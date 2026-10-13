@@ -146,7 +146,12 @@ fn invocation_capture_rejects_expired_and_wrong_actual_receivers() {
     // SAFETY: these selectors only inspect actual immutable receiver fields.
     let actual = unsafe { invocation.capture::<AllocatorProbe, _>(probe_count) }.unwrap();
     assert_eq!(actual, 1);
-    assert!(unsafe { invocation.capture::<rustycad_tkernel::ncollection::HeapAllocatorObject, _>(|_| 0) }.is_err());
+    assert!(
+        unsafe {
+            invocation.capture::<rustycad_tkernel::ncollection::HeapAllocatorObject, _>(|_| 0)
+        }
+        .is_err()
+    );
     drop(owner);
     assert!(unsafe { invocation.capture::<AllocatorProbe, _>(probe_count) }.is_err());
 }

@@ -1,0 +1,362 @@
+[
+  {
+    "upstream_id": "Standard_Transient::get_type_descriptor()",
+    "cpp_declaration_id": "81dd6ec708a841d530f27d10615e2312f82a77227f9cd29257997065410a39d0",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+    "cpp_signature": "const class opencascade::handle<class Standard_Type> &()",
+    "cpp_expansion_location": {
+      "column": 68,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 76
+    },
+    "cpp_spelling_location": {
+      "column": 68,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 76
+    },
+    "cpp_source_sha256": "4c334b9c4f991527169e09d02b3063fbcbf1606eadd81d967af869c1d10067d7",
+    "current_rust_item": "rustycad_tkernel::standard::RuntimeTyped::static_type",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::RuntimeTyped::static_type",
+      "kind": "function",
+      "declaration_sha256": "b266c83c22b028ed282dc5e029cfaccffe8f3daea84262970e598bf3de59f4bd",
+      "source_file": "crates/tkernel/src/standard/runtime_type.rs",
+      "source_sha256": "95ef80e509ae0b20233fedaa0000cf9ad84f166771da8a535ce0504dfdfe321f"
+    },
+    "reason": "Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/runtime_type.rs",
+      "line": 245,
+      "text": "fn static_type() -> &'static RuntimeType;",
+      "macro_expansion_anchor": false
+    },
+    "legacy_result_shape": "&'static RuntimeType pointee"
+  },
+  {
+    "upstream_id": "Standard_Transient::DynamicType() const",
+    "cpp_declaration_id": "8306f327e3e8f411954c0648f4c22b0aef459aa380f74383df3dbf67391b3abe",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+    "cpp_signature": "const class opencascade::handle<class Standard_Type> &() const",
+    "cpp_expansion_location": {
+      "column": 69,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 79
+    },
+    "cpp_spelling_location": {
+      "column": 69,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 79
+    },
+    "cpp_source_sha256": "4c334b9c4f991527169e09d02b3063fbcbf1606eadd81d967af869c1d10067d7",
+    "current_rust_item": "rustycad_tkernel::standard::Transient::dynamic_type",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::Transient::dynamic_type",
+      "kind": "function",
+      "declaration_sha256": "f6e0933e0a0bdf93e63022df8f816cbb137fbe5d90e78cf38c3a0e59e20426d0",
+      "source_file": "crates/tkernel/src/standard/transient.rs",
+      "source_sha256": "173530e50bee6b7e34c6d82f303c8086a55f21acb73556408a1111bc14b65f51"
+    },
+    "reason": "Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/transient.rs",
+      "line": 16,
+      "text": "fn dynamic_type(&self) -> &'static RuntimeType;",
+      "macro_expansion_anchor": false
+    },
+    "legacy_result_shape": "&'static RuntimeType pointee"
+  },
+  {
+    "upstream_id": "Standard_Type::get_type_descriptor()",
+    "cpp_declaration_id": "eda5819a51c16688a368e08f3aa68a4186bfece64a43d2234fabae6e12d3ad82",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+    "cpp_signature": "const class opencascade::handle<class Standard_Type> &()",
+    "cpp_expansion_location": {
+      "column": 3,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "line": 174
+    },
+    "cpp_spelling_location": {
+      "column": 61,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "line": 77
+    },
+    "cpp_source_sha256": "9d486666c6f05674aec2b3180eba8147e2c7c6396e5fea9dcf82d4d85ac94674",
+    "current_rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "kind": "function",
+      "declaration_sha256": "4bf81195c0ddc2e5e6f54b7cda20bb84abb3e895111bc49558e8199facb14d24",
+      "source_file": "crates/tkernel/src/standard/runtime_type.rs",
+      "source_sha256": "95ef80e509ae0b20233fedaa0000cf9ad84f166771da8a535ce0504dfdfe321f",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "RuntimeType",
+            "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeType"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+        }
+      }
+    },
+    "reason": "Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/runtime_type.rs",
+      "line": 245,
+      "text": "fn static_type() -> &'static RuntimeType;",
+      "macro_expansion_anchor": false
+    },
+    "legacy_result_shape": "&'static RuntimeType pointee"
+  },
+  {
+    "upstream_id": "Standard_Type::DynamicType() const",
+    "cpp_declaration_id": "3ca790c595889096031ce8662881115db12d87a7c82be5f09f14ea302dbad784",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+    "cpp_signature": "const class opencascade::handle<class Standard_Type> &() const",
+    "cpp_expansion_location": {
+      "column": 3,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "line": 174
+    },
+    "cpp_spelling_location": {
+      "column": 61,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "line": 78
+    },
+    "cpp_source_sha256": "9d486666c6f05674aec2b3180eba8147e2c7c6396e5fea9dcf82d4d85ac94674",
+    "current_rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::Transient>::dynamic_type",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "kind": "function",
+      "declaration_sha256": "f5e4e85befd8db687fc7e5cafa0ef1b1db26b88921640759fc85dfc194f2f6d3",
+      "source_file": "crates/tkernel/src/standard/runtime_type.rs",
+      "source_sha256": "95ef80e509ae0b20233fedaa0000cf9ad84f166771da8a535ce0504dfdfe321f",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "RuntimeType",
+            "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeType"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "Transient",
+          "resolved_item_path": "rustycad_tkernel::standard::transient::Transient"
+        }
+      }
+    },
+    "reason": "Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/runtime_type.rs",
+      "line": 21,
+      "text": "/// The concrete class supplies the function, normally through `impl_transient!`;",
+      "macro_expansion_anchor": true
+    },
+    "legacy_result_shape": "&'static RuntimeType pointee"
+  },
+  {
+    "upstream_id": "Standard_Persistent::get_type_descriptor()",
+    "cpp_declaration_id": "ebec4323c193c7f03b511f349d4e5832eb00eaa69004ebd17749552cea4efcdb",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+    "cpp_signature": "const class opencascade::handle<class Standard_Type> &()",
+    "cpp_expansion_location": {
+      "column": 3,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "line": 33
+    },
+    "cpp_spelling_location": {
+      "column": 61,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "line": 77
+    },
+    "cpp_source_sha256": "f870d571060d475c2ab1cb3fe38b991e233cdee95f966f629463b73223a676d4",
+    "current_rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "kind": "function",
+      "declaration_sha256": "7ec903e6db92bd2ca33530f83137efd15a9091cfb7f42c820275302f58b1a326",
+      "source_file": "crates/tkernel/src/standard/persistent.rs",
+      "source_sha256": "95e912572d1a86ced1d3d453617b72659bff8aff3fdcbbcf1e8640338d71c63a",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "StandardPersistent",
+            "resolved_item_path": "rustycad_tkernel::standard::persistent::StandardPersistent"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+        }
+      }
+    },
+    "reason": "Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/persistent.rs",
+      "line": 13,
+      "text": "crate::impl_transient!(",
+      "macro_expansion_anchor": true
+    },
+    "legacy_result_shape": "&'static RuntimeType pointee"
+  },
+  {
+    "upstream_id": "Standard_Persistent::DynamicType() const",
+    "cpp_declaration_id": "f176172467a2621f40b031a6f4a22802977f72a47d81f616ad525f4e79071174",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+    "cpp_signature": "const class opencascade::handle<class Standard_Type> &() const",
+    "cpp_expansion_location": {
+      "column": 3,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "line": 33
+    },
+    "cpp_spelling_location": {
+      "column": 61,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "line": 78
+    },
+    "cpp_source_sha256": "f870d571060d475c2ab1cb3fe38b991e233cdee95f966f629463b73223a676d4",
+    "current_rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::Transient>::dynamic_type",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "kind": "function",
+      "declaration_sha256": "43ea18e81d34f8f452c0f8b20e36b5576967ddd5d3d467c6c9675d35fe1016b2",
+      "source_file": "crates/tkernel/src/standard/persistent.rs",
+      "source_sha256": "95e912572d1a86ced1d3d453617b72659bff8aff3fdcbbcf1e8640338d71c63a",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "StandardPersistent",
+            "resolved_item_path": "rustycad_tkernel::standard::persistent::StandardPersistent"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "Transient",
+          "resolved_item_path": "rustycad_tkernel::standard::transient::Transient"
+        }
+      }
+    },
+    "reason": "Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/persistent.rs",
+      "line": 13,
+      "text": "crate::impl_transient!(",
+      "macro_expansion_anchor": true
+    },
+    "legacy_result_shape": "&'static RuntimeType pointee"
+  },
+  {
+    "upstream_id": "Standard_Transient::IsInstance(const opencascade::handle<Standard_Type>&) const",
+    "cpp_declaration_id": "c09466390610ef495313f98292513f4cec1b2710105a2362aee4848d6f360f47",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+    "cpp_signature": "bool (const class opencascade::handle<class Standard_Type> &) const",
+    "cpp_expansion_location": {
+      "column": 24,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 82
+    },
+    "cpp_spelling_location": {
+      "column": 24,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 82
+    },
+    "cpp_source_sha256": "4c334b9c4f991527169e09d02b3063fbcbf1606eadd81d967af869c1d10067d7",
+    "current_rust_item": "rustycad_tkernel::standard::Transient::is_instance",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::Transient::is_instance",
+      "kind": "function",
+      "declaration_sha256": "29cef4d92f779a2437322686241aa872800b70c94164cb0b698cfc54569ad4be",
+      "source_file": "crates/tkernel/src/standard/transient.rs",
+      "source_sha256": "173530e50bee6b7e34c6d82f303c8086a55f21acb73556408a1111bc14b65f51"
+    },
+    "reason": "Native borrows the caller handle through virtual DynamicType; the legacy Rust target accepts a pointee, preventing callback replacement of the original caller slot from affecting the subsequent query.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/transient.rs",
+      "line": 32,
+      "text": "fn is_instance(&self, exact: &RuntimeType) -> bool {",
+      "macro_expansion_anchor": false
+    },
+    "legacy_result_shape": "bool after virtual pointee getter; argument &RuntimeType rather than original handle slot"
+  },
+  {
+    "upstream_id": "Standard_Transient::IsKind(const opencascade::handle<Standard_Type>&) const",
+    "cpp_declaration_id": "324f306d54a4377eaf97f1c2296a6d3684eec631f776344e10ef95aec1ca9dd6",
+    "current_status": "implemented",
+    "recommendation": "partial",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+    "cpp_signature": "bool (const class opencascade::handle<class Standard_Type> &) const",
+    "cpp_expansion_location": {
+      "column": 24,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 90
+    },
+    "cpp_spelling_location": {
+      "column": 24,
+      "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "line": 90
+    },
+    "cpp_source_sha256": "4c334b9c4f991527169e09d02b3063fbcbf1606eadd81d967af869c1d10067d7",
+    "current_rust_item": "rustycad_tkernel::standard::Transient::is_kind",
+    "current_ledger_selectors": {},
+    "captured_rust_selector": {
+      "path": "rustycad_tkernel::standard::Transient::is_kind",
+      "kind": "function",
+      "declaration_sha256": "708f5599ca36daec60442e68bcb086fee6a500935728965d05a6835fac0b88ee",
+      "source_file": "crates/tkernel/src/standard/transient.rs",
+      "source_sha256": "173530e50bee6b7e34c6d82f303c8086a55f21acb73556408a1111bc14b65f51"
+    },
+    "reason": "Native borrows the caller handle through virtual DynamicType; the legacy Rust target accepts a pointee, preventing callback replacement of the original caller slot from affecting the subsequent query.",
+    "rust_source_anchor": {
+      "file": "crates/tkernel/src/standard/transient.rs",
+      "line": 41,
+      "text": "fn is_kind(&self, base: &RuntimeType) -> bool {",
+      "macro_expansion_anchor": false
+    },
+    "legacy_result_shape": "bool after virtual pointee getter; argument &RuntimeType rather than original handle slot"
+  }
+]

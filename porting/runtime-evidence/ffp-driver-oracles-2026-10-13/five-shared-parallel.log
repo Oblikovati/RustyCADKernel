@@ -1,0 +1,23 @@
+
+running 5 tests
+
+thread 'triangle_edge_replay::native_fixed_filter_mipmap_and_alpha_assets_replay_without_occt' (2247610) panicked at crates/vulkan/tests/suites/../../examples/support/native_golden.rs:15:5:
+received different pixels for cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled at byte Some(3380); expected pinned native RGBA
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test triangle_edge_replay::native_fixed_filter_mipmap_and_alpha_assets_replay_without_occt ... FAILED
+test ais_textured_shape_native_replay::textured_native_mapping_assets_replay_on_either_actual_device ... ok
+test xr_device_presentations::xr_real_presentations_replay_native_captures_on_each_device ... ok
+
+thread 'fixed_lighting_replay::fixed_lighting_native_assets_replay_without_occt' (2247609) panicked at crates/vulkan/tests/suites/../../examples/support/native_golden.rs:15:5:
+received different pixels for lit-alpha-opacity-updated at byte Some(14620); expected pinned native RGBA
+test fixed_lighting_replay::fixed_lighting_native_assets_replay_without_occt ... FAILED
+test triangle_edge_replay::scoped_native_edge_and_mapped_line_assets_replay_without_occt ... ok
+
+failures:
+
+failures:
+    fixed_lighting_replay::fixed_lighting_native_assets_replay_without_occt
+    triangle_edge_replay::native_fixed_filter_mipmap_and_alpha_assets_replay_without_occt
+
+test result: FAILED. 3 passed; 2 failed; 0 ignored; 0 measured; 227 filtered out; finished in 0.30s
+

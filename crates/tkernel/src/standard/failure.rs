@@ -13,6 +13,8 @@ pub use out_of_memory::{out_of_memory, out_of_memory_bytes};
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Failure {
     exception_type: &'static str,
+    /// Higher toolkits supply their declared base without a reverse dependency or registry.
+    pub(super) exception_parent: Option<&'static str>,
     message: FailureText,
     stack: FailureText,
     /// `Standard_OutOfMemory`'s own message buffer, which its `what()` returns instead.
@@ -72,6 +74,7 @@ impl Failure {
     pub fn copy_base(source: &Self) -> Self {
         Self {
             exception_type: "Standard_Failure",
+            exception_parent: None,
             message: source.message.clone(),
             stack: source.stack.clone(),
             own_buffer: None,
@@ -88,6 +91,11 @@ impl Failure {
     /// Models the defined self-assignment branch without aliasing `&mut self`.
     /// `failure.assign_base_self()` returns the same failure without changing its state.
     pub fn assign_base_self(&mut self) -> &mut Self {
+        self
+    }
+    /// Attach a declared base for a higher-toolkit exception; `failure.with_exception_parent("Standard_OutOfRange")`.
+    pub fn with_exception_parent(mut self, parent: &'static str) -> Self {
+        self.exception_parent = Some(parent);
         self
     }
     /// Replaces the message while preserving copies; `failure.set_message("updated")`.

@@ -1,0 +1,46 @@
+{
+  "schema": "martensite-transient-virtual-delete-gap-v1",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "main_audit_revision": "13a8ae880c8367b08284e0636a2f639e603b49a9",
+  "feature_revision_before_audit": "be890d0873533500e2de8361a2ab3f470a32c10e",
+  "initial_generator_sha256": "dae4742e16344c88647ee010a8174b0c507ff32f8eb428fdf522bed555c4f394",
+  "initial_observed_stdout": "1 0 0 0 2\n1\n",
+  "initial_probe_exit_code": 0,
+  "initial_probe_runs": 1,
+  "initial_probe_stdout_provenance": "Recorded tool result from the original temporary native invocation; no retained raw log exists. Initial source is preserved verbatim.",
+  "durable_generator": "../../../tools/oracle/martensite_clip_plane_delete_override.cxx",
+  "durable_generator_verified_runs": 2,
+  "second_native_run_pending_timing_hold_release": false,
+  "rust_runtime_replay_complete": false,
+  "api_promotion": false,
+  "production_source_change_in_this_audit": false,
+  "native_command": [
+    "c++",
+    "-std=c++17",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-clip-plane-chain/tools/oracle/martensite_clip_plane_delete_override.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-clip-plane-chain/target/oracle/martensite_clip_plane_delete_override"
+  ],
+  "native_stdout_files": [
+    "native-1.txt",
+    "native-2.txt"
+  ],
+  "durable_generator_sha256": "ed3fa68f1b4f0ba9a5e2c43476e98f9b81330c55574ae6cb3a91dac00a0464f7",
+  "native_binary_sha256": "95e253a55e803a22b1c2400a7ffd3b50da4deddf3da02478b3b1df36e6223a1f",
+  "native_library_sha256": {
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "sdk_header_sha256": {
+    "Graphic3d_ClipPlane.hxx": "b1908fd3cc2ab1e625de8e3ccd3940e979468c739c5164066b52aed61737c00a",
+    "Standard_Transient.hxx": "3310b0daaadb07c61a9cc09b410d1d0381c70174194def87c4a86ec397ed3416",
+    "Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb"
+  }
+}

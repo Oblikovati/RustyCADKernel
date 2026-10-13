@@ -116257,16 +116257,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
       "rust_item": "rustycad_tkernel::standard::RuntimeTyped::static_type",
-      "status": "implemented",
-      "notes": "The registered descriptor of the class."
+      "status": "partial",
+      "notes": "The registered descriptor of the class. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Transient::DynamicType() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
       "rust_item": "rustycad_tkernel::standard::Transient::dynamic_type",
-      "status": "implemented",
-      "notes": "The most-derived descriptor. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+      "status": "partial",
+      "notes": "The most-derived descriptor. Compared with OCCT by the runtime_object probe for four classes and every registered column type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Type::get_type_name()",
@@ -116281,16 +116281,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "Compiler inventory ID eda5819a51c16688a368e08f3aa68a4186bfece64a43d2234fabae6e12d3ad82 returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor; RuntimeTyped::static_type_handle() explicitly clones an owning Handle when callers need one. The descriptor keeps its static owner. Rust does not expose a borrowed Handle wrapper, so the exact C++ return type is not reproduced."
+      "status": "partial",
+      "notes": "Compiler inventory ID eda5819a51c16688a368e08f3aa68a4186bfece64a43d2234fabae6e12d3ad82 returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor; RuntimeTyped::static_type_handle() explicitly clones an owning Handle when callers need one. The descriptor keeps its static owner. Rust does not expose a borrowed Handle wrapper, so the exact C++ return type is not reproduced. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Type::DynamicType() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::Transient>::dynamic_type",
-      "status": "implemented",
-      "notes": "Compiler inventory ID 3ca790c595889096031ce8662881115db12d87a7c82be5f09f14ea302dbad784 returns const handle<Standard_Type>& for the dynamic class. Rust returns the same static descriptor by borrow; Transient::dynamic_type_handle() makes an owning copy. RuntimeType's class descriptor has the native-style static baseline owner. Rust does not expose the borrowed C++ Handle wrapper type."
+      "status": "partial",
+      "notes": "Compiler inventory ID 3ca790c595889096031ce8662881115db12d87a7c82be5f09f14ea302dbad784 returns const handle<Standard_Type>& for the dynamic class. Rust returns the same static descriptor by borrow; Transient::dynamic_type_handle() makes an owning copy. RuntimeType's class descriptor has the native-style static baseline owner. Rust does not expose the borrowed C++ Handle wrapper type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Persistent::get_type_name()",
@@ -116305,24 +116305,24 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
       "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "Compiler inventory ID ebec4323c193c7f03b511f349d4e5832eb00eaa69004ebd17749552cea4efcdb returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor, and RuntimeTyped::static_type_handle() explicitly clones an owner when needed; the descriptor's static owner also owns one handle to Standard_Transient. Rust does not expose the borrowed C++ Handle wrapper type."
+      "status": "partial",
+      "notes": "Compiler inventory ID ebec4323c193c7f03b511f349d4e5832eb00eaa69004ebd17749552cea4efcdb returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor, and RuntimeTyped::static_type_handle() explicitly clones an owner when needed; the descriptor's static owner also owns one handle to Standard_Transient. Rust does not expose the borrowed C++ Handle wrapper type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Persistent::DynamicType() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
       "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::Transient>::dynamic_type",
-      "status": "implemented",
-      "notes": "Compiler inventory ID f176172467a2621f40b031a6f4a22802977f72a47d81f616ad525f4e79071174 returns const handle<Standard_Type>&. Rust dynamically selects and borrows this descriptor; Transient::dynamic_type_handle() provides an explicit owning copy with the same identity. Rust does not expose the borrowed C++ Handle wrapper type."
+      "status": "partial",
+      "notes": "Compiler inventory ID f176172467a2621f40b031a6f4a22802977f72a47d81f616ad525f4e79071174 returns const handle<Standard_Type>&. Rust dynamically selects and borrows this descriptor; Transient::dynamic_type_handle() provides an explicit owning copy with the same identity. Rust does not expose the borrowed C++ Handle wrapper type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Transient::IsInstance(const opencascade::handle<Standard_Type>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
       "rust_item": "rustycad_tkernel::standard::Transient::is_instance",
-      "status": "implemented",
-      "notes": "Descriptor identity. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+      "status": "partial",
+      "notes": "Descriptor identity. Compared with OCCT by the runtime_object probe for four classes and every registered column type. Source audit 2026-10-13: Native borrows the caller handle through virtual DynamicType; the legacy Rust target accepts a pointee, preventing callback replacement of the original caller slot from affecting the subsequent query. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Transient::IsInstance(const char* const) const",
@@ -116337,8 +116337,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
       "rust_item": "rustycad_tkernel::standard::Transient::is_kind",
-      "status": "implemented",
-      "notes": "SubType of the dynamic type. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+      "status": "partial",
+      "notes": "SubType of the dynamic type. Compared with OCCT by the runtime_object probe for four classes and every registered column type. Source audit 2026-10-13: Native borrows the caller handle through virtual DynamicType; the legacy Rust target accepts a pointee, preventing callback replacement of the original caller slot from affecting the subsequent query. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
     },
     {
       "upstream_id": "Standard_Transient::IsKind(const char* const) const",
@@ -116385,8 +116385,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::<core::ops::drop::Drop>::drop",
-      "status": "implemented",
-      "notes": "The last handle's release drops the Rust object (C++ `delete this`); a Drop impl of the class is the virtual Delete override. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+      "status": "partial",
+      "notes": "Default final-owner destruction is implemented. Native virtual Delete can instead retain a constructed count-zero object and allow explicit later destruction; Rust Handle::drop lacks this override dispatch. Exact compiler identity and twice-repeated native evidence: porting/audits/transient-virtual-delete-gap-current-main. No production fix is claimed."
     },
     {
       "upstream_id": "Standard_Transient::base_type",
@@ -488662,25 +488662,19 @@
       "upstream_id": "Aspect_AspectFillAreaDefinitionError::Aspect_AspectFillAreaDefinitionError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_AspectFillAreaDefinitionError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::aspect_fill_area_definition_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::aspect_fill_area_definition_error(message) builds the same exception. Partial: C++ derives Aspect_AspectFillAreaDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "ee841c441bacca3e30fc34cc3e0addf10291c8a5ea054031c9cce12c943b9416",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::aspect_fill_area_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "ee841c441bacca3e30fc34cc3e0addf10291c8a5ea054031c9cce12c943b9416"
     },
     {
       "upstream_id": "Aspect_AspectFillAreaDefinitionError::Aspect_AspectFillAreaDefinitionError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_AspectFillAreaDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::aspect_fill_area_definition_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_AspectFillAreaDefinitionError\", message, stack) builds the same exception. Partial: C++ derives Aspect_AspectFillAreaDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "b2593a96cd93bb92ca39f21c491f2d6ca0da497b5ab6c3a7c5ed5e817ee7aae4",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::aspect_fill_area_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "b2593a96cd93bb92ca39f21c491f2d6ca0da497b5ab6c3a7c5ed5e817ee7aae4"
     },
     {
       "upstream_id": "Aspect_AspectFillAreaDefinitionError::ExceptionType() const noexcept",
@@ -488708,25 +488702,19 @@
       "upstream_id": "Aspect_AspectLineDefinitionError::Aspect_AspectLineDefinitionError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_AspectLineDefinitionError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::aspect_line_definition_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::aspect_line_definition_error(message) builds the same exception. Partial: C++ derives Aspect_AspectLineDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "fc5eb1038467c66a7179cc25ec09d88d6d8ab04f14e6239c16f8fbb6a6c58344",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::aspect_line_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "fc5eb1038467c66a7179cc25ec09d88d6d8ab04f14e6239c16f8fbb6a6c58344"
     },
     {
       "upstream_id": "Aspect_AspectLineDefinitionError::Aspect_AspectLineDefinitionError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_AspectLineDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::aspect_line_definition_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_AspectLineDefinitionError\", message, stack) builds the same exception. Partial: C++ derives Aspect_AspectLineDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "231267bff7fa4b29ee603ef31b6beb9eb16854e65ea947a3591078842e9fe8c5",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::aspect_line_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "231267bff7fa4b29ee603ef31b6beb9eb16854e65ea947a3591078842e9fe8c5"
     },
     {
       "upstream_id": "Aspect_AspectLineDefinitionError::ExceptionType() const noexcept",
@@ -488754,25 +488742,19 @@
       "upstream_id": "Aspect_AspectMarkerDefinitionError::Aspect_AspectMarkerDefinitionError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_AspectMarkerDefinitionError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::aspect_marker_definition_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::aspect_marker_definition_error(message) builds the same exception. Partial: C++ derives Aspect_AspectMarkerDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "84d454aeb4e3cf94755b8c96694d738232a5f82b0ae0839149c9bcd8cd7d7a78",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::aspect_marker_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "84d454aeb4e3cf94755b8c96694d738232a5f82b0ae0839149c9bcd8cd7d7a78"
     },
     {
       "upstream_id": "Aspect_AspectMarkerDefinitionError::Aspect_AspectMarkerDefinitionError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_AspectMarkerDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::aspect_marker_definition_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_AspectMarkerDefinitionError\", message, stack) builds the same exception. Partial: C++ derives Aspect_AspectMarkerDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "eb604a1470aeb3aed6db07cdbe2cfbc45d0950b12ffd5944b6a91d6222379c24",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::aspect_marker_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "eb604a1470aeb3aed6db07cdbe2cfbc45d0950b12ffd5944b6a91d6222379c24"
     },
     {
       "upstream_id": "Aspect_AspectMarkerDefinitionError::ExceptionType() const noexcept",
@@ -488800,25 +488782,19 @@
       "upstream_id": "Aspect_DisplayConnectionDefinitionError::Aspect_DisplayConnectionDefinitionError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnectionDefinitionError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::display_connection_definition_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::display_connection_definition_error(message) builds the same exception. Partial: C++ derives Aspect_DisplayConnectionDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "a7350166c3c0c4d11e41d0fd612303d60b7d6050c71a44ae0b093ee5fbcc7b22",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::display_connection_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "a7350166c3c0c4d11e41d0fd612303d60b7d6050c71a44ae0b093ee5fbcc7b22"
     },
     {
       "upstream_id": "Aspect_DisplayConnectionDefinitionError::Aspect_DisplayConnectionDefinitionError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnectionDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::display_connection_definition_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_DisplayConnectionDefinitionError\", message, stack) builds the same exception. Partial: C++ derives Aspect_DisplayConnectionDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "83301e0774ad68c3a51fa469573ad4fe6bbe6d4ad3c9a3dacfe30312e59f9c2a",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::display_connection_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "83301e0774ad68c3a51fa469573ad4fe6bbe6d4ad3c9a3dacfe30312e59f9c2a"
     },
     {
       "upstream_id": "Aspect_DisplayConnectionDefinitionError::ExceptionType() const noexcept",
@@ -488846,25 +488822,19 @@
       "upstream_id": "Aspect_GraphicDeviceDefinitionError::Aspect_GraphicDeviceDefinitionError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_GraphicDeviceDefinitionError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::graphic_device_definition_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::graphic_device_definition_error(message) builds the same exception. Partial: C++ derives Aspect_GraphicDeviceDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "d43ca0dbd1b50b575f8a12fbedde063eb52d70063c9ddb508692c9419daf0963",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::graphic_device_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "d43ca0dbd1b50b575f8a12fbedde063eb52d70063c9ddb508692c9419daf0963"
     },
     {
       "upstream_id": "Aspect_GraphicDeviceDefinitionError::Aspect_GraphicDeviceDefinitionError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_GraphicDeviceDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::graphic_device_definition_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_GraphicDeviceDefinitionError\", message, stack) builds the same exception. Partial: C++ derives Aspect_GraphicDeviceDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "ff2b44e0be72fd90d6e3160e8da27c50255e89dfb6e3ebc8bdbd5f1a38406b30",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::graphic_device_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "ff2b44e0be72fd90d6e3160e8da27c50255e89dfb6e3ebc8bdbd5f1a38406b30"
     },
     {
       "upstream_id": "Aspect_GraphicDeviceDefinitionError::ExceptionType() const noexcept",
@@ -488892,25 +488862,19 @@
       "upstream_id": "Aspect_IdentDefinitionError::Aspect_IdentDefinitionError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_IdentDefinitionError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::ident_definition_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::ident_definition_error(message) builds the same exception. Partial: C++ derives Aspect_IdentDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "d568d80499ae5ec67887696917bdc46083aeac813d814891ef8cb860d4d9cfe9",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::ident_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "d568d80499ae5ec67887696917bdc46083aeac813d814891ef8cb860d4d9cfe9"
     },
     {
       "upstream_id": "Aspect_IdentDefinitionError::Aspect_IdentDefinitionError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_IdentDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::ident_definition_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_IdentDefinitionError\", message, stack) builds the same exception. Partial: C++ derives Aspect_IdentDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "259bfcd1eefd947df3ca2f264698f67bbfaa3653a097a7ff018e755bb9410fb0",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::ident_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "259bfcd1eefd947df3ca2f264698f67bbfaa3653a097a7ff018e755bb9410fb0"
     },
     {
       "upstream_id": "Aspect_IdentDefinitionError::ExceptionType() const noexcept",
@@ -488938,25 +488902,19 @@
       "upstream_id": "Aspect_WindowDefinitionError::Aspect_WindowDefinitionError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_WindowDefinitionError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::window_definition_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::window_definition_error(message) builds the same exception. Partial: C++ derives Aspect_WindowDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "8ef3709bda77ddd3f5ab4b15deb8e3676a4816386d4ff90a119697c0bcd07e7d",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::window_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "8ef3709bda77ddd3f5ab4b15deb8e3676a4816386d4ff90a119697c0bcd07e7d"
     },
     {
       "upstream_id": "Aspect_WindowDefinitionError::Aspect_WindowDefinitionError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_WindowDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::window_definition_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_WindowDefinitionError\", message, stack) builds the same exception. Partial: C++ derives Aspect_WindowDefinitionError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "936d3f625a967ceb7e4a191e16b42b31a859e7c702f995c26b130dab10bbb7a6",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::window_definition_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "936d3f625a967ceb7e4a191e16b42b31a859e7c702f995c26b130dab10bbb7a6"
     },
     {
       "upstream_id": "Aspect_WindowDefinitionError::ExceptionType() const noexcept",
@@ -488984,25 +488942,19 @@
       "upstream_id": "Aspect_WindowError::Aspect_WindowError(const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_WindowError.hxx",
-      "rust_item": "rustycad_tkservice::aspect::exceptions::window_error",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkservice::aspect::exceptions::window_error(message) builds the same exception. Partial: C++ derives Aspect_WindowError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "d30670f3f9ded936b51f1d113d8627b12ed16f486e8a413314463f100896ea32",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::window_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Message-only construction delegates checked Kernel stack capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "d30670f3f9ded936b51f1d113d8627b12ed16f486e8a413314463f100896ea32"
     },
     {
       "upstream_id": "Aspect_WindowError::Aspect_WindowError(const char*,const char*)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_WindowError.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
-      "rust_items": [
-        "rustycad_tkernel::standard::Failure::with_type",
-        "rustycad_tkservice::aspect::exceptions::window_error"
-      ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Aspect_WindowError\", message, stack) builds the same exception. Partial: C++ derives Aspect_WindowError from Standard_OutOfRange, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
-      "cpp_declaration_id": "edc19e6c57ef7ff2dd5b8d4dcf05d0483f2bbf0a3393711a5d088ba0d10988b7",
-      "generated_by": "tools/generate_api_macro_rows.py"
+      "rust_item": "rustycad_tkservice::aspect::exceptions::exception_bytes::stacks::window_error",
+      "status": "implemented",
+      "notes": "Byte-preserving constructor injects the declared Standard_OutOfRange ancestry and preserves native C-string truncation. Explicit stack bytes bypass capture. Eight classes replay 32 native constructor/typed-catch rows, including invalid UTF-8 and embedded NUL; source hashes and checked main integration are in porting/runtime-evidence/aspect-exception-ancestry-2026-10-13. This is constructor credit only; no whole-class or extension acceptance claim.",
+      "cpp_declaration_id": "edc19e6c57ef7ff2dd5b8d4dcf05d0483f2bbf0a3393711a5d088ba0d10988b7"
     },
     {
       "upstream_id": "Aspect_WindowError::ExceptionType() const noexcept",
@@ -509311,8 +509263,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::<rustycad_tkernel::standard::Transient>::dynamic_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "status": "partial",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
       "cpp_declaration_id": "5858cff8421c02e61530a390b309b66a374a44239bd57437c099c08382937281",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -509331,8 +509283,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "status": "partial",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
       "cpp_declaration_id": "d9dfc31d949afcc9fe5c9117bc7463d7bfa439e6ccbaad997b3938b891381e4b",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -509399,8 +509351,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::<rustycad_tkernel::standard::Transient>::dynamic_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "status": "partial",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
       "cpp_declaration_id": "c0d3991bd1a84e128cc5da3378e11d6a474ce9c5c59ed59d9855de18c9afc97d",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -509427,8 +509379,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "status": "partial",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
       "cpp_declaration_id": "ddb5e7ebdec30a1633060482ef966074d54fada6854bb696f289cd28cfc5d3f6",
       "generated_by": "tools/generate_api_macro_rows.py"
     },

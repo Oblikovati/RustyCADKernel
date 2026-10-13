@@ -181,6 +181,8 @@ pub mod standard_atomic;
 pub mod standard_c_string_format;
 #[path = "../standard_character.rs"]
 pub mod standard_character;
+#[path = "../standard_descriptor_count_scope.rs"]
+pub mod standard_descriptor_count_scope;
 #[path = "../standard_dump.rs"]
 pub mod standard_dump;
 #[path = "../standard_dump_behavior.rs"]
@@ -253,5 +255,3 @@ pub mod ubtree_fallible;
 pub mod ubtree_filler_dispatch_contracts;
 #[path = "../ubtree_filler_payload_contracts.rs"]
 pub mod ubtree_filler_payload_contracts;
-#[path = "../ubtree_gemmate_parent_contracts.rs"]
-pub mod ubtree_gemmate_parent_contracts;

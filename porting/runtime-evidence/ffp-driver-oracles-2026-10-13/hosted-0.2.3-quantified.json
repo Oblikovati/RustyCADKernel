@@ -1,0 +1,92 @@
+{
+  "run_id": 38317817655,
+  "immutable_source": "11a4c51420695911ea94d9b4be23c11df21a0d55",
+  "cpu_model": "Model name:                              AMD EPYC 7763 64-Core Processor",
+  "driver_and_llvm_match_local_extracted": true,
+  "core_library_sha256": {
+    "libvulkan_lvp.so": "5a218118760fee2398cc783820a1cc052de162d8c937dafcd6045576dfd9576c",
+    "libLLVM.so.20.1": "4b93481bd1c9d42c0951275dd275d4a9d30db78c309ae2cc0405669bc6dbbf8a",
+    "libVkLayer_khronos_validation.so": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104"
+  },
+  "comparisons": [
+    {
+      "hosted_case": "map-5",
+      "reference": "sealed-native-fixture",
+      "different_channels": 0,
+      "max_rgba_delta": 0,
+      "max_depth_delta": 8.940696716308594e-08
+    },
+    {
+      "hosted_case": "feather-two",
+      "reference": "sealed-native-fixture",
+      "different_channels": 0,
+      "max_rgba_delta": 0,
+      "max_depth_delta": 1.4901161193847656e-08
+    },
+    {
+      "hosted_case": "xr-texture",
+      "reference": "sealed-native-fixture",
+      "different_channels": 0,
+      "max_rgba_delta": 0,
+      "max_depth_delta": 5.774199962615967e-08
+    },
+    {
+      "hosted_case": "lit-alpha-opacity-updated",
+      "reference": "vulkan-mesa25",
+      "different_channels": 0,
+      "max_rgba_delta": 0,
+      "max_depth_delta": 0.0
+    },
+    {
+      "hosted_case": "lit-alpha-opacity-updated",
+      "reference": "occt-gl-mesa25",
+      "different_channels": 0,
+      "max_rgba_delta": 0,
+      "max_depth_delta": 0.0
+    },
+    {
+      "hosted_case": "lit-alpha-opacity-updated",
+      "reference": "vulkan-mesa26",
+      "different_channels": 1,
+      "max_rgba_delta": 1,
+      "max_depth_delta": 0.0
+    },
+    {
+      "hosted_case": "lit-alpha-opacity-updated",
+      "reference": "occt-gl-mesa26",
+      "different_channels": 1,
+      "max_rgba_delta": 1,
+      "max_depth_delta": 0.0
+    },
+    {
+      "hosted_case": "cap-fixed-bilinear-center",
+      "reference": "vulkan-mesa25",
+      "different_channels": 0,
+      "max_rgba_delta": 0,
+      "max_depth_delta": 0.0
+    },
+    {
+      "hosted_case": "cap-fixed-bilinear-center",
+      "reference": "occt-gl-mesa25",
+      "different_channels": 0,
+      "max_rgba_delta": 0,
+      "max_depth_delta": 1.4901161193847656e-08
+    },
+    {
+      "hosted_case": "cap-fixed-bilinear-center",
+      "reference": "vulkan-mesa26",
+      "different_channels": 2888,
+      "max_rgba_delta": 1,
+      "max_depth_delta": 0.0
+    },
+    {
+      "hosted_case": "cap-fixed-bilinear-center",
+      "reference": "occt-gl-mesa26",
+      "different_channels": 2888,
+      "max_rgba_delta": 1,
+      "max_depth_delta": 1.4901161193847656e-08
+    }
+  ],
+  "original_three_cause": "Unproven: fresh serial hosted replay/captures pass, original failing fulljob rawpixels/CPU unavailable.",
+  "strict_gates_unchanged": true
+}

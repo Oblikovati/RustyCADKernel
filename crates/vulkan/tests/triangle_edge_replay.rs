@@ -1,4 +1,6 @@
 //! Scoped strict native edge/line assets replay without OCCT; full precision diagnostics are separate.
+#[path = "support/capping_texture_policy.rs"]
+mod cap_policy;
 #[allow(dead_code)]
 #[path = "support/capping_texture_scene.rs"]
 mod capping_scene;
@@ -7,6 +9,8 @@ mod device_options;
 #[allow(dead_code)]
 #[path = "support/triangle_edge_scene.rs"]
 mod edge_scene;
+#[path = "support/ffp_oracle_profile.rs"]
+mod ffp_oracle_profile;
 #[path = "../examples/support/native_golden.rs"]
 mod native_golden;
 #[allow(dead_code)]
@@ -18,8 +22,6 @@ mod texture_scene;
 #[allow(dead_code)]
 #[path = "support/view_setup.rs"]
 mod view_setup;
-#[path = "support/capping_texture_policy.rs"]
-mod cap_policy;
 use martensite_vulkan::*;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::graphic3d::*;
@@ -168,13 +170,25 @@ fn capture_cap_boundary(driver: &Handle<Graphic3dRenderDriver>, mode: &str) -> F
     capture
 }
 macro_rules! cap_asset {
-    ($mode:literal) => { (
-        $mode,
-        include_bytes!(concat!("fixtures/texture-cap-edges/host/", $mode, ".rgba")).as_slice(),
-        include_bytes!(concat!("fixtures/texture-cap-edges/host/", $mode, ".depth")).as_slice(),
-        include_bytes!(concat!("fixtures/texture-cap-edges/software/", $mode, ".rgba")).as_slice(),
-        include_bytes!(concat!("fixtures/texture-cap-edges/software/", $mode, ".depth")).as_slice(),
-    ) };
+    ($mode:literal) => {
+        (
+            $mode,
+            include_bytes!(concat!("fixtures/texture-cap-edges/host/", $mode, ".rgba")).as_slice(),
+            include_bytes!(concat!("fixtures/texture-cap-edges/host/", $mode, ".depth")).as_slice(),
+            include_bytes!(concat!(
+                "fixtures/texture-cap-edges/software/",
+                $mode,
+                ".rgba"
+            ))
+            .as_slice(),
+            include_bytes!(concat!(
+                "fixtures/texture-cap-edges/software/",
+                $mode,
+                ".depth"
+            ))
+            .as_slice(),
+        )
+    };
 }
 #[test]
 fn generated_cap_coordinates_preserve_native_fixed_function_mesh_selection() {
@@ -182,17 +196,28 @@ fn generated_cap_coordinates_preserve_native_fixed_function_mesh_selection() {
         device_options::validation_options(),
         RenderTextureCoordinatePipeline::GeneratedCompatibility,
         RenderMeshEdgePipeline::Programmable,
-    ).unwrap();
+    )
+    .unwrap();
     let mode = "cap-section-edges-oblique-generated";
-    let (_, rgba, depth) = select_cap_asset(&driver, cap_asset!("cap-section-edges-oblique-generated"));
+    let (_, rgba, depth) =
+        select_cap_asset(&driver, cap_asset!("cap-section-edges-oblique-generated"));
     native_golden::assert_capture(&capture_cap_boundary(&driver, mode), rgba, depth, mode);
     assert!(driver.validation_errors().is_empty());
 }
 
 fn select_cap_asset(
-    driver: &Handle<Graphic3dRenderDriver>, asset: NativeTriangleEdgeAsset,
+    driver: &Handle<Graphic3dRenderDriver>,
+    asset: NativeTriangleEdgeAsset,
 ) -> (&'static str, &'static [u8], &'static [u8]) {
     let (mode, host_rgba, host_depth, software_rgba, software_depth) = asset;
+    if let Some((rgba, depth)) = ffp_oracle_profile::profiled_driver_asset(
+        driver,
+        mode,
+        (host_rgba, host_depth),
+        (software_rgba, software_depth),
+    ) {
+        return (mode, rgba, depth);
+    }
     if driver.device_name().contains("llvmpipe") {
         return (mode, software_rgba, software_depth);
     }
@@ -210,7 +235,9 @@ fn native_polygon_texture_environment_and_eye_matrix_replay_without_occt() {
         cap_asset!("cap-section-edges-oblique-generated-eye-polygon-thin-alpha-updated"),
         cap_asset!("cap-section-edges-oblique-generated-polygon-thin"),
         cap_asset!("cap-section-edges-oblique-generated-polygon-thin-format-alpha-edges-disabled"),
-        cap_asset!("cap-section-edges-oblique-generated-polygon-thin-format-alpha-f-edges-disabled"),
+        cap_asset!(
+            "cap-section-edges-oblique-generated-polygon-thin-format-alpha-f-edges-disabled"
+        ),
         cap_asset!("cap-section-edges-oblique-generated-polygon-thin-format-gray-edges-disabled"),
         cap_asset!("cap-section-edges-oblique-generated-polygon-thin-format-gray-no-modulate"),
         cap_asset!("cap-section-edges-oblique-generated-polygon-thin-format-rgb-edges-disabled"),
@@ -231,18 +258,35 @@ fn full_textured_cap_edge_strict_native_diagnostic() {
 }
 fn replay_cap_configured_asset(asset: NativeTriangleEdgeAsset) {
     let (coordinates, edges) = cap_policy::cap_fixture_pipelines(asset.0);
-    let driver = Graphic3dRenderDriver::with_surface_pipelines(device_options::validation_options(), coordinates, edges).unwrap();
+    let driver = Graphic3dRenderDriver::with_surface_pipelines(
+        device_options::validation_options(),
+        coordinates,
+        edges,
+    )
+    .unwrap();
     let (mode, rgba, depth) = select_cap_asset(&driver, asset);
     native_golden::assert_capture(&capture_cap_boundary(&driver, mode), rgba, depth, mode);
-    assert!(driver.validation_errors().is_empty(), "{:?}", driver.validation_errors());
+    assert!(
+        driver.validation_errors().is_empty(),
+        "{:?}",
+        driver.validation_errors()
+    );
 }
 #[test]
 fn native_fixed_filter_mipmap_and_alpha_assets_replay_without_occt() {
     for asset in [
-        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled"),
-        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-edges-disabled"),
-        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-no-modulate-edges-disabled"),
-        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-image-refreshed-edges-disabled"),
+        cap_asset!(
+            "cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled"
+        ),
+        cap_asset!(
+            "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-edges-disabled"
+        ),
+        cap_asset!(
+            "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-no-modulate-edges-disabled"
+        ),
+        cap_asset!(
+            "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-image-refreshed-edges-disabled"
+        ),
         cap_asset!("cap-section-edges-generated-polygon-thin-blend-edges-disabled"),
         cap_asset!("cap-section-edges-generated-polygon-thin-mask-edges-disabled"),
         cap_asset!("cap-section-edges-generated-polygon-thin-mask-blend-edges-disabled"),
@@ -254,15 +298,22 @@ fn native_fixed_filter_mipmap_and_alpha_assets_replay_without_occt() {
 
 const FULL_CAP_EDGE_ASSETS: &[NativeTriangleEdgeAsset] = &[
     cap_asset!("cap-section-edges-oblique-generated-polygon-thin-sampler-updated"),
-    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled"),
-    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-edges-disabled"),
-    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-no-modulate-edges-disabled"),
-    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-image-refreshed-edges-disabled"),
+    cap_asset!(
+        "cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled"
+    ),
+    cap_asset!(
+        "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-edges-disabled"
+    ),
+    cap_asset!(
+        "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-no-modulate-edges-disabled"
+    ),
+    cap_asset!(
+        "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-image-refreshed-edges-disabled"
+    ),
     cap_asset!("cap-section-edges-generated-polygon-thin-blend-edges-disabled"),
     cap_asset!("cap-section-edges-generated-polygon-thin-mask-edges-disabled"),
     cap_asset!("cap-section-edges-generated-polygon-thin-mask-blend-edges-disabled"),
     cap_asset!("cap-section-edges-generated-polygon-thin-opaque-alpha-edges-disabled"),
-
     cap_asset!("cap-section-edges-oblique-generated-polygon-thin-bc1-rgb"),
     cap_asset!("cap-section-edges-oblique-generated-polygon-thin-bc1-rgba"),
     cap_asset!("cap-section-edges-oblique-generated-polygon-thin-bc2"),

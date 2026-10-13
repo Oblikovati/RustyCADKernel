@@ -116,15 +116,23 @@ impl Failure {
     /// True when a C++ `catch (Ancestor&)` would catch this exception; every OCCT
     /// exception is a `Standard_Failure`. `out_of_range("").is_kind("Standard_DomainError")`.
     pub fn is_kind(&self, ancestor: &str) -> bool {
-        let mut current: Option<&str> = Some(self.exception_type());
-        while let Some(class) = current {
-            if class == ancestor {
-                return true;
-            }
-            current = exception_parent(class);
+        if self.exception_type() == ancestor {
+            return true;
         }
-        // Classes declared by other toolkits are not in these tables; they still derive
-        // from Standard_Failure, which is the root of every OCCT exception.
-        ancestor == "Standard_Failure"
+        let current = self
+            .exception_parent
+            .or_else(|| exception_parent(self.exception_type()));
+        exception_ancestor_matches(current, ancestor)
     }
+}
+
+fn exception_ancestor_matches(mut current: Option<&str>, ancestor: &str) -> bool {
+    while let Some(class) = current {
+        if class == ancestor {
+            return true;
+        }
+        current = exception_parent(class);
+    }
+    // Unknown classes retain the existing root catch; declared external bases are injected.
+    ancestor == "Standard_Failure"
 }

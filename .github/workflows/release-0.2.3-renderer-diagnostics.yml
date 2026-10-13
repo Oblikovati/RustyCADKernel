@@ -1,0 +1,42 @@
+name: Martensite v0.2.3 immutable renderer diagnostics
+on:
+  push:
+    branches: [diagnostics/release-0.2.3]
+permissions:
+  contents: read
+env:
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  CARGO_INCREMENTAL: '0'
+  CARGO_BUILD_JOBS: '2'
+  GALLIUM_OVERRIDE_CPU_CAPS: sse2
+  LP_NATIVE_VECTOR_WIDTH: '128'
+  MARTENSITE_VULKAN_DEVICE: '0'
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      # Tooling branch contributes diagnostics only; the tested source is immutable.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: diagnostic-tools
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: 11a4c51420695911ea94d9b4be23c11df21a0d55
+          path: kernel
+      - name: Install and identify the runner graphics stack
+        working-directory: kernel
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mesa-vulkan-drivers vulkan-validationlayers vulkan-tools xvfb xauth libfontconfig-dev libfreetype-dev libx11-dev fonts-dejavu-core
+          echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
+          python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
+      - name: Keep every strict failure and capture its immutable release buffers
+        run: |
+          xvfb-run -a -s '-screen 0 1280x1024x24' python3 diagnostic-tools/tools/diagnose_release_renderer.py --root kernel --output kernel/target/renderer-diagnostics-0.2.3
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: release-0.2.3-renderer-diagnostics
+          path: kernel/target/renderer-diagnostics-0.2.3
