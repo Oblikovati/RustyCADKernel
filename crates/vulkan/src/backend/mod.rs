@@ -10,6 +10,7 @@ pub struct VulkanRenderer {
     pipeline: pipeline_variants::RasterPipelines,
     capping_pipeline: Option<pipeline_variants::RasterPipelines>,
     fragment_alpha: crate::legacy_fragment_alpha::LegacyFragmentAlpha,
+    stencil: crate::RenderStencilState,
 }
 impl VulkanRenderer {
     /// Load Vulkan and select a capable graphics device; `VulkanRenderer::new(options)?`.
@@ -22,6 +23,7 @@ impl VulkanRenderer {
             pipeline,
             capping_pipeline: None,
             fragment_alpha: Default::default(),
+            stencil: Default::default(),
         })
     }
     pub(crate) fn capture_limit(&self) -> u32 {
@@ -65,6 +67,7 @@ impl RenderBackend for VulkanRenderer {
         record::record_frame(&self.runtime, commands.command, &resources, frame);
         commands.finish()?;
         self.commit_fragment_alpha(frame, resources.fragment_alpha.ending);
+        self.commit_stencil(frame, resources.stencil.ending);
         resources.capture()
     }
 }
@@ -109,6 +112,7 @@ impl VulkanRenderer {
             .stage_mask(ash::vk::PipelineStageFlags2::ALL_COMMANDS)];
         commands.finish_synced(&waits, &signals)?;
         self.commit_fragment_alpha(frame, resources.fragment_alpha.ending);
+        self.commit_stencil(frame, resources.stencil.ending);
         chain.present(
             self.runtime.queues[presenter.present_family as usize],
             index,
@@ -132,14 +136,28 @@ impl VulkanRenderer {
         }
         self.fragment_alpha = ending;
     }
+    fn commit_stencil(&mut self, frame: &RenderFrame, ending: crate::RenderStencilState) {
+        if let Some(snapshot) = &frame.stencil_context {
+            snapshot.commit(ending);
+            return;
+        }
+        self.stencil = ending;
+    }
     fn frame_resources(
         &mut self,
         frame: &RenderFrame,
     ) -> Result<frame::FrameResources, RenderError> {
-        let capped = frame
-            .draws
-            .iter()
-            .any(|draw| draw.capping_pass != crate::RenderCappingPass::None);
+        let initial_stencil = frame.initial_stencil(self.stencil);
+        let capped = frame.stencil_clear_value != 0
+            || initial_stencil.is_enabled()
+            || frame
+                .layers
+                .iter()
+                .any(|layer| !layer.stencil_boundaries.is_empty())
+            || frame
+                .draws
+                .iter()
+                .any(|draw| draw.capping_pass != crate::RenderCappingPass::None);
         if capped && self.capping_pipeline.is_none() {
             self.capping_pipeline = Some(pipeline_variants::RasterPipelines::new(
                 &self.runtime,
@@ -158,6 +176,7 @@ impl VulkanRenderer {
             frame,
             pipeline,
             frame.initial_fragment_alpha(self.fragment_alpha),
+            initial_stencil,
         )
     }
 }
@@ -200,3 +219,5 @@ mod pipeline_layout;
 mod raster_limits;
 mod raster_samples;
 mod render_target_record;
+
+mod ordered_stencil_record;

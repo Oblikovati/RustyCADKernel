@@ -8,7 +8,8 @@ use std::ops::Range;
 
 impl OitCommandRecorder<'_> {
     pub fn geometry(&self, layers: Range<usize>, phase: OitGeometryPhase, set: vk::DescriptorSet) {
-        for layer in &self.frame.layers[layers] {
+        for index in layers {
+            let layer = &self.frame.layers[index];
             super::record::set_depth_policy(self.runtime, self.command, layer);
             super::record::record_draws_selected(
                 self.runtime,
@@ -16,6 +17,12 @@ impl OitCommandRecorder<'_> {
                 self.resources,
                 layer,
                 Some((phase, set)),
+            );
+            super::ordered_stencil_record::finish_layer(
+                self.runtime,
+                self.command,
+                self.resources,
+                index,
             );
         }
         self.end_rendering();
@@ -31,6 +38,8 @@ impl OitCommandRecorder<'_> {
             false,
             self.pass().fixed_output,
         );
+        let ending = self.resources.stencil.after_layer[layers.end - 1];
+        super::ordered_stencil_record::apply(self.runtime, self.command, ending);
         self.composite(
             &self.pass().composite,
             self.pass()
@@ -43,6 +52,8 @@ impl OitCommandRecorder<'_> {
             unreachable!()
         };
         self.begin_colors(&[color_attachment(back.view, [0.; 4], false)], None);
+        // Native color-only back-blend FBO has no stencil attachment.
+        super::ordered_stencil_record::apply(self.runtime, self.command, Default::default());
         self.composite(
             self.pass().peeling_back.as_ref().unwrap(),
             self.pass()

@@ -46,10 +46,18 @@ pub struct RenderFrame {
     pub(crate) layers: Vec<RenderLayerSpan>,
     pub(crate) raster: crate::transparency::RenderRasterSettings,
     pub(crate) raster_feedback: crate::raster_feedback::RasterFailureFeedback,
+    pub(crate) stencil_clear_value: u8,
+    pub(crate) stencil_context: Option<crate::stencil_feedback::StencilSnapshot>,
     pub(crate) fragment_alpha_context:
         Option<crate::fragment_alpha_feedback::FragmentAlphaSnapshot>,
 }
 impl RenderFrame {
+    /// Set an explicit low-level attachment clear; `frame.with_stencil_clear_value(1)`.
+    /// Retained-view test adaptors use this to prove comparisons against independently seeded buffers.
+    pub fn with_stencil_clear_value(mut self, value: u8) -> Self {
+        self.stencil_clear_value = value;
+        self
+    }
     /// Read target dimensions; `frame.extent()`.
     pub fn extent(&self) -> [u32; 2] {
         [self.width, self.height]
@@ -110,6 +118,8 @@ impl RenderFrame {
             raster: Default::default(),
             raster_feedback: Default::default(),
             fragment_alpha_context: None,
+            stencil_context: None,
+            stencil_clear_value: 0,
         })
     }
 }

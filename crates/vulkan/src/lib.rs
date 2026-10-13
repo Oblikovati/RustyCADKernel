@@ -141,3 +141,9 @@ pub use transparency::RenderTransparency;
 
 mod raster_feedback;
 mod retained_transparency;
+
+mod stencil_context;
+mod stencil_program;
+pub use stencil_context::RenderStencilState;
+mod stencil_feedback;
+mod stencil_plan;

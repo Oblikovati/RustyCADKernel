@@ -18,7 +18,13 @@ pub(super) fn begin_rendering(
         encoded_attachment,
     )];
     let depth = scene_depth_attachment(resources, first || clear_depth);
-    let stencil = scene_depth_attachment(resources, first);
+    let mut stencil = scene_depth_attachment(resources, first);
+    stencil.clear_value = vk::ClearValue {
+        depth_stencil: vk::ClearDepthStencilValue {
+            depth: 1.,
+            stencil: u32::from(resources.stencil_clear_value),
+        },
+    };
     begin_scene_attachments(runtime, command, resources, &colors, &depth, &stencil);
     set_viewport(runtime, command, resources.extent);
 }

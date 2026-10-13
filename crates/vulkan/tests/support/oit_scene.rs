@@ -158,7 +158,7 @@ fn populate_oit_groups(scene: &ViewerScene, reverse: bool, fixture: &str) {
         group.add_primitive_array(&oit_quad(rank, fixture), true);
     }
 }
-fn oit_fill_aspect(rank: usize, fixture: &str) -> Handle<Graphic3dAspects> {
+pub fn oit_fill_aspect(rank: usize, fixture: &str) -> Handle<Graphic3dAspects> {
     let style = Handle::new(Graphic3dAspects::default());
     style.set_interior_style(AspectInteriorStyle::Solid);
     style.set_shading_model(Graphic3dTypeOfShadingModel::Unlit);
@@ -179,7 +179,7 @@ fn oit_fill_aspect(rank: usize, fixture: &str) -> Handle<Graphic3dAspects> {
     );
     style
 }
-fn oit_quad(rank: usize, fixture: &str) -> Handle<Graphic3dArrayOfPrimitives> {
+pub fn oit_quad(rank: usize, fixture: &str) -> Handle<Graphic3dArrayOfPrimitives> {
     let flags = GRAPHIC3D_ARRAY_FLAGS_VERTEX_NORMAL | GRAPHIC3D_ARRAY_FLAGS_VERTEX_TEXEL;
     let vertices = Handle::new(
         Graphic3dArrayOfPrimitives::new(Graphic3dTypeOfPrimitiveArray::Triangles, 6, 0, 0, flags)

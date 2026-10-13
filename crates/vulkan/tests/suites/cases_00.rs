@@ -53,6 +53,8 @@ pub mod material_packing;
 pub mod object_animation_capture_cases;
 #[path = "../oit_transparency.rs"]
 pub mod oit_transparency;
+#[path = "../ordered_stencil.rs"]
+pub mod ordered_stencil;
 #[path = "../point_alpha.rs"]
 pub mod point_alpha;
 #[path = "../point_lighting.rs"]
