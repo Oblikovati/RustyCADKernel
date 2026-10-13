@@ -7,6 +7,8 @@ mod chain;
 mod dyadic;
 mod error;
 mod isolate;
+/// Exact planar curve/pcurve residual inequalities on finite same-parameter domains.
+pub mod metric_bounds;
 mod polynomial;
 /// Exact signs of a second polynomial at each isolated source root.
 pub mod signs;

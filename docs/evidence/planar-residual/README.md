@@ -1,0 +1,15 @@
+# Martensite exact planar representation residuals
+
+This extension certifies a supplied stored 3D curve against its stored pcurve on a plane, using their actual common parameter. It does not replace mapped OCCT tolerance checks, certify contact identity, or complete whole-body validation. The private TKBO adapter requires SameParameter, stored pcurves, identical ranges and supported analytic representations; unavailable coverage remains incomplete.
+
+Supported representations are polynomial or positive-weight rational Bezier curves and affine lines. Actual unscaled placement coefficients, scale and translation are captured separately. Negative or mixed weights, other curves or surfaces, absent geometry, mismatched ranges and unsupported policies return typed causes with the actual affected edge and face. Captured coefficients are owned immutable values; attributed topology identities remain references to the operation's actual entities.
+
+The core constructs homogeneous residual numerators and the exact threshold polynomial `Q = limit² × denominator² − sum(residual_numerator²)`. Binary64 inputs are converted to their exact dyadic values before multiplication. Coefficient magnitude is preserved until the final sign-only polynomial conversion. Positive Bezier weights on the admitted trim establish denominator positivity. Endpoint signs and exact signs at every derivative root prove the threshold over the whole interval. Failed or exhausted root work never produces a successful certificate.
+
+`Within.proven_squared_upper` is a certified upper bound, generally the requested squared limit; it is not a sampled estimate or a measured tight maximum. Requested spatial limits, effective spatial limits and root isolation widths remain distinct. Exact subintervals must lie inside the original declared source trim. A closed singleton proves its endpoint residual through the same threshold pipeline. Rounded split trims cannot admit an exact root outside their declared interval.
+
+The independent degree-23 case has a stationary peak between 23 uniform samples: every sample is below the chosen limit while the exact stationary peak exceeds it. This rejects sample-only certification; it does not claim the mapped OCCT checker necessarily misses that case. Additional tests cover nonunit rational weights, subnormal and huge finite coefficients, trim restrictions, placement, cancellation, budget exhaustion, actual source mutation and typed native accessor failures.
+
+The census endpoint comparison uses the original unsplit source parameter map. Bounding a mapped endpoint's distance to that source is metric conformance only, never evidence that two source entities share one certified incidence. General pair/self-contact coverage and all required per-context tolerance certificates remain prerequisites before ordered validation can pass.
+
+Failed subdivision work is currently unknown in this adapter rather than inferred from legacy errors. Performance measurements require a separately audited frozen cohort, identical accepted requests, time and peak resident memory. No performance baseline is accepted by this stage.
