@@ -9,7 +9,10 @@ use super::super::{
 use super::{BezierLineError, BezierLineQuery, BezierStage, solve};
 pub use error::BezierRayError;
 use num_bigint::BigInt;
-pub(super) use prepare::{RegularProjection, regular_projection, regular_projection_captured};
+pub(super) use prepare::{
+    RegularProjection, regular_projection, regular_projection_accounted,
+    regular_projection_captured,
+};
 
 /// Classify each isolated supporting-line contact relative to the ray from A towards B.
 ///

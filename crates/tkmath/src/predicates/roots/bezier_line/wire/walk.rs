@@ -29,8 +29,17 @@ impl WireWalk {
         reversed: bool,
         result: WindingEvaluation,
     ) -> Result<(), BezierWireError> {
-        self.used += result.bisections;
-        match result.incidence {
+        self.append_contribution(id, reversed, result.incidence, result.bisections)
+    }
+    pub(super) fn append_contribution(
+        &mut self,
+        id: u64,
+        reversed: bool,
+        incidence: BezierWinding,
+        bisections: u16,
+    ) -> Result<(), BezierWireError> {
+        self.used += bisections;
+        match incidence {
             BezierWinding::Boundary => self.boundary_ids.push(id),
             BezierWinding::Clear(count) => {
                 let contribution = i64::from(count) * if reversed { -1 } else { 1 };

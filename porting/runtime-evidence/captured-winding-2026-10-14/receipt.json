@@ -1,0 +1,101 @@
+{
+  "source_revision": "306200cb6ca146bfdb9a8525ef8bade259d27810",
+  "base_revision": "999670a71729b46e496aac2a98ad635ae9b199d4",
+  "source_sha256": {
+    "crates/tkmath/Cargo.toml": "da2480faeb28fc6ffe0fb59a044c20031d5296279a3779be40810dbc8941623b",
+    "crates/tkmath/benches/captured_winding.rs": "a00a625202af87b6877c62e41aff94ccb650f012e7eb559257784d5fa17763b7",
+    "crates/tkmath/benches/captured_winding/allocation_calls.rs": "4deb6bf977e0590c5141dec035447e4b8cad1e050c0b6c9b2d2dc8aeaa1fdecd",
+    "crates/tkmath/benches/captured_winding/cases.rs": "9f08cc571face2c5a3e08b6c0175fcf67f1efc551b4522f3c6275629d274479d",
+    "crates/tkmath/benches/captured_winding/execute.rs": "502020c8b29adb8cefdf1c71869c9e1eb0b132fd03ecf4ddf6e2ae9f85a831fb",
+    "crates/tkmath/src/predicates/roots/bezier_line.rs": "be341d276bffc948e88d8cf1e1ff55e2e0493fe98a7b3a25412b6c3dac74c71e",
+    "crates/tkmath/src/predicates/roots/bezier_line/ray.rs": "9d0d9ab6c1dbf99311834cc50cef9f78aaa50ba99bc2b5e5e3adbc1aad54b073",
+    "crates/tkmath/src/predicates/roots/bezier_line/ray/prepare.rs": "0ad79094a0271f6d31719509c08b727f70892ec63e9dbd09ec98266b6afa6a00",
+    "crates/tkmath/src/predicates/roots/bezier_line/solve.rs": "9b3dafbaefa860688a7dc025858e2325c9c5226dab63a37f9f5c491f5b7f8c40",
+    "crates/tkmath/src/predicates/roots/bezier_line/winding.rs": "3feaea606d8c7195fefecb70d53f37fa3f56a0f07b1d46226a61434085553d58",
+    "crates/tkmath/src/predicates/roots/bezier_line/winding/evidence.rs": "2f1900dea781217da39d8efa5082ad7d346b99e0c25dcd3d92150c933c5a10be",
+    "crates/tkmath/src/predicates/roots/bezier_line/wire.rs": "9f23b94a46eeb5fcf7235539d0cb48f96a9efba8d06a5fafc90699429abea056",
+    "crates/tkmath/src/predicates/roots/bezier_line/wire/captured.rs": "85025bf4917d90229a0db19fa5184da4249caa832a13e125d73e038e40b407ed",
+    "crates/tkmath/src/predicates/roots/bezier_line/wire/captured/input.rs": "a2c4620afe2bf703aa1eb91a93e4aeddf48ccf548304a1ed34a6a503ad625d1f",
+    "crates/tkmath/src/predicates/roots/bezier_line/wire/captured/proof.rs": "7b680a28ab82d6c86a9ac2e9d8201db2dda1051a70c747d355d6696cdaf17720",
+    "crates/tkmath/src/predicates/roots/bezier_line/wire/captured/result.rs": "b78e95bfd60607577b63e26cc2d05ef0f8fe3497f06fab5c780d42ae5787e7e6",
+    "crates/tkmath/src/predicates/roots/bezier_line/wire/captured/store.rs": "a2276c3b3575f9ee84d9f8ecce886afadd48f121b85b1e371dcb0551fe24d91a",
+    "crates/tkmath/src/predicates/roots/bezier_line/wire/walk.rs": "de750504f685b82b8c10c496d548f88e454cae8bfa72246a7a7cab117a023716",
+    "crates/tkmath/src/predicates/roots/isolate.rs": "d746f3644d845302bd67dff4cdb78dce6b17f88fd236152e15ca470572be5f9f",
+    "crates/tkmath/src/predicates/roots/isolate_accounting_tests.rs": "6aeb8baa3cdf435f0f1d8160c57b3f8ed1ef06b6bf9b8a5711db948cf7a482ef",
+    "crates/tkmath/tests/exact_roots/bezier_line.rs": "bba9d62360400b71255ffd27ecfc93ce6446ce0a1622c98edffd596714f3794f",
+    "crates/tkmath/tests/exact_roots/bezier_line/captured_winding.rs": "b416ea3b4f62b860865537059782fc799eefdae7f1595f33c810cf79ce1d4500",
+    "crates/tkmath/tests/exact_roots/bezier_line/captured_winding/admission.rs": "3d22525e10ea0e8d40d7178d15291f11b17719a2a9510d700bf2d65bd363b786",
+    "crates/tkmath/tests/exact_roots/bezier_line/captured_winding/degeneracies.rs": "105af9bee3a7780030c1c75d4ad9981a0569a094c3ac468fc9baddf9b33d9316",
+    "crates/tkmath/tests/exact_roots/bezier_line/captured_winding/failures.rs": "25866d59c2f165d8e207c87d5f021515d7bcf254b55ed4c8b0b2c183c31e2c1f",
+    "crates/tkmath/tests/exact_roots/bezier_line/captured_winding/invariants.rs": "f68fa0a17435f44a8ea797424e5568b6f8f60ec2ebf9c397eac31f24a6379014",
+    "docs/captured-winding-certificates.md": "d1f574e0ccc637e65fa22b5435c7b3c244b51ec06351e53f50f5a3867392efe5"
+  },
+  "checks": {
+    "tkmath_all_targets_passed": 2912,
+    "doctests_passed": 47,
+    "clippy": "all-targets -D warnings terminal0",
+    "captured_regressions": 20,
+    "accounted_isolator_regressions": 4,
+    "benchmark_default_accepted_workloads": 3,
+    "extracted_roots_passed": 144,
+    "extracted_accounted_passed": 4,
+    "canonical_crate_archives": 31,
+    "changed_crate_sources_exact_before_after": 26
+  },
+  "logs": {
+    "captured-winding-complete-all-targets.log": {
+      "raw_sha256": "ff808cf52105295cd2ab12f14aecdc7be3faccf7881c54d40ee34144d7ae98d3",
+      "gzip_sha256": "cc79677a187bd197038cad862dddbf2f913622bb18237fa8c720f72a21f088d9",
+      "raw_bytes": 222268
+    },
+    "captured-winding-complete-clippy.log": {
+      "raw_sha256": "4a8da94ec406efe7d365dc887592e34802f1fe425389ea0f3f4341fe377db197",
+      "gzip_sha256": "b38a04593560b6804984ac98cfa982a87510f4fed0a271b33ad622123e342456",
+      "raw_bytes": 1279
+    },
+    "captured-winding-docs.log": {
+      "raw_sha256": "e2dbff6c8371e98c83695fc1aa8e79decbe6bf16c8b44d20332a6ab278ba63a4",
+      "gzip_sha256": "1b2681fafce527fa5a1110262474791e37a5eb6f5aeede8fdbdb9d2f80497485",
+      "raw_bytes": 5491
+    },
+    "captured-winding-checked-benchmark-verify.log": {
+      "raw_sha256": "5e7342a63b64cc0082438a32a8fc20b693ab8ff1138c85e733e0a4eb7ac5f616",
+      "gzip_sha256": "fc294ee25222b15c6764aa8b467ab39616d1b10994dcbde0a0de14a7db8d96e1",
+      "raw_bytes": 326
+    },
+    "captured-winding-package-prepare.log": {
+      "raw_sha256": "a5f3156cc8b48082453806678421930e019396823f8b5ca1ad36d4cd9ce4c8e1",
+      "gzip_sha256": "d8977cf20f63052c6afe75b6282883de9463dbe76711eeba63edea4451b452d6",
+      "raw_bytes": 10619
+    },
+    "captured-winding-extracted-accounting.log": {
+      "raw_sha256": "297ad2d2a8ffaa7a9e5b59aac3a8bb0d46952ecd619b10ad6c2d751d6c6260dd",
+      "gzip_sha256": "7f87ec5cf340ac04c083e26ba786b33d1449f656e49f7e9627c857c2402fb249",
+      "raw_bytes": 2924
+    },
+    "captured-winding-extracted-roots.log": {
+      "raw_sha256": "5a3a46165a8bf9f4277035ea8941f0f063510b56b9b9285b3c9df5d1b3fe05b5",
+      "gzip_sha256": "7c816c9070ae6bc5dfa7fd77f85b9e2220e4ebcab6a2f31a66c3aa42f5a012ed",
+      "raw_bytes": 16555
+    }
+  },
+  "occt_launched_by_tests": false,
+  "occt_cpp_api_promotions": 0,
+  "classes_promoted": 0,
+  "performance": {
+    "timings_executed": false,
+    "baseline_accepted": false,
+    "pending": "optimized freeze and root exclusive GO; whole source may integrate first, checkout retained until measured proof accepted",
+    "memory": "external process peak RSS planned; GPU memory not measured"
+  },
+  "deferred_original_scope": {
+    "worktree": "../Martensite-clip-plane-chain",
+    "revision": "84b295358",
+    "scope": "ordinary chain/Delete/Iterator/RTTI/canonical lifetime production acceptance remains unfinished and preserved"
+  },
+  "notes": [
+    "Legacy classify_bezier_wire contract and cold polling/error order preserved.",
+    "CaptureWorkReceipt records actual work, reuse and historical proof work separately.",
+    "Benchmark-only allocator delegates unchanged System alloc/alloc_zeroed/realloc/dealloc; no production allocator change."
+  ]
+}
