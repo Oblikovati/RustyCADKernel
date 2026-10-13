@@ -24,8 +24,6 @@ mod statuses;
 mod tests;
 mod tolerance;
 mod tolerance_capture;
-mod tolerance_curves;
-mod tolerance_placement;
 #[cfg(test)]
 mod tolerance_test_support;
 #[cfg(test)]

@@ -8,6 +8,7 @@ pub mod bop_tools;
 pub mod brep_algo_api;
 pub mod int_tools;
 
+mod sketch_region_geometry_capture;
 #[allow(dead_code)] // ADR0014: private partial stage, not a successful region API.
 mod sketch_region_validation;
 

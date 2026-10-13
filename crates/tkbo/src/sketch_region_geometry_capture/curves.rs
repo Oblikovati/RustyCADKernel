@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Capture real immutable coefficient values, never rounded line endpoints.
-use super::tolerance_types::PlanarMetricCause;
+use super::CapturedGeometryCause;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve, GeomLine};
 use rustycad_tkmath::predicates::roots::metric_bounds::{MetricBezier, MetricCurve};
-pub(super) enum CapturedMetricCurve<const DIM: usize> {
+pub(crate) enum CapturedMetricCurve<const DIM: usize> {
     Bezier {
         poles: Vec<[f64; DIM]>,
         weights: Option<Vec<f64>>,
@@ -16,7 +16,7 @@ pub(super) enum CapturedMetricCurve<const DIM: usize> {
     },
 }
 impl<const DIM: usize> CapturedMetricCurve<DIM> {
-    pub(super) fn borrow(&self) -> MetricCurve<'_, DIM> {
+    pub(crate) fn borrow(&self) -> MetricCurve<'_, DIM> {
         match self {
             Self::Bezier { poles, weights } => MetricCurve::Bezier(MetricBezier {
                 poles,
@@ -29,9 +29,9 @@ impl<const DIM: usize> CapturedMetricCurve<DIM> {
         }
     }
 }
-pub(super) fn capture_space_curve(
+pub(crate) fn capture_space_curve(
     curve: &Handle<dyn GeomCurve>,
-) -> Result<CapturedMetricCurve<3>, PlanarMetricCause> {
+) -> Result<CapturedMetricCurve<3>, CapturedGeometryCause> {
     if let Some(bezier) = curve.cast::<GeomBezierCurve>().get() {
         return space_bezier(bezier);
     }
@@ -46,9 +46,9 @@ pub(super) fn capture_space_curve(
     }
     unsupported_curve(curve, "3D curve")
 }
-pub(super) fn capture_plane_curve(
+pub(crate) fn capture_plane_curve(
     curve: &Handle<dyn Geom2dCurve>,
-) -> Result<CapturedMetricCurve<2>, PlanarMetricCause> {
+) -> Result<CapturedMetricCurve<2>, CapturedGeometryCause> {
     if let Some(bezier) = curve.cast::<Geom2dBezierCurve>().get() {
         return plane_bezier(bezier);
     }
@@ -68,22 +68,24 @@ fn unsupported_curve<
 >(
     curve: &Handle<T>,
     representation: &'static str,
-) -> Result<CapturedMetricCurve<DIM>, PlanarMetricCause> {
+) -> Result<CapturedMetricCurve<DIM>, CapturedGeometryCause> {
     let Some(curve) = curve.get() else {
-        return Err(PlanarMetricCause::MissingCurve { representation });
+        return Err(CapturedGeometryCause::MissingCurve { representation });
     };
-    Err(PlanarMetricCause::Unsupported {
+    Err(CapturedGeometryCause::Unsupported {
         representation,
         dynamic_type: curve.dynamic_type().name().to_owned(),
     })
 }
-fn space_bezier(curve: &GeomBezierCurve) -> Result<CapturedMetricCurve<3>, PlanarMetricCause> {
+fn space_bezier(curve: &GeomBezierCurve) -> Result<CapturedMetricCurve<3>, CapturedGeometryCause> {
     capture_bezier_coefficients(curve.nb_poles(), curve.is_rational(), |index| {
         let pole = curve.pole(index)?;
         Ok(([pole.x(), pole.y(), pole.z()], curve.weight(index)?))
     })
 }
-fn plane_bezier(curve: &Geom2dBezierCurve) -> Result<CapturedMetricCurve<2>, PlanarMetricCause> {
+fn plane_bezier(
+    curve: &Geom2dBezierCurve,
+) -> Result<CapturedMetricCurve<2>, CapturedGeometryCause> {
     capture_bezier_coefficients(curve.nb_poles(), curve.is_rational(), |index| {
         let pole = curve.pole(index)?;
         Ok(([pole.x(), pole.y()], curve.weight(index)?))
@@ -92,8 +94,8 @@ fn plane_bezier(curve: &Geom2dBezierCurve) -> Result<CapturedMetricCurve<2>, Pla
 fn capture_bezier_coefficients<const DIM: usize>(
     count: i32,
     rational: bool,
-    mut coefficient: impl FnMut(i32) -> Result<([f64; DIM], f64), PlanarMetricCause>,
-) -> Result<CapturedMetricCurve<DIM>, PlanarMetricCause> {
+    mut coefficient: impl FnMut(i32) -> Result<([f64; DIM], f64), CapturedGeometryCause>,
+) -> Result<CapturedMetricCurve<DIM>, CapturedGeometryCause> {
     let mut poles = Vec::new();
     let mut weights = Vec::new();
     for index in 1..=count {
