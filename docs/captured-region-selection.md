@@ -9,11 +9,16 @@ search/history, self-intersection and tolerance.
 
 One operation fixes the full requested root policy and seed ray. The consumer
 assigns deterministic operation-local tokens to actual copied edge identities
-and original trim domains. Orientation and current occurrence IDs remain outside
+and captured output representation domains. Orientation and current occurrence IDs remain outside
 the cache key. The math store additionally binds exact coefficient/weight/trim
 bits, so unrelated physical sources or changed scalar captures do not reuse a
 proof merely because points are near or equal. These tokens are not persistent
 application names or addresses.
+
+The receipt `representation_interval` records the output pcurve range before
+normalization. The existing `CandidateSegment.original_interval` supplies those
+unchanged values; neither field proves admitted original-source parameter
+conformance. That separate construction obligation remains incomplete.
 
 The result owns the actual proof store and current occurrence/parent bindings.
 It reports newly executed subdivisions, total charged operation work, reused

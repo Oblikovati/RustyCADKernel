@@ -17,7 +17,8 @@ pub(crate) struct CandidateCapturedOccurrence {
     pub id: u64,
     pub physical_source: u64,
     pub parents: Vec<OriginalMemberIdentity>,
-    pub original_interval: [f64; 2],
+    // WHY: this output pcurve range precedes normalization; it does not certify original-source parameters.
+    pub representation_interval: [f64; 2],
     pub reversed: bool,
 }
 pub(crate) struct CandidateCapturedFailure {
@@ -79,7 +80,7 @@ impl<'a> CandidateWindingOperation<'a> {
         if let Some(index) = self
             .registry
             .iter()
-            .position(|source| same_original_domain(source, segment))
+            .position(|source| same_captured_domain(source, segment))
         {
             return index as u64 + 1;
         }
@@ -94,7 +95,7 @@ impl<'a> CandidateWindingOperation<'a> {
         accumulated.certificate_bisections += work.certificate_bisections;
     }
 }
-fn same_original_domain(first: &CandidateSegment, second: &CandidateSegment) -> bool {
+fn same_captured_domain(first: &CandidateSegment, second: &CandidateSegment) -> bool {
     first.edge.is_same(&second.edge)
         && first.original_interval.map(f64::to_bits) == second.original_interval.map(f64::to_bits)
 }
@@ -106,7 +107,7 @@ fn retained_occurrence(
         id: segment.occurrence,
         physical_source,
         parents: segment.parents.clone(),
-        original_interval: segment.original_interval,
+        representation_interval: segment.original_interval,
         reversed: segment.reversed,
     }
 }
