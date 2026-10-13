@@ -9,7 +9,6 @@ mod refine;
 #[cfg(test)]
 mod tests;
 mod types;
-mod world;
 use super::super::RootBracket;
 pub use types::*;
 

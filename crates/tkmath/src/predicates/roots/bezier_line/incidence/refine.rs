@@ -3,11 +3,11 @@ use super::super::super::{
     DyadicBound, RootBracket, RootIsolation, RootIsolationOptions, polynomial::IntegerPolynomial,
 };
 use super::super::{ray, solve};
-use super::{
-    types::*,
+use super::types::*;
+use crate::predicates::roots::certificate_arithmetic::{
+    ExactRatio,
     world::{EnvelopeFailure, HomogeneousCurve, WorldEnvelope},
 };
-use crate::predicates::roots::certificate_arithmetic::ExactRatio;
 
 pub(super) struct ConstructedRoot {
     pub root: RootBracket,
