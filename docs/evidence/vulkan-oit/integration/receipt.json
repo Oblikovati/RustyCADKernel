@@ -1,0 +1,38 @@
+{
+  "tested_source_revision": "69433756df1b81b131814ba3f5ccf56585d0edff",
+  "integrated_branch_head": "ded86b442db330bead034a95f295375860611def",
+  "measured_source_revision": "850f43ceec210ea40f1c17962c84a96053e376d8",
+  "scope": "Full retained transparency implementation, assets, captures, state/resource tests, and measured workloads; no partial cherry-pick",
+  "gates": {
+    "software": {
+      "passed": 644,
+      "failed": 0,
+      "ignored_diagnostics": 5,
+      "executables": 71
+    },
+    "host": {
+      "passed": 644,
+      "failed": 0,
+      "ignored_diagnostics": 5,
+      "executables": 71
+    },
+    "clippy_exit": 0,
+    "docs_warnings_denied_exit": 0,
+    "format_exit": 0,
+    "diff_check_exit": 0,
+    "python_modules_passed": 34,
+    "python_modules_failed": 0
+  },
+  "measured_source_difference_on_main": [
+    "crates/tkernel/src/standard/handle_reference.rs",
+    "crates/tkernel/src/standard/handle_reference_tests.rs",
+    "crates/tkgeomalgo/src/lib.rs",
+    "crates/tkgeomalgo/tests/suites/cases_00.rs"
+  ],
+  "difference_review": "Direct pointer-metadata fix d980011e6 and independent sketch-spline module/test registration from 4ebbba28e; renderer sources match the measured candidate. Combined source gates executed after integration. Timings remain attributed to their original measured revision.",
+  "performance_samples": 7000,
+  "benchmark_baseline_accepted": false,
+  "gpu_memory_measured": false,
+  "api_class_promotion": false,
+  "remaining_strict_parity": "All configured diagnostics documented in vulkan-oit-contract.md remain retained; no full raster or application acceptance claim."
+}

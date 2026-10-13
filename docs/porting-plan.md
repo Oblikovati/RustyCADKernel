@@ -110,8 +110,15 @@ exchange-format work that follows the visualization and Vulkan renderer prioriti
    endpoint and color interpolation parity remains open.
    [Translucent surface lighting](vulkan-lit-transparency.md) now combines the three
    Phong-family algorithms with material opacity, distinguished back faces,
-   deferred pass ordering and live opaque/translucent transitions. Keep alpha-mask,
-   OIT and transparent cap/annotation work in the remaining renderer scope.
+   deferred pass ordering and live opaque/translucent transitions.
+   [Retained transparency](vulkan-oit-contract.md) now implements unordered blending,
+   weighted OIT and dual depth peeling with live parameters, context alpha state,
+   multisample fallback, layers and capping. Both-device functional replay and
+   35-workload performance measurements are recorded with the implementation.
+   Keep the documented texel, sprite, far-plane, high-sample and text driver
+   differences explicit; full raster parity and API completion are not claimed.
+   Continue remaining alpha-mask and cap/annotation policies alongside these
+   retained diagnostic gates.
    [AIS trihedrons](ais-trihedron.md) now provide cached wire/shaded datum parts,
    native owner selection and protected application subclass hooks. Vulkan polygon
    offsets support the shaded geometry with both-device runtime checks; strict
