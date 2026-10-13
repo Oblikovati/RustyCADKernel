@@ -1,0 +1,60 @@
+test_absent_library_tool_cannot_replace_original_failure (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_absent_library_tool_cannot_replace_original_failure) ... ok
+test_cli_defaults_to_tool_checkout_and_selects_explicit_kernel_root (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_cli_defaults_to_tool_checkout_and_selects_explicit_kernel_root) ... ok
+test_cold_failure_identity_survives_stage_cleanup_without_sealing (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_cold_failure_identity_survives_stage_cleanup_without_sealing) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-e15_u8kn/workspace/target --all-targets
+ok
+test_declared_driver_hashes_are_read_without_loading_and_bad_json_is_diagnostic (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_declared_driver_hashes_are_read_without_loading_and_bad_json_is_diagnostic) ... ok
+test_failed_executable_parser_rejects_foreign_paths_and_uses_last_running (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_failed_executable_parser_rejects_foreign_paths_and_uses_last_running) ... ok
+test_hashing_excludes_root_build_but_keeps_source_target_fixture (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_hashing_excludes_root_build_but_keeps_source_target_fixture) ... ok
+test_original_failure_survives_diagnostic_volume_refusal (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_original_failure_survives_diagnostic_volume_refusal) ... {"release_diagnostic_error": "diagnostic volume full"}
+ok
+test_successful_command_preserves_stderr_and_bounds_receipt_streams (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_successful_command_preserves_stderr_and_bounds_receipt_streams) ... ok
+test_system_boundary_retains_stderr_and_original_failure (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_system_boundary_retains_stderr_and_original_failure) ... err
+out
+ok
+test_whitelisted_environment_and_library_metadata_do_not_probe_graphics (test_release_failure_evidence.ReleaseFailureEvidenceTests.test_whitelisted_environment_and_library_metadata_do_not_probe_graphics) ... ok
+test_archive_rejects_wrong_root_traversal_and_links (test_release_packages.ReleasePackageTests.test_archive_rejects_wrong_root_traversal_and_links) ... ok
+test_archive_requires_manifest (test_release_packages.ReleasePackageTests.test_archive_requires_manifest) ... ok
+test_cargo_metadata_preserves_available_features (test_release_packages.ReleasePackageTests.test_cargo_metadata_preserves_available_features) ... ok
+test_dirty_checkout_and_wrong_tag_are_rejected (test_release_packages.ReleasePackageTests.test_dirty_checkout_and_wrong_tag_are_rejected) ... ok
+test_each_profile_uses_and_cleans_its_own_target_directory (test_release_packages.ReleasePackageTests.test_each_profile_uses_and_cleans_its_own_target_directory) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-uneq69i7/workspace/target --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-uneq69i7/workspace/target --doc
+ok
+test_feature_bearing_release_still_runs_both_profiles (test_release_packages.ReleasePackageTests.test_feature_bearing_release_still_runs_both_profiles) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-vr2z68nx/workspace/target --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-vr2z68nx/workspace/target --doc
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-vr2z68nx/workspace/target --all-features --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-vr2z68nx/workspace/target --all-features --doc
+ok
+test_featureless_release_does_not_repeat_identical_cargo_tests (test_release_packages.ReleasePackageTests.test_featureless_release_does_not_repeat_identical_cargo_tests) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-yokfk0cy/workspace/target --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-yokfk0cy/workspace/target --doc
+ok
+test_invalid_inventories_are_rejected (test_release_packages.ReleasePackageTests.test_invalid_inventories_are_rejected) ... ok
+test_inventory_and_named_archive (test_release_packages.ReleasePackageTests.test_inventory_and_named_archive) ... ok
+test_malformed_features_cannot_silently_skip_release_tests (test_release_packages.ReleasePackageTests.test_malformed_features_cannot_silently_skip_release_tests) ... ok
+test_malformed_package_fields_are_rejected_before_profile_selection (test_release_packages.ReleasePackageTests.test_malformed_package_fields_are_rejected_before_profile_selection) ... ok
+test_release_reuses_dependencies_across_packages_and_cleans_after_profiles (test_release_packages.ReleasePackageTests.test_release_reuses_dependencies_across_packages_and_cleans_after_profiles) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/tmp5w6jf6lf/stage/target --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/tmp5w6jf6lf/stage/target --doc
++ cargo test --package rustycad-cmath --locked --target-dir /tmp/tmp5w6jf6lf/stage/target --all-targets
++ cargo test --package rustycad-cmath --locked --target-dir /tmp/tmp5w6jf6lf/stage/target --doc
++ cargo test --package rustycad-cmath --locked --target-dir /tmp/tmp5w6jf6lf/stage/target --all-features --all-targets
++ cargo test --package rustycad-cmath --locked --target-dir /tmp/tmp5w6jf6lf/stage/target --all-features --doc
+ok
+test_stale_suites_refuse_release_before_packaging (test_release_packages.ReleasePackageTests.test_stale_suites_refuse_release_before_packaging) ... ok
+test_success_seals_exact_artifacts_and_hashes_after_both_tests (test_release_packages.ReleasePackageTests.test_success_seals_exact_artifacts_and_hashes_after_both_tests) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-niv0mevg/workspace/target --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-niv0mevg/workspace/target --doc
+ok
+test_system_commands_propagates_failures (test_release_packages.ReleasePackageTests.test_system_commands_propagates_failures) ... fatal: not a git repository (or any of the parent directories): .git
+ok
+test_tag_must_match_package_version (test_release_packages.ReleasePackageTests.test_tag_must_match_package_version) ... ok
+test_test_failure_never_creates_release_output (test_release_packages.ReleasePackageTests.test_test_failure_never_creates_release_output) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-lqwqxb5u/workspace/target --all-targets
+ok
+test_test_support_is_independent_of_checkout_timestamps (test_release_packages.ReleasePackageTests.test_test_support_is_independent_of_checkout_timestamps) ... ok
+test_workspace_is_new_and_patch_paths_are_portable (test_release_packages.ReleasePackageTests.test_workspace_is_new_and_patch_paths_are_portable) ... + cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-dv9rlyr5/workspace/target --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-dv9rlyr5/workspace/target --doc
+ok
+test_ci_keeps_tooling_and_rust_tests_without_native_oracle_builds (test_ci_oracle_boundary.CiOracleBoundaryTests.test_ci_keeps_tooling_and_rust_tests_without_native_oracle_builds) ... ok
+test_release_reuses_the_same_ci_boundary (test_ci_oracle_boundary.CiOracleBoundaryTests.test_release_reuses_the_same_ci_boundary) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.089s
+
+OK
