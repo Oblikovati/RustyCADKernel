@@ -93,7 +93,7 @@ fn measure_case(
     fixture.mutate_inputs(scene);
     let workload = format!("oit-{scene}-{mode}-samples{samples}-fixed{fixed}");
     retained_text_performance::measure_text_view(&fixture.scene.render_view(), &workload);
-    fixture.scene.view.remove();
+    fixture.finish();
 }
 fn measure_live_parameters(driver: &Handle<Graphic3dRenderDriver>, fixed: bool) {
     let fixture = oit_scene::OitScene::new(driver, false);
@@ -113,5 +113,5 @@ fn measure_live_parameters(driver: &Handle<Graphic3dRenderDriver>, fixed: bool) 
         fixture.scene.render_view().try_redraw().unwrap();
         index += 1;
     });
-    fixture.scene.view.remove();
+    fixture.finish();
 }

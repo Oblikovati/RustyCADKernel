@@ -39,7 +39,9 @@ use martensite_vulkan::{
     RenderTransparency,
 };
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkservice::graphic3d::{GRAPHIC3D_ZLAYER_ID_DEFAULT, Graphic3dCViewMembers};
+use rustycad_tkservice::graphic3d::{
+    GRAPHIC3D_ZLAYER_ID_DEFAULT, Graphic3dCViewMembers, Graphic3dGraphicDriver,
+};
 
 #[test]
 fn retained_unordered_weighted_and_peeling_native_buffers_replay_without_occt() {
@@ -366,4 +368,19 @@ fn assert_transition_contract(
         capture.pixel(20, 20),
         Some(rgba[(20 * 64 + 20) * 4..][..4].try_into().unwrap())
     );
+}
+
+#[test]
+fn owned_layer_fixture_teardown_allows_fresh_viewers_on_the_same_driver() {
+    let backend = recording_device::RecordingDevice::default();
+    let driver = Graphic3dRenderDriver::with_backend(backend, 128).unwrap();
+    // Native layer-lifetime control returns UNDERLAY, DEFAULT, TOP, TOPMOST, OVERLAY.
+    let defaults = vec![-5, 0, -2, -3, -4];
+    assert_eq!(driver.z_layers(), defaults);
+    for name in ["layer-clear", "layer-shared", "layer-clear"] {
+        let fixture = oit_scene::OitScene::with_scene(&driver, false, name);
+        assert_eq!(driver.z_layers().len(), defaults.len() + 1);
+        fixture.finish();
+        assert_eq!(driver.z_layers(), defaults, "{name}");
+    }
 }

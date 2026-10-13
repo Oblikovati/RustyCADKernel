@@ -15,6 +15,7 @@ class OitCaseTests(unittest.TestCase):
 
         stems = (
             "layers.hxx",
+            "layer_lifetime.cxx",
             "transition.cxx",
             "alpha_scope.cxx",
             "draw_trace.hxx",

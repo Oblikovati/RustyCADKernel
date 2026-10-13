@@ -54,6 +54,25 @@ impl OitScene {
             cap_inputs: None,
         }
     }
+    /// Release this fixture's actual viewer-owned layer before another fixture; `fixture.finish()`.
+    pub fn finish(&self) {
+        self.scene.view.remove();
+        let Some(structure) = &self.layer_structure else {
+            return;
+        };
+        let layer = structure.get_z_layer();
+        structure.erase();
+        assert!(
+            !structure.is_displayed(),
+            "received displayed layer={layer}; expected erased fixture structure"
+        );
+        // OCCT3d097a0 Viewer::DelView does not remove viewer-owned driver-global layers.
+        let removed = self.scene.viewer.remove_z_layer(layer).unwrap();
+        assert!(
+            removed,
+            "received layer={layer}; expected this fixture's owned custom layer"
+        );
+    }
     /// Replace live groups while retaining the same context; `fixture.replace_groups("two")`.
     pub fn replace_groups(&self, fixture: &str) {
         self.scene.structure.clear(true);

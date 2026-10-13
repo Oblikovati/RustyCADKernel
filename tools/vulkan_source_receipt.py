@@ -11,6 +11,7 @@ RECEIPT_ORACLE_PATHS = (
     "tools/oracle/martensite_oit_draw_trace.hxx",
     "tools/oracle/martensite_oit_fixture.hxx",
     "tools/oracle/martensite_oit_layers.hxx",
+    "tools/oracle/martensite_oit_layer_lifetime.cxx",
     "tools/oracle/martensite_oit_transition.cxx",
     "tools/oracle/martensite_fixed_lighting_capture.cxx",
     "tools/oracle/martensite_fixed_lighting_cap_capture.cxx",
