@@ -44,7 +44,8 @@ exchange-format work that follows the visualization and Vulkan renderer prioriti
 
 1. Resolve the critical [application blockers](application-blockers.md): prepare
    the accepted spline and predicate extensions for tested release, prove the
-   general analytic sketch-region-to-solid path, and certify edit incidences.
+   general analytic sketch-region-to-solid path, release native GUI composition
+   for the existing view, and certify edit incidences.
    Use the named consumer and acceptance gate to size each slice.
 2. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
    camera-dependent selection, native comparisons and regression tests.

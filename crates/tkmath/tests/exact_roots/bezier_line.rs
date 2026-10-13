@@ -188,3 +188,5 @@ fn scaled_contact(scale: f64) -> RootIsolation {
     request.weights = Some(&weights);
     contacts(request)
 }
+
+mod captured_winding;

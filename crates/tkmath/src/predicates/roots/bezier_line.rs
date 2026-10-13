@@ -19,7 +19,9 @@ pub use error::{BezierInput, BezierLineError, BezierStage};
 pub use winding::{BezierWinding, bezier_winding_contribution};
 pub use wire::{
     BezierWireError, BezierWireLocation, BezierWireQuery, BezierWireResult, BezierWireSegment,
-    classify_bezier_wire,
+    CaptureWorkReceipt, CapturedBezierWindingProof, CapturedBezierWireFailure,
+    CapturedBezierWireInput, CapturedBezierWireOccurrence, CapturedBezierWireResult,
+    CapturedBezierWireStore, CapturedWindingEvidence, classify_bezier_wire,
 };
 
 /// Borrowed controls of a polynomial or rational Bézier curve and an infinite line.

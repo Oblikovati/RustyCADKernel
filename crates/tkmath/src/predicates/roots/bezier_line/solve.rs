@@ -42,8 +42,18 @@ pub(super) fn solve_polynomial(
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<RootIsolation, RootIsolationError> {
+    solve_polynomial_accounted(polynomial, bounds, width, options, cancelled, &mut || {})
+}
+pub(super) fn solve_polynomial_accounted(
+    polynomial: super::super::polynomial::IntegerPolynomial,
+    bounds: [DyadicBound; 2],
+    width: DyadicBound,
+    options: RootIsolationOptions,
+    cancelled: &mut impl FnMut() -> bool,
+    completed_split: &mut impl FnMut(),
+) -> Result<RootIsolation, RootIsolationError> {
     let tower = chain::multiplicity_tower(polynomial, cancelled)?;
-    isolate::isolate(&tower, bounds, width, options, cancelled)
+    isolate::isolate_accounted(&tower, bounds, width, options, cancelled, completed_split)
 }
 pub(super) fn regular_denominator(
     controls: Vec<BigInt>,
@@ -62,11 +72,27 @@ pub(super) fn regular_denominator_certified(
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<(super::super::polynomial::IntegerPolynomial, RootIsolation), BezierLineError> {
+    regular_denominator_accounted(controls, bounds, width, options, cancelled, &mut || {})
+}
+pub(super) fn regular_denominator_accounted(
+    controls: Vec<BigInt>,
+    bounds: [DyadicBound; 2],
+    width: DyadicBound,
+    options: RootIsolationOptions,
+    cancelled: &mut impl FnMut() -> bool,
+    completed_split: &mut impl FnMut(),
+) -> Result<(super::super::polynomial::IntegerPolynomial, RootIsolation), BezierLineError> {
     let polynomial = bernstein::from_integer_controls(controls, options.max_degree, cancelled)
         .map_err(denominator_error)?;
-    let result = solve_polynomial(polynomial.clone(), bounds, width, options, cancelled);
-    let isolation = check_denominator(result)?;
-    Ok((polynomial, isolation))
+    let result = solve_polynomial_accounted(
+        polynomial.clone(),
+        bounds,
+        width,
+        options,
+        cancelled,
+        completed_split,
+    );
+    Ok((polynomial, check_denominator(result)?))
 }
 fn denominator_error(cause: RootIsolationError) -> BezierLineError {
     match cause {

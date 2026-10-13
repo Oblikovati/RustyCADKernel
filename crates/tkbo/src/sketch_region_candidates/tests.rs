@@ -12,7 +12,7 @@ use rustycad_tkmath::{
     predicates::roots::RootIsolationOptions,
 };
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakePolygon;
-pub(super) fn arranged(shapes: &[Shape]) -> OwnedArrangement {
+pub(crate) fn arranged(shapes: &[Shape]) -> OwnedArrangement {
     let sources: Vec<_> = shapes
         .iter()
         .enumerate()
@@ -27,7 +27,7 @@ pub(super) fn arranged(shapes: &[Shape]) -> OwnedArrangement {
     };
     owned
 }
-pub(super) fn candidates(shapes: &[Shape]) -> CandidateBatch {
+pub(crate) fn candidates(shapes: &[Shape]) -> CandidateBatch {
     extract_candidates(&arranged(shapes), Plane3::default(), &mut |_| false)
         .unwrap_or_else(|_| panic!("expected mapped candidates with captured boundaries"))
 }
@@ -40,7 +40,7 @@ pub(super) fn selection(batch: &CandidateBatch, seed: [f64; 2]) -> SeedSelection
     assert!(missing.len() >= 5);
     selection
 }
-pub(super) fn rectangle(x: f64, y: f64, width: f64, height: f64) -> Vec<Shape> {
+pub(crate) fn rectangle(x: f64, y: f64, width: f64, height: f64) -> Vec<Shape> {
     let mut polygon = BRepBuilderAPIMakePolygon::new();
     for (u, v) in [
         (x, y),

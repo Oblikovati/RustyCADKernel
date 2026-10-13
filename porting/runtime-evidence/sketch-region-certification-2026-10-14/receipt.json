@@ -1,0 +1,116 @@
+{
+  "base": "999670a717",
+  "gates": {
+    "clippy": {
+      "exit": 0,
+      "log": "clippy-final.log.gz"
+    },
+    "committed_archives": {
+      "actual_packages": 31,
+      "canonical_helpers": [
+        "release_archives.stage_workspace",
+        "release_packages.test_profile"
+      ],
+      "doc_groups": 3,
+      "doc_passed": 249,
+      "failed": 0,
+      "log": "committed-archive-tests.log.gz",
+      "runtime_groups": 8,
+      "runtime_passed": 2451,
+      "sealed": false,
+      "source_equality_files": 14,
+      "vcs_dirty": false,
+      "vcs_sha": "7c681b15fc932eaab7ab14582f88e469f7bae3d1"
+    },
+    "dirty_source_archives": {
+      "acceptance": false,
+      "failed": 0,
+      "log": "extracted-tests.log.gz",
+      "reason": "attributed diagnostic only; replaced for acceptance by committed-source archives",
+      "runtime_passed": 2451
+    },
+    "discovery": {
+      "exit": 0,
+      "log": "discovery-final.log.gz"
+    },
+    "format": {
+      "exit": 0,
+      "log": "format-final.log.gz"
+    },
+    "toolkits": {
+      "failed": 0,
+      "groups": 8,
+      "log": "toolkits-final.log.gz",
+      "passed": 2451
+    }
+  },
+  "native": {
+    "build_command": [
+      "c++",
+      "-std=c++17",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_boundary_census.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKBO",
+      "-lTKTopAlgo",
+      "-lTKGeomAlgo",
+      "-lTKBRep",
+      "-lTKG3d",
+      "-lTKG2d",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/certification/native-census"
+    ],
+    "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "identity_manifests": [
+      {
+        "file": "native-input-manifest-000.json",
+        "sha256": "04bebb21d290f2a5537d97fd89b8f68a1a8f0ab0d8c20e86fa4066383f1a1e93"
+      },
+      {
+        "file": "native-input-manifest-001.json",
+        "sha256": "70bb61824c505d437904373dad3cbaef61fbc6c035468db6ff55ebdfb9337561"
+      },
+      {
+        "file": "native-input-manifest-002.json",
+        "sha256": "2fcb7032af91f755c66c0de1410789ba4c7dede4a1400cc45c4601794340016a"
+      },
+      {
+        "file": "native-input-manifest-003.json",
+        "sha256": "84fef65f87b95b7a6af630ba9bf5760da81591cb456c24f33edf55d3ed1c84e0"
+      },
+      {
+        "file": "native-input-manifest-004.json",
+        "sha256": "e52ef5eabf8c89cfe4584e9f07792947de60f65d5e77160d74b684be2e1e7a58"
+      },
+      {
+        "file": "native-input-manifest-005.json",
+        "sha256": "8ae26955f5366bc1844e4cd88c7c22d481530d4fff8d2ef59e2743cd87714e27"
+      }
+    ],
+    "raw_equals_fixture": true,
+    "raw_rows": 2,
+    "rejected_probe": "Initial generated-vertex Parameter(original source edge) threw Standard_NoSuchObject twice. Correct query uses actual incident modified edge; no aborted stdout became an asset.",
+    "repeat_count": 2,
+    "run_command": [
+      "target/certification/native-census"
+    ],
+    "successful_exit_codes": [
+      0,
+      0
+    ]
+  },
+  "occt_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "profile": {
+    "dev_debug": 0,
+    "incremental": false,
+    "jobs": 2,
+    "test_debug": 0
+  },
+  "scope": "Private incomplete census/coverage prerequisite; no mapped API, healthy-body, construction/search/SI/tolerance, issue10, application or performance completion credit. Captured numerical reports bind stored coefficients; native approximate splits preserved without bracket/enclosure widening. No checked winding/pair/metric peer source consumed.",
+  "source_bookend": "All16 changed source/doc/oracle/fixture hashes equal the implementation manifest; final receipt is evidence-only.",
+  "source_revision": "7c681b15fc932eaab7ab14582f88e469f7bae3d1"
+}
