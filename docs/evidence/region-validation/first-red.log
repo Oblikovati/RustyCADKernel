@@ -1,0 +1,48 @@
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.190
+   Compiling num-traits v0.2.19
+   Compiling smallvec v1.16.3
+   Compiling rustc_apfloat v0.2.3+llvm-462a31f5a5ab
+   Compiling num-integer v0.1.47
+   Compiling allocator-api2 v0.4.0
+   Compiling bitflags v2.13.2
+   Compiling bytemuck v1.25.2
+   Compiling rustycad-cmath v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/cmath)
+   Compiling rustycad-tkernel v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkernel)
+   Compiling num-bigint v0.4.6
+   Compiling num-complex v0.4.6
+   Compiling static_assertions v1.1.0
+   Compiling rustycad-tkmath v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkmath)
+   Compiling rustycad-tkg2d v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkg2d)
+   Compiling rustycad-tkg3d v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkg3d)
+   Compiling rustycad-tkgeombase v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkgeombase)
+   Compiling rustycad-tkbrep v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tktopalgo)
+   Compiling rustycad-tkshhealing v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkshhealing)
+   Compiling rustycad-tkprim v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkprim)
+   Compiling rustycad-tkmesh v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkmesh)
+   Compiling rustycad-tkbo v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-region-validation/crates/tkbo)
+    Finished `test` profile [unoptimized] target(s) in 43.95s
+     Running unittests src/lib.rs (target/debug/deps/rustycad_tkbo-bb5313b20bed6465)
+
+running 1 test
+test sketch_region_validation::tests::required_missing_context_is_incomplete_despite_mapped_validity ... FAILED
+
+failures:
+
+---- sketch_region_validation::tests::required_missing_context_is_incomplete_despite_mapped_validity stdout ----
+
+thread 'sketch_region_validation::tests::required_missing_context_is_incomplete_despite_mapped_validity' (104385) panicked at crates/tkbo/src/sketch_region_validation/tests.rs:26:5:
+assertion `left == right` failed
+  left: Passed
+ right: Incomplete
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    sketch_region_validation::tests::required_missing_context_is_incomplete_despite_mapped_validity
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 39 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p rustycad-tkbo --lib`
