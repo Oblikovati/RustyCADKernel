@@ -25,6 +25,8 @@ mod exceptional;
 
 mod source_certificate;
 
+#[cfg(test)]
+mod algebraic_world_tests;
 mod candidate_certificate;
 mod membership_certificate;
 #[cfg(test)]
