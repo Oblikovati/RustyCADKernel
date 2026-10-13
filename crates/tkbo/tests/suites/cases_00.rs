@@ -217,3 +217,6 @@ pub mod shrunk_range_behavior;
 pub mod solid_orientation;
 #[path = "../split_reverse.rs"]
 pub mod split_reverse;
+
+#[path = "../exact_region_prism.rs"]
+pub mod exact_region_prism;

@@ -138,3 +138,9 @@ pin and production profile/extrusion behavior are unchanged. No sampled
 classifier is promoted into production acceptance.
 Net changes in geometric recognizers, tolerance constants, fallback sites, and
 geometric type assertions are zero. Cross-platform execution remains unverified.
+
+The [constructed cubic prism probe](exact-region-prism.md) now reads actual
+region pcurves into this classifier and checks the resulting prism against
+native face reports. It also records the shared-input mutation in the diagnostic
+construction path and the tested geometry-copy boundary. This does not complete
+the production region contract.
