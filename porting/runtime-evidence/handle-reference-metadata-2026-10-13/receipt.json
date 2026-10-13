@@ -1,0 +1,55 @@
+{
+  "scope": "Direct pointer metadata for projected, local, and retained-field HandleReference implementations",
+  "base_revision": "27713a1da45240a84a30fefb527f481e3d46fd19",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_contract": {
+    "header": "Standard_Handle.hxx",
+    "lines": [
+      94,
+      122
+    ],
+    "sha256": "17324edfa4eac229897635d359554f699e70e1c95522c17dadf7c8c34644c25f"
+  },
+  "source_hashes": {
+    "crates/tkernel/src/standard/handle_reference.rs": "8aa706c19a9969e1ff411e9e7404a9c0e19c61d157e6912fecd05f63c99b2a39",
+    "crates/tkernel/src/standard/handle_reference_tests.rs": "50cf5776d1f7493499e4ca3c4dfc91324c4f2b29be53c5bfcb7b290ee5645921"
+  },
+  "regression_before_fix": {
+    "exit": 101,
+    "failure": "observed original object; expected pointer metadata only"
+  },
+  "results": {
+    "tkernel-all-targets.log": {
+      "exit": 0,
+      "groups": 29,
+      "passed": 5021,
+      "failed": 0,
+      "ignored": 0
+    },
+    "clippy.log": {
+      "exit": 0,
+      "groups": 0,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    "doctests.log": {
+      "exit": 0,
+      "groups": 2,
+      "passed": 292,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "format_exit": 0,
+  "diff_check_exit": 0,
+  "profile": {
+    "dev_debug": 0,
+    "test_debug": 0,
+    "incremental": 0,
+    "build_jobs": 2
+  },
+  "native_runtime_required": false,
+  "api_status_promotion": false,
+  "remaining": "Virtual Delete and actual Handle/Observer constructed-lifetime integration remain separate incomplete work."
+}
