@@ -22,3 +22,7 @@ pub(crate) mod sketch_region_candidates;
 #[cfg(test)]
 #[path = "../tests/support/changing_child_count.rs"]
 mod changing_child_count;
+
+#[cfg(test)]
+#[path = "../tests/support/closed_analytic_cubic.rs"]
+pub(crate) mod closed_analytic_cubic;

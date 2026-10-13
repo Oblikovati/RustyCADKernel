@@ -41,6 +41,8 @@ impl TShape for FakeChangingChildCount {
     }
 }
 
+/// Exercise a real More/Value failure for the requested topology kind.
+/// Example: `changing_shape(ShapeEnum::Wire)`.
 pub(crate) fn changing_shape(kind: ShapeEnum) -> Shape {
     let mut shape = Shape::default();
     let original = FakeChangingChildCount::new(kind);

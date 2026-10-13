@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Native sampled cusp/complement results are retained diagnostics, not exact decision certificates.
 use super::{outcome::*, tests::*};
+use rustycad_tkmath::gp::Plane3;
 struct NativeCandidateRow<'a> {
     label: &'a str,
     seed: [f64; 2],
@@ -78,5 +79,50 @@ fn assert_native_selection(batch: &CandidateBatch, row: &NativeCandidateRow<'_>)
         count => assert!(
             matches!(selected,SeedSelection::Ambiguous{candidates} if candidates.len()==count)
         ),
+    }
+}
+
+#[test]
+fn native_generated_intersection_history_and_omitted_wire_are_retained() {
+    let owned = arranged(&super::coverage_tests::cut_edges());
+    let raw = include_str!("../../tests/fixtures/region-candidate-cut-native.txt");
+    replay_generated_counts(&owned, raw);
+    assert_eq!(
+        raw.lines()
+            .filter(|line| line.starts_with("cut-wire ") && line.ends_with(" 1 0"))
+            .count(),
+        2
+    );
+    let outcome = super::extract_candidates(&owned, Plane3::default(), &mut |_| false);
+    assert!(matches!(
+        outcome,
+        Err(CandidateCause::Incomplete(
+            CandidateGap::IncompleteWire { .. }
+        ))
+    ));
+}
+fn generated_count(owned: &crate::sketch_region::OwnedArrangement, source: u64) -> usize {
+    use rustycad_tkg3d::top_abs::ShapeEnum;
+    let mut images: Vec<rustycad_tkbrep::topods::Shape> = Vec::new();
+    for relation in &owned.relations {
+        if relation.output.shape_type().unwrap() != ShapeEnum::Vertex {
+            continue;
+        }
+        if !relation.generated.iter().any(|key| key.source.0 == source) {
+            continue;
+        }
+        if !images.iter().any(|image| image.is_same(&relation.output)) {
+            images.push(relation.output.clone());
+        }
+    }
+    images.len()
+}
+
+fn replay_generated_counts(owned: &crate::sketch_region::OwnedArrangement, raw: &str) {
+    for row in raw.lines().filter(|row| row.starts_with("generated ")) {
+        let fields: Vec<&str> = row.split_whitespace().collect();
+        let source = fields[1].parse::<u64>().unwrap();
+        let expected = fields[2].parse::<usize>().unwrap();
+        assert_eq!(generated_count(owned, source), expected);
     }
 }

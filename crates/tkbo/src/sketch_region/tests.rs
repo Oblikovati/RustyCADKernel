@@ -11,8 +11,7 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::{geom::GeomBezierCurve, top_abs::ShapeEnum};
 use rustycad_tkmath::gp::Point3;
 
-#[path = "../../tests/support/closed_analytic_cubic.rs"]
-mod cubic_fixture;
+use crate::closed_analytic_cubic as cubic_fixture;
 pub(crate) fn closed_cubic() -> Shape {
     // Both diagnostic/native bridge and stage admission use the same authored geometry.
     cubic_fixture::closed_analytic_cubic(1., false)

@@ -15,22 +15,29 @@ pub(super) fn capture_candidate(
     occurrence: &mut u64,
 ) -> Result<RegionCandidate, CandidateCause> {
     let face = face(shape).map_err(CandidateCause::Mapped)?;
-    let mut wires = Vec::new();
-    let mut children = ShapeIterator::new(&face, true, true);
-    while children.more() {
-        let child = children.value().map_err(CandidateCause::Mapped)?.clone();
-        children.next();
-        if child.shape_type().map_err(CandidateCause::Mapped)? != ShapeEnum::Wire {
-            continue;
-        }
-        wires.push(capture_wire(&child, &face, parents, occurrence)?);
-    }
+    let wires = candidate_wires(&face, parents, occurrence)?;
     let relations = super::ancestry::candidate_relations(shape, parents)?;
     Ok(RegionCandidate {
         face,
         wires,
         relations,
     })
+}
+fn candidate_wires(
+    face: &Face,
+    parents: &CandidateParents,
+    occurrence: &mut u64,
+) -> Result<Vec<CandidateWire>, CandidateCause> {
+    let mut wires = Vec::new();
+    for child in fallible_children(face)? {
+        if child.shape_type().map_err(CandidateCause::Mapped)? != ShapeEnum::Wire {
+            return Err(CandidateCause::Incomplete(
+                CandidateGap::UnclassifiedOccurrence { member: child },
+            ));
+        }
+        wires.push(capture_wire(&child, face, parents, occurrence)?);
+    }
+    Ok(wires)
 }
 pub(super) fn capture_wire(
     shape: &Shape,
@@ -126,16 +133,7 @@ fn segment_parents(
     id: u64,
 ) -> Result<Vec<crate::sketch_region::OriginalMemberIdentity>, CandidateCause> {
     let mut original = Vec::new();
-    for relation in parents
-        .iter()
-        .filter(|relation| relation.output.is_same(edge))
-    {
-        for key in relation.modified.iter().chain(&relation.generated) {
-            if !original.contains(key) {
-                original.push(key.clone());
-            }
-        }
-    }
+    append_segment_parents(edge, parents, &mut original);
     if original.is_empty() {
         return Err(CandidateCause::Incomplete(CandidateGap::MissingParents {
             occurrence: id,
@@ -201,7 +199,7 @@ fn capture_visited(
     Ok(())
 }
 
-fn fallible_children(wire: &rustycad_tkbrep::topods::Wire) -> Result<Vec<Shape>, CandidateCause> {
+fn fallible_children(wire: &Shape) -> Result<Vec<Shape>, CandidateCause> {
     let mut children = ShapeIterator::new(wire, true, true);
     let mut occurrences = Vec::new();
     while children.more() {
@@ -209,4 +207,21 @@ fn fallible_children(wire: &rustycad_tkbrep::topods::Wire) -> Result<Vec<Shape>,
         children.next();
     }
     Ok(occurrences)
+}
+
+fn append_segment_parents(
+    edge: &Edge,
+    parents: &CandidateParents,
+    original: &mut Vec<crate::sketch_region::OriginalMemberIdentity>,
+) {
+    for relation in parents
+        .iter()
+        .filter(|relation| relation.output.is_same(edge))
+    {
+        for key in relation.modified.iter().chain(&relation.generated) {
+            if !original.contains(key) {
+                original.push(key.clone());
+            }
+        }
+    }
 }

@@ -11,6 +11,7 @@
 #include <BRepLib.hxx>
 #include <BRepClass_FaceClassifier.hxx>
 #include <BRepTopAdaptor_FClass2d.hxx>
+#include <BRepTools_WireExplorer.hxx>
 #include <Geom_BezierCurve.hxx>
 #include <NCollection_Array1.hxx>
 #include <TopExp.hxx>
@@ -48,17 +49,27 @@ static void Rectangle(NCollection_List<TopoDS_Shape>& roots,double x,double y,do
   polygon.Close();
   for (TopoDS_Iterator it(polygon.Wire());it.More();it.Next()) roots.Append(it.Value());
 }
-static TopoDS_Shape RunArrangement(const NCollection_List<TopoDS_Shape>& roots)
+static void CaptureGenerated(BOPAlgo_Builder& builder,const NCollection_List<TopoDS_Shape>& roots)
+{
+  int source=0;
+  for (const TopoDS_Shape& root:roots) {
+    int vertices=0; ++source;
+    for (const TopoDS_Shape& generated:builder.Generated(root)) vertices+=generated.ShapeType()==TopAbs_VERTEX;
+    std::cout<<"generated "<<source<<' '<<vertices<<'\n';
+  }
+}
+static TopoDS_Shape RunArrangement(const NCollection_List<TopoDS_Shape>& roots,bool emit=false)
 {
   BRep_Builder constructor; TopoDS_Compound batch; constructor.MakeCompound(batch);
   for (const TopoDS_Shape& root:roots) constructor.Add(batch,root);
   BRepBuilderAPI_Copy copy(batch,true,true); NCollection_List<TopoDS_Shape> arguments;
   for (TopoDS_Iterator it(copy.Shape());it.More();it.Next()) arguments.Append(it.Value());
   BOPAlgo_PaveFiller filler; filler.SetArguments(arguments); filler.SetNonDestructive(true); filler.Perform();
-  if (filler.HasErrors()) throw Standard_Failure("fixture filler report");
+  if (filler.HasErrors()) throw Standard_Failure("PaveFiller.HasErrors=true; expected completed nonempty interference");
   NonemptyGenerator builder; builder.SetArguments(arguments); builder.SetNonDestructive(true);
   builder.PerformWithFiller(filler);
-  if (builder.HasErrors()) throw Standard_Failure("fixture builder report");
+  if (builder.HasErrors()) throw Standard_Failure("Builder.HasErrors=true; expected completed nonempty arrangement");
+  if (emit) CaptureGenerated(builder,arguments);
   return builder.Shape();
 }
 static NCollection_List<TopoDS_Shape> Generate(const NCollection_List<TopoDS_Shape>& roots)
@@ -72,7 +83,7 @@ static NCollection_List<TopoDS_Shape> Generate(const NCollection_List<TopoDS_Sha
     inputs.Append(edge.Oriented(TopAbs_FORWARD)); inputs.Append(edge.Oriented(TopAbs_REVERSED));
   }
   BOPAlgo_BuilderFace builder; builder.SetFace(plane); builder.SetShapes(inputs); builder.Perform();
-  if (builder.HasErrors()) throw Standard_Failure("fixture candidate report");
+  if (builder.HasErrors()) throw Standard_Failure("BuilderFace.HasErrors=true; expected completed planar candidate generation");
   return builder.Areas();
 }
 static void Capture(const char* label,const NCollection_List<TopoDS_Shape>& areas,double x,double y)
@@ -95,8 +106,27 @@ static void CaptureCubic(bool rational,bool reversed,const char* label)
   const NCollection_List<TopoDS_Shape> areas=Generate(Cubic(rational,reversed));
   Capture(label,areas,1,1); Capture(label,areas,-1,1); Capture(label,areas,0,0);
 }
-int main()
+static void CaptureCutWire(const TopoDS_Face& face,const TopoDS_Shape& wire,int candidate)
 {
+  int expected=0,captured=0;
+  for (TopoDS_Iterator it(wire);it.More();it.Next()) ++expected;
+  for (BRepTools_WireExplorer it(TopoDS::Wire(wire),face);it.More();it.Next()) ++captured;
+  std::cout<<"cut-wire "<<candidate<<' '<<expected<<' '<<captured<<'\n';
+}
+static void CaptureCut()
+{
+  NCollection_List<TopoDS_Shape> roots; Rectangle(roots,0,0,4);
+  roots.Append(BRepBuilderAPI_MakeEdge(gp_Pnt(-1,2,0),gp_Pnt(5,2,0)).Edge());
+  RunArrangement(roots,true);
+  const NCollection_List<TopoDS_Shape> candidates=Generate(roots); int candidate=0;
+  for (const TopoDS_Shape& face:candidates) {
+    ++candidate;
+    for (TopoDS_Iterator it(face);it.More();it.Next()) CaptureCutWire(TopoDS::Face(face),it.Value(),candidate);
+  }
+}
+int main(int argc,char**)
+{
+  if (argc>1) {CaptureCut(); return 0;}
   CaptureCubic(false,false,"cubic"); CaptureCubic(false,true,"reverse");
   CaptureCubic(true,false,"rational"); NCollection_List<TopoDS_Shape> nested;
   Rectangle(nested,0,0,8); Rectangle(nested,2,2,4);

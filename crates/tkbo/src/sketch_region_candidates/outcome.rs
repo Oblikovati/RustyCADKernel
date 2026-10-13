@@ -28,6 +28,7 @@ pub(crate) struct CandidateBatch {
     pub candidates: Vec<RegionCandidate>,
     pub input_deleted: Vec<OriginalMemberIdentity>,
     pub unrepresented: Vec<ArrangementRelation>,
+    pub mapped_report: std::sync::Arc<rustycad_tkernel::message::Report>,
 }
 pub(crate) enum CandidateCause {
     Mapped(Failure),
@@ -37,6 +38,15 @@ pub(crate) enum CandidateCause {
     Numerical(BezierWireError),
 }
 pub(crate) enum CandidateGap {
+    WindingOrientationOverflow {
+        winding: i64,
+    },
+    UnsupportedFaceOrientation {
+        orientation: rustycad_tkg3d::top_abs::Orientation,
+    },
+    UnclassifiedOccurrence {
+        member: Shape,
+    },
     WorkBudget {
         requested: u16,
         used: u32,
@@ -66,6 +76,7 @@ pub(crate) enum CandidatePhase {
 pub(crate) enum MissingCertificate {
     Construction,
     SharedIncidenceReuse,
+    CandidateHistoryCoverage,
     SearchCompleteness,
     SelfIntersection,
     Tolerance,

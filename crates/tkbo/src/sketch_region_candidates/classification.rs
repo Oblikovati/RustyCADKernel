@@ -30,7 +30,7 @@ pub(crate) fn classify_candidates(
             accumulated.interiors.push(index);
         }
     }
-    accumulated.finish(options)
+    accumulated.finish(options, !batch.unrepresented.is_empty())
 }
 fn classify_candidate(
     candidate: &RegionCandidate,
@@ -45,7 +45,7 @@ fn classify_candidate(
         let result = classify_wire(wire, seed, effective, cancelled)?;
         accumulated.append_result(&result, &mut winding)?;
     }
-    Ok(winding)
+    facing_winding(candidate, winding)
 }
 fn classify_wire(
     wire: &CandidateWire,
@@ -89,11 +89,12 @@ impl SeedAccumulation {
     fn finish(
         self,
         requested: RootIsolationOptions,
+        unrepresented: bool,
     ) -> Result<CandidateClassification, CandidateCause> {
         let remaining = remaining_options(requested, self.bisections)?;
         Ok(CandidateClassification::Incomplete {
             selection: selection(self.interiors, self.boundary),
-            missing: missing_certificates(),
+            missing: missing_certificates(unrepresented),
             bisections: self.bisections,
             requested,
             remaining,
@@ -117,14 +118,18 @@ fn selection(interiors: Vec<usize>, boundary: Vec<u64>) -> SeedSelection {
         },
     }
 }
-fn missing_certificates() -> Vec<MissingCertificate> {
-    vec![
+fn missing_certificates(unrepresented: bool) -> Vec<MissingCertificate> {
+    let mut missing = vec![
         MissingCertificate::Construction,
         MissingCertificate::SharedIncidenceReuse,
         MissingCertificate::SearchCompleteness,
         MissingCertificate::SelfIntersection,
         MissingCertificate::Tolerance,
-    ]
+    ];
+    if unrepresented {
+        missing.push(MissingCertificate::CandidateHistoryCoverage);
+    }
+    missing
 }
 fn add_winding(partial: i64, contribution: i64) -> Result<i64, CandidateCause> {
     partial
@@ -149,4 +154,17 @@ fn remaining_options(
         }))?;
     requested.max_bisections = remaining as u16;
     Ok(requested)
+}
+
+fn facing_winding(candidate: &RegionCandidate, winding: i64) -> Result<i64, CandidateCause> {
+    use rustycad_tkg3d::top_abs::Orientation;
+    match candidate.face.orientation() {
+        Orientation::Forward => Ok(winding),
+        Orientation::Reversed => winding.checked_neg().ok_or(CandidateCause::Incomplete(
+            CandidateGap::WindingOrientationOverflow { winding },
+        )),
+        orientation => Err(CandidateCause::Incomplete(
+            CandidateGap::UnsupportedFaceOrientation { orientation },
+        )),
+    }
 }

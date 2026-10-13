@@ -3,6 +3,8 @@
 use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 use rustycad_tkernel::standard::{Failure, exceptions};
 
+/// Retain every cumulative IsEqual occurrence with fallible child acquisition.
+/// Example: `equal_occurrences(&owned_root)?`.
 pub(crate) fn equal_occurrences(root: &Shape) -> Result<Vec<Shape>, Failure> {
     let mut ordered = Vec::new();
     collect_occurrences(root, &mut ordered, &mut Vec::new())?;

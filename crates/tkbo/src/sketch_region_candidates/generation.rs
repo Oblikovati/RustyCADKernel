@@ -15,7 +15,7 @@ use rustycad_tktopalgo::{
     brep_lib,
 };
 pub(super) type CandidateParents = Vec<crate::sketch_region::ArrangementRelation>;
-/// Build owned diagnostic candidates; `extract_candidates(&arrangement, plane)`.
+/// Build owned diagnostic candidates; `extract_candidates(&arrangement, plane, &mut |_| false)`.
 pub(crate) fn extract_candidates(
     owned: &OwnedArrangement,
     plane: Plane3,
@@ -28,20 +28,37 @@ pub(crate) fn extract_candidates(
     poll(CandidatePhase::Generation, cancelled)?;
     let builder = generate_faces(copier.shape().map_err(CandidateCause::Mapped)?, plane)?;
     poll(CandidatePhase::Capture, cancelled)?;
-    let mut candidates = Vec::new();
-    let mut occurrence = 1;
-    for candidate in builder.areas().iter() {
-        candidates.push(capture_candidate(candidate, &parents, &mut occurrence)?);
-    }
-    let unrepresented = unrepresented_members(&parents, &candidates)?;
+    finish_batch(owned, plane, &builder, &parents)
+}
+fn finish_batch(
+    owned: &OwnedArrangement,
+    plane: Plane3,
+    builder: &BuilderFace,
+    parents: &CandidateParents,
+) -> Result<CandidateBatch, CandidateCause> {
+    let candidates = capture_faces(builder, parents)?;
+    let unrepresented = unrepresented_members(parents, &candidates)?;
     Ok(CandidateBatch {
         plane,
         candidates,
         input_deleted: owned.deleted.clone(),
         unrepresented,
+        mapped_report: capture_report(builder),
     })
 }
-fn copy_parents(
+fn capture_faces(
+    builder: &BuilderFace,
+    parents: &CandidateParents,
+) -> Result<Vec<RegionCandidate>, CandidateCause> {
+    let mut candidates = Vec::new();
+    let mut occurrence = 1;
+    for candidate in builder.areas().iter() {
+        candidates.push(capture_candidate(candidate, parents, &mut occurrence)?);
+    }
+    Ok(candidates)
+}
+
+pub(super) fn copy_parents(
     owned: &OwnedArrangement,
     copier: &mut BRepBuilderAPICopy,
 ) -> Result<CandidateParents, CandidateCause> {
@@ -78,9 +95,12 @@ pub(super) fn check_builder(builder: &BuilderFace) -> Result<(), CandidateCause>
     if !builder.options().has_errors() {
         return Ok(());
     }
+    Err(CandidateCause::MappedReport(capture_report(builder)))
+}
+fn capture_report(builder: &BuilderFace) -> std::sync::Arc<rustycad_tkernel::message::Report> {
     let retained = std::sync::Arc::new(rustycad_tkernel::message::Report::new());
     retained.merge(builder.options().report());
-    Err(CandidateCause::MappedReport(retained))
+    retained
 }
 
 fn poll(
@@ -110,7 +130,7 @@ fn composed_copy_relation(
         generated: relation.generated.clone(),
     }
 }
-fn generate_faces(shape: &Shape, plane: Plane3) -> Result<BuilderFace, CandidateCause> {
+pub(super) fn generate_faces(shape: &Shape, plane: Plane3) -> Result<BuilderFace, CandidateCause> {
     let support = BRepBuilderAPIMakeFace::from_plane(plane)
         .map_err(CandidateCause::Mapped)?
         .face()
@@ -130,18 +150,25 @@ fn unrepresented_members(
 ) -> Result<CandidateParents, CandidateCause> {
     let mut unrepresented = Vec::new();
     for relation in parents {
-        if !rustycad_tkbrep::brep_tools::History::is_supported_type(&relation.output)
-            .map_err(CandidateCause::Mapped)?
-        {
+        if !unrepresented_leaf(relation, candidates)? {
             continue;
         }
-        let represented = candidates
-            .iter()
-            .flat_map(|c| &c.relations)
-            .any(|r| r.output.is_same(&relation.output));
-        if !represented {
-            unrepresented.push(composed_copy_relation(relation, &relation.output));
-        }
+        unrepresented.push(composed_copy_relation(relation, &relation.output));
     }
     Ok(unrepresented)
+}
+
+fn unrepresented_leaf(
+    relation: &crate::sketch_region::ArrangementRelation,
+    candidates: &[RegionCandidate],
+) -> Result<bool, CandidateCause> {
+    if !rustycad_tkbrep::brep_tools::History::is_supported_type(&relation.output)
+        .map_err(CandidateCause::Mapped)?
+    {
+        return Ok(false);
+    }
+    Ok(!candidates
+        .iter()
+        .flat_map(|c| &c.relations)
+        .any(|r| r.output.is_same(&relation.output)))
 }

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::*;
+pub(super) use crate::closed_analytic_cubic as cubic;
 use crate::sketch_region::{
     ArrangementCompletion, ArrangementSource, OwnedArrangement, RegionSourceId,
     arrange_owned_sources,
@@ -11,8 +12,6 @@ use rustycad_tkmath::{
     predicates::roots::RootIsolationOptions,
 };
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakePolygon;
-#[path = "../../tests/support/closed_analytic_cubic.rs"]
-pub(super) mod cubic;
 pub(super) fn arranged(shapes: &[Shape]) -> OwnedArrangement {
     let sources: Vec<_> = shapes
         .iter()
@@ -38,7 +37,7 @@ pub(super) fn selection(batch: &CandidateBatch, seed: [f64; 2]) -> SeedSelection
     let CandidateClassification::Incomplete {
         selection, missing, ..
     } = result;
-    assert_eq!(missing.len(), 5);
+    assert!(missing.len() >= 5);
     selection
 }
 pub(super) fn rectangle(x: f64, y: f64, width: f64, height: f64) -> Vec<Shape> {
@@ -212,15 +211,7 @@ fn duplicate_actual_candidates_report_ambiguity_without_first_match() {
         matches!(selection(&batch,[1.,1.]),SeedSelection::Ambiguous{candidates} if candidates.len()==2)
     );
     assert_eq!(
-        selection(
-            &CandidateBatch {
-                plane: Plane3::default(),
-                input_deleted: Vec::new(),
-                unrepresented: Vec::new(),
-                candidates: Vec::new()
-            },
-            [1., 1.]
-        ),
+        selection(&empty_candidate_batch(), [1., 1.]),
         SeedSelection::Empty
     );
 }
@@ -251,4 +242,14 @@ fn numerical_cancellation_keeps_original_typed_cause() {
         outcome,
         Err(CandidateCause::Numerical(BezierWireError::Cancelled { .. }))
     ));
+}
+
+fn empty_candidate_batch() -> CandidateBatch {
+    CandidateBatch {
+        plane: Plane3::default(),
+        candidates: Vec::new(),
+        input_deleted: Vec::new(),
+        unrepresented: Vec::new(),
+        mapped_report: std::sync::Arc::new(rustycad_tkernel::message::Report::new()),
+    }
 }
