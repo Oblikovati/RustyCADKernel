@@ -2,8 +2,10 @@
 //! Exact signs of supplied binary64 coordinates, separate from metric tolerance.
 //! This extension does not change mapped OCCT decisions (ADR 0003, issue #10).
 
+mod compare;
 /// Certified polynomial roots for extension topology.
 pub mod roots;
+pub use compare::{compare_line_projections_2d, compare_squared_distances_2d};
 
 use num_bigint::{BigInt, Sign};
 use std::fmt;
@@ -64,6 +66,10 @@ pub fn orient2d(
         Sign::NoSign => OrientationSign::Zero,
         Sign::Plus => OrientationSign::Positive,
     })
+}
+
+fn exact_dot(left: &[BigInt; 2], right: &[BigInt; 2]) -> BigInt {
+    &left[0] * &right[0] + &left[1] * &right[1]
 }
 
 fn exact_determinant(left: &[BigInt; 2], right: &[BigInt; 2]) -> BigInt {

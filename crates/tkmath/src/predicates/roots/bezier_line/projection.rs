@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::{BezierInput, BezierLineError, BezierLineQuery, BezierStage};
-use crate::predicates::{exact_coordinate, exact_determinant, exact_point};
+use crate::predicates::{exact_coordinate, exact_determinant, exact_dot, exact_point};
 use num_bigint::BigInt;
 pub(super) struct Projection {
     pub numerator: Vec<BigInt>,
@@ -18,7 +18,7 @@ pub(super) fn project_directed(
 ) -> Result<(Projection, Vec<BigInt>), BezierLineError> {
     let mut longitudinal = Vec::with_capacity(query.controls.len());
     let projected = project_with(query, cancelled, &mut |direction, displacement, weight| {
-        let dot = &direction[0] * &displacement[0] + &direction[1] * &displacement[1];
+        let dot = exact_dot(direction, displacement);
         longitudinal.push(dot * weight);
     })?;
     Ok((projected, longitudinal))
