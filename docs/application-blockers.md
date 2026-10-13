@@ -40,6 +40,9 @@ application acceptance. Exact comparisons do not certify constructed roots.
 
 Owner: [region #10](https://github.com/Oblikovati/RustyCADKernel/issues/10).
 
+The owning-kernel boundary and deletion gate are recorded in
+[ADR 0014](adr/0014-owned-analytic-sketch-regions.md).
+
 This is the critical functional blocker for general parameter-driven sketch
 profiles and extrusion. The cardinality diagnostic and exact numeric primitives
 do not establish complete regions, source identity, or operation validity.
