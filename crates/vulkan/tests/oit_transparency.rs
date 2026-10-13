@@ -30,6 +30,8 @@ mod oit_oracle_profile;
 #[allow(dead_code)]
 #[path = "support/oit_scene.rs"]
 mod oit_scene;
+#[path = "support/oit_transition_assets.rs"]
+mod oit_transition_assets;
 #[path = "support/recording_device.rs"]
 mod recording_device;
 use martensite_vulkan::{
@@ -108,6 +110,14 @@ fn actual_view_parameter_replacements_preserve_previous_submissions() {
     let before = backend.last_frame();
     fixture.parameters("peeling", 0, 0.25, 7);
     fixture.scene.render_view().try_redraw().unwrap();
+    assert_parameter_snapshots(&before, &backend);
+    fixture.scene.view.remove();
+}
+
+fn assert_parameter_snapshots(
+    before: &martensite_vulkan::RenderFrame,
+    backend: &recording_device::RecordingDevice,
+) {
     assert_eq!(
         before.transparency(),
         RenderTransparency::Weighted { depth_factor: 0.75 }
@@ -120,7 +130,6 @@ fn actual_view_parameter_replacements_preserve_previous_submissions() {
         backend.frames.read()[0].transparency(),
         before.transparency()
     );
-    fixture.scene.view.remove();
 }
 
 #[test]
@@ -164,27 +173,24 @@ fn sprite_alpha_context_persists_in_its_view_and_does_not_leak_to_adjacent_views
     let driver = oit_driver(false);
     let fixture = oit_scene::OitScene::with_scene(&driver, false, "sprite-mask");
     fixture.parameters("weighted", 0, 0., 4);
-    assert_eq!(
-        capture_retained_fixture(&fixture).pixel(20, 20),
-        Some([0, 0, 255, 255])
-    );
+    assert_context_pixel(&fixture, [0, 0, 255, 255]);
     fixture.replace_groups("two");
-    assert_eq!(
-        capture_retained_fixture(&fixture).pixel(20, 20),
-        Some([0, 0, 255, 255])
-    );
+    assert_context_pixel(&fixture, [0, 0, 255, 255]);
     let adjacent = oit_scene::OitScene::new(&driver, false);
     adjacent.parameters("weighted", 0, 0., 4);
-    assert_eq!(
-        capture_retained_fixture(&adjacent).pixel(20, 20),
-        Some([142, 204, 99, 255])
-    );
+    assert_context_pixel(&adjacent, [142, 204, 99, 255]);
     fixture.scene.view.remove();
     adjacent.scene.view.remove();
     assert!(
         driver.validation_errors().is_empty(),
         "{:?}",
         driver.validation_errors()
+    );
+}
+fn assert_context_pixel(fixture: &oit_scene::OitScene, expected: [u8; 4]) {
+    assert_eq!(
+        capture_retained_fixture(fixture).pixel(20, 20),
+        Some(expected)
     );
 }
 fn capture_retained_fixture(fixture: &oit_scene::OitScene) -> FrameCapture {
@@ -323,4 +329,41 @@ fn assert_finite_oit_asset(asset: &oit_finite_assets::OitFiniteAsset) {
         driver.validation_errors()
     );
     fixture.scene.view.remove();
+}
+
+#[test]
+fn actual_same_view_sampling_and_persistent_peeling_fallback_replay_native_assets() {
+    let driver = oit_driver(false);
+    let fixture = oit_scene::OitScene::new(&driver, false);
+    for stage in oit_transition_assets::NATIVE_OIT_TRANSITIONS {
+        fixture.parameters(stage.mode, stage.samples, 0., 4);
+        let capture = capture_retained_fixture(&fixture);
+        assert_transition_contract(&driver, stage, &capture);
+    }
+    fixture.scene.view.remove();
+    assert!(
+        driver.validation_errors().is_empty(),
+        "{:?}",
+        driver.validation_errors()
+    );
+}
+fn assert_transition_contract(
+    driver: &Handle<Graphic3dRenderDriver>,
+    stage: &oit_transition_assets::NativeOitTransition,
+    capture: &FrameCapture,
+) {
+    let (rgba, depth) = if oit_oracle_profile::software_oracle(driver) {
+        stage.software
+    } else {
+        stage.host
+    };
+    if stage.strict {
+        native_golden::assert_capture(capture, rgba, depth, stage.name);
+        return;
+    }
+    // Native/Vulkan six/eight-sample edge coverage is a retained raw diagnostic, not a promoted gate.
+    assert_eq!(
+        capture.pixel(20, 20),
+        Some(rgba[(20 * 64 + 20) * 4..][..4].try_into().unwrap())
+    );
 }

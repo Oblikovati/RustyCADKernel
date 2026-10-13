@@ -25,22 +25,36 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let prefix = transition_prefix()?;
     let driver = Graphic3dRenderDriver::new(device_options::validation_options())?;
     let fixture = oit_scene::OitScene::new(&driver, false);
+    capture_live_stages(&fixture, &prefix)?;
+    fixture.scene.view.remove();
+    require_clean_transition(&driver)?;
+    eprintln!("MARTENSITE_DEVICE={}", driver.device_name());
+    Ok(())
+}
+fn capture_live_stages(
+    fixture: &oit_scene::OitScene,
+    prefix: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
     for samples in [0, 1, 2, 3, 4, 6, 8] {
         capture_stage(
-            &fixture,
+            fixture,
             "weighted",
             samples,
             &format!("{prefix}-weighted-{samples}"),
         )?;
     }
-    capture_stage(&fixture, "peeling", 4, &format!("{prefix}-peeling-4"))?;
+    capture_stage(fixture, "peeling", 4, &format!("{prefix}-peeling-4"))?;
     capture_stage(
-        &fixture,
+        fixture,
         "weighted",
         4,
         &format!("{prefix}-after-weighted-4"),
     )?;
-    fixture.scene.view.remove();
+    Ok(())
+}
+fn require_clean_transition(
+    driver: &Graphic3dRenderDriver,
+) -> Result<(), Box<dyn std::error::Error>> {
     if !driver.validation_errors().is_empty() {
         return Err(format!(
             "received errors={:?}; expected validation-clean OIT transitions",
@@ -48,7 +62,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         )
         .into());
     }
-    eprintln!("MARTENSITE_DEVICE={}", driver.device_name());
     Ok(())
 }
 fn transition_prefix() -> Result<String, Box<dyn std::error::Error>> {

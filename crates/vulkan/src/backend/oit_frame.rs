@@ -183,19 +183,18 @@ fn final_descriptors(
     targets: &OitTargets,
     pipeline: &OitCompositePipeline,
 ) -> Result<Vec<OitPassDescriptors>, RenderError> {
-    let layout = &pipeline.descriptors;
     match targets {
         OitTargets::Weighted {
             accumulation,
             coverage,
         } => Ok(vec![OitPassDescriptors::new(
-            layout,
+            &pipeline.descriptors,
             [accumulation.view, coverage.view],
             0.,
         )?]),
         OitTargets::Peeling { ping, pong, back } => Ok(vec![
-            OitPassDescriptors::new(layout, [ping[1].view, back.view], 0.)?,
-            OitPassDescriptors::new(layout, [pong[1].view, back.view], 0.)?,
+            OitPassDescriptors::new(&pipeline.descriptors, [ping[1].view, back.view], 0.)?,
+            OitPassDescriptors::new(&pipeline.descriptors, [pong[1].view, back.view], 0.)?,
         ]),
     }
 }
