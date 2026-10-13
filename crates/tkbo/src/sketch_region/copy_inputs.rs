@@ -5,12 +5,12 @@ use rustycad_tkbrep::topods::{Shape, borrowed_shape_batch};
 use rustycad_tkernel::{ncollection::List, standard::Failure};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPICopy, BRepBuilderAPIMakeShape};
 
-pub(super) struct CopiedSources {
+pub(crate) struct CopiedSources {
     pub arguments: List<Shape>,
     pub roots: Vec<(RegionSourceId, Shape)>,
     pub members: Vec<(OriginalMemberIdentity, Shape)>,
 }
-pub(super) fn admit_sources(sources: &[ArrangementSource<'_>]) -> Result<(), ArrangementCause> {
+pub(crate) fn admit_sources(sources: &[ArrangementSource<'_>]) -> Result<(), ArrangementCause> {
     if sources.is_empty() {
         return Err(ArrangementCause::Empty);
     }
@@ -25,7 +25,7 @@ pub(super) fn admit_sources(sources: &[ArrangementSource<'_>]) -> Result<(), Arr
     }
     Ok(())
 }
-pub(super) fn copy_sources(
+pub(crate) fn copy_sources(
     sources: &[ArrangementSource<'_>],
 ) -> Result<CopiedSources, ArrangementCause> {
     let batch = source_compound(sources).map_err(copy_failure)?;

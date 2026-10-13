@@ -90,7 +90,7 @@ fn capture_walk(
     }
     Ok(())
 }
-fn capture_segment(
+pub(crate) fn capture_segment(
     edge: &Edge,
     face: &Face,
     parents: &CandidateParents,

@@ -26,3 +26,6 @@ mod changing_child_count;
 #[cfg(test)]
 #[path = "../tests/support/closed_analytic_cubic.rs"]
 pub(crate) mod closed_analytic_cubic;
+
+#[allow(dead_code, unused_imports)]
+mod sketch_region_certification;
