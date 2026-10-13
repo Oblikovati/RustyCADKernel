@@ -7,11 +7,12 @@ use rustycad_tkernel::{
     },
     standard::{Failure, Handle, SharedState, Transient},
 };
-use std::alloc::Layout;
+use std::{alloc::Layout, ptr::NonNull};
 #[derive(Default)]
 struct CurrentFreeProbe {
     parent: AllocatorObject,
     events: SharedState<Vec<i32>>,
+    failure_policy: u8,
 }
 rustycad_tkernel::impl_transient!(CurrentFreeProbe, "Martensite_CurrentFreeProbe", AllocatorObject,
     parent, interfaces: [dyn AllocatorSource]);
@@ -98,9 +99,96 @@ unsafe fn current_probe_free(
     pointer: *mut u8,
 ) -> Result<(), Failure> {
     // SAFETY: this step mutates only plain trace values, without callbacks or native retirement.
-    rustycad_tkernel::standard::raise_native_failure(unsafe {
-        invocation.capture(record_current_probe)
+    let policy = rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(record_current_failure_policy)
     });
+    current_free_failure_policy(policy)?;
     // SAFETY: the original Standard range is accepted by this actual parent.
     unsafe { invocation.free_base(pointer) }
+}
+
+fn record_current_failure_policy(source: &CurrentFreeProbe) -> u8 {
+    record_current_probe(source);
+    source.failure_policy
+}
+fn current_free_failure_policy(policy: u8) -> Result<(), Failure> {
+    if policy == 1 {
+        return Err(Failure::with_type(
+            "Standard_ConstructionError",
+            FREE_FAILURE_MESSAGE,
+            "",
+        ));
+    }
+    if policy == 2 {
+        std::panic::panic_any(73_u32);
+    }
+    assert_eq!(
+        policy, 0,
+        "received Free policy={policy}; expected 0, 1 or 2"
+    );
+    Ok(())
+}
+type CurrentFreeOutcome = Result<Result<(), Failure>, Box<dyn std::any::Any + Send>>;
+const FREE_FAILURE_MESSAGE: &str =
+    "reset Free policy=1; expected successful original allocation release";
+
+fn checked_current_free(
+    original: &BaseAllocator,
+    current: &BaseAllocator,
+    pointer: NonNull<u8>,
+) -> CurrentFreeOutcome {
+    std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        rustycad_tkernel::standard::catch_native_failure(|| {
+            // SAFETY: no payload exists and both sources use the actual Standard heap.
+            unsafe { original.deallocate_using(pointer, Layout::new::<u64>(), current) };
+            Ok(())
+        })
+    }))
+}
+
+fn assert_current_free_cause(outcome: CurrentFreeOutcome, policy: u8) {
+    match (policy, outcome) {
+        (0, Ok(Ok(()))) => {}
+        (1, Ok(Err(failure))) => {
+            assert_eq!(failure.exception_type(), "Standard_ConstructionError");
+            assert_eq!(failure.message(), FREE_FAILURE_MESSAGE);
+        }
+        (2, Err(payload)) => assert_eq!(payload.downcast_ref::<u32>(), Some(&73)),
+        (policy, _) => panic!(
+            "received incompatible Free outcome for policy={policy}; expected success/typed ConstructionError/foreign payload73"
+        ),
+    }
+}
+
+fn replay_current_free_failure(policy: u8) {
+    let owner = Handle::new(CurrentFreeProbe {
+        failure_policy: policy,
+        ..Default::default()
+    });
+    let current = BaseAllocator::from_handle(&owner);
+    let original = current.storage_lease();
+    let pointer = Allocator::allocate(&original, Layout::new::<u64>())
+        .unwrap()
+        .cast::<u8>();
+    assert_eq!(owner.ref_count(), 2);
+    let outcome = checked_current_free(&original, &current, pointer);
+    recover_failed_current_free(&owner, pointer, policy);
+    assert_eq!(&*owner.events.read(), &[2]);
+    assert_current_free_cause(outcome, policy);
+}
+
+fn recover_failed_current_free(owner: &Handle<CurrentFreeProbe>, pointer: NonNull<u8>, policy: u8) {
+    if policy == 0 {
+        return;
+    }
+    let invocation = AllocatorInvocation::from_handle(owner).unwrap();
+    // SAFETY: failed Free left the original raw allocation live; no payload destruction is repeated.
+    unsafe { invocation.free_base(pointer.as_ptr()) }.unwrap();
+}
+
+#[test]
+fn custom_current_free_preserves_typed_and_unrelated_failure_causes() {
+    for policy in 0..3 {
+        replay_current_free_failure(policy);
+    }
 }

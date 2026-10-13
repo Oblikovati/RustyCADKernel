@@ -1,0 +1,24 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "row_count": 5,
+  "column_count": 8,
+  "schema": "outcome phase failureKind calls qualifiedParentCompleted originalPointerIdentity originalArenaByteUnchanged currentAllocatorRefCount",
+  "configuration": "Actual original NCollection_IncAllocator arena and independent actual current descendant. Qualified Inc Free is the actual no-op; typed Standard_ConstructionError or unrelated std::logic_error occurs afterward. Native raw no-op Free retry changes only current outcome; original raw bytes stay live until Reset after all access. No Sequence/node/payload destruction retry. Extra selected Handle mirrors the current caller slot; actual refCount2.",
+  "native_runs": "two byte-identical integer-column CPU runs",
+  "fixture_sha256": "d7a0643707eabc2e8ce3836ae2e4b388b235760fe4f6e0434707c93bfc98c39f",
+  "second_run_sha256": "d7a0643707eabc2e8ce3836ae2e4b388b235760fe4f6e0434707c93bfc98c39f",
+  "second_compressed_sha256": "480f6d41e4fe90999057b1e0dd04112722709e925dffe7867d61d8701e25e790",
+  "oracle_executable_sha256": "aa8a5732ee8adf89bd3c5a4c641943d7e394d491ffb290ec4a7016644455eab6",
+  "sources": {
+    "tools/oracle/martensite_incremental_current_free_failure.cxx": "1ea8f6c85760490485e82d54a17e9349eed70620b60f4f8bc8711d5232c3cfe8",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx": "4fa6b2f70b28a1dfc9c4aa8e4b9a0120b60eb453220c36a390692c6432b7ab63",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.cxx": "39cb787042f5ace9cb1656d8f0b27484aeef01997bacb6b77b318b56b01e663d",
+    "../OCCT/src/FoundationClasses/TKernel/Standard/Standard_ConstructionError.hxx": "64b7c18fd72b5a89aef2dcc77420154e0d5a5c8c8f68edbfc4e17dafc279a401"
+  },
+  "native_libraries": {
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so.8.1": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "comparison": "exact integer rows and exact typed exception message; no tolerance changes",
+  "rust_branch_evidence": "Explicit no-virtual-provenance plus allocate_calls_optimal assertions select actual deallocate_arena_using Free site. Fresh Common/Heap typed storage selects virtual provenance and cannot prove this branch. After a fault the original arena remains leased; successful raw no-op retry releases the single lease, then Reset succeeds. Lease guards are extra Rust safety, not native object-destruction retry credit.",
+  "claim_scope": "bounded actual compatible Incremental current Free transport/recovery proof; no allocator class/API ledger completion."
+}
