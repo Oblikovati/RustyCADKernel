@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "base_revision": "43a83e66e1e30a9682d42d47ca50abe23a6e4051",
+  "failed_candidate_revision": "bb1e00115cd8855da4a40e2092b570a2120ab657",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "correction": "Acceptance state setup corrected; inherited compatibility alpha behavior unchanged. Real opaque sprite reset separates camera depth-clamp control from retained .9 rejection.",
+  "source_bookends_equal": true,
+  "source_bookend_file_count": 15266,
+  "correction_source_hashes": {
+    "crates/vulkan/examples/support/point_alpha_goldens.rs": "9e92ae91fedbf176b0e0d20cea761c89b7fcb4539ef6148da7f99661ad519369",
+    "crates/vulkan/tests/point_alpha_context.rs": "61a683846ad665e2bc3f90d6358912884b0b189c08f150d7fbd7c601f78f1cc0",
+    "crates/vulkan/tests/suites/cases_00.rs": "38ea4faf5e010523f4324e9467800b536b0b1b8de4b521b67652257149ab0c60",
+    "crates/vulkan/src/legacy_fragment_alpha.rs": "829df25ae1bd6d27d0f1986111d7fabf98ba726bbf6dd7586bb910e6140d6b20",
+    "tools/oracle/martensite_vulkan_point_alpha_context.cxx": "fddb08523ddd711e94ba2ee8d251e52ce36544829f16958c4096a73704354b65"
+  },
+  "original_21_golden_assets_unchanged": true,
+  "native_repeatability": {
+    "lavapipe": {
+      "capture_pairs": 48,
+      "byte_identical": true,
+      "logs_equal": true
+    },
+    "host": {
+      "capture_pairs": 48,
+      "byte_identical": true,
+      "logs_equal": true
+    }
+  },
+  "validation_driver_icd_hashes": {
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/validation-layer.deb": "b100bfafac3df98c5d8ef5a572b423bcd9ebf3fab963e2e68957f4bf6f2423f0",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json": "f328caf95d75607075575cf5849b4e765f9eabe111ea5be7f971c92a9a7d1a58",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu/libVkLayer_khronos_validation.so": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104",
+    "/usr/share/vulkan/icd.d/lvp_icd.json": "8468db31369dbd0140b68783f1a7943e6158cadcf5314e949e6be31f42068e13",
+    "/usr/share/vulkan/icd.d/radeon_icd.json": "bca32a660ca32a42b598d53cdc63b3e3e917ea40c0b3b1e00fdbd3115280b51d",
+    "/usr/lib/x86_64-linux-gnu/libvulkan_lvp.so": "ef1f6ec8bad6f4ab9ac4fec44d38a1c9d634cf3ce713faf5e9fb74b06270bef6",
+    "/usr/lib/x86_64-linux-gnu/libvulkan_radeon.so": "7bf31db67cbf803c7cbd8bbe9280f2ba0cb77d8840529af640dc5978a14e589d"
+  },
+  "gates": {
+    "lavapipe-alltargets": {
+      "exit": 0,
+      "log_sha256": "d659a36b4c76af4dc5c180d6021e336c2799fc031c072140e9278ecc11f0f351",
+      "passed": 648,
+      "failed": 0,
+      "ignored": 5,
+      "groups": 71
+    },
+    "lavapipe-offscreen_acceptance": {
+      "exit": 0,
+      "log_sha256": "ad8ab5e83fbde15ade6bf56bdcde35e81c9b4c1e355bc97309ec3d5123df7ca1"
+    },
+    "lavapipe-lighting_acceptance": {
+      "exit": 0,
+      "log_sha256": "a3474bbb2b55ac20d6227ee048f030d7e2772da00f09fa22982f99bf8dcdb5ad"
+    },
+    "host-alltargets": {
+      "exit": 0,
+      "log_sha256": "9b4de10ad921ba21b1991607a7cf0f8ca0b4110ee734fe9fabad844b0ab60cad",
+      "passed": 648,
+      "failed": 0,
+      "ignored": 5,
+      "groups": 71
+    },
+    "host-offscreen_acceptance": {
+      "exit": 0,
+      "log_sha256": "f0941a8700164b12194c0fb1a92a30e388ca7d89d47967539b0160f4ceb0f2d9"
+    },
+    "host-lighting_acceptance": {
+      "exit": 0,
+      "log_sha256": "d96732f92e68fd6998e83faad3b4834ba497756dd26e0b819233648746c62eb6"
+    }
+  },
+  "other_gates": {
+    "clippy": 0,
+    "workspace_fmt": 0,
+    "discovery": 0,
+    "discovery_unit_tests": {
+      "exit": 0,
+      "tests": 17
+    }
+  },
+  "exclusions": [
+    "No GPU performance measurements",
+    "No API/class completion claim",
+    "No Windows/macOS",
+    "Original full Frame/Pick/XR remains deferred and preserved"
+  ],
+  "retained_diagnostics": "Originalred\u2192diagnosticonlyalphasuppressiongreen\u2192restoredred and cold-firstnative diagnostic retained separately inproof; never accepted as mapped production correction.",
+  "runtime_commands": [
+    "cargo test -p martensite-vulkan --all-targets --locked",
+    "cargo run -p martensite-vulkan --example offscreen_acceptance --locked",
+    "cargo run -p martensite-vulkan --example lighting_acceptance --locked"
+  ],
+  "runtime_wrapper": "python3 tools/with_vulkan_validation.py --cache /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation --",
+  "common_environment": {
+    "DISPLAY": ":1",
+    "CARGO_TARGET_DIR": "target/point-persistence-diagnostic",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2",
+    "MARTENSITE_VULKAN_DEVICE": "0"
+  },
+  "software_environment": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+    "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+    "LP_NATIVE_VECTOR_WIDTH": "128",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "host_environment": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+  },
+  "upstream_source_hashes": {
+    "../OCCT/src/Visualization/TKOpenGl/OpenGl/OpenGl_PrimitiveArray.cxx": "de7897388e657e58c2f17377119fa2bb83c1f50ae1d552e31a5bd2c1c7d49edb",
+    "../OCCT/src/Visualization/TKOpenGl/OpenGl/OpenGl_Structure.cxx": "6616e23b01e6a00231a5f43f3a3c5dd9759f67f4b6b19d544c5591f16f3e1a47",
+    "../OCCT/src/Visualization/TKOpenGl/OpenGl/OpenGl_Context.cxx": "d92598c2e5de23521f814bc5287307a5de823f1ff80dcfcfd68a32fe58723f39"
+  },
+  "native_binary_sha256": "a1e5b3c5d7cd7dd6b1deb7750aac231feabada23cc3b769653d32208b6e42fd3"
+}

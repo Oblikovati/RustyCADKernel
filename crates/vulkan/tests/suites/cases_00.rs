@@ -55,6 +55,8 @@ pub mod object_animation_capture_cases;
 pub mod oit_transparency;
 #[path = "../point_alpha.rs"]
 pub mod point_alpha;
+#[path = "../point_alpha_context.rs"]
+pub mod point_alpha_context;
 #[path = "../point_lighting.rs"]
 pub mod point_lighting;
 #[path = "../point_primitives.rs"]

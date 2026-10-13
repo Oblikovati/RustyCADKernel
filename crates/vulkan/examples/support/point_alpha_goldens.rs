@@ -305,21 +305,74 @@ pub fn check_point_goldens(driver: &Handle<Graphic3dRenderDriver>) {
         scene.render_view().try_redraw().unwrap();
         assert_capture(&scene.render_view().capture().unwrap(), rgba, depth, mode);
     }
-    check_point_persistence(&scene);
+    check_point_persistence(&scene, &driver.device_name());
     scene.view.remove();
 }
-fn check_point_persistence(scene: &ViewerScene) {
+macro_rules! context_asset {
+    ($profile:literal, $control:literal) => {
+        (
+            include_bytes!(concat!(
+                "../../tests/fixtures/point-alpha-context/",
+                $profile,
+                "/",
+                $control,
+                ".rgba"
+            ))
+            .as_slice(),
+            include_bytes!(concat!(
+                "../../tests/fixtures/point-alpha-context/",
+                $profile,
+                "/",
+                $control,
+                ".depth"
+            ))
+            .as_slice(),
+        )
+    };
+}
+fn check_point_persistence(scene: &ViewerScene, device: &str) {
     point_alpha_arrays::replace_alpha_points(&*scene.group, "point-alpha-opaque");
     let persistence = Graphic3dTransformPers::new(Graphic3dTransModeFlags::CAMERA_PERS).unwrap();
     scene
         .structure
         .set_transform_persistence(&Handle::new(persistence).cast());
+    assert_point_context_capture(scene, device, "retained");
+    // OCCT 3d097a0 drawMarkers restores .9 after the final mask sprite. Plain
+    // points retain that test; a real opaque sprite disables it before testing clamp.
+    point_alpha_arrays::replace_alpha_points(&*scene.group, "sprite-alpha-opaque");
+    scene.render_view().try_redraw().unwrap();
+    point_alpha_arrays::replace_alpha_points(&*scene.group, "point-alpha-opaque");
+    assert_point_context_capture(scene, device, "reset");
+}
+fn assert_point_context_capture(scene: &ViewerScene, device: &str, control: &str) {
     scene.render_view().try_redraw().unwrap();
     let capture = scene.render_view().capture().unwrap();
-    assert!(
-        capture.depth.iter().any(|value| *value < 1.),
-        "received empty camera-persistent points; expected visible depth"
+    let (rgba, depth) = point_context_fixture(device, control);
+    assert_eq!(
+        capture.rgba, rgba,
+        "received wrong {control} pixels; expected native context capture"
     );
+    let actual = point_context_depth_bytes(&capture);
+    assert_eq!(
+        actual, depth,
+        "received wrong {control} depth; expected native context capture"
+    );
+}
+fn point_context_depth_bytes(capture: &martensite_vulkan::FrameCapture) -> Vec<u8> {
+    capture
+        .depth
+        .iter()
+        .flat_map(|value| value.to_le_bytes())
+        .collect()
+}
+fn point_context_fixture(device: &str, control: &str) -> (&'static [u8], &'static [u8]) {
+    match (device.contains("llvmpipe"), control) {
+        (true, "retained") => context_asset!("lavapipe", "retained"),
+        (true, "reset") => context_asset!("lavapipe", "reset"),
+        (false, "retained") => context_asset!("host", "retained"),
+        (false, "reset") => context_asset!("host", "reset"),
+        _ => panic!("received {control:?}; expected retained or reset context control"),
+    }
 }
 #[cfg(test)]
 mod tests {
