@@ -61,6 +61,14 @@ class DiagnosticContractTests(unittest.TestCase):
         self.assertEqual(selected[0].name, "toolkit")
         self.assertEqual(diagnostic.cargo_executables("{}"), [])
 
+    def test_injected_revision_is_not_labeled_as_the_older_release(self) -> None:
+        expected = "4c884b0e01435243f4c23ee7eda93aaff9029641"
+        probe = diagnostic.RendererDiagnosticProcess(self.root, self.output, expected)
+        probe.persist()
+        receipt = json.loads((self.output / "commands.json").read_text())
+        self.assertEqual(receipt["revision"], expected)
+        self.assertNotEqual(receipt["revision"], diagnostic.REVISION)
+
     def test_real_process_preserves_red_exit(self) -> None:
         probe = diagnostic.RendererDiagnosticProcess(self.root, self.output)
         result = probe.run("red", ["python3", "-c", "raise SystemExit(7)"])
@@ -167,6 +175,19 @@ class DiagnosticContractTests(unittest.TestCase):
             (self.output / "binaries-before.json").read_text(),
             (self.output / "binaries-after.json").read_text(),
         )
+
+    def test_binary_mutation_is_rejected_after_the_after_receipt_is_saved(self) -> None:
+        artifacts = [
+            diagnostic.DiagnosticBinary(
+                "toolkit", str(self.binary), diagnostic.digest_file(self.binary)
+            )
+        ]
+        self.binary.write_bytes(b"changed")
+        with self.assertRaisesRegex(
+            ValueError, "changed diagnostic binaries.*expected unchanged"
+        ):
+            diagnostic.record_binary_bookend(self.fake(), artifacts)
+        self.assertTrue((self.output / "binaries-after.json").is_file())
 
     def test_failed_build_and_missing_toolkit_are_rejected(self) -> None:
         probe = self.artifact_fake()
