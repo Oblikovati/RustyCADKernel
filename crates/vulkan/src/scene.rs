@@ -46,7 +46,8 @@ pub struct RenderFrame {
     pub(crate) layers: Vec<RenderLayerSpan>,
     pub(crate) raster: crate::transparency::RenderRasterSettings,
     pub(crate) raster_feedback: crate::raster_feedback::RasterFailureFeedback,
-    pub(crate) fragment_alpha_context: Option<crate::fragment_alpha_feedback::FragmentAlphaSnapshot>,
+    pub(crate) fragment_alpha_context:
+        Option<crate::fragment_alpha_feedback::FragmentAlphaSnapshot>,
 }
 impl RenderFrame {
     /// Read target dimensions; `frame.extent()`.

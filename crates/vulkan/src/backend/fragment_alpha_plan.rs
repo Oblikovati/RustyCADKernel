@@ -14,7 +14,11 @@ impl FragmentAlphaPlan {
             during.push(state.advance(draw));
             after.push(state.0);
         }
-        Self { during, after, ending: state }
+        Self {
+            during,
+            after,
+            ending: state,
+        }
     }
 }
 #[cfg(test)]
@@ -22,7 +26,12 @@ mod tests {
     use super::*;
     #[test]
     fn captured_context_and_frame_state_are_independent() {
-        let draw = crate::PrimitiveDraw::new(vec![crate::RenderVertex::new([0.; 3], [1.; 4]); 3], vec![0, 1, 2], crate::identity_clip()).unwrap();
+        let draw = crate::PrimitiveDraw::new(
+            vec![crate::RenderVertex::new([0.; 3], [1.; 4]); 3],
+            vec![0, 1, 2],
+            crate::identity_clip(),
+        )
+        .unwrap();
         let frame = RenderFrame::new(2, 2, [0.; 4], vec![draw]).unwrap();
         let previous = FragmentAlphaPlan::new(&frame, LegacyFragmentAlpha(Some(0.5)));
         let fresh = FragmentAlphaPlan::new(&frame, LegacyFragmentAlpha::default());

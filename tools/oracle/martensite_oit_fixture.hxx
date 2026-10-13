@@ -3,7 +3,10 @@
 #include "martensite_surface_texture_probe.hxx"
 #include <Graphic3d_ArrayOfPoints.hxx>
 #include <Graphic3d_ArrayOfSegments.hxx>
+#include <Graphic3d_Text.hxx>
+#include <Graphic3d_AspectText3d.hxx>
 static Quantity_ColorRGBA oit_native_palette(int rank,const std::string& scene) {
+  if(scene=="occluded"&&rank==2)return Quantity_ColorRGBA(1,1,1,1);
   if(scene!="five")return Quantity_ColorRGBA(Quantity_Color(rank==0?1.:0.,rank==1?1.:0.,0.,Quantity_TOC_RGB),rank==0?.5f:.75f);
   const float colors[][4]={{1,0,0,.25f},{0,1,0,.5f},{0,0,1,.75f},{1,1,0,.4f},{1,0,1,.6f}};
   const auto& color=colors[rank];return Quantity_ColorRGBA(Quantity_Color(color[0],color[1],color[2],Quantity_TOC_RGB),color[3]);
@@ -18,11 +21,11 @@ static occ::handle<Graphic3d_AspectFillArea3d> oit_native_aspect(int rank,const 
   auto material=aspect->FrontMaterial();material.SetTransparency(1.f-color.Alpha());
   aspect->SetFrontMaterial(material);
   auto alpha=Graphic3d_AlphaMode_Blend;
-  if(scene=="opaque")alpha=Graphic3d_AlphaMode_Opaque;
+  if(scene=="opaque"||scene=="far-boundary-opaque")alpha=Graphic3d_AlphaMode_Opaque;
   if(scene=="mask"||scene=="one-mask")alpha=Graphic3d_AlphaMode_Mask;
   if(scene=="mask-blend")alpha=Graphic3d_AlphaMode_MaskBlend;
   if(scene=="auto")alpha=Graphic3d_AlphaMode_BlendAuto;
-  aspect->SetAlphaMode(alpha,.5f);
+  aspect->SetAlphaMode(scene=="occluded"&&rank==2?Graphic3d_AlphaMode_Opaque:alpha,.5f);
   if(scene.rfind("texture-",0)==0) {
     const auto texture=texture_source("blend");
     texture_style(aspect,texture,scene.substr(8));
@@ -37,9 +40,16 @@ static occ::handle<Graphic3d_AspectFillArea3d> oit_native_aspect(int rank,const 
 static occ::handle<Graphic3d_ArrayOfTriangles> oit_native_quad(int rank,const std::string& scene="two") {
   const occ::handle<Graphic3d_ArrayOfTriangles> vertices=new Graphic3d_ArrayOfTriangles(6,0,true,false,true);
   const float corners[][2]={{-6,-6},{6,-6},{6,6},{-6,-6},{6,6},{-6,6}};
-  const float z=scene=="five"?6.f-3.f*rank:(rank==0?2.f:-2.f);
+  const float z=scene=="tied"?2.f:scene=="near-boundary"?19.f:(scene=="far-boundary"||scene=="far-boundary-opaque")?-80.f:scene=="far-interior"?-79.f:
+    scene=="occluded"&&rank==2?4.f:scene=="five"?6.f-3.f*rank:(rank==0?2.f:-2.f);
   for(const auto& corner:corners)vertices->AddVertex(gp_Pnt(corner[0],corner[1],z),gp_Dir(0,0,1),gp_Pnt2d((corner[0]+6)/12,(corner[1]+6)/12));
   return vertices;
+}
+static void oit_native_text(const occ::handle<Graphic3d_Structure>& structure) {
+  const occ::handle<Graphic3d_AspectText3d> style=new Graphic3d_AspectText3d(texture_rgb(.18,.4,.7),"DejaVu Sans",1,0,Aspect_TOST_NORMAL,Aspect_TODT_NORMAL);
+  const occ::handle<Graphic3d_Text> text=new Graphic3d_Text(16);text->SetText("AV");text->SetPosition(gp_Pnt(0,0,4));
+  text->SetHorizontalAlignment(Graphic3d_HTA_CENTER);text->SetVerticalAlignment(Graphic3d_VTA_CENTER);
+  const auto group=structure->NewGroup();group->SetPrimitivesAspect(style);group->AddText(text);
 }
 static void oit_native_overlay(const occ::handle<Graphic3d_Structure>& structure,const std::string& scene) {
   if(scene!="sprite-mask"&&scene!="sprite-low-mask"&&scene!="sprite-opaque"&&scene!="line-mask")return;
@@ -60,13 +70,13 @@ static occ::handle<Graphic3d_Structure> oit_native_geometry(
   const occ::handle<V3d_Viewer>& viewer,bool reverse,const std::string& scene="two") {
   const occ::handle<Graphic3d_Structure> structure=new Graphic3d_Structure(viewer->StructureManager());
   structure->SetZLayer(Graphic3d_ZLayerId_Default);
-  const int count=scene.rfind("one-",0)==0?1:(scene=="five"?5:2);
+  const int count=scene.rfind("one-",0)==0?1:(scene=="five"?5:scene=="occluded"?3:2);
   for(int index=0;index<count;++index) {
     const int rank=reverse?count-1-index:index;const auto group=structure->NewGroup();
     group->SetGroupPrimitivesAspect(oit_native_aspect(rank,scene));
     group->AddPrimitiveArray(oit_native_quad(rank,scene));
   }
-  oit_native_overlay(structure,scene);structure->Display();return structure;
+  oit_native_overlay(structure,scene);if(scene=="text-colored")oit_native_text(structure);structure->Display();return structure;
 }
 static void oit_native_parameters(const occ::handle<V3d_View>& view,const std::string& mode,
                                   int samples,float factor,int layers) {

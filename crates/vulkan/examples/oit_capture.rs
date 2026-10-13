@@ -58,7 +58,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         args[5].parse()?,
     );
     fixture.scene.render_view().try_redraw()?;
-    view_capture::capture_view(&fixture.scene.view, 64, 64, &args[2], false)?;
+    fixture.mutate_inputs(args.get(8).map_or("two", String::as_str));
+    view_capture::capture_view(&fixture.scene.view, 64, 64, &args[2], args.get(8).is_some_and(|name| name.starts_with("layer-")))?;
     if !driver.validation_errors().is_empty() {
         return Err(format!(
             "received validation errors={:?}; expected none",

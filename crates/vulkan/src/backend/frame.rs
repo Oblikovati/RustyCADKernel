@@ -9,7 +9,10 @@ use ash::vk;
 use std::sync::Arc;
 pub(super) struct UploadedDraw {
     pub native_alpha: Option<Arc<super::oit_descriptor::OitPassDescriptors>>,
-    pub oit_alpha: Vec<(vk::DescriptorSet, Arc<super::oit_descriptor::OitPassDescriptors>)>,
+    pub oit_alpha: Vec<(
+        vk::DescriptorSet,
+        Arc<super::oit_descriptor::OitPassDescriptors>,
+    )>,
     pub sample_alpha_cutoff: bool,
     pub oit: Option<super::oit_upload::OitUploadedVariants>,
     pub vertices: DeviceBuffer,
@@ -48,10 +51,13 @@ pub(super) struct FrameResources {
 }
 impl FrameResources {
     pub fn new(
-        runtime: &Arc<VulkanRuntime>, frame: &RenderFrame, pipeline: &RasterPipelines,
+        runtime: &Arc<VulkanRuntime>,
+        frame: &RenderFrame,
+        pipeline: &RasterPipelines,
         initial_alpha: crate::legacy_fragment_alpha::LegacyFragmentAlpha,
     ) -> Result<Self, RenderError> {
-        let fragment_alpha = super::fragment_alpha_plan::FragmentAlphaPlan::new(frame, initial_alpha);
+        let fragment_alpha =
+            super::fragment_alpha_plan::FragmentAlphaPlan::new(frame, initial_alpha);
         pipeline.surface_images.prune()?;
         check_extent(runtime, frame)?;
         let extent = vk::Extent2D {
@@ -61,7 +67,9 @@ impl FrameResources {
         let bytes = u64::from(frame.width) * u64::from(frame.height) * 4;
         let plan = super::frame_raster_plan::frame_raster_plan(runtime, frame, pipeline.stencil);
         let mut oit = super::oit_frame::OitFramePass::new(runtime, frame, pipeline, extent, plan)?;
-        if let Some(pass) = &mut oit { pass.prepare_alpha(&fragment_alpha)?; }
+        if let Some(pass) = &mut oit {
+            pass.prepare_alpha(&fragment_alpha)?;
+        }
         let mut draws = frame
             .draws
             .iter()
@@ -78,7 +86,15 @@ impl FrameResources {
         if let Some(pass) = &oit {
             super::oit_upload::upload_oit_variants(runtime, pipeline, &mut draws, pass)?;
         }
-        super::fragment_alpha_upload::upload_fragment_alpha(runtime, pipeline, &mut draws, &fragment_alpha, oit.as_ref(), plan.samples, frame.raster.alpha_to_coverage)?;
+        super::fragment_alpha_upload::upload_fragment_alpha(
+            runtime,
+            pipeline,
+            &mut draws,
+            &fragment_alpha,
+            oit.as_ref(),
+            plan.samples,
+            frame.raster.alpha_to_coverage,
+        )?;
         Ok(Self {
             fragment_alpha,
             multisample: super::multisample_targets::MultisampleTargets::new(
@@ -256,7 +272,9 @@ fn upload_draw(
     Ok(UploadedDraw {
         native_alpha: None,
         oit_alpha: vec![],
-        sample_alpha_cutoff: draw.native_material_cutoff.is_some_and(|cutoff| cutoff <= 1.)
+        sample_alpha_cutoff: draw
+            .native_material_cutoff
+            .is_some_and(|cutoff| cutoff <= 1.)
             || draw.surface_cutoff.is_some(),
         oit: None,
         lighting,
@@ -335,7 +353,7 @@ fn encode_vertex_sources(draw: &PrimitiveDraw, sources: &[(usize, usize)]) -> Ve
     let mut bytes = Vec::new();
     for &(index, source) in sources {
         let vertex = &draw.vertices[index];
-        bytes.extend(encoded_vertex_header(vertex, draw.text_logic_xor));
+        bytes.extend(encoded_vertex_header(vertex, draw.text_logic_xor && !draw.compatibility_color_target));
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
         }

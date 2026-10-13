@@ -47,5 +47,55 @@ material opacity alone does not set unlit fragment alpha.
 
 Raw development receipts currently live under `target/oit-proof`; final pinned
 assets, Rust-only replay, both-device functional captures and source-bound
-optimized measurements will accompany implementation. Unsupported Vulkan modes
-remain rejected until genuine backend behavior and regressions replace that gate.
+optimized measurements will accompany implementation. The former retained OIT rejection has been replaced by actual Vulkan attachments,
+geometry variants and composites; unsupported allocation failures remain typed errors.
+
+Compatibility marker alpha state is scoped to each native view context. Pinned
+`OpenGl_PrimitiveArray::drawMarkers` restores `GL_GEQUAL` to the material cutoff
+(and disables the test for opaque material); programmable material upload does
+not clear that compatibility state. Native controls on both devices prove that
+Mask cutoff .5 rejects the weighted revealage .125 and the peeling depth output
+alpha zero. Cutoff .1 admits weighted output, while an opaque marker clears the
+state. Removing the marker preserves state in the same view; independent views
+sharing a driver start with alpha testing disabled. Martensite snapshots this
+scalar state per retained view and commits the resulting state after submission.
+Standalone low-level frames use their own renderer context. No view handle is
+retained by the feedback cell.
+
+The bounded AMD object-material weighted audit retains 725 strict channel
+mismatches: 721 have magnitude one, and four are at two texture boundary pixels
+(39,41)/(47,41), with exact depth. They remain strict diagnostics; no sampling or
+numeric adjustment is used to force equality. Marker coverage also retains its
+known one-row configured-driver difference. Initial broad Mask-marker fill
+failures are preserved separately from the fixed cutoff controls.
+
+Actual `V3d_Viewer::AddZLayer` controls retain two structures on Default/custom
+layers and compare depth-sharing versus clearing. All 24 fixed/programmed,
+unordered/weighted/peeling, software/AMD pairs match exact RGBA and depth. Native
+assets and an ordinary Rust-only test preserve these batch-boundary contracts.
+Tied depths and opaque occlusion also match. Exact far-plane AMD peeling remains
+a configured precision diagnostic: opaque depth is 0.9999999403953552 natively
+and 1.0 in Vulkan, changing the initial strict predicate. A one-unit-inside
+control matches on both profiles; no epsilon or coordinate adjustment changes
+the implementation.
+
+Actual retained-view transitions request 0/1/2/3/4/6/8 weighted samples, then
+peeling4 and weighted4 again. Native GL_SAMPLES traces establish4 versus8
+geometry samples rather than inferring them from output FBOs. Fourteen of18
+pairs match exact RGBA/depth; requested6/8 retain12 edge-channel differences
+(max78), with identical centers/depth. The configured peeling retry and
+subsequent weighted fallback match exactly. No sample-coordinate tuning is used.
+
+Colored-font controls expose a genuine compatibility contract: fixed-function
+contexts disable framebuffer sRGB even while the font shader remains bound.
+The Vulkan UNORM alias now also covers those glyph passes, without claiming
+fixed lighting or clearing inherited material alpha. All12 programmed/fixed,
+three-mode, software/AMD pairs match exact RGBA (depth below7.45e-8); the old
+306-channel/max74 errors remain in raw receipts.
+
+Nonpositive peeling iteration counts are outside the native defined domain.
+Pinned OpenGl_LayerList.cxx962 initializes the composite buffer index to-1;
+zero/negative loops leave it unchanged and line1230 accessesFBOS[-1]. Actual
+zero/-1 controls repeat SIGSEGV on both configured drivers, while Martensite
+returns the existing typed positive-count error. No empty-render semantics
+or upstream API completion is invented from those undefined native inputs.

@@ -61,15 +61,20 @@ impl OitPassDescriptors {
     ) -> Result<Self, RenderError> {
         Self::with_parameters(layout, Some(images), depth_factor, None)
     }
-    pub fn parameter_only(layout: &Arc<OitDescriptorLayout>, cutoff: f32) -> Result<Self, RenderError> {
+    pub fn parameter_only(
+        layout: &Arc<OitDescriptorLayout>,
+        cutoff: f32,
+    ) -> Result<Self, RenderError> {
         Self::with_parameters(layout, None, 0., Some(cutoff))
     }
     pub fn alpha_override(&self, cutoff: f32) -> Result<Self, RenderError> {
         Self::with_parameters(&self.layout, self.images, self.depth_factor, Some(cutoff))
     }
     fn with_parameters(
-        layout: &Arc<OitDescriptorLayout>, images: Option<[vk::ImageView; 2]>,
-        depth_factor: f32, alpha_cutoff: Option<f32>,
+        layout: &Arc<OitDescriptorLayout>,
+        images: Option<[vk::ImageView; 2]>,
+        depth_factor: f32,
+        alpha_cutoff: Option<f32>,
     ) -> Result<Self, RenderError> {
         let pool = create_oit_pool(&layout.runtime)?;
         let mut descriptors = Self {
@@ -80,7 +85,11 @@ impl OitPassDescriptors {
             images,
             depth_factor,
         };
-        descriptors.parameters = Some(upload_oit_parameters(&layout.runtime, depth_factor, alpha_cutoff)?);
+        descriptors.parameters = Some(upload_oit_parameters(
+            &layout.runtime,
+            depth_factor,
+            alpha_cutoff,
+        )?);
         descriptors.allocate()?;
         descriptors.write(images);
         Ok(descriptors)
@@ -95,45 +104,35 @@ impl OitPassDescriptors {
         Ok(())
     }
     fn write(&self, views: Option<[vk::ImageView; 2]>) {
-        let images: Vec<_> = views.into_iter().flatten().map(|view| {
-            vk::DescriptorImageInfo::default()
-                .sampler(self.layout.sampler)
-                .image_view(view)
-                .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
-        }).collect();
-        let offset = u32::from(self.layout.geometry);
-        let mut writes: Vec<_> = images
-            .iter()
-            .enumerate()
-            .map(|(index, image)| {
-                vk::WriteDescriptorSet::default()
-                    .dst_set(self.set)
-                    .dst_binding(offset + index as u32)
-                    .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
-                    .image_info(std::slice::from_ref(image))
-            })
-            .collect();
-        let buffers = self.parameters.as_ref().map(|buffer| {
-            vk::DescriptorBufferInfo::default()
-                .buffer(buffer.handle)
-                .range(16)
+        let images = self.descriptor_images(views);
+        let mut writes = self.image_writes(&images);
+        let buffer = self.parameters.as_ref().map(|parameters| {
+            vk::DescriptorBufferInfo::default().buffer(parameters.handle).range(16)
         });
-        if let Some(buffer) = buffers.as_ref() {
-            writes.push(
-                vk::WriteDescriptorSet::default()
-                    .dst_set(self.set)
-                    .dst_binding(if self.layout.geometry {0} else {2})
-                    .descriptor_type(vk::DescriptorType::STORAGE_BUFFER)
-                    .buffer_info(std::slice::from_ref(buffer)),
-            );
-        }
-        unsafe {
-            self.layout
-                .runtime
-                .device()
-                .update_descriptor_sets(&writes, &[]);
-        }
+        if let Some(buffer) = &buffer { writes.push(self.parameter_write(buffer)); }
+        unsafe { self.layout.runtime.device().update_descriptor_sets(&writes, &[]); }
     }
+    fn descriptor_images(&self, views: Option<[vk::ImageView; 2]>) -> Vec<vk::DescriptorImageInfo> {
+        views.into_iter().flatten().map(|view| {
+            vk::DescriptorImageInfo::default().sampler(self.layout.sampler).image_view(view)
+                .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
+        }).collect()
+    }
+    fn image_writes<'a>(&self, images: &'a [vk::DescriptorImageInfo]) -> Vec<vk::WriteDescriptorSet<'a>> {
+        let offset = u32::from(self.layout.geometry);
+        images.iter().enumerate().map(|(index, image)| {
+            vk::WriteDescriptorSet::default().dst_set(self.set).dst_binding(offset + index as u32)
+                .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+                .image_info(std::slice::from_ref(image))
+        }).collect()
+    }
+    fn parameter_write<'a>(&self, buffer: &'a vk::DescriptorBufferInfo) -> vk::WriteDescriptorSet<'a> {
+        vk::WriteDescriptorSet::default().dst_set(self.set)
+            .dst_binding(if self.layout.geometry {0} else {2})
+            .descriptor_type(vk::DescriptorType::STORAGE_BUFFER)
+            .buffer_info(std::slice::from_ref(buffer))
+    }
+
 }
 impl Drop for OitPassDescriptors {
     fn drop(&mut self) {
@@ -157,7 +156,7 @@ fn oit_descriptor_bindings(geometry: bool) -> Vec<vk::DescriptorSetLayoutBinding
         })
         .collect();
     {
-        let index = if geometry {0} else {2};
+        let index = if geometry { 0 } else { 2 };
         bindings.insert(
             index,
             vk::DescriptorSetLayoutBinding::default()
@@ -178,9 +177,7 @@ fn oit_sampler_description() -> vk::SamplerCreateInfo<'static> {
         .address_mode_v(vk::SamplerAddressMode::CLAMP_TO_EDGE)
         .address_mode_w(vk::SamplerAddressMode::CLAMP_TO_EDGE)
 }
-fn create_oit_pool(
-    runtime: &VulkanRuntime,
-) -> Result<vk::DescriptorPool, RenderError> {
+fn create_oit_pool(runtime: &VulkanRuntime) -> Result<vk::DescriptorPool, RenderError> {
     let mut sizes = vec![vk::DescriptorPoolSize {
         ty: vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
         descriptor_count: 2,
@@ -216,7 +213,12 @@ fn upload_oit_parameters(
     Ok(buffer)
 }
 fn oit_parameter_values(depth_factor: f32, alpha_cutoff: Option<f32>) -> [f32; 4] {
-    [depth_factor, alpha_cutoff.unwrap_or(0.), u8::from(alpha_cutoff.is_some()) as f32, 0.]
+    [
+        depth_factor,
+        alpha_cutoff.unwrap_or(0.),
+        u8::from(alpha_cutoff.is_some()) as f32,
+        0.,
+    ]
 }
 #[cfg(test)]
 mod tests {
@@ -240,7 +242,7 @@ mod tests {
     }
     #[test]
     fn alpha_test_parameters_keep_weight_and_reference_independent() {
-        assert_eq!(oit_parameter_values(0.75, None), [0.75,0.,0.,0.]);
-        assert_eq!(oit_parameter_values(0.75, Some(0.5)), [0.75,0.5,1.,0.]);
+        assert_eq!(oit_parameter_values(0.75, None), [0.75, 0., 0., 0.]);
+        assert_eq!(oit_parameter_values(0.75, Some(0.5)), [0.75, 0.5, 1., 0.]);
     }
 }

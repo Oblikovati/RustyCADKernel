@@ -1,7 +1,7 @@
 //! The initial unlit pipeline consumes real vertex/index buffers and a per-draw transform.
+use super::pipeline_layout::{create_layout, fixed_marker_push_range, push_range};
 #[cfg(test)]
-use super::pipeline_layout::{descriptor_layout_handles,fixed_marker_push_range};
-use super::pipeline_layout::{create_layout, push_range};
+use super::pipeline_layout::descriptor_layout_handles;
 use super::runtime::{VulkanRuntime, vk_error};
 use crate::{RenderError, error::rejected};
 use ash::vk;
@@ -26,7 +26,14 @@ impl DrawPipeline {
         runtime: &Arc<VulkanRuntime>,
         kind: super::pipeline_variants::PipelineVariant,
     ) -> Result<Self, RenderError> {
-        Self::build(runtime, kind, None, vk::SampleCountFlags::TYPE_1, false, None)
+        Self::build(
+            runtime,
+            kind,
+            None,
+            vk::SampleCountFlags::TYPE_1,
+            false,
+            None,
+        )
     }
     pub fn new_oit(
         runtime: &Arc<VulkanRuntime>,
@@ -52,11 +59,20 @@ impl DrawPipeline {
         Self::build(runtime, kind, None, samples, alpha_coverage, None)
     }
     pub fn new_native_alpha(
-        runtime: &Arc<VulkanRuntime>, kind: super::pipeline_variants::PipelineVariant,
-        samples: vk::SampleCountFlags, alpha_coverage: bool,
+        runtime: &Arc<VulkanRuntime>,
+        kind: super::pipeline_variants::PipelineVariant,
+        samples: vk::SampleCountFlags,
+        alpha_coverage: bool,
         layout: &Arc<super::oit_descriptor::OitDescriptorLayout>,
     ) -> Result<Self, RenderError> {
-        Self::build(runtime, kind, None, samples, alpha_coverage, Some(layout.clone()))
+        Self::build(
+            runtime,
+            kind,
+            None,
+            samples,
+            alpha_coverage,
+            Some(layout.clone()),
+        )
     }
     fn build(
         runtime: &Arc<VulkanRuntime>,
@@ -82,7 +98,10 @@ impl DrawPipeline {
         let mut pipeline = Self {
             runtime: runtime.clone(),
             kind,
-            oit_layout: oit.as_ref().map(|(_, layout)| layout.clone()).or_else(|| alpha_layout.clone()),
+            oit_layout: oit
+                .as_ref()
+                .map(|(_, layout)| layout.clone())
+                .or_else(|| alpha_layout.clone()),
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
             push_stages: push_range(
@@ -165,17 +184,21 @@ impl DrawPipeline {
             pipeline.replace_oit_fragment(*target)?;
         }
         if alpha_layout.is_some() {
-            pipeline.replace_fragment(super::native_alpha_shader::native_alpha_fragment(pipeline.fragment_bytes)?)?;
+            pipeline.replace_fragment(super::native_alpha_shader::native_alpha_fragment(
+                pipeline.fragment_bytes,
+            )?)?;
         }
         pipeline.layout = create_layout(
             runtime,
-            line || kind.polygon_edges
-                || point
-                || text
-                || kind.surface_texture
-                || kind.surface_alpha,
-            kind.mesh_edges,
-            point && kind.encoded_surface,
+            fixed_marker_push_range(
+                line || kind.polygon_edges
+                    || point
+                    || text
+                    || kind.surface_texture
+                    || kind.surface_alpha,
+                kind.mesh_edges,
+                point && kind.encoded_surface,
+            ),
             pipeline
                 .sprite_layout
                 .as_ref()
@@ -201,7 +224,9 @@ impl DrawPipeline {
         self.replace_fragment(bytes)
     }
     fn add_shader(&mut self, bytes: &'static [u8]) -> Result<(), RenderError> {
-        if self.shaders.len() == 1 { self.fragment_bytes = bytes; }
+        if self.shaders.len() == 1 {
+            self.fragment_bytes = bytes;
+        }
         self.shaders.push(load_shader(&self.runtime, bytes)?);
         Ok(())
     }

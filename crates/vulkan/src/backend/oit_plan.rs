@@ -48,38 +48,33 @@ pub(super) fn choose_resource_plan(
     caps: OitCapabilities,
     has_transparent_fill: bool,
 ) -> OitResourcePlan {
-    let mut plan = OitResourcePlan {
-        transparency: raster.transparency,
-        samples: requested_samples(raster, caps),
-        disable_feedback: 0,
-    };
-    if raster.disabled_capabilities & 2 != 0 && plan.samples == vk::SampleCountFlags::TYPE_1 {
-        plan.transparency = RenderTransparency::Unordered;
-    }
-    if plan.transparency == RenderTransparency::Unordered {
-        return plan;
-    }
-    if !caps.weighted_formats
-        || caps.max_color_attachments < 2
-        || (plan.samples != vk::SampleCountFlags::TYPE_1 && !caps.sample_rate_shading)
-    {
-        plan.transparency = RenderTransparency::Unordered;
-        // Native checkOitCompatibility writes DisableMSAA for this already-selected MSAA frame.
-        plan.disable_feedback |= if plan.samples == vk::SampleCountFlags::TYPE_1 {
-            2
-        } else {
-            1
-        };
-        return plan;
-    }
+    let mut plan = initial_resource_plan(raster, caps);
+    if plan.transparency == RenderTransparency::Unordered { return plan; }
+    if !check_weighted_compatibility(&mut plan, caps) { return plan; }
     apply_oit_sample_fallback(&mut plan, has_transparent_fill);
     if matches!(plan.transparency, RenderTransparency::DepthPeeling { .. })
-        && (!caps.peeling_formats || caps.max_color_attachments < 3)
-    {
+        && (!caps.peeling_formats || caps.max_color_attachments < 3) {
         plan.transparency = RenderTransparency::Unordered;
     }
     plan
 }
+fn initial_resource_plan(raster: RenderRasterSettings, caps: OitCapabilities) -> OitResourcePlan {
+    let samples = requested_samples(raster, caps);
+    let transparency = if raster.disabled_capabilities & 2 != 0 && samples == vk::SampleCountFlags::TYPE_1 {
+        RenderTransparency::Unordered
+    } else { raster.transparency };
+    OitResourcePlan { transparency, samples, disable_feedback: 0 }
+}
+fn check_weighted_compatibility(plan: &mut OitResourcePlan, caps: OitCapabilities) -> bool {
+    let incompatible = !caps.weighted_formats || caps.max_color_attachments < 2
+        || (plan.samples != vk::SampleCountFlags::TYPE_1 && !caps.sample_rate_shading);
+    if !incompatible { return true; }
+    plan.transparency = RenderTransparency::Unordered;
+    // Native checkOitCompatibility writes DisableMSAA for this already-selected MSAA frame.
+    plan.disable_feedback |= if plan.samples == vk::SampleCountFlags::TYPE_1 { 2 } else { 1 };
+    false
+}
+
 fn requested_samples(raster: RenderRasterSettings, caps: OitCapabilities) -> vk::SampleCountFlags {
     if raster.disabled_capabilities & 1 != 0 {
         return vk::SampleCountFlags::TYPE_1;

@@ -7,9 +7,13 @@ use rustycad_tkservice::{aspect::AspectInteriorStyle, graphic3d::*};
 mod interaction;
 #[path = "oit_overlay.rs"]
 mod overlay;
+#[path = "oit_layers.rs"]
+mod layered;
 
 pub struct OitScene {
     pub scene: ViewerScene,
+    layer_structure: Option<Handle<Graphic3dStructure>>,
+    cap_inputs: Option<(Handle<Graphic3dClipPlane>, Handle<Graphic3dTexture2D>)>,
 }
 impl OitScene {
     /// Construct actual retained OIT geometry; `OitScene::new(&driver, false)`.
@@ -23,10 +27,8 @@ impl OitScene {
         fixture: &str,
     ) -> Self {
         if fixture.starts_with("cap-") {
-            return Self {
-                scene: super::capping_texture_scene::CappingTextureScene::new(driver, fixture)
-                    .scene,
-            };
+            let cap = super::capping_texture_scene::CappingTextureScene::new(driver, fixture);
+            return Self { scene: cap.scene, layer_structure: None, cap_inputs: Some((cap.plane, cap.texture)) };
         }
         assert!(
             OIT_FIXTURES.contains(&fixture),
@@ -35,15 +37,26 @@ impl OitScene {
         let scene = ViewerScene::new(driver);
         scene.group.clear(true);
         scene.structure.set_z_layer(GRAPHIC3D_ZLAYER_ID_DEFAULT);
-        populate_oit_groups(&scene, reverse, fixture);
-        overlay::install_overlay(&scene, fixture);
-        Self { scene }
+        let layer_structure = if fixture.starts_with("layer-") {
+            Some(layered::install_oit_layers(&scene, fixture))
+        } else {
+            populate_oit_groups(&scene, reverse, fixture);
+            overlay::install_overlay(&scene, fixture);
+            None
+        };
+        Self { scene, layer_structure, cap_inputs: None }
     }
     /// Replace live groups while retaining the same context; `fixture.replace_groups("two")`.
     pub fn replace_groups(&self, fixture: &str) {
         self.scene.structure.clear(true);
         populate_oit_groups(&self.scene, false, fixture);
         overlay::install_overlay(&self.scene, fixture);
+    }
+    /// Change the actual retained cap inputs after initial rendering; `fixture.mutate_inputs("cap-alpha-updated")`.
+    pub fn mutate_inputs(&self, mode: &str) {
+        if let Some((plane, texture)) = &self.cap_inputs {
+            super::capping_texture_scene::mutate_cap_inputs(&self.scene, plane, texture, mode);
+        }
     }
     /// Mutate real view parameters; `fixture.parameters("weighted", 0, 0., 4)`.
     pub fn parameters(&self, mode: &str, samples: i32, factor: f32, layers: i32) {
@@ -57,6 +70,14 @@ impl OitScene {
 }
 const OIT_FIXTURES: &[&str] = &[
     "two",
+    "layer-clear",
+    "layer-shared",
+    "tied",
+    "occluded",
+    "near-boundary",
+    "far-boundary",
+    "far-boundary-opaque",
+    "far-interior",
     "five",
     "opaque",
     "mask",
@@ -69,6 +90,7 @@ const OIT_FIXTURES: &[&str] = &[
     "texture-gouraud",
     "texture-facet",
     "texture-no-modulate",
+    "text-colored",
     "sprite-mask",
     "sprite-low-mask",
     "sprite-opaque",
@@ -87,6 +109,8 @@ fn populate_oit_groups(scene: &ViewerScene, reverse: bool, fixture: &str) {
         1
     } else if fixture == "five" {
         5
+    } else if fixture == "occluded" {
+        3
     } else {
         2
     };
@@ -98,7 +122,7 @@ fn populate_oit_groups(scene: &ViewerScene, reverse: bool, fixture: &str) {
             scene.structure.new_group().unwrap()
         };
         let aspects = oit_fill_aspect(rank, fixture);
-        interaction::configure_interaction(&scene, &aspects, rank, fixture);
+        interaction::configure_interaction(scene, &aspects, rank, fixture);
         group.set_group_primitives_aspect(&aspects.cast());
         group.add_primitive_array(&oit_quad(rank, fixture), true);
     }
@@ -114,7 +138,14 @@ fn oit_fill_aspect(rank: usize, fixture: &str) -> Handle<Graphic3dAspects> {
     let mut material = style.front_material();
     material.set_transparency(1. - color[3]).unwrap();
     style.set_front_material(material);
-    style.set_alpha_mode(oit_alpha_mode(fixture), 0.5);
+    style.set_alpha_mode(
+        if fixture == "occluded" && rank == 2 {
+            Graphic3dAlphaMode::Opaque
+        } else {
+            oit_alpha_mode(fixture)
+        },
+        0.5,
+    );
     style
 }
 fn oit_quad(rank: usize, fixture: &str) -> Handle<Graphic3dArrayOfPrimitives> {
@@ -133,17 +164,7 @@ fn oit_quad(rank: usize, fixture: &str) -> Handle<Graphic3dArrayOfPrimitives> {
     ] {
         vertices
             .add_vertex_normal_texel(
-                [
-                    x,
-                    y,
-                    if fixture == "five" {
-                        6. - 3. * rank as f32
-                    } else if rank == 0 {
-                        2.
-                    } else {
-                        -2.
-                    },
-                ],
+                [x, y, oit_quad_depth(rank, fixture)],
                 [0., 0., 1.],
                 [(x + 6.) / 12., (y + 6.) / 12.],
             )
@@ -151,7 +172,22 @@ fn oit_quad(rank: usize, fixture: &str) -> Handle<Graphic3dArrayOfPrimitives> {
     }
     vertices
 }
+fn oit_quad_depth(rank: usize, fixture: &str) -> f32 {
+    match fixture {
+        "tied" => 2.,
+        "near-boundary" => 19.,
+        "far-boundary" | "far-boundary-opaque" => -80.,
+        "far-interior" => -79.,
+        "occluded" if rank == 2 => 4.,
+        "five" => 6. - 3. * rank as f32,
+        _ if rank == 0 => 2.,
+        _ => -2.,
+    }
+}
 fn oit_palette(rank: usize, fixture: &str) -> [f32; 4] {
+    if fixture == "occluded" && rank == 2 {
+        return [1.; 4];
+    }
     if fixture == "five" {
         return [
             [1., 0., 0., 0.25],
@@ -169,7 +205,7 @@ fn oit_palette(rank: usize, fixture: &str) -> [f32; 4] {
 }
 fn oit_alpha_mode(fixture: &str) -> Graphic3dAlphaMode {
     match fixture {
-        "opaque" => Graphic3dAlphaMode::Opaque,
+        "opaque" | "far-boundary-opaque" => Graphic3dAlphaMode::Opaque,
         "mask" | "one-mask" => Graphic3dAlphaMode::Mask,
         "mask-blend" => Graphic3dAlphaMode::MaskBlend,
         "auto" => Graphic3dAlphaMode::BlendAuto,

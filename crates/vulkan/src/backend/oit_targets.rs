@@ -14,8 +14,8 @@ pub(super) enum OitTargets {
         coverage: TargetImage,
     },
     Peeling {
-        ping: [TargetImage; 3],
-        pong: [TargetImage; 3],
+        ping: Box<[TargetImage; 3]>,
+        pong: Box<[TargetImage; 3]>,
         back: TargetImage,
     },
 }
@@ -62,8 +62,8 @@ impl OitTargets {
         formats: [vk::Format; 3],
     ) -> Result<Self, RenderError> {
         Ok(Self::Peeling {
-            ping: peeling_images(runtime, extent, formats)?,
-            pong: peeling_images(runtime, extent, formats)?,
+            ping: Box::new(peeling_images(runtime, extent, formats)?),
+            pong: Box::new(peeling_images(runtime, extent, formats)?),
             back: TargetImage::with_attachment(
                 runtime,
                 extent,

@@ -26,8 +26,13 @@ impl RenderFrame {
         });
     }
 
-    pub(crate) fn initial_fragment_alpha(&self, fallback: LegacyFragmentAlpha) -> LegacyFragmentAlpha {
-        self.fragment_alpha_context.as_ref().map_or(fallback, |snapshot| snapshot.initial)
+    pub(crate) fn initial_fragment_alpha(
+        &self,
+        fallback: LegacyFragmentAlpha,
+    ) -> LegacyFragmentAlpha {
+        self.fragment_alpha_context
+            .as_ref()
+            .map_or(fallback, |snapshot| snapshot.initial)
     }
 }
 
@@ -41,19 +46,35 @@ mod tests {
         let second = FragmentAlphaFeedback::default();
         let mut captured = RenderFrame::new(2, 2, [0.; 4], vec![]).unwrap();
         captured.attach_fragment_alpha(&first);
-        captured.fragment_alpha_context.as_ref().unwrap().commit(LegacyFragmentAlpha(Some(0.5)));
-        assert_eq!(captured.initial_fragment_alpha(LegacyFragmentAlpha(Some(0.1))), LegacyFragmentAlpha(None));
+        captured
+            .fragment_alpha_context
+            .as_ref()
+            .unwrap()
+            .commit(LegacyFragmentAlpha(Some(0.5)));
+        assert_eq!(
+            captured.initial_fragment_alpha(LegacyFragmentAlpha(Some(0.1))),
+            LegacyFragmentAlpha(None)
+        );
         let mut next = captured.clone();
         next.attach_fragment_alpha(&first);
-        assert_eq!(next.initial_fragment_alpha(Default::default()), LegacyFragmentAlpha(Some(0.5)));
+        assert_eq!(
+            next.initial_fragment_alpha(Default::default()),
+            LegacyFragmentAlpha(Some(0.5))
+        );
         next.attach_fragment_alpha(&second);
-        assert_eq!(next.initial_fragment_alpha(Default::default()), LegacyFragmentAlpha(None));
+        assert_eq!(
+            next.initial_fragment_alpha(Default::default()),
+            LegacyFragmentAlpha(None)
+        );
     }
 
     #[test]
     fn standalone_frames_use_their_renderer_context_without_a_retained_view_sink() {
         let frame = RenderFrame::new(2, 2, [0.; 4], vec![]).unwrap();
-        assert_eq!(frame.initial_fragment_alpha(LegacyFragmentAlpha(Some(0.25))), LegacyFragmentAlpha(Some(0.25)));
+        assert_eq!(
+            frame.initial_fragment_alpha(LegacyFragmentAlpha(Some(0.25))),
+            LegacyFragmentAlpha(Some(0.25))
+        );
         assert!(frame.fragment_alpha_context.is_none());
     }
 }

@@ -4,7 +4,7 @@ use rustycad_tkernel::standard::SharedState;
 use std::sync::Arc;
 pub(crate) type SharedRenderDevice = Arc<SharedState<DriverBackend>>;
 pub(crate) enum DriverBackend {
-    Vulkan(VulkanRenderer),
+    Vulkan(Box<VulkanRenderer>),
     Injected(Box<dyn RenderBackend + Send + Sync>),
 }
 impl DriverBackend {

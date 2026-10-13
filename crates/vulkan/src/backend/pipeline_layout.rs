@@ -5,16 +5,14 @@ use ash::vk;
 
 pub(super) fn create_layout(
     runtime: &VulkanRuntime,
-    line: bool,
-    edges: bool,
-    fixed_marker: bool,
+    push: vk::PushConstantRange,
     sprite: Option<vk::DescriptorSetLayout>,
     lighting: Option<&super::storage_descriptor::StorageDescriptorLayout>,
     clipping: Option<&super::storage_descriptor::StorageDescriptorLayout>,
     oit: Option<vk::DescriptorSetLayout>,
 ) -> Result<vk::PipelineLayout, RenderError> {
     // Fragment constants force redundant lavapipe state work on every surface draw.
-    let ranges = [fixed_marker_push_range(line, edges, fixed_marker)];
+    let ranges = [push];
     let mut layouts = descriptor_layout_handles(
         sprite,
         lighting.map(|s| s.handle),

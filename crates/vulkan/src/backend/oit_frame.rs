@@ -10,8 +10,8 @@ use super::{
 };
 use crate::{RenderError, RenderFrame, RenderTransparency};
 use ash::vk;
-use std::sync::Arc;
 use std::collections::BTreeMap;
+use std::sync::Arc;
 
 pub(super) struct OitFramePass {
     pub mode: RenderTransparency,
@@ -81,18 +81,35 @@ impl OitFramePass {
             back_alpha: BTreeMap::new(),
         })
     }
-    pub fn prepare_alpha(&mut self, plan: &super::fragment_alpha_plan::FragmentAlphaPlan) -> Result<(), RenderError> {
+    pub fn prepare_alpha(
+        &mut self,
+        plan: &super::fragment_alpha_plan::FragmentAlphaPlan,
+    ) -> Result<(), RenderError> {
         for cutoff in plan.after.iter().flatten() {
             let key = cutoff.to_bits();
-            if self.composite_alpha.contains_key(&key) { continue; }
-            self.composite_alpha.insert(key, alpha_composite_sets(&self.composite_sets, *cutoff)?);
-            self.back_alpha.insert(key, alpha_composite_sets(&self.back_sets, *cutoff)?);
+            if self.composite_alpha.contains_key(&key) {
+                continue;
+            }
+            self.composite_alpha
+                .insert(key, alpha_composite_sets(&self.composite_sets, *cutoff)?);
+            self.back_alpha
+                .insert(key, alpha_composite_sets(&self.back_sets, *cutoff)?);
         }
         Ok(())
     }
-    pub fn composite_set(&self, index: usize, cutoff: Option<f32>, back: bool) -> vk::DescriptorSet {
-        let (original, overrides) = if back { (&self.back_sets, &self.back_alpha) } else { (&self.composite_sets, &self.composite_alpha) };
-        cutoff.and_then(|cutoff| overrides.get(&cutoff.to_bits()))
+    pub fn composite_set(
+        &self,
+        index: usize,
+        cutoff: Option<f32>,
+        back: bool,
+    ) -> vk::DescriptorSet {
+        let (original, overrides) = if back {
+            (&self.back_sets, &self.back_alpha)
+        } else {
+            (&self.composite_sets, &self.composite_alpha)
+        };
+        cutoff
+            .and_then(|cutoff| overrides.get(&cutoff.to_bits()))
             .map_or(original[index].set, |sets| sets[index].set)
     }
     pub fn geometry_target(&self, phase: OitGeometryPhase) -> OitPipelineTarget {
@@ -124,8 +141,14 @@ impl OitFramePass {
         }
     }
 }
-fn alpha_composite_sets(original: &[OitPassDescriptors], cutoff: f32) -> Result<Vec<Arc<OitPassDescriptors>>, RenderError> {
-    original.iter().map(|parameters| parameters.alpha_override(cutoff).map(Arc::new)).collect()
+fn alpha_composite_sets(
+    original: &[OitPassDescriptors],
+    cutoff: f32,
+) -> Result<Vec<Arc<OitPassDescriptors>>, RenderError> {
+    original
+        .iter()
+        .map(|parameters| parameters.alpha_override(cutoff).map(Arc::new))
+        .collect()
 }
 fn geometry_descriptors(
     runtime: &Arc<VulkanRuntime>,

@@ -10,8 +10,7 @@ pub(super) fn select_attachment_samples(
     }
     let maximum = sample_counts()
         .into_iter()
-        .filter(|count| supported.contains(*count))
-        .last()
+        .rfind(|count| supported.contains(*count))
         .unwrap_or(vk::SampleCountFlags::TYPE_1)
         .as_raw();
     let clamped = (requested as u32).min(maximum).max(2);

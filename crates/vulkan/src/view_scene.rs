@@ -18,6 +18,7 @@ pub(crate) fn frame_for_view(
     crate::retained_lighting::apply_view_lights(&mut passes, view)?;
     let mut frame = RenderFrame::with_layers(extent[0], extent[1], view_clear_color(view), passes)?;
     frame.raster = crate::retained_transparency::view_raster_settings(view, &rendering)?;
+    crate::compatibility_text_color::capture_text_color_target(&mut frame);
     Ok(frame)
 }
 struct ViewLayerInputs<'a> {

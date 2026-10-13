@@ -30,15 +30,29 @@ struct OitVariantKey {
     fixed_output: bool,
 }
 impl OitPipelineCache {
+    fn lock_variants(&self, offending: &str) -> Result<std::sync::MutexGuard<'_, OitCachedVariants>, RenderError> {
+        self.0.lock().map_err(|_| rejected(offending, "an available renderer cache"))
+    }
     pub fn native_alpha(
-        &self, runtime: &Arc<VulkanRuntime>, source: &DrawPipeline,
-        samples: ash::vk::SampleCountFlags, coverage: bool,
+        &self,
+        runtime: &Arc<VulkanRuntime>,
+        source: &DrawPipeline,
+        samples: ash::vk::SampleCountFlags,
+        coverage: bool,
     ) -> Result<Arc<DrawPipeline>, RenderError> {
-        let key = [source.handle.as_raw(), samples.as_raw() as u64, u64::from(coverage)];
-        let mut cached = self.0.lock().map_err(|_| rejected("poisoned alpha pipeline cache", "an available renderer cache"))?;
-        if let Some(pipeline) = cached.native_alpha.get(&key) { return Ok(pipeline.clone()); }
+        let key = raster_variant_key(source.handle.as_raw(), samples, coverage);
+        let mut cached = self.lock_variants("poisoned alpha pipeline cache")?;
+        if let Some(pipeline) = cached.native_alpha.get(&key) {
+            return Ok(pipeline.clone());
+        }
         let layout = cache_layout(&mut cached, runtime)?;
-        let pipeline = Arc::new(DrawPipeline::new_native_alpha(runtime, source.kind, samples, coverage, &layout)?);
+        let pipeline = Arc::new(DrawPipeline::new_native_alpha(
+            runtime,
+            source.kind,
+            samples,
+            coverage,
+            &layout,
+        )?);
         cached.native_alpha.insert(key, pipeline.clone());
         Ok(pipeline)
     }
@@ -52,17 +66,8 @@ impl OitPipelineCache {
         if samples == ash::vk::SampleCountFlags::TYPE_1 {
             return Ok(source.clone());
         }
-        let key = [
-            source.handle.as_raw(),
-            samples.as_raw() as u64,
-            u64::from(coverage),
-        ];
-        let mut cached = self.0.lock().map_err(|_| {
-            rejected(
-                "poisoned multisample pipeline cache",
-                "an available renderer cache",
-            )
-        })?;
+        let key = raster_variant_key(source.handle.as_raw(), samples, coverage);
+        let mut cached = self.lock_variants("poisoned multisample pipeline cache")?;
         if let Some(pipeline) = cached.multisample.get(&key) {
             return Ok(pipeline.clone());
         }
@@ -87,12 +92,7 @@ impl OitPipelineCache {
             u32::from(target.stencil),
             target.samples.as_raw(),
         ];
-        let mut cached = self.0.lock().map_err(|_| {
-            rejected(
-                "poisoned OIT composite cache",
-                "an available renderer cache",
-            )
-        })?;
+        let mut cached = self.lock_variants("poisoned OIT composite cache")?;
         if let Some(pipeline) = cached.composites.get(&key) {
             return Ok(pipeline.clone());
         }
@@ -106,10 +106,7 @@ impl OitPipelineCache {
         &self,
         runtime: &Arc<VulkanRuntime>,
     ) -> Result<Arc<OitDescriptorLayout>, RenderError> {
-        let mut cached = self
-            .0
-            .lock()
-            .map_err(|_| rejected("poisoned OIT pipeline cache", "an available renderer cache"))?;
+        let mut cached = self.lock_variants("poisoned OIT pipeline cache")?;
         cache_layout(&mut cached, runtime)
     }
     pub fn select(
@@ -119,10 +116,7 @@ impl OitPipelineCache {
         target: OitPipelineTarget,
     ) -> Result<Arc<DrawPipeline>, RenderError> {
         let key = variant_key(source.handle.as_raw(), target);
-        let mut cached = self
-            .0
-            .lock()
-            .map_err(|_| rejected("poisoned OIT pipeline cache", "an available renderer cache"))?;
+        let mut cached = self.lock_variants("poisoned OIT pipeline cache")?;
         if let Some(pipeline) = cached.pipelines.get(&key) {
             return Ok(pipeline.clone());
         }
@@ -136,6 +130,9 @@ impl OitPipelineCache {
         cached.pipelines.insert(key, pipeline.clone());
         Ok(pipeline)
     }
+}
+fn raster_variant_key(source: u64, samples: ash::vk::SampleCountFlags, coverage: bool) -> [u64;3] {
+    [source, samples.as_raw() as u64, u64::from(coverage)]
 }
 fn cache_layout(
     cached: &mut OitCachedVariants,
@@ -160,6 +157,16 @@ fn variant_key(source: u64, target: OitPipelineTarget) -> OitVariantKey {
 }
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn raster_cache_identity_keeps_source_samples_and_coverage_distinct() {
+        let one=ash::vk::SampleCountFlags::TYPE_1;
+        let four=ash::vk::SampleCountFlags::TYPE_4;
+        assert_eq!(super::raster_variant_key(7,one,false), [7,1,0]);
+        assert_ne!(super::raster_variant_key(7,one,false), super::raster_variant_key(8,one,false));
+        assert_ne!(super::raster_variant_key(7,one,false), super::raster_variant_key(7,four,false));
+        assert_ne!(super::raster_variant_key(7,four,false), super::raster_variant_key(7,four,true));
+    }
+
     use super::super::oit_pipeline::OitGeometryPhase;
     use super::*;
     use ash::vk;

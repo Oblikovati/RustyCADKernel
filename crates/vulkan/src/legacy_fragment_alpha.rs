@@ -7,26 +7,42 @@ pub(crate) struct LegacyFragmentAlpha(pub Option<f32>);
 impl LegacyFragmentAlpha {
     pub fn advance(&mut self, draw: &PrimitiveDraw) -> Option<f32> {
         if draw.fixed_function_lighting {
-            self.0 = draw.native_material_cutoff.map(|cutoff| cutoff.clamp(0., 1.));
+            self.0 = restored_material_alpha(draw.native_material_cutoff);
         }
-        if draw.point_style.as_ref().is_some_and(|style| style.color_policy != PointColorPolicy::Plain) {
-            self.0 = draw.native_material_cutoff.map(|cutoff| cutoff.clamp(0., 1.));
+        if draw
+            .point_style
+            .as_ref()
+            .is_some_and(|style| style.color_policy != PointColorPolicy::Plain)
+        {
+            self.0 = restored_material_alpha(draw.native_material_cutoff);
             return Some(0.1);
         }
         self.0
     }
 }
-pub(crate) fn capture_material_alpha(draw: &mut PrimitiveDraw, aspects: &dyn Graphic3dAspectsSource) {
+fn restored_material_alpha(cutoff: Option<f32>) -> Option<f32> {
+    // Native ShortRealLast disables the compatibility test even for an explicit mask mode.
+    cutoff.filter(|reference| *reference < f32::MAX).map(|reference| reference.clamp(0., 1.))
+}
+pub(crate) fn capture_material_alpha(
+    draw: &mut PrimitiveDraw,
+    aspects: &dyn Graphic3dAspectsSource,
+) {
     draw.native_material_cutoff = native_material_alpha_cutoff(aspects);
 }
 fn native_material_alpha_cutoff(aspects: &dyn Graphic3dAspectsSource) -> Option<f32> {
     let interior = aspects.interior_style();
-    if aspects.to_draw_edges() && (interior == AspectInteriorStyle::Empty
-        || (interior == AspectInteriorStyle::Solid && aspects.edge_color_rgba().alpha() < 1.)) {
+    if aspects.to_draw_edges()
+        && (interior == AspectInteriorStyle::Empty
+            || (interior == AspectInteriorStyle::Solid && aspects.edge_color_rgba().alpha() < 1.))
+    {
         return Some(0.285);
     }
-    matches!(aspects.alpha_mode(), Graphic3dAlphaMode::Mask | Graphic3dAlphaMode::MaskBlend)
-        .then(|| aspects.alpha_cutoff())
+    matches!(
+        aspects.alpha_mode(),
+        Graphic3dAlphaMode::Mask | Graphic3dAlphaMode::MaskBlend
+    )
+    .then(|| aspects.alpha_cutoff())
 }
 #[cfg(test)]
 mod tests {
@@ -64,11 +80,31 @@ mod tests {
         aspects.set_interior_style(AspectInteriorStyle::Empty);
         assert_eq!(native_material_alpha_cutoff(&aspects), Some(0.285));
     }
+    #[test]
+    fn native_short_real_last_restoration_disables_the_context_alpha_test() {
+        let mut marker = alpha_sprite();
+        marker.native_material_cutoff = Some(f32::MAX);
+        let mut state = LegacyFragmentAlpha(Some(0.5));
+        assert_eq!(state.advance(&marker), Some(0.1));
+        assert_eq!(state.0, None);
+        assert_eq!(restored_material_alpha(Some(-2.)), Some(0.));
+    }
     fn alpha_triangle() -> PrimitiveDraw {
-        PrimitiveDraw::new(vec![crate::RenderVertex::new([0.; 3], [1.; 4]); 3], vec![0, 1, 2], crate::identity_clip()).unwrap()
+        PrimitiveDraw::new(
+            vec![crate::RenderVertex::new([0.; 3], [1.; 4]); 3],
+            vec![0, 1, 2],
+            crate::identity_clip(),
+        )
+        .unwrap()
     }
     fn alpha_sprite() -> PrimitiveDraw {
         let style = crate::PointStyle::new(1., [1, 1], vec![[1.; 4]]).unwrap();
-        PrimitiveDraw::points(vec![crate::RenderVertex::new([0.; 3], [1.; 4])], vec![0], crate::identity_clip(), style).unwrap()
+        PrimitiveDraw::points(
+            vec![crate::RenderVertex::new([0.; 3], [1.; 4])],
+            vec![0],
+            crate::identity_clip(),
+            style,
+        )
+        .unwrap()
     }
 }

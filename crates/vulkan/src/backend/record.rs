@@ -164,10 +164,17 @@ pub(super) fn record_draws_selected(
         );
     }
 }
-fn selected_alpha_set(draw: &super::frame::UploadedDraw, selection: Option<vk::DescriptorSet>) -> Option<vk::DescriptorSet> {
+fn selected_alpha_set(
+    draw: &super::frame::UploadedDraw,
+    selection: Option<vk::DescriptorSet>,
+) -> Option<vk::DescriptorSet> {
     if let Some(base) = selection {
-        return Some(draw.oit_alpha.iter().find(|(key, _)| *key == base)
-            .map_or(base, |(_, override_set)| override_set.set));
+        return Some(
+            draw.oit_alpha
+                .iter()
+                .find(|(key, _)| *key == base)
+                .map_or(base, |(_, override_set)| override_set.set),
+        );
     }
     draw.native_alpha.as_ref().map(|parameters| parameters.set)
 }

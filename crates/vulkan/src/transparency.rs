@@ -73,6 +73,22 @@ impl RenderRasterSettings {
         })
     }
 }
+impl crate::RenderFrame {
+    /// Choose a low-level frame algorithm; `frame.with_transparency(RenderTransparency::Weighted { depth_factor: 0. })?`.
+    pub fn with_transparency(
+        mut self,
+        transparency: RenderTransparency,
+    ) -> Result<Self, RenderError> {
+        transparency.validate()?;
+        self.raster.transparency = transparency;
+        Ok(self)
+    }
+    /// Read the retained frame algorithm; `frame.transparency()`.
+    pub fn transparency(&self) -> RenderTransparency {
+        self.raster.transparency
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -142,18 +158,3 @@ mod tests {
     }
 }
 
-impl crate::RenderFrame {
-    /// Choose a low-level frame algorithm; `frame.with_transparency(RenderTransparency::Weighted { depth_factor: 0. })?`.
-    pub fn with_transparency(
-        mut self,
-        transparency: RenderTransparency,
-    ) -> Result<Self, RenderError> {
-        transparency.validate()?;
-        self.raster.transparency = transparency;
-        Ok(self)
-    }
-    /// Read the retained frame algorithm; `frame.transparency()`.
-    pub fn transparency(&self) -> RenderTransparency {
-        self.raster.transparency
-    }
-}
