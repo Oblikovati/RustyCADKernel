@@ -2,6 +2,7 @@
 use super::*;
 use rustycad_tkmath::predicates::roots::bezier_line::*;
 mod failures;
+mod fixture;
 mod ownership;
 mod rays;
 fn query(controls: &[[f64; 2]]) -> BezierLineQuery<'_> {

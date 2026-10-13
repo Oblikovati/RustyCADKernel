@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: GPL-2.0-only
 mod error;
+mod prepare;
 use super::super::{
     DyadicBound, RootIsolationError, RootIsolationOptions, bernstein,
     polynomial::IntegerPolynomial,
     signs::{self, RootSignEvaluation},
 };
-use super::{BezierLineError, BezierLineQuery, BezierStage, projection, solve};
+use super::{BezierLineError, BezierLineQuery, BezierStage, solve};
 pub use error::BezierRayError;
 use num_bigint::BigInt;
+pub(super) use prepare::{RegularProjection, regular_projection};
 
 /// Classify each isolated supporting-line contact relative to the ray from A towards B.
 ///
@@ -28,11 +30,8 @@ pub fn classify_bezier_ray_contacts(
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<RootSignEvaluation, BezierRayError> {
     let (bounds, width) = super::checked_query(query).map_err(BezierRayError::Line)?;
-    let (projection, longitudinal) =
-        projection::project_directed(query, &mut cancelled).map_err(BezierRayError::Line)?;
     let prepared = prepare(
-        projection,
-        longitudinal,
+        query,
         bounds.clone(),
         width.clone(),
         query.options,
@@ -46,27 +45,28 @@ struct PreparedRay {
     denominator_work: u16,
 }
 fn prepare(
-    projection: projection::Projection,
-    longitudinal: Vec<BigInt>,
+    query: BezierLineQuery<'_>,
     bounds: [DyadicBound; 2],
     width: DyadicBound,
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PreparedRay, BezierRayError> {
-    let (denominator, denominator_work) =
-        solve::regular_denominator(projection.denominator, bounds, width, options, cancelled)
-            .map_err(BezierRayError::Line)?;
-    let normal =
-        bernstein::from_integer_controls(projection.numerator, options.max_degree, cancelled)
-            .map_err(normal_error)?;
-    let directed = directed_product(longitudinal, denominator, options.max_degree, cancelled)?;
+    let projected: RegularProjection = regular_projection(query, bounds, width, cancelled)?;
+    let normal = bernstein::from_integer_controls(projected.normal, options.max_degree, cancelled)
+        .map_err(normal_error)?;
+    let directed = directed_product(
+        projected.longitudinal,
+        projected.denominator,
+        options.max_degree,
+        cancelled,
+    )?;
     Ok(PreparedRay {
         normal,
         directed,
-        denominator_work,
+        denominator_work: projected.work,
     })
 }
-fn directed_product(
+pub(super) fn directed_product(
     controls: Vec<BigInt>,
     denominator: IntegerPolynomial,
     max_degree: u16,
@@ -96,7 +96,7 @@ fn classify(
     signs::evaluate_isolated(prepared.normal, prepared.directed, isolation, cancelled)
         .map_err(BezierRayError::Signs)
 }
-fn normal_error(cause: RootIsolationError) -> BezierRayError {
+pub(super) fn normal_error(cause: RootIsolationError) -> BezierRayError {
     match cause {
         RootIsolationError::ZeroPolynomial { .. } => BezierRayError::SupportingLineCoincidence,
         cause => BezierRayError::Line(BezierLineError::Root {

@@ -12,25 +12,12 @@ fn ray_signs_match_independent_exact_algebraic_comparisons() {
 }
 fn check_ray_fixture(row: &str) -> RootSignEvaluation {
     let fields: Vec<&str> = row.split('\t').collect();
-    let controls: Vec<[f64; 2]> = fields[1]
-        .split(';')
-        .map(|point| decode_bits(point).try_into().unwrap())
-        .collect();
-    let weights = (fields[2] != "-").then(|| decode_bits(fields[2]));
-    let endpoints = decode_bits(fields[3]);
-    let request = BezierLineQuery {
-        controls: &controls,
-        weights: weights.as_deref(),
-        line: [[endpoints[0], endpoints[1]], [endpoints[2], endpoints[3]]],
-        interval: decode_bits(fields[4]).try_into().unwrap(),
-        options: options(0.0001),
-    };
     let expected: Vec<Ordering> = fields[5]
         .split(',')
         .filter(|s| !s.is_empty())
         .map(|s| s.parse::<i32>().unwrap().cmp(&0))
         .collect();
-    let result = directed(request);
+    let result = super::super::fixture::with_ray_fixture(row, directed);
     assert_eq!(result.signs(), expected, "{}", fields[0]);
     result
 }
