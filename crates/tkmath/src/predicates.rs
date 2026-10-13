@@ -58,12 +58,16 @@ pub fn orient2d(
     let [ax, ay] = exact_point(a, 0)?;
     let [bx, by] = exact_point(b, 1)?;
     let [cx, cy] = exact_point(c, 2)?;
-    let determinant = (bx - &ax) * (cy - &ay) - (by - ay) * (cx - ax);
+    let determinant = exact_determinant(&[bx - &ax, by - &ay], &[cx - ax, cy - ay]);
     Ok(match determinant.sign() {
         Sign::Minus => OrientationSign::Negative,
         Sign::NoSign => OrientationSign::Zero,
         Sign::Plus => OrientationSign::Positive,
     })
+}
+
+fn exact_determinant(left: &[BigInt; 2], right: &[BigInt; 2]) -> BigInt {
+    &left[0] * &right[1] - &left[1] * &right[0]
 }
 
 fn exact_point(point: [f64; 2], index: usize) -> Result<[BigInt; 2], NonFiniteCoordinate> {

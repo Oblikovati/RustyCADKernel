@@ -6,6 +6,7 @@ use rustycad_tkmath::predicates::roots::{
 };
 use std::cmp::Ordering;
 mod bernstein;
+mod bezier_line;
 mod limits;
 mod oracle;
 fn options(width: f64) -> RootIsolationOptions {

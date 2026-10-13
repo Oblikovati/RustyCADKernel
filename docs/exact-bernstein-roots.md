@@ -3,6 +3,8 @@
 Tracking: [kernel issue #10](https://github.com/Oblikovati/RustyCADKernel/issues/10).
 Decision: [ADR 0005](adr/0005-exact-bernstein-root-input.md). Base: local kernel
 `d983a7383`, the exact power-coefficient solver from ADR 0004.
+The later [Bézier-to-line query](exact-bezier-line.md) constructs projected
+scalar controls with exact coordinate and weight products.
 
 `tkmath::predicates::roots::isolate_bernstein_roots` takes finite scalar
 Bernstein control values, a finite closed query interval, the existing versioned

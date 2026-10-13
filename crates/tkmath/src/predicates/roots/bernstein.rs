@@ -13,6 +13,13 @@ pub(super) fn from_controls(
 ) -> Result<IntegerPolynomial, RootIsolationError> {
     poll(cancelled)?;
     let differences = integer_coefficients(controls)?;
+    from_integer_controls(differences, limit, cancelled)
+}
+pub(super) fn from_integer_controls(
+    differences: Vec<BigInt>,
+    limit: u16,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<IntegerPolynomial, RootIsolationError> {
     IntegerPolynomial::from_integers(power_coefficients(differences, cancelled)?, limit)
 }
 fn power_coefficients(

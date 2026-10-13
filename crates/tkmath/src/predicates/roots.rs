@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact supplied-polynomial classification; no mapped OCCT solver is replaced (ADR 0004).
 mod bernstein;
+/// Exact parameter contacts between a planar Bézier curve and an infinite line.
+pub mod bezier_line;
 mod chain;
 mod dyadic;
 mod error;
@@ -135,13 +137,19 @@ fn isolate_basis(
     basis: Basis,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<RootIsolation, RootIsolationError> {
-    if options.version != 1 {
-        return Err(RootIsolationError::OptionsVersion(options.version));
-    }
-    let (bounds, width) = checked_interval(interval, options.max_width)?;
+    let (bounds, width) = checked_policy_interval(interval, options)?;
     let polynomial = basis.convert(coefficients, options.max_degree, &mut cancelled)?;
     let tower = chain::multiplicity_tower(polynomial, &mut cancelled)?;
     isolate::isolate(&tower, bounds, width, options, &mut cancelled)
+}
+fn checked_policy_interval(
+    interval: [f64; 2],
+    options: RootIsolationOptions,
+) -> Result<([DyadicBound; 2], DyadicBound), RootIsolationError> {
+    if options.version != 1 {
+        return Err(RootIsolationError::OptionsVersion(options.version));
+    }
+    checked_interval(interval, options.max_width)
 }
 fn checked_interval(
     interval: [f64; 2],
