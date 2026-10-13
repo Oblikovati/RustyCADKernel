@@ -15,7 +15,7 @@ pub struct BezierLineQuery<'a> {
     pub weights: Option<&'a [f64]>,
     /// Two distinct finite points defining an infinite line, not a segment.
     pub line: [[f64; 2]; 2],
-    /// Closed parameter query; the Bernstein basis remains fixed at [0,1].
+    /// Closed parameter query; the Bernstein basis remains fixed at `[0,1]`.
     pub interval: [f64; 2],
     /// Shared degree, width, and total subdivision limits for both stages.
     pub options: RootIsolationOptions,
