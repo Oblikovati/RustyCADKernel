@@ -91,6 +91,19 @@ mod tests {
         assert_eq!(state.0, None);
         assert_eq!(restored_material_alpha(Some(-2.)), Some(0.));
     }
+    #[test]
+    fn opaque_plain_points_retain_mask_but_opaque_sprite_disables_it() {
+        let mut sprite = alpha_sprite();
+        sprite.native_material_cutoff = Some(0.9);
+        let mut state = LegacyFragmentAlpha::default();
+        assert_eq!(state.advance(&sprite), Some(0.1));
+        let mut plain = alpha_sprite();
+        plain.point_style.as_mut().unwrap().color_policy = PointColorPolicy::Plain;
+        assert_eq!(state.advance(&plain), Some(0.9));
+        sprite.native_material_cutoff = None;
+        assert_eq!(state.advance(&sprite), Some(0.1));
+        assert_eq!(state.advance(&plain), None);
+    }
     fn alpha_triangle() -> PrimitiveDraw {
         PrimitiveDraw::new(
             vec![crate::RenderVertex::new([0.; 3], [1.; 4]); 3],
