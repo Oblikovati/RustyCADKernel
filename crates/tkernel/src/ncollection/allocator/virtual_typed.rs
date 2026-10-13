@@ -51,8 +51,10 @@ impl BaseAllocator {
             .remove(&pointer.as_ptr().addr())
             .expect("typed allocation address must retain original virtual allocation provenance");
         // SAFETY: caller guarantees current allocator accepts the original raw allocation.
-        unsafe { current.free_raw_nullable(original.load(Ordering::Relaxed)) }
-            .expect("current allocator virtual Free must accept its live allocation");
+        // Native virtual Free may raise a typed exception after payload destruction; keep its cause.
+        crate::standard::raise_native_failure(unsafe {
+            current.free_raw_nullable(original.load(Ordering::Relaxed))
+        });
         self.release_virtual_lease();
     }
     /// Release through the current native collection resource; `unsafe { original.deallocate_using(p, layout, &current) }`.
@@ -74,8 +76,8 @@ impl BaseAllocator {
     unsafe fn deallocate_arena_using(&self, pointer: NonNull<u8>, current: &Self) {
         if self.allocate_calls_optimal() {
             // SAFETY: current Free accepts this raw arena range, according to the caller contract.
-            unsafe { current.free_raw(pointer) }
-                .expect("current allocator must accept raw arena range");
+            // The same native Free exception contract applies to raw arena retirement.
+            crate::standard::raise_native_failure(unsafe { current.free_raw(pointer) });
             self.release_virtual_lease();
             return;
         }
@@ -116,3 +118,7 @@ fn aligned_virtual_address(original: NonNull<u8>, layout: Layout) -> Option<NonN
     }
     NonNull::new(original.as_ptr().with_addr(aligned))
 }
+
+#[cfg(test)]
+#[path = "typed_inc_free_failure_tests.rs"]
+mod typed_inc_free_failure_tests;
