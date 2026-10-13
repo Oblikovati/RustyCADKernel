@@ -69,7 +69,9 @@ archive tests.
 an explicit existing tag so repaired orchestration can test an immutable older
 revision. The resolver rejects branches and malformed versions, peels the tag
 once, and supplies that exact commit to every owner check and the package job.
-Concurrency follows the requested tag. For example:
+The packaging and publication tools come from the orchestration revision in a
+separate checkout; `release_packages.py --root kernel` verifies only the clean,
+selected kernel tag. Concurrency follows the requested tag. For example:
 
 ```sh
 gh workflow run release.yml --ref main -f release_tag=v0.2.5
