@@ -1,6 +1,6 @@
 # Critical application blockers
 
-User priority decision: 2026-10-13. These dependencies take precedence over
+User priority decision: 2026-10-13; native GUI dependency added 2026-10-14. These dependencies take precedence over
 broader visualization and exchange expansion in the [porting plan](porting-plan.md).
 Retain active work and all existing renderer regression gates. The full OCCT
 scope, local-only integration rule, and separate release authorization remain.
@@ -60,7 +60,37 @@ keys that round-trip and survive the edit that consumed them. Release the tested
 contract, then verify app parameter edits, save/reopen, undo/redo and presentation.
 Delete the diagnostic construction path when its replacement gate passes.
 
-## 3. Certify the incidences consumed by trim and extension
+## 3. Release native GUI composition on the existing view
+
+Consumer: application epic #3563, R1V/R4 native shell. Rechecked against app
+`3bbcd8933` and released Martensite v0.2.5 (`8118c7e1`). The app already produces
+owned Dear ImGui packets and lowers them to `RenderLayer`, but cannot attach that
+layer to `Graphic3dRenderView`. Its public `capture`/`try_redraw` path still builds
+submissions through private `view_scene::frame_for_view`; native presentation
+refuses an injected `RenderBackend`. Native status text and slot outlines do not
+supply this composition contract.
+
+This blocks the visible command controls, sketch selection controls, and placement
+field widgets. It therefore takes precedence over trim/extension expansion and
+broader renderer coverage. Keep the existing scene and rendering regression gates.
+
+Next action: expose a kernel-owned attach/replace/clear operation for an owned GUI
+layer on an existing native view, with expected target extent. Preserve the model
+scene, clear color, layer ordering, float colors, UVs, intersected clip chains and
+alpha blending. Keep device, swapchain, capture and resource retirement in the
+existing renderer. UI must not affect Fit bounds or model selection identity.
+A resize must require a fresh packet; retained font images must outlive GPU use.
+Do not introduce a second application renderer or production offscreen-copy path.
+
+Acceptance: native model-plus-UI pixels and GPU capture must agree after draw,
+replacement, removal, resize and close. Cover invalid extent and failed replacement
+without stale capture or lost model content, ordered alpha blending, all four clip
+edges, atlas lifetime and validation on software Vulkan and the native GPU. Release
+the tested contract, then run the application's full gate with native GUI commands.
+The consumer requirements are recorded in application
+`architecture/rust-port/implementation-imgui-packets.md`.
+
+## 4. Certify the incidences consumed by trim and extension
 
 Owners: application epic #3563 and the shared exact-classification dependencies
 of region #10. This work shares the region intersector; it is not a second engine.
