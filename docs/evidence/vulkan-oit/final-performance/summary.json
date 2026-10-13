@@ -1,0 +1,47 @@
+{
+  "identical_workloads": true,
+  "profiles": [
+    {
+      "profile": "software",
+      "workloads": 35,
+      "samples": 3500,
+      "peak_rss_KiB": 155476,
+      "idle_bookends": true,
+      "input_bookends": true,
+      "device": [
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 65541, device_id: 0, driver_id: 13, driver_version: 109056006, driver_name: \"llvmpipe\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea (LLVM 20.1.2)\", device_name: \"llvmpipe (LLVM 20.1.2, 128 bits)\" })",
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 65541, device_id: 0, driver_id: 13, driver_version: 109056006, driver_name: \"llvmpipe\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea (LLVM 20.1.2)\", device_name: \"llvmpipe (LLVM 20.1.2, 128 bits)\" })"
+      ],
+      "baseline_accepted": false,
+      "gpu_memory_measured": false
+    },
+    {
+      "profile": "host",
+      "workloads": 35,
+      "samples": 3500,
+      "peak_rss_KiB": 69180,
+      "idle_bookends": true,
+      "input_bookends": true,
+      "device": [
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 4098, device_id: 5510, driver_id: 3, driver_version: 109056006, driver_name: \"radv\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\", device_name: \"AMD Radeon 8060S Graphics (RADV STRIX_HALO)\" })",
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 4098, device_id: 5510, driver_id: 3, driver_version: 109056006, driver_name: \"radv\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\", device_name: \"AMD Radeon 8060S Graphics (RADV STRIX_HALO)\" })"
+      ],
+      "baseline_accepted": false,
+      "gpu_memory_measured": false
+    }
+  ],
+  "measured_source_head": "850f43ceec210ea40f1c17962c84a96053e376d8",
+  "total_samples": 7000,
+  "warmup": 20,
+  "samples_per_workload": 100,
+  "validation": false,
+  "baseline_accepted": false,
+  "gpu_memory_measured": false,
+  "whole_process_peak_RSS": true,
+  "controller_sha256": "617715345c27f09ef1268efc0e94441a107b462de4ec04f150fa12f2686a3983",
+  "known_failed_runs_preserved": [
+    "../layer-lifetime/failed-software-report.json.gz",
+    "contention-diagnostic/report.json.gz"
+  ],
+  "controller_archive": "controller.py.gz"
+}

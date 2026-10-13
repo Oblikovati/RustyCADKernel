@@ -45,9 +45,9 @@ center RGBA was `[142,204,99,255]`; peeling was `[187,165,0,255]` software and
 tuning. The initial Blend-with-interior-alpha-one control is valid separately:
 material opacity alone does not set unlit fragment alpha.
 
-Raw development receipts currently live under `target/oit-proof`; final pinned
-assets, Rust-only replay, both-device functional captures and source-bound
-optimized measurements will accompany implementation. The former retained OIT rejection has been replaced by actual Vulkan attachments,
+Pinned assets, Rust-only replay, both-device functional captures and source-bound
+optimized measurements are retained under `docs/evidence/vulkan-oit`. The former
+retained OIT rejection has been replaced by actual Vulkan attachments,
 geometry variants and composites; unsupported allocation failures remain typed errors.
 
 Compatibility marker alpha state is scoped to each native view context. Pinned
@@ -119,3 +119,35 @@ actual selected Vulkan physical-device metadata, rejecting unknown identities.
 This does not promote the separately retained sprite, texel-boundary, far-plane
 or high-sample coverage diagnostics. Source and command receipts are under
 `docs/evidence/vulkan-oit/mesa25-accepted`.
+
+
+The final integration checkpoint covers the whole transparency family through
+actual retained views, including compatibility alpha feedback, live parameters,
+layer batching, opaque/cap/text interactions and persistent capability fallback.
+It does not claim complete raster parity or promote any upstream class/API.
+Final source gates pass 644 tests with zero failures and five retained diagnostics
+on each configured device. Earlier independently extracted 31-package runs pass
+643 tests per device; the subsequent fixture teardown adds one CPU regression.
+Their original source revisions remain recorded rather than relabeled.
+
+Optimized measurements bind source `850f43ceec210ea40f1c17962c84a96053e376d8`,
+15,174 inputs, 56 external inputs and the exact release executable. Each device
+runs the same 35 accepted workloads with 20 warmups and 100 measured samples;
+all 7,000 samples are finite and positive. Whole-process peak resident memory is
+155,476 KiB on llvmpipe and 69,180 KiB on AMD. GPU memory is unmeasured and no
+performance baseline is accepted. Independent root audits verify empty heavy-job
+bookends and unchanged source, executable, libraries and workload identities.
+The earlier duplicate-layer failure and compiler-contention run remain separate
+raw diagnostics. Native viewer-local layer allocation requires explicit fixture
+RemoveZLayer teardown when reusing a driver; production allocation is unchanged.
+
+Remaining parity obligations are the strict object-material/texel-boundary and
+marker/sprite coverage cases, exact far-plane peeling predicate precision,
+weighted requested-six/eight-sample edge coverage, AMD single-byte Shadow/Decal
+cases and configured software programmable XOR behavior. Their gates and raw
+buffers remain unchanged. Portable behavior for native nonpositive peeling
+iterations is not claimed because those native controls fault outside the
+defined domain. Hardware capability combinations absent on these two devices,
+GPU allocation accounting and application acceptance need separate evidence;
+Windows/macOS checks remain deferred. These limits do not remove any supported
+transparency algorithm or substitute a different compositing policy.

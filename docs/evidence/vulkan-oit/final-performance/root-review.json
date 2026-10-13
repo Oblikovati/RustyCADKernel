@@ -1,0 +1,33 @@
+{
+  "identical_workloads": true,
+  "profiles": [
+    {
+      "profile": "software",
+      "workloads": 35,
+      "samples": 3500,
+      "peak_rss_KiB": 155476,
+      "idle_bookends": true,
+      "input_bookends": true,
+      "device": [
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 65541, device_id: 0, driver_id: 13, driver_version: 109056006, driver_name: \"llvmpipe\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea (LLVM 20.1.2)\", device_name: \"llvmpipe (LLVM 20.1.2, 128 bits)\" })",
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 65541, device_id: 0, driver_id: 13, driver_version: 109056006, driver_name: \"llvmpipe\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea (LLVM 20.1.2)\", device_name: \"llvmpipe (LLVM 20.1.2, 128 bits)\" })"
+      ],
+      "baseline_accepted": false,
+      "gpu_memory_measured": false
+    },
+    {
+      "profile": "host",
+      "workloads": 35,
+      "samples": 3500,
+      "peak_rss_KiB": 69180,
+      "idle_bookends": true,
+      "input_bookends": true,
+      "device": [
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 4098, device_id: 5510, driver_id: 3, driver_version: 109056006, driver_name: \"radv\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\", device_name: \"AMD Radeon 8060S Graphics (RADV STRIX_HALO)\" })",
+        "MARTENSITE_DEVICE_IDENTITY=Some(RenderDriverIdentity { vendor_id: 4098, device_id: 5510, driver_id: 3, driver_version: 109056006, driver_name: \"radv\", driver_info: \"Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\", device_name: \"AMD Radeon 8060S Graphics (RADV STRIX_HALO)\" })"
+      ],
+      "baseline_accepted": false,
+      "gpu_memory_measured": false
+    }
+  ]
+}
