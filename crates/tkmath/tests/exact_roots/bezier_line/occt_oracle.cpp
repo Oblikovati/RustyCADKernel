@@ -45,7 +45,7 @@ occ::handle<Geom2d_BezierCurve> curve(const std::vector<std::string>& fields) {
     weights.SetValue(index, values.at(index - 1));
   return new Geom2d_BezierCurve(poles, weights);
 }
-void record(const std::vector<std::string>& fields) {
+void record(const std::vector<std::string>& fields, bool sides) {
   const auto endpoints = decode(fields.at(3));
   const gp_Pnt2d origin(endpoints.at(0), endpoints.at(1));
   const gp_Dir2d direction(endpoints.at(2)-origin.X(), endpoints.at(3)-origin.Y());
@@ -53,18 +53,22 @@ void record(const std::vector<std::string>& fields) {
   // Native tolerance only; exact certification is provided by the rational oracle.
   const Geom2dAPI_InterCurveCurve result(curve(fields), line, 1e-10);
   if (!result.Intersector().IsDone()) throw std::runtime_error(fields[0] + ": unfinished; expected done");
-  std::vector<double> parameters;
-  for (int index = 1; index <= result.NbPoints(); ++index)
-    parameters.push_back(result.Intersector().Point(index).ParamOnFirst());
+  std::vector<std::pair<double, int>> parameters;
+  for (int index = 1; index <= result.NbPoints(); ++index) {
+    const auto point = result.Point(index);
+    const double along = direction.X()*(point.X()-origin.X()) + direction.Y()*(point.Y()-origin.Y());
+    parameters.emplace_back(result.Intersector().Point(index).ParamOnFirst(), (along > 0) - (along < 0));
+  }
   std::sort(parameters.begin(), parameters.end());
   std::cout << fields[0] << '\t' << result.NbSegments() << '\t';
   for (size_t index = 0; index < parameters.size(); ++index)
-    std::cout << (index ? "," : "") << parameters[index];
+    std::cout << (index ? "," : "") << (sides ? parameters[index].second : parameters[index].first);
   std::cout << '\n';
 }
 int main(int argc, char** argv) {
   static_assert(OCC_VERSION_MAJOR == 8 && OCC_VERSION_MINOR == 0 && OCC_VERSION_MAINTENANCE == 0);
-  if (argc != 2) throw std::runtime_error("argument count " + std::to_string(argc) + "; expected corpus path");
+  if (argc != 2 && !(argc == 3 && std::string(argv[2]) == "--sides"))
+    throw std::runtime_error("argument count " + std::to_string(argc) + "; expected corpus path [--sides]");
   std::ifstream input(argv[1]);
   if (!input) throw std::runtime_error(std::string(argv[1]) + "; expected readable corpus");
   std::cout << std::setprecision(17);
@@ -73,6 +77,6 @@ int main(int argc, char** argv) {
     const auto fields = split(row, '\t');
     const auto& name = fields[0];
     if (name == "linear" || name == "tangent" || name == "endpoints" ||
-        name == "weighted_crossing" || name == "rational_quadratic" || name == "oblique") record(fields);
+        name == "weighted_crossing" || name == "rational_quadratic" || name == "oblique") record(fields, argc == 3);
   }
 }

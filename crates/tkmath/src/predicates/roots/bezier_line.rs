@@ -2,6 +2,8 @@
 //! Exact supplied-curve parameter classification; no B-rep is built (ADR 0006).
 mod error;
 mod projection;
+mod ray;
+pub use ray::{BezierRayError, classify_bezier_ray_contacts};
 mod solve;
 use super::{RootIsolation, RootIsolationOptions};
 pub use error::{BezierInput, BezierLineError, BezierStage};
@@ -46,13 +48,18 @@ pub fn intersect_bezier_line(
     query: BezierLineQuery<'_>,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<BezierLineContact, BezierLineError> {
-    let (bounds, width) =
-        super::checked_policy_interval(query.interval, query.options).map_err(|cause| {
-            BezierLineError::Root {
-                stage: BezierStage::Input,
-                cause,
-            }
-        })?;
+    let (bounds, width) = checked_query(query)?;
     let projected = projection::project(query, &mut cancelled)?;
     solve::classify(projected, bounds, width, query.options, &mut cancelled)
+}
+
+fn checked_query(
+    query: BezierLineQuery<'_>,
+) -> Result<([super::DyadicBound; 2], super::DyadicBound), BezierLineError> {
+    super::checked_policy_interval(query.interval, query.options).map_err(|cause| {
+        BezierLineError::Root {
+            stage: BezierStage::Input,
+            cause,
+        }
+    })
 }

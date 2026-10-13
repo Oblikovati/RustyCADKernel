@@ -51,13 +51,18 @@ pub fn signs_at_polynomial_roots(
         .map_err(|cause| RootSignStage::Source.failure(cause))?;
     let isolation = isolate::isolate(&tower, bounds, width, options, &mut cancelled)
         .map_err(|cause| RootSignStage::Source.failure(cause))?;
-    let signs = tarski::evaluate(source, query, &isolation, &mut cancelled)?;
+    evaluate_isolated(source, query, isolation, &mut cancelled)
+}
+pub(super) fn evaluate_isolated(
+    source: IntegerPolynomial,
+    query: IntegerPolynomial,
+    isolation: RootIsolation,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<RootSignEvaluation, RootSignError> {
+    let signs = tarski::evaluate(source, query, &isolation, cancelled)?;
     Ok(RootSignEvaluation { isolation, signs })
 }
 fn query_polynomial(coefficients: &[f64], limit: u16) -> Result<IntegerPolynomial, RootSignError> {
-    match IntegerPolynomial::from_binary64(coefficients, limit) {
-        Ok(polynomial) => Ok(polynomial),
-        Err(super::RootIsolationError::ZeroPolynomial { .. }) => Ok(IntegerPolynomial(Vec::new())),
-        Err(cause) => Err(RootSignStage::Query.failure(cause)),
-    }
+    IntegerPolynomial::accept_zero(IntegerPolynomial::from_binary64(coefficients, limit))
+        .map_err(|cause| RootSignStage::Query.failure(cause))
 }

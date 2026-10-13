@@ -27,6 +27,14 @@ impl IntegerPolynomial {
         }
         Ok(polynomial)
     }
+    pub fn accept_zero(
+        result: Result<Self, RootIsolationError>,
+    ) -> Result<Self, RootIsolationError> {
+        match result {
+            Err(RootIsolationError::ZeroPolynomial { .. }) => Ok(Self(Vec::new())),
+            other => other,
+        }
+    }
     pub fn degree(&self) -> usize {
         self.0.len().saturating_sub(1)
     }

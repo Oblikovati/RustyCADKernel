@@ -10,6 +10,24 @@ pub(super) fn project(
     query: BezierLineQuery<'_>,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<Projection, BezierLineError> {
+    project_with(query, cancelled, &mut |_, _, _| {})
+}
+pub(super) fn project_directed(
+    query: BezierLineQuery<'_>,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<(Projection, Vec<BigInt>), BezierLineError> {
+    let mut longitudinal = Vec::with_capacity(query.controls.len());
+    let projected = project_with(query, cancelled, &mut |direction, displacement, weight| {
+        let dot = &direction[0] * &displacement[0] + &direction[1] * &displacement[1];
+        longitudinal.push(dot * weight);
+    })?;
+    Ok((projected, longitudinal))
+}
+fn project_with(
+    query: BezierLineQuery<'_>,
+    cancelled: &mut impl FnMut() -> bool,
+    capture: &mut impl FnMut(&[BigInt; 2], &[BigInt; 2], &BigInt),
+) -> Result<Projection, BezierLineError> {
     validate_counts(query)?;
     let origin = point(query.line[0], 0, BezierInput::Line)?;
     let end = point(query.line[1], 1, BezierInput::Line)?;
@@ -17,7 +35,7 @@ pub(super) fn project(
         return Err(BezierLineError::DegenerateLine(query.line));
     }
     let direction = [&end[0] - &origin[0], &end[1] - &origin[1]];
-    project_controls(query, origin, direction, cancelled)
+    project_controls(query, origin, direction, cancelled, capture)
 }
 fn validate_counts(query: BezierLineQuery<'_>) -> Result<(), BezierLineError> {
     if query.controls.is_empty() {
@@ -38,6 +56,7 @@ fn project_controls(
     origin: [BigInt; 2],
     direction: [BigInt; 2],
     cancelled: &mut impl FnMut() -> bool,
+    capture: &mut impl FnMut(&[BigInt; 2], &[BigInt; 2], &BigInt),
 ) -> Result<Projection, BezierLineError> {
     let mut result = Projection::new(query.controls.len());
     for (index, control) in query.controls.iter().enumerate() {
@@ -45,6 +64,7 @@ fn project_controls(
         let position = point(*control, index, BezierInput::Control)?;
         let displacement = [&position[0] - &origin[0], &position[1] - &origin[1]];
         let weight = weight(query.weights, index)?;
+        capture(&direction, &displacement, &weight);
         result
             .numerator
             .push(exact_determinant(&direction, &displacement) * &weight);

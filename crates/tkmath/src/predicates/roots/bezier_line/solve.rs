@@ -12,14 +12,14 @@ pub(super) fn classify(
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<BezierLineContact, BezierLineError> {
-    let denominator = solve(
+    let denominator = regular_denominator(
         projected.denominator,
         bounds.clone(),
         width.clone(),
         options,
         cancelled,
     );
-    let used = check_denominator(denominator)?;
+    let (_, used) = denominator?;
     let mut remaining = options;
     remaining.max_bisections -= used;
     let numerator = solve(projected.numerator, bounds, width, remaining, cancelled);
@@ -33,8 +33,39 @@ fn solve(
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<RootIsolation, RootIsolationError> {
     let polynomial = bernstein::from_integer_controls(controls, options.max_degree, cancelled)?;
+    solve_polynomial(polynomial, bounds, width, options, cancelled)
+}
+pub(super) fn solve_polynomial(
+    polynomial: super::super::polynomial::IntegerPolynomial,
+    bounds: [DyadicBound; 2],
+    width: DyadicBound,
+    options: RootIsolationOptions,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<RootIsolation, RootIsolationError> {
     let tower = chain::multiplicity_tower(polynomial, cancelled)?;
     isolate::isolate(&tower, bounds, width, options, cancelled)
+}
+pub(super) fn regular_denominator(
+    controls: Vec<BigInt>,
+    bounds: [DyadicBound; 2],
+    width: DyadicBound,
+    options: RootIsolationOptions,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<(super::super::polynomial::IntegerPolynomial, u16), BezierLineError> {
+    let polynomial = bernstein::from_integer_controls(controls, options.max_degree, cancelled)
+        .map_err(denominator_error)?;
+    let result = solve_polynomial(polynomial.clone(), bounds, width, options, cancelled);
+    let used = check_denominator(result)?;
+    Ok((polynomial, used))
+}
+fn denominator_error(cause: RootIsolationError) -> BezierLineError {
+    match cause {
+        RootIsolationError::ZeroPolynomial { .. } => BezierLineError::ZeroDenominator,
+        cause => BezierLineError::Root {
+            stage: BezierStage::Denominator,
+            cause,
+        },
+    }
 }
 fn check_denominator(
     result: Result<RootIsolation, RootIsolationError>,
@@ -42,11 +73,7 @@ fn check_denominator(
     match result {
         Ok(roots) if roots.roots().is_empty() => Ok(roots.bisections()),
         Ok(roots) => Err(BezierLineError::DenominatorRoots(roots)),
-        Err(RootIsolationError::ZeroPolynomial { .. }) => Err(BezierLineError::ZeroDenominator),
-        Err(cause) => Err(BezierLineError::Root {
-            stage: BezierStage::Denominator,
-            cause,
-        }),
+        Err(cause) => Err(denominator_error(cause)),
     }
 }
 fn complete_numerator(
