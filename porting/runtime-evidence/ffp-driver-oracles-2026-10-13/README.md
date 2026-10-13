@@ -1,0 +1,7 @@
+# Driver-specific native FFP oracle fixtures
+
+The immutable v0.2.3 release failed two FFP tests with the runner's Mesa 25.2.8 driver. Actual OCCT OpenGL and the unchanged released Vulkan renderer agree exactly on that driver. The complete affected family contains 124 cases; all were generated twice independently by OCCT, and every full-frame RGBA comparison with released Vulkan is exact. Depth uses the existing 1e-6 limit. Twenty-nine cases differ from Mesa 26 fixtures, including texture alpha thresholds, so a guessed rounding adjustment would be incorrect.
+
+The 248 Rust fixture buffers are actual native outputs, verified independently against both raw native runs. The test-only selector uses exact properties of the selected Vulkan device. Unknown or inconsistent driver cohorts fail with their actual metadata. Original Mesa 26 and AMD fixtures remain intact; no tolerance, ignore list, shader or production rendering behavior changes. RenderDriverIdentity is a Martensite provenance extension, with no upstream API credit.
+
+Full-family raw captures, commands, binary/source/library provenance and repeated comparisons are retained here. Initial strict red logs are preserved. Root checks pass for Mesa25/128, Mesa26/128, native AMD and default Mesa26/256; all-target/all-feature Clippy also passes after extracting shared selection logic. These are functional checks, not performance measurements or release publication evidence. The existing ignored precision diagnostics retain their original reasons.

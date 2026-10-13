@@ -20,6 +20,14 @@ impl DriverBackend {
             Self::Injected(_) => vec![],
         }
     }
+    /// Return selected Vulkan provenance; injected backends have no Vulkan identity.
+    /// Example: `backend.driver_identity().is_none()`.
+    pub fn driver_identity(&self) -> Option<crate::RenderDriverIdentity> {
+        match self {
+            Self::Vulkan(device) => Some(device.driver_identity()),
+            Self::Injected(_) => None,
+        }
+    }
     pub fn name(&self) -> &str {
         match self {
             Self::Vulkan(device) => device.device_name(),

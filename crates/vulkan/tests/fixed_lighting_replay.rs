@@ -6,6 +6,8 @@ mod cap_assets;
 mod capping_texture_scene;
 #[path = "../examples/support/device_options.rs"]
 mod device_options;
+#[path = "support/ffp_oracle_profile.rs"]
+mod ffp_oracle_profile;
 #[path = "support/fixed_cap_lights.rs"]
 mod fixed_cap_lights;
 #[allow(dead_code)]
@@ -138,6 +140,13 @@ fn replay_fixed_assets(include_diagnostics: bool) {
         } else {
             (host_rgba, host_depth)
         };
+        let (rgba, depth) = ffp_oracle_profile::profiled_driver_asset(
+            &driver,
+            mode,
+            (host_rgba, host_depth),
+            (software_rgba, software_depth),
+        )
+        .unwrap_or((rgba, depth));
         native_golden::assert_capture(&capture, rgba, depth, mode);
     }
     assert!(

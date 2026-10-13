@@ -165,6 +165,10 @@ impl Graphic3dRenderDriver {
     pub fn device_name(&self) -> String {
         self.device.read().name().to_owned()
     }
+    /// Read exact selected Vulkan provenance, absent for injected backends; `driver.driver_identity()`.
+    pub fn driver_identity(&self) -> Option<crate::RenderDriverIdentity> {
+        self.device.read().driver_identity()
+    }
     fn live_views(&self) -> Vec<Handle<dyn Graphic3dCView>> {
         self.views
             .read()
