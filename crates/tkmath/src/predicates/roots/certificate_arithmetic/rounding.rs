@@ -4,7 +4,7 @@ use std::cmp::Ordering;
 
 const MAX_FINITE_BITS: u64 = 0x7fef_ffff_ffff_ffff;
 
-pub(super) fn outward_binary64(value: &ExactRatio) -> Option<[f64; 2]> {
+pub(in crate::predicates::roots) fn outward_binary64(value: &ExactRatio) -> Option<[f64; 2]> {
     if value.sign() != Ordering::Less {
         return positive_bounds(value);
     }
@@ -27,7 +27,7 @@ fn floor_bits(value: &ExactRatio) -> u64 {
     // Unlike a floating quotient, this also certifies underflow and extreme ratios.
     greatest_bits_where(|candidate| ExactRatio::from_finite(candidate) <= *value)
 }
-pub(super) fn outward_sqrt(value: &ExactRatio) -> Option<f64> {
+pub(in crate::predicates::roots) fn outward_sqrt(value: &ExactRatio) -> Option<f64> {
     if value.sign() == Ordering::Less {
         return None;
     }
