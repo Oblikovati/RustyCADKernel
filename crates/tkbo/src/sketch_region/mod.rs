@@ -28,3 +28,5 @@ mod empty_history_tests;
 
 #[cfg(test)]
 mod occurrence_tests;
+
+pub(crate) use occurrences::equal_occurrences;
