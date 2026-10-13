@@ -1,0 +1,40 @@
+{
+  "archive_lineage": {
+    "archives_revision": "597a9886186853474b4ff663b2d7ab7a37be2b7c",
+    "new_source_archive_acceptance_claimed": false,
+    "proof": "archive-proof.json",
+    "repackaged_after_rename": false
+  },
+  "change": "Only adapter identifiers, one provenance WHY comment, and explanatory documentation; values and CandidateSegment original_interval unchanged.",
+  "diff_check": {
+    "exit": 0
+  },
+  "focused_gate": {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_candidates"
+    ],
+    "durable_sha256": "d891f72cf08dabdf9251f9f878af1f22ff892c4b6c972336fdaf2a9ded55bc60",
+    "exit": 0,
+    "failed": 0,
+    "log": "representation-rename-tests.log.gz",
+    "passed": 33,
+    "raw_sha256": "f58b0076fd842f2e58946552221c6dd05ae4d6ff1d0523823791056ab0803b7e"
+  },
+  "format": {
+    "exit": 0
+  },
+  "previous_handoff_revision": "6f8a171db00194f7d818f3b5404761c1a8225895",
+  "previous_source_revision": "597a9886186853474b4ff663b2d7ab7a37be2b7c",
+  "remaining_contracts": "Original-source parameter conformance and all previously recorded region/body gaps remain incomplete.",
+  "source_hashes": {
+    "crates/tkbo/src/sketch_region_candidates/captured_store.rs": "dc7ef2f091d4779c8c0a430f50ed618e6ee5bbb6eac2cc1c0c9834291087bfbb",
+    "docs/captured-region-selection.md": "d1364185b8d45a93ad139594ce2ee7f5c524c3bf871af545b15a8d3eb867311b"
+  },
+  "source_revision": "d087995def6c11a7a576c93b5ca6420b8df8aa86",
+  "structural_equivalence": "captured_store.rs is byte-identical to 597a98861 after reversing the two identifier renames and removing the added WHY comment."
+}
