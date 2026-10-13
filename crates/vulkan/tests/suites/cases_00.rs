@@ -51,6 +51,8 @@ pub mod line_primitives;
 pub mod material_packing;
 #[path = "../object_animation_capture_cases.rs"]
 pub mod object_animation_capture_cases;
+#[path = "../oit_transparency.rs"]
+pub mod oit_transparency;
 #[path = "../point_alpha.rs"]
 pub mod point_alpha;
 #[path = "../point_lighting.rs"]

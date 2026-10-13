@@ -21,6 +21,8 @@ pub struct Graphic3dRenderView {
     presenter: SharedState<Option<crate::backend::WindowPresenter>>,
     window_error: SharedState<Option<RenderError>>,
     outcome: SharedState<Option<Result<FrameCapture, RenderError>>>,
+    raster_feedback: crate::raster_feedback::RasterFailureFeedback,
+    fragment_alpha_feedback: crate::fragment_alpha_feedback::FragmentAlphaFeedback,
 }
 rustycad_tkernel::impl_transient!(Graphic3dRenderView, "Martensite_RenderView", StandardTransient, transient, interfaces:[dyn Graphic3dCView, dyn Graphic3dDataStructureManager]);
 impl Graphic3dRenderView {
@@ -40,6 +42,8 @@ impl Graphic3dRenderView {
             presenter: SharedState::default(),
             window_error: SharedState::default(),
             outcome: SharedState::default(),
+            raster_feedback: Default::default(),
+            fragment_alpha_feedback: Default::default(),
         });
         graphic3d_cview_register(&view.cast())?;
         Ok(view)
@@ -74,7 +78,9 @@ impl Graphic3dRenderView {
             return Err(error.clone());
         }
         let extent = capture_extent(self, self.limit)?;
-        let frame = frame_for_view(self, extent, self.retained.render_clip_planes())?;
+        let mut frame = frame_for_view(self, extent, self.retained.render_clip_planes())?;
+        frame.attach_raster_feedback(&self.raster_feedback);
+        frame.attach_fragment_alpha(&self.fragment_alpha_feedback);
         self.render_target(&frame)
     }
 }

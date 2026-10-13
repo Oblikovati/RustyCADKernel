@@ -59,6 +59,12 @@ pub(super) struct PipelineState {
     dynamic: vk::PipelineDynamicStateCreateInfo<'static>,
 }
 impl PipelineState {
+    pub fn set_multisampling(&mut self, samples: vk::SampleCountFlags, alpha_coverage: bool) {
+        self.samples = self
+            .samples
+            .rasterization_samples(samples)
+            .alpha_to_coverage_enable(alpha_coverage);
+    }
     pub fn new(kind: super::pipeline_variants::PipelineVariant) -> Self {
         let super::pipeline_variants::PipelineVariant {
             clamp: depth_clamp,

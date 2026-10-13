@@ -44,6 +44,10 @@ pub struct RenderFrame {
     pub(crate) clear_color: [f32; 4],
     pub(crate) draws: Vec<PrimitiveDraw>,
     pub(crate) layers: Vec<RenderLayerSpan>,
+    pub(crate) raster: crate::transparency::RenderRasterSettings,
+    pub(crate) raster_feedback: crate::raster_feedback::RasterFailureFeedback,
+    pub(crate) fragment_alpha_context:
+        Option<crate::fragment_alpha_feedback::FragmentAlphaSnapshot>,
 }
 impl RenderFrame {
     /// Read target dimensions; `frame.extent()`.
@@ -103,6 +107,9 @@ impl RenderFrame {
             clear_color,
             draws,
             layers,
+            raster: Default::default(),
+            raster_feedback: Default::default(),
+            fragment_alpha_context: None,
         })
     }
 }

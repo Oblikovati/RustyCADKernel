@@ -2,6 +2,7 @@
 use crate::{PrimitiveDraw, PrimitiveTopology};
 use rustycad_tkservice::graphic3d::*;
 pub(crate) fn apply_surface_alpha(draw: &mut PrimitiveDraw, aspects: &dyn Graphic3dAspectsSource) {
+    crate::legacy_fragment_alpha::capture_material_alpha(draw, aspects);
     if draw.topology() != PrimitiveTopology::Triangles || draw.textured_style.is_some() {
         return;
     }

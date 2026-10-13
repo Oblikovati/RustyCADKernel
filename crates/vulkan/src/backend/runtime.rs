@@ -35,6 +35,9 @@ pub(super) struct VulkanRuntime {
     pub polygon_lines: bool,
     pub large_points: bool,
     pub sampler_anisotropy: bool,
+    pub sample_rate_shading: bool,
+    pub depth_resolve_modes: vk::ResolveModeFlags,
+    pub stencil_resolve_modes: vk::ResolveModeFlags,
     pub lines: super::line_device::LineCapabilities,
     pub line_stipple: Option<ash::ext::line_rasterization::Device>,
     pub name: String,
@@ -77,6 +80,9 @@ impl VulkanRuntime {
             polygon_lines: false,
             large_points: false,
             sampler_anisotropy: false,
+            sample_rate_shading: false,
+            depth_resolve_modes: vk::ResolveModeFlags::empty(),
+            stencil_resolve_modes: vk::ResolveModeFlags::empty(),
             lines: Default::default(),
             line_stipple: None,
             name: String::new(),
@@ -105,6 +111,15 @@ impl VulkanRuntime {
         self.logic_op =
             unsafe { self.instance.get_physical_device_features(physical) }.logic_op == vk::TRUE;
         let native_features = unsafe { self.instance.get_physical_device_features(physical) };
+        self.sample_rate_shading = native_features.sample_rate_shading == vk::TRUE;
+        let mut resolve = vk::PhysicalDeviceDepthStencilResolveProperties::default();
+        let mut query = vk::PhysicalDeviceProperties2::default().push_next(&mut resolve);
+        unsafe {
+            self.instance
+                .get_physical_device_properties2(physical, &mut query);
+        }
+        self.depth_resolve_modes = resolve.supported_depth_resolve_modes;
+        self.stencil_resolve_modes = resolve.supported_stencil_resolve_modes;
         self.geometry_shader = native_features.geometry_shader == vk::TRUE;
         self.polygon_lines = native_features.fill_mode_non_solid == vk::TRUE;
         self.lines = super::line_device::LineCapabilities::query(&self.instance, physical)?;
@@ -248,6 +263,7 @@ fn create_device(
         .synchronization2(true);
     let supported = unsafe { instance.get_physical_device_features(physical) };
     let core_features = vk::PhysicalDeviceFeatures::default()
+        .sample_rate_shading(supported.sample_rate_shading == vk::TRUE)
         .sampler_anisotropy(supported.sampler_anisotropy == vk::TRUE)
         .texture_compression_bc(supported.texture_compression_bc == vk::TRUE)
         .depth_clamp(depth_clamp)

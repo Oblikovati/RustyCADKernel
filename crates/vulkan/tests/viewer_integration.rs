@@ -231,14 +231,14 @@ fn unsupported_multisampling_and_connected_rendering_return_errors() {
     scene
         .cview()
         .change_rendering_params(&mut |params| params.nb_msaa_samples = 4);
-    assert_redraw_error(&scene, "single-sample");
+    scene.render_view().try_redraw().unwrap();
     scene
         .cview()
         .change_rendering_params(&mut |params| params.nb_msaa_samples = 0);
     scene.cview().change_rendering_params(&mut |params| {
         params.transparency_method = Graphic3dRenderTransparentMethod::BlendOit;
     });
-    assert_redraw_error(&scene, "unordered blending");
+    scene.render_view().try_redraw().unwrap();
     scene.cview().change_rendering_params(&mut |params| {
         params.transparency_method = Graphic3dRenderTransparentMethod::BlendUnordered;
     });

@@ -1,4 +1,7 @@
 //! Explicit Vulkan 1.3 barriers connect rendering, transfer and coherent host readback.
+pub(super) use super::render_target_record::{
+    begin_rendering, depth_clear, render_attachment, set_viewport,
+};
 use super::{frame::FrameResources, image::TargetImage, runtime::VulkanRuntime};
 use crate::RenderFrame;
 use ash::vk;
@@ -9,9 +12,7 @@ pub(super) fn record_frame(
     frame: &RenderFrame,
 ) {
     transition_targets(runtime, command, resources, false);
-    for (index, layer) in frame.layers.iter().enumerate() {
-        record_layer(runtime, command, resources, frame.clear_color, index, layer);
-    }
+    super::oit_record::record_layers(runtime, command, resources, frame);
     transition_targets(runtime, command, resources, true);
     read_attachments(runtime, command, resources);
 }
@@ -75,69 +76,20 @@ fn readback_transition(barrier: vk::ImageMemoryBarrier2<'_>) -> vk::ImageMemoryB
         .dst_access_mask(vk::AccessFlags2::TRANSFER_READ)
 }
 
-fn begin_rendering(
-    runtime: &VulkanRuntime,
-    command: vk::CommandBuffer,
-    resources: &FrameResources,
-    clear: [f32; 4],
-    first: bool,
-    clear_depth: bool,
-    encoded_attachment: bool,
-) {
-    let color = [render_attachment(
-        if encoded_attachment {
-            resources.color.xor_view
-        } else {
-            resources.color.view
-        },
-        color_clear(clear),
-        first,
-    )];
-    let depth = render_attachment(resources.depth.view, depth_clear(), first || clear_depth);
-    let area = vk::Rect2D {
-        offset: vk::Offset2D::default(),
-        extent: resources.extent,
-    };
-    let mut info = vk::RenderingInfo::default()
-        .render_area(area)
-        .layer_count(1)
-        .color_attachments(&color)
-        .depth_attachment(&depth);
-    let stencil = render_attachment(resources.depth.view, depth_clear(), first);
-    if resources
-        .depth
-        .aspect
-        .contains(vk::ImageAspectFlags::STENCIL)
-    {
-        info = info.stencil_attachment(&stencil);
-    }
-    unsafe { runtime.device().cmd_begin_rendering(command, &info) };
-    set_viewport(runtime, command, resources.extent);
-}
-fn set_viewport(runtime: &VulkanRuntime, command: vk::CommandBuffer, extent: vk::Extent2D) {
-    let area = vk::Rect2D {
-        offset: vk::Offset2D::default(),
-        extent,
-    };
-    // Negative viewport height preserves Graphic3d's upward-positive camera Y in top-left captures.
-    let viewport = vk::Viewport {
-        x: 0.,
-        y: extent.height as f32,
-        width: extent.width as f32,
-        height: -(extent.height as f32),
-        min_depth: 0.,
-        max_depth: 1.,
-    };
-    unsafe {
-        runtime.device().cmd_set_viewport(command, 0, &[viewport]);
-        runtime.device().cmd_set_scissor(command, 0, &[area]);
-    }
-}
 fn record_draws(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
     resources: &FrameResources,
     layer: &crate::RenderLayerSpan,
+) {
+    record_draws_selected(runtime, command, resources, layer, None);
+}
+pub(super) fn record_draws_selected(
+    runtime: &VulkanRuntime,
+    command: vk::CommandBuffer,
+    resources: &FrameResources,
+    layer: &crate::RenderLayerSpan,
+    selection: Option<(super::oit_pipeline::OitGeometryPhase, vk::DescriptorSet)>,
 ) {
     let mut state = super::draw_state::DrawState::default();
     let mut depth_policy = (layer.depth_test, layer.depth_write);
@@ -146,18 +98,26 @@ fn record_draws(
     let mut culling = (crate::RenderFaceCulling::None, false);
     super::capping_record::set_culling(runtime, command, culling);
     for draw in &resources.draws[layer.draw_range.clone()] {
-        let next_attachment = draw.text_logic_xor || draw.encoded_surface;
+        let pipeline = selection
+            .map(|(phase, _)| {
+                draw.oit
+                    .as_ref()
+                    .expect("uploaded OIT fill pipeline")
+                    .pipeline(phase)
+            })
+            .unwrap_or(&draw.pipeline);
+        let next_attachment = selection.is_none() && (draw.text_logic_xor || draw.encoded_surface);
         if encoded_attachment != next_attachment {
             change_encoded_attachment(runtime, command, resources, next_attachment);
             encoded_attachment = next_attachment;
         }
-        let (bind, push) = state.advance(draw.pipeline.handle, &draw.transform);
+        let (bind, push) = state.advance(pipeline.handle, &draw.transform);
         if bind {
             unsafe {
                 runtime.device().cmd_bind_pipeline(
                     command,
                     vk::PipelineBindPoint::GRAPHICS,
-                    draw.pipeline.handle,
+                    pipeline.handle,
                 )
             };
         }
@@ -194,14 +154,37 @@ fn record_draws(
                 .device()
                 .cmd_set_depth_bias(command, units, 0., factor)
         };
-        record_draw(runtime, command, draw, push);
+        record_draw(
+            runtime,
+            command,
+            draw,
+            pipeline,
+            push,
+            selected_alpha_set(draw, selection.map(|(_, set)| set)),
+        );
     }
+}
+fn selected_alpha_set(
+    draw: &super::frame::UploadedDraw,
+    selection: Option<vk::DescriptorSet>,
+) -> Option<vk::DescriptorSet> {
+    if let Some(base) = selection {
+        return Some(
+            draw.oit_alpha
+                .iter()
+                .find(|(key, _)| *key == base)
+                .map_or(base, |(_, override_set)| override_set.set),
+        );
+    }
+    draw.native_alpha.as_ref().map(|parameters| parameters.set)
 }
 fn record_draw(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
     draw: &super::frame::UploadedDraw,
+    pipeline: &super::pipeline::DrawPipeline,
     push: bool,
+    oit_set: Option<vk::DescriptorSet>,
 ) {
     let device = runtime.device();
     unsafe {
@@ -220,7 +203,7 @@ fn record_draw(
             device.cmd_bind_descriptor_sets(
                 command,
                 vk::PipelineBindPoint::GRAPHICS,
-                draw.pipeline.layout,
+                pipeline.layout,
                 0,
                 &[lighting.set],
                 &[],
@@ -230,8 +213,8 @@ fn record_draw(
             device.cmd_bind_descriptor_sets(
                 command,
                 vk::PipelineBindPoint::GRAPHICS,
-                draw.pipeline.layout,
-                draw.pipeline.sprite_set,
+                pipeline.layout,
+                pipeline.sprite_set,
                 &[sprite.set],
                 &[],
             );
@@ -240,8 +223,8 @@ fn record_draw(
             device.cmd_bind_descriptor_sets(
                 command,
                 vk::PipelineBindPoint::GRAPHICS,
-                draw.pipeline.layout,
-                draw.pipeline.sprite_set,
+                pipeline.layout,
+                pipeline.sprite_set,
                 &[image.set],
                 &[],
             );
@@ -250,16 +233,26 @@ fn record_draw(
             device.cmd_bind_descriptor_sets(
                 command,
                 vk::PipelineBindPoint::GRAPHICS,
-                draw.pipeline.layout,
+                pipeline.layout,
                 1,
                 &[clipping.set],
+                &[],
+            );
+        }
+        if let Some(set) = oit_set {
+            device.cmd_bind_descriptor_sets(
+                command,
+                vk::PipelineBindPoint::GRAPHICS,
+                pipeline.layout,
+                3,
+                &[set],
                 &[],
             );
         }
         device.cmd_bind_vertex_buffers(command, 0, &[draw.vertices.handle], &[0]);
         device.cmd_bind_index_buffer(command, draw.indices.handle, 0, vk::IndexType::UINT32);
         if push {
-            push_draw_transform(runtime, command, draw);
+            push_draw_transform(runtime, command, draw, pipeline);
         }
         device.cmd_draw_indexed(command, draw.count, 1, 0, 0, 0);
     }
@@ -312,10 +305,16 @@ fn transition_targets(
     resources: &FrameResources,
     readback: bool,
 ) {
-    let barriers = [
+    let mut barriers = vec![
         image_barrier(&resources.color, readback),
         image_barrier(&resources.depth, readback),
     ];
+    if !readback && let Some(targets) = &resources.multisample {
+        barriers.extend([
+            image_barrier(&targets.color, false),
+            image_barrier(&targets.depth, false),
+        ]);
+    }
     unsafe {
         runtime.device().cmd_pipeline_barrier2(
             command,
@@ -324,38 +323,7 @@ fn transition_targets(
     }
 }
 
-fn render_attachment(
-    view: vk::ImageView,
-    clear: vk::ClearValue,
-    reset: bool,
-) -> vk::RenderingAttachmentInfo<'static> {
-    vk::RenderingAttachmentInfo::default()
-        .image_view(view)
-        .image_layout(vk::ImageLayout::ATTACHMENT_OPTIMAL)
-        .load_op(if reset {
-            vk::AttachmentLoadOp::CLEAR
-        } else {
-            vk::AttachmentLoadOp::LOAD
-        })
-        .store_op(vk::AttachmentStoreOp::STORE)
-        .clear_value(clear)
-}
-
-fn color_clear(value: [f32; 4]) -> vk::ClearValue {
-    vk::ClearValue {
-        color: vk::ClearColorValue { float32: value },
-    }
-}
-fn depth_clear() -> vk::ClearValue {
-    vk::ClearValue {
-        depth_stencil: vk::ClearDepthStencilValue {
-            depth: 1.,
-            stencil: 0,
-        },
-    }
-}
-
-fn record_layer(
+pub(super) fn record_layer(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
     resources: &FrameResources,
@@ -379,7 +347,7 @@ fn record_layer(
     record_draws(runtime, command, resources, layer);
     unsafe { runtime.device().cmd_end_rendering(command) };
 }
-fn layer_dependency(runtime: &VulkanRuntime, command: vk::CommandBuffer) {
+pub(super) fn layer_dependency(runtime: &VulkanRuntime, command: vk::CommandBuffer) {
     let access =
         vk::AccessFlags2::COLOR_ATTACHMENT_WRITE | vk::AccessFlags2::DEPTH_STENCIL_ATTACHMENT_WRITE;
     let reads =
@@ -397,7 +365,7 @@ fn layer_dependency(runtime: &VulkanRuntime, command: vk::CommandBuffer) {
     };
 }
 
-fn set_depth_policy(
+pub(super) fn set_depth_policy(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
     layer: &crate::RenderLayerSpan,
@@ -416,12 +384,13 @@ fn push_draw_transform(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
     draw: &super::frame::UploadedDraw,
+    pipeline: &super::pipeline::DrawPipeline,
 ) {
     unsafe {
         runtime.device().cmd_push_constants(
             command,
-            draw.pipeline.layout,
-            draw.pipeline.push_stages,
+            pipeline.layout,
+            pipeline.push_stages,
             0,
             &draw.transform,
         );

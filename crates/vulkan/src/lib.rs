@@ -132,3 +132,12 @@ mod texture_coordinate_frame;
 mod texture_coordinate_pipeline;
 pub use texture_coordinate_pipeline::RenderTextureCoordinatePipeline;
 mod view_render_camera;
+
+mod compatibility_text_color;
+mod fragment_alpha_feedback;
+mod legacy_fragment_alpha;
+mod transparency;
+pub use transparency::RenderTransparency;
+
+mod raster_feedback;
+mod retained_transparency;

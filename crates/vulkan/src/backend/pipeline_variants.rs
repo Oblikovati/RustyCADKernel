@@ -28,7 +28,7 @@ pub(super) struct PipelineVariant {
     pub capping: RenderCappingPass,
 }
 impl PipelineVariant {
-    fn from_index(index: usize, stencil: bool) -> Self {
+    pub(super) fn from_index(index: usize, stencil: bool) -> Self {
         if (40..44).contains(&index) {
             return text_xor_variant(index, stencil);
         }
@@ -112,6 +112,7 @@ fn empty_variant(
     }
 }
 pub(super) struct RasterPipelines {
+    pub oit: super::oit_pipeline_cache::OitPipelineCache,
     variants: Vec<Option<Arc<DrawPipeline>>>,
     pub surface_images: super::surface_image_cache::SurfaceImageCache,
     pub stencil: bool,
@@ -135,6 +136,7 @@ impl RasterPipelines {
             });
         }
         Ok(Self {
+            oit: Default::default(),
             variants,
             surface_images: Default::default(),
             stencil,
@@ -151,6 +153,7 @@ impl RasterPipelines {
             || draw.surface_forced_blend
             || draw.lighting.is_some()
             || draw.fixed_function_lighting
+            || draw.compatibility_color_target
             || draw.surface_blend
             || draw.text_background_blend
             || draw.text_logic_xor
@@ -235,7 +238,8 @@ fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
 }
 pub(super) fn encoded_surface_attachment(draw: &PrimitiveDraw) -> bool {
     !draw.surface_texture_binding_only
-        && (draw.fixed_function_lighting
+        && (draw.compatibility_color_target
+            || draw.fixed_function_lighting
             || crate::fixed_surface_environment::uses_fixed_surface_environment(draw))
 }
 fn validate_special_features(

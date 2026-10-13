@@ -1,4 +1,7 @@
 //! The initial unlit pipeline consumes real vertex/index buffers and a per-draw transform.
+#[cfg(test)]
+use super::pipeline_layout::descriptor_layout_handles;
+use super::pipeline_layout::{create_layout, fixed_marker_push_range, push_range};
 use super::runtime::{VulkanRuntime, vk_error};
 use crate::{RenderError, error::rejected};
 use ash::vk;
@@ -9,7 +12,10 @@ pub(super) struct DrawPipeline {
     pub layout: vk::PipelineLayout,
     pub push_stages: vk::ShaderStageFlags,
     pub sprite_set: u32,
+    pub kind: super::pipeline_variants::PipelineVariant,
+    pub oit_layout: Option<Arc<super::oit_descriptor::OitDescriptorLayout>>,
     shaders: Vec<vk::ShaderModule>,
+    fragment_bytes: &'static [u8],
     pub clipping_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
     pub lighting_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
     pub sprite_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
@@ -19,6 +25,65 @@ impl DrawPipeline {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
         kind: super::pipeline_variants::PipelineVariant,
+    ) -> Result<Self, RenderError> {
+        Self::build(
+            runtime,
+            kind,
+            None,
+            vk::SampleCountFlags::TYPE_1,
+            false,
+            None,
+        )
+    }
+    pub fn new_oit(
+        runtime: &Arc<VulkanRuntime>,
+        kind: super::pipeline_variants::PipelineVariant,
+        target: super::oit_pipeline::OitPipelineTarget,
+        layout: &Arc<super::oit_descriptor::OitDescriptorLayout>,
+    ) -> Result<Self, RenderError> {
+        Self::build(
+            runtime,
+            kind,
+            Some((target, layout.clone())),
+            target.samples,
+            false,
+            None,
+        )
+    }
+    pub fn new_multisample(
+        runtime: &Arc<VulkanRuntime>,
+        kind: super::pipeline_variants::PipelineVariant,
+        samples: vk::SampleCountFlags,
+        alpha_coverage: bool,
+    ) -> Result<Self, RenderError> {
+        Self::build(runtime, kind, None, samples, alpha_coverage, None)
+    }
+    pub fn new_native_alpha(
+        runtime: &Arc<VulkanRuntime>,
+        kind: super::pipeline_variants::PipelineVariant,
+        samples: vk::SampleCountFlags,
+        alpha_coverage: bool,
+        layout: &Arc<super::oit_descriptor::OitDescriptorLayout>,
+    ) -> Result<Self, RenderError> {
+        Self::build(
+            runtime,
+            kind,
+            None,
+            samples,
+            alpha_coverage,
+            Some(layout.clone()),
+        )
+    }
+    fn build(
+        runtime: &Arc<VulkanRuntime>,
+        kind: super::pipeline_variants::PipelineVariant,
+        oit: Option<(
+            super::oit_pipeline::OitPipelineTarget,
+            Arc<super::oit_descriptor::OitDescriptorLayout>,
+        )>,
+        samples: vk::SampleCountFlags,
+        alpha_coverage: bool,
+        alpha_layout: Option<Arc<super::oit_descriptor::OitDescriptorLayout>>,
     ) -> Result<Self, RenderError> {
         let super::pipeline_variants::PipelineVariant {
             clamp: _,
@@ -32,6 +97,11 @@ impl DrawPipeline {
         } = kind;
         let mut pipeline = Self {
             runtime: runtime.clone(),
+            kind,
+            oit_layout: oit
+                .as_ref()
+                .map(|(_, layout)| layout.clone())
+                .or_else(|| alpha_layout.clone()),
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
             push_stages: push_range(
@@ -49,6 +119,7 @@ impl DrawPipeline {
                 0
             },
             shaders: vec![],
+            fragment_bytes: &[],
             clipping_layout: if clipped {
                 Some(super::storage_descriptor::StorageDescriptorLayout::new(
                     runtime,
@@ -88,36 +159,46 @@ impl DrawPipeline {
                 super::fixed_lighting_pipeline::fixed_lighting_pair(kind).to_vec()
             };
             for bytes in shaders {
-                pipeline.shaders.push(load_shader(runtime, bytes)?);
+                pipeline.add_shader(bytes)?;
             }
         } else if kind.fixed_line_stipple && !kind.lighting {
             for bytes in super::fixed_lighting_pipeline::fixed_unlit_line_pair(kind.clipped) {
-                pipeline.shaders.push(load_shader(runtime, bytes)?);
+                pipeline.add_shader(bytes)?;
             }
         } else if kind.point && kind.encoded_surface && !kind.lighting {
             for bytes in super::fixed_lighting_pipeline::fixed_unlit_point_pair(kind.clipped) {
-                pipeline.shaders.push(load_shader(runtime, bytes)?);
+                pipeline.add_shader(bytes)?;
             }
         } else if kind.mesh_edges {
             for bytes in super::mesh_edge_pipeline::edge_shader_bytes(kind) {
-                pipeline.shaders.push(load_shader(runtime, bytes)?);
+                pipeline.add_shader(bytes)?;
             }
         } else if kind.surface_texture || kind.surface_alpha {
             for bytes in super::surface_texture_pipeline::surface_shaders(kind) {
-                pipeline.shaders.push(load_shader(runtime, bytes)?);
+                pipeline.add_shader(bytes)?;
             }
         } else {
             pipeline.load_shaders(line || kind.polygon_edges, point, text, clipped, lighting)?;
         }
+        if let Some((target, _)) = &oit {
+            pipeline.replace_oit_fragment(*target)?;
+        }
+        if alpha_layout.is_some() {
+            pipeline.replace_fragment(super::native_alpha_shader::native_alpha_fragment(
+                pipeline.fragment_bytes,
+            )?)?;
+        }
         pipeline.layout = create_layout(
             runtime,
-            line || kind.polygon_edges
-                || point
-                || text
-                || kind.surface_texture
-                || kind.surface_alpha,
-            kind.mesh_edges,
-            point && kind.encoded_surface,
+            fixed_marker_push_range(
+                line || kind.polygon_edges
+                    || point
+                    || text
+                    || kind.surface_texture
+                    || kind.surface_alpha,
+                kind.mesh_edges,
+                point && kind.encoded_surface,
+            ),
             pipeline
                 .sprite_layout
                 .as_ref()
@@ -125,9 +206,40 @@ impl DrawPipeline {
                 .or_else(|| pipeline.surface_layout.as_ref().map(|v| v.handle)),
             pipeline.lighting_layout.as_ref(),
             pipeline.clipping_layout.as_ref(),
+            pipeline.oit_layout.as_ref().map(|layout| layout.handle),
         )?;
-        pipeline.create(kind)?;
+        pipeline.create(
+            kind,
+            oit.as_ref().map(|(target, _)| *target),
+            samples,
+            alpha_coverage,
+        )?;
         Ok(pipeline)
+    }
+    fn replace_oit_fragment(
+        &mut self,
+        target: super::oit_pipeline::OitPipelineTarget,
+    ) -> Result<(), RenderError> {
+        let bytes = super::oit_pipeline::oit_fragment_bytes(self.kind, target)?;
+        self.replace_fragment(bytes)
+    }
+    fn add_shader(&mut self, bytes: &'static [u8]) -> Result<(), RenderError> {
+        if self.shaders.len() == 1 {
+            self.fragment_bytes = bytes;
+        }
+        self.shaders.push(load_shader(&self.runtime, bytes)?);
+        Ok(())
+    }
+    fn replace_fragment(&mut self, bytes: &'static [u8]) -> Result<(), RenderError> {
+        let replacement = load_shader(&self.runtime, bytes)?;
+        unsafe {
+            self.runtime
+                .device()
+                .destroy_shader_module(self.shaders[1], None);
+        }
+        self.shaders[1] = replacement;
+        self.fragment_bytes = bytes;
+        Ok(())
     }
     fn load_shaders(
         &mut self,
@@ -163,21 +275,32 @@ impl DrawPipeline {
             ]
         };
         for bytes in shaders {
-            self.shaders.push(load_shader(&self.runtime, bytes)?);
+            self.add_shader(bytes)?;
         }
         Ok(())
     }
     fn create(
         &mut self,
         kind: super::pipeline_variants::PipelineVariant,
+        oit: Option<super::oit_pipeline::OitPipelineTarget>,
+        samples: vk::SampleCountFlags,
+        alpha_coverage: bool,
     ) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
-        let state = super::pipeline_state::PipelineState::new(kind);
-        let color_format = [if kind.text_logic_xor || kind.encoded_surface {
+        let mut state = super::pipeline_state::PipelineState::new(kind);
+        state.set_multisampling(samples, alpha_coverage);
+        let color_format = vec![if kind.text_logic_xor || kind.encoded_surface {
             vk::Format::R8G8B8A8_UNORM
         } else {
             vk::Format::R8G8B8A8_SRGB
         }];
+        let color_format = oit
+            .map(|target| target.formats[..target.count].to_vec())
+            .unwrap_or(color_format);
+        let blends =
+            oit.map(|target| super::oit_pipeline::geometry_blend_attachments(target, kind));
+        let blend_info = vk::PipelineColorBlendStateCreateInfo::default()
+            .attachments(blends.as_deref().unwrap_or(&[]));
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
             .color_attachment_formats(&color_format)
             .depth_attachment_format(kind.depth_format())
@@ -189,6 +312,9 @@ impl DrawPipeline {
         let mut info = state
             .description(self.layout, &stages)
             .push_next(&mut rendering);
+        if oit.is_some() {
+            info = info.color_blend_state(&blend_info);
+        }
         let mut line_state = vk::PipelineRasterizationLineStateCreateInfoEXT::default()
             .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM)
             .stippled_line_enable(kind.fixed_line_stipple)
@@ -224,7 +350,10 @@ impl Drop for DrawPipeline {
         }
     }
 }
-fn load_shader(runtime: &VulkanRuntime, bytes: &[u8]) -> Result<vk::ShaderModule, RenderError> {
+pub(super) fn load_shader(
+    runtime: &VulkanRuntime,
+    bytes: &[u8],
+) -> Result<vk::ShaderModule, RenderError> {
     if !bytes.len().is_multiple_of(4) {
         return Err(rejected(bytes.len(), "SPIR-V words aligned to four bytes"));
     }
@@ -241,7 +370,9 @@ fn load_shader(runtime: &VulkanRuntime, bytes: &[u8]) -> Result<vk::ShaderModule
     }
     .map_err(|e| vk_error("create shader module", e))
 }
-fn shader_stages(shaders: &[vk::ShaderModule]) -> Vec<vk::PipelineShaderStageCreateInfo<'static>> {
+pub(super) fn shader_stages(
+    shaders: &[vk::ShaderModule],
+) -> Vec<vk::PipelineShaderStageCreateInfo<'static>> {
     let mut stages = vec![
         vk::PipelineShaderStageCreateInfo::default()
             .stage(vk::ShaderStageFlags::VERTEX)
@@ -262,7 +393,7 @@ fn shader_stages(shaders: &[vk::ShaderModule]) -> Vec<vk::PipelineShaderStageCre
     }
     stages
 }
-fn create_pipeline(
+pub(super) fn create_pipeline(
     runtime: &VulkanRuntime,
     info: vk::GraphicsPipelineCreateInfo<'_>,
 ) -> Result<vk::Pipeline, RenderError> {
@@ -279,58 +410,6 @@ fn create_pipeline(
             Err(vk_error("create graphics pipeline", error))
         }
     }
-}
-
-fn create_layout(
-    runtime: &VulkanRuntime,
-    line: bool,
-    edges: bool,
-    fixed_marker: bool,
-    sprite: Option<vk::DescriptorSetLayout>,
-    lighting: Option<&super::storage_descriptor::StorageDescriptorLayout>,
-    clipping: Option<&super::storage_descriptor::StorageDescriptorLayout>,
-) -> Result<vk::PipelineLayout, RenderError> {
-    // Fragment constants force redundant lavapipe state work on every surface draw.
-    let ranges = [fixed_marker_push_range(line, edges, fixed_marker)];
-    let layouts = descriptor_layout_handles(
-        sprite,
-        lighting.map(|s| s.handle),
-        clipping.map(|s| s.handle),
-    );
-    let info = vk::PipelineLayoutCreateInfo::default()
-        .push_constant_ranges(&ranges)
-        .set_layouts(&layouts);
-    let layout = unsafe { runtime.device().create_pipeline_layout(&info, None) }
-        .map_err(|e| vk_error("create pipeline layout", e))?;
-    Ok(layout)
-}
-fn fixed_marker_push_range(line: bool, edges: bool, fixed_marker: bool) -> vk::PushConstantRange {
-    let mut range = push_range(line, edges);
-    if fixed_marker {
-        range.size = 84;
-    }
-    range
-}
-
-fn push_range(line: bool, edges: bool) -> vk::PushConstantRange {
-    let stages = if edges {
-        vk::ShaderStageFlags::VERTEX
-            | vk::ShaderStageFlags::GEOMETRY
-            | vk::ShaderStageFlags::FRAGMENT
-    } else if line {
-        vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT
-    } else {
-        vk::ShaderStageFlags::VERTEX
-    };
-    vk::PushConstantRange::default()
-        .stage_flags(stages)
-        .size(if edges {
-            128
-        } else if line {
-            80
-        } else {
-            64
-        })
 }
 
 fn clipping_shaders(line: bool, point: bool, text: bool) -> [&'static [u8]; 2] {
@@ -405,90 +484,4 @@ fn surface_lighting_shaders(clipped: bool) -> [&'static [u8]; 2] {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn fixed_marker_cutoff_extends_only_its_point_constant_range() {
-        assert_eq!(fixed_marker_push_range(true, false, true).size, 84);
-        assert_eq!(fixed_marker_push_range(true, false, false).size, 80);
-        assert_eq!(fixed_marker_push_range(false, false, false).size, 64);
-        assert_eq!(
-            fixed_marker_push_range(true, false, true).stage_flags,
-            vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT
-        );
-    }
-    #[test]
-    fn triangle_constants_do_not_invalidate_fragment_state() {
-        assert_eq!(
-            push_range(false, false).stage_flags,
-            vk::ShaderStageFlags::VERTEX
-        );
-        assert_eq!(push_range(false, false).size, 64);
-        assert_eq!(push_range(true, false).size, 80);
-        assert!(
-            push_range(true, false)
-                .stage_flags
-                .contains(vk::ShaderStageFlags::FRAGMENT)
-        );
-    }
-    #[test]
-    fn native_mesh_constants_are_visible_to_all_three_shader_stages() {
-        let range = push_range(false, true);
-        assert_eq!(range.size, 128);
-        assert_eq!(range.offset, 0);
-        assert_eq!(
-            range.stage_flags,
-            vk::ShaderStageFlags::VERTEX
-                | vk::ShaderStageFlags::GEOMETRY
-                | vk::ShaderStageFlags::FRAGMENT
-        );
-    }
-}
-
-fn descriptor_layout_handles(
-    sprite: Option<vk::DescriptorSetLayout>,
-    lighting: Option<vk::DescriptorSetLayout>,
-    clipping: Option<vk::DescriptorSetLayout>,
-) -> Vec<vk::DescriptorSetLayout> {
-    if let (Some(sprite), Some(lighting)) = (sprite, lighting) {
-        // Keep clipping at set 1; an unused compatible layout fills its slot when absent.
-        return vec![lighting, clipping.unwrap_or(lighting), sprite];
-    }
-    sprite
-        .or(lighting)
-        .or(clipping)
-        .into_iter()
-        .chain(clipping)
-        .collect()
-}
-
-#[cfg(test)]
-mod marker_descriptor_tests {
-    use super::*;
-    use ash::vk::Handle;
-    #[test]
-    fn lit_marker_keeps_lighting_clipping_and_sprite_in_distinct_slots() {
-        let [sprite, lighting, clipping] = [1, 2, 3].map(vk::DescriptorSetLayout::from_raw);
-        assert_eq!(
-            descriptor_layout_handles(Some(sprite), Some(lighting), Some(clipping)),
-            vec![lighting, clipping, sprite]
-        );
-        assert_eq!(
-            descriptor_layout_handles(Some(sprite), Some(lighting), None),
-            vec![lighting, lighting, sprite]
-        );
-        assert_eq!(
-            descriptor_layout_handles(Some(sprite), None, Some(clipping)),
-            vec![sprite, clipping]
-        );
-        assert_eq!(
-            descriptor_layout_handles(None, Some(lighting), Some(clipping)),
-            vec![lighting, clipping]
-        );
-        assert_eq!(
-            descriptor_layout_handles(None, None, Some(clipping)),
-            vec![clipping, clipping]
-        );
-        assert!(descriptor_layout_handles(None, None, None).is_empty());
-    }
-}
+include!("pipeline_tests.rs");

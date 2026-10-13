@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #define MARTENSITE_FRAGMENT
 #include "clipping.glsl"
+#include "native_fragment_alpha.glsl"
 layout(location=0) in vec4 vertexColor;
 layout(location=1) in vec2 textureUV;
 layout(location=0) out vec4 outColor;
@@ -24,4 +25,5 @@ void main() {
     vec4 bottom = mix(texel(origin + ivec2(0,1)), texel(origin + ivec2(1,1)), fraction.x);
     outColor = vertexColor * mix(top, bottom, fraction.y);
     if (outColor.a <= transform.cutoff) discard;
+    nativePostAlpha(outColor.a);
 }

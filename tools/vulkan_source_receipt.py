@@ -5,6 +5,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RECEIPT_ORACLE_PATHS = (
+    "tools/oracle/martensite_oit_alpha_scope.cxx",
+    "tools/oracle/martensite_oit_capability.cxx",
+    "tools/oracle/martensite_oit_capture.cxx",
+    "tools/oracle/martensite_oit_draw_trace.hxx",
+    "tools/oracle/martensite_oit_fixture.hxx",
+    "tools/oracle/martensite_oit_layers.hxx",
+    "tools/oracle/martensite_oit_layer_lifetime.cxx",
+    "tools/oracle/martensite_oit_transition.cxx",
     "tools/oracle/martensite_fixed_lighting_capture.cxx",
     "tools/oracle/martensite_fixed_lighting_cap_capture.cxx",
     "tools/oracle/martensite_fixed_cap_lights.hxx",
@@ -66,7 +74,12 @@ RECEIPT_ORACLE_PATHS = (
 
 def source_hashes() -> dict[str, str]:
     """Fingerprint the actual renderer and transitive source inputs; e.g. source_hashes()."""
-    paths = [ROOT / "Cargo.toml", ROOT / "Cargo.lock"]
+    paths = [
+        ROOT / "Cargo.toml",
+        ROOT / "Cargo.lock",
+        ROOT / "rust-toolchain.toml",
+        ROOT / ".cargo/config.toml",
+    ]
     for crate in sorted(p.name for p in (ROOT / "crates").iterdir() if p.is_dir()):
         paths.extend(p for p in (ROOT / "crates" / crate).rglob("*") if p.is_file())
     paths.extend(ROOT / p for p in RECEIPT_ORACLE_PATHS)

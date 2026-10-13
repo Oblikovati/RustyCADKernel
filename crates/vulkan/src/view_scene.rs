@@ -13,10 +13,13 @@ pub(crate) fn frame_for_view(
     validate_view(view)?;
     crate::retained_texture_images::prune_view_texture_snapshots(view)?;
     let camera = crate::view_render_camera::owned_render_camera(view);
-    let mut passes = view_layer_passes(view, extent, &camera, clipping)?;
+    let (mut passes, rendering) = view_layer_passes(view, extent, &camera, clipping)?;
     apply_view_culling(&mut passes, view.backfacing_model());
     crate::retained_lighting::apply_view_lights(&mut passes, view)?;
-    RenderFrame::with_layers(extent[0], extent[1], view_clear_color(view), passes)
+    let mut frame = RenderFrame::with_layers(extent[0], extent[1], view_clear_color(view), passes)?;
+    frame.raster = crate::retained_transparency::view_raster_settings(view, &rendering)?;
+    crate::compatibility_text_color::capture_text_color_target(&mut frame);
+    Ok(frame)
 }
 struct ViewLayerInputs<'a> {
     camera: &'a Graphic3dCamera,
@@ -59,17 +62,18 @@ fn view_layer_passes(
     extent: [u32; 2],
     camera: &Graphic3dCamera,
     clipping: &dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
-) -> Result<Vec<RenderLayer>, RenderError> {
+) -> Result<(Vec<RenderLayer>, Graphic3dRenderingParams), RenderError> {
     let mut layers = view.layers();
     // OpenGl_FilteredIndexedLayerIterator renders normal layers before immediate ones.
     layers.sort_by_key(|layer| layer.is_immediate());
     update_view_culling(view, &layers, extent)?;
     let inputs = ViewLayerInputs::new(view, extent, camera, clipping);
-    layers
+    let passes = layers
         .iter()
         .filter(|layer| layer_selected(view, layer.layer_id()))
         .map(|layer| inputs.layer(layer))
-        .collect()
+        .collect::<Result<Vec<_>, _>>()?;
+    Ok((passes, inputs.rendering))
 }
 fn view_clear_color(view: &dyn Graphic3dCView) -> [f32; 4] {
     let color = view.cview_base().fields.read().bg_color;
@@ -175,9 +179,7 @@ fn structure_draws(
 fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     let params = view.rendering_params();
     if params.method != Graphic3dRenderingMode::Rasterization
-        || params.nb_msaa_samples != 0
         || params.render_resolution_scale != 1.0
-        || params.transparency_method != Graphic3dRenderTransparentMethod::BlendUnordered
     {
         return Err(rejected(
             (
@@ -186,7 +188,7 @@ fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> 
                 params.render_resolution_scale,
                 params.transparency_method,
             ),
-            "single-sample rasterization at scale 1 with unordered blending",
+            "rasterization at scale 1",
         ));
     }
     Ok(())
