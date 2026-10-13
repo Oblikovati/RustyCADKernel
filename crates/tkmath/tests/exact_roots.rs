@@ -9,6 +9,7 @@ mod bernstein;
 mod bezier_line;
 mod limits;
 mod oracle;
+mod signs;
 fn options(width: f64) -> RootIsolationOptions {
     RootIsolationOptions::new(width)
 }

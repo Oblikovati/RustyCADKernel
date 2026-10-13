@@ -8,6 +8,8 @@ mod dyadic;
 mod error;
 mod isolate;
 mod polynomial;
+/// Exact signs of a second polynomial at each isolated source root.
+pub mod signs;
 pub use dyadic::DyadicBound;
 pub use error::RootIsolationError;
 

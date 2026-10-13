@@ -79,10 +79,32 @@ impl IntegerPolynomial {
             remainder.cancel_leading_term(divisor);
             remainder.reduce_content();
         }
-        for coefficient in &mut remainder.0 {
+        Ok(remainder.negated())
+    }
+    pub fn negated(mut self) -> Self {
+        for coefficient in &mut self.0 {
             *coefficient = -coefficient.clone();
         }
-        Ok(remainder)
+        self
+    }
+    pub fn multiply(
+        &self,
+        other: &Self,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<Self, RootIsolationError> {
+        if self.0.is_empty() || other.0.is_empty() {
+            return Ok(Self(Vec::new()));
+        }
+        let mut product = vec![BigInt::from(0); self.0.len() + other.0.len() - 1];
+        for (left_power, left) in self.0.iter().enumerate() {
+            for (right_power, right) in other.0.iter().enumerate() {
+                poll(cancelled)?;
+                product[left_power + right_power] += left * right;
+            }
+        }
+        let mut polynomial = Self(product);
+        polynomial.reduce_content();
+        Ok(polynomial)
     }
     fn cancel_leading_term(&mut self, divisor: &Self) {
         let offset = self.degree() - divisor.degree();

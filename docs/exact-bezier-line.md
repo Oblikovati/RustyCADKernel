@@ -3,6 +3,8 @@
 Tracking: [kernel issue #10](https://github.com/Oblikovati/RustyCADKernel/issues/10).
 Decision: [ADR 0006](adr/0006-exact-bezier-line-parameters.md). Base: kernel
 `8c764eb99`, following the exact Bernstein conversion from ADR 0005.
+The later [algebraic root-sign operation](exact-root-signs.md) supplies the
+next numerical prerequisite for directed ray-side classification.
 
 `tkmath::predicates::roots::bezier_line::intersect_bezier_line` accepts immutable
 planar control points, optional weights, two distinct line endpoints, a closed

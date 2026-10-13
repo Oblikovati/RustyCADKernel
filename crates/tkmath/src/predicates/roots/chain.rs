@@ -15,10 +15,18 @@ impl SturmChain {
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<Self, RootIsolationError> {
         poll(cancelled)?;
-        let mut members = vec![polynomial];
-        if members[0].degree() > 0 {
-            members.push(members[0].derivative());
+        let derivative = polynomial.derivative();
+        Self::from_pair(polynomial, derivative, cancelled)
+    }
+    pub fn from_pair(
+        polynomial: IntegerPolynomial,
+        second: IntegerPolynomial,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<Self, RootIsolationError> {
+        if second.0.is_empty() {
+            return Ok(Self(vec![polynomial]));
         }
+        let mut members = vec![polynomial, second];
         while members.last().is_some_and(|last| last.degree() > 0) {
             let last = members.len() - 1;
             let remainder = members[last - 1].negative_remainder(&members[last], cancelled)?;
