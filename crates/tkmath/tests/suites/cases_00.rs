@@ -145,6 +145,8 @@ pub mod elclib_behavior;
 pub mod elslib_behavior;
 #[path = "../empty_bounds_behavior.rs"]
 pub mod empty_bounds_behavior;
+#[path = "../exact_orientation.rs"]
+pub mod exact_orientation;
 #[path = "../frame_behavior.rs"]
 pub mod frame_behavior;
 #[path = "../frame_constructor_behavior.rs"]
@@ -253,5 +255,3 @@ pub mod math_crout;
 pub mod math_direct_polynomial_roots;
 #[path = "../math_double_tab.rs"]
 pub mod math_double_tab;
-#[path = "../math_eigen_values_searcher.rs"]
-pub mod math_eigen_values_searcher;
