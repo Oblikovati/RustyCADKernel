@@ -33,3 +33,6 @@ pub mod bsplslib;
 pub mod convert;
 pub mod geom_abs;
 pub mod plib;
+
+/// Exact signs for extension topology; mapped OCCT predicates are unchanged.
+pub mod predicates;
