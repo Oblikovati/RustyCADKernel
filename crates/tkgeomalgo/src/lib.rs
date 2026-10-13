@@ -45,3 +45,6 @@ pub mod nl_plate;
 pub mod plate;
 pub mod topclass;
 pub mod toptrans;
+
+/// Owned sketch spline construction; extension ADR 0011.
+pub mod sketch_spline;
