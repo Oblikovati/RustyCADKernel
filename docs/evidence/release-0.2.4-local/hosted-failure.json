@@ -1,0 +1,49 @@
+{
+  "run_id": 38353583807,
+  "url": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38353583807",
+  "status": "completed",
+  "conclusion": "failure",
+  "release_published": false,
+  "tag": "v0.2.4",
+  "tag_rewritten": false,
+  "jobs": [
+    {
+      "name": "owner-checks / vulkan-runtime",
+      "conclusion": "success"
+    },
+    {
+      "name": "owner-checks / coverage",
+      "conclusion": "success"
+    },
+    {
+      "name": "owner-checks / rust (ubuntu-latest)",
+      "conclusion": "success"
+    },
+    {
+      "name": "owner-checks / tools",
+      "conclusion": "success"
+    },
+    {
+      "name": "owner-checks / inventory",
+      "conclusion": "success"
+    },
+    {
+      "name": "owner-checks / dependencies",
+      "conclusion": "success"
+    },
+    {
+      "name": "package",
+      "conclusion": "failure"
+    },
+    {
+      "name": "publish",
+      "conclusion": "skipped"
+    }
+  ],
+  "remaining_archive_failures": [
+    "ais_textured_shape_native_replay::textured_native_mapping_assets_replay_on_either_actual_device",
+    "triangle_edge_replay::scoped_native_edge_and_mapped_line_assets_replay_without_occt",
+    "xr_device_presentations::xr_real_presentations_replay_native_captures_on_each_device"
+  ],
+  "cause": "unproved; immutable same-runner source versus extracted-package diagnostic pending"
+}

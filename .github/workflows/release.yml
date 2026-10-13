@@ -3,6 +3,11 @@ on:
   push:
     tags: ['v[0-9]*']
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing immutable release tag (for example v0.2.5)
+        required: true
+        type: string
 permissions:
   contents: read
 # Match CI's bounded test artifact profile for the extracted archive checks.
@@ -15,47 +20,98 @@ env:
   GALLIUM_OVERRIDE_CPU_CAPS: sse2
   LP_NATIVE_VECTOR_WIDTH: '128'
 concurrency:
-  group: martensite-release-${{ github.ref }}
+  group: martensite-release-${{ inputs.release_tag || github.ref_name }}
   cancel-in-progress: false
 jobs:
-  owner-checks:
-    uses: ./.github/workflows/ci.yml
-  package:
-    needs: owner-checks
+  resolve:
     runs-on: ubuntu-24.04
+    outputs:
+      tag: ${{ steps.release.outputs.tag }}
+      revision: ${{ steps.release.outputs.revision }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Require a release tag
+      - name: Resolve the requested immutable release
+        id: release
         env:
-          RELEASE_REF: ${{ github.ref }}
-        run: '[[ "$RELEASE_REF" == refs/tags/v* ]]'
+          RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
+        run: |
+          [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          revision=$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")
+          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "revision=$revision" >> "$GITHUB_OUTPUT"
+  owner-checks:
+    needs: resolve
+    uses: ./.github/workflows/ci.yml
+    with:
+      source_ref: ${{ needs.resolve.outputs.revision }}
+  package:
+    needs: [resolve, owner-checks]
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: kernel
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.resolve.outputs.revision }}
+          path: kernel
+          fetch-depth: 0
+          persist-credentials: false
+      # Repaired orchestration may verify older immutable kernel tags.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          path: release-tools
+          persist-credentials: false
       - name: Install native test prerequisites
         run: |
           sudo apt-get update
           sudo apt-get install -y pkg-config tcl8.6-dev tk8.6-dev libfreetype-dev libfontconfig-dev libx11-dev libvulkan1 mesa-vulkan-drivers vulkan-validationlayers
           echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
-          python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
+          python3 ../release-tools/tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
       - run: rustup show
-      - run: python3 tools/run_tool_tests.py --jobs 2 --pattern 'test_release_*.py'
+      - run: python3 ../release-tools/tools/run_tool_tests.py --jobs 2 --pattern 'test_release_*.py'
       - name: Package and test extracted crates
+        shell: bash
         env:
-          RELEASE_TAG: ${{ github.ref_name }}
-        run: python3 tools/release_packages.py --tag "$RELEASE_TAG"
+          RELEASE_TAG: ${{ needs.resolve.outputs.tag }}
+        run: |
+          set -euo pipefail
+          mkdir -p target/release-diagnostics
+          python3 ../release-tools/tools/release_packages.py --root . --tag "$RELEASE_TAG" 2>&1 | tee target/release-diagnostics/package.log
+      - name: Retain release runner context after package tests
+        if: always()
+        run: |
+          mkdir -p target/release-diagnostics
+          lscpu > target/release-diagnostics/cpu.txt
+          dpkg-query -W mesa-vulkan-drivers 'libllvm*' libvulkan1 > target/release-diagnostics/packages.txt
+          rustc -vV > target/release-diagnostics/rustc.txt
+          df -h / > target/release-diagnostics/disk.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: martensite-release-diagnostics
+          path: kernel/target/release-diagnostics/*
+          if-no-files-found: warn
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: martensite-release
-          path: target/releases/${{ github.ref_name }}/*
+          path: kernel/target/releases/${{ needs.resolve.outputs.tag }}/*
           if-no-files-found: error
   publish:
-    needs: package
+    needs: [resolve, package]
     environment: kernel-release
     permissions:
       contents: write
     runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: martensite-release
@@ -64,14 +120,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          RELEASE_TAG: ${{ github.ref_name }}
+          RELEASE_TAG: ${{ needs.resolve.outputs.tag }}
+          RELEASE_REVISION: ${{ needs.resolve.outputs.revision }}
         shell: bash
         run: |
-          cd release
-          sha256sum --check SHA256SUMS
-          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
-            echo "Release $RELEASE_TAG already exists; expected a new immutable release."
-            exit 1
-          fi
-          gh release create "$RELEASE_TAG" --verify-tag --draft --title "Martensite $RELEASE_TAG" --generate-notes ./*
-          gh release edit "$RELEASE_TAG" --draft=false --prerelease=false --latest=false
+          python3 tools/publish_release.py --artifacts release --tag "$RELEASE_TAG" --revision "$RELEASE_REVISION" --repository "$GH_REPO"

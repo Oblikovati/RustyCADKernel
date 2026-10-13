@@ -65,7 +65,7 @@ checksum = "b0d28e293f2b8c9d2b2d1c0193bd3c1cbdc0d2cf396888dc01162f7cf9d6c3f3"
 
 [[package]]
 name = "martensite-vulkan"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "ash",
  "rustycad-tkbrep",
@@ -80,10 +80,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "num-bigint"
+version = "0.4.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a5e44f723f1133c9deac646763579fdb3ac745e418f2a7af9cd0c431da1f20b9"
+dependencies = [
+ "num-integer",
+ "num-traits",
+]
+
+[[package]]
 name = "num-complex"
 version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495"
+dependencies = [
+ "num-traits",
+]
+
+[[package]]
+name = "num-integer"
+version = "0.1.47"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7ce2d95d4b3734dc35aa2f45e1aa22cd416814592a4f9d9205e11affd5b8e10b"
 dependencies = [
  "num-traits",
 ]
@@ -121,26 +140,26 @@ dependencies = [
 
 [[package]]
 name = "rustycad-cmath"
-version = "0.2.4"
+version = "0.2.5"
 
 [[package]]
 name = "rustycad-kernel"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkernel",
 ]
 
 [[package]]
 name = "rustycad-parity"
-version = "0.2.4"
+version = "0.2.5"
 
 [[package]]
 name = "rustycad-tcl"
-version = "0.2.4"
+version = "0.2.5"
 
 [[package]]
 name = "rustycad-tkbo"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -158,7 +177,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkbool"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbo",
  "rustycad-tkbrep",
@@ -175,7 +194,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkbrep"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkernel",
  "rustycad-tkg2d",
@@ -188,7 +207,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkcaf"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbo",
  "rustycad-tkbrep",
@@ -205,14 +224,14 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkcdf"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkernel",
 ]
 
 [[package]]
 name = "rustycad-tkde"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -222,7 +241,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkdraw"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "libc",
  "rustycad-tcl",
@@ -241,7 +260,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkernel"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "allocator-api2",
  "bytemuck",
@@ -257,7 +276,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkexpress"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-cmath",
  "rustycad-tkernel",
@@ -265,7 +284,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkfillet"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbo",
  "rustycad-tkbool",
@@ -283,7 +302,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkg2d"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-cmath",
  "rustycad-tkernel",
@@ -294,7 +313,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkg3d"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-cmath",
  "rustycad-tkernel",
@@ -304,7 +323,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkgeomalgo"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -318,7 +337,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkgeombase"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-cmath",
  "rustycad-tkernel",
@@ -329,7 +348,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkhelix"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -343,7 +362,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkhlr"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -358,7 +377,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tklcaf"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkcdf",
  "rustycad-tkernel",
@@ -366,8 +385,9 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkmath"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
+ "num-bigint",
  "num-complex",
  "rustc_apfloat",
  "rustycad-cmath",
@@ -381,7 +401,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkmesh"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "allocator-api2",
  "rustycad-tkbrep",
@@ -398,7 +418,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkoffset"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbo",
  "rustycad-tkbool",
@@ -417,7 +437,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkprim"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -431,7 +451,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkservice"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "libc",
  "rustycad-tkernel",
@@ -442,7 +462,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkshhealing"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -457,7 +477,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tktopalgo"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -471,7 +491,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkv3d"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",
@@ -488,7 +508,7 @@ dependencies = [
 
 [[package]]
 name = "rustycad-tkxsbase"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "rustycad-tkbrep",
  "rustycad-tkernel",

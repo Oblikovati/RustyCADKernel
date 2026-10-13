@@ -159,6 +159,8 @@ pub mod brep_tools_history_legacy;
 pub mod connexity;
 #[path = "../empty_shape.rs"]
 pub mod empty_shape;
+#[path = "../exact_region_prism.rs"]
+pub mod exact_region_prism;
 #[path = "../face_off.rs"]
 pub mod face_off;
 #[path = "../int_tools_algorithms.rs"]

@@ -8,11 +8,13 @@ Requires Python 3.12+, the pinned Rust toolchain, and native build prerequisites
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
 import gzip
 from pathlib import Path
 import tempfile
 import tarfile
 
+from release_failure_commands import ReleaseDiagnosticCommands
 from release_archives import seal_release, stage_workspace
 from release_inventory import (
     Commands,
@@ -62,6 +64,22 @@ def test_profile(
 
 def build_release(root: Path, tag: str, commands: Commands) -> Path:
     """Produce tested assets only for a clean tagged revision; example: ``build_release(root, 'v0.1.0', runner)``."""
+    crates, revision, output = release_plan(root, tag, commands)
+    prepare_release_packages(root, commands)
+    verify_extracted_release(root, tag, revision, commands, crates)
+    checked_revision = release_revision(root, commands, tag)
+    if checked_revision != revision:
+        raise ValueError(
+            f"release revision={checked_revision!r}: expected unchanged {revision!r}"
+        )
+    seal_release(root / "target/package", output, crates, revision, root / "Cargo.lock")
+    return output
+
+
+def release_plan(
+    root: Path, tag: str, commands: Commands
+) -> tuple[list[ReleaseCrate], str, Path]:
+    """Validate identity before creating receipts; e.g. release_plan(root, 'v0.2.3', runner)."""
     crates = release_inventory(root, commands)
     if tag != f"v{crates[0].version}":
         raise ValueError(f"release tag {tag!r}: expected v{crates[0].version}")
@@ -69,17 +87,46 @@ def build_release(root: Path, tag: str, commands: Commands) -> Path:
     output = root / "target/releases" / tag
     if output.exists():
         raise ValueError(f"release output {str(output)!r}: expected a new directory")
+    return crates, revision, output
+
+
+def prepare_release_packages(root: Path, commands: Commands) -> None:
+    """Keep existing discovery/package ordering; e.g. prepare_release_packages(root, runner)."""
     # Run 38315068263 exposed a regression module missing from generated test groups.
     commands.run(["python3", "tools/toolkit_test_suites.py"], root)
     # Cargo cannot resolve unpublished registry siblings. Verify the whole archive
     # set below instead; retain the owner lockfile as a separate release asset.
     commands.run(
-        ["cargo", "package", "--workspace", "--no-verify", "--exclude-lockfile"], root
+        [
+            "cargo",
+            "package",
+            "--workspace",
+            "--locked",
+            "--no-verify",
+            "--exclude-lockfile",
+        ],
+        root,
     )
     package_test_support(root, commands)
+
+
+def verify_extracted_release(
+    root: Path, tag: str, revision: str, commands: Commands, crates: list[ReleaseCrate]
+) -> None:
+    """Keep cold failure receipts outside deleted stage; e.g. verify_extracted_release(root, tag, sha, runner, crates)."""
     with tempfile.TemporaryDirectory(prefix="martensite-packages-") as temporary:
-        test_archives(root, Path(temporary) / "workspace", commands, crates)
-    seal_release(root / "target/package", output, crates, revision, root / "Cargo.lock")
+        diagnostics = Path(
+            tempfile.mkdtemp(prefix=f"{tag}-", dir=diagnostic_root(root))
+        )
+        logged = ReleaseDiagnosticCommands(commands, diagnostics / "commands")
+        logged.write_json("release.json", {"tag": tag, "revision": revision})
+        test_archives(root, Path(temporary) / "workspace", logged, crates)
+
+
+def diagnostic_root(root: Path) -> Path:
+    """Keep receipts outside removable stages; e.g. diagnostic_root(root)."""
+    output = root / "target/release-diagnostics"
+    output.mkdir(parents=True, exist_ok=True)
     return output
 
 
@@ -110,13 +157,29 @@ def release_metadata(member: tarfile.TarInfo) -> tarfile.TarInfo:
     )
 
 
-def main() -> None:
-    """Run the tagged owner-side release check; example: ``python3 tools/release_packages.py --tag v0.1.0``."""
+@dataclass(frozen=True)
+class ReleaseArguments:
+    """Separate immutable kernel checkout from the checkout owning orchestration."""
+
+    tag: str
+    root: Path
+
+
+def parse_release_arguments(arguments: list[str] | None = None) -> ReleaseArguments:
+    """Select the kernel checkout explicitly; e.g. parse_release_arguments(['--tag', 'v0.2.3', '--root', '../kernel'])."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tag", required=True)
-    arguments = parser.parse_args()
-    root = Path(__file__).resolve().parents[1]
-    print(build_release(root, arguments.tag, SystemCommands()))
+    parser.add_argument(
+        "--root", type=Path, default=Path(__file__).resolve().parents[1]
+    )
+    selected = parser.parse_args(arguments)
+    return ReleaseArguments(tag=selected.tag, root=selected.root.resolve())
+
+
+def main() -> None:
+    """Run current tools against a tagged kernel; e.g. python3 tools/release_packages.py --tag v0.2.3 --root ../kernel."""
+    arguments = parse_release_arguments()
+    print(build_release(arguments.root, arguments.tag, SystemCommands()))
 
 
 if __name__ == "__main__":

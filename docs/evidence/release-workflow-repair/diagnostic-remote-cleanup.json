@@ -1,0 +1,20 @@
+{
+  "integration_revision": "bcec8667d836b0744830a4e324fc5375053a348b",
+  "deleted_remote_branches": {
+    "diagnostics/release-0.2.3": "d58c86dab4e376709c5fa99a2aa51d23f4935701",
+    "diagnostics/release-0.2.4-cold-archives": "bbb46536258628772677f4d400ec43c461fda67d",
+    "diagnostics/release-0.2.4-source-archives": "7f10bad9c86824498acf4260698816f024e80d7d",
+    "diagnostics/release-0.2.5-current-vulkan": "8825623cfbe56b55759af0eefdd951839f98f722"
+  },
+  "checks": [
+    "all four tips verified ancestors of main",
+    "no live workflow runs on those branches",
+    "remote diagnostic refs absent after deletion",
+    "completed worktrees already physically deleted; no checkout archive"
+  ],
+  "preserved": [
+    "five unfinished porting worktrees",
+    "immutable release tags",
+    "release evidence and sealed assets"
+  ]
+}

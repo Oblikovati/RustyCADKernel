@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import sys
 from typing import Protocol
 
 
@@ -25,11 +26,20 @@ class Commands(Protocol):
 class SystemCommands:
     """Execute commands without a shell and preserve their failure diagnostics."""
 
+    last_stderr: str = ""
+
     def run(self, arguments: list[str], root: Path) -> str:
         """Return stdout, for example ``run(['cargo', '--version'], root)``."""
         result = subprocess.run(
-            arguments, cwd=root, text=True, stdout=subprocess.PIPE, check=False
+            arguments,
+            cwd=root,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
         )
+        self.last_stderr = result.stderr
+        print(result.stderr, end="", file=sys.stderr, flush=True)
         if result.returncode:
             print(result.stdout, end="", flush=True)
             result.check_returncode()

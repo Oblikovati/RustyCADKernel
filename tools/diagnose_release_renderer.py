@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import subprocess
 import time
+from renderer_process_maps import run_observed_command
 
 REVISION = "11a4c51420695911ea94d9b4be23c11df21a0d55"
 FILTERS = (
@@ -36,6 +37,34 @@ CAPTURES = (
 )
 
 
+DIAGNOSTIC_ENVIRONMENT_KEYS = (
+    "VK_DRIVER_FILES",
+    "VK_LAYER_PATH",
+    "LD_LIBRARY_PATH",
+    "LD_PRELOAD",
+    "VK_LOADER_DEBUG",
+    "GALLIUM_OVERRIDE_CPU_CAPS",
+    "LP_NATIVE_VECTOR_WIDTH",
+    "LP_NUM_THREADS",
+    "GALLIVM_PERF",
+    "LLVM_TARGET_FEATURES",
+    "DISPLAY",
+    "MARTENSITE_VULKAN_DEVICE",
+    "RUST_TEST_THREADS",
+    "RUSTFLAGS",
+    "CARGO_ENCODED_RUSTFLAGS",
+    "RUSTUP_TOOLCHAIN",
+    "CARGO_INCREMENTAL",
+    "CARGO_PROFILE_DEV_DEBUG",
+    "CARGO_PROFILE_TEST_DEBUG",
+    "CARGO_PROFILE_DEV_OPT_LEVEL",
+    "CARGO_PROFILE_TEST_OPT_LEVEL",
+    "CARGO_BUILD_JOBS",
+    "MESA_SHADER_CACHE_DISABLE",
+    "MESA_SHADER_CACHE_DIR",
+)
+
+
 @dataclass(frozen=True)
 class DiagnosticCommandResult:
     label: str
@@ -52,7 +81,8 @@ class DiagnosticBinary:
 
 
 class RendererDiagnosticProcess:
-    def __init__(self, root: Path, output: Path) -> None:
+    def __init__(self, root: Path, output: Path, revision: str = REVISION) -> None:
+        self.revision = revision
         self.root = root
         self.output = output
         self.results: list[DiagnosticCommandResult] = []
@@ -60,9 +90,7 @@ class RendererDiagnosticProcess:
     def run(self, label: str, arguments: list[str]) -> subprocess.CompletedProcess[str]:
         """Retain stdout/stderr and real exit status; `probe.run('cpu', ['lscpu'])`."""
         started = time.monotonic()
-        result = subprocess.run(
-            arguments, cwd=self.root, capture_output=True, text=True, check=False
-        )
+        result = run_observed_command(arguments, self.root, self.output / label)
         (self.output / f"{label}.stdout").write_text(result.stdout)
         (self.output / f"{label}.stderr").write_text(result.stderr)
         self.results.append(
@@ -76,7 +104,7 @@ class RendererDiagnosticProcess:
     def persist(self) -> None:
         """Retain every completed command even before later failures; `probe.persist()`."""
         payload = {
-            "revision": REVISION,
+            "revision": self.revision,
             "release_guards_unchanged": True,
             "commands": [asdict(result) for result in self.results],
         }
@@ -112,9 +140,9 @@ def cargo_executables(output: str) -> list[DiagnosticBinary]:
 def record_source(probe: RendererDiagnosticProcess) -> None:
     """Prove immutable checkout and compiled inputs; `record_source(probe)`."""
     revision = probe.run("source-head", ["git", "rev-parse", "HEAD"])
-    if revision.stdout.strip() != REVISION:
+    if revision.stdout.strip() != probe.revision:
         raise ValueError(
-            f"received revision={revision.stdout.strip()!r}; expected immutable {REVISION}"
+            f"received revision={revision.stdout.strip()!r}; expected immutable {probe.revision}"
         )
     probe.run("source-status", ["git", "status", "--porcelain"])
     files = probe.run("source-files", ["git", "ls-files", "-z"])
@@ -196,44 +224,48 @@ def linked_library_paths(linked: str) -> list[Path]:
 
 def record_environment(probe: RendererDiagnosticProcess) -> None:
     """Capture only rendering selection variables; `record_environment(probe)`."""
-    selected = {
-        name: os.environ.get(name)
-        for name in (
-            "VK_DRIVER_FILES",
-            "VK_LAYER_PATH",
-            "LD_LIBRARY_PATH",
-            "GALLIUM_OVERRIDE_CPU_CAPS",
-            "LP_NATIVE_VECTOR_WIDTH",
-            "LLVM_TARGET_FEATURES",
-            "DISPLAY",
-        )
-    }
+    selected = {name: os.environ.get(name) for name in DIAGNOSTIC_ENVIRONMENT_KEYS}
     (probe.output / "environment.json").write_text(json.dumps(selected, indent=2))
 
 
-def build_artifacts(probe: RendererDiagnosticProcess) -> list[DiagnosticBinary]:
+def build_artifacts(
+    probe: RendererDiagnosticProcess,
+    captures: tuple[tuple[str, str, str], ...] = CAPTURES,
+) -> list[DiagnosticBinary]:
     """Build only immutable test/capture targets; `build_artifacts(probe)`."""
     common = ["-p", "martensite-vulkan", "--locked", "--message-format=json"]
     test = probe.run(
         "build-toolkit", ["cargo", "test", *common, "--test", "toolkit", "--no-run"]
     )
-    arguments = ["cargo", "build", *common]
-    for example, _, _ in CAPTURES:
-        arguments.extend(["--example", example])
-    captures = probe.run("build-captures", arguments)
-    if test.returncode or captures.returncode:
+    captured = build_capture_targets(probe, common, captures)
+    if test.returncode or captured.returncode:
         raise ValueError(
-            f"received Cargo exits={test.returncode},{captures.returncode}; expected successful immutable builds"
+            f"received Cargo exits={test.returncode},{captured.returncode}; expected successful immutable builds"
         )
-    artifacts = cargo_executables(test.stdout) + cargo_executables(captures.stdout)
+    artifacts = cargo_executables(test.stdout) + cargo_executables(captured.stdout)
     (probe.output / "binaries-before.json").write_text(
         json.dumps([asdict(item) for item in artifacts], indent=2)
     )
     return artifacts
 
 
+def build_capture_targets(
+    probe: RendererDiagnosticProcess,
+    common: list[str],
+    captures: tuple[tuple[str, str, str], ...],
+) -> subprocess.CompletedProcess[str]:
+    """Build exactly the requested raw capture targets; `build_capture_targets(probe, common, captures)`."""
+    arguments = ["cargo", "build", *common]
+    for example, _, _ in captures:
+        arguments.extend(["--example", example])
+    return probe.run("build-captures", arguments)
+
+
 def replay_and_capture(
-    probe: RendererDiagnosticProcess, artifacts: list[DiagnosticBinary]
+    probe: RendererDiagnosticProcess,
+    artifacts: list[DiagnosticBinary],
+    filters: tuple[str, ...] = FILTERS,
+    captures: tuple[tuple[str, str, str], ...] = CAPTURES,
 ) -> None:
     """Keep strict red tests separate from successful raw captures; `replay_and_capture(probe, artifacts)`."""
     binaries = {artifact.name: artifact.path for artifact in artifacts}
@@ -241,8 +273,19 @@ def replay_and_capture(
         raise ValueError(
             f"received targets={sorted(binaries)}; expected compiled toolkit"
         )
-    replay_strict_filters(probe, binaries["toolkit"])
-    for example, mode, label in CAPTURES:
+    replay_strict_filters(probe, binaries["toolkit"], filters)
+    replay_raw_captures(probe, binaries, captures)
+    record_binary_bookend(probe, artifacts)
+    record_buffer_hashes(probe)
+
+
+def replay_raw_captures(
+    probe: RendererDiagnosticProcess,
+    binaries: dict[str, str],
+    captures: tuple[tuple[str, str, str], ...],
+) -> None:
+    """Preserve actual raw captures even after red replays; `replay_raw_captures(probe, binaries, captures)`."""
+    for example, mode, label in captures:
         if example not in binaries:
             raise ValueError(
                 f"received targets={sorted(binaries)}; expected capture target {example}"
@@ -250,8 +293,6 @@ def replay_and_capture(
         probe.run(
             f"capture-{label}", [binaries[example], mode, str(probe.output / label)]
         )
-    record_binary_bookend(probe, artifacts)
-    record_buffer_hashes(probe)
 
 
 def record_buffer_hashes(probe: RendererDiagnosticProcess) -> None:
@@ -266,9 +307,11 @@ def record_buffer_hashes(probe: RendererDiagnosticProcess) -> None:
     )
 
 
-def replay_strict_filters(probe: RendererDiagnosticProcess, binary: str) -> None:
+def replay_strict_filters(
+    probe: RendererDiagnosticProcess, binary: str, filters: tuple[str, ...] = FILTERS
+) -> None:
     """Retain every real strict-test verdict; `replay_strict_filters(probe, toolkit)`."""
-    for name in FILTERS:
+    for name in filters:
         probe.run(f"strict-{name}", [binary, name, "--nocapture"])
 
 
@@ -283,17 +326,34 @@ def record_binary_bookend(
     (probe.output / "binaries-after.json").write_text(
         json.dumps([asdict(item) for item in after], indent=2)
     )
+    require_binary_bookend(artifacts, after)
+
+
+def require_binary_bookend(
+    before: list[DiagnosticBinary], after: list[DiagnosticBinary]
+) -> None:
+    """Reject a changed executable after preserving evidence; `require_binary_bookend(before, after)`."""
+    if before != after:
+        changed = [
+            item.path
+            for item, fresh in zip(before, after, strict=True)
+            if item != fresh
+        ]
+        raise ValueError(
+            f"received changed diagnostic binaries={changed}; expected unchanged capture/replay executables"
+        )
 
 
 def main() -> None:
     """Run diagnostic evidence, not release approval; `main()` via the explicit workflow."""
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--revision", default=REVISION)
     parser.add_argument("--root", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    probe = RendererDiagnosticProcess(args.root.resolve(), output)
+    probe = RendererDiagnosticProcess(args.root.resolve(), output, args.revision)
     record_source(probe)
     record_driver(probe)
     replay_and_capture(probe, build_artifacts(probe))
