@@ -27,6 +27,14 @@ impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> HandleReference<U>
     fn reference_address(&self) -> *const () {
         self.source.reference_address()
     }
+    fn object_address(&self) -> *const () {
+        // OCCT 3d097a0 Standard_Handle.hxx:122 reads the pointer without RTTI or pointee access.
+        self.source.object_address()
+    }
+    fn is_null(&self) -> bool {
+        // OCCT 3d097a0 Standard_Handle.hxx:94 tests entity, even after virtual Delete fails.
+        self.source.is_null()
+    }
 }
 /// Native constHandle reference contract for local slots and retained fields.
 /// Example: `let observed=reference.observe(); assert_eq!(reference.object_address(),observed.object_address())`.
@@ -55,6 +63,12 @@ impl<T: ?Sized + RuntimeTyped> HandleReference<T> for Handle<T> {
     fn reference_address(&self) -> *const () {
         std::ptr::from_ref(self).cast()
     }
+    fn object_address(&self) -> *const () {
+        Handle::object_address(self)
+    }
+    fn is_null(&self) -> bool {
+        Handle::is_null(self)
+    }
 }
 impl<S, T: ?Sized + RuntimeTyped> HandleReference<T> for HandleFieldRef<'_, S, T> {
     fn observe(&self) -> HandleObserver<T> {
@@ -62,6 +76,12 @@ impl<S, T: ?Sized + RuntimeTyped> HandleReference<T> for HandleFieldRef<'_, S, T
     }
     fn reference_address(&self) -> *const () {
         HandleFieldRef::reference_address(self)
+    }
+    fn object_address(&self) -> *const () {
+        HandleFieldRef::object_address(self)
+    }
+    fn is_null(&self) -> bool {
+        HandleFieldRef::is_null(self)
     }
 }
 #[cfg(test)]
