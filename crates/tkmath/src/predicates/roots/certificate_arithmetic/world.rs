@@ -1,38 +1,39 @@
 // SPDX-License-Identifier: GPL-2.0-only
-use super::super::super::RootBracket;
-use super::super::BezierLineQuery;
-use super::{
-    enclosure::{RatioInterval, bernstein_enclosure},
-    rational::ExactRatio,
-    rounding,
+use super::super::RootBracket;
+use super::super::bezier_line::BezierLineQuery;
+use crate::predicates::roots::certificate_arithmetic::{
+    ExactRatio, RatioInterval, bernstein_enclosure, rounding,
 };
 
-pub(super) struct HomogeneousCurve {
+pub(in crate::predicates::roots) struct HomogeneousCurve {
     coordinates: [Vec<ExactRatio>; 2],
     denominator: Vec<ExactRatio>,
 }
-pub(super) struct WorldEnvelope {
+pub(in crate::predicates::roots) struct WorldEnvelope {
     pub bounds: [[f64; 2]; 2],
     pub point: [f64; 2],
     pub achieved_error: f64,
     pub error_squared: ExactRatio,
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(super) enum EnvelopeFailure {
+pub(in crate::predicates::roots) enum EnvelopeFailure {
     Cancelled,
     DenominatorUnresolved,
     Binary64Overflow,
 }
 impl HomogeneousCurve {
-    pub(super) fn from_validated(query: BezierLineQuery<'_>) -> Self {
-        let denominator: Vec<ExactRatio> = (0..query.controls.len())
-            .map(|index| {
-                ExactRatio::from_finite(query.weights.map_or(1., |weights| weights[index]))
-            })
+    pub(in crate::predicates::roots) fn from_validated(query: BezierLineQuery<'_>) -> Self {
+        Self::from_controls(query.controls, query.weights)
+    }
+    pub(in crate::predicates::roots) fn from_controls(
+        controls: &[[f64; 2]],
+        weights: Option<&[f64]>,
+    ) -> Self {
+        let denominator: Vec<ExactRatio> = (0..controls.len())
+            .map(|index| ExactRatio::from_finite(weights.map_or(1., |weights| weights[index])))
             .collect();
         let coordinates = std::array::from_fn(|axis| {
-            query
-                .controls
+            controls
                 .iter()
                 .zip(&denominator)
                 .map(|(point, weight)| ExactRatio::from_finite(point[axis]).multiply(weight))
@@ -43,7 +44,7 @@ impl HomogeneousCurve {
             denominator,
         }
     }
-    pub(super) fn enclose(
+    pub(in crate::predicates::roots) fn enclose(
         &self,
         root: &RootBracket,
         cancelled: &mut impl FnMut() -> bool,

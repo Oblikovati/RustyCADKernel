@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::super::RootIsolationOptions;
 use super::super::BezierLineQuery;
-use super::rational::ExactRatio;
 use super::*;
+use crate::predicates::roots::certificate_arithmetic::ExactRatio;
 
 fn rational_query(controls: &[[f64; 2]], domain: BezierLineDomain) -> BezierIncidenceQuery<'_> {
     let curve = BezierLineQuery {

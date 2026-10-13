@@ -1,16 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact enclosure arithmetic; rounding is postponed until a proved endpoint.
-use super::super::super::DyadicBound;
+use super::super::DyadicBound;
 use num_bigint::{BigInt, Sign};
 use std::cmp::Ordering;
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub(super) struct ExactRatio {
+pub(in crate::predicates::roots) struct ExactRatio {
     numerator: BigInt,
     denominator: BigInt,
 }
 impl ExactRatio {
-    pub(super) fn new(mut numerator: BigInt, mut denominator: BigInt) -> Self {
+    pub(in crate::predicates::roots) fn new(
+        mut numerator: BigInt,
+        mut denominator: BigInt,
+    ) -> Self {
         assert_ne!(
             denominator,
             BigInt::from(0),
@@ -26,34 +29,34 @@ impl ExactRatio {
             denominator: denominator / divisor,
         }
     }
-    pub(super) fn from_dyadic(bound: &DyadicBound) -> Self {
+    pub(in crate::predicates::roots) fn from_dyadic(bound: &DyadicBound) -> Self {
         let (numerator, denominator) = bound.ratio();
         Self::new(numerator, denominator)
     }
-    pub(super) fn from_finite(value: f64) -> Self {
+    pub(in crate::predicates::roots) fn from_finite(value: f64) -> Self {
         let bound = DyadicBound::from_f64(value).expect("finite input already validated");
         Self::from_dyadic(&bound)
     }
-    pub(super) fn add(&self, other: &Self) -> Self {
+    pub(in crate::predicates::roots) fn add(&self, other: &Self) -> Self {
         let numerator = &self.numerator * &other.denominator + &other.numerator * &self.denominator;
         Self::new(numerator, &self.denominator * &other.denominator)
     }
-    pub(super) fn negated(&self) -> Self {
+    pub(in crate::predicates::roots) fn negated(&self) -> Self {
         Self::new(-self.numerator.clone(), self.denominator.clone())
     }
-    pub(super) fn subtract(&self, other: &Self) -> Self {
+    pub(in crate::predicates::roots) fn subtract(&self, other: &Self) -> Self {
         let opposite = other.negated();
         self.add(&opposite)
     }
-    pub(super) fn multiply(&self, other: &Self) -> Self {
+    pub(in crate::predicates::roots) fn multiply(&self, other: &Self) -> Self {
         let numerator = &self.numerator * &other.numerator;
         Self::new(numerator, &self.denominator * &other.denominator)
     }
-    pub(super) fn divide(&self, other: &Self) -> Self {
+    pub(in crate::predicates::roots) fn divide(&self, other: &Self) -> Self {
         let numerator = &self.numerator * &other.denominator;
         Self::new(numerator, &self.denominator * &other.numerator)
     }
-    pub(super) fn sign(&self) -> Ordering {
+    pub(in crate::predicates::roots) fn sign(&self) -> Ordering {
         self.numerator.cmp(&BigInt::from(0))
     }
 }

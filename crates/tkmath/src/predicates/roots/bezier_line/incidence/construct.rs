@@ -4,8 +4,8 @@ use super::{
     domain::DomainIsolation,
     refine::{ConstructedRoot, RootConstruction},
     types::*,
-    world::HomogeneousCurve,
 };
+use crate::predicates::roots::certificate_arithmetic::world::HomogeneousCurve;
 
 pub(super) struct ReportConstruction {
     source: BezierIncidenceSource,

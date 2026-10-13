@@ -3,6 +3,7 @@
 mod bernstein;
 /// Exact parameter contacts between a planar Bézier curve and an infinite line.
 pub mod bezier_line;
+mod certificate_arithmetic;
 mod chain;
 mod dyadic;
 mod error;

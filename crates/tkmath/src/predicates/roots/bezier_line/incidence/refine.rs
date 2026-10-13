@@ -3,9 +3,9 @@ use super::super::super::{
     DyadicBound, RootBracket, RootIsolation, RootIsolationOptions, polynomial::IntegerPolynomial,
 };
 use super::super::{ray, solve};
-use super::{
-    rational::ExactRatio,
-    types::*,
+use super::types::*;
+use crate::predicates::roots::certificate_arithmetic::{
+    ExactRatio,
     world::{EnvelopeFailure, HomogeneousCurve, WorldEnvelope},
 };
 
