@@ -5,6 +5,7 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve, GeomLine};
 use rustycad_tkmath::predicates::roots::metric_bounds::{MetricBezier, MetricCurve};
+#[derive(Clone)]
 pub(crate) enum CapturedMetricCurve<const DIM: usize> {
     Bezier {
         poles: Vec<[f64; DIM]>,

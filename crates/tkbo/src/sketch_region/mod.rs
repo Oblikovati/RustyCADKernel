@@ -31,4 +31,4 @@ mod occurrence_tests;
 
 pub(crate) use occurrences::equal_occurrences;
 
-pub(crate) use copy_inputs::{admit_sources, copy_sources};
+pub(crate) use copy_inputs::{admit_sources, copy_sources, original_identity};

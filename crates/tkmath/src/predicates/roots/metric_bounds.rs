@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact supplied-representation geometry; no mapped tolerance algorithm is replaced.
 mod arithmetic;
+mod mapped;
+mod parameter;
+pub use mapped::{
+    TransportedResidualQuery, TransportedResidualReport, certify_transported_residual,
+};
+pub use parameter::MetricParameterMap;
 mod coefficients;
 mod inequality;
 mod proof;
@@ -83,3 +89,6 @@ fn validate_query(query: &PlanarResidualQuery<'_>) -> Result<(), ResidualError> 
 }
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod parameter_tests;

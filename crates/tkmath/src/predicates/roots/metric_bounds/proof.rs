@@ -17,6 +17,14 @@ pub(super) fn decide(
     domain: MetricProofDomain,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<ResidualDecision, ResidualError> {
+    decide_accounted(coefficients, domain, cancelled, &mut || {})
+}
+pub(super) fn decide_accounted(
+    coefficients: Vec<BigInt>,
+    domain: MetricProofDomain,
+    cancelled: &mut impl FnMut() -> bool,
+    completed_split: &mut impl FnMut(),
+) -> Result<ResidualDecision, ResidualError> {
     poll(cancelled)?;
     let polynomial = IntegerPolynomial::accept_zero(IntegerPolynomial::from_integers(
         coefficients,
@@ -30,7 +38,7 @@ pub(super) fn decide(
             proven_squared_upper: domain.upper,
         });
     }
-    stationary_decision(polynomial, domain, cancelled)
+    stationary_decision(polynomial, domain, cancelled, completed_split)
 }
 fn endpoint_violation(
     polynomial: &IntegerPolynomial,
@@ -45,8 +53,9 @@ fn stationary_decision(
     polynomial: IntegerPolynomial,
     domain: MetricProofDomain,
     cancelled: &mut impl FnMut() -> bool,
+    completed_split: &mut impl FnMut(),
 ) -> Result<ResidualDecision, ResidualError> {
-    let (evaluated, upper) = stationary_evaluation(polynomial, domain, cancelled)?;
+    let (evaluated, upper) = stationary_evaluation(polynomial, domain, cancelled, completed_split)?;
     if let Some(witness) = stationary_violation(&evaluated) {
         return Ok(ResidualDecision::Exceeds { witness });
     }
@@ -58,15 +67,17 @@ fn stationary_evaluation(
     polynomial: IntegerPolynomial,
     domain: MetricProofDomain,
     cancelled: &mut impl FnMut() -> bool,
+    completed_split: &mut impl FnMut(),
 ) -> Result<(signs::RootSignEvaluation, DyadicBound), ResidualError> {
     let derivative = polynomial.derivative();
     let tower = chain::multiplicity_tower(derivative.clone(), cancelled)?;
-    let isolation = isolate::isolate(
+    let isolation = isolate::isolate_accounted(
         &tower,
         domain.bounds,
         domain.width,
         domain.options,
         cancelled,
+        completed_split,
     )?;
     let evaluated = signs::evaluate_isolated(derivative, polynomial, isolation, cancelled)?;
     Ok((evaluated, domain.upper))
