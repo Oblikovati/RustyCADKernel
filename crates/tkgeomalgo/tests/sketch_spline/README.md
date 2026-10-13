@@ -56,3 +56,34 @@ caller-supplied fit and seam limits; the fixture comparison bound is not a
 production tolerance policy. The constructor uses the existing native LU
 solver, not Go's Gauss–Jordan implementation, so bitwise solver parity is not
 claimed.
+
+## Active handle corpus
+
+`handle_oracle.go` calls the actual pinned Go `SplineHandles.Activate`,
+`TangentDirection`, `Weight`, and `EntityPolyline` methods. `go-handles.csv`
+contains six cases (three station policies, open/closed), 33 station rows and
+219 sampled positions. Handles at source indices 0 and 2 change direction and
+weight; a coincident endpoint at index 4 retains its natural derivative.
+Station rows are `case,station,index,u,x,y,dx,dy`; sample rows are
+`case,sample,index,u,x,y`. Go's sampled points are oracle observations only;
+production construction and evaluation remain analytic.
+
+`handle_occt_oracle.cpp` builds separate OCCT 8.0.0 cubic Bezier curves from
+those source positions and effective derivatives. It does not use Martensite's
+output poles. `occt-handles-8.0.0.csv` contains 243 rows of
+`case,span,u,x,y,dx,dy,ddx,ddy`, including both sides of each join. Derivatives
+are converted from local Bezier parameter to normalized global parameter.
+The same explicit floating-point fixture bound above applies.
+
+```sh
+GOWORK=/absolute/path/to/go.work go run \
+  crates/tkgeomalgo/tests/sketch_spline/handle_oracle.go > /tmp/handles.csv
+cmp /tmp/handles.csv crates/tkgeomalgo/tests/sketch_spline/go-handles.csv
+g++ -std=c++17 -I../occt-install/include/opencascade \
+  crates/tkgeomalgo/tests/sketch_spline/handle_occt_oracle.cpp \
+  -L../occt-install/lib -Wl,-rpath-link,../occt-install/lib \
+  -lTKG2d -lTKMath -lTKernel -o /tmp/handle-oracle
+LD_LIBRARY_PATH=../occt-install/lib /tmp/handle-oracle /tmp/handles.csv \
+  > /tmp/handles-d2.csv
+cmp /tmp/handles-d2.csv crates/tkgeomalgo/tests/sketch_spline/occt-handles-8.0.0.csv
+```

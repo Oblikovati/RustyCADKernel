@@ -3,12 +3,16 @@
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Point2;
 mod definition;
+mod handles;
 mod knots;
 mod measure;
 mod solve;
 mod stations;
 mod validate;
 pub use definition::SketchSplineDefinition;
+pub use handles::{
+    SketchHandleOptionsV1, SketchHandledSplineReport, SketchSplineHandle, build_handled_spline,
+};
 
 /// The application's Smooth, Chord, and Sweet station policies respectively.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

@@ -58,7 +58,7 @@ fn seam_residuals(curve: &Geom2dBSplineCurve, limits: [f64; 3]) -> Result<[f64; 
     }
     Ok(residuals)
 }
-fn require_residual(residual: f64, limit: f64, context: &str) -> Result<(), Failure> {
+pub(super) fn require_residual(residual: f64, limit: f64, context: &str) -> Result<(), Failure> {
     if !residual.is_finite() || residual > limit {
         return Err(decline(format!(
             "{context}, residual {residual}: expected finite residual <= {limit}"

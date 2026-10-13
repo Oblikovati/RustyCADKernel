@@ -3,6 +3,8 @@
 use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkgeomalgo::sketch_spline::*;
 use rustycad_tkmath::gp::Point2;
+mod handle_parity;
+mod handles;
 mod oracle;
 fn source_points() -> Vec<Point2> {
     [[0.0, 0.0], [0.2, 1.0], [2.0, 1.5], [3.0, -0.5], [1.0, -2.0]]
