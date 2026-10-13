@@ -12,7 +12,7 @@ pub(crate) use outcome::{
     ArrangementSource, OriginalMemberIdentity, OwnedArrangement, RegionSourceId,
 };
 #[cfg(test)]
-mod tests;
+pub(crate) mod tests;
 
 #[cfg(test)]
 mod isolation_tests;

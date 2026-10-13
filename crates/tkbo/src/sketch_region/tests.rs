@@ -13,7 +13,7 @@ use rustycad_tkmath::gp::Point3;
 
 #[path = "../../tests/support/closed_analytic_cubic.rs"]
 mod cubic_fixture;
-pub(super) fn closed_cubic() -> Shape {
+pub(crate) fn closed_cubic() -> Shape {
     // Both diagnostic/native bridge and stage admission use the same authored geometry.
     cubic_fixture::closed_analytic_cubic(1., false)
 }
