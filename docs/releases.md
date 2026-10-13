@@ -65,13 +65,27 @@ archive tests.
 
 ## Publication
 
-`.github/workflows/release.yml` runs on `v*` tags or manual dispatch on a tag.
-It requires the complete reusable kernel CI workflow first, then packages and
-tests the extracted files. Only the final publication job has write permission.
+`.github/workflows/release.yml` runs on `v*` tag pushes. Manual dispatch accepts
+an explicit existing tag so repaired orchestration can test an immutable older
+revision. The resolver rejects branches and malformed versions, peels the tag
+once, and supplies that exact commit to every owner check and the package job.
+Concurrency follows the requested tag. For example:
+
+```sh
+gh workflow run release.yml --ref main -f release_tag=v0.2.5
+```
+
+The complete reusable kernel CI workflow must pass before packaging and testing
+the extracted files. Only the final publication job has write permission.
 It verifies checksums, creates a draft with all assets, and publishes the draft
 as a stable release. An existing release causes an error; assets are not
 replaced.
 A failed Rust, tooling, Vulkan, package, or documentation check prevents publication.
+The package command keeps its original exit through `tee` with `pipefail`.
+A separate diagnostics artifact retains its log and actual CPU, installed driver
+packages, compiler and free-disk context even after a failed package check.
+Runner observation happens after package tests so it does not warm the driver
+before the cold rendering controls.
 Native OCCT comparisons run locally and do not gate publication.
 
 Creating these tools does not certify all kernel capabilities or publish a

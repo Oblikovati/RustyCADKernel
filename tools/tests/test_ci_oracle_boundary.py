@@ -22,7 +22,7 @@ class CiOracleBoundaryTests(unittest.TestCase):
     def test_release_reuses_the_same_ci_boundary(self) -> None:
         workflow = (ROOT / ".github/workflows/release.yml").read_text()
         self.assertIn("uses: ./.github/workflows/ci.yml", workflow)
-        self.assertIn("needs: owner-checks", workflow)
+        self.assertIn("needs: [resolve, owner-checks]", workflow)
         self.assertIn("tools/release_packages.py", workflow)
 
 
