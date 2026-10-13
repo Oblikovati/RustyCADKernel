@@ -42,6 +42,10 @@ fn tangent_walking() -> (IntWalkPWalking, [f64; 4]) {
 #[test]
 fn real_unfinished_walking_cannot_be_complete_analytic_coverage() {
     let (walk, start) = tangent_walking();
+    assert_eq!(
+        include_str!("../../tests/fixtures/self_walking_completion.expected"),
+        "tangent 0  StdFail_NotDone\n"
+    );
     assert!(!walk.is_done());
     assert_eq!(
         walk.nb_points().unwrap_err().exception_type(),
@@ -153,4 +157,42 @@ fn converted_box() -> rustycad_tkbrep::topods::Shape {
     let mut converted =
         BRepBuilderAPINurbsConvert::with_shape(maker.shape().unwrap(), false).unwrap();
     converted.shape().unwrap().clone()
+}
+
+fn circle_surface_pair() -> [Adaptor3dSurfaceHandle; 2] {
+    let sphere: Handle<dyn GeomSurface> =
+        Handle::new(GeomSphericalSurface::new(z_frame(0.0), 1.0).unwrap()).cast();
+    let frame = Axis3::from_normal(
+        Point3::new(0.0, 0.5, 0.0),
+        Direction3::new(0.0, 1.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(frame)).cast();
+    [
+        Handle::new(GeomAdaptorSurface::with_bounds(&plane, (-2.0, 2.0, -2.0, 2.0)).unwrap())
+            .cast(),
+        Handle::new(
+            GeomAdaptorSurface::with_bounds(&sphere, (0.0, 2.0 * PI, -FRAC_PI_2, FRAC_PI_2))
+                .unwrap(),
+        )
+        .cast(),
+    ]
+}
+
+#[test]
+fn completed_single_walk_is_scoped_to_its_actual_execution() {
+    let [first, second] = circle_surface_pair();
+    let values = [0.866, 0.0, FRAC_PI_2, std::f64::consts::FRAC_PI_3];
+    let mut start = Array1::with_bounds(1, 4).unwrap();
+    for (index, value) in values.iter().enumerate() {
+        start[index as i32 + 1] = *value;
+    }
+    let mut walk = IntWalkPWalking::new(&first, &second, 1e-6, 1e-8, 0.01, 0.1).unwrap();
+    walk.perform(&start).unwrap();
+    assert!(walk.is_done() && walk.is_closed().unwrap());
+    assert!(walk.nb_points().unwrap() > 10);
+    assert_eq!(
+        walking_coverage(&observe_walking(&walk, values)),
+        StageCoverage::Passed
+    );
 }

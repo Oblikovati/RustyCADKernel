@@ -114,11 +114,7 @@ impl BOPAlgoCheckerSI {
                 .options()
                 .add_error(&alert(AlertIntersectionFailed));
         }
-        if let Some(trace) = trace {
-            trace.returned = true;
-            trace.native_alerts = self.filler.options().has_errors();
-            trace.alerts = observed_alerts(self.filler.options());
-        }
+        finish_returned(trace, self.filler.options());
     }
 
     fn perform_checks(
@@ -216,4 +212,12 @@ fn observed_alerts(options: &super::Options) -> Vec<NativeAlertObservation> {
         .into_iter()
         .map(|original| NativeAlertObservation { original })
         .collect()
+}
+
+fn finish_returned(trace: Option<&mut SelfCheckCompletion>, options: &super::Options) {
+    if let Some(trace) = trace {
+        trace.returned = true;
+        trace.native_alerts = options.has_errors();
+        trace.alerts = observed_alerts(options);
+    }
 }

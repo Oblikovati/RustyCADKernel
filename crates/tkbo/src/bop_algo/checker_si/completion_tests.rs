@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Opt-in observations retain no topology and preserve the mapped interference results.
+//! Scalar face receipts preserve mapped interference; opt-in alerts retain payloads.
 use super::{BOPAlgoCheckerSI, FaceTermination};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::ncollection::List;
@@ -8,8 +8,7 @@ use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeShape, BRepBuilderA
 
 fn completion_box() -> Shape {
     let mut maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0).unwrap();
-    let shape = maker.shape().unwrap().clone();
-    shape
+    maker.shape().unwrap().clone()
 }
 
 fn configured_checker(shape: &Shape, level: i32) -> BOPAlgoCheckerSI {

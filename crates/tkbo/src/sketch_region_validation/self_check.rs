@@ -58,14 +58,7 @@ struct AnalyticInspection<'a> {
 
 impl AnalyticInspection<'_> {
     fn consume(&mut self, mut trace: SelfCheckCompletion) {
-        if let Some(failure) = trace.failure.take() {
-            let cause = ValidationCause::AnalyticFailure {
-                phase: trace.phase,
-                index: trace.active_source,
-                failure,
-            };
-            self.push(trace.active_source, None, StageCoverage::Incomplete, cause);
-        }
+        self.captured_failure(&mut trace);
         for alert in trace.alerts.drain(..) {
             self.push(
                 None,
@@ -80,18 +73,19 @@ impl AnalyticInspection<'_> {
         self.gap(None, None, None, AnalyticGap::PairCompletionUnobserved);
     }
 
-    fn run_gaps(&mut self, trace: &SelfCheckCompletion) {
-        if let Some(actual) = trace.rejected_arguments {
-            self.gap(
-                None,
-                None,
-                None,
-                AnalyticGap::ArgumentsRejected {
-                    actual,
-                    expected: 1,
-                },
-            );
+    fn captured_failure(&mut self, trace: &mut SelfCheckCompletion) {
+        if let Some(failure) = trace.failure.take() {
+            let cause = ValidationCause::AnalyticFailure {
+                phase: trace.phase,
+                index: trace.active_source,
+                failure,
+            };
+            self.push(trace.active_source, None, StageCoverage::Incomplete, cause);
         }
+    }
+
+    fn run_gaps(&mut self, trace: &SelfCheckCompletion) {
+        self.rejected_arguments(trace);
         if !trace.returned {
             self.gap(None, None, None, AnalyticGap::NativeRunIncomplete);
         }
@@ -103,6 +97,20 @@ impl AnalyticInspection<'_> {
         }
         if !trace.face_phase_scheduled {
             self.gap(None, None, None, AnalyticGap::FacePhaseUnscheduled);
+        }
+    }
+
+    fn rejected_arguments(&mut self, trace: &SelfCheckCompletion) {
+        if let Some(actual) = trace.rejected_arguments {
+            self.gap(
+                None,
+                None,
+                None,
+                AnalyticGap::ArgumentsRejected {
+                    actual,
+                    expected: 1,
+                },
+            );
         }
     }
 

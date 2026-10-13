@@ -98,8 +98,13 @@ fn real_missing_surface_blocks_self_check_with_affected_source() {
         super::validate_owned_candidate(&shape, super::outcome::BodyKind::PlanarRegion, &sources);
     assert_eq!(report.topology, StageCoverage::Failed);
     assert_eq!(report.self_intersection, StageCoverage::Blocked);
-    assert!(report.findings.iter().any(|finding| matches!(&finding.cause,
-        ValidationCause::NativeStatuses(statuses) if statuses.contains(&BRepCheckStatus::NoSurface))));
+    assert_missing_surface_attribution(&report, &shape);
+}
+
+fn assert_missing_surface_attribution(
+    report: &super::outcome::OrderedCoverage,
+    shape: &rustycad_tkbrep::topods::Shape,
+) {
     let missing = report
         .findings
         .iter()
@@ -108,6 +113,7 @@ fn real_missing_surface_blocks_self_check_with_affected_source() {
         ValidationCause::NativeStatuses(statuses) if statuses.contains(&BRepCheckStatus::NoSurface))
         })
         .unwrap();
-    assert!(missing.affected.shape.is_equal(&shape));
+    assert!(missing.affected.shape.is_equal(shape));
+    assert!(missing.affected.original_parents.is_some());
     assert_eq!(missing.affected.source_parents, Some(vec![31, 53]));
 }
