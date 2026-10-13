@@ -112,6 +112,30 @@ class FakeCommands:
             raise subprocess.CalledProcessError(1, ["cargo", "test"])
 
 
+class LateReleaseMutation(FakeCommands):
+    """Expose a real source/tag gate transition after extracted tests finish."""
+
+    mutation: str = ""
+    tests_finished: bool = False
+
+    def run(self, arguments: list[str], root: Path) -> str:
+        result = super().run(arguments, root)
+        if arguments[:2] == ["cargo", "test"]:
+            self.tests_finished = True
+            if self.mutation == "dirty":
+                self.dirty = " M Cargo.lock"
+        return result
+
+    def git_result(self, arguments: list[str]) -> str:
+        if (
+            self.tests_finished
+            and self.mutation == "moved"
+            and arguments[1] == "rev-parse"
+        ):
+            return "b" * 40
+        return super().git_result(arguments)
+
+
 class ReleasePackageTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -127,7 +151,9 @@ class ReleasePackageTests(unittest.TestCase):
         self.runner.stale_suites = True
         with self.assertRaises(subprocess.CalledProcessError):
             build_release(self.fixture.root, "v0.1.0", self.runner)
-        self.assertFalse(any(call[:2] == ["cargo", "package"] for call in self.runner.calls))
+        self.assertFalse(
+            any(call[:2] == ["cargo", "package"] for call in self.runner.calls)
+        )
 
     def test_featureless_release_does_not_repeat_identical_cargo_tests(self) -> None:
         build_release(self.fixture.root, "v0.1.0", self.runner)
@@ -196,6 +222,21 @@ class ReleasePackageTests(unittest.TestCase):
         self.runner.tagged = "b" * 40
         with self.assertRaisesRegex(ValueError, "expected HEAD"):
             release_revision(self.fixture.root, self.runner, "v0.1.0")
+
+    def test_post_test_source_or_tag_changes_prevent_sealing(self) -> None:
+        for mutation in ["dirty", "moved"]:
+            runner = LateReleaseMutation(self.fixture)
+            runner.mutation = mutation
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                build_release(self.fixture.root, "v0.1.0", runner)
+            self.assertFalse((self.fixture.root / "target/releases/v0.1.0").exists())
+
+    def test_packaging_cannot_update_the_owner_lockfile(self) -> None:
+        build_release(self.fixture.root, "v0.1.0", self.runner)
+        package = next(
+            call for call in self.runner.calls if call[:2] == ["cargo", "package"]
+        )
+        self.assertIn("--locked", package)
 
     def test_tag_must_match_package_version(self) -> None:
         with self.assertRaisesRegex(ValueError, "expected v0.1.0"):

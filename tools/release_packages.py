@@ -67,6 +67,11 @@ def build_release(root: Path, tag: str, commands: Commands) -> Path:
     crates, revision, output = release_plan(root, tag, commands)
     prepare_release_packages(root, commands)
     verify_extracted_release(root, tag, revision, commands, crates)
+    checked_revision = release_revision(root, commands, tag)
+    if checked_revision != revision:
+        raise ValueError(
+            f"release revision={checked_revision!r}: expected unchanged {revision!r}"
+        )
     seal_release(root / "target/package", output, crates, revision, root / "Cargo.lock")
     return output
 
@@ -92,7 +97,15 @@ def prepare_release_packages(root: Path, commands: Commands) -> None:
     # Cargo cannot resolve unpublished registry siblings. Verify the whole archive
     # set below instead; retain the owner lockfile as a separate release asset.
     commands.run(
-        ["cargo", "package", "--workspace", "--no-verify", "--exclude-lockfile"], root
+        [
+            "cargo",
+            "package",
+            "--workspace",
+            "--locked",
+            "--no-verify",
+            "--exclude-lockfile",
+        ],
+        root,
     )
     package_test_support(root, commands)
 
