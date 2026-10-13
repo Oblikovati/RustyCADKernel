@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! A root-free linear graph covers the entire product domain; exceptional fibers stay incomplete.
+//! The regular graph and certified exclusions cover the domain; unresolved fibers stay incomplete.
 use super::super::{
     RootBracket, RootIsolationOptions, certificate_arithmetic::world::WorldEnvelope,
+    signs::RootSignEvaluation,
 };
 pub(super) use super::operation_failure::PairOperationFailure;
 use super::{
@@ -18,6 +19,7 @@ pub(super) struct PairOperationProof {
     pub sources: [OwnedBezierSource; 2],
     pub projection: LinearFiberProjection,
     pub contacts: Vec<PairContact>,
+    pub exceptional_fibers: RootSignEvaluation,
 }
 pub(super) fn compute(
     sources: [OwnedBezierSource; 2],
@@ -27,16 +29,17 @@ pub(super) fn compute(
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PairOperationProof, PairOperationFailure> {
     validate_world_request(requested_error)?;
-    let projection = checked_projection(&sources, self_domain, options, cancelled)?;
-    let task = GraphTask {
-        sources: &sources,
-        projection: &projection,
-        self_domain,
-        options,
-        requested_error,
-    };
+    let (projection, exceptional_fibers) =
+        checked_projection(&sources, self_domain, options, cancelled)?;
+    let settings = (self_domain, options, requested_error);
+    let task = GraphTask::new(&sources, &projection, settings);
     let contacts = task.contacts(cancelled)?;
-    Ok(owned_proof(sources, projection, contacts))
+    Ok(owned_proof(
+        sources,
+        projection,
+        contacts,
+        exceptional_fibers,
+    ))
 }
 fn validate_world_request(value: f64) -> Result<(), PairOperationFailure> {
     if !value.is_finite() || value <= 0. {
@@ -48,11 +51,13 @@ fn owned_proof(
     sources: [OwnedBezierSource; 2],
     projection: LinearFiberProjection,
     contacts: Vec<PairContact>,
+    exceptional_fibers: RootSignEvaluation,
 ) -> PairOperationProof {
     PairOperationProof {
         sources,
         projection,
         contacts,
+        exceptional_fibers,
     }
 }
 fn checked_projection(
@@ -60,13 +65,14 @@ fn checked_projection(
     self_domain: bool,
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<LinearFiberProjection, PairOperationFailure> {
+) -> Result<(LinearFiberProjection, RootSignEvaluation), PairOperationFailure> {
     let equations = checked_equations(sources, self_domain, options, cancelled)?;
     let projection = LinearFiberProjection::derive(&equations, cancelled)
         .map_err(PairOperationFailure::Root)?
         .ok_or(PairOperationFailure::NonLinearFiber)?;
-    ensure_regular_graph(&projection, sources[0].interval, options, cancelled)?;
-    Ok(projection)
+    let exceptional =
+        super::exceptional::certify(&projection, sources[0].interval, options, cancelled)?;
+    Ok((projection, exceptional))
 }
 fn checked_equations(
     sources: &[OwnedBezierSource; 2],
@@ -105,25 +111,27 @@ fn checked_source(
     }
     Ok(polynomials)
 }
-fn ensure_regular_graph(
-    projection: &LinearFiberProjection,
-    interval: [f64; 2],
-    options: RootIsolationOptions,
-    cancelled: &mut impl FnMut() -> bool,
-) -> Result<(), PairOperationFailure> {
-    let roots = algebraic::solve(&projection.alpha, interval, options, cancelled)
-        .map_err(PairOperationFailure::Root)?;
-    if !roots.roots().is_empty() {
-        return Err(PairOperationFailure::ExceptionalFiber);
-    }
-    Ok(())
-}
 pub(super) struct GraphTask<'a> {
     pub sources: &'a [OwnedBezierSource; 2],
     pub projection: &'a LinearFiberProjection,
     pub self_domain: bool,
     pub options: RootIsolationOptions,
     pub requested_error: f64,
+}
+impl<'a> GraphTask<'a> {
+    fn new(
+        sources: &'a [OwnedBezierSource; 2],
+        projection: &'a LinearFiberProjection,
+        settings: (bool, RootIsolationOptions, f64),
+    ) -> Self {
+        Self {
+            sources,
+            projection,
+            self_domain: settings.0,
+            options: settings.1,
+            requested_error: settings.2,
+        }
+    }
 }
 impl GraphTask<'_> {
     fn contacts(

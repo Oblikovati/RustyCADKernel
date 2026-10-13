@@ -35,7 +35,19 @@ impl GraphTask<'_> {
         axis: usize,
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<Vec<MembershipQuery>, PairOperationFailure> {
-        let mut queries: Vec<MembershipQuery> = vec![
+        let mut queries = self.base_queries(axis, cancelled)?;
+        self.append_diagonal(&mut queries, cancelled)?;
+        Ok(queries)
+    }
+    fn base_queries(
+        &self,
+        axis: usize,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<Vec<MembershipQuery>, PairOperationFailure> {
+        let queries: Vec<MembershipQuery> = vec![
+            (self.projection.alpha.clone(), |sign| {
+                sign != Ordering::Equal
+            }),
             (
                 self.projection.cleared_originals[1 - axis].clone(),
                 |sign| sign == Ordering::Equal,
@@ -45,7 +57,6 @@ impl GraphTask<'_> {
                 sign != Ordering::Greater
             }),
         ];
-        self.append_diagonal(&mut queries, cancelled)?;
         Ok(queries)
     }
     fn append_diagonal(

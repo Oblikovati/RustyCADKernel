@@ -11,7 +11,7 @@ pub(super) enum PairOperationFailure {
     Sign(RootSignError),
     Diagonal(DiagonalDivisionFailure),
     DenominatorRoots,
-    ExceptionalFiber,
+    ExceptionalFiber(super::super::signs::RootSignEvaluation),
     NonLinearFiber,
     PositiveDimensional,
     World(EnvelopeFailure),
@@ -29,6 +29,7 @@ impl PairOperationFailure {
             Self::Diagonal(cause) => Some(cause),
             Self::World(cause) => Some(cause),
             Self::Graph(cause) => Some(cause),
+            Self::ExceptionalFiber(certificate) => Some(certificate),
             Self::WorldRequest(value) => Some(value),
             _ => None,
         }

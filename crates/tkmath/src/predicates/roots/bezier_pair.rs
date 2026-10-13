@@ -20,3 +20,5 @@ mod native_replay;
 mod operation_failure;
 #[cfg(test)]
 mod operation_limits_tests;
+
+mod exceptional;

@@ -17,10 +17,10 @@ fn run(sources: [OwnedBezierSource; 2]) -> Result<PairOperationProof, PairOperat
 #[test]
 fn exceptional_leading_fiber_and_overlap_remain_explicitly_incomplete() {
     let a = source(&[[0., 0.], [0.5, 0.], [1., 1.]], None);
-    let b = source(&[[0., 0.], [0.5, 0.5]], Some(&[1., 2.]));
+    let b = source(&[[0.5, 0.], [0.5, 1.]], Some(&[1., 2.]));
     assert!(matches!(
         run([a.clone(), b]),
-        Err(PairOperationFailure::ExceptionalFiber)
+        Err(PairOperationFailure::ExceptionalFiber(_))
     ));
     assert!(matches!(
         run([a.clone(), a]),
@@ -65,4 +65,19 @@ fn transform(point: [f64; 2], scale: f64, swap: bool) -> [f64; 2] {
         return [scaled[1], scaled[0]];
     }
     scaled
+}
+
+#[test]
+fn nonzero_ideal_constant_excludes_exceptional_fiber_and_extraneous_root() {
+    let a = source(&[[0., 0.], [0.5, 0.], [1., 1.]], None);
+    let b = source(&[[0., 0.], [0.5, 0.5]], Some(&[1., 2.]));
+    let proof = run([a, b]).unwrap();
+    assert_eq!(proof.exceptional_fibers.isolation().roots().len(), 1);
+    assert_ne!(
+        proof.exceptional_fibers.signs()[0],
+        std::cmp::Ordering::Equal
+    );
+    assert_eq!(proof.contacts.len(), 1);
+    assert_eq!(proof.contacts[0].u_bounds, [0., 0.]);
+    assert_eq!(proof.contacts[0].world.point, [0., 0.]);
 }
