@@ -62,6 +62,11 @@ cancellation, and later source mutation.
 
 ## Local validation
 
+This receipt describes commit `d983a7383`. The later
+[Bernstein extension](exact-bernstein-roots.md) shares this solver and expands
+the retained benchmark corpus. The measurements below retain their original
+22-input scope.
+
 ```sh
 cargo test -p rustycad-tkmath --all-features --locked
 cargo clippy -p rustycad-tkmath --all-targets --all-features --locked -- -D warnings

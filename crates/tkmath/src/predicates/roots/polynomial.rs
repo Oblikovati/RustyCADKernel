@@ -8,11 +8,15 @@ pub(super) struct IntegerPolynomial(pub Vec<BigInt>);
 impl IntegerPolynomial {
     pub fn from_binary64(coefficients: &[f64], limit: u16) -> Result<Self, RootIsolationError> {
         let converted = integer_coefficients(coefficients)?;
+        Self::from_integers(converted, limit)
+    }
+    pub fn from_integers(converted: Vec<BigInt>, limit: u16) -> Result<Self, RootIsolationError> {
+        let supplied = converted.len();
         let mut polynomial = Self(converted);
         polynomial.reduce_content();
         if polynomial.0.is_empty() {
             return Err(RootIsolationError::ZeroPolynomial {
-                coefficients: coefficients.len(),
+                coefficients: supplied,
             });
         }
         if polynomial.degree() > usize::from(limit) {
@@ -131,7 +135,9 @@ fn positive_gcd(mut left: BigInt, mut right: BigInt) -> BigInt {
     left
 }
 
-fn integer_coefficients(coefficients: &[f64]) -> Result<Vec<BigInt>, RootIsolationError> {
+pub(super) fn integer_coefficients(
+    coefficients: &[f64],
+) -> Result<Vec<BigInt>, RootIsolationError> {
     coefficients
         .iter()
         .enumerate()

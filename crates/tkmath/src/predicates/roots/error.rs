@@ -6,9 +6,9 @@ use std::fmt;
 pub enum RootIsolationError {
     /// The supplied work policy has an unsupported version.
     OptionsVersion(u32),
-    /// An ascending coefficient is not finite.
+    /// A supplied coefficient in the selected basis is not finite.
     Coefficient {
-        /// Zero-based coefficient position, equal to its power.
+        /// Zero-based position in the supplied coefficient array.
         index: usize,
         /// Rejected nonfinite value.
         value: f64,

@@ -1,13 +1,24 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Replay the certified root corpus to measure a repeatable local baseline.
-use rustycad_tkmath::predicates::roots::{RootIsolationOptions, isolate_polynomial_roots};
+use rustycad_tkmath::predicates::roots::{
+    RootIsolation, RootIsolationOptions, isolate_bernstein_roots, isolate_polynomial_roots,
+};
 use std::time::Instant;
 struct RootCase {
     coefficients: Vec<f64>,
     expected: usize,
+    isolate: fn(&[f64]) -> RootIsolation,
 }
 fn corpus() -> Vec<RootCase> {
-    include_str!("../tests/exact_roots/oracle.tsv")
+    let mut cases = parse_corpus(include_str!("../tests/exact_roots/oracle.tsv"), power);
+    cases.extend(parse_corpus(
+        include_str!("../tests/exact_roots/bernstein/oracle.tsv"),
+        bernstein,
+    ));
+    cases
+}
+fn parse_corpus(source: &str, isolate: fn(&[f64]) -> RootIsolation) -> Vec<RootCase> {
+    source
         .lines()
         .map(|line| {
             let fields: Vec<&str> = line.split('\t').collect();
@@ -17,18 +28,34 @@ fn corpus() -> Vec<RootCase> {
                     .map(|bits| f64::from_bits(u64::from_str_radix(bits, 16).unwrap()))
                     .collect(),
                 expected: fields[2].split('|').filter(|root| !root.is_empty()).count(),
+                isolate,
             }
         })
         .collect()
 }
+fn power(coefficients: &[f64]) -> RootIsolation {
+    isolate_polynomial_roots(
+        coefficients,
+        [-16., 16.],
+        RootIsolationOptions::new(0.0001),
+        || false,
+    )
+    .unwrap()
+}
+fn bernstein(controls: &[f64]) -> RootIsolation {
+    isolate_bernstein_roots(
+        controls,
+        [-16., 16.],
+        RootIsolationOptions::new(0.0001),
+        || false,
+    )
+    .unwrap()
+}
 fn run(cases: &[RootCase], repetitions: usize) -> usize {
-    let options = RootIsolationOptions::new(0.0001);
     let mut roots = 0;
     for _ in 0..repetitions {
         for case in cases {
-            let result =
-                isolate_polynomial_roots(&case.coefficients, [-16., 16.], options, || false)
-                    .unwrap();
+            let result = (case.isolate)(&case.coefficients);
             assert_eq!(result.roots().len(), case.expected);
             roots += result.roots().len();
             std::hint::black_box(result);

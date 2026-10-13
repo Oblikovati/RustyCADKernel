@@ -36,7 +36,7 @@ fn verify_fixture(line: &str) {
         certify_interval(root, expected);
     }
 }
-fn certify_interval(root: &RootBracket, expected: &str) {
+pub(super) fn certify_interval(root: &RootBracket, expected: &str) {
     let (coefficients, multiplicity) = expected.split_once(':').unwrap();
     let coefficients: Vec<BigInt> = coefficients
         .split(',')

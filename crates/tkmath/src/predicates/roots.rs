@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact supplied-polynomial classification; no mapped OCCT solver is replaced (ADR 0004).
+mod bernstein;
 mod chain;
 mod dyadic;
 mod error;
@@ -17,7 +18,7 @@ pub struct RootIsolationOptions {
     pub max_width: f64,
     /// Maximum number of subdivisions for the complete request.
     pub max_bisections: u16,
-    /// Maximum admitted polynomial degree after removing trailing zeros.
+    /// Maximum admitted polynomial degree after exact basis conversion and reduction.
     pub max_degree: u16,
 }
 impl RootIsolationOptions {
@@ -84,14 +85,61 @@ pub fn isolate_polynomial_roots(
     coefficients: &[f64],
     interval: [f64; 2],
     options: RootIsolationOptions,
+    cancelled: impl FnMut() -> bool,
+) -> Result<RootIsolation, RootIsolationError> {
+    isolate_basis(coefficients, interval, options, Basis::Power, cancelled)
+}
+
+/// Isolate roots of a scalar Bernstein polynomial with exact supplied control values.
+///
+/// The basis is `B(i,n,t) = choose(n,i) * t^i * (1-t)^(n-i)`, even when the query
+/// interval is outside `[0,1]`. Bounds do not rescale the basis. Products used to
+/// construct control values (such as rational weights) are outside this contract.
+/// ```
+/// use rustycad_tkmath::predicates::roots::{isolate_bernstein_roots, RootIsolationOptions};
+/// let roots = isolate_bernstein_roots(&[1., -1., 1.], [0., 1.],
+///     RootIsolationOptions::new(0.001), || false)?;
+/// assert_eq!(roots.roots()[0].multiplicity(), 2);
+/// # Ok::<(), rustycad_tkmath::predicates::roots::RootIsolationError>(())
+/// ```
+pub fn isolate_bernstein_roots(
+    controls: &[f64],
+    interval: [f64; 2],
+    options: RootIsolationOptions,
+    cancelled: impl FnMut() -> bool,
+) -> Result<RootIsolation, RootIsolationError> {
+    isolate_basis(controls, interval, options, Basis::Bernstein, cancelled)
+}
+
+enum Basis {
+    Power,
+    Bernstein,
+}
+impl Basis {
+    fn convert(
+        &self,
+        coefficients: &[f64],
+        limit: u16,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<polynomial::IntegerPolynomial, RootIsolationError> {
+        match self {
+            Self::Power => polynomial::IntegerPolynomial::from_binary64(coefficients, limit),
+            Self::Bernstein => bernstein::from_controls(coefficients, limit, cancelled),
+        }
+    }
+}
+fn isolate_basis(
+    coefficients: &[f64],
+    interval: [f64; 2],
+    options: RootIsolationOptions,
+    basis: Basis,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<RootIsolation, RootIsolationError> {
     if options.version != 1 {
         return Err(RootIsolationError::OptionsVersion(options.version));
     }
     let (bounds, width) = checked_interval(interval, options.max_width)?;
-    let polynomial =
-        polynomial::IntegerPolynomial::from_binary64(coefficients, options.max_degree)?;
+    let polynomial = basis.convert(coefficients, options.max_degree, &mut cancelled)?;
     let tower = chain::multiplicity_tower(polynomial, &mut cancelled)?;
     isolate::isolate(&tower, bounds, width, options, &mut cancelled)
 }

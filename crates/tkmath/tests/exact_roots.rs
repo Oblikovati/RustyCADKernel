@@ -5,6 +5,7 @@ use rustycad_tkmath::predicates::roots::{
     isolate_polynomial_roots,
 };
 use std::cmp::Ordering;
+mod bernstein;
 mod limits;
 mod oracle;
 fn options(width: f64) -> RootIsolationOptions {
