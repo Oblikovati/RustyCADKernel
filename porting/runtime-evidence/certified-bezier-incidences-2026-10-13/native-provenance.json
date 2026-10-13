@@ -1,0 +1,26 @@
+{
+  "scope": "Martensite extension; ordinary OCCT fixture complements independent exact certificates, not C++ API credit",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "repeat_byte_equal": true,
+  "compile_command": "g++ -std=c++17 -O2 -I../RustyCADKernel/target/occt-all-full/include/opencascade tools/oracle/martensite_certified_bezier_incidence.cxx -L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKGeomAlgo -lTKGeomBase -lTKG2d -lTKMath -lTKernel -o target/certified-curve-incidences/native-incidence",
+  "run_commands": [
+    "target/certified-curve-incidences/native-incidence > target/certified-curve-incidences/native-1.tsv",
+    "target/certified-curve-incidences/native-incidence > target/certified-curve-incidences/native-2.tsv"
+  ],
+  "sha256": {
+    "tools/oracle/martensite_certified_bezier_incidence.cxx": "7be4d1b4b623816c3dbcfa37f72357a47e28f499a8c993aa8391b7fd6f3222bf",
+    "target/certified-curve-incidences/native-incidence": "bb293ce1a56d9f3a1c8422bd0840b593c89051b230ca88742ccbb717b63ba31e",
+    "target/certified-curve-incidences/native-1.tsv": "fb97628d2b60296447c205bfe856863ac210bad02c71b5b005aa7c1ccaae7208",
+    "target/certified-curve-incidences/native-2.tsv": "fb97628d2b60296447c205bfe856863ac210bad02c71b5b005aa7c1ccaae7208",
+    "../RustyCADKernel/target/occt-all-full/include/opencascade/Geom2dAPI_InterCurveCurve.hxx": "ae9b26434dd5f9db0fdf9d68edc39a2ed298a09107d6f6d92267741986b3857e",
+    "../RustyCADKernel/target/occt-all-full/include/opencascade/Geom2d_BezierCurve.hxx": "30a83dbecd41ccd082ddbb9186aaf72b552c7034e3cb9062ae932b5bf3c5dc20",
+    "../RustyCADKernel/target/occt-all-full/include/opencascade/Geom2d_Line.hxx": "18b30b908bc6e829cda2c9f2d994af09dbca78ee2edab4da494e3a8755e358fb",
+    "../RustyCADKernel/target/occt-all-full/include/opencascade/Geom2d_TrimmedCurve.hxx": "a785f7e0c3cb515bc2226272859e195ed31ea8c918a70a237382be71a9a773f2",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomAlgo.so": "2e48df1c0073752ef3101428161e41d0a3a78067754a51acf7dbd60f703d9c8e",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomBase.so": "bb5616b53df21edbc3e012d6b704e2e8d8cab670c89b362c97b2434589071a37",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKG2d.so": "ddc380d9d38a66583112995c8455d2f0cc6fd8b8971a1abef38c2d7b05d02611",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  }
+}
