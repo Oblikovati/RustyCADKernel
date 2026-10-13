@@ -1,0 +1,41 @@
+{
+  "source_base": "7e754661e",
+  "stage": "private partial ordered-validation prerequisite",
+  "integration_ready_prerequisite": true,
+  "complete_region_validation": false,
+  "mapped_checker_changes": false,
+  "tests": {
+    "all_target_all_feature": 700,
+    "final_focused": 13,
+    "extracted_final_relinked": 13,
+    "failed": 0
+  },
+  "checks": [
+    "Clippy all targets/features -D warnings",
+    "strict Rustdoc",
+    "leaf rustfmt",
+    "canonical toolkit discovery",
+    "git diff --check"
+  ],
+  "all_target_source_note": "Full700 gate precedes stronger final context assertions and SPDX-only headers; final13-focused/extracted relink cover the final stage source.",
+  "remaining": [
+    "analytic self-intersection done/completeness and affected-entity certificates",
+    "declared tolerance consistency and certified requested/effective/achieved error",
+    "full body-kind invariants and member history/source adapter",
+    "ownership/copy/cache/failure/cancellation isolation acceptance"
+  ],
+  "benchmark_run": false,
+  "source_sha256": {
+    "crates/tkbo/src/lib.rs": "8524e57a91b4de25dbc24383d897fffba38e10daa0251df566939bf35e11dc50",
+    "crates/tkbo/src/sketch_region_validation/body.rs": "96850bca7a2bb1df051dc3a33d72d026c7e8a7047c0e27951973983e6dc7aa04",
+    "crates/tkbo/src/sketch_region_validation/contexts.rs": "dcb9a26c0b14158f0415492f2bef95644cdf4ea191da74f18b680934a3a5c7db",
+    "crates/tkbo/src/sketch_region_validation/coverage_tests.rs": "3515db75db5461b26498dedd9756c42cb58555672038b997bb20406758fdf992",
+    "crates/tkbo/src/sketch_region_validation/diagnostic_tests.rs": "4393cb8fc906e5c2dd57459c796a51bac91b467f78b6b43143b8d770d4daa917",
+    "crates/tkbo/src/sketch_region_validation/geometry_tests.rs": "ca57f4bd3ad1a0282b9e53b26618d03ebc0a9298685c3eb6d95aca05441c8251",
+    "crates/tkbo/src/sketch_region_validation/inspection.rs": "466bc0714d03a87e7c02f0af8eed4593a1458d911bed1c570806a961c4c3ee6a",
+    "crates/tkbo/src/sketch_region_validation/mod.rs": "70d9691928af5a6c93271a2d33dd5a27b336da533349f676cb4da37fe4b2449a",
+    "crates/tkbo/src/sketch_region_validation/outcome.rs": "c612ee1c8fbe7512b984e7679e716829470ec9c13e9a052a721f98630c2be022",
+    "crates/tkbo/src/sketch_region_validation/statuses.rs": "7ea231de423a65dc0162dc09db514b0ff2ee07d08cb7f8806db125b5da9c9d0c",
+    "crates/tkbo/src/sketch_region_validation/tests.rs": "9d8318796448cfaab75db624fbbc225e48a5343f76ee5da1e95979905efe7a08"
+  }
+}
