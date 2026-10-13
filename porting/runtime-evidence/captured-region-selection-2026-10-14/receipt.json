@@ -1,0 +1,256 @@
+{
+  "base": "a5cbc260c",
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39"
+  },
+  "gates": {
+    "clippy": {
+      "all_features": true,
+      "all_targets": true,
+      "exit": 0,
+      "warnings_denied": true
+    },
+    "diff_check": {
+      "exit": 0
+    },
+    "discovery": {
+      "exit": 0
+    },
+    "extracted": {
+      "archives": 31,
+      "canonical_helpers": [
+        "release_archives.stage_workspace",
+        "release_packages.test_profile"
+      ],
+      "doctest_groups": 2,
+      "doctests_passed": 82,
+      "failed": 0,
+      "runtime_groups": 8,
+      "runtime_passed": 3740,
+      "sealed": false,
+      "source_files_equal": 6,
+      "vcs_dirty": false,
+      "vcs_revision": "597a9886186853474b4ff663b2d7ab7a37be2b7c"
+    },
+    "focused": {
+      "failed": 0,
+      "passed": [
+        30,
+        33
+      ]
+    },
+    "format": {
+      "exit": 0
+    },
+    "toolkits": {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features"
+      ],
+      "failed": 0,
+      "groups": 8,
+      "passed": 3740
+    }
+  },
+  "logs": {
+    "archive-prepare.log": {
+      "durable_file": "archive-prepare.log.gz",
+      "durable_sha256": "eee975bbafe573be368a6e1c7477e3b2c9d34fd9c8db473b16818a1703c12f94",
+      "raw_sha256": "28a20e10e8184f54bee3204c532d8b76eab36057ec9f3cddee38b943d263d1ef"
+    },
+    "archive-tests.log": {
+      "durable_file": "archive-tests.log.gz",
+      "durable_sha256": "b746881ac0680f5a8408b4c74287c17ec01243c6f8bdcf191be6be7a77b57af2",
+      "raw_sha256": "a768174c7bc4484485bb66c51aab006b8f5164930e971a0171cff786b7ee637e"
+    },
+    "clippy.log": {
+      "durable_file": "clippy.log.gz",
+      "durable_sha256": "871db5897910da6ff4b955ac327917a16ed1a828c104925ae6949f1a146c21b2",
+      "raw_sha256": "b374d78897b01ef30ad2af00a36dff5fb24f9741838d57872ed2b71271c5ab2c"
+    },
+    "diff-check.log": {
+      "durable_file": "diff-check.log.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "discovery.log": {
+      "durable_file": "discovery.log.gz",
+      "durable_sha256": "6f3b066b0b64cca5c7f1ef7b63f8cfba5ae90ede8c417606b16dd4e4f2f5ed0b",
+      "raw_sha256": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4"
+    },
+    "focused-first.log": {
+      "durable_file": "focused-first.log.gz",
+      "durable_sha256": "6a7f347859d8ad0287b85119837a7094285838984823b9e0eb502e36a0be2b35",
+      "raw_sha256": "f3033caa85754f554b034b0c4133a078995172f566f225d9e2c642cfa436be44"
+    },
+    "focused-second.log": {
+      "durable_file": "focused-second.log.gz",
+      "durable_sha256": "0339429c7d809a7cada23575a41476d5801d3835f56259fbe0429f68373569b0",
+      "raw_sha256": "74478a2f6956983a7038bdf849689cc78ea29775cd7af00e652af45095194c4b"
+    },
+    "format-2.log": {
+      "durable_file": "format-2.log.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-3.log": {
+      "durable_file": "format-3.log.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-final.log": {
+      "durable_file": "format-final.log.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format.log": {
+      "durable_file": "format.log.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-1.stderr": {
+      "durable_file": "native-1.stderr.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-1.txt": {
+      "durable_file": "native-1.txt.gz",
+      "durable_sha256": "62309de8482eaaf50390b79f0793dfdf74d1061ab6278c47da3659a898cb6c2c",
+      "raw_sha256": "0d973ddaadc46c5955ab5835dfc60d711f4e04e455bc23e1efc45d3d9c27da05"
+    },
+    "native-2.stderr": {
+      "durable_file": "native-2.stderr.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-2.txt": {
+      "durable_file": "native-2.txt.gz",
+      "durable_sha256": "62309de8482eaaf50390b79f0793dfdf74d1061ab6278c47da3659a898cb6c2c",
+      "raw_sha256": "0d973ddaadc46c5955ab5835dfc60d711f4e04e455bc23e1efc45d3d9c27da05"
+    },
+    "native-build.log": {
+      "durable_file": "native-build.log.gz",
+      "durable_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-runs.json": {
+      "durable_file": "native-runs.json.gz",
+      "durable_sha256": "bdbcf8a2ed5b0e0c79c288f9ff6946e666faeccc23bf3c916de277ae78d18ebf",
+      "raw_sha256": "fe7522c1baa1598e480754ee166ba1ceb8fd78221dd5f3d8d072879bce9fa4d8"
+    },
+    "packages.log": {
+      "durable_file": "packages.log.gz",
+      "durable_sha256": "f03892c5ffe1def7f8ccb52e7c62e76d9b2366dc7a5737ce86137afa7b2a73b8",
+      "raw_sha256": "e253da392b5a8426d8e6f0bfb7ea27b19f63a2c4b26eaacf88c34a32f1428f4a"
+    },
+    "toolkits.log": {
+      "durable_file": "toolkits.log.gz",
+      "durable_sha256": "096a06c6ce20616c845fc8042bb7cffaaad4d6b217993fbdd323a07b5811f1b5",
+      "raw_sha256": "64e92221c59f5db28df7f3e0b34a9774db9dc329cd15f4e3cbbf0c34b5261b80"
+    }
+  },
+  "mapped_api_credit": false,
+  "native": {
+    "build_command": [
+      "c++",
+      "-std=c++17",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_region_candidates.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKBO",
+      "-lTKTopAlgo",
+      "-lTKGeomAlgo",
+      "-lTKBRep",
+      "-lTKG3d",
+      "-lTKG2d",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/captured-region/native-candidates"
+    ],
+    "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "existing_sampled_cusp_complement_diagnostics_preserved": true,
+    "exits": [
+      0,
+      0
+    ],
+    "fixture": "crates/tkbo/tests/fixtures/region-candidates-native.txt",
+    "identity_files": 918,
+    "input_manifests": [
+      {
+        "file": "native-input-manifest-000.json",
+        "sha256": "25ae1f27b9266d4e787675c319e2b39a7ec134f676cb62f2582097d7daf62ce0"
+      },
+      {
+        "file": "native-input-manifest-001.json",
+        "sha256": "996433a5682c7896243e00f9a931fc746e50b898f9b7cfe39df3ab07a7b608fb"
+      },
+      {
+        "file": "native-input-manifest-002.json",
+        "sha256": "d386c1d97392ce220beaf150259079a4d5e8648b026aa7b08a67e488fc3e7877"
+      },
+      {
+        "file": "native-input-manifest-003.json",
+        "sha256": "6d2b961c18af91e4d9cbc1cbc3841ca47e2feb39a15d4614ebe776da82ac4ee2"
+      },
+      {
+        "file": "native-input-manifest-004.json",
+        "sha256": "274f29d40dc68742378198e9cb00043fc8c9a98f17fcba7f0b52fe7ebdcaad19"
+      },
+      {
+        "file": "native-input-manifest-005.json",
+        "sha256": "66d2cc3aee53bae9b37b9e55fd0b893d4f47f7805f7f5909fad102cf6b0ceca4"
+      },
+      {
+        "file": "native-input-manifest-006.json",
+        "sha256": "fe1b4c776da65d5bf93ba12d97df68b3807ad2b3548a530ccab3bd473a96eefe"
+      },
+      {
+        "file": "native-input-manifest-007.json",
+        "sha256": "4fd11234b56699970ecedf36b70afa37c3d484879039ef5c7bd9658e37ba7f21"
+      },
+      {
+        "file": "native-input-manifest-008.json",
+        "sha256": "38f5cc9a434681411891f260711aace7702a81378d674003a767249d14d9881e"
+      },
+      {
+        "file": "native-input-manifest-009.json",
+        "sha256": "66e29df99694fc7110cc4d6bae596dac555e3d3d4519d814446d57317ee3219e"
+      }
+    ],
+    "oracle_unchanged": true,
+    "raw_stdout_byte_equal": true,
+    "repeats": 2,
+    "rows_per_run": 14,
+    "run_command": [
+      "target/captured-region/native-candidates"
+    ],
+    "source": "tools/oracle/martensite_region_candidates.cxx"
+  },
+  "performance": {
+    "baseline_accepted": false,
+    "executed": false
+  },
+  "project": "Martensite",
+  "remaining": [
+    "Construction and original plane/parameter transport",
+    "Complete candidate search and history coverage",
+    "Self-intersection",
+    "Tolerance consistency",
+    "Unknown achieved geometric error",
+    "General region/body and application acceptance"
+  ],
+  "scope": "Private candidate captured-winding consumer; closes only SharedIncidenceReuse.",
+  "source_revision": "597a9886186853474b4ff663b2d7ab7a37be2b7c"
+}
