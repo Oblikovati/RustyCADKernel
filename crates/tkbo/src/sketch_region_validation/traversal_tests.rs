@@ -3,55 +3,12 @@
 use super::contexts::checked_occurrences;
 use super::outcome::{BodyKind, OrderedCoverage, StageCoverage, ValidationStage};
 use rustycad_tkbrep::brep::BRepBuilder;
-use rustycad_tkbrep::topods::{Shape, ShapeIterator, TShape, TShapeBase, Vertex};
-use rustycad_tkernel::{
-    impl_transient,
-    standard::{Failure, Handle, StandardTransient},
-};
+use rustycad_tkbrep::topods::{ShapeIterator, Vertex};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
-use std::sync::atomic::{AtomicU32, Ordering};
 
-struct FakeChangingChildCount {
-    transient: StandardTransient,
-    topology: TShapeBase,
-    reads: AtomicU32,
-}
-impl_transient!(FakeChangingChildCount, "Martensite_FakeChangingChildCount", dyn TShape, transient, interfaces: [dyn TShape]);
-
-impl FakeChangingChildCount {
-    fn new() -> Self {
-        Self {
-            transient: StandardTransient::default(),
-            topology: TShapeBase::new(ShapeEnum::Face),
-            reads: AtomicU32::new(0),
-        }
-    }
-}
-
-impl TShape for FakeChangingChildCount {
-    fn tshape_base(&self) -> &TShapeBase {
-        // Use the real iterator and its stored topology; no alternate traversal.
-        &self.topology
-    }
-
-    fn empty_copy(&self) -> Result<Handle<dyn TShape>, Failure> {
-        let copied = Handle::new(Self::new());
-        Ok(copied.cast())
-    }
-
-    fn nb_children(&self) -> i32 {
-        let previous = self.reads.fetch_add(1, Ordering::Relaxed);
-        i32::from(previous == 0)
-    }
-}
-
-fn changing_shape() -> Shape {
-    let mut shape = Shape::default();
-    let original = FakeChangingChildCount::new();
-    shape.set_tshape(&original.empty_copy().unwrap());
-    shape
-}
+use crate::changing_child_count::changing_shape;
 
 #[test]
 fn empty_and_exhausted_iterators_are_normal_ends() {
@@ -75,7 +32,7 @@ fn empty_and_exhausted_iterators_are_normal_ends() {
 
 #[test]
 fn iterator_error_between_more_and_value_propagates() {
-    let failure = checked_occurrences(&changing_shape()).unwrap_err();
+    let failure = checked_occurrences(&changing_shape(ShapeEnum::Face)).unwrap_err();
     check_iterator_failure(&failure);
 }
 
@@ -83,7 +40,7 @@ fn iterator_error_between_more_and_value_propagates() {
 fn traversal_failure_is_typed_incomplete_not_passed_coverage() {
     let face = super::tests::box_face();
     let analyzer = BRepCheckAnalyzer::new(&face, false, false, true).unwrap();
-    let shape = changing_shape();
+    let shape = changing_shape(ShapeEnum::Face);
     let findings = super::inspection::inspect_candidate(
         &analyzer,
         &shape,

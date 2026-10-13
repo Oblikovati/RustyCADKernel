@@ -14,3 +14,11 @@ mod sketch_region_validation;
 // ADR0014 keeps this prerequisite internal until the complete owned-region contract passes.
 #[allow(dead_code, unused_imports)]
 pub(crate) mod sketch_region;
+
+// ADR0014 candidate diagnostics cannot expose an uncertified healthy body.
+#[allow(dead_code, unused_imports)]
+pub(crate) mod sketch_region_candidates;
+
+#[cfg(test)]
+#[path = "../tests/support/changing_child_count.rs"]
+mod changing_child_count;
