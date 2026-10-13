@@ -1,0 +1,23 @@
+{
+  "run": 38424482880,
+  "tag": "v0.2.5",
+  "revision": "8118c7e1fae4d28bb5bb5656cd8f86445dadef10",
+  "conclusion": "failure",
+  "owners": {
+    "rust": "failure",
+    "inventory": "success",
+    "dependencies": "success",
+    "vulkan-runtime": "success",
+    "coverage": "success",
+    "tools": "success"
+  },
+  "coverage": {
+    "passed": 17972,
+    "skipped": 5,
+    "controls": "all three failing workspace fixtures individually passed under instrumented nextest",
+    "excluded": "bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance (coverage only; kept in functional suite)"
+  },
+  "package": "skipped",
+  "publish": "skipped",
+  "cause": "not established; original failed Cargo executable replay and matching workspace-feature raw captures are next"
+}

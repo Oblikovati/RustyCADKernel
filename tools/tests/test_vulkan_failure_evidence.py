@@ -120,7 +120,7 @@ class VulkanFailureEvidenceTests(unittest.TestCase):
         args.gate_log = self.log
         with patch.object(current, "record_existing_gate") as record:
             current.dispatch_phase(self.probe, args, parser)
-        record.assert_called_once_with(self.probe, self.log, self.status)
+        record.assert_called_once_with(self.probe, self.log, self.status, "vulkan")
 
     def test_failure_workflow_cannot_observe_before_original_gate(self) -> None:
         workflow = (

@@ -1,0 +1,38 @@
+{
+  "source_revision": "b1955dcfebbad0eb2216763cc882c3b93d9f5b18",
+  "production_source_identical_to": "8118c7e1fae4d28bb5bb5656cd8f86445dadef10",
+  "argv": [
+    "cargo",
+    "test",
+    "-p",
+    "martensite-vulkan",
+    "--test",
+    "toolkit",
+    "--features",
+    "rustycad-tkmath/occt-debug-checks",
+    "--locked"
+  ],
+  "exit_code": 0,
+  "passed": 247,
+  "failed": 0,
+  "ignored": 4,
+  "filtered": 0,
+  "driver": "Mesa25.2.8-0ubuntu0.24.04.4/LLVM20.1.2/128",
+  "cpu": "AMD RYZEN AI MAX+395",
+  "test_environment": {
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2",
+    "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+    "LP_NATIVE_VECTOR_WIDTH": "128",
+    "VK_DRIVER_FILES": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/release-runner-mesa/isolated-lvp.json",
+    "validation": "pinned helper target/vulkan-validation"
+  },
+  "binary": {
+    "path": "target/debug/deps/toolkit-fc15c7ec380759b5",
+    "sha256": "68acddae9dc16bc4952fc595cdf83710ff1bf7c4b6c5ee32891e20e9b040df28",
+    "captured": "after original test command, no subsequent build"
+  },
+  "limits": "Single package with explicit TKMath feature, not proof of the full workspace graph or CI CPU context. Metadata queried after the test; metadata-only process did not receive compilation-profile flags. Prior hosted failure cause still unproven."
+}

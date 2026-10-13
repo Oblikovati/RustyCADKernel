@@ -1,0 +1,43 @@
+{
+  "run": 38424482880,
+  "job": 115391384178,
+  "tag": "v0.2.5",
+  "revision": "8118c7e1fae4d28bb5bb5656cd8f86445dadef10",
+  "job_conclusion": "failure",
+  "argv": [
+    "cargo",
+    "test-all",
+    "--no-fail-fast"
+  ],
+  "expanded_argv": [
+    "cargo",
+    "test",
+    "--workspace",
+    "--all-features",
+    "--locked",
+    "--no-fail-fast"
+  ],
+  "failed_target": "martensite-vulkan --test toolkit",
+  "passed": 244,
+  "failed": 3,
+  "ignored": 4,
+  "first_rgba_mismatches": {
+    "map-5": 4728,
+    "feather-two": 1560,
+    "texture": 4492
+  },
+  "dedicated_vulkan_job": {
+    "job": 115391384519,
+    "conclusion": "success",
+    "argv": [
+      "cargo",
+      "test",
+      "-p",
+      "martensite-vulkan",
+      "--all-targets",
+      "--locked"
+    ]
+  },
+  "cause": "not established; workspace feature context and actual unrecorded runner CPU/library context need controlled evidence",
+  "publication": "blocked"
+}
