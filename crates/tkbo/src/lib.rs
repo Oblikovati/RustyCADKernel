@@ -10,3 +10,7 @@ pub mod int_tools;
 
 #[allow(dead_code)] // ADR0014: private partial stage, not a successful region API.
 mod sketch_region_validation;
+
+// ADR0014 keeps this prerequisite internal until the complete owned-region contract passes.
+#[allow(dead_code, unused_imports)]
+pub(crate) mod sketch_region;

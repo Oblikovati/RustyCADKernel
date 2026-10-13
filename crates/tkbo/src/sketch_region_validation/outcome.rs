@@ -26,15 +26,16 @@ pub(crate) enum StageCoverage {
     Blocked,
 }
 
-pub(crate) struct SourceRelation {
-    pub(crate) output: Shape,
-    pub(crate) parents: Vec<u64>,
-}
+use super::source_relations::SourceMemberRelations;
+pub(crate) use super::source_relations::SourceRelation;
+pub(super) use super::source_relations::attributed_occurrence;
 
 #[derive(Debug)]
 pub(crate) struct AffectedOccurrence {
     pub(crate) shape: Shape,
     // None means attribution unknown; never invent a first-parent/root relation.
+    pub(crate) original_parents: Option<SourceMemberRelations>,
+    // Derived caller IDs cannot replace the complete member-and-kind attribution.
     pub(crate) source_parents: Option<Vec<u64>>,
 }
 
@@ -142,32 +143,4 @@ fn summarize_findings(findings: &[ValidationFinding]) -> StageCoverage {
         return StageCoverage::Incomplete;
     }
     StageCoverage::Passed
-}
-
-pub(super) fn attributed_occurrence(
-    shape: &Shape,
-    sources: &[SourceRelation],
-) -> AffectedOccurrence {
-    let matches: Vec<&SourceRelation> = sources
-        .iter()
-        .filter(|entry| entry.output.is_equal(shape))
-        .collect();
-    let source_parents = merged_parents(&matches);
-    AffectedOccurrence {
-        shape: shape.clone(),
-        source_parents,
-    }
-}
-
-fn merged_parents(matches: &[&SourceRelation]) -> Option<Vec<u64>> {
-    if matches.is_empty() {
-        return None;
-    }
-    let mut parents: Vec<u64> = matches
-        .iter()
-        .flat_map(|entry| entry.parents.iter().copied())
-        .collect();
-    parents.sort_unstable();
-    parents.dedup();
-    Some(parents)
 }

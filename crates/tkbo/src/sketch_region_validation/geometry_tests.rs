@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Real mismatched pcurves must fail geometry after conclusive topology.
 use super::{
-    outcome::{BodyKind, SourceRelation, StageCoverage, ValidationCause},
+    outcome::{BodyKind, StageCoverage, ValidationCause},
     validate_owned_candidate,
 };
 use rustycad_tkbrep::{
@@ -37,14 +37,8 @@ fn inconsistent_face() -> (Shape, Shape) {
 fn inconsistent_geometry_retains_edge_face_and_all_known_source_parents() {
     let (candidate, edge) = inconsistent_face();
     let sources = [
-        SourceRelation {
-            output: edge.clone(),
-            parents: vec![5, 9],
-        },
-        SourceRelation {
-            output: candidate.clone(),
-            parents: vec![5, 9, 17],
-        },
+        super::source_relation_test_support::test_source_relation(&edge, &[5, 9]),
+        super::source_relation_test_support::test_source_relation(&candidate, &[5, 9, 17]),
     ];
     let report = validate_owned_candidate(&candidate, BodyKind::PlanarRegion, &sources);
     assert_eq!(report.topology, StageCoverage::Passed);

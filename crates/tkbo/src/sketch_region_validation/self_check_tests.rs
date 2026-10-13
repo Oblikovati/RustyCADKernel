@@ -61,14 +61,8 @@ fn z_frame(z: f64) -> Axis3 {
 
 #[test]
 fn actual_outer_termination_keeps_each_freeform_source_incomplete() {
-    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
-    use rustycad_tktopalgo::brep_builder_api::{
-        BRepBuilderAPIMakeShape, BRepBuilderAPINurbsConvert,
-    };
-    let mut maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0).unwrap();
-    let mut converted =
-        BRepBuilderAPINurbsConvert::with_shape(maker.shape().unwrap(), false).unwrap();
-    let findings = super::self_check::inspect_self_intersection(converted.shape().unwrap(), &[]);
+    let shape = converted_box();
+    let findings = super::self_check::inspect_self_intersection(&shape, &[]);
     let freeform: Vec<_> = findings
         .iter()
         .filter(|finding| {
@@ -82,6 +76,10 @@ fn actual_outer_termination_keeps_each_freeform_source_incomplete() {
             )
         })
         .collect();
+    assert_freeform_findings(&freeform);
+}
+
+fn assert_freeform_findings(freeform: &[&super::outcome::ValidationFinding]) {
     assert_eq!(freeform.len(), 6);
     assert!(
         freeform
@@ -109,6 +107,10 @@ fn mapped_contacts_fail_strict_coverage_with_real_entity_contexts() {
             )
         })
         .collect();
+    assert_contact_findings(&contacts);
+}
+
+fn assert_contact_findings(contacts: &[&super::outcome::ValidationFinding]) {
     assert!(!contacts.is_empty());
     assert!(
         contacts
@@ -140,4 +142,15 @@ fn overlapping_solids() -> rustycad_tkbrep::topods::Shape {
     builder.add(&mut shape, left.shape().unwrap()).unwrap();
     builder.add(&mut shape, right.shape().unwrap()).unwrap();
     shape.into_shape()
+}
+
+fn converted_box() -> rustycad_tkbrep::topods::Shape {
+    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+    use rustycad_tktopalgo::brep_builder_api::{
+        BRepBuilderAPIMakeShape, BRepBuilderAPINurbsConvert,
+    };
+    let mut maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0).unwrap();
+    let mut converted =
+        BRepBuilderAPINurbsConvert::with_shape(maker.shape().unwrap(), false).unwrap();
+    converted.shape().unwrap().clone()
 }
