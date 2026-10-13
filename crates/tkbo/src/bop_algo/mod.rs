@@ -25,6 +25,9 @@ mod remove_features;
 pub use argument_analyzer::BOPAlgoArgumentAnalyzer;
 pub use check_result::{CheckResult, CheckStatus};
 pub use checker_si::BOPAlgoCheckerSI;
+pub(crate) use checker_si::{
+    FaceTermination, NativeAlertObservation, SelfCheckCompletion, SelfCheckPhase,
+};
 pub use make_connected::BOPAlgoMakeConnected;
 pub use make_periodic::{BOPAlgoMakePeriodic, PeriodicityParams};
 pub use maker_volume::BOPAlgoMakerVolume;

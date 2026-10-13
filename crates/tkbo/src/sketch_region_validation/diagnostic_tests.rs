@@ -83,3 +83,37 @@ fn empty_body_status_is_a_failed_topological_body() {
     assert_eq!(report.geometry, StageCoverage::Blocked);
     assert!(!report.complete());
 }
+
+#[test]
+fn real_missing_surface_blocks_self_check_with_affected_source() {
+    use rustycad_tkbrep::{brep::BRepBuilder, topods::Face};
+    let mut face = Face::default();
+    BRepBuilder::default().make_face(&mut face);
+    let shape = face.into_shape();
+    let sources = [super::source_relation_test_support::test_source_relation(
+        &shape,
+        &[31, 53],
+    )];
+    let report =
+        super::validate_owned_candidate(&shape, super::outcome::BodyKind::PlanarRegion, &sources);
+    assert_eq!(report.topology, StageCoverage::Failed);
+    assert_eq!(report.self_intersection, StageCoverage::Blocked);
+    assert_missing_surface_attribution(&report, &shape);
+}
+
+fn assert_missing_surface_attribution(
+    report: &super::outcome::OrderedCoverage,
+    shape: &rustycad_tkbrep::topods::Shape,
+) {
+    let missing = report
+        .findings
+        .iter()
+        .find(|finding| {
+            matches!(&finding.cause,
+        ValidationCause::NativeStatuses(statuses) if statuses.contains(&BRepCheckStatus::NoSurface))
+        })
+        .unwrap();
+    assert!(missing.affected.shape.is_equal(shape));
+    assert!(missing.affected.original_parents.is_some());
+    assert_eq!(missing.affected.source_parents, Some(vec![31, 53]));
+}

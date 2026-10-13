@@ -1,0 +1,68 @@
+{
+  "source_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_status": "",
+  "cmake_version_marker": "BUILD_OCCT_VERSION_EXT:STRING=8.1.0.dev1-3d097a0328",
+  "sdk": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full",
+  "build_command": [
+    "c++",
+    "-std=c++17",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-self-intersection-completion/tools/oracle/martensite_self_walking_completion.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKGeomAlgo",
+    "-lTKGeomBase",
+    "-lTKG3d",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-self-intersection-completion/target/self-walking-pinned-native"
+  ],
+  "build_exit": 0,
+  "compiler": "/usr/bin/x86_64-linux-gnu-g++-13",
+  "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+  "compiler_version": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "binary_sha256": "e8264c1b6d6f86fafb4034570e1fbb7c273e4f8e4c5ec1d9c47af2151c6ebbae",
+  "source_sha256": "9e22e582f04899a5b5424184996ee339ab0c01ea238142b77bd2fd43605c3062",
+  "runs": [
+    {
+      "exit": 0,
+      "stdout_sha256": "0095ddea0961a24edf28a11bff0b84ef99a0fe61e39398ff718d3d5e85adcabc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit": 0,
+      "stdout_sha256": "0095ddea0961a24edf28a11bff0b84ef99a0fe61e39398ff718d3d5e85adcabc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "sdk_inputs": 7251,
+  "bookends_equal": true,
+  "loaded_libraries": {
+    "/usr/local/lib/AppProtection/libAppProtection.so.26.4.0.5": "47672263645fbc2bdbd194d629183842ed36353708b5a66d0084b472936191ce",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomAlgo.so.8.1.0": "2e48df1c0073752ef3101428161e41d0a3a78067754a51acf7dbd60f703d9c8e",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKG3d.so.8.1.0": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so.8.1.0": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so.8.1.0": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+    "/usr/lib/x86_64-linux-gnu/libm.so.6": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+    "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+    "/usr/lib/x86_64-linux-gnu/libpthread.so.0": "90491a21ce44efcf3bd4b65ec82501c091d7ebe7f8d9b341dd01d721001d9ecd",
+    "/usr/lib/x86_64-linux-gnu/libdl.so.2": "c2994527172cc23b7fb0f7d611b71e00a37da27af12c2e5e9e0dc1a742886c96",
+    "/usr/lib/x86_64-linux-gnu/libX11.so.6.4.0": "c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879",
+    "/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0": "7958a0136b121bdc4c708968569ad152a9ed208ab026e2537b1005dde64ca440",
+    "/usr/lib/x86_64-linux-gnu/libXi.so.6.1.0": "a51348c921ce1a35123fa7c99dc59bfd3e815be6829874fe15ae55172901d3e4",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKBRep.so.8.1.0": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomBase.so.8.1.0": "bb5616b53df21edbc3e012d6b704e2e8d8cab670c89b362c97b2434589071a37",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKG2d.so.8.1.0": "ddc380d9d38a66583112995c8455d2f0cc6fd8b8971a1abef38c2d7b05d02611",
+    "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+    "/usr/lib/x86_64-linux-gnu/libXau.so.6.0.0": "8040da3f8516c1acfe39f04ff022480cdb273705ba5e7a4ca70bbdb1527cd67a",
+    "/usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0": "667d97d6da16016400ab10de9f83ef4ab209ceb6adf68ff9650225ec13e723b0",
+    "/usr/lib/x86_64-linux-gnu/libXext.so.6.4.0": "2907e6a996465de5b32a0dd10534d4416b87f1dee5670aaa7b19301a1fc93f44",
+    "/usr/lib/x86_64-linux-gnu/libbsd.so.0.12.1": "e86cd4f0019f42c2ba5e60602e0edc8694d2948377d98c3654d0f6bddb5254bb",
+    "/usr/lib/x86_64-linux-gnu/libmd.so.0.1.0": "423e18586b6ea740f4465afd64f7a9a4cb7264ed979c8e7256f9085af5345fef"
+  },
+  "fixture_unchanged": true,
+  "prior_occt_install_run": "Retained but SDK revision binding was not proved; authoritative pinned SDK rerun recorded separately."
+}
