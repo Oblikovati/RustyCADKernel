@@ -4,10 +4,10 @@ use super::super::super::{
 };
 use super::super::{ray, solve};
 use super::{
-    rational::ExactRatio,
     types::*,
     world::{EnvelopeFailure, HomogeneousCurve, WorldEnvelope},
 };
+use crate::predicates::roots::certificate_arithmetic::ExactRatio;
 
 pub(super) struct ConstructedRoot {
     pub root: RootBracket,

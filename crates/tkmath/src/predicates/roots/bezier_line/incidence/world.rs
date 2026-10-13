@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::super::RootBracket;
 use super::super::BezierLineQuery;
-use super::{
-    enclosure::{RatioInterval, bernstein_enclosure},
-    rational::ExactRatio,
-    rounding,
+use crate::predicates::roots::certificate_arithmetic::{
+    ExactRatio, RatioInterval, bernstein_enclosure, rounding,
 };
 
 pub(super) struct HomogeneousCurve {

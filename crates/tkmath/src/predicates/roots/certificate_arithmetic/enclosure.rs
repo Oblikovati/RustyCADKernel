@@ -3,24 +3,24 @@ use super::rational::ExactRatio;
 use std::cmp::Ordering;
 
 #[derive(Clone, Debug)]
-pub(super) struct RatioInterval {
+pub(in crate::predicates::roots) struct RatioInterval {
     pub lower: ExactRatio,
     pub upper: ExactRatio,
 }
 impl RatioInterval {
-    pub(super) fn point(value: ExactRatio) -> Self {
+    pub(in crate::predicates::roots) fn point(value: ExactRatio) -> Self {
         Self {
             lower: value.clone(),
             upper: value,
         }
     }
-    pub(super) fn add(&self, other: &Self) -> Self {
+    pub(in crate::predicates::roots) fn add(&self, other: &Self) -> Self {
         Self {
             lower: self.lower.add(&other.lower),
             upper: self.upper.add(&other.upper),
         }
     }
-    pub(super) fn multiply(&self, other: &Self) -> Self {
+    pub(in crate::predicates::roots) fn multiply(&self, other: &Self) -> Self {
         let products = [
             self.lower.multiply(&other.lower),
             self.lower.multiply(&other.upper),
@@ -32,7 +32,7 @@ impl RatioInterval {
             upper: products.iter().max().unwrap().clone(),
         }
     }
-    pub(super) fn reciprocal(&self) -> Option<Self> {
+    pub(in crate::predicates::roots) fn reciprocal(&self) -> Option<Self> {
         if self.lower.sign() != self.upper.sign() || self.lower.sign() == Ordering::Equal {
             return None;
         }
@@ -43,7 +43,7 @@ impl RatioInterval {
         })
     }
 }
-pub(super) fn bernstein_enclosure(
+pub(in crate::predicates::roots) fn bernstein_enclosure(
     coefficients: &[ExactRatio],
     parameter: &RatioInterval,
     cancelled: &mut impl FnMut() -> bool,

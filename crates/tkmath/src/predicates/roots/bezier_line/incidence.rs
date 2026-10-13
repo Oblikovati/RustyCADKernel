@@ -4,11 +4,8 @@ mod access;
 mod construct;
 mod domain;
 mod domain_policy;
-mod enclosure;
 mod error;
-mod rational;
 mod refine;
-mod rounding;
 #[cfg(test)]
 mod tests;
 mod types;
