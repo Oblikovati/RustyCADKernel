@@ -1,0 +1,57 @@
+// SPDX-License-Identifier: GPL-2.0-only
+//! Enclose the actual algebraic graph without replacing correspondence by point proximity.
+use super::super::{
+    RootBracket, RootIsolationError,
+    certificate_arithmetic::{ExactRatio, RatioInterval, rounding::outward_binary64},
+    error::poll,
+};
+use super::{polynomial::ExactCoefficientPolynomial, projection::LinearFiberProjection};
+use num_bigint::BigInt;
+#[derive(Clone, Debug, PartialEq)]
+pub(super) enum GraphEnvelopeFailure {
+    Root(RootIsolationError),
+    UnresolvedLeadingInterval,
+    Binary64Overflow,
+}
+pub(super) fn enclose_u(
+    projection: &LinearFiberProjection,
+    root: &RootBracket,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<[f64; 2], GraphEnvelopeFailure> {
+    let interval = parameter_interval(root);
+    let alpha = power_enclosure(&projection.alpha, &interval, cancelled)?;
+    let reciprocal = alpha
+        .reciprocal()
+        .ok_or(GraphEnvelopeFailure::UnresolvedLeadingInterval)?;
+    let beta = power_enclosure(
+        &projection.beta.scaled(&BigInt::from(-1)),
+        &interval,
+        cancelled,
+    )?;
+    let value = beta.multiply(&reciprocal);
+    rounded_bounds(&value)
+}
+fn parameter_interval(root: &RootBracket) -> RatioInterval {
+    RatioInterval {
+        lower: ExactRatio::from_dyadic(root.bounds().0),
+        upper: ExactRatio::from_dyadic(root.bounds().1),
+    }
+}
+fn rounded_bounds(value: &RatioInterval) -> Result<[f64; 2], GraphEnvelopeFailure> {
+    let lower = outward_binary64(&value.lower).ok_or(GraphEnvelopeFailure::Binary64Overflow)?;
+    let upper = outward_binary64(&value.upper).ok_or(GraphEnvelopeFailure::Binary64Overflow)?;
+    Ok([lower[0], upper[1]])
+}
+fn power_enclosure(
+    polynomial: &ExactCoefficientPolynomial,
+    parameter: &RatioInterval,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<RatioInterval, GraphEnvelopeFailure> {
+    let mut value = RatioInterval::point(ExactRatio::from_finite(0.));
+    for coefficient in polynomial.0.iter().rev() {
+        poll(cancelled).map_err(GraphEnvelopeFailure::Root)?;
+        let term = RatioInterval::point(ExactRatio::new(coefficient.clone(), BigInt::from(1)));
+        value = value.multiply(parameter).add(&term);
+    }
+    Ok(value)
+}
