@@ -1,7 +1,16 @@
 //! `BOPAlgo_CheckerSI`: checks one shape for self-interference by intersecting its
 //! sub-shapes with each other and collecting the interfering pairs.
+#[path = "checker_si/completion.rs"]
+mod completion;
+#[cfg(test)]
+#[path = "checker_si/completion_tests.rs"]
+mod completion_tests;
 #[path = "checker_si/face_self.rs"]
 mod face_self;
+pub(crate) use completion::{
+    FaceTermination, NativeAlertObservation, SelfCheckCompletion, SelfCheckPhase,
+};
+use completion::{capture_failure, enter_phase};
 #[path = "checker_si/post_treat.rs"]
 mod post_treat;
 #[path = "checker_si/solids.rs"]
@@ -78,24 +87,59 @@ impl BOPAlgoCheckerSI {
     /// self-intersection, the shapes against the solids, and records every interfering pair;
     /// any failure is reported as `AlertIntersectionFailed` (`Perform`); `checker.perform()`.
     pub fn perform(&mut self) {
-        if self.filler.arguments().extent() != 1 {
+        // Compatibility callers retain no new receipts or failure ownership.
+        self.perform_recorded(None);
+    }
+
+    /// Observe exact execution privately; retain original diagnostics only on opt-in.
+    /// Example: `let receipt = checker.perform_observed();`.
+    pub(crate) fn perform_observed(&mut self) -> SelfCheckCompletion {
+        let mut trace = SelfCheckCompletion::new(self.level_of_check);
+        self.perform_recorded(Some(&mut trace));
+        trace
+    }
+
+    fn perform_recorded(&mut self, mut trace: Option<&mut SelfCheckCompletion>) {
+        let arguments = self.filler.arguments().extent();
+        if arguments != 1 {
             self.filler
                 .options()
                 .add_error(&alert(AlertMultipleArguments));
+            finish_rejected(trace, arguments, self.filler.options());
             return;
         }
-        if self.perform_checks().is_err() {
+        if let Err(failure) = self.perform_checks(trace.as_deref_mut()) {
+            capture_failure(trace.as_deref_mut(), failure);
             self.filler
                 .options()
                 .add_error(&alert(AlertIntersectionFailed));
         }
+        if let Some(trace) = trace {
+            trace.returned = true;
+            trace.native_alerts = self.filler.options().has_errors();
+            trace.alerts = observed_alerts(self.filler.options());
+        }
     }
 
-    fn perform_checks(&mut self) -> Result<(), Failure> {
+    fn perform_checks(
+        &mut self,
+        mut trace: Option<&mut SelfCheckCompletion>,
+    ) -> Result<(), Failure> {
         let level = self.level_of_check;
         self.filler
             .perform_with_initializer(|filler| initialize_checker(filler, level));
-        self.check_face_self_intersection()?;
+        enter_phase(trace.as_deref_mut(), SelfCheckPhase::FacePolicy);
+        self.check_face_self_intersection(trace.as_deref_mut())?;
+        enter_phase(trace.as_deref_mut(), SelfCheckPhase::SolidPairs);
+        self.perform_solid_checks()?;
+        if self.filler.options().has_errors() {
+            return Ok(());
+        }
+        enter_phase(trace, SelfCheckPhase::PostTreat);
+        self.post_treat()
+    }
+
+    fn perform_solid_checks(&mut self) -> Result<(), Failure> {
         let stages: [CheckStage; 4] = [
             Self::perform_vz,
             Self::perform_ez,
@@ -107,10 +151,7 @@ impl BOPAlgoCheckerSI {
                 stage(self)?;
             }
         }
-        if self.filler.options().has_errors() {
-            return Ok(());
-        }
-        self.post_treat()
+        Ok(())
     }
 
     /// The data structure, which `perform` must have created.
@@ -152,4 +193,27 @@ fn initialize_checker(filler: &mut BOPAlgoPaveFiller, level: i32) -> Result<(), 
     iterator.update_by_level_of_check(level);
     filler.install_context_and_iterator(context, iterator.into_iterator());
     Ok(())
+}
+
+fn finish_rejected(
+    trace: Option<&mut SelfCheckCompletion>,
+    arguments: i32,
+    options: &super::Options,
+) {
+    if let Some(trace) = trace {
+        trace.rejected_arguments = Some(arguments);
+        trace.returned = true;
+        trace.native_alerts = true;
+        trace.alerts = observed_alerts(options);
+    }
+}
+
+fn observed_alerts(options: &super::Options) -> Vec<NativeAlertObservation> {
+    use rustycad_tkernel::message::Gravity;
+    options
+        .report()
+        .get_alerts(Gravity::Fail)
+        .into_iter()
+        .map(|original| NativeAlertObservation { original })
+        .collect()
 }

@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Coverage and diagnostic identities are independent of mapped validity booleans.
+use crate::bop_algo::{FaceTermination, NativeAlertObservation, SelfCheckPhase};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tktopalgo::brep_check::BRepCheckStatus;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -14,6 +16,7 @@ pub(crate) enum BodyKind {
 pub(crate) enum ValidationStage {
     Topology,
     Geometry,
+    SelfIntersection,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum StageCoverage {
@@ -47,6 +50,35 @@ pub(crate) enum ValidationCause {
     EmptyStatuses,
     NativeStatuses(Vec<BRepCheckStatus>),
     NativeFailure(Failure),
+    AnalyticGap {
+        index: Option<i32>,
+        kind: Option<SurfaceType>,
+        outer: Option<FaceTermination>,
+        reason: AnalyticGap,
+    },
+    AnalyticFailure {
+        phase: SelfCheckPhase,
+        index: Option<i32>,
+        failure: Failure,
+    },
+    AnalyticNativeAlert(NativeAlertObservation),
+    AnalyticInterference {
+        first_index: i32,
+        second_index: i32,
+    },
+}
+
+#[derive(Debug)]
+pub(crate) enum AnalyticGap {
+    LevelNotCovered(i32),
+    NativeRunIncomplete,
+    ArgumentsRejected { actual: i32, expected: i32 },
+    FacePhaseUnscheduled,
+    NativeAlerts,
+    FaceNotAttempted,
+    OuterNotDone,
+    InnerSearchUnobserved,
+    PairCompletionUnobserved,
 }
 
 #[derive(Debug)]
@@ -82,6 +114,7 @@ impl OrderedCoverage {
         match stage {
             ValidationStage::Topology => self.topology = coverage,
             ValidationStage::Geometry => self.geometry = coverage,
+            ValidationStage::SelfIntersection => self.self_intersection = coverage,
         }
         self.findings.extend(findings);
     }

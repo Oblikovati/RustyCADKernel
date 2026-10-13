@@ -11,6 +11,9 @@ mod diagnostic_tests;
 mod geometry_tests;
 mod inspection;
 mod outcome;
+mod self_check;
+#[cfg(test)]
+mod self_check_tests;
 mod statuses;
 #[cfg(test)]
 mod tests;
@@ -38,7 +41,8 @@ pub(crate) fn validate_owned_candidate(
     }
     inspect_stage(shape, kind, sources, ValidationStage::Geometry, &mut report);
     if report.geometry == StageCoverage::Passed {
-        report.self_intersection = StageCoverage::Incomplete;
+        let findings = self_check::inspect_self_intersection(shape, sources);
+        report.record(ValidationStage::SelfIntersection, findings);
     }
     report
 }
