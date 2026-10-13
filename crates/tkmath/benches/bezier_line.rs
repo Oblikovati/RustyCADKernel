@@ -12,21 +12,22 @@ struct ContactCase {
 enum ExpectedContacts {
     Line(usize),
     Ray(Vec<Ordering>),
+    Winding(BezierWinding),
 }
 fn values(text: &str) -> Vec<f64> {
     text.split(',')
         .map(|bits| f64::from_bits(u64::from_str_radix(bits, 16).unwrap()))
         .collect()
 }
-fn corpus(rays: bool) -> Vec<ContactCase> {
+fn corpus(rays: bool, winding: bool) -> Vec<ContactCase> {
     let text = if rays {
         include_str!("../tests/exact_roots/bezier_line/rays/oracle.tsv")
     } else {
         include_str!("../tests/exact_roots/bezier_line/oracle.tsv")
     };
-    text.lines().map(|row| case(row, rays)).collect()
+    text.lines().map(|row| case(row, rays, winding)).collect()
 }
-fn case(row: &str, rays: bool) -> ContactCase {
+fn case(row: &str, rays: bool, winding: bool) -> ContactCase {
     let fields: Vec<&str> = row.split('\t').collect();
     let endpoints = values(fields[3]);
     ContactCase {
@@ -41,7 +42,11 @@ fn case(row: &str, rays: bool) -> ContactCase {
         } else {
             [0., 1.]
         },
-        expected: expected_contacts(&fields, rays),
+        expected: if winding {
+            winding_expected(fields[0])
+        } else {
+            expected_contacts(&fields, rays)
+        },
     }
 }
 fn expected_contacts(fields: &[&str], rays: bool) -> ExpectedContacts {
@@ -67,6 +72,7 @@ fn query(case: &ContactCase) -> usize {
     match &case.expected {
         ExpectedContacts::Line(expected) => line_query(request, *expected),
         ExpectedContacts::Ray(expected) => ray_query(request, expected),
+        ExpectedContacts::Winding(expected) => winding_query(request, *expected),
     }
 }
 fn line_query(request: BezierLineQuery<'_>, expected: usize) -> usize {
@@ -92,14 +98,34 @@ fn run(cases: &[ContactCase], repetitions: usize) -> usize {
     count
 }
 fn main() {
-    let rays = std::env::args().any(|arg| arg == "--rays");
-    let cases = corpus(rays);
+    let winding = std::env::args().any(|arg| arg == "--winding");
+    let rays = winding || std::env::args().any(|arg| arg == "--rays");
+    let cases = corpus(rays, winding);
     run(&cases, 1);
     let start = Instant::now();
     let contacts = run(&cases, 1000);
     println!(
-        "{{\"rays\":{rays},\"requests\":{},\"contacts\":{contacts},\"elapsed_ns\":{}}}",
+        "{{\"rays\":{rays},\"winding\":{winding},\"requests\":{},\"observations\":{contacts},\"elapsed_ns\":{}}}",
         cases.len() * 1000,
         start.elapsed().as_nanos()
     );
+}
+
+fn winding_expected(name: &str) -> ExpectedContacts {
+    let row = include_str!("../tests/exact_roots/bezier_line/winding/oracle.tsv")
+        .lines()
+        .find(|row| row.split('\t').next() == Some(name))
+        .unwrap();
+    let value = row.split_once('\t').unwrap().1;
+    ExpectedContacts::Winding(if value == "boundary" {
+        BezierWinding::Boundary
+    } else {
+        BezierWinding::Clear(value.parse().unwrap())
+    })
+}
+fn winding_query(request: BezierLineQuery<'_>, expected: BezierWinding) -> usize {
+    let result = bezier_winding_contribution(request, || false).unwrap();
+    assert_eq!(result, expected);
+    std::hint::black_box(result);
+    1
 }

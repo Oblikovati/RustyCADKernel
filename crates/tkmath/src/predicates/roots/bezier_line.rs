@@ -5,8 +5,10 @@ mod projection;
 mod ray;
 pub use ray::{BezierRayError, classify_bezier_ray_contacts};
 mod solve;
+mod winding;
 use super::{RootIsolation, RootIsolationOptions};
 pub use error::{BezierInput, BezierLineError, BezierStage};
+pub use winding::{BezierWinding, bezier_winding_contribution};
 
 /// Borrowed controls of a polynomial or rational Bézier curve and an infinite line.
 #[derive(Clone, Copy, Debug)]

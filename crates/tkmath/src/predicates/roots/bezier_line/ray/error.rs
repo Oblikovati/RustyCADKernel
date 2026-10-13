@@ -13,6 +13,8 @@ pub enum BezierRayError {
     Direction(RootIsolationError),
     /// Exact sign certification failed.
     Signs(RootSignError),
+    /// A certified isolated root did not have a nonzero local normal sign.
+    LocalNormalSign(super::super::super::RootBracket),
 }
 impl fmt::Display for BezierRayError {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -24,6 +26,10 @@ impl fmt::Display for BezierRayError {
             ),
             Self::Direction(cause) => write!(formatter, "ray longitudinal numerator: {cause}"),
             Self::Signs(cause) => write!(formatter, "ray side: {cause}"),
+            Self::LocalNormalSign(root) => write!(
+                formatter,
+                "zero local normal at {root:?}; expected nonzero leading derivative sign or nonroot upper bound"
+            ),
         }
     }
 }
@@ -33,7 +39,7 @@ impl std::error::Error for BezierRayError {
             Self::Line(cause) => Some(cause),
             Self::Direction(cause) => Some(cause),
             Self::Signs(cause) => Some(cause),
-            Self::SupportingLineCoincidence => None,
+            Self::SupportingLineCoincidence | Self::LocalNormalSign(_) => None,
         }
     }
 }
