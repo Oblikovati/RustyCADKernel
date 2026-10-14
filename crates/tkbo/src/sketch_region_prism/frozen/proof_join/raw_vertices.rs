@@ -8,6 +8,15 @@ pub(super) fn capture(
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,
 ) -> CaptureResult<Vec<JoinedVertexOperand>> {
+    let rows = capture_bound(bound)?;
+    for row in &rows {
+        check_placement(row, projection)?;
+    }
+    Ok(rows)
+}
+pub(super) fn capture_bound(
+    bound: &BoundProjection<'_>,
+) -> CaptureResult<Vec<JoinedVertexOperand>> {
     let mut rows = Vec::new();
     for (index, context) in bound.contexts.iter().enumerate() {
         if context
@@ -16,41 +25,41 @@ pub(super) fn capture(
             .map_err(PrismFreezeCause::Native)?
             == ShapeEnum::Vertex
         {
-            rows.push(capture_vertex(bound, projection, index)?);
+            rows.push(capture_vertex(bound, index)?);
         }
     }
     rows.sort_by(|a, b| a.occurrence.cmp(&b.occurrence));
     Ok(rows)
 }
-fn capture_vertex(
-    bound: &BoundProjection<'_>,
+fn capture_vertex(bound: &BoundProjection<'_>, index: usize) -> CaptureResult<JoinedVertexOperand> {
+    let actual = &bound.contexts[index].occurrence;
+    Ok(JoinedVertexOperand {
+        vertex: bound.names[index],
+        occurrence: bound.use_names[index].clone(),
+        local_point: local_point(actual)?,
+        placement: super::super::history::freeze_placement(actual.location())?,
+    })
+}
+fn check_placement(
+    row: &JoinedVertexOperand,
     projection: &FrozenPrismProjection,
-    index: usize,
-) -> CaptureResult<JoinedVertexOperand> {
-    let occurrence = &bound.use_names[index];
+) -> CaptureResult<()> {
     let matches: Vec<_> = projection
         .uses()
         .iter()
-        .filter(|row| &row.key == occurrence)
+        .filter(|current| current.key == row.occurrence)
         .collect();
     let current = *only_bound(&matches, "one actual authored vertex occurrence placement")?;
-    let actual = &bound.contexts[index].occurrence;
-    let placement = super::super::history::freeze_placement(actual.location())?;
     let mut expected = Vec::new();
     let mut observed = Vec::new();
-    encoding::placement(placement, &mut expected);
+    encoding::placement(row.placement, &mut expected);
     encoding::placement(current.placement, &mut observed);
     if expected != observed {
         return Err(PrismFreezeCause::StaleCapture {
             representation: "raw vertex owner placement",
         });
     }
-    Ok(JoinedVertexOperand {
-        vertex: bound.names[index],
-        occurrence: occurrence.clone(),
-        local_point: local_point(actual)?,
-        placement,
-    })
+    Ok(())
 }
 pub(super) fn local_point(actual: &rustycad_tkbrep::topods::Shape) -> CaptureResult<[f64; 3]> {
     let point = vertex_tshape(actual, "Martensite same-body local vertex operand")

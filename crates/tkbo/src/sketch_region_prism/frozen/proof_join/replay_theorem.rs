@@ -8,6 +8,7 @@ pub(super) fn regularity(
 ) {
     let report = proof.regularity();
     let source = report.source();
+    replay_options::regularity(source.options(), bytes);
     replay::text(
         &format!("regularity/{:?}/{:?}", links.original, source.options()),
         bytes,

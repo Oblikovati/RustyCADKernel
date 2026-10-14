@@ -134,7 +134,7 @@ fn with_linked(
         check(proof, bound, projection, contact)
     });
 }
-fn complete_replay() -> Vec<u8> {
+fn operand_replay() -> Vec<u8> {
     let mut result = Vec::new();
     with_full_linked(
         |proof, bound, projection, contact, selected_first, closure| {
@@ -150,7 +150,7 @@ fn complete_replay() -> Vec<u8> {
 }
 #[test]
 fn complete_named_operand_replay_matches_independent_operations() {
-    assert_eq!(complete_replay(), complete_replay());
+    assert_eq!(operand_replay(), operand_replay());
 }
 #[test]
 fn joined_raw_vertex_rows_retain_local_points_and_every_directed_owner() {
@@ -196,6 +196,9 @@ fn complete_proof_owned_operand_types_are_send_sync() {
     check::<JoinedPrismTrim>();
     check::<JoinedParentDispositions>();
     check::<JoinedVertexOperand>();
+}
+fn complete_replay() -> Vec<u8> {
+    super::operation_tests::complete_replay()
 }
 #[test]
 fn joined_math_byte_receipt() {
@@ -307,5 +310,27 @@ fn original_closure_query_and_all_semantic_raw_uses_are_owned_and_replayed() {
         after.clear();
         replay_closure::append(&changed, bound.bindings, &mut after).unwrap();
         assert_ne!(before, after);
+    });
+}
+
+#[test]
+fn owned_original_singleton_query_retains_authoritative_parameter_mapping() {
+    with_full_linked(|_, _, _, _, _, closure| {
+        use rustycad_tkmath::predicates::roots::metric_bounds::*;
+        let snapshot = &closure.query;
+        let query = crate::sketch_region_source_conformance::with_captured_point_comparator(
+            snapshot.source_query(),
+            [0.; 3],
+            snapshot.representation.placement,
+            0.,
+        );
+        assert_eq!(query.maps, snapshot.maps);
+        assert_eq!(query.residual.options, snapshot.roots);
+        assert_eq!(query.residual.interval, snapshot.interval);
+        let report =
+            certify_transported_residual_on_bounds(query, snapshot.bounds.clone(), || false);
+        assert!(
+            matches!(report.decision,Ok(ResidualDecision::Within{proven_squared_upper}) if proven_squared_upper.compare_f64(0.).unwrap().is_eq())
+        );
     });
 }

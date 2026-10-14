@@ -116,3 +116,21 @@ native/basis intervals, both parameter maps, exact singleton bounds, root option
 and the requested world limit. No candidate-curve substitution is inferred.
 ADR0036 must evaluate exact raw transport against these immutable operands before
 claiming closure tolerance consistency. This join alone makes no such claim.
+
+### Callback and replay boundary
+
+`compose_prism_proof` performs minimal cardinality admission and captures raw
+source/body vertex probes before the first callback. It then uses the existing
+fresh embedding entry and selectable ordered frozen capture. After its final
+callback, `rebind_joined_prism_proof` repeats the shared current binding, the
+existing full V2 recapture, and the complete authored join/raw-query encoding.
+The initial raw probes are compared once more without callbacks. Malformed
+source/census/candidate counts return typed refusal before indexed legacy paths.
+Downstream consumers reuse the callback-free rebind after their own callbacks.
+
+Parameter maps have explicit variant tags and endpoint binary64 bits; root
+policies encode versions, degree/bisection budgets and width bits. The encoding
+retains signed zero and NaN payload distinctions without admitting invalid
+numerical inputs. Historical V1 bytes are unchanged. The owned query's
+`source_query()` borrows the existing assembler, preserving the original curve,
+construction support, maps, interval and root policy.
