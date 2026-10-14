@@ -99,7 +99,21 @@ fn bound_trim_owner<'a>(
     value: &AnnularAuthoredTrim,
     binding: &'a AnnularPrismBinding,
 ) -> ReplayCheck<&'a AnnularBoundChart> {
-    let matches: Vec<_> = binding
+    let matches = matching_trim_owners(value, binding);
+    let [owner] = matches.as_slice() else {
+        return Err(Box::new(AnnularBindingCause::Count {
+            required: "one full-context source/face/trim/parent operand in binding replay",
+            actual: matches.len(),
+            expected: 1,
+        }));
+    };
+    Ok(*owner)
+}
+fn matching_trim_owners<'a>(
+    value: &AnnularAuthoredTrim,
+    binding: &'a AnnularPrismBinding,
+) -> Vec<&'a AnnularBoundChart> {
+    binding
         .charts()
         .iter()
         .flat_map(|chart| {
@@ -111,15 +125,7 @@ fn bound_trim_owner<'a>(
                 .filter(move |trim| same_bound_trim(value, chart, trim))
                 .map(move |_| chart)
         })
-        .collect();
-    let [owner] = matches.as_slice() else {
-        return Err(Box::new(AnnularBindingCause::Count {
-            required: "one full-context source/face/trim/parent operand in binding replay",
-            actual: matches.len(),
-            expected: 1,
-        }));
-    };
-    Ok(*owner)
+        .collect()
 }
 fn same_bound_trim(
     value: &AnnularAuthoredTrim,
