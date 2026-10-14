@@ -53,6 +53,8 @@ mod diagnostic_runtime_tests;
 
 #[cfg(test)]
 mod diagnostic_codec_tests;
+#[cfg(test)]
+pub(in crate::sketch_region_prism) mod publication_diagnostic_tests;
 mod resolver;
 
 #[cfg(test)]

@@ -166,3 +166,79 @@ invocation packet and bounded typed adapters/codecs. Validation, measure, histor
 and unsupported join numerical/frozen families remain explicit completion tasks;
 unsupported local owners cannot become lossless diagnostics through Debug text
 or a known outer class. Preserving producer headers does not close those gaps.
+
+## Sealed publication adapter V1
+
+The private `project_invoked_publication_refusal` consumes only
+`InvokedPrismPublicationFailure`, issued by the actual resolver invocation. The
+issuer owns the source vector and bindings and captures the exact request and
+actual V2 naming plan at the call. Neither the adapter nor its tests add a packet
+constructor accepting detached context and failure values. The invocation
+explicitly dispatches requested publication behavior 2 to the V2 producer; all
+other requests retain the original V1 entry and its admission behavior.
+
+The adapter verifies the observed operation token, exact encoded publication
+policy bits, and caller operation/source/endpoint dictionary against the sealed
+request. Equal binary64 NaN payloads compare equal as requested bits; signed zero
+and different NaN payloads remain distinct. These checks supplement actual issuer
+provenance; reusable internal operation token 257 is not proof of that provenance.
+The owned context includes the complete request and actual plan version. Tests
+execute otherwise identical callers with different IDs, rather than treating
+those internal tokens as persistent caller identities.
+
+Outer publication class and phase are copied unchanged. V2 retains each actual
+stage header. The reused join projector receives a class with an explicit origin:
+`RetainedStage(phase)` for a retained stage, or `PublicationOperation` for a V1
+callback descendant whose child header was discarded. A V1 descendant always
+records `UnretainedChildHeader`; no cause-based inference reconstructs its former
+class. Actual nested binding cancellation currently has child class Incomplete
+under the existing publication classifier, while a native callback makes the
+outer operation Failed. The adapter pins that distinction without changing it.
+
+Supported lossless cases are outer version refusal, callback cancellation/native
+failure/exhaustion and exact checkpoint, binding proof label, history cancellation
+header, and join missing-query/version/cancellation/stale-label cases. A join
+binding cancellation or mapped native failure is supported. Embedding versions
+and those binding causes are supported only without an original identity payload.
+The adapter reuses ADR0043 projection and the existing native provenance encoder;
+it does not duplicate identity resolution. A nonempty join entity is conservatively
+recorded as a full unqualified authored key and a projection gap until the actual
+semantic-map projection is supplied. A foreign observed history operation also
+records a gap rather than attributing it through the outer operation token.
+
+The distinct full format `Martensite.OwnedPublicationDiagnostic/v1` plus NUL
+contains length-delimited actual context, observed internal operation, explicit
+outer phase/class, diagnostic coverage, typed supported cause tree, class-origin
+tags, checkpoint ordinals, and ordered gaps. Supported join bytes use a separate
+versioned block with exact embedding options, phases and native provenance.
+Primitive literal fixtures pin tags and operands; actual invocation process and
+thread fixtures use this complete format. No Debug or Display text is a substitute
+for unsupported payload encoding. Encoding the available envelope completely does
+not claim complete projection of local owners.
+
+On any gap, the consuming result retains the same original boxed publication
+failure, including all borrowed history diagnostics. The immutable owned report
+has Send/Sync assertions and lock-free read tests; the retention carrier has no
+published ownership or Send/Sync claim. Successful diagnostic projection conveys
+no successful body. It does not claim the final one-call failure gate is complete.
+
+### Remaining completion work
+
+The Kernel#10 operation-contract owner must close the actual reachable refusal
+corpus before final owned one-call outcome acceptance. This includes:
+
+- Resolver failures before a publication packet exists: preserve the actual
+  request/plan availability at invocation, scalar/plan/native operands, and exact
+  Binding/Prism/History causes with explicit unknown entity context until bound.
+- Ordered validation, complete-history and complete-measure typed payloads,
+  including precise numerical limits/work/error and actual identity observations.
+- Remaining join closure-query/region, embedding regularity, frozen capture,
+  binding and link families, including qualified entity/original correspondence.
+- Borrowed `PrismHistoryLocalDiagnostic` partition, arrangement and candidate
+  payloads. An owning prepared object containing a failure that borrows itself is
+  not an accepted immutable publication representation. Retaining the local
+  original is an intermediate inspection path, not a completed public solution.
+
+The existing migration owner and ADR0014 application R3 limit apply. The lossy V1
+producer remains selectable until its recorded migration. No public completeness,
+release benchmark, application acceptance, or successful TSan suite is claimed.

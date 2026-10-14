@@ -150,3 +150,15 @@ Closure, paired directed uses, endpoint-germ links, connectivity and Euler2 do
 not establish geometric outwardness, embedding or valid-solid status. The #10
 publication coordinator owns the same-C1-milestone migration of its publication
 path to V2; diagnostic V1 replay remains selectable until the recorded gate.
+
+### Private sealed publication diagnostic projection
+
+- ADR0048 adds a private owned refusal adapter fed only by an actual resolver
+  invocation packet. It preserves caller request/revision/policy bits, the actual
+  naming plan, original outer classification, explicit child-class provenance,
+  callback/native fields and a versioned typed replay.
+- Unsupported payload families and unqualified entity contexts remain explicitly
+  projection-incomplete with the same original local failure retained. This is
+  intermediate Kernel#10 work, not acceptance of a complete public one-call
+  failure API. The existing operation-contract owner and ADR0014 application R3
+  migration/deletion obligation remain; no workspace version changes here.
