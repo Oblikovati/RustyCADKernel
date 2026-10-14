@@ -1,0 +1,114 @@
+{
+  "revision": "e60e9b30b59d837184956b277f9ad09e37a7469d",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "cargo_build_jobs": 2,
+  "test_threads": 1,
+  "inherited_instrumentation": {
+    "LD_PRELOAD": null,
+    "RUSTFLAGS": null,
+    "RUSTDOCFLAGS": null,
+    "TSAN_OPTIONS": null
+  },
+  "checks": [
+    {
+      "name": "focused",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "--lib",
+        "polynomial_side",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 56.780163049697876
+    },
+    {
+      "name": "full-tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--locked",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 182.0800497531891
+    },
+    {
+      "name": "docs",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "doc",
+        "-p",
+        "rustycad-tkmath",
+        "--no-deps",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.363074064254761
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 45.69024872779846
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "-p",
+        "rustycad-tkmath",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.6244268417358398
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.010921716690063477
+    }
+  ],
+  "source_files": 15627,
+  "source_unchanged": true,
+  "source_differences": [],
+  "test_binary_hashes": {
+    "target/debug/deps/toolkit-c6d1d90398d9dcec": "c332ada2b9bd33d4283d146ae9e3d6ba5420b1ef58d6f42da7c95fbb9ad3337c",
+    "target/debug/deps/rustycad_tkmath-3f312a80af6befd1": "1471be4020805be51264593f61b554adf295cf4bbafd0302bd6224724ffaab2a",
+    "target/debug/deps/rustycad_tkmath-7425437c53ad40b3": "60777b5bc5206e6d8e200469a2cef2933df1544b7f598bf7eb816193631ab1fd"
+  }
+}

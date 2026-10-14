@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "absolute_area_error_limit": 1e-05,
+  "max_subdivisions": 4096,
+  "max_degree": 16,
+  "observed_workloads": [
+    {
+      "fixture": "closed_cubic_height_two",
+      "subdivisions": 1482,
+      "interval_bounds": 2965,
+      "bounds": [
+        11.521275517910366,
+        11.52128551726446
+      ],
+      "error": 9.999354093181978e-06
+    },
+    {
+      "fixture": "ph_cubic",
+      "subdivisions": 300,
+      "interval_bounds": 601,
+      "bounds": [
+        3.9999950035441536,
+        4.000004996459594
+      ],
+      "error": 9.992915440015793e-06
+    },
+    {
+      "fixture": "reversing_quadratic",
+      "subdivisions": 9,
+      "interval_bounds": 19,
+      "bounds": [
+        1.6666641235351562,
+        1.6666717529296875
+      ],
+      "error": 7.62939453125e-06
+    }
+  ],
+  "interpretation": "Finite owned workload evidence, not a universal convergence or performance claim. Closed cubic bounds are not an independent accepted-face oracle."
+}
