@@ -1,0 +1,15 @@
+{
+  "binary_sha256": "f90b1178897a9c0876813d76c7fba31ce2da46595edc60ffe134dba18746cee2",
+  "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p martensite-vulkan --test toolkit gui_surface_legacy -- --test-threads=1",
+  "development_attempts": [
+    "legacy-tests.log: 4 pass, shared viewer fixture dead-code warning",
+    "legacy-final.log: compile failure E0599, missing AspectWindowMembers import after fixture reduction",
+    "legacy-complete.log: 4 pass, no warning; retained source bookends equal"
+  ],
+  "failed": 0,
+  "native_gpu_execution": false,
+  "passed": 4,
+  "source_bookends_equal": true,
+  "source_files": 15793,
+  "source_revision": "7f27d9b17b99fab5a93e755e331a14bf3bcf5270"
+}

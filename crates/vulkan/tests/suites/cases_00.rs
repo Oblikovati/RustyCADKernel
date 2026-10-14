@@ -39,6 +39,8 @@ pub mod group_flipping;
 pub mod gui_composition;
 #[path = "../gui_gpu_composition.rs"]
 pub mod gui_gpu_composition;
+#[path = "../gui_surface_legacy.rs"]
+pub mod gui_surface_legacy;
 #[path = "../homogeneous_vertices.rs"]
 pub mod homogeneous_vertices;
 #[path = "../light_name_dump_boundary.rs"]
