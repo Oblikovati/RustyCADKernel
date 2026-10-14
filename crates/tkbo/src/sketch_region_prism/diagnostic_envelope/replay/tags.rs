@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Explicit tags preserve classification and missing-evidence categories independently.
 use super::super::*;
-pub(super) fn class(value: PrismDiagnosticClass) -> u8 {
+pub(in crate::sketch_region_prism::diagnostic_envelope) fn class(
+    value: PrismDiagnosticClass,
+) -> u8 {
     match value {
         PrismDiagnosticClass::Declined => 0,
         PrismDiagnosticClass::Incomplete => 1,
