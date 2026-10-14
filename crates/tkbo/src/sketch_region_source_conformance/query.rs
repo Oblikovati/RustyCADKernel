@@ -30,7 +30,7 @@ pub(crate) fn source_query<'a>(
         curve, pcurve, support, interval, maps, limit, roots,
     ))
 }
-fn assemble_query<'a>(
+pub(crate) fn assemble_query<'a>(
     curve: &'a CapturedSpaceRepresentation,
     pcurve: &'a CapturedMetricCurve<2>,
     support: &CapturedPlaneSupport,

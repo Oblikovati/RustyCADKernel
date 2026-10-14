@@ -214,3 +214,60 @@ fn singleton_point_inputs(
     // A fresh fixed endpoint proof cannot silently become a new unbudgeted contact search.
     zero.then_some(inputs)
 }
+
+/// Own the exact original-source singleton operands; e.g. `capture_contact_point_query(bridge, 0)`.
+pub(crate) fn capture_contact_point_query(
+    retained: &PairedContactTransaction,
+    contact: usize,
+) -> Option<Result<super::ContactPointQuerySnapshot, SourceConformanceCause>> {
+    let inputs = singleton_point_inputs(retained, contact)?;
+    let [parent] = inputs.construction.parents.as_slice() else {
+        return None;
+    };
+    Some(owned_point_query(&inputs, parent))
+}
+fn owned_point_query(
+    inputs: &ContactMetricInputs<'_>,
+    parent: &crate::sketch_region::OriginalMemberIdentity,
+) -> Result<super::ContactPointQuerySnapshot, SourceConformanceCause> {
+    let query = super::exact_sources::exact_source_query(
+        inputs.originals,
+        inputs.construction,
+        parent,
+        inputs.requested.remaining_roots(0),
+    )?;
+    let original =
+        super::exact_sources::single_original_representation(inputs.originals, parent)?.clone();
+    clone_point_query(inputs, parent, original, query)
+}
+fn clone_point_query(
+    inputs: &ContactMetricInputs<'_>,
+    parent: &crate::sketch_region::OriginalMemberIdentity,
+    representation: CapturedSpaceRepresentation,
+    query: TransportedResidualQuery<'_>,
+) -> Result<super::ContactPointQuerySnapshot, SourceConformanceCause> {
+    let construction = inputs.construction;
+    Ok(super::ContactPointQuerySnapshot {
+        original: parent.clone(),
+        representation,
+        copied: checked_point_operand(&construction.copied)?.clone(),
+        pcurve: checked_point_operand(&construction.pcurve)?.clone(),
+        support: checked_point_operand(&construction.support)?.clone(),
+        captured: construction.captured.clone(),
+        copied_occurrence: construction.copied_occurrence.clone(),
+        parents: construction.parents.clone(),
+        native_interval: construction.native_interval,
+        basis_interval: construction.basis_interval,
+        maps: query.maps,
+        interval: query.residual.interval,
+        bounds: inputs.bounds.clone(),
+        roots: query.residual.options,
+        requested_world_limit: inputs.requested.world_endpoint_limit,
+    })
+}
+
+fn checked_point_operand<T>(value: &CapturedGeometry<T>) -> Result<&T, SourceConformanceCause> {
+    value
+        .as_ref()
+        .map_err(|cause| SourceConformanceCause::Capture(cause.clone()))
+}
