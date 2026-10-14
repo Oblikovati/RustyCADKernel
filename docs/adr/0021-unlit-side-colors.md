@@ -83,3 +83,6 @@ than the end of that milestone (at most one milestone of overlap). V2 is not act
 GitHub milestone, issue completion or migration is claimed by this document.
 Any later removal of the public V1 selector needs the appropriate semantic
 version change and release migration notes.
+
+Executed checks, independent expectations, preserved failures and exclusions are
+recorded in [the V2 evidence](../evidence/unlit-side-color-v2/README.md).
