@@ -36,7 +36,7 @@ impl SemanticReplayEnvelope {
 }
 fn encode_envelope(plan: &SingleBoundaryNamePlan, child: &[u8]) -> Vec<u8> {
     let mut bytes = b"Martensite.SemanticNames\0".to_vec();
-    bytes.extend_from_slice(&1_u32.to_le_bytes());
+    bytes.extend_from_slice(&plan.version().to_le_bytes());
     encode_request(&mut bytes, plan);
     word(&mut bytes, plan.entries().len() as u64);
     for entry in plan.entries() {
@@ -78,6 +78,6 @@ fn encode_entry(bytes: &mut Vec<u8>, entry: &SemanticNameEntry) {
     bytes.push(tag);
     word(bytes, value);
 }
-fn word(bytes: &mut Vec<u8>, value: u64) {
+pub(super) fn word(bytes: &mut Vec<u8>, value: u64) {
     bytes.extend_from_slice(&value.to_le_bytes());
 }

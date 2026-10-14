@@ -1,0 +1,21 @@
+{
+  "source": "be459a6d340016f16c9576218172495f53f33a23",
+  "before_source": "54cf44790",
+  "kind": "structural borrowed context extraction",
+  "tests_before": 45,
+  "tests_after": 45,
+  "full_history_replay_bytes": 421702,
+  "sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686",
+  "commands": [
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib complete_history --jobs 2 -- --nocapture",
+    "rustup run 1.99.0 cargo clippy -p rustycad-tkbo --all-targets --all-features --jobs 2 -- -D warnings",
+    "rustup run 1.99.0 cargo fmt --all -- --check"
+  ],
+  "results": "all passed; exact complete history replay unchanged before, copier-only intermediate, final extraction",
+  "limits": [
+    "indices are temporary lookups, never authored identities",
+    "consumer must prove complete target coverage",
+    "no production name resolver issued",
+    "full crate gate follows completed resolver scope"
+  ]
+}
