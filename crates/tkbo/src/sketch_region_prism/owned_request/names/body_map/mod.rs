@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Read seam only until the actual correspondence resolver owns production issuance.
+//! Portable semantic map; production issuance is sealed behind actual resolver/publication ownership.
 mod checks;
 mod expansion;
 mod replay;
@@ -19,3 +19,9 @@ mod test_fixture;
 
 #[cfg(test)]
 mod adversarial_tests;
+
+mod issued;
+pub(in crate::sketch_region_prism::owned_request) use issued::issue_resolved_prism_names;
+
+#[cfg(test)]
+mod copied_base_tests;

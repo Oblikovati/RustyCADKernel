@@ -7,7 +7,12 @@ pub(super) struct NamedSourceContext {
     pub member: SemanticNameRole,
     pub directed_use: SemanticNameRole,
 }
-pub(super) enum ResolutionCause {
+pub(in crate::sketch_region_prism::owned_request) enum ResolutionCause {
+    Native(rustycad_tkernel::standard::Failure),
+    EndpointParameter {
+        actual: f64,
+        expected: [f64; 2],
+    },
     Binding(
         Box<crate::sketch_region_prism::region_certificate::current_binding::PrismBindingFailure>,
     ),
@@ -35,7 +40,7 @@ pub(super) enum ResolutionCause {
         expected: usize,
     },
 }
-pub(super) type ResolveCheck<T> = Result<T, ResolutionCause>;
+pub(in crate::sketch_region_prism::owned_request) type ResolveCheck<T> = Result<T, ResolutionCause>;
 impl From<PrismHistoryCause> for ResolutionCause {
     fn from(cause: PrismHistoryCause) -> Self {
         Self::History(Box::new(cause))

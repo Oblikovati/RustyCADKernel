@@ -39,7 +39,7 @@ pub(super) fn map_selected_copy(
     complete_context_coverage(&result, &current::snapshot_contexts(target)?)?;
     Ok(result)
 }
-fn unique_live<'a>(
+pub(super) fn unique_live<'a>(
     contexts: &'a [PrismBodyContext],
     expected: &RegionObservedContext,
 ) -> ResolveCheck<&'a PrismBodyContext> {

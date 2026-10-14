@@ -40,6 +40,7 @@ pub(super) fn output(
         ));
     }
     let role = output_role(key, source)
+        .or_else(|| copied_base_root_role(plan.version(), key, source))
         .ok_or_else(|| failure(plan, PrismSemanticMapCause::UnsupportedMember { key }))?;
     Ok(role.map(|role| SemanticNameSlot {
         stage: SemanticNameStage::Output,
@@ -138,4 +139,18 @@ fn step(
         member: member(plan, definition)?,
         directed_use,
     })
+}
+
+fn copied_base_root_role(
+    version: u32,
+    key: FrozenPrismKey,
+    source: SemanticNameSlot,
+) -> Option<Option<SemanticNameRole>> {
+    use SemanticNameRole::{BoundedRegion, Shell, Solid};
+    use SemanticNameStage::SweepBase;
+    match (version, source.stage, source.role, key.role, key.kind) {
+        (2, SweepBase, BoundedRegion, FrozenSweepRole::Generated, 2) => Some(Some(Solid)),
+        (2, SweepBase, BoundedRegion, FrozenSweepRole::Generated, 3) => Some(Some(Shell)),
+        _ => None,
+    }
 }

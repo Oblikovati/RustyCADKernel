@@ -22,3 +22,26 @@ mod selected_copy;
 
 #[cfg(test)]
 mod generated_tests;
+
+mod materialize;
+mod roster;
+
+mod output;
+mod output_trims;
+
+#[cfg(test)]
+mod output_tests;
+
+mod bindings;
+mod invocation;
+
+#[cfg(test)]
+mod invocation_tests;
+
+pub(in crate::sketch_region_prism::owned_request) use invocation::{
+    InvokedPrismPublicationFailure, ResolvedPrismInvocation, ResolvedPrismPublication,
+    resolve_invocation,
+};
+
+#[cfg(test)]
+pub(in crate::sketch_region_prism::owned_request) mod fixture;

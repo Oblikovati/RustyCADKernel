@@ -60,3 +60,12 @@ pub(super) fn snapshot_contexts(
         .map(|row| snapshot_directed_history_context(row).map_err(ResolutionCause::from))
         .collect()
 }
+
+pub(super) fn constructed_source(
+    prepared: &PreparedPolynomialPrism,
+) -> ResolveCheck<&super::super::construction::ConstructedPolynomialSource> {
+    require_local(
+        prepared.retained.source.as_ref(),
+        "actual constructor source",
+    )
+}

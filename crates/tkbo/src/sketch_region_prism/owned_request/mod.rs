@@ -29,3 +29,8 @@ mod progress_tests;
 mod test_fixture;
 
 mod resolver;
+
+#[cfg(test)]
+pub(in crate::sketch_region_prism) use resolver::fixture::{
+    ResolvedPrismFixture, default_resolved_prism_fixture, resolved_prism_fixture,
+};
