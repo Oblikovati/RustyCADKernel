@@ -33,15 +33,7 @@ fn shared_rim_conclusion_preserves_both_caps_and_physical_correspondence() {
 }
 
 fn check_retained_rim(expected: &PrismIncidenceConclusion) {
-    let PrismIncidenceConclusion::ExactlyRim {
-        cap,
-        side,
-        normalized_sweep,
-        ..
-    } = expected
-    else {
-        panic!("actual {expected:?}; expected authored rim")
-    };
+    let (cap, side, normalized_sweep) = rim_operands(expected);
     assert_eq!(
         rim_conclusion(cap, side, *normalized_sweep).unwrap(),
         *expected
@@ -54,6 +46,21 @@ fn check_retained_rim(expected: &PrismIncidenceConclusion) {
     assert!(rim_conclusion(cap, &foreign, *normalized_sweep).is_err());
 }
 
+fn rim_operands(
+    expected: &PrismIncidenceConclusion,
+) -> (&PrismAuthoredTrimUse, &PrismAuthoredTrimUse, &f64) {
+    let PrismIncidenceConclusion::ExactlyRim {
+        cap,
+        side,
+        normalized_sweep,
+        ..
+    } = expected
+    else {
+        panic!("actual {expected:?}; expected authored rim")
+    };
+    (cap, side, normalized_sweep)
+}
+
 #[test]
 fn shared_trim_retention_keeps_every_directed_field_and_parent_multiplicity() {
     let report = bound_report();
@@ -64,12 +71,20 @@ fn shared_trim_retention_keeps_every_directed_field_and_parent_multiplicity() {
             .find(|row| row.face == chart.output)
             .unwrap();
         for (captured, expected) in chart.captured.trims.iter().zip(&domain.trims) {
-            assert_eq!(retain_trim(chart, captured), *expected);
-            let mut repeated = captured.clone();
-            repeated.parents.push(captured.parents[0].clone());
-            let retained = retain_trim(chart, &repeated);
-            assert_eq!(retained.parents, repeated.parents);
-            assert_eq!(retained.parents.len(), expected.parents.len() + 1);
+            check_retained_trim(chart, captured, expected);
         }
     }
+}
+
+fn check_retained_trim(
+    chart: &BoundPrismChart,
+    captured: &CapturedPrismTrim,
+    expected: &PrismAuthoredTrimUse,
+) {
+    assert_eq!(retain_trim(chart, captured), *expected);
+    let mut repeated = captured.clone();
+    repeated.parents.push(captured.parents[0].clone());
+    let retained = retain_trim(chart, &repeated);
+    assert_eq!(retained.parents, repeated.parents);
+    assert_eq!(retained.parents.len(), expected.parents.len() + 1);
 }
