@@ -35,3 +35,7 @@ mod geometry_tests;
 
 #[cfg(test)]
 mod context_tests;
+
+mod region_certificate;
+#[allow(unused_imports)]
+pub(crate) use region_certificate::retain_source_bound_prism;

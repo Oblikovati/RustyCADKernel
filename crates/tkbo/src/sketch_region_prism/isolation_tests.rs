@@ -13,7 +13,7 @@ use rustycad_tkmath::{
     gp::{Direction3, Point2, Point3},
     poly::{Triangle, Triangulation, mesh_purpose},
 };
-fn attached_mesh(face: &Face) -> Handle<Triangulation> {
+pub(super) fn attached_mesh(face: &Face) -> Handle<Triangulation> {
     let mesh = Handle::new(Triangulation::with_sizes(3, 1, true, true).unwrap());
     fill_mesh(mesh.get().unwrap());
     BRepBuilder::default()
@@ -40,7 +40,7 @@ fn mesh_cap(body: &Shape) -> Face {
         })
         .expect("copied base triangulation must survive on actual first cap")
 }
-fn first_edge(face: &Face) -> Edge {
+pub(super) fn first_edge(face: &Face) -> Edge {
     let found = equal_occurrences(face)
         .unwrap()
         .into_iter()
@@ -48,7 +48,7 @@ fn first_edge(face: &Face) -> Edge {
         .unwrap();
     edge(&found).unwrap()
 }
-fn pole(edge: &Edge) -> Point3 {
+pub(super) fn pole(edge: &Edge) -> Point3 {
     let (curve, _, _) = BRepTool::curve(edge).unwrap();
     curve
         .cast::<GeomBezierCurve>()
@@ -57,7 +57,7 @@ fn pole(edge: &Edge) -> Point3 {
         .pole(2)
         .unwrap()
 }
-fn set_pole(edge: &Edge, coordinate: f64) {
+pub(super) fn set_pole(edge: &Edge, coordinate: f64) {
     let (curve, _, _) = BRepTool::curve(edge).unwrap();
     curve
         .cast::<GeomBezierCurve>()
@@ -76,7 +76,7 @@ fn change_mesh(mesh: &Handle<Triangulation>, coordinate: f64) {
     mesh.set_deflection(coordinate);
     mesh.unset_cached_min_max();
 }
-fn assert_original_mesh(mesh: &Handle<Triangulation>) {
+pub(super) fn assert_original_mesh(mesh: &Handle<Triangulation>) {
     let mesh = mesh.get().unwrap();
     assert_eq!(mesh.node(2).unwrap(), Point3::new(1., 0., 0.));
     assert_eq!(mesh.uv_node(2).unwrap(), Point2::new(1., 0.));

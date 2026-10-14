@@ -38,7 +38,9 @@ fn accumulate_seed<'a>(
 ) -> Result<SeedAccumulation, CandidateCause> {
     let mut accumulated = SeedAccumulation::default();
     for (index, candidate) in batch.candidates.iter().enumerate() {
-        if classify_candidate(candidate, operation, cancelled, &mut accumulated)? > 0 {
+        let winding = classify_candidate(candidate, operation, cancelled, &mut accumulated)?;
+        operation.receipt.candidate_windings.push(winding);
+        if winding > 0 {
             accumulated.interiors.push(index);
         }
     }

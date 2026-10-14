@@ -9,6 +9,8 @@ pub(super) struct CandidateWindingOperation<'a> {
     pub receipt: CandidateCaptureReceipt,
 }
 pub(crate) struct CandidateCaptureReceipt {
+    // Directed totals from the same executed classifier, before any region certificate.
+    pub candidate_windings: Vec<i64>,
     pub store: CapturedBezierWireStore,
     pub work: CaptureWorkReceipt,
     pub occurrences: Vec<CandidateCapturedOccurrence>,
@@ -33,6 +35,7 @@ impl<'a> CandidateWindingOperation<'a> {
             registry: Vec::new(),
             receipt: CandidateCaptureReceipt {
                 store,
+                candidate_windings: Vec::new(),
                 work: CaptureWorkReceipt::default(),
                 occurrences: Vec::new(),
             },

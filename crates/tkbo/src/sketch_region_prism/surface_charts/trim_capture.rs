@@ -78,7 +78,7 @@ fn require_cap_coverage(
     }
     Ok(())
 }
-pub(super) fn pcurve_on(
+pub(in crate::sketch_region_prism) fn pcurve_on(
     edge_shape: &Shape,
     face_shape: &Shape,
 ) -> Result<(CapturedMetricCurve<2>, [f64; 2]), PrismSurfaceCause> {

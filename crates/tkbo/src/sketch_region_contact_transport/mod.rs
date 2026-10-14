@@ -41,7 +41,10 @@ mod storage_tests;
 mod declared_plane_tests;
 
 #[cfg(test)]
-mod test_fixture;
+pub(crate) mod test_fixture;
 
 #[cfg(test)]
 mod revision_tests;
+
+pub(crate) use admission::BoundedContactConstruction;
+pub(crate) use generated::observe_generated_vertex;

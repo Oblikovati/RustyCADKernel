@@ -12,6 +12,7 @@ mod sources;
 mod trim_binding;
 mod trim_capture;
 mod types;
+pub(super) use capture::capture_bezier_edge;
 pub(super) use inspection::retain_surface_charts;
 pub(super) use sources::capture_sources;
 pub(crate) use types::*;
@@ -59,3 +60,4 @@ fn prove_cap_chart(
     };
     cap::prove_cap((source, actual), chart, offset, context)
 }
+pub(super) use trim_capture::pcurve_on;

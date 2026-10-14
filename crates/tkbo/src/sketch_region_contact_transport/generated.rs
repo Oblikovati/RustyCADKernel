@@ -49,7 +49,8 @@ pub(super) fn retain_generated_vertices(retained: &mut PairedContactTransaction)
         }
     }
 }
-fn observe_generated_vertex(
+/// Rebind retained copy/query contexts without inventing contact identity; `observe_generated_vertex(copy, key)`.
+pub(crate) fn observe_generated_vertex(
     copied: &CandidateCopyInspection,
     native: &PartitionOccurrenceIdentity,
 ) -> Vec<GeneratedContactObservation> {

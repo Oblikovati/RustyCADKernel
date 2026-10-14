@@ -22,7 +22,7 @@ pub(super) fn actual_inputs() -> (
 ) {
     actual_inputs_for(single_root_edges())
 }
-pub(super) fn actual_inputs_for(
+pub(crate) fn actual_inputs_for(
     edges: Vec<rustycad_tkbrep::topods::Shape>,
 ) -> (
     BoundaryCensus,
@@ -194,7 +194,7 @@ fn bind_observed_fixture(
     )
 }
 
-pub(super) fn finish_fixture_request(
+pub(crate) fn finish_fixture_request(
     census: BoundaryCensus,
     mapped: crate::sketch_region_partition_bindings::PartitionBoundOutputs,
     sources: &[ArrangementSource<'_>],
