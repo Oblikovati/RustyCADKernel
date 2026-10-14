@@ -36,3 +36,5 @@ pub(crate) use source::PrismPublicationSource;
 pub(crate) use stage_error::{
     PrismPublicationClass, PublicationStageCause, PublicationStageFailure,
 };
+#[cfg(test)]
+mod refusal_tests;

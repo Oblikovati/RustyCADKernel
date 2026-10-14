@@ -2,6 +2,7 @@
 //! Terminal callback edits must be seen by the one source check and extra-history reproject.
 use super::{fixture::*, progress::*, result::*, stage_error::*, *};
 use crate::sketch_region_partition_bindings::binding_sources;
+use crate::sketch_region_prism::frozen::publication_read_snapshot::read_snapshot;
 use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 use rustycad_tkernel::standard::Failure;
 
@@ -45,6 +46,7 @@ fn final_source_and_body_raw_vertex_edits_refuse_without_mutating_previous_resul
         let fixture = PublicationFixture::new();
         let previous = fixture.publish(&mut PublicationObserver::default());
         let bytes = previous.replay_bytes().to_vec();
+        let fresh = read_snapshot(&previous);
         let root = if body {
             &fixture.operation.receipt.diagnostic.as_ref().unwrap().body
         } else {
@@ -58,6 +60,7 @@ fn final_source_and_body_raw_vertex_edits_refuse_without_mutating_previous_resul
         assert_eq!(failure.phase, PrismPublicationPhase::Commit);
         assert_eq!(progress.commits, 1);
         assert_eq!(previous.replay_bytes(), bytes);
+        assert_eq!(read_snapshot(&previous), fresh);
     }
 }
 #[test]
@@ -101,6 +104,7 @@ fn rejected_receipt_change_cannot_reuse_complete_history_or_old_result_ownership
     let mut fixture = PublicationFixture::new();
     let previous = fixture.publish(&mut PublicationObserver::default());
     let bytes = previous.replay_bytes().to_vec();
+    let fresh = read_snapshot(&previous);
     fixture.operation.receipt.input.rejected[0][0]
         .generated
         .pop();
@@ -114,6 +118,7 @@ fn rejected_receipt_change_cannot_reuse_complete_history_or_old_result_ownership
     assert_eq!(failure.phase, PrismPublicationPhase::History);
     assert_eq!(failure.class, PrismPublicationClass::Incomplete);
     assert_eq!(previous.replay_bytes(), bytes);
+    assert_eq!(read_snapshot(&previous), fresh);
 }
 
 #[test]
@@ -121,6 +126,7 @@ fn extra_partition_query_failure_is_rechecked_after_unchanged_shared_join() {
     let mut fixture = PublicationFixture::new();
     let previous = fixture.publish(&mut PublicationObserver::default());
     let bytes = previous.replay_bytes().to_vec();
+    let fresh = read_snapshot(&previous);
     let crate::sketch_region::PartitionObservation::Captured(partition) =
         &mut fixture.operation.bridge.mapped.arrangement.partition
     else {
@@ -141,4 +147,19 @@ fn extra_partition_query_failure_is_rechecked_after_unchanged_shared_join() {
     assert_eq!(failure.phase, PrismPublicationPhase::Commit);
     assert!(matches!(failure.cause, PrismPublicationCause::History(_)));
     assert_eq!(previous.replay_bytes(), bytes);
+    assert_eq!(read_snapshot(&previous), fresh);
+}
+
+#[test]
+fn fresh_read_views_survive_all_operation_inputs_being_dropped() {
+    let (result, fresh) = {
+        let fixture = PublicationFixture::new();
+        let result = fixture.publish(&mut PublicationObserver::default());
+        let fresh = read_snapshot(&result);
+        (result, fresh)
+    };
+    assert_eq!(read_snapshot(&result), fresh);
+    assert!(result.validation().binds(result.join()));
+    assert!(result.history().binds(result.join()));
+    assert!(result.measures().matches_join(result.join()));
 }

@@ -29,8 +29,12 @@ contact or history engine.
 
 ## Result ownership and diagnostics
 
-Only owned immutable values enter the result; no mutable `Shape`, live receipt,
-borrowed bridge or operation-local identity escapes. The result owns one joined
+Only owned immutable values enter the result; no mutable `Shape`, live receipt
+or borrowed bridge escapes. The private graph retains scalar operation-local
+lookup provenance and persistent immutable `Location` chains. Those lookup
+addresses are excluded from portable replay and are not application persistent
+identity. A public semantic projection is required before exposing this entire
+private result. The result owns one joined
 projection and the certificates bound to it. Read views take no lock. All public
 result candidates must satisfy compile-time Send/Sync and isolation/replay gates.
 
@@ -98,3 +102,9 @@ Initial private refusal values remain operation-local, preserve typed child
 causes and may borrow input diagnostics. Accepted results are owned and have no
 input lifetime. A separate owned-refusal projection is required before a public
 outcome contract. This checkpoint is not full release acceptance.
+
+Fresh ownership regression snapshots deliberately exclude cached publication,
+join and history byte buffers. They recompute projection, ordered validation and
+measurement encodings and inspect raw point/frame rows, actual source/chart/trim
+coefficients, original closure-query geometry and history read views after source
+and body mutation and after all operation inputs have been dropped.

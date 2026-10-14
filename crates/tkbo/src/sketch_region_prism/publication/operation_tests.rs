@@ -49,6 +49,7 @@ fn assert_independent_scalars(result: &PublishedNamedPrism) {
             assert_eq!(area.scalar.enclosure(), cap);
         }
     }
+    assert_side_and_total_oracle(result);
     assert!(!result.replay_bytes().is_empty());
 }
 #[test]
@@ -118,4 +119,22 @@ fn every_stage_cancellation_returns_no_body_and_allows_fresh_reuse() {
             baseline.replay_bytes()
         );
     }
+}
+
+fn assert_side_and_total_oracle(result: &PublishedNamedPrism) {
+    use crate::sketch_region_prism::region_certificate::measurements::tests::complete_tests::{
+        assert_contains_interval, oracle_interval,
+    };
+    let side = result
+        .measures()
+        .named_faces()
+        .iter()
+        .find(|face| face.role == crate::sketch_region_prism::PrismImageRole::Generated)
+        .unwrap();
+    let area = result.measures().face_area(&side.occurrence).unwrap();
+    assert_contains_interval(area.scalar.enclosure(), oracle_interval("side"));
+    assert_contains_interval(
+        result.measures().total_area().enclosure(),
+        oracle_interval("total"),
+    );
 }
