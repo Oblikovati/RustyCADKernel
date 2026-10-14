@@ -126,7 +126,9 @@ fn missing_actual_face_cannot_reuse_complete_chart_rows() {
         .unwrap();
     assert_hypothesis(failure, "one actual image context");
 }
-fn remove_actual_face(receipt: &PrismReceipt) {
+pub(in crate::sketch_region_prism::region_certificate) fn remove_actual_face(
+    receipt: &PrismReceipt,
+) {
     let binding = receipt
         .diagnostic
         .as_ref()
@@ -155,7 +157,10 @@ fn extra_actual_face_cannot_borrow_previous_complete_coverage() {
         .unwrap();
     assert_hypothesis(failure, "actual body relation coverage");
 }
-fn add_foreign_face(receipt: &PrismReceipt, foreign: &PrismReceipt) {
+pub(in crate::sketch_region_prism::region_certificate) fn add_foreign_face(
+    receipt: &PrismReceipt,
+    foreign: &PrismReceipt,
+) {
     let first = face_context(receipt);
     let mut parent = first.ancestors.last().unwrap().clone();
     parent.set_free(true).unwrap();
