@@ -38,6 +38,7 @@ pub(super) fn pair_members(
         });
     }
     complete_pairs(&members)?;
+    preserve_physical_sharing(&members)?;
     members.sort_by_key(|m| m.key);
     Ok(members)
 }
@@ -136,4 +137,14 @@ fn endpoint_role(actual: &PrismBodyContext) -> AnnularCheck<'static, TwoLoopMemb
             expected: [0., 1.],
         },
     )))
+}
+
+pub(super) fn preserve_physical_sharing(members: &[AnnularCopiedMember]) -> AnnularCheck<'static> {
+    use super::super::history::same_physical;
+    for first in members {
+        for second in members {
+            holds("copied physical definitions preserve and reflect selected sharing", same_physical(&first.selected.occurrence, &second.selected.occurrence) == same_physical(&first.copied.occurrence, &second.copied.occurrence))?;
+        }
+    }
+    Ok(())
 }

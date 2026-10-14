@@ -24,7 +24,7 @@ pub(in crate::sketch_region_prism) fn with_actual<R>(
 ) -> R {
     with_prepared(|request, receipt| run(request, fresh_region(request), receipt))
 }
-pub(super) fn fresh_region(request: &TwoLoopRegionRequest<'_, '_>) -> Box<TwoLoopRegionCertificate> {
+pub(in crate::sketch_region_prism) fn fresh_region(request: &TwoLoopRegionRequest<'_, '_>) -> Box<TwoLoopRegionCertificate> {
     let TwoLoopRegionOutcome::Inspected(region) = inspect_two_loop_region(request, &mut ContinueRegion) else {
         panic!("expected independent nested region proof");
     };

@@ -15,6 +15,7 @@ pub(super) fn check<'a>(
     receipt: &PrismReceipt,
     binding: &AnnularPrismBinding,
 ) -> AnnularCheck<'a> {
+    operation::preflight(request, receipt)?;
     operation::region_rebind(request, &binding.region)?;
     let fresh = operation::capture(
         request,
@@ -30,9 +31,10 @@ pub(super) fn check<'a>(
     Ok(())
 }
 fn same_contexts(old: &AnnularPrismOperands, new: &AnnularPrismOperands) -> AnnularCheck<'static> {
+    holds("same hierarchy budget and exact census", old.hierarchy == new.hierarchy)?;
     holds(
         "same complete original copy and native image parent classes",
-        old.parents.copies == new.parents.copies && old.parents.images == new.parents.images,
+        old.parents.copies == new.parents.copies && old.parents.images == new.parents.images && old.parents.captured == new.parents.captured,
     )?;
     holds(
         "same complete current body context census",

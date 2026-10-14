@@ -22,11 +22,11 @@ fn bind<'a>(
     receipt: &PrismReceipt,
     progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'a, AnnularPrismBinding> {
-    poll(progress, AnnularBindingStage::Admission)?;
+    poll(progress, AnnularBindingStage::Admission, request, receipt)?;
     region_rebind(request, &region)?;
     let operands = capture(request, &region, receipt, progress)?;
     let replay = replay::encode(&region, &operands)?;
-    poll(progress, AnnularBindingStage::Commit)?;
+    poll(progress, AnnularBindingStage::Commit, request, receipt)?;
     let binding = AnnularPrismBinding {
         region,
         operands,
@@ -41,15 +41,18 @@ pub(super) fn capture<'a>(
     receipt: &PrismReceipt,
     progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'a, AnnularPrismOperands> {
+    let hierarchy = bounds::inspect(receipt, request.requested.maximum_retained_units)?;
+    let metadata_units = metadata_budget::inspect(receipt, hierarchy.retained_units, request.requested.maximum_retained_units)?;
+    let reserved = geometry_budget::inspect(request, receipt, metadata_units)?;
     let limits = settings::capture(request, receipt)?;
     selection(request, receipt, progress)?;
-    poll(progress, AnnularBindingStage::Copy)?;
+    poll(progress, AnnularBindingStage::Copy, request, receipt)?;
     let copy = capture::copy_inputs(request, region, receipt)?;
     let boundaries = boundaries::capture(region, &copy, receipt)?;
     let signed_jacobian = settings::jacobian(&copy, &limits)?;
-    poll(progress, AnnularBindingStage::Charts)?;
-    let (charts, body_contexts) = chart_capture(receipt, &copy, &boundaries, progress)?;
-    let parents = parents::capture(request, receipt, &copy)?;
+    poll(progress, AnnularBindingStage::Charts, request, receipt)?;
+    let (charts, body_contexts) = chart_capture(request, receipt, &copy, &boundaries, progress)?;
+    let parents = parents::capture(request, receipt, &copy, reserved, &charts)?;
     Ok(AnnularPrismOperands {
         copy,
         boundaries,
@@ -58,6 +61,9 @@ pub(super) fn capture<'a>(
         limits,
         signed_jacobian,
         parents,
+        hierarchy,
+        metadata_units,
+        geometry_units: reserved,
     })
 }
 pub(super) fn region_rebind<'a>(
@@ -70,12 +76,23 @@ pub(super) fn region_rebind<'a>(
 pub(super) fn poll(
     progress: &mut dyn AnnularBindingProgress,
     stage: AnnularBindingStage,
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
 ) -> AnnularCheck<'static> {
+    poll_owned(progress, stage)?;
+    preflight(request, receipt)
+}
+fn poll_owned(progress: &mut dyn AnnularBindingProgress, stage: AnnularBindingStage) -> AnnularCheck<'static> {
     match progress.checkpoint(stage) {
         Ok(false) => Ok(()),
         Ok(true) => Err(Box::new(AnnularBindingCause::Cancelled(stage))),
         Err(cause) => Err(Box::new(AnnularBindingCause::Callback { stage, cause })),
     }
+}
+pub(super) fn preflight(request: &TwoLoopRegionRequest<'_, '_>, receipt: &PrismReceipt) -> AnnularCheck<'static> {
+    let hierarchy = bounds::inspect(receipt, request.requested.maximum_retained_units)?;
+    let reserved = metadata_budget::inspect(receipt, hierarchy.retained_units, request.requested.maximum_retained_units)?;
+    geometry_budget::inspect(request, receipt, reserved).map(|_| ())
 }
 fn selection(
     request: &TwoLoopRegionRequest<'_, '_>,
@@ -92,15 +109,16 @@ fn selection(
     )
 }
 fn chart_capture(
+    request: &TwoLoopRegionRequest<'_, '_>,
     receipt: &PrismReceipt,
     copy: &AnnularCopyCapture,
     boundaries: &[AnnularBoundaryBinding],
     progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'static, (Vec<AnnularBoundChart>, Vec<RegionObservedContext>)> {
     let mut callback = None;
-    let result = charts::capture(receipt, copy, boundaries, &mut || {
+    let result = charts::capture_guarded(receipt, copy, boundaries, &mut || {
         stop(progress, AnnularBindingStage::Charts, &mut callback)
-    });
+    }, &mut || preflight(request, receipt));
     finish_callback(result, callback)
 }
 fn stop(
@@ -111,7 +129,7 @@ fn stop(
     if callback.is_some() {
         return true;
     }
-    if let Err(cause) = poll(progress, stage) {
+    if let Err(cause) = poll_owned(progress, stage) {
         *callback = Some(cause);
     }
     callback.is_some()

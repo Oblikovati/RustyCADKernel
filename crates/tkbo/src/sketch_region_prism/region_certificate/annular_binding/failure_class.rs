@@ -18,7 +18,7 @@ fn classify(cause: &AnnularBindingCause<'_>) -> TwoLoopRefusalClass {
         Native(_) | Callback { .. } => TwoLoopRefusalClass::Failed,
         Capture(cause) => classify_region_surface_cause(cause),
         Body(cause) => body(cause),
-        Count { .. } => TwoLoopRefusalClass::Incomplete,
+        Count { .. } | BudgetOverflow { .. } => TwoLoopRefusalClass::Incomplete,
         Cancelled(_) => TwoLoopRefusalClass::Cancelled,
         Stopped { callback, .. } => classify(callback),
     }

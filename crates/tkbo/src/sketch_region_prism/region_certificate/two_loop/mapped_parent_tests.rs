@@ -100,3 +100,14 @@ fn parent_mapper_checks_zero_one_three_sources_before_budget_or_native_query() {
         });
     }
 }
+#[test]
+fn original_parent_budget_keeps_prior_reservation_and_original_limit() {
+    exercise(|mut request, parent| {
+        request.requested.maximum_retained_units = 20;
+        let result = map_two_loop_original_parents_after(&request, &[&[parent.clone()]], 8).unwrap_or_else(|_| panic!("exact 8+6+4+1+1 budget"));
+        assert_eq!(result.retained_units, 20);
+        request.requested.maximum_retained_units = 19;
+        let Err(failure) = map_two_loop_original_parents_after(&request, &[&[parent]], 8) else { panic!("expected cumulative limit"); };
+        assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { requested: 19, measured: 20, .. }));
+    });
+}

@@ -15,6 +15,14 @@ pub(in crate::sketch_region_prism) fn map_two_loop_original_parents<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     parent_slices: &[&[OriginalMemberIdentity]],
 ) -> Result<TwoLoopMappedParents, Box<TwoLoopRegionFailure<'a>>> {
+    map_two_loop_original_parents_after(request, parent_slices, 0)
+}
+/// Continue one structural budget without changing requested options; `map_two_loop_original_parents_after(request, rows, reserved)`.
+pub(in crate::sketch_region_prism) fn map_two_loop_original_parents_after<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    parent_slices: &[&[OriginalMemberIdentity]],
+    reserved_units: usize,
+) -> Result<TwoLoopMappedParents, Box<TwoLoopRegionFailure<'a>>> {
     let mut progress = CallbackFreeParentMap;
     let mut work = TwoLoopWork::new(
         request.identities.operation,
@@ -23,6 +31,7 @@ pub(in crate::sketch_region_prism) fn map_two_loop_original_parents<'a>(
     );
     work.stage = TwoLoopRegionStage::Membership;
     work.count("two admitted original parent sources", request.sources.len(), 2)?;
+    work.units("previously retained operation structural units", reserved_units)?;
     work.units("original parent mapper directed roster", 6)?;
     work.units("original parent mapper outer rows", parent_slices.len())?;
     let originals = member_parents::originals(request, &mut work)?;

@@ -23,11 +23,13 @@ mod limit_tests;
 #[cfg(test)]
 mod mapped_parent_tests;
 mod mapped_parents;
+mod mapped_geometry;
+pub(in crate::sketch_region_prism) use mapped_geometry::admit_two_loop_polynomial_counts;
 mod member_capture;
 mod member_parents;
 mod member_types;
 pub(in crate::sketch_region_prism) use mapped_parents::{
-    TwoLoopMappedParents, map_two_loop_original_parents,
+    TwoLoopMappedParents, map_two_loop_original_parents, map_two_loop_original_parents_after,
 };
 #[cfg(test)]
 mod mutation_tests;

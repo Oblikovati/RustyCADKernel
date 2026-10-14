@@ -34,6 +34,9 @@ pub(super) fn encode(
     contexts(&value.body_contexts, &mut bytes)?;
     physical_incidence(&value.body_contexts, &mut bytes);
     parents(&value.parents, &mut bytes)?;
+    hierarchy(&value.hierarchy, &mut bytes);
+    bytes.extend((value.metadata_units as u64).to_le_bytes());
+    bytes.extend((value.geometry_units as u64).to_le_bytes());
     Ok(bytes)
 }
 fn parents(value: &AnnularParentCapture, bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
@@ -48,6 +51,13 @@ fn parents(value: &AnnularParentCapture, bytes: &mut Vec<u8>) -> AnnularCheck<'s
     for row in &value.images {
         image_parents(row, bytes)?;
     }
+    bytes.extend((value.captured.len() as u64).to_le_bytes());
+    for row in &value.captured {
+        context(&row.identity.source, bytes)?;
+        context(&row.identity.output, bytes)?;
+        bytes.push(row.identity.role as u8);
+        parent_sequence(&row.parents, bytes);
+    }
     Ok(())
 }
 fn image_parents(row: &AnnularImageParents, bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
@@ -60,11 +70,7 @@ fn image_parents(row: &AnnularImageParents, bytes: &mut Vec<u8>) -> AnnularCheck
 }
 fn parent_classes(rows: &[Vec<TwoLoopOriginalUse>; 3], bytes: &mut Vec<u8>) {
     for class in rows {
-        bytes.extend((class.len() as u64).to_le_bytes());
-        for parent in class {
-            bytes.extend(parent.source.0.to_le_bytes());
-            bytes.push(parent.role as u8);
-        }
+        parent_sequence(class, bytes);
     }
 }
 fn member_key(key: TwoLoopMemberKey, bytes: &mut Vec<u8>) {
@@ -184,5 +190,23 @@ fn physical_incidence(rows: &[RegionObservedContext], bytes: &mut Vec<u8>) {
                     && first.occurrence.location == second.occurrence.location,
             ));
         }
+    }
+}
+
+fn hierarchy(value: &AnnularHierarchyBudget, bytes: &mut Vec<u8>) {
+    for fixed in [3_u64, 9, 3, 9, 5, 48] { bytes.extend(fixed.to_le_bytes()); }
+    bytes.extend((value.maximum_retained_units as u64).to_le_bytes());
+    bytes.extend((value.retained_units as u64).to_le_bytes());
+    for root in value.roots {
+        bytes.extend((root.directed_uses as u64).to_le_bytes());
+        bytes.extend((root.ancestor_elements as u64).to_le_bytes());
+    }
+}
+
+fn parent_sequence(parents: &[TwoLoopOriginalUse], bytes: &mut Vec<u8>) {
+    bytes.extend((parents.len() as u64).to_le_bytes());
+    for parent in parents {
+        bytes.extend(parent.source.0.to_le_bytes());
+        bytes.push(parent.role as u8);
     }
 }

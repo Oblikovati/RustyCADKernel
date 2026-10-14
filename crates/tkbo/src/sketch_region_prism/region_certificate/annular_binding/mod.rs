@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0050: source-keyed correspondence for the actual annular sweep, not body validity.
 mod boundaries;
+mod bounds;
+pub(in crate::sketch_region_prism) use bounds::AnnularHierarchyBudget;
 mod capture;
 mod charts;
 mod correspondence;
@@ -8,6 +10,8 @@ pub(in crate::sketch_region_prism) use correspondence::snapshot as snapshot_annu
 pub(in crate::sketch_region_prism) use replay::context as encode_annular_context;
 mod failure;
 mod failure_class;
+mod geometry_budget;
+mod metadata_budget;
 mod operation;
 mod parents;
 mod rebind;
@@ -19,6 +23,12 @@ pub(in crate::sketch_region_prism) use rebind::rebind_annular_prism_v2;
 pub(in crate::sketch_region_prism) mod tests;
 #[cfg(test)]
 mod contract_tests;
+#[cfg(test)]
+mod budget_tests;
+#[cfg(test)]
+mod growth_tests;
+#[cfg(test)]
+mod replay_tests;
 mod types;
 mod views;
 use super::super::*;
