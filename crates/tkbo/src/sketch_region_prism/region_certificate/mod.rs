@@ -4,7 +4,7 @@ mod boundary;
 mod closure_points;
 mod closure_types;
 mod identity_multiset;
-use closure_types::*;
+pub(crate) use closure_types::*;
 mod containment;
 mod history;
 mod inspect;
