@@ -17,7 +17,7 @@ pub(super) fn census(
             &[retained.source()?.source()],
             retained.request.declared_plane,
         )
-        .map_err(OwnedPreparationCause::Census)?,
+        .map_err(OwnedPreparationCause::from)?,
     );
     enumerate(retained, callbacks)
 }
@@ -33,7 +33,7 @@ fn enumerate(
         retained.request.policy.source,
         || callbacks.poll(OwnedPrismPhase::Census),
     );
-    retained.census = Some(result.map_err(OwnedPreparationCause::Census)?);
+    retained.census = Some(result.map_err(OwnedPreparationCause::from)?);
     Ok(())
 }
 pub(super) fn contacts(

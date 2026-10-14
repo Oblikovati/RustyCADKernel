@@ -16,7 +16,7 @@ pub(crate) enum OwnedPreparationClass {
 pub(crate) enum OwnedPreparationCause {
     Admission(OwnedPrismAdmissionCause),
     Native(Failure),
-    Census(CensusCause),
+    Census(Box<CensusCause>),
     Contact(ContactTransportStop),
     PrismUnavailable(Box<RegionPrismUnavailable>),
     StageUnavailable { class: OwnedPreparationClass },
@@ -69,4 +69,10 @@ pub(super) fn local<T>(
     expected: &'static str,
 ) -> Result<T, OwnedPreparationCause> {
     value.ok_or(OwnedPreparationCause::MissingLocalState { expected })
+}
+
+impl From<CensusCause> for OwnedPreparationCause {
+    fn from(cause: CensusCause) -> Self {
+        Self::Census(Box::new(cause))
+    }
 }
