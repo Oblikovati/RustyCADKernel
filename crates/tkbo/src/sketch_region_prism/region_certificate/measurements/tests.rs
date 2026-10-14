@@ -78,7 +78,7 @@ fn measurement_attempt(
     inspect_prism_measurements(bridge, &binding_sources(shapes), receipt, limits, cancelled)
 }
 #[path = "tests/domain.rs"]
-mod domain_tests;
+pub(in crate::sketch_region_prism::region_certificate) mod domain_tests;
 #[path = "tests/replay.rs"]
 mod replay_tests;
 
