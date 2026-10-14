@@ -5,7 +5,10 @@ use crate::sketch_region_geometry_capture::CapturedMetricCurve;
 use crate::sketch_region_source_conformance::{CapturedPlaneSupport, CapturedSpaceRepresentation};
 use rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding;
 
-pub(in crate::sketch_region_prism) fn numbers(values: impl IntoIterator<Item = f64>, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn numbers(
+    values: impl IntoIterator<Item = f64>,
+    bytes: &mut Vec<u8>,
+) {
     for value in values {
         bytes.extend(value.to_bits().to_le_bytes());
     }
@@ -29,7 +32,10 @@ pub(super) fn curve<const D: usize>(value: &CapturedMetricCurve<D>, bytes: &mut 
         }
     }
 }
-pub(in crate::sketch_region_prism) fn placement<const D: usize>(value: MetricEmbedding<D>, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn placement<const D: usize>(
+    value: MetricEmbedding<D>,
+    bytes: &mut Vec<u8>,
+) {
     numbers(value.linear.into_iter().flatten(), bytes);
     numbers(value.origin, bytes);
     numbers([value.scale], bytes);

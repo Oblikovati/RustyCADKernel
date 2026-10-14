@@ -22,6 +22,7 @@ pub(crate) struct JoinedToleranceMetadata {
 }
 pub(crate) struct JoinedPrismTolerance {
     pub(super) binding: Vec<u8>,
+    pub(super) conformance: Vec<u8>,
     pub(super) operation_limits: FrozenPrismLimits,
     pub(super) cap: StoredToleranceCap,
     pub(super) metadata: Vec<JoinedToleranceMetadata>,

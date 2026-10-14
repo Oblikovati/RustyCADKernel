@@ -26,6 +26,7 @@ pub(crate) fn certify_joined_prism_tolerances(
     }
     Ok(JoinedPrismTolerance {
         binding: join.replay_bytes().to_vec(),
+        conformance: conformance.replay_bytes(),
         operation_limits: *join.projection().limits(),
         cap,
         metadata: work.metadata,

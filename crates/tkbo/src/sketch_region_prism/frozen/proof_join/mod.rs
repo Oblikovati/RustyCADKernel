@@ -26,5 +26,7 @@ mod tests;
 #[cfg(test)]
 pub(in crate::sketch_region_prism) mod operation_tests;
 
-pub(in crate::sketch_region_prism) use replay::{block as encode_joined_block, text as encode_joined_text};
+pub(in crate::sketch_region_prism) use replay::{
+    block as encode_joined_block, text as encode_joined_text,
+};
 pub(in crate::sketch_region_prism) use replay_options::roots as encode_joined_root_options;
