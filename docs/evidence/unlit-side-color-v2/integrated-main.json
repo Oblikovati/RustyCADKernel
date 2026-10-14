@@ -1,0 +1,401 @@
+{
+  "integration_revision": "780537a0c3c33c3da56605c4d79007ec000a5d9c",
+  "candidate": "be2db095851c798ddaa63af17ac2189bc1408b12",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+    "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+    "VK_INSTANCE_LAYERS": null,
+    "VK_LAYER_SETTINGS_PATH": null,
+    "VK_LAYER_ENABLES": null,
+    "VK_LAYER_DISABLES": null
+  },
+  "validation_library_sha256": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104",
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "log": "integrated-full-amd.log.gz",
+      "sha256": "e305841537ba119ce78b68f4c357de182881fea34029bcee5e1024b130779a27",
+      "tests": {
+        "passed": 791,
+        "failed": 0,
+        "ignored": 5
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--test",
+        "toolkit",
+        "--all-features",
+        "--locked",
+        "unlit_face_color_gpu",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "log": "integrated-repeat-amd-1.log.gz",
+      "sha256": "9973a20dfe4ecda5fff32a0cad61027fc1f75ba417baf93cb177950c47014aa7",
+      "tests": {
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--test",
+        "toolkit",
+        "--all-features",
+        "--locked",
+        "unlit_face_color_gpu",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "log": "integrated-repeat-amd-2.log.gz",
+      "sha256": "c89d66c8b6bd149b598b4806b46f703ba3425675112e4608afaf64a4e5bbbc77",
+      "tests": {
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "log": "integrated-full-lavapipe.log.gz",
+      "sha256": "2fccf72470628a823971b1c659730eb2d8a19ee57234845cd664d974d5d56bf8",
+      "tests": {
+        "passed": 791,
+        "failed": 0,
+        "ignored": 5
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--test",
+        "toolkit",
+        "--all-features",
+        "--locked",
+        "unlit_face_color_gpu",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "log": "integrated-repeat-lavapipe-1.log.gz",
+      "sha256": "99acf208790663d162fd3cdccc5c2bcbf7ac38cc77c48db1a53d6191e490c2ab",
+      "tests": {
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--test",
+        "toolkit",
+        "--all-features",
+        "--locked",
+        "unlit_face_color_gpu",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "log": "integrated-repeat-lavapipe-2.log.gz",
+      "sha256": "8501fe6440263642b3ce4e66e7421a845c8cc850b5a9b1e86b4cc7016c2959ac",
+      "tests": {
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {},
+      "log": "integrated-clippy.log.gz",
+      "sha256": "69b621e1d14452086f91b84be714b28ddc6a5a0bcd5d697a2fb846d903bb33d4"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {},
+      "log": "integrated-docs.log.gz",
+      "sha256": "b764866ee1555cef70c297c00139c324f23ae4613065253e1f52868fa512c758",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "environment_overrides": {},
+      "log": "integrated-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  ],
+  "shader_variants": 192,
+  "shader_provenance_sha256": "9f13ccdc5cb12ea435deb188b9f9172fff44c59860978326559b76050de5dc80",
+  "raw_repeat_comparisons": [
+    {
+      "driver": "amd",
+      "capture_count": 20,
+      "byte_identical_between_processes": true,
+      "capture_sha256": [
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "0f104fd93010a72fc1238e09f09c6d4eadc6152c0c709260a6c139d59a3e1139",
+        "149b8427f8910330f3be086fcf8505e0ba6cce2fd8724f9de9ffbd32e29f1925",
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "149b8427f8910330f3be086fcf8505e0ba6cce2fd8724f9de9ffbd32e29f1925",
+        "dfc5d55fad2f62047dfbd9c57f036e02633f18b4f1076a3f8ab9a72f8f29a9cf",
+        "3db49964d46362b9a78bbaa1fc6f52a6a33b6a7031b23af961313119f6ea85f7",
+        "ee602aefa2e87c981f4f4d32a251cfbf0f1e3642df163a158b7e65a10ce19db1",
+        "0f104fd93010a72fc1238e09f09c6d4eadc6152c0c709260a6c139d59a3e1139",
+        "ee602aefa2e87c981f4f4d32a251cfbf0f1e3642df163a158b7e65a10ce19db1",
+        "0f104fd93010a72fc1238e09f09c6d4eadc6152c0c709260a6c139d59a3e1139",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7",
+        "566d1088a37d9eff3fc5bde35dc09ca60a09c530682ebeaa5e02c64eaea9e292",
+        "a9376fcfcc8b2c5f967c76fa94d62aaca187497d8db15a4e12f222f4274c21e4",
+        "5c198bdcfc6eb1071a63b07dc81e5e1559feb7998fcd220176c717485b05b3b4",
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7"
+      ]
+    },
+    {
+      "driver": "lavapipe",
+      "capture_count": 20,
+      "byte_identical_between_processes": true,
+      "capture_sha256": [
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "0f104fd93010a72fc1238e09f09c6d4eadc6152c0c709260a6c139d59a3e1139",
+        "149b8427f8910330f3be086fcf8505e0ba6cce2fd8724f9de9ffbd32e29f1925",
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "149b8427f8910330f3be086fcf8505e0ba6cce2fd8724f9de9ffbd32e29f1925",
+        "dfc5d55fad2f62047dfbd9c57f036e02633f18b4f1076a3f8ab9a72f8f29a9cf",
+        "3db49964d46362b9a78bbaa1fc6f52a6a33b6a7031b23af961313119f6ea85f7",
+        "ee602aefa2e87c981f4f4d32a251cfbf0f1e3642df163a158b7e65a10ce19db1",
+        "0f104fd93010a72fc1238e09f09c6d4eadc6152c0c709260a6c139d59a3e1139",
+        "ee602aefa2e87c981f4f4d32a251cfbf0f1e3642df163a158b7e65a10ce19db1",
+        "0f104fd93010a72fc1238e09f09c6d4eadc6152c0c709260a6c139d59a3e1139",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7",
+        "566d1088a37d9eff3fc5bde35dc09ca60a09c530682ebeaa5e02c64eaea9e292",
+        "a9376fcfcc8b2c5f967c76fa94d62aaca187497d8db15a4e12f222f4274c21e4",
+        "a82a237199c0dabc117f3727fd0767392fb9a89207aa5c229938da64da81e904",
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "a2613a2c526d7cc466aafcef70e56a4bc7ba372911f54a90f6370410d2c04105",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7",
+        "a4be97439b49c4966c209ffd56494d43fdf9ab6c8d7032f9ca01a932cb1671e7"
+      ]
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends_sha256": "681ae2dfee393e28f1dc0e82d44bcd08a664442634cabc7c15ebd7036450b790",
+  "v1_fixture_sha256": "00c99f1202402cfc0fda6300bdd260fccefa72124555b40d855a8d909714f27b",
+  "limitations": [
+    "Five existing ignored Vulkan tests remain explicit per driver.",
+    "Older system validation layer failures and precise upstream ordering fix are preserved in candidate and display comparison evidence.",
+    "No live OCCT execution, GL source-string legacy mapping credit, default migration, release, application, native-window, cross-platform or performance acceptance.",
+    "No loaded-library runtime trace; manifest/library search paths and file hashes are explicit."
+  ],
+  "checks_passed": true,
+  "candidate_source_differences": [
+    {
+      "path": "crates/vulkan/src/lib.rs",
+      "candidate_sha256": "fe87ad33be72f05bb2d80a811bdc9f1f9a49d77127c68463a9e436dcf4f6d5d4",
+      "integrated_sha256": "e7dfa0d61bac000823e13c8dc1d7f2fadea11c475e4c68a6fd439e4d572e935d"
+    }
+  ],
+  "difference_reason": "Only lib.rs module declaration ordering changed under cargo fmt; release notes preserve both native display and unlit sections.",
+  "test_executable_hashes": {
+    "target/debug/deps/martensite_vulkan-ddf64f3039f39019": "60c1efa07c034b29e464585d3ceb82fef9b7ba2d9516aaa277ef6935962b23f9",
+    "target/debug/deps/toolkit-ca5285d9b2b8fe97": "e62972a65740084638b041cf934e141953ecc090e928c2c04b60071abc5992da",
+    "target/debug/examples/ais_axis_capture-9d24360d67b6b9ea": "2e97447a5840fd9da8ad4c581fb157d6f4bafc7e7490b5dee5010ba86c134ea0",
+    "target/debug/examples/ais_capture-471d4fa258d484b8": "d01e530363efa5d7ff2a77fc3db5754304e57eb9b59f924fd32fd7405c42383b",
+    "target/debug/examples/ais_circle_capture-9f4e3fd4f489d6c3": "7c42fbf179c12dac9bc225a6563746e2b851296e9b3eda33d95f23e36aa7a98a",
+    "target/debug/examples/ais_colored_shape_capture-b7d744ce1fdb4a63": "fee3f111ede87c43bf88e665639e0742dff9823ce38a4de539626f44463ae660",
+    "target/debug/examples/ais_colored_shape_performance-dd27bb73d130583c": "d0f6544c6d4fcaf4dfbfeece3fc3bc3a26fd31cd7bb7d05143824d5868e0303a",
+    "target/debug/examples/ais_light_source_capture-f02f4ff7953a29e3": "076295495344a26fcdcbfac35919abff3449bec616c02587c14d540e1df77dc0",
+    "target/debug/examples/ais_line_capture-ca984dc45f401f9a": "44ded6e3ee4f28cb6b2bf9920785fffad4724d2ba33ff69dda99a8c28b07a6b3",
+    "target/debug/examples/ais_plane_capture-01742165cdd6c83a": "f3e7a9cfe08fb993e954a3682ecb756f0272b474e14566595e559e2f463ea08b",
+    "target/debug/examples/ais_point_capture-70452d3565204ee8": "2d419e73547e53e9521e65a0dacdaaa977a016063d76639b7bf711a3ee2148a2",
+    "target/debug/examples/ais_point_cloud_capture-70a0ab7522f19423": "5a5df9d7c6a53caf3fa1250cef4b27cb9d17379eb37eceace05a4e97bbdc9d17",
+    "target/debug/examples/ais_rubber_band_capture-ad3297ae2956c995": "d051b628af9fb7c69b0feda4c8b8ca8bf2059b1e3b86f6d710d55d9b518a784f",
+    "target/debug/examples/ais_text_label_capture-eae0371f945c2232": "29dae38c73a6bfc21eb68a5bf42852e45156ee7a085f439ae370c7631c93a9e9",
+    "target/debug/examples/ais_textured_shape_capture-22356a8e5ef36e12": "dc94fdf4e70bf26e736f33d8136ded6ed443bb8f9efa125b68c1acb2b26cbde6",
+    "target/debug/examples/ais_textured_shape_performance-77231eb6527cfc6b": "f3b903ef10b5238f40a342960bedfcabba3c424e6ba95bde2b84ab7e7aadbb08",
+    "target/debug/examples/ais_trihedron_capture-8b01969593c5f92b": "358298e89e95a0f9ed873fd661c53847255399f44d18c1df21162a067b088415",
+    "target/debug/examples/blend_color_probe-02249e526770fd8c": "fd119399edea7cc2eff6e1dee53ef866db6e4baeb35c452236c3d307f259f787",
+    "target/debug/examples/blend_functional-586f3562351680cd": "d208e489367fd2d52bd1949511a53c9f4ea61807f7c5464fb46ee8ad6c36b762",
+    "target/debug/examples/blend_native_functional-d509a262380644c0": "a2d7674accccf353ad6754983d81e57e18e09c6502109055f28422592d8cea90",
+    "target/debug/examples/blend_native_replay-b22a3da7d3ef2577": "dce89b4640abaaa16fa8a06d8c551df8522e6ad64ed2c3762e761bd45d2e5f5a",
+    "target/debug/examples/blend_text_capture-3b4cafdbdc14ff38": "117a9ac19365d1415dab90b0b708b9e29a3cc4331984b1108ee59c617b2c0384",
+    "target/debug/examples/blend_text_performance-21146b5dadea535c": "9c5e7f9080b4f754332f1b00c4a94a7d0b42683ad741e4eb5cfcf8d3e11c4c7c",
+    "target/debug/examples/capping_acceptance-dda35528a7c489e1": "7d38cfb7c9da2d509fc3abf5444c258772d66ae1fac8cc68a92259130f30052c",
+    "target/debug/examples/capping_texture_capture-8d0eb03d6b00524a": "144a7399042168e4859723d6170dbd6bedaba94359130ee2d085a37f6ccf48ef",
+    "target/debug/examples/capping_texture_edges_performance-6f137bc7b080b7bc": "1564ae08a86bafe4890aba08ef7eb8801f6413ecc96c8eea6cf8028c20b0a09e",
+    "target/debug/examples/clipping_acceptance-57e4c60f7b6f6a0d": "b46a1ae78eb8c38f66cfcca5af7d20a0b21fff8c35d2ef1552d608367def1c90",
+    "target/debug/examples/clipping_transport_performance-d4f1a7aca3e53d9f": "7ecef528f53a78c87f00aae5396fa661c494d7a072683f82f4f5235cb9587a44",
+    "target/debug/examples/decal_functional-dda9182a40194c8c": "cacefb10d6fd899074dd69a226596b403fe6db97c8dc5cff7a7414ccb856d07a",
+    "target/debug/examples/decal_native_replay-28accd5eaaf1e516": "c9b9aaf106a4d73633010caf96b352fe37674bc4096288f9060386beaf248aa8",
+    "target/debug/examples/decal_text_capture-68aea13a1c9a2077": "094bbb59db7725c836ffde25d63b10500fd89187da12454062a653fb49d0bf0e",
+    "target/debug/examples/decal_text_performance-e7ded1f9a1cc10b6": "6163ac1264247ebca51f29af90ea2678b7fc9386826444573828442ec6cfed45",
+    "target/debug/examples/fixed_lighting_cap_capture-3447e3ca338f9e25": "fb53e80c3560f2a315e823e97ac34ccd6ec53926221c8c1be99864fa5363517e",
+    "target/debug/examples/fixed_lighting_capture-f7182b0947c71a23": "25557adac2cdb476133a3c79dcd5d4b9da98af6fa91a4ed5f076e8da0825294c",
+    "target/debug/examples/fixed_lighting_performance-55629bc399fe214a": "a424a02313bcda5a7703225a87d2364d768c1ff4317fc9d35e3eb2f817d63821",
+    "target/debug/examples/fixed_lighting_texture_capture-446965db5859fb32": "095cf2d562c11fcac799a27c0e4b024a7fa5dee232b59a89a283c0d230b3114d",
+    "target/debug/examples/graphic3d_capture-a46031870e80bb54": "b0d28fbf2fccc0d42c432bf951186ddd42e94897e372ce94c60d8626a0152b47",
+    "target/debug/examples/group_flipping_capture-246a83bb2e245c99": "36d8761b66e8f9227409a358f7cbf8328f5c4f8dacb3011b6514daffd35eafc5",
+    "target/debug/examples/lighting_acceptance-dc419e4cc5ccab14": "4b159749bec0270f5c69fd688a42d2c9e5bd64c5ca4c477e2c16f84cc4fdcc2a",
+    "target/debug/examples/lighting_capture-461e7cf9b6322756": "e60cea74bb640c896bf48b0882ecc58c550a0dc64cd39488eed300a4855cda42",
+    "target/debug/examples/material_probe-4b1bd07f88f95304": "29c55f980caa4b34ea3bc23e509d9245fa1a5d8a7c0168eda8122d872f28a13d",
+    "target/debug/examples/native_display_lifecycle-63a5c65d849a3ff4": "58fbbfe88cafedd631fff5fc81dc9ebd550836c82cd24c840e4d948f521ff961",
+    "target/debug/examples/native_gui_acceptance-fb1d22116a93f29a": "3d750402c6921496a9be455a0b7571b712ac4137ddfeaa78eb0177e189ed567c",
+    "target/debug/examples/native_gui_performance-75e41d9ac97fec16": "1f65744ca4fe7edad34dd870ad5c515a1b37310d1cff74b0f34d97fec16d2ad8",
+    "target/debug/examples/native_gui_rapid-953f89a2bfb03f08": "f186606717b7265e3a787408824d09721cfb38f2cfb8bc3e11e398c4d8d4121d",
+    "target/debug/examples/native_window_lifecycle-70c22c69d89e2a11": "168da0327d9655671c2bad28b3e23c7a5b7ebecdb61ed1493c332842cf57d9d8",
+    "target/debug/examples/object_animation_capture-f3b9cb0de6dcd27a": "16cef7e2611e726b28e4f746172454c7bf2353cffacf5c3813dc7feb92c23966",
+    "target/debug/examples/offscreen_acceptance-f64ca86eb26640ab": "13c2e617604757eaefe7dff2fffb81346353ca395261ba5af98511742539874c",
+    "target/debug/examples/oit_capture-b74cbd94ded13510": "62bd6f108e0fbf22c75a25ad6feb31d4c5b3504893c12f6f3fd4f910ea0cde7b",
+    "target/debug/examples/oit_performance-146015bdadb37a39": "6a202be7c441025d0a8c27b129841b4137d50cad112275d4c5542bd738a20f24",
+    "target/debug/examples/oit_transition-556ee3452f663b10": "e6a63879e9fc160236c0420690e966789b937b9e8773d10c3b65a2d70985ae1b",
+    "target/debug/examples/ordered_stencil_capture-642ab2c268d79f9a": "f234b0baf9e1eef9de6aa4d9e03510aac1dbfe0d05bfd5a0cc90d185827066f4",
+    "target/debug/examples/ordered_stencil_performance-0223ec0c511b9eea": "f1cea1a5efe88407e83cf096ae4dc254e0f6537bba2372322d5054f7355c52de",
+    "target/debug/examples/pixel_text_capture-9dff13320d431426": "6138193f404a7711872e8f6f499d96c2d96a2dc97c8cea2e84798703733e9499",
+    "target/debug/examples/plane_presentation_capture-90eec0b27d5a2901": "f9807c9178965094270c7c1cf161a53a72969c4886140d409abe846ab8108b8a",
+    "target/debug/examples/plane_trihedron_capture-dbd76a8690a4884c": "22f7d56f5169615fad401066288c86748f73f2a7f2410ad79eccab4c573657f1",
+    "target/debug/examples/quadrangle_capture-cd5e62078c70f99c": "195ae50353ebeee37c791a977d02dd797aeb5c593ae47bf01dd97482d809899a",
+    "target/debug/examples/renderer_performance-41934d57da16bbf5": "82ccd7f8bf95e3e1b52d38db2962af924aa63449b27074dbb5a12193e4c1d725",
+    "target/debug/examples/shadow_text_performance-136cef115ffc97e6": "59d9eec2c14cc756cae2a6e1663a245d923e499c528dd2765c167e41c89fb4a5",
+    "target/debug/examples/subtitle_functional-e9a8f7066a963bb6": "63d394b640cf55dc8108de3ed7d37d2172571a5a0671f744239ded7aa17b2d35",
+    "target/debug/examples/subtitle_native_replay-93aa03257dd8373c": "76c6a4f6d76f835abd07932d9079a9cbf3964c2e1b30ce847e99fbf5031110cd",
+    "target/debug/examples/subtitle_text_capture-106fe4cb8bb1b23b": "67ca13b59dbf615f408880b6df011ee9f9d309c1e78586ba5055a611915a90af",
+    "target/debug/examples/subtitle_text_performance-97d61a8b4ad4e4e5": "e8783705f8afdb5e530a7983551b5dcbfeb063aadb67ee8d407079719b92f3ec",
+    "target/debug/examples/surface_texture_capture-171b40bcd2fb0ec4": "64fe9c9a5818bd1146cd6b2351182f18769e1533a23fd66fa97db8a6cd35cdc0",
+    "target/debug/examples/surface_texture_performance-0e1522a022d14481": "51c69a71b38c3940e577c98c13914bf1a7c77c18b345d70e97fc09caede1fee6",
+    "target/debug/examples/text_capture-98bb06ff7fd2d38e": "925bdabac15a5cc24ccacbfad32d221a1e0a65743080c8f4945485866e046ee1",
+    "target/debug/examples/text_culling_capture-e55384969e750307": "257dd2eb53d02d86b1ae5c077fa4684fa6b6d7731f90ee5a2b89382bfdc036db",
+    "target/debug/examples/text_culling_performance-4aa0896dcbbcde54": "5c7c626a11626203f8c37317059271904cf1ba58b9c87cf9c07341e4a214a561",
+    "target/debug/examples/texture_dependency_performance-cd1b5b1218ba699b": "16697fd4aec8c200d81f297a9503be1fd510c4ab89d964db23b5d75e5c1a4026",
+    "target/debug/examples/texture_generation_capture-ce6f40b74173cf5f": "2a17dc5dce6e16d9ad3db585e555aea8008d7fc9d11a8ce750601c628cd39b09",
+    "target/debug/examples/triangle_edges_capture-169240ff7af9f71a": "6678599746a5c9bd15dfb4fdb73d074ee0d6a3c217160f1857aa1b585cc26d69",
+    "target/debug/examples/triangle_edges_performance-e6a20c37396a4573": "2acafea9052140325384a746a383c35b20cef613145873fb50e44c52539636a7",
+    "target/debug/examples/view_cube_capture-be917e62df8d580c": "4bf7acd0dd50b8c24c3b57b7a6d24965012a08c1fd9af6a830f2b5fe6cfbd229",
+    "target/debug/examples/view_cube_performance-98618a0705e37cef": "8c0a03673fde2bd14d3190cc108fa51b956d977bf974f5fe666ddcb09be2c201",
+    "target/debug/examples/window_acceptance-adee8c8904c29577": "0b477c06b8f2def6081127e9cc49cc91bf859507b17662532a9c0c54716cfcf2",
+    "target/debug/examples/window_capture-d4a140ab6c5f51e6": "6b11f62a8058e3f163e3fe70c75a5f02b669a4dae227da198d7b3053cee41f55",
+    "target/debug/examples/xr_device_capture-6a371b8875304e7d": "2584ef5e9b8e3b5d993bdb5723638c4dbc2b8800205642ef0f3435ba89ab97ea",
+    "target/debug/examples/xr_device_performance-f2d92cfb723faf48": "2993a8115277f0eb31fb98b7a3480db6222b3ec3ac20c7cf6fff4fb0f1b7d6f0"
+  },
+  "shader_log_sha256": "44e82ad6f962f4c1e2055a440c1b1850957918390372d07b627bb062e83a12fb",
+  "runner_sha256": "73a451c5ee5381a80afdbb1104a979814dd78e5d5e275e9ff69e8a667de9263d",
+  "runner_archive_sha256": "eb234c04bc5d3cff7851c731f6673851d78206f88bdd48e9f9d1159add367bdb",
+  "runner_archive": "integrated-runner.py.gz"
+}
