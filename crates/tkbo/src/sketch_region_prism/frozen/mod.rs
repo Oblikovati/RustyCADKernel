@@ -66,3 +66,4 @@ mod traversal;
 mod traversal_tests;
 
 pub(crate) mod joined_measures;
+pub(crate) mod joined_orientation;
