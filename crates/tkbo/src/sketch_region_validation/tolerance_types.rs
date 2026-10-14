@@ -1,28 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::outcome::AffectedOccurrence;
-use rustycad_tkernel::standard::Failure;
-use rustycad_tkmath::predicates::roots::{
-    RootIsolationOptions,
-    metric_bounds::{ResidualDecision, ResidualError},
-};
-#[derive(Debug)]
-pub(crate) enum PlanarMetricCause {
-    Native(Failure),
-    MissingCurve {
-        representation: &'static str,
-    },
-    Unsupported {
-        representation: &'static str,
-        dynamic_type: String,
-    },
-    ParameterRanges {
-        curve: [f64; 2],
-        pcurve: [f64; 2],
-    },
-    MissingSameParameter,
-    MissingStoredPCurve,
-    Exact(ResidualError),
-}
+pub(crate) use crate::sketch_region_geometry_capture::CapturedGeometryCause as PlanarMetricCause;
+use rustycad_tkmath::predicates::roots::{RootIsolationOptions, metric_bounds::ResidualDecision};
 pub(crate) struct PlanarMetricInspection {
     pub edge: AffectedOccurrence,
     pub face: AffectedOccurrence,
@@ -35,14 +14,4 @@ pub(crate) struct PlanarMetricInspection {
     pub failed_subdivision_work: Option<u32>,
     // Bound belongs to these captured coefficients, not later edits of affected Shape aliases.
     pub coefficient_snapshot: Option<super::tolerance_capture::CapturedPlanarPair>,
-}
-impl From<Failure> for PlanarMetricCause {
-    fn from(cause: Failure) -> Self {
-        Self::Native(cause)
-    }
-}
-impl From<ResidualError> for PlanarMetricCause {
-    fn from(cause: ResidualError) -> Self {
-        Self::Exact(cause)
-    }
 }

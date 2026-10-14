@@ -7,6 +7,8 @@ use rustycad_tkmath::predicates::roots::{RootIsolationOptions, bezier_line::*};
 pub(crate) struct BoundaryInputs {
     pub segments: Vec<CandidateSegment>,
     pub relations: Vec<ArrangementRelation>,
+    pub originals: Vec<crate::sketch_region_source_conformance::OriginalCurveCapture>,
+    pub constructions: Vec<crate::sketch_region_source_conformance::CapturedBoundaryConstruction>,
 }
 pub(crate) struct BoundaryCensus {
     pub inputs: BoundaryInputs,

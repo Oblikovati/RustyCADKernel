@@ -109,6 +109,16 @@ pub enum ResidualError {
         /// Original declared source trim, never an approximate candidate cut.
         declared: [f64; 2],
     },
+    /// Supplied parameter evidence must be an ordered exact bracket.
+    ParameterBracket {
+        /// Offending exact supplied bounds.
+        supplied: [DyadicBound; 2],
+    },
+    /// Exact transported Bézier domain lies outside its native [0,1] basis.
+    ParameterDomain {
+        /// Exact transported bounds in the stored curve basis.
+        supplied: [DyadicBound; 2],
+    },
     /// Original root-completion or policy cause.
     Roots(RootIsolationError),
     /// Original exact algebraic sign-completion cause.
@@ -137,6 +147,10 @@ impl std::fmt::Display for ResidualError {
             Self::ExactDomain { supplied, declared } => {
                 f.write_str(&exact_domain_message(supplied, declared))
             }
+            Self::ParameterBracket { supplied } => {
+                f.write_str(&parameter_bracket_message(supplied))
+            }
+            Self::ParameterDomain { supplied } => f.write_str(&parameter_domain_message(supplied)),
             Self::Roots(cause) => cause.fmt(f),
             Self::Signs(cause) => cause.fmt(f),
         }
@@ -165,4 +179,11 @@ fn domain_message(interval: &[f64; 2]) -> String {
     format!(
         "residual interval {interval:?}; expected finite first <= last, within [0,1] when a Bézier is present"
     )
+}
+
+fn parameter_bracket_message(supplied: &[DyadicBound; 2]) -> String {
+    format!("parameter bracket {supplied:?}; expected ordered exact bounds")
+}
+fn parameter_domain_message(supplied: &[DyadicBound; 2]) -> String {
+    format!("transported domain {supplied:?}; expected native Bézier bounds inside [0,1]")
 }

@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Coefficient snapshots contain no mutable geometry or cached adaptor objects.
-use super::tolerance_curves::{CapturedMetricCurve, capture_plane_curve, capture_space_curve};
-use super::tolerance_placement::{captured_placement, captured_plane_frame};
 use super::tolerance_types::PlanarMetricCause;
+use crate::sketch_region_geometry_capture::{
+    CapturedMetricCurve, capture_plane_curve, capture_space_curve, captured_placement,
+    captured_plane_frame,
+};
 use rustycad_tkbrep::{
     brep::BRepTool,
     topods::{Edge, Face},

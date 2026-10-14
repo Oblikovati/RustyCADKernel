@@ -15,6 +15,8 @@ pub(crate) fn capture_boundary_inputs(
     plane: Plane3,
 ) -> Result<BoundaryInputs, CensusCause> {
     admit_sources(sources).map_err(CensusCause::Input)?;
+    let originals =
+        crate::sketch_region_source_conformance::capture_originals(sources).map_err(mapped)?;
     let copied = copy_sources(sources).map_err(CensusCause::Input)?;
     let relations = copied.members.into_iter().map(copied_relation).collect();
     let support = BRepBuilderAPIMakeFace::from_plane(plane)
@@ -25,10 +27,28 @@ pub(crate) fn capture_boundary_inputs(
     if segments.is_empty() {
         return Err(CensusCause::Incomplete(CensusGap::EmptyBoundaryUniverse));
     }
-    Ok(BoundaryInputs {
+    Ok(retain_construction_inputs(
+        segments, relations, originals, &support,
+    ))
+}
+fn retain_construction_inputs(
+    segments: Vec<crate::sketch_region_candidates::CandidateSegment>,
+    relations: Vec<ArrangementRelation>,
+    originals: Vec<crate::sketch_region_source_conformance::OriginalCurveCapture>,
+    support: &Face,
+) -> BoundaryInputs {
+    let constructions = segments
+        .iter()
+        .map(|segment| {
+            crate::sketch_region_source_conformance::capture_construction(segment, support)
+        })
+        .collect();
+    BoundaryInputs {
         segments,
         relations,
-    })
+        originals,
+        constructions,
+    }
 }
 fn copied_relation(
     (original, output): (

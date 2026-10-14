@@ -7,9 +7,18 @@ pub(super) fn threshold(
     query: &PlanarResidualQuery<'_>,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<(Vec<BigInt>, bool, BigInt), ResidualError> {
+    mapped_threshold(query, [super::MetricParameterMap::Identity; 2], cancelled)
+}
+pub(super) fn mapped_threshold(
+    query: &PlanarResidualQuery<'_>,
+    maps: [super::MetricParameterMap; 2],
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<(Vec<BigInt>, bool, BigInt), ResidualError> {
     let first = embedded(query.curve, query.curve_embedding, "curve", cancelled)?;
     let second = embedded(query.pcurve, query.plane_embedding, "pcurve", cancelled)?;
     let second = place(second, query.plane_placement)?;
+    let first = super::parameter::substitute(first, maps[0], cancelled)?;
+    let second = super::parameter::substitute(second, maps[1], cancelled)?;
     let denominator = product(&first[3], &second[3], cancelled)?;
     let residual = residual_square(&first, &second, cancelled)?;
     let zero = residual.iter().all(|n| n.sign() == Sign::NoSign);
