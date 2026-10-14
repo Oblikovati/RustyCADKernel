@@ -49,6 +49,7 @@ pub(super) fn capture<'a>(
     let signed_jacobian = settings::jacobian(&copy, &limits)?;
     poll(progress, AnnularBindingStage::Charts)?;
     let (charts, body_contexts) = chart_capture(receipt, &copy, &boundaries, progress)?;
+    let parents = parents::capture(request, receipt, &copy)?;
     Ok(AnnularPrismOperands {
         copy,
         boundaries,
@@ -56,6 +57,7 @@ pub(super) fn capture<'a>(
         body_contexts,
         limits,
         signed_jacobian,
+        parents,
     })
 }
 pub(super) fn region_rebind<'a>(

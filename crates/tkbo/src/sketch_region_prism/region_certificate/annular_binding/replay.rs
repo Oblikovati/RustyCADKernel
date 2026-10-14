@@ -33,7 +33,47 @@ pub(super) fn encode(
     charts(&value.charts, &mut bytes)?;
     contexts(&value.body_contexts, &mut bytes)?;
     physical_incidence(&value.body_contexts, &mut bytes);
+    parents(&value.parents, &mut bytes)?;
     Ok(bytes)
+}
+fn parents(value: &AnnularParentCapture, bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
+    bytes.extend((value.retained_units as u64).to_le_bytes());
+    bytes.extend((value.copies.len() as u64).to_le_bytes());
+    for row in &value.copies {
+        member_key(row.key, bytes);
+        parent_classes(&row.selected, bytes);
+        parent_classes(&row.copied, bytes);
+    }
+    bytes.extend((value.images.len() as u64).to_le_bytes());
+    for row in &value.images {
+        image_parents(row, bytes)?;
+    }
+    Ok(())
+}
+fn image_parents(row: &AnnularImageParents, bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
+    member_key(row.key, bytes);
+    context(&row.identity.source, bytes)?;
+    context(&row.identity.output, bytes)?;
+    bytes.push(row.identity.role as u8);
+    parent_classes(&row.parents, bytes);
+    Ok(())
+}
+fn parent_classes(rows: &[Vec<TwoLoopOriginalUse>; 3], bytes: &mut Vec<u8>) {
+    for class in rows {
+        bytes.extend((class.len() as u64).to_le_bytes());
+        for parent in class {
+            bytes.extend(parent.source.0.to_le_bytes());
+            bytes.push(parent.role as u8);
+        }
+    }
+}
+fn member_key(key: TwoLoopMemberKey, bytes: &mut Vec<u8>) {
+    bytes.extend(key.candidate.to_le_bytes());
+    bytes.push(u8::from(key.wire.is_some()));
+    if let Some(wire) = key.wire {
+        bytes.extend(wire.to_le_bytes());
+    }
+    bytes.push(key.role as u8);
 }
 fn copied_members(members: &[AnnularCopiedMember], bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
     bytes.extend((members.len() as u64).to_le_bytes());

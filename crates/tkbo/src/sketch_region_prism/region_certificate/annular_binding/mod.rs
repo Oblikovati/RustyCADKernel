@@ -5,7 +5,9 @@ mod capture;
 mod charts;
 mod correspondence;
 mod failure;
+mod failure_class;
 mod operation;
+mod parents;
 mod rebind;
 mod replay;
 mod settings;
@@ -13,6 +15,8 @@ pub(in crate::sketch_region_prism) use operation::bind_annular_prism_v2;
 pub(in crate::sketch_region_prism) use rebind::rebind_annular_prism_v2;
 #[cfg(test)]
 pub(in crate::sketch_region_prism) mod tests;
+#[cfg(test)]
+mod contract_tests;
 mod types;
 mod views;
 use super::super::*;
