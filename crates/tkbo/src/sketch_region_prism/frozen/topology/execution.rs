@@ -9,7 +9,16 @@ pub(super) struct TopologyWork<'a> {
     pub(super) current: TopologyCheckpoint,
     progress: &'a mut dyn TopologyProgress,
 }
-impl TopologyWork<'_> {
+impl<'a> TopologyWork<'a> {
+    pub(super) fn new(progress: &'a mut dyn TopologyProgress) -> Self {
+        Self {
+            current: TopologyCheckpoint {
+                invariant: TopologyInvariant::Admission,
+                completed: 0,
+            },
+            progress,
+        }
+    }
     pub(super) fn poll(
         &mut self,
         invariant: TopologyInvariant,
@@ -35,13 +44,7 @@ pub(crate) fn certify_frozen_topology(
     source: &FrozenPrismProjection,
     progress: &mut dyn TopologyProgress,
 ) -> FrozenTopologyOutcome {
-    let mut work = TopologyWork {
-        current: TopologyCheckpoint {
-            invariant: TopologyInvariant::Admission,
-            completed: 0,
-        },
-        progress,
-    };
+    let mut work = TopologyWork::new(progress);
     let checked = certify(source, &mut work);
     finish(source.operation, work.current, checked)
 }
