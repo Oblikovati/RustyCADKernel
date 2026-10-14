@@ -87,7 +87,10 @@ fn copy_failure(cause: Failure) -> ArrangementCause {
     }
 }
 
-fn original_identity(source: RegionSourceId, original: &Shape) -> OriginalMemberIdentity {
+pub(crate) fn original_identity(
+    source: RegionSourceId,
+    original: &Shape,
+) -> OriginalMemberIdentity {
     OriginalMemberIdentity {
         source,
         topology_address: original.tshape().object_address().addr(),

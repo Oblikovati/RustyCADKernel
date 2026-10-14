@@ -1,27 +1,31 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::*;
 use crate::predicates::roots::{RootIsolationError, RootIsolationOptions};
-fn identity_embedding() -> MetricEmbedding<3> {
+pub(super) fn identity_embedding() -> MetricEmbedding<3> {
     MetricEmbedding {
         linear: [[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]],
         origin: [0.; 3],
         scale: 1.,
     }
 }
-fn default_plane_embedding() -> MetricEmbedding<2> {
+pub(super) fn default_plane_embedding() -> MetricEmbedding<2> {
     MetricEmbedding {
         linear: [[1., 0.], [0., 1.], [0., 0.]],
         origin: [0.; 3],
         scale: 1.,
     }
 }
-fn bezier<const DIM: usize>(poles: &[[f64; DIM]]) -> MetricCurve<'_, DIM> {
+pub(super) fn bezier<const DIM: usize>(poles: &[[f64; DIM]]) -> MetricCurve<'_, DIM> {
     MetricCurve::Bezier(MetricBezier {
         poles,
         weights: None,
     })
 }
-fn query<'a>(curve: &'a [[f64; 3]], pcurve: &'a [[f64; 2]], limit: f64) -> PlanarResidualQuery<'a> {
+pub(super) fn query<'a>(
+    curve: &'a [[f64; 3]],
+    pcurve: &'a [[f64; 2]],
+    limit: f64,
+) -> PlanarResidualQuery<'a> {
     PlanarResidualQuery {
         curve: bezier(curve),
         curve_embedding: identity_embedding(),
@@ -33,7 +37,7 @@ fn query<'a>(curve: &'a [[f64; 3]], pcurve: &'a [[f64; 2]], limit: f64) -> Plana
         options: RootIsolationOptions::new(0.001),
     }
 }
-fn weighted_query<'a>(
+pub(super) fn weighted_query<'a>(
     curve: &'a [[f64; 3]],
     pcurve: &'a [[f64; 2]],
     weights: &'a [f64],
