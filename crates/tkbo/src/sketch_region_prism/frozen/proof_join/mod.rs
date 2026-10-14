@@ -43,4 +43,6 @@ pub(super) use parents::{
     current_dispositions as link_frozen_parent_dispositions,
 };
 #[allow(unused_imports)]
+pub(super) use raw_vertices::append as encode_frozen_raw_vertices;
+#[allow(unused_imports)]
 pub(super) use raw_vertices::capture as capture_frozen_raw_vertices;
