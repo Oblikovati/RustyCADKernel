@@ -13,7 +13,7 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkmath::gp::Point3;
 
-fn live_face(receipt: &PrismReceipt, role: PrismImageRole) -> Face {
+pub(super) fn live_face(receipt: &PrismReceipt, role: PrismImageRole) -> Face {
     let diagnostic = receipt.diagnostic.as_ref().unwrap();
     let binding = diagnostic
         .bindings
@@ -25,7 +25,7 @@ fn live_face(receipt: &PrismReceipt, role: PrismImageRole) -> Face {
         .unwrap();
     face(&binding.context.occurrence).unwrap()
 }
-fn side_basis(receipt: &PrismReceipt) -> Handle<GeomBezierCurve> {
+pub(super) fn side_basis(receipt: &PrismReceipt) -> Handle<GeomBezierCurve> {
     let surface = BRepTool::surface(&live_face(receipt, PrismImageRole::Generated)).unwrap();
     surface
         .cast::<GeomSurfaceOfLinearExtrusion>()
@@ -46,7 +46,7 @@ fn edited_original_copy_and_side_never_reuse_measured_coefficients() {
         assert_encloses(original.measures.first_cap.enclosure(), 2.4);
     }
 }
-fn edit_target(target: usize, shapes: &[Shape], receipt: &PrismReceipt) {
+pub(super) fn edit_target(target: usize, shapes: &[Shape], receipt: &PrismReceipt) {
     match target {
         0 => set_pole(&edge(&shapes[0]).unwrap(), 5.),
         1 => set_pole(
