@@ -68,12 +68,7 @@ fn exercise_growth(
     target: fn(&PrismReceipt) -> GrowthTarget,
 ) {
     tests::with_prepared(|request, receipt| {
-        let mut requested = request.requested;
-        requested.maximum_poles = 4;
-        let request = TwoLoopRegionRequest {
-            requested,
-            ..*request
-        };
+        let request = four_pole_request(request);
         let region = tests::fresh_region(&request);
         let mut progress = GrowAtBoundary {
             target: target(receipt),
@@ -167,4 +162,15 @@ fn swept_hierarchy_growth_after_chart_callback_refuses_before_next_capture() {
             matches!(&*failure.cause, AnnularBindingCause::History(cause) if matches!(&**cause, super::super::super::frozen::complete_history::PrismHistoryCause::Bounds(_)))
         );
     });
+}
+
+fn four_pole_request<'a, 'b>(
+    request: &TwoLoopRegionRequest<'a, 'b>,
+) -> TwoLoopRegionRequest<'a, 'b> {
+    let mut requested = request.requested;
+    requested.maximum_poles = 4;
+    TwoLoopRegionRequest {
+        requested,
+        ..*request
+    }
 }

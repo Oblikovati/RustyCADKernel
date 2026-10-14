@@ -65,23 +65,7 @@ fn actual_copy_has_nine_source_keyed_directed_members_and_two_full_boundaries() 
         assert_eq!(captured.members.len(), 9);
         assert_eq!(captured.selected.boundaries.len(), 2);
         assert_eq!(captured.copied.boundaries.len(), 2);
-        for wire in [401, 402] {
-            let roles: Vec<_> = captured
-                .members
-                .iter()
-                .filter(|m| m.key.wire == Some(wire))
-                .map(|m| m.key.role)
-                .collect();
-            assert_eq!(
-                roles,
-                [
-                    TwoLoopMemberRole::Wire,
-                    TwoLoopMemberRole::Boundary,
-                    TwoLoopMemberRole::NativeStart,
-                    TwoLoopMemberRole::NativeEnd
-                ]
-            );
-        }
+        assert_member_roles(&captured);
     });
 }
 #[test]
@@ -116,21 +100,7 @@ fn actual_four_charts_retain_twelve_directed_trims_and_native_closure_roles() {
             boundaries::capture(&region, &copy, receipt).unwrap_or_else(|_| panic!("boundaries"));
         let (charts, _) = charts::capture(receipt, &copy, &boundaries, &mut || false)
             .unwrap_or_else(|_| panic!("charts"));
-        assert_eq!(
-            boundaries
-                .iter()
-                .map(|b| (b.source.0, b.wire))
-                .collect::<Vec<_>>(),
-            [(101, 401), (202, 402)]
-        );
-        assert_eq!(charts.len(), 4);
-        assert_eq!(charts.iter().map(|c| c.trims.len()).sum::<usize>(), 12);
-        for boundary in boundaries {
-            assert_native_roles(&boundary);
-        }
-        for side in charts.iter().filter(|c| c.source_boundary.is_some()) {
-            assert_seam_contexts(side);
-        }
+        assert_chart_roles(&boundaries, &charts);
     });
 }
 fn assert_native_roles(boundary: &AnnularBoundaryBinding) {
@@ -205,5 +175,43 @@ fn describe_refusal(cause: &AnnularBindingCause<'_>) -> String {
         AnnularBindingCause::Chart(_) => "current chart/selection binding".into(),
         AnnularBindingCause::Capture(cause) => format!("capture: {cause:?}"),
         _ => "other retained typed refusal".into(),
+    }
+}
+
+fn assert_member_roles(captured: &AnnularCopyCapture) {
+    for wire in [401, 402] {
+        let roles: Vec<_> = captured
+            .members
+            .iter()
+            .filter(|m| m.key.wire == Some(wire))
+            .map(|m| m.key.role)
+            .collect();
+        assert_eq!(
+            roles,
+            [
+                TwoLoopMemberRole::Wire,
+                TwoLoopMemberRole::Boundary,
+                TwoLoopMemberRole::NativeStart,
+                TwoLoopMemberRole::NativeEnd
+            ]
+        );
+    }
+}
+
+fn assert_chart_roles(boundaries: &[AnnularBoundaryBinding], charts: &[AnnularBoundChart]) {
+    assert_eq!(
+        boundaries
+            .iter()
+            .map(|b| (b.source.0, b.wire))
+            .collect::<Vec<_>>(),
+        [(101, 401), (202, 402)]
+    );
+    assert_eq!(charts.len(), 4);
+    assert_eq!(charts.iter().map(|c| c.trims.len()).sum::<usize>(), 12);
+    for boundary in boundaries {
+        assert_native_roles(boundary);
+    }
+    for side in charts.iter().filter(|c| c.source_boundary.is_some()) {
+        assert_seam_contexts(side);
     }
 }

@@ -16,24 +16,8 @@ pub(super) fn inspect(
     let body = receipt.diagnostic.as_ref().expect("admitted swept root");
     relations(&selected.relations, &mut used, maximum)?;
     relations(&copied.relations, &mut used, maximum)?;
-    reserve(
-        &mut used,
-        "actual copy observations",
-        copied.observations.len(),
-        maximum,
-    )?;
-    for row in &copied.observations {
-        relation(&row.selected, &mut used, maximum)?;
-    }
-    reserve(
-        &mut used,
-        "actual native image bindings",
-        body.bindings.len(),
-        maximum,
-    )?;
-    for row in &body.bindings {
-        binding(row, &mut used, maximum)?;
-    }
+    copy_observations(copied, &mut used, maximum)?;
+    image_bindings(body, &mut used, maximum)?;
     relations(&body.relations, &mut used, maximum)?;
     Ok(used)
 }
@@ -89,5 +73,39 @@ pub(super) fn reserve(
     })?;
     bounds::limit(measured, maximum)?;
     *used = measured;
+    Ok(())
+}
+
+fn copy_observations(
+    copied: &PrismCopiedSelection,
+    used: &mut usize,
+    maximum: usize,
+) -> AnnularCheck<'static> {
+    reserve(
+        used,
+        "actual copy observations",
+        copied.observations.len(),
+        maximum,
+    )?;
+    for row in &copied.observations {
+        relation(&row.selected, used, maximum)?;
+    }
+    Ok(())
+}
+
+fn image_bindings(
+    body: &PrismDiagnostic,
+    used: &mut usize,
+    maximum: usize,
+) -> AnnularCheck<'static> {
+    reserve(
+        used,
+        "actual native image bindings",
+        body.bindings.len(),
+        maximum,
+    )?;
+    for row in &body.bindings {
+        binding(row, used, maximum)?;
+    }
     Ok(())
 }

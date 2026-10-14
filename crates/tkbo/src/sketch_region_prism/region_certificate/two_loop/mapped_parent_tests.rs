@@ -102,13 +102,7 @@ fn parent_mapper_checks_zero_one_three_sources_before_budget_or_native_query() {
                 sources: &sources,
                 ..request
             };
-            let Err(failure) = map_two_loop_original_parents(&request, &[]) else {
-                panic!("expected source cardinality refusal");
-            };
-            assert!(
-                matches!(failure.cause, TwoLoopRegionCause::Count { actual, expected: 2, .. } if actual == count)
-            );
-            assert_eq!(failure.retained_units, 0);
+            assert_source_count_refusal(&request, count);
         });
     }
 }
@@ -144,27 +138,45 @@ fn polynomial_descriptor_admission_retains_original_caps_and_negative_count_caus
                 .unwrap_or_else(|_| panic!("exact cumulative geometry cap")),
             10
         );
-        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[5], 0) else {
-            panic!("expected pole cap");
-        };
-        assert!(matches!(
-            failure.cause,
-            TwoLoopRegionCause::Limit {
-                operand: "polynomial poles",
-                requested: 4,
-                measured: 5
-            }
-        ));
-        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[-1], 0) else {
-            panic!("expected negative count");
-        };
-        assert!(matches!(
-            failure.cause,
-            TwoLoopRegionCause::Scalar {
-                operand: "pole count",
-                actual: -1.,
-                ..
-            }
-        ));
+        assert_polynomial_count_refusals(&request);
     });
+}
+
+fn assert_source_count_refusal(request: &TwoLoopRegionRequest<'_, '_>, count: usize) {
+    let Err(failure) = map_two_loop_original_parents(request, &[]) else {
+        panic!("expected source cardinality refusal");
+    };
+    assert!(
+        matches!(failure.cause, TwoLoopRegionCause::Count { actual, expected: 2, .. } if actual == count)
+    );
+    assert_eq!(failure.retained_units, 0);
+}
+
+fn assert_polynomial_count_refusals(request: &TwoLoopRegionRequest<'_, '_>) {
+    let Err(failure) = super::admit_two_loop_polynomial_counts(request, &[5], 0) else {
+        panic!("expected pole cap");
+    };
+    assert!(matches!(
+        failure.cause,
+        TwoLoopRegionCause::Limit {
+            operand: "polynomial poles",
+            requested: 4,
+            measured: 5
+        }
+    ));
+    assert_negative_count_refusal(request);
+}
+
+fn assert_negative_count_refusal(request: &TwoLoopRegionRequest<'_, '_>) {
+    let Err(failure) = super::admit_two_loop_polynomial_counts(request, &[-1], 0) else {
+        panic!("expected negative count");
+    };
+    assert!(matches!(
+        failure.cause,
+        TwoLoopRegionCause::Scalar {
+            operand: "pole count",
+            actual: -1.,
+            ..
+        }
+    ));
 }

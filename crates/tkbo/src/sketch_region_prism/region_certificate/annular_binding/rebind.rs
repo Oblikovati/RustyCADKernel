@@ -45,19 +45,13 @@ fn same_contexts(old: &AnnularPrismOperands, new: &AnnularPrismOperands) -> Annu
         "same complete current body context census",
         old.body_contexts == new.body_contexts,
     )?;
-    require(
-        "same complete copied context census",
-        old.copy.members.len(),
-        new.copy.members.len(),
-    )?;
-    for (first, second) in old.copy.members.iter().zip(&new.copy.members) {
-        holds(
-            "same authored copied context association",
-            first.key == second.key
-                && first.selected == second.selected
-                && first.copied == second.copied,
-        )?;
-    }
+    same_copied_contexts(old, new)?;
+    same_chart_contexts(old, new)
+}
+fn same_chart_contexts(
+    old: &AnnularPrismOperands,
+    new: &AnnularPrismOperands,
+) -> AnnularCheck<'static> {
     require(
         "same complete actual chart universe",
         old.charts.len(),
@@ -71,6 +65,26 @@ fn same_contexts(old: &AnnularPrismOperands, new: &AnnularPrismOperands) -> Annu
         holds(
             "same complete original chart parents",
             first.chart.parents == second.chart.parents,
+        )?;
+    }
+    Ok(())
+}
+
+fn same_copied_contexts(
+    old: &AnnularPrismOperands,
+    new: &AnnularPrismOperands,
+) -> AnnularCheck<'static> {
+    require(
+        "same complete copied context census",
+        old.copy.members.len(),
+        new.copy.members.len(),
+    )?;
+    for (first, second) in old.copy.members.iter().zip(&new.copy.members) {
+        holds(
+            "same authored copied context association",
+            first.key == second.key
+                && first.selected == second.selected
+                && first.copied == second.copied,
         )?;
     }
     Ok(())
