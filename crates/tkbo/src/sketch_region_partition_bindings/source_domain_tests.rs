@@ -31,7 +31,7 @@ fn actual_original_copy_domains_match_full_descriptors_without_contact_credit() 
     assert!(bindings.iter().all(|binding| binding.decision.is_ok()));
 }
 #[test]
-fn missing_or_duplicate_original_rows_cannot_match_by_geometry_or_range() {
+fn missing_original_rows_cannot_match_by_geometry_or_range() {
     let (_, originals, snapshot) = source_domain_inputs();
     let absent = inspect_source_domains(&snapshot, &[], &originals);
     assert!(matches!(
@@ -41,6 +41,10 @@ fn missing_or_duplicate_original_rows_cannot_match_by_geometry_or_range() {
             count: 0
         })
     ));
+}
+#[test]
+fn duplicate_original_rows_cannot_match_by_geometry_or_range() {
+    let (_, originals, snapshot) = source_domain_inputs();
     let mut duplicated = originals.clone();
     duplicated.push(originals[0].clone());
     let repeated = inspect_source_domains(&snapshot, &duplicated, &originals);

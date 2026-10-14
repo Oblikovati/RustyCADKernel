@@ -72,6 +72,8 @@ fn recorded_row(
 ) -> CandidateImageCopyLink {
     CandidateImageCopyLink {
         original: image.occurrence.clone(),
+        kind: Ok(rustycad_tkg3d::top_abs::ShapeEnum::Edge),
+        history_supported: Ok(true),
         copied: image.occurrence.clone(),
         preserved: Vec::new(),
         modified: source.parents.clone(),

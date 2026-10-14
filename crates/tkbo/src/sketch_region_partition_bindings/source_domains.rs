@@ -43,11 +43,7 @@ fn source_domain_rows(
     current: &[OriginalCurveCapture],
 ) -> Vec<PartitionSourceDomainBinding> {
     if source.parents.is_empty() {
-        return vec![PartitionSourceDomainBinding {
-            source_index: source.source_index,
-            parent: None,
-            decision: Err(PartitionSourceDomainCause::MissingParents),
-        }];
+        return vec![missing_source_parents(source.source_index)];
     }
     source
         .parents
@@ -85,6 +81,19 @@ fn original_descriptor<'a>(
     &'a crate::sketch_region_source_conformance::CapturedSpaceRepresentation,
     PartitionSourceDomainCause,
 > {
+    let row = single_original(captures, parent, role)?;
+    row.representation
+        .as_ref()
+        .map_err(|cause| PartitionSourceDomainCause::Capture {
+            role,
+            cause: Arc::clone(cause),
+        })
+}
+fn single_original<'a>(
+    captures: &'a [OriginalCurveCapture],
+    parent: &OriginalMemberIdentity,
+    role: &'static str,
+) -> Result<&'a OriginalCurveCapture, PartitionSourceDomainCause> {
     let rows: Vec<_> = captures
         .iter()
         .filter(|row| row.original == *parent)
@@ -95,14 +104,16 @@ fn original_descriptor<'a>(
             count: rows.len(),
         });
     }
-    rows[0]
-        .representation
-        .as_ref()
-        .map_err(|cause| PartitionSourceDomainCause::Capture {
-            role,
-            cause: Arc::clone(cause),
-        })
+    Ok(rows[0])
 }
+fn missing_source_parents(source_index: i32) -> PartitionSourceDomainBinding {
+    PartitionSourceDomainBinding {
+        source_index,
+        parent: None,
+        decision: Err(PartitionSourceDomainCause::MissingParents),
+    }
+}
+
 fn source_descriptor(
     source: &SourcePartitionObservation,
 ) -> Result<

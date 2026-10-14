@@ -11,13 +11,7 @@
 #include <gp_Trsf.hxx>
 #include <iomanip>
 #include <iostream>
-class PartitionBuilder final : public BOPAlgo_Builder {
-  void CheckData() override
-  {
-    // Preserve filler diagnostics while admitting the extension's nonempty open edges.
-    myReport->Merge(myPaveFiller->GetReport());
-  }
-};
+#include "martensite_partition_fixture.hxx"
 static NCollection_List<TopoDS_Shape> Sources(int mode)
 {
   const TopoDS_Shape first=BRepBuilderAPI_MakeEdge(gp_Pnt(-1,0,0),gp_Pnt(1,0,0)).Edge();

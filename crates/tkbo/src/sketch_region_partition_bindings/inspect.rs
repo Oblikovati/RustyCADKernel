@@ -17,6 +17,7 @@ pub(crate) fn inspect_partition_bindings(
     PartitionBindingInspection {
         endpoints,
         native_spans: source_span_bindings(&snapshot.sources),
+        image_span_faults: super::image_partitions::inspect_image_partitions(snapshot),
         structural_faults: super::integrity::inspect_snapshot_integrity(snapshot),
         canonical_contact: CanonicalContactGap::MissingPairedSourceProof,
     }

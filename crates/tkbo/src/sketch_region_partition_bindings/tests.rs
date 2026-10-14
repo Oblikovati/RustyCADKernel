@@ -40,7 +40,8 @@ fn actual_native_singleton_cut_stays_distinct_from_exact_half() {
     let edges = single_root_edges();
     let snapshot = actual_binding_snapshot(&edges);
     let cut = snapshot.sources[0].blocks[0].own_range[1];
-    assert_eq!(cut, 0.49999999999996131);
+    // Preserve the native two-run scalar bits, including its strict distinction from 0.5.
+    assert_eq!(cut.to_bits(), 0x3fdffffffffffd47);
     assert_ne!(cut, 0.5);
     let observed = inspect_partition_bindings(&snapshot);
     assert_eq!(shared_endpoints(&observed).len(), 1);

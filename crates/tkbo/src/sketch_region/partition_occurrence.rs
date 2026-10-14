@@ -11,4 +11,9 @@ impl PartitionOccurrenceIdentity {
             orientation: shape.orientation(),
         }
     }
+    /// Compare actual physical storage while retaining direction in the full key.
+    /// Example: `forward.same_physical(&reversed)`.
+    pub(crate) fn same_physical(&self, other: &Self) -> bool {
+        self.topology_address == other.topology_address && self.location == other.location
+    }
 }

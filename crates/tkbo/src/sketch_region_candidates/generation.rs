@@ -27,21 +27,23 @@ pub(super) fn extract_candidates_observing_copy(
     owned: &OwnedArrangement,
     plane: Plane3,
     cancelled: &mut dyn FnMut(CandidatePhase) -> bool,
-    collector: Option<&mut super::copy_observation::CandidateCopyCollector>,
+    mut collector: Option<&mut super::copy_observation::CandidateCopyCollector>,
 ) -> Result<CandidateBatch, CandidateCause> {
     poll(CandidatePhase::Copy, cancelled)?;
-    let (mut copier, parents) = prepare_candidate_copy(owned, collector)?;
+    let (mut copier, parents) = prepare_candidate_copy(owned, collector.as_deref_mut())?;
     poll(CandidatePhase::Generation, cancelled)?;
     let builder = generate_faces(copier.shape().map_err(CandidateCause::Mapped)?, plane)?;
+    super::copy_observation::capture_generated_if_present(collector, &builder, &parents);
     poll(CandidatePhase::Capture, cancelled)?;
     finish_batch(owned, plane, &builder, &parents)
 }
 fn prepare_candidate_copy(
     owned: &OwnedArrangement,
-    collector: Option<&mut super::copy_observation::CandidateCopyCollector>,
+    mut collector: Option<&mut super::copy_observation::CandidateCopyCollector>,
 ) -> Result<(BRepBuilderAPICopy, CandidateParents), CandidateCause> {
     let mut copier = BRepBuilderAPICopy::with_shape(&owned.arrangement, true, true)
         .map_err(CandidateCause::Mapped)?;
+    super::copy_observation::capture_tree_if_present(collector.as_deref_mut(), &mut copier);
     let parents = copy_parents_observing(owned, &mut copier, collector)?;
     Ok((copier, parents))
 }

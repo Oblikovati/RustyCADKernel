@@ -5,7 +5,7 @@ use crate::sketch_region::*;
 use crate::sketch_region_candidates::*;
 use rustycad_tkmath::gp::Plane3;
 
-fn actual_copy_inputs() -> (OwnedPartitionSnapshot, OwnedArrangement) {
+pub(super) fn actual_copy_inputs() -> (OwnedPartitionSnapshot, OwnedArrangement) {
     let edges = crate::sketch_region_candidates::tests::rectangle(0., 0., 2., 2.);
     let observed = observe_owned_partition(&binding_sources(&edges), &mut |_| false);
     let PartitionObservation::Captured(snapshot) = observed.partition else {
@@ -16,7 +16,7 @@ fn actual_copy_inputs() -> (OwnedPartitionSnapshot, OwnedArrangement) {
     };
     (snapshot, owned)
 }
-fn actual_candidate_copy(
+pub(super) fn actual_candidate_copy(
     owned: &OwnedArrangement,
     stop: Option<CandidatePhase>,
 ) -> CandidateCopyInspection {
@@ -78,4 +78,31 @@ fn cancelled_then_successful_copy_reuses_inputs_without_accumulating_receipt_row
         // Copy keys are operation-local: released allocations may reuse addresses.
         assert_eq!(before.modified, after.modified);
     }
+}
+
+#[test]
+fn actual_null_copy_failure_then_success_keeps_native_cause_and_no_stale_links() {
+    let (_, mut owned) = actual_copy_inputs();
+    let valid = std::mem::take(&mut owned.arrangement);
+    let failed = actual_candidate_copy(&owned, None);
+    let Err(CandidateCause::Mapped(cause)) = &failed.completion else {
+        panic!("actual null copy; expected original mapped Failure");
+    };
+    let cause_before = (cause.exception_type(), cause.message().to_owned());
+    assert_failed_copy_observation(&failed);
+    owned.arrangement = valid;
+    assert!(actual_candidate_copy(&owned, None).completion.is_ok());
+    assert_eq!(
+        cause_before,
+        (cause.exception_type(), cause.message().to_owned())
+    );
+}
+
+fn assert_failed_copy_observation(failed: &CandidateCopyInspection) {
+    assert!(failed.links.is_empty());
+    assert!(matches!(
+        failed.generated_topology,
+        GeneratedTopologyObservation::NotReached
+    ));
+    assert!(failed.observation_failures.is_empty());
 }

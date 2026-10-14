@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Physical image membership and directed copy identity are separate observations.
+use super::occurrence_keys::same_physical_occurrence;
 use crate::sketch_region::{OwnedPartitionSnapshot, PartitionOccurrenceIdentity};
 use crate::sketch_region_candidates::CandidateImageCopyLink;
 
@@ -58,11 +59,10 @@ fn image_binding(
     let copy_rows: Vec<_> = links
         .iter()
         .enumerate()
-        .filter(|(_, link)| same_physical_image(key, &link.original))
+        .filter(|(_, link)| same_physical_occurrence(key, &link.original))
         .map(|(row, _)| row)
         .collect();
-    let fault = image_context_fault(source)
-        .or_else(|| image_parent_fault(&source.parents, &copy_rows, links));
+    let fault = image_link_fault(source, &copy_rows, links);
     PartitionImageBinding {
         source_index: source.source_index,
         image_index: image,
@@ -105,13 +105,6 @@ fn link_has_parent(
         .chain(&link.generated)
         .any(|member| member == parent)
 }
-fn same_physical_image(
-    left: &PartitionOccurrenceIdentity,
-    right: &PartitionOccurrenceIdentity,
-) -> bool {
-    // Builder image-map lookup is IsSame; directed aliases are retained in each copy row.
-    left.topology_address == right.topology_address && left.location == right.location
-}
 
 fn image_context_fault(
     source: &crate::sketch_region::SourcePartitionObservation,
@@ -121,4 +114,12 @@ fn image_context_fault(
         Some(images) if images.is_empty() => Some(PartitionImageCause::EmptyImageMap),
         _ => None,
     }
+}
+
+fn image_link_fault(
+    source: &crate::sketch_region::SourcePartitionObservation,
+    rows: &[usize],
+    links: &[CandidateImageCopyLink],
+) -> Option<PartitionImageCause> {
+    image_context_fault(source).or_else(|| image_parent_fault(&source.parents, rows, links))
 }

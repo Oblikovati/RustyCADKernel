@@ -3,6 +3,7 @@
 pub(crate) struct PartitionBindingInspection {
     pub endpoints: Vec<PartitionEndpointBinding>,
     pub native_spans: Vec<SourceSpanBinding>,
+    pub image_span_faults: Vec<super::image_partitions::PartitionImageSpanFault>,
     pub structural_faults: Vec<super::integrity::PartitionStructuralFault>,
     pub canonical_contact: CanonicalContactGap,
 }

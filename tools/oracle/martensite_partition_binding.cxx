@@ -10,17 +10,7 @@
 #include <TopoDS.hxx>
 #include <iostream>
 #include <iomanip>
-static NCollection_List<TopoDS_Shape> Sources(int mode)
-{
-  NCollection_Array1<gp_Pnt> poles(1,3);
-  poles(1)=gp_Pnt(0,0,0);poles(2)=gp_Pnt(.5,mode==0?1:0,0);
-  poles(3)=gp_Pnt(1,mode==0?0:1,0);
-  occ::handle<Geom_BezierCurve> curve=new Geom_BezierCurve(poles);
-  NCollection_List<TopoDS_Shape> sources;
-  sources.Append(BRepBuilderAPI_MakeEdge(curve).Edge());
-  sources.Append(BRepBuilderAPI_MakeEdge(gp_Pnt(-1,.25,0),gp_Pnt(2,.25,0)).Edge());
-  return sources;
-}
+#include "martensite_partition_fixture.hxx"
 static void EmitVertices(BOPDS_DS& ds)
 {
   for(int index=0;index<ds.NbShapes();++index) {
@@ -42,7 +32,7 @@ static void EmitSpans(BOPDS_DS& ds)
 }
 static void Capture(int mode)
 {
-  BOPAlgo_PaveFiller filler;filler.SetArguments(Sources(mode));
+  BOPAlgo_PaveFiller filler;filler.SetArguments(PartitionBindingSources(mode));
   filler.SetNonDestructive(true);filler.Perform();
   if(filler.HasErrors()) throw Standard_Failure("endpoint filler HasErrors=true; expected completed observed DS");
   std::cout<<"mode "<<mode<<'\n';
