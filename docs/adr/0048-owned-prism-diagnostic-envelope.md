@@ -94,3 +94,16 @@ process/thread fixtures append typed cause observations solely for byte-for-byte
 test comparisons. A publication wrapper is still pending the resolver-issued
 actual-invocation packet; this prefix provides no arbitrary header/failure pairing
 entrypoint and no publication-completeness claim.
+
+## Native failure provenance seam
+
+A separate additive TKernel API exposes `Failure::explicit_exception_parent()`
+and `Failure::derived_message_bytes()`. The first returns only the stored parent
+override; it does not substitute a base inferred by `is_kind()` from the existing
+hierarchy. The second returns the optional derived message buffer, preserving
+`None` versus `Some(empty)` and the distinction between base `message_bytes()` and
+virtual `what()`. This permits an exact typed codec without Debug/Display parsing.
+No constructor, mutation, hierarchy, buffer ownership or native behavior changes.
+Baseline commit `8d9b35390` pins these distinctions before the accessors are added.
+The final coordinated release accounts for this additive API; no mid-workspace
+version change or replacement migration is introduced by these read-only methods.
