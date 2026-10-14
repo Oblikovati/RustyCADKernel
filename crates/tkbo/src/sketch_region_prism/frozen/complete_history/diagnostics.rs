@@ -135,6 +135,13 @@ fn admit_partition<'a>(request: &NativeHistoryInputs<'a>) -> Result<(), PrismHis
                 cause,
             )
         })?;
+    Err(partition_failure(request, failure, parents))
+}
+fn partition_failure<'a>(
+    request: &NativeHistoryInputs<'a>,
+    failure: &'a crate::sketch_region::PartitionReadFailure,
+    parents: Vec<FrozenOriginalKey>,
+) -> PrismHistoryFailure<'a> {
     let cause = partition_diagnostic(failure, parents);
     let mut result = operation::native_failure(
         request.publication.operation,
@@ -142,7 +149,7 @@ fn admit_partition<'a>(request: &NativeHistoryInputs<'a>) -> Result<(), PrismHis
         PrismHistoryCause::Legacy(Box::new(cause)),
     );
     result.local_diagnostic = Some(PrismHistoryLocalDiagnostic::Partition(failure));
-    Err(result)
+    result
 }
 fn partition_cause(cause: &PartitionReadCause) -> HistoryPartitionReadCause {
     match cause {

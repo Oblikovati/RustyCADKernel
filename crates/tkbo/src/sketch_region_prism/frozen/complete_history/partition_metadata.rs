@@ -41,19 +41,14 @@ pub(super) fn capture(
         .ok_or(PrismHistoryCause::Missing {
             required: "native source shape count",
         })?;
+    let native = request.native_inputs();
     let vertices = snapshot
         .vertices
         .iter()
-        .map(|v| vertex(&request.native_inputs(), copied, v))
+        .map(|v| vertex(&native, copied, v))
         .collect::<HistoryCheck<Vec<_>>>()?;
     history_count("one native physical closure vertex", vertices.len(), 1)?;
-    let result = metadata(
-        &request.native_inputs(),
-        copied,
-        source,
-        source_shape_count,
-        vertices,
-    )?;
+    let result = metadata(&native, copied, source, source_shape_count, vertices)?;
     admit_parents(request, &result)?;
     Ok(result)
 }

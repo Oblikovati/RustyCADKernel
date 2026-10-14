@@ -18,18 +18,21 @@ fn actual_annular_native_history_keeps_two_source_and_three_candidate_rosters() 
         let copied = request.bridge.mapped.copied.as_ref().unwrap();
         assert_copy_roster(&copied.contexts, 7);
         assert_eq!(copied.links.len(), 7);
-        let GeneratedTopologyObservation::Observed(areas) = &copied.generated_topology else {
-            panic!("expected complete actual generated areas");
-        };
-        let mut lengths = areas
-            .iter()
-            .map(|a| observed_len(&a.contexts))
-            .collect::<Vec<_>>();
-        lengths.sort();
-        assert_eq!(lengths, [5, 5, 9]);
+        assert_generated_roster(&copied.generated_topology);
         assert_eq!(receipt.input.rejected.len(), 2);
         assert_eq!(receipt.input.selected.as_ref().unwrap().relations.len(), 9);
     });
+}
+fn assert_generated_roster(observed: &GeneratedTopologyObservation) {
+    let GeneratedTopologyObservation::Observed(areas) = observed else {
+        panic!("expected complete actual generated areas");
+    };
+    let mut lengths = areas
+        .iter()
+        .map(|a| observed_len(&a.contexts))
+        .collect::<Vec<_>>();
+    lengths.sort();
+    assert_eq!(lengths, [5, 5, 9]);
 }
 fn assert_partition_roster(partition: &OwnedPartitionSnapshot) {
     assert_eq!(partition.input_contexts.len(), 2);
@@ -39,11 +42,14 @@ fn assert_partition_roster(partition: &OwnedPartitionSnapshot) {
     for source in &partition.input_contexts {
         assert_copy_roster(&source.observation, 3);
     }
+    assert_partition_queries(&partition.member_queries);
+}
+fn assert_partition_queries(observed: &PartitionMemberQueries) {
     let PartitionMemberQueries::Captured {
         history_requested,
         history_available,
         rows,
-    } = &partition.member_queries
+    } = observed
     else {
         panic!("expected exhaustive native partition queries");
     };

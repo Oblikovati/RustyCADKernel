@@ -114,11 +114,7 @@ fn member(
     row: &GeneratedMemberSnapshot,
 ) -> HistoryCheck<PrismGeneratedMember> {
     let index = parent_rows::occurrence_index(bound, &row.occurrence)?;
-    observed_values::equal(
-        &(row.kind as u8),
-        &bound.owned[index].occurrence.member.kind,
-        "generated kind matches actual context",
-    )?;
+    admit_generated_kind(bound, index, row)?;
     let descendants = descendants(bound, index, &row.descendants)?;
     let copies = copy_members(request, copied, row)?;
     Ok(PrismGeneratedMember {
@@ -134,6 +130,17 @@ fn member(
             &row.generated,
         )?,
     })
+}
+fn admit_generated_kind(
+    bound: &BoundHistoricalContexts<'_>,
+    index: usize,
+    row: &GeneratedMemberSnapshot,
+) -> HistoryCheck<()> {
+    observed_values::equal(
+        &(row.kind as u8),
+        &bound.owned[index].occurrence.member.kind,
+        "generated kind matches actual context",
+    )
 }
 fn descendants(
     bound: &BoundHistoricalContexts<'_>,
