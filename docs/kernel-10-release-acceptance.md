@@ -168,10 +168,42 @@ Both completed worktrees and branches were deleted after checks.
 
 This advances actual single-boundary semantic correspondence and owned body
 reads. It does not close the public one-call outcome, complete owned failures,
-general profiles or the sketch-with-hole consumer workflow. The annular binding,
-embedding and named topology paths remain development candidates until their
-combined proof, ordered validation, measurements, history and publication gates
-are integrated. Release condition remains unsatisfied.
+general profiles or the sketch-with-hole consumer workflow. At that checkpoint,
+annular binding, embedding and named topology remained development candidates.
+The supplements below advance their individual gates; complete ordered
+validation, measurements, history and publication remain required.
+
+## Publication diagnostics and annular binding/embedding supplement
+
+The bounded sealed publication diagnostic adapter is integrated at `e04266c24`,
+with evidence and deleted-checkout receipt `6a51fe8f2`:
+[publication diagnostics](evidence/prism-publication-diagnostic-integration-2026-10-14/INTEGRATED.md).
+Root passed 1,963 tests and 35 doctests, strict lint/fmt/docs, and thirty fresh
+process checks against fifteen retained replay records. Exact source/request/
+policy associations and typed native/scalar causes are owned where supported.
+Unsupported nested families retain their actual original carrier plus explicit
+gaps. This does not close the complete owned failure boundary.
+
+Actual annular binding and embedding are integrated at `949990450`, evidence
+`275b064c6`: [combined receipt](evidence/prism-annular-binding-embedding-integration-2026-10-14/INTEGRATED.md).
+Root passed 2,040 tests and 35 doctests, lint/fmt/docs, and forty-six process
+checks against twenty-three retained full replay records. Both candidates and
+all previous main passing test names remain; overlapping counts are not added.
+All 16,319 source/configuration hashes were unchanged. Both completed worktrees
+and merged branches were deleted after the clean/ancestor/process audit.
+
+This evidence covers the actual nested polynomial pair, source/copy membership,
+four charts, twelve trims, complete classed and captured-flat parent association,
+regularity limits, four parameter domains and ten embedding incidence claims.
+Final callback-free recapture prevents issuance after a stale source mutation.
+The reviewed same-role cap-rim operand-swap regression is retained with its red
+and green logs; valid nominal bytes did not change.
+
+The public general-profile operation, complete annular ordered validity/history/
+measures/publication, owned failure families and application edit/undo/reopen/
+display workflow remain open. These private prerequisites grant no release
+approval. ThreadSanitizer and complete owner package/benchmark acceptance remain
+incomplete under the existing authority and exclusions.
 
 ## Every issue requirement
 
@@ -265,3 +297,11 @@ application owner. Do not claim that an unsplit authored key proves split naming
 
 Release remains gated on every issue row and the owner package workflow; consumer
 adoption then closes the separate application replacement/acceptance work.
+
+### Named annular topology integration supplement
+
+Local main `3cdfa7535` integrates the sealed four-face, six-wire, twelve-trim
+annular topology candidate. Root checks passed 2,063 tests and 35 doctests,
+strict lint, formatting and docs, plus fifty independent replay processes.
+See [integration evidence](evidence/prism-annular-frozen-topology-integration-2026-10-14/INTEGRATED.md).
+This is a private prerequisite; the remaining release requirements above still apply.
