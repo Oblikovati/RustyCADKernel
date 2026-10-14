@@ -5,6 +5,12 @@ use crate::sketch_region::ArrangementSource;
 use crate::sketch_region_contact_transport::PairedContactTransaction;
 use crate::sketch_region_prism::PrismReceipt;
 
+pub(super) struct JoinInputs<'a, 'b> {
+    pub bridge: &'a PairedContactTransaction,
+    pub sources: &'a [ArrangementSource<'b>],
+    pub receipt: &'a PrismReceipt,
+    pub bindings: &'a PrismPublicationBindings,
+}
 /// Compose current proof and immutable ordered projection; `compose_prism_proof(bridge,sources,receipt,bindings,contact,options,cancel)`.
 /// Exclusive operation-local inputs are required; success is evidence, never accepted body status.
 pub(crate) fn compose_prism_proof(
@@ -16,41 +22,76 @@ pub(crate) fn compose_prism_proof(
     requested: PrismProofJoinOptions,
     mut cancelled: impl FnMut() -> bool + Send,
 ) -> Result<JoinedPrismProof, PrismProofJoinFailure> {
-    let wrap = |phase, cause| failure(bindings.operation, phase, cause);
-    admit(requested).map_err(|cause| wrap(PrismProofJoinPhase::Admission, cause))?;
-    let initial = probe::capture(bridge, sources, receipt, bindings)
-        .map_err(|cause| wrap(PrismProofJoinPhase::Admission, cause))?;
-    let embedding = inspect_prism_embedding(
-        bridge,
-        sources,
-        receipt,
-        requested.embedding,
-        &mut cancelled,
-    )
-    .map_err(|cause| {
-        wrap(
-            PrismProofJoinPhase::Embedding,
-            PrismProofJoinCause::Embedding(Box::new(cause)),
-        )
-    })?;
-    let projection = capture_projection(receipt, bindings, &mut cancelled)
-        .map_err(|cause| wrap(PrismProofJoinPhase::Capture, cause))?;
-    let join = assemble(
+    let inputs = JoinInputs {
         bridge,
         sources,
         receipt,
         bindings,
-        contact,
-        requested,
-        (embedding, projection),
-    )
-    .map_err(|cause| wrap(PrismProofJoinPhase::Link, cause))?;
-    final_poll(&mut cancelled).map_err(|cause| wrap(PrismProofJoinPhase::Commit, cause))?;
-    rebind_joined_prism_proof(bridge, sources, receipt, bindings, &join)?;
-    let current = probe::capture(bridge, sources, receipt, bindings)
-        .map_err(|cause| wrap(PrismProofJoinPhase::Commit, cause))?;
-    probe::same(&initial, &current).map_err(|cause| wrap(PrismProofJoinPhase::Commit, cause))?;
-    Ok(join)
+    };
+    inputs.compose(contact, requested, &mut cancelled)
+}
+impl JoinInputs<'_, '_> {
+    fn compose(
+        &self,
+        contact: &AuthoredClosureContact,
+        requested: PrismProofJoinOptions,
+        cancelled: &mut (impl FnMut() -> bool + Send),
+    ) -> Result<JoinedPrismProof, PrismProofJoinFailure> {
+        admit(requested).map_err(|cause| self.failure(PrismProofJoinPhase::Admission, cause))?;
+        let initial = self.raw_probe(PrismProofJoinPhase::Admission)?;
+        let embedding = self.embedding(requested, cancelled)?;
+        let projection = capture_projection(self.receipt, self.bindings, cancelled)
+            .map_err(|cause| self.failure(PrismProofJoinPhase::Capture, cause))?;
+        let join = assemble(self, contact, requested, embedding, projection)
+            .map_err(|cause| self.failure(PrismProofJoinPhase::Link, cause))?;
+        self.finish(&join, &initial, cancelled)?;
+        Ok(join)
+    }
+    fn embedding(
+        &self,
+        requested: PrismProofJoinOptions,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<PrismEmbeddingEvidence, PrismProofJoinFailure> {
+        inspect_prism_embedding(
+            self.bridge,
+            self.sources,
+            self.receipt,
+            requested.embedding,
+            cancelled,
+        )
+        .map_err(|cause| {
+            self.failure(
+                PrismProofJoinPhase::Embedding,
+                PrismProofJoinCause::Embedding(Box::new(cause)),
+            )
+        })
+    }
+    fn finish(
+        &self,
+        join: &JoinedPrismProof,
+        initial: &probe::InitialRawProbe,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<(), PrismProofJoinFailure> {
+        final_poll(cancelled).map_err(|cause| self.failure(PrismProofJoinPhase::Commit, cause))?;
+        rebind_joined_prism_proof(self.bridge, self.sources, self.receipt, self.bindings, join)?;
+        let current = self.raw_probe(PrismProofJoinPhase::Commit)?;
+        probe::same(initial, &current)
+            .map_err(|cause| self.failure(PrismProofJoinPhase::Commit, cause))
+    }
+    fn raw_probe(
+        &self,
+        phase: PrismProofJoinPhase,
+    ) -> Result<probe::InitialRawProbe, PrismProofJoinFailure> {
+        probe::capture(self.bridge, self.sources, self.receipt, self.bindings)
+            .map_err(|cause| self.failure(phase, cause))
+    }
+    pub(super) fn failure(
+        &self,
+        phase: PrismProofJoinPhase,
+        cause: PrismProofJoinCause,
+    ) -> PrismProofJoinFailure {
+        failure(self.bindings.operation, phase, cause)
+    }
 }
 fn admit(requested: PrismProofJoinOptions) -> Result<(), PrismProofJoinCause> {
     if requested.version == 1 {
@@ -78,12 +119,18 @@ fn capture_projection(
     bindings: &PrismPublicationBindings,
     cancelled: &mut (impl FnMut() -> bool + Send),
 ) -> Result<FrozenPrismProjection, PrismProofJoinCause> {
-    match super::super::freeze_prism_with_behavior(
+    let captured = super::super::freeze_prism_with_behavior(
         receipt,
         bindings,
         &mut JoinFreezeProgress(cancelled),
         PrismFreezeBehavior::OrderedTraversalV2,
-    ) {
+    );
+    capture_outcome(captured)
+}
+fn capture_outcome(
+    captured: PrismFreezeOutcome,
+) -> Result<FrozenPrismProjection, PrismProofJoinCause> {
+    match captured {
         PrismFreezeOutcome::Captured(projection) => Ok(*projection),
         PrismFreezeOutcome::Incomplete(cause) => {
             Err(PrismProofJoinCause::IncompleteCapture(Box::new(cause)))
@@ -97,29 +144,21 @@ fn capture_projection(
     }
 }
 fn assemble(
-    bridge: &PairedContactTransaction,
-    sources: &[ArrangementSource<'_>],
-    receipt: &PrismReceipt,
-    bindings: &PrismPublicationBindings,
+    inputs: &JoinInputs<'_, '_>,
     contact: &AuthoredClosureContact,
     requested: PrismProofJoinOptions,
-    proof: (PrismEmbeddingEvidence, FrozenPrismProjection),
+    embedding: PrismEmbeddingEvidence,
+    projection: FrozenPrismProjection,
 ) -> Result<JoinedPrismProof, PrismProofJoinCause> {
-    let (embedding, projection) = proof;
-    let bound = bind_projection(receipt, bindings).map_err(link)?;
-    let links = links::link_proof(&embedding, &bound, &projection, contact).map_err(link)?;
-    let closure = closure::capture(bridge, sources, receipt, &embedding, bindings, contact)?;
-    let first =
-        replay_sources::first_is_selected(bridge, &embedding.binding().region).map_err(link)?;
-    let replay = replay::joined_bytes(&embedding, &bound, &projection, &links, first, &closure)
-        .map_err(link)?;
+    let bound = bind_projection(inputs.receipt, inputs.bindings).map_err(join_link_cause)?;
+    let captured = operands::capture(inputs, &bound, &embedding, &projection, contact)?;
     Ok(JoinedPrismProof {
         projection,
         embedding,
-        links,
+        links: captured.links,
         requested,
-        replay,
-        closure,
+        replay: captured.replay,
+        closure: captured.closure,
     })
 }
 /// Recheck the same owned join after downstream callbacks; `rebind_joined_prism_proof(bridge,sources,receipt,bindings,join)`.
@@ -131,58 +170,11 @@ pub(crate) fn rebind_joined_prism_proof(
     bindings: &PrismPublicationBindings,
     join: &JoinedPrismProof,
 ) -> Result<(), PrismProofJoinFailure> {
-    rebind(bridge, sources, receipt, bindings, join)
-        .map_err(|cause| failure(bindings.operation, PrismProofJoinPhase::Commit, cause))
-}
-fn rebind(
-    bridge: &PairedContactTransaction,
-    sources: &[ArrangementSource<'_>],
-    receipt: &PrismReceipt,
-    bindings: &PrismPublicationBindings,
-    join: &JoinedPrismProof,
-) -> Result<(), PrismProofJoinCause> {
-    rebind_current_prism_binding(bridge, sources, receipt, join.embedding.binding())
-        .map_err(|cause| PrismProofJoinCause::Binding(Box::new(cause)))?;
-    let bound = bind_projection(receipt, bindings).map_err(link)?;
-    super::super::capture::check_final_capture(
-        &bound,
-        &join.projection,
-        PrismFreezeBehavior::OrderedTraversalV2,
-    )
-    .map_err(link)?;
-    let contact = AuthoredClosureContact {
-        name: join.links.contact,
-        actual: join.embedding.binding().region.contact,
-        original: join.embedding.binding().region.original.clone(),
-    };
-    let links =
-        links::link_proof(&join.embedding, &bound, &join.projection, &contact).map_err(link)?;
-    let closure = closure::capture(
+    let inputs = JoinInputs {
         bridge,
         sources,
         receipt,
-        &join.embedding,
         bindings,
-        &contact,
-    )?;
-    let first = replay_sources::first_is_selected(bridge, &join.embedding.binding().region)
-        .map_err(link)?;
-    let replay = replay::joined_bytes(
-        &join.embedding,
-        &bound,
-        &join.projection,
-        &links,
-        first,
-        &closure,
-    )
-    .map_err(link)?;
-    if replay == join.replay {
-        return Ok(());
-    }
-    Err(PrismProofJoinCause::Stale {
-        representation: "complete authored join and raw/query operands",
-    })
-}
-fn link(cause: PrismFreezeCause) -> PrismProofJoinCause {
-    PrismProofJoinCause::Link(Box::new(cause))
+    };
+    rebind::check(&inputs, join).map_err(|cause| inputs.failure(PrismProofJoinPhase::Commit, cause))
 }
