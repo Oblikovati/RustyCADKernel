@@ -27,7 +27,10 @@ distinguishes this state from an uninitialized or virtual target.
 Rebinding the existing view releases its presenter, invalidates the preceding
 capture and any GUI packet tied to that target, and requires a fresh successful
 frame. This rule applies even when the native handle and extent are equal: numeric
-XID equality does not prove an unchanged lifetime. Compared with prior behavior,
+XID equality does not prove an unchanged lifetime. Every explicit rebind advances
+the publication generation even without a GUI packet, so an earlier pending frame
+cannot overwrite the cleared capture. Ordinary resize semantics are unchanged.
+Compared with prior behavior,
 explicit rebind of a live target also refuses the cached frame and old GUI packet.
 The regression explicitly rebinds the same live object at the same extent, then
 requires fresh submission and byte-identical output. This rebind migration is

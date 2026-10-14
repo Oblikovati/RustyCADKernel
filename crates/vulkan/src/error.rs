@@ -57,6 +57,8 @@ mod tests {
     }
     #[test]
     fn closed_render_errors_retain_typed_cause() {
+        fn assert_send_sync<T: Send + Sync>() {}
+        assert_send_sync::<RenderError>();
         let closure = AspectNativeWindowClosure {
             original_handle: 91,
             cause: AspectNativeWindowClosureCause::DestroyNotify,

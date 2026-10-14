@@ -257,3 +257,7 @@ impl Graphic3dCView for Graphic3dRenderView {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "view_binding_tests.rs"]
+mod view_binding_tests;

@@ -65,7 +65,7 @@ impl Graphic3dRenderView {
     }
 
     pub(crate) fn invalidate_window_binding(&self) {
-        self.gui_layers.write().resized();
+        self.gui_layers.write().invalidate_binding();
         *self.outcome.write() = None;
         self.invalidate();
     }
