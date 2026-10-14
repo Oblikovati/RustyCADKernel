@@ -78,6 +78,7 @@
 #include "tkv3d_probe_ais_rubber_band.cxx"
 #include "tkv3d_probe_brep_font.cxx"
 #include "tkv3d_probe_dsg_prs.cxx"
+#include "tkv3d_probe_std_select_filters.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFont regularization and builders (tkv3d_probe_brep_font.cxx)
  {"v3_brepfont_regularize", v3_brepfont_regularize},
@@ -86,6 +87,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_brepfont_text", v3_brepfont_text},
  // DsgPrs presentations (tkv3d_probe_dsg_prs.cxx)
  {"v3_dsgprs", v3_dsgprs},
+ // StdSelect owner filters (tkv3d_probe_std_select_filters.cxx)
+ {"v3_stdsel_filter", v3_stdsel_filter},
  {"v3_ais_rubber_band", v3_ais_rubber_band},
  {"v3_ais_trihedron", v3_ais_trihedron},
  {"v3_ais_point_cloud", v3_ais_point_cloud},

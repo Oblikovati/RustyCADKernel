@@ -11,7 +11,8 @@ use rustycad_tkservice::graphic3d::Graphic3dTypeOfPrimitiveArray;
 
 impl Select3DSensitivePrimitiveArray {
     /// `applyTransformation` (protected): the box of the eight corners at the initial location.
-    pub(super) fn apply_transformation(&self) -> Select3DBndBox3d {
+    /// Example: `array.apply_transformation()`.
+    pub fn apply_transformation(&self) -> Select3DBndBox3d {
         let state = self.read();
         if state.init_location.is_identity() {
             return state.bnd_box;

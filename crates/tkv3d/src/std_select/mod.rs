@@ -23,15 +23,21 @@ mod brep_edge_sensitive;
 mod brep_selection_limit_tests;
 mod brep_selection_priority;
 
+mod filters;
 mod shape;
+pub use filters::{
+    StdSelectEdgeFilter, StdSelectFaceFilter, StdSelectShapeTypeFilter, StdSelectTypeOfEdge,
+    StdSelectTypeOfFace, std_select_set_drawer_for_brep_owner,
+};
 mod shape_reference;
 pub use shape::{
     StdSelectShape, StdSelectShapeBase, StdSelectShapeMembers, StdSelectShapeSource,
-    std_select_shape_compute,
+    std_select_shape_compute, std_select_shape_dump_json,
 };
 pub use shape_reference::{StdSelectShapeFields, StdSelectShapeRef};
 mod brep_owner;
 mod brep_owner_dispatch;
+pub use brep_owner_dispatch::std_select_brep_owner_dump_json;
 mod brep_owner_highlight;
 pub use brep_owner::{
     StdSelectBRepOwner, StdSelectBRepOwnerBase, StdSelectBRepOwnerMembers, StdSelectBRepOwnerSource,

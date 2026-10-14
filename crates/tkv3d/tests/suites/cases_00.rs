@@ -115,10 +115,10 @@ pub mod legacy_brepfont_builder;
 pub mod legacy_brepfont_planar_region;
 #[path = "../legacy_brepfont_regularizer.rs"]
 pub mod legacy_brepfont_regularizer;
-#[path = "../legacy_stdprs_brep_font.rs"]
-pub mod legacy_stdprs_brep_font;
 #[path = "../legacy_sensitive_primitive_array.rs"]
 pub mod legacy_sensitive_primitive_array;
+#[path = "../legacy_stdprs_brep_font.rs"]
+pub mod legacy_stdprs_brep_font;
 #[path = "../plane_presentations.rs"]
 pub mod plane_presentations;
 #[path = "../prs3d_drawer_test.rs"]
@@ -143,6 +143,10 @@ pub mod selection_manager;
 pub mod selection_ranking;
 #[path = "../sensitive_entity_set.rs"]
 pub mod sensitive_entity_set;
+#[path = "../std_select_dump.rs"]
+pub mod std_select_dump;
+#[path = "../std_select_filters.rs"]
+pub mod std_select_filters;
 #[path = "../stdprs_curve.rs"]
 pub mod stdprs_curve;
 #[path = "../stdprs_deflection.rs"]

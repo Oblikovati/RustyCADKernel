@@ -381,3 +381,46 @@ fn sensitive_matches_propagates_distance_failure_after_successful_overlap() {
         "Standard_ProgramError"
     );
 }
+
+#[test]
+fn protected_set_members_bind_and_traverse_the_elements() {
+    use rustycad_tkmath::bvh::BvhSet;
+    use rustycad_tkv3d::select3d::{
+        Select3DSensitiveEntityMembers, Select3DTypeOfSensitivity, select3d_set_clear,
+        select3d_set_process_elements,
+    };
+    let points: Vec<Point3> = (0..5).map(|i| Point3::new(f64::from(i), 0.0, 0.0)).collect();
+    let poly = Select3DSensitivePoly::new(&owner(), &points, true).unwrap();
+    let (size, depth) = poly.set_base().with_primitive_set(&poly, |content| {
+        let tree = content.get_bvh().unwrap();
+        (content.size(), tree.read().depth())
+    });
+    assert_eq!((size, depth), (4, 0));
+    assert!(!poly.set_base().is_dirty());
+    // Elements 1..=2 are the segments [1, 2] and [2, 3]: only the first one touches x <= 1.5.
+    let mut pick = SelectBasicsPickResult::default();
+    let mut matches = 0;
+    let found = select3d_set_process_elements(
+        &poly, &volume(0.5, 1.5), 1, 2, false, false, &mut pick, &mut matches,
+    )
+    .unwrap();
+    assert!(found);
+    assert_eq!(matches, 1);
+    select3d_set_clear(&poly);
+    assert!(!poly.owner_id().is_null());
+    let trg = Triangulation::with_sizes(3, 1, false, false).unwrap();
+    for (index, (x, y)) in [(0.0, 0.0), (1.0, 0.0), (0.0, 1.0)].into_iter().enumerate() {
+        trg.set_node(index as i32 + 1, Point3::new(x, y, 0.0)).unwrap();
+    }
+    trg.set_triangle(1, Triangle::new(1, 2, 3)).unwrap();
+    let trg = Handle::new(trg);
+    let sens =
+        Select3DSensitiveTriangulation::new(&owner(), &trg, &Location::default(), false).unwrap();
+    assert_eq!(sens.primitives_nb(), 3);
+    assert_eq!(sens.sens_type(), Select3DTypeOfSensitivity::Boundary);
+    assert_eq!(sens.free_edges().get().map(|edges| edges.array1().length()), Some(6));
+    assert_eq!(sens.cdg_3d().x(), 1.0 / 3.0);
+    sens.compute_bounding_box();
+    assert_eq!(sens.bnd_box().corner_max().x(), 1.0);
+    assert_eq!(sens.apply_transformation().corner_max().y(), 1.0);
+}

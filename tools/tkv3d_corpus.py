@@ -60,5 +60,6 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     __import__('tkv3d_corpus_bvh_thread_pool').append_bvh_thread_pool_requests(requests)
     __import__('tkv3d_corpus_brep_font').append_brep_font_requests(requests)
     __import__('tkv3d_corpus_dsg_prs').append_dsg_prs_requests(requests)
+    __import__('tkv3d_corpus_std_select_filters').append_std_select_filter_requests(requests)
     __import__('tkv3d_corpus_viewer_selector_state').append_viewer_selector_state_requests(requests)
     __import__('tkv3d_corpus_selection_manager').append_selection_manager_requests(requests)

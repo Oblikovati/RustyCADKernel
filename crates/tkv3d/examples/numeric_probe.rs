@@ -22,6 +22,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_brepfont_text", v3_probe::brep_font::text_case),
     // DsgPrs presentations (v3_probe/dsg_prs.rs)
     ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
+    // StdSelect owner filters (v3_probe/std_select_filters.rs)
+    (
+        "v3_stdsel_filter",
+        v3_probe::std_select_filters::filter_case,
+    ),
     (
         "v3_ais_rubber_band",
         v3_probe::ais_rubber_band::rubber_band_case,

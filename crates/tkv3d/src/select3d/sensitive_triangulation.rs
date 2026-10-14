@@ -141,3 +141,32 @@ impl Select3DSensitiveTriangulation {
         )
     }
 }
+
+/// The protected fields of `Select3D_SensitiveTriangulation`, read only.
+impl Select3DSensitiveTriangulation {
+    /// `myFreeEdges`: the free edge node pairs of a boundary, null for an interior.
+    /// Example: `sens.free_edges()`.
+    pub fn free_edges(&self) -> Handle<HArray1<i32>> {
+        self.state.read().free_edges.clone()
+    }
+    /// `myPrimitivesNb`: the triangles (interior) or free edges (boundary); `sens.primitives_nb()`.
+    pub fn primitives_nb(&self) -> i32 {
+        self.state.read().primitives_nb
+    }
+    /// `myBVHPrimIndexes`: the primitive of every BVH index; `sens.bvh_prim_indexes()`.
+    pub fn bvh_prim_indexes(&self) -> Option<Vec<i32>> {
+        self.state.read().bvh_prim_indexes.clone()
+    }
+    /// `myBndBox`: the cached box at the initial location; `sens.bnd_box()`.
+    pub fn bnd_box(&self) -> Select3DBndBox3d {
+        self.state.read().bnd_box
+    }
+    /// `myCDG3D`: the center of the triangles; `sens.cdg_3d()`.
+    pub fn cdg_3d(&self) -> Point3 {
+        self.cdg3d
+    }
+    /// `mySensType`: interior or boundary; `sens.sens_type()`.
+    pub fn sens_type(&self) -> Select3DTypeOfSensitivity {
+        self.sens_type
+    }
+}
