@@ -1,0 +1,80 @@
+{
+  "revision": "58958b5d111f068f8ac45ae85134ec787f575981",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "jobs": 2,
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region::directed_context_tests::",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05523650800023461,
+      "source_unchanged": true
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::context_tests::",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.24121142399962991,
+      "source_unchanged": true
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "prism_copy_lineage_owned_bytes_replay_across_processes_and_threads",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6421458730001177,
+      "source_unchanged": true
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9337868399998115,
+      "source_unchanged": true
+    }
+  ]
+}

@@ -86,12 +86,7 @@ pub(crate) struct PrismNativeImage {
     pub role: PrismImageRole,
     pub returned: ArrangementRelation,
 }
-#[derive(Clone)]
-pub(crate) struct PrismBodyContext {
-    pub occurrence: Shape,
-    pub ancestors: Vec<Shape>,
-    pub child_slots: Vec<usize>,
-}
+pub(crate) use crate::sketch_region::RegionDirectedContext as PrismBodyContext;
 pub(crate) struct PrismImageBinding {
     pub native: PrismNativeImage,
     pub context: PrismBodyContext,

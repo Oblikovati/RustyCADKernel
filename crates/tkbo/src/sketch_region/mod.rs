@@ -54,3 +54,10 @@ mod partition_source_vertices;
 
 #[cfg(test)]
 pub(crate) use isolation_tests::add_polygon as arrangement_polygon_fixture;
+
+mod directed_contexts;
+pub(crate) use directed_contexts::{
+    RegionContextFailure, RegionDirectedContext, strict_region_contexts,
+};
+#[cfg(test)]
+mod directed_context_tests;
