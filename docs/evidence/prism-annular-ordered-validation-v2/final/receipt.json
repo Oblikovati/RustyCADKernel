@@ -1,0 +1,306 @@
+{
+  "source": "bcdbb7934c1b4fc06fafd9b11d669ef2c1e80d7e",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "toolchain": "1.99.0",
+  "commands": [
+    {
+      "name": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "--test-threads=2"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "tests.log.gz",
+        "sha256": "5bf8e16e946bb993bec157248d510b8078ccc6c34a6bf22689a834174f8303db"
+      },
+      "tests": {
+        "passed": 2121,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "doctests.log.gz",
+        "sha256": "c4051ea4d05eb8dd8e93daf8dee33cbe7b1958e09d0cb22591c6cc9fe5c1e176"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "clippy.log.gz",
+        "sha256": "480b2c6f8b611227210ff7135091701e8630d192d944544873bbb23c07397ee0"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    },
+    {
+      "name": "docs",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "doc",
+        "--no-deps",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "docs.log.gz",
+        "sha256": "ce29ec42589f1f2ea2af98da53798300455b6afe92694b88d3ea706b730b2e56"
+      }
+    },
+    {
+      "name": "ordered-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::ordered_validation::replay_tests::ordered_validation_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "ordered-1.log.gz",
+        "sha256": "06c98eba1cff86b4213d560166bd5081ff73694e3895a8afbb12df7d587e30e2"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "ordered-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::ordered_validation::replay_tests::ordered_validation_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "ordered-2.log.gz",
+        "sha256": "06c98eba1cff86b4213d560166bd5081ff73694e3895a8afbb12df7d587e30e2"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "annular-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::annular_join::replay_tests::annular_frozen_join_owned_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "annular-1.log.gz",
+        "sha256": "4c823dea81791806f2f3640e91c3fe82e70554c7c9a832d160f04111102dc951"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "annular-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::annular_join::replay_tests::annular_frozen_join_owned_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "annular-2.log.gz",
+        "sha256": "c51368e78f938c761d400a0371dc180e1e608ed829b4d34819e55aa53e24891a"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "publication-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::replay_tests::publication_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "publication-1.log.gz",
+        "sha256": "e810ee1c5a4305d8433f3e243919a1fae0d98e1836768b774e3a0f1bded88cc6"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "publication-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::replay_tests::publication_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "publication-2.log.gz",
+        "sha256": "fb8772701368cc0286a8efdbaf739e5ef47cb892c5275d181f7743d2aae7e8bc"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "annular-ordered-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::ordered_validation::annular::replay_tests::ordered_annular_replay_probe",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "annular-ordered-1.log.gz",
+        "sha256": "4ade4826f5ce882a9de474188a4f5993fb2aca2ef4765462e08f997a74ffd59e"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "annular-ordered-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::ordered_validation::annular::replay_tests::ordered_annular_replay_probe",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "annular-ordered-2.log.gz",
+        "sha256": "eaf729daeb7d45ab273c2b566921826afa7d9baab9ebd8bc40dde87877265699"
+      },
+      "tests": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    }
+  ],
+  "source_unchanged": true,
+  "source_count": 16397,
+  "replays": [
+    {
+      "name": "ordered",
+      "bytes": 1394630,
+      "sha256": "af47d670e1d33f0a7cac93d73c92e490e7e5dc28909d2a6a5b78e3dceac9c21f",
+      "processes": 2,
+      "previous_baseline": true
+    },
+    {
+      "name": "annular",
+      "bytes": 536690,
+      "sha256": "7daf5bf9b081a784b1225dd2bc1989d0b1a5f131e44d378abeb898c849cdd1b1",
+      "processes": 2,
+      "previous_baseline": true
+    },
+    {
+      "name": "publication",
+      "bytes": 2202990,
+      "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107",
+      "processes": 2,
+      "previous_baseline": true
+    },
+    {
+      "name": "annular-ordered",
+      "bytes": 4264018,
+      "sha256": "3f7b2e91a49fd3288d80863358226db8d39c1fc52c4d4727ff51d647957407b9",
+      "processes": 2,
+      "previous_baseline": false
+    }
+  ],
+  "limitations": [
+    "No publication, complete history or release acceptance",
+    "No ThreadSanitizer suite executed; retained host startup limitation remains incomplete"
+  ]
+}
