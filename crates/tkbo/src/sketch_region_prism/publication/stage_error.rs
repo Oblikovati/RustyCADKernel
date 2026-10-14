@@ -22,7 +22,7 @@ pub(super) enum PublicationStageCause {
         proof: &'static str,
     },
     Callback {
-        stop: PublicationCallbackStop,
+        stop: Box<PublicationCallbackStop>,
         downstream: Option<Box<PublicationStageCause>>,
     },
 }
@@ -53,7 +53,10 @@ pub(super) fn finish_child<T>(
     Err(PublicationStageFailure {
         phase,
         class,
-        cause: PublicationStageCause::Callback { stop, downstream },
+        cause: PublicationStageCause::Callback {
+            stop: Box::new(stop),
+            downstream,
+        },
     })
 }
 impl From<Box<OrderedPrismValidationFailure>> for PublicationStageFailure {
