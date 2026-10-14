@@ -1,0 +1,134 @@
+{
+  "source_revision": "e4aa52d6261821ccda273237d816956915330cc9",
+  "candidate_revision": "ff0631ecebcb1626756a62062235c590f9877535",
+  "date": "2026-10-14",
+  "toolchain": "Rust 1.99.0",
+  "platform": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+  "checks": [
+    {
+      "driver": "amd",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "exit_code": 0,
+      "log": "integrated-vulkan-amd.log.gz",
+      "sha256": "a35d7e93d5bb3dc51fb47c391761f9e0eeaf1c65224c316902952f89125e1172",
+      "tests": {
+        "passed": 764,
+        "failed": 0,
+        "ignored": 5
+      },
+      "ignored_cases": [
+        "test ais_textured_shape_native_replay::textured_full_native_matrix_preserves_all_unresolved_diagnostics ... ignored, Full strict matrix retains exact-color rounding and software line-coverage diagnostics",
+        "test fixed_lighting_replay::complete_fixed_lighting_strict_native_diagnostic ... ignored, retains native AMD one-byte and rotated-depth strict diagnostics; no gate relaxation",
+        "test fixed_lighting_replay::fixed_cap_point_source_preserves_homogeneous_lighting ... ignored, GL2.1 lighting is undefined for eye-space w=0 section vertices; retain configured-driver diagnostic",
+        "test oit_transparency::sprite_mask_strict_native_buffers_retain_the_coverage_diagnostic ... ignored, configured native sprite coverage differs by one row; strict raw diagnostic stays unchanged",
+        "test triangle_edge_replay::full_textured_cap_edge_strict_native_diagnostic ... ignored, Strict native raster/offset diagnostics remain partial; run explicitly on each profile"
+      ]
+    },
+    {
+      "driver": "lavapipe",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "exit_code": 0,
+      "log": "integrated-vulkan-lavapipe.log.gz",
+      "sha256": "ed6742d68c2d186d0fb11941519ad22d4511523366b76b52240becdb3b64c7cf",
+      "tests": {
+        "passed": 764,
+        "failed": 0,
+        "ignored": 5
+      },
+      "ignored_cases": [
+        "test ais_textured_shape_native_replay::textured_full_native_matrix_preserves_all_unresolved_diagnostics ... ignored, Full strict matrix retains exact-color rounding and software line-coverage diagnostics",
+        "test fixed_lighting_replay::complete_fixed_lighting_strict_native_diagnostic ... ignored, retains native AMD one-byte and rotated-depth strict diagnostics; no gate relaxation",
+        "test fixed_lighting_replay::fixed_cap_point_source_preserves_homogeneous_lighting ... ignored, GL2.1 lighting is undefined for eye-space w=0 section vertices; retain configured-driver diagnostic",
+        "test oit_transparency::sprite_mask_strict_native_buffers_retain_the_coverage_diagnostic ... ignored, configured native sprite coverage differs by one row; strict raw diagnostic stays unchanged",
+        "test triangle_edge_replay::full_textured_cap_edge_strict_native_diagnostic ... ignored, Strict native raster/offset diagnostics remain partial; run explicitly on each profile"
+      ]
+    },
+    {
+      "command": "cargo +1.99.0 clippy -p rustycad-tkservice -p rustycad-tkv3d -p martensite-vulkan --all-targets --all-features --locked -- -D warnings",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "exit_code": 0,
+      "log": "integrated-clippy.log.gz",
+      "sha256": "6d89b120abe4773098922d15f36939d05a8f3d3f8bf5eb9eeca20bde1b67d3e1"
+    },
+    {
+      "command": "cargo +1.99.0 test -p martensite-vulkan --doc --all-features --locked",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "exit_code": 0,
+      "log": "integrated-docs.log.gz",
+      "sha256": "0805dfbbaf0a0c0d5cdad3b7db07c11832b404aad4882858fd735b2b3fefa06d"
+    },
+    {
+      "command": "cargo +1.99.0 fmt --all -- --check",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin"
+      },
+      "exit_code": 0,
+      "log": "integrated-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  ],
+  "source_bookends": {
+    "files": 15557,
+    "unchanged": true,
+    "manifest": "integrated-source-bookends.json.gz",
+    "sha256": "01023e98ee459a7ee6739261a1697f71f739805bea9ca09751c8a11ee0b458c9"
+  },
+  "candidate_sources": {
+    "all_implementation_and_owned_fixtures_match": true,
+    "registration_only_difference": "diff --git a/crates/vulkan/src/lib.rs b/crates/vulkan/src/lib.rs\nindex 482571344..ccbffdca8 100644\n--- a/crates/vulkan/src/lib.rs\n+++ b/crates/vulkan/src/lib.rs\n@@ -48,6 +48,7 @@ mod view_gui_composition;\n mod view_gui_layer;\n mod view_scene;\n mod view_target;\n+mod view_window_lifecycle;\n pub use driver::Graphic3dRenderDriver;\n pub use driver_view::Graphic3dRenderView;\n \n",
+    "integrated_registration_sha256": "8df109d2855be8d50d337f014d93ba2555668219ce428c3cff4be9437f4f354b"
+  },
+  "scope": "Additive completed capture writer and behavior-preserving shared conversion extraction; fourteen new adapter tests and three unchanged owned fixture tests execute within each full Vulkan suite.",
+  "exclusions": [
+    "No full ToPixMap receiver/restore/tiling or API completeness credit.",
+    "Five existing Vulkan exclusions remain explicit; no test was weakened.",
+    "No new performance, extracted-package, application, full concurrency or ThreadSanitizer acceptance.",
+    "Native-window image artifacts belong to preceding4757e8b35 receipt; this receipt records full Vulkan test replay on its own source revision."
+  ]
+}
