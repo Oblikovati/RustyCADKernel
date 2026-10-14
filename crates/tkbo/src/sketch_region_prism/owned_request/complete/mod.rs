@@ -28,3 +28,6 @@ mod policy_tests;
 mod replay_tests;
 #[cfg(test)]
 mod runtime_tests;
+
+mod owned_projection_failure;
+pub(crate) use owned_projection_failure::*;

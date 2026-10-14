@@ -162,3 +162,12 @@ path to V2; diagnostic V1 replay remains selectable until the recorded gate.
   intermediate Kernel#10 work, not acceptance of a complete public one-call
   failure API. The existing operation-contract owner and ADR0014 application R3
   migration/deletion obligation remain; no workspace version changes here.
+
+### Private owned projection-refusal evidence (ADR0056)
+
+The single-boundary scoped operation can move its actual post-publication
+projection refusal into an immutable owned diagnostic. Exact caller input,
+accepted child publication context, original typed cause and outer callback are
+retained with explicit class provenance. Earlier producer behavior and replay
+remain unchanged. Other scoped refusal families still block a public complete
+owned-result contract; RustyCADKernel#10 owns that migration and deletion gate.
