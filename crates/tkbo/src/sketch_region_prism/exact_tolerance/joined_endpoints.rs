@@ -12,19 +12,37 @@ pub(super) fn certify_body_endpoints(
     work: &mut ConformanceWork,
     progress: &mut impl JoinedConformanceProgress,
 ) -> ConformanceCheck {
-    for &(edge, first, last) in &join.projection().incidence().endpoints {
-        let curve = endpoint_curve(join.projection(), edge)?;
+    certify_projection_endpoints(
+        join.projection(),
+        join.raw_vertices(),
+        (6, 12),
+        work,
+        progress,
+    )
+}
+
+// Concrete sealed joins supply their admitted census; this helper issues no join authority.
+pub(super) fn certify_projection_endpoints(
+    projection: &FrozenPrismProjection,
+    raw: &[proof_join::JoinedVertexOperand],
+    expected: (usize, usize),
+    work: &mut ConformanceWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> ConformanceCheck {
+    for &(edge, first, last) in &projection.incidence().endpoints {
+        let curve = endpoint_curve(projection, edge)?;
         for endpoint in obligations(edge, first, last, curve.interval) {
-            append_endpoint(join, endpoint, curve, work, progress)?;
+            append_endpoint(projection, raw, endpoint, curve, work, progress)?;
         }
     }
     count(
         "complete canonical endpoint proofs",
         work.evidence.endpoints.len(),
-        6,
+        expected.0,
     )?;
-    complete_raw_contexts(join, work)
+    complete_raw_contexts(raw, expected.1, work)
 }
+
 fn obligations(
     edge: FrozenPrismKey,
     first: FrozenPrismKey,
@@ -44,7 +62,8 @@ fn obligations(
 }
 
 fn append_endpoint(
-    join: &JoinedPrismProof,
+    projection: &FrozenPrismProjection,
+    raw: &[proof_join::JoinedVertexOperand],
     endpoint: EndpointObligation,
     curve: &CapturedSpaceRepresentation,
     work: &mut ConformanceWork,
@@ -53,7 +72,7 @@ fn append_endpoint(
     work.entity = Some(endpoint.edge);
     work.occurrence = None;
     work.poll(progress)?;
-    let uses = endpoint_uses(join.projection(), join.raw_vertices(), endpoint, work)?;
+    let uses = endpoint_uses(projection, raw, endpoint, work)?;
     work.evidence
         .endpoints
         .push(endpoint_evidence(endpoint, curve, &uses)?);
@@ -107,20 +126,24 @@ fn endpoint_curve(
         .ok_or(missing("captured canonical edge curve"))
 }
 
-fn complete_raw_contexts(join: &JoinedPrismProof, work: &ConformanceWork) -> ConformanceCheck {
-    let expected: BTreeSet<_> = join
-        .raw_vertices()
-        .iter()
-        .map(|row| row.occurrence.clone())
-        .collect();
-    count("unique directed joined raw vertices", expected.len(), 12)?;
+fn complete_raw_contexts(
+    raw: &[proof_join::JoinedVertexOperand],
+    total: usize,
+    work: &ConformanceWork,
+) -> ConformanceCheck {
+    let expected: BTreeSet<_> = raw.iter().map(|row| row.occurrence.clone()).collect();
+    count("unique directed joined raw vertices", expected.len(), total)?;
     let actual: Vec<_> = work
         .evidence
         .endpoints
         .iter()
         .flat_map(|row| row.contexts.iter().cloned())
         .collect();
-    count("all directed raw endpoint proof contexts", actual.len(), 12)?;
+    count(
+        "all directed raw endpoint proof contexts",
+        actual.len(),
+        total,
+    )?;
     same_context_set(actual.into_iter().collect(), expected)
 }
 fn same_context_set(

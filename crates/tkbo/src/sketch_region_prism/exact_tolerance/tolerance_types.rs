@@ -59,14 +59,19 @@ pub(crate) enum JoinedToleranceCause {
 impl JoinedToleranceFailure {
     /// Preserve refusal versus missing evidence; example: `failure.classification()`.
     pub(crate) fn classification(&self) -> JoinedEvidenceClass {
-        match self.cause {
-            JoinedToleranceCause::Cancelled => JoinedEvidenceClass::Cancelled,
-            JoinedToleranceCause::RefusedCap { .. }
-            | JoinedToleranceCause::MetadataScalar { .. } => JoinedEvidenceClass::Failed,
-            _ => JoinedEvidenceClass::Incomplete,
-        }
+        classify_tolerance_cause(&self.cause)
     }
 }
+pub(super) fn classify_tolerance_cause(cause: &JoinedToleranceCause) -> JoinedEvidenceClass {
+    match cause {
+        JoinedToleranceCause::Cancelled => JoinedEvidenceClass::Cancelled,
+        JoinedToleranceCause::RefusedCap { .. } | JoinedToleranceCause::MetadataScalar { .. } => {
+            JoinedEvidenceClass::Failed
+        }
+        _ => JoinedEvidenceClass::Incomplete,
+    }
+}
+
 impl JoinedPrismTolerance {
     /// Match every joined operand; example: `proof.binds(join)`.
     pub(crate) fn binds(&self, join: &JoinedPrismProof) -> bool {
