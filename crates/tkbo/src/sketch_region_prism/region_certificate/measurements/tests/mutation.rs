@@ -148,7 +148,7 @@ fn success_failure_and_cancellation_leave_supplied_original_and_copy_unchanged()
     measured(&bridge, &shapes, &receipt);
 }
 
-fn assert_target_failure(target: usize, failure: PrismMeasureFailure) {
+pub(super) fn assert_target_failure(target: usize, failure: PrismMeasureFailure) {
     if target == 2 {
         assert!(matches!(
             failure,
