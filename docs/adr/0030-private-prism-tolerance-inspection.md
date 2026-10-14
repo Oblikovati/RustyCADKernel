@@ -39,6 +39,53 @@ incomplete. A zero chart identity is evidence about those coefficients, not a
 blanket statement about the body. Missing incidence coverage prevents any
 complete residual aggregate. Keep original typed causes and affected entities.
 
+## Implemented private evidence contract
+
+`inspect_prism_tolerances` captures a fresh shared `CurrentPrismBinding`, a complete
+actual ancestry/history census, raw/effective observations, and one scalar query
+per canonical physical endpoint. The authored operation has 26 directed contexts,
+8 physical metadata entities, 6 directed trims and 6 endpoint queries retaining
+all 12 directed vertex uses. Endpoint identity comes from actual topology,
+placement and relative orientation, never from coordinates or returned rank.
+
+The endpoint report retains the requested and effective spatial limits, fixed
+root policy, completed bisections and the original `Within`, `Exceeds` or typed
+incomplete cause. A `Within` squared upper bound can equal the requested squared
+limit; it is a certified bound, not an attained maximum. Exact zero fixtures use
+an explicit zero request. Six trim bounds follow by composing the freshly proved
+zero source-construction residual with exact chart/trim identities and complete
+incidence coverage. No new surface evaluator or sampling path is introduced.
+
+A captured inspection can contain reported or refused metadata and exceeded or
+incomplete residuals. It collects diagnostics; it admits no body and supplies no
+completed aggregate tolerance certificate. The placement-semantics gap remains
+explicit in every inspection. Earlier receipt behavior remains unchanged.
+
+Cancellation checkpoints surround bounded scalar arithmetic. After the last
+callback, existing source/chart binding is replayed and the local census,
+endpoint point/parameter/curve operands, and raw/effective metadata bits are
+recaptured and compared without callbacks. Errors retain operation, phase,
+entity/context and their original typed cause. Large causes are boxed intact.
+
+## Fixture attribution and replay limits
+
+The retained last-cap vertex shares stored topology with the PrismCopy closure
+vertex. Moving it by `1/8` triggers the existing exact source-closure refusal
+before endpoint inspection, even if the separate endpoint budget is `1/8`.
+The regression retains that earlier typed refusal. Independent threshold tests
+apply a `1/8` displacement to owned endpoint operands: budgets `0` and `0.1`
+exceed, while `0.125` proves the squared bound `1/64`. These changed operands do
+not produce a source-bound body inspection. Rotation/scale/translation tests
+also exercise owned world operands; they do not settle metadata transport.
+
+The shared helper extraction preserves frozen projection V1's 35 existing tests
+and its 89,921-byte replay (SHA256
+`88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4`).
+The inspector's process replay covers arithmetic receipts, limits, metadata,
+incidence counts, endpoint points and proof results. It deliberately excludes
+process-local topology addresses and is not a full body serialization or a
+thread-safety certification.
+
 ## Remaining tolerance semantics
 
 This decision imposes no inferred vertex/edge/face tolerance hierarchy. Raw

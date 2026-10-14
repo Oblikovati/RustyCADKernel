@@ -109,7 +109,7 @@ pub(super) fn require_directed(actual: Orientation) -> CensusCheck<()> {
     })
 }
 
-pub(super) fn physical_edge<'a>(
+pub(super) fn physical_occurrence<'a>(
     contexts: &'a [PrismBodyContext],
     key: &PartitionOccurrenceIdentity,
 ) -> CensusCheck<&'a Shape> {
@@ -117,7 +117,7 @@ pub(super) fn physical_edge<'a>(
         key.same_physical(&PartitionOccurrenceIdentity::capture(&context.occurrence))
     });
     count(
-        "current physical edge occurrence",
+        "current physical occurrence",
         usize::from(found.is_some()),
         1,
     )?;

@@ -20,3 +20,23 @@ mod policy_tests;
 mod trim_census;
 
 pub(super) use policy::*;
+
+mod inspect;
+mod inspection_types;
+mod metadata;
+mod rebind;
+mod residuals;
+pub(crate) use inspect::inspect_prism_tolerances;
+pub(crate) use inspection_types::*;
+#[cfg(test)]
+mod displacement_tests;
+#[cfg(test)]
+mod inspection_fixture;
+#[cfg(test)]
+mod inspection_tests;
+#[cfg(test)]
+mod metric_operand_tests;
+#[cfg(test)]
+mod progress_tests;
+#[cfg(test)]
+mod replay_tests;

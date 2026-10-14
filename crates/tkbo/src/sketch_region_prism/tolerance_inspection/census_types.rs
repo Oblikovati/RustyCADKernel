@@ -12,12 +12,14 @@ pub(crate) struct ToleranceUseContext {
     pub members: Vec<PartitionOccurrenceIdentity>,
 }
 
+#[derive(PartialEq, Eq)]
 pub(crate) struct ToleranceEntityCensus {
     pub entity: PartitionOccurrenceIdentity,
     pub kind: ShapeEnum,
     pub contexts: Vec<ToleranceUseContext>,
 }
 
+#[derive(PartialEq, Eq)]
 pub(crate) struct ToleranceTrimCensus {
     pub face: PartitionOccurrenceIdentity,
     pub edge: PartitionOccurrenceIdentity,
@@ -44,6 +46,7 @@ pub(crate) struct ToleranceEndpointCensus {
     pub contexts: Vec<ToleranceUseContext>,
 }
 
+#[derive(PartialEq, Eq)]
 pub(crate) struct ToleranceUseHistory {
     pub context: ToleranceUseContext,
     pub preserved: Vec<OriginalMemberIdentity>,
@@ -57,8 +60,8 @@ pub(crate) struct ToleranceCensusFailure {
 }
 
 pub(crate) enum ToleranceCensusCause {
-    Native(Failure),
-    Body(PrismCause),
+    Native(Box<Failure>),
+    Body(Box<PrismCause>),
     Count {
         quantity: &'static str,
         actual: usize,
@@ -81,7 +84,7 @@ impl From<Failure> for ToleranceCensusFailure {
     fn from(cause: Failure) -> Self {
         Self {
             context: None,
-            cause: ToleranceCensusCause::Native(cause),
+            cause: ToleranceCensusCause::Native(Box::new(cause)),
         }
     }
 }
@@ -90,7 +93,7 @@ impl From<PrismCause> for ToleranceCensusFailure {
     fn from(cause: PrismCause) -> Self {
         Self {
             context: None,
-            cause: ToleranceCensusCause::Body(cause),
+            cause: ToleranceCensusCause::Body(Box::new(cause)),
         }
     }
 }

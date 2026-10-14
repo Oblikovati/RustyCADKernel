@@ -31,7 +31,7 @@ fn append_edge_endpoints(
     binding: &CurrentPrismBinding,
     endpoints: &mut Vec<ToleranceEndpointCensus>,
 ) -> CensusCheck<()> {
-    let actual = physical_edge(contexts, &entity.entity)?;
+    let actual = physical_occurrence(contexts, &entity.entity)?;
     require_directed(actual.orientation())?;
     let edge = Edge::unchecked(actual.oriented(Orientation::Forward));
     let space = bound_space(binding, &entity.entity)?;
