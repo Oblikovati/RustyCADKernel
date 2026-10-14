@@ -10,7 +10,8 @@ pub(super) fn equal_float_bits<'a>(
 ) -> bool {
     first.map(|v| v.to_bits()).eq(second.map(|v| v.to_bits()))
 }
-pub(super) fn same_metric_curve<const DIM: usize>(
+/// Compare complete stored coefficient bits; `same_metric_curve(&first, &second)`.
+pub(crate) fn same_metric_curve<const DIM: usize>(
     first: &CapturedMetricCurve<DIM>,
     second: &CapturedMetricCurve<DIM>,
 ) -> bool {
@@ -50,7 +51,8 @@ fn same_bezier_coefficients<const DIM: usize>(
         && equal_float_bits(b.iter().flatten(), d.iter().flatten())
 }
 
-pub(super) fn same_embedding<const DIM: usize>(
+/// Compare separate affine coefficient bits without rounded composition; `same_embedding(&a, &b)`.
+pub(crate) fn same_embedding<const DIM: usize>(
     a: &MetricEmbedding<DIM>,
     b: &MetricEmbedding<DIM>,
 ) -> bool {

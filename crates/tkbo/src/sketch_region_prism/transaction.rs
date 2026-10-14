@@ -22,6 +22,7 @@ pub(crate) fn retain_selected_prism(
 }
 fn initial_receipt(batch: &CandidateBatch, requested: PrismRequest) -> PrismReceipt {
     PrismReceipt {
+        region: None,
         affine_chart: None,
         completion: PrismCompletion::Incomplete,
         phase: PrismPhase::Admission,

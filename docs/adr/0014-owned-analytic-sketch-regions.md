@@ -46,8 +46,7 @@ named solid whose references survive the consuming edit and round-trip.
 Issue #10 is also the deletion task for the application's diagnostic-only
 construction boundary. Replace it within the same application R3 milestone
 after the full corpus and a tested owner release pass, followed by application
-parameter edits, save/reopen, undo/redo and presentation acceptance. Native
-OCCT remains a removable oracle. This decision supplies no production OCCT or
+parameter edits, save/reopen, undo/redo and presentation acceptance. Earlier native OCCT captures remain historical replay evidence only. This decision supplies no production OCCT or
 Go fallback and does not authorize publication.
 
 At kernel `fd992c41f`, `tests/exact_region_prism.rs` is diagnostic only. Its
@@ -81,7 +80,9 @@ Every face/trim keeps the existing source and output occurrence keys and all
 original parents. Current body containment must agree with retained history;
 missing, additional or reparented faces cannot inherit old proofs. Scalar
 observations describe the captured revision, not later mutable geometry.
-Compatibility occurrence wrappers remain private and thread-confined.
+Occurrence keys contain immutable Location values and operation-local topology
+addresses. The enclosing receipt still owns mutable Shape aliases; these scalar
+inspections are not immutable body publication.
 
 This is coefficient correspondence, not a side-surface regularity theorem or
 publication gate. Region/source correspondence, domain injectivity and complete
@@ -92,3 +93,77 @@ Existing behavior remains available; this additive diagnostic version introduces
 no new release or migration gate. Issue #10 retains its existing deletion task
 and full-operation corpus requirement. See the immutable
 [surface chart evidence](../evidence/prism-surface-charts/README.md).
+
+## Source-bound Jordan candidate certificates, version 1
+
+The opt-in private `retain_source_bound_prism` entry borrows the completed
+contact/copy receipts and current original sources. An explicitly temporary
+candidate view enters the existing winding, deep-copy, sweep and history
+transaction. The original outcomes, statuses and histories remain intact;
+cloned compatibility handles supply metadata and do not establish isolation.
+The prior batch-only entry remains selectable for replay.
+
+Version 1 discharges only `Construction`, `SharedIncidenceReuse`,
+`CandidateHistoryCoverage` and `SearchCompleteness`, together, when all of the
+following current hypotheses hold:
+
+- One full native `[0,1]` standard-evaluator Bézier boundary has exact zero
+  original/plane/copied/basis residuals. Polynomial and positive-weight rational
+  representations use the same path. Current source identities, coefficients,
+  ranges and placements must still match the original captures. Alternate 3D
+  and pcurve evaluators cannot be certified from their unchanged stored poles.
+- The existing complete source-bound self-contact provider covers its full
+  off-diagonal domain and reports exactly the joint endpoint pair `(0,1)`.
+  Missing search, failed work or any additional contact leaves this entry
+  incomplete. Continuity and absence of all other coincidences give a Jordan
+  boundary; no new classifier or shape-recognition branch is introduced.
+- Actual generation contains exactly two directed face domains for that
+  boundary, each one wire and one edge with two opposite occurrences of the
+  same physical endpoint. Both faces, every descendant and all parent and copy
+  dispositions must agree with the retained generated contexts. The existing
+  exact winding query selects `+1`; the complementary traversal has `-1`.
+  Traversal, selected winding and both captured face identities are retained.
+  Candidate order supplies no identity.
+- Fresh source-domain, partition-span, image, generated-parent and candidate
+  history inspections agree. Existing contact transport observations are
+  rebound through actual copy links. Multiple native history queries may reach
+  the same directed context: query multiplicity is checked against a fresh
+  execution of the existing observer, while the distinct directed context set
+  contains exactly four endpoint occurrences across the two faces.
+- The actual isolated copy matches both current candidate coefficients and its
+  retained pre-sweep snapshot, with a bijection of composed parent relations.
+  The declared seed plane matches the actual support. The existing exact,
+  nonzero support/sweep Jacobian establishes a nondegenerate affine embedding.
+  Zero leaves this hypothesis incomplete; it does not invalidate every planar
+  region operation.
+
+The certificate is attached only after the existing transaction reaches its
+incomplete diagnostic result. Failed hypotheses, cancellation and retries keep
+all four gaps present; recertification first restores them. Mutated copied or
+source geometry cannot inherit a previous certificate. The private receipt
+retains operation-local occurrence keys; its enclosing PrismReceipt retains
+mutable Shape aliases. Captured
+scalar evidence describes its recorded revision and does not authorize a later
+mutated shape. Independent workers create their own compatibility geometry and
+exchange only portable scalar receipt bytes.
+
+This is a bounded progression toward the single representative operation. It
+still publishes no healthy body. `SelfIntersection`, `Tolerance`, combined prism
+injectivity/surface-chart coverage, ordered solid checks and achieved-error
+coverage remain explicit. Conditional integral APIs are a separate dependency;
+no area/volume or accepted-operation benchmark is claimed here. The existing
+issue #10 deletion task, R3 migration limit and full-operation corpus gate remain
+in force. Existing native fixtures are historical replay evidence only; none
+are regenerated and no OCCT process is used as an oracle.
+
+
+Review correction: descendant, directed query and composed-parent identities use
+one exact multiset comparison. A duplicate cannot replace an omitted identity.
+Fresh original, census, partition, both candidate-domain and deep-copy closure
+points are read from actual vertices. The existing exact contact residual engine
+certifies each distinct physical vertex once and retains every directed context.
+This bounded entry requires a zero residual at the exact closure singleton;
+nonzero and inconclusive results retain all four obligations. Stored point
+observations and admission status never substitute for this recapture. Spatial
+point conformance remains separate from native parameters, topology identity and
+the outstanding full tolerance/solid checks.

@@ -23,7 +23,7 @@ pub(crate) use binding::{
     bind_source_conformance, current_construction_correspondence, source_binding_faults,
 };
 pub(crate) use binding_types::{BoundSourceConformance, SourceBindingFault};
-pub(crate) use descriptor_bits::same_space_representation;
+pub(crate) use descriptor_bits::{same_embedding, same_metric_curve, same_space_representation};
 
 pub(crate) use snapshot_binding::binds_current_segment;
 

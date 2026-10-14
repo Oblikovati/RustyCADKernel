@@ -54,7 +54,7 @@ fn cap_source(
     }
     Ok(CapturedChartSource::Cap(sources.support.clone()))
 }
-pub(super) fn capture_bezier_edge(
+pub(in crate::sketch_region_prism) fn capture_bezier_edge(
     edge: &Edge,
 ) -> Result<crate::sketch_region_source_conformance::CapturedSpaceRepresentation, PrismSurfaceCause>
 {

@@ -6,7 +6,7 @@ use crate::sketch_region_source_conformance::{CapturedPlaneSupport, CapturedSpac
 use rustycad_tkmath::predicates::roots::metric_bounds::{
     CurveIdentityDecision, MetricEmbedding, ResidualError,
 };
-// Snapshot occurrence keys retain compatibility Location handles: thread-confined until publication is redesigned.
+// Snapshot keys use immutable Location values; topology addresses remain operation-local.
 pub(crate) type PrismChartSources = Result<CapturedPrismSources, std::sync::Arc<PrismSurfaceCause>>;
 pub(crate) struct CapturedPrismSources {
     pub face: PartitionOccurrenceIdentity,
@@ -21,7 +21,7 @@ pub(crate) struct CapturedSourceBoundary {
     pub endpoints: Vec<(PartitionOccurrenceIdentity, f64)>,
 }
 
-// Occurrence keys retain compatibility Location handles; this private inspection is thread-confined.
+// These scalar inspections do not own or publish the mutable Shape aliases in PrismReceipt.
 // Scalar captures/proofs have no geometry handles and do not authorize later mutated shapes.
 pub(crate) struct PrismSurfaceInspection {
     pub version: u32,

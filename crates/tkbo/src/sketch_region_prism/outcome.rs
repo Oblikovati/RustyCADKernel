@@ -135,6 +135,7 @@ pub(crate) struct PrismCopiedSelection {
     pub relations: Vec<ArrangementRelation>,
 }
 pub(crate) struct PrismReceipt {
+    pub region: Option<super::region_certificate::RegionCertificateInspection>,
     pub affine_chart: Option<super::affine_chart::PrismAffineChartObservation>,
     pub completion: PrismCompletion,
     pub phase: PrismPhase,
