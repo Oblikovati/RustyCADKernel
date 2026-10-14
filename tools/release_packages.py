@@ -8,7 +8,9 @@ Requires Python 3.12+, the pinned Rust toolchain, and native build prerequisites
 from __future__ import annotations
 
 import argparse
+from collections.abc import Callable
 from dataclasses import dataclass
+from functools import partial
 import gzip
 from pathlib import Path
 import tempfile
@@ -20,6 +22,7 @@ from release_inventory import (
     Commands,
     ReleaseCrate,
     SystemCommands,
+    clean_release_revision,
     release_inventory,
     release_revision,
 )
@@ -64,10 +67,27 @@ def test_profile(
 
 def build_release(root: Path, tag: str, commands: Commands) -> Path:
     """Produce tested assets only for a clean tagged revision; example: ``build_release(root, 'v0.1.0', runner)``."""
-    crates, revision, output = release_plan(root, tag, commands)
+    check_revision = partial(release_revision, tag=tag)
+    return build_verified_release(root, tag, commands, check_revision)
+
+
+def build_release_candidate(root: Path, tag: str, commands: Commands) -> Path:
+    """Verify untagged committed assets without creating a tag; e.g. ``build_release_candidate(root, 'v0.1.0', runner)``."""
+    # The pre-tag gate must test the identical package pipeline, not a lighter preview.
+    return build_verified_release(root, tag, commands, clean_release_revision)
+
+
+def build_verified_release(
+    root: Path,
+    tag: str,
+    commands: Commands,
+    check_revision: Callable[[Path, Commands], str],
+) -> Path:
+    """Share tagged and candidate gates; e.g. build_verified_release(root, tag, runner, clean_release_revision)."""
+    crates, revision, output = checked_release_plan(root, tag, commands, check_revision)
     prepare_release_packages(root, commands)
     verify_extracted_release(root, tag, revision, commands, crates)
-    checked_revision = release_revision(root, commands, tag)
+    checked_revision = check_revision(root, commands)
     if checked_revision != revision:
         raise ValueError(
             f"release revision={checked_revision!r}: expected unchanged {revision!r}"
@@ -79,11 +99,22 @@ def build_release(root: Path, tag: str, commands: Commands) -> Path:
 def release_plan(
     root: Path, tag: str, commands: Commands
 ) -> tuple[list[ReleaseCrate], str, Path]:
-    """Validate identity before creating receipts; e.g. release_plan(root, 'v0.2.3', runner)."""
+    """Validate tagged identity before receipts; e.g. release_plan(root, 'v0.2.3', runner)."""
+    check_revision = partial(release_revision, tag=tag)
+    return checked_release_plan(root, tag, commands, check_revision)
+
+
+def checked_release_plan(
+    root: Path,
+    tag: str,
+    commands: Commands,
+    check_revision: Callable[[Path, Commands], str],
+) -> tuple[list[ReleaseCrate], str, Path]:
+    """Bind version, source and fresh output; e.g. checked_release_plan(root, tag, runner, clean_release_revision)."""
     crates = release_inventory(root, commands)
     if tag != f"v{crates[0].version}":
         raise ValueError(f"release tag {tag!r}: expected v{crates[0].version}")
-    revision = release_revision(root, commands, tag)
+    revision = check_revision(root, commands)
     output = root / "target/releases" / tag
     if output.exists():
         raise ValueError(f"release output {str(output)!r}: expected a new directory")
@@ -94,6 +125,8 @@ def prepare_release_packages(root: Path, commands: Commands) -> None:
     """Keep existing discovery/package ordering; e.g. prepare_release_packages(root, runner)."""
     # Run 38315068263 exposed a regression module missing from generated test groups.
     commands.run(["python3", "tools/toolkit_test_suites.py"], root)
+    # Run 38497850980 found included test files that cargo fmt does not visit.
+    commands.run(["python3", "tools/check_rust_format.py"], root)
     # Cargo cannot resolve unpublished registry siblings. Verify the whole archive
     # set below instead; retain the owner lockfile as a separate release asset.
     commands.run(

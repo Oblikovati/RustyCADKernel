@@ -13,7 +13,8 @@ The private module temporarily permits unused production symbols until the
 independently owned metric consumer integrates this checked prerequisite.
 
 Executed locally on Linux: `cargo test -p rustycad-tkmath --all-features --lib`
-(40 passed, including existing world regressions and two convolution tests);
+(40 passed in the authoring tree:28 baseline/arithmetic tests and12 uncommitted
+pair prototypes; this is not standalone checkpoint proof);
 `cargo clippy -p rustycad-tkmath --all-targets --all-features -- -D warnings`
 (exit 0); `cargo fmt --all`. Compact debug-free profiles, incremental disabled,
 two build jobs. No public API credits, numerical policy changes, native fallback,

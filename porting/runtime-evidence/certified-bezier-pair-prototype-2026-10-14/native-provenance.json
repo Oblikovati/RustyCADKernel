@@ -1,0 +1,24 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "repeat_byte_equal": true,
+  "native_sha256": "e2d0cc3628187c824202047a072c4e58b095e4265ed6a1f7c1208ecd92ed98ec",
+  "commands": [
+    "target/certified-bezier-pairs/native-pairs",
+    "target/certified-bezier-pairs/native-pairs"
+  ],
+  "sha256": {
+    "tools/oracle/martensite_certified_bezier_pairs.cxx": "e6eb8e7e09b5deefd8a7ba9e26e4b3aa9d46ecfc91a45d1cfedb37482029e467",
+    "target/certified-bezier-pairs/native-pairs": "9b72f5f834809427fcb7f1446fd0653ed382c1938e2bc8d889bc9e4e7927985f",
+    "../RustyCADKernel/target/occt-all-full/include/opencascade/Geom2dAPI_InterCurveCurve.hxx": "ae9b26434dd5f9db0fdf9d68edc39a2ed298a09107d6f6d92267741986b3857e",
+    "../RustyCADKernel/target/occt-all-full/include/opencascade/Geom2d_BezierCurve.hxx": "30a83dbecd41ccd082ddbb9186aaf72b552c7034e3cb9062ae932b5bf3c5dc20",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomAlgo.so": "2e48df1c0073752ef3101428161e41d0a3a78067754a51acf7dbd60f703d9c8e",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomBase.so": "bb5616b53df21edbc3e012d6b704e2e8d8cab670c89b362c97b2434589071a37",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKG2d.so": "ddc380d9d38a66583112995c8455d2f0cc6fd8b8971a1abef38c2d7b05d02611",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "scope": "ordinary numerical fixture, not product-domain certificate or C++ credit",
+  "compile_command": "g++ -std=c++17 -O2 -I../RustyCADKernel/target/occt-all-full/include/opencascade tools/oracle/martensite_certified_bezier_pairs.cxx -L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKGeomAlgo -lTKGeomBase -lTKG2d -lTKMath -lTKernel -o target/certified-bezier-pairs/native-pairs",
+  "native_tolerance": 1e-09
+}

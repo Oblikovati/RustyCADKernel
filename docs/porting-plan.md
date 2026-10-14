@@ -33,6 +33,10 @@ and delete completed merged worktrees and branches. Deferred platform checks
 remain part of eventual
 validation and do not remove APIs or behavior from the defined porting scope.
 
+User decision, 2026-10-14: release the currently implemented, integrated pieces
+when the release tests are green. This authorizes the release push, immutable tag
+and package publication. Ordinary subsequent porting work remains local.
+
 User decision, 2026-10-11: parallel porting uses at most six agents, including
 the coordinating agent. Independent slices use separate checkouts; the coordinator
 serializes local `main` integration, checks and deletion of completed worktrees.

@@ -93,6 +93,8 @@ pub mod bvh_tree;
 pub mod bvh_tree_handle;
 #[path = "../bvh_triangulation.rs"]
 pub mod bvh_triangulation;
+#[path = "../certified_bezier_pairs.rs"]
+pub mod certified_bezier_pairs;
 #[path = "../class2d_assignment_returns.rs"]
 pub mod class2d_assignment_returns;
 #[path = "../coherent_allocator_behavior.rs"]
@@ -253,5 +255,3 @@ pub mod math_brent_minimum;
 pub mod math_compute_kronrod_points_and_weights;
 #[path = "../math_crout.rs"]
 pub mod math_crout;
-#[path = "../math_direct_polynomial_roots.rs"]
-pub mod math_direct_polynomial_roots;

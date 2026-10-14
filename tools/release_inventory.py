@@ -140,14 +140,20 @@ def validate_names(crates: list[ReleaseCrate]) -> None:
         )
 
 
-def release_revision(root: Path, commands: Commands, tag: str) -> str:
-    """Require a clean checkout at its immutable release tag; example: ``release_revision(root, runner, 'v0.1.0')``."""
+def clean_release_revision(root: Path, commands: Commands) -> str:
+    """Require a clean committed candidate; example: ``clean_release_revision(root, runner)``."""
     revision = commands.run(["git", "rev-parse", "HEAD"], root).strip()
     if not re.fullmatch("[0-9a-f]{40}", revision):
         raise ValueError(f"revision {revision!r}: expected a full Git commit SHA")
     dirty = commands.run(["git", "status", "--porcelain"], root).strip()
     if dirty:
         raise ValueError(f"working tree {dirty!r}: expected a clean release checkout")
+    return revision
+
+
+def release_revision(root: Path, commands: Commands, tag: str) -> str:
+    """Require a clean checkout at its immutable release tag; example: ``release_revision(root, runner, 'v0.1.0')``."""
+    revision = clean_release_revision(root, commands)
     tagged = commands.run(["git", "rev-parse", f"{tag}^{{commit}}"], root).strip()
     if tagged != revision:
         raise ValueError(

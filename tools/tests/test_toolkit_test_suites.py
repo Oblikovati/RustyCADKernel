@@ -18,6 +18,23 @@ from toolkit_test_suites import (
     synchronize_suite,
 )
 from legacy_test_targets import CargoTestLister
+from release_verification_plan import coverage_gate, rust_gates
+
+EXPECTED_COVERAGE_ARGV = (
+    "cargo",
+    "llvm-cov",
+    "nextest",
+    "--workspace",
+    "--all-features",
+    "--locked",
+    "--profile",
+    "ci",
+    "-E",
+    "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)",
+    "--lcov",
+    "--output-path",
+    "target/lcov.info",
+)
 
 
 class ToolkitCheckoutFake:
@@ -245,7 +262,8 @@ class ToolkitWorkflowTests(unittest.TestCase):
         coverage = workflow.split("  coverage:\n", 1)[1].split("  vulkan-runtime:", 1)[
             0
         ]
-        self.assertEqual(coverage.count("cargo llvm-cov nextest"), 1)
+        self.assertEqual(coverage.count("--gate coverage"), 1)
+        self.assert_single_shared_coverage_command()
         self.assertNotIn("run: cargo clean", coverage)
         self.assertNotIn("run: cargo nextest", coverage)
         self.assertIn("target/nextest/ci/junit.xml", coverage)
@@ -259,12 +277,25 @@ class ToolkitWorkflowTests(unittest.TestCase):
         coverage = workflow.split("  coverage:\n", 1)[1].split("  vulkan-runtime:", 1)[
             0
         ]
-        selector = "-E 'not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)'"
-        self.assertEqual(coverage.count("-E "), 1)
-        self.assertIn(selector, coverage)
+        selector = (
+            "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)"
+        )
+        argv = coverage_gate().commands[0].argv
+        self.assertEqual(coverage.count("--gate coverage"), 1)
+        self.assertEqual(argv.count("-E"), 1)
+        self.assertEqual(argv[argv.index("-E") + 1], selector)
         functional = workflow.split("  coverage:\n", 1)[0]
         self.assertIn("cargo test-all --no-fail-fast", functional)
         self.assertNotIn("-E ", functional)
+        self.assertEqual(
+            rust_gates()[1].commands[0].argv, ("cargo", "test-all", "--no-fail-fast")
+        )
+
+    def assert_single_shared_coverage_command(self) -> None:
+        """Assert the executable registry command, not an obsolete inline YAML copy."""
+        gate = coverage_gate()
+        self.assertEqual(len(gate.commands), 1)
+        self.assertEqual(gate.commands[0].argv, EXPECTED_COVERAGE_ARGV)
 
 
 if __name__ == "__main__":

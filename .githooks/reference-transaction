@@ -1,0 +1,4 @@
+#!/bin/sh
+# Resolve the installed hook, because a different unfinished worktree may commit.
+HOOK_DIRECTORY=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
+exec python3 "$HOOK_DIRECTORY/../tools/release_tag_guard.py" "$@"

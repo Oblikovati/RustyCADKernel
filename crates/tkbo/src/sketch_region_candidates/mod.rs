@@ -27,3 +27,6 @@ mod copy_observation;
 pub(crate) use copy_observation::{
     CandidateCopyInspection, CandidateImageCopyLink, observe_candidate_copies,
 };
+pub(crate) use generation::composed_copy_relation;
+
+pub(crate) use ancestry::append_unique as append_original_parents;

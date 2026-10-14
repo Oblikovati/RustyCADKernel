@@ -37,3 +37,6 @@ mod sketch_region_certification;
 // Owned binding evidence cannot promote incomplete ADR0014 contact/search coverage.
 #[allow(dead_code, unused_imports)]
 mod sketch_region_partition_bindings;
+// ADR0014: retained diagnostic prism history cannot publish an uncertified healthy body.
+#[allow(dead_code, unused_imports)]
+mod sketch_region_prism;

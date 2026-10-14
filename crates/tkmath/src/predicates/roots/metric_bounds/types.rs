@@ -14,7 +14,7 @@ pub struct MetricBezier<'a, const DIM: usize> {
 /// Same-parameter analytic representations; lines retain origin/direction without rounded endpoints.
 #[derive(Clone, Copy)]
 pub enum MetricCurve<'a, const DIM: usize> {
-    /// Rational or polynomial Bézier on its natural [0,1] parameter domain.
+    /// Rational or polynomial Bézier on its natural `[0,1]` parameter domain.
     Bezier(MetricBezier<'a, DIM>),
     /// Affine curve origin + parameter * direction on the requested finite trim.
     Line {
@@ -114,7 +114,7 @@ pub enum ResidualError {
         /// Offending exact supplied bounds.
         supplied: [DyadicBound; 2],
     },
-    /// Exact transported Bézier domain lies outside its native [0,1] basis.
+    /// Exact transported Bézier domain lies outside its native `[0,1]` basis.
     ParameterDomain {
         /// Exact transported bounds in the stored curve basis.
         supplied: [DyadicBound; 2],
