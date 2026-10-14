@@ -305,3 +305,29 @@ annular topology candidate. Root checks passed 2,063 tests and 35 doctests,
 strict lint, formatting and docs, plus fifty independent replay processes.
 See [integration evidence](evidence/prism-annular-frozen-topology-integration-2026-10-14/INTEGRATED.md).
 This is a private prerequisite; the remaining release requirements above still apply.
+
+
+### Paused batch integration supplement (2026-10-14)
+
+Local main source `0bae73e49` integrates annular exact conformance/tolerance,
+conditional four-face measures, ordered annular validation, shared history helpers
+and actual census fixtures, plus owned post-publication projection refusals. The
+complete private single-boundary owned operation was integrated at `5b7366168`.
+
+The [combined root evidence](evidence/kernel-10-batch-integration-2026-10-14/INTEGRATED.md)
+records **5,384 TKMath/TKBO tests and 89 doctests**, strict lint, formatting and
+warning-denied docs, plus **70 exact-binary replay processes**. All prior-main and
+candidate tests remain qualified by package/target/name, and all 16,451 compiled
+source/configuration hashes are unchanged. Counts overlap earlier revisions and
+must not be added as distinct coverage. Completed trees and branches were deleted.
+
+**Complete annular history remains unimplemented**: only its shared helpers and
+native census fixtures landed. Annular publication, physical-volume certification,
+owned public inputs/outcomes and complete failure families, general profiles,
+consumer edit/undo/reopen/display, sanitizer and owner package/performance gates
+remain incomplete. These constituents do not satisfy Kernel #10 or authorize release.
+
+The user requested finishing the current batch and a handoff. Broader work is
+paused; [the handoff](handoff-kernel-10-2026-10-14.json) records exact revisions,
+remaining work and preserved older worktrees. No follow-on porting task, PR, push
+or release was performed during this wrap-up.

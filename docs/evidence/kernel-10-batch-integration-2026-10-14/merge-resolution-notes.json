@@ -1,0 +1,17 @@
+{
+  "final_source": "0bae73e49",
+  "prior_union_compile_source": "900b414e0",
+  "conflicts": [
+    {
+      "merge": "6a36e507e",
+      "file": "crates/tkbo/src/sketch_region_prism/frozen/mod.rs",
+      "resolution": "Retain existing public annular_join/orientation/measures registrations and add private annular_history."
+    },
+    {
+      "merge": "900b414e0",
+      "file": "crates/tkbo/src/sketch_region_prism/frozen/mod.rs",
+      "resolution": "Retain existing annular_measures and annular_history registrations omitted from older candidate context."
+    }
+  ],
+  "source_audit_refinement": "Initial source comparison stopped at four diagnostic codec facade files inherited in the measures branch. Reviewed differences are visibility/reexports only and match the independently tested projection candidate exactly; no algorithm was rewritten."
+}
