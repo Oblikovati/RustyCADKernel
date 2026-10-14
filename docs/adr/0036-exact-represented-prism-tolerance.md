@@ -15,6 +15,14 @@ validation stage passed or publish a successful body. Only the future operation
 composer may do that after same-body topology, geometry-consistency and
 self-intersection evidence have passed in order (RustyCADKernel issue #10).
 
+The immutable evidence is split at that ordered boundary. One joined conformance
+proof performs usable-frame, raw endpoint, upstream closure and exact trim work
+and binds the complete join replay. The geometry stage consumes it before
+self-intersection. The later tolerance policy accepts that already-bound proof
+and applies raw metadata caps without recomputing geometry. Missing or mismatched
+conformance is incomplete. Neither helper imports topology/self-intersection
+certificate types or changes ordered coverage; the operation composer owns order.
+
 ## Exact placements and raw vertex transport
 
 An actual placement is usable only when its origin and matrix are finite, its
