@@ -49,6 +49,12 @@ pub mod curve_explorer;
 pub mod face_normals;
 #[path = "../interference_tool.rs"]
 pub mod interference_tool;
+#[path = "../legacy_brep_algo_api_cut.rs"]
+pub mod legacy_brep_algo_api_cut;
+#[path = "../legacy_brep_algo_api_fuse.rs"]
+pub mod legacy_brep_algo_api_fuse;
+#[path = "../legacy_brep_algo_api_section.rs"]
+pub mod legacy_brep_algo_api_section;
 #[path = "../legacy_brep_fill_pipe_shell.rs"]
 pub mod legacy_brep_fill_pipe_shell;
 #[path = "../legacy_top_ope_brep_ds_build_tool.rs"]
