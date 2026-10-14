@@ -131,6 +131,8 @@ pub mod local_analysis_behavior;
 pub mod plate_behavior;
 #[path = "../plate_plate.rs"]
 pub mod plate_plate;
+#[path = "../sketch_line_incidences/main.rs"]
+pub mod sketch_line_incidences;
 #[path = "../sketch_spline/main.rs"]
 pub mod sketch_spline;
 #[path = "../tkg3d_geom_curve_eval.rs"]
