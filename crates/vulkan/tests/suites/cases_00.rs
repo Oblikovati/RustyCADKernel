@@ -35,6 +35,10 @@ pub mod graphic_buffers;
 pub mod graphic_submission;
 #[path = "../group_flipping.rs"]
 pub mod group_flipping;
+#[path = "../gui_composition.rs"]
+pub mod gui_composition;
+#[path = "../gui_gpu_composition.rs"]
+pub mod gui_gpu_composition;
 #[path = "../homogeneous_vertices.rs"]
 pub mod homogeneous_vertices;
 #[path = "../light_name_dump_boundary.rs"]

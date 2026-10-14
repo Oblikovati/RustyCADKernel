@@ -1,0 +1,31 @@
+Diff in /home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkbo/tests/suites/../exact_region_prism.rs:7:
+     topods::{Shape, edge, face},
+     toptools::IndexedMapOfShape,
+ };
+-use rustycad_tkernel::{
+-    ncollection::List,
+-    standard::Handle,
+-};
++use rustycad_tkernel::{ncollection::List, standard::Handle};
+ use rustycad_tkg3d::{
+     geom::GeomBezierCurve,
+     top_abs::{Orientation, ShapeEnum},
+Diff in /home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkbo/tests/suites/../exact_region_prism.rs:17:
+ };
+ use rustycad_tkmath::gp::{Plane3, Point3};
+-use rustycad_tktopalgo::{
+-    brep_builder_api::{BRepBuilderAPIMakeFace},
+-    brep_lib,
+-};
++use rustycad_tktopalgo::{brep_builder_api::BRepBuilderAPIMakeFace, brep_lib};
+ #[path = "exact_region_prism/classification.rs"]
+ mod classification;
+ #[path = "exact_region_prism/ownership.rs"]
+Traceback (most recent call last):
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/tools/check_rust_format.py", line 76, in <module>
+    main()
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/tools/check_rust_format.py", line 71, in main
+    subprocess.run(command, cwd=root, check=True)
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['rustfmt', '--check', '--edition', '2024', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/cmath/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/parity/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tcl/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkbo/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkbool/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkbrep/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkcaf/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkcdf/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkde/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkdraw/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkernel/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkernel/tests/suites/cases_01.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkernel/tests/suites/cases_02.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkernel/tests/suites/cases_03.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkexpress/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkfillet/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkg2d/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkg3d/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkgeomalgo/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkgeombase/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkhelix/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkhlr/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tklcaf/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkmath/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkmath/tests/suites/cases_01.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkmesh/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkoffset/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkprim/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkservice/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkshhealing/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkshhealing/tests/suites/cases_01.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tktopalgo/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/tkv3d/tests/suites/cases_00.rs', '/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/vulkan/tests/suites/cases_00.rs']' returned non-zero exit status 1.

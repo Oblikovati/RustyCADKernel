@@ -1,0 +1,33 @@
+   Compiling martensite-vulkan v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/vulkan)
+    Finished `test` profile [unoptimized] target(s) in 7.01s
+     Running unittests src/lib.rs (target/debug/deps/martensite_vulkan-15771011e98973df)
+
+running 2 tests
+test backend::fragment_alpha_plan::gui_state_tests::retained_model_mask_does_not_reject_translucent_gui ... FAILED
+test backend::fragment_alpha_plan::gui_state_tests::gui_material_reset_does_not_change_next_model_frame ... FAILED
+
+failures:
+
+---- backend::fragment_alpha_plan::gui_state_tests::retained_model_mask_does_not_reject_translucent_gui stdout ----
+
+thread 'backend::fragment_alpha_plan::gui_state_tests::retained_model_mask_does_not_reject_translucent_gui' (1732314) panicked at crates/vulkan/src/backend/fragment_alpha_plan.rs:62:9:
+assertion `left == right` failed
+  left: [Some(0.9), Some(0.9)]
+ right: [Some(0.9), None]
+
+---- backend::fragment_alpha_plan::gui_state_tests::gui_material_reset_does_not_change_next_model_frame stdout ----
+
+thread 'backend::fragment_alpha_plan::gui_state_tests::gui_material_reset_does_not_change_next_model_frame' (1732313) panicked at crates/vulkan/src/backend/fragment_alpha_plan.rs:70:9:
+assertion `left == right` failed
+  left: LegacyFragmentAlpha(None)
+ right: LegacyFragmentAlpha(Some(0.9))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    backend::fragment_alpha_plan::gui_state_tests::gui_material_reset_does_not_change_next_model_frame
+    backend::fragment_alpha_plan::gui_state_tests::retained_model_mask_does_not_reject_translucent_gui
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 242 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p martensite-vulkan --lib`

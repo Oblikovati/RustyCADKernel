@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 //! Real-window AIS fixture shared by capture, lifecycle and timing probes.
-use crate::ais_scene;
-use crate::native_window::NativeWindow;
+use super::ais_scene;
+use super::native_window::NativeWindow;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkservice::{aspect::*, graphic3d::*};

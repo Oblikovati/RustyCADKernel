@@ -1,0 +1,20 @@
+   Compiling martensite-vulkan v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/vulkan)
+error[E0599]: no method named `remove` found for struct `Handle<Graphic3dRenderView>` in the current scope
+  --> crates/vulkan/examples/support/gui_native_extent.rs:19:25
+   |
+19 |     scene.render_view().remove();
+   |                         ^^^^^^
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `Graphic3dCView` which provides `remove` is implemented but not in scope; perhaps you want to import it
+   |
+ 2 + use rustycad_tkservice::graphic3d::Graphic3dCView;
+   |
+help: there is a method `is_removed` with a similar name
+   |
+19 -     scene.render_view().remove();
+19 +     scene.render_view().is_removed();
+   |
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `martensite-vulkan` (example "native_gui_acceptance") due to 1 previous error
