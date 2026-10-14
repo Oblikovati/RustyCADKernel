@@ -41,7 +41,11 @@ pub(crate) struct OwnedPolynomialPrismRequest {
     pub policy: OwnedPrismPolicy,
 }
 impl OwnedPolynomialBoundary {
-    pub(super) fn names(&self, operation: CallerOperationId) -> SingleBoundaryIdentities {
+    /// Borrow caller-authored identities as values; `boundary.names(operation)` proves no geometry correspondence.
+    pub(in crate::sketch_region_prism) fn names(
+        &self,
+        operation: CallerOperationId,
+    ) -> SingleBoundaryIdentities {
         SingleBoundaryIdentities {
             operation,
             boundary: self.source,
