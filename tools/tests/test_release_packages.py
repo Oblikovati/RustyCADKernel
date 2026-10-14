@@ -20,10 +20,13 @@ from release_inventory import (
     release_crate_from_metadata,
     release_feature_names,
     release_revision,
+    clean_release_revision,
     validate_inventory,
 )
 from release_packages import (
     build_release,
+    build_release_candidate,
+    release_plan,
     package_test_support,
     release_metadata,
     test_archives,
@@ -68,6 +71,7 @@ class FakeCommands:
         self.fixture = fixture
         self.dirty = ""
         self.tagged = REVISION
+        self.revision = REVISION
         self.fail_tests = False
         self.stale_suites = False
         self.unformatted_inputs = False
@@ -106,7 +110,7 @@ class FakeCommands:
             return self.dirty
         if arguments[1] == "ls-files":
             return "tools/oracle/check.expected\0"
-        return REVISION if arguments[-1] == "HEAD" else self.tagged
+        return self.revision if arguments[-1] == "HEAD" else self.tagged
 
     def check_isolated_workspace(self, root: Path) -> None:
         if not (root / CRATE.directory / "Cargo.toml").is_file():
@@ -141,12 +145,99 @@ class LateReleaseMutation(FakeCommands):
         return super().git_result(arguments)
 
 
+class UntaggedCandidateCommands(LateReleaseMutation):
+    """Reject any tag lookup or remote action while exercising real archive bytes."""
+
+    def git_result(self, arguments: list[str]) -> str:
+        if arguments[1] == "rev-parse" and arguments[-1] != "HEAD":
+            raise AssertionError(f"Unexpected tag lookup: {arguments!r}")
+        return super().git_result(arguments)
+
+
+class MixedCandidateVersions(UntaggedCandidateCommands):
+    """Expose a wrong sibling version even though the first package matches the tag."""
+
+    def run(self, arguments: list[str], root: Path) -> str:
+        result = super().run(arguments, root)
+        if arguments[:2] != ["cargo", "metadata"]:
+            return result
+        metadata = json.loads(result)
+        sibling = dict(metadata["packages"][0])
+        sibling.update(id="cmath", name="rustycad-cmath", version="0.2.0")
+        sibling["manifest_path"] = str(root / "crates/cmath/Cargo.toml")
+        metadata["packages"].append(sibling)
+        metadata["workspace_members"].append("cmath")
+        return json.dumps(metadata)
+
+
 class ReleasePackageTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.fixture = ReleaseFixture(Path(self.temporary.name))
         self.runner = FakeCommands(self.fixture)
+
+    def test_untagged_candidate_seals_both_profiles_without_tag_actions(self) -> None:
+        runner = UntaggedCandidateCommands(self.fixture)
+        runner.features = {"debug": []}
+        output = build_release_candidate(self.fixture.root, "v0.1.0", runner)
+        receipt = json.loads((output / "martensite-release.json").read_text())
+        self.assertEqual(receipt["revision"], REVISION)
+        tests = [call for call in runner.calls if call[:2] == ["cargo", "test"]]
+        self.assertEqual(len(tests), 4)
+        self.assertEqual(sum("--all-features" in call for call in tests), 2)
+        self.assertEqual(sum("--all-targets" in call for call in tests), 2)
+        self.assertEqual(sum("--doc" in call for call in tests), 2)
+        git_calls = [call[1] for call in runner.calls if call[0] == "git"]
+        self.assertEqual(set(git_calls), {"rev-parse", "status", "ls-files"})
+
+    def test_candidate_source_changes_or_dirty_start_prevent_sealing(self) -> None:
+        for mutation in ["initial", "dirty", "moved"]:
+            runner = UntaggedCandidateCommands(self.fixture)
+            runner.mutation = mutation
+            runner.dirty = " M Cargo.lock" if mutation == "initial" else ""
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                build_release_candidate(self.fixture.root, "v0.1.0", runner)
+            self.assertFalse((self.fixture.root / "target/releases/v0.1.0").exists())
+
+    def test_candidate_failure_retains_original_exit_and_never_seals(self) -> None:
+        runner = UntaggedCandidateCommands(self.fixture)
+        runner.fail_tests = True
+        with self.assertRaises(subprocess.CalledProcessError) as failure:
+            build_release_candidate(self.fixture.root, "v0.1.0", runner)
+        self.assertEqual(failure.exception.returncode, 1)
+        self.assertFalse((self.fixture.root / "target/releases/v0.1.0").exists())
+        self.assertEqual(
+            len(list((self.fixture.root / "target/release-diagnostics").iterdir())), 1
+        )
+
+    def test_candidate_wrong_version_is_rejected_before_packaging(self) -> None:
+        runner = UntaggedCandidateCommands(self.fixture)
+        with self.assertRaisesRegex(ValueError, "expected v0.1.0"):
+            build_release_candidate(self.fixture.root, "v0.2.0", runner)
+        self.assertFalse(any(call[:2] == ["cargo", "package"] for call in runner.calls))
+
+    def test_candidate_rejects_wrong_sibling_version_before_packaging(self) -> None:
+        runner = MixedCandidateVersions(self.fixture)
+        with self.assertRaisesRegex(ValueError, "expected one stable"):
+            build_release_candidate(self.fixture.root, "v0.1.0", runner)
+        self.assertFalse(any(call[:2] == ["cargo", "package"] for call in runner.calls))
+
+    def test_shared_clean_revision_has_no_tag_dependency(self) -> None:
+        runner = UntaggedCandidateCommands(self.fixture)
+        self.assertEqual(clean_release_revision(self.fixture.root, runner), REVISION)
+        runner.dirty = "?? untracked.rs"
+        with self.assertRaisesRegex(ValueError, "clean release"):
+            clean_release_revision(self.fixture.root, runner)
+        runner.dirty = ""
+        runner.revision = "not-a-commit"
+        with self.assertRaisesRegex(ValueError, "full Git commit SHA"):
+            clean_release_revision(self.fixture.root, runner)
+
+    def test_tagged_plan_preserves_immutable_tag_requirement(self) -> None:
+        self.runner.tagged = "b" * 40
+        with self.assertRaisesRegex(ValueError, "expected HEAD"):
+            release_plan(self.fixture.root, "v0.1.0", self.runner)
 
     def test_inventory_and_named_archive(self) -> None:
         self.assertEqual(release_inventory(self.fixture.root, self.runner), [CRATE])
