@@ -248,17 +248,19 @@ fn side_capture_digest(bytes: impl Iterator<Item = u8>) -> u64 {
     })
 }
 fn record_side_capture(capture: &FrameCapture) {
-    let bytes = capture
-        .rgba
-        .iter()
-        .copied()
-        .chain(capture.depth.iter().flat_map(|v| v.to_ne_bytes()));
+    let depth: Vec<u8> = capture.depth.iter().flat_map(|v| v.to_ne_bytes()).collect();
+    let bytes = capture.rgba.iter().copied().chain(depth.iter().copied());
     let digest = side_capture_digest(bytes);
     eprintln!(
         r#"{{"unlit_side_capture_fnv1a64":"{digest:016x}","extent":[{},{}]}}"#,
         capture.width, capture.height
     );
+    eprintln!(
+        r#"{{"unlit_side_capture_bytes":{{"rgba":{:?},"depth":{:?}}}}}"#,
+        capture.rgba, depth
+    );
 }
+
 #[test]
 fn unlit_side_capture_digest_has_independent_known_vectors() {
     assert_eq!(side_capture_digest([].into_iter()), 0xcbf29ce484222325);
