@@ -75,3 +75,39 @@ Final source-bookended suite, process replay, extracted corpus and host sanitize
 status will be recorded in the evidence receipt. No native OCCT oracle or new
 native fixture is part of this decision. Until those checks and the composition
 stage finish, this decision does not claim the intended operation complete.
+
+## Implemented private composition
+
+`region_certificate::measurements::inspect_prism_measurements` returns a separate
+owned scalar inspection. It reruns the existing classifier using the current
+request, binds its unique selection and winding totals, and reruns the current
+source/Jordan/copy/closure inspection. A freshly computed exact nonzero Jacobian
+is retained; a mutable prior affine observation cannot substitute for it.
+
+Every actual image context is rebound to copied-source history. Exact parent
+multiplicities and dispositions are compared with the existing copy/generated
+composition, including generated ancestry retained by cap copies. Existing body
+history composition is rerun on actual containment. Each actual face must have a
+unique current relation and image binding; the admitted single-boundary domain
+requires exactly one First cap, Last cap and Generated side. Each is recaptured
+and reproved through the existing chart/trim identity engine. Missing, extra,
+reparented, duplicate, or unattributed history remains incomplete.
+
+Actual cap pcurves and separate support/placement coefficients supply the plane
+measure; the copied oriented boundary and actual requested extrusion supply the
+signed sweep integral. The fresh chart proof establishes exact agreement of the
+actual normalized extrusion direction times its positive trim height with that
+vector. No floating normalization identity is presumed. The inspection retains
+all chart coefficients, trims, expectations, identities, parents and proof heights.
+
+After all cancellation callbacks, a fresh callback-free binding pass rechecks
+source geometry, selection, determinant, closure contexts/points, actual body
+history, every chart, and every trim expectation. It compares exact coefficient
+bits and identity multiplicities with the measured snapshots. This detects edits
+made by callbacks after initial capture. It does not authorize concurrent writes
+to legacy mutable Shape aliases, and it does not publish those aliases.
+
+The side integral API is now integrated independently, but its binding and total
+surface-area composition are deliberately still pending in this bounded slice.
+The two cap and signed-volume reports are complete conditional measurements;
+no scalar values clear the remaining region/body or publication obligations.

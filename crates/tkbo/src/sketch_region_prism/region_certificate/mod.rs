@@ -131,3 +131,9 @@ mod tests;
 
 #[cfg(test)]
 mod point_tests;
+
+mod measurements;
+#[allow(unused_imports)]
+pub(crate) use measurements::{
+    PrismMeasureInspection, PrismMeasureOptions, inspect_prism_measurements,
+};

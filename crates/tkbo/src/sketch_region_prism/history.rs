@@ -48,7 +48,7 @@ fn retained_diagnostic(
     }
 }
 
-fn output_relations(
+pub(super) fn output_relations(
     body: &Shape,
     observed: &[PrismImageBinding],
 ) -> Result<Vec<ArrangementRelation>, PrismCause> {
@@ -104,7 +104,10 @@ pub(super) fn all_parents(base: &ArrangementRelation) -> Vec<OriginalMemberIdent
     }
     parents
 }
-fn generated_relation(output: &Shape, base: &ArrangementRelation) -> ArrangementRelation {
+pub(super) fn generated_relation(
+    output: &Shape,
+    base: &ArrangementRelation,
+) -> ArrangementRelation {
     ArrangementRelation {
         output: output.clone(),
         preserved: Vec::new(),

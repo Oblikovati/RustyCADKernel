@@ -61,3 +61,5 @@ fn prove_cap_chart(
     cap::prove_cap((source, actual), chart, offset, context)
 }
 pub(super) use trim_capture::pcurve_on;
+
+pub(super) use coverage::{actual_faces, face_history, missing_body_images, same_context};
