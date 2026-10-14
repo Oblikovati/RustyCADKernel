@@ -261,6 +261,57 @@ def verify_tag(tag: str, oid: str, receipt_path: Path, git: GuardGit) -> None:
     verify_packages(receipt, tag, revision, receipt_path.parent)
 
 
+def existing_release_reference(reference: str, git: GuardGit) -> str | None:
+    """Read the unpeeled logical object; example: existing_release_reference('refs/tags/v0.2.8', git)."""
+    try:
+        oid = git.read(
+            "rev-parse", "--verify", "--quiet", "--end-of-options", reference
+        )
+    except subprocess.CalledProcessError as failure:
+        if failure.returncode == 1 and not failure.stderr:
+            return None
+        raise
+    value = oid.decode().strip()
+    if not re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", value):
+        raise ValueError(
+            f"release ref={reference!r} object={value!r}: expected full object ID"
+        )
+    require_direct_release_reference(reference, git)
+    return value
+
+
+def require_direct_release_reference(reference: str, git: GuardGit) -> None:
+    """Refuse symbolic aliases as storage proof; example: require_direct_release_reference(ref, git)."""
+    try:
+        target = git.read("symbolic-ref", "--quiet", reference).decode().strip()
+    except subprocess.CalledProcessError as failure:
+        if failure.returncode == 1 and not failure.stderr:
+            return
+        raise
+    raise ValueError(
+        f"release ref={reference!r} symbolic={target!r}: expected direct immutable tag"
+    )
+
+
+def guard_release_reference(
+    old: str, new: str, reference: str, receipt: str | None, git: GuardGit
+) -> None:
+    """Admit only unchanged stored refs without evidence; example: guard_release_reference(old, new, ref, receipt, git)."""
+    current = existing_release_reference(reference, git)
+    # Kernel#10: pack-refs reports zero-old storage insertion for an existing tag.
+    if current == new and old in ("0" * len(new), new):
+        return
+    if current is not None or set(old) != {"0"}:
+        raise ValueError(
+            f"release ref={reference!r} old={old!r} current={current!r}: expected immutable tag object"
+        )
+    if not receipt:
+        raise ValueError(
+            f"release ref={reference!r}: expected MARTENSITE_RELEASE_RECEIPT"
+        )
+    verify_tag(reference.removeprefix("refs/tags/"), new, Path(receipt).absolute(), git)
+
+
 def guard_transaction(
     state: str, updates: str, receipt: str | None, git: GuardGit
 ) -> None:
@@ -269,18 +320,9 @@ def guard_transaction(
         return
     for line in updates.splitlines():
         old, new, reference = line.split()
-        match = re.fullmatch(r"refs/tags/(v[0-9]+\.[0-9]+\.[0-9]+)", reference)
-        if match is None or set(new) == {"0"}:
-            continue
-        if set(old) != {"0"}:
-            raise ValueError(
-                f"release ref={reference!r} old={old!r}: expected immutable new tag (zero old OID)"
-            )
-        if not receipt:
-            raise ValueError(
-                f"release ref={reference!r}: expected MARTENSITE_RELEASE_RECEIPT"
-            )
-        verify_tag(match[1], new, Path(receipt).absolute(), git)
+        match = re.fullmatch(r"refs/tags/v[0-9]+\.[0-9]+\.[0-9]+", reference)
+        if match is not None and set(new) != {"0"}:
+            guard_release_reference(old, new, reference, receipt, git)
 
 
 def main() -> int:
