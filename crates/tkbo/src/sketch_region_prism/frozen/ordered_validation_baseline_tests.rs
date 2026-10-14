@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0039 starts from retained checker evidence; exact topology never rewrites that history.
-use super::{alerts::FrozenNativeAlert, coverage::FrozenValidationCause, topology::*, *};
+use super::{
+    alerts::FrozenNativeAlert::IntersectionFailedAtFailGravity,
+    coverage::FrozenValidationCause::AnalyticNativeAlert, topology::*, *,
+};
 use crate::sketch_region_validation::StageCoverage;
 use rustycad_tkernel::standard::Failure;
 
@@ -42,9 +45,7 @@ fn assert_historical_failure(projection: &FrozenPrismProjection) {
         .filter(|finding| {
             matches!(
                 finding.cause,
-                FrozenValidationCause::AnalyticNativeAlert(
-                    FrozenNativeAlert::IntersectionFailedAtFailGravity
-                )
+                AnalyticNativeAlert(IntersectionFailedAtFailGravity)
             )
         })
         .count();
