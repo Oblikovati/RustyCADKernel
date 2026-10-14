@@ -148,3 +148,56 @@ fn cancelled_selection_is_incomplete_not_empty() {
         "{result:?}"
     );
 }
+#[test]
+fn unbounded_collinear_overlap_refuses_both_edits() {
+    let collinear = target(7, infinite([9., 0.], [8., 0.]));
+    let refused = SketchSelectionError::Refused(SketchSelectionRefusal::Overlap { target_id: 7 });
+    let support = certify(
+        source([[0., 0.], [1., 0.]], SUPPORT),
+        std::slice::from_ref(&collinear),
+    );
+    assert_eq!(
+        support.select_extension(SketchLineEnd::Start, || false),
+        Err(refused.clone())
+    );
+    let segment = certify(source([[0., 0.], [1., 0.]], SEGMENT), &[collinear]);
+    assert_eq!(segment.select_trim([0.5, 1.], || false), Err(refused));
+}
+#[test]
+fn overlaps_behind_or_outside_the_edited_range_do_not_refuse() {
+    let targets = [
+        target(1, segment([3., -1.], [3., 1.])),
+        target(2, segment([-1., 0.], [-3., 0.])),
+        target(3, segment([0.5, -1.], [0.5, 1.])),
+    ];
+    let report = certify(source([[0., 0.], [4., 0.]], SUPPORT), &targets);
+    let start = report.select_extension(SketchLineEnd::Start, || false);
+    let refused = SketchSelectionError::Refused(SketchSelectionRefusal::Overlap { target_id: 2 });
+    assert_eq!(
+        start,
+        Err(refused),
+        "the overlap is the only thing before the start"
+    );
+    assert!(
+        report
+            .select_extension(SketchLineEnd::End, || false)
+            .unwrap()
+            .is_none()
+    );
+    let report = certify(source([[0., 0.], [4., 0.]], SEGMENT), &targets);
+    let around = report.select_trim([2., 0.], || false).unwrap();
+    assert_eq!(
+        around,
+        SketchTrimSelection {
+            before: Some(0),
+            after: Some(1)
+        }
+    );
+    let nonfinite = report.select_trim([f64::NAN, 0.], || false);
+    assert!(matches!(
+        nonfinite,
+        Err(SketchSelectionError::Refused(
+            SketchSelectionRefusal::PickOutsideSegment { .. }
+        ))
+    ));
+}

@@ -198,3 +198,34 @@ fn isolation_and_degree_limits_are_typed_root_failures() {
         })
     ));
 }
+#[test]
+fn non_monotone_or_stationary_coincident_spans_are_incomplete() {
+    // x = 4u - 3u^2 turns back at u = 2/3 while staying on y = 0.
+    let folded = spline(
+        2,
+        &[[0., 0.], [2., 0.], [1., 0.]],
+        &[0., 0., 0., 1., 1., 1.],
+        [0., 1.],
+    );
+    let failure = attempt_on_axis(folded);
+    assert_eq!(
+        failure.cause(),
+        &Cause::NonMonotoneOverlap { range: [0., 1.] }
+    );
+    assert_eq!(failure.completion(), SketchIncidenceCompletion::Incomplete);
+    let stationary = spline(1, &[[2., 0.], [2., 0.]], &[0., 0., 1., 1.], [0., 1.]);
+    assert_eq!(
+        attempt_on_axis(stationary).cause(),
+        &Cause::NonMonotoneOverlap { range: [0., 1.] }
+    );
+}
+fn attempt_on_axis(curve: SketchIncidenceCurve) -> SketchIncidenceFailure {
+    let line = source([[0., 0.], [4., 0.]], SEGMENT);
+    certify_sketch_line_incidences(
+        line,
+        &[target(6, curve)],
+        SketchIncidenceOptions::v1(ERROR),
+        || false,
+    )
+    .expect_err("a coincident span without a one-to-one line range")
+}
