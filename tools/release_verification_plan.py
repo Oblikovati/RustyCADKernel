@@ -157,6 +157,10 @@ def vulkan_gates(root: Path) -> tuple[VerificationGate, ...]:
             (*xvfb_example("native_gui_rapid", screen=(1920, 1080)),
              "--", "target/native-gui-framebuffer")
         ),
+        GateCommand(
+            (*xvfb_example("native_gui_acceptance"),
+             "--", "target/native-gui-framebuffer/accepted")
+        ),
     )
     return (
         VerificationGate("vulkan-cold", (cold,)),

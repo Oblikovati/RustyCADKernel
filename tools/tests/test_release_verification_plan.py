@@ -110,6 +110,11 @@ class VerificationPlanTests(unittest.TestCase):
             (*xvfb_example("native_gui_rapid", screen=(1920, 1080)),
              "--", "target/native-gui-framebuffer"),
         )
+        self.assertEqual(
+            commands[3].argv,
+            (*xvfb_example("native_gui_acceptance"),
+             "--", "target/native-gui-framebuffer/accepted"),
+        )
         self.assertEqual(xvfb_example("original")[3], "-screen 0 1280x1024x24")
         self.assertEqual(xvfb_screen((1920, 1080)), "-screen 0 1920x1080x24")
         for invalid in [(0, 1080), (-1, 900), (True, 900), (1280,)]:
@@ -123,7 +128,7 @@ class VerificationPlanTests(unittest.TestCase):
             performance.stdout_path, Path("target/renderer-performance.log")
         )
         self.assertEqual(performance.argv, xvfb_example("renderer_performance", True))
-        self.assertEqual(len(self.gates["vulkan-acceptance"].commands), 3)
+        self.assertEqual(len(self.gates["vulkan-acceptance"].commands), 4)
 
     def test_workflow_calls_every_shared_gate_and_preserves_diagnostic_pipes(
         self,
