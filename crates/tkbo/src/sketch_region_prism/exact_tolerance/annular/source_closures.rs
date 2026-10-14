@@ -183,7 +183,7 @@ fn append(
         parameter: row.parameter,
         orientation: row.orientation,
         local_point: row.local_point,
-        raw_tolerance: row.raw_tolerance,
+        source_raw_tolerance: row.raw_tolerance,
         certificate,
     });
     Ok(())

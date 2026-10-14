@@ -3,7 +3,7 @@ use super::*;
 use crate::sketch_region_prism::{
     exact_tolerance::StoredToleranceCap, frozen::annular_join::operation_tests::joined,
 };
-struct Continue;
+pub(super) struct Continue;
 impl AnnularConformanceProgress for Continue {
     fn cancelled(&mut self, _: JoinedConformancePhase) -> bool {
         false
@@ -14,7 +14,7 @@ impl AnnularToleranceProgress for Continue {
         false
     }
 }
-fn conformance(join: &AnnularFrozenDomain) -> AnnularPrismConformance {
+pub(super) fn conformance(join: &AnnularFrozenDomain) -> AnnularPrismConformance {
     certify_annular_prism_conformance(join, &mut Continue).unwrap_or_else(|failure| {
         panic!(
             "annular geometry {:?}/{:?}",

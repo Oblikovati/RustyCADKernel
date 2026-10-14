@@ -21,4 +21,16 @@ pub(in crate::sketch_region_prism) use tolerance::certify_annular_prism_toleranc
 pub(in crate::sketch_region_prism) use types::*;
 
 #[cfg(test)]
+mod cancel_tests;
+#[cfg(test)]
+mod group_tests;
+#[cfg(test)]
+mod metadata_tests;
+#[cfg(test)]
+mod operand_tests;
+#[cfg(test)]
+mod replay_tests;
+#[cfg(test)]
+mod source_tests;
+#[cfg(test)]
 mod tests;
