@@ -6,7 +6,7 @@ use super::{
 use crate::{RenderError, error::rejected};
 use ash::vk;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkservice::aspect::{AspectWindow, AspectWindowMembers};
+use rustycad_tkservice::aspect::AspectWindow;
 use std::sync::Arc;
 pub(crate) struct WindowPresenter {
     runtime: Arc<VulkanRuntime>,
