@@ -15,9 +15,11 @@ from pre_release_execution import (
     command_acceptance,
     execute_recorded_command,
     gate_execution_environment,
+    native_gate_environment,
     preserve_command_output,
     preserve_failure_diagnostics,
     require_cargo_tool_versions,
+    require_native_gate_tools,
     verify_recorded_gate,
     verify_workflow_gates,
 )
@@ -80,6 +82,18 @@ class FakeCargoVersionReads:
         self.calls.append(argv)
         versions = {"nextest": "0.9.148", "llvm-cov": "0.9.1", "deny": "0.20.2"}
         return "cargo-" + argv[1] + " " + ("0.0.0" if self.wrong else versions[argv[1]])
+
+
+class FakeNativeGateTools:
+    """Resolve named prerequisite tools without relying on host installations."""
+
+    def __init__(self, missing: str = "") -> None:
+        self.missing = missing
+        self.paths: list[str | None] = []
+
+    def lookup(self, name: str, mode: int, path: str | None) -> str | None:
+        self.paths.append(path)
+        return None if name == self.missing else "/fixture/bin/" + name
 
 
 class PreReleaseExecutionTests(unittest.TestCase):
@@ -259,6 +273,22 @@ class PreReleaseExecutionTests(unittest.TestCase):
                 (self.files.evidence / relative).read_bytes(),
                 b"original failure evidence",
             )
+
+    def test_native_prerequisites_fail_before_expensive_verification(self) -> None:
+        tools = FakeNativeGateTools()
+        require_native_gate_tools({"PATH": "/fixture"}, tools.lookup)
+        self.assertEqual(tools.paths, ["/fixture"] * 6)
+        missing = FakeNativeGateTools("xvfb-run")
+        with self.assertRaisesRegex(ValueError, "xvfb-run.*expected"):
+            require_native_gate_tools({"PATH": "/fixture"}, missing.lookup)
+
+    def test_distribution_cache_is_selected_without_replacing_system_path(self) -> None:
+        cache = self.files.root / "target/native-ci-tools/usr/bin"
+        cache.mkdir(parents=True)
+        tools = FakeNativeGateTools()
+        with patch("pre_release_execution.shutil.which", new=tools.lookup):
+            environment = native_gate_environment(self.files.root, {"PATH": "/system"})
+        self.assertEqual(environment["PATH"], str(cache) + ":/system")
 
     def test_empty_gate_cannot_create_success_receipt(self) -> None:
         with self.assertRaisesRegex(ValueError, "at least one"):

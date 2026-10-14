@@ -45,6 +45,9 @@ same extracted-package matrix used by the release workflow, before any tag exist
 Use the workflow's pinned `cargo-nextest`, `cargo-llvm-cov` and `cargo-deny`
 versions and Linux native prerequisites. Inherited Cargo aliases and toolchain
 overrides are cleared, and driver caches are isolated by workflow job group.
+Native prerequisites are checked before compilation. An unprivileged distribution
+package extraction under `target/native-ci-tools/usr/bin` can supply missing
+executables when system package installation is unavailable.
 
 Only successful checks create the annotated tag. The command installs the owned
 reference-transaction hook; a direct release-tag command without matching

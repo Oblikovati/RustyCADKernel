@@ -10,7 +10,7 @@ import platform
 import shlex
 import shutil
 import subprocess
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from typing import BinaryIO
 
 from release_inventory import Commands
@@ -27,7 +27,7 @@ PINNED_CARGO_TOOLS = (("nextest", "0.9.148"), ("llvm-cov", "0.9.1"), ("deny", "0
 
 def local_gate_environment(root: Path, inherited: Mapping[str, str]) -> dict[str, str]:
     """Use CI's bounded artifact and driver policy; example: local_gate_environment(root, os.environ)."""
-    selected = bounded_ci_environment(inherited)
+    selected = native_gate_environment(root, bounded_ci_environment(inherited))
     selected["VK_DRIVER_FILES"] = str(require_lavapipe_driver())
     return command_environment(
         root / "target/vulkan-validation",
@@ -36,6 +36,32 @@ def local_gate_environment(root: Path, inherited: Mapping[str, str]) -> dict[str
         platform.system(),
         platform.machine(),
     )
+
+
+def native_gate_environment(root: Path, inherited: Mapping[str, str]) -> dict[str, str]:
+    """Allow an unprivileged distribution tool cache; example: native_gate_environment(root, env)."""
+    selected = dict(inherited)
+    cache = root / "target/native-ci-tools/usr/bin"
+    if cache.is_dir():
+        selected["PATH"] = str(cache) + os.pathsep + selected.get("PATH", os.defpath)
+    require_native_gate_tools(selected, shutil.which)
+    return selected
+
+
+def require_native_gate_tools(
+    environment: Mapping[str, str], lookup: Callable[[str, int, str | None], str | None]
+) -> None:
+    """Reject missing CI prerequisites before compilation; example: require_native_gate_tools(env, shutil.which)."""
+    tools = ("xvfb-run", "Xvfb", "xauth", "spirv-val", "glslangValidator", "pkg-config")
+    missing = [
+        tool
+        for tool in tools
+        if lookup(tool, os.F_OK | os.X_OK, environment.get("PATH")) is None
+    ]
+    if missing:
+        raise ValueError(
+            f"native CI tools={missing!r}: expected executable workflow prerequisites in PATH"
+        )
 
 
 def bounded_ci_environment(inherited: Mapping[str, str]) -> dict[str, str]:
