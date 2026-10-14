@@ -26,12 +26,9 @@ impl FrameImageStore for FileFrameImageStore {
         let saved = output
             .save(&AsciiString::from(name))
             .map_err(io::Error::other)?;
-        if !saved {
-            return Err(io::Error::other(format!(
-                "image={path:?}; expected saved PPM"
-            )));
-        }
-        Ok(())
+        saved
+            .then_some(())
+            .ok_or_else(|| io::Error::other(format!("image={path:?}; expected saved PPM")))
     }
     fn rename(&self, temporary: &Path, target: &Path) -> io::Result<()> {
         std::fs::rename(temporary, target)
@@ -77,19 +74,35 @@ fn owned_capture_image(frame: &FrameCapture) -> io::Result<ImagePixMap> {
     Ok(image)
 }
 fn validate_capture_extent(frame: &FrameCapture) -> io::Result<()> {
-    let expected = frame.width as usize * frame.height as usize * 4;
-    if frame.rgba.len() != expected || frame.depth.len() != expected / 4 || expected == 0 {
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidData,
-            format!(
-                "RGBA bytes={}, extent={}x{}; expected {expected} positive image bytes",
-                frame.rgba.len(),
-                frame.width,
-                frame.height
-            ),
-        ));
+    let expected = (frame.width as usize)
+        .checked_mul(frame.height as usize)
+        .and_then(|pixels| pixels.checked_mul(4));
+    let Some(bytes) = expected else {
+        return Err(invalid_capture_shape(frame, expected));
+    };
+    if frame.rgba.len() != bytes || frame.depth.len() != bytes / 4 || bytes == 0 {
+        return Err(invalid_capture_shape(frame, expected));
     }
     Ok(())
+}
+fn invalid_capture_shape(frame: &FrameCapture, expected: Option<usize>) -> io::Error {
+    let shape = match expected {
+        Some(bytes) => format!(
+            "{bytes} RGBA bytes and {} depth values for positive extent",
+            bytes / 4
+        ),
+        None => "positive extent with representable usize RGBA byte length".into(),
+    };
+    io::Error::new(
+        io::ErrorKind::InvalidData,
+        format!(
+            "RGBA bytes={}, depth values={}, extent={}x{}; expected {shape}",
+            frame.rgba.len(),
+            frame.depth.len(),
+            frame.width,
+            frame.height
+        ),
+    )
 }
 
 fn publish_bytes(path: &Path, bytes: &[u8], store: &impl FrameImageStore) -> io::Result<()> {
@@ -194,5 +207,37 @@ mod tests {
         frame.rgba.fill(0);
         assert!(image.is_top_down());
         assert_eq!(image.pixel_color(0, 0, false).unwrap().rgb().green(), 1.);
+    }
+    #[test]
+    fn extreme_extent_returns_invalid_data_without_publishing() {
+        let store = FakeFrameImageStore::default();
+        let frame = FrameCapture {
+            width: u32::MAX,
+            height: u32::MAX,
+            rgba: Vec::new(),
+            depth: Vec::new(),
+        };
+        let error = publish_capture(Path::new("extreme"), &frame, &store).unwrap_err();
+        assert_eq!(error.kind(), io::ErrorKind::InvalidData);
+        assert!(error.to_string().contains("extent=4294967295x4294967295"));
+        assert!(
+            error
+                .to_string()
+                .contains("representable usize RGBA byte length")
+        );
+        assert!(store.files.borrow().is_empty());
+    }
+    #[test]
+    fn malformed_depth_reports_actual_lengths_and_expected_shape() {
+        let store = FakeFrameImageStore::default();
+        let mut frame = captured_green();
+        frame.depth.clear();
+        let error = publish_capture(Path::new("depth"), &frame, &store).unwrap_err();
+        assert_eq!(error.kind(), io::ErrorKind::InvalidData);
+        assert_eq!(
+            error.to_string(),
+            "RGBA bytes=4, depth values=0, extent=1x1; expected 4 RGBA bytes and 1 depth values for positive extent"
+        );
+        assert!(store.files.borrow().is_empty());
     }
 }
