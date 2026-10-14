@@ -128,7 +128,7 @@ fn context(row: &RegionObservedContext, bytes: &mut Vec<u8>) -> AnnularCheck<'st
         bytes.push(identity.orientation as u8);
         let actual = captured_placement(identity.location.transformation()).map_err(|e| {
             Box::<AnnularBindingCause<'static>>::from(
-                super::super::super::surface_charts::PrismSurfaceCause::Capture(e.into()),
+                super::super::super::surface_charts::PrismSurfaceCause::Capture(e),
             )
         })?;
         placement(actual, bytes);

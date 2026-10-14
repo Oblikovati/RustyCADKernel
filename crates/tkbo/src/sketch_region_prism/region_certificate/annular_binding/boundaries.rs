@@ -87,7 +87,7 @@ fn endpoint(
     let point = [raw.x(), raw.y(), raw.z()];
     let placement = captured_placement(shape.location().transformation()).map_err(|e| {
         Box::<AnnularBindingCause<'static>>::from(
-            super::super::super::surface_charts::PrismSurfaceCause::Capture(e.into()),
+                super::super::super::surface_charts::PrismSurfaceCause::Capture(e),
         )
     })?;
     let proven: Vec<_> = wire
