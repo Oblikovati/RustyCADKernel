@@ -74,3 +74,21 @@ fn assert_metadata_stop(
     assert_eq!(progress.phases, baseline.phases[..stop]);
     assert_eq!(refusal.metadata.len(), stop.saturating_sub(2).min(8));
 }
+
+#[test]
+fn exact_conformance_callback_trace_baseline() {
+    let join = JoinFixture::new().compose(|| false).ok().unwrap();
+    let mut geometry = StopConformance::default();
+    let proof = certify_joined_prism_conformance(&join, &mut geometry)
+        .ok()
+        .unwrap();
+    let mut metadata = StopTolerance::default();
+    assert!(
+        certify_joined_prism_tolerances(&join, &proof, StoredToleranceCap::NoLimit, &mut metadata)
+            .is_ok()
+    );
+    println!(
+        "exact-conformance-callback-baseline:{:?}/{:?}",
+        geometry.phases, metadata.phases
+    );
+}
