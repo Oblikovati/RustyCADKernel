@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0027: source-bound scalar subset, separate from body acceptance and publication.
 mod operand_errors;
-use operand_errors::*;
+pub(crate) use operand_errors::*;
 mod scalars;
 mod types;
 use super::super::surface_charts::*;
@@ -52,7 +52,7 @@ fn complete_inspection(
 }
 
 #[cfg(test)]
-pub(in crate::sketch_region_prism::region_certificate) mod tests;
+pub(in crate::sketch_region_prism) mod tests;
 
 mod complete;
 pub(crate) use complete::*;
