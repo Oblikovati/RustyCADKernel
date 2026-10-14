@@ -32,6 +32,7 @@ pub(super) struct PublicationCallbackStop {
 pub(super) struct PublicationCallbacks<'a> {
     progress: &'a mut dyn PrismPublicationProgress,
     ordinal: usize,
+    halted: bool,
     stopped: Option<PublicationCallbackStop>,
 }
 impl<'a> PublicationCallbacks<'a> {
@@ -39,11 +40,12 @@ impl<'a> PublicationCallbacks<'a> {
         Self {
             progress,
             ordinal: 0,
+            halted: false,
             stopped: None,
         }
     }
     pub fn cancelled(&mut self, phase: PrismPublicationPhase) -> bool {
-        if self.stopped.is_some() {
+        if self.halted {
             return true;
         }
         let checkpoint = PrismPublicationCheckpoint {
@@ -51,9 +53,10 @@ impl<'a> PublicationCallbacks<'a> {
             ordinal: self.ordinal,
         };
         if let Err(cause) = self.advance(checkpoint) {
+            self.halted = true;
             self.stopped = Some(PublicationCallbackStop { checkpoint, cause });
         }
-        self.stopped.is_some()
+        self.halted
     }
     pub fn take_stop(&mut self) -> Option<PublicationCallbackStop> {
         self.stopped.take()

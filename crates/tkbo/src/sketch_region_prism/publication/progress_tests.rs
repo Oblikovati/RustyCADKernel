@@ -33,6 +33,7 @@ fn one_ordinal_sequence_keeps_cancellation_terminal_across_stages() {
     assert_eq!(stop.checkpoint.phase, PrismPublicationPhase::Join);
     assert_eq!(stop.checkpoint.ordinal, 1);
     assert!(matches!(stop.cause, PublicationCallbackCause::Cancelled));
+    assert!(callbacks.cancelled(PrismPublicationPhase::Measures));
     assert_eq!(progress.seen.len(), 2);
 }
 #[test]

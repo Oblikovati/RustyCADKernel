@@ -34,6 +34,16 @@ borrowed bridge or operation-local identity escapes. The result owns one joined
 projection and the certificates bound to it. Read views take no lock. All public
 result candidates must satisfy compile-time Send/Sync and isolation/replay gates.
 
+Existing private join refusals can retain typed legacy diagnostics, including
+mutable operation-local shapes. The initial private non-success outcomes retain
+those original causes; they are not published bodies or a public Send/Sync
+outcome contract. Public refusal publication requires a separate owned typed
+diagnostic projection. Accepted results never retain those failure payloads.
+
+The measurement read view explicitly names the signed sweep integral. Negative
+extrusion may produce a negative signed report. This seam neither calls it a
+nonnegative physical volume nor recomputes it from a rounded representative.
+
 Historical mapped attempted checks, including self-intersection failures, remain
 recorded with their original class and status. Current acceptance comes only
 from the explicit ordered proof mode. Standalone frozen projection
