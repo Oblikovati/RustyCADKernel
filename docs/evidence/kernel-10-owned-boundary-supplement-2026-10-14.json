@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "main_source": "3c39e307958fb76ce5f871e430b2ee5122d4aa98",
+  "release_acceptance": "incomplete",
+  "supplements": [
+    {
+      "component": "conditional_physical_volume",
+      "integrated_source": "53147a45cb36770b886aa8045b1524a6242511d2",
+      "tests": 1641,
+      "doctests": 35,
+      "replay_processes": 6
+    },
+    {
+      "component": "owned_preparation_and_bounded_refusals",
+      "integrated_source": "ff70563b9451ad4580246ad41cc97298edf029e0",
+      "tests": 1689,
+      "doctests": 35,
+      "replay_processes": 26
+    }
+  ],
+  "counts_are_overlapping": true,
+  "sanitizer_acceptance": "incomplete_pre_main_startup_failure",
+  "remaining": [
+    "actual semantic correspondence",
+    "portable owned body and complete diagnostic outcomes",
+    "general profiles and holes",
+    "persistent consumer references and application workflow",
+    "operation sanitizer acceptance",
+    "owner release package gate"
+  ],
+  "artifacts": [
+    {
+      "path": "docs/evidence/prism-joined-volume-integration-2026-10-14/INTEGRATED.md",
+      "sha256": "bfcc5b5f61b61aae96c22cd24350abab5321d16453cf576a48e4c106fd516e4a"
+    },
+    {
+      "path": "docs/evidence/owned-prism-boundary-integration-2026-10-14/INTEGRATED.md",
+      "sha256": "86f8d79975e35bd483a2d966a995597871404087b90da8d5908b843c2e3c398c"
+    },
+    {
+      "path": "docs/evidence/prism-tsan-startup-diagnosis-2026-10-14/receipt.json",
+      "sha256": "245a1ed26525a500eebd4984d733e866798a4a873d0571455ecde66ed0923e64"
+    },
+    {
+      "path": "docs/kernel-10-release-acceptance.md",
+      "sha256": "f111fefe86574b41a314b1fa2751629743c14ea78cb91d1494cfcc5b817f9b7f"
+    }
+  ]
+}
