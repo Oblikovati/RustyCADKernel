@@ -1,0 +1,1645 @@
+{
+  "purpose": "Independent owned nested polynomial-loop fixture algebra; no kernel output used as oracle.",
+  "inputs": {
+    "x": {
+      "domain": "QQ",
+      "variables": [
+        "t"
+      ],
+      "polynomial": {
+        "terms": [
+          {
+            "exponents": [
+              3
+            ],
+            "coefficient": {
+              "num": "12",
+              "den": "1"
+            }
+          },
+          {
+            "exponents": [
+              2
+            ],
+            "coefficient": {
+              "num": "-24",
+              "den": "1"
+            }
+          },
+          {
+            "exponents": [
+              1
+            ],
+            "coefficient": {
+              "num": "12",
+              "den": "1"
+            }
+          }
+        ]
+      }
+    },
+    "y": {
+      "domain": "QQ",
+      "variables": [
+        "t"
+      ],
+      "polynomial": {
+        "terms": [
+          {
+            "exponents": [
+              3
+            ],
+            "coefficient": {
+              "num": "-12",
+              "den": "1"
+            }
+          },
+          {
+            "exponents": [
+              2
+            ],
+            "coefficient": {
+              "num": "12",
+              "den": "1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "records": {
+    "jacobian-schema-0": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"kind\": \"operation\",\n  \"operation\": {\n    \"operation_id\": \"polynomial.rational.compute.derivative\",\n    \"title\": \"Differentiate a rational polynomial\",\n    \"description\": \"Compute the formal derivative of one bounded polynomial in QQ[x].\",\n    \"input_schema\": {\n      \"$defs\": {\n        \"CanonicalRational\": {\n          \"additionalProperties\": false,\n          \"description\": \"A reduced rational whose denominator is positive and whose zero is 0/1.\",\n          \"examples\": [\n            {\n              \"den\": \"2\",\n              \"num\": \"1\"\n            }\n          ],\n          \"properties\": {\n            \"num\": {\n              \"description\": \"Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.\",\n              \"examples\": [\n                \"1\"\n              ],\n              \"maxLength\": 32769,\n              \"pattern\": \"^(?:0|-?[1-9][0-9]{0,32767})(?![\\\\s\\\\S])\",\n              \"title\": \"Num\",\n              \"type\": \"string\"\n            },\n            \"den\": {\n              \"description\": \"Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.\",\n              \"examples\": [\n                \"2\"\n              ],\n              \"maxLength\": 32768,\n              \"pattern\": \"^[1-9][0-9]{0,32767}(?![\\\\s\\\\S])\",\n              \"title\": \"Den\",\n              \"type\": \"string\"\n            }\n          },\n          \"required\": [\n            \"num\",\n            \"den\"\n          ],\n          \"title\": \"CanonicalRational\",\n          \"type\": \"object\"\n        },\n        \"RationalPolynomial\": {\n          \"additionalProperties\": false,\n          \"description\": \"One sparse polynomial together with its exact coefficient ring.\",\n          \"properties\": {\n            \"domain\": {\n              \"const\": \"QQ\",\n              \"default\": \"QQ\",\n              \"title\": \"Domain\",\n              \"type\": \"string\"\n            },\n            \"variables\": {\n              \"items\": {\n                \"pattern\": \"^[A-Za-z][A-Za-z0-9_]{0,31}$\",\n                \"type\": \"string\"\n              },\n              \"maxItems\": 8,\n              \"minItems\": 0,\n              \"title\": \"Variables\",\n              \"type\": \"array\"\n            },\n            \"polynomial\": {\n              \"$ref\": \"#/$defs/SparseRationalPolynomial\"\n            }\n          },\n          \"required\": [\n            \"variables\",\n            \"polynomial\"\n          ],\n          \"title\": \"RationalPolynomial\",\n          \"type\": \"object\"\n        },\n        \"RationalPolynomialTerm\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"coefficient\": {\n              \"$ref\": \"#/$defs/CanonicalRational\"\n            },\n            \"exponents\": {\n              \"items\": {\n                \"type\": \"integer\"\n              },\n              \"maxItems\": 8,\n              \"minItems\": 0,\n              \"title\": \"Exponents\",\n              \"type\": \"array\"\n            }\n          },\n          \"required\": [\n            \"coefficient\",\n            \"exponents\"\n          ],\n          \"title\": \"RationalPolynomialTerm\",\n          \"type\": \"object\"\n        },\n        \"SparseRationalPolynomial\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"terms\": {\n              \"default\": [],\n              \"description\": \"Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].\",\n              \"examples\": [\n                [\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"1\"\n                    },\n                    \"exponents\": [\n                      2\n                    ]\n                  },\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"-1\"\n                    },\n                    \"exponents\": [\n                      0\n                    ]\n                  }\n                ]\n              ],\n              \"items\": {\n                \"$ref\": \"#/$defs/RationalPolynomialTerm\"\n              },\n              \"maxItems\": 4096,\n              \"title\": \"Terms\",\n              \"type\": \"array\"\n            }\n          },\n          \"title\": \"SparseRationalPolynomial\",\n          \"type\": \"object\"\n        }\n      },\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"polynomial\": {\n          \"$ref\": \"#/$defs/RationalPolynomial\"\n        }\n      },\n      \"required\": [\n        \"polynomial\"\n      ],\n      \"title\": \"RationalPolynomialRequest\",\n      \"type\": \"object\"\n    },\n    \"output_schema\": {\n      \"$defs\": {\n        \"CanonicalRational\": {\n          \"additionalProperties\": false,\n          \"description\": \"A reduced rational whose denominator is positive and whose zero is 0/1.\",\n          \"examples\": [\n            {\n              \"den\": \"2\",\n              \"num\": \"1\"\n            }\n          ],\n          \"properties\": {\n            \"num\": {\n              \"description\": \"Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.\",\n              \"examples\": [\n                \"1\"\n              ],\n              \"maxLength\": 32769,\n              \"pattern\": \"^(?:0|-?[1-9][0-9]{0,32767})(?![\\\\s\\\\S])\",\n              \"title\": \"Num\",\n              \"type\": \"string\"\n            },\n            \"den\": {\n              \"description\": \"Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.\",\n              \"examples\": [\n                \"2\"\n              ],\n              \"maxLength\": 32768,\n              \"pattern\": \"^[1-9][0-9]{0,32767}(?![\\\\s\\\\S])\",\n              \"title\": \"Den\",\n              \"type\": \"string\"\n            }\n          },\n          \"required\": [\n            \"num\",\n            \"den\"\n          ],\n          \"title\": \"CanonicalRational\",\n          \"type\": \"object\"\n        },\n        \"RationalPolynomial\": {\n          \"additionalProperties\": false,\n          \"description\": \"One sparse polynomial together with its exact coefficient ring.\",\n          \"properties\": {\n            \"domain\": {\n              \"const\": \"QQ\",\n              \"default\": \"QQ\",\n              \"title\": \"Domain\",\n              \"type\": \"string\"\n            },\n            \"variables\": {\n              \"items\": {\n                \"pattern\": \"^[A-Za-z][A-Za-z0-9_]{0,31}$\",\n                \"type\": \"string\"\n              },\n              \"maxItems\": 8,\n              \"minItems\": 0,\n              \"title\": \"Variables\",\n              \"type\": \"array\"\n            },\n            \"polynomial\": {\n              \"$ref\": \"#/$defs/SparseRationalPolynomial\"\n            }\n          },\n          \"required\": [\n            \"variables\",\n            \"polynomial\"\n          ],\n          \"title\": \"RationalPolynomial\",\n          \"type\": \"object\"\n        },\n        \"RationalPolynomialTerm\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"coefficient\": {\n              \"$ref\": \"#/$defs/CanonicalRational\"\n            },\n            \"exponents\": {\n              \"items\": {\n                \"type\": \"integer\"\n              },\n              \"maxItems\": 8,\n              \"minItems\": 0,\n              \"title\": \"Exponents\",\n              \"type\": \"array\"\n            }\n          },\n          \"required\": [\n            \"coefficient\",\n            \"exponents\"\n          ],\n          \"title\": \"RationalPolynomialTerm\",\n          \"type\": \"object\"\n        },\n        \"SparseRationalPolynomial\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"terms\": {\n              \"default\": [],\n              \"description\": \"Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].\",\n              \"examples\": [\n                [\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"1\"\n                    },\n                    \"exponents\": [\n                      2\n                    ]\n                  },\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"-1\"\n                    },\n                    \"exponents\": [\n                      0\n                    ]\n                  }\n                ]\n              ],\n              \"items\": {\n                \"$ref\": \"#/$defs/RationalPolynomialTerm\"\n              },\n              \"maxItems\": 4096,\n              \"title\": \"Terms\",\n              \"type\": \"array\"\n            }\n          },\n          \"title\": \"SparseRationalPolynomial\",\n          \"type\": \"object\"\n        }\n      },\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"derivative\": {\n          \"$ref\": \"#/$defs/RationalPolynomial\"\n        }\n      },\n      \"required\": [\n        \"derivative\"\n      ],\n      \"title\": \"RationalPolynomialDerivativeResult\",\n      \"type\": \"object\"\n    },\n    \"read_only\": true,\n    \"tags\": [\n      \"polynomial\",\n      \"rational\",\n      \"derivative\"\n    ],\n    \"runtime_requirements\": [],\n    \"discovery_terms\": [],\n    \"examples\": [\n      {\n        \"name\": \"cubic_derivative\",\n        \"description\": \"Differentiate one half x³ minus 2x.\",\n        \"input\": {\n          \"polynomial\": {\n            \"domain\": \"QQ\",\n            \"variables\": [\n              \"x\"\n            ],\n            \"polynomial\": {\n              \"terms\": [\n                {\n                  \"coefficient\": {\n                    \"num\": \"1\",\n                    \"den\": \"2\"\n                  },\n                  \"exponents\": [\n                    3\n                  ]\n                },\n                {\n                  \"coefficient\": {\n                    \"num\": \"-2\",\n                    \"den\": \"1\"\n                  },\n                  \"exponents\": [\n                    1\n                  ]\n                }\n              ]\n            }\n          }\n        }\n      }\n    ]\n  },\n  \"backend_availability\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "kind": "operation",
+        "operation": {
+          "operation_id": "polynomial.rational.compute.derivative",
+          "title": "Differentiate a rational polynomial",
+          "description": "Compute the formal derivative of one bounded polynomial in QQ[x].",
+          "input_schema": {
+            "$defs": {
+              "CanonicalRational": {
+                "additionalProperties": false,
+                "description": "A reduced rational whose denominator is positive and whose zero is 0/1.",
+                "examples": [
+                  {
+                    "den": "2",
+                    "num": "1"
+                  }
+                ],
+                "properties": {
+                  "num": {
+                    "description": "Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.",
+                    "examples": [
+                      "1"
+                    ],
+                    "maxLength": 32769,
+                    "pattern": "^(?:0|-?[1-9][0-9]{0,32767})(?![\\s\\S])",
+                    "title": "Num",
+                    "type": "string"
+                  },
+                  "den": {
+                    "description": "Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.",
+                    "examples": [
+                      "2"
+                    ],
+                    "maxLength": 32768,
+                    "pattern": "^[1-9][0-9]{0,32767}(?![\\s\\S])",
+                    "title": "Den",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "num",
+                  "den"
+                ],
+                "title": "CanonicalRational",
+                "type": "object"
+              },
+              "RationalPolynomial": {
+                "additionalProperties": false,
+                "description": "One sparse polynomial together with its exact coefficient ring.",
+                "properties": {
+                  "domain": {
+                    "const": "QQ",
+                    "default": "QQ",
+                    "title": "Domain",
+                    "type": "string"
+                  },
+                  "variables": {
+                    "items": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,31}$",
+                      "type": "string"
+                    },
+                    "maxItems": 8,
+                    "minItems": 0,
+                    "title": "Variables",
+                    "type": "array"
+                  },
+                  "polynomial": {
+                    "$ref": "#/$defs/SparseRationalPolynomial"
+                  }
+                },
+                "required": [
+                  "variables",
+                  "polynomial"
+                ],
+                "title": "RationalPolynomial",
+                "type": "object"
+              },
+              "RationalPolynomialTerm": {
+                "additionalProperties": false,
+                "properties": {
+                  "coefficient": {
+                    "$ref": "#/$defs/CanonicalRational"
+                  },
+                  "exponents": {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "maxItems": 8,
+                    "minItems": 0,
+                    "title": "Exponents",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "coefficient",
+                  "exponents"
+                ],
+                "title": "RationalPolynomialTerm",
+                "type": "object"
+              },
+              "SparseRationalPolynomial": {
+                "additionalProperties": false,
+                "properties": {
+                  "terms": {
+                    "default": [],
+                    "description": "Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].",
+                    "examples": [
+                      [
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "1"
+                          },
+                          "exponents": [
+                            2
+                          ]
+                        },
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "-1"
+                          },
+                          "exponents": [
+                            0
+                          ]
+                        }
+                      ]
+                    ],
+                    "items": {
+                      "$ref": "#/$defs/RationalPolynomialTerm"
+                    },
+                    "maxItems": 4096,
+                    "title": "Terms",
+                    "type": "array"
+                  }
+                },
+                "title": "SparseRationalPolynomial",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "properties": {
+              "polynomial": {
+                "$ref": "#/$defs/RationalPolynomial"
+              }
+            },
+            "required": [
+              "polynomial"
+            ],
+            "title": "RationalPolynomialRequest",
+            "type": "object"
+          },
+          "output_schema": {
+            "$defs": {
+              "CanonicalRational": {
+                "additionalProperties": false,
+                "description": "A reduced rational whose denominator is positive and whose zero is 0/1.",
+                "examples": [
+                  {
+                    "den": "2",
+                    "num": "1"
+                  }
+                ],
+                "properties": {
+                  "num": {
+                    "description": "Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.",
+                    "examples": [
+                      "1"
+                    ],
+                    "maxLength": 32769,
+                    "pattern": "^(?:0|-?[1-9][0-9]{0,32767})(?![\\s\\S])",
+                    "title": "Num",
+                    "type": "string"
+                  },
+                  "den": {
+                    "description": "Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.",
+                    "examples": [
+                      "2"
+                    ],
+                    "maxLength": 32768,
+                    "pattern": "^[1-9][0-9]{0,32767}(?![\\s\\S])",
+                    "title": "Den",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "num",
+                  "den"
+                ],
+                "title": "CanonicalRational",
+                "type": "object"
+              },
+              "RationalPolynomial": {
+                "additionalProperties": false,
+                "description": "One sparse polynomial together with its exact coefficient ring.",
+                "properties": {
+                  "domain": {
+                    "const": "QQ",
+                    "default": "QQ",
+                    "title": "Domain",
+                    "type": "string"
+                  },
+                  "variables": {
+                    "items": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,31}$",
+                      "type": "string"
+                    },
+                    "maxItems": 8,
+                    "minItems": 0,
+                    "title": "Variables",
+                    "type": "array"
+                  },
+                  "polynomial": {
+                    "$ref": "#/$defs/SparseRationalPolynomial"
+                  }
+                },
+                "required": [
+                  "variables",
+                  "polynomial"
+                ],
+                "title": "RationalPolynomial",
+                "type": "object"
+              },
+              "RationalPolynomialTerm": {
+                "additionalProperties": false,
+                "properties": {
+                  "coefficient": {
+                    "$ref": "#/$defs/CanonicalRational"
+                  },
+                  "exponents": {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "maxItems": 8,
+                    "minItems": 0,
+                    "title": "Exponents",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "coefficient",
+                  "exponents"
+                ],
+                "title": "RationalPolynomialTerm",
+                "type": "object"
+              },
+              "SparseRationalPolynomial": {
+                "additionalProperties": false,
+                "properties": {
+                  "terms": {
+                    "default": [],
+                    "description": "Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].",
+                    "examples": [
+                      [
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "1"
+                          },
+                          "exponents": [
+                            2
+                          ]
+                        },
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "-1"
+                          },
+                          "exponents": [
+                            0
+                          ]
+                        }
+                      ]
+                    ],
+                    "items": {
+                      "$ref": "#/$defs/RationalPolynomialTerm"
+                    },
+                    "maxItems": 4096,
+                    "title": "Terms",
+                    "type": "array"
+                  }
+                },
+                "title": "SparseRationalPolynomial",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "properties": {
+              "derivative": {
+                "$ref": "#/$defs/RationalPolynomial"
+              }
+            },
+            "required": [
+              "derivative"
+            ],
+            "title": "RationalPolynomialDerivativeResult",
+            "type": "object"
+          },
+          "read_only": true,
+          "tags": [
+            "polynomial",
+            "rational",
+            "derivative"
+          ],
+          "runtime_requirements": [],
+          "discovery_terms": [],
+          "examples": [
+            {
+              "name": "cubic_derivative",
+              "description": "Differentiate one half x³ minus 2x.",
+              "input": {
+                "polynomial": {
+                  "domain": "QQ",
+                  "variables": [
+                    "x"
+                  ],
+                  "polynomial": {
+                    "terms": [
+                      {
+                        "coefficient": {
+                          "num": "1",
+                          "den": "2"
+                        },
+                        "exponents": [
+                          3
+                        ]
+                      },
+                      {
+                        "coefficient": {
+                          "num": "-2",
+                          "den": "1"
+                        },
+                        "exponents": [
+                          1
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "backend_availability": []
+      },
+      "isError": false
+    },
+    "jacobian-schema-1": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"kind\": \"operation\",\n  \"operation\": {\n    \"operation_id\": \"polynomial.rational.multiply.compute\",\n    \"title\": \"Multiply rational polynomials\",\n    \"description\": \"Compute the exact product of two rational polynomials in the same QQ variable ring. Sparse convolution admits at most 1000000 input term pairs; compact univariate products can instead use a dense backend with output span at most 4096 and a coefficient bit-work bound.\",\n    \"input_schema\": {\n      \"$defs\": {\n        \"CanonicalRational\": {\n          \"additionalProperties\": false,\n          \"description\": \"A reduced rational whose denominator is positive and whose zero is 0/1.\",\n          \"examples\": [\n            {\n              \"den\": \"2\",\n              \"num\": \"1\"\n            }\n          ],\n          \"properties\": {\n            \"num\": {\n              \"description\": \"Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.\",\n              \"examples\": [\n                \"1\"\n              ],\n              \"maxLength\": 32769,\n              \"pattern\": \"^(?:0|-?[1-9][0-9]{0,32767})(?![\\\\s\\\\S])\",\n              \"title\": \"Num\",\n              \"type\": \"string\"\n            },\n            \"den\": {\n              \"description\": \"Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.\",\n              \"examples\": [\n                \"2\"\n              ],\n              \"maxLength\": 32768,\n              \"pattern\": \"^[1-9][0-9]{0,32767}(?![\\\\s\\\\S])\",\n              \"title\": \"Den\",\n              \"type\": \"string\"\n            }\n          },\n          \"required\": [\n            \"num\",\n            \"den\"\n          ],\n          \"title\": \"CanonicalRational\",\n          \"type\": \"object\"\n        },\n        \"RationalPolynomial\": {\n          \"additionalProperties\": false,\n          \"description\": \"One sparse polynomial together with its exact coefficient ring.\",\n          \"properties\": {\n            \"domain\": {\n              \"const\": \"QQ\",\n              \"default\": \"QQ\",\n              \"title\": \"Domain\",\n              \"type\": \"string\"\n            },\n            \"variables\": {\n              \"items\": {\n                \"pattern\": \"^[A-Za-z][A-Za-z0-9_]{0,31}$\",\n                \"type\": \"string\"\n              },\n              \"maxItems\": 8,\n              \"minItems\": 0,\n              \"title\": \"Variables\",\n              \"type\": \"array\"\n            },\n            \"polynomial\": {\n              \"$ref\": \"#/$defs/SparseRationalPolynomial\"\n            }\n          },\n          \"required\": [\n            \"variables\",\n            \"polynomial\"\n          ],\n          \"title\": \"RationalPolynomial\",\n          \"type\": \"object\"\n        },\n        \"RationalPolynomialTerm\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"coefficient\": {\n              \"$ref\": \"#/$defs/CanonicalRational\"\n            },\n            \"exponents\": {\n              \"items\": {\n                \"type\": \"integer\"\n              },\n              \"maxItems\": 8,\n              \"minItems\": 0,\n              \"title\": \"Exponents\",\n              \"type\": \"array\"\n            }\n          },\n          \"required\": [\n            \"coefficient\",\n            \"exponents\"\n          ],\n          \"title\": \"RationalPolynomialTerm\",\n          \"type\": \"object\"\n        },\n        \"SparseRationalPolynomial\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"terms\": {\n              \"default\": [],\n              \"description\": \"Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].\",\n              \"examples\": [\n                [\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"1\"\n                    },\n                    \"exponents\": [\n                      2\n                    ]\n                  },\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"-1\"\n                    },\n                    \"exponents\": [\n                      0\n                    ]\n                  }\n                ]\n              ],\n              \"items\": {\n                \"$ref\": \"#/$defs/RationalPolynomialTerm\"\n              },\n              \"maxItems\": 4096,\n              \"title\": \"Terms\",\n              \"type\": \"array\"\n            }\n          },\n          \"title\": \"SparseRationalPolynomial\",\n          \"type\": \"object\"\n        }\n      },\n      \"additionalProperties\": false,\n      \"description\": \"Two rational polynomials in the same variable ring for exact multiplication.\",\n      \"properties\": {\n        \"left\": {\n          \"$ref\": \"#/$defs/RationalPolynomial\"\n        },\n        \"right\": {\n          \"$ref\": \"#/$defs/RationalPolynomial\"\n        }\n      },\n      \"required\": [\n        \"left\",\n        \"right\"\n      ],\n      \"title\": \"RationalPolynomialMultiplyRequest\",\n      \"type\": \"object\"\n    },\n    \"output_schema\": {\n      \"$defs\": {\n        \"CanonicalRational\": {\n          \"additionalProperties\": false,\n          \"description\": \"A reduced rational whose denominator is positive and whose zero is 0/1.\",\n          \"examples\": [\n            {\n              \"den\": \"2\",\n              \"num\": \"1\"\n            }\n          ],\n          \"properties\": {\n            \"num\": {\n              \"description\": \"Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.\",\n              \"examples\": [\n                \"1\"\n              ],\n              \"maxLength\": 32769,\n              \"pattern\": \"^(?:0|-?[1-9][0-9]{0,32767})(?![\\\\s\\\\S])\",\n              \"title\": \"Num\",\n              \"type\": \"string\"\n            },\n            \"den\": {\n              \"description\": \"Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.\",\n              \"examples\": [\n                \"2\"\n              ],\n              \"maxLength\": 32768,\n              \"pattern\": \"^[1-9][0-9]{0,32767}(?![\\\\s\\\\S])\",\n              \"title\": \"Den\",\n              \"type\": \"string\"\n            }\n          },\n          \"required\": [\n            \"num\",\n            \"den\"\n          ],\n          \"title\": \"CanonicalRational\",\n          \"type\": \"object\"\n        },\n        \"RationalPolynomialTerm\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"coefficient\": {\n              \"$ref\": \"#/$defs/CanonicalRational\"\n            },\n            \"exponents\": {\n              \"items\": {\n                \"type\": \"integer\"\n              },\n              \"maxItems\": 8,\n              \"minItems\": 0,\n              \"title\": \"Exponents\",\n              \"type\": \"array\"\n            }\n          },\n          \"required\": [\n            \"coefficient\",\n            \"exponents\"\n          ],\n          \"title\": \"RationalPolynomialTerm\",\n          \"type\": \"object\"\n        },\n        \"SparseRationalPolynomial\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"terms\": {\n              \"default\": [],\n              \"description\": \"Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].\",\n              \"examples\": [\n                [\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"1\"\n                    },\n                    \"exponents\": [\n                      2\n                    ]\n                  },\n                  {\n                    \"coefficient\": {\n                      \"den\": \"1\",\n                      \"num\": \"-1\"\n                    },\n                    \"exponents\": [\n                      0\n                    ]\n                  }\n                ]\n              ],\n              \"items\": {\n                \"$ref\": \"#/$defs/RationalPolynomialTerm\"\n              },\n              \"maxItems\": 4096,\n              \"title\": \"Terms\",\n              \"type\": \"array\"\n            }\n          },\n          \"title\": \"SparseRationalPolynomial\",\n          \"type\": \"object\"\n        }\n      },\n      \"additionalProperties\": false,\n      \"description\": \"One sparse polynomial together with its exact coefficient ring.\",\n      \"properties\": {\n        \"domain\": {\n          \"const\": \"QQ\",\n          \"default\": \"QQ\",\n          \"title\": \"Domain\",\n          \"type\": \"string\"\n        },\n        \"variables\": {\n          \"items\": {\n            \"pattern\": \"^[A-Za-z][A-Za-z0-9_]{0,31}$\",\n            \"type\": \"string\"\n          },\n          \"maxItems\": 8,\n          \"minItems\": 0,\n          \"title\": \"Variables\",\n          \"type\": \"array\"\n        },\n        \"polynomial\": {\n          \"$ref\": \"#/$defs/SparseRationalPolynomial\"\n        }\n      },\n      \"required\": [\n        \"variables\",\n        \"polynomial\"\n      ],\n      \"title\": \"RationalPolynomial\",\n      \"type\": \"object\"\n    },\n    \"read_only\": true,\n    \"tags\": [\n      \"polynomial\",\n      \"rational\",\n      \"multiplication\"\n    ],\n    \"runtime_requirements\": [],\n    \"discovery_terms\": [],\n    \"examples\": [\n      {\n        \"name\": \"multiply_x_plus_1_squared\",\n        \"description\": \"Multiply (x+1) * (x+1) = x^2+2x+1; both polynomials must use the same ordered variables.\",\n        \"input\": {\n          \"left\": {\n            \"domain\": \"QQ\",\n            \"variables\": [\n              \"x\"\n            ],\n            \"polynomial\": {\n              \"terms\": [\n                {\n                  \"coefficient\": {\n                    \"num\": \"1\",\n                    \"den\": \"1\"\n                  },\n                  \"exponents\": [\n                    1\n                  ]\n                },\n                {\n                  \"coefficient\": {\n                    \"num\": \"1\",\n                    \"den\": \"1\"\n                  },\n                  \"exponents\": [\n                    0\n                  ]\n                }\n              ]\n            }\n          },\n          \"right\": {\n            \"domain\": \"QQ\",\n            \"variables\": [\n              \"x\"\n            ],\n            \"polynomial\": {\n              \"terms\": [\n                {\n                  \"coefficient\": {\n                    \"num\": \"1\",\n                    \"den\": \"1\"\n                  },\n                  \"exponents\": [\n                    1\n                  ]\n                },\n                {\n                  \"coefficient\": {\n                    \"num\": \"1\",\n                    \"den\": \"1\"\n                  },\n                  \"exponents\": [\n                    0\n                  ]\n                }\n              ]\n            }\n          }\n        }\n      }\n    ]\n  },\n  \"backend_availability\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "kind": "operation",
+        "operation": {
+          "operation_id": "polynomial.rational.multiply.compute",
+          "title": "Multiply rational polynomials",
+          "description": "Compute the exact product of two rational polynomials in the same QQ variable ring. Sparse convolution admits at most 1000000 input term pairs; compact univariate products can instead use a dense backend with output span at most 4096 and a coefficient bit-work bound.",
+          "input_schema": {
+            "$defs": {
+              "CanonicalRational": {
+                "additionalProperties": false,
+                "description": "A reduced rational whose denominator is positive and whose zero is 0/1.",
+                "examples": [
+                  {
+                    "den": "2",
+                    "num": "1"
+                  }
+                ],
+                "properties": {
+                  "num": {
+                    "description": "Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.",
+                    "examples": [
+                      "1"
+                    ],
+                    "maxLength": 32769,
+                    "pattern": "^(?:0|-?[1-9][0-9]{0,32767})(?![\\s\\S])",
+                    "title": "Num",
+                    "type": "string"
+                  },
+                  "den": {
+                    "description": "Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.",
+                    "examples": [
+                      "2"
+                    ],
+                    "maxLength": 32768,
+                    "pattern": "^[1-9][0-9]{0,32767}(?![\\s\\S])",
+                    "title": "Den",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "num",
+                  "den"
+                ],
+                "title": "CanonicalRational",
+                "type": "object"
+              },
+              "RationalPolynomial": {
+                "additionalProperties": false,
+                "description": "One sparse polynomial together with its exact coefficient ring.",
+                "properties": {
+                  "domain": {
+                    "const": "QQ",
+                    "default": "QQ",
+                    "title": "Domain",
+                    "type": "string"
+                  },
+                  "variables": {
+                    "items": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,31}$",
+                      "type": "string"
+                    },
+                    "maxItems": 8,
+                    "minItems": 0,
+                    "title": "Variables",
+                    "type": "array"
+                  },
+                  "polynomial": {
+                    "$ref": "#/$defs/SparseRationalPolynomial"
+                  }
+                },
+                "required": [
+                  "variables",
+                  "polynomial"
+                ],
+                "title": "RationalPolynomial",
+                "type": "object"
+              },
+              "RationalPolynomialTerm": {
+                "additionalProperties": false,
+                "properties": {
+                  "coefficient": {
+                    "$ref": "#/$defs/CanonicalRational"
+                  },
+                  "exponents": {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "maxItems": 8,
+                    "minItems": 0,
+                    "title": "Exponents",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "coefficient",
+                  "exponents"
+                ],
+                "title": "RationalPolynomialTerm",
+                "type": "object"
+              },
+              "SparseRationalPolynomial": {
+                "additionalProperties": false,
+                "properties": {
+                  "terms": {
+                    "default": [],
+                    "description": "Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].",
+                    "examples": [
+                      [
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "1"
+                          },
+                          "exponents": [
+                            2
+                          ]
+                        },
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "-1"
+                          },
+                          "exponents": [
+                            0
+                          ]
+                        }
+                      ]
+                    ],
+                    "items": {
+                      "$ref": "#/$defs/RationalPolynomialTerm"
+                    },
+                    "maxItems": 4096,
+                    "title": "Terms",
+                    "type": "array"
+                  }
+                },
+                "title": "SparseRationalPolynomial",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Two rational polynomials in the same variable ring for exact multiplication.",
+            "properties": {
+              "left": {
+                "$ref": "#/$defs/RationalPolynomial"
+              },
+              "right": {
+                "$ref": "#/$defs/RationalPolynomial"
+              }
+            },
+            "required": [
+              "left",
+              "right"
+            ],
+            "title": "RationalPolynomialMultiplyRequest",
+            "type": "object"
+          },
+          "output_schema": {
+            "$defs": {
+              "CanonicalRational": {
+                "additionalProperties": false,
+                "description": "A reduced rational whose denominator is positive and whose zero is 0/1.",
+                "examples": [
+                  {
+                    "den": "2",
+                    "num": "1"
+                  }
+                ],
+                "properties": {
+                  "num": {
+                    "description": "Exact numerator of the reduced rational; a native Python int and a canonical decimal string in JSON.",
+                    "examples": [
+                      "1"
+                    ],
+                    "maxLength": 32769,
+                    "pattern": "^(?:0|-?[1-9][0-9]{0,32767})(?![\\s\\S])",
+                    "title": "Num",
+                    "type": "string"
+                  },
+                  "den": {
+                    "description": "Positive exact denominator; a native Python int and a canonical decimal string in JSON. Together with num it must be reduced, and integers use den='1'.",
+                    "examples": [
+                      "2"
+                    ],
+                    "maxLength": 32768,
+                    "pattern": "^[1-9][0-9]{0,32767}(?![\\s\\S])",
+                    "title": "Den",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "num",
+                  "den"
+                ],
+                "title": "CanonicalRational",
+                "type": "object"
+              },
+              "RationalPolynomialTerm": {
+                "additionalProperties": false,
+                "properties": {
+                  "coefficient": {
+                    "$ref": "#/$defs/CanonicalRational"
+                  },
+                  "exponents": {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "maxItems": 8,
+                    "minItems": 0,
+                    "title": "Exponents",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "coefficient",
+                  "exponents"
+                ],
+                "title": "RationalPolynomialTerm",
+                "type": "object"
+              },
+              "SparseRationalPolynomial": {
+                "additionalProperties": false,
+                "properties": {
+                  "terms": {
+                    "default": [],
+                    "description": "Nonzero monomials in descending lexicographic order of their exponent tuples (highest first). For one variable, list [2] before [0].",
+                    "examples": [
+                      [
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "1"
+                          },
+                          "exponents": [
+                            2
+                          ]
+                        },
+                        {
+                          "coefficient": {
+                            "den": "1",
+                            "num": "-1"
+                          },
+                          "exponents": [
+                            0
+                          ]
+                        }
+                      ]
+                    ],
+                    "items": {
+                      "$ref": "#/$defs/RationalPolynomialTerm"
+                    },
+                    "maxItems": 4096,
+                    "title": "Terms",
+                    "type": "array"
+                  }
+                },
+                "title": "SparseRationalPolynomial",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "description": "One sparse polynomial together with its exact coefficient ring.",
+            "properties": {
+              "domain": {
+                "const": "QQ",
+                "default": "QQ",
+                "title": "Domain",
+                "type": "string"
+              },
+              "variables": {
+                "items": {
+                  "pattern": "^[A-Za-z][A-Za-z0-9_]{0,31}$",
+                  "type": "string"
+                },
+                "maxItems": 8,
+                "minItems": 0,
+                "title": "Variables",
+                "type": "array"
+              },
+              "polynomial": {
+                "$ref": "#/$defs/SparseRationalPolynomial"
+              }
+            },
+            "required": [
+              "variables",
+              "polynomial"
+            ],
+            "title": "RationalPolynomial",
+            "type": "object"
+          },
+          "read_only": true,
+          "tags": [
+            "polynomial",
+            "rational",
+            "multiplication"
+          ],
+          "runtime_requirements": [],
+          "discovery_terms": [],
+          "examples": [
+            {
+              "name": "multiply_x_plus_1_squared",
+              "description": "Multiply (x+1) * (x+1) = x^2+2x+1; both polynomials must use the same ordered variables.",
+              "input": {
+                "left": {
+                  "domain": "QQ",
+                  "variables": [
+                    "x"
+                  ],
+                  "polynomial": {
+                    "terms": [
+                      {
+                        "coefficient": {
+                          "num": "1",
+                          "den": "1"
+                        },
+                        "exponents": [
+                          1
+                        ]
+                      },
+                      {
+                        "coefficient": {
+                          "num": "1",
+                          "den": "1"
+                        },
+                        "exponents": [
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "right": {
+                  "domain": "QQ",
+                  "variables": [
+                    "x"
+                  ],
+                  "polynomial": {
+                    "terms": [
+                      {
+                        "coefficient": {
+                          "num": "1",
+                          "den": "1"
+                        },
+                        "exponents": [
+                          1
+                        ]
+                      },
+                      {
+                        "coefficient": {
+                          "num": "1",
+                          "den": "1"
+                        },
+                        "exponents": [
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "backend_availability": []
+      },
+      "isError": false
+    },
+    "math-derivative-x": {
+      "input": {
+        "operation_id": "polynomial.rational.compute.derivative",
+        "payload": {
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "exponents": [
+                    3
+                  ],
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  }
+                },
+                {
+                  "exponents": [
+                    2
+                  ],
+                  "coefficient": {
+                    "num": "-24",
+                    "den": "1"
+                  }
+                },
+                {
+                  "exponents": [
+                    1
+                  ],
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.compute.derivative\",\n  \"runtime_ms\": 8,\n  \"output\": {\n    \"derivative\": {\n      \"domain\": \"QQ\",\n      \"variables\": [\n        \"t\"\n      ],\n      \"polynomial\": {\n        \"terms\": [\n          {\n            \"coefficient\": {\n              \"num\": \"36\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              2\n            ]\n          },\n          {\n            \"coefficient\": {\n              \"num\": \"-48\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              1\n            ]\n          },\n          {\n            \"coefficient\": {\n              \"num\": \"12\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              0\n            ]\n          }\n        ]\n      }\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.compute.derivative",
+          "runtime_ms": 8,
+          "output": {
+            "derivative": {
+              "domain": "QQ",
+              "variables": [
+                "t"
+              ],
+              "polynomial": {
+                "terms": [
+                  {
+                    "coefficient": {
+                      "num": "36",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      2
+                    ]
+                  },
+                  {
+                    "coefficient": {
+                      "num": "-48",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      1
+                    ]
+                  },
+                  {
+                    "coefficient": {
+                      "num": "12",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "isError": false
+      }
+    },
+    "math-derivative-y": {
+      "input": {
+        "operation_id": "polynomial.rational.compute.derivative",
+        "payload": {
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "exponents": [
+                    3
+                  ],
+                  "coefficient": {
+                    "num": "-12",
+                    "den": "1"
+                  }
+                },
+                {
+                  "exponents": [
+                    2
+                  ],
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.compute.derivative\",\n  \"runtime_ms\": 0,\n  \"output\": {\n    \"derivative\": {\n      \"domain\": \"QQ\",\n      \"variables\": [\n        \"t\"\n      ],\n      \"polynomial\": {\n        \"terms\": [\n          {\n            \"coefficient\": {\n              \"num\": \"-36\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              2\n            ]\n          },\n          {\n            \"coefficient\": {\n              \"num\": \"24\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              1\n            ]\n          }\n        ]\n      }\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.compute.derivative",
+          "runtime_ms": 0,
+          "output": {
+            "derivative": {
+              "domain": "QQ",
+              "variables": [
+                "t"
+              ],
+              "polynomial": {
+                "terms": [
+                  {
+                    "coefficient": {
+                      "num": "-36",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      2
+                    ]
+                  },
+                  {
+                    "coefficient": {
+                      "num": "24",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      1
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "isError": false
+      }
+    },
+    "math-second-x": {
+      "input": {
+        "operation_id": "polynomial.rational.compute.derivative",
+        "payload": {
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "36",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-48",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.compute.derivative\",\n  \"runtime_ms\": 1,\n  \"output\": {\n    \"derivative\": {\n      \"domain\": \"QQ\",\n      \"variables\": [\n        \"t\"\n      ],\n      \"polynomial\": {\n        \"terms\": [\n          {\n            \"coefficient\": {\n              \"num\": \"72\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              1\n            ]\n          },\n          {\n            \"coefficient\": {\n              \"num\": \"-48\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              0\n            ]\n          }\n        ]\n      }\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.compute.derivative",
+          "runtime_ms": 1,
+          "output": {
+            "derivative": {
+              "domain": "QQ",
+              "variables": [
+                "t"
+              ],
+              "polynomial": {
+                "terms": [
+                  {
+                    "coefficient": {
+                      "num": "72",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      1
+                    ]
+                  },
+                  {
+                    "coefficient": {
+                      "num": "-48",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "isError": false
+      }
+    },
+    "math-second-y": {
+      "input": {
+        "operation_id": "polynomial.rational.compute.derivative",
+        "payload": {
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-36",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "24",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.compute.derivative\",\n  \"runtime_ms\": 1,\n  \"output\": {\n    \"derivative\": {\n      \"domain\": \"QQ\",\n      \"variables\": [\n        \"t\"\n      ],\n      \"polynomial\": {\n        \"terms\": [\n          {\n            \"coefficient\": {\n              \"num\": \"-72\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              1\n            ]\n          },\n          {\n            \"coefficient\": {\n              \"num\": \"24\",\n              \"den\": \"1\"\n            },\n            \"exponents\": [\n              0\n            ]\n          }\n        ]\n      }\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.compute.derivative",
+          "runtime_ms": 1,
+          "output": {
+            "derivative": {
+              "domain": "QQ",
+              "variables": [
+                "t"
+              ],
+              "polynomial": {
+                "terms": [
+                  {
+                    "coefficient": {
+                      "num": "-72",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      1
+                    ]
+                  },
+                  {
+                    "coefficient": {
+                      "num": "24",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "isError": false
+      }
+    },
+    "math-product-xyprime": {
+      "input": {
+        "operation_id": "polynomial.rational.multiply.compute",
+        "payload": {
+          "left": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "exponents": [
+                    3
+                  ],
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  }
+                },
+                {
+                  "exponents": [
+                    2
+                  ],
+                  "coefficient": {
+                    "num": "-24",
+                    "den": "1"
+                  }
+                },
+                {
+                  "exponents": [
+                    1
+                  ],
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  }
+                }
+              ]
+            }
+          },
+          "right": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-36",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "24",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.multiply.compute\",\n  \"runtime_ms\": 0,\n  \"output\": {\n    \"domain\": \"QQ\",\n    \"variables\": [\n      \"t\"\n    ],\n    \"polynomial\": {\n      \"terms\": [\n        {\n          \"coefficient\": {\n            \"num\": \"-432\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            5\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"1152\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            4\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"-1008\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            3\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"288\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            2\n          ]\n        }\n      ]\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.multiply.compute",
+          "runtime_ms": 0,
+          "output": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-432",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    5
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "1152",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-1008",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    3
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "288",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "isError": false
+      }
+    },
+    "math-product-yxprime": {
+      "input": {
+        "operation_id": "polynomial.rational.multiply.compute",
+        "payload": {
+          "left": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "exponents": [
+                    3
+                  ],
+                  "coefficient": {
+                    "num": "-12",
+                    "den": "1"
+                  }
+                },
+                {
+                  "exponents": [
+                    2
+                  ],
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  }
+                }
+              ]
+            }
+          },
+          "right": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "36",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-48",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.multiply.compute\",\n  \"runtime_ms\": 2,\n  \"output\": {\n    \"domain\": \"QQ\",\n    \"variables\": [\n      \"t\"\n    ],\n    \"polynomial\": {\n      \"terms\": [\n        {\n          \"coefficient\": {\n            \"num\": \"-432\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            5\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"1008\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            4\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"-720\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            3\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"144\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            2\n          ]\n        }\n      ]\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.multiply.compute",
+          "runtime_ms": 2,
+          "output": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-432",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    5
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "1008",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-720",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    3
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "144",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "isError": false
+      }
+    },
+    "math-product-xprimeysecond": {
+      "input": {
+        "operation_id": "polynomial.rational.multiply.compute",
+        "payload": {
+          "left": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "36",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-48",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "12",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          },
+          "right": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-72",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "24",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.multiply.compute\",\n  \"runtime_ms\": 0,\n  \"output\": {\n    \"domain\": \"QQ\",\n    \"variables\": [\n      \"t\"\n    ],\n    \"polynomial\": {\n      \"terms\": [\n        {\n          \"coefficient\": {\n            \"num\": \"-2592\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            3\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"4320\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            2\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"-2016\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            1\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"288\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            0\n          ]\n        }\n      ]\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.multiply.compute",
+          "runtime_ms": 0,
+          "output": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-2592",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    3
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "4320",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-2016",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "288",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "isError": false
+      }
+    },
+    "math-product-yprimexsecond": {
+      "input": {
+        "operation_id": "polynomial.rational.multiply.compute",
+        "payload": {
+          "left": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-36",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "24",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                }
+              ]
+            }
+          },
+          "right": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "72",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-48",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"operation_id\": \"polynomial.rational.multiply.compute\",\n  \"runtime_ms\": 1,\n  \"output\": {\n    \"domain\": \"QQ\",\n    \"variables\": [\n      \"t\"\n    ],\n    \"polynomial\": {\n      \"terms\": [\n        {\n          \"coefficient\": {\n            \"num\": \"-2592\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            3\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"3456\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            2\n          ]\n        },\n        {\n          \"coefficient\": {\n            \"num\": \"-1152\",\n            \"den\": \"1\"\n          },\n          \"exponents\": [\n            1\n          ]\n        }\n      ]\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "operation_id": "polynomial.rational.multiply.compute",
+          "runtime_ms": 1,
+          "output": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-2592",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    3
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "3456",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-1152",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "isError": false
+      }
+    }
+  }
+}
