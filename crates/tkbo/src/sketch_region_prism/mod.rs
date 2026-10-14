@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: GPL-2.0-only
+//! ADR0014 retained private prism transaction; diagnostic output is never a healthy body.
+mod copying;
+mod history;
+mod outcome;
+mod transaction;
+pub(crate) use outcome::*;
+pub(crate) use transaction::retain_selected_prism;
+#[cfg(test)]
+mod tests;
+
+#[cfg(test)]
+mod history_tests;
+
+#[cfg(test)]
+mod isolation_tests;
+
+#[cfg(test)]
+mod native_tests;
+#[cfg(test)]
+mod selection_tests;
+
+#[cfg(test)]
+mod progress_tests;
+#[cfg(test)]
+mod storage_tests;

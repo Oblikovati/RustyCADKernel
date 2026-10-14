@@ -50,6 +50,8 @@ pub struct OriginalMemberIdentity {
     pub orientation: rustycad_tkg3d::top_abs::Orientation,
 }
 /// Complete original-member relations for one actual result entity; `relation.preserved`.
+// WHY: receipt snapshots retain actual history aliases; Clone does not isolate geometry.
+#[derive(Clone)]
 pub struct ArrangementRelation {
     pub output: Shape,
     pub preserved: Vec<OriginalMemberIdentity>,

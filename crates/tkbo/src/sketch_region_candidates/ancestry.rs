@@ -88,7 +88,10 @@ fn descendant_parents(
     parents.sort_by_key(|key| key.source);
     Ok(parents)
 }
-fn append_unique(parents: &mut Vec<OriginalMemberIdentity>, candidates: &[OriginalMemberIdentity]) {
+pub(crate) fn append_unique(
+    parents: &mut Vec<OriginalMemberIdentity>,
+    candidates: &[OriginalMemberIdentity],
+) {
     for candidate in candidates {
         if !parents.contains(candidate) {
             parents.push(candidate.clone());

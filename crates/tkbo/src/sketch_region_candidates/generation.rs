@@ -113,7 +113,7 @@ fn poll(
     Ok(())
 }
 
-fn composed_copy_relation(
+pub(crate) fn composed_copy_relation(
     relation: &crate::sketch_region::ArrangementRelation,
     copied: &Shape,
 ) -> crate::sketch_region::ArrangementRelation {
