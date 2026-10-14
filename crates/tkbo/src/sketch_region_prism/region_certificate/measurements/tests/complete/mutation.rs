@@ -46,7 +46,7 @@ fn assert_exact_binding_target(target: usize, failure: CompletePrismMeasureFailu
     let CompletePrismMeasureFailure::Binding(cause) = failure else {
         panic!("expected binding")
     };
-    super::super::super::mutation_tests::assert_target_failure(target, cause.into());
+    super::super::mutation_tests::assert_target_failure(target, cause.into());
 }
 #[test]
 fn actual_side_direction_change_refuses_exact_identity_without_normalization_slack() {

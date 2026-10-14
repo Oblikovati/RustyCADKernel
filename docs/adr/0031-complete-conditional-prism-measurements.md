@@ -3,8 +3,8 @@
 ## Decision and scope
 
 Issue #10's analytic region-to-solid prerequisite composes the ADR0027 cap and
-signed-sweep measures with the existing ADR0024 side integral. A new private
-complete-measure entry will preserve the original subset entry, its options,
+signed-sweep measures with the existing ADR0024 side integral. The additive private
+complete-measure entry preserves the original subset entry, its options,
 pending rows and portable receipt for replay. Completion covers current source
 and actual chart-bound scalar measurements; ordered body validity, tolerances,
 embedding and immutable publication remain separate obligations.
@@ -32,8 +32,8 @@ error is the upward-rounded exact difference between published endpoints. It
 includes component uncertainty and both endpoint roundings. Supplied component
 bits/order and requested/effective options remain unchanged in the owned report.
 
-The complete prism entry will retain cap, side and signed-volume reports unchanged
-and apply a separate total-area policy. It will not allocate tolerances, shrink
+The complete prism entry retains cap, side and signed-volume reports unchanged
+and applies a separate total-area policy. It does not allocate tolerances, shrink
 child budgets, retry integration, clamp options or widen a limit to achieve a
 completed total. Overflow, exhausted side work, excessive width, unsupported
 geometry and cancellation remain typed incomplete outcomes. Scalar and sum
@@ -64,5 +64,21 @@ This is an additive composition of existing general arithmetic, geometry and
 history engines. No replacement or deletion gate is passed, no native OCCT
 capture is introduced, and no faceted/sampled acceptance or valid-body result is
 provided. The original subset remains selectable without migrating its behavior.
-The complete entry and its source-isolation/degenerate/cancellation evidence must
-be implemented and verified before this decision's composition scope is complete.
+The entry is implemented through the shared current binding; the final frozen
+verification receipt records its source-isolation, degenerate, cancellation and
+independent-oracle checks. This scalar composition never closes the body gates.
+
+## Replay and callback ordering
+
+The original subset golden receipt remains byte-pinned. The additive entry owns
+one CurrentPrismBinding, the original subset report, the side report, the total
+report and all three independent requested policies. It calls the unchanged side
+engine once. Its last external callback precedes shared callback-free rebind.
+Tests edit original/copy/side geometry at the side engine's final callback and at
+the outer final callback, and require refusal from fresh binding before return.
+
+The general sum report exposes the explicit evidence tag
+CertifiedConditionalEndpointArithmetic. Its inputs remain conditional, and the
+caller retains the actual component reports and source/role identities. Failed
+private wrapper diagnostics retain legacy typed causes and may contain mutable
+shape aliases; they are not immutable published operation results.
