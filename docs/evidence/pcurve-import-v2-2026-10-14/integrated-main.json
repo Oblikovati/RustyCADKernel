@@ -1,0 +1,132 @@
+{
+  "integration_revision": "99849a27da57332460482fe3cd3c29df7b487c7d",
+  "candidate_revision": "39af64b98",
+  "candidate_base": "77e631344",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "bdd6096df600af860611991f8f1e6cc682f61cbaa0fd2f2a5bf4e76d2095750b"
+      },
+      "tests": {
+        "passed": 2786,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "c8d45438ab895c7e8d4f983e5357e290d99817181d97e51ba78c48bc7c3a8883"
+      },
+      "tests": {
+        "passed": 249,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "50e1ddb9f89ceba9747b3030f8937053c12671f6ac3d5714a0fc5de14085b5f0"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "49839552fc199c81be01be67afb72ff040e54547abe956520353e8a275e4005c"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/graph_import_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/mod.rs": true,
+    "crates/tkbrep/src/brep_graph/shapes_view/add.rs": true,
+    "crates/tkbrep/src/brep_graph/shapes_view/ingest.rs": true,
+    "crates/tkbrep/src/brep_graph_inc/populate/entry.rs": true,
+    "crates/tkbrep/src/brep_graph_inc/populate/extract.rs": true,
+    "crates/tkbrep/src/brep_graph_inc/populate/face.rs": true,
+    "crates/tkbrep/src/brep_graph_inc/populate/mod.rs": true,
+    "crates/tkbrep/src/brep_graph_inc/populate/pcurve_behavior.rs": true,
+    "crates/tkbrep/tests/fixtures/graph-pcurve-import-v1.txt": true,
+    "crates/tkbrep/tests/graph_pcurve_placement.rs": true,
+    "crates/tkbrep/tests/graph_pcurve_placement/contracts.rs": true,
+    "crates/tkbrep/tests/graph_pcurve_placement/fixtures.rs": true,
+    "crates/tkbrep/tests/graph_pcurve_placement/nested.rs": true,
+    "crates/tkbrep/tests/graph_pcurve_placement/occurrences.rs": true,
+    "crates/tkbrep/tests/graph_pcurve_placement/seam.rs": true,
+    "crates/tkbrep/tests/graph_pcurve_placement/source_snapshot.rs": true,
+    "crates/tkbrep/tests/suites/cases_00.rs": true
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
