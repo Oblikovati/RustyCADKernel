@@ -22,6 +22,15 @@ pub(in crate::sketch_region_prism) fn with_actual<R>(
         &mut PrismReceipt,
     ) -> R,
 ) -> R {
+    with_prepared(|request, receipt| run(request, fresh_region(request), receipt))
+}
+pub(super) fn fresh_region(request: &TwoLoopRegionRequest<'_, '_>) -> Box<TwoLoopRegionCertificate> {
+    let TwoLoopRegionOutcome::Inspected(region) = inspect_two_loop_region(request, &mut ContinueRegion) else {
+        panic!("expected independent nested region proof");
+    };
+    region
+}
+pub(super) fn with_prepared<R>(run: impl FnOnce(&TwoLoopRegionRequest<'_, '_>, &mut PrismReceipt) -> R) -> R {
     let fixture = TwoLoopFixture::nested();
     let sources = fixture.sources();
     let identities = fixture_bindings::identities(&fixture);
@@ -33,13 +42,8 @@ pub(in crate::sketch_region_prism) fn with_actual<R>(
         material_seed: [0.25, 0.25],
         requested: fixture_bindings::options(),
     };
-    let TwoLoopRegionOutcome::Inspected(region) =
-        inspect_two_loop_region(&request, &mut ContinueRegion)
-    else {
-        panic!("expected independent nested region proof");
-    };
     let mut receipt = super::super::super::annular_construction::retained_annular_sweep(&fixture);
-    run(&request, region, &mut receipt)
+    run(&request, &mut receipt)
 }
 pub(in crate::sketch_region_prism) fn actual_binding() -> AnnularPrismBinding {
     with_actual(|request, region, receipt| {
