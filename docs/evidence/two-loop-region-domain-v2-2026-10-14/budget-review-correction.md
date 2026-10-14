@@ -51,3 +51,14 @@ candidate batch remains, retains owned pair-capture failures, distinguishes stal
 complete reports, and records signed domain/material winding conclusions per
 candidate. Those additions change only the unpublished V2 proof bytes; its complete
 draft payload is now pinned before later structural cleanup. V1 paths are unchanged.
+
+Independent read-only re-review of fixed `aa8a7b3a4` accepted both reported budget
+corrections: full nested-roster admission and callback-free evaluator admission
+immediately after rank. Reviewer ran no tests; broader added refusal classification
+was explicitly outside the narrow correction approval. Final integration gates remain
+separate. Additional adversarial tests pass (46 focused total): coincident distinct
+sources, disjoint unnested native closure, extra genuine generated area/missing member,
+separate same-parent authored keys, and duplicate parent refusal. An initial test-only
+compile failure attempting Clone on an owned native area is retained; the corrected
+test inserts a genuine independently built extra area. Full V2 bytes match the prior
+pinned draft exactly. This is the final pre-cleanup test corpus checkpoint.

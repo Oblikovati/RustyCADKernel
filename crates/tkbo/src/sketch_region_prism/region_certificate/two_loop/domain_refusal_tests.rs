@@ -67,3 +67,56 @@ fn same_parent_labels_never_merge_actual_source_identity_or_supply_nesting() {
         TwoLoopRegionOutcome::Incomplete(_)
     ));
 }
+
+#[test]
+fn coincident_distinct_authored_curves_never_become_complete_empty_cross_domain() {
+    let outer = cubic(1., [0., 0.]);
+    let inner = cubic(1., [0., 0.]);
+    let sources = [
+        crate::sketch_region::ArrangementSource {
+            identity: OUTER,
+            shape: &outer,
+        },
+        crate::sketch_region::ArrangementSource {
+            identity: INNER,
+            shape: &inner,
+        },
+    ];
+    assert!(!outer.is_partner(&inner));
+    let census = census(&sources);
+    let mut progress = OperationProgress;
+    let mut work = TwoLoopWork::new(77, fixture_bindings::options(), &mut progress);
+    assert!(pair_capture::domains(&census, [OUTER, INNER], &mut work).is_err());
+}
+#[test]
+fn complete_disjoint_unnested_boundaries_fail_the_native_closure_nesting_witness() {
+    use super::{failure::*, request::*};
+    let fixture = TwoLoopFixture::for_edges(cubic(1., [0., 0.]), cubic(0.5, [4., 4.]));
+    let sources = fixture.sources();
+    let captured =
+        super::source_tests::capture(&fixture).unwrap_or_else(|_| panic!("actual source proof"));
+    let identities = TwoLoopRegionIdentities {
+        operation: 77,
+        outer: OUTER,
+        inner: INNER,
+        selected: 301,
+        candidates: Vec::new(),
+    };
+    let request = TwoLoopRegionRequest {
+        bridge: &fixture.bridge,
+        sources: &sources,
+        identities: &identities,
+        inner_interior: [4.5, 4.5],
+        material_seed: [0.25, 0.25],
+        requested: fixture_bindings::options(),
+    };
+    let mut progress = OperationProgress;
+    let mut work = TwoLoopWork::new(77, request.requested, &mut progress);
+    let failure = super::nesting::capture(&request, &captured, &mut work)
+        .err()
+        .unwrap();
+    assert!(matches!(
+        failure.cause,
+        TwoLoopRegionCause::WindingLocation { source: OUTER, .. }
+    ));
+}

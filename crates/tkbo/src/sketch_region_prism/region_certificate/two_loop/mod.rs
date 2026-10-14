@@ -74,3 +74,6 @@ mod callback_budget_tests;
 
 #[cfg(test)]
 mod refusal_tests;
+
+#[cfg(test)]
+mod membership_refusal_tests;
