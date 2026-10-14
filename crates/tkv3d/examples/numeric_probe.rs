@@ -22,6 +22,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_brepfont_text", v3_probe::brep_font::text_case),
     // DsgPrs presentations (v3_probe/dsg_prs.rs)
     ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
+    // AIS filters and graphic tool (v3_probe/ais_attribute_filters.rs)
+    (
+        "v3_ais_attr_filter",
+        v3_probe::ais_attribute_filters::attribute_filter_case,
+    ),
     // StdPrs face and surface presentations (v3_probe/std_prs_faces.rs)
     ("v3_stdprs_face", v3_probe::std_prs_faces::std_prs_face_case),
     // StdSelect owner filters (v3_probe/std_select_filters.rs)

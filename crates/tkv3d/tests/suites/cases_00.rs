@@ -9,6 +9,8 @@ pub mod ais_animation_camera_source;
 pub mod ais_animation_object;
 #[path = "../ais_animation_timer.rs"]
 pub mod ais_animation_timer;
+#[path = "../ais_attribute_filters.rs"]
+pub mod ais_attribute_filters;
 #[path = "../ais_axis.rs"]
 pub mod ais_axis;
 #[path = "../ais_circle.rs"]
