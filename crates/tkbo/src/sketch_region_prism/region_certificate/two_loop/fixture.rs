@@ -17,7 +17,7 @@ use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 
 pub(super) const OUTER: RegionSourceId = RegionSourceId(101);
 pub(super) const INNER: RegionSourceId = RegionSourceId(202);
-pub(super) struct TwoLoopFixture {
+pub(in crate::sketch_region_prism) struct TwoLoopFixture {
     pub outer: Shape,
     pub inner: Shape,
     pub bridge: PairedContactTransaction,
