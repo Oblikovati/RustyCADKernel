@@ -1,0 +1,238 @@
+{
+  "integration_revision": "221eebd8a5c527806beab5e806e3a70a2be6e679",
+  "display_code_candidate": "cc310d9745c17769dec11452ce305f5b2bd90a04",
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "integrated-cpu.log.gz",
+      "sha256": "00f784326f73916f093bec2ae71620318d1abf09367663cabf0704d2d381b802",
+      "tests": {
+        "passed": 1261,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "build",
+        "-p",
+        "martensite-vulkan",
+        "--locked",
+        "--example",
+        "native_gui_rapid",
+        "--example",
+        "native_gui_acceptance",
+        "--example",
+        "native_window_lifecycle",
+        "--example",
+        "native_display_lifecycle"
+      ],
+      "exit_code": 0,
+      "log": "integrated-build.log.gz",
+      "sha256": "eb2bc23fc50175f065f01ba7cea1502dd984d5ea4d04fba6916bef4bd4a3926b"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/docs/evidence/native-display-lifecycle-v1-2026-10-14/run_native_checks.py",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/integrated-native-display-v1/native-replay"
+      ],
+      "exit_code": 0,
+      "log": "integrated-native.log.gz",
+      "sha256": "00a7c0fc50e20df921964e528cd589084f122490cd5372465cf936203a13cce9"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "docs/evidence/gui-framebuffer-restart-2026-10-14/check_framebuffers.py",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/integrated-native-display-v1/native-replay/native"
+      ],
+      "exit_code": 0,
+      "log": "integrated-pixels.log.gz",
+      "sha256": "538268071a64e104cba006dfbdc766a2f18f7316ad78d6b35309e3d398d0b4f6"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "log": "integrated-vulkan-amd.log.gz",
+      "sha256": "03eb3ab8d07e15866d0000390e5b4f90ec18ab5017610b67e9b88eb57e7a047d",
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "tests": {
+        "passed": 766,
+        "failed": 0,
+        "ignored": 5
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "log": "integrated-vulkan-lavapipe.log.gz",
+      "sha256": "8c88d1c6d292290473cac80a83cd228018f39da5e8317b7e09bb6bfb16bea028",
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "tests": {
+        "passed": 766,
+        "failed": 0,
+        "ignored": 5
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "integrated-clippy.log.gz",
+      "sha256": "7976181afa49e93ee3f8f3d03eaabc3f9215e926bea01e995e04083265d08a43"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "-p",
+        "martensite-vulkan",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "integrated-docs.log.gz",
+      "sha256": "e9887635d79e7e9cd8c05c9c4e0b1ed60b0b1150fc9d6159d2fedc8bf8bd25b7",
+      "tests": {
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "integrated-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_release_verification_plan.py"
+      ],
+      "exit_code": 0,
+      "log": "integrated-release-plan.log.gz",
+      "sha256": "7ef5d528b451170b10dc4b96c5f3546bbaf268fede71eb0986129316f9437790",
+      "environment": {
+        "PYTHONPATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools"
+      }
+    }
+  ],
+  "native_cases_passed": 21,
+  "native_snapshot_unchanged": true,
+  "candidate_changed_source_matches": true,
+  "native_start_to_final_build_inputs_unchanged": true,
+  "native_start_to_final_four_executables_unchanged": true,
+  "all_tracked_files_unchanged": false,
+  "tracked_document_drift": {
+    "docs/application-blockers.md": {
+      "before": "ebba785d3f9ada3c69a206c294944274b08914c79bcadbe458d32e04b3133998",
+      "after": "d61e6976ee8492e647fb0070f3c8879e6680325c5859ef10e4fc302388c98be8"
+    }
+  },
+  "receipt_finalization": {
+    "initial_attempt": "All commands passed, then an AssertionError in receipt finalization prevented publication.",
+    "recovery": "Native source snapshots are identical. After all commands only docs/application-blockers.md differs from that snapshot; this external documentation edit is preserved. Every source/shader/fixture/manifest build input and all four native binaries match the native pre-run snapshot. No all-tracked-files-unchanged claim.",
+    "pre_build_bookend": "Initial in-memory bookend was lost when finalizer exited; retained evidence starts at the native pre-run source snapshot. No retained before-CPU-build bookend claim."
+  },
+  "source_bookends_sha256": "5c468fe7bb0a693d33cd4781f17c0a2f98e1a0b43c992c5cada5a8a09740b0b0",
+  "validation_layer": {
+    "api_version": "1.4.313",
+    "library_sha256": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104"
+  },
+  "limitations": [
+    "Five preexisting ignored Vulkan tests per driver remain explicit.",
+    "TSan suite not executed: startup control failure is separate incomplete evidence.",
+    "No application, published package, native concurrency, cross-platform, performance or full parity acceptance."
+  ],
+  "functional_checks_passed": true,
+  "raw_archive": {
+    "path": "integrated-raw.tar.gz",
+    "sha256": "44e37990f2918740c35188df0a5ee2e68eef98a1bbcf92314879ec857e3958b9"
+  }
+}
