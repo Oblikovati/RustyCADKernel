@@ -1,8 +1,9 @@
 # Programmable unlit side colors, behavior version 2
 
-Status: bounded V2 implementation with independent CPU/GPU checks; full renderer
-acceptance and migration remain open (two existing OIT tests report synchronization
-hazards, pending coordinating-agent baseline classification).
+Status: bounded V2 implementation accepted by independent CPU/GPU checks and the
+full Vulkan corpus on both drivers with pinned validation 1.4.313. Historical OIT
+validation failures and their main-baseline comparison are preserved in the evidence.
+Explicit default migration and deletion task `UNLIT-V2-MIGRATE` remain open.
 
 Martensite's V1 programmable renderer rejects untextured unlit surfaces when
 material distinction or front-only vertex color is requested. This is pinned
@@ -74,7 +75,7 @@ and generated source snippets. These Vulkan behavior checks do not translate
 those assertions and supply no 1:1 legacy mapping credit. Their mapping status
 remains unresolved independently.
 
-Open task `UNLIT-V2-MIGRATE`: after the full CPU/GPU corpus gate passes, record
+Open task `UNLIT-V2-MIGRATE`: the bounded full CPU/GPU corpus gate has passed; record
 the default-policy migration and remove the superseded V1 rejection path and
 its selector from production, retaining the owned historical fixture for replay
 with the recorded release. The renderer coordinator owns this task and must name
