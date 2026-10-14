@@ -16,21 +16,21 @@ pub(crate) fn freeze_prism(
 ) -> PrismFreezeOutcome {
     let mut phase = FreezePhase::Admission;
     match execute(receipt, bindings, progress, &mut phase) {
-        Ok(projection) => PrismFreezeOutcome::Captured(projection),
+        Ok(projection) => PrismFreezeOutcome::Captured(Box::new(projection)),
         Err(FreezeStop::Cancelled) => PrismFreezeOutcome::Cancelled {
             operation: bindings.operation,
             phase,
         },
-        Err(FreezeStop::Cause(cause)) => classify_failure(bindings.operation, phase, cause),
+        Err(FreezeStop::Cause(cause)) => classify_failure(bindings.operation, phase, *cause),
     }
 }
 enum FreezeStop {
     Cancelled,
-    Cause(PrismFreezeCause),
+    Cause(Box<PrismFreezeCause>),
 }
 impl From<PrismFreezeCause> for FreezeStop {
     fn from(cause: PrismFreezeCause) -> Self {
-        Self::Cause(cause)
+        Self::Cause(Box::new(cause))
     }
 }
 fn classify_failure(

@@ -173,7 +173,7 @@ fn authored_original(
 }
 pub(super) fn captured(result: PrismFreezeOutcome) -> FrozenPrismProjection {
     match result {
-        PrismFreezeOutcome::Captured(projection) => projection,
+        PrismFreezeOutcome::Captured(projection) => *projection,
         PrismFreezeOutcome::Incomplete(failure) | PrismFreezeOutcome::Failed(failure) => {
             panic!("{failure:?}")
         }

@@ -72,7 +72,7 @@ pub(crate) trait FreezeProgress: Send {
     fn checkpoint(&mut self, phase: FreezePhase) -> Result<bool, Failure>;
 }
 pub(crate) enum PrismFreezeOutcome {
-    Captured(FrozenPrismProjection),
+    Captured(Box<FrozenPrismProjection>),
     Incomplete(PrismFreezeFailure),
     Failed(PrismFreezeFailure),
     Cancelled {
