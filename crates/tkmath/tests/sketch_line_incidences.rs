@@ -27,7 +27,7 @@ fn every_public_result_type_is_send_and_sync() {
 fn report_retains_request_options_work_and_contact_owners() {
     let line = source([[-2., 0.], [2., 0.]], SketchLineDomain::Segment);
     let options = SketchIncidenceOptions::v1(ERROR);
-    let report = certify_with(line, &[target(7, circle([0., 0.], 1.))], options);
+    let report = certify_with(line.clone(), &[target(7, circle([0., 0.], 1.))], options);
     assert_eq!(report.source(), &line);
     assert_eq!(report.options(), options);
     assert!(report.refinements() <= options.max_refinements);

@@ -37,11 +37,7 @@ fn native_points() -> Vec<Vec<[f64; 2]>> {
         .collect()
 }
 pub fn certify_case(case: &CorpusCase) -> SketchLineIncidenceReport {
-    let source = SketchIncidenceSource {
-        id: 0,
-        points: case.source,
-        domain: SketchLineDomain::Support,
-    };
+    let source = SketchIncidenceSource::line(0, case.source, SketchLineDomain::Support);
     let target = SketchIncidenceTarget {
         id: case.id as u64,
         curve: case.target.clone(),

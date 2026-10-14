@@ -127,7 +127,7 @@ fn trim_refuses_picks_at_incidences_outside_the_segment_or_on_overlaps() {
     let at = SketchSelectionError::Refused(SketchSelectionRefusal::PickAtIncidence { group: 0 });
     assert_eq!(report.select_trim([1., 5.], || false), Err(at));
     let outside = SketchSelectionError::Refused(SketchSelectionRefusal::PickOutsideSegment {
-        pick: [5., 0.],
+        pick: SketchTrimPick::Point([5., 0.]),
     });
     assert_eq!(report.select_trim([5., 0.], || false), Err(outside));
     let overlap = SketchSelectionError::Refused(SketchSelectionRefusal::Overlap { target_id: 2 });

@@ -3,6 +3,7 @@
 use super::super::certificate_arithmetic::{ExactRatio, rounding};
 use super::algebraic::IsolatedRoot;
 use super::input::{SketchIncidenceOptions, SketchIncidenceSource, SketchIncidenceTarget};
+use super::place::{KeyValue, SketchSweepChart, SourcePlace};
 
 /// Exact position of a value relative to the start and end of a parameter range.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
@@ -33,15 +34,29 @@ pub enum SketchContactTransition {
     Touching,
     /// The contact is a bounded target end; only one side exists.
     TargetEnd,
+    /// The contact is a bounded spline source end; only one source side exists.
+    SourceEnd,
+}
+/// Place of a conic-source contact: chart around the reference ray and cotangent key.
+///
+/// The reference ray is the sector start (or the frame axis of a full conic) and
+/// the key `-dot(r, q) / det(r, q)` increases with the sweep angle in each open
+/// half turn. Example: `contact.source_sweep().map(|sweep| sweep.chart)`.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct SketchSweepPlace {
+    /// Chart of the contact direction.
+    pub chart: SketchSweepChart,
+    /// Outward bounds of the exact cotangent key inside the open half turns.
+    pub cotangent_bounds: Option<[f64; 2]>,
 }
 /// One certified isolated incidence between the source support line and one target.
 #[derive(Clone, Debug, PartialEq)]
 pub struct SketchLineContact {
     pub(super) target_index: usize,
     pub(super) target_id: u64,
-    pub(super) line_root: IsolatedRoot,
+    pub(super) place: SourcePlace,
     pub(super) target_root: Option<IsolatedRoot>,
-    pub(super) line_position: SketchLinePosition,
+    pub(super) source_position: SketchLinePosition,
     pub(super) target_position: SketchLinePosition,
     pub(super) transition: SketchContactTransition,
     pub(super) multiplicity: [Option<usize>; 2],
@@ -58,30 +73,50 @@ impl SketchLineContact {
     pub fn target_index(&self) -> usize {
         self.target_index
     }
-    /// Outward binary64 bounds of the exact source line parameter `t`.
-    /// Example: `let [lower, upper] = contact.line_parameter_bounds();`.
-    pub fn line_parameter_bounds(&self) -> [f64; 2] {
-        outward_root(&self.line_root)
+    /// Outward bounds of the exact source parameter: `t` of a line source or the
+    /// parameter of a spline source; None for conic sources (see `source_sweep`).
+    /// Example: `let [lower, upper] = contact.source_parameter_bounds().unwrap();`.
+    pub fn source_parameter_bounds(&self) -> Option<[f64; 2]> {
+        match &self.place {
+            SourcePlace::Parameter(value) => Some(value.outward()),
+            SourcePlace::Sweep { .. } => None,
+        }
+    }
+    /// Sweep place on a conic source; None for line and spline sources.
+    pub fn source_sweep(&self) -> Option<SketchSweepPlace> {
+        match &self.place {
+            SourcePlace::Sweep { chart, cotangent } => Some(SketchSweepPlace {
+                chart: *chart,
+                cotangent_bounds: cotangent.as_ref().map(KeyValue::outward),
+            }),
+            SourcePlace::Parameter(_) => None,
+        }
     }
     /// Outward bounds of the exact target parameter, for line and spline targets.
-    /// Conic contacts are classified by exact sector signs and carry no angle.
+    /// Conic targets are classified by exact sector signs and carry no angle.
     pub fn target_parameter_bounds(&self) -> Option<[f64; 2]> {
-        self.target_root.as_ref().map(outward_root)
+        self.target_root
+            .as_ref()
+            .map(|root| KeyValue::Root(root.clone()).outward())
     }
-    /// Exact position on the source line relative to `t = 0` and `t = 1`.
-    pub fn line_position(&self) -> SketchLinePosition {
-        self.line_position
+    /// Exact position on the source relative to its ends: `t = 0` and `t = 1` of a
+    /// line, the bounds of a spline, the sector rays of an arc (outside is `AfterEnd`,
+    /// since the support continues to the start); a full conic is `Interior`.
+    pub fn source_position(&self) -> SketchLinePosition {
+        self.source_position
     }
     /// Exact position on a bounded target; full curves and unbounded lines are `Interior`.
     pub fn target_position(&self) -> SketchLinePosition {
         self.target_position
     }
-    /// Crossing, touching (tangency), or one-sided target end.
+    /// Crossing, touching (tangency), or a one-sided target or spline source end.
     pub fn transition(&self) -> SketchContactTransition {
         self.transition
     }
-    /// Algebraic multiplicity of the defining equation on the left and right sides.
-    /// They differ only at spline knots; None marks a side beyond the target end.
+    /// Algebraic multiplicity of the defining equation on the left and right sides,
+    /// along the curve whose parameter carries the equation (the target for line and
+    /// conic sources against line and spline targets, the source otherwise).
+    /// They differ only at spline knots; None marks a side beyond that curve's end.
     pub fn multiplicity(&self) -> [Option<usize>; 2] {
         self.multiplicity
     }
@@ -104,8 +139,8 @@ pub struct SketchLineOverlap {
     pub(super) target_index: usize,
     pub(super) target_id: u64,
     pub(super) target_range: Option<[f64; 2]>,
-    pub(super) line_range: Option<[ExactRatio; 2]>,
-    pub(super) line_positions: Option<[SketchLinePosition; 2]>,
+    pub(super) source_range: Option<[SourcePlace; 2]>,
+    pub(super) source_positions: Option<[SketchLinePosition; 2]>,
     pub(super) opposite: bool,
 }
 impl SketchLineOverlap {
@@ -121,14 +156,19 @@ impl SketchLineOverlap {
     pub fn target_range(&self) -> Option<[f64; 2]> {
         self.target_range
     }
-    /// Outward bounds of the exact line parameters at the target range start and end.
-    pub fn line_range_bounds(&self) -> Option<[[f64; 2]; 2]> {
-        let range = self.line_range.as_ref()?;
-        Some([outward_ratio(&range[0]), outward_ratio(&range[1])])
+    /// Outward bounds of the exact source parameters at the target range start and
+    /// end; None for unbounded overlaps and for conic sources.
+    pub fn source_parameter_range_bounds(&self) -> Option<[[f64; 2]; 2]> {
+        match self.source_range.as_ref()? {
+            [SourcePlace::Parameter(start), SourcePlace::Parameter(end)] => {
+                Some([start.outward(), end.outward()])
+            }
+            _ => None,
+        }
     }
-    /// Exact line positions of the range start and end.
-    pub fn line_positions(&self) -> Option<[SketchLinePosition; 2]> {
-        self.line_positions
+    /// Exact source positions of the range start and end.
+    pub fn source_positions(&self) -> Option<[SketchLinePosition; 2]> {
+        self.source_positions
     }
     /// True when the target runs against the source direction.
     pub fn opposite(&self) -> bool {
@@ -167,7 +207,7 @@ impl SketchContactGroup {
         &self.members
     }
 }
-/// Complete certified result for one source line and every requested target.
+/// Complete certified result for one source curve and every requested target.
 #[derive(Clone, Debug, PartialEq)]
 pub struct SketchLineIncidenceReport {
     pub(super) source: SketchIncidenceSource,
@@ -190,7 +230,8 @@ impl SketchLineIncidenceReport {
     pub fn targets(&self) -> &[SketchTargetIncidences] {
         &self.targets
     }
-    /// Contacts inside the requested domain, in exact increasing line-parameter order.
+    /// Contacts inside the requested domain, in exact source order (line or spline
+    /// parameter, or conic sweep from the reference ray).
     pub fn ordered(&self) -> &[SketchContactGroup] {
         &self.ordered
     }
@@ -206,10 +247,6 @@ impl SketchLineIncidenceReport {
     pub fn refinements(&self) -> u32 {
         self.refinements
     }
-}
-fn outward_root(root: &IsolatedRoot) -> [f64; 2] {
-    let [lower, upper] = root.ratio_bounds();
-    [outward_ratio(&lower)[0], outward_ratio(&upper)[1]]
 }
 // Values beyond the binary64 range get infinite outward bounds, which still contain them.
 pub(super) fn outward_ratio(value: &ExactRatio) -> [f64; 2] {

@@ -18,7 +18,26 @@ pub(super) fn options(options: SketchIncidenceOptions) -> Result<(), SketchIncid
     checked.map_err(input_failure)
 }
 pub(super) fn source(source: &SketchIncidenceSource) -> Result<(), SketchIncidenceFailure> {
-    distinct_points("source.points", source.points).map_err(input_failure)
+    let checked = match &source.curve {
+        SketchIncidenceCurve::Line { points, bounded } => {
+            distinct_points("source.points", *points).and_then(|()| bounded_source(*bounded))
+        }
+        SketchIncidenceCurve::Spline(_) if source.domain == SketchLineDomain::Support => {
+            Err(Cause::SourceDomain {
+                source: "spline",
+                domain: source.domain,
+            })
+        }
+        other => curve(other),
+    };
+    checked.map_err(input_failure)
+}
+// The two points of a line source are its ends; extension uses the domain, not the flag.
+fn bounded_source(bounded: bool) -> Admission {
+    if bounded {
+        return Ok(());
+    }
+    Err(Cause::UnboundedSource)
 }
 pub(super) fn target(target: &SketchIncidenceTarget) -> Result<(), SketchIncidenceFailure> {
     curve(&target.curve)

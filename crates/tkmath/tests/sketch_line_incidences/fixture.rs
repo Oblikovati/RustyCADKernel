@@ -5,11 +5,7 @@ use rustycad_tkmath::predicates::roots::sketch_incidence::*;
 pub const ERROR: f64 = 1e-12;
 
 pub fn source(points: [[f64; 2]; 2], domain: SketchLineDomain) -> SketchIncidenceSource {
-    SketchIncidenceSource {
-        id: 1,
-        points,
-        domain,
-    }
+    SketchIncidenceSource::line(1, points, domain)
 }
 pub fn target(id: u64, curve: SketchIncidenceCurve) -> SketchIncidenceTarget {
     SketchIncidenceTarget { id, curve }
@@ -127,7 +123,7 @@ pub fn summary(
 ) {
     (
         contact.target_id(),
-        contact.line_position(),
+        contact.source_position(),
         contact.target_position(),
         contact.transition(),
         contact.multiplicity(),

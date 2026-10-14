@@ -24,7 +24,7 @@ fn line_through_unit_circle_crosses_at_exact_dyadic_points() {
         );
         assert_eq!(contact.target_parameter_bounds(), None);
     }
-    assert_eq!(contacts[0].line_parameter_bounds(), [0.25, 0.25]);
+    assert_eq!(contacts[0].source_parameter_bounds(), Some([0.25, 0.25]));
     assert_eq!(report.max_achieved_world_error(), 0.);
 }
 #[test]
@@ -60,7 +60,7 @@ fn pythagorean_chord_has_rational_points_between_dyadic_parameters() {
     let contacts = ordered(&report);
     assert_point(contacts[0], [3., -4.]);
     assert_point(contacts[1], [3., 4.]);
-    let [lower, upper] = contacts[0].line_parameter_bounds();
+    let [lower, upper] = contacts[0].source_parameter_bounds().unwrap();
     assert!(lower < upper && lower <= 0.3 && 0.3 <= upper);
 }
 #[test]

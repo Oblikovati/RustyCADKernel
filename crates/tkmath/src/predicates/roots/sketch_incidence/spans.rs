@@ -3,16 +3,38 @@
 //!
 //! Basis functions follow the Cox–de Boor recurrence with exact rational knots,
 //! so each span polynomial is the native curve's piece, not an approximation.
-use super::super::certificate_arithmetic::ExactRatio;
+use super::super::certificate_arithmetic::{ExactRatio, RatioInterval};
 use super::input::SketchIncidenceSpline;
 use super::rational_polynomial::{RationalPolynomial, ratio, zero};
 
-/// Homogeneous piece `(x, y) / w` on a closed range; None ranges over every real value.
-pub(super) struct ParametricSpan {
+/// Homogeneous point `(x, y) / w` as polynomials of one contact variable.
+#[derive(Clone, Debug)]
+pub(super) struct HomogeneousPoint {
     pub x: RationalPolynomial,
     pub y: RationalPolynomial,
     pub w: RationalPolynomial,
+}
+/// Homogeneous piece on a closed range; None ranges over every real value.
+#[derive(Clone, Debug)]
+pub(super) struct ParametricSpan {
+    pub point: HomogeneousPoint,
     pub range: Option<[f64; 2]>,
+}
+impl HomogeneousPoint {
+    /// Exact enclosure of `(x, y) / w` over a closed bracket, if `w` excludes zero there.
+    pub fn enclose(&self, parameter: &RatioInterval) -> Option<[RatioInterval; 2]> {
+        let reciprocal = self.w.enclose(parameter).reciprocal()?;
+        let coordinate =
+            |polynomial: &RationalPolynomial| polynomial.enclose(parameter).multiply(&reciprocal);
+        Some([coordinate(&self.x), coordinate(&self.y)])
+    }
+    /// Coordinates relative to `origin`, still homogeneous: `(x - ox w, y - oy w)`.
+    pub fn relative(&self, origin: &[ExactRatio; 2]) -> [RationalPolynomial; 2] {
+        [
+            self.x.add(&self.w.scale(&origin[0].negated())),
+            self.y.add(&self.w.scale(&origin[1].negated())),
+        ]
+    }
 }
 /// Target line `P0 + u (P1 - P0)`, on `[0,1]` or unbounded.
 pub(super) fn line_span(points: [[f64; 2]; 2], bounded: bool) -> ParametricSpan {
@@ -22,9 +44,11 @@ pub(super) fn line_span(points: [[f64; 2]; 2], bounded: bool) -> ParametricSpan 
         RationalPolynomial::linear(start, slope)
     };
     ParametricSpan {
-        x: coordinate(0),
-        y: coordinate(1),
-        w: RationalPolynomial::constant(ratio(1.)),
+        point: HomogeneousPoint {
+            x: coordinate(0),
+            y: coordinate(1),
+            w: RationalPolynomial::constant(ratio(1.)),
+        },
         range: bounded.then_some([0., 1.]),
     }
 }
@@ -59,9 +83,11 @@ fn span_piece(
         )
     };
     ParametricSpan {
-        x: combine(&|index| weight(index).multiply(&ratio(spline.poles[index][0]))),
-        y: combine(&|index| weight(index).multiply(&ratio(spline.poles[index][1]))),
-        w: combine(&weight),
+        point: HomogeneousPoint {
+            x: combine(&|index| weight(index).multiply(&ratio(spline.poles[index][0]))),
+            y: combine(&|index| weight(index).multiply(&ratio(spline.poles[index][1]))),
+            w: combine(&weight),
+        },
         range: Some(range),
     }
 }

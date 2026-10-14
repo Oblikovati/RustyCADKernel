@@ -9,15 +9,32 @@ pub enum SketchLineDomain {
     /// Infinite supporting line through the two source points (extension).
     Support,
 }
-/// The edited line: two distinct finite points, parameter `t` with `A + t (B - A)`.
-#[derive(Clone, Copy, Debug, PartialEq)]
+/// The edited curve, its occurrence key and the consumer domain.
+///
+/// A line source is parameterized `A + t (B - A)`; a spline source by its own
+/// parameter; a conic source by its sweep from the sector start (or frame axis).
+#[derive(Clone, Debug, PartialEq)]
 pub struct SketchIncidenceSource {
     /// Caller occurrence key; it identifies the source and certifies nothing.
     pub id: u64,
-    /// Start `A` (t = 0) and end `B` (t = 1).
-    pub points: [[f64; 2]; 2],
+    /// Exact source curve; a line source must be bounded (its two points are the ends).
+    pub curve: SketchIncidenceCurve,
     /// Requested consumer domain.
     pub domain: SketchLineDomain,
+}
+impl SketchIncidenceSource {
+    /// Line source through two distinct points (t = 0 at `points[0]`, t = 1 at `points[1]`).
+    /// Example: `SketchIncidenceSource::line(1, [[0., 0.], [1., 0.]], SketchLineDomain::Segment)`.
+    pub fn line(id: u64, points: [[f64; 2]; 2], domain: SketchLineDomain) -> Self {
+        Self {
+            id,
+            curve: SketchIncidenceCurve::Line {
+                points,
+                bounded: true,
+            },
+            domain,
+        }
+    }
 }
 /// Angular sector of a conic, bounded by directions from the center.
 ///

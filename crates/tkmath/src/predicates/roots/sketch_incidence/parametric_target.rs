@@ -1,14 +1,23 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Whole parametric targets: span contacts merged at shared knots, plus overlaps.
+//! Implicit sources (lines, conics) against parametric targets (lines, spline spans).
+//!
+//! The source equation composed with each target span gives an exact polynomial in
+//! the target parameter `u`. Its roots are merged at shared knots; each is placed
+//! on the source through the image equation of the source key (`t` of a line, the
+//! sweep chart and cotangent key of a conic).
 use super::budget::Work;
-use super::contact::{ContactDraft, TargetKey, finish};
+use super::contact::{ContactDraft, TargetKey, construct_point, finish};
 use super::equation::transition;
-use super::failure::SketchIncidenceCause as Cause;
+use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
 use super::overlap::span_overlap;
-use super::parametric::{SpanEquations, SpanRoot, span_roots};
-use super::report::{SketchLineContact, SketchLineOverlap, SketchLinePosition};
-use super::source_line::{SourceLine, position_between};
+use super::pieces::{MergedRoots, PieceRoot, piece_roots};
+use super::rational_polynomial::RationalPolynomial;
+use super::report::{
+    SketchContactTransition, SketchLineContact, SketchLineOverlap, SketchLinePosition,
+};
+use super::source_frame::{SourceFrame, root_position};
 use super::spans::ParametricSpan;
+use super::sweep::PointPlacer;
 
 pub(super) struct ParametricRequest {
     pub spans: Vec<ParametricSpan>,
@@ -16,74 +25,71 @@ pub(super) struct ParametricRequest {
     pub bounds: Option<[f64; 2]>,
     pub owner: TargetKey,
 }
-#[derive(Default)]
-struct MergedTarget {
-    roots: Vec<SpanRoot>,
-    overlaps: Vec<SketchLineOverlap>,
-    previous_overlap: bool,
-}
 pub(super) fn incidences(
     request: ParametricRequest,
-    source: &SourceLine,
+    source: &SourceFrame,
     work: &mut Work<'_>,
 ) -> Result<(Vec<SketchLineContact>, Vec<SketchLineOverlap>), Cause> {
-    let mut merged = MergedTarget::default();
-    for span in &request.spans {
-        let equations = SpanEquations::new(span, source);
-        match span_roots(span, &equations, source, work)? {
+    let mut merged = MergedRoots::default();
+    let mut overlaps = Vec::new();
+    let mut placers: Vec<Option<PointPlacer>> = Vec::new();
+    for (index, span) in request.spans.iter().enumerate() {
+        work.enter(SketchIncidenceStage::Equation);
+        let equation = source_equation(source, span)?;
+        let roots = piece_roots(&equation, span.range, index, work)?;
+        placers.push(placer(source, span, &equation, roots.as_deref(), work)?);
+        match roots {
             Some(roots) => merged.add_roots(roots),
             None => {
-                merged.add_overlap(span_overlap(span, &equations, source, request.owner, work)?)
+                overlaps.push(span_overlap(span, source, request.owner, work)?);
+                merged.add_overlap();
             }
         }
     }
     let contacts = merged
         .roots
         .into_iter()
-        .map(|root| contact(root, &request, source, work))
+        .map(|root| {
+            let placer = placers[root.piece].as_ref().expect("roots have a placer");
+            contact(root, placer, &request, source, work)
+        })
         .collect::<Result<Vec<_>, _>>()?;
-    Ok((contacts, merged.overlaps))
+    Ok((contacts, overlaps))
 }
-impl MergedTarget {
-    // A root exactly at a span start is the same point as the previous span's end
-    // root (C0 continuity). Its two sides come from the two adjacent spans.
-    fn add_roots(&mut self, roots: Vec<SpanRoot>) {
-        for root in roots {
-            if root.sides[0].is_some() {
-                self.roots.push(root);
-            } else if self.previous_overlap {
-                continue;
-            } else if let Some(last) = self.roots.last_mut().filter(|last| last.sides[1].is_none())
-            {
-                last.sides[1] = root.sides[1];
-                last.multiplicity[1] = root.multiplicity[1];
-            } else {
-                self.roots.push(root);
-            }
-        }
-        self.previous_overlap = false;
+fn source_equation(
+    source: &SourceFrame,
+    span: &ParametricSpan,
+) -> Result<RationalPolynomial, Cause> {
+    match source {
+        SourceFrame::Line(line) => Ok(line.implicit.compose(&span.point)),
+        SourceFrame::Conic(conic) => Ok(conic.implicit.compose(&span.point)),
+        SourceFrame::Spline(_) => Err(Cause::Invariant("a spline source has no implicit equation")),
     }
-    // An overlap boundary is not an isolated contact.
-    fn add_overlap(&mut self, overlap: SketchLineOverlap) {
-        if self
-            .roots
-            .last()
-            .is_some_and(|last| last.sides[1].is_none())
-        {
-            self.roots.pop();
-        }
-        self.overlaps.push(overlap);
-        self.previous_overlap = true;
+}
+// Built only for spans with roots: the image equation needs a nonzero contact equation.
+fn placer(
+    source: &SourceFrame,
+    span: &ParametricSpan,
+    equation: &RationalPolynomial,
+    roots: Option<&[PieceRoot]>,
+    work: &mut Work<'_>,
+) -> Result<Option<PointPlacer>, Cause> {
+    if roots.is_none_or(<[PieceRoot]>::is_empty) {
+        return Ok(None);
     }
+    work.enter(SketchIncidenceStage::Equation);
+    source.placer(&span.point, equation, work).map(Some)
 }
 fn contact(
-    mut root: SpanRoot,
+    mut root: PieceRoot,
+    placer: &PointPlacer,
     request: &ParametricRequest,
-    source: &SourceLine,
+    source: &SourceFrame,
     work: &mut Work<'_>,
 ) -> Result<SketchLineContact, Cause> {
+    work.enter(SketchIncidenceStage::Classification);
     let target_position = match request.bounds {
-        Some(bounds) => position_between(&mut root.target, bounds, work)?,
+        Some(bounds) => root_position(&mut root.contact, bounds, work)?,
         None => SketchLinePosition::Interior,
     };
     let one_sided = root.sides.iter().any(Option::is_none);
@@ -92,12 +98,16 @@ fn contact(
             "interior knot contact lacked its adjacent span",
         ));
     }
+    let place = placer.place(&mut root.contact, work)?;
+    let span = &request.spans[root.piece];
+    let envelope = construct_point(&span.point, &mut root.contact, work)?;
     let draft = ContactDraft {
-        line_root: root.line,
-        target_root: Some(root.target),
+        place,
+        target_root: Some(root.contact),
         target_position,
-        transition: transition(root.sides)?,
+        transition: transition(root.sides, SketchContactTransition::TargetEnd)?,
         multiplicity: root.multiplicity,
+        envelope,
     };
     finish(draft, request.owner, source, work)
 }

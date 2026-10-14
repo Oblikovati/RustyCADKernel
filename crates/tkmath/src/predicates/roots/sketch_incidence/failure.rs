@@ -102,8 +102,22 @@ pub enum SketchIncidenceCause {
         /// Target parameter range of the span.
         range: [f64; 2],
     },
-    /// The line-parameter resultant vanished identically (a base point).
+    /// An image or elimination resultant vanished identically (a base point).
     DegenerateResultant,
+    /// A piece lies on the other curve; version 1 certifies only line-source overlaps.
+    UncertifiedOverlap {
+        /// Parameter range of the coincident piece; None for an unbounded line.
+        range: Option<[f64; 2]>,
+    },
+    /// A line source must be bounded: its two points are its ends.
+    UnboundedSource,
+    /// The requested domain is not defined for this source representation.
+    SourceDomain {
+        /// Name of the source representation, e.g. `"spline"`.
+        source: &'static str,
+        /// The refused domain.
+        domain: super::input::SketchLineDomain,
+    },
     /// An exact invariant failed; reported rather than repaired.
     Invariant(&'static str),
 }
