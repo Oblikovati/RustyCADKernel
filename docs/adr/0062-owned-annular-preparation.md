@@ -29,3 +29,20 @@ cancellation at every observed preparation checkpoint with clean reuse.
 
 Not provided: owned refusal projection of `AnnularPreparationCause`, a public
 outcome type, general profiles beyond two nested closed polynomial loops.
+
+## Follow-up: owned annular preparation refusal (2026-10-15)
+
+`project_annular_preparation_refusal(Box<AnnularPreparationFailure>)` copies the
+actual typed cause into `OwnedAnnularPreparationDiagnostic`: admission
+(`Owned` single-boundary operands, including exact open-boundary endpoints, and
+`Names`), `Role` operands, and `Stage` causes through the unchanged ADR0048 owned
+cause vocabulary. The full original request (both roles, seven authored names,
+interior witness, seed, plane, extrusion and every child limit) is encoded by
+`Martensite.OwnedAnnularPrismRequest/v1`; the diagnostic replay format is
+`Martensite.OwnedAnnularPreparationDiagnostic/v1`, explicit tags only.
+
+Retained partial transactions (constructed sources, census, partition, contact
+transaction, the new `RegionIdentities` owner tag 6, prism receipt) and the
+Census/Contact/RegionPrism/StageCompletion nested families are explicit gaps; on
+any gap the exact original Box is returned beside the diagnostic. Admission
+refusals therefore project completely; post-construction refusals do not yet.

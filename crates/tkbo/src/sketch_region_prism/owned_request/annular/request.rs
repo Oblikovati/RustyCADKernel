@@ -16,7 +16,7 @@ pub(in crate::sketch_region_prism) struct AnnularRegionNames {
 }
 impl AnnularRegionNames {
     /// Every authored name, in role order; `names.all()` is checked for zero and duplicates.
-    pub(super) fn all(&self) -> [u64; 7] {
+    pub(in crate::sketch_region_prism) fn all(&self) -> [u64; 7] {
         [
             self.annulus,
             self.inner_domain,

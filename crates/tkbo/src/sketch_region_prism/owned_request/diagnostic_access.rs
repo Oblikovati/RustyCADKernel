@@ -9,6 +9,8 @@ pub(crate) enum RetainedPreparationStage {
     Partition,
     ContactTransport,
     Prism,
+    /// Annular role-bound region identities (ADR0062); never retained by single-boundary preparation.
+    RegionIdentities,
 }
 /// Operation-local view; it can borrow mutable-owner containers and is not a published result.
 pub(crate) struct PreparationDiagnosticView<'a> {

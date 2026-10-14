@@ -16,6 +16,7 @@ pub(in crate::sketch_region_prism) use retained::{
 
 use super::admission::OwnedPrismAdmissionCause;
 use super::construction::{ConstructedPolynomialSource, construct_owned_polynomial_as};
+use super::diagnostic_access::RetainedPreparationStage;
 use super::diagnostics::{OwnedPreparationCause, OwnedPreparationClass};
 use super::names::CallerOperationId;
 use super::progress::*;
@@ -34,4 +35,4 @@ use retained::*;
 use rustycad_tkmath::{gp::Plane3, predicates::roots::RootIsolationOptions};
 
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism) mod tests;
