@@ -132,3 +132,6 @@ impl std::fmt::Display for Failure {
     }
 }
 impl std::error::Error for Failure {}
+
+#[cfg(test)]
+mod provenance_baseline_tests;
