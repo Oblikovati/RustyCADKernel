@@ -1,0 +1,127 @@
+{
+  "code_revision": "2425bc35a28d7b4f33072bfdf3b74a93b405f886",
+  "base_revision": "c47191e0492c715e24410b999e547ef500854750",
+  "evidence_version": 1,
+  "behavior_change": "Additive exact diagnostic scalar. Existing operation completion, tolerances and replay remain unchanged. No release or replacement success gate.",
+  "platform": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "source_sha256": {
+    "crates/tkbo/src/sketch_region_prism/affine_chart.rs": "e0afbb864868b6fd0bc06afdf3e0abb2b195879f8a61cd5eb07bc689486da063",
+    "crates/tkbo/src/sketch_region_prism/affine_chart_tests.rs": "7abbc2752b2557fc21e58b3afe38b96d978ce3189c8d2e4ba10022531f06f2fa",
+    "crates/tkbo/src/sketch_region_prism/mod.rs": "2052c57cefbbaab68d17b4de0db2a86b10f9fbbf5165f0671d87e478c25ae06e",
+    "crates/tkbo/src/sketch_region_prism/outcome.rs": "5a1f4d754a71bd304da22635210ed8ba204751401082419c1f345d56356fdb3d",
+    "crates/tkbo/src/sketch_region_prism/transaction.rs": "c311aedb5cdd791b6623a6731ad9fb1b82b118170b04f46cc97ec95a435e4fbf",
+    "crates/tkbo/src/sketch_region_source_conformance/capture.rs": "9218f5d336989d77d4b08cb42fc3b0ac02c9a86fd1367d6636def44cd5078106",
+    "crates/tkbo/src/sketch_region_source_conformance/mod.rs": "2ec020cb4ebf2d0183ae047805da7e665246d2d34bf005d25ea16c4fc72b4b4a",
+    "crates/tkmath/src/predicates/roots/metric_bounds.rs": "1e7089148e312d0ab3e5623819940dd2ea199eae4781fba17207ac91a40b4589",
+    "crates/tkmath/src/predicates/roots/metric_bounds/prism_jacobian.rs": "0f43e1995f72a36929b2702f941abc3e11e6b94ca8c986a6ce2f7d01c66afae9",
+    "crates/tkmath/src/predicates/roots/metric_bounds/prism_jacobian_tests.rs": "a822014d8ad170e2c328453bba7371c612187c7c0c6de5d2b6357eada7401be6",
+    "crates/tkmath/src/predicates/triple_product.rs": "4fa8344500ae47d4669db68fe2699f0cbebe48ee524ff4bcb8167655f9285e12",
+    "Cargo.lock": "53fef96fad424c314b571b2fb4e2a6075e208afe5f8e8914ca47499c515c6812",
+    "Cargo.toml": "fa1245128377029158057bc148f54578f27a9305d4e83612452b405a2288fb4f",
+    "rust-toolchain.toml": "b3014764cf8f6250e128ca74673c16b3ffe75a7cddfecaacf30e3fd2152a6d7c"
+  },
+  "ordinary_host_tsan_acceptance": "incomplete: executable exited 139 before any probe stdout; cause not established",
+  "altered_environment_tsan": "exploratory only: single prior invocation masked preload; excluded from ordinary-host acceptance",
+  "operation_acceptance": "incomplete: no successful body publication, no cap/side chart proof, no complete region/source correspondence/ordered body validation",
+  "oracle_kinds": [
+    "FLINT rational exact determinant 501",
+    "closed-form powers-of-two determinant s^5",
+    "algebraic cancellation identity n^2-(n-1)(n+1)=1",
+    "zero determinant for tangent/dependent/zero maps",
+    "invariance under finite translations and determinant sign under chart reversal"
+  ],
+  "options": {
+    "jacobian": "exact dyadic arithmetic; all finite stored coefficients; three cancellation polls; no tolerances/clamps",
+    "probe": "four exact cases, eight threads, 128 repetitions per thread, two ordinary-host processes"
+  },
+  "exclusions": [
+    "No OCCT execution or new native fixture; existing fixture replay remains historical only.",
+    "No faceting, sampling, volume or benchmark used for acceptance.",
+    "No full published prism/body/thread safety claim; compatibility occurrence remains thread-confined.",
+    "No previous-release accepted-workload benchmark: there is not yet a completed accepted region/prism operation.",
+    "No extracted-package replay for this slice.",
+    "No application or GPU validation included."
+  ],
+  "algorithm_revision": "2ac207b4bab642fa8bc3129d074a30241c75894e",
+  "test_only_followup": "2425bc35a extracts the stress-loop worker to keep nesting bounded; identical inputs, expected outputs and repetition counts.",
+  "verification": {
+    "first_all_targets": {
+      "passed": 4090,
+      "failed": 0,
+      "status": "pass",
+      "scope": "before three added/split bridge cases"
+    },
+    "final_all_targets": {
+      "status": "pass",
+      "passed": 4093,
+      "failed": 0,
+      "groups": [
+        [
+          401,
+          0
+        ],
+        [
+          646,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          140,
+          0
+        ],
+        [
+          2904,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "scope": "2ac207b4b algorithm/tests; subsequent helper-only 2425bc35a covered by final focused math replay"
+    },
+    "final_doctests": {
+      "passed": 84,
+      "failed": 0,
+      "status": "pass"
+    },
+    "final_focused_math": {
+      "passed": 7,
+      "failed": 0,
+      "status": "pass",
+      "revision": "2425bc35a"
+    },
+    "final_clippy": {
+      "status": "pass",
+      "warnings": "denied"
+    },
+    "fmt": {
+      "status": "pass"
+    },
+    "process_comparison": {
+      "ordinary_processes": 2,
+      "byte_identical": true,
+      "sha256": "0aa52b56f8a5fd400463fb55af1fc57bca07616764bc7e97775de4da1d313eaa"
+    },
+    "ordinary_host_tsan": {
+      "status": "incomplete",
+      "exit": 139
+    },
+    "altered_environment_tsan": {
+      "status": "exploratory, excluded from ordinary-host acceptance",
+      "exit": 0
+    }
+  }
+}
