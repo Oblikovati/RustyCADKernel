@@ -1,6 +1,6 @@
 # Bound annular prism measurements
 
-Status: implementation in progress; private scalar evidence only.
+Status: private implementation with a completed candidate gate; integration pending.
 
 ## Scope and shared pipeline
 
@@ -71,3 +71,13 @@ This module is a prerequisite for annular ordered validation, history and
 publication, not a public successful operation. Keep V1 selectable until the
 recorded migration; remove superseded temporary adapters within this milestone
 only after the complete operation and consumer corpus passes.
+
+## Candidate evidence
+
+The source frozen at `50a287e78` passed 5,294 affected TKMath/TKBO tests,
+89 doctests, strict lint, formatting and documentation. Complete process bytes
+retain both the initial V2 result and earlier V1 joined-measure baseline unchanged.
+The evidence-only parser correction `9fe4653e6` reran only replay probes; crate
+inputs remained unchanged. See [the evidence receipt](../evidence/prism-annular-measures-v2/README.md)
+for exact commands, source bookends, independent rational expectations and explicit
+TSan/public-operation exclusions. This records the scalar prerequisite only.

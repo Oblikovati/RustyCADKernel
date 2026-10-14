@@ -1,0 +1,170 @@
+[
+  {
+    "label": "tests",
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "test",
+      "--all-targets",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 566.0936348590039,
+    "test_counts": [
+      [
+        1449,
+        0,
+        0
+      ],
+      [
+        646,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        243,
+        0,
+        0
+      ],
+      [
+        2954,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "label": "doctests",
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "test",
+      "--doc",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 2.835930319997715,
+    "test_counts": [
+      [
+        35,
+        0,
+        0
+      ],
+      [
+        54,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "label": "clippy",
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "clippy",
+      "--all-targets",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 3.947033554999507,
+    "test_counts": []
+  },
+  {
+    "label": "format",
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 8.14142190200073,
+    "test_counts": []
+  },
+  {
+    "label": "docs",
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "doc",
+      "--no-deps",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 35.186967812995135,
+    "test_counts": []
+  },
+  {
+    "label": "annular-measures-1",
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "--all-features",
+      "--locked",
+      "sketch_region_prism::frozen::annular_measures::tests::baseline::annular_measure_process_receipt",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit": 0,
+    "seconds": 18.640413649998663,
+    "test_counts": [
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+]
