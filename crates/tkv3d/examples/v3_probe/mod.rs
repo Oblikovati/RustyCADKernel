@@ -3,6 +3,7 @@ pub mod ais_attribute_filters;
 pub mod ais_connected;
 pub mod ais_context_attributes;
 pub mod ais_shape;
+pub mod ais_triangulation;
 pub mod brep_font;
 pub mod dsg_prs;
 pub mod prs3d;

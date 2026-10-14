@@ -56,6 +56,8 @@ pub use context_members::AisContextHandle;
 mod context_selector_reference;
 pub use context_selector_reference::AisMainSelectorRef;
 
+mod triangulation;
+pub use triangulation::AisTriangulation;
 mod connected_interactive;
 pub use connected_interactive::{
     AisConnectedInteractive, AisConnectedInteractiveFields, AisMultipleConnectedInteractive,
@@ -257,6 +259,7 @@ mod view_controller_space_mouse;
 mod view_controller_window_listener;
 
 mod light_source;
+mod light_source_fields;
 mod light_source_properties;
 mod light_source_transforms;
 pub use light_source::{AisLightSourceBase, AisLightSourceSource};

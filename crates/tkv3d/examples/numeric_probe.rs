@@ -22,6 +22,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_brepfont_text", v3_probe::brep_font::text_case),
     // DsgPrs presentations (v3_probe/dsg_prs.rs)
     ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
+    // AIS_Triangulation (v3_probe/ais_triangulation.rs)
+    (
+        "v3_ais_triangulation",
+        v3_probe::ais_triangulation::triangulation_case,
+    ),
     // AIS connected objects (v3_probe/ais_connected.rs)
     ("v3_ais_connected", v3_probe::ais_connected::connected_case),
     // AIS_InteractiveContext attribute members (v3_probe/ais_context_attributes.rs)
