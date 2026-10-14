@@ -5,6 +5,7 @@ mod affine_chart;
 mod affine_chart_tests;
 mod contexts;
 mod copying;
+mod exact_tolerance;
 pub(crate) mod frozen;
 mod history;
 mod outcome;

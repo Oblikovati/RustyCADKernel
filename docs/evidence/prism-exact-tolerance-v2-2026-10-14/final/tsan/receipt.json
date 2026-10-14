@@ -1,0 +1,15 @@
+{
+  "instrumented": {
+    "binary": "target/exact-tolerance-tsan-build/x86_64-unknown-linux-gnu/debug/martensite-exact-tolerance-tsan-control",
+    "sha256": "d501ab733830f232a1bf4215094991ed9ad56c4333ef1758a4fd092539f15f98",
+    "exit_code": -11
+  },
+  "ordinary": {
+    "binary": "target/exact-tolerance-control-unsanitized/debug/martensite-exact-tolerance-tsan-control",
+    "sha256": "1b38a05743bcf95943025dc295a94de25f650cacce1d95721b22eb8204f31a0a",
+    "exit_code": 0
+  },
+  "host": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "toolchain": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+  "acceptance": "incomplete: instrumented startup control failed; actual exact-tolerance tests not built or executed under TSan"
+}
