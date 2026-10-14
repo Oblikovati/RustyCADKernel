@@ -1,0 +1,31 @@
+[
+  {
+    "label": "focused",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::tolerance_inspection"
+    ],
+    "exit_code": 0,
+    "seconds": 20.735735416412354,
+    "log": "focused.log.gz"
+  },
+  {
+    "label": "fmt",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 6.645735740661621,
+    "log": "fmt.log.gz"
+  }
+]

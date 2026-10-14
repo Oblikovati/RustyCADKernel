@@ -28,3 +28,11 @@ pub(crate) use descriptor_bits::{same_embedding, same_metric_curve, same_space_r
 pub(crate) use snapshot_binding::binds_current_segment;
 
 pub(crate) use snapshot_binding::same_construction_basis;
+
+mod endpoints;
+pub(crate) use endpoints::{
+    captured_endpoint_root_options, certify_captured_endpoint, certify_captured_placed_endpoint,
+    with_captured_point_comparator,
+};
+#[cfg(test)]
+mod point_comparator_tests;

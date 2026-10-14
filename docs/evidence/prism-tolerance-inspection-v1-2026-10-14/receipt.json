@@ -1,0 +1,204 @@
+{
+  "source_revision": "edf1de5ff4eaa68d5fbc03b1f30dfe909825b0c1",
+  "base_revision": "bdb88a54723bf14dc4be6be04a326043ef16a564",
+  "structural_extraction": "691c29be2",
+  "behavior_version": 1,
+  "decision": "docs/adr/0030-private-prism-tolerance-inspection.md",
+  "platform": {
+    "uname": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1",
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "jobs": 2
+  },
+  "scope": "private source-bound prism metadata/residual evidence; no successful body publication or aggregate tolerance certificate",
+  "fixture": {
+    "source": "crates/tkbo/tests/support/closed_analytic_cubic.rs",
+    "extrusion": [
+      0,
+      0,
+      2
+    ],
+    "directed_contexts": 26,
+    "physical_metadata_entities": 8,
+    "directed_trims": 6,
+    "physical_endpoint_queries": 6,
+    "directed_endpoint_uses": 12
+  },
+  "oracle_kinds": [
+    "independently authored polynomial/extrusion coordinates and endpoint ranges",
+    "exact existing transported residual machinery",
+    "fresh exact source/chart/trim identities",
+    "actual topology/context/history census",
+    "owned mutation/cancellation invariants",
+    "reviewed frozen V1 full-byte replay baseline"
+  ],
+  "validation": {
+    "focused_tests": 39,
+    "combined_tests": 6078,
+    "doctests": 302,
+    "failed": 0,
+    "ignored": 0,
+    "changed_crate_files": 34
+  },
+  "source_comparison": {
+    "files": 15757,
+    "identical": true,
+    "changed": []
+  },
+  "process_replay": {
+    "arithmetic_bytes": 3629,
+    "equal": true,
+    "sha256": "a3bbc53e1b5be36f87331ff1319ce1e47b078447b694844d21f004abdaaaf8a7",
+    "frozen_bytes": 89921,
+    "frozen_sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+    "frozen_matches_baseline": true
+  },
+  "checks": [
+    {
+      "label": "all-targets",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 284.09856152534485,
+      "log": "all-targets.log.gz"
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 3.5551528930664062,
+      "log": "doctests.log.gz"
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 51.091753244400024,
+      "log": "clippy.log.gz"
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 6.474629163742065,
+      "log": "fmt.log.gz"
+    },
+    {
+      "label": "process-first",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5853679180145264,
+      "log": "process-first.log.gz"
+    },
+    {
+      "label": "process-second",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5746426582336426,
+      "log": "process-second.log.gz"
+    },
+    {
+      "label": "frozen-replay",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9019746780395508,
+      "log": "frozen-replay.log.gz"
+    }
+  ],
+  "exclusions": [
+    "no successful body or aggregate tolerance certification",
+    "stored local tolerance transport unresolved",
+    "no inferred vertex/edge/face hierarchy",
+    "no nonzero tolerance transport acceptance",
+    "arithmetic process replay excludes process-local topology addresses and is not full body serialization",
+    "owned placement arithmetic tests do not settle raw metadata transport",
+    "no new ThreadSanitizer or thread-safety certification",
+    "no accepted-workload performance benchmark",
+    "no application/release completion claim",
+    "no live OCCT or tessellation acceptance"
+  ]
+}

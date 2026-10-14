@@ -63,6 +63,9 @@ impl FrozenPrismProjection {
         bytes.extend(format!("endpoints={:?};", self.endpoints).bytes());
         bytes.extend(geometry_bytes(&self.nodes, &self.faces));
         limits(&self.limits, &mut bytes);
+        if let Some(traversals) = &self.wire_traversals {
+            bytes.extend(format!("ordered_wire_traversal_v2={traversals:?};").bytes());
+        }
         bytes
     }
 }

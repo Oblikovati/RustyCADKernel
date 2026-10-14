@@ -1,0 +1,118 @@
+{
+  "candidate_files": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/embedding-v1.json": "537b10e880bde11bde54b890b73b4579a6beb0510a68414a239d6c0836d094f6",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/replay.rs": "ab292995b064eb084d8143beea983962e53c74423639fde9c11383c5114dad18",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs": "c7378ac25281d491655d333d571060f15500ec5fde03011f8343a5239fd61dc4",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/access.rs": "ae749907c1c347987ea01aea62ec5145ca351196fdb88a7c439747a539a1ac6c",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/error.rs": "cea6d7e0f21966e43ab8a06f0f71c5faea49a6b59bc7cc8970cc0b883864ef83",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/faces.rs": "1786f217582d144a7c65a73336f37ac48fce3d00375fbe4a3d114522e729eea4",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/mod.rs": "72e00e919648c9fc9729ffdb1c7bdffaad7b09a2e1f674ec15f9e982f55475b0",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/signs.rs": "c821017a95e5a6f4e06945943bc236a801c9d3918a5cf4fe8360e937688233de",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests.rs": "f9cff2e91807186961a7a7c6973a7a9fd472c2a32e34d66bc8990987e33ab7ad",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/domain.rs": "9acdbc3a381373b21c33a110795a21d382370c94442487657e518132829361b1",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/mutation.rs": "171339cd140f594abc0318d76c35016fde27a944d3348aa0f8f0ba1e44496b77",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/refusal.rs": "e08079ff802599ca1df17ccd336b85ef7076f322ae3a6a37659597a7fd75865c",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/replay.rs": "2b64878e74a0c3065739439a6abe3befc8d5c7a50e34de9fe10bddaa52a7e52d",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/trims.rs": "c42c3cf1238bf40afec0546a10de9798e73e6855ddf95163af1ebde622cadb5c",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/types.rs": "60819af49232c992782f24f457554b73a35f3010f0db15231bf398794c207e3f",
+    "docs/adr/0034-private-prism-orientation.md": "216b7c423533f1124b957379ba8b691aa107fc2095648ea435893a0eea22184b"
+  },
+  "commands": [
+    {
+      "command": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+      "elapsed_seconds": 0.007266044616699219,
+      "exit_code": 0,
+      "name": "toolchain"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--offline",
+        "--locked",
+        "--all-features",
+        "region_certificate::orientation",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+      "elapsed_seconds": 23.075237274169922,
+      "exit_code": 0,
+      "name": "focused"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--offline",
+        "--locked",
+        "--all-features",
+        "sketch_region_prism::region_certificate::embedding::tests::replay_tests::prism_embedding_process_receipt",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+      "elapsed_seconds": 0.15781164169311523,
+      "exit_code": 0,
+      "name": "embedding-baseline"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--offline",
+        "--locked",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+      "elapsed_seconds": 42.858261823654175,
+      "exit_code": 0,
+      "name": "clippy"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+      "elapsed_seconds": 6.695365905761719,
+      "exit_code": 0,
+      "name": "fmt"
+    }
+  ],
+  "focused_tests": 22,
+  "merged_main": "e6955e6db",
+  "original_evidence": "d9632ae2b",
+  "original_sanitizer_status": "incomplete; executable SIGSEGV before test output; not rerun for reconciliation",
+  "original_source": "e60b9542f",
+  "replay_comparison": {
+    "embedding_identical_to_original": true,
+    "embedding_receipts": 1,
+    "independent_workers": 8,
+    "orientation_identical_to_original": true,
+    "orientation_receipts": 1,
+    "separate_process_replays": 2,
+    "worker_repetitions": 4
+  },
+  "revision": "c23deb36fd8c05fa28287f199f3b56198290be12",
+  "source_files": 15830,
+  "source_unchanged": true
+}

@@ -1,0 +1,13 @@
+diff --git a/crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs b/crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs
+index 37a710309..030f39c94 100644
+--- a/crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs
++++ b/crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs
+@@ -141,6 +141,8 @@ pub(crate) use measurements::{
+ #[cfg(test)]
+ mod embedding_baseline_tests;
+ 
++pub(crate) mod embedding;
++
+ #[allow(unused_imports)]
+ pub(crate) use measurements::{
+     CompletePrismMeasureInspection, CompletePrismMeasureOptions,

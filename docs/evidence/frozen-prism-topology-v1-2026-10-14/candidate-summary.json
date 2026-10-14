@@ -1,0 +1,129 @@
+{
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "--test-threads=1"
+      ],
+      "elapsed_seconds": 454.6833592090006,
+      "name": "all-targets",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "elapsed_seconds": 1.0908760099991923,
+      "name": "doctests",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--no-deps",
+        "--all-features"
+      ],
+      "elapsed_seconds": 1.227420389001054,
+      "name": "docs",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--no-deps",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "elapsed_seconds": 0.1291511060007906,
+      "name": "clippy",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--package",
+        "rustycad-tkbo",
+        "--",
+        "--check"
+      ],
+      "elapsed_seconds": 0.4788018280014512,
+      "name": "fmt",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "exact_topology_report_replays_across_threads_and_processes",
+        "--",
+        "--nocapture"
+      ],
+      "elapsed_seconds": 0.1981620029982878,
+      "name": "process-a",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "exact_topology_report_replays_across_threads_and_processes",
+        "--",
+        "--nocapture"
+      ],
+      "elapsed_seconds": 0.17559341300147935,
+      "name": "process-b",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--",
+        "--nocapture"
+      ],
+      "elapsed_seconds": 0.9330852769999183,
+      "name": "legacy",
+      "returncode": 0
+    }
+  ],
+  "performance_acceptance": false,
+  "replay": {
+    "legacy_length": 89921,
+    "legacy_sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+    "topology_length": 96088,
+    "topology_sha256": "852bd440732f89512ab35e27c2f13b70d00b9af818c3dc3266122b3bee75a9a7"
+  },
+  "revision": "77978c6388b549a103cd7c358bb02a7f4ef07af1",
+  "source_unchanged": true
+}

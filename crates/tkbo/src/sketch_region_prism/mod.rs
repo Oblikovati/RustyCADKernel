@@ -9,6 +9,7 @@ pub(crate) mod frozen;
 mod history;
 mod outcome;
 mod surface_charts;
+mod tolerance_inspection;
 mod transaction;
 pub(crate) use outcome::*;
 pub(crate) use transaction::retain_selected_prism;
@@ -43,3 +44,6 @@ pub(crate) use region_certificate::retain_source_bound_prism;
 
 #[cfg(test)]
 mod graph_import_tests;
+
+#[cfg(test)]
+mod copy_retention_tests;
