@@ -32,8 +32,9 @@ fn one_global_budget_does_not_reset_between_exceptional_and_candidate_isolation(
     assert_eq!(complete.work.completed, 31);
     let proof = complete.completion.unwrap();
     assert_eq!(proof.work, complete.work);
-    assert_eq!(proof.exceptional_fibers.isolation().bisections(), 30);
-    assert_eq!(proof.candidate_certificate.isolation.bisections(), 1);
+    let graph = proof.graph().unwrap();
+    assert_eq!(graph.exceptional_fibers.isolation().bisections(), 30);
+    assert_eq!(graph.candidate_certificate.isolation.bisections(), 1);
     assert_eq!(proof.contacts.len(), 2);
 }
 #[test]

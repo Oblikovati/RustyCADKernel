@@ -17,13 +17,16 @@ fn run_signs(signs: PairSignOptions, primary_limit: u16) -> AccountedPairOutcome
 #[test]
 fn derived_sign_receipt_retains_version_effective_bound_and_primary_policy() {
     let proof = run_signs(PairSignOptions::derived(), 2).completion.unwrap();
-    assert_eq!(proof.signs.requested.version, 1);
+    assert_eq!(proof.graph().unwrap().signs.requested.version, 1);
     assert_eq!(
-        proof.signs.requested.degree_limit,
+        proof.graph().unwrap().signs.requested.degree_limit,
         PairSignAdmission::DerivedProjection
     );
-    assert_eq!(proof.signs.conservative_generated_degree, 2);
-    assert_eq!(proof.signs.effective_limit, 2);
+    assert_eq!(
+        proof.graph().unwrap().signs.conservative_generated_degree,
+        2
+    );
+    assert_eq!(proof.graph().unwrap().signs.effective_limit, 2);
     assert_eq!(proof.contacts.len(), 1);
 }
 #[test]
@@ -91,8 +94,16 @@ fn genuine_quartic_pair_records_linear_primary_and_quadratic_domain_admission() 
     let proof = low_root_high_domain(PairSignOptions::derived())
         .completion
         .unwrap();
-    assert_eq!(proof.candidate_certificate.polynomial.degree(), Some(1));
-    assert_eq!(proof.signs.effective_limit, 2);
+    assert_eq!(
+        proof
+            .graph()
+            .unwrap()
+            .candidate_certificate
+            .polynomial
+            .degree(),
+        Some(1)
+    );
+    assert_eq!(proof.graph().unwrap().signs.effective_limit, 2);
     assert_eq!(proof.contacts.len(), 1);
     assert_eq!(proof.contacts[0].u_bounds, [0., 0.]);
     assert_eq!(proof.contacts[0].world.point, [0., 0.]);
