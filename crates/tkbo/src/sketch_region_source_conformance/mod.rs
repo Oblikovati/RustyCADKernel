@@ -4,7 +4,7 @@ mod capture;
 mod inspect;
 mod membership;
 mod query;
-pub(crate) use query::{captured_map, source_query};
+pub(crate) use query::{assemble_query, captured_map, source_query};
 mod types;
 pub(crate) use capture::capture_support;
 pub(crate) use capture::{capture_construction, capture_originals, capture_space_representation};

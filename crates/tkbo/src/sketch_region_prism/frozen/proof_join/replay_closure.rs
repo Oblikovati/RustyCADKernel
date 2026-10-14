@@ -51,12 +51,8 @@ fn query(
     encoding::numbers(construction.basis_interval, bytes);
     encoding::numbers(query.interval, bytes);
     encoding::numbers([query.requested_world_limit], bytes);
-    replay::text(
-        &format!(
-            "{:?}/{:?}/{}/{}",
-            query.maps, query.roots, query.bounds[0], query.bounds[1]
-        ),
-        bytes,
-    );
+    replay_options::parameter_maps(query.maps, bytes);
+    replay_options::roots(query.roots, bytes);
+    replay::text(&format!("{}/{}", query.bounds[0], query.bounds[1]), bytes);
     Ok(())
 }

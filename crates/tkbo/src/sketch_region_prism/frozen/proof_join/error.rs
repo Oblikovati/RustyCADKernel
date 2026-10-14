@@ -21,7 +21,8 @@ pub(crate) enum PrismProofJoinCause {
     ClosureRegion(Box<crate::sketch_region_prism::region_certificate::RegionCertificateCause>),
     Version { actual: u32, expected: u32 },
     Embedding(Box<PrismEmbeddingFailure>),
-    Freeze(Box<PrismFreezeFailure>),
+    IncompleteCapture(Box<PrismFreezeFailure>),
+    FailedCapture(Box<PrismFreezeFailure>),
     Binding(Box<PrismBindingFailure>),
     Link(Box<PrismFreezeCause>),
     Cancelled { freeze_phase: Option<FreezePhase> },
@@ -33,7 +34,8 @@ pub(super) fn failure(
     cause: PrismProofJoinCause,
 ) -> PrismProofJoinFailure {
     let entity = match &cause {
-        PrismProofJoinCause::Freeze(failure) => failure.entity,
+        PrismProofJoinCause::IncompleteCapture(failure)
+        | PrismProofJoinCause::FailedCapture(failure) => failure.entity,
         PrismProofJoinCause::Link(cause) => cause.primary_entity(),
         _ => None,
     };

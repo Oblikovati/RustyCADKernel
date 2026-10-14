@@ -199,7 +199,7 @@ fn capture_limits(receipt: &PrismReceipt) -> FrozenPrismLimits {
         achieved_error: receipt.limits.achieved_error,
     }
 }
-fn check_final_capture(
+pub(super) fn check_final_capture(
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,
     behavior: PrismFreezeBehavior,

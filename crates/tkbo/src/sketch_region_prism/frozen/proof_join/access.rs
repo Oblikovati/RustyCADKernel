@@ -1,6 +1,15 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::*;
 impl JoinedPrismProof {
+    /// Read the caller-authored contact name; `join.closure_contact()` never returns a report rank.
+    pub(crate) fn closure_contact(&self) -> AuthoredPrismId {
+        self.links.contact
+    }
+    /// Borrow the authored original boundary name; `join.original()` retains member and directed use.
+    pub(crate) fn original(&self) -> &FrozenOriginalKey {
+        &self.links.original
+    }
+
     /// Borrow all raw semantic closure uses; `join.raw_closure_points()` keeps twelve directed contexts.
     pub(crate) fn raw_closure_points(&self) -> &[JoinedClosurePointOperand] {
         &self.closure.rows
