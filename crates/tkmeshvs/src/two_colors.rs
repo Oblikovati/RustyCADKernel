@@ -63,6 +63,7 @@ pub fn extract_color(pair: &mut MeshVSTwoColors, index: i32) -> Color {
 
 /// Overwrite both outputs in their native order; `extract_colors(&mut pair, &mut a, &mut b)`.
 pub fn extract_colors(pair: &mut MeshVSTwoColors, first: &mut Color, second: &mut Color) {
+    // Share the native write order with the explicit same-output route.
     extract_colors_into(pair, MeshVSColorOutputs::Distinct { first, second });
 }
 

@@ -87,6 +87,7 @@ fn fixture_components(index: u8) -> [[f64; 3]; 2] {
 }
 
 fn fixture_color([red, green, blue]: [f64; 3], space: ColorSpace) -> Color {
+    // Keep the native constructor narrowing before any byte quantization.
     Color::new(red, green, blue, space).unwrap()
 }
 

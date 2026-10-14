@@ -9,5 +9,7 @@ pub mod flags;
 pub mod invariants;
 #[path = "../metadata_reference.rs"]
 pub mod metadata_reference;
+#[path = "../node_pairs.rs"]
+pub mod node_pairs;
 #[path = "../two_colors.rs"]
 pub mod two_colors;
