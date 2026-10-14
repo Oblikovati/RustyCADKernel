@@ -50,3 +50,6 @@ pub(crate) use admission::BoundedContactConstruction;
 pub(crate) use generated::observe_generated_vertex;
 
 pub(crate) use world::recertify_contact_point;
+mod point_snapshot;
+pub(crate) use point_snapshot::ContactPointQuerySnapshot;
+pub(crate) use world::capture_contact_point_query;
