@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0035: bind existing proofs to the same authored immutable projection.
 mod access;
+mod operands;
 mod operation;
 mod probe;
+mod rebind;
 pub(crate) use operation::{compose_prism_proof, rebind_joined_prism_proof};
 mod closure;
 mod error;
