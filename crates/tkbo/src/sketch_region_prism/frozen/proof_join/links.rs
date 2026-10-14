@@ -92,7 +92,8 @@ pub(super) fn face_index(
         .collect();
     only_bound(&found, "one actual face context for joined proof").copied()
 }
-fn link_face(
+/// Bind unchanged chart operands to frozen names; `link_frozen_chart(chart, bound, projection)`.
+pub(in crate::sketch_region_prism::frozen) fn link_face(
     chart: &BoundPrismChart,
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,

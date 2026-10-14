@@ -4,7 +4,8 @@ use super::*;
 use rustycad_tkbrep::brep::access::vertex_tshape;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-pub(super) fn capture(
+/// Capture exact local vertices under existing named contexts; `capture_frozen_raw_vertices(bound, projection)`.
+pub(in crate::sketch_region_prism::frozen) fn capture(
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,
 ) -> CaptureResult<Vec<JoinedVertexOperand>> {
