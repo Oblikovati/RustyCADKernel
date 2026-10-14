@@ -128,6 +128,9 @@ fn failed_partial_rows_survive_source_drop_and_remain_typed_incomplete() {
             .err()
             .unwrap()
     });
+    assert_owned_partial(&failure);
+}
+fn assert_owned_partial(failure: &AnnularMeasureFailure) {
     assert_eq!(
         failure.classification(),
         JoinedMeasureFailureClass::Incomplete
