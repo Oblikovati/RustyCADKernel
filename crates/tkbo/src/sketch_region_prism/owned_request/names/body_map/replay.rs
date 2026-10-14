@@ -22,7 +22,7 @@ pub(super) fn encode(
     bytes
 }
 fn member_row(bytes: &mut Vec<u8>, row: &SemanticMemberBinding) {
-    frozen_member(bytes, row.frozen);
+    encode_frozen_member_key(bytes, row.frozen);
     encode_semantic_member_key(bytes, &row.semantic);
     bytes.push(u8::from(row.output_slot.is_some()));
     if let Some(value) = row.output_slot {
@@ -30,7 +30,7 @@ fn member_row(bytes: &mut Vec<u8>, row: &SemanticMemberBinding) {
     }
 }
 fn use_row(bytes: &mut Vec<u8>, row: &SemanticUseBinding) {
-    frozen_use(bytes, &row.frozen);
+    encode_frozen_use_key(bytes, &row.frozen);
     encode_semantic_use_key(bytes, &row.semantic);
 }
 /// Encode the complete ancestry without lookup; `encode_semantic_use_key(bytes, key)`.
@@ -41,15 +41,17 @@ pub(crate) fn encode_semantic_use_key(bytes: &mut Vec<u8>, key: &SemanticUseKey)
         slot(bytes, step.directed_use);
     }
 }
-fn frozen_member(bytes: &mut Vec<u8>, key: FrozenPrismKey) {
+/// Encode the complete authored member observation; `encode_frozen_member_key(bytes, key)` requires separate caller-context binding.
+pub(crate) fn encode_frozen_member_key(bytes: &mut Vec<u8>, key: FrozenPrismKey) {
     word(bytes, key.operation.0);
     word(bytes, key.source.0);
     bytes.extend_from_slice(&[role(key.role), key.kind]);
 }
-fn frozen_use(bytes: &mut Vec<u8>, key: &FrozenUseKey) {
+/// Encode every authored ancestry step; `encode_frozen_use_key(bytes, key)` preserves repeated directed tokens.
+pub(crate) fn encode_frozen_use_key(bytes: &mut Vec<u8>, key: &FrozenUseKey) {
     word(bytes, key.0.len() as u64);
     for (member, token) in &key.0 {
-        frozen_member(bytes, *member);
+        encode_frozen_member_key(bytes, *member);
         word(bytes, token.0);
     }
 }
