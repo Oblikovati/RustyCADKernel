@@ -44,6 +44,12 @@ open; the unsafe upstream XYZ constructor is explicitly partial.
 selection, native comparisons and geometry-update performance coverage.
 [Native X11 presentation](vulkan-window-presentation.md) now adds swapchains,
 resize/rebind/remap checks, actual window captures and presentation timings.
+[Native GUI composition](native-gui-composition.md) now attaches owned GUI layers
+to that same view, with model/GUI alpha isolation, extent rejection and atomic
+replacement. Both drivers pass native captures, source tests and extracted GUI
+regressions; seven workloads per driver retain 1,400 measured samples. See the
+[integration receipt](evidence/gui-integration-2026-10-14/receipt.json) for source
+and performance revision boundaries. Release and application acceptance remain open.
 [Circle datums and adaptive deflection curves](ais-circle.md) add circular/arc
 construction geometry, filled/boundary selection and live geometry-update workloads.
 [Retained clipping](vulkan-clipping.md) adds live plane chains, persistent-anchor

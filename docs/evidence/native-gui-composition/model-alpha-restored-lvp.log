@@ -1,0 +1,35 @@
+   Compiling martensite-vulkan v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/vulkan)
+    Finished `test` profile [unoptimized] target(s) in 5.30s
+     Running unittests src/lib.rs (target/debug/deps/martensite_vulkan-15771011e98973df)
+
+running 6 tests
+test backend::fragment_alpha_plan::gui_state_tests::gui_material_reset_does_not_change_next_model_frame ... ok
+test view_gui_composition::tests::final_gui_follows_deferred_transparency_and_keeps_model_depth ... ok
+test view_gui_layer::tests::invalid_depth_or_deferred_surface_policy_is_refused ... ok
+test view_gui_layer::tests::epoch_and_extent_checks_cover_clear_resize_and_replacement ... ok
+test backend::fragment_alpha_plan::gui_state_tests::retained_model_mask_does_not_reject_translucent_gui ... ok
+test view_gui_layer::tests::snapshot_owns_font_after_replacement_until_its_completion ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 238 filtered out; finished in 0.00s
+
+     Running tests/toolkit.rs (target/debug/deps/toolkit-e069c87c62d9034e)
+
+running 15 tests
+test gui_gpu_composition::native_window::tests::screen_masks_decode_channels_independently ... ok
+test gui_composition::gui_geometry_is_excluded_from_real_model_bounds_and_fit ... ok
+test gui_composition::depth_enabled_gui_and_removed_view_are_rejected ... ok
+test gui_composition::replacement_during_submission_rejects_old_capture_then_retries ... ok
+test gui_composition::failed_device_draw_preserves_packet_and_requires_successful_retry ... ok
+test gui_composition::owned_gui_float_colors_uvs_and_model_order_survive_attachment ... ok
+test gui_composition::rejected_replacement_is_atomic_and_clear_requires_fresh_capture ... ok
+test gui_composition::resize_even_back_to_same_extent_requires_a_new_packet ... ok
+test gui_composition::target_extent_change_cannot_return_the_previous_gui_capture ... ok
+test gui_gpu_composition::gpu_gui_font_producer_retirement_and_view_close ... ok
+test gui_gpu_composition::gpu_gui_ordered_alpha_and_font_uv ... ok
+test gui_gpu_composition::gpu_gui_attachment_lifecycle ... ok
+test gui_gpu_composition::gpu_gui_alpha_scope_keeps_retained_model_state_after_clear ... ok
+test gui_gpu_composition::gpu_gui_model_selection_identity ... ok
+test gui_gpu_composition::gpu_gui_after_model_oit ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 281 filtered out; finished in 0.21s
+

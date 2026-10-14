@@ -1,0 +1,31 @@
+   Compiling martensite-vulkan v0.2.5 (/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/crates/vulkan)
+warning: unused variable: `index`
+  --> crates/vulkan/src/backend/fragment_alpha_plan.rs:16:14
+   |
+16 |         for (index, draw) in frame.draws.iter().enumerate() {
+   |              ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `martensite-vulkan` (lib) generated 1 warning (run `cargo fix --lib -p martensite-vulkan` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 5.04s
+     Running tests/toolkit.rs (target/debug/deps/toolkit-e069c87c62d9034e)
+
+running 1 test
+test gui_gpu_composition::gpu_gui_alpha_scope_keeps_retained_model_state_after_clear ... FAILED
+
+failures:
+
+---- gui_gpu_composition::gpu_gui_alpha_scope_keeps_retained_model_state_after_clear stdout ----
+
+thread 'gui_gpu_composition::gpu_gui_alpha_scope_keeps_retained_model_state_after_clear' (1780177) panicked at crates/vulkan/tests/suites/../../examples/support/gui_acceptance.rs:83:9:
+RGBA [0, 0, 255, 255]; expected sRGB [0, 188, 188] within one quantization byte
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    gui_gpu_composition::gpu_gui_alpha_scope_keeps_retained_model_state_after_clear
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 295 filtered out; finished in 0.12s
+
+error: test failed, to rerun pass `-p martensite-vulkan --test toolkit`

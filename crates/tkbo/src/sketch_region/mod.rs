@@ -47,6 +47,7 @@ mod partition_diagnostics;
 
 mod partition_vertices;
 
+mod partition_occurrence;
 #[cfg(test)]
 mod partition_policy_tests;
 mod partition_source_vertices;

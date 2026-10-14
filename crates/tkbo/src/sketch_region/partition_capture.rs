@@ -51,7 +51,12 @@ fn capture_context(
     let builder = builder.ok_or_else(|| missing_context("mapped builder is None"))?;
     capture_members(copied, structure)?;
     capture_sources(copied, structure, builder, partial, space)?;
-    super::partition_vertices::capture_vertices(copied, structure, partial, occurrence_identity)
+    super::partition_vertices::capture_vertices(
+        copied,
+        structure,
+        partial,
+        PartitionOccurrenceIdentity::capture,
+    )
 }
 fn capture_sources(
     copied: &CopiedSources,
@@ -114,7 +119,7 @@ fn source_shell(
     Ok(SourcePartitionObservation {
         source_index: index,
         parents: Vec::new(),
-        occurrence: occurrence_identity(shape),
+        occurrence: PartitionOccurrenceIdentity::capture(shape),
         range: source_range(index, shape)?,
         space: None,
         has_reference: source_has_reference(index, structure)?,
@@ -149,13 +154,6 @@ fn source_parents(
         ));
     }
     Ok(parents)
-}
-fn occurrence_identity(shape: &Shape) -> PartitionOccurrenceIdentity {
-    PartitionOccurrenceIdentity {
-        topology_address: shape.tshape().object_address().addr(),
-        location: shape.location().clone(),
-        orientation: shape.orientation(),
-    }
 }
 fn capture_images(
     index: i32,
@@ -205,7 +203,7 @@ fn image_observation(
 ) -> Result<PartitionImageObservation, PartitionReadFailure> {
     Ok(PartitionImageObservation {
         shape_index: image_index(source, image, structure)?,
-        occurrence: occurrence_identity(image),
+        occurrence: PartitionOccurrenceIdentity::capture(image),
     })
 }
 
@@ -274,6 +272,6 @@ fn source_children(
         index,
         shape,
         structure,
-        occurrence_identity,
+        PartitionOccurrenceIdentity::capture,
     )
 }
