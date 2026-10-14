@@ -65,5 +65,7 @@ pub mod top_ope_brep_ds_interference;
 pub mod top_ope_brep_tool_classifier;
 #[path = "../top_ope_brep_tool_curve_tool.rs"]
 pub mod top_ope_brep_tool_curve_tool;
+#[path = "../top_ope_brep_tool_tool.rs"]
+pub mod top_ope_brep_tool_tool;
 #[path = "../top_ope_brep_tool_shapes.rs"]
 pub mod top_ope_brep_tool_shapes;

@@ -64,6 +64,8 @@
 #include "tkbool_probe_topopebrepds_build.cxx"
 #include "tkbool_probe_topopebreptool_classifier.cxx"
 #include "tkbool_probe_topopebrepbuild.cxx"
+#include "tkbool_probe_topopebreptool_tool.cxx"
+#include "tkbool_probe_topopebreptool_regu.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx,
  // tkbool_probe_brepfill_compatible.cxx, tkbool_probe_brepfill_section_law.cxx,
@@ -133,6 +135,17 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"tt_shape_classifier", bl_tt_shape_classifier_case},
  {"tt_fsc", bl_tt_fsc_case},
  {"tt_tggeom", bl_tt_tggeom_case},
+ // TopOpeBRepTool TOOL, TOPOLOGY and transitions (tkbool_probe_topopebreptool_tool.cxx)
+ {"tt_tool", bl_tt_tool_case},
+ {"tt_topology", bl_tt_topology_case},
+ {"tt_make_transition", bl_tt_make_transition_case},
+ {"tt_mktondge", bl_tt_mktondge_case},
+ // TopOpeBRepTool regularization and UV correction (tkbool_probe_topopebreptool_regu.cxx)
+ {"tt_classi", bl_tt_classi_case},
+ {"tt_regularize", bl_tt_regularize_case},
+ {"tt_corriso", bl_tt_corriso_case},
+ {"tt_fuse_edges", bl_tt_fuse_edges_case},
+ {"tt_purge_internal", bl_tt_purge_internal_case},
  // TopOpeBRepBuild (tkbool_probe_topopebrepbuild.cxx)
  {"tb_wire_to_face", bl_tb_wire_to_face_case},
  {"tb_face_builder", bl_tb_face_builder_case},

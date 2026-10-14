@@ -48,6 +48,9 @@ pub struct BRepLibFuseEdges {
     my_nb_connex_edge: i32,
     my_avoid_edg: IndexedMapOfShape,
     my_concat_bspl: bool,
+    /// The variant of `TopOpeBRepTool_FuseEdges` (an older copy of this class): no
+    /// closed B-spline edge and the edge range always moved onto the p-curves.
+    my_top_ope_brep_tool: bool,
 }
 
 impl BRepLibFuseEdges {
@@ -70,12 +73,24 @@ impl BRepLibFuseEdges {
             my_nb_connex_edge: 0,
             my_avoid_edg: IndexedMapOfShape::default(),
             my_concat_bspl: false,
+            my_top_ope_brep_tool: false,
         })
     }
 
     /// `AvoidEdges(theMapEdg)`: the edges never fused; `fuser.avoid_edges(&map)`.
     pub fn avoid_edges(&mut self, edges: &IndexedMapOfShape) {
         self.my_avoid_edg = edges.clone();
+    }
+
+    /// Switches to the behaviour of `TopOpeBRepTool_FuseEdges` (TKBool), the older copy
+    /// of `BRepLib_FuseEdges`: a fused edge is always made between its vertices (no
+    /// closed B-spline case) and its range is always moved onto the old p-curve range,
+    /// even after a p-curve is rebuilt; used by
+    /// `rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges`;
+    /// `fuse.set_top_ope_brep_tool_variant()`.
+    #[doc(hidden)]
+    pub fn set_top_ope_brep_tool_variant(&mut self) {
+        self.my_top_ope_brep_tool = true;
     }
 
     /// `SetConcatBSpl(theConcatBSpl)`: B-spline edges meeting with G1 continuity are

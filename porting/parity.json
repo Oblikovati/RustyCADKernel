@@ -605177,6 +605177,2070 @@
       ],
       "status": "implemented",
       "notes": "Reviewed declaration correspondence only; exact C++ identity and fresh Rust compiler selector. Retained selection-policy fixtures cover named values and masks separately; no mesh selection execution or toolkit completeness claim. See porting/audits/meshvs-selection-policy-api.json."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::PurgeFyClosingE(const NCollection_List<TopoDS_Shape> &, NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::purge_fy_closing_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_PurgeInternalEdges::NbEdges() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PurgeInternalEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolPurgeInternalEdges::nb_edges",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PurgeInternalEdges.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_purge_internal (an INTERNAL diagonal)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::AddNewConnexity(const TopoDS_Vertex &, int, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::add_new_connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::IsQuad(const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::is_quad_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_parF(const TopoDS_Edge &, const double &, const TopoDS_Face &, gp_Pnt2d &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_par_f_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_findPinBAC(const BRepAdaptor_Curve &, gp_Pnt &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_find_pin_bac",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::EdgesWithFaultyUV(const NCollection_List<TopoDS_Shape> &, int, NCollection_DataMap<TopoDS_Shape, int> &, bool) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::edges_with_faulty_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_tolUV(const TopoDS_Face &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_tol_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::NextinBlock()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::nextin_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::RegularizeWires(const TopoDS_Face &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::regularize_wires",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_getgeomxx(const TopoDS_Face &, const TopoDS_Edge &, double, const gp_Dir &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_getgeomxx_ng",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_PurgeInternalEdges::myMapEdgLstFac",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PurgeInternalEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolPurgeInternalEdges::my_map_edg_lst_fac",
+      "status": "implemented",
+      "notes": "Public data member of TopOpeBRepTool_PurgeInternalEdges.hxx: the faces of each edge, a public field."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_face::RealF() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_face.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFace::real_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_face.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::CurvF(const TopoDS_Face &, const gp_Pnt2d &, const gp_Dir &, double &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::curv_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_staPinE(const gp_Pnt &, const TopoDS_Edge &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_sta_pin_e_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::Init(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::ChangeItem(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::change_item",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::SetConnexity(const TopoDS_Vertex &, const NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::set_connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::HasInit2d() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::has_init2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::AddItem(int, const NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::add_items",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::GetOshNsh(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::get_osh_nsh",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Matter(const gp_Vec2d &, const gp_Vec2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::matter_2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::TopOpeBRepTool_CORRISO(const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::with_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::SetOwNw(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::set_ow_nw",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::GetAllRest(NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::get_all_rest",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeExplorer::Index() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeExplorer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeExplorer::index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeExplorer.hxx; compared with OCCT by tools/verify_tkbool_numeric.py (the explorer of the classifier probes); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::OriinSor(const TopoDS_Shape &, const TopoDS_Shape &, bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::oriin_sor",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::WireToFace(const TopoDS_Face &, const NCollection_List<TopoDS_Shape> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::wire_to_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::EdgesOUTofBoundsUV(const NCollection_List<TopoDS_Shape> &, bool, double, NCollection_DataMap<TopoDS_Shape, int> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::edges_out_of_bounds_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::GetSplits(NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::get_splits",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_maxtol(const TopoDS_Shape &, const TopAbs_ShapeEnum &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_maxtol_of_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::EdgeOUTofBoundsUV(const TopoDS_Edge &, bool, double, double &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::edge_out_of_bounds_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::Fref() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::fref",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_face::Ffinite() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_face.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFace::ffinite",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_face.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::Connexity(const TopoDS_Vertex &, TopOpeBRepTool_connexity &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::TopOpeBRepTool_makeTransition()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::TrslUV(bool, const NCollection_DataMap<TopoDS_Shape, int> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::trsl_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_value(const gp_Pnt2d &, const TopoDS_Face &, gp_Pnt &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_value_on_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::REGU()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::regu",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_face::Init(const TopoDS_Wire &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_face.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFace::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_face.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::Connexity(const TopoDS_Vertex &, NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Getduv(const TopoDS_Face &, const gp_Pnt2d &, const gp_Vec &, double, gp_Dir2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::getduv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::NearestF(const TopoDS_Edge &, const NCollection_List<TopoDS_Shape> &, TopoDS_Face &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::nearest_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::Print(TopOpeBRepTool_OutCurveType, Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::print_out_curve_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Remove(NCollection_List<TopoDS_Shape> &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::remove",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::AvoidEdges(const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::avoid_edges",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_PurgeInternalEdges::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PurgeInternalEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolPurgeInternalEdges::is_done",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PurgeInternalEdges.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_purge_internal (an INTERNAL diagonal)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::SetEsplits(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::set_esplits",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::IsFaulty() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::is_faulty",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::REGU()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::regu",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_inS(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_in_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::PurgeClosingEdges(const TopoDS_Face &, const TopoDS_Face &, const NCollection_DataMap<TopoDS_Shape, int, TopTools_ShapeMapHasher> &, NCollection_IndexedMap<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::purge_closing_edges_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::IsClosingE(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::is_closing_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_getgeomxx(const TopoDS_Face &, const TopoDS_Edge &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_getgeomxx",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::PurgeClosingEdges(const TopoDS_Face &, const NCollection_List<TopoDS_Shape> &, const NCollection_DataMap<TopoDS_Shape, int, TopTools_ShapeMapHasher> &, NCollection_IndexedMap<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::purge_closing_edges",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::Item(int, NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::item",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::Classip2d(const TopoDS_Shape &, const TopoDS_Shape &, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::classip2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::MkTonE(const TopoDS_Edge &, int &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::mk_ton_e_on",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Tg2dApp(int, const TopoDS_Edge &, const TopOpeBRepTool_C2DF &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::tg2d_app",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_face::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_face.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFace::is_done",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_face.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeExplorer::Next()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeExplorer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeExplorer::next",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeExplorer.hxx; compared with OCCT by tools/verify_tkbool_numeric.py (the explorer of the classifier probes); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_CopyEdge(const TopoDS_Shape &, TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_ds_copy_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::Perform()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::perform",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::Init2d(const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::init2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::outUVbounds(const gp_Pnt2d &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::out_uv_bounds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::tryOriEinF(double, const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::try_ori_e_in_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_findAncestor(const NCollection_List<TopoDS_Shape> &, const TopoDS_Edge &, TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_find_ancestor",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::ClosedS(const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::closed_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::UVF(double, const TopOpeBRepTool_C2DF &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::uvf",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_line(const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_line_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_pcurveonF(const TopoDS_Face &, TopoDS_Edge &, const occ::handle<Geom2d_Curve> &, TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_pcurve_on_f_faulty",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::Getfactor() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::getfactor",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::RegularizeFace(const TopoDS_Face &, const NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::regularize_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::TolP(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::tol_p",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_parE(const TopoDS_Edge &, const double &, const TopoDS_Edge &, double &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_par_e_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_PurgeInternalEdges::Perform()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PurgeInternalEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolPurgeInternalEdges::perform",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PurgeInternalEdges.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_purge_internal (an INTERNAL diagonal)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::IsInternal(NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::is_internal",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_PinC(const gp_Pnt &, const BRepAdaptor_Curve &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_pin_c",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Tg2d(int, const TopoDS_Edge &, const TopOpeBRepTool_C2DF &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::tg2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::S() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::GASref() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::gas_ref",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::TopOpeBRepTool_FuseEdges(const TopoDS_Shape &, bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::Initialize(const TopoDS_Edge &, double, double, double, const TopoDS_Face &, const gp_Pnt2d &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::initialize",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::TopOpeBRepTool_REGUS()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::EdgeWithFaultyUV(const TopoDS_Edge &, int &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::edge_with_faulty_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_getxx(const TopoDS_Face &, const TopoDS_Edge &, double, gp_Dir &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_getxx",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_PinC(const gp_Pnt &, const BRepAdaptor_Curve &, double, double, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_pin_c_range",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_direct(const TopoDS_Face &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_direct",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Matter(const gp_Vec &, const gp_Vec &, const gp_Vec &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::matter_vec",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_ClosingE(const TopoDS_Edge &, const TopoDS_Wire &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_closing_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_Eshared(const TopoDS_Shape &, const TopoDS_Shape &, const TopoDS_Shape &, TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_eshared",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_mkBnd2d(const TopoDS_Shape &, const TopoDS_Shape &, Bnd_Box2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_mk_bnd2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::REGU(int, const TopoDS_Shape &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::regu_step",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_face::TopOpeBRepTool_face()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_face.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFace::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_face.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeExplorer::DumpCurrent(Standard_OStream&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeExplorer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeExplorer::dump_current",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeExplorer.hxx; compared with OCCT by tools/verify_tkbool_numeric.py (the explorer of the classifier probes); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_outbounds(const TopoDS_Shape &, double &, double &, double &, double &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_outbounds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_paronEF(const TopoDS_Edge &, const double &, const TopoDS_Face &, gp_Pnt2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_paron_ef",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_orientEinF(const TopoDS_Edge &, const TopoDS_Face &, TopAbs_Orientation &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_orient_e_in_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_haspc(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_haspc",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::IsMultiple() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::is_multiple",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::SetclE(const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::setcl_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::OnBoundary(double, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::on_boundary",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::S() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_typ(const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_typ",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_findPinE(const TopoDS_Shape &, gp_Pnt &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_find_pin_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::GetnewS(TopoDS_Face &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::getnew_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_face::W() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_face.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFace::w",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_face.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::TopOpeBRepTool_CORRISO()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::tryTg2dApp(int, const TopoDS_Edge &, const TopOpeBRepTool_C2DF &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::try_tg2d_app",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::EdgeONFace(double, const TopoDS_Edge &, const gp_Pnt2d &, const TopoDS_Face &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::edge_on_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_nbshapes(const TopoDS_Shape &, const TopAbs_ShapeEnum &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_nbshapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::HasRest() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::has_rest",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::MkShell(const NCollection_List<TopoDS_Shape> &, TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::mk_shell",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_shapes(const TopoDS_Shape &, const TopAbs_ShapeEnum &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_shapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_parVonE(const TopoDS_Vertex &, const TopoDS_Edge &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_par_v_on_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::SetOshNsh(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::set_osh_nsh",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_SameOri(const TopoDS_Edge &, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_same_ori",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::IsT2d() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::is_t2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::SetRest(double, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::set_rest",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::Add2d(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::add2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_EtgOOE(const double &, const TopoDS_Edge &, const double &, const TopoDS_Edge &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_etg_ooe",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeExplorer::TopOpeBRepTool_ShapeExplorer(const TopoDS_Shape &, TopAbs_ShapeEnum, TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeExplorer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeExplorer::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeExplorer.hxx; compared with OCCT by tools/verify_tkbool_numeric.py (the explorer of the classifier probes); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::TopOpeBRepTool_CLASSI()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::MkT2donE(TopAbs_State &, TopAbs_State &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::mk_t2don_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::Key() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::key",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Vertices(const TopoDS_Edge &, NCollection_Array1<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::vertices",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::Classilist(const NCollection_List<TopoDS_Shape> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::classilist",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::XX(const gp_Pnt2d &, const TopoDS_Face &, double, const TopoDS_Edge &, gp_Dir &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::xx",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::IsonCLO(const TopOpeBRepTool_C2DF &, bool, double, double, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::ison_clo_c2df",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_tggeomE(double, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_tggeom_e_vec",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::SetKey(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::set_key",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::MatterKPtg(const TopoDS_Face &, const TopoDS_Face &, const TopoDS_Edge &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::matter_k_ptg",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::Tol(int, double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::RemoveOldConnexity(const TopoDS_Vertex &, int, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::remove_old_connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::EdgeWithFaultyUV(const NCollection_List<TopoDS_Shape> &, int, TopoDS_Shape &, int &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::first_edge_with_faulty_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::NextinBlock()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::nextin_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_curvesSO(const TopoDS_Edge &, const TopoDS_Edge &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_curves_so",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_staPinE(const gp_Pnt &, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_sta_pin_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::MakeFaces(const TopoDS_Face &, const NCollection_List<TopoDS_Shape> &, const NCollection_IndexedMap<TopoDS_Shape> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::make_faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::tryNgApp(double, const TopoDS_Edge &, const TopoDS_Face &, double, gp_Dir &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::try_ng_app",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_getxx(const TopoDS_Face &, const TopoDS_Edge &, double, const gp_Dir &, gp_Dir &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_getxx_ng",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_nggeomF(const gp_Pnt2d &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_nggeom_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::IsClosingE(const TopoDS_Edge &, const TopoDS_Shape &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::is_closing_e_in",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::SplitFaces()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::split_faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::Fref() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::fref",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::TrslUVModifE(const gp_Vec2d &, const TopoDS_Face &, TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::trsl_uv_modif_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_face::Finite() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_face.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFace::finite",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_face.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::GetFsplits(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::get_fsplits",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::Init(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_geombounds(const TopoDS_Face &, double &, double &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_geombounds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::UVClosed() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::uv_closed",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::GetEsplits(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::get_esplits",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::Faces(NCollection_DataMap<TopoDS_Shape, TopoDS_Shape, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::TgINSIDE(const TopoDS_Vertex &, const TopoDS_Edge &, gp_Vec &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::tg_inside",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_parE(const TopoDS_Edge &, const double &, const TopoDS_Edge &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_par_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::IsonCLO(const occ::handle<Geom2d_Curve> &, bool, double, double, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::ison_clo",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::ClosedE(const TopoDS_Edge &, TopoDS_Vertex &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::closed_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::ParE2d(const gp_Pnt2d &, const TopoDS_Edge &, const TopoDS_Face &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::par_e2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_bounds(const TopoDS_Shape &, double &, double &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_bounds_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::Refclosed(int, double &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::refclosed",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::MapS()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::map_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::HasInit() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::has_init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::RemoveOldConnexity(const TopoDS_Vertex &, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::remove_old_connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_findparinE(const TopoDS_Shape &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_find_par_in_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::Eds() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::eds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_closedS(const TopoDS_Shape &, bool &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_closed_s_in_u",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::SplitF(const TopoDS_Face &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::split_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_PurgeInternalEdges::Faces(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PurgeInternalEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolPurgeInternalEdges::faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PurgeInternalEdges.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_purge_internal (an INTERNAL diagonal)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::RemoveItem(int, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::remove_item_of",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::Getface(const TopoDS_Shape &, TopOpeBRepTool_face &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::getface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::S() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_closedS(const TopoDS_Shape &, bool &, double &, bool &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_closed_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeExplorer::TopOpeBRepTool_ShapeExplorer()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeExplorer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeExplorer::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeExplorer.hxx; compared with OCCT by tools/verify_tkbool_numeric.py (the explorer of the classifier probes); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_closedS(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_closed_s_flag",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeExplorer::Init(const TopoDS_Shape &, TopAbs_ShapeEnum, TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeExplorer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeExplorer::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeExplorer.hxx; compared with OCCT by tools/verify_tkbool_numeric.py (the explorer of the classifier probes); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_quad(const BRepAdaptor_Curve &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_quad_bac",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::AllItems(NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::all_items",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_PurgeInternalEdges::Shape()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PurgeInternalEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolPurgeInternalEdges::shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PurgeInternalEdges.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_purge_internal (an INTERNAL diagonal)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::TrslUV(const gp_Vec2d &, TopOpeBRepTool_C2DF &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::trsl_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::TopOpeBRepTool_connexity()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::InitBlock()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::init_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::NearestE(const NCollection_List<TopoDS_Shape> &, TopoDS_Edge &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::nearest_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_EitangenttoFe(const gp_Dir &, const TopoDS_Edge &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_eitangentto_fe",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_EtgF(const double &, const TopoDS_Edge &, const gp_Pnt2d &, const TopoDS_Face &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_etg_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::UVRep(const TopoDS_Edge &, TopOpeBRepTool_C2DF &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::uv_rep",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_quad(const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_quad_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::MapS()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::map_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_curvesSO(const TopoDS_Edge &, double, const TopoDS_Edge &, double, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_curves_so_at_both",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Matter(const TopoDS_Face &, const TopoDS_Face &, const TopoDS_Edge &, double, double, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::matter_faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_isobounds(const TopoDS_Shape &, double &, double &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_isobounds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::ParE(int, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::par_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_cylinder(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_cylinder_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::SetRest(const TopoDS_Edge &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::set_rest",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::RegularizeShells(const TopoDS_Solid &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::regularize_shells",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_dirC(double, const BRepAdaptor_Curve &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_dir_c_on_curve",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::TopOpeBRepTool_REGUW(const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::Edges(NCollection_DataMap<int, NCollection_List<TopoDS_Shape>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::edges",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Vertex(int, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::vertex",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_quad(const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_quad_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Matter(const gp_Dir &, const gp_Dir &, const gp_Dir &, const gp_Dir &, double, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::matter_dirs",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_getdxx(const TopoDS_Face &, const TopoDS_Edge &, double, gp_Vec2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_getdxx",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::OriinSorclosed(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::oriin_sorclosed",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_pcurveonF(const TopoDS_Face &, TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_pcurve_on_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_parF(const TopoDS_Edge &, const double &, const TopoDS_Face &, gp_Pnt2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_par_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_curvesSO(const TopoDS_Edge &, double, const TopoDS_Edge &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_curves_so_at",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_orientVinE(const TopoDS_Vertex &, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_orient_v_in_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::stuvF(const gp_Pnt2d &, const TopoDS_Face &, int &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::stuv_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::Shape()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::MkT3dproj(TopAbs_State &, TopAbs_State &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::mk_t3dproj",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::TopOpeBRepTool_mkTondgE()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::IsT2d() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::is_t2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::ParISO(const gp_Pnt2d &, const TopoDS_Edge &, const TopoDS_Face &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::par_iso",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::Regularize(const TopoDS_Face &, NCollection_List<TopoDS_Shape> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::regularize",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_PurgeInternalEdges::TopOpeBRepTool_PurgeInternalEdges(const TopoDS_Shape &, bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PurgeInternalEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolPurgeInternalEdges::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PurgeInternalEdges.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_purge_internal (an INTERNAL diagonal)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::InitBlock()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::init_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_plane(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_plane_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_value(double, const TopoDS_Edge &, gp_Pnt &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_value_on_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::SetUVRep(const TopoDS_Edge &, const TopOpeBRepTool_C2DF &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::set_uv_rep",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::CurvE(const TopoDS_Edge &, double, const gp_Dir &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::curv_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::GetOwNw(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::get_ow_nw",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::ClassiBnd2d(const TopoDS_Shape &, const TopoDS_Shape &, double, bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::classi_bnd2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_nearestISO(const TopoDS_Face &, double, bool, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_nearest_iso",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_comparebndkole(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_comparebndkole",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUS::SetFsplits(NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUS::set_fsplits",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUS.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (RegularizeShells); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_MakeWire(const NCollection_List<TopoDS_Shape> &, TopoDS_Wire &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_make_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::NbVertices()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::nb_vertices",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_paronEF(const TopoDS_Edge &, const double &, const TopoDS_Face &, gp_Pnt2d &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_paron_ef_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_maxtol(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_maxtol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool::CorrectONUVISO(const TopoDS_Face &, TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::correct_on_uviso",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool.cxx, RegularizeW.cxx, RegularizeS.cxx and PURGE.cxx as a free function of the package; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize, tt_corriso); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_FuseEdges::ResultEdges(NCollection_DataMap<int, TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_FuseEdges.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolFuseEdges::result_edges",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_FuseEdges.cxx (run as the TKTopAlgo BRepLib_FuseEdges port in its TopOpeBRepTool variant); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fuse_edges (fused boxes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::IsQuad(const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::is_quad_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_IsClosingE(const TopoDS_Edge &, const TopoDS_Shape &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_is_closing_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::RemoveItem(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::remove_item",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::UpdateMultiple(const TopoDS_Vertex &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::update_multiple",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_nggeomF(const double &, const TopoDS_Edge &, const TopoDS_Face &, gp_Vec &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_nggeom_f_on_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Getstp3dF(const gp_Pnt &, const TopoDS_Face &, gp_Pnt2d &, TopAbs_State &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::getstp3d_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::MkTonE(int &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::mk_ton_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::WireToFace(const TopoDS_Face &, const NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::wire_to_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::SplitE(const TopoDS_Edge &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::split_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::AddNewConnexity(const TopoDS_Vertex &, const TopoDS_Edge &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::add_new_connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_REGUW::SplitEds()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_REGUW.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolREGUW::split_eds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_REGUW.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize (figure-eight walks)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::TolUV(const TopoDS_Face &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::tol_uv",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_orientEinFFORWARD(const TopoDS_Edge &, const TopoDS_Face &, TopAbs_Orientation &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_orient_e_in_f_forward",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_findparinBAC(const BRepAdaptor_Curve &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_find_par_in_bac",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_Parameter(const TopoDS_Shape &, const TopoDS_Shape &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_ds_parameter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::Setfactor(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::setfactor",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_EboundF(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_ebound_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_nggeomF(const double &, const TopoDS_Edge &, const TopoDS_Face &, gp_Vec &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_nggeom_f_on_edge_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::uvApp(const TopoDS_Face &, const TopoDS_Edge &, double, double, gp_Pnt2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::uv_app",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CORRISO::Init(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CORRISO.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCORRISO::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CORRISO.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_corriso (p-curves of periodic faces moved by a period)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::NgApp(double, const TopoDS_Edge &, const TopoDS_Face &, double, gp_Dir &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolTOOL::ng_app",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOOL.cxx as an associated function of the TopOpeBRepToolTOOL namespace struct; output references become returned values (Option for a native false return whose outputs are not written, &mut where the native function writes them before failing); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tool: every edge of a box, cylinder, cone, sphere, torus and L-shaped prism on both faces); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_CLASSI::GetBox2d(const TopoDS_Shape &, Bnd_Box2d &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_CLASSI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolCLASSI::get_box2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_CLASSI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_classi (nested, disjoint, overlapping and equal squares)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::TopOpeBRepTool_connexity(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::with_key",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::MkT3onE(TopAbs_State &, TopAbs_State &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::mk_t3on_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_connexity::AddItem(int, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_connexity.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolConnexity::add_item",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_connexity.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_regularize); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_mkTondgE::Initialize(const TopoDS_Edge &, const TopoDS_Face &, const gp_Pnt2d &, const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_mkTondgE.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMkTondgE::initialize",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_mkTondgE.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_mktondge (cone apex and sphere poles crossed by box planes)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FUN_tool_line(const BRepAdaptor_Curve &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOPOLOGY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_line_bac",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_TOPOLOGY.cxx (FUN_tool_getgeomxx, getxx and getdxx from TopOpeBRepTool_matter.cxx) as a free function; overloads take distinct names and native outputs written before a failure stay &mut; compared with OCCT by tools/verify_tkbool_numeric.py (tt_topology on the edges and faces of primitive solids); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_makeTransition::MkTonE(TopAbs_State &, TopAbs_State &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_makeTransition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::mk_ton_e",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
     }
   ],
   "tests": [

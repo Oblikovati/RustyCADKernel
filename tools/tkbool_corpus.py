@@ -59,3 +59,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     # TopOpeBRepBuild face chain (tkbool_corpus_topopebrepbuild.py)
     __import__('tkbool_corpus_topopebrepbuild').append_topopebrepbuild_requests(requests)
     __import__('tkbool_corpus_brepfill_evolved').append_evolved_requests(requests)
+    # TopOpeBRepTool TOOL, TOPOLOGY, transitions and regularization (tkbool_corpus_topopebreptool_tool.py)
+    __import__('tkbool_corpus_topopebreptool_tool').append_topopebreptool_tool_requests(requests)

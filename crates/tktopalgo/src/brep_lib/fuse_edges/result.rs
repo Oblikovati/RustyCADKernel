@@ -68,7 +68,12 @@ impl BRepLibFuseEdges {
         if self.my_concat_bspl && c.cast::<GeomBSplineCurve>().get().is_some() {
             c = concatenated(&c, (&mut f, &mut l), chain)?;
         }
-        let maker = make_fused_edge(&mut c, &vf, &vl, &mut f, &mut l)?;
+        let maker = make_fused_edge(
+            &mut c,
+            (&vf, &vl),
+            (&mut f, &mut l),
+            self.my_top_ope_brep_tool,
+        )?;
         maker.edge()
     }
 }
@@ -119,16 +124,16 @@ fn concatenated(
 /// The MakeEdge of the fused curve: a closed B-spline between one vertex (its origin
 /// moved to the vertex when needed), else the curve between the two vertices, extended
 /// to them when that fails.
+/// The TopOpeBRepTool variant always makes the edge between the two vertices.
 fn make_fused_edge(
     c: &mut Handle<dyn GeomCurve>,
-    vf: &Vertex,
-    vl: &Vertex,
-    f: &mut f64,
-    l: &mut f64,
+    (vf, vl): (&Vertex, &Vertex),
+    (f, l): (&mut f64, &mut f64),
+    top_ope_brep_tool: bool,
 ) -> Result<BRepLibMakeEdge, Failure> {
     let mut maker = BRepLibMakeEdge::new();
     let is_bspline: bool = c.cast::<GeomBSplineCurve>().get().is_some();
-    if vf.is_same(vl) && is_bspline {
+    if vf.is_same(vl) && is_bspline && !top_ope_brep_tool {
         closed_edge(&mut maker, c, vf, vl, (f, l))?;
     } else {
         maker.init_curve_vertices(c, vf, vl)?;
