@@ -32,6 +32,8 @@ mod membership_certificate;
 #[cfg(test)]
 mod retention_tests;
 
+#[cfg(test)]
+mod refinement_tests;
 mod work_budget;
 #[cfg(test)]
 mod work_budget_tests;
