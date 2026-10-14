@@ -91,7 +91,7 @@ fn arrangement(completion: &ArrangementCompletion) -> TwoLoopRefusalClass {
         _ => Incomplete,
     }
 }
-fn candidate(cause: &CandidateCause) -> TwoLoopRefusalClass {
+pub(in crate::sketch_region_prism) fn candidate(cause: &CandidateCause) -> TwoLoopRefusalClass {
     use TwoLoopRefusalClass::*;
     match cause {
         CandidateCause::Mapped(_) => Failed,
@@ -128,7 +128,7 @@ fn geometry(cause: &CapturedGeometryCause) -> TwoLoopRefusalClass {
         _ => TwoLoopRefusalClass::Incomplete,
     }
 }
-fn surface(cause: &super::super::super::surface_charts::PrismSurfaceCause) -> TwoLoopRefusalClass {
+pub(in crate::sketch_region_prism) fn surface(cause: &super::super::super::surface_charts::PrismSurfaceCause) -> TwoLoopRefusalClass {
     use super::super::super::surface_charts::PrismSurfaceCause;
     match cause {
         PrismSurfaceCause::SourceSnapshot(cause) => surface(cause),

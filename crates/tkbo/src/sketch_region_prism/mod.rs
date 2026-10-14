@@ -55,5 +55,5 @@ mod publication;
 mod sweep_query_tests;
 
 #[cfg(test)]
-mod annular_construction;
+pub(in crate::sketch_region_prism) mod annular_construction;
 pub(crate) mod diagnostic_envelope;

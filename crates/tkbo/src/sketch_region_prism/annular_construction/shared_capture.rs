@@ -42,6 +42,7 @@ fn assert_chart_operands(
     retained: &super::super::surface_charts::PrismSurfaceEntry,
 ) {
     assert_eq!(chart.parents, retained.parents);
+    assert_chart_encoding(chart, retained);
     assert_eq!(chart.proof.identities, retained.proof.identities);
     assert_eq!(chart.proof.trim_roles, retained.proof.trim_roles);
     let actual = &retained.captured.as_ref().unwrap().trims;
@@ -117,4 +118,14 @@ fn duplicate_binding(receipt: &mut PrismReceipt) {
         context: row.context.clone(),
         transported: row.transported.clone(),
     });
+}
+
+fn assert_chart_encoding(
+    chart: &BoundPrismChart,
+    retained: &super::super::surface_charts::PrismSurfaceEntry,
+) {
+    assert_eq!(
+        super::super::frozen::encode_prism_chart_geometry(&chart.captured),
+        super::super::frozen::encode_prism_chart_geometry(retained.captured.as_ref().unwrap())
+    );
 }
