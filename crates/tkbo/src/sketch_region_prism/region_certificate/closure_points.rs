@@ -14,12 +14,32 @@ pub(super) fn current_points(
     sources: &[ArrangementSource<'_>],
     receipt: &PrismReceipt,
 ) -> RegionCheck<Vec<ClosurePointEvidence>> {
-    let roots = current_roots(bridge, sources, receipt)?;
     let mut evidence = Vec::new();
-    for (stage, root) in roots {
-        append_current_points(bridge, stage, root, &mut evidence)?;
+    for (stage, shape) in current_closure_vertices(bridge, sources, receipt)? {
+        let context = ClosurePointContext {
+            stage,
+            occurrence: PartitionOccurrenceIdentity::capture(&shape),
+        };
+        bind_partition_point(bridge, &context)?;
+        append_point(bridge, context, current_coordinates(&shape)?, &mut evidence)?;
     }
     Ok(evidence)
+}
+/// Reuse the actual directed closure census; e.g. `current_closure_vertices(bridge, sources, receipt)`.
+pub(crate) fn current_closure_vertices(
+    bridge: &PairedContactTransaction,
+    sources: &[ArrangementSource<'_>],
+    receipt: &PrismReceipt,
+) -> RegionCheck<Vec<(ClosurePointStage, Shape)>> {
+    let mut vertices = Vec::new();
+    for (stage, root) in current_roots(bridge, sources, receipt)? {
+        vertices.extend(
+            actual_vertices(root)?
+                .into_iter()
+                .map(|shape| (stage, shape)),
+        );
+    }
+    Ok(vertices)
 }
 fn current_roots<'a>(
     bridge: &'a PairedContactTransaction,
@@ -40,22 +60,6 @@ fn current_roots<'a>(
         (CandidateSecond, &batch.candidates[1].face),
         (PrismCopy, &copied.base),
     ])
-}
-fn append_current_points(
-    bridge: &PairedContactTransaction,
-    stage: ClosurePointStage,
-    root: &Shape,
-    evidence: &mut Vec<ClosurePointEvidence>,
-) -> RegionCheck {
-    for shape in actual_vertices(root)? {
-        let context = ClosurePointContext {
-            stage,
-            occurrence: PartitionOccurrenceIdentity::capture(&shape),
-        };
-        bind_partition_point(bridge, &context)?;
-        append_point(bridge, context, current_coordinates(&shape)?, evidence)?;
-    }
-    Ok(())
 }
 fn actual_vertices(root: &Shape) -> RegionCheck<Vec<Shape>> {
     let members = equal_occurrences(root).map_err(RegionCertificateCause::Mapped)?;
@@ -182,5 +186,35 @@ fn metric_result(
             row.bisections,
         ),
         Err(cause) => (Err(cause), 0),
+    }
+}
+
+#[cfg(test)]
+mod enumeration_tests {
+    use super::*;
+    #[test]
+    fn shared_enumeration_bijects_every_retained_directed_closure_context() {
+        let (bridge, shapes) = tests::fixture();
+        let receipt = tests::run(&bridge, &shapes);
+        let sources = crate::sketch_region_partition_bindings::binding_sources(&shapes);
+        let actual = current_closure_vertices(&bridge, &sources, &receipt).unwrap();
+        let proof = tests::proof(&receipt);
+        let retained: Vec<_> = proof
+            .closure_points
+            .iter()
+            .flat_map(|r| &r.contexts)
+            .collect();
+        assert_eq!(actual.len(), 12);
+        assert_eq!(retained.len(), actual.len());
+        for (stage, shape) in actual {
+            let key = PartitionOccurrenceIdentity::capture(&shape);
+            assert_eq!(
+                retained
+                    .iter()
+                    .filter(|r| r.stage == stage && r.occurrence == key)
+                    .count(),
+                1
+            );
+        }
     }
 }
