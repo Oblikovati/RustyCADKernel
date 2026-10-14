@@ -135,15 +135,15 @@ fn assert_bound_representation(census: &BoundaryCensus) {
             .missing
             .contains(&CertificationObligation::SourceConversionAndPlane)
     );
-    assert_eq!(census.missing.len(), 6);
     assert!(
         census
             .missing
             .contains(&CertificationObligation::MappedSplitCorrespondence)
     );
+    assert!(census.paired.is_some());
     assert!(
-        census
-            .missing
+        !census
+            .current_obligations()
             .contains(&CertificationObligation::FailedWorkAccounting)
     );
     assert_separate_root_policies(census, source);

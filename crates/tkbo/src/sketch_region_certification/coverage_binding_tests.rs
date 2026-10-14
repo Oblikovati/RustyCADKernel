@@ -10,8 +10,10 @@ fn exact_native_membership_cannot_promote_canonical_contact_dual_axis_or_partiti
     let mut shapes = rectangle(0., 0., 4., 4.);
     shapes.extend(rectangle(2., -1., 1., 6.));
     let census =
-        enumerate_source_bound_census(capture(&shapes), policy(), source_policy(), || false)
-            .unwrap_or_else(|_| panic!("census"));
+        enumerate_source_bound_line_diagnostic(capture(&shapes), policy(), source_policy(), || {
+            false
+        })
+        .unwrap_or_else(|_| panic!("census"));
     let coverage =
         inspect_contact_coverage(&census, &arranged(&shapes), Plane3::default()).unwrap();
     assert!(coverage.iter().any(|row| !row.vertices.is_empty()));
@@ -108,8 +110,10 @@ fn valid_reversed_physical_reuse_preserves_actual_descriptor_and_contact_incompl
 fn parent_or_construction_mutation_after_attachment_reinserts_observed_representation_gap() {
     let shapes = curved_crossing();
     let mut census =
-        enumerate_source_bound_census(capture(&shapes), policy(), source_policy(), || false)
-            .unwrap_or_else(|_| panic!("census"));
+        enumerate_source_bound_line_diagnostic(capture(&shapes), policy(), source_policy(), || {
+            false
+        })
+        .unwrap_or_else(|_| panic!("census"));
     assert!(
         !census
             .missing
@@ -138,8 +142,9 @@ fn nonzero_representation_error_never_establishes_original_contact_or_world_topo
     let mut requested = source_policy();
     requested.original_plane_limit = 0.3;
     requested.construction_limit = 0.3;
-    let census = enumerate_source_bound_census(capture(&shapes), policy(), requested, || false)
-        .unwrap_or_else(|_| panic!("census"));
+    let census =
+        enumerate_source_bound_line_diagnostic(capture(&shapes), policy(), requested, || false)
+            .unwrap_or_else(|_| panic!("census"));
     assert!(
         census
             .source_binding
@@ -209,8 +214,10 @@ fn missing_stale_or_out_of_range_native_map_returns_typed_incomplete_evidence() 
 fn altered_separately_declared_source_policy_cannot_reuse_old_attached_proof() {
     let shapes = curved_crossing();
     let mut census =
-        enumerate_source_bound_census(capture(&shapes), policy(), source_policy(), || false)
-            .unwrap_or_else(|_| panic!("census"));
+        enumerate_source_bound_line_diagnostic(capture(&shapes), policy(), source_policy(), || {
+            false
+        })
+        .unwrap_or_else(|_| panic!("census"));
     census.source_policy.as_mut().unwrap().construction_limit = 1.;
     assert!(!census.source_representation_certified());
     assert!(

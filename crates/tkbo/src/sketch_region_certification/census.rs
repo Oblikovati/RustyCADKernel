@@ -29,13 +29,14 @@ fn enumerate_domains(
     }
     Ok(census)
 }
-fn empty_census(inputs: BoundaryInputs, requested: CensusPolicy) -> BoundaryCensus {
+pub(super) fn empty_census(inputs: BoundaryInputs, requested: CensusPolicy) -> BoundaryCensus {
     BoundaryCensus {
         inputs,
         source_policy: None,
         source_binding: None,
         domains: Vec::new(),
         reports: Vec::new(),
+        paired: None,
         failures: Vec::new(),
         requested,
         bisections: 0,
@@ -78,7 +79,7 @@ fn unsupported_domain(census: &BoundaryCensus, pair: [usize; 2]) -> Option<Censu
         .is_same(&segments[pair[1]].edge)
         .then_some(CensusGap::SamePhysicalCurve)
 }
-fn pair_domains(count: usize) -> impl Iterator<Item = [usize; 2]> {
+pub(super) fn pair_domains(count: usize) -> impl Iterator<Item = [usize; 2]> {
     // Include the canonical self domain once; source directions remain separate occurrences.
     (0..count).flat_map(move |first| (first..count).map(move |second| [first, second]))
 }
@@ -173,7 +174,7 @@ fn same_pair(segments: &[CandidateSegment], first: (usize, usize), second: (usiz
     same_capture(&segments[first.0], &segments[second.0])
         && same_capture(&segments[first.1], &segments[second.1])
 }
-fn same_capture(first: &CandidateSegment, second: &CandidateSegment) -> bool {
+pub(super) fn same_capture(first: &CandidateSegment, second: &CandidateSegment) -> bool {
     first.edge.is_same(&second.edge)
         && equal_bits(
             first.controls.iter().flatten(),
@@ -263,7 +264,7 @@ fn cancelled_census(
         completed: Box::new(completed),
     }
 }
-fn validate_policy(policy: CensusPolicy) -> Result<(), CensusPolicyViolation> {
+pub(super) fn validate_policy(policy: CensusPolicy) -> Result<(), CensusPolicyViolation> {
     if !policy.max_world_error.is_finite() || policy.max_world_error <= 0. {
         return Err(CensusPolicyViolation::WorldError {
             received: policy.max_world_error,
@@ -283,8 +284,8 @@ fn validate_policy(policy: CensusPolicy) -> Result<(), CensusPolicyViolation> {
 }
 
 /// Bind the complete source matrix with a separately declared numerical policy.
-/// Example: `enumerate_source_bound_census(inputs, incidence_policy, source_policy, || false)`.
-pub(crate) fn enumerate_source_bound_census(
+/// Example: `enumerate_source_bound_line_diagnostic(inputs, incidence_policy, source_policy, || false)`.
+pub(crate) fn enumerate_source_bound_line_diagnostic(
     inputs: BoundaryInputs,
     policy: CensusPolicy,
     source_policy: crate::sketch_region_source_conformance::SourceConformancePolicy,
@@ -292,13 +293,8 @@ pub(crate) fn enumerate_source_bound_census(
 ) -> Result<BoundaryCensus, CensusCause> {
     validate_policy(policy).map_err(CensusCause::Policy)?;
     let mut census = empty_census(inputs, policy);
-    census.source_policy = Some(source_policy);
-    let source_cancelled = retain_source_binding(&mut census, source_policy, &mut cancelled);
-    if super::source_status::representation_matches(&census) {
-        census
-            .missing
-            .retain(|gap| *gap != CertificationObligation::SourceConversionAndPlane);
-    }
+    let source_cancelled =
+        super::paired_admission::admit_source_binding(&mut census, source_policy, &mut cancelled);
     if source_cancelled {
         return Err(CensusCause::SourceCancelled {
             completed: Box::new(census),
@@ -307,7 +303,7 @@ pub(crate) fn enumerate_source_bound_census(
     enumerate_domains(census, &mut cancelled)
 }
 
-fn retain_source_binding(
+pub(super) fn retain_source_binding(
     census: &mut BoundaryCensus,
     policy: crate::sketch_region_source_conformance::SourceConformancePolicy,
     cancelled: &mut impl FnMut() -> bool,
