@@ -26,25 +26,29 @@ impl GraphTask<'_> {
             .roots()
             .iter()
             .zip(accepted)
-            .filter(|(_, flag)| *flag)
-            .map(|(root, _)| self.construct_one(polynomial, &curve, root.clone(), cancelled))
+            .enumerate()
+            .filter(|(_, (_, flag))| *flag)
+            .map(|(index, (root, _))| {
+                self.construct_one(polynomial, &curve, (index, root.clone()), cancelled)
+            })
             .collect()
     }
     fn construct_one(
         &self,
         polynomial: &ExactCoefficientPolynomial,
         curve: &HomogeneousCurve,
-        mut root: RootBracket,
+        candidate: (usize, RootBracket),
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<PairContact, PairOperationFailure> {
+        let (candidate_index, mut root) = candidate;
         loop {
             let world = construction_attempt(curve, &root, cancelled)?;
             if let Some(u_bounds) = self.accepted_bounds(&root, &world, cancelled)? {
-                return Ok(PairContact {
-                    root,
+                return Ok(owned_contact(
+                    (candidate_index, root),
                     u_bounds,
-                    world: world.unwrap(),
-                });
+                    world.unwrap(),
+                ));
             }
             root = self.refine_or_limit(polynomial, root, world, cancelled)?;
         }
@@ -115,5 +119,19 @@ fn resolution_limit(
         requested_error,
         last_root: Box::new(root),
         enclosure,
+    }
+}
+
+fn owned_contact(
+    candidate: (usize, RootBracket),
+    u_bounds: [f64; 2],
+    world: WorldEnvelope,
+) -> PairContact {
+    let (candidate_index, root) = candidate;
+    PairContact {
+        candidate_index,
+        root,
+        u_bounds,
+        world,
     }
 }

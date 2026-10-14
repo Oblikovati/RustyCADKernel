@@ -13,6 +13,7 @@ use super::{
 };
 
 pub(super) struct PairContact {
+    pub candidate_index: usize,
     pub root: RootBracket,
     pub u_bounds: [f64; 2],
     pub world: WorldEnvelope,

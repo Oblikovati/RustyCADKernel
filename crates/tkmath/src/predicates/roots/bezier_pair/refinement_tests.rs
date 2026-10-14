@@ -77,7 +77,8 @@ fn root_width_less_than(root: &super::super::RootBracket, limit: f64) -> bool {
 }
 
 fn assert_root_link(proof: &PairOperationProof) {
-    let original = &proof.candidate_certificate.isolation.roots()[0];
+    let contact = &proof.contacts[0];
+    let original = &proof.candidate_certificate.isolation.roots()[contact.candidate_index];
     let refined = &proof.contacts[0].root;
     assert!(refined.bounds().0 >= original.bounds().0);
     assert!(refined.bounds().1 <= original.bounds().1);

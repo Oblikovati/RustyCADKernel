@@ -42,3 +42,7 @@ mod work_budget_tests;
 
 #[cfg(test)]
 mod sign_policy_tests;
+
+mod query;
+#[cfg(test)]
+mod query_tests;
