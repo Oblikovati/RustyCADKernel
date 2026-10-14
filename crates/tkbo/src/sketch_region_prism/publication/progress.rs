@@ -73,3 +73,7 @@ impl<'a> PublicationCallbacks<'a> {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "progress_tests.rs"]
+mod tests;

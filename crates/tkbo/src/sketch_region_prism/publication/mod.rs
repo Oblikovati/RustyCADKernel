@@ -3,5 +3,3 @@
 #[cfg(test)]
 mod baseline_tests;
 mod progress;
-#[cfg(test)]
-mod progress_tests;

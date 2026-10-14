@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-use super::progress::*;
+use super::*;
 use rustycad_tkernel::standard::Failure;
 
 struct NamedPublicationProgress {
@@ -30,13 +30,8 @@ fn one_ordinal_sequence_keeps_cancellation_terminal_across_stages() {
     assert!(callbacks.cancelled(PrismPublicationPhase::Join));
     assert!(callbacks.cancelled(PrismPublicationPhase::Commit));
     let stop = callbacks.take_stop().unwrap();
-    assert_eq!(
-        stop.checkpoint,
-        PrismPublicationCheckpoint {
-            phase: PrismPublicationPhase::Join,
-            ordinal: 1
-        }
-    );
+    assert_eq!(stop.checkpoint.phase, PrismPublicationPhase::Join);
+    assert_eq!(stop.checkpoint.ordinal, 1);
     assert!(matches!(stop.cause, PublicationCallbackCause::Cancelled));
     assert_eq!(progress.seen.len(), 2);
 }
@@ -54,4 +49,21 @@ fn callback_failure_retains_typed_cause_and_checkpoint() {
     assert!(matches!(stop.cause, PublicationCallbackCause::Failed(_)));
     fn send<T: Send>() {}
     send::<PublicationCallbackStop>();
+}
+
+#[test]
+fn exhausted_checkpoint_counter_refuses_before_callback() {
+    let mut progress = NamedPublicationProgress {
+        fail: false,
+        stop: None,
+        seen: Vec::new(),
+    };
+    let mut callbacks = PublicationCallbacks::new(&mut progress);
+    callbacks.ordinal = usize::MAX;
+    assert!(callbacks.cancelled(PrismPublicationPhase::Commit));
+    assert!(matches!(
+        callbacks.take_stop().unwrap().cause,
+        PublicationCallbackCause::Exhausted
+    ));
+    assert!(progress.seen.is_empty());
 }
