@@ -1,0 +1,49 @@
+{
+  "dependency_source": "2ad3768d4792b7df50bcbf16d63a29f40575055c",
+  "shared_key_commit": "2329f32515ee743eb2d6ef116c5290d3030387c7",
+  "rust": "1.99.0",
+  "jobs": 2,
+  "boundary_tests": 5,
+  "key_tests": 21,
+  "native_phase_tests": 15,
+  "payloads": [
+    {
+      "name": "complete",
+      "bytes": 9583467,
+      "sha256": "09c3de2d8d60981dacc60240f9a7d945f833177b514f64ab495e5b45dfefd00e"
+    },
+    {
+      "name": "preparation",
+      "bytes": 5807,
+      "sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8"
+    },
+    {
+      "name": "publication",
+      "bytes": 27122,
+      "sha256": "60678228ea0662cbea41f30128d2d60c922d47103ea1f1d30376f8ee32c7caea"
+    }
+  ],
+  "structural_payloads": [
+    {
+      "name": "complete",
+      "bytes": 9583467,
+      "sha256": "09c3de2d8d60981dacc60240f9a7d945f833177b514f64ab495e5b45dfefd00e"
+    },
+    {
+      "name": "preparation",
+      "bytes": 5807,
+      "sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8"
+    },
+    {
+      "name": "publication",
+      "bytes": 27122,
+      "sha256": "60678228ea0662cbea41f30128d2d60c922d47103ea1f1d30376f8ee32c7caea"
+    }
+  ],
+  "archive_sha256": "99773b822c0cc0f2216658c25e5f2a9725fae8593f5294e4f7cacf78fcec6693",
+  "retained_failure": "key-seam.log used system rustc1.95; corrected command pinned PATH and passed",
+  "exclusions": [
+    "No producer behavior changes",
+    "TSan remains incomplete; unchanged host control not repeated"
+  ]
+}

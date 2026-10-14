@@ -11,3 +11,7 @@ pub(crate) use preparation::project_owned_preparation_refusal;
 pub(crate) use publication::*;
 use rustycad_tkernel::standard::Failure;
 pub(crate) use types::*;
+
+pub(in crate::sketch_region_prism) use replay::{
+    append_native_failure, append_preparation_phase, publication_phase_tag,
+};
