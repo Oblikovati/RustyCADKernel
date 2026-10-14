@@ -1,0 +1,127 @@
+{
+  "integration_revision": "8980e4929407772a7a859c47287ec37208c5b643",
+  "candidate_revision": "52eb7bda9",
+  "candidate_base": "0e1f2ef8f",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "89aa7b6a494b8e7f6dd856070f25156c2981c31ad5d60be032fa805e9a5e968f"
+      },
+      "tests": {
+        "passed": 4238,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "8512d0746869a5ce302692a0bf3865d42343224eaee92086b84458c4142bf49a"
+      },
+      "tests": {
+        "passed": 87,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "c70d73ca9bc8b4cd8a7e96846e89184a7a4e7abace95399aecdd981128c39b14"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "fe652b57d30c6f8e2dc3b2aca395d79e30a5a3e046a2df1bf61427396e556714"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkmath/src/predicates/roots/certificate_arithmetic/rounding.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/arithmetic.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/bounds.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/domain_tests.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/error.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/execution.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/invariant_tests.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/replay_tests.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/restriction.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/tests.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_side/types.rs": true
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
