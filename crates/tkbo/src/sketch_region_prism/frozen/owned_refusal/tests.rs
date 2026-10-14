@@ -421,3 +421,6 @@ fn mapped_native(result: &OwnedPrismJoinRefusal) -> (&PrismPhase, &Failure) {
     };
     (phase, failure)
 }
+
+#[path = "frozen_tests.rs"]
+mod frozen_tests;
