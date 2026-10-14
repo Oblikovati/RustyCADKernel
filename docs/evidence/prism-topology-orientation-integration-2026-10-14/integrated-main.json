@@ -1,0 +1,164 @@
+{
+  "integration_revision": "d59cbce3cff316151890483233defb673269213e",
+  "candidate_revision": "9262459aa",
+  "candidate_base": "e6955e6db",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "9358e1983ac5a52e91c0a393dae71a0f682a55343361c929ed7241600e22ca10"
+      },
+      "tests": {
+        "passed": 1358,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "16fabcde739faaaa26473f83eb39ea675ec7f002f370ecff318c3ebb2d8725c6"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "7284c7c4ac87b4bb7b57da8bd5a89b0fee759bc7598178d3879b3cb820f8e0a7"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "639fd091b1f4ce54ee0553f19c43b0363ad974e0476831009cd1eb30b4b9cf01"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/frozen/capture.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/graph.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/mutation_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/admission.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/combinatorial_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/containment.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/containment_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/execution.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/fixtures.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/incidence.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/links.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/model.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/pairing.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/replay_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/traversal_binding.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/traversal_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/views.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/wires.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology_baseline_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/traversal.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/traversal_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/views.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/frozen/capture.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/graph.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/mutation_tests.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/admission.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/combinatorial_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/containment.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/containment_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/execution.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/fixtures.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/incidence.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/links.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/model.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/pairing.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/replay_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/traversal_binding.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/traversal_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/views.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/wires.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology_baseline_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/traversal.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/traversal_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/types.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/views.rs": "M"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}

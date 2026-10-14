@@ -1,0 +1,277 @@
+{
+  "processes": [
+    {
+      "kind": "topology",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "exact_topology_report_replays_across_threads_and_processes",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 96088,
+      "sha256": "852bd440732f89512ab35e27c2f13b70d00b9af818c3dc3266122b3bee75a9a7",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-topology-first.log.gz",
+        "sha256": "1d9374a4aa28ed6498eae28113d54dbdfe61170a181ff189916700b95d936ab0"
+      }
+    },
+    {
+      "kind": "topology",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "exact_topology_report_replays_across_threads_and_processes",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 96088,
+      "sha256": "852bd440732f89512ab35e27c2f13b70d00b9af818c3dc3266122b3bee75a9a7",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-topology-second.log.gz",
+        "sha256": "9e35c83e13e9282eff6ac6ee09afb23516295964404aaee7d04f940dbcf36a9d"
+      }
+    },
+    {
+      "kind": "orientation",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "prism_orientation_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 752,
+      "sha256": "67df03c3156f98f17484f304d3a67078534778fa6fbe87882c8234ef5ac50f31",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-orientation-first.log.gz",
+        "sha256": "7b32eb36c2714ca54c15a9d60082c2f465aa43a28178d70b2b1119b96ccd2184"
+      }
+    },
+    {
+      "kind": "orientation",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "prism_orientation_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 752,
+      "sha256": "67df03c3156f98f17484f304d3a67078534778fa6fbe87882c8234ef5ac50f31",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-orientation-second.log.gz",
+        "sha256": "4eaa4c07a8bc508b0a52f5cab317cbce10511a6c796708c753559343d1d9d605"
+      }
+    },
+    {
+      "kind": "embedding",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "prism_embedding_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 2095,
+      "sha256": "77cb0f94a14372370b1e45a43d21fabeac88907bad7e2d5b7a4df0dadc6dc674",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-embedding-first.log.gz",
+        "sha256": "753853f30cceae9a7de7029bf9d5af811600cc0ab84eafde36b95c57ecc7553b"
+      }
+    },
+    {
+      "kind": "embedding",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "prism_embedding_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 2095,
+      "sha256": "77cb0f94a14372370b1e45a43d21fabeac88907bad7e2d5b7a4df0dadc6dc674",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-embedding-second.log.gz",
+        "sha256": "4bee4712f71a69b78e7423316709889309cb095a072520d625627bc294f59e6d"
+      }
+    },
+    {
+      "kind": "frozen",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-frozen-first.log.gz",
+        "sha256": "7cf7a317031ce6c85a0b6c880bb9d6d7adbaa6b6545e6dbc1bc1cc0632f9de80"
+      }
+    },
+    {
+      "kind": "frozen",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-frozen-second.log.gz",
+        "sha256": "d5c1a92d85fd29f30944bbf7325bfbfb8b629fe16b87a55fcf98cd2878bd7851"
+      }
+    },
+    {
+      "kind": "lineage",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "prism_copy_lineage_owned_bytes_replay_across_processes_and_threads",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 167821,
+      "sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-lineage-first.log.gz",
+        "sha256": "d12f354e9ec2bf687eace8d944c54a2b6dd14cb4ce835c1128a133f2cc70144c"
+      }
+    },
+    {
+      "kind": "lineage",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "prism_copy_lineage_owned_bytes_replay_across_processes_and_threads",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 167821,
+      "sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec",
+      "matches_candidate": true,
+      "log": {
+        "path": "integrated-lineage-second.log.gz",
+        "sha256": "bd7811d32336a5f888d4bf38df0967bd8f257f8a0665d16508b06124c144a459"
+      }
+    }
+  ],
+  "orientation_candidate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/embedding-v1.json": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/access.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/error.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/faces.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/signs.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/domain.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/mutation.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/refusal.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/trims.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/types.rs": true
+  },
+  "point_adapter_candidate_files_match": {
+    "crates/tkbo/src/sketch_region_source_conformance/endpoints.rs": true,
+    "crates/tkbo/src/sketch_region_source_conformance/mod.rs": true,
+    "crates/tkbo/src/sketch_region_source_conformance/point_comparator_tests.rs": true
+  },
+  "source_inputs_unchanged_after_replays": true
+}

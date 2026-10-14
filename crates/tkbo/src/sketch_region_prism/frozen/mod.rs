@@ -66,3 +66,4 @@ mod traversal;
 mod traversal_tests;
 
 pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
+pub(crate) mod joined_orientation;

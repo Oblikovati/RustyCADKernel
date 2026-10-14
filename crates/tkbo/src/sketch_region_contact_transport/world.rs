@@ -236,21 +236,28 @@ fn owned_point_query(
         parent,
         inputs.requested.remaining_roots(0),
     )?;
+    let original =
+        super::exact_sources::single_original_representation(inputs.originals, parent)?.clone();
+    clone_point_query(inputs, parent, original, query)
+}
+fn clone_point_query(
+    inputs: &ContactMetricInputs<'_>,
+    parent: &crate::sketch_region::OriginalMemberIdentity,
+    representation: CapturedSpaceRepresentation,
+    query: TransportedResidualQuery<'_>,
+) -> Result<super::ContactPointQuerySnapshot, SourceConformanceCause> {
+    let construction = inputs.construction;
     Ok(super::ContactPointQuerySnapshot {
         original: parent.clone(),
-        representation: super::exact_sources::single_original_representation(
-            inputs.originals,
-            parent,
-        )?
-        .clone(),
-        copied: checked_point_operand(&inputs.construction.copied)?.clone(),
-        pcurve: checked_point_operand(&inputs.construction.pcurve)?.clone(),
-        support: checked_point_operand(&inputs.construction.support)?.clone(),
-        captured: inputs.construction.captured.clone(),
-        copied_occurrence: inputs.construction.copied_occurrence.clone(),
-        parents: inputs.construction.parents.clone(),
-        native_interval: inputs.construction.native_interval,
-        basis_interval: inputs.construction.basis_interval,
+        representation,
+        copied: checked_point_operand(&construction.copied)?.clone(),
+        pcurve: checked_point_operand(&construction.pcurve)?.clone(),
+        support: checked_point_operand(&construction.support)?.clone(),
+        captured: construction.captured.clone(),
+        copied_occurrence: construction.copied_occurrence.clone(),
+        parents: construction.parents.clone(),
+        native_interval: construction.native_interval,
+        basis_interval: construction.basis_interval,
         maps: query.maps,
         interval: query.residual.interval,
         bounds: inputs.bounds.clone(),

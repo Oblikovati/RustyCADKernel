@@ -42,7 +42,7 @@ fn require_trim_orientation(
 ) -> OrientationCheck<Orientation> {
     let actual = trim.output.orientation;
     if actual != expected {
-        return Err(PrismOrientationCause::Trim {
+        return Err(PrismOrientationEvaluationCause::Trim {
             authored: Box::new(trim.clone()),
             actual,
             expected,

@@ -1,0 +1,298 @@
+{
+  "source_revision": "93fac56f229fc299080f38581bdf3d5a82acbcfd",
+  "baseline_revision": "afb12e5ccc0119344c6aecd9157cddd6fc4be751",
+  "started_utc": "2026-10-14T14:47:25.444806+00:00",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "jobs": 2,
+  "steps": [
+    {
+      "name": "frozen_tests",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::frozen",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 88.93289430000004
+    },
+    {
+      "name": "source_query_tests",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_source_conformance",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09416726699782885
+    },
+    {
+      "name": "closure_census",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "shared_enumeration_bijects_every_retained_directed_closure_context",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.16081713200037484
+    },
+    {
+      "name": "doctests",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 3.770527165997919
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 2.8933274030023313
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 6.758845888998621
+    },
+    {
+      "name": "join-process-1",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::frozen::proof_join::tests::joined_math_byte_receipt",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22370551800122485
+    },
+    {
+      "name": "join-process-2",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::frozen::proof_join::tests::joined_math_byte_receipt",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.20733924199885223
+    },
+    {
+      "name": "frozen_v1-process-1",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9210043820021383
+    },
+    {
+      "name": "frozen_v1-process-2",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5056313060013053
+    },
+    {
+      "name": "complete_corrected-process-1",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::region_certificate::measurements::tests::complete_tests::replay_tests::complete_prism_measure_process_receipt",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5764963879992138
+    },
+    {
+      "name": "complete_corrected-process-2",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::region_certificate::measurements::tests::complete_tests::replay_tests::complete_prism_measure_process_receipt",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5215992810008174
+    },
+    {
+      "name": "cap_subset-process-1",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::region_certificate::measurements::tests::replay_tests::portable_prism_measure_process_receipt",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1515151089988649
+    },
+    {
+      "name": "cap_subset-process-2",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::region_certificate::measurements::tests::replay_tests::portable_prism_measure_process_receipt",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.14915537300112192
+    }
+  ],
+  "replays": [
+    {
+      "name": "join",
+      "bytes": 193080,
+      "sha256": "de1f88a80716a820eddc03254425f0400b5743e425126e3d43bf843ae2908871",
+      "two_processes_and_frozen_baseline_equal": true
+    },
+    {
+      "name": "frozen_v1",
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "two_processes_and_frozen_baseline_equal": true
+    },
+    {
+      "name": "complete_corrected",
+      "bytes": 207,
+      "sha256": "1943b5f23e744fc9c2c4b90c379f5422e7f927eea92912dd2056f65529d7f6e1",
+      "two_processes_and_frozen_baseline_equal": true
+    },
+    {
+      "name": "cap_subset",
+      "bytes": 319,
+      "sha256": "ad4b31d4e8075751c5f0bdd4bda83d859c7f7545a8c0d4848206c947dd56f9a3",
+      "two_processes_and_frozen_baseline_equal": true
+    }
+  ],
+  "inputs_count": 15873,
+  "input_hashes_unchanged": true,
+  "status": "passed",
+  "finished_utc": "2026-10-14T14:49:12.937371+00:00",
+  "passed": {
+    "frozen_tests": 121,
+    "source_query_tests": 20,
+    "closure_census": 1,
+    "doctests": 35
+  }
+}
