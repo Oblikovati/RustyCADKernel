@@ -83,7 +83,7 @@ do not extend this fixture-only prerequisite into an alternative production path
 Multiple boundaries, holes, rational/general profiles, persistent edit naming,
 mesh publication, and application acceptance remain separate unfinished gates.
 
-## Private row-projection checkpoint
+## Historical private row-projection checkpoint (`41b0250ed`)
 
 `publication::body_view::project_named_prism_body` now requires an accepted
 `PublishedNamedPrism` and an exact `ResolvedPrismNames` binding before projecting.
@@ -103,3 +103,34 @@ its V2 dictionary/actual correspondence work is a pending dependency. Full body
 replay, complete getter isolation, cost measurements on an actual accepted body,
 and the final full toolkit gate remain pending that positive operation fixture.
 The symbolic fixture is not a fallback or production name allocator.
+
+## Actual resolver integration
+
+The committed resolver source `a3b345b7e` (evidence `6ed91a0be`) supplies the first
+actual sealed preparation→correspondence→publication→map issuance fixture. The
+body uses that production-issued V2 dictionary/map unchanged; it does not decode
+new roles or construct authority from symbolic rows. Map schema and body behavior
+remain V1, independently of dictionary V2. The historical symbolic tests remain.
+
+The actual corpus checks all 13 members, 26 uses, six trims and eight stored
+tolerance observations, including both seam uses, three cyclic wire rows, native
+closed-rim endpoint roles, and zero/full-range caller namespaces. Original
+accepted geometry and metadata bytes are compared with projected operands.
+Independent read-view snapshots rebuild every row from getters; request mutation,
+disposal of the publication and map, and a test-only owned-row mutation distinguish
+fresh values from cached binding bytes. Curve-buffer addresses are compared only
+to demonstrate separate allocation, never to name a member. Construction owners
+have already been dropped by the actual resolver fixture before body projection;
+the earlier publication mutation corpus remains the live-owner isolation gate.
+
+Retained allocation observations count accessible Vec blocks and capacities,
+copied curve scalars, and the complete naming binding. The dictionary's private
+capacity is not observable, so its entry payload is reported separately. Repeated
+projection latency and process peak RSS are observations of this workload; they
+are neither total transient allocator-call counts nor a previous-release whole
+operation benchmark. No storage redesign or lock instrumentation is claimed.
+
+Final toolkit/replay results and source hashes are recorded in the accompanying
+actual-body evidence receipt. This private result read model does not expose the
+whole join or add an application-facing outcome API; broader profiles, annular
+publication, persistent edits and release benchmark/sanitizer gates remain open.

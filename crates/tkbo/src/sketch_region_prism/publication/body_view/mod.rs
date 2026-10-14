@@ -23,11 +23,19 @@ pub(crate) use rows::{
     PrismBodyTrim, PrismBodyWireTraversal,
 };
 #[cfg(test)]
+mod actual_operand_tests;
+#[cfg(test)]
+mod actual_replay_tests;
+#[cfg(test)]
+mod actual_tests;
+#[cfg(test)]
 mod domain_tests;
 #[cfg(test)]
 mod face_tests;
 #[cfg(test)]
 mod geometry_tests;
+#[cfg(test)]
+mod getter_snapshot;
 #[cfg(test)]
 mod incidence_tests;
 #[cfg(test)]
@@ -38,5 +46,7 @@ mod occurrence_tests;
 mod operation_tests;
 #[cfg(test)]
 mod row_replay_tests;
+#[cfg(test)]
+mod storage_tests;
 #[cfg(test)]
 mod test_fixture;
