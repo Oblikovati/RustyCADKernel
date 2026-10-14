@@ -3,6 +3,10 @@
 mod arithmetic;
 mod mapped;
 mod parameter;
+mod prism_jacobian;
+pub use prism_jacobian::affine_prism_jacobian;
+#[cfg(test)]
+mod prism_jacobian_tests;
 pub use mapped::{
     TransportedResidualQuery, TransportedResidualReport, certify_transported_residual,
     certify_transported_residual_on_bounds,

@@ -88,7 +88,9 @@ fn capture_pcurve(
     }
     capture_plane_curve(&representation.pcurve)
 }
-fn capture_support(face: &Face) -> Result<CapturedPlaneSupport, CapturedGeometryCause> {
+/// Snapshot actual support scalars and placement without retaining mutable geometry handles.
+/// Example: `capture_support(&face)?` binds later exact arithmetic to this face revision.
+pub(crate) fn capture_support(face: &Face) -> Result<CapturedPlaneSupport, CapturedGeometryCause> {
     let (surface, location) = BRepTool::surface_with_location(face)?;
     let plane = surface.cast::<GeomPlane>();
     let Some(plane) = plane.get() else {

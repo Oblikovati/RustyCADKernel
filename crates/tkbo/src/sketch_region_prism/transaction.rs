@@ -22,6 +22,7 @@ pub(crate) fn retain_selected_prism(
 }
 fn initial_receipt(batch: &CandidateBatch, requested: PrismRequest) -> PrismReceipt {
     PrismReceipt {
+        affine_chart: None,
         completion: PrismCompletion::Incomplete,
         phase: PrismPhase::Admission,
         limits: PrismLimits {
@@ -67,6 +68,7 @@ fn execute(
     select_batch(batch, receipt, progress)?;
     checkpoint(receipt, progress, PrismPhase::Copy)?;
     retain_copy(receipt)?;
+    super::affine_chart::retain_affine_chart(receipt);
     sweep(receipt, progress)
 }
 fn select_batch(
