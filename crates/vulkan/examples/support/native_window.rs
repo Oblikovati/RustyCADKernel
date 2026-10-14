@@ -10,15 +10,40 @@ pub struct NativeWindow {
     display: Handle<AspectDisplayConnection>,
 }
 impl NativeWindow {
+    /// Create a managed framebuffer target; e.g. NativeWindow::managed(1440,900).
+    pub fn managed(width: i32, height: i32) -> Self {
+        Self::create(width, height, false)
+    }
     pub fn new(width: i32, height: i32) -> Self {
+        Self::create(width, height, true)
+    }
+    fn create(width: i32, height: i32, unmanaged: bool) -> Self {
         let api = xlib::Xlib::open().expect("load test Xlib");
         unsafe {
             (api.XInitThreads)();
         }
         let display = Handle::new(AspectDisplayConnection::new().unwrap());
-        let window = Handle::new(
+        let window = Self::create_client(&display, width, height);
+        if unmanaged {
+            Self::override_redirect(&api, &display, &window);
+        }
+        window.map();
+        let native = Self {
+            api,
+            window,
+            display,
+        };
+        native.sync();
+        native
+    }
+    fn create_client(
+        display: &Handle<AspectDisplayConnection>,
+        width: i32,
+        height: i32,
+    ) -> Handle<XwWindow> {
+        Handle::new(
             XwWindow::create(
-                &display,
+                display,
                 "Martensite Vulkan presentation",
                 100,
                 100,
@@ -26,7 +51,13 @@ impl NativeWindow {
                 height,
             )
             .unwrap(),
-        );
+        )
+    }
+    fn override_redirect(
+        api: &xlib::Xlib,
+        display: &Handle<AspectDisplayConnection>,
+        window: &Handle<XwWindow>,
+    ) {
         // Test geometry must not race the desktop window manager's placement/minimum size.
         let mut attributes = xlib::XSetWindowAttributes {
             override_redirect: 1,
@@ -40,14 +71,6 @@ impl NativeWindow {
                 &mut attributes,
             );
         }
-        window.map();
-        let native = Self {
-            api,
-            window,
-            display,
-        };
-        native.sync();
-        native
     }
     fn display_ptr(&self) -> *mut xlib::Display {
         self.display.get_display_aspect() as *mut xlib::Display

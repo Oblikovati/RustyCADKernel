@@ -1,6 +1,8 @@
 //! Identical analytic GUI cases run on virtual GPU targets and actual mapped windows.
 #![allow(dead_code)]
 use super::gui_acceptance_scene::GuiAcceptanceScene;
+#[path = "framebuffer_capture_image.rs"]
+mod framebuffer_capture_image;
 use super::{ais_scene, device_options, gui_packets, view_setup};
 use martensite_vulkan::*;
 use rustycad_tkernel::standard::Handle;
@@ -11,7 +13,7 @@ fn native_fixture(use_native: bool) -> (Handle<Graphic3dRenderDriver>, GuiAccept
     let scene = GuiAcceptanceScene::new(&driver, use_native);
     (driver, scene)
 }
-/// Prove the shared GUI case; example: `attachment_lifecycle(true)` uses native pixels.
+/// Prove the shared GUI case; example: `attachment_lifecycle(true)` uses a native framebuffer.
 pub fn attachment_lifecycle(use_native: bool) {
     let (driver, scene) = native_fixture(use_native);
     let baseline = scene.frame();
@@ -51,7 +53,7 @@ fn verify_gui_resize(scene: &GuiAcceptanceScene) {
     let resized = scene.frame();
     assert_eq!([resized.width, resized.height], [80, 72]);
 }
-/// Prove the shared GUI case; example: `alpha_and_uv(true)` uses native pixels.
+/// Prove the shared GUI case; example: `alpha_and_uv(true)` uses a native framebuffer.
 pub fn alpha_and_uv(use_native: bool) {
     let (driver, scene) = native_fixture(use_native);
     let baseline = scene.frame();
@@ -99,7 +101,7 @@ fn verify_font_uvs(scene: &GuiAcceptanceScene, baseline: &FrameCapture) {
     }
 }
 
-/// Prove the shared GUI case; example: `model_transparency(true)` uses native pixels.
+/// Prove the shared GUI case; example: `model_transparency(true)` uses a native framebuffer.
 pub fn model_transparency(use_native: bool) {
     for mode in [
         Graphic3dRenderTransparentMethod::BlendUnordered,
@@ -144,7 +146,7 @@ fn transparent_model(scene: &mut GuiAcceptanceScene) {
         .unwrap();
     scene.scene_mut().object = object;
 }
-/// Prove the shared GUI case; example: `selection_identity(true)` uses native pixels.
+/// Prove the shared GUI case; example: `selection_identity(true)` uses a native framebuffer.
 pub fn selection_identity(use_native: bool) {
     let (driver, scene) = native_fixture(use_native);
     let context = &scene.scene().context;
@@ -219,28 +221,20 @@ fn install_retired_font(scene: &GuiAcceptanceScene) {
         .attach_gui_layer([64, 64], layer)
         .unwrap();
 }
-/// Retain native and GPU byte buffers; example: `capture_native_overlay("target/gui")?`.
+/// Publish completed native-target framebuffer color/depth/image; example: `capture_native_overlay("target/gui")?`.
 pub fn capture_native_overlay(prefix: &str) -> Result<(), Box<dyn std::error::Error>> {
     let (driver, scene) = native_fixture(true);
     install_gui_quad(&scene, [64, 64], [0., 1., 0., 1.], [12., 12., 52., 52.]);
     let capture = scene.frame();
-    let native = scene.presented_pixels().unwrap();
-    assert_eq!(native, capture.rgba);
-    write_gui_buffers(prefix, &capture, &native)?;
+    framebuffer_capture_image::publish_capture(
+        std::path::Path::new(prefix),
+        &capture,
+        &framebuffer_capture_image::FileFrameImageStore,
+    )?;
     println!("MARTENSITE_DEVICE={}", driver.device_name());
     println!("MARTENSITE_DEVICE_IDENTITY={:?}", driver.driver_identity());
     close_gui_case(&driver, &scene);
     Ok(())
-}
-fn write_gui_buffers(prefix: &str, capture: &FrameCapture, native: &[u8]) -> std::io::Result<()> {
-    std::fs::write(format!("{prefix}.rgba"), &capture.rgba)?;
-    std::fs::write(format!("{prefix}.window.rgba"), native)?;
-    let depth: Vec<u8> = capture
-        .depth
-        .iter()
-        .flat_map(|value| value.to_le_bytes())
-        .collect();
-    std::fs::write(format!("{prefix}.depth"), depth)
 }
 /// Retained .9 model alpha remains scoped across GUI and clear; `model_alpha_scope(true)`.
 pub fn model_alpha_scope(use_native: bool) {

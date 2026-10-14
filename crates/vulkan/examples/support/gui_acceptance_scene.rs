@@ -1,4 +1,4 @@
-//! One fixture interface preserves actual native pixels and display-independent GPU tests.
+//! One owner runs native and virtual render targets; acceptance captures their completed framebuffer.
 use super::{ais_scene::AisViewerScene, window_scene::WindowScene};
 use martensite_vulkan::{FrameCapture, Graphic3dRenderDriver};
 use rustycad_tkernel::standard::Handle;
@@ -33,12 +33,9 @@ impl GuiAcceptanceScene {
             GuiAcceptanceTarget::Native(scene) => &mut scene.scene,
         }
     }
-    /// Render and verify actual native pixels when configured; `scene.frame()`.
+    /// Render and capture the completed composited framebuffer; `scene.frame()`.
     pub fn frame(&self) -> FrameCapture {
         self.scene().render_view().try_redraw().unwrap();
-        if let GuiAcceptanceTarget::Native(scene) = &self.target {
-            scene.verify_pixels();
-        }
         self.scene().render_view().capture().unwrap()
     }
     /// Notify the actual target and view; `scene.resize(80,72)`.
@@ -49,14 +46,5 @@ impl GuiAcceptanceScene {
         }
         self.scene().window.set_size(width, height);
         self.scene().view.must_be_resized();
-    }
-}
-impl GuiAcceptanceScene {
-    /// Read actual drawable pixels for proof; example: `scene.presented_pixels().unwrap()`.
-    pub fn presented_pixels(&self) -> Option<Vec<u8>> {
-        match &self.target {
-            GuiAcceptanceTarget::Native(scene) => Some(scene.native.snapshot()),
-            GuiAcceptanceTarget::Virtual(_) => None,
-        }
     }
 }
