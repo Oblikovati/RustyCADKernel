@@ -485064,6 +485064,14 @@
       ]
     },
     {
+      "upstream_id": "Draw_Window::WExpose()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::expose_view",
+      "status": "implemented",
+      "notes": "The pure virtual expose hook of Draw_Window. Its only override, Draw_View::WExpose (ResetFrame then RepaintView), is DrawViewer::expose_view keyed by view id, because the repaint needs the viewer; the window backend calls it on an expose event (docs/draw-design.md section 3)."
+    },
+    {
       "upstream_id": "Draw_Failure",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/Draw/Draw_Failure.hxx",
