@@ -1,0 +1,245 @@
+{
+  "integration_revision": "a290c4fe466c916a83a79a0e053c4ac5378d3828",
+  "integral_candidate": "15df959ca",
+  "inventory_candidate": "dd7ba5474",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "martensite-tkmeshvs",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "integrated-tests.log.gz",
+      "sha256": "ea5616e6caeeb4a3c21a94a869c34dfb8a556f5c9c322e0f9c4934f3da6eeefc",
+      "tests": {
+        "passed": 4195,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "martensite-tkmeshvs",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "integrated-docs.log.gz",
+      "sha256": "e7a23cabec5d35aab012d95d13fb312d1ab712bdd66c9fdc744f366d8ce04587",
+      "tests": {
+        "passed": 94,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "martensite-tkmeshvs",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "integrated-clippy.log.gz",
+      "sha256": "4db8d1c91c34e121629171aaeecefc5b00574a6006ed7bc71db7cd2330ce3434"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "integrated-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_api_claim_preflight.py"
+      ],
+      "exit_code": 0,
+      "log": "integrated-api_claim_preflight.log.gz",
+      "sha256": "0dd6f298dd5e9bde02d4b405df20407659842154d461b23af4751a0bbba63889"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_publish_api_snapshot.py"
+      ],
+      "exit_code": 0,
+      "log": "integrated-publish_api_snapshot.log.gz",
+      "sha256": "ef09dc7d5bed677ad36a9a86d3ebab61987fc157a40b4e4688565103ee59faf7"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_api_coverage_report.py"
+      ],
+      "exit_code": 0,
+      "log": "integrated-api_coverage_report.log.gz",
+      "sha256": "550b569a30a577ea6523daaf8741465354c0bcdc58028fba478c5d7705e61c02"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_api_inventory_status.py"
+      ],
+      "exit_code": 0,
+      "log": "integrated-api_inventory_status.log.gz",
+      "sha256": "8c4e630f5668ded76d223f0776c6beceead11fd1a135f4e44e5282160dd24a8c"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_api_metrics_report.py"
+      ],
+      "exit_code": 0,
+      "log": "integrated-api_metrics_report.log.gz",
+      "sha256": "ad5e0a82c37748c28627daea5f043ade084d4fd2e38fed58108ae2c55fb67701"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/porting.py",
+        "status"
+      ],
+      "exit_code": 0,
+      "log": "integrated-porting-status.log.gz",
+      "sha256": "042611a61d0e593849b44e2e071d831d92a3123a0cf1cd02a2a1ff05426ba538"
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends_sha256": "c4ea84051e19599d1ebca9f4122ef02b3734d94297c039467d7587353b658b8f",
+  "cpp_artifact_hash_checks": {
+    "porting/api-header-manifest.json": true,
+    "porting/api-inventory/occt-alias-reachability.jsonl.gz": true,
+    "porting/api-inventory/occt-capture-gap-audit.json": true,
+    "porting/api-inventory/occt-compiler-summaries.jsonl.gz": true,
+    "porting/api-inventory/occt-context-retries.jsonl.gz": true,
+    "porting/api-inventory/occt-declarations.jsonl.gz": true,
+    "porting/api-inventory/occt-diagnostics.jsonl.gz": true,
+    "porting/api-inventory/occt-headers.jsonl.gz": true,
+    "porting/api-inventory/occt-included-files.jsonl.gz": true,
+    "porting/api-inventory/occt-macros.jsonl.gz": true,
+    "porting/api-inventory/occt-manifest.json": true,
+    "porting/api-inventory/occt-skipped-ranges.jsonl.gz": true,
+    "porting/api-inventory/occt-transitive-context-plan.json": true,
+    "porting/api-inventory/occt-unsupported.jsonl.gz": true,
+    "porting/api-proof-toolchain.json": true
+  },
+  "integral_fixture_sha256": "8d8a61bee2de99d120420a5284c830e3b50884e7876d871f339f87920bd64071",
+  "inventory_capture_revision": "eb63c68438e4b31ce0b799aa62412ded57c2da98",
+  "inventory_stale_against_main": true,
+  "limitations": [
+    "TSan acceptance remains incomplete: startup control crashed; current integral target was not run under TSan.",
+    "Conditional signed scalar integration does not prove boundary, region or body validity.",
+    "Inventory declaration mappings are not behavioral proof or full API parity.",
+    "No application, release package, cross-platform or performance acceptance."
+  ],
+  "checks_passed": true,
+  "candidate_source_comparison": {
+    "crates/tkmath/src/predicates/roots/metric_bounds.rs": {
+      "candidate_sha256": "ad79a501b460132738a19aa10f67150451274e5402cd617e65ecf9d4532b29f6",
+      "integrated_sha256": "e5bcf2b53b9675a291ac1c96898dc866f418a04579bebcf40dfb16d79ea5a1fd"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/integral_baseline_tests.rs": {
+      "candidate_sha256": "0e8b460dcbbed4d883095ca407d75b65839d7dd3278da0a0ad61c415561e026d",
+      "integrated_sha256": "0e8b460dcbbed4d883095ca407d75b65839d7dd3278da0a0ad61c415561e026d"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial-integrals-fixture.txt": {
+      "candidate_sha256": "8d8a61bee2de99d120420a5284c830e3b50884e7876d871f339f87920bd64071",
+      "integrated_sha256": "8d8a61bee2de99d120420a5284c830e3b50884e7876d871f339f87920bd64071"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_integrals.rs": {
+      "candidate_sha256": "a3556c958d1706813dcbf326b0f3daf86f7d5aad50d5ed1def041234adaefdcf",
+      "integrated_sha256": "a3556c958d1706813dcbf326b0f3daf86f7d5aad50d5ed1def041234adaefdcf"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_integrals/arithmetic.rs": {
+      "candidate_sha256": "3dde35d94aa693d9744855bce502636087088171e61a6ab09c7ce10abda4d160",
+      "integrated_sha256": "3dde35d94aa693d9744855bce502636087088171e61a6ab09c7ce10abda4d160"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_integrals/error.rs": {
+      "candidate_sha256": "c4a5bd583e8fc9236cbcc38e862a3a4c5f4f26af791bbf91c53cd938d3ab1e3e",
+      "integrated_sha256": "c4a5bd583e8fc9236cbcc38e862a3a4c5f4f26af791bbf91c53cd938d3ab1e3e"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_integrals/stress_tests.rs": {
+      "candidate_sha256": "3e55f4afddf6fac6207075c7386a6a13d247c7af9da5b1a12cd3c7dab94e007b",
+      "integrated_sha256": "3e55f4afddf6fac6207075c7386a6a13d247c7af9da5b1a12cd3c7dab94e007b"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_integrals/tests.rs": {
+      "candidate_sha256": "c15339f563fe5b1116e1f1512224911327e3450ecea35063a1f3f98414c88e8b",
+      "integrated_sha256": "c15339f563fe5b1116e1f1512224911327e3450ecea35063a1f3f98414c88e8b"
+    },
+    "crates/tkmath/src/predicates/roots/metric_bounds/polynomial_integrals/types.rs": {
+      "candidate_sha256": "057b411c13f26240345da2413b12ac80bf18da6e47c7e27c4fc9052aa5526602",
+      "integrated_sha256": "057b411c13f26240345da2413b12ac80bf18da6e47c7e27c4fc9052aa5526602"
+    }
+  },
+  "registration_merge": "metric_bounds.rs also retains the already integrated curve_identity exports and tests; all other candidate crate files match exactly.",
+  "python_tool_tests_passed": 50
+}
