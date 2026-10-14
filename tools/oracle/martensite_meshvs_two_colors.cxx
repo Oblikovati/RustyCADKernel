@@ -45,4 +45,7 @@ int main() {
   for (int index : {-2147483647-1,-1,0,3,2147483647}) {
     std::cout << "invalid " << index; ColorBits(ExtractColor(pair,index)); std::cout << "\n";
   }
+  Quantity_Color aliased;
+  ExtractColors(pair, aliased, aliased);
+  std::cout << "alias"; ColorBits(aliased); std::cout << "\n";
 }

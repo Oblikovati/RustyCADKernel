@@ -11,7 +11,7 @@ fn native_packing_hash_equality_and_extraction_replay() {
     let lines: Vec<&str> = include_str!("fixtures/two-colors-native.txt")
         .lines()
         .collect();
-    assert_eq!(lines.len(), 773);
+    assert_eq!(lines.len(), 774);
     for line in &lines[..768] {
         let expected = numbers(line);
         let mut pair = fixture_pair(expected[0], expected[1] as u8);
@@ -103,6 +103,7 @@ fn invalid_indices_preserve_pair_and_return_native_default() {
     for line in include_str!("fixtures/two-colors-native.txt")
         .lines()
         .skip(768)
+        .take(5)
     {
         let words: Vec<&str> = line.split_whitespace().collect();
         assert_eq!(words[0], "invalid");
@@ -114,6 +115,23 @@ fn invalid_indices_preserve_pair_and_return_native_default() {
         );
         assert_eq!(pair, before);
     }
+}
+
+#[test]
+fn native_aliased_outputs_write_the_second_color_last() {
+    use martensite_tkmeshvs::{MeshVSColorOutputs, extract_colors_into};
+    let mut pair = raw_pair([1, 2, 3, 4, 5, 6]);
+    let original = pair;
+    let mut output = Color::default();
+    extract_colors_into(&mut pair, MeshVSColorOutputs::Aliased(&mut output));
+    let line = include_str!("fixtures/two-colors-native.txt")
+        .lines()
+        .last()
+        .unwrap();
+    assert_eq!(line.split_whitespace().next(), Some("alias"));
+    let expected = numbers(line.strip_prefix("alias ").unwrap());
+    assert_eq!(color_bits(output).as_slice(), expected);
+    assert_eq!(pair, original);
 }
 
 #[test]

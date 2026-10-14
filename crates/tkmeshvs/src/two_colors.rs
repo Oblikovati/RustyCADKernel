@@ -63,8 +63,36 @@ pub fn extract_color(pair: &mut MeshVSTwoColors, index: i32) -> Color {
 
 /// Overwrite both outputs in their native order; `extract_colors(&mut pair, &mut a, &mut b)`.
 pub fn extract_colors(pair: &mut MeshVSTwoColors, first: &mut Color, second: &mut Color) {
-    *first = extract_color(pair, 1);
-    *second = extract_color(pair, 2);
+    extract_colors_into(pair, MeshVSColorOutputs::Distinct { first, second });
+}
+
+/// Preserve native output aliasing without overlapping mutable references.
+pub enum MeshVSColorOutputs<'a> {
+    /// Two separate native output variables; `MeshVSColorOutputs::Distinct { first, second }`.
+    Distinct {
+        /// First output reference.
+        first: &'a mut Color,
+        /// Second output reference.
+        second: &'a mut Color,
+    },
+    /// One variable passed twice; `MeshVSColorOutputs::Aliased(&mut color)`.
+    Aliased(&'a mut Color),
+}
+
+/// Model both legal native output arrangements; `extract_colors_into(pair, MeshVSColorOutputs::Aliased(color))`.
+pub fn extract_colors_into(pair: &mut MeshVSTwoColors, outputs: MeshVSColorOutputs<'_>) {
+    let first_color = extract_color(pair, 1);
+    let second_color = extract_color(pair, 2);
+    match outputs {
+        MeshVSColorOutputs::Distinct { first, second } => {
+            *first = first_color;
+            *second = second_color;
+        }
+        MeshVSColorOutputs::Aliased(output) => {
+            *output = first_color;
+            *output = second_color;
+        }
+    }
 }
 
 fn decode_srgb_bytes(bytes: [u8; 3]) -> Color {
