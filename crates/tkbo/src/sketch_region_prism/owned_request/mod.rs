@@ -64,3 +64,5 @@ pub(in crate::sketch_region_prism) use resolver::fixture::{
 
 /// Sealed local refusal from the actual resolver publication invocation.
 pub(in crate::sketch_region_prism) use resolver::InvokedPrismPublicationFailure;
+
+pub(crate) mod complete;
