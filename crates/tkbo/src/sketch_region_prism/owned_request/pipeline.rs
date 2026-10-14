@@ -9,8 +9,27 @@ pub(crate) fn prepare_owned_polynomial_prism(
     request: OwnedPolynomialPrismRequest,
     progress: &mut dyn OwnedPrismProgress,
 ) -> Result<PreparedPolynomialPrism, Box<OwnedPrismPreparationFailure>> {
+    prepare_with_admission(request, progress, admit_owned_prism)
+}
+type PlanAdmission = fn(
+    &OwnedPolynomialPrismRequest,
+) -> Result<super::names::SingleBoundaryNamePlan, OwnedPrismAdmissionCause>;
+pub(super) fn prepare_with_admission(
+    request: OwnedPolynomialPrismRequest,
+    progress: &mut dyn OwnedPrismProgress,
+    admit: PlanAdmission,
+) -> Result<PreparedPolynomialPrism, Box<OwnedPrismPreparationFailure>> {
+    let mut retained = admitted_state(request, admit)?;
+    let mut callbacks = OwnedPrismCallbacks::new(progress);
+    let outcome = execute(&mut retained, &mut callbacks);
+    finish_preparation(retained, outcome, callbacks.stop.take())
+}
+fn admitted_state(
+    request: OwnedPolynomialPrismRequest,
+    admit: PlanAdmission,
+) -> Result<PreparationRetained, Box<OwnedPrismPreparationFailure>> {
     let mut retained = PreparationRetained::new(request);
-    match admit_owned_prism(&retained.request) {
+    match admit(&retained.request) {
         Ok(plan) => retained.plan = Some(plan),
         Err(cause) => {
             return Err(failed(
@@ -20,9 +39,7 @@ pub(crate) fn prepare_owned_polynomial_prism(
             ));
         }
     }
-    let mut callbacks = OwnedPrismCallbacks::new(progress);
-    let outcome = execute(&mut retained, &mut callbacks);
-    finish_preparation(retained, outcome, callbacks.stop.take())
+    Ok(retained)
 }
 fn execute(
     retained: &mut PreparationRetained,
