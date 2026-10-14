@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR0060: one named annular prism from one sealed join, ordered validation, complete V2 history
+//! ADR0061: one named annular prism from one sealed join, ordered validation, complete V2 history
 //! and conditional measures; V1 single-boundary publication remains selected by its own entry.
 mod operation;
 mod replay;

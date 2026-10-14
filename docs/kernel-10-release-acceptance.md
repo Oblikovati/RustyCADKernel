@@ -341,11 +341,11 @@ A worktree branch (not yet integrated or root-gated) adds, on top of `6f158ea74`
   continuation-derived partition parents, all three authored candidates with
   sealed dispositions, captured flat parents bound to native sweep rows, two
   separate intermediate wire retirements, certified-empty original deletion.
-- ADR0060 named annular publication: one join, ordered validation, V2 history
+- ADR0061 named annular publication: one join, ordered validation, V2 history
   and four-face measures bound to one source; terminal callback before the
   callback-free source rebind and history reprojection. Closed-form cap areas
   (9/5) and sweep magnitude (18/5) lie inside the certified enclosures.
-- ADR0061 owned annular preparation from owned coefficients through the shared
+- ADR0062 owned annular preparation from owned coefficients through the shared
   census/partition/copy/contact/prism pipelines; it publishes end to end.
 - ADR0056 follow-up: complete publication history findings are owned.
 

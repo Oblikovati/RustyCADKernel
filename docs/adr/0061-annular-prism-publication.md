@@ -1,4 +1,4 @@
-# ADR 0060: Complete named annular prism publication
+# ADR 0061: Complete named annular prism publication
 
 Status: private assembler implemented on a worktree branch (2026-10-15);
 main integration, owned request/outcome integration and release remain open.

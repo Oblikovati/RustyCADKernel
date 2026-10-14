@@ -1,4 +1,4 @@
-# ADR 0061: Owned annular prism preparation
+# ADR 0062: Owned annular prism preparation
 
 Status: private preparation implemented on a worktree branch (2026-10-15).
 
@@ -23,7 +23,7 @@ downstream. `PreparedAnnularPrism::with_region` lends the two-loop request in
 authored outer/inner order.
 
 Evidence: certified by `inspect_two_loop_region` for forward and reversed
-traversal; owned inputs publish end-to-end through ADR0060 with identical replay
+traversal; owned inputs publish end-to-end through ADR0061 with identical replay
 across independent preparations; refusals for names, pole counts and version;
 cancellation at every observed preparation checkpoint with clean reuse.
 
