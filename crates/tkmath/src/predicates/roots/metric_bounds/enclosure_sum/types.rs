@@ -26,6 +26,13 @@ pub enum EnclosureSumOperation {
     /// Exact lower/upper addition and final outward rounding; input claims are external.
     NonnegativeBounds,
 }
+/// Arithmetic evidence scope; component geometric claims remain external.
+/// Example: `let evidence = EnclosureSumEvidence::CertifiedConditionalEndpointArithmetic;`.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum EnclosureSumEvidence {
+    /// Exact endpoint sums with outward rounding, conditional on supplied enclosures.
+    CertifiedConditionalEndpointArithmetic,
+}
 /// Immutable owned sum; component intervals retain their supplied bits and order.
 /// This certifies endpoint arithmetic only, not that components enclose physical quantities.
 /// Example: `assert!(report.absolute_error_bound() <= report.requested_options().absolute_error_limit);`.
@@ -37,6 +44,12 @@ pub struct CertifiedEnclosureSum {
     pub(super) options: EnclosureSumOptions,
 }
 impl CertifiedEnclosureSum {
+    /// Identify the proved conditional arithmetic; `let evidence = report.evidence();`.
+    pub fn evidence(&self) -> EnclosureSumEvidence {
+        // This tag never certifies the inputs' physical or geometric interpretation.
+        EnclosureSumEvidence::CertifiedConditionalEndpointArithmetic
+    }
+
     /// Read unchanged component endpoints; `let supplied = report.components();`.
     pub fn components(&self) -> &[[f64; 2]] {
         // Borrowing this owned slice cannot mutate the report or original input.

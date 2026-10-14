@@ -47,8 +47,46 @@ def encode(bounds: tuple[Fraction, Fraction]) -> dict[str, object]:
             "bits": [struct.unpack("Q", struct.pack("d", value))[0] for value in rounded]}
 
 
+def multiply(left: list[Fraction], right: list[Fraction]) -> list[Fraction]:
+    """Independent power convolution checks the algebraic remainder hypotheses."""
+    result = [Fraction(0)]*(len(left)+len(right)-1)
+    for i, a in enumerate(left):
+        for j, b in enumerate(right):
+            result[i+j] += a*b
+    return result
+
+
+def bernstein(powers: list[Fraction]) -> list[Fraction]:
+    """Convert a bounded power polynomial exactly for the convex coefficient bound."""
+    degree = len(powers)-1
+    return [sum(powers[k]*Fraction(math.comb(i, k), math.comb(degree, k))
+                for k in range(i+1)) for i in range(degree+1)]
+
+
+def verify_positive_polynomial() -> None:
+    """p=1/9+18(t²-t+2/9)² proves p>=1/9 on the complete interval."""
+    factor = [Fraction(2, 9), Fraction(-1), Fraction(1)]
+    product = [18*value for value in multiply(factor, factor)]
+    product[0] += Fraction(1, 9)
+    assert product == list(map(Fraction, [1, -8, 26, -36, 18]))
+    x, y = list(map(Fraction, [1, -4, 3])), list(map(Fraction, [0, 2, -3]))
+    assert [a+b for a, b in zip(multiply(x, x), multiply(y, y))] == product
+
+
+def verify_second_derivative_bound() -> None:
+    """f=24sqrt(p): |f''|<=12*56*3+6*(28/3)²*27=16128."""
+    first = bernstein(list(map(Fraction, [-8, 52, -108, 72])))
+    second = bernstein(list(map(Fraction, [52, -216, 216])))
+    assert first == [Fraction(-8), Fraction(28, 3), Fraction(-28, 3), Fraction(8)]
+    assert second == list(map(Fraction, [52, -56, 52]))
+    bound = 12*max(map(abs, second))*3 + 6*max(map(abs, first))**2*27
+    assert bound == 16128
+
+
 def generate() -> dict[str, object]:
     """Compute the one fixed representative; no production result is an input."""
+    verify_positive_polynomial()
+    verify_second_derivative_bound()
     count, scale = 2**17, 2**80
     side = midpoint_bounds(count, scale)
     total = tuple(endpoint + Fraction(24, 5) for endpoint in side)

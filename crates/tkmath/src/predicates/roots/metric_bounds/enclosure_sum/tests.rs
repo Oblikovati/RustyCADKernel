@@ -133,15 +133,12 @@ fn exact_accumulation_is_permutation_independent() {
 }
 #[test]
 fn sum_types_are_send_sync_and_independent_workers_repeat() {
-    fn check<T: Send + Sync>() {
-        // Compile-time ownership bound covers the complete reachable report.
-        assert!(std::mem::size_of::<T>() < usize::MAX);
-    }
-    check::<CertifiedEnclosureSum>();
-    check::<EnclosureSumError>();
-    check::<EnclosureSumCause>();
-    check::<EnclosureSumOptions>();
-    check::<EnclosureSumOperation>();
+    check_sum_type::<CertifiedEnclosureSum>();
+    check_sum_type::<EnclosureSumError>();
+    check_sum_type::<EnclosureSumCause>();
+    check_sum_type::<EnclosureSumOptions>();
+    check_sum_type::<EnclosureSumOperation>();
+    check_sum_type::<EnclosureSumEvidence>();
     let workers: Vec<_> = (0..8)
         .map(|_| std::thread::spawn(repeated_sum_reports))
         .collect();
@@ -186,4 +183,24 @@ fn repeated_sum_reports() -> Vec<CertifiedEnclosureSum> {
     (0..32)
         .map(|_| sum_nonnegative_enclosures(&[[1., 2.]; 3], options(3.), || false).unwrap())
         .collect()
+}
+
+#[test]
+fn evidence_scope_is_conditional_endpoint_arithmetic() {
+    let report = sum_nonnegative_enclosures(&[[1., 1.]], options(0.), || false).unwrap();
+    assert_eq!(
+        report.evidence(),
+        EnclosureSumEvidence::CertifiedConditionalEndpointArithmetic
+    );
+    assert!(
+        sum_nonnegative_enclosures(&[[2., 1.]], options(0.), || false)
+            .unwrap_err()
+            .to_string()
+            .contains("finite ordered nonnegative")
+    );
+}
+
+fn check_sum_type<T: Send + Sync>() {
+    // Compile-time ownership bound covers the complete reachable report.
+    assert!(std::mem::size_of::<T>() < usize::MAX);
 }

@@ -138,6 +138,6 @@ pub use bezier_regularity::{
 
 mod enclosure_sum;
 pub use enclosure_sum::{
-    CertifiedEnclosureSum, EnclosureSumCause, EnclosureSumError, EnclosureSumOperation,
-    EnclosureSumOptions, sum_nonnegative_enclosures,
+    CertifiedEnclosureSum, EnclosureSumCause, EnclosureSumError, EnclosureSumEvidence,
+    EnclosureSumOperation, EnclosureSumOptions, sum_nonnegative_enclosures,
 };
