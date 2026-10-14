@@ -41,6 +41,14 @@ impl HandleReference<dyn MeshVSDrawerSource> for Handle<MeshVSDrawer> {
     fn reference_address(&self) -> *const () {
         std::ptr::from_ref(self).cast()
     }
+    fn object_address(&self) -> *const () {
+        // Standard_Handle.hxx reads the original pointer, without projecting a dying pointee.
+        Handle::object_address(self)
+    }
+    fn is_null(&self) -> bool {
+        // Metadata remains meaningful after a native virtual Delete failure at count zero.
+        Handle::is_null(self)
+    }
 }
 /// Execute the qualified base assignment; `meshvs_drawer_assign(&drawer,&other)`.
 pub fn meshvs_drawer_assign(

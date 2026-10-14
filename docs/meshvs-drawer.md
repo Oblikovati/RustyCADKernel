@@ -20,7 +20,12 @@ uses declaration order and resets the new object's intrusive count.
 
 The native oracle records all six channels, absent outputs, material/string
 mutation, assignment/removal, actual derived override dispatch, typed and foreign
-failures after the base copy, and genuine intrusive counts. Ordinary Rust tests
+failures after the base copy, and genuine intrusive counts. A separate native fixture records every exported
+value: 40 drawer attributes, 16 display masks and 8 entity masks. The concrete
+handle-to-source adapter forwards nullness and identity to the actual original
+slot without projecting a pointee; a named metadata-only reader checks live and
+null slot identity. This does not prove count-zero virtual Delete behavior.
+Ordinary Rust tests
 replay retained fixtures without compiling or running OCCT.
 
 Full drawer class completion remains required and open: native RTTI

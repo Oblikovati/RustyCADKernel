@@ -66,6 +66,15 @@ fn missed_values(
         drawer.get_material(-3, material),
         drawer.get_ascii_string(-3, text),
     ];
+    missing_value_row(rows, found, color, material, text);
+}
+fn missing_value_row(
+    rows: &mut String,
+    found: [bool; 3],
+    color: &Color,
+    material: &Graphic3dMaterialAspect,
+    text: &AsciiString,
+) {
     let name = std::str::from_utf8(text.as_bytes()).unwrap();
     writeln!(
         rows,

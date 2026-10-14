@@ -25,15 +25,16 @@ impl MeshVSDrawerSource for AssignProbe {
         )
         .unwrap();
         meshvs_drawer_assign(&self.base, source);
-        match *self.fault.read() {
-            1 => raise_native_failure::<()>(Err(
-                rustycad_tkernel::standard::exceptions::construction_error(
-                    "drawer assign after copy",
-                ),
-            )),
-            2 => std::panic::panic_any(ForeignAssignFault),
-            _ => (),
-        }
+        raise_assign_fault(*self.fault.read());
+    }
+}
+fn raise_assign_fault(fault: i32) {
+    match fault {
+        1 => raise_native_failure::<()>(Err(
+            rustycad_tkernel::standard::exceptions::construction_error("drawer assign after copy"),
+        )),
+        2 => std::panic::panic_any(ForeignAssignFault),
+        _ => (),
     }
 }
 #[derive(Debug)]
