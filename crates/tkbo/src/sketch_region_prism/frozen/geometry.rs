@@ -45,7 +45,7 @@ pub(super) fn capture_faces(bound: &BoundProjection<'_>) -> CaptureResult<Vec<Fr
             .map_err(PrismFreezeCause::Native)?
             == ShapeEnum::Face
         {
-            result.push(capture_face(bound, index)?);
+            result.push(capture_face(bound, index).map_err(|c| c.at_occurrence(bound, index))?);
         }
     }
     if result.len() != inspection.entries.len() {
@@ -221,7 +221,10 @@ pub(super) fn capture_nodes(bound: &BoundProjection<'_>) -> CaptureResult<Vec<Fr
             .iter()
             .any(|n: &FrozenPrismNode| n.key == bound.names[index])
         {
-            nodes.push(capture_node(bound, index, &context.occurrence)?);
+            nodes.push(
+                capture_node(bound, index, &context.occurrence)
+                    .map_err(|c| c.at_occurrence(bound, index))?,
+            );
         }
     }
     nodes.sort_by_key(|node| node.key);

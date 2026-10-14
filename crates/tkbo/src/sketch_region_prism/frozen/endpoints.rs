@@ -23,10 +23,9 @@ pub(super) fn certify_endpoints(
 ) -> CaptureResult<Vec<FrozenEndpointProof>> {
     let mut result = Vec::new();
     for (edge, first, last) in &graph.endpoints {
-        let curve = node(nodes, *edge)?
-            .curve
-            .as_ref()
-            .ok_or(missing("captured endpoint curve"))?;
+        let curve = node(nodes, *edge)
+            .and_then(|n| n.curve.as_ref().ok_or(missing("captured endpoint curve")))
+            .map_err(|c| c.at_endpoint(*edge, *first))?;
         for (vertex, parameter) in [(*first, curve.interval[0]), (*last, curve.interval[1])] {
             result.push(endpoint_proof(nodes, *edge, vertex, parameter, curve)?);
         }
@@ -40,15 +39,18 @@ fn endpoint_proof(
     parameter: f64,
     curve: &CapturedSpaceRepresentation,
 ) -> CaptureResult<FrozenEndpointProof> {
-    let point = node(nodes, vertex)?
+    let point = node(nodes, vertex)
+        .map_err(|c| c.at_endpoint(edge, vertex))?
         .point
-        .ok_or(missing("captured endpoint vertex"))?;
+        .ok_or(missing("captured endpoint vertex"))
+        .map_err(|c| c.at_endpoint(edge, vertex))?;
     Ok(FrozenEndpointProof {
         edge,
         vertex,
         parameter,
         requested_spatial: 0.,
-        proven_squared_upper: certify_endpoint(curve, parameter, point)?,
+        proven_squared_upper: certify_endpoint(curve, parameter, point)
+            .map_err(|c| c.at_endpoint(edge, vertex))?,
     })
 }
 

@@ -57,18 +57,11 @@ fn zero_and_subfloor_raw_bytes_survive_the_same_effective_floor() {
 fn assert_invalid_raw(kind: ShapeEnum, raw: f64) {
     let (source, receipt) = authored_receipt();
     let bindings = authored_bindings(&receipt, &source);
-    set_raw(&actual_entity(&receipt, kind), raw);
+    let actual = actual_entity(&receipt, kind);
+    let expected = super::error_context_tests::actual_key(&receipt, &bindings, &actual);
+    set_raw(&actual, raw);
     let outcome = freeze_prism(&receipt, &bindings, &mut NamedFreezeProgress);
-    assert!(
-        matches!(
-            outcome,
-            PrismFreezeOutcome::Incomplete(PrismFreezeFailure {
-                cause: PrismFreezeCause::InvalidScalar { .. },
-                ..
-            })
-        ),
-        "expected typed invalid raw metadata {kind:?}/{raw:?}"
-    );
+    super::error_context_tests::assert_raw_context(outcome, expected, raw);
 }
 #[test]
 fn invalid_raw_values_are_refused_before_the_compatibility_floor() {

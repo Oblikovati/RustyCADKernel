@@ -104,3 +104,10 @@ commands and limitations; no successful body, application acceptance, or
 previous-release accepted-workload benchmark is claimed. Function-size audits use
 executable body lines, excluding formatted signatures and documentation; files
 remain below 500 lines.
+
+Known refusal entities accompany the original typed cause through an owned
+context wrapper. Node, face and history occurrence failures retain the authored
+primary key and directed-use context. Endpoint numerical errors and mismatches
+retain their edge/vertex pair. The outer failure exposes the primary key when
+known; global or genuinely unbound failures keep it absent. Wrapping does not
+change native failure classification or discard numerical error operands.

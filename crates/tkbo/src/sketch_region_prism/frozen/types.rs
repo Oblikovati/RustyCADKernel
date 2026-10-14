@@ -89,6 +89,12 @@ pub(crate) struct PrismFreezeFailure {
 }
 #[derive(Debug)]
 pub(crate) enum PrismFreezeCause {
+    Entities {
+        primary: FrozenPrismKey,
+        related: Vec<FrozenPrismKey>,
+        occurrence: Option<FrozenUseKey>,
+        cause: Box<PrismFreezeCause>,
+    },
     Missing {
         required: &'static str,
         actual: usize,

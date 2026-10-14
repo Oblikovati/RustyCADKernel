@@ -49,3 +49,7 @@ mod endpoint_tests;
 
 #[cfg(test)]
 mod admission_tests;
+
+mod error_context;
+#[cfg(test)]
+mod error_context_tests;

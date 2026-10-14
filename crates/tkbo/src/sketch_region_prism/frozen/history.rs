@@ -16,7 +16,7 @@ pub(super) fn capture_history(bound: &BoundProjection<'_>) -> CaptureResult<Froz
     }
     let mut derived = Vec::new();
     for index in 0..bound.contexts.len() {
-        derived.push(capture_relation(bound, index)?);
+        derived.push(capture_relation(bound, index).map_err(|c| c.at_occurrence(bound, index))?);
     }
     derived.sort_by(|a, b| a.output.cmp(&b.output));
     let deleted = original_keys(bound.bindings, &bound.receipt.input.input_deleted)?;

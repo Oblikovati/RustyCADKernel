@@ -36,17 +36,9 @@ fn refuse_moved_endpoint(phase: FreezePhase) {
         phase,
         actual: actual_vertex(&receipt),
     };
+    let vertex = super::error_context_tests::actual_key(&receipt, &bindings, &callback.actual);
     let result = freeze_prism(&receipt, &bindings, &mut callback);
-    assert!(
-        matches!(
-            result,
-            PrismFreezeOutcome::Incomplete(PrismFreezeFailure {
-                cause: PrismFreezeCause::EndpointMismatch { .. },
-                ..
-            })
-        ),
-        "actual moved vertex must fail exact endpoint evidence"
-    );
+    super::error_context_tests::assert_endpoint_context(result, &before, vertex);
     assert_eq!(before.replay_bytes(), bytes);
 }
 #[test]

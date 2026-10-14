@@ -38,11 +38,11 @@ fn classify_failure(
     phase: FreezePhase,
     cause: PrismFreezeCause,
 ) -> PrismFreezeOutcome {
-    let native = matches!(cause, PrismFreezeCause::Native(_));
+    let native = cause.native_failure();
     let failure = PrismFreezeFailure {
         operation,
         phase,
-        entity: None,
+        entity: cause.primary_entity(),
         cause,
     };
     if native {
