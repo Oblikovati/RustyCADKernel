@@ -1,0 +1,227 @@
+{
+  "payload": {
+    "left": {
+      "domain": "QQ",
+      "variables": [
+        "t"
+      ],
+      "polynomial": {
+        "terms": [
+          {
+            "coefficient": {
+              "num": "96",
+              "den": "1"
+            },
+            "exponents": [
+              3
+            ]
+          },
+          {
+            "coefficient": {
+              "num": "-144",
+              "den": "1"
+            },
+            "exponents": [
+              2
+            ]
+          },
+          {
+            "coefficient": {
+              "num": "48",
+              "den": "1"
+            },
+            "exponents": [
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "right": {
+      "domain": "QQ",
+      "variables": [
+        "t"
+      ],
+      "polynomial": {
+        "terms": [
+          {
+            "coefficient": {
+              "num": "-64",
+              "den": "1"
+            },
+            "exponents": [
+              3
+            ]
+          },
+          {
+            "coefficient": {
+              "num": "48",
+              "den": "1"
+            },
+            "exponents": [
+              2
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "result": {
+    "operation_id": "polynomial.compute.gcd",
+    "runtime_ms": 8,
+    "output": {
+      "left": {
+        "domain": "QQ",
+        "variables": [
+          "t"
+        ],
+        "polynomial": {
+          "terms": [
+            {
+              "coefficient": {
+                "num": "96",
+                "den": "1"
+              },
+              "exponents": [
+                3
+              ]
+            },
+            {
+              "coefficient": {
+                "num": "-144",
+                "den": "1"
+              },
+              "exponents": [
+                2
+              ]
+            },
+            {
+              "coefficient": {
+                "num": "48",
+                "den": "1"
+              },
+              "exponents": [
+                1
+              ]
+            }
+          ]
+        }
+      },
+      "right": {
+        "domain": "QQ",
+        "variables": [
+          "t"
+        ],
+        "polynomial": {
+          "terms": [
+            {
+              "coefficient": {
+                "num": "-64",
+                "den": "1"
+              },
+              "exponents": [
+                3
+              ]
+            },
+            {
+              "coefficient": {
+                "num": "48",
+                "den": "1"
+              },
+              "exponents": [
+                2
+              ]
+            }
+          ]
+        }
+      },
+      "gcd": {
+        "domain": "QQ",
+        "variables": [
+          "t"
+        ],
+        "polynomial": {
+          "terms": [
+            {
+              "coefficient": {
+                "num": "1",
+                "den": "1"
+              },
+              "exponents": [
+                1
+              ]
+            }
+          ]
+        }
+      },
+      "bezout": {
+        "left_multiplier": {
+          "domain": "QQ",
+          "variables": [
+            "t"
+          ],
+          "polynomial": {
+            "terms": [
+              {
+                "coefficient": {
+                  "num": "-1",
+                  "den": "3"
+                },
+                "exponents": [
+                  2
+                ]
+              },
+              {
+                "coefficient": {
+                  "num": "1",
+                  "den": "48"
+                },
+                "exponents": [
+                  0
+                ]
+              }
+            ]
+          }
+        },
+        "right_multiplier": {
+          "domain": "QQ",
+          "variables": [
+            "t"
+          ],
+          "polynomial": {
+            "terms": [
+              {
+                "coefficient": {
+                  "num": "-1",
+                  "den": "2"
+                },
+                "exponents": [
+                  2
+                ]
+              },
+              {
+                "coefficient": {
+                  "num": "3",
+                  "den": "8"
+                },
+                "exponents": [
+                  1
+                ]
+              },
+              {
+                "coefficient": {
+                  "num": "1",
+                  "den": "16"
+                },
+                "exponents": [
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "normalization": "MONIC"
+    }
+  }
+}

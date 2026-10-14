@@ -137,3 +137,5 @@ mod measurements;
 pub(crate) use measurements::{
     PrismMeasureInspection, PrismMeasureOptions, inspect_prism_measurements,
 };
+#[cfg(test)]
+mod embedding_baseline_tests;
