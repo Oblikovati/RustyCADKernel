@@ -2,9 +2,10 @@
 //! Opt-in borrowed entry; original receipts are never moved from or promoted to completion.
 mod boundary;
 mod closure_points;
+pub(crate) use closure_points::current_closure_vertices;
 mod closure_types;
 mod identity_multiset;
-use closure_types::*;
+pub(crate) use closure_types::*;
 mod containment;
 mod history;
 mod inspect;

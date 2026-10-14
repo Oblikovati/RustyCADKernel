@@ -98,7 +98,7 @@ fn node_bytes(node: &FrozenPrismNode, bytes: &mut Vec<u8>) {
         space(curve, bytes);
     }
 }
-fn face_bytes(face: &FrozenPrismFace, bytes: &mut Vec<u8>) {
+pub(super) fn face_bytes(face: &FrozenPrismFace, bytes: &mut Vec<u8>) {
     bytes.extend(format!("face={:?};proof={:?};", face.key, face.proof).bytes());
     chart_source(&face.source, bytes);
     surface(&face.surface, bytes);
