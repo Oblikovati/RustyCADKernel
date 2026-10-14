@@ -29,12 +29,16 @@ fn append_original_source(
         }
         captures.push(OriginalCurveCapture {
             original: crate::sketch_region::original_identity(source.identity, &occurrence),
-            representation: capture_space(&edge(&occurrence)?).map_err(Arc::new),
+            representation: capture_space_representation(&edge(&occurrence)?).map_err(Arc::new),
         });
     }
     Ok(())
 }
-fn capture_space(edge: &Edge) -> Result<CapturedSpaceRepresentation, CapturedGeometryCause> {
+/// Capture actual coefficients, full native trim and separate placement before callbacks.
+/// Example: `capture_space_representation(&actual_edge)?` retains no geometry handle.
+pub(crate) fn capture_space_representation(
+    edge: &Edge,
+) -> Result<CapturedSpaceRepresentation, CapturedGeometryCause> {
     let representation = BRepTool::curve_with_location(edge)?;
     Ok(CapturedSpaceRepresentation {
         curve: capture_space_curve(&representation.curve)?,
@@ -49,9 +53,12 @@ pub(crate) fn capture_construction(
 ) -> CapturedBoundaryConstruction {
     let copied = edge(&segment.edge)
         .map_err(CapturedGeometryCause::from)
-        .and_then(|e| capture_space(&e));
+        .and_then(|e| capture_space_representation(&e));
     CapturedBoundaryConstruction {
         occurrence: segment.occurrence,
+        copied_occurrence: crate::sketch_region::PartitionOccurrenceIdentity::capture(
+            &segment.edge,
+        ),
         parents: segment.parents.clone(),
         copied: copied.map_err(Arc::new),
         pcurve: capture_pcurve(segment, face).map_err(Arc::new),

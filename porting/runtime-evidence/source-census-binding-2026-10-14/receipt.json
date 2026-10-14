@@ -1,0 +1,123 @@
+{
+  "source_revision": "d82b634c7ed678946a9a99aa30b7abe54d37678b",
+  "base_revision": "74c288e86f3b49aefd064004a407daf675e010e7",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "checks": {
+    "all_targets_successes": 865,
+    "doctests": 35,
+    "extracted_lib_successes": 217,
+    "certification_regressions": 38,
+    "all_commands_terminal_exit": 0,
+    "clippy": "all-targets -D warnings",
+    "canonical_archives": 31,
+    "changed_members_byte_equal_before_after": 24,
+    "fmt_discovery_diff": "pass"
+  },
+  "native": {
+    "upstream_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "generator": "tools/oracle/martensite_boundary_census.cxx",
+    "fixture": "crates/tkbo/tests/fixtures/boundary-census-native.txt",
+    "rows": 2,
+    "repeated_twice_exact": true,
+    "input_manifest_entries": 668,
+    "input_manifest_note": "Existing attributed dependency-header/library set reverified where available; current generator, fixture and freshly rebuilt binary added. No upstream production dependency."
+  },
+  "logs": {
+    "target-census-final-tests.log": {
+      "raw_sha256": "e092744853faacf394827efdcb5a3339c58b52269e9f59497bd041f17890cede",
+      "gzip_sha256": "2d8d5ae3b5c688f6ee1cd7a35ee80ae6aa8865ce3d35dd728dc447a6220a65b1",
+      "raw_bytes": 87259,
+      "passed": 865,
+      "failed": 0,
+      "groups": 5
+    },
+    "target-census-docs.log": {
+      "raw_sha256": "94956b32702e9b49fed342158aa4092f6ab05f995b7b85c81f418c0943aef592",
+      "gzip_sha256": "56d8d92564a4618bd0cec8cca0f30c60245b2d855a29d9a9180c436e586f539e",
+      "raw_bytes": 4176,
+      "passed": 35,
+      "failed": 0,
+      "groups": 1
+    },
+    "target-census-clippy.log": {
+      "raw_sha256": "0685aa603af7f926b1cb6143e8b074472d9eb36cf318b17c9357c0a29928ca2f",
+      "gzip_sha256": "c4c47d2015a5a0ffe89b6d9af6160f53be0d530104d039ce70a25125240f0270",
+      "raw_bytes": 181,
+      "passed": 0,
+      "failed": 0,
+      "groups": 0
+    },
+    "target-census-discovery.log": {
+      "raw_sha256": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4",
+      "gzip_sha256": "6f3b066b0b64cca5c7f1ef7b63f8cfba5ae90ede8c417606b16dd4e4f2f5ed0b",
+      "raw_bytes": 63,
+      "passed": 0,
+      "failed": 0,
+      "groups": 0
+    },
+    "package.log": {
+      "raw_sha256": "b8f0a8c793cfe9613d14050adee348298df09131cadccb56d8616fa03c4321fc",
+      "gzip_sha256": "a9c15b9537b9ad179d358287aef7d8a446035eddde5b42f281bcd41702d53ae7",
+      "raw_bytes": 10774,
+      "passed": 0,
+      "failed": 0,
+      "groups": 0
+    },
+    "extracted-lib.log": {
+      "raw_sha256": "14c82c87529068f10e4dd3440d7fa16daa148812e6d87d89a505fad7b031aff5",
+      "gzip_sha256": "c1fa9b9493d4bf3229f95ba75fd67f64c6983eb6dc1a26d50c7637ac916629e1",
+      "raw_bytes": 27727,
+      "passed": 217,
+      "failed": 0,
+      "groups": 1
+    },
+    "native-build.log": {
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "raw_bytes": 0,
+      "passed": 0,
+      "failed": 0,
+      "groups": 0
+    },
+    "native-1.log": {
+      "raw_sha256": "7f7f570b6621cea26cee2ceeb9250f3210f1c7d0bb7183e78bf494a13e824adf",
+      "gzip_sha256": "e923cdd4e2d98b98c98e672cb1d4067b5a80188de4a7b5715fe87c0267705eb2",
+      "raw_bytes": 149,
+      "passed": 0,
+      "failed": 0,
+      "groups": 0
+    },
+    "native-2.log": {
+      "raw_sha256": "7f7f570b6621cea26cee2ceeb9250f3210f1c7d0bb7183e78bf494a13e824adf",
+      "gzip_sha256": "e923cdd4e2d98b98c98e672cb1d4067b5a80188de4a7b5715fe87c0267705eb2",
+      "raw_bytes": 149,
+      "passed": 0,
+      "failed": 0,
+      "groups": 0
+    }
+  },
+  "acceptance": {
+    "representation_only": true,
+    "new_cpp_api_claims": 0,
+    "healthy_region_or_body": false,
+    "canonical_contact": false,
+    "dual_axis_parameter": false,
+    "world3d_composition": false,
+    "partition": false,
+    "gpu_submission_changed": false,
+    "benchmark_required": false
+  },
+  "excluded_platforms": [
+    "Windows",
+    "macOS"
+  ],
+  "commands": [
+    "cargo test -p rustycad-tkbo --all-targets",
+    "cargo test -p rustycad-tkbo --doc",
+    "cargo clippy -p rustycad-tkbo --all-targets -- -D warnings",
+    "cargo fmt --all --check",
+    "python3 tools/toolkit_test_suites.py",
+    "cargo package --workspace --locked --no-verify --exclude-lockfile",
+    "cargo test --manifest-path target/source-census-binding/extracted/Cargo.toml -p rustycad-tkbo --lib --locked --target-dir target"
+  ]
+}

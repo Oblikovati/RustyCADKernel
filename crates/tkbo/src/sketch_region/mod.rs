@@ -44,3 +44,5 @@ mod partition_capture;
 
 mod partition_blocks;
 mod partition_diagnostics;
+
+mod partition_occurrence;

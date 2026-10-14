@@ -93,7 +93,7 @@ fn source_fields(
     Ok(SourcePartitionObservation {
         source_index: index,
         parents: Vec::new(),
-        occurrence: occurrence_identity(shape),
+        occurrence: PartitionOccurrenceIdentity::capture(shape),
         range,
         has_reference,
         blocks: capture_blocks(index, structure)?,
@@ -125,13 +125,6 @@ fn source_parents(
         ));
     }
     Ok(parents)
-}
-fn occurrence_identity(shape: &Shape) -> PartitionOccurrenceIdentity {
-    PartitionOccurrenceIdentity {
-        topology_address: shape.tshape().object_address().addr(),
-        location: shape.location().clone(),
-        orientation: shape.orientation(),
-    }
 }
 fn capture_images(
     index: i32,
@@ -181,7 +174,7 @@ fn image_observation(
 ) -> Result<PartitionImageObservation, PartitionReadFailure> {
     Ok(PartitionImageObservation {
         shape_index: image_index(source, image, structure)?,
-        occurrence: occurrence_identity(image),
+        occurrence: PartitionOccurrenceIdentity::capture(image),
     })
 }
 

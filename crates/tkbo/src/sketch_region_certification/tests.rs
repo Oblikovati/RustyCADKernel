@@ -6,7 +6,7 @@ use rustycad_tkbrep::topods::Shape;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::{gp::Plane3, predicates::roots::RootIsolationOptions};
 
-fn capture(shapes: &[Shape]) -> BoundaryInputs {
+pub(super) fn capture(shapes: &[Shape]) -> BoundaryInputs {
     let sources: Vec<_> = shapes
         .iter()
         .enumerate()
@@ -18,13 +18,13 @@ fn capture(shapes: &[Shape]) -> BoundaryInputs {
     capture_boundary_inputs(&sources, Plane3::default())
         .unwrap_or_else(|_| panic!("expected genuine copied source boundaries"))
 }
-fn policy() -> CensusPolicy {
+pub(super) fn policy() -> CensusPolicy {
     CensusPolicy {
         roots: RootIsolationOptions::new(0.001),
         max_world_error: 1e-8,
     }
 }
-fn census(shapes: &[Shape]) -> BoundaryCensus {
+pub(super) fn census(shapes: &[Shape]) -> BoundaryCensus {
     enumerate_boundary_census(capture(shapes), policy(), || false).unwrap_or_else(|_| {
         panic!("expected explicit complete census domains, not complete operation")
     })
@@ -209,7 +209,7 @@ fn typed_empty_and_invalid_inputs_preserve_actual_admission_cause() {
         ))
     ));
 }
-fn curved_crossing() -> Vec<Shape> {
+pub(super) fn curved_crossing() -> Vec<Shape> {
     use rustycad_tkernel::{ncollection::Array1, standard::Handle};
     use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve};
     use rustycad_tkmath::gp::Point3;

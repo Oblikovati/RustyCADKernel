@@ -19,6 +19,7 @@ pub(crate) struct CapturedSpaceRepresentation {
 #[derive(Clone)]
 pub(crate) struct CapturedBoundaryConstruction {
     pub occurrence: u64,
+    pub copied_occurrence: crate::sketch_region::PartitionOccurrenceIdentity,
     pub parents: Vec<OriginalMemberIdentity>,
     pub copied: CapturedGeometry<CapturedSpaceRepresentation>,
     pub pcurve: CapturedGeometry<CapturedMetricCurve<2>>,
@@ -74,6 +75,16 @@ pub(crate) enum SourceConformanceCause {
         copied: [f64; 2],
         stored: [f64; 2],
     },
+    InvalidSegmentIndex {
+        received: usize,
+        expected_length: usize,
+    },
+    CurrentDescriptorMismatch {
+        occurrence: u64,
+    },
+    MissingConstruction {
+        occurrence: u64,
+    },
     UnknownParameterBinding,
     Exact(ResidualError),
 }
@@ -90,6 +101,9 @@ impl std::fmt::Display for SourceConformanceCause {
             Self::Capture(cause) => write!(f, "source coefficients {cause:?}; expected supported stored analytic representations"),
             Self::MissingOriginal(key) => write!(f, "original member {key:?}; expected exact captured source occurrence key"),
             Self::NativeRange { original, copied, stored } => write!(f, "original={original:?}, copied={copied:?}, stored={stored:?}; expected identical full native trims for a copy binding"),
+            Self::InvalidSegmentIndex { received,expected_length } => write!(f,"segment index={received}; expected index below {expected_length}"),
+            Self::CurrentDescriptorMismatch { occurrence } => write!(f,"occurrence={occurrence}; expected current scalar/physical capture matching native parameter map"),
+            Self::MissingConstruction { occurrence } => write!(f,"occurrence={occurrence}; expected one actual captured construction"),
             Self::UnknownParameterBinding => f.write_str("same_parameter=false; expected declared same-parameter binding before independent coefficient proof"),
             Self::Exact(cause) => cause.fmt(f),
         }

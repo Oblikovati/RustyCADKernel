@@ -35,6 +35,7 @@ pub(crate) struct PartitionImageObservation {
     pub occurrence: PartitionOccurrenceIdentity,
 }
 /// Identity only: no mutable shape, DS, or pave-block handle survives in this receipt.
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) struct PartitionOccurrenceIdentity {
     pub topology_address: usize,
     pub location: Location,
