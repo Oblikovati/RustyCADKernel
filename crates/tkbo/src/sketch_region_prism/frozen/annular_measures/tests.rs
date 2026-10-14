@@ -101,3 +101,13 @@ fn whole_report_and_terminal_partial_evidence_are_send_sync() {
 
 #[path = "baseline_tests.rs"]
 mod baseline;
+
+#[path = "budget_tests.rs"]
+mod budget;
+#[path = "isolation_tests.rs"]
+mod isolation;
+#[path = "oracle_tests.rs"]
+mod oracle;
+
+#[path = "policy_tests.rs"]
+mod policy;
