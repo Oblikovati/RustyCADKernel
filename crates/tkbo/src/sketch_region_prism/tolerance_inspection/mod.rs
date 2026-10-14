@@ -2,6 +2,8 @@
 //! ADR0030 keeps raw metadata caps separate from independently certified world residuals.
 #[cfg(test)]
 mod compatibility_tests;
+#[cfg(test)]
+mod legacy_baseline_tests;
 mod policy;
 #[cfg(test)]
 mod policy_tests;
