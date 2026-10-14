@@ -37,4 +37,6 @@ pub(crate) use stage_error::{
     PrismPublicationClass, PublicationStageCause, PublicationStageFailure,
 };
 #[cfg(test)]
+mod diagnostic_baseline_tests;
+#[cfg(test)]
 mod refusal_tests;
