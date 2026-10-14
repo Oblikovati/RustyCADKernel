@@ -7,8 +7,11 @@ use crate::sketch_region_contact_transport::{
 };
 use crate::sketch_region_prism::{
     PrismReceipt,
-    region_certificate::{RegionCertificateCause, current_closure_vertices},
+    region_certificate::{
+        ClosurePointContext, ClosurePointStage, RegionCertificateCause, current_closure_vertices,
+    },
 };
+use rustycad_tkbrep::topods::Shape;
 
 pub(super) fn capture(
     bridge: &PairedContactTransaction,
@@ -33,50 +36,81 @@ pub(super) fn capture(
 fn region_failure(cause: RegionCertificateCause) -> PrismProofJoinCause {
     PrismProofJoinCause::ClosureRegion(Box::new(cause))
 }
+struct ClosureCensus<'a> {
+    expected: Vec<&'a ClosurePointContext>,
+    matched: Vec<bool>,
+    original: FrozenOriginalKey,
+    contact: AuthoredPrismId,
+    selected: bool,
+}
 fn capture_rows(
-    actual: &[(
-        crate::sketch_region_prism::region_certificate::ClosurePointStage,
-        rustycad_tkbrep::topods::Shape,
-    )],
+    actual: &[(ClosurePointStage, Shape)],
     proof: &PrismEmbeddingEvidence,
     bindings: &PrismPublicationBindings,
     contact: &AuthoredClosureContact,
     bridge: &PairedContactTransaction,
 ) -> Result<Vec<JoinedClosurePointOperand>, PrismProofJoinCause> {
-    let region = &proof.binding().region;
-    let expected: Vec<_> = region
-        .closure_points
+    let mut census = ClosureCensus::new(proof, bindings, contact, bridge)?;
+    let rows = actual
         .iter()
-        .flat_map(|row| &row.contexts)
-        .collect();
-    let mut matched = vec![false; expected.len()];
-    let selected = replay_sources::first_is_selected(bridge, region).map_err(link_failure)?;
-    let original = original_key(bindings, &region.original).map_err(link_failure)?;
-    let mut rows = Vec::new();
-    for (stage, shape) in actual {
-        match_context(
-            *stage,
-            &PartitionOccurrenceIdentity::capture(shape),
-            &expected,
-            &mut matched,
-        )?;
-        rows.push(JoinedClosurePointOperand {
-            contact: contact.name,
-            original: original.clone(),
-            stage: replay_sources::semantic_stage(*stage, selected),
-            orientation: shape.orientation(),
-            local_point: raw_vertices::local_point(shape).map_err(link_failure)?,
-            placement: super::super::history::freeze_placement(shape.location())
-                .map_err(link_failure)?,
-        });
-    }
-    check_complete(&matched, rows.len())?;
+        .map(|(stage, shape)| census.capture(*stage, shape))
+        .collect::<Result<Vec<_>, _>>()?;
+    check_complete(&census.matched, rows.len())?;
     Ok(rows)
 }
+impl<'a> ClosureCensus<'a> {
+    fn new(
+        proof: &'a PrismEmbeddingEvidence,
+        bindings: &PrismPublicationBindings,
+        contact: &AuthoredClosureContact,
+        bridge: &PairedContactTransaction,
+    ) -> Result<Self, PrismProofJoinCause> {
+        let region = &proof.binding().region;
+        let expected: Vec<_> = region
+            .closure_points
+            .iter()
+            .flat_map(|row| &row.contexts)
+            .collect();
+        let matched = vec![false; expected.len()];
+        let selected =
+            replay_sources::first_is_selected(bridge, region).map_err(join_link_cause)?;
+        let original = original_key(bindings, &region.original).map_err(join_link_cause)?;
+        Ok(Self {
+            expected,
+            matched,
+            original,
+            contact: contact.name,
+            selected,
+        })
+    }
+    fn capture(
+        &mut self,
+        stage: ClosurePointStage,
+        shape: &Shape,
+    ) -> Result<JoinedClosurePointOperand, PrismProofJoinCause> {
+        match_context(
+            stage,
+            &PartitionOccurrenceIdentity::capture(shape),
+            &self.expected,
+            &mut self.matched,
+        )?;
+        let local_point = raw_vertices::local_point(shape).map_err(join_link_cause)?;
+        let placement =
+            super::super::history::freeze_placement(shape.location()).map_err(join_link_cause)?;
+        Ok(JoinedClosurePointOperand {
+            contact: self.contact,
+            original: self.original.clone(),
+            stage: replay_sources::semantic_stage(stage, self.selected),
+            orientation: shape.orientation(),
+            local_point,
+            placement,
+        })
+    }
+}
 fn match_context(
-    stage: crate::sketch_region_prism::region_certificate::ClosurePointStage,
+    stage: ClosurePointStage,
     actual: &PartitionOccurrenceIdentity,
-    expected: &[&crate::sketch_region_prism::region_certificate::ClosurePointContext],
+    expected: &[&ClosurePointContext],
     matched: &mut [bool],
 ) -> Result<(), PrismProofJoinCause> {
     let matches: Vec<_> = expected
@@ -86,9 +120,9 @@ fn match_context(
         .map(|(index, _)| index)
         .collect();
     let index = *only_bound(&matches, "one legacy semantic directed closure context")
-        .map_err(link_failure)?;
+        .map_err(join_link_cause)?;
     if matched[index] {
-        return Err(link_failure(identity(
+        return Err(join_link_cause(identity(
             "unique actual closure stage context",
             2,
         )));
@@ -98,15 +132,12 @@ fn match_context(
 }
 fn check_complete(matched: &[bool], actual: usize) -> Result<(), PrismProofJoinCause> {
     if actual != 12 || matched.len() != 12 || matched.iter().any(|value| !value) {
-        return Err(link_failure(identity(
+        return Err(join_link_cause(identity(
             "bijection of all twelve semantic closure uses",
             actual,
         )));
     }
     Ok(())
-}
-fn link_failure(cause: PrismFreezeCause) -> PrismProofJoinCause {
-    PrismProofJoinCause::Link(Box::new(cause))
 }
 
 fn contact_index(
@@ -123,13 +154,14 @@ fn contact_index(
         .collect();
     only_bound(&matches, "unique actual authored closure contact query")
         .copied()
-        .map_err(link_failure)
+        .map_err(join_link_cause)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::sketch_region_prism::region_certificate::{ClosurePointContext, ClosurePointStage};
+    use rustycad_tkbrep::topods::Shape;
     #[test]
     fn closure_context_bijection_refuses_duplicates_missing_and_wrong_stage() {
         let (_, shapes) = crate::sketch_region_prism::region_certificate::tests::fixture();
