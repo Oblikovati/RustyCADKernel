@@ -3,6 +3,17 @@
 Next compatible patch target: **0.2.8**. Workspace version changes and publication
 remain with the release coordinator.
 
+## Conditional polynomial extrusion-side integral
+
+`certify_polynomial_side_integral` adds behavior v1 for full-[0,1] polynomial
+Bézier/line side integrals under supplied affine embeddings. It returns a
+certified scalar interval, absolute area-error bound, explicit policy and work,
+or a typed incomplete/cancelled/input failure. Default absolute area error is
+1e-5 with at most 4096 subdivisions; policies are never silently widened.
+Existing signed boundary/sweep and mapped integration behavior is unchanged.
+No call establishes face/body validity or replaces source-bound region checks.
+See [ADR0024](../adr/0024-conditional-polynomial-extrusion-side-integral.md).
+
 ## Native window lifecycle
 
 Native-window-lifecycle behavior v1 retires an X11 window after its matching
