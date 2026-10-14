@@ -64,6 +64,11 @@ impl<E> PartialEq for BRepFontPlanarRegionId<E> {
     fn eq(&self, other: &Self) -> bool {
         self.value == other.value
     }
+    /// `operator!=`: different values (spelled out so the native friend has its own body).
+    #[allow(clippy::partialeq_ne_impl)] // Native declares both operators.
+    fn ne(&self, other: &Self) -> bool {
+        self.value != other.value
+    }
 }
 impl<E> Eq for BRepFontPlanarRegionId<E> {}
 
