@@ -51,7 +51,8 @@ fn inspect_trim(
         expected,
     })
 }
-fn source_for_trim(
+/// Select the certified source by complete wire ancestry; `annular_trim_source(face, trim)`.
+pub(in crate::sketch_region_prism) fn source_for_trim(
     face: &NamedAnnularFace,
     trim: &JoinedPrismTrim,
 ) -> AnnularDirectionCheck<RegionSourceId> {
