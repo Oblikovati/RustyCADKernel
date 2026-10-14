@@ -1,0 +1,441 @@
+{
+  "operation": "polynomial.sos.decomposition.check",
+  "fixture": {
+    "controls": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        0
+      ],
+      [
+        2,
+        3,
+        0
+      ]
+    ],
+    "extrusion": [
+      0,
+      0,
+      1
+    ],
+    "expected_integral": {
+      "num": "4",
+      "den": "1"
+    },
+    "reason": "Squared speed equals (3+3t^2)^2; 3+3t^2 is positive on [0,1], and its exact antiderivative is 3t+t^3."
+  },
+  "checks": [
+    {
+      "payload": {
+        "polynomial": {
+          "domain": "QQ",
+          "variables": [
+            "t"
+          ],
+          "polynomial": {
+            "terms": [
+              {
+                "coefficient": {
+                  "num": "9",
+                  "den": "1"
+                },
+                "exponents": [
+                  4
+                ]
+              },
+              {
+                "coefficient": {
+                  "num": "18",
+                  "den": "1"
+                },
+                "exponents": [
+                  2
+                ]
+              },
+              {
+                "coefficient": {
+                  "num": "9",
+                  "den": "1"
+                },
+                "exponents": [
+                  0
+                ]
+              }
+            ]
+          }
+        },
+        "summands": [
+          {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "-3",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "3",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "6",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "operation_id": "polynomial.sos.decomposition.check",
+        "runtime_ms": 1,
+        "output": {
+          "is_valid": true,
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "18",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          },
+          "summands": [
+            {
+              "domain": "QQ",
+              "variables": [
+                "t"
+              ],
+              "polynomial": {
+                "terms": [
+                  {
+                    "coefficient": {
+                      "num": "-3",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      2
+                    ]
+                  },
+                  {
+                    "coefficient": {
+                      "num": "3",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "domain": "QQ",
+              "variables": [
+                "t"
+              ],
+              "polynomial": {
+                "terms": [
+                  {
+                    "coefficient": {
+                      "num": "6",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      1
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "computed_sum": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "18",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "payload": {
+        "polynomial": {
+          "domain": "QQ",
+          "variables": [
+            "t"
+          ],
+          "polynomial": {
+            "terms": [
+              {
+                "coefficient": {
+                  "num": "9",
+                  "den": "1"
+                },
+                "exponents": [
+                  4
+                ]
+              },
+              {
+                "coefficient": {
+                  "num": "18",
+                  "den": "1"
+                },
+                "exponents": [
+                  2
+                ]
+              },
+              {
+                "coefficient": {
+                  "num": "9",
+                  "den": "1"
+                },
+                "exponents": [
+                  0
+                ]
+              }
+            ]
+          }
+        },
+        "summands": [
+          {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "3",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "3",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "operation_id": "polynomial.sos.decomposition.check",
+        "runtime_ms": 0,
+        "output": {
+          "is_valid": true,
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "18",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          },
+          "summands": [
+            {
+              "domain": "QQ",
+              "variables": [
+                "t"
+              ],
+              "polynomial": {
+                "terms": [
+                  {
+                    "coefficient": {
+                      "num": "3",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      2
+                    ]
+                  },
+                  {
+                    "coefficient": {
+                      "num": "3",
+                      "den": "1"
+                    },
+                    "exponents": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "computed_sum": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "18",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    2
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "9",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

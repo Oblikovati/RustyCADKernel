@@ -115,3 +115,10 @@ pub use polynomial_integrals::{
     PolynomialIntegralOptions, certify_polynomial_boundary_integral,
     certify_polynomial_sweep_integral,
 };
+
+mod polynomial_side;
+pub use polynomial_side::{
+    CertifiedPolynomialSideIntegral, PolynomialSideError, PolynomialSideEvidence,
+    PolynomialSideFailure, PolynomialSideOptions, PolynomialSideWork,
+    certify_polynomial_side_integral,
+};

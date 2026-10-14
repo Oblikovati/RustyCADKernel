@@ -28,7 +28,8 @@ fn floor_bits(value: &ExactRatio) -> u64 {
     greatest_bits_where(|candidate| ExactRatio::from_finite(candidate) <= *value)
 }
 pub(in crate::predicates::roots) fn outward_sqrt(value: &ExactRatio) -> Option<f64> {
-    outward_sqrt_bounds(value).map(|bounds| bounds[1])
+    let bounds = outward_sqrt_bounds(value)?;
+    Some(bounds[1])
 }
 pub(in crate::predicates::roots) fn outward_sqrt_bounds(value: &ExactRatio) -> Option<[f64; 2]> {
     if value.sign() == Ordering::Less {
@@ -77,12 +78,8 @@ mod tests {
         let maximum = ExactRatio::from_finite(f64::MAX);
         let excessive = maximum.multiply(&maximum).add(&ExactRatio::from_finite(1.));
         assert_eq!(outward_sqrt(&excessive), None);
-        assert_eq!(
-            outward_sqrt(&ExactRatio::from_finite(2.))
-                .unwrap()
-                .to_bits(),
-            0x3ff6_a09e_667f_3bcd
-        );
+        let upper = outward_sqrt(&ExactRatio::from_finite(2.)).unwrap();
+        assert_eq!(upper.to_bits(), 0x3ff6_a09e_667f_3bcd);
     }
     #[test]
     fn square_root_pair_retains_exact_roots_and_outward_subnormal_bounds() {
@@ -99,10 +96,8 @@ mod tests {
             Some([0., f64::from_bits(1)])
         );
         let bounds = outward_sqrt_bounds(&ExactRatio::from_finite(2.)).unwrap();
-        assert_eq!(
-            bounds.map(f64::to_bits),
-            [0x3ff6_a09e_667f_3bcc, 0x3ff6_a09e_667f_3bcd]
-        );
+        let expected = [0x3ff6_a09e_667f_3bcc, 0x3ff6_a09e_667f_3bcd];
+        assert_eq!(bounds.map(f64::to_bits), expected);
     }
     #[test]
     fn directed_rounding_contains_nonbinary_fraction_without_widening_exact_values() {
