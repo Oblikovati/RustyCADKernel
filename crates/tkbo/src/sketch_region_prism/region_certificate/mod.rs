@@ -53,12 +53,16 @@ fn retain_certificate(
     });
 }
 
-fn borrowed_batch(bridge: &PairedContactTransaction) -> Option<&CandidateBatch> {
+/// Borrow the completed candidate owner without consuming the bridge; `borrowed_batch(bridge)`.
+pub(in crate::sketch_region_prism) fn borrowed_batch(
+    bridge: &PairedContactTransaction,
+) -> Option<&CandidateBatch> {
     let copied = bridge.mapped.copied.as_ref()?;
     // Borrow the actual outcome; absence never fabricates an empty successful batch.
     copied.completion.as_ref().ok()
 }
-fn temporary_view(batch: &CandidateBatch) -> CandidateBatch {
+/// Supply the existing deep-copy transaction while retaining its source owner; `temporary_view(batch)`.
+pub(in crate::sketch_region_prism) fn temporary_view(batch: &CandidateBatch) -> CandidateBatch {
     CandidateBatch {
         plane: batch.plane,
         candidates: batch.candidates.iter().map(temporary_candidate).collect(),
