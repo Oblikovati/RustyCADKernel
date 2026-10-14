@@ -8,6 +8,9 @@ pub(super) fn inspect<'a>(
     binding: &AnnularPrismBinding,
     authored: &PrismPublicationBindings,
 ) -> AnnularFrozenCheck<'a, ()> {
+    if authored.operation.0 != request.identities.operation {
+        return Err(identity("same authored operation as actual annular proof", 0).into());
+    }
     originals(request, authored)?;
     sources(binding, authored)?;
     if authored.selected_region.0 != binding.region().selected_candidate_id() {

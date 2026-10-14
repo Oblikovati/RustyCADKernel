@@ -26,6 +26,7 @@ pub(super) fn capture(
     .collect::<CaptureResult<Vec<_>>>()?;
     rows.sort_by(|a, b| a.chart.occurrence.cmp(&b.chart.occurrence));
     check_coverage(&rows, projection)?;
+    check_wire_coverage(&rows, projection)?;
     Ok(rows)
 }
 fn link_domain(
@@ -179,6 +180,17 @@ fn check_coverage(
             "all and only actual frozen faces in certified annular domain bijection",
             actual.len(),
         ));
+    }
+    Ok(())
+}
+
+fn check_wire_coverage(rows: &[NamedAnnularFace], projection: &FrozenPrismProjection) -> CaptureResult<()> {
+    let mut actual = rows.iter().flat_map(|face| face.domain.boundary_uses()).collect::<Vec<_>>();
+    let mut expected = projection.uses().iter().filter(|row| row.key.0.last().is_some_and(|(key, _)| key.kind == rustycad_tkg3d::top_abs::ShapeEnum::Wire as u8)).map(|row| &row.key).collect::<Vec<_>>();
+    actual.sort();
+    expected.sort();
+    if actual != expected || actual.windows(2).any(|pair| pair[0] == pair[1]) {
+        return Err(identity("all and only actual directed wires in certified domain bijection", actual.len()));
     }
     Ok(())
 }

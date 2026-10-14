@@ -36,6 +36,7 @@ pub(in crate::sketch_region_prism) enum AnnularFrozenCause<'a> {
     IncompleteCapture(Box<PrismFreezeFailure>),
     FailedCapture(Box<PrismFreezeFailure>),
     Link(Box<PrismFreezeCause>),
+    Callback(rustycad_tkernel::standard::Failure),
     Cancelled {
         freeze_phase: Option<FreezePhase>,
     },
@@ -47,6 +48,15 @@ pub(in crate::sketch_region_prism) struct AnnularFrozenFailure<'a> {
     pub cause: AnnularFrozenCause<'a>,
 }
 pub(super) type AnnularFrozenCheck<'a, T> = Result<T, AnnularFrozenCause<'a>>;
+pub(in crate::sketch_region_prism) trait AnnularFrozenProgress:
+    Send
+{
+    /// Poll bounded join work; `progress.checkpoint(AnnularFrozenPhase::Commit)`.
+    fn checkpoint(
+        &mut self,
+        phase: AnnularFrozenPhase,
+    ) -> Result<bool, rustycad_tkernel::standard::Failure>;
+}
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(in crate::sketch_region_prism) struct NamedAnnularWire {

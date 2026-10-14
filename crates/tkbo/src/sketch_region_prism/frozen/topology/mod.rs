@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0033: exact finite incidence certificate, independent of geometric body validity.
 mod admission;
+mod annular;
+pub(in crate::sketch_region_prism) use annular::*;
 mod containment;
 mod domain;
 mod execution;

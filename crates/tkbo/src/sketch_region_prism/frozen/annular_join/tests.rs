@@ -6,7 +6,7 @@ use rustycad_tkmath::predicates::roots::{
     RootIsolationOptions, metric_bounds::BezierRegularityOptions,
 };
 
-fn embedding_options() -> AnnularEmbeddingOptions {
+pub(super) fn embedding_options() -> AnnularEmbeddingOptions {
     AnnularEmbeddingOptions {
         version: 2,
         regularity: AnnularRegularityOptions {
@@ -15,7 +15,7 @@ fn embedding_options() -> AnnularEmbeddingOptions {
         },
     }
 }
-fn options() -> AnnularFrozenOptions {
+pub(super) fn options() -> AnnularFrozenOptions {
     AnnularFrozenOptions {
         version: 2,
         maximum_name_units: 1024,
