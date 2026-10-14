@@ -7,6 +7,10 @@ mod census_tests;
 mod census_types;
 #[cfg(test)]
 mod compatibility_tests;
+mod endpoint_census;
+mod endpoint_contexts;
+#[cfg(test)]
+mod endpoint_tests;
 mod history_census;
 #[cfg(test)]
 mod legacy_baseline_tests;

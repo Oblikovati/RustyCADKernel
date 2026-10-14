@@ -3,6 +3,7 @@ use super::super::{
     PrismBodyContext, PrismReceipt, contexts::body_contexts,
     region_certificate::current_binding::CurrentPrismBinding,
 };
+use super::endpoint_census::capture_endpoints;
 use super::{
     census_contexts::*, census_types::*, history_census::capture_history,
     trim_census::capture_trim_census,
@@ -29,13 +30,23 @@ pub(super) fn capture_census_from_contexts(
     binding: &CurrentPrismBinding,
     relations: &[ArrangementRelation],
 ) -> CensusCheck<PrismToleranceCensus> {
+    let keys = checked_contexts(contexts)?;
+    let entities = capture_entities(contexts)?;
+    let trims = capture_trim_census(contexts, binding)?;
+    let history = capture_history(contexts, relations)?;
+    let endpoints = capture_endpoints(contexts, &entities, binding)?;
+    Ok(PrismToleranceCensus {
+        contexts: keys,
+        entities,
+        trims,
+        history,
+        endpoints,
+    })
+}
+
+fn checked_contexts(contexts: &[PrismBodyContext]) -> CensusCheck<Vec<ToleranceUseContext>> {
     for context in contexts {
         attach_context(check_parent_kinds(context), &capture_context(context))?;
     }
-    Ok(PrismToleranceCensus {
-        contexts: capture_all_contexts(contexts)?,
-        entities: capture_entities(contexts)?,
-        trims: capture_trim_census(contexts, binding)?,
-        history: capture_history(contexts, relations)?,
-    })
+    capture_all_contexts(contexts)
 }

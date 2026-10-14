@@ -2,7 +2,9 @@
 //! Actual ancestry is the use key; storage order never creates an entity identity.
 use super::super::{PrismCause, surface_charts::PrismTrimRole};
 use crate::sketch_region::{OriginalMemberIdentity, PartitionOccurrenceIdentity};
+use crate::sketch_region_source_conformance::CapturedSpaceRepresentation;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -30,6 +32,16 @@ pub(crate) struct PrismToleranceCensus {
     pub entities: Vec<ToleranceEntityCensus>,
     pub trims: Vec<ToleranceTrimCensus>,
     pub history: Vec<ToleranceUseHistory>,
+    pub endpoints: Vec<ToleranceEndpointCensus>,
+}
+
+pub(crate) struct ToleranceEndpointCensus {
+    pub edge: PartitionOccurrenceIdentity,
+    pub vertex: PartitionOccurrenceIdentity,
+    pub parameter: f64,
+    pub point: [f64; 3],
+    pub space: CapturedSpaceRepresentation,
+    pub contexts: Vec<ToleranceUseContext>,
 }
 
 pub(crate) struct ToleranceUseHistory {
@@ -55,6 +67,10 @@ pub(crate) enum ToleranceCensusCause {
     Kind {
         parent: Option<ShapeEnum>,
         actual: ShapeEnum,
+        expected: &'static str,
+    },
+    Orientation {
+        actual: Orientation,
         expected: &'static str,
     },
 }

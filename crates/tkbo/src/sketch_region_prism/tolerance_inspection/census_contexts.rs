@@ -36,7 +36,9 @@ pub(super) fn attach_context<T>(
     context: &ToleranceUseContext,
 ) -> CensusCheck<T> {
     result.map_err(|mut failure| {
-        failure.context = Some(context.clone());
+        if failure.context.is_none() {
+            failure.context = Some(context.clone());
+        }
         failure
     })
 }

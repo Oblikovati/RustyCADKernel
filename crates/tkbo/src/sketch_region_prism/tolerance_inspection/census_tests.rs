@@ -8,7 +8,7 @@ use super::{census::*, census_types::*};
 use crate::sketch_region_partition_bindings::binding_sources;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-fn fixture() -> (PrismReceipt, CurrentPrismBinding) {
+pub(super) fn fixture() -> (PrismReceipt, CurrentPrismBinding) {
     let (bridge, shapes) = tests::fixture();
     let receipt = tests::run(&bridge, &shapes);
     let binding =
@@ -137,8 +137,8 @@ fn missing_current_relation_is_not_recovered_from_old_chart_parents() {
 }
 
 #[test]
-fn missing_body_and_wrong_parent_kind_remain_typed_incomplete_census() {
-    let (mut receipt, binding) = fixture();
+fn wrong_parent_kind_remains_typed_incomplete_census() {
+    let (receipt, binding) = fixture();
     let mut contexts = body_contexts(&receipt.diagnostic.as_ref().unwrap().body)
         .ok()
         .unwrap();
@@ -156,6 +156,11 @@ fn missing_body_and_wrong_parent_kind_remain_typed_incomplete_census() {
             ..
         }
     ));
+}
+
+#[test]
+fn missing_body_remains_typed_incomplete_census() {
+    let (mut receipt, binding) = fixture();
     receipt.diagnostic.take();
     assert_count(
         capture_census(&receipt, &binding).err().unwrap(),
@@ -179,7 +184,7 @@ fn assert_same_entities(first: &PrismToleranceCensus, second: &PrismToleranceCen
     }
 }
 
-fn assert_count(
+pub(super) fn assert_count(
     error: ToleranceCensusFailure,
     quantity: &str,
     actual: usize,
