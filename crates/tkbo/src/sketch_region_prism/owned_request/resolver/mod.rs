@@ -46,3 +46,10 @@ pub(in crate::sketch_region_prism::owned_request) use invocation::{
 pub(in crate::sketch_region_prism::owned_request) mod fixture;
 
 pub(in crate::sketch_region_prism) use invocation::InvokedPrismPublicationFailure;
+
+#[cfg(test)]
+mod corpus_tests;
+#[cfg(test)]
+mod mutation_tests;
+#[cfg(test)]
+mod replay_tests;

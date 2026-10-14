@@ -3,13 +3,19 @@ use super::{source_tests::*, *};
 use crate::sketch_region_prism::publication::*;
 use rustycad_tkernel::standard::Failure;
 #[derive(Default)]
-struct PublicationObserver {
-    seen: Vec<PrismPublicationCheckpoint>,
-    stop: Option<usize>,
+pub(super) struct PublicationObserver {
+    pub seen: Vec<PrismPublicationCheckpoint>,
+    pub stop: Option<usize>,
+    pub fail: Option<usize>,
 }
 impl PrismPublicationProgress for PublicationObserver {
     fn checkpoint(&mut self, point: PrismPublicationCheckpoint) -> Result<bool, Failure> {
         self.seen.push(point);
+        if self.fail == Some(point.ordinal) {
+            return Err(Failure::new(
+                "resolver publication callback failure; expected continuation",
+            ));
+        }
         Ok(self.stop == Some(point.ordinal))
     }
 }
