@@ -78,6 +78,6 @@ fn encode_entry(bytes: &mut Vec<u8>, entry: &SemanticNameEntry) {
     bytes.push(tag);
     word(bytes, value);
 }
-fn word(bytes: &mut Vec<u8>, value: u64) {
+pub(super) fn word(bytes: &mut Vec<u8>, value: u64) {
     bytes.extend_from_slice(&value.to_le_bytes());
 }
