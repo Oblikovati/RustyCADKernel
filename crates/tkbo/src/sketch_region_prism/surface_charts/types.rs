@@ -45,6 +45,7 @@ pub(crate) struct CapturedSurfaceChart {
     pub trims: Vec<CapturedPrismTrim>,
     pub extrusion: [f64; 3],
 }
+#[derive(Clone)]
 pub(crate) enum CapturedChartSource {
     Cap(CapturedPlaneSupport),
     Side(CapturedSpaceRepresentation),
@@ -68,6 +69,7 @@ pub(crate) struct CapturedPrismTrim {
     pub space: CapturedSpaceRepresentation,
     pub expected: CapturedTrimExpectation,
 }
+#[derive(Clone)]
 pub(crate) enum CapturedTrimExpectation {
     Cap {
         pcurve: CapturedMetricCurve<2>,
