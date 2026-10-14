@@ -1,0 +1,1159 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "StdPrs_BRepFont::PlanText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "008b9a2b81cdeeefc8afdd7dd6d2cea63fb898a5dd10500dcf732d5839c2251b",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::plan_text",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::AdvanceY",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "05e61e33f21488593fb6f5d1b99b281aa4b182af92f6f2db6ec7e4d09397553f",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::advance_y",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::BuildText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "07f8ae81fe499a5a4ed2386b212821fab98e3450b8922c78f82cba99d052046e",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::build_text_with",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Build",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "0ac8f935e59a2e270ef1258d868d6284267acbe6092b98b4f8ce2c15ef836c81",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizer::build_with",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::Init",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "0b2926c9f5f70e709971b1b01ecbe6a655c94eaa0c93a48717fa8b2d2ad8aee4",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::init",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::TextOptions::ToConcatenateContours",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "0bf6b37542f1606c74ec6e1b8ba46af973f056095226e6ea57f73960bdf1cee7",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontTextOptions::to_concatenate_contours",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::FindAndInit",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "0d03ca7fb1a53e40132ed9c5850170c5bc8726ad9eb089e9032300d444bf6e79",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::find_and_init",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Height",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "0d6601d3e1b4d0e8f25d019e14d7d8608b400b42f610b1e95bd12c1966f0a695",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::height",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::NbRegions",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "0dd6104432c122b88ff052be0cee2a3c952c23951b906041ab2a3c607790073f",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::nb_regions",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFontCache::StdPrs_BRepFontCache",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFontCache.hxx",
+      "cpp_declaration_id": "124afb34d1957c31d0419431762c16a9d965a0e9688aeeb3e2e37d56280dfebd",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontCache::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::LineSpacing",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "1b29b80a5ddee4eccf4b8ba7b3e37f187be4ee47ac81a3bfbce28b179e967fd2",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::line_spacing",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Status::SelfIntersectingContour",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "1d3be6c3d3fa7dcba563d5b166f9e82a3ca7e2030bdad11f16eafcfe4d695f59",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerStatus::SelfIntersectingContour",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Size",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "1e8b33ce8b3bea4e82ab4a01a94fa7505840aa5298661ae2fa570d31fd209117",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::size",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Vertices",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "1e8e3461314f8a5ea60f80c9bc0e6e179abdcf20313388412b04641118ff646f",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::vertices",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::StdPrs_BRepFont",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "1f9df9c1e64a2dfd62af1c217167b32b57b1cd2816cebfbbfdc5bd3969d1d017",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::from_path",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Item::Region",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "1fde5b52942f491c3432ca0ff89631b64e5ba7c6d8008042c7cdf944a9108b51",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlanItem::region",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::Value",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "202a0888998f306d919c420e20d278a7c1f54e3d522fdbff4c1b406d90e3299b",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::value",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::LowerLeft",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "211057411a14e31b70d98b7b77b3f902d3eebe2a250235c2d251be8a804bcda3",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::lower_left",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::BuildText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "293758d00c2e3937e41d1e9d702dcf0eba4e8dee9bf9473a3be81754407cf6d2",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::build_text",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Status::OpenContour",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "2a4a47b3076d1ca89a285e3df3441e185a9f4578eb4627f0be28ce2a306f4e0a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerStatus::OpenContour",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Loop::SignedArea",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "2dd48f69a4fe4afd6b2619f0849a9f72e0b25904b9bc1fbd8a9d10f95d2bc760",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionLoop::signed_area",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::Ascender",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "2e67b1eba182c5399956b03f6cbd49b6a91aeaf258902a5a88809fde6b7fdfdb",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::ascender",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Result::ChangePlanarRegion",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "2fddec65d20879ebc4480a672218bd9ee9af55901e29f79e6b134efc621ea261",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerResult::change_planar_region",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::VertexId",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "315e0b44a6017745ad6a45c4ad22042a095d6ccdee7eed32697807e58bfd4f19",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontVertexId",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::RenderGlyph",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "340f21d166d72bd0e9cd011a4dbb254706c78ace2ae1b29107b97d4820016ab0",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::render_glyph_with",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Status::Success",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "34a0fe4d4bb00f0cf47d8c2454d6aa8548c17db32934aa71c2c4a4162ac5643f",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerStatus::Success",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFontCache::Capacity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFontCache.hxx",
+      "cpp_declaration_id": "34b591e3ea66a041a013abbe49c4973a6ca1c6db7842f54315a5f993807d2e0b",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontCache::capacity",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::RenderGlyph",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "3504de13181ff45ac1e5aedb624dae8705f48d7ba9daed308406034004534e7a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::render_glyph",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Uses",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "35198f80ef3fe77e6add23c883ae62e7a0e4731035157750dfcac9522d8cc1d6",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::uses",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Tolerance",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "37b5280626e1dde11278b4840a1dbfb74f5e612cced704a8893f8034f585bb6e",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::tolerance",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::RenderText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "386f7d66d4b144e8ef9aa22b91304e08764527185bed5060b5d6859fb68bf222",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::render_plan",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Region",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "39f2bd15279d96c4b0222e0740a1ebfc1451d827b4dc8aac44267cd63e0a07a2",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::region",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Region::NbHoles",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "3addbed8933b9e9b9091fc78f29c02c668630c3321ae085d86c832999d720bda",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionRegion::nb_holes",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Use::IsReversed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "3b76cceb7efc3d51bacc81ae31653f4f8afb50d61942f877288dc658fcf209d2",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionUse::is_reversed",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::StdPrs_BRepFont",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "3c74e41551c9677608a6666f6dfa2896778587112772fd47ec733580ca8603d3",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::from_name",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Entity::Vertex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "3eb00034573e9fac9f111175aef447c8fd5fd7f18b7e9fb6660ecbf42b058b9a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionEntity::Vertex",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::IsSingleStroke",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "4318f34bfb3ff76c42a1afff8059ea96d100a625f5b2a944d12bc4cad6919650",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::is_single_stroke",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::BuildGlyph",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "43acd2536385091024f751408dc6be36fa95818e108435233c8aa401a3d6df97",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::build_glyph",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::FindAndCreate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "44f4a20206399f09c5f47f25598bb78f80b3a32f428ac77bbb3d8ce3b543ea7a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::find_and_create",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::SetSingleStrokeFont",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "4a506d0a04a2fa0cee911ce78f629ee90aa9227ebd01c2357df3801ad0f483d5",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::set_single_stroke_font",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::Control2",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "4d8efec124ecb64256fcfb15391474261206d9e6661a48d50ac2d9fcab08df0a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::control2",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "operator==",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "4dbc77babd873c5615b690aed3b03c27c80d0aa72c6fd7e889830343b3d9edcf",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionId::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::Descender",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "4e008492b06fe55f70a95e09aa1562c7d5ce737d191d131aa87b403c6b254577",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::descender",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::GlyphOptions::ToConcatenateContours",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "4eb5c1215f74b3dbcac8ecb18d63aaec95bb053ad66a496ce613a15a29662e5d",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontGlyphOptions::to_concatenate_contours",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_Builder::GlyphOptions::ToConcatenateContours",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "4f27d70eba7c2c63961481b67b837748d67c18652293146023dbbc7a0b819b70",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderGlyphOptions::to_concatenate_contours",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Use::LastVertex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "51327b9752f28b7bff142bd7b2f59ea08a9430f41d980058fafc6d72b7f6734a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionUse::last_vertex",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFontCache::FindFont",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFontCache.hxx",
+      "cpp_declaration_id": "5306850384234c1b59fbc1836070e2c095807fc8f19a150407866481240b82c6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontCache::find_font",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::RenderText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "5af3c1eae9c64f41bfff79ef96be519b344d82a5960427d8acf7fe6c74681b54",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::render_plan_with",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::TextOptions::Pen",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "5baec705637643e68054893cc402f8693e2812da280c240770bf2c93192acbdb",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontTextOptions::pen",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Build",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "5f8f0844cb59fa49994e775a0537334aa1491a736e273851cf32d26cd6285d43",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizer::build",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::WithEndpoints",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "63454b85c98295027532ecdf1a6377078a9c19539f6ebbf46f590b1f4c78271e",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::with_endpoints",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::Scale",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "67956922fc00dec3cf8e59d355190fd50f5f6ba71fb6b54f44b33a6c2c564736",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::scale",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Item::Position",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "67b32c4ca93893f7a3edd1490ded2e4610ab1190597037860710fee4f14f47bd",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlanItem::position",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::Start",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "6b9e0f70b1502d7ce54bbe6b9eb702134627159cbcc90bc097f0af888b5d945f",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::start",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::RenderText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "6da59974a593b644ff60fc1a6533d7d0847bf83e14d6ef1a17c1687cd0506669",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::render_text_with",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::AddText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "6df551a6fdf188bc9e92f8feb5137a7b52292b68a4cf06ddcc844ecf46c4ebdd",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::add_text_with",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::End",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "6e3264d3f052a6834f9f8facd8fae5308ee7fcd46b08580c1274e0544fb9482c",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::end",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::GlyphOptions::Size",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "6fc645dac6bf5d02056f45551c070537a0626281ba4c351e77d1e44665a77c97",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderGlyphOptions::size",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Result::StatusValue",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "70c37f2f35e5e9fef041a1814d6c6fdd9fd5a00ef890f9979769e698e81d70c5",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerResult::status_value",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Loop::FirstUse",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "71766d2dbf603d969f2a3f357d347b9a359729d3ceb11eed7351684d95ed32cc",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionLoop::first_use",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Loop::Bounds",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "73f445aa09f584199c628b70c9b9895b3c5395ef59a9ad36bbe584dd1d1fc14a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionLoop::bounds",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::TextOptions::HorizontalAlignment",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "773b0b028d06abc33f8225bec83aaae6915746cb6a1de7f2046b11ad667197f3",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontTextOptions::horizontal_alignment",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_Builder::AddText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "78aab4cf32d2ed2ea69241323b245ed70e59915c5b90e82db8df0c1ea2a20625",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::add_text",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::CreateTextPlan",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "79393ec95161341ced89adb667dff49e57d53b33407f0c5ddaecb1bd7147c4c8",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::create_text_plan",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::AddGlyph",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "799bc2aaaa7b8b78cec61c6482e4e2d869437cfd037835ab61f09b634c436358",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::add_glyph",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::AdvanceX",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "7a4147737ca945055cb9f6c5dfebbb67959f31cada479aa054ba2be4c0565c17",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::advance_x_of",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::Size",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "7abd194e89e00b840c711bf274b7427f80e115f0bb965efb22d1a99c738159c4",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::size",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::HoleLoops",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "7b2885fa0083207519095453613493d8d01925fa6416187cd0e5664128bfcd6a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::hole_loops",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Entity::Loop",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "7d137b0863494778c6100f09c8c2b435baa3e68e07339c10dc811a66def0ce72",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionEntity::Loop",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::StdPrs_BRepFont",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "7ec05703c6e52d2ad2f1f7eb3ab7637ff3149de7bded54d488eb0a5496304f71",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::LoopId",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "80f6095ed3dfac03202bdd160eacfca78174dbb9e2a25ab1b91794c285e8689a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontLoopId",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFontCache::Size",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFontCache.hxx",
+      "cpp_declaration_id": "87ff163413a9d5021940057f6d8493c6bfd9580774e197c60f591938d16b3130",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontCache::size",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::AdvanceX",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "88b1a9b475ffc95d5b3c1da2f3f0d7d320e5ed6adac165251d1fdbad0dab4b13",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::advance_x",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Loop::NbUses",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "88fe3108b06d9518a91a2ad91fcb3cbbeac81bb7e1ed6584973dffb941bd8ee4",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionLoop::nb_uses",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Entity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "8c384799e5ba538abd116aabca1ea4c26e3e001d925e7537252fb356e067556e",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionEntity",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Use::FirstParameter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "8ca28b3173112196acb75fa9730dd33d5eec612bcef528d689096b016d82049e",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionUse::first_parameter",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::UpperRight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "8ea1d64970393f69c5711e5e746bef1d4b2972d11c85211dfe152b5d28fe2940",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::upper_right",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Entity::Curve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "8f96ed2b06d1b07988add624725bfdf2a376d1b94d3227e778ef97be0d0f9b98",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionEntity::Curve",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::CurveId",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "9316b36c11984eee9c7cd215b1c115717177821723b964439beb2949b45a67b9",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontCurveId",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::D1",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "99e845ee58ce61baa58278d8c2cc7f5dc85e9a8b6746401411245644a986690a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::d1",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "operator!=",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "9a3f17f9bb3efe344beb8a8d758c64fc94a9c361178c25200d47781633842c84",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionId::<core::cmp::PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFontCache::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFontCache.hxx",
+      "cpp_declaration_id": "9caf97de5dc0ee5a95a33424f471b4704a6e2db0732ecd5e493b1fec9f15118d",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontCache::clear",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::IsValid",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "9daa9b2a9e15a688e83221455335aeb282c15864494a1863d950c932f41baa91",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::is_valid",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::SetWidthScaling",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "9e8fea8dd27b14a1aecff4ed3fdbe437377a847df748a406109db874660826b2",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::set_width_scaling",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Id",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "a6579ea3d954c9ff1bebc5f2f4f6a0d011bb591552c9d62b59e528898708a821",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionId",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::RenderText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "a72d9df70d4a160a113c1747a57bde609368e5ba1c310ee6072a470b8fc3ee7b",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::render_text",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curves",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "a850c0e994a470d9c8744551a515031f8353fa2178baaad0f2ffb14a8eac2eda",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::curves",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::UnitsPerEm",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "a8bb0470032aa44e162d368ce30e64585bef729b760aa468c856c1d2ae8e1176",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::units_per_em",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Id::Id<TheEntity>",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "a8ec9df8888cf51fa153421c3621b2bdb4cdecbf7de906a1c8d4469b7893a9dc",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionId::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextOptions::ToConcatenateContours",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "aa72cea89cef3b77250b63b04e79151ec0bea7327579da920bde02ec9f39d84a",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextOptions::to_concatenate_contours",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Id::Value",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "ab155b24cdd56d0cb74f824a61cc59ae37268cba184f9fb4bd42b90d45f86970",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionId::value",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Regions",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "ac1e590c9e7ab9efe2bbf390451063032d00a2f30218ea521a84a3b8b1382a87",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::regions",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Loops",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "ae53bdee71903712bc48419b3f06bef368276a3cd90bae5a0823e9bd961046d2",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::loops",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Status::IntersectingContours",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "b0bece03936ef56134de934900cd05d0c004956a6a3f37707d7e620d1575fc4c",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerStatus::IntersectingContours",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::TextOptions::VerticalAlignment",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "b1528512f092719c52fff95e9d3996dc84dcd6e917784808fb6ca994464db5c7",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFontTextOptions::vertical_alignment",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Use::Use",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "b1a9b3779cf3b88d627f36bdb7cd08a80911a3901618b41561e6180441cc0571",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionUse::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::Type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "b31920de8db7a9e3f041535f33fa79a62a082190013e9645459fa8479eac9990",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::kind",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Tolerance",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "b441a6e551b5c18a9be2580b462cf7a0fa9cd9aa9775fb1cc196539fb82f4da8",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::tolerance",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::AdvanceY",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "b780d552924e8bc96168540300baf781bb51109c21a73bc723b2b9cb466b5762",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::advance_y_of",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Result::PlanarRegion",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "b7c8b8e101435fcc562417e78c2611358c66c4509d2ee33dee318cacf902a1fb",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerResult::planar_region",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Region::FirstHole",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "b84938a54761244d97fdfb8d2ed0a64b219be28611853df5058c3fe965ded1b7",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionRegion::first_hole",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::Control1",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "ba1ecad3e26e6ecf7b1bad74191a55e29c12a7e12a539202cc54f0afd49b447b",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::control1",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Width",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "bcb09f4704162214a1ca5327f1f79ee5e5202e078d650911c215db9eb4e5badf",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::width",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Items",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "be862ff9973c87a1c00d232590b2ade90e1d6115a4858729b090730702c39b33",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::items",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::Init",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "c1895650bda18b321d6ce2076c726387eaa3001f959ad97ca62b7ea0e32d0dc4",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::init_by_name",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Loop::Loop",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "c288a736d91f8fb7a6750034a920ea4d87ef8ab9ad8fd377d9efe901c929895c",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionLoop::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::IsEmpty",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "c3fd20f56c778bb801a7041a36238fda8066b76fc1cbd1231410b31f21f128fc",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegion::is_empty",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::RegionHandle",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "c403a25c03856f139bfbc342f0ea20258316102fd732d1151143c61d075e2e55",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlan::region_handle",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::Curve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "c500754bee9d44f5fd016fe92e4d6ef1e518f7f28501527a9899a63c9bf43512",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Result::IsDone",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "c8b097b75943604c239a16d9902cdef78db8d778e855f232f26ec1f610822edd",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerResult::is_done",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::BuildText",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "cf34e35533ea78bf090acb17dcc26e3caab0e2716508734a582c8634cf6bbdb3",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilder::build_text_from_glyphs",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Use::CurveIndex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "cffa381c1ae1ae31c469ba52cce43cc2bb4af5ef526825f7e082e7a3cd0a8a68",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionUse::curve_index",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Status",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "d1fc27a47eba7f855f6c67b981dcdeef37316c15edb0a4ab5d8f485d334a6e18",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerStatus",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextPlan::Item::Item",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "e4cbeaf502a40c0052acb688daf0da027dcfc0d6307769805efc5c7fd9e54af2",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextPlanItem::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Status::Empty",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "e52555ada0e2ce0d4a8e710606516a1df71f2799a87d935ebf1f3de0a0788cca",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerStatus::Empty",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Region::OuterLoop",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "e6cc54236592b563a7f4b87e28f552bc0a7fffc9e3069d315f8e581cca4e9f8d",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionRegion::outer_loop",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Options::Tolerance",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "e70164d4c11185211a8eeaf5f1fceb25f956b55be85e801717c582c38fb199df",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerOptions::tolerance",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::PointSize",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "e95f6a7c50c2832bd759f2fdfeb437aaee9a678e8d46119a0fb95a45e8fa7b90",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::point_size",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "StdPrs_BRepFont::Release",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BRepFont.hxx",
+      "cpp_declaration_id": "ec36e4cbfadf64daba68708d91db0b53c592908e5ded4b9b34e1371b75775a46",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBRepFont::release",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Region::Region",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "ee897ec3299ae91e67f10f81d6a1933d64ce520320159895092027c7c7e54ff2",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionRegion::new",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Use::FirstVertex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "f115160f7f13b194e8f732a0de3ca5a439c8c6cccaa08554d924ee7c2a227bc1",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionUse::first_vertex",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::GlyphOptions::Tolerance",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "f2d21de71ba6450041928883045e79b8bf7aa97f87c4f7af6b7d3ffa5d8419a5",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderGlyphOptions::tolerance",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::SignedArea",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "f68f0c1efffd8db4a617a3c2b7486a257f9694eb0957fda894eaf925ccfac7d5",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::signed_area",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Regularizer::Status::InvalidOutline",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Regularizer.hxx",
+      "cpp_declaration_id": "fb96463f05b3822e6b8b83044d382e050fdafdecb370a49e26ff4d75c33f812f",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontRegularizerStatus::InvalidOutline",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_Builder::TextOptions::Pen",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_Builder.hxx",
+      "cpp_declaration_id": "fdfc6527279e74e14b95f1a790c02abecfbdd814eb60c3b5f469a52c9d97675e",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontBuilderTextOptions::pen",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Curve::Bounds",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "ff1f82fb546b66e781dc9a2433dfb5362c845af58e1aec7029a003ad7215856b",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionCurve::bounds",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    },
+    {
+      "upstream_id": "BRepFont_PlanarRegion::Use::LastParameter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/BRepFont/BRepFont_PlanarRegion.hxx",
+      "cpp_declaration_id": "ff7d840c93543c65f9f129c45b2d536421c79408094b7c487e6e83cc55ea426c",
+      "rust_item": "rustycad_tkv3d::brep_font::BRepFontPlanarRegionUse::last_parameter",
+      "status": "implemented",
+      "notes": "Martensite BRepFont/StdPrs_BRepFont port (crates/tkv3d/src/brep_font, std_prs/brep_font*.rs): faithful translation with long double roots through tkmath LongDouble; upstream GTests translated (tests/legacy_brepfont_*.rs, legacy_stdprs_brep_font.rs) and 374 native differential probes (tools/tkv3d_corpus_brep_font.py). A native geometry exception inside the builders is a failed (null) result in Rust."
+    }
+  ]
+}
