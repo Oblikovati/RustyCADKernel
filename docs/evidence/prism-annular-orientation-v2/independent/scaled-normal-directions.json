@@ -1,0 +1,197 @@
+[
+  {
+    "label": "outer_positive",
+    "entries": [
+      [
+        -3,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"operation_id\": \"matrix.determinant.compute\",\n  \"runtime_ms\": 0,\n  \"output\": {\n    \"determinant\": {\n      \"num\": \"-6\",\n      \"den\": \"1\"\n    }\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "operation_id": "matrix.determinant.compute",
+        "runtime_ms": 0,
+        "output": {
+          "determinant": {
+            "num": "-6",
+            "den": "1"
+          }
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "label": "inner_positive",
+    "entries": [
+      [
+        -3,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        0
+      ]
+    ],
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"operation_id\": \"matrix.determinant.compute\",\n  \"runtime_ms\": 0,\n  \"output\": {\n    \"determinant\": {\n      \"num\": \"6\",\n      \"den\": \"1\"\n    }\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "operation_id": "matrix.determinant.compute",
+        "runtime_ms": 0,
+        "output": {
+          "determinant": {
+            "num": "6",
+            "den": "1"
+          }
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "label": "outer_negative_E",
+    "entries": [
+      [
+        -3,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        2
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"operation_id\": \"matrix.determinant.compute\",\n  \"runtime_ms\": 0,\n  \"output\": {\n    \"determinant\": {\n      \"num\": \"12\",\n      \"den\": \"1\"\n    }\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "operation_id": "matrix.determinant.compute",
+        "runtime_ms": 0,
+        "output": {
+          "determinant": {
+            "num": "12",
+            "den": "1"
+          }
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "label": "outer_reflection",
+    "entries": [
+      [
+        3,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ],
+      [
+        -1,
+        1,
+        0
+      ]
+    ],
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"operation_id\": \"matrix.determinant.compute\",\n  \"runtime_ms\": 0,\n  \"output\": {\n    \"determinant\": {\n      \"num\": \"6\",\n      \"den\": \"1\"\n    }\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "operation_id": "matrix.determinant.compute",
+        "runtime_ms": 0,
+        "output": {
+          "determinant": {
+            "num": "6",
+            "den": "1"
+          }
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "label": "outer_stored_reversal",
+    "entries": [
+      [
+        3,
+        -3,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"operation_id\": \"matrix.determinant.compute\",\n  \"runtime_ms\": 3,\n  \"output\": {\n    \"determinant\": {\n      \"num\": \"6\",\n      \"den\": \"1\"\n    }\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "operation_id": "matrix.determinant.compute",
+        "runtime_ms": 3,
+        "output": {
+          "determinant": {
+            "num": "6",
+            "den": "1"
+          }
+        }
+      },
+      "isError": false
+    }
+  }
+]

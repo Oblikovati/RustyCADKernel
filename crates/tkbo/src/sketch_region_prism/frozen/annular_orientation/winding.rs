@@ -63,3 +63,6 @@ pub(super) fn boundary(
     count("one certified source-bound winding", found.len(), 1)?;
     Ok(*found[0])
 }
+#[cfg(test)]
+#[path = "winding_tests.rs"]
+mod tests;

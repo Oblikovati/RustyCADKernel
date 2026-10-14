@@ -27,6 +27,8 @@ mod fixture;
 #[cfg(test)]
 mod lifecycle_tests;
 #[cfg(test)]
+mod literal_tests;
+#[cfg(test)]
 mod replay_tests;
 #[cfg(test)]
 mod tests;

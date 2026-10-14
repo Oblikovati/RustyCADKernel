@@ -67,3 +67,5 @@ fn trim_role(bytes: &mut Vec<u8>, role: PrismTrimRole) {
         PrismTrimRole::End => 4,
     });
 }
+#[cfg(test)]
+mod literal_tests;

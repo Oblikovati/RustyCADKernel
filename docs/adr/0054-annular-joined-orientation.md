@@ -46,10 +46,12 @@ The owned cubic has poles (0,0),(4,0),(0,4),(0,0). At t=1/2 its point is
 (3/2,3/2), derivative (-3,3); the right-side vector (1,1) points outside the
 outer region. Its half-scale translated inner copy has the opposite material
 normal. Exact rational scalar triple products, independently evaluated with
-Jacobian, are -6 for the outer positive sweep, +6 for the inner material side,
-+6 after reflecting x, and +6 after stored-parameter reversal. Reversing the
-sweep reverses this sign (the retained receipt also records a positive scalar
-multiple +12). These local analytic checks determine sign expectations; the
+Jacobian, are -6 for the outer positive sweep, +3 for the actual half-scale inner
+material side, +6 after reflecting x, and +6 after stored-parameter reversal. Reversing the
+sweep reverses this sign to +6. The earlier retained sign receipt uses
+positive-scaled tangent/direction vectors and records +6 for the inner side
+and +12 for the reversed sweep; the additional actual-derivative receipt
+records +3 and +6 respectively. Both receipts are retained explicitly. These local analytic checks determine sign expectations; the
 existing source-bound embedding supplies the global domain theorem.
 
 Actual pipeline fixtures exercise each stored-pole reversal independently,
