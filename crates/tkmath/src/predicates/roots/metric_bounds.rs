@@ -100,3 +100,6 @@ mod parameter_tests;
 
 #[cfg(test)]
 mod transported_contact_bounds_tests;
+
+#[cfg(test)]
+mod integral_baseline_tests;
