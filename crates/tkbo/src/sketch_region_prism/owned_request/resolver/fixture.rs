@@ -13,11 +13,17 @@ pub(in crate::sketch_region_prism) struct ResolvedPrismFixture {
 pub(in crate::sketch_region_prism) fn resolved_prism_fixture(
     request: OwnedPolynomialPrismRequest,
 ) -> ResolvedPrismFixture {
+    complete_fixture(invoked_prism_fixture(request))
+}
+/// Retain the sealed actual invocation for coverage checks; `invoked_prism_fixture(request)`.
+pub(in crate::sketch_region_prism::owned_request) fn invoked_prism_fixture(
+    request: OwnedPolynomialPrismRequest,
+) -> ResolvedPrismPublication {
     let plan = fixture_plan(&request);
     let prepared = super::super::test_fixture::prepared(request);
     let invocation = invocation::resolve_invocation(&prepared, plan, &mut || false)
         .unwrap_or_else(|_| panic!("actual correspondence required"));
-    complete_fixture(publish_fixture(&invocation))
+    publish_fixture(&invocation)
 }
 fn fixture_plan(request: &OwnedPolynomialPrismRequest) -> SingleBoundaryNamePlan {
     assert_eq!(request.sources.len(), 1);

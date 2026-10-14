@@ -161,3 +161,23 @@ request/diagnostic/body envelope, full frozen tests and concurrency evidence.
 Reservation applicability must be reported explicitly: unmaterialized region-role
 reservations are not observed entities. No public general-profile admission,
 application edit/history completion, or Kernel #10 release claim follows.
+
+## Reservation applicability
+
+The additive `PrismReservationCoverage` inspection accepts only the sealed actual
+publication and its exact issued map. It reads the accepted complete history's
+seven-stage context keys, request operation/contact keys, output member
+associations and final directed-use steps. It performs no live capture or
+identity allocation. Each of the 101 V2 reservations receives either an actual
+named-field application count or a typed inapplicability reason. Repeated physical
+members in distinct contexts contribute repeated named fields; these counts are
+not definition cardinalities.
+
+For the admitted single unsplit boundary, 73 reservations apply. The 28 remaining
+slots are the eight region roles at each pre-generation partition/candidate-copy
+stage, four complement roles at selected and sweep-base stages, and four bounded
+roles at the complement stage. Missing applicable slots and observed applications
+of inapplicable slots refuse explicitly. The report's own V1 replay binds the full
+unchanged map bytes plus every ordered applicability row. Legacy map and naming
+replays are untouched. This report explains reservations; it adds no geometric
+completion authority and does not replace the exact request/revision envelope.
