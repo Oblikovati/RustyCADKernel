@@ -62,12 +62,6 @@ fn bind_member(shape: &Shape, captured: &[GeneratedMemberSnapshot]) -> RegionChe
         .collect();
     holds(
         "generated/current containment identity",
-        same_keys(&rows[0].descendants, &keys),
+        super::identity_multiset::same_multiset(&rows[0].descendants, &keys),
     )
-}
-fn same_keys(a: &[PartitionOccurrenceIdentity], b: &[PartitionOccurrenceIdentity]) -> bool {
-    // Compare retained identities as sets with multiplicity, never infer identity from traversal order.
-    a.len() == b.len()
-        && a.iter()
-            .all(|key| b.iter().filter(|other| *other == key).count() == 1)
 }

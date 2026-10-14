@@ -8,18 +8,18 @@ fn portable_receipt() -> String {
     let receipt = run(&bridge, &shapes);
     let evidence = proof(&receipt);
     let poles = receipt_poles(evidence);
-    let count = evidence.source_candidate.boundaries.len();
     let orientation = evidence.source_candidate.face.orientation;
     assert!(matches!(receipt.completion, PrismCompletion::Incomplete));
     format!(
-        "{{\"operation\":\"martensite.region-certificate\",\"version\":1,\"winding\":{},\"reversed\":{},\"orientation\":\"{:?}\",\"boundary_count\":{},\"report\":{},\"root\":{},\"poles\":{:?},\"body\":\"incomplete\"}}",
+        "{{\"operation\":\"martensite.region-certificate\",\"version\":1,\"winding\":{},\"reversed\":{},\"orientation\":\"{:?}\",\"boundary_count\":{},\"report\":{},\"root\":{},\"poles\":{:?},\"closure_points\":{},\"body\":\"incomplete\"}}",
         evidence.selected_winding,
         evidence.boundary_reversed,
         orientation,
-        count,
+        evidence.source_candidate.boundaries.len(),
         evidence.contact.report,
         evidence.contact.candidate_root,
-        poles
+        poles,
+        receipt_points(evidence)
     )
 }
 #[test]
@@ -48,4 +48,13 @@ fn receipt_poles(evidence: &RegionCertificate) -> &[[f64; 2]] {
         panic!("expected certified Bézier boundary");
     };
     poles
+}
+
+fn receipt_points(evidence: &RegionCertificate) -> String {
+    let points: Vec<_> = evidence
+        .closure_points
+        .iter()
+        .map(|row| format!("{:?}", row.point))
+        .collect();
+    format!("[{}]", points.join(","))
 }

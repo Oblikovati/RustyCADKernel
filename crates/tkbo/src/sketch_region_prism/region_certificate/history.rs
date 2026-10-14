@@ -165,7 +165,7 @@ fn closure_contexts(
         .collect();
     holds(
         "current retained contact query contexts",
-        same_query_contexts(&expected, &bounded.directed_contexts),
+        super::identity_multiset::same_multiset(&expected, &bounded.directed_contexts),
     )?;
     distinct_contexts(&expected)
 }
@@ -179,16 +179,6 @@ fn distinct_contexts(expected: &[(usize, PartitionOccurrenceIdentity)]) -> Regio
     require("four distinct directed closure contexts", unique.len(), 4)
 }
 
-fn same_query_contexts(
-    a: &[(usize, PartitionOccurrenceIdentity)],
-    b: &[(usize, PartitionOccurrenceIdentity)],
-) -> bool {
-    // The existing bridge queries both native vertex orientations. Preserve query multiplicity.
-    a.len() == b.len()
-        && a.iter().all(|key| {
-            a.iter().filter(|row| *row == key).count() == b.iter().filter(|row| *row == key).count()
-        })
-}
 fn closure_vertex(
     bridge: &PairedContactTransaction,
     index: i32,

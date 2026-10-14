@@ -3,13 +3,14 @@
 use super::super::surface_charts::{CapturedPrismSources, PrismSurfaceCause};
 use crate::sketch_region::OriginalMemberIdentity;
 
-// Compatibility occurrence keys retain Location handles. This private receipt is thread-confined.
+// Scalar evidence uses immutable Location keys; it does not own or publish the mutable body.
 pub(crate) struct RegionCertificateInspection {
     pub version: u32,
     pub decision: Result<RegionCertificate, RegionCertificateCause>,
 }
-// This private certificate includes thread-confined compatibility identity keys.
+// Occurrence addresses are operation-local identities, never persistent names.
 pub(crate) struct RegionCertificate {
+    pub closure_points: Vec<super::ClosurePointEvidence>,
     pub original: OriginalMemberIdentity,
     pub census_occurrence: u64,
     pub contact: crate::sketch_region_contact_transport::ReportContactIdentity,
@@ -22,6 +23,7 @@ pub(crate) struct RegionCertificate {
 #[derive(Debug)]
 pub(crate) enum RegionCertificateCause {
     UnavailableCandidates,
+    ClosurePoint(Box<super::ClosurePointEvidence>),
     MissingEvidence {
         hypothesis: &'static str,
     },

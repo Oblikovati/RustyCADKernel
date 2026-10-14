@@ -117,10 +117,29 @@ fn bind_parent_relation(
 }
 fn same_composed_parents(source: &ArrangementRelation, copied: &ArrangementRelation) -> bool {
     let modified: Vec<_> = source.preserved.iter().chain(&source.modified).collect();
+    let actual: Vec<_> = copied.modified.iter().collect();
     copied.preserved.is_empty()
-        && modified.len() == copied.modified.len()
-        && modified
-            .iter()
-            .all(|parent| copied.modified.contains(parent))
-        && source.generated == copied.generated
+        && super::identity_multiset::same_multiset(&modified, &actual)
+        && super::identity_multiset::same_multiset(&source.generated, &copied.generated)
+}
+
+#[cfg(test)]
+mod review_tests {
+    use super::*;
+
+    #[test]
+    fn duplicate_composed_parent_cannot_replace_different_parent() {
+        let (bridge, _) = super::super::tests::fixture();
+        let batch = super::super::borrowed_batch(&bridge).unwrap();
+        let mut source = batch.candidates[0].relations[0].clone();
+        let first = bridge.census.inputs.originals[0].original.clone();
+        let mut second = first.clone();
+        second.source = crate::sketch_region::RegionSourceId(u64::MAX);
+        source.preserved = vec![first.clone(), first.clone()];
+        source.modified.clear();
+        let mut copied = source.clone();
+        copied.preserved.clear();
+        copied.modified = vec![first, second];
+        assert!(!same_composed_parents(&source, &copied));
+    }
 }

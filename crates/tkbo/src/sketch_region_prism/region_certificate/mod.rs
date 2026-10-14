@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Opt-in borrowed entry; original receipts are never moved from or promoted to completion.
 mod boundary;
+mod closure_points;
+mod closure_types;
+mod identity_multiset;
+use closure_types::*;
 mod containment;
 mod history;
 mod inspect;
@@ -124,3 +128,6 @@ mod rejection_tests;
 mod replay_tests;
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod point_tests;

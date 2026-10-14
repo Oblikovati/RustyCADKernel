@@ -121,3 +121,41 @@ fn changed_stored_pcurve_trim_does_not_reuse_full_range_classification() {
         .unwrap();
     assert_four_present(&run(&bridge, &shapes));
 }
+
+#[test]
+fn duplicate_descendant_omitting_current_identity_cannot_reuse_containment() {
+    let (mut bridge, shapes) = fixture();
+    let copy = bridge.mapped.copied.as_mut().unwrap();
+    let crate::sketch_region_candidates::GeneratedTopologyObservation::Observed(areas) =
+        &mut copy.generated_topology
+    else {
+        panic!("expected generated topology");
+    };
+    let descendants = &mut areas[0].members[0].descendants;
+    assert!(descendants.len() > 1);
+    assert_ne!(descendants[0], descendants[1]);
+    descendants[1] = descendants[0].clone();
+    assert!(containment::generated_universe(&bridge).is_err());
+    assert_four_present(&run(&bridge, &shapes));
+}
+#[test]
+fn moved_actual_shared_vertex_cannot_reuse_retained_construction_bounds() {
+    let (bridge, shapes) = fixture();
+    let mut receipt = run(&bridge, &shapes);
+    let face = &borrowed_batch(&bridge).unwrap().candidates[0].face;
+    let members = crate::sketch_region::equal_occurrences(face).unwrap();
+    let shape = members
+        .iter()
+        .find(|row| row.shape_type().unwrap() == rustycad_tkg3d::top_abs::ShapeEnum::Vertex)
+        .unwrap();
+    let vertex = rustycad_tkbrep::topods::vertex(shape).unwrap();
+    BRepBuilder::default()
+        .update_vertex_point(&vertex, rustycad_tkmath::gp::Point3::new(0., 0., 1.), 1e-7)
+        .unwrap();
+    retain_certificate(
+        &bridge,
+        &crate::sketch_region_partition_bindings::binding_sources(&shapes),
+        &mut receipt,
+    );
+    assert_four_present(&receipt);
+}

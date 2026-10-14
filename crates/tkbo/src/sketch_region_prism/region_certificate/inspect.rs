@@ -13,12 +13,12 @@ pub(super) fn inspect(
     let original = source::source_hypotheses(bridge, sources)?;
     let (candidate, complement) = candidate_universe(bridge, receipt)?;
     let contact = history::current_history(bridge, sources, &candidate)?;
-    let copied = rebind::copied_boundary(receipt, &candidate)?;
     Ok(RegionCertificate {
         original,
         census_occurrence: bridge.census.inputs.segments[0].occurrence,
         contact,
-        copied,
+        copied: rebind::copied_boundary(receipt, &candidate)?,
+        closure_points: closure_points::current_points(bridge, sources, receipt)?,
         boundary_reversed: reversed_boundary(&candidate),
         source_candidate: candidate,
         complementary_candidate: complement,

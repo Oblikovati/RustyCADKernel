@@ -182,3 +182,35 @@ fn identity_placement() -> MetricEmbedding<3> {
         scale: 1.,
     }
 }
+
+/// Recompute a captured-source residual for a fresh point; `recertify_contact_point(bridge, 0, point, 0.)`.
+pub(crate) fn recertify_contact_point(
+    retained: &PairedContactTransaction,
+    contact: usize,
+    point: [f64; 3],
+    limit: f64,
+) -> Option<Result<TransportedResidualReport, SourceConformanceCause>> {
+    let inputs = singleton_point_inputs(retained, contact)?;
+    let [parent] = inputs.construction.parents.as_slice() else {
+        return None;
+    };
+    let query = point_query(&inputs, parent, point, inputs.requested.remaining_roots(0));
+    Some(query.map(|mut query| {
+        // The region entry first proves the exact endpoint singleton; no root search is introduced.
+        query.residual.spatial_limit = limit;
+        certify_transported_residual_on_bounds(query, inputs.bounds.clone(), || false)
+    }))
+}
+
+fn singleton_point_inputs(
+    retained: &PairedContactTransaction,
+    contact: usize,
+) -> Option<ContactMetricInputs<'_>> {
+    let inputs = contact_metric_inputs(retained, contact)?;
+    let zero = inputs
+        .bounds
+        .iter()
+        .all(|bound| bound.compare_f64(0.).is_ok_and(|order| order.is_eq()));
+    // A fresh fixed endpoint proof cannot silently become a new unbudgeted contact search.
+    zero.then_some(inputs)
+}

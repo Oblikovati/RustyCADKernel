@@ -48,3 +48,5 @@ mod revision_tests;
 
 pub(crate) use admission::BoundedContactConstruction;
 pub(crate) use generated::observe_generated_vertex;
+
+pub(crate) use world::recertify_contact_point;
