@@ -144,8 +144,7 @@ fn unbound_projection<'a>(
         .diagnostic
         .as_ref()
         .ok_or(missing("diagnostic body"))?;
-    let contexts =
-        body_contexts(&diagnostic.body).map_err(|_| missing("acyclic complete body contexts"))?;
+    let contexts = body_contexts(&diagnostic.body).map_err(freeze_context_cause)?;
     let bound = BoundProjection {
         receipt,
         diagnostic,
@@ -185,5 +184,16 @@ pub(super) fn only_bound<'a, T>(values: &'a [T], required: &'static str) -> Capt
     match values {
         [value] => Ok(value),
         _ => Err(identity(required, values.len())),
+    }
+}
+
+pub(super) fn freeze_context_cause(cause: super::super::PrismCause) -> PrismFreezeCause {
+    use super::super::PrismCause;
+    match cause {
+        PrismCause::Mapped { failure, .. } => PrismFreezeCause::Native(failure),
+        PrismCause::CyclicBodyContext { .. } => super::admission::unsupported(
+            "cyclic actual body context requires unbound Shape diagnostic",
+        ),
+        _ => super::admission::unsupported("unprojectable actual body-context cause"),
     }
 }

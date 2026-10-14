@@ -48,3 +48,59 @@ incidence/formula expectations and the separately attributed existing stored-cha
 convention. It predates production changes. The negative stored extrusion direction
 and negative second surface parameter are retained exactly. Euler and scalar volume
 checks do not establish geometry consistency or solid validity.
+
+## Admission and evidence binding
+
+Version 1 admits at most 4096 explicitly bound directed occurrences and at most
+17 polynomial poles (degree 16); excess is refused, never truncated. Explicit
+weights, including unit weights, remain outside this capture domain. Forward and
+Reversed are the admitted orientation domain. Internal and External are refused
+before local coedge reversal is computed. A graph coedge carries its authored full
+use key, face/wire/edge keys and reversal; indistinguishable repeated uses are
+incomplete rather than named by insertion order.
+
+Every capture creates a fresh BRepGraph with explicit CumulativeOccurrenceV2
+pcurve extraction, disabled automatic product creation, and an unchanged Audit
+gate. This importer behavior affects newly extracted definitions; its metadata
+alone is no certification or repair of arbitrary existing graphs. Graph IDs are
+used only during operation-local lookup. Captured topology and replay order use
+explicit stable keys; directed child order is the actual bound containment order.
+
+Freeze re-enumerates and rebinds the actual body before graph capture and again at
+Commit. The final pass recaptures geometry, graph incidence, history, coverage and
+limits and compares exact replay bytes. Retained source/chart proof operands must
+match fresh scalar values and actual source/use/history contexts. Checkpoint
+callbacks may mutate legacy aliases; mutations must be detected. Concurrent writes
+to those aliases during capture are outside the operation-local Interface.
+
+Owned nodes retain raw TShape tolerance and compatibility-accessor effective
+tolerance independently. Raw metadata must be finite and nonnegative; valid zero
+and sub-floor values retain their exact binary64 bits. The existing BRepTool
+floor is unchanged. Endpoint proof reuses the existing transported residual engine
+on frozen operands with exact spatial limit zero and constant parameter maps.
+This bounded equality admission is independent of requested body tolerances;
+Evidence and Commit checkpoints surround it. It neither computes an aggregate
+body error nor discharges whole-body tolerance consistency.
+
+Historical validation observations remain explicitly unbound. Present unsupported
+region/affine/report/alert causes are refused as UnsupportedDiagnostic. The known
+concrete dataless AlertIntersectionFailed observation is retained with its observed
+Fail gravity. Unknown or owner-bearing alerts are not reduced to strings. Native
+intermediate retirement retains its copied source key, placement, orientation and
+all original relation classes; it is not credited as composed original deletion.
+Rejected selection history retains all parents with explicitly unbound outputs.
+Selection, affine and whole-body evidence remain unimported/incomplete.
+
+## Verification scope
+
+The owned fixture supplies semantic identities before inspecting generated output.
+Its baseline bytes are unchanged. Tests exercise one complete diagnostic capture,
+all cancellation/failure checkpoints and reuse, clone isolation, exact source and
+body mutation rejection, raw/effective tolerance distinctions, missing/colliding
+identity bindings, typed alert refusal and bounded-domain limits. Compiled
+Send/Sync assertions, ordinary deterministic thread/process tests and sanitizer
+acceptance are separate obligations. The final evidence receipt records actual
+commands and limitations; no successful body, application acceptance, or
+previous-release accepted-workload benchmark is claimed. Function-size audits use
+executable body lines, excluding formatted signatures and documentation; files
+remain below 500 lines.

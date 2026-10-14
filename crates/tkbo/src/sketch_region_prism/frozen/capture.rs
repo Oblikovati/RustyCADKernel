@@ -64,6 +64,7 @@ fn execute(
     super::domain::check_count(bound.contexts.len())?;
     let projection = capture_phases(&bound, progress, phase)?;
     checkpoint(progress, phase, FreezePhase::Commit)?;
+    super::admission::admit_receipt(receipt)?;
     check_source_snapshot(&bound)?;
     check_final_capture(&bound, &projection)?;
     Ok(projection)

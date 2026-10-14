@@ -46,3 +46,6 @@ mod tolerances;
 mod domain_tests;
 #[cfg(test)]
 mod endpoint_tests;
+
+#[cfg(test)]
+mod admission_tests;
