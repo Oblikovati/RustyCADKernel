@@ -1,0 +1,152 @@
+{
+  "integration_revision": "f4cd79ae2d6a447e78302d07062df23b1ce5f9ed",
+  "candidate_revision": "94fe5b25b",
+  "candidate_base": "0ceea4561",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "2923eaa48f275fd8f0bdf3e469f66cf8fd8ff8baa93b5786da2613516e7996e6"
+      },
+      "tests": {
+        "passed": 4425,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "2454ee386c159915a1719dd5898a665fb2eabd0cbe7c45e4a02b55cac30611f3"
+      },
+      "tests": {
+        "passed": 88,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "bc404c68cb5699d690da2bb234f7dd77d57de30dd84891b0af2a5675d765d593"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "6fae51f8eb3fef636098571a80acb16c4eb35567c7bb2e1c131d10da3b85c269"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/access.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/domains.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/error.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/regularity.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/domains.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/mutation.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/refusal.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/domain.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/history.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/mutation.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/access.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/domains.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/error.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/regularity.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/domains.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/mutation.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/refusal.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/replay.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/domain.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/history.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/mutation.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs": "M"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
