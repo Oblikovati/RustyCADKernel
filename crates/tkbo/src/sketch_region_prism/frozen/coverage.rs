@@ -26,6 +26,7 @@ pub(crate) enum FrozenPublicationGap {
     SelectionEvidenceNotImported,
     RejectedSelectionHistoryUnbound,
     AffineEvidenceNotImported,
+    IntermediateRetirementCompositionUnproven,
     Candidate(crate::sketch_region_candidates::MissingCertificate),
     PrismInjectivityAndSurfaceCharts,
     AchievedErrorUnknown,
@@ -67,6 +68,7 @@ pub(crate) enum FrozenValidationCause {
         index: Option<i32>,
         failure: Failure,
     },
+    AnalyticNativeAlert(super::alerts::FrozenNativeAlert),
     AnalyticInterference {
         first_index: i32,
         second_index: i32,
@@ -109,6 +111,7 @@ pub(super) fn capture_coverage(
         FrozenPublicationGap::SelectionEvidenceNotImported,
         FrozenPublicationGap::RejectedSelectionHistoryUnbound,
         FrozenPublicationGap::AffineEvidenceNotImported,
+        FrozenPublicationGap::IntermediateRetirementCompositionUnproven,
     ];
     for gap in &bound.receipt.gaps {
         limitations.push(freeze_gap(gap)?);
@@ -195,11 +198,8 @@ fn freeze_cause(cause: &ValidationCause) -> Result<FrozenValidationCause, PrismF
             first_index: *first_index,
             second_index: *second_index,
         },
-        C::AnalyticNativeAlert(_) => {
-            return Err(PrismFreezeCause::UnsupportedDiagnostic {
-                stage: Some(ValidationStage::SelfIntersection),
-                actual: "owner-bearing native alert",
-            });
+        C::AnalyticNativeAlert(alert) => {
+            F::AnalyticNativeAlert(super::alerts::freeze_alert(alert)?)
         }
     })
 }
@@ -229,6 +229,9 @@ fn freeze_gap(gap: &super::super::PrismGap) -> Result<FrozenPublicationGap, Pris
             Ok(FrozenPublicationGap::PrismInjectivityAndSurfaceCharts)
         }
         G::AchievedErrorUnknown => Ok(FrozenPublicationGap::AchievedErrorUnknown),
+        G::ComposedDeletionCoverage => {
+            Ok(FrozenPublicationGap::IntermediateRetirementCompositionUnproven)
+        }
         _ => Err(PrismFreezeCause::UnsupportedDiagnostic {
             stage: None,
             actual: "unresolved attributed transport/history gap",

@@ -34,6 +34,10 @@ impl FrozenPrismProjection {
     pub(crate) fn endpoint_proofs(&self) -> &[super::endpoints::FrozenEndpointProof] {
         &self.endpoints
     }
+    /// Borrow fixed capture bounds (excess is refused); example: `projection.capture_policy().maximum_polynomial_poles`.
+    pub(crate) fn capture_policy(&self) -> &super::domain::FrozenCapturePolicy {
+        &self.capture_policy
+    }
     /// No accepted body is produced by this diagnostic Interface; example: `assert!(!projection.is_valid_body())`.
     pub(crate) fn is_valid_body(&self) -> bool {
         false
@@ -55,6 +59,7 @@ impl FrozenPrismProjection {
                 .bytes(),
             );
         }
+        bytes.extend(format!("capture_policy={:?};", self.capture_policy).bytes());
         bytes.extend(format!("endpoints={:?};", self.endpoints).bytes());
         bytes.extend(geometry_bytes(&self.nodes, &self.faces));
         limits(&self.limits, &mut bytes);
@@ -77,8 +82,12 @@ fn node_bytes(node: &FrozenPrismNode, bytes: &mut Vec<u8>) {
     if let Some(point) = node.point {
         numbers(point, bytes);
     }
-    bytes.push(u8::from(node.tolerance.is_some()));
-    if let Some(tolerance) = node.tolerance {
+    bytes.push(u8::from(node.raw_tolerance.is_some()));
+    if let Some(raw) = node.raw_tolerance {
+        numbers([raw], bytes);
+    }
+    bytes.push(u8::from(node.effective_tolerance.is_some()));
+    if let Some(tolerance) = node.effective_tolerance {
         numbers([tolerance], bytes);
     }
     bytes.push(u8::from(node.curve.is_some()));
@@ -129,6 +138,20 @@ impl std::fmt::Debug for FrozenOriginalOccurrence {
         formatter
             .debug_struct("FrozenOriginalOccurrence")
             .field("key", &self.key)
+            .field("orientation", &self.orientation)
+            .field("linear", &self.placement.linear)
+            .field("origin", &self.placement.origin)
+            .field("scale", &self.placement.scale)
+            .finish()
+    }
+}
+
+impl std::fmt::Debug for FrozenRetiredIntermediate {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("FrozenRetiredIntermediate")
+            .field("source", &self.source)
+            .field("relation", &self.relation)
             .field("orientation", &self.orientation)
             .field("linear", &self.placement.linear)
             .field("origin", &self.placement.origin)

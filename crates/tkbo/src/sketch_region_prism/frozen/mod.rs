@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0023 private diagnostic projection. Captured never means a valid published body.
 mod admission;
+mod alerts;
 mod bindings;
 mod capture;
 mod coverage;
+mod domain;
 mod encoding;
 mod endpoints;
 mod geometry;
@@ -32,3 +34,15 @@ mod expected_tests;
 mod replay_tests;
 #[cfg(test)]
 mod source_mutation_tests;
+
+#[cfg(test)]
+mod diagnostic_tests;
+
+#[cfg(test)]
+mod tolerance_tests;
+mod tolerances;
+
+#[cfg(test)]
+mod domain_tests;
+#[cfg(test)]
+mod endpoint_tests;

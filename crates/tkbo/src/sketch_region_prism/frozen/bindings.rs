@@ -16,6 +16,7 @@ pub(super) fn bind_projection<'a>(
     receipt: &'a PrismReceipt,
     bindings: &'a PrismPublicationBindings,
 ) -> Result<BoundProjection<'a>, PrismFreezeCause> {
+    super::domain::check_count(bindings.directed.len())?;
     admit_identifiers(bindings)?;
     let mut bound = unbound_projection(receipt, bindings)?;
     bound.names = bound

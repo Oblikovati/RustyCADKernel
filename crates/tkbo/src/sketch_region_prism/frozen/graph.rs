@@ -6,10 +6,12 @@ use rustycad_tkbrep::brep_graph::{
     shapes_view::{AddStatus, Options},
     validate, *,
 };
+use rustycad_tkbrep::brep_graph_inc::populate::PCurveImportBehavior;
 use std::collections::BTreeMap;
 
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenGraphIncidence {
+    pub(crate) import_behavior: PCurveImportBehavior,
     pub(crate) counts: [u32; 7],
     pub(crate) endpoints: Vec<(FrozenPrismKey, FrozenPrismKey, FrozenPrismKey)>,
     pub(crate) coedges: Vec<FrozenCoedgeIncidence>,
@@ -21,6 +23,7 @@ pub(super) fn capture_graph(
     let names = mapped_nodes(bound, &graph)?;
     audit_graph(bound, &graph, &names)?;
     Ok(FrozenGraphIncidence {
+        import_behavior: PCurveImportBehavior::CumulativeOccurrenceV2,
         counts: checked_counts(&graph, names.len())?,
         endpoints: edge_endpoints(&graph, &names)?,
         coedges: directed_coedges(bound, &graph, &names)?,
@@ -35,7 +38,11 @@ fn populate_graph(bound: &BoundProjection<'_>) -> Result<BRepGraph, PrismFreezeC
     };
     let added = graph
         .shapes_mut()
-        .add_with_options(&bound.diagnostic.body, &options)
+        .add_with_options_and_behavior(
+            &bound.diagnostic.body,
+            &options,
+            PCurveImportBehavior::CumulativeOccurrenceV2,
+        )
         .map_err(PrismFreezeCause::Native)?;
     if added.status != AddStatus::Success {
         return Err(PrismFreezeCause::GraphStatus(added.status));

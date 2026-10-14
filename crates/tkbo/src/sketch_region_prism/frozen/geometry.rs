@@ -2,6 +2,7 @@
 //! Reuse actual capture and exact chart proof; retained scalar bytes must still match.
 use super::super::surface_charts::*;
 use super::bindings::only_bound;
+use super::domain::polynomial;
 use super::{
     bindings::{BoundProjection, missing},
     encoding,
@@ -9,7 +10,6 @@ use super::{
     types::*,
 };
 use crate::sketch_region::PartitionOccurrenceIdentity;
-use crate::sketch_region_geometry_capture::CapturedMetricCurve;
 use crate::sketch_region_source_conformance::capture_space_representation;
 use rustycad_tkbrep::{
     brep::BRepTool,
@@ -183,19 +183,6 @@ fn check_chart_domain(chart: &CapturedSurfaceChart) -> Result<(), PrismFreezeCau
     }
     Ok(())
 }
-pub(super) fn polynomial<const D: usize>(
-    curve: &CapturedMetricCurve<D>,
-) -> Result<(), PrismFreezeCause> {
-    if let CapturedMetricCurve::Bezier { poles, weights } = curve {
-        if weights.is_some() || poles.is_empty() || poles.len() > 17 {
-            return Err(PrismFreezeCause::Unsupported {
-                representation: "analytic coefficient domain",
-                actual: "expected polynomial degree 0..16; rational or excess degree present",
-            });
-        }
-    }
-    Ok(())
-}
 fn capture_trim_values(
     bound: &BoundProjection<'_>,
     face_index: usize,
@@ -258,7 +245,8 @@ fn capture_node(
     let mut node = FrozenPrismNode {
         key: bound.names[index],
         point: None,
-        tolerance: None,
+        raw_tolerance: super::tolerances::capture_stored_tolerance(actual)?,
+        effective_tolerance: None,
         curve: None,
     };
     match actual.shape_type().map_err(PrismFreezeCause::Native)? {
@@ -277,7 +265,8 @@ fn capture_vertex(
     let vertex = vertex(actual).map_err(PrismFreezeCause::Native)?;
     let point = BRepTool::pnt(&vertex).map_err(PrismFreezeCause::Native)?;
     node.point = Some([point.x(), point.y(), point.z()]);
-    node.tolerance = Some(BRepTool::vertex_tolerance(&vertex).map_err(PrismFreezeCause::Native)?);
+    node.effective_tolerance =
+        Some(BRepTool::vertex_tolerance(&vertex).map_err(PrismFreezeCause::Native)?);
     Ok(())
 }
 fn capture_edge(
@@ -288,7 +277,8 @@ fn capture_edge(
     let curve =
         capture_space_representation(&edge).map_err(|c| PrismFreezeCause::Surface(c.into()))?;
     polynomial(&curve.curve)?;
-    node.tolerance = Some(BRepTool::edge_tolerance(&edge).map_err(PrismFreezeCause::Native)?);
+    node.effective_tolerance =
+        Some(BRepTool::edge_tolerance(&edge).map_err(PrismFreezeCause::Native)?);
     node.curve = Some(curve);
     Ok(())
 }
@@ -305,7 +295,8 @@ fn capture_face_tolerance(
             actual: "mutable triangulation outside analytic capture",
         });
     }
-    node.tolerance = Some(BRepTool::face_tolerance(&face).map_err(PrismFreezeCause::Native)?);
+    node.effective_tolerance =
+        Some(BRepTool::face_tolerance(&face).map_err(PrismFreezeCause::Native)?);
     Ok(())
 }
 
@@ -329,7 +320,13 @@ fn same_trim_contexts(first: &CapturedSurfaceChart, second: &CapturedSurfaceChar
 }
 
 fn check_node_scalars(node: &FrozenPrismNode) -> Result<(), PrismFreezeCause> {
-    for actual in node.point.into_iter().flatten().chain(node.tolerance) {
+    for actual in node
+        .point
+        .into_iter()
+        .flatten()
+        .chain(node.effective_tolerance)
+        .chain(node.raw_tolerance)
+    {
         if !actual.is_finite() {
             return Err(PrismFreezeCause::InvalidScalar {
                 quantity: "finite vertex/tolerance",
@@ -337,7 +334,7 @@ fn check_node_scalars(node: &FrozenPrismNode) -> Result<(), PrismFreezeCause> {
             });
         }
     }
-    if let Some(actual) = node.tolerance.filter(|value| *value < 0.) {
+    if let Some(actual) = node.raw_tolerance.filter(|value| *value < 0.) {
         return Err(PrismFreezeCause::InvalidScalar {
             quantity: "nonnegative entity tolerance",
             actual,

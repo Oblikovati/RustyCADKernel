@@ -10,11 +10,10 @@ use crate::sketch_region::OriginalMemberIdentity;
 pub(super) fn capture_history(
     bound: &BoundProjection<'_>,
 ) -> Result<FrozenPrismHistory, PrismFreezeCause> {
-    if !bound.receipt.input.unrepresented.is_empty() || !bound.diagnostic.native_retired.is_empty()
-    {
+    if !bound.receipt.input.unrepresented.is_empty() {
         return Err(PrismFreezeCause::UnsupportedDiagnostic {
             stage: None,
-            actual: "unrepresented input or uncomposed intermediate retirement",
+            actual: "unrepresented input history",
         });
     }
     let mut derived = Vec::new();
@@ -26,6 +25,7 @@ pub(super) fn capture_history(
     Ok(FrozenPrismHistory {
         originals: capture_originals(bound)?,
         rejected_unbound: capture_rejected(bound)?,
+        retired_intermediate_unbound: capture_retired(bound)?,
         derived,
         deleted,
     })
@@ -144,4 +144,20 @@ fn rejected_relation(
         output_kind: row.output.shape_type().map_err(PrismFreezeCause::Native)? as u8,
         parents,
     })
+}
+
+fn capture_retired(
+    bound: &BoundProjection<'_>,
+) -> Result<Vec<FrozenRetiredIntermediate>, PrismFreezeCause> {
+    let mut result = Vec::new();
+    for row in &bound.diagnostic.native_retired {
+        result.push(FrozenRetiredIntermediate {
+            source: super::identities::source_name(bound.bindings, &row.output)?,
+            relation: rejected_relation(bound, row)?,
+            orientation: row.output.orientation(),
+            placement: freeze_placement(row.output.location())?,
+        });
+    }
+    result.sort_by_key(|row| (row.source, row.orientation as u8));
+    Ok(result)
 }

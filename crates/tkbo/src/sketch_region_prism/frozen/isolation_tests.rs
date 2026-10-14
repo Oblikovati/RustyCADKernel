@@ -69,7 +69,7 @@ fn clone_mutation_is_isolated_from_published_values() {
     let original = fresh_projection();
     let bytes = original.replay_bytes();
     let mut copy = original.clone();
-    copy.nodes[0].tolerance = Some(123.);
+    copy.nodes[0].effective_tolerance = Some(123.);
     copy.uses.clear();
     copy.faces.clear();
     copy.history.derived.clear();

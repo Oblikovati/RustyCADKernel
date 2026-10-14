@@ -61,9 +61,7 @@ fn execute(
     super::admission::admit_receipt(receipt)?;
     checkpoint(progress, phase, FreezePhase::Identity)?;
     let bound = bind_projection(receipt, bindings)?;
-    if bound.contexts.len() > 4096 {
-        return Err(missing("at most 4096 directed occurrences").into());
-    }
+    super::domain::check_count(bound.contexts.len())?;
     let projection = capture_phases(&bound, progress, phase)?;
     checkpoint(progress, phase, FreezePhase::Commit)?;
     check_source_snapshot(&bound)?;
@@ -105,6 +103,7 @@ fn finish_projection(
 ) -> Result<FrozenPrismProjection, PrismFreezeCause> {
     Ok(FrozenPrismProjection {
         version: 1,
+        capture_policy: super::domain::fixed_policy(),
         operation: bound.bindings.operation,
         region: bound.bindings.selected_region,
         endpoints: super::endpoints::certify_endpoints(&nodes, &graph)?,

@@ -99,6 +99,19 @@ pub(crate) enum PrismFreezeCause {
         representation: &'static str,
         actual: &'static str,
     },
+    LimitExceeded {
+        quantity: &'static str,
+        actual: usize,
+        maximum: usize,
+    },
+    PolynomialPoles {
+        actual: usize,
+        minimum: usize,
+        maximum: usize,
+    },
+    RationalWeights {
+        actual: usize,
+    },
     InvalidScalar {
         quantity: &'static str,
         actual: f64,
@@ -133,6 +146,7 @@ pub(crate) enum PrismFreezeCause {
 #[derive(Clone)]
 pub(crate) struct FrozenPrismProjection {
     pub(super) version: u32,
+    pub(super) capture_policy: super::domain::FrozenCapturePolicy,
     pub(super) operation: AuthoredPrismId,
     pub(super) region: AuthoredPrismId,
     pub(super) nodes: Vec<FrozenPrismNode>,
@@ -148,7 +162,8 @@ pub(crate) struct FrozenPrismProjection {
 pub(crate) struct FrozenPrismNode {
     pub(crate) key: FrozenPrismKey,
     pub(crate) point: Option<[f64; 3]>,
-    pub(crate) tolerance: Option<f64>,
+    pub(crate) raw_tolerance: Option<f64>,
+    pub(crate) effective_tolerance: Option<f64>,
     pub(crate) curve: Option<CapturedSpaceRepresentation>,
 }
 #[derive(Clone)]
@@ -188,12 +203,21 @@ pub(crate) struct FrozenOriginalKey {
 pub(crate) struct FrozenPrismHistory {
     pub(crate) originals: Vec<FrozenOriginalOccurrence>,
     pub(crate) rejected_unbound: Vec<Vec<FrozenRejectedRelation>>,
+    pub(crate) retired_intermediate_unbound: Vec<FrozenRetiredIntermediate>,
     pub(crate) derived: Vec<FrozenDerivedRelation>,
     pub(crate) deleted: Vec<FrozenOriginalKey>,
 }
 #[derive(Clone)]
 pub(crate) struct FrozenOriginalOccurrence {
     pub(crate) key: FrozenOriginalKey,
+    pub(crate) orientation: Orientation,
+    pub(crate) placement: MetricEmbedding<3>,
+}
+/// Native retirement of a copied intermediate does not establish original-member deletion.
+#[derive(Clone)]
+pub(crate) struct FrozenRetiredIntermediate {
+    pub(crate) source: AuthoredPrismId,
+    pub(crate) relation: FrozenRejectedRelation,
     pub(crate) orientation: Orientation,
     pub(crate) placement: MetricEmbedding<3>,
 }
