@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0037 bounded history composition; observation alone never publishes a valid body.
 mod bounds;
+pub(in crate::sketch_region_prism) use bounds::{HistoryHierarchyCensus, preflight_history_census, preflight_history_root};
 mod context_names;
 mod contexts;
 mod copied_contexts;
@@ -14,7 +15,7 @@ mod partition_queries;
 mod stage_names;
 mod stages;
 use super::*;
-use limits::*;
+pub(in crate::sketch_region_prism) use limits::*;
 #[cfg(test)]
 mod bounds_tests;
 
