@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 import diagnose_current_vulkan as current
 import renderer_workspace_evidence as evidence
+from release_verification_plan import rust_gates
 from diagnose_release_renderer import (
     DiagnosticBinary,
     RendererDiagnosticProcess,
@@ -335,14 +336,15 @@ class WorkspaceEvidenceTests(unittest.TestCase):
         self,
     ) -> None:
         workflow = self.rust_workflow()
-        self.assertIn(
-            "cargo test-all --no-fail-fast 2>&1 | tee -a target/rust-gate/gate.log",
-            workflow,
+        runner = "python3 target/verification-tools/tools/verify_release_gate.py --root . --gate rust-tests"
+        self.assertIn(runner + " 2>&1 | tee -a target/rust-gate/gate.log", workflow)
+        self.assertEqual(
+            rust_gates()[1].commands[0].argv, ("cargo", "test-all", "--no-fail-fast")
         )
         self.assertIn("gate_status=${PIPESTATUS[0]}", workflow)
         self.assertIn('exit "$gate_status"', workflow)
         self.assertLess(
-            workflow.index("cargo test-all --no-fail-fast 2>&1"),
+            workflow.index(runner + " 2>&1"),
             workflow.index("path: diagnostic-tools"),
         )
         self.assertIn("--phase observe --profile workspace", workflow)
