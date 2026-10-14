@@ -49,8 +49,16 @@ impl WorldLimit {
                     achieved,
                 });
             }
-            root.bisect(work)?;
+            for _ in 0..self.halvings(achieved) {
+                root.bisect(work)?;
+            }
         }
+    }
+    // Scheduling only: the enclosure width roughly halves the error per bisection,
+    // so skip envelope checks that cannot yet succeed. Certification is unchanged.
+    fn halvings(&self, achieved: Option<f64>) -> u32 {
+        let ratio = achieved.map_or(2., |value| value / self.requested);
+        (ratio.log2().floor() as u32).clamp(1, 64)
     }
 }
 // Inside one binary64 gap per axis, no refinement can bring any representable

@@ -77,7 +77,14 @@ pub fn certify(
     source: SketchIncidenceSource,
     targets: &[SketchIncidenceTarget],
 ) -> SketchLineIncidenceReport {
-    certify_sketch_line_incidences(source, targets, SketchIncidenceOptions::v1(ERROR), || false)
+    certify_with(source, targets, SketchIncidenceOptions::v1(ERROR))
+}
+pub fn certify_with(
+    source: SketchIncidenceSource,
+    targets: &[SketchIncidenceTarget],
+    options: SketchIncidenceOptions,
+) -> SketchLineIncidenceReport {
+    certify_sketch_line_incidences(source, targets, options, || false)
         .unwrap_or_else(|failure| panic!("{failure}"))
 }
 /// Contacts of the ordered groups, flattened in order.

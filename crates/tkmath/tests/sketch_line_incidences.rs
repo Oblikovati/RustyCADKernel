@@ -8,6 +8,7 @@ use fixture::*;
 
 mod conics;
 mod failures;
+mod generated;
 mod lines;
 mod ordering;
 mod selection;
