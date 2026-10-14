@@ -19,6 +19,7 @@
 //! assert_eq!(proof.contact(0).unwrap().paired_parameter_bounds, [0.5, 0.5]);
 //! # Ok::<(), BezierPairCaptureFailure>(())
 //! ```
+mod constant_exclusion;
 mod equations;
 mod polynomial;
 mod projection;
@@ -67,6 +68,8 @@ mod query;
 mod query_tests;
 
 mod public_certificate;
+mod public_constant_certificate;
+mod public_graph_certificate;
 mod public_query;
 mod public_report;
 pub use super::certificate_arithmetic::world::EnvelopeFailure as BezierPairWorldFailure;
@@ -74,8 +77,10 @@ pub use equations::DiagonalDivisionFailure as BezierPairDiagonalFailure;
 pub use graph_enclosure::GraphEnvelopeFailure as BezierPairGraphFailure;
 pub use membership_certificate::MembershipRule as BezierPairMembershipRule;
 pub use operation_failure::PairOperationFailure as BezierPairOperationFailure;
-pub use public_certificate::{
-    BezierPairCertificate, BezierPairMembership, BezierPairProjection, CertifiedBezierPairContact,
+pub use public_certificate::{BezierPairCertificate, CertifiedBezierPairContact};
+pub use public_constant_certificate::{BezierPairConstantExclusion, BezierPairSignStage};
+pub use public_graph_certificate::{
+    BezierPairGraphCertificate, BezierPairMembership, BezierPairProjection,
 };
 pub use public_query::BezierPairCurve;
 pub use public_report::{BezierPairFailure, BezierPairReport};

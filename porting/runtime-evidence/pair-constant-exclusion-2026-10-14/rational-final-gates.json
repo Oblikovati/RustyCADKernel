@@ -1,0 +1,46 @@
+[
+  {
+    "name": "rational-final-tests",
+    "argv": [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkmath",
+      "--test",
+      "toolkit",
+      "certified_bezier_pair_exclusions"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "rational-final-clippy",
+    "argv": [
+      "cargo",
+      "clippy",
+      "-p",
+      "rustycad-tkmath",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "rational-final-format",
+    "argv": [
+      "python3",
+      "tools/check_rust_format.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "rational-final-discovery",
+    "argv": [
+      "python3",
+      "tools/toolkit_test_suites.py"
+    ],
+    "exit_code": 0
+  }
+]

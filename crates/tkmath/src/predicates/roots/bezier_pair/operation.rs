@@ -5,8 +5,9 @@ use super::super::{
     signs::RootSignEvaluation,
 };
 use super::candidate_certificate::CandidateCertificate;
+use super::constant_exclusion::ConstantEquationExclusion;
 pub(super) use super::operation_failure::PairOperationFailure;
-use super::sign_policy::{EffectivePairSigns, PairSignOptions};
+use super::sign_policy::{EffectivePairSigns, PairSignOptions, PairSignPolicyFailure};
 use super::{
     algebraic, equations::PairedEquations, projection::LinearFiberProjection,
     source::OwnedBezierSource,
@@ -20,13 +21,28 @@ pub(super) struct PairContact {
 }
 pub(super) struct PairOperationProof {
     pub sources: [OwnedBezierSource; 2],
-    pub projection: LinearFiberProjection,
+    pub evidence: PairProofEvidence,
     pub contacts: Vec<PairContact>,
-    pub exceptional_fibers: RootSignEvaluation,
     pub source_certificates: [super::source_certificate::SourceCertificate; 2],
-    pub candidate_certificate: CandidateCertificate,
     pub work: super::work_budget::PairWorkReceipt,
+}
+pub(super) enum PairProofEvidence {
+    Graph(Box<GraphProofEvidence>),
+    ConstantExcluded(ConstantEquationExclusion),
+}
+pub(super) struct GraphProofEvidence {
+    pub projection: LinearFiberProjection,
+    pub exceptional_fibers: RootSignEvaluation,
+    pub candidate_certificate: CandidateCertificate,
     pub signs: EffectivePairSigns,
+}
+impl PairOperationProof {
+    pub fn graph(&self) -> Option<&GraphProofEvidence> {
+        match &self.evidence {
+            PairProofEvidence::Graph(graph) => Some(graph),
+            PairProofEvidence::ConstantExcluded(_) => None,
+        }
+    }
 }
 pub(super) struct AccountedPairOutcome {
     pub completion: Result<PairOperationProof, PairOperationFailure>,
@@ -96,16 +112,68 @@ fn execute(
 ) -> Result<PairOperationProof, PairOperationFailure> {
     validate_world_request(requested_error)?;
     let prepared = checked_projection(&sources, self_domain, options, signs, budget, cancelled)?;
-    let settings = (self_domain, options, requested_error);
-    let task = prepared.graph_task(&sources, settings, budget);
-    let outcome = task.contacts(cancelled)?;
+    finish_prepared(
+        sources,
+        prepared,
+        (self_domain, options, requested_error),
+        budget,
+        cancelled,
+    )
+}
+fn finish_prepared(
+    sources: [OwnedBezierSource; 2],
+    prepared: PreparedEvidence,
+    settings: (bool, RootIsolationOptions, f64),
+    budget: &super::work_budget::PairWorkBudget,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<PairOperationProof, PairOperationFailure> {
+    match prepared {
+        PreparedEvidence::Graph(graph) => {
+            finish_graph(sources, *graph, settings, budget, cancelled)
+        }
+        PreparedEvidence::Constant(checked) => {
+            Ok(constant_proof(sources, *checked, budget.receipt()))
+        }
+    }
+}
+fn finish_graph(
+    sources: [OwnedBezierSource; 2],
+    prepared: PreparedProjection,
+    settings: (bool, RootIsolationOptions, f64),
+    budget: &super::work_budget::PairWorkBudget,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<PairOperationProof, PairOperationFailure> {
+    let outcome = prepared
+        .graph_task(&sources, settings, budget)
+        .contacts(cancelled)?;
     Ok(owned_proof(sources, prepared, outcome, budget.receipt()))
+}
+fn constant_proof(
+    sources: [OwnedBezierSource; 2],
+    checked: ConstantPrepared,
+    work: super::work_budget::PairWorkReceipt,
+) -> PairOperationProof {
+    PairOperationProof {
+        sources,
+        source_certificates: checked.domains,
+        work,
+        contacts: Vec::new(),
+        evidence: PairProofEvidence::ConstantExcluded(checked.exclusion),
+    }
 }
 fn validate_world_request(value: f64) -> Result<(), PairOperationFailure> {
     if !value.is_finite() || value <= 0. {
         return Err(PairOperationFailure::WorldRequest(value));
     }
     Ok(())
+}
+enum PreparedEvidence {
+    Graph(Box<PreparedProjection>),
+    Constant(Box<ConstantPrepared>),
+}
+struct ConstantPrepared {
+    exclusion: ConstantEquationExclusion,
+    domains: [super::source_certificate::SourceCertificate; 2],
 }
 struct PreparedProjection {
     signs: EffectivePairSigns,
@@ -122,12 +190,14 @@ fn owned_proof(
     PairOperationProof {
         sources,
         work,
-        signs: prepared.signs,
-        projection: prepared.projection,
         contacts: outcome.contacts,
-        candidate_certificate: outcome.certificate,
-        exceptional_fibers: prepared.exceptional_fibers,
         source_certificates: prepared.source_certificates,
+        evidence: PairProofEvidence::Graph(Box::new(GraphProofEvidence {
+            signs: prepared.signs,
+            projection: prepared.projection,
+            candidate_certificate: outcome.certificate,
+            exceptional_fibers: prepared.exceptional_fibers,
+        })),
     }
 }
 fn checked_projection(
@@ -137,18 +207,74 @@ fn checked_projection(
     signs: PairSignOptions,
     budget: &super::work_budget::PairWorkBudget,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<PreparedProjection, PairOperationFailure> {
+) -> Result<PreparedEvidence, PairOperationFailure> {
     let (equations, source_certificates) =
         checked_equations(sources, self_domain, options, budget, cancelled)?;
-    let projection = derive_projection(&equations, cancelled)?;
-    complete_projection(
-        projection,
-        source_certificates,
+    prepare_checked_equations(
+        (equations, source_certificates),
         sources[0].interval,
         (self_domain, options, signs),
         budget,
         cancelled,
     )
+}
+type CheckedPairEquations = (
+    PairedEquations,
+    [super::source_certificate::SourceCertificate; 2],
+);
+fn prepare_checked_equations(
+    checked: CheckedPairEquations,
+    interval: [f64; 2],
+    settings: (bool, RootIsolationOptions, PairSignOptions),
+    budget: &super::work_budget::PairWorkBudget,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<PreparedEvidence, PairOperationFailure> {
+    let (equations, source_certificates) = checked;
+    let Some(projection) = derive_projection(&equations, cancelled)? else {
+        return prepare_constant(&equations, source_certificates, settings.0, settings.2);
+    };
+    let graph = (projection, source_certificates, interval);
+    finish_graph_preparation(graph, settings, budget, cancelled)
+}
+type CheckedGraphInput = (
+    LinearFiberProjection,
+    [super::source_certificate::SourceCertificate; 2],
+    [f64; 2],
+);
+fn finish_graph_preparation(
+    graph: CheckedGraphInput,
+    settings: (bool, RootIsolationOptions, PairSignOptions),
+    budget: &super::work_budget::PairWorkBudget,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<PreparedEvidence, PairOperationFailure> {
+    let (projection, source_certificates, interval) = graph;
+    complete_projection(
+        projection,
+        source_certificates,
+        interval,
+        settings,
+        budget,
+        cancelled,
+    )
+    .map(|graph| PreparedEvidence::Graph(Box::new(graph)))
+}
+fn prepare_constant(
+    equations: &PairedEquations,
+    domains: [super::source_certificate::SourceCertificate; 2],
+    self_domain: bool,
+    signs: PairSignOptions,
+) -> Result<PreparedEvidence, PairOperationFailure> {
+    let exclusion = ConstantEquationExclusion::from_checked_equations(equations, self_domain)
+        .ok_or(PairOperationFailure::NonLinearFiber)?;
+    if signs.version != 1 {
+        return Err(PairOperationFailure::SignPolicy(
+            PairSignPolicyFailure::Version(signs.version),
+        ));
+    }
+    Ok(PreparedEvidence::Constant(Box::new(ConstantPrepared {
+        exclusion,
+        domains,
+    })))
 }
 fn complete_projection(
     projection: LinearFiberProjection,
@@ -171,10 +297,8 @@ fn complete_projection(
 fn derive_projection(
     equations: &PairedEquations,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<LinearFiberProjection, PairOperationFailure> {
-    LinearFiberProjection::derive(equations, cancelled)
-        .map_err(PairOperationFailure::Root)?
-        .ok_or(PairOperationFailure::NonLinearFiber)
+) -> Result<Option<LinearFiberProjection>, PairOperationFailure> {
+    LinearFiberProjection::derive(equations, cancelled).map_err(PairOperationFailure::Root)
 }
 fn certify_projection(
     projection: &LinearFiberProjection,
@@ -337,3 +461,7 @@ fn certify_source_domain(
     super::source_certificate::certify(&sources[source_index], options, budget, cancelled)
         .map_err(|cause| super::operation_failure::source_domain_failure(source_index, cause))
 }
+
+#[cfg(test)]
+#[path = "operation_storage_tests.rs"]
+mod storage_tests;

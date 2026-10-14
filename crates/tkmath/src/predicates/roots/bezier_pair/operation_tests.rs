@@ -30,7 +30,7 @@ fn real_parabola_pair_certifies_unique_bounded_contact_and_world_error() {
     assert_eq!(proof.contacts[0].world.achieved_error, 0.);
     assert_eq!(proof.sources[0].controls, a);
     verify_denominator_certificates(&proof);
-    assert_eq!(proof.projection.alpha.0, vec![(-2).into()]);
+    assert_eq!(proof.graph().unwrap().projection.alpha.0, vec![(-2).into()]);
 }
 #[test]
 fn general_self_pipeline_separates_loop_contact_cusp_and_closed_endpoint() {

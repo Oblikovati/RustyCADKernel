@@ -46,32 +46,35 @@ fn assert_contact(certificate: &BezierPairCertificate<'_>) {
     assert!(contact.achieved_world_error > 0. && contact.achieved_world_error <= 1e-8);
 }
 fn assert_coverage(certificate: &BezierPairCertificate<'_>) {
-    assert_eq!(certificate.candidates().1.roots().len(), 1);
-    assert!(certificate.candidates().0.polynomial_degree().is_some());
-    assert_eq!(certificate.accepted_candidates(), &[true]);
-    assert_eq!(certificate.membership().len(), 4);
+    let graph = certificate.graph().unwrap();
+    assert_eq!(graph.candidates().1.roots().len(), 1);
+    assert!(graph.candidates().0.polynomial_degree().is_some());
+    assert_eq!(graph.accepted_candidates(), &[true]);
+    assert_eq!(graph.membership().len(), 4);
     assert_membership(certificate);
     assert_regular_domains(certificate);
     assert_projection(certificate);
 }
 fn assert_membership(certificate: &BezierPairCertificate<'_>) {
-    for predicate in certificate.membership() {
+    let graph = certificate.graph().unwrap();
+    for predicate in graph.membership() {
         assert!(predicate.rule.accepts(predicate.evaluation.signs()[0]));
-        assert_eq!(predicate.evaluation.isolation(), certificate.candidates().1);
+        assert_eq!(predicate.evaluation.isolation(), graph.candidates().1);
         let _exact_query = predicate.coefficients;
     }
 }
 fn assert_projection(certificate: &BezierPairCertificate<'_>) {
-    let projection = certificate.projection();
+    let graph = certificate.graph().unwrap();
+    let projection = graph.projection();
     assert!(projection.alpha.coefficient_count() > 0);
     assert!(projection.beta.coefficient_count() > 0);
     assert_eq!(projection.cleared_originals.len(), 2);
     let leading = projection.alpha.signed_coefficient(0).unwrap().to_string();
     assert!(leading.parse::<i64>().unwrap() < 0);
     assert!(projection.alpha.signed_coefficient(5).is_none());
-    assert_eq!(certificate.leading_factors().len(), 0);
+    assert_eq!(graph.leading_factors().len(), 0);
     assert_eq!(certificate.homogeneous_sources().len(), 2);
-    assert_eq!(certificate.effective_signs().requested, policy().signs);
+    assert_eq!(graph.effective_signs().requested, policy().signs);
 }
 #[test]
 fn public_canonical_closed_cubic_self_survives_query_drop_and_input_mutation() {
@@ -151,19 +154,14 @@ fn public_capture_failure_includes_actual_offending_counts_and_expected_shape() 
 }
 
 fn assert_regular_domains(certificate: &BezierPairCertificate<'_>) {
+    let graph = certificate.graph().unwrap();
     assert!(
         certificate
             .denominators()
             .iter()
             .all(|roots| roots.roots().is_empty())
     );
-    assert!(
-        certificate
-            .exceptional_fibers()
-            .isolation()
-            .roots()
-            .is_empty()
-    );
+    assert!(graph.exceptional_fibers().isolation().roots().is_empty());
 }
 fn rational_query(swapped: bool, reversed_line: bool) -> CapturedBezierPair {
     let controls = [[0., 0.], [0.5, 1.]];
@@ -252,25 +250,32 @@ fn actual_right_source_singularity_retains_domain_and_original_denominator_roots
     let query = CapturedBezierPair::capture_pair(curve(&controls), singular).unwrap();
     let report = query.certify(policy(), || false);
     assert_eq!(report.completion(), BezierPairCompletion::Incomplete);
-    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {
-        panic!("expected original source failure");
-    };
-    assert!(matches!(
-        failure,
-        BezierPairOperationFailure::SourceDomain {
-            source_index: 1,
-            ..
-        }
-    ));
-    let BezierPairOperationFailure::DenominatorRoots(roots) = failure.original_cause() else {
+    assert_original_denominator(source_operation_failure(&report, 1));
+}
+fn assert_original_denominator(failure: &BezierPairOperationFailure) {
+    let BezierPairOperationFailure::DenominatorRoots(roots) = failure else {
         panic!("expected actual denominator root isolation");
     };
     assert_eq!(
         roots.roots()[0].bounds().0.compare_f64(0.5).unwrap(),
         std::cmp::Ordering::Equal
     );
-    assert!(report.complete().is_none());
 }
+fn source_operation_failure(
+    report: &BezierPairReport,
+    expected: usize,
+) -> &BezierPairOperationFailure {
+    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {
+        panic!("expected original source failure");
+    };
+    let BezierPairOperationFailure::SourceDomain { source_index, .. } = failure else {
+        panic!("expected source-domain failure");
+    };
+    assert_eq!(*source_index, expected);
+    assert!(report.complete().is_none());
+    failure.original_cause()
+}
+
 #[test]
 fn actual_left_nonfinite_coordinate_is_invalid_and_preserves_original_point_cause() {
     let left = [[f64::NAN, 0.], [1., 1.]];
@@ -278,18 +283,9 @@ fn actual_left_nonfinite_coordinate_is_invalid_and_preserves_original_point_caus
     let query = CapturedBezierPair::capture_pair(curve(&left), curve(&right)).unwrap();
     let report = query.certify(policy(), || false);
     assert_eq!(report.completion(), BezierPairCompletion::Invalid);
-    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {
-        panic!("expected original source failure");
-    };
+    let failure = source_operation_failure(&report, 0);
     assert!(matches!(
         failure,
-        BezierPairOperationFailure::SourceDomain {
-            source_index: 0,
-            ..
-        }
-    ));
-    assert!(matches!(
-        failure.original_cause(),
         BezierPairOperationFailure::Source(BezierPairCaptureFailure::Coordinate(_))
     ));
     assert!(report.source().captured_curves()[0].controls[0][0].is_nan());
