@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "scope": "Private symbolic semantic body key/map prefix; no production correspondence issuer",
+  "source_revision": "d3c9e0aa6d5a2104edb58bc297830b231b4b87d8",
+  "base_revision": "892d9f99e8198731776568302a925d81846cf8ad",
+  "behavior_commits": [
+    "44444e595",
+    "89b753d12",
+    "d3c9e0aa6"
+  ],
+  "commands": [
+    {
+      "command": "rustup run 1.99.0 cargo fmt --all -- --check",
+      "result": "passed"
+    },
+    {
+      "command": "rustup run 1.99.0 cargo clippy -p rustycad-tkbo --all-targets --all-features --jobs 2 -- -D warnings",
+      "result": "passed"
+    },
+    {
+      "command": "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib sketch_region_prism --jobs 2",
+      "result": "664 passed; 369 filtered; 0 failed"
+    },
+    {
+      "command": "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib semantic_map_replay_probe --jobs 2 -- --nocapture",
+      "processes": 2,
+      "result": "exact byte equality"
+    }
+  ],
+  "source_bookends": {
+    "tracked_input_count": 16074,
+    "equal": true
+  },
+  "replay": {
+    "bytes": 10571,
+    "sha256": "ffbdcd9461a1acb2349d514610a6f24b6cdadd03b460bf9394a65240b88247ff",
+    "equal_to_pre_format_source": true
+  },
+  "oracle_kinds": [
+    "literal symbolic 13-member/26-use tables",
+    "independent slot discriminants",
+    "exact multiset and ancestor invariants",
+    "unchanged legacy publication rejection",
+    "process and thread equality"
+  ],
+  "retained_failures": [
+    "first-map-tests.log: wrong fixture marker window length, corrected test only",
+    "initial-map-prefix-clippy.log: redundant field spelling",
+    "pre-format-frozen-fmt.log: field shorthand formatting; final d3c source fully rerun"
+  ],
+  "exclusions": [
+    "Actual native correspondence and production map issuance are not implemented",
+    "No public API or complete owned operation acceptance",
+    "No new TSan execution or concurrency stress claim",
+    "No full TKBO suite or doctests in this bounded prefix gate"
+  ],
+  "platform": {
+    "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+    "rust": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "jobs": 2
+  }
+}
