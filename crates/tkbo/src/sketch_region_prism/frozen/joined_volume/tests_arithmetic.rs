@@ -147,3 +147,17 @@ fn nonunit_support_scale_preserves_closed_form_and_original_error() {
         assert_eq!(representative, f64::from(sign) * source.representative());
     }
 }
+
+#[test]
+fn representative_error_matches_independent_exact_rational_differences() {
+    // 24/5 - lower = 1/(5*2^50); upper - 24/5 = 1/(5*2^48).
+    // The independent Arb receipts enclose both, below these upward binary64 bounds.
+    for (height, expected) in [(2., 0x3ca999999999999a), (-2., 0x3cc999999999999a)] {
+        let source = extreme_scalar(height, 1.);
+        assert_eq!(source.absolute_error_bound().to_bits(), expected);
+        assert_eq!(
+            source.requested_options(),
+            PolynomialIntegralOptions::default()
+        );
+    }
+}
