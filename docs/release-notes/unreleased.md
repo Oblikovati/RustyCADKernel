@@ -12,7 +12,10 @@ Closed targets expose their original native ID and destruction cause; renderer
 operations return typed closed-target failures and refuse cached images. Rebind
 to a live window and submit a fresh GUI packet before capturing a new frame.
 
-The live-window contract is unchanged. Prior fatal behavior is retained through
+Explicit rebind always invalidates cached frames and GUI packets, including a
+rebind with the same native handle and extent. Submit a fresh packet and redraw
+before capture; numeric XID equality cannot establish a shared lifetime. Ordinary
+live-rendering output is unchanged. Prior fatal behavior is retained through
 revision-bound diagnostic replay; see the [migration decision](../adr/0018-delivered-native-window-destruction.md).
 Unreported native destruction, shared-display reinitialization, the original
 intermittent `BadWindow` and fresh performance acceptance remain open.

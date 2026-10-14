@@ -2,8 +2,9 @@
 
 Decision: native-window-lifecycle behavior version 1. Migration recorded
 2026-10-14 for the next compatible patch, targeted at 0.2.8. This changes the
-previously unsupported delivered-destruction outcome; valid live-window behavior
-and public method signatures remain unchanged. The coordinator owns workspace
+previously unsupported delivered-destruction outcome and makes explicit rebind
+invalidation unconditional. Ordinary live rendering and public method signatures
+remain unchanged. The coordinator owns workspace
 versioning and release; this decision authorizes neither publication nor a claim
 that the original intermittent GUI failure is fixed.
 
@@ -25,14 +26,20 @@ distinguishes this state from an uninitialized or virtual target.
 
 Rebinding the existing view releases its presenter, invalidates the preceding
 capture and any GUI packet tied to that target, and requires a fresh successful
-frame. Removal and repeated delivered destruction are idempotent. Foreign-window
+frame. This rule applies even when the native handle and extent are equal: numeric
+XID equality does not prove an unchanged lifetime. Compared with prior behavior,
+explicit rebind of a live target also refuses the cached frame and old GUI packet.
+The regression explicitly rebinds the same live object at the same extent, then
+requires fresh submission and byte-identical output. This rebind migration is
+distinct from delivered-close handling; ordinary rendering has unchanged bytes.
+Removal and repeated delivered destruction are idempotent. Foreign-window
 events must not close this target, including events whose parent ID happens to
 equal this target.
 
 The earlier fatal behavior remains available for revision-bound diagnostic replay
 at `c814d12b3`, using the archived probe sources. This is the recorded migration
 from that unversioned behavior; fatal termination is not a selectable production
-policy in behavior v1. Live-window expected results are not changed.
+policy in behavior v1. Ordinary live-rendering expected images are not changed.
 
 Scope excludes unreported external destruction, reinitializing a display while
 native objects retain it, and attributing the historical intermittent `BadWindow`.
