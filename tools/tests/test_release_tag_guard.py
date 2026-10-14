@@ -14,11 +14,25 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from release_archives import write_receipt
-from release_tag_guard import guard_transaction, planned_gate_names, verify_tag
+from release_tag_guard import (
+    guard_transaction,
+    planned_gate_names,
+    plan_command_roster,
+    verify_tag,
+)
 
 REVISION = "a" * 40
 OID = "b" * 40
-PLAN = b"GATE_NAMES = ('tests', 'docs')\n"
+PLAN = b"""from types import SimpleNamespace as Record
+GATE_NAMES = ('tests', 'docs', 'coverage')
+def verification_gates(root, source):
+    def command(argv, env=(), stdout_path=None):
+        return Record(argv=argv, env=env, stdout_path=stdout_path)
+    checks = (command(('python3', 'discovery')), command(('python3', 'format')), command(('cargo', 'lint', '-Dwarnings')))
+    docs = (command(('cargo', 'doc'), (('RUSTDOCFLAGS', '-D warnings'),)),)
+    coverage = (command(('cargo', 'llvm-cov', '-E', 'not test(slow)'), stdout_path=root / 'coverage.log'),)
+    return (Record(name='tests', commands=checks), Record(name='docs', commands=docs), Record(name='coverage', commands=coverage))
+"""
 
 
 class FakeGuardGit:
@@ -26,6 +40,7 @@ class FakeGuardGit:
         self.status = b""
         self.head = REVISION
         self.kind = "tag"
+        self.root = Path.cwd()
 
     def read(self, *arguments: str) -> bytes:
         responses = {
@@ -35,6 +50,7 @@ class FakeGuardGit:
             + b"\ntype commit\ntag v0.2.8\n\nRelease\n",
             ("rev-parse", OID + "^{commit}"): REVISION.encode(),
             ("rev-parse", "HEAD"): self.head.encode(),
+            ("rev-parse", "--show-toplevel"): str(self.root).encode(),
             ("status", "--porcelain", "--untracked-files=all"): self.status,
             ("show", REVISION + ":tools/release_verification_plan.py"): PLAN,
         }
@@ -61,6 +77,7 @@ class ReleaseEvidenceFixture:
             "tag": "v0.2.8",
             "revision": REVISION,
             "complete": True,
+            "occt_source": "/fixture/OCCT",
             "verification_plan_sha256": hashlib.sha256(PLAN).hexdigest(),
             "gates": gates,
             "packages": {
@@ -71,16 +88,19 @@ class ReleaseEvidenceFixture:
         }
 
     def gate_evidence(self) -> tuple[list[dict[str, object]], str]:
-        command = {
-            "argv": ["cargo", "test"],
-            "exit_code": 0,
-            "log": "tests.log",
-            "sha256": hashlib.sha256(b"passed\n").hexdigest(),
-        }
-        gates = [
-            {"name": name, "exit_code": 0, "commands": [command]}
-            for name in ("tests", "docs")
-        ]
+        roster = plan_command_roster(PLAN, Path.cwd(), Path("/fixture/OCCT"))
+        gates = []
+        for name, commands in roster.items():
+            evidence = [
+                dict(
+                    command,
+                    exit_code=0,
+                    log="tests.log",
+                    sha256=hashlib.sha256(b"passed\n").hexdigest(),
+                )
+                for command in commands
+            ]
+            gates.append({"name": name, "exit_code": 0, "commands": evidence})
         manifest_hash = hashlib.sha256(
             (self.assets / "martensite-release.json").read_bytes()
         ).hexdigest()
@@ -112,7 +132,7 @@ class ReleaseGuardTests(unittest.TestCase):
     def test_missing_receipt_and_malformed_plan(self) -> None:
         with self.assertRaisesRegex(ValueError, "MARTENSITE_RELEASE_RECEIPT"):
             guard_transaction(
-                "prepared", f"{REVISION} {OID} refs/tags/v0.2.8", None, self.git
+                "prepared", f"{'0' * 40} {OID} refs/tags/v0.2.8", None, self.git
             )
         for plan in [b"GATE_NAMES = ()", b"GATE_NAMES = function()", b"OTHER = 1"]:
             with self.assertRaises((ValueError, TypeError)):
@@ -172,6 +192,49 @@ class ReleaseGuardTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "regular file"):
             self.verify()
 
+    def test_exact_command_rosters(self) -> None:
+        original = copy.deepcopy(self.fixture.receipt)
+        for alteration in (
+            "omitted",
+            "formatter",
+            "echo",
+            "lint",
+            "coverage",
+            "env",
+            "stdout",
+        ):
+            self.fixture.receipt = copy.deepcopy(original)
+            self.alter_roster(alteration)
+            self.fixture.write()
+            with self.assertRaisesRegex(ValueError, "command roster"):
+                self.verify()
+
+    def test_release_updates_are_immutable(self) -> None:
+        with self.assertRaisesRegex(ValueError, "immutable"):
+            guard_transaction(
+                "prepared",
+                f"{REVISION} {OID} refs/tags/v0.2.8",
+                str(self.fixture.receipt_path),
+                self.git,
+            )
+
+    def alter_roster(self, alteration: str) -> None:
+        gates = self.fixture.receipt["gates"]
+        if alteration == "omitted":
+            gates[0]["commands"].pop()
+        if alteration == "formatter":
+            gates[0]["commands"].pop(1)
+        if alteration == "echo":
+            gates[0]["commands"][0]["argv"] = ["echo", "passed"]
+        if alteration == "lint":
+            gates[0]["commands"][2]["argv"].pop()
+        if alteration == "coverage":
+            gates[2]["commands"][0]["argv"][-1] = "all()"
+        if alteration == "env":
+            gates[1]["commands"][0]["env"] = {}
+        if alteration == "stdout":
+            gates[2]["commands"][0]["stdout_path"] = None
+
 
 class RealHookIntegration(unittest.TestCase):
     def test_hook_rejects_release_allows_branch_and_delete(self) -> None:
@@ -211,12 +274,20 @@ class RealHookIntegration(unittest.TestCase):
         (fixture.assets / "martensite-release.json").unlink()
         write_receipt(fixture.assets, "0.2.8", revision)
         fixture.receipt["revision"] = revision
+        fixture.receipt["gates"][2]["commands"][0]["stdout_path"] = str(
+            root / "coverage.log"
+        )
         fixture.receipt["packages"]["manifest_sha256"] = hashlib.sha256(
             (fixture.assets / "martensite-release.json").read_bytes()
         ).hexdigest()
         fixture.write()
         hook = Path(__file__).resolve().parents[2] / ".githooks"
         self.git(root, "config", "core.hooksPath", str(hook))
+        self.check_release_attempts(root, fixture)
+
+    def check_release_attempts(
+        self, root: Path, fixture: ReleaseEvidenceFixture
+    ) -> None:
         result = self.tag_with_receipt(root, fixture.receipt_path)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.git(root, "tag", "-d", "v0.2.8")

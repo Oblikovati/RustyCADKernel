@@ -11,7 +11,8 @@ from pathlib import Path
 import re
 import subprocess
 import sys
-from typing import Protocol
+from types import ModuleType
+from typing import Callable, Protocol, cast
 
 from publish_release import artifact_hashes, json_object, validate_assets
 
@@ -25,6 +26,21 @@ class GuardGit(Protocol):
     def read(self, *arguments: str) -> bytes:
         """Return checked Git bytes; example: read('rev-parse', 'HEAD')."""
         ...
+
+
+class PlannedCommand(Protocol):
+    """Owned view of the pure candidate command; example: command_identity(command)."""
+
+    argv: tuple[str, ...]
+    env: tuple[tuple[str, str], ...]
+    stdout_path: Path | None
+
+
+class PlannedGate(Protocol):
+    """Owned view of the candidate roster; example: planned_gate.commands."""
+
+    name: str
+    commands: tuple[PlannedCommand, ...]
 
 
 class SystemGuardGit:
@@ -113,6 +129,60 @@ def planned_gate_names(plan_bytes: bytes) -> tuple[str, ...]:
     raise ValueError("plan GATE_NAMES: expected nonempty literal string tuple")
 
 
+def plan_command_roster(
+    plan_bytes: bytes, root: Path, source: Path
+) -> dict[str, list[dict[str, object]]]:
+    """Evaluate the already source-verified pure plan; example: plan_command_roster(blob, root, source)."""
+    name = "_martensite_release_verified_plan"
+    module = ModuleType(name)
+    module.__file__ = str(root / PLAN_PATH)
+    sys.modules[name] = module
+    try:
+        exec(compile(plan_bytes, module.__file__, "exec"), module.__dict__)
+        build = cast(
+            Callable[[Path, Path], tuple[PlannedGate, ...]], module.verification_gates
+        )
+        gates = build(root, source)
+        return {
+            gate.name: [command_identity(command) for command in gate.commands]
+            for gate in gates
+        }
+    finally:
+        del sys.modules[name]
+
+
+def command_identity(command: PlannedCommand) -> dict[str, object]:
+    """Serialize the exact shared command contract; example: command_identity(planned_command)."""
+    return {
+        "argv": list(command.argv),
+        "env": dict(command.env),
+        "stdout_path": (
+            None if command.stdout_path is None else str(command.stdout_path)
+        ),
+    }
+
+
+def verify_command_rosters(
+    receipt: dict[str, object], plan_bytes: bytes, root: Path
+) -> None:
+    """Reject omitted or substituted checks; example: verify_command_rosters(receipt, blob, root)."""
+    source = receipt.get("occt_source")
+    if not isinstance(source, str) or not Path(source).is_absolute():
+        raise ValueError(f"occt_source={source!r}: expected absolute source path")
+    expected = plan_command_roster(plan_bytes, root, Path(source))
+    require_equal(
+        sorted(expected), sorted(planned_gate_names(plan_bytes)), "plan gate names"
+    )
+    for gate in receipt["gates"]:
+        actual = [
+            {key: command.get(key) for key in ("argv", "env", "stdout_path")}
+            for command in gate["commands"]
+        ]
+        require_equal(
+            actual, expected[gate["name"]], f"gate {gate['name']} command roster"
+        )
+
+
 def verify_gates(receipt: dict[str, object], plan_bytes: bytes, base: Path) -> None:
     """Require each planned gate exactly once; example: verify_gates(receipt, blob, base)."""
     expected = planned_gate_names(plan_bytes)
@@ -186,6 +256,8 @@ def verify_tag(tag: str, oid: str, receipt_path: Path, git: GuardGit) -> None:
         "plan sha256",
     )
     verify_gates(receipt, plan_bytes, receipt_path.parent)
+    root = Path(git.read("rev-parse", "--show-toplevel").decode().strip())
+    verify_command_rosters(receipt, plan_bytes, root)
     verify_packages(receipt, tag, revision, receipt_path.parent)
 
 
@@ -200,6 +272,10 @@ def guard_transaction(
         match = re.fullmatch(r"refs/tags/(v[0-9]+\.[0-9]+\.[0-9]+)", reference)
         if match is None or set(new) == {"0"}:
             continue
+        if set(old) != {"0"}:
+            raise ValueError(
+                f"release ref={reference!r} old={old!r}: expected immutable new tag (zero old OID)"
+            )
         if not receipt:
             raise ValueError(
                 f"release ref={reference!r}: expected MARTENSITE_RELEASE_RECEIPT"
