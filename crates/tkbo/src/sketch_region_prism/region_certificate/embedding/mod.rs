@@ -114,3 +114,8 @@ mod tests;
 
 #[cfg(test)]
 mod trim_incidence_tests;
+
+mod annular_validation;
+pub(in crate::sketch_region_prism) use annular_validation::{
+    AnnularTableFailure, check_bound_annular_table,
+};
