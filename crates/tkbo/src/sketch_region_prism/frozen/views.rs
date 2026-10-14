@@ -26,6 +26,7 @@ impl FrozenPrismProjection {
         )
         .into_bytes();
         for occurrence in &self.uses {
+            placement(occurrence.placement, &mut bytes);
             bytes.extend(
                 format!(
                     "{:?};{:?};{:?};",
@@ -34,6 +35,7 @@ impl FrozenPrismProjection {
                 .bytes(),
             );
         }
+        bytes.extend(format!("endpoints={:?};", self.endpoints).bytes());
         bytes.extend(geometry_bytes(&self.nodes, &self.faces));
         limits(&self.limits, &mut bytes);
         bytes
@@ -75,6 +77,13 @@ fn face_bytes(face: &FrozenPrismFace, bytes: &mut Vec<u8>) {
     }
 }
 fn limits(value: &FrozenPrismLimits, bytes: &mut Vec<u8>) {
+    bytes.extend(
+        format!(
+            "effective={:?}/{:?}/{:?};",
+            value.effective_seed, value.effective_extrusion, value.effective_roots
+        )
+        .bytes(),
+    );
     numbers(value.seed, bytes);
     numbers(value.extrusion, bytes);
     numbers([value.spatial_limit, value.parameter_limit], bytes);
@@ -85,4 +94,17 @@ fn limits(value: &FrozenPrismLimits, bytes: &mut Vec<u8>) {
         )
         .bytes(),
     );
+}
+
+impl std::fmt::Debug for FrozenOriginalOccurrence {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("FrozenOriginalOccurrence")
+            .field("key", &self.key)
+            .field("orientation", &self.orientation)
+            .field("linear", &self.placement.linear)
+            .field("origin", &self.placement.origin)
+            .field("scale", &self.placement.scale)
+            .finish()
+    }
 }

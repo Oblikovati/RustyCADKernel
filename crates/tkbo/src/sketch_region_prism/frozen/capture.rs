@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! One operation-local entry owns every reachable result value; callbacks cannot publish a prefix.
-use super::super::{PrismCompletion, PrismReceipt};
+use super::super::PrismReceipt;
 use super::{
     bindings::*, coverage::capture_coverage, geometry::*, graph::capture_graph,
     history::capture_history, types::*,
@@ -58,26 +58,32 @@ fn execute(
     phase: &mut FreezePhase,
 ) -> Result<FrozenPrismProjection, FreezeStop> {
     checkpoint(progress, phase, FreezePhase::Admission)?;
-    admit_receipt(receipt)?;
+    super::admission::admit_receipt(receipt)?;
     checkpoint(progress, phase, FreezePhase::Identity)?;
     let bound = bind_projection(receipt, bindings)?;
     if bound.contexts.len() > 4096 {
         return Err(missing("at most 4096 directed occurrences").into());
     }
-    checkpoint(progress, phase, FreezePhase::Geometry)?;
-    check_source_snapshot(&bound)?;
-    let faces = capture_faces(&bound)?;
-    checkpoint(progress, phase, FreezePhase::Incidence)?;
-    check_current_contexts(&bound)?;
-    let (graph, incidence) = capture_graph(&bound)?;
-    let nodes = capture_nodes(&bound, &graph)?;
-    super::endpoints::certify_endpoints(&nodes, &incidence)?;
-    checkpoint(progress, phase, FreezePhase::Evidence)?;
-    let projection = finish_projection(&bound, nodes, faces, incidence)?;
+    let projection = capture_phases(&bound, progress, phase)?;
     checkpoint(progress, phase, FreezePhase::Commit)?;
     check_source_snapshot(&bound)?;
     check_final_capture(&bound, &projection)?;
     Ok(projection)
+}
+fn capture_phases(
+    bound: &BoundProjection<'_>,
+    progress: &mut impl FreezeProgress,
+    phase: &mut FreezePhase,
+) -> Result<FrozenPrismProjection, FreezeStop> {
+    checkpoint(progress, phase, FreezePhase::Geometry)?;
+    check_source_snapshot(bound)?;
+    let faces = capture_faces(bound)?;
+    checkpoint(progress, phase, FreezePhase::Incidence)?;
+    check_current_contexts(bound)?;
+    let incidence = capture_graph(bound)?;
+    let nodes = capture_nodes(bound)?;
+    checkpoint(progress, phase, FreezePhase::Evidence)?;
+    Ok(finish_projection(bound, nodes, faces, incidence)?)
 }
 fn checkpoint(
     progress: &mut impl FreezeProgress,
@@ -91,22 +97,6 @@ fn checkpoint(
         Err(failure) => Err(PrismFreezeCause::Native(failure).into()),
     }
 }
-fn admit_receipt(receipt: &PrismReceipt) -> Result<(), PrismFreezeCause> {
-    if !matches!(receipt.completion, PrismCompletion::Incomplete) {
-        return Err(missing("completed private diagnostic transaction"));
-    }
-    let diagnostic = receipt
-        .diagnostic
-        .as_ref()
-        .ok_or(missing("diagnostic body"))?;
-    if !diagnostic.transport_gaps.is_empty() {
-        return Err(missing("complete observed history transport"));
-    }
-    if receipt.cancelled_query.is_some() {
-        return Err(missing("uncancelled source selection"));
-    }
-    Ok(())
-}
 fn finish_projection(
     bound: &BoundProjection<'_>,
     nodes: Vec<FrozenPrismNode>,
@@ -117,50 +107,59 @@ fn finish_projection(
         version: 1,
         operation: bound.bindings.operation,
         region: bound.bindings.selected_region,
+        endpoints: super::endpoints::certify_endpoints(&nodes, &graph)?,
         nodes,
         faces,
         graph,
-        uses: capture_uses(bound),
+        uses: capture_uses(bound)?,
         history: capture_history(bound)?,
         coverage: capture_coverage(bound)?,
         limits: capture_limits(bound.receipt),
     })
 }
-fn capture_uses(bound: &BoundProjection<'_>) -> Vec<FrozenPrismUse> {
-    let mut uses = Vec::new();
-    for (index, context) in bound.contexts.iter().enumerate() {
-        let children = bound
-            .contexts
-            .iter()
-            .enumerate()
-            .filter(|(_, child)| {
-                child.child_slots.len() == context.child_slots.len() + 1
-                    && child.child_slots.starts_with(&context.child_slots)
-            })
-            .map(|(i, _)| bound.use_names[i].clone())
-            .collect();
-        uses.push(FrozenPrismUse {
-            key: bound.use_names[index].clone(),
-            orientation: context.occurrence.orientation(),
-            children,
-        });
-    }
+fn capture_uses(bound: &BoundProjection<'_>) -> Result<Vec<FrozenPrismUse>, PrismFreezeCause> {
+    let mut uses = (0..bound.contexts.len())
+        .map(|i| capture_use(bound, i))
+        .collect::<Result<Vec<_>, _>>()?;
     uses.sort_by(|a, b| a.key.cmp(&b.key));
-    uses
+    Ok(uses)
+}
+fn capture_use(
+    bound: &BoundProjection<'_>,
+    index: usize,
+) -> Result<FrozenPrismUse, PrismFreezeCause> {
+    let context = &bound.contexts[index];
+    Ok(FrozenPrismUse {
+        key: bound.use_names[index].clone(),
+        orientation: context.occurrence.orientation(),
+        placement: super::history::freeze_placement(context.occurrence.location())?,
+        children: child_keys(bound, &context.child_slots),
+    })
+}
+fn child_keys(bound: &BoundProjection<'_>, path: &[usize]) -> Vec<FrozenUseKey> {
+    bound
+        .contexts
+        .iter()
+        .enumerate()
+        .filter(|(_, child)| {
+            child.child_slots.len() == path.len() + 1 && child.child_slots.starts_with(path)
+        })
+        .map(|(index, _)| bound.use_names[index].clone())
+        .collect()
 }
 fn capture_limits(receipt: &PrismReceipt) -> FrozenPrismLimits {
     let requested = receipt.limits.requested;
     let effective = &receipt.limits.effective;
+    let vector = requested.extrusion;
     FrozenPrismLimits {
         seed: requested.seed,
-        extrusion: [
-            requested.extrusion.x(),
-            requested.extrusion.y(),
-            requested.extrusion.z(),
-        ],
+        extrusion: [vector.x(), vector.y(), vector.z()],
         roots: requested.roots,
         spatial_limit: requested.spatial_limit,
         parameter_limit: requested.parameter_limit,
+        effective_seed: effective.seed,
+        effective_extrusion: effective.extrusion.map(|v| [v.x(), v.y(), v.z()]),
+        effective_roots: effective.roots,
         effective_spatial: effective.spatial_limit,
         effective_parameter: effective.parameter_limit,
         achieved_error: receipt.limits.achieved_error,
@@ -173,9 +172,8 @@ fn check_final_capture(
     let fresh = bind_projection(bound.receipt, bound.bindings)?;
     check_current_contexts(bound)?;
     check_source_snapshot(&fresh)?;
-    let (graph, incidence) = capture_graph(&fresh)?;
-    let nodes = capture_nodes(&fresh, &graph)?;
-    super::endpoints::certify_endpoints(&nodes, &incidence)?;
+    let incidence = capture_graph(&fresh)?;
+    let nodes = capture_nodes(&fresh)?;
     let recaptured = finish_projection(&fresh, nodes, capture_faces(&fresh)?, incidence)?;
     if recaptured.replay_bytes() != projection.replay_bytes() {
         return Err(PrismFreezeCause::StaleCapture {

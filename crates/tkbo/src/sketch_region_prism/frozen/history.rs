@@ -23,7 +23,11 @@ pub(super) fn capture_history(
     }
     derived.sort_by(|a, b| a.output.cmp(&b.output));
     let deleted = original_keys(bound.bindings, &bound.receipt.input.input_deleted)?;
-    Ok(FrozenPrismHistory { derived, deleted })
+    Ok(FrozenPrismHistory {
+        originals: capture_originals(bound)?,
+        derived,
+        deleted,
+    })
 }
 fn capture_relation(
     bound: &BoundProjection<'_>,
@@ -77,4 +81,31 @@ pub(super) fn occurrence_keys(
         return Err(missing("actual attributed diagnostic occurrence"));
     }
     Ok(keys)
+}
+
+pub(super) fn freeze_placement(
+    location: &rustycad_tkmath::toploc::Location,
+) -> Result<rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding<3>, PrismFreezeCause>
+{
+    crate::sketch_region_geometry_capture::captured_placement(location.transformation())
+        .map_err(|cause| PrismFreezeCause::Surface(cause.into()))
+}
+fn capture_originals(
+    bound: &BoundProjection<'_>,
+) -> Result<Vec<FrozenOriginalOccurrence>, PrismFreezeCause> {
+    let mut result = Vec::new();
+    for binding in &bound.bindings.originals {
+        result.push(FrozenOriginalOccurrence {
+            key: original_key(bound.bindings, &binding.actual)?,
+            orientation: binding.actual.orientation,
+            placement: freeze_placement(&binding.actual.location)?,
+        });
+    }
+    result.sort_by(|a, b| a.key.cmp(&b.key));
+    if result.windows(2).any(|pair| pair[0].key == pair[1].key) {
+        return Err(missing(
+            "one authored original key per actual original occurrence",
+        ));
+    }
+    Ok(result)
 }

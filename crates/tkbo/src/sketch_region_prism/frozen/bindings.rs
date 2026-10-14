@@ -36,6 +36,7 @@ pub(super) fn bind_projection<'a>(
         .iter()
         .map(|c| name_context(&bound, c))
         .collect::<Result<_, _>>()?;
+    check_orientations(&bound)?;
     check_definition_collisions(&bound)?;
     bound.use_names = bind_uses(&bound)?;
     Ok(bound)
@@ -143,4 +144,18 @@ pub(super) fn missing(required: &'static str) -> PrismFreezeCause {
         required,
         actual: 0,
     }
+}
+
+fn check_orientations(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCause> {
+    use rustycad_tkg3d::top_abs::Orientation::{Forward, Reversed};
+    for context in &bound.contexts {
+        let actual = context.occurrence.orientation();
+        if !matches!(actual, Forward | Reversed) {
+            return Err(PrismFreezeCause::UnsupportedOrientation {
+                actual,
+                expected: "Forward or Reversed directed polynomial prism occurrence",
+            });
+        }
+    }
+    Ok(())
 }

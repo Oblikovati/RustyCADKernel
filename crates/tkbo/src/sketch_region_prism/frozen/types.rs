@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::surface_charts::{CapturedPrismSurface, PrismSurfaceCause, PrismSurfaceProof};
-use super::super::{PrismBodyContext, PrismImageRole, PrismPhase};
+use super::super::{PrismBodyContext, PrismImageRole};
 use crate::sketch_region::{OriginalMemberIdentity, PartitionOccurrenceIdentity};
 use crate::sketch_region_geometry_capture::CapturedMetricCurve;
 use crate::sketch_region_source_conformance::CapturedSpaceRepresentation;
 use crate::sketch_region_validation::{StageCoverage, ValidationStage};
-use rustycad_tkbrep::brep_graph::{NodeId, NodeKind};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::predicates::roots::RootIsolationOptions;
+use rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding;
 
 /// Explicit caller names; zero is deliberately invalid. Example: `AuthoredPrismId(703)`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -96,6 +96,10 @@ pub(crate) enum PrismFreezeCause {
         representation: &'static str,
         actual: &'static str,
     },
+    UnsupportedOrientation {
+        actual: Orientation,
+        expected: &'static str,
+    },
     UnsupportedDiagnostic {
         stage: Option<ValidationStage>,
         actual: &'static str,
@@ -131,6 +135,7 @@ pub(crate) struct FrozenPrismProjection {
     pub(super) history: FrozenPrismHistory,
     pub(super) coverage: super::coverage::FrozenPrismCoverage,
     pub(super) limits: FrozenPrismLimits,
+    pub(super) endpoints: Vec<super::endpoints::FrozenEndpointProof>,
 }
 #[derive(Clone)]
 pub(crate) struct FrozenPrismNode {
@@ -143,6 +148,7 @@ pub(crate) struct FrozenPrismNode {
 pub(crate) struct FrozenPrismUse {
     pub(super) key: FrozenUseKey,
     pub(super) orientation: Orientation,
+    pub(super) placement: MetricEmbedding<3>,
     pub(super) children: Vec<FrozenUseKey>,
 }
 #[derive(Clone)]
@@ -167,8 +173,15 @@ pub(crate) struct FrozenOriginalKey {
 }
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenPrismHistory {
+    pub(super) originals: Vec<FrozenOriginalOccurrence>,
     pub(super) derived: Vec<FrozenDerivedRelation>,
     pub(super) deleted: Vec<FrozenOriginalKey>,
+}
+#[derive(Clone)]
+pub(crate) struct FrozenOriginalOccurrence {
+    pub(super) key: FrozenOriginalKey,
+    pub(super) orientation: Orientation,
+    pub(super) placement: MetricEmbedding<3>,
 }
 /// All original parents are retained; the mapped class is provenance of derivation.
 #[derive(Clone, Debug)]
@@ -185,6 +198,9 @@ pub(crate) struct FrozenPrismLimits {
     pub(super) roots: RootIsolationOptions,
     pub(super) spatial_limit: f64,
     pub(super) parameter_limit: f64,
+    pub(super) effective_seed: Option<[f64; 2]>,
+    pub(super) effective_extrusion: Option<[f64; 3]>,
+    pub(super) effective_roots: Option<RootIsolationOptions>,
     pub(super) effective_spatial: Option<f64>,
     pub(super) effective_parameter: Option<f64>,
     pub(super) achieved_error: Option<f64>,
@@ -197,7 +213,4 @@ impl From<PrismImageRole> for FrozenSweepRole {
             PrismImageRole::Generated => Self::Generated,
         }
     }
-}
-pub(super) fn kind_code(kind: NodeKind) -> u8 {
-    kind.0 as u8
 }

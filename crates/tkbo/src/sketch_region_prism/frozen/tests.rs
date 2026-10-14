@@ -17,14 +17,14 @@ fn missing_authored_bindings_never_get_invented_ids() {
     let result = freeze_prism(&receipt, &bindings, &mut NamedFreezeProgress);
     assert!(matches!(result, PrismFreezeOutcome::Incomplete(_)));
 }
-struct NamedFreezeProgress;
+pub(super) struct NamedFreezeProgress;
 impl FreezeProgress for NamedFreezeProgress {
     fn checkpoint(&mut self, _: FreezePhase) -> Result<bool, rustycad_tkernel::standard::Failure> {
         Ok(false)
     }
 }
 
-fn authored_bindings(
+pub(super) fn authored_bindings(
     receipt: &PrismReceipt,
     source: &rustycad_tkbrep::topods::Shape,
 ) -> PrismPublicationBindings {
@@ -132,7 +132,7 @@ fn complete_owned_capture_keeps_independent_incidence_counts() {
     assert!(!capture.is_valid_body());
 }
 
-fn authored_receipt() -> (rustycad_tkbrep::topods::Shape, PrismReceipt) {
+pub(super) fn authored_receipt() -> (rustycad_tkbrep::topods::Shape, PrismReceipt) {
     let source = crate::closed_analytic_cubic::closed_analytic_cubic(1., false);
     let batch = crate::sketch_region_candidates::tests::candidates(std::slice::from_ref(&source));
     let receipt = retain_selected_prism(
@@ -141,4 +141,25 @@ fn authored_receipt() -> (rustycad_tkbrep::topods::Shape, PrismReceipt) {
         &mut progress(None, None),
     );
     (source, receipt)
+}
+
+#[test]
+fn internal_and_external_body_orientations_are_explicitly_unsupported() {
+    use rustycad_tkg3d::top_abs::Orientation::{External, Internal};
+    for orientation in [Internal, External] {
+        let (source, mut receipt) = authored_receipt();
+        receipt
+            .diagnostic
+            .as_mut()
+            .unwrap()
+            .body
+            .set_orientation(orientation);
+        let bindings = authored_bindings(&receipt, &source);
+        let result = freeze_prism(&receipt, &bindings, &mut NamedFreezeProgress);
+        assert!(
+            matches!(result, PrismFreezeOutcome::Incomplete(PrismFreezeFailure {
+            cause: PrismFreezeCause::UnsupportedOrientation { actual, .. }, ..
+        }) if actual == orientation)
+        );
+    }
 }

@@ -15,7 +15,7 @@ pub(crate) struct FrozenGraphIncidence {
 }
 pub(super) fn capture_graph(
     bound: &BoundProjection<'_>,
-) -> Result<(BRepGraph, FrozenGraphIncidence), PrismFreezeCause> {
+) -> Result<FrozenGraphIncidence, PrismFreezeCause> {
     let mut graph = BRepGraph::new();
     let options = Options {
         create_auto_product: false,
@@ -51,7 +51,7 @@ pub(super) fn capture_graph(
         endpoints: edge_endpoints(&graph, &names)?,
         coedges: directed_coedges(bound, &graph, &names)?,
     };
-    Ok((graph, frozen))
+    Ok(frozen)
 }
 fn mapped_nodes(
     bound: &BoundProjection<'_>,

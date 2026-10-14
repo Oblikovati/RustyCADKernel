@@ -12,7 +12,6 @@ use crate::sketch_region_geometry_capture::CapturedMetricCurve;
 use crate::sketch_region_source_conformance::capture_space_representation;
 use rustycad_tkbrep::{
     brep::BRepTool,
-    brep_graph::BRepGraph,
     topods::{edge, face, vertex},
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -23,12 +22,11 @@ pub(super) fn check_source_snapshot(bound: &BoundProjection<'_>) -> Result<(), P
         .copied
         .as_ref()
         .ok_or(missing("pre-sweep copied selection"))?;
-    let old = copied
-        .chart_sources
-        .as_ref()
-        .map_err(|_| missing("successful pre-sweep scalar capture"))?;
-    let fresh =
-        capture_sources(&copied.base).map_err(|_| missing("fresh source scalar capture"))?;
+    let old = copied.chart_sources.as_ref().map_err(|cause| {
+        PrismFreezeCause::Surface(PrismSurfaceCause::SourceSnapshot(cause.clone()))
+    })?;
+    let fresh = capture_sources(&copied.base)
+        .map_err(|cause| PrismFreezeCause::Surface(PrismSurfaceCause::SourceSnapshot(cause)))?;
     if encoding::sources(old) != encoding::sources(&fresh) {
         return Err(PrismFreezeCause::StaleCapture {
             representation: "pre-sweep source coefficients/endpoints",
@@ -119,7 +117,12 @@ fn check_retained_chart(
         .captured
         .as_ref()
         .ok_or(missing("retained captured chart"))?;
-    if entry.decision.is_err() || encoding::chart(old) != encoding::chart(fresh) {
+    if entry.decision.is_err() {
+        return Err(super::admission::unsupported(
+            "present retained surface chart failure",
+        ));
+    }
+    if encoding::chart(old) != encoding::chart(fresh) {
         return Err(PrismFreezeCause::StaleCapture {
             representation: "retained output surface/trim proof",
         });
@@ -192,7 +195,6 @@ fn trim_occurrence(
 }
 pub(super) fn capture_nodes(
     bound: &BoundProjection<'_>,
-    _graph: &BRepGraph,
 ) -> Result<Vec<FrozenPrismNode>, PrismFreezeCause> {
     let mut nodes = Vec::new();
     for (index, context) in bound.contexts.iter().enumerate() {
@@ -200,7 +202,7 @@ pub(super) fn capture_nodes(
             .iter()
             .any(|n: &FrozenPrismNode| n.key == bound.names[index])
         {
-            nodes.push(capture_node(bound, _graph, index, &context.occurrence)?);
+            nodes.push(capture_node(bound, index, &context.occurrence)?);
         }
     }
     nodes.sort_by_key(|node| node.key);
@@ -208,7 +210,6 @@ pub(super) fn capture_nodes(
 }
 fn capture_node(
     bound: &BoundProjection<'_>,
-    _graph: &BRepGraph,
     index: usize,
     actual: &rustycad_tkbrep::topods::Shape,
 ) -> Result<FrozenPrismNode, PrismFreezeCause> {
