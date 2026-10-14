@@ -68,3 +68,29 @@ Send/Sync of owned envelopes, and input isolation. Local retained containers hav
 no published lock-free ownership claim. Record source-frozen tests, docs, lint,
 formatting, sanitizer attempt and any incomplete gate separately. No native OCCT,
 GPU, release benchmark or application acceptance belongs to this slice.
+
+## Early preparation implementation boundary
+
+The first private envelope consumes an actual boxed preparation refusal. Its
+owned context is cloned only from that refusal's retained request and optional
+validated naming plan. Admission causes and direct native failures preserve their
+existing typed operands, including invalid floating-point bits. Callback evidence
+retains the exact checkpoint, ordinal, cancellation/exhaustion variant or native
+failure. The operation class is copied without reinterpretation.
+
+Projection coverage is complete only when that supported cause/callback evidence
+is present and there are no retained outer owners. Census, contact transport,
+unavailable-region and unavailable-stage causes always add explicit typed gaps,
+even when the outer owner inventory is empty. They are not claimed to have
+lossless projected child phases or numerical payloads: the same original boxed
+failure remains available for operation-local inspection. An absent callback for
+a callback cause also prevents complete coverage. The immutable envelope and the
+local retention carrier are separate types; the carrier has no published
+Send/Sync claim.
+
+The context receipt encodes full request operands and the actual optional
+semantic envelope. It is not a diagnostic-cause persistence format. Development
+process/thread fixtures append typed cause observations solely for byte-for-byte
+test comparisons. A publication wrapper is still pending the resolver-issued
+actual-invocation packet; this prefix provides no arbitrary header/failure pairing
+entrypoint and no publication-completeness claim.

@@ -53,3 +53,5 @@ mod owned_request;
 mod publication;
 #[cfg(test)]
 mod sweep_query_tests;
+
+pub(crate) mod diagnostic_envelope;

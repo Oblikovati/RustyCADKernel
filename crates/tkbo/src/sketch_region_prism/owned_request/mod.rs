@@ -42,3 +42,11 @@ mod diagnostic_baseline_tests;
 mod diagnostic_access_tests;
 
 pub(crate) mod request_replay;
+
+#[cfg(test)]
+mod diagnostic_nested_tests;
+#[cfg(test)]
+mod diagnostic_projection_tests;
+
+#[cfg(test)]
+mod diagnostic_runtime_tests;
