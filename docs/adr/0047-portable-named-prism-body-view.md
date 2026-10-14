@@ -82,3 +82,24 @@ Resolve the pending actual-correspondence gate within the Kernel #10 milestone;
 do not extend this fixture-only prerequisite into an alternative production path.
 Multiple boundaries, holes, rational/general profiles, persistent edit naming,
 mesh publication, and application acceptance remain separate unfinished gates.
+
+## Private row-projection checkpoint
+
+`publication::body_view::project_named_prism_body` now requires an accepted
+`PublishedNamedPrism` and an exact `ResolvedPrismNames` binding before projecting.
+It retains one full naming-binding byte vector (which already contains the
+publication binding), the caller plan, an explicit unique solid root occurrence,
+and owned scalar/member/use/face/incidence rows. Complete-domain checks compare
+sets and multiplicity, not merely counts. Raw vertex contexts, tolerance contexts,
+face trims, edge endpoints, coedges, and ordered wire rows must all be covered.
+Read methods expose no mutable topology or geometry handles. Replay is recomputed
+from current owned rows using shared key, geometry and tolerance encoders.
+
+The current tests exercise symbolic row mechanics, exact copying, source mutation
+and disposal, threaded row replay, and refusal of an unbound symbolic map against
+a real accepted publication. **They do not construct an accepted complete body
+view.** The actual semantic resolver has no production issuer at this checkpoint;
+its V2 dictionary/actual correspondence work is a pending dependency. Full body
+replay, complete getter isolation, cost measurements on an actual accepted body,
+and the final full toolkit gate remain pending that positive operation fixture.
+The symbolic fixture is not a fallback or production name allocator.
