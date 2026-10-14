@@ -8,7 +8,7 @@ use super::types::PrismSurfaceCause;
 use crate::sketch_region::ArrangementRelation;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-pub(super) fn actual_faces(
+pub(in crate::sketch_region_prism) fn actual_faces(
     diagnostic: &PrismDiagnostic,
 ) -> Result<Vec<PrismBodyContext>, PrismCompletion> {
     let mut faces = Vec::new();
@@ -23,7 +23,7 @@ pub(super) fn actual_faces(
     }
     Ok(faces)
 }
-pub(super) fn face_history<'a>(
+pub(in crate::sketch_region_prism) fn face_history<'a>(
     face: &PrismBodyContext,
     diagnostic: &'a PrismDiagnostic,
 ) -> Result<(&'a PrismImageBinding, &'a ArrangementRelation), PrismSurfaceCause> {
@@ -51,7 +51,10 @@ fn unique_history<'a>(
         }),
     }
 }
-fn same_context(first: &PrismBodyContext, second: &PrismBodyContext) -> bool {
+pub(in crate::sketch_region_prism) fn same_context(
+    first: &PrismBodyContext,
+    second: &PrismBodyContext,
+) -> bool {
     first.occurrence.is_equal(&second.occurrence)
         && first.child_slots == second.child_slots
         && first.ancestors.len() == second.ancestors.len()
@@ -62,7 +65,7 @@ fn same_context(first: &PrismBodyContext, second: &PrismBodyContext) -> bool {
             .all(|(a, b)| a.is_equal(b))
 }
 
-pub(super) fn missing_body_images(
+pub(in crate::sketch_region_prism) fn missing_body_images(
     diagnostic: &PrismDiagnostic,
     faces: &[PrismBodyContext],
 ) -> Result<

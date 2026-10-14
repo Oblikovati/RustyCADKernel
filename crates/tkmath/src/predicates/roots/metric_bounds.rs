@@ -3,6 +3,7 @@
 mod arithmetic;
 mod curve_identity;
 pub use curve_identity::{CurveIdentityDecision, MetricCurveChain, compare_curve_chains};
+mod affine_support;
 #[cfg(test)]
 mod curve_identity_tests;
 mod mapped;
@@ -110,10 +111,11 @@ mod integral_baseline_tests;
 
 mod polynomial_integrals;
 pub use polynomial_integrals::{
-    CertifiedPolynomialMeasure, OrientedMetricCurve, PolynomialIntegralError,
-    PolynomialIntegralEvidence, PolynomialIntegralFailure, PolynomialIntegralOperation,
-    PolynomialIntegralOptions, certify_polynomial_boundary_integral,
-    certify_polynomial_sweep_integral,
+    CertifiedPolynomialMeasure, CertifiedPolynomialPlaneMeasure, OrientedMetricCurve,
+    PolynomialIntegralError, PolynomialIntegralEvidence, PolynomialIntegralFailure,
+    PolynomialIntegralOperation, PolynomialIntegralOptions, PolynomialPlaneError,
+    PolynomialPlaneEvidence, PolynomialPlaneFailure, certify_polynomial_boundary_integral,
+    certify_polynomial_plane_measure, certify_polynomial_sweep_integral,
 };
 
 mod polynomial_side;

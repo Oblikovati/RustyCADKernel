@@ -293,3 +293,6 @@ fn invalid_singular_sweep_inputs_retain_typed_operation_context() {
     assert!(matches!(error.cause, Failure::Metric(cause)
         if matches!(*cause, super::super::ResidualError::Value { role:"origin", index:2, .. })));
 }
+
+#[path = "plane/tests.rs"]
+mod plane_tests;

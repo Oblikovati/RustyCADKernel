@@ -49,6 +49,7 @@ pub(crate) enum CapturedChartSource {
     Cap(CapturedPlaneSupport),
     Side(CapturedSpaceRepresentation),
 }
+#[derive(Clone)]
 pub(crate) enum CapturedPrismSurface {
     Plane(CapturedPlaneSupport),
     Extrusion {
@@ -94,7 +95,7 @@ pub(crate) enum PrismChartStage {
     TrimPCurve,
     TrimSpaceCurve,
 }
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub(crate) struct PrismSurfaceProof {
     pub identities: Vec<PrismChartStage>,
     pub trim_roles: Vec<PrismTrimRole>,
