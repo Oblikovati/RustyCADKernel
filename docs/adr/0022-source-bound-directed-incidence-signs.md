@@ -39,8 +39,9 @@ The retained rational fixture has controls (0,-1),(1,2) and weights (2,1).
 Its homogeneous numerators are Nx=t, Ny=4t-2, with D=2-t. At t=1/2,
 Ny=0 and Nx/D=1/3. The adjacent binary64 values have exact fractions
 6004799503160661/18014398509481984 and
-3002399751580331/9007199254740992. Their differences from 1/3 are
-+1/54043195528445952 and -1/27021597764222976, respectively.
+3002399751580331/9007199254740992. The exact subtractions are
+1/3 minus the lower endpoint = +1/54043195528445952, and
+1/3 minus the upper endpoint = -1/27021597764222976.
 Jacobian `polynomial.map.evaluate` independently checks the normal zero and
 both rational differences; the Bernstein-to-polynomial derivation above is
 explicit reasoning, not a claim that that tool verified the implementation.
