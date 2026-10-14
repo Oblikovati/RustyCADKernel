@@ -8,6 +8,7 @@ use crate::sketch_region_prism::{
     frozen::proof_join::{encode_joined_block, encode_joined_text},
 };
 pub(super) use join::join_bytes;
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) use tags::freeze as freeze_tag;
 impl OwnedPrismPublicationDiagnostic {
     /// Replay supported evidence and exact coverage; `diagnostic.replay_bytes()` excludes retained local owners.
     pub(crate) fn replay_bytes(&self) -> Vec<u8> {
@@ -37,6 +38,11 @@ fn cause(value: &OwnedPublicationDiagnosticCause, bytes: &mut Vec<u8>) {
             bytes.push(1);
             stage(value, bytes);
         }
+        other => history_cause(other, bytes),
+    }
+}
+fn history_cause(value: &OwnedPublicationDiagnosticCause, bytes: &mut Vec<u8>) {
+    match value {
         OwnedPublicationDiagnosticCause::HistoryCancelled { operation, phase } => {
             bytes.push(2);
             bytes.extend(operation.0.to_le_bytes());
@@ -45,6 +51,11 @@ fn cause(value: &OwnedPublicationDiagnosticCause, bytes: &mut Vec<u8>) {
         OwnedPublicationDiagnosticCause::Unprojected(value) => {
             bytes.extend([3, tags::pending(*value)])
         }
+        OwnedPublicationDiagnosticCause::History(value) => {
+            bytes.push(4);
+            encode_joined_block(value.encoded(), bytes);
+        }
+        _ => unreachable!("version and stage causes are encoded by the caller"),
     }
 }
 fn stage(value: &OwnedPublicationStageDiagnostic, bytes: &mut Vec<u8>) {

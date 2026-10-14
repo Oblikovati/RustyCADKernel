@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Only actual invocation packets qualify private authored observations with caller context.
 mod admission;
+mod history;
+mod history_codec;
 mod joined;
 mod operation;
 mod projection;
