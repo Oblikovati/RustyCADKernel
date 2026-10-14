@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "MeshVS_NodePair",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_SymmetricPairHasher.hxx",
+      "source_sha256": "326789c07190c1fdb479a64d8c973947097fca3423fbc631f41345a636624744",
+      "cpp_declaration_id": "2a3b9d4436daac9e96f21c2f8e928b9f8afbe5a56daf4207f4df153bb4507143",
+      "rust_item": "martensite_tkmeshvs::MeshVSNodePair",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSNodePair",
+          "declaration_sha256": "7843cbf08f3de770c49a6f01b01b78dc343e5a88527c7cf173fd178c86541843",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "MeshVS_TwoNodes::MeshVS_TwoNodes",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoNodes.hxx",
+      "source_sha256": "458c4c4c9492b0541f7869f75d162786ff7a4e13362fe96d3c84b13e351d2611",
+      "cpp_declaration_id": "477911e6fe21347e6278fae9a5c8d6452946aa9db5aedbec9a760eb5e4828837",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoNodes::new",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes::new",
+          "declaration_sha256": "caa490c0303503bc482dbe9ab06a2857b03eb0286e57dd650225944d191ddeaf",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoNodes",
+                "resolved_item_path": "martensite_tkmeshvs::node_pairs::MeshVSTwoNodes"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes::<core::default::Default>::default",
+          "declaration_sha256": "7651b27b16d3202596a9f484e9c96cd2f79bac2297a95a41ea09e3ff860f6e70",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoNodes",
+                "resolved_item_path": "martensite_tkmeshvs::node_pairs::MeshVSTwoNodes"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Default",
+              "resolved_item_path": "core::default::Default"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14.",
+      "rust_items": [
+        "martensite_tkmeshvs::MeshVSTwoNodes::new",
+        "martensite_tkmeshvs::MeshVSTwoNodes::<core::default::Default>::default"
+      ]
+    },
+    {
+      "upstream_id": "MeshVS_TwoNodes::operator==",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoNodes.hxx",
+      "source_sha256": "458c4c4c9492b0541f7869f75d162786ff7a4e13362fe96d3c84b13e351d2611",
+      "cpp_declaration_id": "5675c8879db4478a7e5b1160eeba8534b510df2bbdbdf14c03cc4830d107ff11",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoNodes::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes::<core::cmp::PartialEq>::eq",
+          "declaration_sha256": "41107ca62da7abe7d8f19288649b2cf3de4bed0b5becea8d3ff6e2067ccfdc02",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoNodes",
+                "resolved_item_path": "martensite_tkmeshvs::node_pairs::MeshVSTwoNodes"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PartialEq",
+              "resolved_item_path": "core::cmp::PartialEq"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "MeshVS_SymmetricPairHasher",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_SymmetricPairHasher.hxx",
+      "source_sha256": "326789c07190c1fdb479a64d8c973947097fca3423fbc631f41345a636624744",
+      "cpp_declaration_id": "90ef98a91a1c8a3a1db98e5223ba3ac4b04d416bb6e85ee8660788779447e3d1",
+      "rust_item": "martensite_tkmeshvs::MeshVSSymmetricPairHasher",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSSymmetricPairHasher",
+          "declaration_sha256": "43a08f3ff6c9ecaa36297d6550d31a80410549d0b9eb7ce28705e81f2cfe3a46",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "std::hash<MeshVS_TwoNodes>::operator()",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoNodes.hxx",
+      "source_sha256": "458c4c4c9492b0541f7869f75d162786ff7a4e13362fe96d3c84b13e351d2611",
+      "cpp_declaration_id": "bea219bb4c36db33d6dc5d2faf1cadee7b74fc3b267b3ed6dbfc39156f5ead46",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoNodes::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+          "declaration_sha256": "4da63d71b2f4417c57515840b33da8e4b22b1bcde76bdc7a56e54f78972b9ba5",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoNodes",
+                "resolved_item_path": "martensite_tkmeshvs::node_pairs::MeshVSTwoNodes"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "HashKey",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashKey"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "MeshVS_SymmetricPairHasher::operator()",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_SymmetricPairHasher.hxx",
+      "source_sha256": "326789c07190c1fdb479a64d8c973947097fca3423fbc631f41345a636624744",
+      "cpp_declaration_id": "c9762a76ed2e49d18c94ae57335519e78b9b7617131d30256960e6a75a4f6283",
+      "rust_item": "martensite_tkmeshvs::MeshVSSymmetricPairHasher::<rustycad_tkernel::ncollection::HashPolicy<(i32, i32)>>::hash",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSSymmetricPairHasher::<rustycad_tkernel::ncollection::HashPolicy<(i32, i32)>>::hash",
+          "declaration_sha256": "9ec1b6007a59fc6a7bf2a28213adda0963845f04adc7db3f6bbaf84755a1fd42",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSSymmetricPairHasher",
+                "resolved_item_path": "martensite_tkmeshvs::node_pairs::MeshVSSymmetricPairHasher"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": [
+                          {
+                            "primitive": "i32"
+                          },
+                          {
+                            "primitive": "i32"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "HashPolicy",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "MeshVS_TwoNodes",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoNodes.hxx",
+      "source_sha256": "458c4c4c9492b0541f7869f75d162786ff7a4e13362fe96d3c84b13e351d2611",
+      "cpp_declaration_id": "d17d4fa7e0eb36ae7cf667033020ce6b93d5c6805f3a7dd37b4ac9793eb8af36",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoNodes",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes",
+          "declaration_sha256": "b37c72fb864a2cc14ff71b8e88694cb6aea9281604f2fd655e39210ce994f1ea",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoNodes.hxx",
+      "source_sha256": "458c4c4c9492b0541f7869f75d162786ff7a4e13362fe96d3c84b13e351d2611",
+      "cpp_declaration_id": "d6bae2d084eb8a904c8e84bf6011f9d2d414dfffea61d957e013480404c38e66",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+          "declaration_sha256": "d17c038f278c32feff5d7cb4f9e1ebf525bcd3f9aff2a46f5867f02e61170246",
+          "impl_context": null
+        },
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+          "declaration_sha256": "4da63d71b2f4417c57515840b33da8e4b22b1bcde76bdc7a56e54f78972b9ba5",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoNodes",
+                "resolved_item_path": "martensite_tkmeshvs::node_pairs::MeshVSTwoNodes"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "HashKey",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashKey"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DefaultHashPolicy",
+        "martensite_tkmeshvs::MeshVSTwoNodes::<rustycad_tkernel::ncollection::HashKey>::occt_hash"
+      ]
+    },
+    {
+      "upstream_id": "MeshVS_TwoNodes::First",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoNodes.hxx",
+      "source_sha256": "458c4c4c9492b0541f7869f75d162786ff7a4e13362fe96d3c84b13e351d2611",
+      "cpp_declaration_id": "dcba6e343b14ae3e820a91354409a893363ce1235101d5e5d63aebf662e25fe0",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoNodes::first",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes::first",
+          "declaration_sha256": "d8c322c6746418ea4276beabf2773ff0fa8cffd15c9474b7d9ba2682c3396039",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "MeshVS_SymmetricPairHasher::operator()",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_SymmetricPairHasher.hxx",
+      "source_sha256": "326789c07190c1fdb479a64d8c973947097fca3423fbc631f41345a636624744",
+      "cpp_declaration_id": "ec8eddcca1a10e4c5b30e06a94bb46d327b65e386bd9339016249e2e0e153c02",
+      "rust_item": "martensite_tkmeshvs::MeshVSSymmetricPairHasher::<rustycad_tkernel::ncollection::HashPolicy<(i32, i32)>>::equal",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSSymmetricPairHasher::<rustycad_tkernel::ncollection::HashPolicy<(i32, i32)>>::equal",
+          "declaration_sha256": "0728cd4e960365d058372d024c30824fe7f6a8db6649f4a9f40c78ca93246d3d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSSymmetricPairHasher",
+                "resolved_item_path": "martensite_tkmeshvs::node_pairs::MeshVSSymmetricPairHasher"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": [
+                          {
+                            "primitive": "i32"
+                          },
+                          {
+                            "primitive": "i32"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "HashPolicy",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    },
+    {
+      "upstream_id": "MeshVS_TwoNodes::Second",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoNodes.hxx",
+      "source_sha256": "458c4c4c9492b0541f7869f75d162786ff7a4e13362fe96d3c84b13e351d2611",
+      "cpp_declaration_id": "f5a1b4c590cd97222f3e9ebb7cb5e1fb10a320cbc7414d929a699100df7d1094",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoNodes::second",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes::second",
+          "declaration_sha256": "310d736494f5c03c9cd68196031fcf6282de2e3654069945190dfd6b2ff0016a",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite complete symmetric node-key family preserves original stored orientation, signed sorted native byte hashing, direct/reversed equality and actual NCollection map insertion/removal. NodePair remains an ordered tuple outside the explicit symmetric policy. Independent366row native fixture with29282 equality decisions, two exact native captures,18 extracted Rust tests/2doctests and clean32crate archive source/VCS equality: porting/runtime-evidence/meshvs-node-pairs-2026-10-14."
+    }
+  ]
+}

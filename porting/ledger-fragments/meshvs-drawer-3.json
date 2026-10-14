@@ -108,7 +108,7 @@
       "rust_declaration_selectors": [
         {
           "path": "martensite_tkmeshvs::MeshVSDrawerAttribute",
-          "declaration_sha256": "e1d4bd551451ec7fce440013c955fbe283c4ad475c427138de132e8fc969ffc6",
+          "declaration_sha256": "eb21bcbe3a7ee0345cd882a34d12c46b23ad908899f315787c6eca5275a51af6",
           "impl_context": null
         }
       ],
@@ -125,7 +125,7 @@
       "rust_declaration_selectors": [
         {
           "path": "martensite_tkmeshvs::MeshVSEntityType",
-          "declaration_sha256": "fbf5710633276f73f1df0df3b8926a54f9061778d08f01e0de25342e21ba9966",
+          "declaration_sha256": "93c8cb9eb5f6859f69b85c522ba6d34e82122ffa6c118b5e082ec2733befef51",
           "impl_context": null
         }
       ],
@@ -220,15 +220,15 @@
       "source_sha256": "e01979a20c3ec8e16301a38aa5a2333d03fcce3c4b880e777d1402b4fb2b1642",
       "cpp_declaration_id": "97b39393738040f8bc0e6f9b717487e5b128a964863e4f34824e7092001b7588",
       "rust_item": "martensite_tkmeshvs::MeshVSDrawerSource::assign",
-      "status": "partial",
+      "status": "implemented",
       "rust_declaration_selectors": [
         {
           "path": "martensite_tkmeshvs::MeshVSDrawerSource::assign",
-          "declaration_sha256": "bac85949f9e920385e246c61d3d9c50d170748d0f43cdbf5612d09c4420c0e18",
+          "declaration_sha256": "6b0fff6e1cdbcd73ffe58fcf861eccc5c349399cfe0657f6dfdf63d9a9cdd642",
           "impl_context": null
         }
       ],
-      "notes": "Martensite MeshVS actual typed drawer storage, pinned17row native two-repeat oracle and Rust-only replay including value copies and derived Assign failure/count ordering. Descriptor-field RTTI remains required/open; no whole toolkit/rendering claim. See docs/meshvs-drawer.md. Qualified inherited-base projection remains open; see porting/runtime-evidence/qualified-drawer-capping-gaps-2026-10-14/receipt.json.",
+      "notes": "Martensite MeshVS actual typed drawer storage, pinned17row native two-repeat oracle and Rust-only replay including value copies and derived Assign failure/count ordering. Descriptor-field RTTI remains required/open; no whole toolkit/rendering claim. See docs/meshvs-drawer.md. Parity gap audit2026-10-14: Qualified native map assignment reads original inherited storage directly. Current Rust default/copy path calls overridable drawer_base and can run an extra callback or use alternate maps. Registered-base follow-up is not integrated. See porting/runtime-evidence/qualified-drawer-capping-gaps-2026-10-14/receipt.json. Qualified-base correction: actual registered MeshVS_Drawer projection replaces the extension accessor for receiver and source. Three-row derived native control repeated exactly, red-before Rust accessor-redirection regressions and current-source/extracted replay prove original maps, zero accessor callbacks and actual counts. See porting/runtime-evidence/meshvs-tool-projection-2026-10-14; historical gap receipt retained. Full Drawer descriptor/virtualDelete class scope remains open.",
       "rust_kind": "function"
     },
     {
