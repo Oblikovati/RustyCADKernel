@@ -9,7 +9,7 @@ use rustycad_tkernel::{
     standard::Handle,
 };
 use rustycad_tkservice::{aspect::AspectTypeOfFacingModel, graphic3d::*};
-use std::fmt::Write;
+use std::{fmt::Write, sync::atomic::Ordering};
 fn copy_object(input: &ColoredExpansionInputs) -> Handle<AisColoredShape> {
     let object = AisColoredShape::new(&input.base);
     object.attributes().setup_own_defaults().unwrap();
@@ -212,4 +212,110 @@ fn copy_constructor_resumes_unrelated_source_panics_without_masking_them() {
         *panic.downcast::<&str>().unwrap(),
         "unrelated copy-source panic"
     );
+}
+
+#[test]
+fn copy_contract_source_replacement_preserves_copied_shape_and_color() {
+    let input = ColoredExpansionInputs::new();
+    let source = copy_object(&input);
+    source.set_color(Color::named(NamedColor::RED)).unwrap();
+    let parent: Handle<dyn AisShapeSource> = source.cast();
+    let copy = AisColoredShape::from_shape(&parent).unwrap();
+    source.set_shape(&input.external);
+    source.set_color(Color::named(NamedColor::BLUE)).unwrap();
+    source.set_custom_width(&input.edges[0], 7.0).unwrap();
+    assert!(copy.shape_ref().is_equal(&input.base));
+    assert!(source.shape_ref().is_equal(&input.external));
+    assert_eq!(copy.color(), Color::named(NamedColor::RED));
+    assert!(copy.custom_aspects_map().is_empty());
+    assert_eq!(source.custom_aspects_map().len(), 1);
+}
+
+#[test]
+fn copy_contract_copy_mutation_preserves_source_appearance_and_map() {
+    let input = ColoredExpansionInputs::new();
+    let source = copy_object(&input);
+    source.set_color(Color::named(NamedColor::RED)).unwrap();
+    source.set_width(2.5).unwrap();
+    let parent: Handle<dyn AisShapeSource> = source.cast();
+    let copy = AisColoredShape::from_shape(&parent).unwrap();
+    copy.set_color(Color::named(NamedColor::BLUE)).unwrap();
+    copy.set_width(7.0).unwrap();
+    copy.set_custom_width(&input.edges[0], 9.0).unwrap();
+    assert_eq!(source.color(), Color::named(NamedColor::RED));
+    assert_eq!(source.width(), 2.5);
+    assert!(source.custom_aspects_map().is_empty());
+    assert_eq!(copy.custom_aspects_map().len(), 1);
+}
+
+#[test]
+fn copy_contract_retains_shape_and_appearance_after_source_drop() {
+    let input = ColoredExpansionInputs::new();
+    let source = copy_object(&input);
+    source.set_color(Color::named(NamedColor::RED)).unwrap();
+    let parent: Handle<dyn AisShapeSource> = source.cast();
+    let copy = AisColoredShape::from_shape(&parent).unwrap();
+    drop(parent);
+    drop(source);
+    assert!(copy.shape_ref().is_equal(&input.base));
+    assert_eq!(copy.color(), Color::named(NamedColor::RED));
+    copy.set_width(4.0).unwrap();
+    assert_eq!(copy.width(), 4.0);
+}
+
+#[test]
+fn copy_contract_topology_payload_remains_shared_and_mutable() {
+    let input = ColoredExpansionInputs::new();
+    let source = copy_object(&input);
+    let parent: Handle<dyn AisShapeSource> = source.cast();
+    let copy = AisColoredShape::from_shape(&parent).unwrap();
+    let source_shape = source.shape_ref().clone_shape();
+    let copy_shape = copy.shape_ref().clone_shape();
+    // Pin this limitation so presentation copying cannot be mistaken for kernel isolation.
+    assert!(source_shape.is_partner(&copy_shape));
+    source_shape.set_checked(true).unwrap();
+    assert!(copy_shape.checked().unwrap());
+    copy_shape.set_checked(false).unwrap();
+    assert!(!source_shape.checked().unwrap());
+}
+
+#[test]
+fn copy_contract_failed_getters_release_topology_and_allow_reuse() {
+    let input = ColoredExpansionInputs::new();
+    let source = copy_failure_source(&input);
+    let parent: Handle<dyn AisShapeSource> = source.cast();
+    let topology_owners = input.base.tshape().ref_count();
+    for stage in [3, 4, 5, 6] {
+        copy_contract_failure_attempt(&source, &parent, stage);
+        assert_eq!(input.base.tshape().ref_count(), topology_owners);
+        source.failure.store(0, Ordering::Relaxed);
+        assert!(source.shape_ref().is_equal(&input.base));
+        assert_eq!(source.color(), Color::named(NamedColor::RED));
+        let copy = AisColoredShape::from_shape(&parent).unwrap();
+        assert!(copy.shape_ref().is_equal(&input.base));
+        assert_eq!(copy.color(), Color::named(NamedColor::RED));
+        assert_eq!(copy.transparency(), f64::from(0.4_f32));
+    }
+    assert_eq!(input.base.tshape().ref_count(), topology_owners);
+}
+
+fn copy_contract_failure_attempt(
+    source: &super::colored_shape_dispatch_fixture::ColoredDispatchFake,
+    parent: &Handle<dyn AisShapeSource>,
+    stage: i32,
+) {
+    source.failure.store(stage, Ordering::Relaxed);
+    let outcome = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        AisColoredShape::from_shape(parent)
+    }));
+    if stage == 6 {
+        let payload = outcome.expect_err("stage=6; expected original foreign panic");
+        let message = payload.downcast::<&str>().unwrap();
+        assert_eq!(*message, "unrelated copy-source panic");
+        return;
+    }
+    let error = outcome
+        .unwrap()
+        .expect_err("stage=3..=5; expected typed getter failure");
+    assert_eq!(error.exception_type(), "Standard_Failure");
 }
