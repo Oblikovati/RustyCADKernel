@@ -1,0 +1,491 @@
+{
+  "algebra": {
+    "behavior": "ADR0034 algebra only; no geometry acceptance",
+    "cap_trims": [
+      {
+        "edge": 1,
+        "face": -1,
+        "q": -1
+      },
+      {
+        "edge": -1,
+        "face": 1,
+        "q": -1
+      },
+      {
+        "edge": -1,
+        "face": -1,
+        "q": 1
+      },
+      {
+        "edge": 1,
+        "face": 1,
+        "q": 1
+      }
+    ],
+    "incidence_signs": [
+      {
+        "cap_edges": [
+          -1,
+          1
+        ],
+        "first": 1,
+        "j": -1,
+        "last": -1,
+        "q": -1,
+        "side": -1,
+        "side_rims": [
+          1,
+          -1
+        ]
+      },
+      {
+        "cap_edges": [
+          1,
+          -1
+        ],
+        "first": -1,
+        "j": 1,
+        "last": 1,
+        "q": -1,
+        "side": 1,
+        "side_rims": [
+          -1,
+          1
+        ]
+      },
+      {
+        "cap_edges": [
+          1,
+          -1
+        ],
+        "first": 1,
+        "j": -1,
+        "last": -1,
+        "q": 1,
+        "side": 1,
+        "side_rims": [
+          -1,
+          1
+        ]
+      },
+      {
+        "cap_edges": [
+          -1,
+          1
+        ],
+        "first": -1,
+        "j": 1,
+        "last": 1,
+        "q": 1,
+        "side": -1,
+        "side_rims": [
+          1,
+          -1
+        ]
+      }
+    ],
+    "inputs": {
+      "orientation_dot_request.json": "2d2390450baf2bdc1693e8cbe4d39776b39424d98771c57dfeb7000bfc486a8e",
+      "orientation_dot_result.json": "b4100b9d8acc5cf230c3ab8a3614eac672e03baa1f008f29205812e6265ced7f",
+      "orientation_math_find.json": "443247038552817ef963d72cd6cd46a248667b37daaa674092bd3938dda9263b",
+      "orientation_matrix_schema.json": "f224c0578711989327a430e9381fa7d41459b980066ffb003d7f38bf7120c21f",
+      "orientation_side_request.json": "ada1c583ae04a9558cc49baa0b4f557d4d2f0345091b3012e0ef7834b8c31ef6",
+      "orientation_side_result.json": "ede3da44a04462f081627b05bd6d2e07ca31c0e02896bf1e798f3c48844dae5b",
+      "orientation_transport_attempt.json": "9bbb49911981699816f2f497a05826a6aec3a137d6e22202550efd94bb39ab13"
+    },
+    "inward_identity": "all three coefficients of arbitrary E equal -(a^2+b^2)*(U cross V)",
+    "limitations": [
+      "Jordan orientation and regularity are prerequisites",
+      "positive h and nonzero J required for sign conclusions",
+      "finite cases supplement universal coefficient identity"
+    ],
+    "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "side_trims": [
+      {
+        "cumulative": 1,
+        "facing": -1,
+        "inward": [
+          0,
+          -1
+        ],
+        "role": "First",
+        "tangent": [
+          1,
+          0
+        ]
+      },
+      {
+        "cumulative": -1,
+        "facing": 1,
+        "inward": [
+          0,
+          -1
+        ],
+        "role": "First",
+        "tangent": [
+          1,
+          0
+        ]
+      },
+      {
+        "cumulative": -1,
+        "facing": -1,
+        "inward": [
+          0,
+          1
+        ],
+        "role": "Last",
+        "tangent": [
+          1,
+          0
+        ]
+      },
+      {
+        "cumulative": 1,
+        "facing": 1,
+        "inward": [
+          0,
+          1
+        ],
+        "role": "Last",
+        "tangent": [
+          1,
+          0
+        ]
+      },
+      {
+        "cumulative": -1,
+        "facing": -1,
+        "inward": [
+          1,
+          0
+        ],
+        "role": "Start",
+        "tangent": [
+          0,
+          -1
+        ]
+      },
+      {
+        "cumulative": 1,
+        "facing": 1,
+        "inward": [
+          1,
+          0
+        ],
+        "role": "Start",
+        "tangent": [
+          0,
+          -1
+        ]
+      },
+      {
+        "cumulative": 1,
+        "facing": -1,
+        "inward": [
+          -1,
+          0
+        ],
+        "role": "End",
+        "tangent": [
+          0,
+          -1
+        ]
+      },
+      {
+        "cumulative": -1,
+        "facing": 1,
+        "inward": [
+          -1,
+          0
+        ],
+        "role": "End",
+        "tangent": [
+          0,
+          -1
+        ]
+      }
+    ],
+    "stored_side_normal": "T cross (-E/h) equals -(T cross E)/h; outward sign uses h>0",
+    "winding": [
+      {
+        "f": -1,
+        "q": -1,
+        "r": -1,
+        "w": -1
+      },
+      {
+        "f": -1,
+        "q": 1,
+        "r": -1,
+        "w": 1
+      },
+      {
+        "f": -1,
+        "q": -1,
+        "r": 1,
+        "w": 1
+      },
+      {
+        "f": -1,
+        "q": 1,
+        "r": 1,
+        "w": -1
+      },
+      {
+        "f": 1,
+        "q": -1,
+        "r": -1,
+        "w": 1
+      },
+      {
+        "f": 1,
+        "q": 1,
+        "r": -1,
+        "w": -1
+      },
+      {
+        "f": 1,
+        "q": -1,
+        "r": 1,
+        "w": -1
+      },
+      {
+        "f": 1,
+        "q": 1,
+        "r": 1,
+        "w": 1
+      }
+    ],
+    "world_cases": {
+      "bases": 11808,
+      "cap_sign_checks": 47232,
+      "side_sign_checks": 377856,
+      "singular": 7875
+    }
+  },
+  "base_revision": "f4cd79ae2",
+  "baseline_revision": "bf5745181",
+  "behavior_version": 1,
+  "candidate_files": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/embedding-v1.json": "537b10e880bde11bde54b890b73b4579a6beb0510a68414a239d6c0836d094f6",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests/replay.rs": "ab292995b064eb084d8143beea983962e53c74423639fde9c11383c5114dad18",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs": "416752a464acf49ec956524f0fc4c35f3e3e2501d5b2a6db1a31870faa1b9cc7",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/access.rs": "ae749907c1c347987ea01aea62ec5145ca351196fdb88a7c439747a539a1ac6c",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/error.rs": "cea6d7e0f21966e43ab8a06f0f71c5faea49a6b59bc7cc8970cc0b883864ef83",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/faces.rs": "1786f217582d144a7c65a73336f37ac48fce3d00375fbe4a3d114522e729eea4",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/mod.rs": "72e00e919648c9fc9729ffdb1c7bdffaad7b09a2e1f674ec15f9e982f55475b0",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/signs.rs": "c821017a95e5a6f4e06945943bc236a801c9d3918a5cf4fe8360e937688233de",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests.rs": "f9cff2e91807186961a7a7c6973a7a9fd472c2a32e34d66bc8990987e33ab7ad",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/domain.rs": "9acdbc3a381373b21c33a110795a21d382370c94442487657e518132829361b1",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/mutation.rs": "171339cd140f594abc0318d76c35016fde27a944d3348aa0f8f0ba1e44496b77",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/refusal.rs": "e08079ff802599ca1df17ccd336b85ef7076f322ae3a6a37659597a7fd75865c",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/replay.rs": "2b64878e74a0c3065739439a6abe3befc8d5c7a50e34de9fe10bddaa52a7e52d",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/trims.rs": "c42c3cf1238bf40afec0546a10de9798e73e6855ddf95163af1ebde622cadb5c",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/types.rs": "60819af49232c992782f24f457554b73a35f3010f0db15231bf398794c207e3f",
+    "docs/adr/0034-private-prism-orientation.md": "216b7c423533f1124b957379ba8b691aa107fc2095648ea435893a0eea22184b"
+  },
+  "checks": {
+    "doctests": 88,
+    "embedding-baseline": 1,
+    "focused": 22,
+    "tests": 4447
+  },
+  "concurrency": {
+    "independent_workers": 8,
+    "process_replays": 2,
+    "repetitions_per_worker": 4
+  },
+  "exclusions": [
+    "no native OCCT execution or new native fixtures",
+    "no tessellation or GPU acceptance",
+    "no geometry evaluator, classifier, topology or endpoint capture duplication",
+    "no full body, tolerance, public contract, naming or Kernel#10 completion",
+    "no performance or allocation improvement claimed",
+    "no host protection or instrumentation changes"
+  ],
+  "matrix": {
+    "commands": [
+      {
+        "command": [
+          "rustc",
+          "-Vv"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 0.00896310806274414,
+        "exit_code": 0,
+        "name": "toolchain"
+      },
+      {
+        "command": [
+          "cargo",
+          "-V"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 0.003869295120239258,
+        "exit_code": 0,
+        "name": "cargo-version"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-features",
+          "region_certificate::orientation",
+          "--",
+          "--nocapture"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 62.23330211639404,
+        "exit_code": 0,
+        "name": "focused"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkmath",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-targets",
+          "--all-features"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 333.9569323062897,
+        "exit_code": 0,
+        "name": "tests"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkmath",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--doc",
+          "--all-features"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 3.060154676437378,
+        "exit_code": 0,
+        "name": "doctests"
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "-p",
+          "rustycad-tkmath",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-targets",
+          "--all-features",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 52.52180051803589,
+        "exit_code": 0,
+        "name": "clippy"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 7.07006573677063,
+        "exit_code": 0,
+        "name": "fmt"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-features",
+          "sketch_region_prism::region_certificate::embedding::tests::replay_tests::prism_embedding_process_receipt",
+          "--",
+          "--exact",
+          "--nocapture"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+        "elapsed_seconds": 0.18250656127929688,
+        "exit_code": 0,
+        "name": "embedding-baseline"
+      }
+    ],
+    "revision": "e60b9542f9977e126d56022bdd83632e4f59da4c",
+    "source_unchanged": true
+  },
+  "operation": "Martensite private prism orientation",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "provenance": {
+    "algebra_transport": "initial math.run input key rejected before computation; payload request succeeded",
+    "compiler_correction": "initial domain test used nonexistent Orientation::reverse method; corrected to existing top_abs::reverse",
+    "initial_wrapper": "system Cargo1.95 rejected +1.99.0, exit101; pinned direct toolchain succeeded",
+    "prefreeze": "diagnostic-only: overlapped final SendSync test macro edit; frozen matrix reran all checks"
+  },
+  "sanitizer": {
+    "command": {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--offline",
+        "--locked",
+        "-Zbuild-std",
+        "--target",
+        "x86_64-unknown-linux-gnu",
+        "--lib",
+        "region_certificate::orientation::tests::replay_tests::independent_orientation_threads_match_serial_owned_receipt",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-orientation",
+      "elapsed_seconds": 112.32402038574219,
+      "exit_code": 101,
+      "name": "ordinary-host-tsan"
+    },
+    "environment_changes": {
+      "CARGO_BUILD_JOBS": "2",
+      "CARGO_TARGET_DIR": "/tmp/martensite-prism-orientation-checks/tsan-target",
+      "PATH": "/home/vmiguel/.rustup/toolchains/nightly-2026-09-25-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin",
+      "RUSTFLAGS": "-Zsanitizer=thread"
+    },
+    "host_instrumentation_changes": false,
+    "source_unchanged": true,
+    "status": "incomplete",
+    "test_output_started": false
+  },
+  "scope": {
+    "body": "incomplete; unchanged diagnostics and coverage",
+    "frozen_topology_endpoint_composition": "pending",
+    "native_winding": "DerivedFromFreshFacedWinding; no independently retained raw native contribution",
+    "orientation": "complete conditional face and trim orientation for admitted fresh embedding"
+  },
+  "source_bookends": 15789,
+  "source_revision": "e60b9542f9977e126d56022bdd83632e4f59da4c"
+}

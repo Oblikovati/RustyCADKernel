@@ -196,7 +196,7 @@ fn capture_trim_values(
     }
     Ok(result)
 }
-fn trim_occurrence(
+pub(super) fn trim_occurrence(
     bound: &BoundProjection<'_>,
     face_index: usize,
     output: &PartitionOccurrenceIdentity,

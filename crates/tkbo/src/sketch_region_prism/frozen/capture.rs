@@ -14,8 +14,23 @@ pub(crate) fn freeze_prism(
     bindings: &PrismPublicationBindings,
     progress: &mut impl FreezeProgress,
 ) -> PrismFreezeOutcome {
+    freeze_prism_with_behavior(
+        receipt,
+        bindings,
+        progress,
+        PrismFreezeBehavior::ContainmentV1,
+    )
+}
+/// Retain complete graph traversal explicitly; example: `freeze_prism_with_behavior(receipt, bindings, progress, PrismFreezeBehavior::OrderedTraversalV2)`.
+/// V1 retains its bytes; neither behavior produces an accepted body.
+pub(crate) fn freeze_prism_with_behavior(
+    receipt: &PrismReceipt,
+    bindings: &PrismPublicationBindings,
+    progress: &mut impl FreezeProgress,
+    behavior: PrismFreezeBehavior,
+) -> PrismFreezeOutcome {
     let mut phase = FreezePhase::Admission;
-    match execute(receipt, bindings, progress, &mut phase) {
+    match execute(receipt, bindings, progress, &mut phase, behavior) {
         Ok(projection) => PrismFreezeOutcome::Captured(Box::new(projection)),
         Err(FreezeStop::Cancelled) => PrismFreezeOutcome::Cancelled {
             operation: bindings.operation,
@@ -30,7 +45,8 @@ enum FreezeStop {
 }
 impl From<PrismFreezeCause> for FreezeStop {
     fn from(cause: PrismFreezeCause) -> Self {
-        Self::Cause(Box::new(cause))
+        let cause = Box::new(cause);
+        Self::Cause(cause)
     }
 }
 fn classify_failure(
@@ -56,33 +72,35 @@ fn execute(
     bindings: &PrismPublicationBindings,
     progress: &mut impl FreezeProgress,
     phase: &mut FreezePhase,
+    behavior: PrismFreezeBehavior,
 ) -> Result<FrozenPrismProjection, FreezeStop> {
     checkpoint(progress, phase, FreezePhase::Admission)?;
     super::admission::admit_receipt(receipt)?;
     checkpoint(progress, phase, FreezePhase::Identity)?;
     let bound = bind_projection(receipt, bindings)?;
     super::domain::check_count(bound.contexts.len())?;
-    let projection = capture_phases(&bound, progress, phase)?;
+    let projection = capture_phases(&bound, progress, phase, behavior)?;
     checkpoint(progress, phase, FreezePhase::Commit)?;
     super::admission::admit_receipt(receipt)?;
     check_source_snapshot(&bound)?;
-    check_final_capture(&bound, &projection)?;
+    check_final_capture(&bound, &projection, behavior)?;
     Ok(projection)
 }
 fn capture_phases(
     bound: &BoundProjection<'_>,
     progress: &mut impl FreezeProgress,
     phase: &mut FreezePhase,
+    behavior: PrismFreezeBehavior,
 ) -> Result<FrozenPrismProjection, FreezeStop> {
     checkpoint(progress, phase, FreezePhase::Geometry)?;
     check_source_snapshot(bound)?;
     let faces = capture_faces(bound)?;
     checkpoint(progress, phase, FreezePhase::Incidence)?;
     check_current_contexts(bound)?;
-    let incidence = capture_graph(bound)?;
+    let incidence = capture_graph(bound, behavior)?;
     let nodes = capture_nodes(bound)?;
     checkpoint(progress, phase, FreezePhase::Evidence)?;
-    Ok(finish_projection(bound, nodes, faces, incidence)?)
+    Ok(finish_projection(bound, nodes, faces, incidence, behavior)?)
 }
 fn checkpoint(
     progress: &mut impl FreezeProgress,
@@ -96,26 +114,45 @@ fn checkpoint(
         Err(failure) => Err(PrismFreezeCause::Native(failure).into()),
     }
 }
+struct ProjectionParts {
+    nodes: Vec<FrozenPrismNode>,
+    faces: Vec<FrozenPrismFace>,
+    graph: super::graph::FrozenGraphCapture,
+    behavior: PrismFreezeBehavior,
+}
 fn finish_projection(
     bound: &BoundProjection<'_>,
     nodes: Vec<FrozenPrismNode>,
     faces: Vec<FrozenPrismFace>,
-    graph: super::graph::FrozenGraphIncidence,
+    graph: super::graph::FrozenGraphCapture,
+    behavior: PrismFreezeBehavior,
 ) -> CaptureResult<FrozenPrismProjection> {
-    Ok(FrozenPrismProjection {
-        version: 1,
-        capture_policy: super::domain::fixed_policy(),
-        operation: bound.bindings.operation,
-        region: bound.bindings.selected_region,
-        endpoints: super::endpoints::certify_endpoints(&nodes, &graph)?,
+    ProjectionParts {
         nodes,
         faces,
         graph,
-        uses: capture_uses(bound)?,
-        history: capture_history(bound)?,
-        coverage: capture_coverage(bound)?,
-        limits: capture_limits(bound.receipt),
-    })
+        behavior,
+    }
+    .finish(bound)
+}
+impl ProjectionParts {
+    fn finish(self, bound: &BoundProjection<'_>) -> CaptureResult<FrozenPrismProjection> {
+        Ok(FrozenPrismProjection {
+            version: self.behavior.version(),
+            wire_traversals: self.graph.traversals,
+            capture_policy: super::domain::fixed_policy(),
+            operation: bound.bindings.operation,
+            region: bound.bindings.selected_region,
+            endpoints: super::endpoints::certify_endpoints(&self.nodes, &self.graph.incidence)?,
+            nodes: self.nodes,
+            faces: self.faces,
+            graph: self.graph.incidence,
+            uses: capture_uses(bound)?,
+            history: capture_history(bound)?,
+            coverage: capture_coverage(bound)?,
+            limits: capture_limits(bound.receipt),
+        })
+    }
 }
 fn capture_uses(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenPrismUse>> {
     let mut uses = (0..bound.contexts.len())
@@ -162,16 +199,17 @@ fn capture_limits(receipt: &PrismReceipt) -> FrozenPrismLimits {
         achieved_error: receipt.limits.achieved_error,
     }
 }
-fn check_final_capture(
+pub(super) fn check_final_capture(
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,
+    behavior: PrismFreezeBehavior,
 ) -> CaptureResult<()> {
     let fresh = bind_projection(bound.receipt, bound.bindings)?;
     check_current_contexts(bound)?;
     check_source_snapshot(&fresh)?;
-    let incidence = capture_graph(&fresh)?;
+    let incidence = capture_graph(&fresh, behavior)?;
     let nodes = capture_nodes(&fresh)?;
-    let recaptured = finish_projection(&fresh, nodes, capture_faces(&fresh)?, incidence)?;
+    let recaptured = finish_projection(&fresh, nodes, capture_faces(&fresh)?, incidence, behavior)?;
     if recaptured.replay_bytes() != projection.replay_bytes() {
         return Err(PrismFreezeCause::StaleCapture {
             representation: "full geometry/incidence/history/evidence changed during capture",

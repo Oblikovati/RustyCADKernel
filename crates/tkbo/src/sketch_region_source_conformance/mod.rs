@@ -4,7 +4,7 @@ mod capture;
 mod inspect;
 mod membership;
 mod query;
-pub(crate) use query::{captured_map, source_query};
+pub(crate) use query::{assemble_query, captured_map, source_query};
 mod types;
 pub(crate) use capture::capture_support;
 pub(crate) use capture::{capture_construction, capture_originals, capture_space_representation};
@@ -30,4 +30,9 @@ pub(crate) use snapshot_binding::binds_current_segment;
 pub(crate) use snapshot_binding::same_construction_basis;
 
 mod endpoints;
-pub(crate) use endpoints::{captured_endpoint_root_options, certify_captured_endpoint};
+pub(crate) use endpoints::{
+    captured_endpoint_root_options, certify_captured_endpoint, certify_captured_placed_endpoint,
+    with_captured_point_comparator,
+};
+#[cfg(test)]
+mod point_comparator_tests;

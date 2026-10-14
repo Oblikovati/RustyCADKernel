@@ -40,3 +40,12 @@ fn shared_published_projection_reads_are_lock_free_and_deterministic() {
         }
     });
 }
+
+#[test]
+fn frozen_containment_v1_matches_owned_pre_composition_bytes() {
+    // ADR0035: structural sharing and new proof joins must preserve selectable V1 replay.
+    assert_eq!(
+        fresh_projection().replay_bytes(),
+        include_bytes!("fixtures/containment-v1.bin")
+    );
+}
