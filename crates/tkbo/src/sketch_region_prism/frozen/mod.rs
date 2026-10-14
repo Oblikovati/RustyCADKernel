@@ -65,9 +65,10 @@ mod traversal;
 #[cfg(test)]
 mod traversal_tests;
 
-pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
+#[cfg(test)]
+mod ordered_validation_baseline_tests;
+
 pub(crate) mod joined_measures;
 pub(crate) mod joined_orientation;
 pub(crate) mod ordered_validation;
-#[cfg(test)]
-mod ordered_validation_baseline_tests;
+pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};

@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "decision": "release-ref-storage-maintenance-v1",
+  "source_revision": "255f626f905d62bfdd6688e21e6e2b0c6c8dfc7d",
+  "base_revision": "9bf9fbf1e0218cb2e1774ae815db21f574922eca",
+  "git": "git version 2.43.0",
+  "python": "3.12.3",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "primary_source": "https://git-scm.com/docs/githooks#_reference_transaction",
+  "cause": "prepared pack-refs transaction inserts packed storage with zero old OID while existing logical unpeeled ref already equals new OID",
+  "scope": "Only exact unchanged direct logical reference object is admitted without receipt. New tag verification and different-object immutability remain.",
+  "legacy_receipt_format": 1,
+  "unchanged_verification_functions": [
+    "require_equal",
+    "object_field",
+    "evidence_path",
+    "verify_log",
+    "verify_gate",
+    "planned_gate_names",
+    "plan_command_roster",
+    "command_identity",
+    "verify_command_rosters",
+    "verify_gates",
+    "verify_packages",
+    "verify_annotation",
+    "verify_source",
+    "verify_tag",
+    "main"
+  ],
+  "source_hashes": {
+    "tools/release_tag_guard.py": "72d312141259ff912d93e612c404ae363fc1a96b46423a3b6325032c45f2f2ca",
+    "tools/tests/test_release_tag_guard.py": "1af92201c50374faeefb05df970ecad67ccabe9925d3e3dc500da9aab904a8ca",
+    "tools/tests/test_release_ref_maintenance.py": "65d296cf63b943fad8d5fc8caf795269b9a4a8e6268b8f5b30c960094955fbd2",
+    ".githooks/reference-transaction": "f06171c59df433c15e449cd0f4dec0a29f2ba525d85a08dba2e586bb7b279c81"
+  },
+  "frozen_checks": {
+    "revision": "255f626f905d62bfdd6688e21e6e2b0c6c8dfc7d",
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/tests",
+          "-p",
+          "test_release_*.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "frozen-0.log",
+        "sha256": "b7d7f2c4b01b82386ec789b0a9401fc6ceb1705acb27302f2c1572564ac1cd0e",
+        "seconds": 2.407054085000709
+      },
+      {
+        "command": [
+          "python3",
+          "tools/run_tool_tests.py",
+          "--jobs",
+          "2",
+          "--pattern",
+          "test_pre_release*.py"
+        ],
+        "exit_code": 0,
+        "log": "frozen-1.log",
+        "sha256": "eb67913f4c7d01c092413ed26061670159fd86c1cb13dfc45bfde41d8ed2f4d4",
+        "seconds": 0.32485868000003393
+      },
+      {
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/tests",
+          "-p",
+          "test_verify_release_gate.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "frozen-2.log",
+        "sha256": "24985304cd7e15f0f7dfbc301dd011d58f8e2855a675aaac21def2ef2eaa96c9",
+        "seconds": 0.05176547800147091
+      },
+      {
+        "command": [
+          "/tmp/martensite-release-ref-checks/format-env/bin/python",
+          "-m",
+          "black",
+          "--check",
+          "tools/release_tag_guard.py",
+          "tools/tests/test_release_tag_guard.py",
+          "tools/tests/test_release_ref_maintenance.py"
+        ],
+        "exit_code": 0,
+        "log": "frozen-3.log",
+        "sha256": "45a468fa6205768496f23f1716ebb7575e9b723449d2099b88bf2afef60b721f",
+        "seconds": 0.0779256260029797
+      }
+    ],
+    "environment_changes": {
+      "PYTHONPATH": "/home/vmiguel/git/oblikovati-workspace/Martensite-release-ref-maintenance/tools"
+    },
+    "source_count": 3739,
+    "source_unchanged": true
+  },
+  "results": {
+    "release_tests": 94,
+    "new_regression_tests_included": 13,
+    "existing_guard_tests_included": 10,
+    "verification_gate_tests": 8,
+    "pre_release_modules": 4,
+    "original_repro_pack_runs": 2,
+    "original_repro_gc_runs": 1,
+    "original_refs_unchanged": true
+  },
+  "failures_retained": [
+    "Original pack-refs twice and gc rejected existing tag:exit128.",
+    "Initial regression5tests:2storage failures,3creation/rewrite protections passed.",
+    "Initial broad unittest command omitted PYTHONPATH=tools:2importerrors; corrected runner only, same source."
+  ],
+  "safety": {
+    "actual_release_refs_modified": false,
+    "host_protection_changes": false,
+    "release_receipt_bypass": false,
+    "new_or_changed_tag_gate_removed": false,
+    "deletion_policy_changed": false,
+    "remote_writes": false,
+    "workspace_repository_config_modified": false
+  },
+  "archive_payloads": 28,
+  "archive_sha256": "0ea616d89a1a06ad15ad12e079364e3d5963de8e977622432db0767a15ba7de1"
+}
