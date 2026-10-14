@@ -92,22 +92,7 @@ fn authored(
     ] {
         budget.add(count)?;
     }
-    for bindings in [
-        &request.publication.directed,
-        &request.copied.selected_uses,
-        &request.copied.copied_uses,
-    ] {
-        for row in bindings {
-            context_fields(&row.actual, budget)?;
-        }
-    }
-    for stage in &request.historical.intermediate {
-        budget.add(stage.members.len())?;
-        budget.add(stage.uses.len())?;
-        for row in &stage.uses {
-            budget.contexts(std::slice::from_ref(&row.actual))?;
-        }
-    }
+    authored_contexts(request, budget)?;
     Ok(())
 }
 fn partition(
@@ -119,30 +104,7 @@ fn partition(
         | PartitionObservation::Incomplete { partial: rows, .. } => rows,
         PartitionObservation::NotReached => return Ok(()),
     };
-    budget.add(rows.input_contexts.len())?;
-    budget.add(rows.sources.len())?;
-    budget.add(rows.vertices.len())?;
-    for input in &rows.input_contexts {
-        budget.copy(&input.observation)?;
-    }
-    for source in &rows.sources {
-        partition_source(source, budget)?;
-    }
-    for vertex in &rows.vertices {
-        budget.add(vertex.original_parents.len())?;
-    }
-    if let crate::sketch_region::PartitionMemberQueries::Captured { rows, .. } =
-        &rows.member_queries
-    {
-        budget.add(rows.len())?;
-        for row in rows {
-            for answer in [&row.modified, &row.generated] {
-                if let Ok(images) = answer {
-                    budget.add(images.len())?;
-                }
-            }
-        }
-    }
+    partition_operands(rows, budget)?;
     if let crate::sketch_region::ArrangementCompletion::Arranged(rows) =
         &request.bridge.mapped.arrangement.completion
     {
@@ -161,16 +123,13 @@ fn partition_source(
     if let Some(images) = &source.images {
         budget.add(images.len())?;
     }
-    if let Some(Ok(space)) = &source.space {
-        if let crate::sketch_region_geometry_capture::CapturedMetricCurve::Bezier {
-            poles,
-            weights,
-        } = &space.curve
-        {
-            budget.add(poles.len())?;
-            if let Some(weights) = weights {
-                budget.add(weights.len())?;
-            }
+    if let Some(Ok(space)) = &source.space
+        && let crate::sketch_region_geometry_capture::CapturedMetricCurve::Bezier { poles, weights } =
+            &space.curve
+    {
+        budget.add(poles.len())?;
+        if let Some(weights) = weights {
+            budget.add(weights.len())?;
         }
     }
     Ok(())
@@ -190,23 +149,9 @@ fn candidate(
         budget.add(row.modified.len())?;
         budget.add(row.generated.len())?;
     }
-    match &copy.copied_tree {
-        crate::sketch_region_candidates::CandidateCopyTreeObservation::Captured(rows)
-        | crate::sketch_region_candidates::CandidateCopyTreeObservation::Incomplete {
-            members: rows,
-            ..
-        } => budget.add(rows.len())?,
-        crate::sketch_region_candidates::CandidateCopyTreeObservation::NotReached => (),
-    }
+    candidate_tree(copy, budget)?;
     generated(copy, budget)?;
-    if let Ok(batch) = &copy.completion {
-        budget.add(batch.candidates.len())?;
-        budget.add(batch.input_deleted.len())?;
-        budget.relations(&batch.unrepresented)?;
-        for candidate in &batch.candidates {
-            budget.relations(&candidate.relations)?;
-        }
-    }
+    candidate_batch(copy, budget)?;
     Ok(())
 }
 fn generated(
@@ -220,20 +165,7 @@ fn generated(
         } => areas,
         crate::sketch_region_candidates::GeneratedTopologyObservation::NotReached => return Ok(()),
     };
-    budget.add(areas.len())?;
-    for area in areas {
-        if let RegionContextObservation::Captured(rows) = &area.contexts {
-            budget.contexts(rows)?;
-        }
-        budget.add(area.members.len())?;
-        for member in &area.members {
-            budget.add(member.descendants.len())?;
-            budget.add(member.copy_indices.len())?;
-            budget.add(member.preserved.len())?;
-            budget.add(member.modified.len())?;
-            budget.add(member.generated.len())?;
-        }
-    }
+    generated_areas(areas, budget)?;
     Ok(())
 }
 fn receipt(
@@ -250,14 +182,147 @@ fn receipt(
     if let Some(selected) = &receipt.input.selected {
         budget.relations(&selected.relations)?;
     }
-    if let Some(copy) = &receipt.copied {
+    selected_copy(request, budget)?;
+    sweep_operands(request, budget)?;
+    Ok(())
+}
+
+fn context_fields(
+    context: &crate::sketch_region::RegionDirectedContext,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    budget.add(context.ancestors.len())?;
+    budget.add(context.child_slots.len())
+}
+
+fn authored_contexts(
+    request: &PrismHistoryRequest<'_, '_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    for bindings in [
+        &request.publication.directed,
+        &request.copied.selected_uses,
+        &request.copied.copied_uses,
+    ] {
+        for row in bindings {
+            context_fields(&row.actual, budget)?;
+        }
+    }
+    for stage in &request.historical.intermediate {
+        budget.add(stage.members.len())?;
+        budget.add(stage.uses.len())?;
+        for row in &stage.uses {
+            budget.contexts(std::slice::from_ref(&row.actual))?;
+        }
+    }
+    Ok(())
+}
+
+fn partition_operands(
+    rows: &crate::sketch_region::OwnedPartitionSnapshot,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    budget.add(rows.input_contexts.len())?;
+    budget.add(rows.sources.len())?;
+    budget.add(rows.vertices.len())?;
+    for input in &rows.input_contexts {
+        budget.copy(&input.observation)?;
+    }
+    for source in &rows.sources {
+        partition_source(source, budget)?;
+    }
+    for vertex in &rows.vertices {
+        budget.add(vertex.original_parents.len())?;
+    }
+    partition_answers(&rows.member_queries, budget)?;
+    Ok(())
+}
+
+fn partition_answers(
+    observed: &crate::sketch_region::PartitionMemberQueries,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    if let crate::sketch_region::PartitionMemberQueries::Captured { rows, .. } = observed {
+        budget.add(rows.len())?;
+        for row in rows {
+            for images in [&row.modified, &row.generated].into_iter().flatten() {
+                budget.add(images.len())?;
+            }
+        }
+    }
+    Ok(())
+}
+
+fn candidate_tree(
+    copy: &crate::sketch_region_candidates::CandidateCopyInspection,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    match &copy.copied_tree {
+        crate::sketch_region_candidates::CandidateCopyTreeObservation::Captured(rows)
+        | crate::sketch_region_candidates::CandidateCopyTreeObservation::Incomplete {
+            members: rows,
+            ..
+        } => budget.add(rows.len())?,
+        crate::sketch_region_candidates::CandidateCopyTreeObservation::NotReached => (),
+    }
+    Ok(())
+}
+
+fn candidate_batch(
+    copy: &crate::sketch_region_candidates::CandidateCopyInspection,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    if let Ok(batch) = &copy.completion {
+        budget.add(batch.candidates.len())?;
+        budget.add(batch.input_deleted.len())?;
+        budget.relations(&batch.unrepresented)?;
+        for candidate in &batch.candidates {
+            budget.relations(&candidate.relations)?;
+        }
+    }
+    Ok(())
+}
+
+fn generated_areas(
+    areas: &[crate::sketch_region_candidates::GeneratedAreaSnapshot],
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    budget.add(areas.len())?;
+    for area in areas {
+        if let RegionContextObservation::Captured(rows) = &area.contexts {
+            budget.contexts(rows)?;
+        }
+        budget.add(area.members.len())?;
+        for member in &area.members {
+            budget.add(member.descendants.len())?;
+            budget.add(member.copy_indices.len())?;
+            budget.add(member.preserved.len())?;
+            budget.add(member.modified.len())?;
+            budget.add(member.generated.len())?;
+        }
+    }
+    Ok(())
+}
+
+fn selected_copy(
+    request: &PrismHistoryRequest<'_, '_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    if let Some(copy) = &request.receipt.copied {
         budget.relations(&copy.relations)?;
         budget.add(copy.observations.len())?;
         for row in &copy.observations {
             budget.relations(std::slice::from_ref(&row.selected))?;
         }
     }
-    if let Some(body) = &receipt.diagnostic {
+    Ok(())
+}
+
+fn sweep_operands(
+    request: &PrismHistoryRequest<'_, '_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    if let Some(body) = &request.receipt.diagnostic {
         budget.relations(&body.relations)?;
         budget.relations(&body.native_retired)?;
         budget.add(body.bindings.len())?;
@@ -276,13 +341,6 @@ fn receipt(
     Ok(())
 }
 
-fn context_fields(
-    context: &crate::sketch_region::RegionDirectedContext,
-    budget: &mut HistoryRowBudget,
-) -> HistoryCheck<()> {
-    budget.add(context.ancestors.len())?;
-    budget.add(context.child_slots.len())
-}
 #[cfg(test)]
 mod tests {
     use super::*;

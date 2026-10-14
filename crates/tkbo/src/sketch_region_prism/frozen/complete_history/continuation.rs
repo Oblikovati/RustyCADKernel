@@ -32,15 +32,7 @@ pub(super) fn prove(
         result.len(),
         request.publication.originals.len(),
     )?;
-    let originals = result
-        .iter()
-        .map(|r| &r.original)
-        .collect::<std::collections::BTreeSet<_>>();
-    history_count(
-        "distinct original use continuation census",
-        originals.len(),
-        result.len(),
-    )?;
+    admit_original_census(&result)?;
     Ok(observed_values::sorted(result))
 }
 fn continue_original(
@@ -157,4 +149,17 @@ fn kept_outputs(
         required: "actual last cap continuation",
     })?;
     Ok((first.outputs.clone(), last.outputs.clone()))
+}
+
+fn admit_original_census(result: &[PrismOriginalContinuation]) -> HistoryCheck<()> {
+    let originals = result
+        .iter()
+        .map(|r| &r.original)
+        .collect::<std::collections::BTreeSet<_>>();
+    history_count(
+        "distinct original use continuation census",
+        originals.len(),
+        result.len(),
+    )?;
+    Ok(())
 }

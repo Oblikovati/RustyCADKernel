@@ -40,21 +40,11 @@ fn actual_binding(
         copied,
         &PartitionOccurrenceIdentity::capture(&binding.native.query),
     )?;
-    let rows: Vec<_> = bound
-        .contexts
-        .iter()
-        .enumerate()
-        .filter(|(_, c)| super::super::identities::same_context(c, &binding.context))
-        .collect();
-    history_count(
-        "one actual output context for exhaustive binding coverage",
-        rows.len(),
-        1,
-    )?;
+    let output = coverage_output(bound, binding)?;
     Ok(SweepBindingOperand {
         copied: copied.owned[query].key.clone(),
         role: binding.native.role.into(),
-        output: bound.use_names[rows[0].0].clone(),
+        output,
         parents: parent_rows::relation_parents(request, &binding.native.returned)?,
     })
 }
@@ -83,4 +73,22 @@ fn append_answer(
             parents: answer.parents.clone(),
         });
     }
+}
+
+fn coverage_output(
+    bound: &BoundProjection<'_>,
+    binding: &crate::sketch_region_prism::PrismImageBinding,
+) -> HistoryCheck<FrozenUseKey> {
+    let rows: Vec<_> = bound
+        .contexts
+        .iter()
+        .enumerate()
+        .filter(|(_, c)| super::super::identities::same_context(c, &binding.context))
+        .collect();
+    history_count(
+        "one actual output context for exhaustive binding coverage",
+        rows.len(),
+        1,
+    )?;
+    Ok(bound.use_names[rows[0].0].clone())
 }

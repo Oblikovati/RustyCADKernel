@@ -49,7 +49,7 @@ pub(crate) enum PrismHistoryCause {
         entity: PrismHistoryUseKey,
         cause: Box<PrismHistoryCause>,
     },
-    Legacy(diagnostics::HistoricalLegacyCause),
+    Legacy(Box<diagnostics::HistoricalLegacyCause>),
     Lineage(Box<super::super::lineage::PrismLineageInspection>),
     LineageCancelled(FreezePhase),
     Count {
@@ -65,8 +65,8 @@ pub(crate) enum PrismHistoryCause {
     },
     ParentsMismatch {
         stage: PrismHistoryStage,
-        actual: [Vec<FrozenOriginalKey>; 3],
-        expected: [Vec<FrozenOriginalKey>; 3],
+        actual: Box<[Vec<FrozenOriginalKey>; 3]>,
+        expected: Box<[Vec<FrozenOriginalKey>; 3]>,
     },
     Bounds(HistoryBoundCause),
     ContextRead {
@@ -183,66 +183,74 @@ pub(crate) enum HistoricalDiagnosticKind {
 impl std::fmt::Debug for PrismHistoryCause {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::AtUse { entity, cause } => formatter
-                .debug_struct("AtUse")
-                .field("entity", entity)
-                .field("cause", cause)
-                .finish(),
-            Self::Legacy(value) => formatter
-                .debug_tuple("UnsupportedLegacyDiagnostic")
-                .field(value)
-                .finish(),
-            Self::Lineage(value) => formatter
-                .debug_tuple("Lineage")
-                .field(&value.findings())
-                .finish(),
-            Self::LineageCancelled(phase) => formatter
-                .debug_tuple("LineageCancelled")
-                .field(phase)
-                .finish(),
+            Self::AtUse { entity, cause } => {
+                debug_fields(formatter, "AtUse", &[("entity", entity), ("cause", cause)])
+            }
+            Self::Legacy(value) => debug_value(formatter, "UnsupportedLegacyDiagnostic", value),
+            Self::Lineage(value) => debug_value(formatter, "Lineage", &value.findings()),
+            Self::LineageCancelled(phase) => debug_value(formatter, "LineageCancelled", phase),
+            other => other.fmt_operands(formatter),
+        }
+    }
+}
+fn debug_fields(
+    formatter: &mut std::fmt::Formatter<'_>,
+    name: &str,
+    fields: &[(&str, &dyn std::fmt::Debug)],
+) -> std::fmt::Result {
+    let mut result = formatter.debug_struct(name);
+    for (name, value) in fields {
+        result.field(name, value);
+    }
+    result.finish()
+}
+fn debug_value(
+    formatter: &mut std::fmt::Formatter<'_>,
+    name: &str,
+    value: &dyn std::fmt::Debug,
+) -> std::fmt::Result {
+    formatter.debug_tuple(name).field(value).finish()
+}
+impl PrismHistoryCause {
+    fn fmt_operands(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
             Self::Count {
                 required,
                 actual,
                 expected,
-            } => formatter
-                .debug_struct("Count")
-                .field("required", required)
-                .field("actual", actual)
-                .field("expected", expected)
-                .finish(),
-            Self::Missing { required } => formatter.debug_tuple("Missing").field(required).finish(),
-            Self::Changed { operand } => formatter.debug_tuple("Changed").field(operand).finish(),
+            } => debug_count(formatter, required, actual, expected),
+            Self::Missing { required } => debug_value(formatter, "Missing", required),
+            Self::Changed { operand } => debug_value(formatter, "Changed", operand),
             Self::ParentsMismatch {
                 stage,
                 actual,
                 expected,
-            } => formatter
-                .debug_struct("ParentsMismatch")
-                .field("stage", stage)
-                .field("actual", actual)
-                .field("expected", expected)
-                .finish(),
-            Self::Bounds(value) => formatter.debug_tuple("Bounds").field(value).finish(),
-            Self::ContextRead { stage, cause } => formatter
-                .debug_struct("ContextRead")
-                .field("stage", stage)
-                .field("cause", cause)
-                .finish(),
-            Self::Frozen(value) => formatter.debug_tuple("Frozen").field(value).finish(),
-            Self::Native(value) => formatter.debug_tuple("Native").field(value).finish(),
-            Self::Geometry(value) => formatter.debug_tuple("Geometry").field(value).finish(),
+            } => debug_fields(
+                formatter,
+                "ParentsMismatch",
+                &[("stage", stage), ("actual", actual), ("expected", expected)],
+            ),
+            other => other.fmt_capture(formatter),
+        }
+    }
+    fn fmt_capture(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Bounds(value) => debug_value(formatter, "Bounds", value),
+            Self::ContextRead { stage, cause } => debug_fields(
+                formatter,
+                "ContextRead",
+                &[("stage", stage), ("cause", cause)],
+            ),
+            Self::Frozen(value) => debug_value(formatter, "Frozen", value),
+            Self::Native(value) => debug_value(formatter, "Native", value),
+            Self::Geometry(value) => debug_value(formatter, "Geometry", value),
             Self::UnsupportedDiagnostic {
                 stage,
                 kind,
                 observation,
                 retained_rows,
-            } => formatter
-                .debug_struct("UnsupportedDiagnostic")
-                .field("stage", stage)
-                .field("kind", kind)
-                .field("observation", observation)
-                .field("retained_rows", retained_rows)
-                .finish(),
+            } => debug_unsupported(formatter, stage, kind, observation, retained_rows),
+            _ => unreachable!("capture-specific history diagnostic"),
         }
     }
 }
@@ -270,4 +278,39 @@ impl PrismHistoryCause {
             _ => PrismHistoryFailureClass::Incomplete,
         }
     }
+}
+
+fn debug_count(
+    formatter: &mut std::fmt::Formatter<'_>,
+    required: &str,
+    actual: &usize,
+    expected: &usize,
+) -> std::fmt::Result {
+    debug_fields(
+        formatter,
+        "Count",
+        &[
+            ("required", &required),
+            ("actual", actual),
+            ("expected", expected),
+        ],
+    )
+}
+fn debug_unsupported(
+    formatter: &mut std::fmt::Formatter<'_>,
+    stage: &PrismHistoryStage,
+    kind: &HistoricalDiagnosticKind,
+    observation: &Option<usize>,
+    retained_rows: &usize,
+) -> std::fmt::Result {
+    debug_fields(
+        formatter,
+        "UnsupportedDiagnostic",
+        &[
+            ("stage", stage),
+            ("kind", kind),
+            ("observation", observation),
+            ("retained_rows", retained_rows),
+        ],
+    )
 }

@@ -62,16 +62,7 @@ fn matches_trace(
     {
         return Ok(false);
     }
-    let edge_source = &source.ancestors[1];
-    let edge_target = &target.ancestors[2];
-    if !same_definition(edge_source, edge_target) {
-        return Ok(false);
-    }
-    let local_source = census::forward_reversed(source.occurrence.orientation)?
-        ^ census::forward_reversed(edge_source.orientation)?;
-    let local_target = census::forward_reversed(target.occurrence.orientation)?
-        ^ census::forward_reversed(edge_target.orientation)?;
-    Ok(local_source == local_target)
+    matches_endpoint_trace(source, target)
 }
 fn admit_bijection(rows: &[PrismGeneratedTrace]) -> HistoryCheck<()> {
     let selected = rows
@@ -92,4 +83,20 @@ fn admit_bijection(rows: &[PrismGeneratedTrace]) -> HistoryCheck<()> {
         complement.len(),
         rows.len(),
     )
+}
+
+fn matches_endpoint_trace(
+    source: &RegionObservedContext,
+    target: &RegionObservedContext,
+) -> HistoryCheck<bool> {
+    let edge_source = &source.ancestors[1];
+    let edge_target = &target.ancestors[2];
+    if !same_definition(edge_source, edge_target) {
+        return Ok(false);
+    }
+    let local_source = census::forward_reversed(source.occurrence.orientation)?
+        ^ census::forward_reversed(edge_source.orientation)?;
+    let local_target = census::forward_reversed(target.occurrence.orientation)?
+        ^ census::forward_reversed(edge_target.orientation)?;
+    Ok(local_source == local_target)
 }

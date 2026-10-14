@@ -8,27 +8,7 @@ pub(super) fn historical_member(
     names: &PrismHistoricalStageBindings,
     actual: &RegionObservedContext,
 ) -> HistoryCheck<PrismHistoryMemberKey> {
-    let matches: Vec<_> = names
-        .members
-        .iter()
-        .filter(|b| same_definition(&b.actual, &actual.occurrence))
-        .collect();
-    history_count(
-        "exactly one authored historical definition",
-        matches.len(),
-        1,
-    )?;
-    let member = matches[0].member;
-    history_count(
-        "nonzero authored historical member",
-        usize::from(member.0 != 0),
-        1,
-    )?;
-    history_count(
-        "one physical definition per historical member",
-        names.members.iter().filter(|b| b.member == member).count(),
-        1,
-    )?;
+    let member = authored_member(names, actual)?;
     Ok(PrismHistoryMemberKey {
         operation,
         stage: names.stage,
@@ -94,4 +74,40 @@ pub(super) fn ancestor_at<'a>(
         )?;
     }
     Ok(rows[0])
+}
+
+fn authored_member(
+    names: &PrismHistoricalStageBindings,
+    actual: &RegionObservedContext,
+) -> HistoryCheck<AuthoredPrismId> {
+    let matches: Vec<_> = names
+        .members
+        .iter()
+        .filter(|b| same_definition(&b.actual, &actual.occurrence))
+        .collect();
+    history_count(
+        "exactly one authored historical definition",
+        matches.len(),
+        1,
+    )?;
+    let member = matches[0].member;
+    admit_member_name(names, member)?;
+    Ok(member)
+}
+
+fn admit_member_name(
+    names: &PrismHistoricalStageBindings,
+    member: AuthoredPrismId,
+) -> HistoryCheck<()> {
+    history_count(
+        "nonzero authored historical member",
+        usize::from(member.0 != 0),
+        1,
+    )?;
+    history_count(
+        "one physical definition per historical member",
+        names.members.iter().filter(|b| b.member == member).count(),
+        1,
+    )?;
+    Ok(())
 }

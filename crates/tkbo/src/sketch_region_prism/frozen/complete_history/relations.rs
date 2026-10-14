@@ -39,14 +39,7 @@ fn validate_partition(
     bound: &BoundHistoricalContexts<'_>,
     queries: &[PrismPartitionQuery],
 ) -> HistoryCheck<()> {
-    let context =
-        bound
-            .owned
-            .iter()
-            .find(|c| c.key == row.output)
-            .ok_or(PrismHistoryCause::Missing {
-                required: "partition relation context",
-            })?;
+    let context = relation_context(row, bound)?;
     let is_container =
         context.occurrence.member.kind == rustycad_tkg3d::top_abs::ShapeEnum::Compound as u8;
     let parents = if is_container {
@@ -74,8 +67,8 @@ pub(super) fn same_parents(
     if actual != expected {
         return Err(PrismHistoryCause::ParentsMismatch {
             stage,
-            actual: actual.clone(),
-            expected: expected.clone(),
+            actual: Box::new(actual.clone()),
+            expected: Box::new(expected.clone()),
         });
     }
     Ok(())
@@ -148,29 +141,8 @@ pub(super) fn receipt_regions(
     selected: &[PrismHistoricalRelation],
     complement: &[PrismHistoricalRelation],
 ) -> HistoryCheck<()> {
+    selected_receipt(request, stages, selected)?;
     let input = &request.receipt.input;
-    let current = input.selected.as_ref().ok_or(PrismHistoryCause::Missing {
-        required: "selected input history",
-    })?;
-    history_count(
-        "selected receipt is actual admitted candidate",
-        usize::from(
-            current
-                .face
-                .is_equal(&operands::candidate(request, PrismHistoryStage::Selected)?.face),
-        ),
-        1,
-    )?;
-    let actual = parent_rows::relation_rows(
-        request,
-        stages::stage(stages, PrismHistoryStage::Selected)?,
-        &current.relations,
-    )?;
-    observed_values::equal(
-        &actual,
-        &selected.to_vec(),
-        "selected receipt equals actual candidate full relations",
-    )?;
     history_count(
         "one actual complementary rejected history",
         input.rejected.len(),
@@ -195,6 +167,66 @@ fn empty_input_dispositions(request: &PrismHistoryRequest<'_, '_>) -> HistoryChe
         batch.candidates.len(),
         2,
     )?;
+    empty_dispositions(request, batch)?;
+    Ok(())
+}
+
+fn relation_context<'a>(
+    row: &PrismHistoricalRelation,
+    bound: &'a BoundHistoricalContexts<'_>,
+) -> HistoryCheck<&'a PrismHistoricalContext> {
+    let context =
+        bound
+            .owned
+            .iter()
+            .find(|c| c.key == row.output)
+            .ok_or(PrismHistoryCause::Missing {
+                required: "partition relation context",
+            })?;
+    Ok(context)
+}
+
+fn selected_receipt(
+    request: &PrismHistoryRequest<'_, '_>,
+    stages: &[BoundHistoryStage<'_>],
+    selected: &[PrismHistoricalRelation],
+) -> HistoryCheck<()> {
+    let input = &request.receipt.input;
+    let current = input.selected.as_ref().ok_or(PrismHistoryCause::Missing {
+        required: "selected input history",
+    })?;
+    admit_selected_face(request, &current.face)?;
+    let actual = parent_rows::relation_rows(
+        request,
+        stages::stage(stages, PrismHistoryStage::Selected)?,
+        &current.relations,
+    )?;
+    observed_values::equal(
+        &actual,
+        &selected.to_vec(),
+        "selected receipt equals actual candidate full relations",
+    )?;
+    Ok(())
+}
+
+fn admit_selected_face(
+    request: &PrismHistoryRequest<'_, '_>,
+    face: &rustycad_tkbrep::topods::Shape,
+) -> HistoryCheck<()> {
+    history_count(
+        "selected receipt is actual admitted candidate",
+        usize::from(
+            face.is_equal(&operands::candidate(request, PrismHistoryStage::Selected)?.face),
+        ),
+        1,
+    )?;
+    Ok(())
+}
+
+fn empty_dispositions(
+    request: &PrismHistoryRequest<'_, '_>,
+    batch: &crate::sketch_region_candidates::CandidateBatch,
+) -> HistoryCheck<()> {
     for (required, actual) in [
         ("batch original deletion", batch.input_deleted.len()),
         ("batch unrepresented", batch.unrepresented.len()),

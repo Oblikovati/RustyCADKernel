@@ -9,21 +9,7 @@ pub(super) fn project_copier_queries(
     source: &BoundHistoricalContexts<'_>,
     copied: &BoundHistoricalContexts<'_>,
 ) -> HistoryCheck<Vec<PrismHistoricalCopyQuery>> {
-    history_count(
-        "all directed copier query outcomes",
-        observed.queries.len(),
-        source.actual.len(),
-    )?;
-    history_count(
-        "same retained source contexts",
-        usize::from(observed.source == source.actual),
-        1,
-    )?;
-    history_count(
-        "same retained copied contexts",
-        usize::from(observed.copied == copied.actual),
-        1,
-    )?;
+    admit_query_censuses(observed, source, copied)?;
     let mut result = Vec::new();
     for (index, actual) in source.actual.iter().enumerate() {
         let target = unique_copy(observed, actual, copied)
@@ -136,4 +122,27 @@ fn query_for<'a>(
         1,
     )?;
     Ok(found[0])
+}
+
+fn admit_query_censuses(
+    observed: &RegionCopyContexts,
+    source: &BoundHistoricalContexts<'_>,
+    copied: &BoundHistoricalContexts<'_>,
+) -> HistoryCheck<()> {
+    history_count(
+        "all directed copier query outcomes",
+        observed.queries.len(),
+        source.actual.len(),
+    )?;
+    history_count(
+        "same retained source contexts",
+        usize::from(observed.source == source.actual),
+        1,
+    )?;
+    history_count(
+        "same retained copied contexts",
+        usize::from(observed.copied == copied.actual),
+        1,
+    )?;
+    Ok(())
 }

@@ -136,25 +136,9 @@ fn descendants(
     )?;
     let mut result = Vec::new();
     for identity in actual {
-        let matches: Vec<_> = expected
-            .iter()
-            .filter(|(_, r)| &r.occurrence == identity)
-            .collect();
-        history_count(
-            "one exact generated descendant occurrence",
-            matches.len(),
-            1,
-        )?;
-        result.push(bound.owned[matches[0].0].key.clone());
+        result.push(descendant_key(bound, &expected, identity)?);
     }
-    history_count(
-        "unique generated descendant uses",
-        result
-            .iter()
-            .collect::<std::collections::BTreeSet<_>>()
-            .len(),
-        expected.len(),
-    )?;
+    admit_descendant_keys(&result, expected.len())?;
     Ok(observed_values::sorted(result))
 }
 fn copy_members(
@@ -178,4 +162,33 @@ fn copy_members(
         "generated copy indices exactly bind actual reused physical members",
     )?;
     Ok(observed_values::sorted(actual))
+}
+
+fn descendant_key(
+    bound: &BoundHistoricalContexts<'_>,
+    expected: &[(usize, &crate::sketch_region::RegionObservedContext)],
+    identity: &crate::sketch_region::PartitionOccurrenceIdentity,
+) -> HistoryCheck<PrismHistoryUseKey> {
+    let matches: Vec<_> = expected
+        .iter()
+        .filter(|(_, r)| &r.occurrence == identity)
+        .collect();
+    history_count(
+        "one exact generated descendant occurrence",
+        matches.len(),
+        1,
+    )?;
+    Ok(bound.owned[matches[0].0].key.clone())
+}
+
+fn admit_descendant_keys(result: &[PrismHistoryUseKey], expected: usize) -> HistoryCheck<()> {
+    history_count(
+        "unique generated descendant uses",
+        result
+            .iter()
+            .collect::<std::collections::BTreeSet<_>>()
+            .len(),
+        expected,
+    )?;
+    Ok(())
 }

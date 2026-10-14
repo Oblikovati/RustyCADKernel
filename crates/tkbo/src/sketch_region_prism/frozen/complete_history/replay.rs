@@ -5,18 +5,7 @@ pub(super) fn finish(
     request: &PrismHistoryRequest<'_, '_>,
     captured: capture::CapturedPrismHistory,
 ) -> HistoryCheck<PrismCompleteHistory> {
-    let originals = captured
-        .continued
-        .iter()
-        .map(|r| r.original.clone())
-        .collect();
-    let binding = PrismHistorySourceBinding {
-        operation: request.publication.operation,
-        selected_region: request.publication.selected_region,
-        complementary_region: request.historical.complementary_region,
-        closure_contact: request.joined.closure_contact(),
-        originals,
-    };
+    let binding = source_binding(request, &captured);
     let mut result = PrismCompleteHistory {
         binding,
         requested: request.requested,
@@ -43,4 +32,22 @@ fn encode(value: &PrismCompleteHistory) -> Vec<u8> {
     block(&value.captured.lineage.replay_bytes(), &mut result);
     block(&value.joined, &mut result);
     result
+}
+
+fn source_binding(
+    request: &PrismHistoryRequest<'_, '_>,
+    captured: &capture::CapturedPrismHistory,
+) -> PrismHistorySourceBinding {
+    let originals = captured
+        .continued
+        .iter()
+        .map(|r| r.original.clone())
+        .collect();
+    PrismHistorySourceBinding {
+        operation: request.publication.operation,
+        selected_region: request.publication.selected_region,
+        complementary_region: request.historical.complementary_region,
+        closure_contact: request.joined.closure_contact(),
+        originals,
+    }
 }

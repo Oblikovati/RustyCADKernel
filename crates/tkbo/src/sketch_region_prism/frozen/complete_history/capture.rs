@@ -16,15 +16,7 @@ pub(super) fn capture(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<Cap
         request,
         stages::stage(&stages, PrismHistoryStage::InputCopy)?,
     )?;
-    let bound = super::super::bindings::bind_projection(request.receipt, request.publication)
-        .map_err(|e| PrismHistoryCause::Frozen(Box::new(e)))?;
-    let lineage = sweep_lineage::capture(request, &bound)?;
-    let sweep = sweep::capture(
-        request,
-        &bound,
-        stages::stage(&stages, PrismHistoryStage::SweepBase)?,
-    )?;
-    let continued = continuation::prove(request, &intermediate, &lineage, &sweep)?;
+    let (lineage, sweep, continued) = capture_kept_history(request, &stages, &intermediate)?;
     Ok(CapturedPrismHistory {
         intermediate,
         partition,
@@ -32,4 +24,25 @@ pub(super) fn capture(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<Cap
         sweep,
         continued,
     })
+}
+
+fn capture_kept_history(
+    request: &PrismHistoryRequest<'_, '_>,
+    stages: &[stages::BoundHistoryStage<'_>],
+    intermediate: &PrismIntermediateHistory,
+) -> HistoryCheck<(
+    super::super::lineage::PrismLineageInspection,
+    Vec<PrismCompleteSweepQuery>,
+    Vec<PrismOriginalContinuation>,
+)> {
+    let bound = super::super::bindings::bind_projection(request.receipt, request.publication)
+        .map_err(|e| PrismHistoryCause::Frozen(Box::new(e)))?;
+    let lineage = sweep_lineage::capture(request, &bound)?;
+    let sweep = sweep::capture(
+        request,
+        &bound,
+        stages::stage(stages, PrismHistoryStage::SweepBase)?,
+    )?;
+    let continued = continuation::prove(request, intermediate, &lineage, &sweep)?;
+    Ok((lineage, sweep, continued))
 }

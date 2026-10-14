@@ -126,17 +126,11 @@ fn admit_partition<'a>(
     };
     let parents = parent_rows::original_keys(request, &failure.parents)
         .map_err(|cause| operation::failure(request, PrismHistoryPhase::Admission, cause))?;
-    let cause = HistoricalLegacyCause::Partition {
-        source: failure.source_index,
-        vertex: failure.vertex_index,
-        block: failure.block_position,
-        parents,
-        cause: partition_cause(&failure.cause),
-    };
+    let cause = partition_diagnostic(failure, parents);
     let mut result = operation::failure(
         request,
         PrismHistoryPhase::Admission,
-        PrismHistoryCause::Legacy(cause),
+        PrismHistoryCause::Legacy(Box::new(cause)),
     );
     result.local_diagnostic = Some(PrismHistoryLocalDiagnostic::Partition(failure));
     Err(result)
@@ -179,7 +173,7 @@ fn admit_arrangement<'a>(
     let mut error = operation::failure(
         request,
         PrismHistoryPhase::Admission,
-        PrismHistoryCause::Legacy(HistoricalLegacyCause::Arrangement { variant }),
+        PrismHistoryCause::Legacy(Box::new(HistoricalLegacyCause::Arrangement { variant })),
     );
     error.local_diagnostic = Some(PrismHistoryLocalDiagnostic::Arrangement(actual));
     Err(error)
@@ -193,10 +187,10 @@ fn candidate_failure<'a>(
     let mut error = operation::failure(
         request,
         PrismHistoryPhase::Admission,
-        PrismHistoryCause::Legacy(HistoricalLegacyCause::Candidate {
+        PrismHistoryCause::Legacy(Box::new(HistoricalLegacyCause::Candidate {
             observation,
             variant,
-        }),
+        })),
     );
     error.local_diagnostic = Some(PrismHistoryLocalDiagnostic::Candidate(cause));
     error
@@ -231,6 +225,81 @@ fn candidate_gap(cause: &CandidateGap) -> HistoryCandidateVariant {
             used: *used,
         },
         CandidateGap::UnattributedMember { .. } => HistoryCandidateVariant::UnattributedMember,
+        other => candidate_member_gap(other),
+    }
+}
+pub(super) fn join_failure<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+    phase: PrismHistoryPhase,
+    cause: PrismProofJoinFailure,
+) -> PrismHistoryFailure<'a> {
+    let description = HistoricalLegacyCause::Join {
+        phase: cause.phase,
+        entity: cause.entity,
+        variant: join_variant(&cause.cause),
+    };
+    let mut error = operation::failure(
+        request,
+        phase,
+        PrismHistoryCause::Legacy(Box::new(description)),
+    );
+    error.local_diagnostic = Some(PrismHistoryLocalDiagnostic::Join(Box::new(cause)));
+    error
+}
+fn join_variant(cause: &PrismProofJoinCause) -> HistoryJoinVariant {
+    match cause {
+        PrismProofJoinCause::MissingClosureQuery => HistoryJoinVariant::MissingClosureQuery,
+        PrismProofJoinCause::ClosureQuery(_) => HistoryJoinVariant::ClosureQuery,
+        PrismProofJoinCause::ClosureRegion(_) => HistoryJoinVariant::ClosureRegion,
+        PrismProofJoinCause::Version { actual, expected } => HistoryJoinVariant::Version {
+            actual: *actual,
+            expected: *expected,
+        },
+        PrismProofJoinCause::Binding(_) => HistoryJoinVariant::Binding,
+        PrismProofJoinCause::Link(_) => HistoryJoinVariant::Link,
+        PrismProofJoinCause::Cancelled { freeze_phase } => HistoryJoinVariant::Cancelled {
+            freeze_phase: *freeze_phase,
+        },
+        PrismProofJoinCause::Stale { representation } => {
+            HistoryJoinVariant::Stale { representation }
+        }
+        other => join_capture_variant(other),
+    }
+}
+
+pub(super) fn legacy_failed(cause: &HistoricalLegacyCause) -> bool {
+    matches!(
+        cause,
+        HistoricalLegacyCause::Candidate {
+            variant: HistoryCandidateVariant::Native(_),
+            ..
+        } | HistoricalLegacyCause::Partition {
+            cause: HistoryPartitionReadCause::Native(_),
+            ..
+        } | HistoricalLegacyCause::Arrangement {
+            variant: HistoryArrangementVariant::Failed,
+        } | HistoricalLegacyCause::Join {
+            variant: HistoryJoinVariant::FailedCapture { .. },
+            ..
+        }
+    )
+}
+
+fn partition_diagnostic(
+    failure: &crate::sketch_region::PartitionReadFailure,
+    parents: Vec<FrozenOriginalKey>,
+) -> HistoricalLegacyCause {
+    HistoricalLegacyCause::Partition {
+        source: failure.source_index,
+        vertex: failure.vertex_index,
+        block: failure.block_position,
+        parents,
+        cause: partition_cause(&failure.cause),
+    }
+}
+
+fn candidate_member_gap(cause: &CandidateGap) -> HistoryCandidateVariant {
+    match cause {
         CandidateGap::UnsupportedCurve {
             occurrence,
             dynamic_type,
@@ -248,31 +317,12 @@ fn candidate_gap(cause: &CandidateGap) -> HistoryCandidateVariant {
             omitted: omitted.len(),
             unexpected: unexpected.len(),
         },
+        _ => unreachable!("member-specific candidate gap"),
     }
 }
-pub(super) fn join_failure<'a>(
-    request: &PrismHistoryRequest<'a, '_>,
-    phase: PrismHistoryPhase,
-    cause: PrismProofJoinFailure,
-) -> PrismHistoryFailure<'a> {
-    let description = HistoricalLegacyCause::Join {
-        phase: cause.phase,
-        entity: cause.entity,
-        variant: join_variant(&cause.cause),
-    };
-    let mut error = operation::failure(request, phase, PrismHistoryCause::Legacy(description));
-    error.local_diagnostic = Some(PrismHistoryLocalDiagnostic::Join(Box::new(cause)));
-    error
-}
-fn join_variant(cause: &PrismProofJoinCause) -> HistoryJoinVariant {
+
+fn join_capture_variant(cause: &PrismProofJoinCause) -> HistoryJoinVariant {
     match cause {
-        PrismProofJoinCause::MissingClosureQuery => HistoryJoinVariant::MissingClosureQuery,
-        PrismProofJoinCause::ClosureQuery(_) => HistoryJoinVariant::ClosureQuery,
-        PrismProofJoinCause::ClosureRegion(_) => HistoryJoinVariant::ClosureRegion,
-        PrismProofJoinCause::Version { actual, expected } => HistoryJoinVariant::Version {
-            actual: *actual,
-            expected: *expected,
-        },
         PrismProofJoinCause::Embedding(v) => HistoryJoinVariant::Embedding { phase: v.phase },
         PrismProofJoinCause::IncompleteCapture(v) => {
             HistoryJoinVariant::IncompleteCapture { phase: v.phase }
@@ -280,34 +330,6 @@ fn join_variant(cause: &PrismProofJoinCause) -> HistoryJoinVariant {
         PrismProofJoinCause::FailedCapture(v) => {
             HistoryJoinVariant::FailedCapture { phase: v.phase }
         }
-        PrismProofJoinCause::Binding(_) => HistoryJoinVariant::Binding,
-        PrismProofJoinCause::Link(_) => HistoryJoinVariant::Link,
-        PrismProofJoinCause::Cancelled { freeze_phase } => HistoryJoinVariant::Cancelled {
-            freeze_phase: *freeze_phase,
-        },
-        PrismProofJoinCause::Stale { representation } => {
-            HistoryJoinVariant::Stale { representation }
-        }
-    }
-}
-
-pub(super) fn legacy_failed(cause: &HistoricalLegacyCause) -> bool {
-    match cause {
-        HistoricalLegacyCause::Candidate {
-            variant: HistoryCandidateVariant::Native(_),
-            ..
-        }
-        | HistoricalLegacyCause::Partition {
-            cause: HistoryPartitionReadCause::Native(_),
-            ..
-        }
-        | HistoricalLegacyCause::Arrangement {
-            variant: HistoryArrangementVariant::Failed,
-        }
-        | HistoricalLegacyCause::Join {
-            variant: HistoryJoinVariant::FailedCapture { .. },
-            ..
-        } => true,
-        _ => false,
+        _ => unreachable!("capture-specific join cause"),
     }
 }

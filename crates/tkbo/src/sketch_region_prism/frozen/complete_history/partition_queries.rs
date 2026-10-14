@@ -22,15 +22,9 @@ pub(super) fn project_partition_queries(
     )?;
     let mut result = Vec::new();
     for (index, actual) in original.actual.iter().enumerate() {
-        let identity = stage_names::original_identity(request, &actual.occurrence)?;
-        let rows: Vec<_> = observed.iter().filter(|q| q.original == identity).collect();
-        history_count(
-            "one actual native partition query for each original use",
-            rows.len(),
-            1,
-        )?;
+        let query = original_query(request, observed, actual)?;
         result.push(
-            project_query(request, rows[0], actual, copied, partition)
+            project_query(request, query, actual, copied, partition)
                 .map_err(|cause| cause.at_use(original.owned[index].key.clone()))?,
         );
     }
@@ -50,16 +44,7 @@ fn query_rows<'a>(
             required: "exhaustive native partition member queries",
         });
     };
-    history_count(
-        "history filling requested",
-        usize::from(*history_requested),
-        1,
-    )?;
-    history_count(
-        "actual filled native history available",
-        usize::from(*history_available),
-        1,
-    )?;
+    admit_history_availability(*history_requested, *history_available)?;
     Ok(rows)
 }
 fn project_query(
@@ -96,51 +81,18 @@ fn admit_query(query: &PartitionMemberQuery, original: &RegionObservedContext) -
         usize::from(*native_result(&query.supported)?),
         1,
     )?;
-    history_count(
-        "v1 unchanged Jordan partition Modified answers",
-        native_result(&query.modified)?.len(),
-        0,
-    )?;
-    history_count(
-        "v1 unchanged Jordan partition Generated answers",
-        native_result(&query.generated)?.len(),
-        0,
-    )?;
-    history_count(
-        "v1 continued original member is not deleted",
-        usize::from(*native_result(&query.deleted)?),
-        0,
-    )
+    admit_unchanged_answers(query)
 }
 fn bind_initial_query(
     request: &PrismHistoryRequest<'_, '_>,
     query: &PartitionMemberQuery,
     original: &RegionObservedContext,
 ) -> HistoryCheck<()> {
-    let initial = operands::copied_contexts(
-        &operands::partition(request)?.input_contexts[0].observation,
-        PrismHistoryStage::InputCopy,
-    )?;
-    let rows: Vec<_> = initial
-        .queries
-        .iter()
-        .filter(|q| q.source == *original)
-        .collect();
-    history_count(
-        "one actual initial copier observation for partition query",
-        rows.len(),
-        1,
-    )?;
-    let images = native_result(&rows[0].images)?;
-    history_count(
-        "one actual initial copier image for partition query",
-        images.len(),
-        1,
-    )?;
+    let image = initial_query_image(request, original)?;
     history_count(
         "partition query targets its actual initial copied image",
         usize::from(
-            same_definition(&images[0], &query.copied)
+            same_definition(image, &query.copied)
                 && query.copied.orientation == original.occurrence.orientation,
         ),
         1,
@@ -190,4 +142,88 @@ pub(super) fn native_result<T>(
     result
         .as_ref()
         .map_err(|cause| PrismHistoryCause::Native(cause.clone()))
+}
+
+fn original_query<'a>(
+    request: &PrismHistoryRequest<'_, '_>,
+    observed: &'a [PartitionMemberQuery],
+    actual: &RegionObservedContext,
+) -> HistoryCheck<&'a PartitionMemberQuery> {
+    let identity = stage_names::original_identity(request, &actual.occurrence)?;
+    let rows: Vec<_> = observed.iter().filter(|q| q.original == identity).collect();
+    history_count(
+        "one actual native partition query for each original use",
+        rows.len(),
+        1,
+    )?;
+    Ok(rows[0])
+}
+
+fn admit_history_availability(
+    history_requested: bool,
+    history_available: bool,
+) -> HistoryCheck<()> {
+    history_count(
+        "history filling requested",
+        usize::from(history_requested),
+        1,
+    )?;
+    history_count(
+        "actual filled native history available",
+        usize::from(history_available),
+        1,
+    )?;
+    Ok(())
+}
+
+fn admit_unchanged_answers(query: &PartitionMemberQuery) -> HistoryCheck<()> {
+    history_count(
+        "v1 unchanged Jordan partition Modified answers",
+        native_result(&query.modified)?.len(),
+        0,
+    )?;
+    history_count(
+        "v1 unchanged Jordan partition Generated answers",
+        native_result(&query.generated)?.len(),
+        0,
+    )?;
+    history_count(
+        "v1 continued original member is not deleted",
+        usize::from(*native_result(&query.deleted)?),
+        0,
+    )
+}
+
+fn initial_query_image<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+    original: &RegionObservedContext,
+) -> HistoryCheck<&'a PartitionOccurrenceIdentity> {
+    let initial = operands::copied_contexts(
+        &operands::partition(request)?.input_contexts[0].observation,
+        PrismHistoryStage::InputCopy,
+    )?;
+    let rows: Vec<_> = initial
+        .queries
+        .iter()
+        .filter(|q| q.source == *original)
+        .collect();
+    history_count(
+        "one actual initial copier observation for partition query",
+        rows.len(),
+        1,
+    )?;
+    let images = unique_initial_image(rows[0])?;
+    Ok(&images[0])
+}
+
+fn unique_initial_image(
+    query: &crate::sketch_region::RegionContextCopyQuery,
+) -> HistoryCheck<&[PartitionOccurrenceIdentity]> {
+    let images = native_result(&query.images)?;
+    history_count(
+        "one actual initial copier image for partition query",
+        images.len(),
+        1,
+    )?;
+    Ok(images)
 }

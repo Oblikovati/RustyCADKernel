@@ -37,15 +37,7 @@ pub(super) fn copy_links(
             request, source, copied, link, queries, relations,
         )?);
     }
-    history_count(
-        "unique original context per candidate copy link",
-        result
-            .iter()
-            .map(|r| &r.original)
-            .collect::<std::collections::BTreeSet<_>>()
-            .len(),
-        source.actual.len(),
-    )?;
+    admit_link_keys(&result, source.actual.len())?;
     Ok(observed_values::sorted(result))
 }
 fn copy_link(
@@ -60,18 +52,7 @@ fn copy_link(
     let original = source.owned[index].key.clone();
     let image = observed_values::occurrence(copied, &link.copied)?;
     let parents = parent_rows::parents(request, &link.preserved, &link.modified, &link.generated)?;
-    let kind = *partition_queries::native_result(&link.kind)? as u8;
-    let supported = *partition_queries::native_result(&link.history_supported)?;
-    observed_values::equal(
-        &supported,
-        &(kind != rustycad_tkg3d::top_abs::ShapeEnum::Compound as u8),
-        "supported leaf history versus administrative container",
-    )?;
-    observed_values::equal(
-        &kind,
-        &source.owned[index].occurrence.member.kind,
-        "copier member kind matches original",
-    )?;
+    let (kind, supported) = admit_link_kind(link, source.owned[index].occurrence.member.kind)?;
     match_link(&original, &image, &parents, queries, relations)
         .map_err(|cause| cause.at_use(original.clone()))?;
     Ok(PrismCandidateCopyLink {
@@ -128,19 +109,7 @@ pub(super) fn project_tree(
     let rows = tree(request)?;
     let expected: std::collections::BTreeSet<_> =
         copied.owned.iter().map(|r| r.occurrence.member).collect();
-    history_count(
-        "complete physical candidate-copy tree",
-        rows.len(),
-        expected.len(),
-    )?;
-    history_count(
-        "unique temporary tree lookup indices",
-        rows.iter()
-            .map(|r| r.index)
-            .collect::<std::collections::BTreeSet<_>>()
-            .len(),
-        rows.len(),
-    )?;
+    admit_tree_census(rows, expected.len())?;
     let mut result = Vec::new();
     for row in rows {
         result.push(tree_member(copied, row)?);
@@ -175,4 +144,49 @@ pub(super) fn tree_key(
     let rows: Vec<_> = tree(request)?.iter().filter(|r| r.index == index).collect();
     history_count("one actual copied tree lookup index", rows.len(), 1)?;
     Ok(observed_values::occurrence(copied, &rows[0].occurrence)?.member)
+}
+
+fn admit_link_keys(result: &[PrismCandidateCopyLink], expected: usize) -> HistoryCheck<()> {
+    history_count(
+        "unique original context per candidate copy link",
+        result
+            .iter()
+            .map(|r| &r.original)
+            .collect::<std::collections::BTreeSet<_>>()
+            .len(),
+        expected,
+    )?;
+    Ok(())
+}
+
+fn admit_link_kind(
+    link: &crate::sketch_region_candidates::CandidateImageCopyLink,
+    expected: u8,
+) -> HistoryCheck<(u8, bool)> {
+    let kind = *partition_queries::native_result(&link.kind)? as u8;
+    let supported = *partition_queries::native_result(&link.history_supported)?;
+    observed_values::equal(
+        &supported,
+        &(kind != rustycad_tkg3d::top_abs::ShapeEnum::Compound as u8),
+        "supported leaf history versus administrative container",
+    )?;
+    observed_values::equal(&kind, &expected, "copier member kind matches original")?;
+    Ok((kind, supported))
+}
+
+fn admit_tree_census(rows: &[CandidateCopiedMember], expected: usize) -> HistoryCheck<()> {
+    history_count(
+        "complete physical candidate-copy tree",
+        rows.len(),
+        expected,
+    )?;
+    history_count(
+        "unique temporary tree lookup indices",
+        rows.iter()
+            .map(|r| r.index)
+            .collect::<std::collections::BTreeSet<_>>()
+            .len(),
+        rows.len(),
+    )?;
+    Ok(())
 }
