@@ -95,9 +95,17 @@ jobs:
         shell: pwsh
         run: tools/ci/install_windows_freetype.ps1
       - run: rustup show
-      - run: python3 tools/toolkit_test_suites.py
-      - run: python3 tools/check_rust_format.py
-      - run: cargo lint
+      - name: Check out current shared verification tools
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: target/verification-tools
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/release_verification_plan.py
+            tools/verify_release_gate.py
+          persist-credentials: false
+      - run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate rust-prechecks
       - name: Test every toolkit (including doctests)
         id: rust_gate
         shell: bash
@@ -107,7 +115,7 @@ jobs:
           printf 'Martensite original gate command: cargo test-all --no-fail-fast\n' >> target/rust-gate/gate.log
           set +e
           set -o pipefail
-          cargo test-all --no-fail-fast 2>&1 | tee -a target/rust-gate/gate.log
+          python3 target/verification-tools/tools/verify_release_gate.py --root . --gate rust-tests 2>&1 | tee -a target/rust-gate/gate.log
           gate_status=${PIPESTATUS[0]}
           printf '%s\n' "$gate_status" > target/rust-gate/gate.exit
           exit "$gate_status"
@@ -144,9 +152,7 @@ jobs:
             target/rust-gate/evidence/*.rgba
             target/rust-gate/evidence/*.depth
           if-no-files-found: error
-      - run: cargo doc --workspace --all-features --no-deps --locked
-        env:
-          RUSTDOCFLAGS: -D warnings
+      - run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate rust-docs
   coverage:
     if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
@@ -170,11 +176,18 @@ jobs:
       - run: cargo install cargo-llvm-cov --version 0.9.1 --locked
       # Run 38156653032 timed out in Bug30655's 211k-triangle sphere workload.
       # The functional toolkit suite keeps it; coverage avoids the duplicate dense replay.
+      - name: Check out current shared verification tools
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: target/verification-tools
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/release_verification_plan.py
+            tools/verify_release_gate.py
+          persist-credentials: false
       - name: Run instrumented tests once, with coverage and JUnit output
-        run: >-
-          cargo llvm-cov nextest --workspace --all-features --locked --profile ci
-          -E 'not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)'
-          --lcov --output-path target/lcov.info
+        run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate coverage
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: coverage-and-tests
@@ -193,6 +206,16 @@ jobs:
         run: python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
       - name: Select the installed software Vulkan ICD
         run: echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
+      - name: Check out current shared verification tools
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: target/verification-tools
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/release_verification_plan.py
+            tools/verify_release_gate.py
+          persist-credentials: false
       - name: Run the original cold Vulkan gate
         id: vulkan_gate
         shell: bash
@@ -202,7 +225,7 @@ jobs:
           printf 'Martensite original gate command: cargo test -p martensite-vulkan --all-targets --locked\n' >> target/vulkan-gate/gate.log
           set +e
           set -o pipefail
-          cargo test -p martensite-vulkan --all-targets --locked 2>&1 | tee -a target/vulkan-gate/gate.log
+          python3 target/verification-tools/tools/verify_release_gate.py --root . --gate vulkan-cold 2>&1 | tee -a target/vulkan-gate/gate.log
           gate_status=${PIPESTATUS[0]}
           printf '%s\n' "$gate_status" > target/vulkan-gate/gate.exit
           exit "$gate_status"
@@ -232,25 +255,17 @@ jobs:
           name: vulkan-cold-gate-failure
           path: target/vulkan-gate
           if-no-files-found: error
-      - run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --example offscreen_acceptance --locked
-      - name: Validate opaque lighting and clipped lighting on lavapipe
-        run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --example lighting_acceptance --locked
+      - name: Validate offscreen and opaque/clipped lighting on lavapipe
+        run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate vulkan-acceptance
       - name: Validate every checked-in Vulkan shader variant
-        run: |
-          for shader in crates/vulkan/shaders/*.spv; do
-            spirv-val --target-env vulkan1.3 "$shader"
-          done
+        run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate vulkan-shaders
       - name: Measure release renderer performance on lavapipe
-        run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --release --example renderer_performance --locked > target/renderer-performance.log
+        run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate vulkan-performance
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: lavapipe-renderer-performance
           path: target/renderer-performance.log
-      - run: glslangValidator --target-env vulkan1.3 -V crates/vulkan/shaders/unlit.vert -o /tmp/unlit.vert.spv
-      - run: spirv-val --target-env vulkan1.3 crates/vulkan/shaders/unlit.vert.spv
-      - run: glslangValidator --target-env vulkan1.3 -V crates/vulkan/shaders/unlit.frag -o /tmp/unlit.frag.spv
-      - run: spirv-val --target-env vulkan1.3 crates/vulkan/shaders/unlit.frag.spv
   dependencies:
     if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
@@ -260,7 +275,17 @@ jobs:
           ref: ${{ inputs.source_ref || github.sha }}
       - run: rustup show
       - run: cargo install cargo-deny --version 0.20.2 --locked
-      - run: cargo deny check
+      - name: Check out current shared verification tools
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: target/verification-tools
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/release_verification_plan.py
+            tools/verify_release_gate.py
+          persist-credentials: false
+      - run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate dependencies
   inventory:
     if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
@@ -273,8 +298,17 @@ jobs:
           repository: Open-Cascade-SAS/OCCT
           ref: 3d097a0328e71b826377d4814ab05ec3c3d23871
           path: target/occt-source
-      - run: python3 tools/porting.py check --source target/occt-source
-      - run: python3 tools/porting.py status
+      - name: Check out current shared verification tools
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: target/verification-tools
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/release_verification_plan.py
+            tools/verify_release_gate.py
+          persist-credentials: false
+      - run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate inventory
   tools:
     if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
@@ -282,4 +316,14 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           ref: ${{ inputs.source_ref || github.sha }}
-      - run: python3 tools/run_tool_tests.py --jobs 2
+      - name: Check out current shared verification tools
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: target/verification-tools
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/release_verification_plan.py
+            tools/verify_release_gate.py
+          persist-credentials: false
+      - run: python3 target/verification-tools/tools/verify_release_gate.py --root . --gate tools

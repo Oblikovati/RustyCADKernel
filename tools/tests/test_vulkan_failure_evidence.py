@@ -161,7 +161,18 @@ class VulkanFailureEvidenceTests(unittest.TestCase):
             binary.chmod(0o755)
         return {**os.environ, "PATH": f'{self.directory}:{os.environ["PATH"]}'}
 
+    def stage_current_gate_helper(self) -> None:
+        """Use actual orchestration over the isolated fake source, as older-tag CI does."""
+        helper = self.directory / "target/verification-tools/tools"
+        helper.mkdir(parents=True)
+        for name in ("release_verification_plan.py", "verify_release_gate.py"):
+            (helper / name).write_bytes((ROOT / "tools" / name).read_bytes())
+        shader = self.directory / "crates/vulkan/shaders/unlit.vert.spv"
+        shader.parent.mkdir(parents=True)
+        shader.write_bytes(b"test-only source variant")
+
     def test_actual_shell_gate_retains_exact_command_and_failure_exit(self) -> None:
+        self.stage_current_gate_helper()
         environment = self.fake_gate_environment()
         result = subprocess.run(
             ["bash", "-e", "-c", self.gate_script()],
