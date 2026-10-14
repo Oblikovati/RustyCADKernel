@@ -19,11 +19,20 @@ pub(super) fn capture_mapped_partition(
     filler: &BOPAlgoPaveFiller,
     builder: Option<&BOPAlgoBuilder>,
 ) -> PartitionObservation {
+    capture_partition_with_space(copied, filler, builder, None)
+}
+pub(super) fn capture_partition_with_space(
+    copied: &CopiedSources,
+    filler: &BOPAlgoPaveFiller,
+    builder: Option<&BOPAlgoBuilder>,
+    space: Option<PartitionSpaceCapture>,
+) -> PartitionObservation {
     let mut partial = OwnedPartitionSnapshot {
         source_shape_count: None,
         sources: Vec::new(),
+        vertices: Vec::new(),
     };
-    match capture_context(copied, filler, builder, &mut partial) {
+    match capture_context(copied, filler, builder, &mut partial, space) {
         Ok(()) => PartitionObservation::Captured(partial),
         Err(failure) => PartitionObservation::Incomplete { partial, failure },
     }
@@ -33,6 +42,7 @@ fn capture_context(
     filler: &BOPAlgoPaveFiller,
     builder: Option<&BOPAlgoBuilder>,
     partial: &mut OwnedPartitionSnapshot,
+    space: Option<PartitionSpaceCapture>,
 ) -> Result<(), PartitionReadFailure> {
     let structure = filler
         .data_structure()
@@ -40,25 +50,24 @@ fn capture_context(
     partial.source_shape_count = Some(structure.nb_source_shapes());
     let builder = builder.ok_or_else(|| missing_context("mapped builder is None"))?;
     capture_members(copied, structure)?;
-    capture_sources(copied, structure, builder, partial)
+    capture_sources(copied, structure, builder, partial, space)?;
+    super::partition_vertices::capture_vertices(copied, structure, partial, occurrence_identity)
 }
 fn capture_sources(
     copied: &CopiedSources,
     structure: &DataStructure,
     builder: &BOPAlgoBuilder,
     partial: &mut OwnedPartitionSnapshot,
+    space: Option<PartitionSpaceCapture>,
 ) -> Result<(), PartitionReadFailure> {
     for index in 0..structure.nb_source_shapes() {
-        let kind = structure
-            .shape_info(index)
-            .map_err(|cause| native_failure(index, cause))?
-            .shape_type();
+        let kind = source_kind(index, structure)?;
         if kind != ShapeEnum::Edge {
             continue;
         }
         partial
             .sources
-            .push(capture_source(index, copied, structure, builder)?);
+            .push(capture_source(index, copied, structure, builder, space)?);
     }
     Ok(())
 }
@@ -68,9 +77,10 @@ fn capture_source(
     copied: &CopiedSources,
     structure: &DataStructure,
     builder: &BOPAlgoBuilder,
+    space: Option<PartitionSpaceCapture>,
 ) -> Result<SourcePartitionObservation, PartitionReadFailure> {
     let parents = source_parents(index, copied, structure)?;
-    source_fields(index, structure, builder)
+    source_fields(index, structure, builder, space)
         .map(|mut source| {
             source.parents = parents.clone();
             source
@@ -84,22 +94,36 @@ fn source_fields(
     index: i32,
     structure: &DataStructure,
     builder: &BOPAlgoBuilder,
+    space: Option<PartitionSpaceCapture>,
 ) -> Result<SourcePartitionObservation, PartitionReadFailure> {
     let shape = structure
         .shape(index)
         .map_err(|cause| native_failure(index, cause))?;
-    let range = source_range(index, shape)?;
-    let has_reference = source_has_reference(index, structure)?;
+    let mut source = source_shell(index, shape, structure)?;
+    source.space = capture_source_space(index, shape, space)?;
+    source.source_vertices = source_children(index, shape, structure)?;
+    source.blocks = capture_blocks(index, structure)?;
+    source.images = capture_images(index, shape, structure, builder)?;
+    Ok(source)
+}
+fn source_shell(
+    index: i32,
+    shape: &Shape,
+    structure: &DataStructure,
+) -> Result<SourcePartitionObservation, PartitionReadFailure> {
     Ok(SourcePartitionObservation {
         source_index: index,
         parents: Vec::new(),
         occurrence: occurrence_identity(shape),
-        range,
-        has_reference,
-        blocks: capture_blocks(index, structure)?,
-        images: capture_images(index, shape, structure, builder)?,
+        range: source_range(index, shape)?,
+        space: None,
+        has_reference: source_has_reference(index, structure)?,
+        source_vertices: Vec::new(),
+        blocks: Vec::new(),
+        images: None,
     })
 }
+
 fn source_range(index: i32, shape: &Shape) -> Result<[f64; 2], PartitionReadFailure> {
     let typed = edge(shape).map_err(|cause| native_failure(index, cause))?;
     let range = BRepTool::range(&typed).map_err(|cause| native_failure(index, cause))?;
@@ -220,4 +244,36 @@ fn missing_member_failure(
     );
     failure.parents.push(parent.clone());
     failure
+}
+
+fn capture_source_space(
+    index: i32,
+    shape: &Shape,
+    capture: Option<PartitionSpaceCapture>,
+) -> Result<Option<PartitionSpaceRead>, PartitionReadFailure> {
+    let Some(capture) = capture else {
+        return Ok(None);
+    };
+    let typed = edge(shape).map_err(|cause| native_failure(index, cause))?;
+    Ok(Some(capture(&typed).map_err(std::sync::Arc::new)))
+}
+
+fn source_kind(index: i32, structure: &DataStructure) -> Result<ShapeEnum, PartitionReadFailure> {
+    Ok(structure
+        .shape_info(index)
+        .map_err(|cause| native_failure(index, cause))?
+        .shape_type())
+}
+
+fn source_children(
+    index: i32,
+    shape: &Shape,
+    structure: &DataStructure,
+) -> Result<Vec<SourceVertexObservation>, PartitionReadFailure> {
+    super::partition_source_vertices::capture_source_vertices(
+        index,
+        shape,
+        structure,
+        occurrence_identity,
+    )
 }

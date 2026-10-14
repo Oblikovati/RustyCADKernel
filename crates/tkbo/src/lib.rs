@@ -33,3 +33,7 @@ pub(crate) mod closed_analytic_cubic;
 
 #[allow(dead_code, unused_imports)]
 mod sketch_region_certification;
+
+// Owned binding evidence cannot promote incomplete ADR0014 contact/search coverage.
+#[allow(dead_code, unused_imports)]
+mod sketch_region_partition_bindings;

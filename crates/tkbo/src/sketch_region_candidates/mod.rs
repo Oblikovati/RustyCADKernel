@@ -22,3 +22,8 @@ pub(crate) use boundaries::capture_segment as capture_boundary_segment;
 
 #[cfg(test)]
 mod captured_tests;
+
+mod copy_observation;
+pub(crate) use copy_observation::{
+    CandidateCopyInspection, CandidateImageCopyLink, observe_candidate_copies,
+};

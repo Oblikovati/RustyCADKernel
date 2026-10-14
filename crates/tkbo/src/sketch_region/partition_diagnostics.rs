@@ -21,6 +21,7 @@ pub(super) fn read_failure(
 ) -> PartitionReadFailure {
     PartitionReadFailure {
         source_index,
+        vertex_index: None,
         block_position,
         parents: Vec::new(),
         cause,

@@ -21,15 +21,31 @@ pub(crate) fn extract_candidates(
     plane: Plane3,
     cancelled: &mut dyn FnMut(CandidatePhase) -> bool,
 ) -> Result<CandidateBatch, CandidateCause> {
+    extract_candidates_observing_copy(owned, plane, cancelled, None)
+}
+pub(super) fn extract_candidates_observing_copy(
+    owned: &OwnedArrangement,
+    plane: Plane3,
+    cancelled: &mut dyn FnMut(CandidatePhase) -> bool,
+    collector: Option<&mut super::copy_observation::CandidateCopyCollector>,
+) -> Result<CandidateBatch, CandidateCause> {
     poll(CandidatePhase::Copy, cancelled)?;
-    let mut copier = BRepBuilderAPICopy::with_shape(&owned.arrangement, true, true)
-        .map_err(CandidateCause::Mapped)?;
-    let parents = copy_parents(owned, &mut copier)?;
+    let (mut copier, parents) = prepare_candidate_copy(owned, collector)?;
     poll(CandidatePhase::Generation, cancelled)?;
     let builder = generate_faces(copier.shape().map_err(CandidateCause::Mapped)?, plane)?;
     poll(CandidatePhase::Capture, cancelled)?;
     finish_batch(owned, plane, &builder, &parents)
 }
+fn prepare_candidate_copy(
+    owned: &OwnedArrangement,
+    collector: Option<&mut super::copy_observation::CandidateCopyCollector>,
+) -> Result<(BRepBuilderAPICopy, CandidateParents), CandidateCause> {
+    let mut copier = BRepBuilderAPICopy::with_shape(&owned.arrangement, true, true)
+        .map_err(CandidateCause::Mapped)?;
+    let parents = copy_parents_observing(owned, &mut copier, collector)?;
+    Ok((copier, parents))
+}
+
 fn finish_batch(
     owned: &OwnedArrangement,
     plane: Plane3,
@@ -62,17 +78,28 @@ pub(super) fn copy_parents(
     owned: &OwnedArrangement,
     copier: &mut BRepBuilderAPICopy,
 ) -> Result<CandidateParents, CandidateCause> {
+    copy_parents_observing(owned, copier, None)
+}
+fn copy_parents_observing(
+    owned: &OwnedArrangement,
+    copier: &mut BRepBuilderAPICopy,
+    mut collector: Option<&mut super::copy_observation::CandidateCopyCollector>,
+) -> Result<CandidateParents, CandidateCause> {
     let mut parents = Vec::new();
     for relation in &owned.relations {
-        for copied in copier
-            .modified(&relation.output)
-            .map_err(CandidateCause::Mapped)?
-        {
+        let modified = copy_images(copier, &relation.output)?;
+        for copied in modified {
+            super::copy_observation::record_copy_if_present(
+                collector.as_deref_mut(),
+                relation,
+                copied,
+            );
             parents.push(composed_copy_relation(relation, copied));
         }
     }
     Ok(parents)
 }
+
 fn prepare_edges(
     shape: &Shape,
     support: &rustycad_tkbrep::topods::Face,
@@ -171,4 +198,11 @@ fn unrepresented_leaf(
         .iter()
         .flat_map(|c| &c.relations)
         .any(|r| r.output.is_same(&relation.output)))
+}
+
+fn copy_images<'a>(
+    copier: &'a mut BRepBuilderAPICopy,
+    original: &Shape,
+) -> Result<&'a List<Shape>, CandidateCause> {
+    copier.modified(original).map_err(CandidateCause::Mapped)
 }
