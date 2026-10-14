@@ -46,6 +46,7 @@ pub(in crate::sketch_region_prism) struct AnnularBoundChart {
     pub chart: super::super::current_binding::BoundPrismChart,
     pub trims: Vec<AnnularTrimIdentity>,
 }
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub(in crate::sketch_region_prism) struct AnnularTrimIdentity {
     pub source: RegionObservedContext,
     pub output: RegionObservedContext,
