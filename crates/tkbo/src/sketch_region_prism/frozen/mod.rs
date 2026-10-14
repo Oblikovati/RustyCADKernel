@@ -8,6 +8,10 @@ pub(crate) mod complete_history;
 mod coverage;
 mod domain;
 mod encoding;
+#[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use encoding::{
+    chart as encode_prism_chart_geometry, sources as encode_prism_source_geometry,
+};
 mod endpoints;
 mod geometry;
 mod graph;

@@ -42,6 +42,10 @@ fn assert_chart_operands(
     retained: &super::super::surface_charts::PrismSurfaceEntry,
 ) {
     assert_eq!(chart.parents, retained.parents);
+    assert_eq!(
+        super::super::frozen::encode_prism_chart_geometry(&chart.captured),
+        super::super::frozen::encode_prism_chart_geometry(retained.captured.as_ref().unwrap())
+    );
     assert_eq!(chart.proof.identities, retained.proof.identities);
     assert_eq!(chart.proof.trim_roles, retained.proof.trim_roles);
     let actual = &retained.captured.as_ref().unwrap().trims;
