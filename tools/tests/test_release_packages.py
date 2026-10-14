@@ -70,11 +70,16 @@ class FakeCommands:
         self.tagged = REVISION
         self.fail_tests = False
         self.stale_suites = False
+        self.unformatted_inputs = False
         self.features: object = {}
         self.calls: list[list[str]] = []
 
     def run(self, arguments: list[str], root: Path) -> str:
         self.calls.append(arguments)
+        if arguments == ["python3", "tools/check_rust_format.py"]:
+            if self.unformatted_inputs:
+                raise subprocess.CalledProcessError(3, arguments)
+            return ""
         if arguments == ["python3", "tools/toolkit_test_suites.py"]:
             if self.stale_suites:
                 raise subprocess.CalledProcessError(2, arguments)
@@ -160,6 +165,15 @@ class ReleasePackageTests(unittest.TestCase):
         tests = [call for call in self.runner.calls if call[:2] == ["cargo", "test"]]
         self.assertEqual(len(tests), 2)
         self.assertFalse(any("--all-features" in call for call in tests))
+
+    def test_unformatted_included_tests_refuse_release_before_packaging(self) -> None:
+        self.runner.unformatted_inputs = True
+        with self.assertRaises(subprocess.CalledProcessError) as failure:
+            build_release(self.fixture.root, "v0.1.0", self.runner)
+        self.assertEqual(failure.exception.returncode, 3)
+        self.assertFalse(
+            any(call[:2] == ["cargo", "package"] for call in self.runner.calls)
+        )
 
     def test_cargo_metadata_preserves_available_features(self) -> None:
         self.runner.features = {"default": [], "debug": ["default"]}

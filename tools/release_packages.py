@@ -94,6 +94,8 @@ def prepare_release_packages(root: Path, commands: Commands) -> None:
     """Keep existing discovery/package ordering; e.g. prepare_release_packages(root, runner)."""
     # Run 38315068263 exposed a regression module missing from generated test groups.
     commands.run(["python3", "tools/toolkit_test_suites.py"], root)
+    # Run 38497850980 found included test files that cargo fmt does not visit.
+    commands.run(["python3", "tools/check_rust_format.py"], root)
     # Cargo cannot resolve unpublished registry siblings. Verify the whole archive
     # set below instead; retain the owner lockfile as a separate release asset.
     commands.run(
