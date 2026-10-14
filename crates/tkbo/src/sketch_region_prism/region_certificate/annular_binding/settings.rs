@@ -22,32 +22,7 @@ pub(super) fn capture(
         "certified actual material selection seed",
         limits.seed.map(f64::to_bits) == request.material_seed.map(f64::to_bits),
     )?;
-    holds(
-        "effective actual seed",
-        limits.effective_seed.map(|v| v.map(f64::to_bits)) == Some(limits.seed.map(f64::to_bits)),
-    )?;
-    holds(
-        "effective actual sweep vector",
-        limits.effective_extrusion.map(|v| v.map(f64::to_bits))
-            == Some(limits.extrusion.map(f64::to_bits)),
-    )?;
-    // The diagnostic has not executed tolerance validation. A requested budget is not an applied one.
-    holds(
-        "diagnostic spatial limit remains unapplied",
-        limits.effective_spatial.is_none(),
-    )?;
-    holds(
-        "diagnostic parameter limit remains unapplied",
-        limits.effective_parameter.is_none(),
-    )?;
-    holds(
-        "effective roots unchanged",
-        limits.effective_roots == Some(limits.roots),
-    )?;
-    holds(
-        "diagnostic does not invent achieved error",
-        limits.achieved_error.is_none(),
-    )?;
+    effective_limits(&limits)?;
     Ok(limits)
 }
 pub(super) fn jacobian(
@@ -68,4 +43,36 @@ pub(super) fn jacobian(
         determinant.compare_f64(0.).is_ok_and(|v| !v.is_eq()),
     )?;
     Ok(determinant)
+}
+
+fn effective_limits(limits: &FrozenPrismLimits) -> AnnularCheck<'static> {
+    holds(
+        "effective actual seed",
+        limits.effective_seed.map(|v| v.map(f64::to_bits)) == Some(limits.seed.map(f64::to_bits)),
+    )?;
+    holds(
+        "effective actual sweep vector",
+        limits.effective_extrusion.map(|v| v.map(f64::to_bits))
+            == Some(limits.extrusion.map(f64::to_bits)),
+    )?;
+    diagnostic_limits(limits)
+}
+fn diagnostic_limits(limits: &FrozenPrismLimits) -> AnnularCheck<'static> {
+    // The diagnostic has not executed tolerance validation. A requested budget is not an applied one.
+    holds(
+        "diagnostic spatial limit remains unapplied",
+        limits.effective_spatial.is_none(),
+    )?;
+    holds(
+        "diagnostic parameter limit remains unapplied",
+        limits.effective_parameter.is_none(),
+    )?;
+    holds(
+        "effective roots unchanged",
+        limits.effective_roots == Some(limits.roots),
+    )?;
+    holds(
+        "diagnostic does not invent achieved error",
+        limits.achieved_error.is_none(),
+    )
 }

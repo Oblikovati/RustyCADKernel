@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::{annular_fixture::*, topology::*};
 use super::*;
-use crate::sketch_region_prism::region_certificate::annular_binding::tests::with_actual;
 use rustycad_tkernel::standard::Failure;
 
 pub(super) struct JoinProgress<F>(pub F);
@@ -22,14 +21,11 @@ pub(super) fn with_named<T>(
     run: impl FnOnce(
         &TwoLoopRegionRequest<'_, '_>,
         &mut PrismReceipt,
-        &PrismPublicationBindings,
+        &mut PrismPublicationBindings,
         AnnularEmbeddingEvidence,
     ) -> T,
 ) -> T {
-    with_actual(|request, region, receipt| {
-        let binding = bind_annular_prism_v2(request, region, receipt, &mut ContinueAnnularFixture)
-            .unwrap_or_else(|_| panic!("actual binding"));
-        let names = authored(request, receipt, &binding);
+    with_bound(|request, receipt, names, binding| {
         let proof = inspect_bound_annular_embedding(
             request,
             receipt,
@@ -38,17 +34,16 @@ pub(super) fn with_named<T>(
             || false,
         )
         .unwrap_or_else(|_| panic!("actual embedding"));
-        run(request, receipt, &names, proof)
+        run(request, receipt, names, proof)
     })
 }
 pub(in crate::sketch_region_prism) fn joined() -> AnnularFrozenDomain {
     with_named(|request, receipt, names, proof| {
-        join_annular_frozen_domain(
+        inspect_default(
             request,
             receipt,
             names,
             proof,
-            tests::options(),
             &mut JoinProgress(|_| Ok(false)),
         )
         .unwrap_or_else(|failure| {
@@ -68,19 +63,7 @@ fn actual_annular_join_and_parameter_domain_topology_leave_body_validation_incom
     else {
         panic!("actual annular topology")
     };
-    assert!(topology.binds(&joined));
-    assert_eq!(topology.counts(), [4, 6, 12, 6, 4, 1, 1]);
-    assert_eq!(topology.operation(), AuthoredPrismId(77));
-    assert_eq!(topology.root().operation, topology.operation());
-    assert_eq!(topology.source_bytes(), joined.replay_bytes());
-    assert_eq!(
-        topology.evidence_kind(),
-        TopologyEvidenceKind::ExactCombinatorial
-    );
-    assert_eq!(
-        topology.numerical_error(),
-        TopologyNumericalError::NotApplicable
-    );
+    assert_topology_binding(&topology, &joined);
     assert!(!joined.projection().is_valid_body());
     assert!(matches!(
         certify_frozen_topology(joined.projection(), &mut ContinueTopology),
@@ -95,34 +78,28 @@ fn both_coarse_checkpoints_cancel_without_a_published_candidate() {
     ] {
         with_named(|request, receipt, names, proof| {
             let mut calls = Vec::new();
-            let result = join_annular_frozen_domain(
+            let result = inspect_default(
                 request,
                 receipt,
                 names,
                 proof,
-                tests::options(),
                 &mut JoinProgress(|phase| {
                     calls.push(phase);
                     Ok(phase == cutoff)
                 }),
             );
-            let failure = result.err().unwrap();
-            assert_eq!(failure.phase, cutoff);
-            assert_eq!(failure.classification(), TwoLoopRefusalClass::Cancelled);
-            assert_eq!(calls.last(), Some(&cutoff));
-            assert!(super::super::admission::admit_receipt(receipt).is_ok());
+            assert_cancelled(result, cutoff, &calls, receipt);
         });
     }
 }
 #[test]
 fn annular_join_rebind_detects_same_revision_source_mutation_and_retains_owned_bytes() {
     with_named(|request, receipt, names, proof| {
-        let joined = join_annular_frozen_domain(
+        let joined = inspect_default(
             request,
             receipt,
             names,
             proof,
-            tests::options(),
             &mut JoinProgress(|_| Ok(false)),
         )
         .unwrap_or_else(|_| panic!("join"));
@@ -148,32 +125,16 @@ fn commit_alias_mutation_is_refused_after_the_final_callback() {
             }
             Ok(false)
         });
-        let failure = join_annular_frozen_domain(
-            request,
-            receipt,
-            names,
-            proof,
-            tests::options(),
-            &mut progress,
-        )
-        .err()
-        .unwrap();
+        let failure = inspect_default(request, receipt, names, proof, &mut progress)
+            .err()
+            .unwrap();
         assert_eq!(failure.phase, AnnularFrozenPhase::Commit);
         assert!(matches!(failure.cause, AnnularFrozenCause::Embedding(_)));
     });
 }
 #[test]
 fn name_budget_and_version_admission_precede_external_callbacks() {
-    for options in [
-        AnnularFrozenOptions {
-            maximum_name_units: 1,
-            ..tests::options()
-        },
-        AnnularFrozenOptions {
-            version: 9,
-            ..tests::options()
-        },
-    ] {
+    for options in inadmissible_options() {
         with_named(|request, receipt, names, proof| {
             let failure = join_annular_frozen_domain(
                 request,
@@ -190,4 +151,56 @@ fn name_budget_and_version_admission_precede_external_callbacks() {
             assert_eq!(failure.classification(), TwoLoopRefusalClass::Incomplete);
         });
     }
+}
+
+pub(super) fn inspect_default<'r>(
+    request: &TwoLoopRegionRequest<'r, '_>,
+    receipt: &PrismReceipt,
+    names: &PrismPublicationBindings,
+    proof: AnnularEmbeddingEvidence,
+    progress: &mut dyn AnnularFrozenProgress,
+) -> Result<AnnularFrozenDomain, Box<AnnularFrozenFailure<'r>>> {
+    join_annular_frozen_domain(request, receipt, names, proof, tests::options(), progress)
+}
+
+fn assert_topology_binding(topology: &AnnularTopologyCertificate, joined: &AnnularFrozenDomain) {
+    assert!(topology.binds(joined));
+    assert_eq!(topology.counts(), [4, 6, 12, 6, 4, 1, 1]);
+    assert_eq!(topology.operation(), AuthoredPrismId(77));
+    assert_eq!(topology.root().operation, topology.operation());
+    assert_eq!(topology.source_bytes(), joined.replay_bytes());
+    assert_eq!(
+        topology.evidence_kind(),
+        TopologyEvidenceKind::ExactCombinatorial
+    );
+    assert_eq!(
+        topology.numerical_error(),
+        TopologyNumericalError::NotApplicable
+    );
+}
+
+fn inadmissible_options() -> [AnnularFrozenOptions; 2] {
+    [
+        AnnularFrozenOptions {
+            maximum_name_units: 1,
+            ..tests::options()
+        },
+        AnnularFrozenOptions {
+            version: 9,
+            ..tests::options()
+        },
+    ]
+}
+
+fn assert_cancelled(
+    result: Result<AnnularFrozenDomain, Box<AnnularFrozenFailure<'_>>>,
+    cutoff: AnnularFrozenPhase,
+    calls: &[AnnularFrozenPhase],
+    receipt: &PrismReceipt,
+) {
+    let failure = result.err().unwrap();
+    assert_eq!(failure.phase, cutoff);
+    assert_eq!(failure.classification(), TwoLoopRefusalClass::Cancelled);
+    assert_eq!(calls.last(), Some(&cutoff));
+    assert!(super::super::admission::admit_receipt(receipt).is_ok());
 }

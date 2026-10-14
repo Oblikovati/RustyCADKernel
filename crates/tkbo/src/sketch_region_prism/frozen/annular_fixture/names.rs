@@ -19,15 +19,7 @@ pub(in crate::sketch_region_prism::frozen) fn authored(
     rebind_two_loop_region(request, binding.region()).unwrap_or_else(|_| panic!("current region"));
     let originals = original_names(request, receipt);
     let sources = source_names(binding);
-    let directed = body_contexts(&receipt.diagnostic.as_ref().unwrap().body)
-        .ok()
-        .unwrap()
-        .into_iter()
-        .map(|actual| PrismDirectedBinding {
-            authored_use: directed_name(&actual, binding),
-            actual,
-        })
-        .collect();
+    let directed = directed_names(receipt, binding);
     rebind_two_loop_region(request, binding.region())
         .unwrap_or_else(|_| panic!("unchanged region"));
     PrismPublicationBindings {
@@ -38,6 +30,21 @@ pub(in crate::sketch_region_prism::frozen) fn authored(
         directed,
     }
 }
+fn directed_names(
+    receipt: &PrismReceipt,
+    binding: &AnnularPrismBinding,
+) -> Vec<PrismDirectedBinding> {
+    body_contexts(&receipt.diagnostic.as_ref().unwrap().body)
+        .ok()
+        .unwrap()
+        .into_iter()
+        .map(|actual| PrismDirectedBinding {
+            authored_use: directed_name(&actual, binding),
+            actual,
+        })
+        .collect()
+}
+
 fn original_names(
     request: &TwoLoopRegionRequest<'_, '_>,
     receipt: &PrismReceipt,
@@ -104,11 +111,7 @@ fn source_names(binding: &AnnularPrismBinding) -> Vec<PrismSourceBinding> {
     }];
     for boundary in binding.boundaries() {
         let names = loop_names(boundary.source);
-        let vertex = boundary
-            .endpoints
-            .iter()
-            .find(|e| e.parameter == 0.)
-            .unwrap();
+        let vertex = native_start(boundary);
         for (actual, member) in [
             (&boundary.copied_wire, names[0]),
             (&boundary.copied, names[1]),
@@ -162,4 +165,12 @@ fn endpoint_name(actual: &PrismBodyContext) -> u64 {
     }
     assert_eq!(parameter, end);
     921
+}
+
+fn native_start(boundary: &AnnularBoundaryBinding) -> &AnnularNativeEndpoint {
+    boundary
+        .endpoints
+        .iter()
+        .find(|e| e.parameter == 0.)
+        .unwrap()
 }

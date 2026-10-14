@@ -69,6 +69,54 @@ fn endpoint(
     parameter: f64,
     contexts: &[PrismBodyContext],
 ) -> AnnularCheck<'static, AnnularNativeEndpoint> {
+    let shape = current_endpoint(context, contexts)?;
+    let raw = vertex_tshape(shape, "Martensite annular copied closure")?.pnt();
+    let point = [raw.x(), raw.y(), raw.z()];
+    let placement = captured_placement(shape.location().transformation()).map_err(|e| {
+        Box::<AnnularBindingCause<'static>>::from(
+            super::super::super::surface_charts::PrismSurfaceCause::Capture(e),
+        )
+    })?;
+    proven_endpoint(wire, context, parameter, point, &placement)?;
+    Ok(AnnularNativeEndpoint {
+        context: context.clone(),
+        parameter,
+        local_point: point,
+        placement,
+    })
+}
+
+fn proven_endpoint(
+    wire: &TwoLoopWireProof,
+    context: &RegionObservedContext,
+    parameter: f64,
+    point: [f64; 3],
+    placement: &rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding<3>,
+) -> AnnularCheck<'static> {
+    let proven: Vec<_> = wire
+        .closure
+        .iter()
+        .filter(|v| v.parameter.to_bits() == parameter.to_bits())
+        .collect();
+    require("one certified native endpoint parameter", proven.len(), 1)?;
+    holds(
+        "copied native endpoint raw local coordinates",
+        point.map(f64::to_bits) == proven[0].local_point.map(f64::to_bits),
+    )?;
+    holds(
+        "copied native endpoint actual placement",
+        same_embedding(placement, &proven[0].placement),
+    )?;
+    holds(
+        "copied native endpoint traversal",
+        context.occurrence.orientation == proven[0].orientation,
+    )
+}
+
+fn current_endpoint<'a>(
+    context: &RegionObservedContext,
+    contexts: &'a [PrismBodyContext],
+) -> AnnularCheck<'static, &'a rustycad_tkbrep::topods::Shape> {
     let matches: Vec<_> = contexts
         .iter()
         .filter(|c| c.child_slots == context.child_slots)
@@ -82,36 +130,5 @@ fn endpoint(
         "same full copied native endpoint context",
         correspondence::snapshot(matches[0])? == *context,
     )?;
-    let shape = &matches[0].occurrence;
-    let raw = vertex_tshape(shape, "Martensite annular copied closure")?.pnt();
-    let point = [raw.x(), raw.y(), raw.z()];
-    let placement = captured_placement(shape.location().transformation()).map_err(|e| {
-        Box::<AnnularBindingCause<'static>>::from(
-            super::super::super::surface_charts::PrismSurfaceCause::Capture(e),
-        )
-    })?;
-    let proven: Vec<_> = wire
-        .closure
-        .iter()
-        .filter(|v| v.parameter.to_bits() == parameter.to_bits())
-        .collect();
-    require("one certified native endpoint parameter", proven.len(), 1)?;
-    holds(
-        "copied native endpoint raw local coordinates",
-        point.map(f64::to_bits) == proven[0].local_point.map(f64::to_bits),
-    )?;
-    holds(
-        "copied native endpoint actual placement",
-        same_embedding(&placement, &proven[0].placement),
-    )?;
-    holds(
-        "copied native endpoint traversal",
-        context.occurrence.orientation == proven[0].orientation,
-    )?;
-    Ok(AnnularNativeEndpoint {
-        context: context.clone(),
-        parameter,
-        local_point: point,
-        placement,
-    })
+    Ok(&matches[0].occurrence)
 }
