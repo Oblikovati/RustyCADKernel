@@ -94,6 +94,13 @@ fn check_segment(
         .collect();
     if matches.len() != 1 || !binds_current_segment(matches[0], segment) {
         faults.push(SourceBindingFault::CurrentSegment(segment.occurrence));
+        return;
+    }
+    if let Err(cause) = current_construction_correspondence(inputs, matches[0], segment) {
+        faults.push(SourceBindingFault::CurrentGeometry {
+            occurrence: segment.occurrence,
+            cause: std::sync::Arc::new(cause),
+        });
     }
 }
 fn check_required_matrix(
@@ -178,4 +185,31 @@ fn check_one_matrix_row(
             original: key.1.clone(),
         });
     }
+}
+
+/// Check current mutable BRep fields separately from historical scalar proof.
+/// Example: `current_construction_correspondence(inputs, capture, segment)?`.
+pub(crate) fn current_construction_correspondence(
+    inputs: &BoundaryInputs,
+    historical: &CapturedBoundaryConstruction,
+    segment: &crate::sketch_region_candidates::CandidateSegment,
+) -> Result<(), SourceConformanceCause> {
+    // Topology identity does not freeze mutable BRep curves, pcurves or support.
+    let current = super::capture::capture_construction(segment, &inputs.construction_support);
+    require_current_capture(&current.copied)?;
+    require_current_capture(&current.pcurve)?;
+    require_current_capture(&current.support)?;
+    if !same_construction(historical, &current) {
+        return Err(SourceConformanceCause::CurrentDescriptorMismatch {
+            occurrence: segment.occurrence,
+        });
+    }
+    Ok(())
+}
+
+fn require_current_capture<T>(capture: &CapturedGeometry<T>) -> Result<(), SourceConformanceCause> {
+    capture
+        .as_ref()
+        .map(|_| ())
+        .map_err(|cause| SourceConformanceCause::Capture(cause.clone()))
 }

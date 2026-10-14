@@ -65,3 +65,14 @@ The census retains the caller source policy independently of the report.
 `current_obligations()` revalidates that attachment against current descriptors
 and reinstates representation incompleteness after later input/policy mutation;
 the original recorded missing list remains historical evidence.
+
+The census retains the actual construction support face solely to recapture
+current copied curve, stored pcurve and plane/support correspondence. Native
+aliases may mutate those fields while topology identity and cached scalar bits
+remain unchanged. Current checks recapture the admitted representations and
+reject mismatch or typed capture failure. They do not mutate geometry. The
+original immutable scalar inspection remains valid historical evidence after
+such mutation; it cannot by itself certify the current BRep body. Retaining or
+cloning a face is not an input-isolation proof. Original source coefficients
+remain the operation's historical pre-copy snapshot, not a claim about a later
+mutated caller object.

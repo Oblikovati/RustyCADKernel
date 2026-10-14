@@ -44,6 +44,7 @@ fn retain_construction_inputs(
         })
         .collect();
     BoundaryInputs {
+        construction_support: support.clone(),
         segments,
         relations,
         originals,

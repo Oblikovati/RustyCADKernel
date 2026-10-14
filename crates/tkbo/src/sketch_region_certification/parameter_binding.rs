@@ -54,6 +54,7 @@ fn current_construction(
             occurrence: segment.occurrence,
         });
     }
+    current_construction_correspondence(&census.inputs, capture, segment)?;
     Ok(capture)
 }
 

@@ -25,3 +25,6 @@ mod source_binding_tests;
 
 #[cfg(test)]
 mod coverage_binding_tests;
+
+#[cfg(test)]
+mod live_geometry_tests;

@@ -17,7 +17,9 @@ mod binding_types;
 mod descriptor_bits;
 mod snapshot_binding;
 mod stage_binding;
-pub(crate) use binding::{bind_source_conformance, source_binding_faults};
+pub(crate) use binding::{
+    bind_source_conformance, current_construction_correspondence, source_binding_faults,
+};
 pub(crate) use binding_types::{BoundSourceConformance, SourceBindingFault};
 pub(crate) use descriptor_bits::same_space_representation;
 

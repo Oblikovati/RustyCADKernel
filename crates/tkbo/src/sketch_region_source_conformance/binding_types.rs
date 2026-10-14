@@ -20,13 +20,17 @@ impl BoundSourceConformance {
         !self.inspection.entries.is_empty() && self.faults.is_empty()
     }
 }
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug)]
 pub(crate) enum SourceBindingFault {
     Policy,
     EmptyUniverse,
     OriginalSnapshot,
     ConstructionSnapshot,
     CurrentSegment(u64),
+    CurrentGeometry {
+        occurrence: u64,
+        cause: std::sync::Arc<super::SourceConformanceCause>,
+    },
     Matrix {
         occurrence: u64,
         original: OriginalMemberIdentity,

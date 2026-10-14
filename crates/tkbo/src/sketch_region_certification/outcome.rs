@@ -5,6 +5,7 @@ use crate::sketch_region_candidates::{CandidateCause, CandidateSegment};
 use rustycad_tkmath::predicates::roots::{RootIsolationOptions, bezier_line::*};
 
 pub(crate) struct BoundaryInputs {
+    pub construction_support: rustycad_tkbrep::topods::Face,
     pub segments: Vec<CandidateSegment>,
     pub relations: Vec<ArrangementRelation>,
     pub originals: Vec<crate::sketch_region_source_conformance::OriginalCurveCapture>,
