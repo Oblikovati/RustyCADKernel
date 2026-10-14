@@ -79,3 +79,47 @@ reuse it for the annular publication path. Remove temporary fixture adapters and
 superseded production paths within this milestone; retaining explicit V1 replay
 behavior is intentional until a recorded migration. Any externally breaking
 change requires the corresponding version bump and migration notes.
+
+## Implemented private entry and replay
+
+The private `inspect_bound_annular_embedding` entry consumes an actual sealed
+annular binding. It polls admission, rebinds current source and copied operands,
+checks both regularity reports under the per-boundary and aggregate budgets,
+constructs four domains and ten pair conclusions, encodes the complete result,
+and polls Commit. After that last callback it rebinds all actual operands without
+another callback. Only then does it issue immutable evidence. This does not issue
+a valid solid or bypass ordered validation.
+
+The sealed evidence exposes read-only binding, domains, incidences, requested
+options, regularity and complete replay bytes to the frozen-domain consumer.
+`rebind_bound_annular_embedding` checks the same actual binding without callbacks.
+Encoding failures preserve the binding failure classification; they are not
+relabeled as generic incomplete numerical evidence.
+
+Replay version 2 includes the entire annular binding, explicit requested and
+effective regularity limits, every measured report, four full domain identities,
+and ten conclusions. Directed contexts reference the binding's classed parent
+multiplicities and its exact ordered legacy-flat parent bridge. Numeric values
+use explicit bit or exact-bound encodings, rather than Debug output. No source
+address is a persistent authored name.
+
+Review of `23c0860ec` found that two cap rims sharing a role could accidentally
+borrow each other's operand association in the replay encoder. The regression
+swaps only those operands, leaving their identities unchanged. It failed before
+`26692a32e`; the fix requires the identity, source/output occurrence, role and
+retained operand to match the same captured row, uniquely. The independent
+review accepted that correction. Valid nominal bytes stayed identical before
+and after the fix (257,173 bytes); the rejected swapped result is never issued.
+The retained red and green logs are in the actual-entry evidence directory.
+
+The all-cutoff cancellation test reconstructs a fresh sealed region/binding for
+each cutoff over the same unchanged native fixture. It preserves the complete
+baseline callback count, every stopped prefix, terminal refusal and final reuse
+assertions. Reusing that immutable fixture setup reduced the development run's
+cost without skipping an operation checkpoint or admitting a cached result.
+
+At `be693f4ff`, all 15 actual-entry tests pass after reconciliation with the
+binding owner's structural cleanup. The complete toolkit/source-bookend gate passed 2,008 tests and 35 doctests,
+strict lint, formatting and documentation; see the final evidence directory. Ordinary thread/process equality does not close the recorded
+ThreadSanitizer startup failure, and these private certificates do not close the
+public general-profile, persistent-reference or release-package gates.
