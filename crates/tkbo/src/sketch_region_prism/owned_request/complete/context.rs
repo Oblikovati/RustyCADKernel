@@ -99,3 +99,6 @@ impl PrismPublicationProgress for CompletePrismContext<'_> {
         self.child_poll(CompletePrismPhase::Publication(point.phase), point.ordinal)
     }
 }
+#[cfg(test)]
+#[path = "context_tests.rs"]
+mod tests;

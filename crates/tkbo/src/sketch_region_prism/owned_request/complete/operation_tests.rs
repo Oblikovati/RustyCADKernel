@@ -5,12 +5,16 @@ use super::*;
 use rustycad_tkernel::standard::Failure;
 #[derive(Default)]
 pub(super) struct CompleteObserver {
-    points: Vec<CompletePrismCheckpoint>,
-    stop: Option<usize>,
+    pub(super) points: Vec<CompletePrismCheckpoint>,
+    pub(super) stop: Option<usize>,
+    pub(super) fail: Option<usize>,
 }
 impl CompletePrismProgress for CompleteObserver {
     fn checkpoint(&mut self, point: CompletePrismCheckpoint) -> Result<bool, Failure> {
         self.points.push(point);
+        if self.fail == Some(point.ordinal) {
+            return Err(native_failure());
+        }
         Ok(self.stop == Some(point.ordinal))
     }
 }
@@ -95,6 +99,7 @@ fn assert_outer_order(points: &[CompletePrismCheckpoint]) {
         points.iter().map(|p| p.ordinal).collect::<Vec<_>>(),
         (0..points.len()).collect::<Vec<_>>()
     );
+    assert_eq!(points.len(), 8268);
     let last = points.last().unwrap();
     assert_eq!(last.phase, CompletePrismPhase::Commit);
     assert_eq!(last.child_ordinal, None);
@@ -104,6 +109,7 @@ fn assert_outer_order(points: &[CompletePrismCheckpoint]) {
             .filter(|p| matches!(p.phase, CompletePrismPhase::Publication(_)) == phase)
             .filter_map(|p| p.child_ordinal)
             .collect();
+        assert_eq!(local.len(), if phase { 2866 } else { 3696 });
         assert_eq!(local, (0..local.len()).collect::<Vec<_>>());
     }
 }
@@ -140,4 +146,9 @@ fn complete_success_is_send_sync_and_operation_context_is_send() {
     send_sync::<CompletePrismCallbackStop>();
     send::<context::CompletePrismContext<'_>>();
     send::<ScopedPrismFailure<'_>>();
+}
+
+pub(super) fn native_failure() -> Failure {
+    Failure::with_type_bytes("ScopedCompleteProbe", &[255, 17], &[254, 29])
+        .with_exception_parent("Standard_Failure")
 }

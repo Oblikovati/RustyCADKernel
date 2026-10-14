@@ -13,6 +13,18 @@ pub(crate) use result::OwnedCompletePrism;
 pub(crate) use scoped_failure::{ScopedPrismCause, ScopedPrismFailure};
 
 #[cfg(test)]
+mod boundary_tests;
+#[cfg(test)]
+mod cancellation_tests;
+#[cfg(test)]
+mod degenerate_tests;
+#[cfg(test)]
+mod isolation_tests;
+#[cfg(test)]
 mod operation_tests;
 #[cfg(test)]
+mod policy_tests;
+#[cfg(test)]
 mod replay_tests;
+#[cfg(test)]
+mod runtime_tests;
