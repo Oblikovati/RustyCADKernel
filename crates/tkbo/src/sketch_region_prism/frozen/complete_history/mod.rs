@@ -15,7 +15,7 @@ mod partition_queries;
 mod stage_names;
 mod stages;
 use super::*;
-use limits::*;
+pub(in crate::sketch_region_prism) use limits::*;
 #[cfg(test)]
 mod bounds_tests;
 
