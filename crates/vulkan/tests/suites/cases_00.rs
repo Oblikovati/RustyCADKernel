@@ -107,5 +107,7 @@ pub mod triangle_edge_replay;
 pub mod view_culling;
 #[path = "../viewer_integration.rs"]
 pub mod viewer_integration;
+#[path = "../unlit_face_color_baseline.rs"]
+pub mod unlit_face_color_baseline;
 #[path = "../xr_device_presentations.rs"]
 pub mod xr_device_presentations;
