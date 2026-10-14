@@ -29,3 +29,6 @@ pub use two_colors::{
 
 pub mod tool;
 pub use tool::MeshVSTool;
+
+pub mod volume_topology;
+pub use volume_topology::{MeshVSVolumeTopology, create_prism_topology, create_pyramid_topology};

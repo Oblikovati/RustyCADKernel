@@ -1,0 +1,123 @@
+{
+  "scope": "Two static MeshVS_DataSource3D factories only; no full class, inherited interface, RTTI, cached getters, renderer or application acceptance claim.",
+  "base_rust_commit": "42ba6552d38f5c65c86709dec20b87eb0f5df5ac",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "occt_checkout_clean": true,
+  "platform": "Linux 7.1.5-76070105-generic x86_64",
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "rust_compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "native_source_sha256": {
+    "src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.hxx": "5840f191a920284851f59891760a36a9562e35362e9d8a9ea6ac352d1b68a15d",
+    "src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.cxx": "87f6f876f53e7a34565a89a29a3441fc3dba7559fd9a399c0af596763464a0e5",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.cxx": "ea2a587de0fa3eda4455a3bf29fb73aab0ca628927bb531498e072f0d5d2c960",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.cxx": "a4a84687e85059dad70193d2b839dbffb6650dd360ff86dc94e61bb8f3461da0"
+  },
+  "native_build_command": "g++ -std=c++17 -I ../OCCT/src/FoundationClasses/TKernel/NCollection -I ../occt-build/include/opencascade tools/oracle/martensite_meshvs_volume_topology.cxx ../OCCT/src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.cxx ../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.cxx ../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.cxx -L ../occt-build/lin64/gcc/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib -lTKMeshVS -lTKV3d -lTKService -lTKMath -lTKernel -o /tmp/martensite-independent-meshvs-topology-oracle",
+  "native_capture_command": "/tmp/martensite-independent-meshvs-topology-oracle > crates/tkmeshvs/tests/fixtures/volume-topology-native.txt",
+  "native_build_note": "Installed forwarding headers and libraries expose older collection ABI. The capture compiles the pinned factory, BaseSequence and BaseMap implementations directly; no OCCT checkout or build files were modified.",
+  "fixture": {
+    "path": "crates/tkmeshvs/tests/fixtures/volume-topology-native.txt",
+    "sha256": "d05ca4f4fde93e8084ba93c5aa000d0b427c802acb8ab1dc3057d7cfb4475fd3",
+    "rows": 26,
+    "inputs": [
+      -2147483648,
+      -7,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      16,
+      64
+    ],
+    "ownership_cases": [
+      "independent factory calls",
+      "alias mutation",
+      "alias survives original handle nullification"
+    ]
+  },
+  "mapping_fragment": [
+    {
+      "id": "852c66916459f0d17702ce27f4367ed20451af9d539f1cd72cac01f95cbcfdf3",
+      "usr": "c:@S@MeshVS_DataSource3D@F@CreatePyramidTopology#I#S",
+      "qualified_name": "MeshVS_DataSource3D::CreatePyramidTopology",
+      "signature": "class opencascade::handle<class NCollection_HArray1<class NCollection_Sequence<int>>> (int)",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.hxx",
+      "spelling_location": {
+        "column": 5,
+        "file": "src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.hxx",
+        "line": 42
+      },
+      "rust_path": "martensite_tkmeshvs::create_pyramid_topology"
+    },
+    {
+      "id": "d426adcdb368cdeaafae4aa3d7afc72e58acc6a206421f1cbcfdb998e3cb6f72",
+      "usr": "c:@S@MeshVS_DataSource3D@F@CreatePrismTopology#I#S",
+      "qualified_name": "MeshVS_DataSource3D::CreatePrismTopology",
+      "signature": "class opencascade::handle<class NCollection_HArray1<class NCollection_Sequence<int>>> (int)",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.hxx",
+      "spelling_location": {
+        "column": 5,
+        "file": "src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.hxx",
+        "line": 39
+      },
+      "rust_path": "martensite_tkmeshvs::create_prism_topology"
+    }
+  ],
+  "storage": "Handle<HArray1<Sequence<i32>>>; face array and node sequences are one-based; node-index values follow native zero/apex numbering; each static invocation allocates fresh mutable storage.",
+  "legacy_test_audit": {
+    "direct_upstream_tests_found": false,
+    "search_roots": [
+      "OCCT/tests",
+      "OCCT/src"
+    ],
+    "related_cases": [
+      "tests/v3d/mesh/B1-B8",
+      "tests/bugs/demo/bug27905"
+    ],
+    "related_cases_note": "mesh3delem uses XSDRAWSTL_DataSource3D derived directly from MeshVS_DataSource and constructs topology itself. These cases do not call the two mapped methods and are not claimed translated. The committed fixture contains newly generated native regression cases."
+  },
+  "exclusions": [
+    "Full MeshVS_DataSource3D API and inherited MeshVS_DataSource contract",
+    "GetPrismTopology/GetPyramidTopology cache behavior",
+    "Native undefined signed-overflow domains and resource-exhausting allocations; native allocation-failure parity is not claimed",
+    "Windows/macOS and rendering/application acceptance"
+  ],
+  "validation": {
+    "status": "passed locally; candidate not yet integrated",
+    "commands": [
+      {
+        "command": "~/.cargo/bin/cargo fmt -p martensite-tkmeshvs -- --check",
+        "exit_code": 0
+      },
+      {
+        "command": "~/.cargo/bin/cargo test -p martensite-tkmeshvs",
+        "exit_code": 0,
+        "toolkit_tests": 40,
+        "new_topology_tests": 6,
+        "doctests": 7,
+        "new_topology_doctests": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "command": "~/.cargo/bin/cargo clippy -p martensite-tkmeshvs --all-targets -- -D warnings",
+        "exit_code": 0
+      },
+      {
+        "command": "git diff --check",
+        "exit_code": 0
+      },
+      {
+        "command": "ldd target/debug/deps/toolkit-688abbd16a3b65e7",
+        "exit_code": 0,
+        "occt_libraries": []
+      }
+    ],
+    "rust_test_runtime": "Committed fixture compiled by include_str!; no OCCT source reads, native subprocess, or OCCT dynamic library dependency.",
+    "generated_invariants": "Prism and pyramid for base-point counts 3 through 32: every edge occurs exactly twice with opposite orientation."
+  }
+}
