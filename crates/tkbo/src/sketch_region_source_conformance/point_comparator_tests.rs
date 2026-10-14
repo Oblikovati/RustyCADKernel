@@ -43,14 +43,8 @@ fn authored_query() -> TransportedResidualQuery<'static> {
 }
 
 fn authored_residual() -> PlanarResidualQuery<'static> {
-    let curve = MetricCurve::Line {
-        origin: [0.; 3],
-        direction: [1., 0., 0.],
-    };
-    let pcurve = MetricCurve::Line {
-        origin: [99.; 2],
-        direction: [3.; 2],
-    };
+    let curve = authored_line();
+    let pcurve = authored_plane_line();
     let plane_embedding = MetricEmbedding {
         linear: [[1.; 2]; 3],
         origin: [99.; 3],
@@ -89,4 +83,18 @@ fn assert_zero_report(report: TransportedResidualReport) {
         matches!(report.decision, Ok(ResidualDecision::Within { proven_squared_upper })
         if proven_squared_upper == DyadicBound::from_f64(0.).unwrap())
     );
+}
+
+fn authored_line() -> MetricCurve<'static, 3> {
+    MetricCurve::Line {
+        origin: [0.; 3],
+        direction: [1., 0., 0.],
+    }
+}
+
+fn authored_plane_line() -> MetricCurve<'static, 2> {
+    MetricCurve::Line {
+        origin: [99.; 2],
+        direction: [3.; 2],
+    }
 }

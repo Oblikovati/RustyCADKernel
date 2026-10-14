@@ -19,7 +19,7 @@ mod policy;
 mod policy_tests;
 mod trim_census;
 
-pub(super) use policy::*;
+pub(crate) use policy::*;
 
 mod inspect;
 mod inspection_types;
