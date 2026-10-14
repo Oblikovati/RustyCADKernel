@@ -1,0 +1,81 @@
+{
+  "revision": "805e3392898e8fb3ac9e9286772b028d8f954d44",
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "joined_volume::",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "tests": 13
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "joined_volume::",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "tests": 13
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "docs/evidence/prism-joined-volume-v1/verify_error_enclosures.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "source_unchanged": true,
+  "full_replay": {
+    "bytes": 601860,
+    "sha256": "15f229b2a11115e2c5f4a7f37e5e845e0b5576f71aa83d8ec865de39941f180e"
+  },
+  "scope": "13 focused tests after mechanical extraction; full bytes equal pre-style; strict Clippy, fmt, independent rational verifier; no full suite/publication/sanitizer claim"
+}
