@@ -20,12 +20,12 @@ pub(crate) trait PrismPublicationProgress: Send {
     /// Stop before accepting the checkpoint; `progress.checkpoint(point)` retains typed failures.
     fn checkpoint(&mut self, point: PrismPublicationCheckpoint) -> Result<bool, Failure>;
 }
-pub(super) enum PublicationCallbackCause {
+pub(crate) enum PublicationCallbackCause {
     Cancelled,
     Failed(Failure),
     Exhausted,
 }
-pub(super) struct PublicationCallbackStop {
+pub(crate) struct PublicationCallbackStop {
     pub checkpoint: PrismPublicationCheckpoint,
     pub cause: PublicationCallbackCause,
 }

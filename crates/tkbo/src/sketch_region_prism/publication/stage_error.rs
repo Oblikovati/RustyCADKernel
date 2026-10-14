@@ -9,12 +9,12 @@ pub(crate) enum PrismPublicationClass {
     Incomplete,
     Cancelled,
 }
-pub(super) struct PublicationStageFailure {
+pub(crate) struct PublicationStageFailure {
     pub phase: PrismPublicationPhase,
     pub class: PrismPublicationClass,
     pub cause: PublicationStageCause,
 }
-pub(super) enum PublicationStageCause {
+pub(crate) enum PublicationStageCause {
     Join(Box<crate::sketch_region_prism::frozen::proof_join::PrismProofJoinFailure>),
     Validation(Box<OrderedPrismValidationFailure>),
     Measures(Box<JoinedPrismMeasureFailure>),

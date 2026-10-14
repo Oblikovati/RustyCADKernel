@@ -75,3 +75,26 @@ interfaces remain selectable and byte-identical. Promoting a public interface
 requires explicit supported-domain documentation and semantic version/changelog
 review. This private implementation alone does not complete Kernel #10's broader
 public/general-profile release contract.
+
+## Private implementation checkpoint
+
+`publish_named_prism` accepts a `PrismPublicationRequest` with explicit source,
+copy and intermediate history bindings and versioned policies. Its owned
+`PublishedNamedPrism` combines the single joined body, ordered certificate,
+complete history and certified measurements. `signed_sweep_integral()` retains
+the signed report under negative extrusion and reversed traversal. The full
+replay length-delimits all four child receipts, including their policies,
+authored names, operand bits and conclusions.
+
+The history stage calls the existing conditional projection helper. The sole
+terminal callback then precedes shared join rebind and history-only reprojection.
+An exhaustive partition member query can change while the shared join still
+binds: an owned regression changes its deletion answer to a typed native failure
+and requires the additional history reproject to refuse. Partition tree removal
+and rejected-parent multiplicity are already rejected by the shared join; the
+new tests retain that earlier rejection rather than assuming a later failure.
+
+Initial private refusal values remain operation-local, preserve typed child
+causes and may borrow input diagnostics. Accepted results are owned and have no
+input lifetime. A separate owned-refusal projection is required before a public
+outcome contract. This checkpoint is not full release acceptance.
