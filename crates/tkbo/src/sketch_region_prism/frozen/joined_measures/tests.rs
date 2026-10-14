@@ -111,3 +111,6 @@ fn full_joined_surface_reports_contain_independent_exact_integration_oracles() {
         cap.map(|value| value * 2.)
     );
 }
+
+#[path = "tests_domain.rs"]
+mod domain;

@@ -50,8 +50,9 @@ checkpoints without changing the older live API.
 The older complete scalar process fixture was pinned before extraction at
 `f33490bc8`; structural changes `1e96d18ac` and `fddab07cb` retained the exact
 cap/subset and complete scalar bytes and old failures. The latter narrows errors
-without changing arithmetic. The common region hypothesis helper will replace
-the temporary duplicate operand checks in a separate structural reconciliation.
+without changing arithmetic. The shared region hypothesis helper replaces the temporary duplicate operand
+checks in structural reconciliation `20703816f`; all earlier scalar and joined
+replays and all 718 cancellation cutoffs remain unchanged.
 
 New replay stores the complete joined source bytes, behavior version, exact
 binary64 result/option/error bits, both requested and effective child policies,
@@ -67,8 +68,9 @@ rational/square-root side and total bounds in the existing owned cubic fixture.
 They check all observed cancellation cutoffs, separate policy failures, exact
 source binding, authored binding permutation, mutable source isolation,
 independent workers, shared immutable readers and complete process replay.
-Generated scale, traversal and extrusion cases and owner full-toolkit integration
-are required before the final accepted receipt.
+Eight generated power-of-two scale, traversal and positive/negative extrusion
+cases also check independent cap, signed-volume, side and total bounds. Owner
+full-toolkit integration remains required before the final accepted receipt.
 
 This first admitted domain remains one complete polynomial Jordan boundary and
 three corresponding swept faces. General profiles, rational/spline extensions,
