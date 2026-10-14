@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "decision": "ADR0045",
+  "scope": "private owned request preparation; semantic resolver/publication integration pending",
+  "behavior_version": 1,
+  "source_revision": "06a9f7e7142266295a83084fa75678336c6c80ff",
+  "behavior_revision": "21e74305d30d03888d7655c5f2734627717ea114",
+  "dependency_merge": "8a891a6338fcab1318684b77c308b5b559ae5e30",
+  "reviewed_publication_dependency": "3e8bb7dc3",
+  "platform": {
+    "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+    "rust": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "jobs": 2
+  },
+  "source_bookends": {
+    "files": 16055,
+    "equal": true,
+    "paths": [
+      "source-before.json",
+      "source-after.json"
+    ],
+    "pre_boxing_equal": true
+  },
+  "checks": [
+    {
+      "command": "cargo +1.99.0 test -p rustycad-tkbo --lib owned_request --jobs 2",
+      "passed": 34,
+      "failed": 0,
+      "source": "21e74305d",
+      "log": "final-preparation-tests.log"
+    },
+    {
+      "command": "cargo +1.99.0 test -p rustycad-tkbo --lib sketch_region_prism --jobs 2",
+      "passed": 628,
+      "failed": 0,
+      "source": "21e74305d",
+      "log": "pre-boxing-frozen-prism-tests.log"
+    },
+    {
+      "command": "cargo +1.99.0 test -p rustycad-tkbo --lib sketch_region_prism --jobs 2",
+      "passed": 628,
+      "failed": 0,
+      "source": "06a9f7e7142266295a83084fa75678336c6c80ff",
+      "log": "frozen-prism-tests.log"
+    },
+    {
+      "command": "cargo +1.99.0 clippy -p rustycad-tkbo --all-targets --all-features --jobs 2 -- -D warnings",
+      "exit_code": 0,
+      "log": "frozen-clippy.log"
+    },
+    {
+      "command": "cargo +1.99.0 test -p rustycad-tkbo --lib every_observed_callback_cancellation_retains_owned_inputs_and_allows_reuse --jobs 2 -- --exact sketch_region_prism::owned_request::progress_tests::every_observed_callback_cancellation_retains_owned_inputs_and_allows_reuse --nocapture",
+      "passed": 1,
+      "failed": 0,
+      "checkpoint_count": 3696,
+      "log": "frozen-callbacks.log"
+    },
+    {
+      "command": "cargo +1.99.0 fmt --all -- --check",
+      "exit_code": 0,
+      "log": "frozen-fmt.log"
+    }
+  ],
+  "oracle_kinds": [
+    "literal cubic and native parameter endpoint expectations",
+    "existing owned source/history/chart/validation fixtures unchanged",
+    "typed exact existing Geometry refusal",
+    "complete observed cancellation prefix and fresh reuse"
+  ],
+  "limitations": [
+    "No successful body publication from this new entry",
+    "No semantic correspondence resolver yet",
+    "No application-facing public API",
+    "Multiple boundaries and holes explicitly incomplete",
+    "No new operation concurrency stress or ThreadSanitizer run; compile-time Send only for private preparation state",
+    "No new whole-preparation serialization or two-process receipt claim",
+    "No native OCCT oracle or tessellation acceptance"
+  ],
+  "failed_attempts": [
+    {
+      "log": "first-owned-tests.log",
+      "result": "25 pass,1 fail",
+      "reason": "Test queried native endpoint use against reversed closed edge; corrected to assert actual Forward 0/1 separately from cumulative reversed 1/0; constructor retains native edge."
+    },
+    {
+      "log": "expanded-owned-tests.log",
+      "result": "32 pass,1 fail",
+      "reason": "Edited off-plane pole expected Incomplete incorrectly; exact legacy ValidationRejected(Geometry) is Failed. Cause logs and red source snapshot retained."
+    },
+    {
+      "log": "complete-preparation-tests.log",
+      "result": "compile failure E0308",
+      "reason": "Plane coordinates borrowed array required explicit copy for finite check."
+    },
+    {
+      "log": "preparation-clippy.log",
+      "result": "11 result_large_err diagnostics",
+      "reason": "Exact CensusCause boxed in separate structural commit; payload/class/callback/order unchanged."
+    }
+  ]
+}
