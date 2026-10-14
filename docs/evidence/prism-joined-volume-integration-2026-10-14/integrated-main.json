@@ -1,0 +1,136 @@
+{
+  "integration_revision": "53147a45cb36770b886aa8045b1524a6242511d2",
+  "candidate_revision": "805e33928",
+  "candidate_base": "8aaf72608",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "78571a9d6678f47f2440cade40a2be2276b7326647bbf1887a202c012ce45ad7"
+      },
+      "tests": {
+        "passed": 1641,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "ec2088e99da8e464ccef29240f24eac83fddabc136ccc74e3ad290d6f608d18d"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "bad3c066c82bfdb047638e33af3b3da181d38b7227d16532e83e42fb2289bb36"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "d227ab1d1d4e9e80f97b7a2e839f5e141d606493183784fa1911a543252f0c06"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/access.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/tests_arithmetic.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/tests_domains.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/transport.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": false
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/access.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/replay.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/tests_arithmetic.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/tests_domains.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/transport.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_volume/types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": "M"
+  },
+  "resolved_module_registration": {
+    "path": "crates/tkbo/src/sketch_region_prism/frozen/mod.rs",
+    "candidate_sha256": "4ab9d716760326d916367dcbc57d2407e848c19f7b9d6443da4045a5aceef3f9",
+    "expected_combination_sha256": "b015c857fc1049373bee9469a9540cf0294c2287d61f5df7efd3cbee829300f7",
+    "actual_sha256": "b015c857fc1049373bee9469a9540cf0294c2287d61f5df7efd3cbee829300f7",
+    "matches_exact_combination": true,
+    "reason": "Preserve volume declaration plus already-integrated complete_history and test-only publication_read_snapshot registrations; no other edits"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}

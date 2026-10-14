@@ -1,0 +1,95 @@
+{
+  "revision": "53147a45cb36770b886aa8045b1524a6242511d2",
+  "candidate_test_names_retained": 12,
+  "previous_main_test_names_retained": 1628,
+  "missing_tests": [],
+  "source_unchanged": true,
+  "candidate_artifact_hashes": {
+    "CANDIDATE.md": "af6e6204aa2adb4ea04c83ccfd4e8408dcfbc23f799aaa511afc20912233fa14",
+    "final/clippy.log.gz": "52895e662957406fa054e76eecfa1cd803805618c5ed7f3f8abf6aabfd8fbcbf",
+    "final/fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "final/focused-1.log.gz": "6dda2a70da7019a3264071243d2bfaa8c46c2dcc0fabd8337eda93507d36ddcd",
+    "final/focused-2.log.gz": "a0ad248df35ea8d4bed2d4c41202fea5c2222e28f373490c66638903327f2282",
+    "final/independent-error.log.gz": "0cfc0afa4d615dbfe8652b443f20ceeae2f1ddd3948c092e1eb205a86da195d7",
+    "final/receipt.json": "c5d378727ead9ef6f217436cd714372183d9b814a33908d89995b1227fe1d404",
+    "final/replay-1.bin.gz": "d1fdd971ba2615a112ef35d549c5bb9f7572fcfc87a28eaab26aefd438f29ab5",
+    "final/replay-2.bin.gz": "d1fdd971ba2615a112ef35d549c5bb9f7572fcfc87a28eaab26aefd438f29ab5",
+    "final/runner.py.gz": "05b365d144657103de89bdf0c4f2c799d280982d0132713e42dc643e245bade3",
+    "final/source-bookends.json.gz": "e9d60e541014ac702bfe724bc2983c4a2bc9aba42788af3a82b2154f3a7ec561",
+    "independent-error-enclosures.json": "a1e1b66c08a89b674caeb70b79afd1c9a4ab2bbcf0075793d9975628b02b91ed",
+    "prestyle/focused-1.log.gz": "ca2737c4bc259ad03dbb353ad78f004b25173a2fa86bb5df9bb5fa0c8e278d23",
+    "prestyle/focused-2.log.gz": "af32aec571cd16433878ec4fa7fbc6d1aaffc48e4bb7ad7f95b08eabc1ba15a3",
+    "prestyle/preceding-clippy.log.gz": "1fcd85f654a4db0256cd0d1eb526fdfaf79692c19dc9cac0c6da90dd3391c75d",
+    "prestyle/preceding-expanded.log.gz": "5cb9b30069e8ba4f106fbf20944a15418bb91256ec1485abac1cb786dfa94be4",
+    "prestyle/receipt.json": "1e8f73698d01248ad858d1bcf763a86c94e89831dfe4b9045bb63e2e4c9c7fdb",
+    "prestyle/replay-1.bin.gz": "d1fdd971ba2615a112ef35d549c5bb9f7572fcfc87a28eaab26aefd438f29ab5",
+    "prestyle/replay-2.bin.gz": "d1fdd971ba2615a112ef35d549c5bb9f7572fcfc87a28eaab26aefd438f29ab5",
+    "prestyle/runner.py.gz": "a55cad3f97e30b026d7fd67a866add78b443fbcdb3f8d629d5b6f7852684599f",
+    "prestyle/source-bookends.json.gz": "b7b15689a857312860a7534b3fbfe4d0439bfc0eee29eab1dd9011de99d3ce8c",
+    "verify_error_enclosures.py": "d4d17ba948106352d158c478939cf2a0ddc1a2c2f59be9072e6d36bc672a7f37"
+  },
+  "replays": [
+    {
+      "kind": "volume",
+      "process": 1,
+      "bytes": 601860,
+      "sha256": "15f229b2a11115e2c5f4a7f37e5e845e0b5576f71aa83d8ec865de39941f180e"
+    },
+    {
+      "kind": "volume",
+      "process": 2,
+      "bytes": 601860,
+      "sha256": "15f229b2a11115e2c5f4a7f37e5e845e0b5576f71aa83d8ec865de39941f180e"
+    },
+    {
+      "kind": "measures",
+      "process": 1,
+      "bytes": 193495,
+      "sha256": "78bf68fc0feccec38f467abc8108bec7e4b52a1875a7ec6786bf933dcfc15f93"
+    },
+    {
+      "kind": "measures",
+      "process": 2,
+      "bytes": 193495,
+      "sha256": "78bf68fc0feccec38f467abc8108bec7e4b52a1875a7ec6786bf933dcfc15f93"
+    },
+    {
+      "kind": "publication",
+      "process": 1,
+      "bytes": 2202990,
+      "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107"
+    },
+    {
+      "kind": "publication",
+      "process": 2,
+      "bytes": 2202990,
+      "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--no-deps",
+        "--locked"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/docs/evidence/prism-joined-volume-v1/verify_error_enclosures.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "limits": [
+    "Private conditional physical quantity; no construction-domain widening, public outcome or release acceptance.",
+    "ThreadSanitizer remains incomplete."
+  ]
+}
