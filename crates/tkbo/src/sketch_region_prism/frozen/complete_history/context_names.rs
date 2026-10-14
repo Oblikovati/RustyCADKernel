@@ -3,7 +3,7 @@
 use super::*;
 use crate::sketch_region::{PartitionOccurrenceIdentity, RegionObservedContext};
 
-pub(super) fn historical_member(
+pub(in crate::sketch_region_prism::frozen) fn historical_member(
     operation: AuthoredPrismId,
     names: &PrismHistoricalStageBindings,
     actual: &RegionObservedContext,
@@ -16,7 +16,7 @@ pub(super) fn historical_member(
         kind: actual.kind as u8,
     })
 }
-pub(super) fn historical_occurrence(
+pub(in crate::sketch_region_prism::frozen) fn historical_occurrence(
     member: PrismHistoryMemberKey,
     actual: &PartitionOccurrenceIdentity,
 ) -> HistoryCheck<PrismHistoricalOccurrence> {
@@ -38,7 +38,7 @@ pub(super) fn historical_occurrence(
         placement_bits,
     })
 }
-pub(super) fn historical_use(
+pub(in crate::sketch_region_prism::frozen) fn historical_use(
     names: &PrismHistoricalStageBindings,
     actual: &RegionObservedContext,
 ) -> HistoryCheck<AuthoredPrismId> {
@@ -56,7 +56,7 @@ pub(super) fn historical_use(
     )?;
     Ok(name)
 }
-pub(super) fn ancestor_at<'a>(
+pub(in crate::sketch_region_prism::frozen) fn ancestor_at<'a>(
     rows: &'a [RegionObservedContext],
     context: &RegionObservedContext,
     depth: usize,

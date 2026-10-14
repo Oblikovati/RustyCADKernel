@@ -83,13 +83,13 @@ pub(crate) enum PrismHistoryCause {
         retained_rows: usize,
     },
 }
-pub(super) type HistoryCheck<T> = Result<T, PrismHistoryCause>;
+pub(in crate::sketch_region_prism::frozen) type HistoryCheck<T> = Result<T, PrismHistoryCause>;
 
-pub(super) struct BoundHistoricalContexts<'a> {
+pub(in crate::sketch_region_prism::frozen) struct BoundHistoricalContexts<'a> {
     pub actual: &'a [RegionObservedContext],
     pub owned: Vec<PrismHistoricalContext>,
 }
-pub(super) fn history_count(
+pub(in crate::sketch_region_prism::frozen) fn history_count(
     required: &'static str,
     actual: usize,
     expected: usize,
@@ -103,7 +103,7 @@ pub(super) fn history_count(
     }
     Ok(())
 }
-pub(super) fn same_definition(
+pub(in crate::sketch_region_prism::frozen) fn same_definition(
     a: &PartitionOccurrenceIdentity,
     b: &PartitionOccurrenceIdentity,
 ) -> bool {

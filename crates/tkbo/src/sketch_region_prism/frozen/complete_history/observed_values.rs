@@ -2,14 +2,14 @@
 //! Native orientation remains an operand even when physical lookup uses a common member key.
 use super::*;
 use crate::sketch_region::PartitionOccurrenceIdentity;
-pub(super) fn occurrence(
+pub(in crate::sketch_region_prism::frozen) fn occurrence(
     bound: &BoundHistoricalContexts<'_>,
     actual: &PartitionOccurrenceIdentity,
 ) -> HistoryCheck<PrismHistoricalOccurrence> {
     let index = parent_rows::physical_index(bound, actual)?;
     context_names::historical_occurrence(bound.owned[index].occurrence.member, actual)
 }
-pub(super) fn point(
+pub(in crate::sketch_region_prism::frozen) fn point(
     value: &crate::sketch_region_vertex_observation::ObservedVertexPoint,
 ) -> HistoryCheck<Option<[u64; 3]>> {
     value
@@ -25,7 +25,7 @@ pub(super) fn point(
         })
         .transpose()
 }
-pub(super) fn equal<T: PartialEq>(
+pub(in crate::sketch_region_prism::frozen) fn equal<T: PartialEq>(
     actual: &T,
     expected: &T,
     operand: &'static str,
@@ -35,7 +35,7 @@ pub(super) fn equal<T: PartialEq>(
     }
     Ok(())
 }
-pub(super) fn sorted<T: Ord>(mut values: Vec<T>) -> Vec<T> {
+pub(in crate::sketch_region_prism::frozen) fn sorted<T: Ord>(mut values: Vec<T>) -> Vec<T> {
     values.sort();
     values
 }

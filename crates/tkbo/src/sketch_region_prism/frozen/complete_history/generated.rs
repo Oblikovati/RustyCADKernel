@@ -114,7 +114,12 @@ fn member(
         point_bits: observed_values::point(&row.vertex_point)?,
         descendants,
         copies,
-        parents: parent_rows::parents(request, &row.preserved, &row.modified, &row.generated)?,
+        parents: parent_rows::parents(
+            request.publication,
+            &row.preserved,
+            &row.modified,
+            &row.generated,
+        )?,
     })
 }
 fn descendants(

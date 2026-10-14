@@ -51,7 +51,12 @@ fn copy_link(
     let index = parent_rows::occurrence_index(source, &link.original)?;
     let original = source.owned[index].key.clone();
     let image = observed_values::occurrence(copied, &link.copied)?;
-    let parents = parent_rows::parents(request, &link.preserved, &link.modified, &link.generated)?;
+    let parents = parent_rows::parents(
+        request.publication,
+        &link.preserved,
+        &link.modified,
+        &link.generated,
+    )?;
     let (kind, supported) = admit_link_kind(link, source.owned[index].occurrence.member.kind)?;
     match_link(&original, &image, &parents, queries, relations)
         .map_err(|cause| cause.at_use(original.clone()))?;

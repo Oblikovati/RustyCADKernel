@@ -89,7 +89,7 @@ fn vertex(
     Ok(PrismPartitionVertex {
         occurrence: observed_values::occurrence(copied, &row.occurrence)?,
         point_bits: row.point.map(f64::to_bits),
-        parents: parent_rows::original_keys(request, &row.original_parents)?,
+        parents: parent_rows::original_keys(request.publication, &row.original_parents)?,
     })
 }
 fn endpoints(
@@ -163,7 +163,7 @@ fn metadata(
     let result = PrismPartitionMetadata {
         source_shape_count,
         source: observed_values::occurrence(copied, &source.occurrence)?,
-        parents: parent_rows::original_keys(request, &source.parents)?,
+        parents: parent_rows::original_keys(request.publication, &source.parents)?,
         range_bits: source.range.map(f64::to_bits),
         space: space(&source.space)?,
         has_reference: source.has_reference,

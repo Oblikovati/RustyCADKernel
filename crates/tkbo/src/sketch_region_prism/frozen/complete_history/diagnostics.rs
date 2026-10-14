@@ -124,7 +124,7 @@ fn admit_partition<'a>(
     else {
         return Ok(());
     };
-    let parents = parent_rows::original_keys(request, &failure.parents)
+    let parents = parent_rows::original_keys(request.publication, &failure.parents)
         .map_err(|cause| operation::failure(request, PrismHistoryPhase::Admission, cause))?;
     let cause = partition_diagnostic(failure, parents);
     let mut result = operation::failure(

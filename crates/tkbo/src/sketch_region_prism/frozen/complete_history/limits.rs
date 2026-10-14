@@ -34,7 +34,7 @@ impl PrismHistoryLimits {
             maximum_rows: 16384,
         }
     }
-    pub(super) fn admit(self) -> Result<Self, HistoryBoundCause> {
+    pub(in crate::sketch_region_prism::frozen) fn admit(self) -> Result<Self, HistoryBoundCause> {
         for (quantity, actual, maximum) in [
             ("ancestor depth", self.maximum_depth, 64),
             ("directed uses", self.maximum_uses, 16384),
@@ -51,7 +51,7 @@ impl PrismHistoryLimits {
         }
         Ok(self)
     }
-    pub(super) fn count(
+    pub(in crate::sketch_region_prism::frozen) fn count(
         self,
         quantity: &'static str,
         actual: usize,

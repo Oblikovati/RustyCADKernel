@@ -28,7 +28,7 @@ pub(super) fn partition(
         owned.deleted.len(),
         0,
     )?;
-    let rows = parent_rows::relation_rows(request, stage, &owned.relations)?;
+    let rows = parent_rows::relation_rows(request.publication, stage, &owned.relations)?;
     for row in &rows {
         validate_partition(row, stage, queries)?;
     }
@@ -81,7 +81,7 @@ pub(super) fn generated(
     links: &[PrismCandidateCopyLink],
 ) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
     let actual = parent_rows::relation_rows(
-        request,
+        request.publication,
         bound,
         &operands::candidate(request, stage)?.relations,
     )?;
@@ -149,7 +149,7 @@ pub(super) fn receipt_regions(
         1,
     )?;
     let actual = parent_rows::relation_rows(
-        request,
+        request.publication,
         stages::stage(stages, PrismHistoryStage::Complement)?,
         &input.rejected[0],
     )?;
@@ -197,7 +197,7 @@ fn selected_receipt(
     })?;
     admit_selected_face(request, &current.face)?;
     let actual = parent_rows::relation_rows(
-        request,
+        request.publication,
         stages::stage(stages, PrismHistoryStage::Selected)?,
         &current.relations,
     )?;
