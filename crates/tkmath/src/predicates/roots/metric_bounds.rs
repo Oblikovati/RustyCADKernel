@@ -122,3 +122,6 @@ pub use polynomial_side::{
     PolynomialSideFailure, PolynomialSideOptions, PolynomialSideWork,
     certify_polynomial_side_integral,
 };
+
+#[cfg(test)]
+mod regularity_baseline_tests;
