@@ -13,7 +13,9 @@ pub(in crate::sketch_region_prism) fn fixture() -> (PairedContactTransaction, Ve
         1., false,
     )])
 }
-pub(super) fn fixture_for(shapes: Vec<Shape>) -> (PairedContactTransaction, Vec<Shape>) {
+pub(in crate::sketch_region_prism) fn fixture_for(
+    shapes: Vec<Shape>,
+) -> (PairedContactTransaction, Vec<Shape>) {
     let (census, mapped, shapes) = actual_inputs_for(shapes);
     let bridge = finish_fixture_request(census, mapped, &binding_sources(&shapes));
     (bridge, shapes)

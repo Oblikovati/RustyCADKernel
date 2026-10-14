@@ -54,6 +54,7 @@ mod error_context;
 #[cfg(test)]
 mod error_context_tests;
 
+pub(crate) mod proof_join;
 #[cfg(test)]
 mod topology_baseline_tests;
 
