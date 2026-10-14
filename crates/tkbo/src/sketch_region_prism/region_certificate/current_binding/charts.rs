@@ -11,7 +11,7 @@ use crate::sketch_region::PartitionOccurrenceIdentity;
 pub(super) fn current_charts(
     receipt: &PrismReceipt,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck<Vec<MeasuredPrismChart>> {
+) -> PrismBindingCheck<Vec<BoundPrismChart>> {
     let diagnostic = need(receipt.diagnostic.as_ref(), "measurement actual body")?;
     let copied = need(receipt.copied.as_ref(), "measurement actual copied base")?;
     history::current_history(diagnostic, copied)?;
@@ -27,13 +27,13 @@ fn capture_current(
     face: &PrismBodyContext,
     receipt: &PrismReceipt,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck<MeasuredPrismChart> {
+) -> PrismBindingCheck<BoundPrismChart> {
     let diagnostic = receipt.diagnostic.as_ref().unwrap();
     let (binding, relation) = face_history(face, diagnostic)?;
     let captured = capture_bound(binding, receipt)?;
     let mut proof = PrismSurfaceProof::default();
     prove_chart(&captured, binding.native.role, cancelled, &mut proof)?;
-    Ok(MeasuredPrismChart {
+    Ok(BoundPrismChart {
         source: PartitionOccurrenceIdentity::capture(&binding.native.query),
         output: PartitionOccurrenceIdentity::capture(&face.occurrence),
         role: binding.native.role,
@@ -43,7 +43,7 @@ fn capture_current(
     })
 }
 
-fn complete_faces(diagnostic: &PrismDiagnostic) -> MeasureCheck<Vec<PrismBodyContext>> {
+fn complete_faces(diagnostic: &PrismDiagnostic) -> PrismBindingCheck<Vec<PrismBodyContext>> {
     let faces = actual_faces(diagnostic)?;
     require("single boundary prism face universe", faces.len(), 3)?;
     require(
@@ -53,7 +53,7 @@ fn complete_faces(diagnostic: &PrismDiagnostic) -> MeasureCheck<Vec<PrismBodyCon
     )?;
     Ok(faces)
 }
-fn complete_roles(charts: &[MeasuredPrismChart]) -> MeasureCheck {
+fn complete_roles(charts: &[BoundPrismChart]) -> PrismBindingCheck {
     for role in [
         PrismImageRole::First,
         PrismImageRole::Last,
@@ -70,7 +70,7 @@ fn complete_roles(charts: &[MeasuredPrismChart]) -> MeasureCheck {
 fn capture_bound(
     binding: &PrismImageBinding,
     receipt: &PrismReceipt,
-) -> MeasureCheck<CapturedSurfaceChart> {
+) -> PrismBindingCheck<CapturedSurfaceChart> {
     let diagnostic = receipt.diagnostic.as_ref().unwrap();
     let sources = &receipt.copied.as_ref().unwrap().chart_sources;
     let vector = receipt.limits.requested.extrusion;

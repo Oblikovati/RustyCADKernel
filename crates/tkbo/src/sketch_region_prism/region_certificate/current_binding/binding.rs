@@ -8,7 +8,7 @@ pub(super) fn current_region(
     sources: &[ArrangementSource<'_>],
     receipt: &PrismReceipt,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck<(
+) -> PrismBindingCheck<(
     RegionCertificate,
     rustycad_tkmath::predicates::roots::DyadicBound,
 )> {
@@ -27,11 +27,11 @@ fn current_selection(
     bridge: &PairedContactTransaction,
     receipt: &PrismReceipt,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck {
+) -> PrismBindingCheck {
     let batch = need(borrowed_batch(bridge), "measurement actual candidate batch")?;
     let request = receipt.limits.requested;
     let fresh = classify_candidates(batch, request.seed, request.roots, cancelled)
-        .map_err(|cause| PrismMeasureFailure::Classification(Box::new(cause)))?;
+        .map_err(|cause| PrismBindingFailure::Classification(Box::new(cause)))?;
     let old = need(
         receipt.classification.as_ref(),
         "measurement retained classification",
@@ -41,7 +41,7 @@ fn current_selection(
 fn same_classification(
     fresh: &CandidateClassification,
     old: &CandidateClassification,
-) -> MeasureCheck {
+) -> PrismBindingCheck {
     let CandidateClassification::Incomplete {
         selection: first,
         captured: a,
@@ -58,9 +58,9 @@ fn same_classification(
     )?;
     Ok(())
 }
-pub(super) fn poll(cancelled: &mut impl FnMut() -> bool) -> MeasureCheck {
+pub(crate) fn poll(cancelled: &mut impl FnMut() -> bool) -> PrismBindingCheck {
     if cancelled() {
-        return Err(PrismMeasureFailure::Cancelled);
+        return Err(PrismBindingFailure::Cancelled);
     }
     Ok(())
 }
@@ -69,7 +69,7 @@ fn current_sweep(
     region: &RegionCertificate,
     receipt: &PrismReceipt,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck<rustycad_tkmath::predicates::roots::DyadicBound> {
+) -> PrismBindingCheck<rustycad_tkmath::predicates::roots::DyadicBound> {
     let support = &region.copied.support;
     let vector = receipt.limits.requested.extrusion;
     let determinant = affine_prism_jacobian(

@@ -16,8 +16,8 @@ pub(super) fn rebind(
     sources: &[ArrangementSource<'_>],
     receipt: &PrismReceipt,
     region: &RegionCertificate,
-    charts: &[MeasuredPrismChart],
-) -> MeasureCheck {
+    charts: &[BoundPrismChart],
+) -> PrismBindingCheck {
     let (current, _) = binding::current_region(bridge, sources, receipt, &mut || false)?;
     holds(
         "measured original/contact/traversal still current",
@@ -26,10 +26,10 @@ pub(super) fn rebind(
     let actual = charts::current_charts(receipt, &mut || false)?;
     same_charts(charts, &actual)
 }
-pub(super) fn same_charts(
-    charts: &[MeasuredPrismChart],
-    actual: &[MeasuredPrismChart],
-) -> MeasureCheck {
+pub(crate) fn same_charts(
+    charts: &[BoundPrismChart],
+    actual: &[BoundPrismChart],
+) -> PrismBindingCheck {
     for measured in charts {
         let current = actual
             .iter()
@@ -61,7 +61,7 @@ fn same_boundary(a: &CapturedPrismSources, b: &CapturedPrismSources) -> bool {
         && same_multiset(&first.endpoints, &second.endpoints)
         && same_boundary_geometry(a, b)
 }
-fn same_chart(a: &MeasuredPrismChart, b: &MeasuredPrismChart) -> bool {
+fn same_chart(a: &BoundPrismChart, b: &BoundPrismChart) -> bool {
     a.source == b.source
         && a.output == b.output
         && a.role == b.role
