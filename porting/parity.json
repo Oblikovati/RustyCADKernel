@@ -98177,6 +98177,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Interface_FileReaderTool",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "status": "implemented",
+      "notes": "Class record: the abstract Interface_FileReaderTool is the trait InterfaceFileReaderTool (its virtual members) plus InterfaceFileReaderToolOps (its non-virtual accessors over the shared base state), reached as &dyn InterfaceFileReaderTool. The record generator sees two Rust traits and leaves it to a hand row. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderTool",
+      "rust_items": [
+        "rustycad_tkxsbase::interface::InterfaceFileReaderTool",
+        "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps"
+      ]
+    },
+    {
       "upstream_id": "Interface_TypedValue::Interface_TypedValue",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Interface/Interface_TypedValue.hxx",
@@ -99335,6 +99347,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Interface_CheckFailure",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckFailure.hxx",
+      "status": "implemented",
+      "notes": "Class record of the DEFINE_STANDARD_EXCEPTION class Interface_CheckFailure: The class maps to the Failure constructor rustycad_tkxsbase::interface::check_failure, which carries the type name \"Interface_CheckFailure\"; Failure::exception_type returns it, and the macro's (message, stack) constructor is Failure::with_type. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::interface::check_failure"
+    },
+    {
       "upstream_id": "Interface_InterfaceError::ExceptionType() const noexcept",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Interface/Interface_InterfaceError.hxx",
@@ -99373,6 +99393,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Interface_InterfaceError",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_InterfaceError.hxx",
+      "status": "implemented",
+      "notes": "Class record of the DEFINE_STANDARD_EXCEPTION class Interface_InterfaceError: The class maps to the Failure constructor rustycad_tkxsbase::interface::interface_error, which carries the type name \"Interface_InterfaceError\"; Failure::exception_type returns it, and the macro's (message, stack) constructor is Failure::with_type. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::interface::interface_error"
+    },
+    {
       "upstream_id": "Interface_InterfaceMismatch::ExceptionType() const noexcept",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Interface/Interface_InterfaceMismatch.hxx",
@@ -99409,6 +99437,14 @@
       "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Interface_InterfaceMismatch\", message, stack) builds the same exception. Partial: C++ derives Interface_InterfaceMismatch from Interface_InterfaceError, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
       "cpp_declaration_id": "2c652213be4010de3d733be1865a0a1f4be3aa03c2aa0db87f2733ba3ca858c0",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Interface_InterfaceMismatch",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_InterfaceMismatch.hxx",
+      "status": "implemented",
+      "notes": "Class record of the DEFINE_STANDARD_EXCEPTION class Interface_InterfaceMismatch: The class maps to the Failure constructor rustycad_tkxsbase::interface::interface_mismatch, which carries the type name \"Interface_InterfaceMismatch\"; Failure::exception_type returns it, and the macro's (message, stack) constructor is Failure::with_type. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::interface::interface_mismatch"
     },
     {
       "upstream_id": "Interface_UndefinedContent::DynamicType() const",
@@ -102727,6 +102763,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Transfer_TransferFailure",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "status": "implemented",
+      "notes": "Class record of the DEFINE_STANDARD_EXCEPTION class Transfer_TransferFailure: the inventory records the class at the forward declaration in Transfer_ProcessForFinder.hxx. The class maps to the Failure constructor rustycad_tkxsbase::transfer::transfer_failure, which carries the type name \"Transfer_TransferFailure\"; Failure::exception_type returns it, and the macro's (message, stack) constructor is Failure::with_type. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::transfer::transfer_failure"
+    },
+    {
       "upstream_id": "Transfer_ResultFromTransient::Transfer_ResultFromTransient",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
@@ -104695,6 +104739,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "TopTools_ShapeMapHasher",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeMapper.hxx",
+      "status": "implemented",
+      "notes": "Class record observed at its first declaration, the forward declaration in TransferBRep_ShapeMapper.hxx; the class is defined in TKBRep (TopTools_ShapeMapHasher.hxx) and ported as the type rustycad_tkbrep::toptools::ShapeMapHasher, whose members are mapped by their own rows.",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeMapHasher"
+    },
+    {
       "upstream_id": "TransferBRep_ShapeInfo::Type",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeInfo.hxx",
@@ -105233,6 +105285,18 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkxsbase::xs_algo::XSAlgo needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "ffa6efeecc6d3d7b9211a16c32552694b1fe3c65ecf812d56acf7bbb891e0fe7",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "XSAlgo_AlgoContainer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo.hxx",
+      "status": "implemented",
+      "notes": "Class record: XSAlgo_AlgoContainer is ported as the type rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainer plus the trait rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainerOps, which carries its virtual members so Rust types that embed XSAlgoAlgoContainer can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainer",
+      "rust_items": [
+        "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainer",
+        "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainerOps"
+      ]
     },
     {
       "upstream_id": "XSAlgo_AlgoContainer::XSAlgo_AlgoContainer",
@@ -109231,6 +109295,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IFSelect_SignatureList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "status": "implemented",
+      "notes": "Class record: IFSelect_SignatureList is ported as the type rustycad_tkxsbase::if_select::IFSelectSignatureList plus the trait rustycad_tkxsbase::if_select::IFSelectSignatureListOps, which carries its virtual members so Rust types that embed IFSelectSignatureList can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList",
+      "rust_items": [
+        "rustycad_tkxsbase::if_select::IFSelectSignatureList",
+        "rustycad_tkxsbase::if_select::IFSelectSignatureListOps"
+      ]
+    },
+    {
       "upstream_id": "IFSelect_SignCounter::IFSelect_SignCounter(const bool,const bool)",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
@@ -110315,6 +110391,18 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): RuntimeTyped::TYPE_NAME == \"IFSelect_DispPerSignature\" registers descriptor \"IFSelect_DispPerSignature\"; C++ base_type is IFSelect_Dispatch. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Not proven: the Rust registration names parent unknown.",
       "cpp_declaration_id": "cee6ecafd6c663d71a275de745dd7b6b2ed2d394f397b458c612005ba84dafbf",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "status": "implemented",
+      "notes": "Class record: IFSelect_SignCounter is ported as the type rustycad_tkxsbase::if_select::IFSelectSignCounter plus the trait rustycad_tkxsbase::if_select::IFSelectSignCounterOps, which carries its virtual members so Rust types that embed IFSelectSignCounter can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter",
+      "rust_items": [
+        "rustycad_tkxsbase::if_select::IFSelectSignCounter",
+        "rustycad_tkxsbase::if_select::IFSelectSignCounterOps"
+      ]
     },
     {
       "upstream_id": "IFSelect_GeneralModifier::IFSelect_GeneralModifier",
@@ -115435,6 +115523,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IFSelect_WorkSession",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Functions.hxx",
+      "status": "implemented",
+      "notes": "Class record: IFSelect_WorkSession is ported as the type rustycad_tkxsbase::if_select::IFSelectWorkSession plus the trait rustycad_tkxsbase::if_select::IFSelectWorkSessionOps, which carries its virtual members so Rust types that embed IFSelectWorkSession can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession",
+      "rust_items": [
+        "rustycad_tkxsbase::if_select::IFSelectWorkSession",
+        "rustycad_tkxsbase::if_select::IFSelectWorkSessionOps"
+      ]
+    },
+    {
       "upstream_id": "XSControl_Utils::XSControl_Utils",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
@@ -118073,6 +118173,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "551781131f2d247f92461e2cd350b7c9cc6b1c87fed93b7991d8d6912fc49cf1",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Interface_GraphContent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFGraph/IFGraph_SubPartsIterator.hxx",
+      "status": "implemented",
+      "notes": "Class record observed at its first declaration, the forward declaration in IFGraph_SubPartsIterator.hxx; the class is defined in Interface_GraphContent.hxx and ported as the type rustycad_tkxsbase::interface::InterfaceGraphContent, whose members are mapped by their own rows.",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContent"
     },
     {
       "upstream_id": "IFSelect_ShareOutResult::thegraph",
@@ -294339,6 +294447,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HelixGeom_BuilderApproxCurve",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "status": "implemented",
+      "notes": "Class record: HelixGeom_BuilderApproxCurve is ported as the type rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase plus the trait rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve, which carries its virtual members (the abstract Perform) so Rust types that embed HelixGeomBuilderApproxCurveBase can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase",
+      "rust_items": [
+        "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase",
+        "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve"
+      ]
+    },
+    {
       "upstream_id": "HelixGeom_BuilderHelix::HelixGeom_BuilderHelix()",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
@@ -294681,6 +294801,18 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "9d0432ffce323b657fb600c75cb1d389bedda63be3a07fe7d36ecb9104b66477",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "status": "implemented",
+      "notes": "Class record: HelixGeom_BuilderHelixGen is ported as the type rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase plus the trait rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGen, which carries its virtual members (the abstract Perform) so Rust types that embed HelixGeomBuilderHelixGenBase can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase",
+      "rust_items": [
+        "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase",
+        "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGen"
+      ]
     },
     {
       "upstream_id": "HelixGeom_HelixCurve::HelixGeom_HelixCurve()",
@@ -297783,6 +297915,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepPrim_Cone",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkprim::brep_prim::BRepPrimCone, which embeds the BRepPrimRevolution part of its C++ base class and implements BRepPrimRevolutionDerived for the virtual construction hooks; the record generator sees the base among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone"
+    },
+    {
       "upstream_id": "BRepPrim_Cylinder::BRepPrim_Cylinder(const gp_Ax2&,double,double)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
@@ -297897,6 +298037,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "ed88a3cc741bec49f890dfc7bb78802b4cfb2cf1185e3d7d7d7b63652b47b12f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkprim::brep_prim::BRepPrimCylinder, which embeds the BRepPrimRevolution part of its C++ base class and implements BRepPrimRevolutionDerived for the virtual construction hooks; the record generator sees the base among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCylinder"
     },
     {
       "upstream_id": "BRepPrim_Direction",
@@ -298757,6 +298905,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepPrim_OneAxis",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "status": "implemented",
+      "notes": "Class record: BRepPrim_OneAxis is ported as the type rustycad_tkprim::brep_prim::BRepPrimOneAxisBase plus the trait rustycad_tkprim::brep_prim::BRepPrimOneAxis, which carries its pure virtual construction hooks so Rust types that embed BRepPrimOneAxisBase can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxisBase",
+      "rust_items": [
+        "rustycad_tkprim::brep_prim::BRepPrimOneAxisBase",
+        "rustycad_tkprim::brep_prim::BRepPrimOneAxis"
+      ]
+    },
+    {
       "upstream_id": "BRepPrim_Revolution::BRepPrim_Revolution(const gp_Ax2&,double,double,const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
@@ -298975,6 +299135,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepPrim_Sphere",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Sphere.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkprim::brep_prim::BRepPrimSphere, which embeds the BRepPrimRevolution part of its C++ base class and implements BRepPrimRevolutionDerived for the virtual construction hooks; the record generator sees the base among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimSphere"
+    },
+    {
       "upstream_id": "BRepPrim_Torus::BRepPrim_Torus(const gp_Ax2&,double,double)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Torus.hxx",
@@ -299065,6 +299233,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "2750b04f27ed8abd80739e02cdb1e6b1636a6d6e55093dd2e9405af39c979cc9",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepPrim_Torus",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Torus.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkprim::brep_prim::BRepPrimTorus, which embeds the BRepPrimRevolution part of its C++ base class and implements BRepPrimRevolutionDerived for the virtual construction hooks; the record generator sees the base among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimTorus"
     },
     {
       "upstream_id": "BRepPrim_Wedge::BRepPrim_Wedge()",
@@ -299791,6 +299967,18 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "aa934519b599f63bdd04586d688c3ccb3e21509e698464f6210f9738457cebf7",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "status": "implemented",
+      "notes": "Class record: BRepSweep_NumLinearRegularSweep is ported as the type rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase plus the trait rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep, which carries its pure virtual sweep hooks so Rust types that embed BRepSweepNumLinearRegularSweepBase can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase",
+      "rust_items": [
+        "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase",
+        "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep"
+      ]
     },
     {
       "upstream_id": "BRepSweep_Prism::BRepSweep_Prism(const TopoDS_Shape&,const gp_Vec&,bool,bool)",
@@ -300925,6 +301113,18 @@
       "notes": "Class record: ported as a type, rustycad_tkbrep::brep::BRepBuilder (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "5c1c0e1089978e91c1ee0ffe5bef0335d4041cc545ba65900ab46fb0bfd5e5dd",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepSweep_Trsf",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
+      "status": "implemented",
+      "notes": "Class record: BRepSweep_Trsf is ported as the type rustycad_tkprim::brep_sweep::BRepSweepTrsfBase plus the trait rustycad_tkprim::brep_sweep::BRepSweepTrsf, which carries its pure virtual hooks so Rust types that embed BRepSweepTrsfBase can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsfBase",
+      "rust_items": [
+        "rustycad_tkprim::brep_sweep::BRepSweepTrsfBase",
+        "rustycad_tkprim::brep_sweep::BRepSweepTrsf"
+      ]
     },
     {
       "upstream_id": "BRepPrimAPI_MakeBox::BRepPrimAPI_MakeBox()",
@@ -304009,6 +304209,18 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient_interface!(dyn ShapeCustomModification, \"ShapeCustom_Modification\", dyn BRepToolsModification) at crates/tkshhealing/src/shape_custom/modification.rs:60 registers descriptor \"ShapeCustom_Modification\"; C++ base_type is BRepTools_Modification. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types; the descriptor is `<dyn Trait as RuntimeTyped>`. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "f26f8eb90c2aac7f7fc476e43be3c8540e1111123fa23e6213c836ff297d7730",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ShapeExtend_BasicMsgRegistrator",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Modification.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeExtend_BasicMsgRegistrator is ported as the type rustycad_tkshhealing::shape_extend::ShapeExtendBasicMsgRegistrator plus the trait rustycad_tkshhealing::shape_extend::BasicMsgRegistrator, which carries its virtual members so Rust types that embed ShapeExtendBasicMsgRegistrator can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendBasicMsgRegistrator",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_extend::ShapeExtendBasicMsgRegistrator",
+        "rustycad_tkshhealing::shape_extend::BasicMsgRegistrator"
+      ]
     },
     {
       "upstream_id": "ShapeCustom_RestrictionParameters::ShapeCustom_RestrictionParameters()",
@@ -324334,6 +324546,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepMesh_BoundaryParamsRangeSplitter",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_BoundaryParamsRangeSplitter.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkmesh::brep_mesh::BoundaryParamsRangeSplitter, which implements the RangeSplitter trait for its virtual hooks and reuses the base splitter state for inherited members; the record generator sees the base splitter among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BoundaryParamsRangeSplitter"
+    },
+    {
       "upstream_id": "BRepMesh_ConstrainedBaseMeshAlgo::BRepMesh_ConstrainedBaseMeshAlgo()",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConstrainedBaseMeshAlgo.hxx",
@@ -325072,6 +325292,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepMesh_NURBSRangeSplitter",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_NURBSRangeSplitter.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkmesh::brep_mesh::NURBSRangeSplitter, which implements the RangeSplitter trait for its virtual hooks and reuses the base splitter state for inherited members; the record generator sees the base splitter among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkmesh::brep_mesh::NURBSRangeSplitter"
+    },
+    {
       "upstream_id": "BRepMesh_NodeInsertionMeshAlgo",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_NodeInsertionMeshAlgo.hxx",
@@ -325221,6 +325449,14 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. A Rust port of the class needs no callable counterpart.",
       "cpp_declaration_id": "227497a35dc4e8278c54455c325a31a9d9f24f28fc684ee5bed72d6d8ae9c903",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepMesh_TorusRangeSplitter",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_TorusRangeSplitter.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkmesh::brep_mesh::TorusRangeSplitter, which implements the RangeSplitter trait for its virtual hooks and reuses the base splitter state for inherited members; the record generator sees the base splitter among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkmesh::brep_mesh::TorusRangeSplitter"
     },
     {
       "upstream_id": "BRepMesh_Triangulator::BRepMesh_Triangulator(const NCollection_DynamicArray<gp_XYZ>&,const NCollection_List<NCollection_Sequence<int>>&,const gp_Dir&)",
@@ -342718,6 +342954,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPTools_AlgoTools3D",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "status": "implemented",
+      "notes": "Class record: BOPTools_AlgoTools3D is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbo::bop_tools::algo_tools3d, whose free functions carry its static members; each member is mapped by its own row.",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d"
+    },
+    {
       "upstream_id": "BOPTools_AlgoTools2D::CurveOnSurface(const TopoDS_Edge &, const TopoDS_Face &, occ::handle<Geom2d_Curve> &, double &, const occ::handle<IntTools_Context> &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
@@ -342849,6 +343093,14 @@
       "notes": "Class record: ported as a type, rustycad_tkbrep::brep_adaptor::BRepAdaptorSurface (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
       "cpp_declaration_id": "733912665ecf049f96a2e82bfcf1222a610513ca92229a6f7a3feec408644c36",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "status": "implemented",
+      "notes": "Class record: BOPTools_AlgoTools2D is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbo::bop_tools::algo_tools2d, whose free functions carry its static members; each member is mapped by its own row.",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d"
     },
     {
       "upstream_id": "BOPTools_AlgoTools::Sense(const TopoDS_Face &, const TopoDS_Face &, const occ::handle<IntTools_Context> &)",
@@ -343873,6 +344125,14 @@
       "notes": "Class record: ported as a type, rustycad_tkbo::int_tools::Range (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "0828a96afdd2d12a4abade8c3c60cb37d428502bb41a243ea64619a4b3799e67",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "status": "implemented",
+      "notes": "Class record: BOPTools_AlgoTools is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbo::bop_tools, whose free functions carry its static members; each member is mapped by its own row.",
+      "rust_item": "rustycad_tkbo::bop_tools"
     },
     {
       "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Edge &, const double, const TopoDS_Edge &, const TopoDS_Edge &, const bool, const double, const GeomAbs_Shape)",
@@ -412561,6 +412821,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeFix_Root",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeFix_Root is ported as the type rustycad_tkshhealing::shape_fix::ShapeFixRoot plus the trait rustycad_tkshhealing::shape_fix::FixRoot, which carries its virtual members so Rust types that embed ShapeFixRoot can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixRoot",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixRoot",
+        "rustycad_tkshhealing::shape_fix::FixRoot"
+      ]
+    },
+    {
       "upstream_id": "ShapeCustom::ApplyModifier(const TopoDS_Shape&,const occ::handle<BRepTools_Modification>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,BRepTools_Modifier&,const Message_ProgressRange&,const occ::handle<ShapeBuild_ReShape>&)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
@@ -413506,6 +413778,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeUpgrade_SplitCurve",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeUpgrade_SplitCurve is ported as the type rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve plus the trait rustycad_tkshhealing::shape_upgrade::SplitCurve, which carries its virtual members so Rust types that embed ShapeUpgradeSplitCurve can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve",
+        "rustycad_tkshhealing::shape_upgrade::SplitCurve"
+      ]
+    },
+    {
       "upstream_id": "ShapeAnalysis_Edge::myStatus",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
@@ -414241,6 +414525,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeUpgrade_EdgeDivide",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeUpgrade_EdgeDivide is ported as the type rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide plus the trait rustycad_tkshhealing::shape_upgrade::EdgeDivider, which carries its virtual members so Rust types that embed ShapeUpgradeEdgeDivide can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide",
+        "rustycad_tkshhealing::shape_upgrade::EdgeDivider"
+      ]
+    },
+    {
       "upstream_id": "ShapeUpgrade_SplitCurve2d::myResultingCurves",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
@@ -414371,6 +414667,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeUpgrade_FixSmallCurves is ported as the type rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves plus the trait rustycad_tkshhealing::shape_upgrade::FixSmallCurves, which carries its virtual members so Rust types that embed ShapeUpgradeFixSmallCurves can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves",
+        "rustycad_tkshhealing::shape_upgrade::FixSmallCurves"
+      ]
+    },
+    {
       "upstream_id": "ShapeAnalysis_TransferParameters::myEdge",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
@@ -414441,6 +414749,18 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(ShapeAnalysisTransferParameters, \"ShapeAnalysis_TransferParameters\", StandardTransient) at crates/tkshhealing/src/shape_analysis/transfer_parameters/mod.rs:112 registers descriptor \"ShapeAnalysis_TransferParameters\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "4000e729be3b1d95c7b598065f83a93ae5ce2491309b47170c389f970a11efce",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeAnalysis_TransferParameters is ported as the type rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters plus the trait rustycad_tkshhealing::shape_analysis::TransferParameters, which carries its virtual members so Rust types that embed ShapeAnalysisTransferParameters can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters",
+        "rustycad_tkshhealing::shape_analysis::TransferParameters"
+      ]
     },
     {
       "upstream_id": "ShapeUpgrade_WireDivide::GetSplitCurve2dTool() const",
@@ -414897,6 +415217,42 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeUpgrade_FaceDivide",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivide.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeUpgrade_FaceDivide is ported as the type rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivide plus the trait rustycad_tkshhealing::shape_upgrade::FaceDivider, which carries its virtual members so Rust types that embed ShapeUpgradeFaceDivide can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivide",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivide",
+        "rustycad_tkshhealing::shape_upgrade::FaceDivider"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivide.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeUpgrade_SplitSurface is ported as the type rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface plus the trait rustycad_tkshhealing::shape_upgrade::SplitSurface, which carries its virtual members so Rust types that embed ShapeUpgradeSplitSurface can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface",
+        "rustycad_tkshhealing::shape_upgrade::SplitSurface"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivide.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeUpgrade_WireDivide is ported as the type rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide plus the trait rustycad_tkshhealing::shape_upgrade::WireDivider, which carries its virtual members so Rust types that embed ShapeUpgradeWireDivide can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide",
+        "rustycad_tkshhealing::shape_upgrade::WireDivider"
+      ]
+    },
+    {
       "upstream_id": "ShapeFix_ComposeShell::ShapeFix_ComposeShell()",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_ComposeShell.hxx",
@@ -415267,6 +415623,18 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "cafcef4fadbabe523455e7636e3ae3a567a74b78feb033fa8ded30f6962db8a7",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "status": "implemented",
+      "notes": "Class record: ShapeUpgrade_ShapeDivide is ported as the type rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide plus the trait rustycad_tkshhealing::shape_upgrade::ShapeDivider, which carries its virtual members so Rust types that embed ShapeUpgradeShapeDivide can override them as a C++ subclass does. The record generator leaves it to a hand row because it sees more than one Rust type (the struct registered by RuntimeTyped::TYPE_NAME and the trait of impl_transient_interface!). Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide",
+        "rustycad_tkshhealing::shape_upgrade::ShapeDivider"
+      ]
     },
     {
       "upstream_id": "ShapeUpgrade_ShapeDivideArea::GetSplitFaceTool() const",
@@ -417053,6 +417421,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeConstruct",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct.hxx",
+      "status": "implemented",
+      "notes": "Class record: the static-only class ShapeConstruct is the type rustycad_tkshhealing::shape_construct::ShapeConstruct, whose associated functions carry its static members; the record generator also sees ShapeConstructCurve among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstruct"
+    },
+    {
       "upstream_id": "ShapeUpgrade_UnifySameDomain::DataMapOfFacePlane",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
@@ -417276,6 +417652,14 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(ShapeUpgradeUnifySameDomain, \"ShapeUpgrade_UnifySameDomain\", StandardTransient) at crates/tkshhealing/src/shape_upgrade/unify_same_domain/mod.rs:109 registers descriptor \"ShapeUpgrade_UnifySameDomain\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "85cfcd7f1e7e8045ad730e449bc979f1c10aeb7dd06ec75415b60276b5152da2",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::SubSequenceOfEdges",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): the helper record SubSequenceOfEdges (edge chains merged by the protected MergeEdges step) is declared after `protected:` in ShapeUpgrade_UnifySameDomain. Rust has no subclassing, so a Rust caller cannot reach it; the public members of the class carry the observable behaviour.",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain"
     },
     {
       "upstream_id": "ShapeAlgo::Init()",
@@ -418223,6 +418607,14 @@
       "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkshhealing::shape_process::ShapeProcessOperator (evidence: impl_transient_interface!); each member is mapped by its own row.",
       "cpp_declaration_id": "51c55bef6ed0158520d8776a02c0ba2728db085bc43659e12b4c1182521b807c",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ShapeProcess",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "status": "implemented",
+      "notes": "Class record: the static-only class ShapeProcess is the type rustycad_tkshhealing::shape_process::ShapeProcess (operator registry and Perform); the record generator also sees the module functions and ShapeProcessOperation among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcess"
     },
     {
       "upstream_id": "ShapeProcess_OperLibrary::Init()",
@@ -421296,6 +421688,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Storage_BaseDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "status": "implemented",
+      "notes": "Class record observed at its first declaration, the forward declaration in PCDM_ReadWriter.hxx; the class is defined in TKernel (Storage_BaseDriver.hxx) and ported as the trait rustycad_tkernel::storage::BaseDriver, whose members are mapped by their own rows.",
+      "rust_item": "rustycad_tkernel::storage::BaseDriver"
+    },
+    {
       "upstream_id": "PCDM_Reader::myReaderStatus",
       "toolkit": "TKCDF",
       "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reader.hxx",
@@ -421796,6 +422196,14 @@
       "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"PCDM_DriverError\", message, stack) builds the same exception.",
       "cpp_declaration_id": "9becaa9522789d5fb9bac7653a4c9f6ef1424caa70cd6820311f9a9d31fd8719",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "PCDM_DriverError",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_DriverError.hxx",
+      "status": "implemented",
+      "notes": "Class record of the DEFINE_STANDARD_EXCEPTION class PCDM_DriverError: The class maps to the Failure constructor rustycad_tkcdf::pcdm::pcdm_driver_error, which carries the type name \"PCDM_DriverError\"; Failure::exception_type returns it, and the macro's (message, stack) constructor is Failure::with_type. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkcdf::pcdm::pcdm_driver_error"
     },
     {
       "upstream_id": "PCDM_Reader::DynamicType() const",
@@ -423312,6 +423720,46 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "LDOMBasicString",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkcdf::ldom::LdomBasicString; its nested StringType enum is rustycad_tkcdf::ldom::LdomStringType. The record generator sees two owner types among the member rows and leaves it to a hand row. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString"
+    },
+    {
+      "upstream_id": "LDOMBasicString::(unnamed union at src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx:131:3)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): the record of the anonymous union behind the protected field myVal is declared after `protected:` in LDOMBasicString.hxx. Rust has no subclassing, so a Rust caller cannot reach it; the public members of the class carry the observable behaviour.",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString"
+    },
+    {
+      "upstream_id": "LDOMBasicString::(unnamed union)::i",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 classes B6 and B5): member i of the anonymous union myVal of LDOMBasicString (an int or a void* to the text, chosen by myType) is raw storage of a protected field; Rust LdomBasicString keeps the value as a typed enum, read through GetInteger/GetString (plan D1 class B5 for the untyped pointer).",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString"
+    },
+    {
+      "upstream_id": "LDOMBasicString::(unnamed union)::ptr",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 classes B6 and B5): member ptr of the anonymous union myVal of LDOMBasicString (an int or a void* to the text, chosen by myType) is raw storage of a protected field; Rust LdomBasicString keeps the value as a typed enum, read through GetInteger/GetString (plan D1 class B5 for the untyped pointer).",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString"
+    },
+    {
+      "upstream_id": "LDOM_Node",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "status": "implemented",
+      "notes": "Class record observed at its first declaration, the forward declaration in LDOMBasicString.hxx; the class is defined in LDOM_Node.hxx and ported as the type rustycad_tkcdf::ldom::LdomNode, whose members are mapped by their own rows.",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode"
+    },
+    {
       "upstream_id": "LDOMParser::GetBOM",
       "toolkit": "TKCDF",
       "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
@@ -423392,6 +423840,14 @@
       "notes": "Class record: ported as a type, rustycad_tkcdf::ldom::LdomParser (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "806addc52619185f0d2b30dba54362072092faf0f37487bc2ed63dd0e8e63bf1",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "LDOM_XmlReader",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "status": "implemented",
+      "notes": "Class record observed at its first declaration, the forward declaration in LDOMParser.hxx; the class is defined in LDOM_XmlReader.hxx and ported as the type rustycad_tkcdf::ldom::LdomXmlReader, whose members are mapped by their own rows.",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlReader"
     },
     {
       "upstream_id": "LDOMString::LDOMString()",
@@ -424812,6 +425268,14 @@
       "notes": "Class record: ported as a type, rustycad_tkcdf::ldom::LdomSBuffer (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "6fa027f849d6e3863d46457d7195276ba47e10d5dc194be026d45c1d2168037a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "LDOM_OSStream",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkcdf::ldom::LdomOSStream (the std::ostream subclass becomes a type with the same buffer and Write methods); its nested BOM enum is LdomBomType. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkcdf::ldom::LdomOSStream"
     },
     {
       "upstream_id": "LDOM_Text::LDOM_Text()",
@@ -471753,6 +472217,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPAlgo_Builder::NbShapes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): the helper class NbShapes (shape counters used by the protected size estimate) is declared after `protected:` in BOPAlgo_Builder. Rust has no subclassing, so a Rust caller cannot reach it; the public members of the class carry the observable behaviour.",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder"
+    },
+    {
       "upstream_id": "BOPAlgo_BuilderArea::Areas() const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BuilderArea.hxx",
@@ -471991,6 +472463,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "477beb0d6a9423a878a158628dbecd5db9201aa192243dcd83d24b937d0b0a8b",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BOPAlgo_BuilderArea",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BuilderArea.hxx",
+      "status": "implemented",
+      "notes": "Class record: the abstract BOPAlgo_BuilderArea is ported as the type rustycad_tkbo::bop_algo::BuilderArea, the shared state its face and solid builders embed. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkbo::bop_algo::BuilderArea"
     },
     {
       "upstream_id": "BOPAlgo_BuilderFace::CheckData()",
@@ -474869,6 +475349,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPAlgo_Tools",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Tools.hxx",
+      "status": "implemented",
+      "notes": "Class record: BOPAlgo_Tools is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbo::bop_algo::tools, whose free functions carry its static members; each member is mapped by its own row.",
+      "rust_item": "rustycad_tkbo::bop_algo::tools"
+    },
+    {
       "upstream_id": "BOPAlgo_WireEdgeSet::AddShape(const TopoDS_Shape&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_WireEdgeSet.hxx",
@@ -475628,6 +476116,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPDS_Tools",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Tools.hxx",
+      "status": "implemented",
+      "notes": "Class record: BOPDS_Tools is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbo::bop_ds::tools, whose free functions carry its static members; each member is mapped by its own row.",
+      "rust_item": "rustycad_tkbo::bop_ds::tools"
+    },
+    {
       "upstream_id": "BOPTools_Parallel::Perform(bool,TypeSolverVector&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_Parallel.hxx",
@@ -475644,6 +476140,14 @@
       "rust_item": "rustycad_tkbo::bop_algo::ParallelAlgo",
       "status": "excluded",
       "notes": "C++ functor-dispatch template over OSD_Parallel/OSD_ThreadPool: the Rust port runs each algorithm's task vector in order inside the algorithm (the results do not depend on the order), so there is no generic functor runner; the per-task work is ported with its algorithm."
+    },
+    {
+      "upstream_id": "BOPTools_Parallel",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_Parallel.hxx",
+      "status": "excluded",
+      "notes": "Excluded, as its member rows: C++ functor-dispatch template over OSD_Parallel/OSD_ThreadPool; the Rust port runs each algorithm's task vector inside the algorithm (the results do not depend on the order), so there is no generic functor runner; the per-task work is ported with its algorithm.",
+      "rust_item": "rustycad_tkbo::bop_algo::ParallelAlgo"
     },
     {
       "upstream_id": "DE_ConfigurationContext::DE_ConfigurationContext",
@@ -478620,6 +479124,14 @@
       "notes": "Excluded: Draw_Drawable2D only overrides Is3D() to return false; the Rust 2D drawables (DrawSegment2D, DrawMarker2D, DrawText2D, DrawAxis2D) implement Drawable3D::is_3d that way."
     },
     {
+      "upstream_id": "Draw_Drawable2D",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable2D.hxx",
+      "status": "excluded",
+      "notes": "Excluded, as its one member row: Draw_Drawable2D only overrides Is3D() to return false; the Rust 2D drawables (DrawSegment2D, DrawMarker2D, DrawText2D, DrawAxis2D) implement Drawable3D::is_3d that way, so no separate Rust type stands for the intermediate C++ class.",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D"
+    },
+    {
       "upstream_id": "Draw_Drawable3D::Bounds(double &,double &,double &,double &) const",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
@@ -479434,6 +479946,30 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Draw_Interpretor::CallBackData",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "status": "excluded",
+      "notes": "Excluded, as its member rows: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file).",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand"
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataFunc",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): the function-pointer closure record CallBackDataFunc is declared after `protected:` in Draw_Interpretor. Rust has no subclassing, so a Rust caller cannot reach it; the public members of the class carry the observable behaviour.",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand"
+    },
+    {
+      "upstream_id": "Tcl_Interp",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "status": "implemented",
+      "notes": "Class record observed at its first declaration, the forward declaration in Draw_Interpretor.hxx; the class is defined in the Tcl C library (tcl.h, an opaque handle) and ported as the type of the project's Tcl wrapper rustycad_tcl::Interp, whose members are mapped by their own rows.",
+      "rust_item": "rustycad_tcl::Interp"
+    },
+    {
       "upstream_id": "Draw_Losange",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
@@ -479708,6 +480244,14 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(DrawPrinterType, \"Draw_Printer\", PrinterType) at crates/tkdraw/src/draw/printer.rs:29 registers descriptor \"Draw_Printer\"; C++ base_type is Message_Printer. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "93e793ea8c876aef1be4d13cb2daa44bb2e7fa5e5b37cedd43ad176a9585bfa2",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Draw_Printer",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Printer.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw::DrawPrinter (a Message printer over the interpreter link); the marker type DrawPrinterType carries the Draw_Printer runtime descriptor, so the record generator sees two Rust types and leaves it to a hand row. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw::DrawPrinter"
     },
     {
       "upstream_id": "Draw_ProgressIndicator::DefaultConsoleMode()",
@@ -480326,6 +480870,14 @@
       "notes": "Class record: ported as a type, rustycad_tkdraw::draw::DrawViewer (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "a3d9200c133e931a4ed1884d8af3f0e5ddcba76ebe95b7ab2909b5e0a725dfb8",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Draw_View",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw::DrawView, which owns its DrawWindow and implements DisplaySurface (docs/draw-design.md section 3); the record generator sees DrawView and DrawViewer among the member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw::DrawView"
     },
     {
       "upstream_id": "Draw_Viewer::AddDrawable(const occ::handle<Draw_Drawable3D> &)",
@@ -481594,6 +482146,14 @@
       "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
     },
     {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d"
+    },
+    {
       "upstream_id": "DrawTrSurf_BSplineCurve::ClearKnots()",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
@@ -481752,6 +482312,14 @@
       "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
       "status": "implemented",
       "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve"
     },
     {
       "upstream_id": "DrawTrSurf_BSplineSurface::ClearIsos()",
@@ -481938,6 +482506,14 @@
       "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
     },
     {
+      "upstream_id": "DrawTrSurf_BSplineSurface",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface"
+    },
+    {
       "upstream_id": "DrawTrSurf_BezierCurve2d::ClearPoles()",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
@@ -482024,6 +482600,14 @@
       "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
       "status": "implemented",
       "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d"
     },
     {
       "upstream_id": "DrawTrSurf_BezierCurve::ClearPoles()",
@@ -482114,6 +482698,14 @@
       "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
     },
     {
+      "upstream_id": "DrawTrSurf_BezierCurve",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve"
+    },
+    {
       "upstream_id": "DrawTrSurf_BezierSurface::ClearPoles()",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
@@ -482200,6 +482792,14 @@
       "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
       "status": "implemented",
       "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface"
     },
     {
       "upstream_id": "DrawTrSurf_Curve2d::ClearCurvature()",
@@ -482400,6 +483000,14 @@
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d",
       "status": "excluded",
       "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d"
     },
     {
       "upstream_id": "DrawTrSurf_Curve::ClearCurvature()",
@@ -482610,6 +483218,14 @@
       "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
     },
     {
+      "upstream_id": "DrawTrSurf_Curve",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve"
+    },
+    {
       "upstream_id": "DrawTrSurf_Drawable::DrawCurve2dOn(Adaptor2d_Curve2d &,Draw_Display &) const",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
@@ -482706,6 +483322,22 @@
       "notes": "Class record: ported as a type, rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
       "cpp_declaration_id": "41a29d4e8611f0dc0c3fe901b3c3ef0c18b640319ee1ab5d4439a57ae255a201",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "status": "implemented",
+      "notes": "Class record: ported as the type rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable, a Drawable3D that embeds its C++ base class part (docs/draw-design.md section 5); the record generator sees the embedded parts as further member owners. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable"
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "status": "implemented",
+      "notes": "Class record observed at its first declaration, the forward declaration in DrawTrSurf_Drawable.hxx; the class is defined in TKG2d (Adaptor2d_Curve2d.hxx) and ported as the trait rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d, whose members are mapped by their own rows.",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d"
     },
     {
       "upstream_id": "DrawTrSurf_Params::BoundsColor",
@@ -484418,6 +485050,26 @@
       "notes": "Class record: ported as a type, rustycad_tkdraw::draw::DrawXSegment (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "ce8cd2564bf703724814be180defcbe5cf32b3bf4e8fb7b9f57b4245e5e48671",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Draw_Window",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "status": "partial",
+      "notes": "Class record: Draw_Window is split into the traits DrawWindow (one window) and DrawWindowSystem (creation, colors, flush, events), docs/draw-design.md section 3. Partial as its member rows: only the batch and recording window systems exist; the native window backend is not ported yet.",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow",
+      "rust_items": [
+        "rustycad_tkdraw::draw::DrawWindow",
+        "rustycad_tkdraw::draw::DrawWindowSystem"
+      ]
+    },
+    {
+      "upstream_id": "Draw_Failure",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Failure.hxx",
+      "status": "implemented",
+      "notes": "Class record of the DEFINE_STANDARD_EXCEPTION class Draw_Failure: The class maps to the Failure constructor rustycad_tkdraw::draw::draw_failure, which carries the type name \"Draw_Failure\"; Failure::exception_type returns it, and the macro's (message, stack) constructor is Failure::with_type. Each member is mapped by its own row.",
+      "rust_item": "rustycad_tkdraw::draw::draw_failure"
     },
     {
       "upstream_id": "Image_PixMap::Value",
