@@ -42,3 +42,5 @@ pub use system_font::FontSystemFont;
 pub use text_formatter::{
     FontTextFormatter, FontTextFormatterIterationFilter, FontTextFormatterIterator,
 };
+
+mod native_font_aspect;

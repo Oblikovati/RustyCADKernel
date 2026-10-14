@@ -24,6 +24,8 @@ pub fn graphic3d_default_line_pattern_for_type(kind: AspectTypeOfLine) -> u16 {
         AspectTypeOfLine::Empty => 0x0000,
         AspectTypeOfLine::Solid => 0xFFFF,
         AspectTypeOfLine::Userdefined => 0xFF24,
+        // Pinned Graphic3d_Aspects.hxx returns this after the switch for unnamed values.
+        _ => 0xFFFF,
     }
 }
 

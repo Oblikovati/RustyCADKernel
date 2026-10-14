@@ -88,3 +88,8 @@ mod xr_array_replay_tests;
 
 #[cfg(test)]
 mod xr_action_rebase_tests;
+
+mod native_style_values;
+
+#[cfg(test)]
+mod native_style_values_tests;

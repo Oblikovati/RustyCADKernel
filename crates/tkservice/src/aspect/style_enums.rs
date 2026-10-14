@@ -34,6 +34,10 @@ pub enum AspectHatchStyle {
     GridDiagonalWide = 2,
     /// `Aspect_HS_NB`.
     Nb = 13,
+    /// Unnamed native value `14` within the original C++ enumeration range.
+    Native14 = 14,
+    /// Unnamed native value `15` within the original C++ enumeration range.
+    Native15 = 15,
 }
 
 /// Interior types for primitive faces.
@@ -52,6 +56,12 @@ pub enum AspectInteriorStyle {
     Hiddenline = 2,
     /// display only vertices of surface (obsolete).
     Point = 3,
+    /// Unnamed native value `-4` within the original C++ enumeration range.
+    NativeMinus4 = -4,
+    /// Unnamed native value `-3` within the original C++ enumeration range.
+    NativeMinus3 = -3,
+    /// Unnamed native value `-2` within the original C++ enumeration range.
+    NativeMinus2 = -2,
 }
 impl AspectInteriorStyle {
     /// Obsolete alias `Aspect_IS_HOLLOW` of [`Self::Empty`].
@@ -112,6 +122,10 @@ pub enum AspectTypeOfDisplayText {
     Dimension = 4,
     /// the text will have a shadow at the right-bottom corner.
     Shadow = 5,
+    /// Unnamed native value `6` within the original C++ enumeration range.
+    Native6 = 6,
+    /// Unnamed native value `7` within the original C++ enumeration range.
+    Native7 = 7,
 }
 
 /// The values of `Aspect_TypeOfFacingModel`.
@@ -163,6 +177,26 @@ pub enum AspectTypeOfLine {
     Dotdash = 3,
     /// defined by Users.
     Userdefined = 4,
+    /// Unnamed native value `-8` within the original C++ enumeration range.
+    NativeMinus8 = -8,
+    /// Unnamed native value `-7` within the original C++ enumeration range.
+    NativeMinus7 = -7,
+    /// Unnamed native value `-6` within the original C++ enumeration range.
+    NativeMinus6 = -6,
+    /// Unnamed native value `-5` within the original C++ enumeration range.
+    NativeMinus5 = -5,
+    /// Unnamed native value `-4` within the original C++ enumeration range.
+    NativeMinus4 = -4,
+    /// Unnamed native value `-3` within the original C++ enumeration range.
+    NativeMinus3 = -3,
+    /// Unnamed native value `-2` within the original C++ enumeration range.
+    NativeMinus2 = -2,
+    /// Unnamed native value `5` within the original C++ enumeration range.
+    Native5 = 5,
+    /// Unnamed native value `6` within the original C++ enumeration range.
+    Native6 = 6,
+    /// Unnamed native value `7` within the original C++ enumeration range.
+    Native7 = 7,
 }
 
 /// Definition of types of markers
@@ -201,6 +235,40 @@ pub enum AspectTypeOfMarker {
     Ball = 12,
     /// defined by Users (custom image).
     Userdefined = 13,
+    /// Unnamed native value `-16` within the original C++ enumeration range.
+    NativeMinus16 = -16,
+    /// Unnamed native value `-15` within the original C++ enumeration range.
+    NativeMinus15 = -15,
+    /// Unnamed native value `-14` within the original C++ enumeration range.
+    NativeMinus14 = -14,
+    /// Unnamed native value `-13` within the original C++ enumeration range.
+    NativeMinus13 = -13,
+    /// Unnamed native value `-12` within the original C++ enumeration range.
+    NativeMinus12 = -12,
+    /// Unnamed native value `-11` within the original C++ enumeration range.
+    NativeMinus11 = -11,
+    /// Unnamed native value `-10` within the original C++ enumeration range.
+    NativeMinus10 = -10,
+    /// Unnamed native value `-9` within the original C++ enumeration range.
+    NativeMinus9 = -9,
+    /// Unnamed native value `-8` within the original C++ enumeration range.
+    NativeMinus8 = -8,
+    /// Unnamed native value `-7` within the original C++ enumeration range.
+    NativeMinus7 = -7,
+    /// Unnamed native value `-6` within the original C++ enumeration range.
+    NativeMinus6 = -6,
+    /// Unnamed native value `-5` within the original C++ enumeration range.
+    NativeMinus5 = -5,
+    /// Unnamed native value `-4` within the original C++ enumeration range.
+    NativeMinus4 = -4,
+    /// Unnamed native value `-3` within the original C++ enumeration range.
+    NativeMinus3 = -3,
+    /// Unnamed native value `-2` within the original C++ enumeration range.
+    NativeMinus2 = -2,
+    /// Unnamed native value `14` within the original C++ enumeration range.
+    Native14 = 14,
+    /// Unnamed native value `15` within the original C++ enumeration range.
+    Native15 = 15,
 }
 
 /// Define the style of the text.
