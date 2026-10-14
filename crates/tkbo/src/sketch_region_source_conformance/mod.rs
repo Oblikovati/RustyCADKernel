@@ -32,4 +32,7 @@ pub(crate) use snapshot_binding::same_construction_basis;
 mod endpoints;
 pub(crate) use endpoints::{
     captured_endpoint_root_options, certify_captured_endpoint, certify_captured_placed_endpoint,
+    with_captured_point_comparator,
 };
+#[cfg(test)]
+mod point_comparator_tests;

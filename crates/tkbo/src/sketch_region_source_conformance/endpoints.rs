@@ -34,6 +34,22 @@ pub(crate) fn certify_captured_placed_endpoint(
 pub(crate) fn captured_endpoint_root_options() -> RootIsolationOptions {
     RootIsolationOptions::new(1.)
 }
+
+/// Reuse a source query's exact maps and bounds with raw point transport; example: `with_captured_point_comparator(query, local, placement, 0.)`.
+/// Only the point comparator and its explicit spatial budget change; source operands remain intact.
+pub(crate) fn with_captured_point_comparator(
+    mut query: TransportedResidualQuery<'_>,
+    local_point: [f64; 3],
+    placement: MetricEmbedding<3>,
+    spatial_limit: f64,
+) -> TransportedResidualQuery<'_> {
+    query.residual.pcurve = constant_origin();
+    query.residual.plane_embedding = endpoint_embedding(local_point);
+    query.residual.plane_placement = placement;
+    query.residual.spatial_limit = spatial_limit;
+    query
+}
+
 fn transported_endpoint_query(
     curve: &CapturedSpaceRepresentation,
     parameter: f64,
