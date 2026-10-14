@@ -1,0 +1,251 @@
+{
+  "baseline_revision": "c814d12b309b7443cdc3a32fb316a57b84032557",
+  "scope": "Diagnosis only; no production correction. Delivered DestroyNotify handled=false leaves native XID live, next public resize exits through default Xlib error handler. Historical original BadWindow cause remains unproven.",
+  "window_cases": [
+    {
+      "mode": "owned",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/0-owned.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_window_lifecycle_probe",
+        "owned"
+      ],
+      "exit": 0,
+      "bad_window": false,
+      "get_window_attributes": false
+    },
+    {
+      "mode": "wrapped-live",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/1-wrapped-live.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_window_lifecycle_probe",
+        "wrapped-live"
+      ],
+      "exit": 0,
+      "bad_window": false,
+      "get_window_attributes": false
+    },
+    {
+      "mode": "wrapped-dead",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/2-wrapped-dead.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_window_lifecycle_probe",
+        "wrapped-dead"
+      ],
+      "exit": 1,
+      "bad_window": true,
+      "get_window_attributes": true
+    },
+    {
+      "mode": "wrapped-dead",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/3-wrapped-dead.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_window_lifecycle_probe",
+        "wrapped-dead"
+      ],
+      "exit": 1,
+      "bad_window": true,
+      "get_window_attributes": true
+    },
+    {
+      "mode": "wrapped-dead",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/4-wrapped-dead.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_window_lifecycle_probe",
+        "wrapped-dead"
+      ],
+      "exit": 1,
+      "bad_window": true,
+      "get_window_attributes": true
+    }
+  ],
+  "initial_view_cases": [
+    {
+      "mode": "owned-retained",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/view-owned-retained.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_view_lifecycle_probe",
+        "owned-retained"
+      ],
+      "exit": 0,
+      "bad_window": false,
+      "get_window_attributes": false
+    },
+    {
+      "mode": "owned-rebind",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/view-owned-rebind.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_view_lifecycle_probe",
+        "owned-rebind"
+      ],
+      "exit": 0,
+      "bad_window": false,
+      "get_window_attributes": false
+    },
+    {
+      "mode": "wrapped-live",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/view-wrapped-live.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_view_lifecycle_probe",
+        "wrapped-live"
+      ],
+      "exit": 0,
+      "bad_window": false,
+      "get_window_attributes": false
+    },
+    {
+      "mode": "wrapped-dead-resize",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/view-wrapped-dead-resize.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_view_lifecycle_probe",
+        "wrapped-dead-resize"
+      ],
+      "exit": 1,
+      "bad_window": true,
+      "get_window_attributes": true
+    },
+    {
+      "mode": "wrapped-dead-redraw",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/view-wrapped-dead-redraw.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_view_lifecycle_probe",
+        "wrapped-dead-redraw"
+      ],
+      "exit": 1,
+      "bad_window": true,
+      "get_window_attributes": true
+    },
+    {
+      "mode": "owned-destroy-event",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/view-owned-destroy-event.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_view_lifecycle_probe",
+        "owned-destroy-event"
+      ],
+      "exit": 1,
+      "bad_window": true,
+      "get_window_attributes": true
+    },
+    {
+      "mode": "owned-display-reset",
+      "command": [
+        "strace",
+        "-k",
+        "-e",
+        "trace=exit_group",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/window-lifecycle-diagnostic/view-owned-display-reset.stack",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-window-lifecycle/target/debug/examples/native_view_lifecycle_probe",
+        "owned-display-reset"
+      ],
+      "exit": 1,
+      "bad_window": true,
+      "get_window_attributes": true
+    }
+  ],
+  "traced_repetitions": {
+    "drivers_selected": [
+      "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "/usr/share/vulkan/icd.d/lvp_icd.json"
+    ],
+    "repeats_per_case_per_driver": 3,
+    "cases": [
+      "owned-retained",
+      "owned-rebind",
+      "wrapped-live",
+      "wrapped-dead-resize",
+      "wrapped-dead-redraw",
+      "owned-destroy-event"
+    ],
+    "passes": 18,
+    "badwindow_failures": 18
+  },
+  "caller_stacks": {
+    "wrapped-dead-resize": {
+      "window": 4194305,
+      "caller_stack": "   0: <rustycad_tkservice::xlib::XlibApi>::window_attributes\n             at ./crates/tkservice/src/xlib/window.rs:181:138\n   1: <rustycad_tkservice::xw::window::XwWindow>::live_attributes\n             at ./crates/tkservice/src/xw/window.rs:179:28\n   2: <rustycad_tkservice::xw::window::XwWindow as rustycad_tkservice::aspect::window::AspectWindow>::size\n             at ./crates/tkservice/src/xw/window.rs:274:20\n   3: <rustycad_tkv3d::v3d::view::V3dView>::set_ratio\n             at ./crates/tkv3d/src/v3d/view_mapping.rs:151:38\n   4: <rustycad_tkv3d::v3d::view::V3dView>::must_be_resized\n             at ./crates/tkv3d/src/v3d/view_redraw.rs:68:14\n   5: native_view_lifecycle_probe::main\n             at ./crates/vulkan/examples/native_view_lifecycle_probe.rs:37:45\n"
+    },
+    "wrapped-dead-redraw": {
+      "window": 4194305,
+      "caller_stack": "   0: <rustycad_tkservice::xlib::XlibApi>::window_attributes\n             at ./crates/tkservice/src/xlib/window.rs:181:138\n   1: <rustycad_tkservice::xw::window::XwWindow>::live_attributes\n             at ./crates/tkservice/src/xw/window.rs:179:28\n   2: <rustycad_tkservice::xw::window::XwWindow as rustycad_tkservice::aspect::window::AspectWindow>::size\n             at ./crates/tkservice/src/xw/window.rs:274:20\n   3: martensite_vulkan::view_target::target_dimensions::{closure#0}\n             at ./crates/vulkan/src/view_target.rs:61:56\n   4: <core::option::Option<&dyn rustycad_tkservice::aspect::window::AspectWindow>>::map::<(i32, i32), martensite_vulkan::view_target::target_dimensions::{closure#0}>\n             at /home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/option.rs:1163:29\n   5: martensite_vulkan::view_target::target_dimensions\n             at ./crates/vulkan/src/view_target.rs:61:36\n   6: martensite_vulkan::view_target::capture_extent\n             at ./crates/vulkan/src/view_target.rs:42:22\n   7: <martensite_vulkan::driver_view::Graphic3dRenderView>::gui_composed_frame\n             at ./crates/vulkan/src/driver_view.rs:139:22\n   8: <martensite_vulkan::driver_view::Graphic3dRenderView>::render_current\n             at ./crates/vulkan/src/driver_view.rs:132:30\n   9: <martensite_vulkan::driver_view::Graphic3dRenderView>::try_redraw\n             at ./crates/vulkan/src/driver_view.rs:98:28\n  10: native_view_lifecycle_probe::main\n             at ./crates/vulkan/examples/native_view_lifecycle_probe.rs:38:12\n  11: <fn() as core::ops::function::FnOnce<()>>::call_once\n             at /home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5\n  12: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>\n             at /home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/sys/backtrace.rs:166:18\n  13: std::rt::lang_start::<()>::{closure#0}\n             at /home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/rt.rs:206:18\n  14: <&dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe as core::ops::function::FnOnce<()>>::call_once\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/function.rs:287:21\n  15: std::panicking::catch_unwind::do_call::<&dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe, i32>\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:576:43\n  16: std::panicking::catch_unwind::<i32, &dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe>\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:544:19\n  17: std::panic::catch_unwind::<&dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe, i32>\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panic.rs:359:14\n  18: std::rt::lang_start_internal::{closure#0}\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/rt.rs:175:24\n  19: std::panicking::catch_unwind::do_call::<std::rt::lang_start_internal::{closure#0}, isize>\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:576:43\n  20: std::panicking::catch_unwind::<isize, std::rt::lang_start_internal::{closure#0}>\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:544:19\n  21: std::panic::catch_unwind::<std::rt::lang_start_internal::{closure#0}, isize>\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panic.rs:359:14\n  22: std::rt::lang_start_internal\n             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/rt.rs:171:5\n  23: std::rt::lang_start::<()>\n             at /home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/rt.rs:205:5\n  24: main\n  25: <unknown>\n  26: __libc_start_main\n  27: _start\n"
+    },
+    "owned-destroy-event": {
+      "window": 4194305,
+      "caller_stack": "   0: <rustycad_tkservice::xlib::XlibApi>::window_attributes\n             at ./crates/tkservice/src/xlib/window.rs:181:138\n   1: <rustycad_tkservice::xw::window::XwWindow>::live_attributes\n             at ./crates/tkservice/src/xw/window.rs:179:28\n   2: <rustycad_tkservice::xw::window::XwWindow as rustycad_tkservice::aspect::window::AspectWindow>::size\n             at ./crates/tkservice/src/xw/window.rs:274:20\n   3: <rustycad_tkv3d::v3d::view::V3dView>::set_ratio\n             at ./crates/tkv3d/src/v3d/view_mapping.rs:151:38\n   4: <rustycad_tkv3d::v3d::view::V3dView>::must_be_resized\n             at ./crates/tkv3d/src/v3d/view_redraw.rs:68:14\n   5: native_view_lifecycle_probe::main\n             at ./crates/vulkan/examples/native_view_lifecycle_probe.rs:37:45\n"
+    }
+  },
+  "separate_display_reset": {
+    "initial_exit": 1,
+    "instrumented_exit": -6,
+    "instrumented_symptom": "corrupted double-linked list",
+    "excluded_from_delivered_destruction_correction": true
+  },
+  "temporary_instrumentation": "temporary-boundary-trace.patch; stack logging only, no global error handlers or mutable state",
+  "build_jobs": 2,
+  "display": ":1",
+  "validation_layer_path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+  "ld_library_path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+  "new_occt_runs": false,
+  "performance_measured": false,
+  "source_sha256": {
+    "crates/tkservice/examples/native_window_lifecycle_probe.rs": "4f436ecd2926681f942100dd8a89d98c76858933db8492695217a0884bbabf9c",
+    "crates/tkservice/src/xlib/window.rs": "6e7162983f8c10d5a720771a1b0cac3afbf079ce58196acfd0ff7684c71e4b5b",
+    "crates/vulkan/examples/native_view_lifecycle_probe.rs": "5e320b4faeb8e3fadbbaf9fca51a28d2aca8785654d68c8cd3802e2abb7a2b44"
+  },
+  "instrumented_executable_sha256": "7620db5503490c7eabf2c344b05474b6f0bde5f63e2374cbb7f205bb571c33af",
+  "archive_sha256": "522a9755d8f6bf433a2e1e4bae2487212036fca72837fb874222b9b4381a5efc"
+}
