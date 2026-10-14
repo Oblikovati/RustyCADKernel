@@ -56,7 +56,9 @@ pub use context_members::AisContextHandle;
 mod context_selector_reference;
 pub use context_selector_reference::AisMainSelectorRef;
 
+mod media_player;
 mod triangulation;
+pub use media_player::{AisMediaPlayer, AisMediaPlayerFields};
 pub use triangulation::AisTriangulation;
 mod connected_interactive;
 pub use connected_interactive::{
