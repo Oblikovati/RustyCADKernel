@@ -10,25 +10,31 @@ fn actual_selected_copy_pairs_preserve_every_original_relation_class() {
     let copied = receipt.copied.as_ref().unwrap();
     assert_eq!(copied.observations.len(), selected.relations.len());
     for observation in &copied.observations {
-        let selected_row = selected
-            .relations
-            .iter()
-            .find(|row| row.output.is_equal(&observation.selected.output))
-            .unwrap();
-        assert_relation(selected_row, &observation.selected);
-        assert!(
-            !observation
-                .selected
-                .output
-                .is_partner(&observation.native_image)
-        );
-        assert!(observation.native_image.is_same(&observation.copied_image));
-        assert_eq!(
-            observation.copied_image.orientation(),
-            selected_row.output.orientation()
-        );
-        assert_legacy_relation(copied, observation);
+        assert_observed_pair(&selected.relations, copied, observation);
     }
+}
+fn assert_observed_pair(
+    selected: &[ArrangementRelation],
+    copied: &PrismCopiedSelection,
+    observation: &PrismCopyObservation,
+) {
+    let selected_row = selected
+        .iter()
+        .find(|row| row.output.is_equal(&observation.selected.output))
+        .unwrap();
+    assert_relation(selected_row, &observation.selected);
+    assert!(
+        !observation
+            .selected
+            .output
+            .is_partner(&observation.native_image)
+    );
+    assert!(observation.native_image.is_same(&observation.copied_image));
+    assert_eq!(
+        observation.copied_image.orientation(),
+        selected_row.output.orientation()
+    );
+    assert_legacy_relation(copied, observation);
 }
 fn assert_legacy_relation(copied: &PrismCopiedSelection, observation: &PrismCopyObservation) {
     let expected = crate::sketch_region_candidates::composed_copy_relation(
