@@ -29,13 +29,20 @@ pub fn certify_bezier_line_incidences(
     query: BezierIncidenceQuery<'_>,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<BezierIncidenceReport, BezierIncidenceFailure> {
+    let (source, domain) = prepare_incidence(query, query.domain, &mut cancelled)?;
+    construct::ReportConstruction::new(query, source, domain).construct(&mut cancelled)
+}
+fn prepare_incidence(
+    query: BezierIncidenceQuery<'_>,
+    sign_domain: BezierLineDomain,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<(BezierIncidenceSource, domain::DomainIsolation), BezierIncidenceFailure> {
     let source = BezierIncidenceSource::retain(query);
     validate_error(query.max_world_error)
         .map_err(|cause| failure(source.clone(), cause, None, None))?;
-    let domain =
-        domain::isolate_domain(query.curve, query.domain_sign, query.domain, &mut cancelled)
-            .map_err(|cause| failure(source.clone(), cause, None, None))?;
-    construct::ReportConstruction::new(query, source, domain).construct(&mut cancelled)
+    let domain = domain::isolate_domain(query.curve, query.domain_sign, sign_domain, cancelled)
+        .map_err(|cause| failure(source.clone(), cause, None, None))?;
+    Ok((source, domain))
 }
 fn validate_error(value: f64) -> Result<(), BezierIncidenceCause> {
     if !value.is_finite() || value <= 0. {

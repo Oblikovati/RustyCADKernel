@@ -13,7 +13,13 @@ fn owned_incidence_preparation_baseline_is_unchanged() {
     let mut actual = String::new();
     for domain in [BezierLineDomain::Support, BezierLineDomain::Segment] {
         query.domain = domain;
-        actual.push_str(&format!("{:#?}\n", certify_bezier_line_incidences(query, || false)));
+        actual.push_str(&format!(
+            "{:#?}\n",
+            certify_bezier_line_incidences(query, || false)
+        ));
     }
-    assert_eq!(actual, include_str!("incidence_assets/owned-preparation-baseline.txt"));
+    assert_eq!(
+        actual,
+        include_str!("incidence_assets/owned-preparation-baseline.txt")
+    );
 }
