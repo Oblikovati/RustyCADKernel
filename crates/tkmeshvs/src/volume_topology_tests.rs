@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::*;
+use MeshVSTopologyError::IndexOverflow;
 use std::error::Error;
 
 #[test]
@@ -36,16 +37,10 @@ fn assert_maximum_sizes(
             (maximum as usize * entries, maximum as usize + extra)
         );
     } else {
-        assert!(matches!(
-            sizes,
-            Err(MeshVSTopologyError::IndexOverflow { .. })
-        ));
+        assert!(matches!(sizes, Err(IndexOverflow { .. })));
     }
     let excessive = topology_sizes(maximum + 1, operation);
-    assert!(matches!(
-        excessive,
-        Err(MeshVSTopologyError::IndexOverflow { .. })
-    ));
+    assert!(matches!(excessive, Err(IndexOverflow { .. })));
 }
 
 #[test]
