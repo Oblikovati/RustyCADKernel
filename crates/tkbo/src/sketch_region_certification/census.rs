@@ -12,12 +12,17 @@ pub(crate) fn enumerate_boundary_census(
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<BoundaryCensus, CensusCause> {
     validate_policy(policy).map_err(CensusCause::Policy)?;
-    let mut census = empty_census(inputs, policy);
+    enumerate_domains(empty_census(inputs, policy), &mut cancelled)
+}
+fn enumerate_domains(
+    mut census: BoundaryCensus,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<BoundaryCensus, CensusCause> {
     for pair in pair_domains(census.inputs.segments.len()) {
         if cancelled() {
             return Err(cancelled_census(census, pair, false));
         }
-        let evidence = append_domain(&mut census, pair, &mut cancelled);
+        let evidence = append_domain(&mut census, pair, cancelled);
         if numerically_cancelled(&census, evidence) {
             return Err(cancelled_census(census, pair, true));
         }
@@ -27,6 +32,8 @@ pub(crate) fn enumerate_boundary_census(
 fn empty_census(inputs: BoundaryInputs, requested: CensusPolicy) -> BoundaryCensus {
     BoundaryCensus {
         inputs,
+        source_policy: None,
+        source_binding: None,
         domains: Vec::new(),
         reports: Vec::new(),
         failures: Vec::new(),
@@ -273,4 +280,43 @@ fn validate_policy(policy: CensusPolicy) -> Result<(), CensusPolicyViolation> {
         });
     }
     Ok(())
+}
+
+/// Bind the complete source matrix with a separately declared numerical policy.
+/// Example: `enumerate_source_bound_census(inputs, incidence_policy, source_policy, || false)`.
+pub(crate) fn enumerate_source_bound_census(
+    inputs: BoundaryInputs,
+    policy: CensusPolicy,
+    source_policy: crate::sketch_region_source_conformance::SourceConformancePolicy,
+    mut cancelled: impl FnMut() -> bool,
+) -> Result<BoundaryCensus, CensusCause> {
+    validate_policy(policy).map_err(CensusCause::Policy)?;
+    let mut census = empty_census(inputs, policy);
+    census.source_policy = Some(source_policy);
+    let source_cancelled = retain_source_binding(&mut census, source_policy, &mut cancelled);
+    if super::source_status::representation_matches(&census) {
+        census
+            .missing
+            .retain(|gap| *gap != CertificationObligation::SourceConversionAndPlane);
+    }
+    if source_cancelled {
+        return Err(CensusCause::SourceCancelled {
+            completed: Box::new(census),
+        });
+    }
+    enumerate_domains(census, &mut cancelled)
+}
+
+fn retain_source_binding(
+    census: &mut BoundaryCensus,
+    policy: crate::sketch_region_source_conformance::SourceConformancePolicy,
+    cancelled: &mut impl FnMut() -> bool,
+) -> bool {
+    use crate::sketch_region_source_conformance::{
+        bind_source_conformance, inspect_source_conformance,
+    };
+    let report = inspect_source_conformance(&census.inputs, policy, cancelled);
+    let cancelled = super::source_status::source_cancelled(&report);
+    census.source_binding = Some(bind_source_conformance(&census.inputs, policy, report));
+    cancelled
 }

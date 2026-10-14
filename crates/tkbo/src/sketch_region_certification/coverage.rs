@@ -9,7 +9,6 @@ use rustycad_tkbrep::{
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::{gp::Plane3, predicates::roots::bezier_line::CertifiedBezierIncidence};
-use std::cmp::Ordering;
 
 type EndpointRead = Result<EndpointEvidence, Failure>;
 struct CoverageScope<'a> {
@@ -42,8 +41,25 @@ pub(crate) fn inspect_contact_coverage(
     Ok(coverage)
 }
 impl CoverageScope<'_> {
+    fn orphan_contacts(&self, report: usize) -> Vec<ContactCoverage> {
+        self.census.reports[report]
+            .contacts()
+            .iter()
+            .enumerate()
+            .map(|(contact, _)| ContactCoverage {
+                report,
+                contact,
+                vertices: Vec::new(),
+                complete: false,
+                missing: super::coverage_status::missing_states(self.census, false, &[]),
+            })
+            .collect()
+    }
     fn inspect_report(&self, report: usize) -> Result<Vec<ContactCoverage>, Failure> {
-        let (curve, line) = report_inputs(self.census, report);
+        let Some([curve, line]) = super::incidence_binding::report_domain_pair(self.census, report)
+        else {
+            return Ok(self.orphan_contacts(report));
+        };
         self.census.reports[report]
             .contacts()
             .iter()
@@ -60,29 +76,25 @@ impl CoverageScope<'_> {
             .collect()
     }
 }
-fn report_inputs(census: &BoundaryCensus, target: usize) -> (usize, usize) {
-    census
-        .domains
-        .iter()
-        .find_map(|domain| match domain.evidence {
-            DomainEvidence::StoredIncidence {
-                report,
-                curve,
-                line,
-            } if report == target => Some((curve, line)),
-            _ => None,
-        })
-        .expect("retained incidence report must have its actual source domain")
-}
 impl ContactProbe<'_> {
     fn inspect(&self) -> Result<ContactCoverage, Failure> {
-        // No plane/conversion residual certificate exists yet, even for an exact stored root witness.
+        let bound = super::incidence_binding::report_pair_bound(
+            self.scope.census,
+            self.identity.0,
+            self.pair,
+        );
+        let vertices = if bound {
+            self.collect_endpoints()?
+        } else {
+            Vec::new()
+        };
+        let missing = super::coverage_status::missing_states(self.scope.census, bound, &vertices);
         Ok(ContactCoverage {
             report: self.identity.0,
             contact: self.identity.1,
-            vertices: self.collect_endpoints()?,
+            vertices,
             complete: false,
-            missing: EndpointGap::SourcePlaneAndParameterConstructionUncertified,
+            missing,
         })
     }
     fn collect_endpoints(&self) -> Result<Vec<EndpointEvidence>, Failure> {
@@ -128,12 +140,16 @@ impl ContactProbe<'_> {
         relation: &ArrangementRelation,
         parameters: (f64, f64),
     ) -> EndpointRead {
-        let (in_bracket, exact_parameter) = self.observe_parameter(parameters.0);
+        let native_membership = self.native_membership(parameters.0);
+        let (in_bracket, exact_parameter) = native_membership
+            .as_ref()
+            .map_or((false, false), |e| (e.belongs, e.singleton_equal));
         let point = BRepTool::pnt(&vertex(&relation.output)?)?;
         Ok(EndpointEvidence {
             vertex: relation.output.clone(),
             parameter: parameters.0,
             line_parameter: parameters.1,
+            native_membership,
             parameter_in_bracket: in_bracket,
             exact_parameter,
             world_inside_enclosure: self.observed_metric_bound(point),
@@ -141,23 +157,26 @@ impl ContactProbe<'_> {
             certificate_world_error: self.contact.achieved_world_error(),
         })
     }
+    fn native_membership(
+        &self,
+        parameter: f64,
+    ) -> Result<
+        crate::sketch_region_source_conformance::NativeParameterMembership,
+        crate::sketch_region_source_conformance::SourceConformanceCause,
+    > {
+        super::parameter_binding::contact_native_membership(
+            self.scope.census,
+            self.pair[0],
+            self.contact,
+            parameter,
+        )
+    }
     fn observed_metric_bound(&self, point: rustycad_tkmath::gp::Point3) -> bool {
         // Observation cannot certify the unmeasured source-plane construction residual.
         inside_bounds(
             project(point, self.scope.plane),
             self.contact.world_bounds(),
         )
-    }
-    fn observe_parameter(&self, parameter: f64) -> (bool, bool) {
-        let source = &self.scope.census.inputs.segments[self.pair[0]];
-        let bounds = source.original_interval;
-        let basis = if source.interval == bounds {
-            parameter
-        } else {
-            (parameter - bounds[0]) / (bounds[1] - bounds[0])
-        };
-        let (in_bracket, singleton) = parameter_membership(self.contact, basis);
-        (in_bracket, singleton && source.interval == bounds)
     }
 }
 
@@ -188,16 +207,6 @@ fn edge_parents(
             || relation.modified.contains(parent)
             || relation.generated.contains(parent)
     })
-}
-fn parameter_membership(contact: &CertifiedBezierIncidence, parameter: f64) -> (bool, bool) {
-    let (lower, upper) = contact.parameter().bounds();
-    let lo = lower.compare_f64(parameter).ok();
-    let hi = upper.compare_f64(parameter).ok();
-    (
-        matches!(lo, Some(Ordering::Less | Ordering::Equal))
-            && matches!(hi, Some(Ordering::Greater | Ordering::Equal)),
-        lo == Some(Ordering::Equal) && hi == Some(Ordering::Equal),
-    )
 }
 fn project(point: rustycad_tkmath::gp::Point3, plane: Plane3) -> [f64; 2] {
     let origin = plane.location();

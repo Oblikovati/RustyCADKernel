@@ -12,6 +12,8 @@ pub(crate) struct BoundaryInputs {
 }
 pub(crate) struct BoundaryCensus {
     pub inputs: BoundaryInputs,
+    pub source_policy: Option<crate::sketch_region_source_conformance::SourceConformancePolicy>,
+    pub source_binding: Option<crate::sketch_region_source_conformance::BoundSourceConformance>,
     pub domains: Vec<BoundaryDomain>,
     pub reports: Vec<BezierIncidenceReport>,
     pub failures: Vec<BezierIncidenceFailure>,
@@ -50,6 +52,9 @@ pub(crate) enum CensusCause {
     Policy(CensusPolicyViolation),
     Capture(CandidateCause),
     Incomplete(CensusGap),
+    SourceCancelled {
+        completed: Box<BoundaryCensus>,
+    },
     Cancelled {
         next_domain: [usize; 2],
         during_domain: bool,
@@ -62,12 +67,16 @@ pub(crate) struct ContactCoverage {
     pub contact: usize,
     pub vertices: Vec<EndpointEvidence>,
     pub complete: bool,
-    pub missing: EndpointGap,
+    pub missing: Vec<EndpointGap>,
 }
 pub(crate) struct EndpointEvidence {
     pub vertex: rustycad_tkbrep::topods::Shape,
     pub parameter: f64,
     pub line_parameter: f64,
+    pub native_membership: Result<
+        crate::sketch_region_source_conformance::NativeParameterMembership,
+        crate::sketch_region_source_conformance::SourceConformanceCause,
+    >,
     pub parameter_in_bracket: bool,
     pub exact_parameter: bool,
     pub world_inside_enclosure: bool,
@@ -93,7 +102,13 @@ pub(crate) struct CandidateOccurrenceCoverage {
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub(crate) enum EndpointGap {
-    SourcePlaneAndParameterConstructionUncertified,
+    RepresentationUncertified,
+    IncidenceSourceUnbound,
+    NativeCurveParameterUncertified,
+    DualAxisParameterUncertified,
+    CanonicalContactIdentityUncertified,
+    World3dErrorUncertified,
+    PartitionUncertified,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -101,4 +116,23 @@ pub(crate) enum CensusPolicyViolation {
     WorldError { received: f64 },
     RootVersion { received: u32 },
     ParameterWidth { received: f64 },
+}
+
+impl BoundaryCensus {
+    /// Recheck current inputs and the separately declared policy, not a stale gap vector.
+    /// Example: `census.source_representation_certified()` never certifies topology.
+    pub(crate) fn source_representation_certified(&self) -> bool {
+        super::source_status::representation_matches(self)
+    }
+    /// Return authoritative current obligations after possible private stage input edits.
+    /// Example: `census.current_obligations().contains(&CertificationObligation::SourceConversionAndPlane)`.
+    pub(crate) fn current_obligations(&self) -> Vec<CertificationObligation> {
+        let mut current = self.missing.clone();
+        if !self.source_representation_certified()
+            && !current.contains(&CertificationObligation::SourceConversionAndPlane)
+        {
+            current.push(CertificationObligation::SourceConversionAndPlane);
+        }
+        current
+    }
 }
