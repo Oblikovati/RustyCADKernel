@@ -15,7 +15,7 @@ use rustycad_tkmath::{
     toploc::Location,
 };
 use rustycad_tktopalgo::{brep_builder_api::BRepBuilderAPIMakeEdge, brep_gprop::BRepGProp};
-fn mixed_boundary() -> Vec<Shape> {
+pub(super) fn mixed_boundary() -> Vec<Shape> {
     let points = [
         Point3::default(),
         Point3::new(2., 0., 0.),

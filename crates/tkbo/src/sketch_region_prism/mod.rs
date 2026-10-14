@@ -7,6 +7,7 @@ mod contexts;
 mod copying;
 mod history;
 mod outcome;
+mod surface_charts;
 mod transaction;
 pub(crate) use outcome::*;
 pub(crate) use transaction::retain_selected_prism;

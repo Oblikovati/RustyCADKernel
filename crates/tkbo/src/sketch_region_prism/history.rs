@@ -38,6 +38,7 @@ fn retained_diagnostic(
     native_retired: Vec<ArrangementRelation>,
 ) -> PrismDiagnostic {
     PrismDiagnostic {
+        surface_charts: None,
         body,
         bindings: Vec::new(),
         transport_gaps: Vec::new(),
@@ -96,7 +97,7 @@ fn observe_caps(
     append_cap_images(base, first, last, observed);
     Ok(())
 }
-fn all_parents(base: &ArrangementRelation) -> Vec<OriginalMemberIdentity> {
+pub(super) fn all_parents(base: &ArrangementRelation) -> Vec<OriginalMemberIdentity> {
     let mut parents = Vec::new();
     for kind in [&base.preserved, &base.modified, &base.generated] {
         append_parents(&mut parents, kind);

@@ -163,7 +163,7 @@ fn missing_ancestry_and_boundary_cancellation_are_not_success() {
     ));
 }
 
-pub(super) fn rational_closed_curve() -> Shape {
+pub(crate) fn rational_closed_curve() -> Shape {
     use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
     BRepBuilderAPIMakeEdge::from_curve(&rational_fixture_curve())
         .unwrap()
