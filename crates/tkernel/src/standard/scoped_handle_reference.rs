@@ -25,15 +25,19 @@ impl<T: ?Sized + RuntimeTyped> HandleReference<T> for ScopedHandleReferenceSlot<
         }))
     }
     fn observe(&self) -> HandleObserver<T> {
+        // Observer leases avoid the intrusive retain that a copied callback argument would add.
         self.slot.observe()
     }
     fn reference_address(&self) -> *const () {
+        // Bind the genuine Handle field, not the scope wrapper or its target.
         Rc::as_ptr(&self.slot).cast()
     }
     fn object_address(&self) -> *const () {
+        // Read original pointer metadata without projecting a retired target.
         self.slot.object_address()
     }
     fn is_null(&self) -> bool {
+        // A live null slot still has a valid original reference identity.
         self.slot.is_null()
     }
 }
@@ -57,11 +61,13 @@ impl<T: ?Sized + RuntimeTyped> HandleReference<T> for ScopedSlotAlias<T> {
             .map_or(std::ptr::null(), |slot| slot.object_address())
     }
     fn is_null(&self) -> bool {
+        // Expiration is Rust safety behavior, not a native dangling-reference observation.
         self.slot.upgrade().is_none_or(|slot| slot.is_null())
     }
 }
 impl<T: ?Sized + RuntimeTyped> RetainedSlotSource<T> for ScopedSlotAlias<T> {
     fn is_expired(&self) -> bool {
+        // Only the scoped owner owns this storage; retained aliases cannot postpone retirement.
         self.slot.strong_count() == 0
     }
 }

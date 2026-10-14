@@ -19,6 +19,7 @@ impl<T: ?Sized + RuntimeTyped> RetainedHandleReference<T> {
     }
     /// Distinguish expiration from a live null value; `assert!(!alias.is_expired())`.
     pub fn is_expired(&self) -> bool {
+        // Expiration follows the original scope owner, independently of a live null value.
         self.source.is_expired()
     }
     pub(super) fn project<U: ?Sized + RuntimeTyped>(self) -> RetainedHandleReference<U> {
@@ -37,18 +38,23 @@ impl<T: ?Sized + RuntimeTyped> Clone for RetainedHandleReference<T> {
 }
 impl<T: ?Sized + RuntimeTyped> HandleReference<T> for RetainedHandleReference<T> {
     fn retain_reference(&self) -> Result<Self, Failure> {
+        // Alias copies retain only the weak capability, so native target counts remain unchanged.
         Ok(self.clone())
     }
     fn observe(&self) -> HandleObserver<T> {
+        // Read through the original slot capability; never retain a pointee snapshot.
         self.source.observe()
     }
     fn reference_address(&self) -> *const () {
+        // Wrapper identity cannot substitute for the native original Handle address.
         self.source.reference_address()
     }
     fn object_address(&self) -> *const () {
+        // Metadata remains readable without projecting a retired zero-count target.
         self.source.object_address()
     }
     fn is_null(&self) -> bool {
+        // Null pointer metadata must not trigger RTTI on a retired object.
         self.source.is_null()
     }
 }
@@ -60,15 +66,19 @@ impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> HandleReference<U>
     for RetainedProjection<T, U>
 {
     fn observe(&self) -> HandleObserver<U> {
+        // Read through the original slot capability; never retain a pointee snapshot.
         self.source.observe().observe_as::<U>()
     }
     fn reference_address(&self) -> *const () {
+        // Wrapper identity cannot substitute for the native original Handle address.
         self.source.reference_address()
     }
     fn object_address(&self) -> *const () {
+        // Metadata remains readable without projecting a retired zero-count target.
         self.source.object_address()
     }
     fn is_null(&self) -> bool {
+        // Null pointer metadata must not trigger RTTI on a retired object.
         self.source.is_null()
     }
 }
@@ -76,6 +86,7 @@ impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> RetainedSlotSource<U>
     for RetainedProjection<T, U>
 {
     fn is_expired(&self) -> bool {
+        // Expiration follows the original scope owner, independently of a live null value.
         self.source.is_expired()
     }
 }
