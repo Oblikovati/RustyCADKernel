@@ -1,0 +1,1638 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Select",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "002f11e12df31549b97cd4ad0fdac14a948b4973741329814abcca0656621b15",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::select",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_FilterType_AND",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_FilterType.hxx",
+      "cpp_declaration_id": "00b356db1025f76dbf1c181dbbbf4320ba97632fd0d0fbd29ebe773bd4648f2b",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFilterType::And",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::ChangeEntities",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "0126294c0484e1620db922c16b700387e8f99767592c984b3d51bd25299f0426",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::change_entities",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::IsEmpty",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "0164d1fd8ae80571d22aed02d70051954d5a7d0ce347c725ed918f2452174f1f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrCompositionFilter::is_empty",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::SetSensitivity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "0568b5d34699e260a2d13c0fd871b2e3a46f74c9f6b04dde131abe1d9cf714b3",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::set_sensitivity",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SOS_Deactivated",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_StateOfSelection.hxx",
+      "cpp_declaration_id": "05a275202e137f2f16d6b1330ac731eeab3587dded9ab8abfd8e7908863c9cdf",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrStateOfSelection::Deactivated",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::setGlobalSelMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "086845dd48de7a2d211aef6ab08fa24ca3f2c8194232f3fa98e9008c0de962ad",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::set_global_sel_mode",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::HilightWithColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "095f7ed9685360705c7c5674a9726326f36b4d47fb25daef503a5f080d58d9b6",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::hilight_with_color",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "09a4436941d683522c19cb9897fc4a45f1199df59bd5c07fdc0945065950bf74",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::clear",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::SetLocation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "09f7a1a9aed5bbe82142cd954f6b6124b268401b39f5b7b7f64becb93348c88a",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::set_location",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::myAutoHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "0a39fbc0dfdf2c835c955e0dbf9a145d99faa12210e799525714d8b4862331bd",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectFields::auto_hilight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Sphere",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "0a5017932f9ff379200d76ecb0a3917f7d61c086ddcb27f857b19986172a2bfa",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace::Sphere",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_AndOrFilter::IsOk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AndOrFilter.hxx",
+      "cpp_declaration_id": "0a61c2811dca27c35d411e285b65dcc763cc7864a815426021b160a775c8b948",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAndOrFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::is_ok",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SelectMgr_EntityOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "0c18b9cdbff93e13bfbfda82d2ca41ecb91185d32d562ce43838bc67ed439ac4",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwner::new",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_FaceFilter::IsOk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_FaceFilter.hxx",
+      "cpp_declaration_id": "0c3241a30927ab2b32cfbaab318b715222320d633e4c84fb062772494d4a1526",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectFaceFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::is_ok",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::UpdateHighlightTrsf",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "0d2c492bb6ebd43696acef8f293e00c8219a18b43f5acc280c084cb2e8edc429",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::update_highlight_trsf",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "0ed6c916e6cb5a43d624af57fb44c8b61b361701ee866e99aa1f8425ca7dddd3",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::add",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "0ee572d926a5b36770ad2dd80caf03c5d681c93af1b6967aee2e65c5c0728e6b",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::ClearDynamicHighlight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "10de97dfefb0d533b45bc8373e39e115b609a4232734f16d866b9542e2c0ad13",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::clear_dynamic_highlight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Cylinder",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "12c345a195e1f36c0d394a1811f56b9325c8ef2262e9177ce49fda03e44171ca",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace::Cylinder",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::myIsSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "13b8b92f7fba1eac45c81d1550e2027e0fee76206fb94d3caf6703358a47df11",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerFields::is_selected",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SetComesFromDecomposition",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "13e7bab7e9445aa4001ae16565a906d91c6923cc39d474b3b349fc792d6b9d1e",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::set_comes_from_decomposition",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::Selections",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "149b76c2e798b92513d5ad20cdb123f0d3dbcadce6be9b17fbebb81eed5d71a8",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::selections",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SetSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "14c68be8f2a82c351f13f72b8c459a3bc0a80221cb0d49b2d464b9a2b716eb5a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::set_selected",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_PickingStrategy_OnlyTopmost",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_PickingStrategy.hxx",
+      "cpp_declaration_id": "15746345d5ef870266ad25889e3ed413c3203b7244069805d907249715ce2aa7",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrPickingStrategy::OnlyTopmost",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_AnyFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "165d2f9350708d3ee5dca90668ea2c53efba1a235736c413d5509bb05d54a2cd",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace::AnyFace",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_AndOrFilter::FilterType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AndOrFilter.hxx",
+      "cpp_declaration_id": "187cbd0a48b983fd785066638025251e52048984ecd930e3238f06880a8ea267",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAndOrFilter::filter_type",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::UpdateHighlightTrsf",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "1cd0e561affd685d25e26a5bdc932a3c91bfd566df062eac7fa170613c848584",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::update_highlight_trsf",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionType_Polyline",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionType.hxx",
+      "cpp_declaration_id": "1d361a4100057713fa859fcce36e1d5e9a04c84c2cca34fd3c8c671e0184a5dc",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionType::Polyline",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SetZLayer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "1e724c2cf34117670ebe2bacc374e0499f88e32a4d07222dab18b4766ec7a5f3",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::set_z_layer",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_AndOrFilter::SetDisabledObjects",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AndOrFilter.hxx",
+      "cpp_declaration_id": "1f2fe6fc5f0e7418fca368196c0f49f06cf82dd7711ed649872b24a43d451d42",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAndOrFilter::set_disabled_objects",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::GlobalSelOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "1f84ee60f97b9d21a83a54096be5345cfc1031e12a5db5295490a404edbe3ce6",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::global_sel_owner",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "1fdbf370f7de555db18a64a4d3a34e9eaaa0dc223df8fa51873f690a7b544cc6",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::dump_json",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::myGlobalSelMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "20ad063231e9927cf40d6c668117cd2d9d8e71b9d48eb82235ac4b45c2c6bb10",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectFields::global_sel_mode",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Circle",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfEdge.hxx",
+      "cpp_declaration_id": "2231ff5b4123db3d7d1b4ae91a562e5385e16988b6725cde7d71c71d7c059cd4",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfEdge::Circle",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::Selection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "25c14a9d679de444126e39045a72e3ef234027dc8195ccaa1bdd00b9490c0af2",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::selection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::SetAssemblyOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "268aa117088a9396dcc07f23fa5969815a9dee9ecf639d0480994b31cbb51459",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::set_assembly_owner",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::UpdateSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "27528f3cbeb393c8c013c9fec5509e4de27e4701c1c642348f61b9ca1a5928e6",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::update_selection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "29a69ad87d303a3d2161b03916e9aaa498c757818bd7c46a51caaad417460f23",
+      "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_selectable_dump_json",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_FilterType_OR",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_FilterType.hxx",
+      "cpp_declaration_id": "2b29eb2b7a5a95e5970649db9ff678bb2390f46561193220eeffc7f589c8dade",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFilterType::Or",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::myselections",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "2b71943226b81cabc4bfce4571d77d48db56d50b9dcf2d9be29d0da75f7c998a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectFields::selections",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Plane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "2d4ba303db215a1a075c68b36957df2882c0d6d73cf63ff4ac4b49d5bcb6b1a8",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace::Plane",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntity.hxx",
+      "cpp_declaration_id": "2e52a4941ab667b26543443ffcb87b47c8297398bc0cbb9b36d0d0c07e144cd1",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity::clear",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::SetZLayer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "2f4481fa54b8fc08662f7f23e65d5f3803b4ec6b526a1c2b137b6ef960ea24cc",
+      "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_set_z_layer",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_EdgeFilter::Type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_EdgeFilter.hxx",
+      "cpp_declaration_id": "3125708433a9f09708822d0b2409a1e43e2c8167b6147e177616aaa87a3eb683",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectEdgeFilter::type_",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::myFromDecomposition",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "3137a5e64eab07205c9d8cc4179458708ba3ac725c46bf8f78c8ca49c282e93f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerFields::from_decomposition",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_ShapeTypeFilter::StdSelect_ShapeTypeFilter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_ShapeTypeFilter.hxx",
+      "cpp_declaration_id": "370bd722e30c234a8ccb6f1162317a86d75b1384c1a15f1e720a5239e4fcf225",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectShapeTypeFilter::new",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionType_Point",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionType.hxx",
+      "cpp_declaration_id": "37356f69c543060a8e495430449894ebc673633908a096dcfb5c899bf472050f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionType::Point",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::Remove",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "3839fcd1007adbcae2a6040a7a1747b7e61edb0cd053e3a0517661dd42f2d8ba",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrCompositionFilter::remove",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::Destroy",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "39321cfce7305d773cd5147a906f4325bb18f86f7fc528ae5b2f3d9b0797da60",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::destroy",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "3acc72394ff124389e893fe51d41ccaca02197d547d357ba13155431f1e6248a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::dump_json",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionType.hxx",
+      "cpp_declaration_id": "3ce77628e0d7d4d32aca25c3fe51960e7977ea006395b8049a5ce0fe8c540176",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionType",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::mySelectable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "3eec50e8173f5cc60baa8d792db5bc206c7a7edf1fdc26f6c16e897b039b4498",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerFields::selectable",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::StoredFilters",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "3fb6071a57fe51b35137223aa44addf11842e816831e0bb7f957675cbd109431",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrCompositionFilter::stored_filters",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::BaseSensitive",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntity.hxx",
+      "cpp_declaration_id": "3fbe4b425c5589a2b2fb69ec1601da921a68e51d778ffe435870a4aec37b1514",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity::base_sensitive",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_FaceFilter::StdSelect_FaceFilter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_FaceFilter.hxx",
+      "cpp_declaration_id": "4052151f2cba7c9cd515844afad7e95943f9656007613fe9804a0bbdbbd1f180",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectFaceFilter::new",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::GetAssemblyOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "4404b714d99093ceeb2ec9d75a887c664a4f05734545dc4e2bdbb50ed2d8d072",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::get_assembly_owner",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::ClearSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "45b27954b716e56e2c61e7c575b77ba7f2da50a3f3c7bc2cd8df98af49ddd9d5",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::clear_selected",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_FaceFilter::Type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_FaceFilter.hxx",
+      "cpp_declaration_id": "4757247adcf362287227a76f19e179a58ce5a86c2e0c51ca628cef2fc75fbb65",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectFaceFilter::type_",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::IsEmpty",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "4937c7ad67bfbfd7ae1f35de57e4d666accd9e90d105189f41430d1a592ca882",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::is_empty",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::HilightOwnerWithColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "4a4842c9b1e92b06a7119e14c350d0fb034876f0007e2a1bd6a63a0f06132b3f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::hilight_owner_with_color",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TOU_None",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfUpdate.hxx",
+      "cpp_declaration_id": "4b288baa038b0bd0a56eff7c596ab6c7143b8039b039b8c758f5951d3149a82e",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfUpdate::None",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_PickingStrategy_FirstAcceptable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_PickingStrategy.hxx",
+      "cpp_declaration_id": "4c820807d49accad03c0b1475a56cd95636f7d1c4fae00ce97310b9285c0b49c",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrPickingStrategy::FirstAcceptable",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_ShapeTypeFilter::ActsOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_ShapeTypeFilter.hxx",
+      "cpp_declaration_id": "4d94633ac3d07c46a2df5f57d39f4b92d8ea8625e465b41786ecdf803ef07d5d",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectShapeTypeFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::acts_on",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::ClearSelections",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "4dd9758e27e9a7d0d24228f26267ba92304ac12c81d32629ded90d31af47e3ed",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::clear_selections",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "4e28efdbc561de0bd16f334a21e80ab24c564963f9995968049d343b31ecdedb",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::clear",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::myHilightPrs",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "4f028b471b08df7503e498df5bec9edd8830c6c2517d255ed672412b888cd4e1",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectFields::hilight_prs",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::SetActiveForSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntity.hxx",
+      "cpp_declaration_id": "50ace720237c856be5cc8e922c139ec6d2d371b69ee7c798481fc68ef0634602",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity::set_active_for_selection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::GetSelectionState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "50d1f4f146f84c43a211fbb30683b0e2144ef9407c6091488496177817120d84",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::get_selection_state",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_StateOfSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_StateOfSelection.hxx",
+      "cpp_declaration_id": "532bea662ffe15148ca27e86c8a61ef53b5172a55332e761aa1cc68321083ff9",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrStateOfSelection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_PickingStrategy",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_PickingStrategy.hxx",
+      "cpp_declaration_id": "56bf1b1054f560cdff8207141913b385a2b0c6aad51fa99dc246b81ab83a7f93",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrPickingStrategy",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TypeOfDepthTolerance_UniformPixels",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfDepthTolerance.hxx",
+      "cpp_declaration_id": "59040134fccaf93cf32d8603e23a73e1322ff616c3262f6684b00a33640a3dba",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfDepthTolerance::UniformPixels",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::ComputeSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "5912efccb5457a6b65548093fef6d7107131a2d174dfff55d238143fcb2bb68e",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::compute_selection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect::SetDrawerForBRepOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect.hxx",
+      "cpp_declaration_id": "59e7629a1e5728761c956ef50d5b889c23dab43c3b9b8f679e4c2bcf95a7735b",
+      "rust_item": "rustycad_tkv3d::std_select::std_select_set_drawer_for_brep_owner",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Filter::IsOk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Filter.hxx",
+      "cpp_declaration_id": "5d785c138e2c1eed6abe3bcf29451775084abf2463ce7b39dc7b636162f06dc4",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFilter::is_ok",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_AndFilter::SelectMgr_AndFilter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AndFilter.hxx",
+      "cpp_declaration_id": "61dc01e639895c2c9f790d273e7a5da91ed520c07c8f20c1c1be268876bdedbf",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAndFilter::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_OrFilter::IsOk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_OrFilter.hxx",
+      "cpp_declaration_id": "6389a0c3f703f98ee07e7b5b37d5e0922c58728561cf109fc2ee27236ed80356",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrOrFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::is_ok",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SelectMgr_EntityOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "67978ad51080138c237473ad5fef6a380de2c87563b5fe69f119c9dafa65d3ce",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwner::from_owner",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SetLocation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "67eae439fc1b444e954f7cdcb0f1bcb8940f5210ff03a7a18e67b5987fa3c213",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::set_location",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::HilightSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "690b18ccce28872aca9e4744232cb8e6d4774287c828602583457036e5a7914a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::hilight_selected",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TBU_Invalidate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfBVHUpdate.hxx",
+      "cpp_declaration_id": "691030336fca0815f39db4848de63273de79edddf57e4e29331cb61a5e1d0e76",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfBvhUpdate::Invalidate",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::HandleMouseClick",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "691e62c424391f415857a54a2b6466a3a103b40534ed3439e7545e6dc9673bda",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::handle_mouse_click",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TypeOfUpdate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfUpdate.hxx",
+      "cpp_declaration_id": "6dfc5af478a8b880e11ef939fd5b8285868dc6c9a105dd30dc868891db918a59",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfUpdate",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SelectMgr_EntityOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "6f10d4f8ff24ac7c350af40d27536b3c0fc6ab18ca7fa2d368c3c35742921922",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwner::with_selectable",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_EdgeFilter::IsOk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_EdgeFilter.hxx",
+      "cpp_declaration_id": "7366540c7512ee0378ab30d7d3c4581a4d4c722e5d7e40bb7d71ddf457598509",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectEdgeFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::is_ok",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::ResetTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "7367ae6931b81f1201b996071d80e9aeeddc3720d5954566e1f1d2ffaa986edb",
+      "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_reset_transformation",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::SelectMgr_SensitiveEntity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntity.hxx",
+      "cpp_declaration_id": "73cfc19d3ad405bbc2b1a4d5684518d21fe4cf7af20a196f0c0b709278303b98",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity::new",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SOS_Activated",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_StateOfSelection.hxx",
+      "cpp_declaration_id": "74f9c85f8ade638e214c6ebd7a688864477b6adc92fba252408ed5da57ba49a5",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrStateOfSelection::Activated",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::BndBoxOfSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "7721c9f1d738c281b821cf71bca08d55627298c62b3866b11ef505b82dacb8c9",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::bnd_box_of_selected",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::AcceptShapeDecomposition",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "77f466906bbe0beb9763d2b0b81936533fa47ba33756c028bf22ee4cf6837913",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::accept_shape_decomposition",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Unhilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "7a5e7f28bf69d64dee25ee6d395f7effddf63a0da0402374c491cdcec012b9d6",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::unhilight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Location",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "7b1f8fbb1f130e56b00d5da8e2edffd08596c4aab128bc2ab6a7a9a844fb53b9",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::location",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TypeOfDepthTolerance",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfDepthTolerance.hxx",
+      "cpp_declaration_id": "7d271b76c5b68e0dca5d640ccdbdf15098d4138946dc48215e48f6ef8aebff08",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfDepthTolerance",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Shape::Compute",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_Shape.hxx",
+      "cpp_declaration_id": "7fd85c007614b599b3021310adc51616ba2e53ef8fcf03ea0b7147fd3bf98868",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_FilterType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_FilterType.hxx",
+      "cpp_declaration_id": "7ffcd9c93617919a814063bd148b2a9f9dcf9dc366e93fb109a20ab3658665ed",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFilterType",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::myPrsSh",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "80907ef15311688505498a3e74ed320f50f8f6bfd1d46080c2d3fae6701bdc64",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwnerBase::presentation",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::UpdateTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "83b3d144c7eff52b6951c08c3151f23684c5a292582161aae5058c7131196c9f",
+      "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_update_transformation",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::ErasePresentations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "85daa87b4f83d70baa2ab3e61f96281473b3882c8d02037de228ca42b78c5466",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::erase_presentations",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::IsSameSelectable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "87fe3d0b4e63507d0bc7242d423e3d27a4da484f19ae1fcf720bd91f599f2591",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::is_same_selectable",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_OrFilter::SelectMgr_OrFilter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_OrFilter.hxx",
+      "cpp_declaration_id": "8cf937016211efc95329401a13713090733903a8b0aebebf408b0606c484df72",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrOrFilter::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Filter::ActsOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Filter.hxx",
+      "cpp_declaration_id": "8e180f3775e800ea96f74eefbfb8abbe767c886d97da24d501d1437e348e0650",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFilter::acts_on",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::SetAutoHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "8f87cb9d172cdc71bfb162431ba74dda69233bdd2f0f5d8767915089c20b0604",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::set_auto_hilight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Selectable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "8f8dfc62497b3b5281648e768b37ae320f23cfa391bcd5536e1ec486eba2d2cf",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::selectable",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "90e7a5af115d70826c5fc71c8d3a2209f83d44fbdbe3c55bd78d8e4fb0d5a809",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrCompositionFilter::add",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::SetSelectionState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "952ae74d885a7dc01a1eaa20631866640169bba522a8304086f4e5c5b2a453a6",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::set_selection_state",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::ActsOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "95ae998adb97a922fca134823b7fb644f850fbb4f39c4a912b7d592b7519d96c",
+      "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_composition_acts_on",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TypeOfDepthTolerance_Uniform",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfDepthTolerance.hxx",
+      "cpp_declaration_id": "97547a03ccb2fb0f28082791dfd07b3755fb15a2c4e9dc80b1266b40b7f3ee2f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfDepthTolerance::Uniform",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_ShapeTypeFilter::IsOk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_ShapeTypeFilter.hxx",
+      "cpp_declaration_id": "97f92fb3eba6a7c1e87935b92b3ac69fbfb44be94f8cee5662e8d3fa4d42b948",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectShapeTypeFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::is_ok",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::Mode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "9a1eee27701be980fbaa6b19c2286bbb2c107c4a3dc72dc27e9a54f556bf5273",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::mode",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TOU_Full",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfUpdate.hxx",
+      "cpp_declaration_id": "9a50254c17557c7e9559233181bd57dcfe7af9e502e9e8b6cde1879a74618749",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfUpdate::Full",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::myFilters",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "9a5d4745c1dc3ee80c88e18735728b811ba3163f7be0a8b019816e2f3c67e404",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrCompositionFilterBase::filters",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "SelectMgr_AndOrFilter::SelectMgr_AndOrFilter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AndOrFilter.hxx",
+      "cpp_declaration_id": "9b02a98d18080d891432401897fccc772192c76666f681ccb6d01edfe13cf1fa",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAndOrFilter::new",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TBU_None",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfBVHUpdate.hxx",
+      "cpp_declaration_id": "9bd56747a4328ed9109ad91554791ed174634e6cf9f6f5e69e2378e30fdbee85",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfBvhUpdate::None",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TypeOfBVHUpdate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfBVHUpdate.hxx",
+      "cpp_declaration_id": "9cfd8e6c5bc6c4acb59b35023e627b19e072689c29debb83329d5954baca000a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfBvhUpdate",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionType_Unknown",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionType.hxx",
+      "cpp_declaration_id": "9d68bd63f99c67ff4b61b9e88ef45accd6227307db6efc15c8b17786e0987d0d",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionType::Unknown",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::IsSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "a1161bfc91c55309ebe5f41e88d63a53c6b157b7a5053ac566a4f4976ad6ac22",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::is_selected",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_AndOrFilter::SetFilterType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AndOrFilter.hxx",
+      "cpp_declaration_id": "a1fbba053d9550468f44493f3dee464c07d5d6922c875b7a5656c5ba8d619f23",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAndOrFilter::set_filter_type",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SetSelectable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "a6841bee6136f826f3d22b91b90cdb737618c035d98e405a940bbf917ad94fcd",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::set_selectable",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_EdgeFilter::StdSelect_EdgeFilter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_EdgeFilter.hxx",
+      "cpp_declaration_id": "a857a1a62f8d341f685104c48142f796ab1e7b4804e7039a74ac267a14e77b8e",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectEdgeFilter::new",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::UpdateBVHStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "a947ea2ae9b6aacb946836cce79802f25523c2c4f8d515c3d3e80e447abf7f67",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::update_bvh_status",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::Unhilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "a95f6fc6ce5a2cfe7975f4cbf7056ffa059ec3e62613b05feecd424445e77c7a",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::unhilight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::HasLocation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "adda27e58670adb61f85a6d4dc8d47c4627b641017364f6a446c781e8d73a1cc",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::has_location",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::IsHilighted",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "ae531f260f7ff3b2b96c9d8bad24a609c34c411053c9221a5dab52fb6e9e4816",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::is_hilighted",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SOS_Any",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_StateOfSelection.hxx",
+      "cpp_declaration_id": "ae730978439233386291f1ad3d38994571671a20958cf94fb9a01963c920b613",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrStateOfSelection::Any",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Shape::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_Shape.hxx",
+      "cpp_declaration_id": "afdc62cbda50a7d1ea340d19d48fb2de2be1e0dad8c534ef6fb2df54070c6f3d",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::dump_json",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_AnyEdge",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfEdge.hxx",
+      "cpp_declaration_id": "b108a3fc2b4a382753cbf6324936fa92bf50e1407ec24a0b952e1e916030cf86",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfEdge::AnyEdge",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "b16606ede04e786fcea32b8bb7bdbf0e6d3713c3c9596d1c3194b096a0383dc4",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::clear",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::UpdateStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "b349bc2fde689a8510f2241dd5b9aeee156d5c358491e11797e89116dd1fcfc9",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::update_status",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::IsAutoHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "b7ad59335756b53749392e0e15071b99a69bf91e50314dcb317e535a8c8d17ae",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::is_auto_hilight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::IsAutoHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "b895f00303e7196eb42f70f259ce004575581bd3d783f09266b751a74ff2a49e",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::is_auto_hilight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::myShape",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "b90a7cdda15ef5e6ba974bde707e3db0b5f3c15e5ce34b9233bf86cafac8ead5",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwnerBase::shape",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::myCurMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "b953170c4351d606d84cbdc99bff6d9140b458b8787944d4e85e79f9f119bcfe",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwnerBase::highlight_mode",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle.",
+      "rust_kind": "struct_field"
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::RecomputePrimitives",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "bb393b40a7c68767756027c984146b0371608190c1edc6289cdb5c3c1c78155c",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::recompute_primitives",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Line",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfEdge.hxx",
+      "cpp_declaration_id": "bb8908ead28d50006fcd3f48418abe4e218072ddac573865bf8ff528b59b7c1d",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfEdge::Line",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::GetHilightPresentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "bd173ed7256eed824e1e486720ef7e948079e5ee3655d058d75b713d7dafa898",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::get_hilight_presentation",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionType_Box",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionType.hxx",
+      "cpp_declaration_id": "bd33f0a2c7e006559e70d55c6668e52ba7a5cb74eee0f36b13dd20581b471146",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionType::Box",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_ShapeTypeFilter::Type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_ShapeTypeFilter.hxx",
+      "cpp_declaration_id": "be042f929851692010d2e1d6040eecdeb00eb1aa0e3f659a71cdae28d9a3333e",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectShapeTypeFilter::type_",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TBU_Remove",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfBVHUpdate.hxx",
+      "cpp_declaration_id": "be5c0935d7ca04f972697b4c0a5934e48519501229d414660bdf958564545e13",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfBvhUpdate::Remove",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::Entities",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "bee48b3236d6598fb3a1a2ad8c186d87465b9405c5b8659cbd3ba6f83f272d45",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::entities",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "bfc67590353250dc40d8b5caa0096c90c98f58386987db787e03420a2ee52f58",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrCompositionFilter::clear",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::SelectMgr_Selection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "bfe30100596fb8fd5f781a8d2e1f520823493ecb8705e1ad6740479c97ab915f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::new",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Cone",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "c411f7495687639aff64aaef68263281a57767c240819f4921fe5b56e2d730eb",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace::Cone",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::UpdateTransformations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "c5e9a188c4006a7a796263edaf3aeec94b45e6ad444d97686aef4a36ca10409b",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::update_transformations",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::UpdateClipping",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "c60b93b09ae294556417bcce689cfa74bd488235f10db966b53f1625b78f66fc",
+      "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_update_clipping",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_AndFilter::IsOk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AndFilter.hxx",
+      "cpp_declaration_id": "c668e6bec3a40dbd322dd39d807aec6842344a37b09ed5b5a04d49cc8ad1c9f1",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAndFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::is_ok",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_FaceFilter::ActsOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_FaceFilter.hxx",
+      "cpp_declaration_id": "c6ff8f37424f363992f69b565b821a78298f675a7620b60f02c870391ba38a0e",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectFaceFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::acts_on",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_FaceFilter::SetType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_FaceFilter.hxx",
+      "cpp_declaration_id": "c7bbdca7d85e63a48a351f229ee8b19a520db85c274242b2b047891cfdba2f3f",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectFaceFilter::set_type",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::ComesFromDecomposition",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "c8c11dc845172257c6a15ab4104492b302d1bde78a91d33414325fd7fa6e6814",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::comes_from_decomposition",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::RecomputePrimitives",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "cb0423bce7cabd02dbdf86b1e3ba2207a59b6c9add56dcec3d4c15ef86f5ca96",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::recompute_primitives_of_mode",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_CompositionFilter::IsIn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_CompositionFilter.hxx",
+      "cpp_declaration_id": "cdc1074cbfc13296b99aff1a6de5437ab7b2ace80ba7b53350408e7874f2b812",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrCompositionFilter::is_in",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::HasSelectable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "ce4afd3ab870461b389dd2a6c9abf811e275b9d5a21f446bb2200d06d67e8241",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::has_selectable",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Torus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "d167def53ef01e82befc25f90c01ac620341a5fb373ffcce0f1d3eb3603f7863",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace::Torus",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TBU_Renew",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfBVHUpdate.hxx",
+      "cpp_declaration_id": "d17fed339764e3e5a72731acfa12bcf4007050dd8e8e96d32b1043ec84cc53e3",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfBvhUpdate::Renew",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::mySelectionPrs",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "d1f4b40fd983bf3179ae9f407635fe3e089760ff1e1d6d3768070cd4e8b5e56b",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectFields::selection_prs",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::ResetSelectionActiveStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntity.hxx",
+      "cpp_declaration_id": "d3b161fe8421ed78bdf5eee4f0943b29210f678ca406c96f08f39e773fa0ef6b",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity::reset_selection_active_status",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::BVHUpdateStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "d493a709b9211e8c1b57680b1db7360845f9a04e35c382cc802858d718b24ac6",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::bvh_update_status",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_BRepOwner::HilightWithColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepOwner.hxx",
+      "cpp_declaration_id": "d9a493daca5a6b123321ba836caa4c967b6b2e7a1ff537a0b13617abcbb38624",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectBRepOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::hilight_with_color",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::HasSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "dbf02e8d8be0eccdcfc8b48fefd105057b8b93c04d81f005257073d5d647f3bf",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::has_selection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_Revol",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfFace.hxx",
+      "cpp_declaration_id": "dd84347e1e737338815112871539a0435ec65024b74fd5ddd1587a10518e55d4",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfFace::Revol",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TypeOfDepthTolerance_SensitivityFactor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfDepthTolerance.hxx",
+      "cpp_declaration_id": "ddb625a413a3650691b50c1bff1719b6f57aec7cf9af5a969583618f4bbb2e35",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfDepthTolerance::SensitivityFactor",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Priority",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "df11fed266952e95e6ff8bb3515de11c013ba646b87b245dcfce8c03719ac2eb",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::priority",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::AddSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "e1ff41546c46ae230d50ce6de0560df8bfc0184580bdba5ab7cdea8a8cc194de",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::add_selection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SOS_Unknown",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_StateOfSelection.hxx",
+      "cpp_declaration_id": "e37e60eba6617f8f647b3f372f4bacdd39459b581f82dab3dd681940ab6ced34",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrStateOfSelection::Unknown",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TOU_Partial",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfUpdate.hxx",
+      "cpp_declaration_id": "e75269efad4680d4ca3e0efecf326957b76dd6287abab756646adc2db379175a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfUpdate::Partial",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::SetPriority",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "e88aa2656a1699a5e8f78af7efb4b7de7f8c27cd2966f4df1ae1c2efd7209f37",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerMembers::set_priority",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_EdgeFilter::SetType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_EdgeFilter.hxx",
+      "cpp_declaration_id": "e91a6a226483de54d7a67e18c33bc7222bfe0c90dbb390e5e3a1fc82e4f14ff7",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectEdgeFilter::set_type",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::mypriority",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "eaf112969060fa1eaef557d023b518c463e2ec92594c5cfc4b225725345a6636",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerFields::priority",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::GetSelectPresentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "ee5b97b82c00acc2e3718f477d368751ac3d9b5b43827d87928a3590b38da7fe",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::get_select_presentation",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_EdgeFilter::ActsOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_EdgeFilter.hxx",
+      "cpp_declaration_id": "eed5c576e0426ee2b81e17122917c8f0b1d838957deba7e2d9185a3ae14709c6",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectEdgeFilter::<rustycad_tkv3d::select_mgr::SelectMgrFilter>::acts_on",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::IsActiveForSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntity.hxx",
+      "cpp_declaration_id": "f30265ed220ea19559fa442662afaf321994d2a50a0571fbd7f30972c7c0b68a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity::is_active_for_selection",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::Sensitivity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "f3a90a47d81c17375bd75bbe86a0818706ec8236bba761cd6abb35e97d533a74",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::sensitivity",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntity.hxx",
+      "cpp_declaration_id": "f4048633519c34a73c58582e9cf65b65e2ab092e03166a5aeba80d61565377e8",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity::dump_json",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::IsHilighted",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "f44d9227d2459d169f6a433e714e73e8b1315f8aef73bbb5cd11e2123d032f9e",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::is_hilighted",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::updateSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "f721e5f89ec58c46f142a933e2b6973170e8b26cdfb7014fb8934cba7a3567cb",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject::update_selection_internal",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::UpdateStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_Selection.hxx",
+      "cpp_declaration_id": "f79c3d4dde861dcb690dbefac252122245e27ad2eed4775387f76a2d26c41cf3",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelection::update_status",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::SelectMgr_SelectableObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "f7a9dc4b7030537ef609312797e152599caf91507a273d97e6653d81e2f10e4f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::IsForcedHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "f82796307726af9f49e11b610849e1d69947e7ca88be3a4a273c24bfc151cb2a",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::is_forced_hilight",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "cpp_declaration_id": "fa8cffb06dcff35309a2072705f23675c881dd0779db972a1b7d0af31a01258c",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource::dump_json",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_TBU_Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_TypeOfBVHUpdate.hxx",
+      "cpp_declaration_id": "fe0ba7cd472697843abb16f2ed6a08c0183ea593125c4c6dfbecc237b0671743",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrTypeOfBvhUpdate::Add",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfEdge",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfEdge.hxx",
+      "cpp_declaration_id": "fe988a75d62ff73c56e7e6b8af5e0ec20101c3c58a0e5acc81b12c4bf8cad15d",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfEdge",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::GlobalSelectionMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+      "cpp_declaration_id": "ff1d5ce0b5e2229b4b14ae6de9a50235a85d2f9aa5cc8651c76237aac500bb02",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectMembers::global_selection_mode",
+      "status": "implemented",
+      "notes": "SelectMgr/StdSelect mapping (docs/v3d-design.md sections 6-7): abstract classes are traits over embedded *Base state (protected fields in *Fields records), non-virtual members are the *Members traits, and the native base bodies that overrides call are select_mgr_* free functions; the StdSelect owner filters are compared with native OCCT by the v3_stdsel_filter probes and the selection behaviour by the TKV3d numeric oracle."
+    }
+  ]
+}
