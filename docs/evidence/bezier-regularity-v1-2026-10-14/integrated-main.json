@@ -1,0 +1,132 @@
+{
+  "integration_revision": "0dc6859b65232c5c0d9aadc08e274ab7b512a1b6",
+  "candidate_revision": "16d6ac280",
+  "candidate_base": "8980e4929",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "7134f8cffb1c8cbc22bf0e0a898439d5e5cb05f5b031c72702dda6033f3e84fe"
+      },
+      "tests": {
+        "passed": 4270,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "2513415cb3e0af0df92f5aa656b4535382a10062f48df47d42c8f4f857b1528c"
+      },
+      "tests": {
+        "passed": 88,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "a084d5408499dde950b3badc4628be1eaa3428c0ab8b8027a83036e862698415"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "27cc359c14a3422220481a3477e3aa649aad9b275f254b1f8866fb560dfa69e8"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkmath/src/predicates/roots/metric_bounds.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/bezier_regularity.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/bezier_regularity/access.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/bezier_regularity/arithmetic.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/bezier_regularity/error.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/bezier_regularity/solve.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/bezier_regularity/types.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/coefficients.rs": true,
+    "crates/tkmath/src/predicates/roots/metric_bounds/regularity_baseline_tests.rs": true,
+    "crates/tkmath/tests/exact_roots.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity/cubic-jacobian.json": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity/failures.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity/generated.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity/ownership.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity/replay.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity/signed.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_regularity/stored_degree.rs": true
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
