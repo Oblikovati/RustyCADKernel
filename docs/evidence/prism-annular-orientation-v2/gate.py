@@ -74,7 +74,7 @@ def replay_gate(binary):
     prefix = "sketch_region_prism::"
     compare_receipt(binary, "orientation-v1", prefix + "region_certificate::orientation::tests::replay_tests::prism_orientation_process_receipt",
                     '{"operation":"martensite.prism-orientation"', "text", BASE + "baseline-orientation-1.bin.gz")
-    compare_receipt(binary, "joined-orientation-v1", prefix + "frozen::joined_orientation::tests_replay::joined_orientation_process_receipt",
+    compare_receipt(binary, "joined-orientation-v1", prefix + "frozen::joined_orientation::tests::replay_tests::joined_orientation_process_receipt",
                     "joined-orientation-v1:", "hex", BASE + "baseline-joined-orientation-1.bin.gz")
     compare_receipt(binary, "publication-v1", prefix + "publication::replay_tests::publication_process_replay",
                     "named-prism-publication-v1=", "hex", BASE + "baseline-publication-1.bin.gz")
