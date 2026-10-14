@@ -20,6 +20,17 @@ GATE_NAMES = (
 )
 
 
+# Local and hosted verification use identical artifact/CPU policy; VVL paths stay inherited.
+VERIFICATION_ENV: tuple[tuple[str, str], ...] = (
+    ("CARGO_PROFILE_DEV_DEBUG", "0"),
+    ("CARGO_PROFILE_TEST_DEBUG", "0"),
+    ("CARGO_INCREMENTAL", "0"),
+    ("GALLIUM_OVERRIDE_CPU_CAPS", "sse2"),
+    ("LP_NATIVE_VECTOR_WIDTH", "128"),
+    ("LLVM_PROFILE_FILE_NAME", "martensite-%4m.profraw"),
+)
+
+
 @dataclass(frozen=True)
 class GateCommand:
     """Exact argument vector and command-local overrides, without a shell."""

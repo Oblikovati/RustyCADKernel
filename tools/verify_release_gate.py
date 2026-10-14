@@ -12,6 +12,7 @@ from typing import Protocol
 
 from release_verification_plan import (
     GATE_NAMES,
+    VERIFICATION_ENV,
     GateCommand,
     VerificationGate,
     verification_gates,
@@ -48,9 +49,14 @@ def run_gate(
     executor: GateExecutor,
 ) -> int:
     """Stop at the original failing command; e.g. run_gate(gate, root, env, executor)."""
+    if not gate.commands:
+        raise ValueError(
+            f"gate={gate.name!r} commands={gate.commands!r}; expected at least one verification command"
+        )
     for command in gate.commands:
         print("+ " + shlex.join(command.argv), flush=True)
         environment = dict(inherited)
+        environment.update(VERIFICATION_ENV)
         environment.update(command.env)
         status = executor.run(command, root, environment)
         if status:

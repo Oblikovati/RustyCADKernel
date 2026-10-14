@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 import tempfile
+import re
 import unittest
 
 from release_verification_plan import (
     GATE_NAMES,
+    VERIFICATION_ENV,
     VerificationGate,
     verification_gates,
     shader_commands,
@@ -49,6 +51,16 @@ class VerificationPlanTests(unittest.TestCase):
                     for command in gate.commands
                 )
             )
+
+    def test_immutable_policy_matches_existing_hosted_environment(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        workflow = (root / ".github/workflows/ci.yml").read_text()
+        self.assertIsInstance(VERIFICATION_ENV, tuple)
+        self.assertEqual(len(VERIFICATION_ENV), 6)
+        for key, value in VERIFICATION_ENV:
+            expected = re.escape(value)
+            self.assertRegex(workflow, rf"(?m)^  {key}: (?:'{expected}'|{expected})$")
+        self.assertNotIn("CARGO_BUILD_JOBS", dict(VERIFICATION_ENV))
 
     def test_original_workspace_and_cold_test_commands(self) -> None:
         self.assertEqual(
