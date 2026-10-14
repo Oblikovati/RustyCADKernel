@@ -28,6 +28,7 @@ pub(super) fn capture_partition_with_space(
     space: Option<PartitionSpaceCapture>,
 ) -> PartitionObservation {
     let mut partial = OwnedPartitionSnapshot {
+        input_contexts: copied.contexts.clone(),
         source_shape_count: None,
         sources: Vec::new(),
         vertices: Vec::new(),

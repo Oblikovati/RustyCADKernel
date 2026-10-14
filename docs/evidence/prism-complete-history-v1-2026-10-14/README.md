@@ -20,3 +20,18 @@ cap results; its failure is retained in `retention-null-cap-assumption-red.log.g
 independent of cap images. The corrected structural invariant keeps both cap
 continuations together with the retired wire and empty generated list. This
 corrects an unpinned draft assertion; no owned baseline expectation changed.
+
+## Structural directed context retention
+
+`context-retention.json` records all 665 TKBO library tests passing, plus focused
+context/native-error checks and both exact V1 replay comparisons. Source bookends
+are unchanged. Initial and candidate copier observations retain every actual
+directed context and its actual Modified query result while the copier lives.
+Generated areas retain their complete directed context rows too. Native errors,
+NotReached, empty answers, ancestry and repeated child-slot multiplicity remain
+distinct. These operation-local identities are lookup operands, not published IDs.
+
+The neutral traversal extraction preserves legacy cumulative placement/orientation
+and error ordering. Its ancestor check still includes Location; it is not a claim
+of bounded safety for arbitrary cyclic input. New complete-history admission will
+check identity-only ancestor cycles and explicit depth/use limits separately.

@@ -8,6 +8,7 @@ use rustycad_tkbrep::topods::Shape;
 use rustycad_tkmath::gp::Plane3;
 
 pub(crate) struct CandidateCopyInspection {
+    pub contexts: crate::sketch_region::RegionCopyContextObservation,
     pub completion: Result<CandidateBatch, CandidateCause>,
     pub links: Vec<CandidateImageCopyLink>,
     pub generated_topology: super::generated_observation::GeneratedTopologyObservation,
@@ -28,6 +29,7 @@ pub(crate) struct CandidateImageCopyLink {
     pub generated: Vec<OriginalMemberIdentity>,
 }
 pub(super) struct CandidateCopyCollector {
+    contexts: crate::sketch_region::RegionCopyContextObservation,
     links: Vec<CandidateImageCopyLink>,
     capture: fn(&Shape) -> PartitionOccurrenceIdentity,
     copied_tree: super::copy_tree::CandidateCopyTreeObservation,
@@ -84,6 +86,7 @@ fn snapshot_copy_link(
 impl CandidateCopyCollector {
     fn new(capture: fn(&Shape) -> PartitionOccurrenceIdentity) -> Self {
         Self {
+            contexts: crate::sketch_region::RegionCopyContextObservation::NotReached,
             links: Vec::new(),
             capture,
             generated_topology:
@@ -95,6 +98,7 @@ impl CandidateCopyCollector {
 
     fn finish(self, completion: Result<CandidateBatch, CandidateCause>) -> CandidateCopyInspection {
         CandidateCopyInspection {
+            contexts: self.contexts,
             completion,
             links: self.links,
             copied_tree: self.copied_tree,
@@ -107,18 +111,16 @@ impl CandidateCopyCollector {
 pub(super) fn capture_tree_if_present(
     collector: Option<&mut CandidateCopyCollector>,
     copier: &mut rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICopy,
+    original: &Shape,
 ) {
     use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
     let Some(collector) = collector else {
         return;
     };
     // An observer read failure must not replace the mapped phase/callback result.
-    collector.copied_tree = match copier.shape() {
-        Ok(shape) => super::copy_tree::snapshot_copied_tree(shape),
-        Err(cause) => super::copy_tree::CandidateCopyTreeObservation::Incomplete {
-            members: Vec::new(),
-            cause: std::sync::Arc::new(cause),
-        },
+    match copier.shape().cloned() {
+        Ok(shape) => capture_trees(collector, original, &shape, copier),
+        Err(cause) => capture_tree_failure(collector, cause),
     };
 }
 
@@ -136,4 +138,52 @@ pub(super) fn capture_generated_if_present(
         &collector.copied_tree,
         &mut collector.observation_failures,
     );
+}
+
+fn capture_trees(
+    collector: &mut CandidateCopyCollector,
+    original: &Shape,
+    copied: &Shape,
+    copier: &mut rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICopy,
+) {
+    collector.copied_tree = super::copy_tree::snapshot_copied_tree(copied);
+    collector.contexts = crate::sketch_region::observe_copy_contexts(original, copied, copier);
+}
+
+fn capture_tree_failure(
+    collector: &mut CandidateCopyCollector,
+    cause: rustycad_tkernel::standard::Failure,
+) {
+    let cause = std::sync::Arc::new(cause);
+    collector.copied_tree = super::copy_tree::CandidateCopyTreeObservation::Incomplete {
+        members: Vec::new(),
+        cause: cause.clone(),
+    };
+    collector.contexts = crate::sketch_region::RegionCopyContextObservation::Incomplete(
+        crate::sketch_region::RegionContextReadFailure::Native(cause),
+    );
+}
+
+#[cfg(test)]
+mod context_failure_tests {
+    use super::*;
+    #[test]
+    fn unavailable_copier_keeps_original_tree_cause_in_context_refusal() {
+        let mut collector = CandidateCopyCollector::new(PartitionOccurrenceIdentity::capture);
+        let mut copier = rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICopy::new();
+        capture_tree_if_present(Some(&mut collector), &mut copier, &Shape::default());
+        let super::super::copy_tree::CandidateCopyTreeObservation::Incomplete { cause, .. } =
+            &collector.copied_tree
+        else {
+            panic!("expected actual unfinished copier cause");
+        };
+        let crate::sketch_region::RegionCopyContextObservation::Incomplete(
+            crate::sketch_region::RegionContextReadFailure::Native(context),
+        ) = &collector.contexts
+        else {
+            panic!("expected same context cause");
+        };
+        assert_eq!(cause.exception_type(), context.exception_type());
+        assert_eq!(cause.message(), context.message());
+    }
 }

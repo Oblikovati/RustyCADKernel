@@ -31,7 +31,9 @@ mod occurrence_tests;
 
 pub(crate) use occurrences::equal_occurrences;
 
-pub(crate) use copy_inputs::{admit_sources, copy_sources, original_identity};
+pub(crate) use copy_inputs::{
+    CopiedSourceContexts, admit_sources, copy_sources, original_identity,
+};
 
 mod partition_observation;
 mod partition_types;
@@ -61,3 +63,8 @@ pub(crate) use directed_contexts::{
 };
 #[cfg(test)]
 mod directed_context_tests;
+
+mod observed_contexts;
+pub(crate) use observed_contexts::*;
+#[cfg(test)]
+mod observed_context_tests;
