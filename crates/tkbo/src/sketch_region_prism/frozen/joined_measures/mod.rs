@@ -4,6 +4,10 @@ mod access;
 mod admission;
 mod error;
 mod replay;
+pub(in crate::sketch_region_prism) use replay::{
+    integral_options as encode_joined_integral_options, side_options as encode_joined_side_options,
+    total_options as encode_joined_total_options,
+};
 mod types;
 use super::proof_join::{JoinedPrismFace, JoinedPrismProof};
 use super::{AuthoredPrismId, FrozenUseKey};
