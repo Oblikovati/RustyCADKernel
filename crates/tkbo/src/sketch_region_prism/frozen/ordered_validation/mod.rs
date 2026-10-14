@@ -45,3 +45,5 @@ mod replay_tests;
 mod classification_tests;
 #[cfg(test)]
 mod policy_tests;
+
+pub(in crate::sketch_region_prism) mod annular;
