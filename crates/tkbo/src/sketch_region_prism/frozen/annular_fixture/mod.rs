@@ -3,6 +3,7 @@
 mod names;
 use super::*;
 use crate::sketch_region_prism::region_certificate::{annular_binding::*, two_loop::*};
+pub(super) use names::authored;
 use rustycad_tkernel::standard::Failure;
 
 pub(super) struct ContinueAnnularFixture;
