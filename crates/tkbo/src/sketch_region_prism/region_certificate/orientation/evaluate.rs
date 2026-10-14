@@ -8,19 +8,18 @@ pub(crate) struct PrismOrientationConclusions {
     pub(super) faces: [PrismFaceOrientation; 3],
 }
 
-/// Derive unchanged directions without capture; `evaluate_prism_orientation(theorem, policy)`.
+/// Derive unchanged directions without capture; `evaluate_prism_orientation(theorem)`.
 /// The caller retains the theorem and its policy/binding; this alone publishes no body.
 pub(crate) fn evaluate_prism_orientation(
     embedding: &PrismEmbeddingEvidence,
-    requested: PrismOrientationOptions,
-) -> Result<PrismOrientationConclusions, PrismOrientationFailure> {
-    let refuse = |phase, cause| failure(requested, phase, Some(embedding), cause);
+) -> Result<PrismOrientationConclusions, PrismOrientationEvaluationFailure> {
+    let refuse = |phase, cause| PrismOrientationEvaluationFailure { phase, cause };
     let winding = signs::native_winding(&embedding.binding().region)
-        .map_err(|cause| refuse(PrismOrientationPhase::Winding, cause))?;
+        .map_err(|cause| refuse(PrismOrientationEvaluationPhase::Winding, cause))?;
     let jacobian_sign = signs::determinant_sign(&embedding.binding().signed_jacobian)
-        .map_err(|cause| refuse(PrismOrientationPhase::Faces, cause))?;
+        .map_err(|cause| refuse(PrismOrientationEvaluationPhase::Faces, cause))?;
     let faces = faces::inspect_faces(embedding, winding.increasing_parameter, jacobian_sign)
-        .map_err(|cause| refuse(PrismOrientationPhase::Faces, cause))?;
+        .map_err(|cause| refuse(PrismOrientationEvaluationPhase::Faces, cause))?;
     Ok(PrismOrientationConclusions {
         winding,
         jacobian_sign,

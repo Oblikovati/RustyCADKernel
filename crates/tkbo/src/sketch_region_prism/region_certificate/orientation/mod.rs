@@ -3,6 +3,7 @@
 mod access;
 mod error;
 mod evaluate;
+mod evaluation_error;
 mod faces;
 mod signs;
 mod trims;
@@ -14,9 +15,10 @@ use crate::sketch_region::PartitionOccurrenceIdentity;
 use crate::sketch_region_prism::surface_charts::PrismTrimRole;
 pub(crate) use error::*;
 pub(crate) use evaluate::*;
+pub(crate) use evaluation_error::*;
 use rustycad_tkg3d::top_abs::Orientation;
 pub(crate) use types::*;
-type OrientationCheck<T> = Result<T, PrismOrientationCause>;
+type OrientationCheck<T> = Result<T, PrismOrientationEvaluationCause>;
 
 /// Inspect conditional orientations; `inspect_prism_orientation(bridge,sources,receipt,options,cancel)`.
 /// This never upgrades legacy body completion, geometry, topology or tolerance coverage.
@@ -69,7 +71,8 @@ fn construct(
     embedding: PrismEmbeddingEvidence,
     requested: PrismOrientationOptions,
 ) -> Result<PrismOrientationEvidence, PrismOrientationFailure> {
-    let conclusions = evaluate_prism_orientation(&embedding, requested)?;
+    let conclusions = evaluate_prism_orientation(&embedding)
+        .map_err(|error| evaluation_error::legacy_failure(requested, &embedding, error))?;
     Ok(PrismOrientationEvidence {
         requested,
         embedding,

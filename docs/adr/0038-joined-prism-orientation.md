@@ -72,8 +72,12 @@ work, before returning a certificate. It preserves no partial success on
 cancellation. Unsupported version, prerequisite direction refusal, named table
 cardinality, missing use, actual direction mismatch, interval-bit mismatch and
 parent-multiplicity mismatch have distinct typed causes. Failures retain operation,
-requested version, phase, named context when available and the unchanged nested
-legacy cause. The ordered consumer classifies these causes explicitly.
+requested version, phase, named context when available and the owned pure cause.
+The pure evaluator admits only Unsupported/Winding/ZeroJacobian/Face/Trim causes
+and Winding/Faces phases. It cannot retain legacy Embedding/Binding diagnostics
+even as unreachable variants. The live entry exhaustively adapts all five pure
+causes back to its exact old errors; no catchall drops a cause. The ordered
+consumer classifies the narrow causes explicitly.
 
 ## Verification
 

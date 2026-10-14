@@ -19,7 +19,7 @@ pub(crate) enum JoinedPrismOrientationCause {
         expected: u32,
     },
     Cancelled,
-    Orientation(Box<PrismOrientationFailure>),
+    Orientation(Box<PrismOrientationEvaluationFailure>),
     Count {
         subject: &'static str,
         actual: usize,

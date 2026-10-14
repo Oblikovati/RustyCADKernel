@@ -39,7 +39,7 @@ fn derive(
     requested: JoinedPrismOrientationOptions,
 ) -> Result<JoinedPrismOrientationCertificate, JoinedPrismOrientationFailure> {
     let policy = PrismOrientationOptions::v1(join.embedding().requested());
-    let evaluated = evaluate(join, requested, policy)?;
+    let evaluated = evaluate(join, requested)?;
     let faces = faces::name_faces(join, &evaluated)
         .map_err(|cause| failure(join, requested, JoinedPrismOrientationPhase::Names, cause))?;
     Ok(JoinedPrismOrientationCertificate {
@@ -88,9 +88,8 @@ fn poll(
 fn evaluate(
     join: &JoinedPrismProof,
     requested: JoinedPrismOrientationOptions,
-    policy: PrismOrientationOptions,
 ) -> Result<PrismOrientationConclusions, JoinedPrismOrientationFailure> {
-    evaluate_prism_orientation(join.embedding(), policy).map_err(|cause| {
+    evaluate_prism_orientation(join.embedding()).map_err(|cause| {
         failure(
             join,
             requested,

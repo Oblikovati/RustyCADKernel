@@ -129,3 +129,6 @@ pub(in crate::sketch_region_prism) fn mutate_orientation_fixture(
 ) {
     super::super::measurements::tests::mutation_tests::edit_target(target, shapes, receipt);
 }
+
+#[path = "tests/evaluation.rs"]
+mod evaluation_tests;

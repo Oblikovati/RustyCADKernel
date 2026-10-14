@@ -70,7 +70,7 @@ fn borrowed_conclusions_equal_owned_orientation_without_recapture() {
     let (bridge, shapes) = fixture();
     let receipt = run(&bridge, &shapes);
     let original = oriented(&bridge, &shapes, &receipt);
-    let borrowed = evaluate_prism_orientation(original.embedding(), original.requested())
+    let borrowed = evaluate_prism_orientation(original.embedding())
         .ok()
         .unwrap();
     assert_eq!(borrowed.winding(), original.winding());
