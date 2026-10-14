@@ -30,3 +30,18 @@ failed access remains typed incomplete; unbound and bound-empty lists differ.
 Whole ordered region validation remains incomplete where those certificates are
 missing. No compatibility API, numerical algorithm, limit, or successful region
 contract is changed. No benchmark or baseline acceptance is claimed.
+
+The first-red regression used actual crossing geometry and the existing
+arrangement facade: mapped arrangement completed, but no observation survived
+filler retirement. It establishes a missing private extension prerequisite, not
+a mapped OCCT defect. Final source and canonical extracted TKBO suites each pass
+817 tests over five executables; both documentation runs pass 35 tests. The 18
+focused controls include real invalid pool/common-block access, absent filler or
+builder context, missing copied-source binding, cancellation, reuse, parent
+orientation/location preservation, and caller replacement after capture.
+
+`checked/receipt.json` binds the canonical 31 archives to source commit
+563e1b266eaa13eb717672994d0a30687d9c59c5 and 12,674 equal Rust/text/SPIR-V
+members. Native hook final formatting is separately rebuilt and attributed in
+`native/receipt.json`; both outputs match the unchanged fixture. No original
+checkout or OCCT harness is needed to execute the extracted Rust regressions.

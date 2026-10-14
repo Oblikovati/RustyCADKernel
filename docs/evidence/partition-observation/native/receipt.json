@@ -3,7 +3,7 @@
   "sdk_bookends_equal": true,
   "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
   "executable_sha256": "2111a37906fbb4247c5b471cebcb5572ce61651869ff50789a8f25bc721f145d",
-  "source_sha256": "22f70cf4bf55d24f8be0bcf90d5cbe5b03a46e3eb76c5dbd297b596fc11e37bb",
+  "source_sha256": "cbbcafbacb25315cee1c84d93103160c09ad81d974bed9b79767aecf49e4c629",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "execution_exit_codes": [
     0,
@@ -40,5 +40,24 @@
     "/lib/x86_64-linux-gnu/libmd.so.0": "423e18586b6ea740f4465afd64f7a9a4cb7264ed979c8e7256f9085af5345fef"
   },
   "executable_sdk_loaded_libraries_bookends_equal": true,
-  "bookend_inputs": 13566
+  "bookend_inputs": 13566,
+  "compiler_command": [
+    "c++",
+    "-std=c++17",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_partition_observation.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKBO",
+    "-lTKTopAlgo",
+    "-lTKBRep",
+    "-lTKG3d",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-partition-observation/target/partition-observation/native-located/partition-observation"
+  ],
+  "final_rebuild_reason": "Native hook formatting only; both new raw runs equal the unchanged attributed fixture"
 }

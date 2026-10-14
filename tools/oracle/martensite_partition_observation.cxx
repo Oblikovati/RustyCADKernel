@@ -12,7 +12,11 @@
 #include <iomanip>
 #include <iostream>
 class PartitionBuilder final : public BOPAlgo_Builder {
-  void CheckData() override { myReport->Merge(myPaveFiller->GetReport()); }
+  void CheckData() override
+  {
+    // Preserve filler diagnostics while admitting the extension's nonempty open edges.
+    myReport->Merge(myPaveFiller->GetReport());
+  }
 };
 static NCollection_List<TopoDS_Shape> Sources(int mode)
 {
