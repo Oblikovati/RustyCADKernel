@@ -32,6 +32,7 @@ pub(crate) fn primitive_style_in_pipeline(
     aspects: &Handle<dyn Graphic3dAspectsSource>,
     closed: bool,
     pipeline: crate::RenderLightingPipeline,
+    unlit: crate::RenderUnlitFaceColorPolicy,
 ) -> Result<([f32; 4], Option<LineStyle>), RenderError> {
     let nodal = matches!(
         kind,
@@ -39,9 +40,9 @@ pub(crate) fn primitive_style_in_pipeline(
             | Graphic3dTypeOfPrimitiveArray::Segments
             | Graphic3dTypeOfPrimitiveArray::Polylines
     );
-    if pipeline == crate::RenderLightingPipeline::FixedFunction && !nodal {
+    if !nodal {
         return Ok((
-            crate::style::surface_color_in_pipeline(aspects, pipeline)?,
+            crate::style::surface_color_with_policies(aspects, pipeline, unlit)?,
             None,
         ));
     }

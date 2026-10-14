@@ -113,6 +113,7 @@ fn polygon_edge_draw(
     coordinates: crate::RenderTextureCoordinatePipeline,
 ) -> PrimitiveDraw {
     let mut edge = face.clone();
+    edge.unlit_back_color = None;
     for vertex in &mut edge.vertices {
         vertex.color = color;
     }
@@ -323,5 +324,20 @@ mod tests {
             )
             .is_ok()
         );
+    }
+}
+
+#[cfg(test)]
+mod unlit_side_tests {
+    use super::*;
+    #[test]
+    fn polygon_edges_clear_unlit_auxiliary_rgba_without_mutating_the_face() {
+        let mut face = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        face.unlit_back_color = Some([0., 1., 0., 0.25]);
+        let style = LineStyle::new(1., 0xffff, 1).unwrap();
+        let edge = polygon_edge_draw(&face, style, [1.; 4], Default::default());
+        assert!(edge.unlit_back_color.is_none());
+        assert!(edge.polygon_edge_style.is_some());
+        assert_eq!(face.unlit_back_color, Some([0., 1., 0., 0.25]));
     }
 }

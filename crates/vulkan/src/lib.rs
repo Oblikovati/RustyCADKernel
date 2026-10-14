@@ -167,3 +167,8 @@ mod stencil_program;
 pub use stencil_context::RenderStencilState;
 mod stencil_feedback;
 mod stencil_plan;
+
+mod unlit_face_policy;
+pub use unlit_face_policy::RenderUnlitFaceColorPolicy;
+mod driver_unlit_policy;
+mod unlit_face_color;

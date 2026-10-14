@@ -30,6 +30,9 @@ impl PrimitiveDraw {
             ));
         }
         self.capping_pass = pass;
+        if pass != RenderCappingPass::None {
+            self.unlit_back_color = None;
+        }
         // Native FillModeOnly masks use the workspace unlit aspect.
         if pass.is_mask() {
             self.lighting = None;

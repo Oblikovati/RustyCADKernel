@@ -43,3 +43,19 @@ The explicit non-null invalidate_content display override is preserved and lease
 through its send callback; same-server XID validity and external raw lifetime remain
 caller obligations. Failed admission causes no send and cannot be reported by that
 legacy unit-return adapter; it is not a successful invalidation or delivery guarantee.
+
+## Opt-in unlit side colors
+
+`Graphic3dRenderDriver::with_unlit_face_color_policy` and
+`with_backend_and_unlit_face_color_policy` accept
+`RenderUnlitFaceColorPolicy::SideColorsV2` for distinguished, untextured unlit
+triangle RGBA and front-only vertex colors. Existing constructors remain on
+`LegacyV1` and preserve the owned rejection contract. Callers opting in should
+record `behavior_version() == 2` with replay settings. Back alpha participates in
+BlendAuto routing and the existing strict Mask/MaskBlend cutoff. Without a
+vertex color array, the front-only flag has no effect; distinction chooses the
+back interior RGBA. Textured and fixed-function behavior is unchanged.
+
+Default migration and V1 deletion remain gated by
+[ADR 0021](../adr/0021-unlit-side-colors.md); this entry does not change workspace
+versions, activate the default, or complete a release/milestone.

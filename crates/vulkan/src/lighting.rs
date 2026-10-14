@@ -200,6 +200,7 @@ impl PrimitiveDraw {
             self.surface_blend |= lighting.uses_translucent_material();
         }
         self.lighting = Some(lighting);
+        self.unlit_back_color = None;
         Ok(self)
     }
     fn validate_lighting_topology(&self, lighting: &RenderLighting) -> Result<(), RenderError> {

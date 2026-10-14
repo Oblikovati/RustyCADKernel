@@ -59,6 +59,10 @@ layout(location=0) out vec4 outColor;
 #endif
 vec4 sampledSurfaceColor() {
     vec4 primary=vertexColor;
+#if !defined(MARTENSITE_LIGHTING) && !defined(MARTENSITE_SURFACE_TEXTURE)
+    // ADR 0021: the untextured auxiliary vec4 owns back RGBA, never sampler coordinates.
+    if ((transform.flags&4096u)!=0u) return gl_FrontFacing?vertexColor:surfaceUV;
+#endif
 #ifdef MARTENSITE_LIGHTING
 #ifdef MARTENSITE_FIXED_LIGHTING
     if(lighting.settings.x>=3u)primary=litFragmentColor();

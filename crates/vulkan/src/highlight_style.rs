@@ -36,6 +36,7 @@ pub(crate) fn apply_highlight(
     crate::scene::validate_components(&vertices, &draw.clip_transform)?;
     crate::scene::validate_annotation_opacity(&vertices)?;
     draw.vertices = vertices;
+    draw.unlit_back_color = draw.unlit_back_color.map(|_| rgba);
     if let Some(lighting) = &mut draw.lighting {
         lighting
             .material
@@ -69,7 +70,9 @@ mod tests {
             .set_color(*ColorRgba::new(0., 1., 0., 1.).unwrap().rgb());
         let vertices = vec![crate::RenderVertex::homogeneous([2., 3., 4., 2.], [1.; 4]); 3];
         let mut draw = PrimitiveDraw::new(vertices, vec![0, 1, 2], crate::identity_clip()).unwrap();
+        draw.unlit_back_color = Some([1., 0., 0., 0.25]);
         apply_highlight(&mut draw, &fields).unwrap();
+        assert_eq!(draw.unlit_back_color, Some([0., 1., 0., 1.]));
         assert_eq!(draw.vertices[0].weight, 2.);
         assert_eq!(draw.vertices[0].color, [0., 1., 0., 1.]);
         fields.highlight_style.set_transparency(0.5);
