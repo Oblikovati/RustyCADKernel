@@ -1,0 +1,35 @@
+Martensite permanent MeshVS volume-topology fixture
+
+Captured from OCCT 8.1.0-dev1, commit 3d097a0328e71b826377d4814ab05ec3c3d23871.
+Source: src/Visualization/TKMeshVS/MeshVS/MeshVS_DataSource3D.hxx and .cxx.
+Original implementation: Alexander SOLOVYOV, 2005-01-21.
+Copyright (c) 2005-2014 OPEN CASCADE SAS.
+Upstream license: LGPL 2.1 with OCCT_LGPL_EXCEPTION.txt special exception;
+alternative OCCT commercial terms are described in the source notice.
+
+The fixture records actual CreatePrismTopology/CreatePyramidTopology calls,
+not a reimplementation of their expected output. Integer rows need no tolerance.
+Each of the first 24 rows contains kind, base-point count, null flag, then
+(nonnull only) lower/upper face bounds and each face's length followed by indices.
+The final two rows record factory-call identity, cloned-handle identity,
+mutation seen by original, untouched independent allocation, and retained alias.
+
+Capture implementation: tools/oracle/martensite_meshvs_volume_topology.cxx.
+Build commands, compiler declaration IDs, hashes, platform and scope exclusions:
+porting/runtime-evidence/meshvs-volume-topology-2026-10-14/scope.json.
+This fixture stays with the Rust tests if removable oracle infrastructure goes away.
+Tests read it with include_str! and have no OCCT source/build/runtime dependency.
+No original upstream test directly invoking these two methods was found; these
+are newly generated native regression cases, not claimed legacy translations.
+
+Immutable unpublished candidate revision (2026-10-14):
+The first 24 rows remain exact connectivity/order and rejected-input evidence.
+The final two rows remain unchanged historical evidence of OCCT mutable handle
+semantics. Martensite does not replay those ownership semantics: successful
+factories now return private owned Rust vectors with immutable face slices,
+value equality, independent deep clones and no shared mutable state. Counts below
+three return typed TooFewBasePoints errors rather than a null handle. Bounds and
+allocation failures are explicit typed errors; native failure parity is not claimed.
+No live native program was consulted or executed for this revision. Independent
+closed-connectivity, edge-orientation, Euler and node-set checks supplement the
+historical fixture. This is visualization connectivity, not accepted solid geometry.
