@@ -22,15 +22,27 @@ impl Graphic3dRenderView {
         self.require_gui_live_view(AspectNativeWindowOperation::AttachGui)?;
         validate_gui_layer(&layer)?;
         let actual = crate::view_target::capture_extent(self, self.limit)?;
+        if actual != extent && self.checked_gui_policy() {
+            return Err(self.gui_attachment_mismatch(extent, actual));
+        }
         if actual != extent {
             return Err(rejected(extent, &format!("GUI target extent {actual:?}")));
         }
         Ok(GuiLayerPacket { extent, layer })
     }
+    fn gui_attachment_mismatch(&self, requested: [u32; 2], actual: [u32; 2]) -> RenderError {
+        let mut change = crate::RenderGuiSurfaceChange::extent_mismatch(
+            crate::RenderGuiSurfacePhase::Attachment,
+            requested,
+            actual,
+        );
+        change.fresh_packet = self.gui_layers.read().fresh_packet_state(Some(actual));
+        RenderError::surface_changed(change)
+    }
     fn install_gui_packet(&self, packet: Option<GuiLayerPacket>) {
         let mut slot = self.gui_layers.write();
         let retired = slot.replace(packet);
-        self.invalidate_gui_capture();
+        self.invalidate_gui_slot(&slot);
         drop(slot);
         drop(retired);
     }
@@ -54,6 +66,14 @@ impl Graphic3dRenderView {
         Ok(())
     }
     pub(crate) fn invalidate_gui_capture(&self) {
+        let slot = self.gui_layers.read();
+        self.invalidate_gui_slot(&slot);
+    }
+    fn invalidate_gui_slot(&self, slot: &crate::view_gui_layer::GuiLayerSlot) {
+        if self.checked_gui_policy() {
+            self.invalidate_checked_gui(slot);
+            return;
+        }
         *self.outcome.write() = Some(Err(rejected(
             "GUI composition changed",
             "a successful redraw of the current composition",

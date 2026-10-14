@@ -81,6 +81,12 @@ mod point_sprite;
 mod gui_native_extent;
 mod window_blit;
 mod window_chain;
+mod window_gui_contract;
+#[cfg(test)]
+mod window_gui_contract_tests;
+#[cfg(all(test, target_os = "linux"))]
+mod window_gui_native_tests;
+mod window_gui_render;
 mod window_submission;
 mod window_support;
 mod window_surface;
@@ -93,26 +99,6 @@ impl VulkanRenderer {
         window: &rustycad_tkernel::standard::Handle<dyn rustycad_tkservice::aspect::AspectWindow>,
     ) -> Result<WindowPresenter, RenderError> {
         WindowPresenter::new(&self.runtime, window)
-    }
-    pub(crate) fn render_window(
-        &mut self,
-        frame: &RenderFrame,
-        presenter: &mut WindowPresenter,
-        vsync: bool,
-    ) -> Result<FrameCapture, RenderError> {
-        let resources = self.frame_resources(frame)?;
-        let commands = submission::CommandSubmission::new(&self.runtime)?;
-        let index = presenter.acquire([frame.width, frame.height], vsync)?;
-        let chain = presenter.chain.as_mut().expect("acquired swapchain");
-        gui_native_extent::validate(frame, chain.config.extent)?;
-        record::record_frame(&self.runtime, commands.command, &resources, frame);
-        window_blit::record(&self.runtime, commands.command, &resources, chain, index);
-        window_submission::finish(&commands, chain)?;
-        self.commit_fragment_alpha(frame, resources.fragment_alpha.ending);
-        self.commit_stencil(frame, resources.stencil.ending);
-        let queue = self.runtime.queues[presenter.present_family as usize];
-        chain.present(queue, index)?;
-        resources.capture()
     }
 }
 

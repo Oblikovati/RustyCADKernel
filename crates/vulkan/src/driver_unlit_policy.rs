@@ -16,6 +16,7 @@ impl Graphic3dRenderDriver {
             Default::default(),
             Default::default(),
             policy,
+            Default::default(),
         )
     }
     /// Inject device I/O and unlit semantics; `Self::with_backend_and_unlit_face_color_policy(recorder, 4096, RenderUnlitFaceColorPolicy::SideColorsV2)?`.
@@ -30,6 +31,7 @@ impl Graphic3dRenderDriver {
             Arc::new(crate::FreeTypeTextSource::default()),
             Default::default(),
             policy,
+            Default::default(),
         )
     }
 }

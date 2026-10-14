@@ -1,0 +1,351 @@
+{
+  "operation": "martensite.complete-conditional-prism-measurements",
+  "behavior_version": 1,
+  "source_revision": "9e64161bbdc4825af1cc8340e1edf337e2c9c2bf",
+  "frozen_base": "83eccdbcc",
+  "source_commits": [
+    "9e64161bbdc4825af1cc8340e1edf337e2c9c2bf Box complete-measure diagnostic payloads without changing failure context",
+    "fa120edd5d6c323a67452d75873ca7c03b5242ef Finalize complete-measure callback contract and regression binding",
+    "3b9e9bd0ab589b732c6d2d8110eed410f68eb4a2 Compose complete conditional prism measurements through current binding",
+    "62f5098e3c72fd92e47c91206e79b4aa73f3de01 Tag conditional sum evidence and check independent oracle remainder algebra",
+    "c5f5ba6ce9e145f3e61b67138f3a5516e595d884 Share existing identity placement and owned prism measurement fixtures",
+    "ff836b4465a7deaa4c4710712972597d05c13b42 Bound conditional enclosure sums with exact endpoint arithmetic",
+    "718f0dc8bd9d2f6d74bc4fcf267cf2e4a7187b15 Pin prism measurement subset v1 before complete measurement composition"
+  ],
+  "pre_rebase_provenance": {
+    "subset_baseline": "cf4103b0f",
+    "sum": "bad8b2b2a",
+    "structural_access": "d6d0dc65b",
+    "sum_tag_and_oracle_checks": "c1cfe4c03",
+    "complete_entry": "985069363",
+    "reviewed_binding_original": "5685d1c0c",
+    "binding_cherry_pick": "9c6969142; dropped as equivalent on rebase83eccdbcc"
+  },
+  "platform": {
+    "uname": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "jobs": 2,
+    "python": "Python 3.12.3"
+  },
+  "options": {
+    "cap_and_signed_volume": {
+      "behavior_version": 1,
+      "max_degree": 16,
+      "max_curves": 64,
+      "absolute_error_limit": 1e-12
+    },
+    "side": {
+      "behavior_version": 1,
+      "max_degree": 16,
+      "max_subdivisions": 4096,
+      "absolute_error_limit": 1e-05
+    },
+    "total": {
+      "behavior_version": 1,
+      "max_components": 64,
+      "absolute_error_limit": 0.0001
+    },
+    "mutation_and_replay_explicit_override": {
+      "side_absolute_error_limit": 0.01,
+      "total_absolute_error_limit": 0.02
+    },
+    "requested_effective": "identical; no allocation, clamp or retry"
+  },
+  "oracle": {
+    "kind": "independent exact midpoint quadrature with analytic second-derivative remainder",
+    "nodes": 131072,
+    "sqrt_grid_denominator": "1208925819614629174706176",
+    "second_derivative_bound": 16128,
+    "remainder": "672/N^2",
+    "node_rounding": "integer sqrt with exact squared bracket inequalities",
+    "source": "owned polynomial derivation and independent Jacobian QQ factorization",
+    "production_comparison": "entire independent oracle interval contained in returned interval",
+    "regeneration": "byte-identical JSON and TSV"
+  },
+  "checks": [
+    {
+      "label": "sum-focused",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "--lib",
+        "enclosure_sum",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 13.630281925201416,
+      "source_unchanged": true
+    },
+    {
+      "label": "full-focused",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "complete_tests",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 15.292949199676514,
+      "source_unchanged": true
+    },
+    {
+      "label": "subset-replay",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "additive_complete_measurements_preserve_subset_v1_baseline",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.4926424026489258,
+      "source_unchanged": true
+    },
+    {
+      "label": "all-targets",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 450.09117102622986,
+      "source_unchanged": true
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 3.435826539993286,
+      "source_unchanged": true
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.25340962409973145,
+      "source_unchanged": true
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--check"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 1.1541426181793213,
+      "source_unchanged": true
+    },
+    {
+      "label": "extract-lock",
+      "command": [
+        "cargo",
+        "generate-lockfile",
+        "--manifest-path",
+        "/tmp/martensite-complete-measures-final/extracted/Cargo.toml",
+        "--offline"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.05898141860961914,
+      "source_unchanged": true
+    },
+    {
+      "label": "extract-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/tmp/martensite-complete-measures-final/extracted/Cargo.toml",
+        "--offline",
+        "--locked",
+        "--lib"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 29.130152225494385,
+      "source_unchanged": true
+    },
+    {
+      "label": "oracle-regeneration",
+      "command": [
+        "python3",
+        "/tmp/martensite-complete-measures-final/extracted/tests/fixtures/prism_complete_measures/generate.py"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.22145557403564453,
+      "source_unchanged": true
+    },
+    {
+      "label": "process-first",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "complete_prism_measure_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.6938595771789551,
+      "source_unchanged": true
+    },
+    {
+      "label": "process-second",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "complete_prism_measure_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.6407608985900879,
+      "source_unchanged": true
+    }
+  ],
+  "test_counts": {
+    "ordinary-host-tsan": 0,
+    "process-second": 1,
+    "fmt": 0,
+    "oracle-regeneration": 0,
+    "process-first": 1,
+    "sum-focused": 14,
+    "full-focused": 17,
+    "extract-tests": 230,
+    "all-targets": 4362,
+    "doctests": 88,
+    "subset-replay": 1,
+    "extract-lock": 0,
+    "clippy": 0
+  },
+  "source_bookends_equal": true,
+  "extracted_files": 156,
+  "portable_scalar_process_receipts_equal": true,
+  "before_after_boxing_receipts_equal": true,
+  "thread_stress": {
+    "composition": "4 independent operation workers vs serial receipt",
+    "sum": "8 workers x 32 reports"
+  },
+  "audit": {
+    "new_rust_files": 14,
+    "generator_files": 1,
+    "function_count": 99,
+    "function_physical_lines": "4..20",
+    "file_lines": "<500"
+  },
+  "sanitizer": {
+    "status": "incomplete",
+    "details": {
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/tmp/martensite-complete-measures-final/extracted/Cargo.toml",
+        "--offline",
+        "--locked",
+        "-Zbuild-std",
+        "--target",
+        "x86_64-unknown-linux-gnu",
+        "--lib",
+        "enclosure_sum::tests::sum_types_are_send_sync_and_independent_workers_repeat",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-complete-measures",
+      "toolchain": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "environment_changes": {
+        "PATH_prefix": "/home/vmiguel/.rustup/toolchains/nightly-2026-09-25-x86_64-unknown-linux-gnu/bin",
+        "CARGO_BUILD_JOBS": "2",
+        "RUSTFLAGS": "-Zsanitizer=thread",
+        "CARGO_TARGET_DIR": "/tmp/martensite-complete-measures-final/tsan-target"
+      },
+      "host_instrumentation_changes": false,
+      "exit_code": 101,
+      "elapsed_seconds": 24.970617055892944,
+      "source_unchanged": true,
+      "test_output_started": false,
+      "passed": false
+    }
+  },
+  "completion": {
+    "cap_side_total_signed_sweep": "complete conditional scalar evidence for current admitted binding",
+    "subset_v1": "unchanged selectable replay",
+    "body_validation": "incomplete",
+    "immutable_body_publication": "not provided"
+  },
+  "exclusions": [
+    "no body geometry/tolerance/self-intersection promotion",
+    "no native OCCT execution/new capture",
+    "historical native.tsv replay only",
+    "no sampled/faceted acceptance",
+    "no application acceptance",
+    "no release accepted-workload benchmark",
+    "Python Black unavailable; generator exact assertions, regeneration and function audit executed",
+    "no authorization for concurrent legacy shape edits",
+    "failure diagnostics may retain mutable legacy shapes",
+    "source keys are operation-local, not persistent names"
+  ],
+  "earlier_attempts": "retained diagnostic-only; no source-changing compiler run accepted"
+}

@@ -46,3 +46,55 @@ fn verify_extent_retry(
     // Capture is the completed framebuffer; rootless XWayland client pixmaps can remain stale.
     assert_eq!(native.window.size(), (80, 72));
 }
+
+/// Prove capture refusal survives observed away/back resize; `verify_checked_native_gui_extent()`.
+pub fn verify_checked_native_gui_extent() {
+    let driver = Graphic3dRenderDriver::with_gui_surface_policy(
+        device_options::validation_options(),
+        martensite_vulkan::RenderGuiSurfacePolicy::CheckedV2,
+    )
+    .unwrap();
+    let native = NativeWindow::new(64, 64);
+    let window = application_window(&native);
+    let scene = AisViewerScene::new(&driver);
+    scene.view.set_window(&window.cast(), 0).unwrap();
+    install_packet(&scene, [64, 64]);
+    scene.render_view().try_redraw().unwrap();
+    assert_checked_capture_refusals(&scene, &native);
+    verify_checked_mapping(&scene, &window);
+    scene.render_view().remove();
+    assert!(driver.validation_errors().is_empty());
+}
+fn assert_checked_capture_refusals(scene: &AisViewerScene, native: &NativeWindow) {
+    native.resize(80, 72);
+    let error = scene.render_view().capture().unwrap_err();
+    assert!(matches!(
+        error.gui_surface_outcome(),
+        Some(martensite_vulkan::RenderGuiSurfaceOutcome::SurfaceChanged(
+            _
+        ))
+    ));
+    native.resize(64, 64);
+    assert!(scene.render_view().capture().is_err());
+    assert!(scene.render_view().try_redraw().is_err());
+    install_packet(scene, [64, 64]);
+    scene.render_view().try_redraw().unwrap();
+    assert_eq!(
+        scene.render_view().capture().unwrap().pixel(32, 32),
+        Some([0, 255, 0, 255])
+    );
+}
+fn verify_checked_mapping(scene: &AisViewerScene, window: &AspectNeutralWindow) {
+    window.unmap();
+    scene.render_view().try_redraw().unwrap();
+    assert_eq!(
+        scene.render_view().capture().unwrap().pixel(32, 32),
+        Some([0, 255, 0, 255])
+    );
+    window.map();
+    scene.render_view().try_redraw().unwrap();
+    assert_eq!(
+        scene.render_view().capture().unwrap().pixel(32, 32),
+        Some([0, 255, 0, 255])
+    );
+}

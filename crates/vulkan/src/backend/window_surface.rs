@@ -17,6 +17,18 @@ pub(crate) struct WindowPresenter {
     _window: Handle<dyn AspectWindow>,
 }
 impl WindowPresenter {
+    pub(super) fn retire_failed_operation(&mut self) {
+        let retired = self.chain.take();
+        drop(retired);
+    }
+    pub(crate) fn observed_extent(&self) -> Result<[u32; 2], RenderError> {
+        let cap = unsafe {
+            self.surface
+                .get_physical_device_surface_capabilities(self.runtime.physical, self.handle)
+        }
+        .map_err(|error| vk_error("observe GUI surface extent", error))?;
+        authoritative_gui_extent(cap.current_extent)
+    }
     pub(super) fn new(
         runtime: &Arc<VulkanRuntime>,
         window: &Handle<dyn AspectWindow>,
@@ -61,39 +73,63 @@ impl WindowPresenter {
             "a queue supporting the selected native window",
         ))
     }
-    pub(super) fn acquire(&mut self, extent: [u32; 2], vsync: bool) -> Result<u32, RenderError> {
+    pub(super) fn acquire(
+        &mut self,
+        extent: [u32; 2],
+        vsync: bool,
+        contract: super::window_gui_contract::WindowGuiContract,
+    ) -> Result<u32, RenderError> {
         let config = WindowConfig::query(&self.runtime, &self.surface, self.handle, extent, vsync)?;
+        contract.validate(
+            [config.extent.width, config.extent.height],
+            crate::RenderGuiSurfacePhase::Acquire,
+        )?;
+        self.prepare_window_chain(config)?;
+        let result = self.chain.as_mut().unwrap().acquire();
+        let index = self.resolve_window_acquire(result, extent, vsync, contract)?;
+        self.chain.as_ref().unwrap().sync.wait_acquire()?;
+        Ok(index)
+    }
+    fn prepare_window_chain(&mut self, config: WindowConfig) -> Result<(), RenderError> {
         if let Some(chain) = self.chain.as_mut() {
             chain.sync.wait_present()?;
         }
         if self
             .chain
             .as_ref()
-            .is_none_or(|c| c.stale || c.config != config)
+            .is_none_or(|chain| chain.stale || chain.config != config)
         {
             self.recreate(config)?;
         }
-        let result = self.chain.as_mut().unwrap().acquire();
-        let index = match result {
-            Ok(index) => index,
+        Ok(())
+    }
+    fn resolve_window_acquire(
+        &mut self,
+        result: Result<u32, vk::Result>,
+        extent: [u32; 2],
+        vsync: bool,
+        contract: super::window_gui_contract::WindowGuiContract,
+    ) -> Result<u32, RenderError> {
+        match result {
+            Ok(index) => Ok(index),
             Err(vk::Result::ERROR_OUT_OF_DATE_KHR) => {
-                self.recreate(WindowConfig::query(
-                    &self.runtime,
-                    &self.surface,
-                    self.handle,
-                    extent,
-                    vsync,
-                )?)?;
-                self.chain
-                    .as_mut()
-                    .unwrap()
-                    .acquire()
-                    .map_err(|e| vk_error("reacquire resized window", e))?
+                self.chain.as_mut().unwrap().stale = true;
+                if let Some(change) = contract.out_of_date(crate::RenderGuiSurfacePhase::Acquire) {
+                    return Err(change);
+                }
+                self.legacy_reacquire(extent, vsync)
             }
-            Err(e) => return Err(vk_error("acquire window image", e)),
-        };
-        self.chain.as_ref().unwrap().sync.wait_acquire()?;
-        Ok(index)
+            Err(error) => Err(vk_error("acquire window image", error)),
+        }
+    }
+    fn legacy_reacquire(&mut self, extent: [u32; 2], vsync: bool) -> Result<u32, RenderError> {
+        let config = WindowConfig::query(&self.runtime, &self.surface, self.handle, extent, vsync)?;
+        self.recreate(config)?;
+        self.chain
+            .as_mut()
+            .unwrap()
+            .acquire()
+            .map_err(|error| vk_error("reacquire resized window", error))
     }
     fn recreate(&mut self, config: WindowConfig) -> Result<(), RenderError> {
         let old = self.chain.take();
@@ -164,4 +200,48 @@ fn create_window_surface(
         .window(native_window);
     unsafe { xlib.create_xlib_surface(&info, None) }
         .map_err(|e| vk_error("create Xlib Vulkan surface", e))
+}
+
+pub(super) fn authoritative_gui_extent(extent: vk::Extent2D) -> Result<[u32; 2], RenderError> {
+    let observed = [extent.width, extent.height];
+    if observed
+        .into_iter()
+        .any(|value| value == 0 || value == u32::MAX)
+    {
+        return Err(rejected(
+            observed,
+            "positive authoritative native GUI extent; unconstrained extent is unsupported",
+        ));
+    }
+    Ok(observed)
+}
+#[cfg(test)]
+mod gui_extent_tests {
+    use super::*;
+    #[test]
+    fn unconstrained_and_zero_native_extent_are_not_requested_extent_observations() {
+        for [width, height] in [
+            [u32::MAX, u32::MAX],
+            [u32::MAX, 64],
+            [64, u32::MAX],
+            [0, 64],
+            [64, 0],
+        ] {
+            let failure = authoritative_gui_extent(vk::Extent2D { width, height }).unwrap_err();
+            assert!(failure.gui_surface_outcome().is_none());
+            assert!(
+                failure
+                    .to_string()
+                    .contains(&format!("[{width}, {height}]"))
+            );
+        }
+    }
+    #[test]
+    fn positive_native_extent_is_returned_exactly() {
+        let extent = vk::Extent2D {
+            width: 80,
+            height: 72,
+        };
+        assert_eq!(authoritative_gui_extent(extent).unwrap(), [80, 72]);
+    }
 }

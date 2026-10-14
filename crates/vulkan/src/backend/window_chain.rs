@@ -136,7 +136,12 @@ impl WindowChain {
         self.stale = suboptimal;
         Ok(index)
     }
-    pub fn present(&mut self, queue: vk::Queue, index: u32) -> Result<(), RenderError> {
+    pub fn present(
+        &mut self,
+        queue: vk::Queue,
+        index: u32,
+        contract: super::window_gui_contract::WindowGuiContract,
+    ) -> Result<(), RenderError> {
         let waits = [self.sync.rendered];
         let swaps = [self.handle];
         let indices = [index];
@@ -148,21 +153,20 @@ impl WindowChain {
             .image_indices(&indices)
             .push_next(&mut fence_info);
         let result = unsafe { self.loader.queue_present(queue, &info) };
-        self.sync.pending = present_was_enqueued(result);
-        if self.sync.pending {
-            self.acquired_index = None;
-        }
-        match result {
-            Ok(suboptimal) => {
-                self.stale |= suboptimal;
-                Ok(())
-            }
-            Err(vk::Result::ERROR_OUT_OF_DATE_KHR) => {
-                self.stale = true;
-                Ok(())
-            }
-            Err(e) => Err(vk_error("present window frame", e)),
-        }
+        self.complete_present(result, contract)
+    }
+    fn complete_present(
+        &mut self,
+        result: Result<bool, vk::Result>,
+        contract: super::window_gui_contract::WindowGuiContract,
+    ) -> Result<(), RenderError> {
+        complete_present_state(
+            result,
+            &mut self.sync.pending,
+            &mut self.acquired_index,
+            &mut self.stale,
+        );
+        contract.present_result(result)
     }
 }
 impl Drop for WindowChain {
@@ -214,9 +218,71 @@ fn present_was_enqueued(result: Result<bool, vk::Result>) -> bool {
                 | vk::Result::ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
     )
 }
+
+fn complete_present_state(
+    result: Result<bool, vk::Result>,
+    pending: &mut bool,
+    acquired: &mut Option<u32>,
+    stale: &mut bool,
+) {
+    *pending = present_was_enqueued(result);
+    if *pending {
+        *acquired = None;
+    }
+    *stale |= matches!(result, Ok(true) | Err(vk::Result::ERROR_OUT_OF_DATE_KHR));
+}
+pub(super) fn legacy_present_result(result: Result<bool, vk::Result>) -> Result<(), RenderError> {
+    match result {
+        Ok(_) | Err(vk::Result::ERROR_OUT_OF_DATE_KHR) => Ok(()),
+        Err(error) => Err(vk_error("present window frame", error)),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    fn assert_present_completion(
+        result: Result<bool, vk::Result>,
+        expected: (bool, Option<u32>, bool, bool),
+    ) {
+        let (mut pending, mut acquired, mut stale) = (false, Some(7), false);
+        complete_present_state(result, &mut pending, &mut acquired, &mut stale);
+        let failed = legacy_present_result(result).is_err();
+        assert_eq!((pending, acquired, stale, failed), expected);
+    }
+    #[test]
+    fn legacy_out_of_date_success_keeps_enqueued_present_ownership() {
+        let result = Err(vk::Result::ERROR_OUT_OF_DATE_KHR);
+        assert_present_completion(result, (true, None, true, false));
+    }
+    #[test]
+    fn legacy_real_faults_and_suboptimal_preserve_distinct_completion_states() {
+        assert_present_completion(Ok(false), (true, None, false, false));
+        assert_present_completion(Ok(true), (true, None, true, false));
+        assert_present_completion(
+            Err(vk::Result::ERROR_SURFACE_LOST_KHR),
+            (true, None, false, true),
+        );
+    }
+    #[test]
+    fn legacy_device_faults_retain_their_original_operation() {
+        for fault in [
+            vk::Result::ERROR_DEVICE_LOST,
+            vk::Result::ERROR_OUT_OF_HOST_MEMORY,
+        ] {
+            assert_present_completion(Err(fault), (false, Some(7), false, true));
+            assert_eq!(
+                legacy_present_result(Err(fault)),
+                Err(vk_error("present window frame", fault))
+            );
+        }
+    }
+    #[test]
+    fn legacy_completion_does_not_clear_an_existing_stale_chain() {
+        let (mut pending, mut acquired, mut stale) = (false, Some(3), true);
+        complete_present_state(Ok(false), &mut pending, &mut acquired, &mut stale);
+        assert_eq!((pending, acquired, stale), (true, None, true));
+    }
     #[test]
     fn rejected_surface_presentations_still_own_the_fence() {
         for result in [

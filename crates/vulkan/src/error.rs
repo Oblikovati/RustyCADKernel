@@ -3,11 +3,24 @@ use rustycad_tkservice::aspect::{AspectDisplayLifecycleFailure, AspectNativeWind
 use std::fmt;
 /// A renderer input, capability or device failure; inspect with `error.to_string()`.
 #[derive(Clone, PartialEq, Eq)]
-pub struct RenderError(String, Option<NativeLifecycleFailure>);
+pub struct RenderError(String, Option<RenderFailureCause>);
 #[derive(Clone, PartialEq, Eq)]
-enum NativeLifecycleFailure {
+enum RenderFailureCause {
     Window(AspectNativeWindowFailure),
     Display(AspectDisplayLifecycleFailure),
+    GuiSurface(Box<crate::gui_surface_outcome::GuiSurfaceFailure>),
+    WindowTarget(Box<WindowTargetFailure>),
+    ObservedFault(Box<ObservedRenderFault>),
+}
+#[derive(Clone, PartialEq, Eq)]
+struct WindowTargetFailure {
+    primary: RenderError,
+    closure: AspectNativeWindowFailure,
+}
+#[derive(Clone, PartialEq, Eq)]
+struct ObservedRenderFault {
+    primary: RenderError,
+    observed: RenderError,
 }
 impl RenderError {
     /// Describe a rejected backend input; `RenderError::rejected(0, "positive extent")`.
@@ -17,14 +30,32 @@ impl RenderError {
     /// Inspect a closed target without parsing text; `error.native_window_failure()`.
     pub fn native_window_failure(&self) -> Option<&AspectNativeWindowFailure> {
         match &self.1 {
-            Some(NativeLifecycleFailure::Window(failure)) => Some(failure),
+            Some(RenderFailureCause::Window(failure)) => Some(failure),
+            Some(RenderFailureCause::WindowTarget(failure)) => Some(&failure.closure),
+            Some(RenderFailureCause::ObservedFault(failure)) => failure
+                .observed
+                .native_window_failure()
+                .or_else(|| failure.primary.native_window_failure()),
+            Some(RenderFailureCause::GuiSurface(failure)) => {
+                failure.primary.as_ref()?.native_window_failure()
+            }
             _ => None,
         }
     }
     /// Inspect native connection admission failure; `error.native_display_failure()`.
     pub fn native_display_failure(&self) -> Option<&AspectDisplayLifecycleFailure> {
         match &self.1 {
-            Some(NativeLifecycleFailure::Display(failure)) => Some(failure),
+            Some(RenderFailureCause::Display(failure)) => Some(failure),
+            Some(RenderFailureCause::GuiSurface(failure)) => {
+                failure.primary.as_ref()?.native_display_failure()
+            }
+            Some(RenderFailureCause::WindowTarget(failure)) => {
+                failure.primary.native_display_failure()
+            }
+            Some(RenderFailureCause::ObservedFault(failure)) => failure
+                .primary
+                .native_display_failure()
+                .or_else(|| failure.observed.native_display_failure()),
             _ => None,
         }
     }
@@ -33,7 +64,7 @@ impl From<AspectNativeWindowFailure> for RenderError {
     fn from(failure: AspectNativeWindowFailure) -> Self {
         Self(
             failure.to_string(),
-            Some(NativeLifecycleFailure::Window(failure)),
+            Some(RenderFailureCause::Window(failure)),
         )
     }
 }
@@ -41,7 +72,7 @@ impl From<AspectDisplayLifecycleFailure> for RenderError {
     fn from(failure: AspectDisplayLifecycleFailure) -> Self {
         Self(
             failure.to_string(),
-            Some(NativeLifecycleFailure::Display(failure)),
+            Some(RenderFailureCause::Display(failure)),
         )
     }
 }
@@ -58,8 +89,14 @@ impl fmt::Display for RenderError {
 impl std::error::Error for RenderError {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
         match &self.1 {
-            Some(NativeLifecycleFailure::Window(failure)) => Some(failure),
-            Some(NativeLifecycleFailure::Display(failure)) => Some(failure),
+            Some(RenderFailureCause::Window(failure)) => Some(failure),
+            Some(RenderFailureCause::Display(failure)) => Some(failure),
+            Some(RenderFailureCause::GuiSurface(failure)) => failure
+                .primary
+                .as_ref()
+                .map(|primary| primary as &(dyn std::error::Error + 'static)),
+            Some(RenderFailureCause::WindowTarget(failure)) => Some(&failure.primary),
+            Some(RenderFailureCause::ObservedFault(failure)) => Some(&failure.primary),
             None => None,
         }
     }
@@ -113,3 +150,12 @@ mod tests {
         assert_eq!(failure.to_string(), cause.to_string());
     }
 }
+
+#[path = "gui_surface_error.rs"]
+mod gui_surface;
+
+#[path = "gui_native_failure.rs"]
+pub(crate) mod gui_native_failure;
+
+#[path = "gui_observed_failure.rs"]
+pub(crate) mod gui_observed_failure;
