@@ -107,3 +107,15 @@ without repair. Migrate by rebuilding a fresh graph with V2 and auditing it;
 a successful import is not body validation. Polygon/triangulation lookup and
 mutable graph ownership are unchanged. Default migration and V1 production
 removal remain gated by [ADR0026](../adr/0026-cumulative-pcurve-import.md).
+
+## Private frozen topology evidence
+
+ADR0033 adds exact combinatorial topology evidence for RustyCADKernel#10's named
+analytic prism. The existing private `freeze_prism` retains containment V1 and
+its bytes. Publication composition must explicitly select
+`PrismFreezeBehavior::OrderedTraversalV2`, then certify that exact immutable
+projection; V1 has no retained wire traversal and is incomplete for this check.
+Closure, paired directed uses, endpoint-germ links, connectivity and Euler2 do
+not establish geometric outwardness, embedding or valid-solid status. The #10
+publication coordinator owns the same-C1-milestone migration of its publication
+path to V2; diagnostic V1 replay remains selectable until the recorded gate.

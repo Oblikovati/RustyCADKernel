@@ -63,6 +63,9 @@ impl FrozenPrismProjection {
         bytes.extend(format!("endpoints={:?};", self.endpoints).bytes());
         bytes.extend(geometry_bytes(&self.nodes, &self.faces));
         limits(&self.limits, &mut bytes);
+        if let Some(traversals) = &self.wire_traversals {
+            bytes.extend(format!("ordered_wire_traversal_v2={traversals:?};").bytes());
+        }
         bytes
     }
 }
@@ -95,7 +98,7 @@ fn node_bytes(node: &FrozenPrismNode, bytes: &mut Vec<u8>) {
         space(curve, bytes);
     }
 }
-fn face_bytes(face: &FrozenPrismFace, bytes: &mut Vec<u8>) {
+pub(super) fn face_bytes(face: &FrozenPrismFace, bytes: &mut Vec<u8>) {
     bytes.extend(format!("face={:?};proof={:?};", face.key, face.proof).bytes());
     chart_source(&face.source, bytes);
     surface(&face.surface, bytes);

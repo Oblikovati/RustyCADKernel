@@ -128,11 +128,12 @@ fn retain_copy(receipt: &mut PrismReceipt) -> Result<(), PrismCompletion> {
         .selected
         .as_ref()
         .expect("unique selected candidate retained");
-    let (base, relations) = copied_selection(selected).map_err(PrismCompletion::Failed)?;
-    let chart_sources = super::surface_charts::capture_sources(&base);
+    let copied = copied_selection(selected).map_err(PrismCompletion::Failed)?;
+    let chart_sources = super::surface_charts::capture_sources(&copied.root);
     receipt.copied = Some(PrismCopiedSelection {
-        base,
-        relations,
+        base: copied.root,
+        relations: copied.relations,
+        observations: copied.observations,
         chart_sources,
     });
     Ok(())

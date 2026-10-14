@@ -45,3 +45,6 @@ pub(crate) use region_certificate::retain_source_bound_prism;
 
 #[cfg(test)]
 mod graph_import_tests;
+
+#[cfg(test)]
+mod copy_retention_tests;

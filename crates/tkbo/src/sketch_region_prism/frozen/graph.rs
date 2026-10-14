@@ -16,15 +16,46 @@ pub(crate) struct FrozenGraphIncidence {
     pub(crate) endpoints: Vec<(FrozenPrismKey, FrozenPrismKey, FrozenPrismKey)>,
     pub(crate) coedges: Vec<FrozenCoedgeIncidence>,
 }
-pub(super) fn capture_graph(bound: &BoundProjection<'_>) -> CaptureResult<FrozenGraphIncidence> {
+pub(super) struct FrozenGraphCapture {
+    pub(super) incidence: FrozenGraphIncidence,
+    pub(super) traversals: Option<Vec<super::traversal::FrozenWireTraversal>>,
+}
+pub(super) fn capture_graph(
+    bound: &BoundProjection<'_>,
+    behavior: PrismFreezeBehavior,
+) -> CaptureResult<FrozenGraphCapture> {
+    let (graph, names) = capture_bound_graph(bound)?;
+    let incidence = capture_incidence(bound, &graph, &names)?;
+    let traversals = match behavior {
+        PrismFreezeBehavior::ContainmentV1 => None,
+        PrismFreezeBehavior::OrderedTraversalV2 => {
+            Some(super::traversal::capture_traversals(bound, &graph, &names)?)
+        }
+    };
+    Ok(FrozenGraphCapture {
+        incidence,
+        traversals,
+    })
+}
+
+fn capture_bound_graph(
+    bound: &BoundProjection<'_>,
+) -> CaptureResult<(BRepGraph, BTreeMap<NodeId, FrozenPrismKey>)> {
     let graph = populate_graph(bound)?;
     let names = mapped_nodes(bound, &graph)?;
     audit_graph(bound, &graph, &names)?;
+    Ok((graph, names))
+}
+fn capture_incidence(
+    bound: &BoundProjection<'_>,
+    graph: &BRepGraph,
+    names: &BTreeMap<NodeId, FrozenPrismKey>,
+) -> CaptureResult<FrozenGraphIncidence> {
     Ok(FrozenGraphIncidence {
         import_behavior: PCurveImportBehavior::CumulativeOccurrenceV2,
-        counts: checked_counts(&graph, names.len())?,
-        endpoints: edge_endpoints(&graph, &names)?,
-        coedges: directed_coedges(bound, &graph, &names)?,
+        counts: checked_counts(graph, names.len())?,
+        endpoints: edge_endpoints(graph, names)?,
+        coedges: directed_coedges(bound, graph, names)?,
     })
 }
 fn populate_graph(bound: &BoundProjection<'_>) -> CaptureResult<BRepGraph> {
@@ -186,7 +217,7 @@ fn check_coedge_multiplicity(
     }
     Ok(())
 }
-fn bind_coedge(
+pub(super) fn bind_coedge(
     bound: &BoundProjection<'_>,
     graph: &BRepGraph,
     names: &BTreeMap<NodeId, FrozenPrismKey>,

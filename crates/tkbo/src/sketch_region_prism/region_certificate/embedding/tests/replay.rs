@@ -59,7 +59,9 @@ fn incidence_tag(conclusion: &PrismIncidenceConclusion) -> String {
 }
 #[test]
 fn prism_embedding_process_receipt() {
-    println!("{}", portable_receipt());
+    let receipt = portable_receipt();
+    assert_eq!(receipt, include_str!("embedding-v1.json").trim());
+    println!("{receipt}");
 }
 #[test]
 fn independent_embedding_threads_match_serial_receipt() {

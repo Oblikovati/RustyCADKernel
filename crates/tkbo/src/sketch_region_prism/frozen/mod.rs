@@ -15,7 +15,7 @@ mod identities;
 mod source_bindings;
 mod types;
 mod views;
-pub(crate) use capture::freeze_prism;
+pub(crate) use capture::{freeze_prism, freeze_prism_with_behavior};
 pub(crate) use types::*;
 #[cfg(test)]
 mod tests;
@@ -53,3 +53,14 @@ mod admission_tests;
 mod error_context;
 #[cfg(test)]
 mod error_context_tests;
+
+pub(crate) mod proof_join;
+#[cfg(test)]
+mod topology_baseline_tests;
+
+pub(crate) mod topology;
+
+pub(crate) mod lineage;
+mod traversal;
+#[cfg(test)]
+mod traversal_tests;
