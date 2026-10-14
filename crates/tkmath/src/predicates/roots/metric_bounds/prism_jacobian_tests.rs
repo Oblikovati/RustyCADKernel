@@ -134,11 +134,12 @@ fn independent_threads_match_serial_exact_results_without_shared_operation_state
     std::thread::scope(|scope| {
         for _ in 0..8 {
             let expected = &expected;
-            scope.spawn(move || {
-                for _ in 0..32 {
-                    assert_eq!(&exact_value(support(), placement(), [3., 4., 2.]), expected);
-                }
-            });
+            scope.spawn(move || repeat_exact_result(expected));
         }
     });
+}
+fn repeat_exact_result(expected: &DyadicBound) {
+    for _ in 0..32 {
+        assert_eq!(&exact_value(support(), placement(), [3., 4., 2.]), expected);
+    }
 }
