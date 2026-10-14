@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::{parameter::admit_map, *};
 /// New proof query; legacy same-parameter calls keep their original validation/order.
-/// Example: native line t=[a,b] uses Endpoints([a,b]), captured endpoints use Identity.
+/// Example: native line `t=[a,b]` uses `Endpoints([a,b])`, captured endpoints use `Identity`.
 pub struct TransportedResidualQuery<'a> {
     /// Captured coefficients, placements, requested spatial limit and root policy.
     pub residual: PlanarResidualQuery<'a>,
