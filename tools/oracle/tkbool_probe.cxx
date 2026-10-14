@@ -66,6 +66,7 @@
 #include "tkbool_probe_topopebrepbuild.cxx"
 #include "tkbool_probe_topopebreptool_tool.cxx"
 #include "tkbool_probe_topopebreptool_regu.cxx"
+#include "tkbool_probe_topopebrepds_ops.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx,
  // tkbool_probe_brepfill_compatible.cxx, tkbool_probe_brepfill_section_law.cxx,
@@ -146,6 +147,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"tt_corriso", bl_tt_corriso_case},
  {"tt_fuse_edges", bl_tt_fuse_edges_case},
  {"tt_purge_internal", bl_tt_purge_internal_case},
+ // TopOpeBRepDS interference processing (tkbool_probe_topopebrepds_ops.cxx)
+ {"dsx", bl_dsx_case},
  // TopOpeBRepBuild (tkbool_probe_topopebrepbuild.cxx)
  {"tb_wire_to_face", bl_tb_wire_to_face_case},
  {"tb_face_builder", bl_tb_face_builder_case},

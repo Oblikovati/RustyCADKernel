@@ -1,5 +1,5 @@
 // Rust translation of ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_HDataStructure.hxx/.cxx
-// at 3d097a0328e71b826377d4814ab05ec3c3d23871 (ChkIntg needs TopOpeBRepDS_Check, not ported).
+// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `TopOpeBRepDS_HDataStructure`: the data structure shared through handles by the
 //! fillers and builders of the topological operations, with the queries and the
@@ -22,6 +22,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use std::sync::{RwLockReadGuard, RwLockWriteGuard};
 
 pub use interferences::fun_topopebrepds_sort_on_parameter;
+pub(crate) use interferences::store_interference_ds;
 
 /// The shared data structure (`TopOpeBRepDS_HDataStructure`); the data structure is
 /// read through [`TopOpeBRepDSHDataStructure::ds`] and changed through
@@ -77,6 +78,14 @@ impl TopOpeBRepDSHDataStructure {
     /// `TopOpeBRepDS_HDataStructure()`; `TopOpeBRepDSHDataStructure::new()`.
     pub fn new() -> Self {
         Self::default()
+    }
+
+    /// `ChkIntg()`: the integrity of the structure checked by a `TopOpeBRepDS_Check`
+    /// (natively a member creating the checker on `this`; here on the handle);
+    /// `TopOpeBRepDSHDataStructure::chk_intg(&hds)?`.
+    pub fn chk_intg(hds: &Handle<Self>) -> Result<(), Failure> {
+        super::TopOpeBRepDSCheck::with_hds(hds).chk_intg()?;
+        Ok(())
     }
 
     /// `DS()`: the data structure, read; `hds.ds().nb_curves()`.

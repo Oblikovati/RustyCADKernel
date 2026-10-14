@@ -63,3 +63,61 @@ Every public class and function of the package is ported (the debug-only `STATE`
 map of shapes whose native order follows memory addresses; the probes print them sorted
 by their boxes. Unit tests with closed-form expectations are in
 `crates/tkbool/tests/top_ope_brep_tool_tool.rs`.
+
+## TopOpeBRepDS (TKI, connex, TOOL, EXPORT, ProcessInterferencesTool, repvg, redu, funk, interference tools, EIR, FIR, Filter, Reducer, Check, Dumper)
+
+The free functions of `TopOpeBRepDS_EXPORT.cxx` live in `top_ope_brep_ds::export`, those
+of `TopOpeBRepDS_ProcessInterferencesTool.cxx` in
+`top_ope_brep_ds::process_interferences_tool`, the edge and face filters of
+`TopOpeBRepDS_Process{Edge,Face}Interferences.cxx` in
+`top_ope_brep_ds::process_{edge,face}_interferences`. A function taking the handled
+structure locks it once (`change_ds`) and works on the structure; `_ds` twins take the
+structure itself (a read lock is never taken again while one is held). Interference
+lists walked with removals at iterators are walked as vectors: a removal at an index is
+the native removal at an iterator, and the list is written back on the error paths that
+the native code leaves half done (`FUN_select2dI`). The FDSCNX maps are a thread-local
+cache (`fdscnx_close` empties it).
+
+### Native quirks kept
+
+- `FDS_repvg` drops the groups of a single interference per transition face from the
+  list it reduces (only the groups of several are appended back).
+- `FUN_select3dI` removes residual interferences with `lFE.Remove(it)` while `it` walks
+  `lFEresi`: at the head of `lFEresi` the first interference of `lFE` goes and the walk
+  continues in `lFE`; later the residual node is unlinked from `lFEresi` (natively `lFE`
+  then miscounts, which is not modelled).
+- `FUN_ds_completeforSE8` never stores its regrouped lists (`hasnew` stays false); only
+  the transitions of the reduced 2d interferences change through their handles.
+- `FUN_ds_completeforSE4` and `FUN_ds_completeforSE5` return out of the whole completion
+  on inconsistent data; `FUN_ds_completeforSE5` drops the interferences of a point whose
+  faces lie on the same side; `FUN_ds_completeforE7` selects the supports into `lREV`
+  (whose size is tested) and rewrites every edge list grouped by geometry.
+- `FUN_reclSE` keeps only the VERTEX geometries; `FUN_ProcessEdgeInterferences` drops
+  the interferences on neither FACE nor EDGE transitions and the residual 3d ones;
+  `TopOpeBRepDS_EIR::ProcessEdgeInterferences(EIX)` skips its disabled PNC filtering.
+- `FUN_ReducerSDEdge` appends unpaired later interferences once per earlier one;
+  `FUN_reducedoublons` treats every edge/vertex pair on a closed edge as the same
+  vertex (`vG.IsSame(vG)`).
+- `FUN_resolveFUNKNOWN` sets the classifier reference to the shape whose index is the
+  rank of the support face; `FUN_UNKFstasta` adds point representations of the edge
+  vertices on the edge rebuilt on the other face surface.
+- `FUN_ds_mkTonFsdm` without `pardef` projects the origin; `CheckEdgeParameter` compares
+  int-truncated parameters with 1e50; `TopOpeBRepDS_Check::ChkIntg` keeps only the check
+  of the last shape list before the geometries; `ChkIntgSamDom` never resets its found
+  flag; `FDS_EdgeIsConnexToSameDomainFaces` compares each face with itself.
+- `TopOpeBRepDS_FaceInterferenceTool::isLine` is always false, so only the curvature
+  frames are used; `STATIC_TOREVERSE` is a thread-local flag.
+
+### Verification
+
+`python3 tools/verify_tkbool_numeric.py` runs `dsx`
+(`tools/oracle/tkbool_probe_topopebrepds_ops.cxx` and `_run.cxx`, corpus
+`tools/tkbool_corpus_topopebrepds_ops.py`): structures of two solids (overlapping boxes,
+a cylinder through a box, boxes sharing a face) with points, same domain pairs, section
+edges and pseudo-random interferences of the native types, each of TKI, the selectors,
+the 3d/2d/1d selections, the reductions (doubles, unknown, symmetric, repvg, reclSE,
+scanloi, GetTr, hasI2d, redu2d1d), EIR, FIR, Filter, the EXPORT/TOOL/connex queries,
+Check/Dumper and every FUN_ds_* completion printing the resulting interferences of every
+shape (the section edges sorted: `TOOL::EShareG` adds them in the order of a shape map).
+Unit tests with closed-form expectations are in
+`crates/tkbool/tests/top_ope_brep_ds_ops.rs`.

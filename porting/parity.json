@@ -607241,6 +607241,1326 @@
       "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolMakeTransition::mk_ton_e",
       "status": "implemented",
       "notes": "Translated from TopOpeBRepTool_makeTransition.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_transition (a cylinder through the faces of a box, box edges on their faces)); unit tests in crates/tkbool/tests/top_ope_brep_tool_tool.rs."
+    },
+    {
+      "upstream_id": "FDS_aresamdom(const TopOpeBRepDS_DataStructure &, int, int, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_aresamdom_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Dumper::SPrintShape(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Dumper.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSDumper::sprint_shape_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Dumper.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::TopOpeBRepDS_Check()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_GetTr(const TopOpeBRepDS_DataStructure &, int, int, const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, TopAbs_State &, int &, int &, TopAbs_State &, int &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fun_ds_get_tr",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_redu.cxx as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::ProcessEdgeInterferences()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::process_edge_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_SetT(TopOpeBRepDS_Transition &, const TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_set_t",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::CheckDS(int, TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::check_ds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_FillSDMFaces(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_fill_sdm_faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_hasStateShape(const TopOpeBRepDS_Transition &, TopAbs_State, TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_has_state_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::PrintShape(TopAbs_ShapeEnum, Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::print_shape_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeInterferenceTool::Add(const TopoDS_Shape &, const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeInterferenceTool::add_vertex",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectpure2dI(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_selectpure2d_i",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Dumper::SPrintShape(const TopoDS_Shape &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Dumper.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSDumper::sprint_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Dumper.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FIR::ProcessFaceInterferences(const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FIR.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFIR::process_face_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FIR.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_transitionEQUAL(const TopOpeBRepDS_Transition &, const TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_transition_equal",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::ProcessInterferences()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::process_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeInterferenceTool::Transition(const occ::handle<TopOpeBRepDS_Interference> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeInterferenceTool::transition",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeInterferenceTool::Init(const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeInterferenceTool::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_EdgeIsConnexToSameDomainFaces(const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_edge_is_connex_to_same_domain_faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TOOL::ShareSplitON(const occ::handle<TopOpeBRepDS_HDataStructure> &, const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &, int, int, TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTOOL::share_split_on",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TOOL.cxx (static members; `_ds` twins take the locked structure); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::ChkIntgInterf(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::chk_intg_interf",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_transitionINDEXEQUAL(const TopOpeBRepDS_Transition &, const TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_transition_index_equal",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE1(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se1",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::Transition(const occ::handle<TopOpeBRepDS_Interference> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::transition",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "MakeCPVInterference(const TopOpeBRepDS_Transition &, int, int, double, TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::make_cpv_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_repvg2(const TopOpeBRepDS_DataStructure &, int, TopOpeBRepDS_Kind, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_repvg.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fds_repvg2",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_repvg.cxx as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::Value(TopOpeBRepDS_Kind &, int &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::value",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::DumpTKIIterator(const TCollection_AsciiString &, const TCollection_AsciiString &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::dump_tki_iterator",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_select1dI(int, TopOpeBRepDS_DataStructure &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select1d_i",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_HasSameDomain2d(const TopOpeBRepDS_DataStructure &, const TopoDS_Shape &, NCollection_List<TopoDS_Shape> *)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_has_same_domain2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::TopOpeBRepDS_TKI()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectTRAUNKinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_traunk_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TOOL::GetEsd(const occ::handle<TopOpeBRepDS_HDataStructure> &, const TopoDS_Shape &, int, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTOOL::get_esd",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TOOL.cxx (static members; `_ds` twins take the locked structure); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectTRASHAinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, TopAbs_ShapeEnum, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_trasha_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_unkeepUNKNOWN(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, TopOpeBRepDS_DataStructure &, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_unkeep_unknown",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_getoov(const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_HDataStructure> &, TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_getoov_hds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectTRAINTinterference(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_select_traint_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_getVsdm(const TopOpeBRepDS_DataStructure &, int, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_get_vsdm",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Edge3dInterferenceTool::Transition(const occ::handle<TopOpeBRepDS_Interference> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Edge3dInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdge3dInterferenceTool::transition",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Edge3dInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::ChangeInterferences(TopOpeBRepDS_Kind, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::change_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EIR::ProcessEdgeInterferences(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EIR.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEIR::process_edge_interferences_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EIR.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "MakeEPVInterference(const TopOpeBRepDS_Transition &, int, int, double, TopOpeBRepDS_Kind, bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::make_epv_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Edge3dInterferenceTool::TopOpeBRepDS_Edge3dInterferenceTool()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Edge3dInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdge3dInterferenceTool::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Edge3dInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectGKinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, TopOpeBRepDS_Kind, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_gk_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_Idata(const occ::handle<TopOpeBRepDS_Interference> &, TopAbs_ShapeEnum &, int &, TopAbs_ShapeEnum &, int &, TopOpeBRepDS_Kind &, int &, TopOpeBRepDS_Kind &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_idata",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::ChkIntgSamDom()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::chk_intg_sam_dom",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_transitionSHAPEEQUAL(const TopOpeBRepDS_Transition &, const TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_transition_shape_equal",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EIR::TopOpeBRepDS_EIR(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EIR.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEIR::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EIR.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::Add(TopOpeBRepDS_Kind, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::add",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectITRASHAinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, int, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_itrasha_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_Parameter(const occ::handle<TopOpeBRepDS_Interference> &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_parameter_checked",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::FillOnSupport(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::fill_on_support",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE4(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se4",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Dumper::SDumpRefOri(const TopoDS_Shape &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Dumper.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSDumper::sdump_ref_ori_of",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Dumper.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_scanloi(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, int &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, int &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fun_scanloi",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_redu.cxx as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::Add(TopOpeBRepDS_Kind, int, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::add_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::ProcessCurveInterferences(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::process_curve_interferences_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectTRAORIinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, TopAbs_Orientation, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_traori_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Dumper::SPrintShapeRefOri(const TopoDS_Shape &, const TCollection_AsciiString &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Dumper.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSDumper::sprint_shape_ref_ori",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Dumper.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_Prepare(const TopoDS_Shape &, const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_prepare",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (the static maps a thread-local cache; `_ds` twins take the locked structure) as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_EdgeConnexityShapeIndex(const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_HDataStructure> &, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_edge_connexity_shape_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (the static maps a thread-local cache; `_ds` twins take the locked structure) as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeInterferenceTool::Add(const TopoDS_Shape &, const TopOpeBRepDS_Point &, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeInterferenceTool::add_point",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_Tdata(const occ::handle<TopOpeBRepDS_Interference> &, TopAbs_ShapeEnum &, int &, TopAbs_ShapeEnum &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_tdata",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Dumper::TopOpeBRepDS_Dumper(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Dumper.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSDumper::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Dumper.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_LOIinfsup(const TopOpeBRepDS_DataStructure &, const TopoDS_Edge &, double, TopOpeBRepDS_Kind, int, const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, double &, double &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_lo_iinfsup",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TOOL::ShareG(const occ::handle<TopOpeBRepDS_HDataStructure> &, int, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTOOL::share_g",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TOOL.cxx (static members; `_ds` twins take the locked structure); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::ChangeHDS()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::change_hds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::IsEdgePntParDef() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::is_edge_pnt_par_def",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::IsBound(TopOpeBRepDS_Kind, int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::is_bound",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_EdgeConnexitySameShape(const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_edge_connexity_same_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (the static maps a thread-local cache; `_ds` twins take the locked structure) as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_assign(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_assign",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_addSEsdm1d(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_add_se_sdm1d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE6(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se6",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE8(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se8",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_Dump(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_dump",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (printing to standard output); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_HasSameDomain3d(const TopOpeBRepDS_DataStructure &, const TopoDS_Shape &, NCollection_List<TopoDS_Shape> *)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_has_same_domain3d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::TopOpeBRepDS_Check(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::with_hds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_mkTonFsdm(const occ::handle<TopOpeBRepDS_HDataStructure> &, int, int, int, int, double, const TopoDS_Edge &, bool, TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_mk_ton_fsdm",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_oriEinF(const TopOpeBRepDS_DataStructure &, const TopoDS_Edge &, const TopoDS_Shape &, TopAbs_Orientation &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_ori_e_in_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Edge3dInterferenceTool::InitPointVertex(int, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Edge3dInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdge3dInterferenceTool::init_point_vertex",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Edge3dInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Reducer::ProcessFaceInterferences(const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Reducer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSReducer::process_face_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Reducer.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_Config3d(const TopoDS_Shape &, const TopoDS_Shape &, TopOpeBRepDS_Config &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_config3d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectSKinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, TopOpeBRepDS_Kind, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_sk_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE9(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se9",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_FaceEdgeConnexFaces(const TopoDS_Shape &, const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_HDataStructure> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_face_edge_connex_faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (the static maps a thread-local cache; `_ds` twins take the locked structure) as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_FEIGb1TO0(occ::handle<TopOpeBRepDS_HDataStructure> &, const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_feig_b1_to0",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_complete1dForSESDM(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete1d_for_se_sdm",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_redusamsha(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_redusamsha",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FIR::TopOpeBRepDS_FIR(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FIR.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFIR::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FIR.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TOOL::EShareG(const occ::handle<TopOpeBRepDS_HDataStructure> &, const TopoDS_Edge &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTOOL::e_share_g",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TOOL.cxx (static members; `_ds` twins take the locked structure); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::TopOpeBRepDS_Filter(const occ::handle<TopOpeBRepDS_HDataStructure> &, TopOpeBRepTool_ShapeClassifier *const &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::Next()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::next",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::ChangeValue(TopOpeBRepDS_Kind &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::change_value",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::Add(const TopoDS_Shape &, const TopoDS_Shape &, const TopoDS_Shape &, bool, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::add",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::Add(const TopoDS_Shape &, const TopOpeBRepDS_Curve &, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::add_curve",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Edge3dInterferenceTool::Init(const TopoDS_Shape &, const TopoDS_Shape &, const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Edge3dInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdge3dInterferenceTool::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Edge3dInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::ProcessFaceInterferences(const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::process_face_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_transitionSTATEEQUAL(const TopOpeBRepDS_Transition &, const TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_transition_state_equal",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_hasFEI(TopOpeBRepDS_DataStructure *const &, const TopoDS_Shape &, int, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_has_fei",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_assign(const NCollection_List<TopoDS_Shape> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_assign",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforE7(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_e7",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::FillOnGeometry(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::fill_on_geometry",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_Parameter(const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_parameter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectSIinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, int, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_si_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_reducedoublons(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, const TopOpeBRepDS_DataStructure &, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_reducedoublons",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_selectGIinterference(NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, int, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select_gi_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::ProcessEdgeInterferences(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::process_edge_interferences_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::SetEdgePntPar(const gp_Pnt &, double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::set_edge_pnt_par",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::OneVertexOnPnt()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::one_vertex_on_pnt",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE3(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se3",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_samRk(const TopOpeBRepDS_DataStructure &, int, NCollection_List<TopoDS_Shape> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_sam_rk",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::Interferences(TopOpeBRepDS_Kind, int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_redu2d1d(const TopOpeBRepDS_DataStructure &, int, const occ::handle<TopOpeBRepDS_Interference> &, const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fun_ds_redu2d1d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_redu.cxx as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_getupperlower(const occ::handle<TopOpeBRepDS_HDataStructure> &, int, double, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_getupperlower",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::Print(TopOpeBRepDS_CheckStatus, Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::print",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_stateEwithF2d(const TopOpeBRepDS_DataStructure &, const TopoDS_Edge &, double, TopOpeBRepDS_Kind, int, const TopoDS_Face &, TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_state_e_with_f2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::GetEdgePntPar(gp_Pnt &, double &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::get_edge_pnt_par",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE2(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se2",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::TopOpeBRepDS_FaceInterferenceTool(TopOpeBRepDS_DataStructure *const &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_select3dinterference(int, TopOpeBRepDS_DataStructure &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select3d_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_SIisGIofIofSBAofTofI(const TopOpeBRepDS_DataStructure &, int, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_si_is_gi_of_i_of_sba_of_t_of_i",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_PointToVertex(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_point_to_vertex",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_data(const occ::handle<TopOpeBRepDS_Interference> &, TopOpeBRepDS_Kind &, int &, TopOpeBRepDS_Kind &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_data",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_DumpIndex(const occ::handle<TopOpeBRepDS_HDataStructure> &, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_dump_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (the static maps a thread-local cache; `_ds` twins take the locked structure) as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "MakeEPVInterference(const TopOpeBRepDS_Transition &, int, int, double, TopOpeBRepDS_Kind, TopOpeBRepDS_Kind, bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::make_epv_interference_sk",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_copy(const NCollection_List<TopoDS_Shape> &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_copy",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_hasI2d(int, const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_has_i2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_data(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>>::Iterator &, occ::handle<TopOpeBRepDS_Interference> &, TopOpeBRepDS_Kind &, int &, TopOpeBRepDS_Kind &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_data_iter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::ProcessFaceInterferences(int, const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::process_face_interferences_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_Dump(const occ::handle<TopOpeBRepDS_HDataStructure> &, int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_dump_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (printing to standard output); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_interfhassupport(const TopOpeBRepDS_DataStructure &, const occ::handle<TopOpeBRepDS_Interference> &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_interfhassupport",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_shareG(const occ::handle<TopOpeBRepDS_HDataStructure> &, int, int, int, const TopoDS_Edge &, bool &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_share_g",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FIR::ProcessFaceInterferences(int, const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FIR.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFIR::process_face_interferences_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FIR.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeInterferenceTool::TopOpeBRepDS_EdgeInterferenceTool()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeInterferenceTool::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Filter::ProcessCurveInterferences()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Filter.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFilter::process_curve_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Filter.cxx and TopOpeBRepDS_Filter*Interferences.cxx (the classifier pointer an optional borrow); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::HasInterferences(TopOpeBRepDS_Kind, int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::has_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::HDS() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::hds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Reducer::ProcessEdgeInterferences()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Reducer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSReducer::process_edge_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Reducer.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Dumper::SDumpRefOri(TopOpeBRepDS_Kind, int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Dumper.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSDumper::sdump_ref_ori",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Dumper.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_HDataStructure::ChkIntg()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_HDataStructure.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSHDataStructure::chk_intg",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_HDataStructure.cxx as an associated function on the handle (the checker needs the handle of the structure); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::Init()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_sdm(const TopOpeBRepDS_DataStructure &, const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_sdm",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_ONesd(const TopOpeBRepDS_DataStructure &, int, const TopoDS_Shape &, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_one_sd",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceInterferenceTool::Init(const TopoDS_Shape &, const TopoDS_Shape &, bool, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceInterferenceTool::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceInterferenceTool.cxx (the structure pointer a borrowed reference); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::Clear()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::clear",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::PrintShape(int, Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::print_shape_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_aresamdom(const TopOpeBRepDS_DataStructure &, const TopoDS_Shape &, const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_aresamdom",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::CheckShapes(const NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::check_shapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TKI::More() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TKI.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTKI::more",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TKI.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_getoov(const TopoDS_Shape &, const TopOpeBRepDS_DataStructure &, TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_getoov",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_TOOL::GetConfig(const occ::handle<TopOpeBRepDS_HDataStructure> &, const NCollection_DataMap<TopoDS_Shape, TopOpeBRepDS_ListOfShapeOn1State, TopTools_ShapeMapHasher> &, int, int, int &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTOOL::get_config",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_TOOL.cxx (static members; `_ds` twins take the locked structure); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_select2dI(int, TopOpeBRepDS_DataStructure &, TopAbs_ShapeEnum, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ProcessInterferencesTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::process_interferences_tool::fun_select2d_i",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ProcessInterferencesTool.cxx (the lists walked as vectors, a removal at an index the native removal at an iterator); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Dumper::SPrintShapeRefOri(const NCollection_List<TopoDS_Shape> &, const TCollection_AsciiString &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Dumper.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSDumper::sprint_shape_ref_ori_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Dumper.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Reducer::TopOpeBRepDS_Reducer(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Reducer.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSReducer::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Reducer.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_parbefaft(const TopOpeBRepDS_DataStructure &, const TopoDS_Edge &, double, const double &, const double &, const bool &, double &, double &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_parbefaft",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::ChkIntg()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::chk_intg",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_hasUNK(const TopOpeBRepDS_Transition &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_has_unk",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_repvg(const TopOpeBRepDS_DataStructure &, int, TopOpeBRepDS_Kind, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_repvg.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fds_repvg",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_repvg.cxx as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Edge3dInterferenceTool::Add(const TopoDS_Shape &, const TopoDS_Shape &, const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_Interference> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Edge3dInterferenceTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdge3dInterferenceTool::add",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Edge3dInterferenceTool.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Check::PrintIntg(Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Check.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheck::print_intg",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Check.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDSCNX_HasConnexFace(const TopoDS_Shape &, const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_connex.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::fdscnx_has_connex_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_connex.cxx (the static maps a thread-local cache; `_ds` twins take the locked structure) as a free function; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_completeforSE5(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_complete_for_se5",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FUN_ds_PURGEforE9(const occ::handle<TopOpeBRepDS_HDataStructure> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fun_ds_purge_for_e9",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EIR::ProcessEdgeInterferences()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EIR.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEIR::process_edge_interferences",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EIR.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
+    },
+    {
+      "upstream_id": "FDS_copy(const NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &, NCollection_List<occ::handle<TopOpeBRepDS_Interference>> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EXPORT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::export::fds_copy",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EXPORT.cxx as a free function of the export module (outputs returned, Option for a native false return; the handled structure locked once); compared with OCCT by tools/verify_tkbool_numeric.py (dsx: structures of two solids with points, same domain pairs, section edges and pseudo-random interferences, every operation printing the resulting interferences); unit tests in crates/tkbool/tests/top_ope_brep_ds_ops.rs."
     }
   ],
   "tests": [

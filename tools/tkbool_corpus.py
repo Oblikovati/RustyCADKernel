@@ -61,3 +61,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_evolved').append_evolved_requests(requests)
     # TopOpeBRepTool TOOL, TOPOLOGY, transitions and regularization (tkbool_corpus_topopebreptool_tool.py)
     __import__('tkbool_corpus_topopebreptool_tool').append_topopebreptool_tool_requests(requests)
+    # TopOpeBRepDS interference processing (tkbool_corpus_topopebrepds_ops.py)
+    __import__('tkbool_corpus_topopebrepds_ops').append_topopebrepds_ops_requests(requests)

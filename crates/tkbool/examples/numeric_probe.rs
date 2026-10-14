@@ -147,6 +147,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "tt_purge_internal",
         bl_probe::top_ope_brep_tool_regu::purge_internal_case,
     ),
+    // TopOpeBRepDS interference processing (bl_probe/top_ope_brep_ds_ops.rs)
+    ("dsx", bl_probe::top_ope_brep_ds_ops::dsx_case),
     ("tb_wire_to_face", top_ope_brep_build::wire_to_face_case),
     ("tb_face_builder", top_ope_brep_build::face_builder_case),
     ("tb_wec", top_ope_brep_build::wec_case),

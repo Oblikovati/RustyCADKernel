@@ -21,6 +21,7 @@ pub mod point_explorer;
 pub mod top_ope_brep_build;
 pub mod top_ope_brep_ds;
 pub mod top_ope_brep_ds_build;
+pub mod top_ope_brep_ds_ops;
 pub mod top_ope_brep_tool_classifier;
 pub mod top_ope_brep_tool_curve_tool;
 pub mod top_ope_brep_tool_regu;

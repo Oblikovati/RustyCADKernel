@@ -8,8 +8,8 @@
 //! interferences, and storing interferences on shapes and on their geometries.
 use super::TopOpeBRepDSHDataStructure;
 use crate::top_ope_brep_ds::{
-    ListOfInterference, TopOpeBRepDSInterference, TopOpeBRepDSKind, TopOpeBRepDSPoint,
-    TopOpeBRepDSPointIterator,
+    ListOfInterference, TopOpeBRepDSDataStructure, TopOpeBRepDSInterference, TopOpeBRepDSKind,
+    TopOpeBRepDSPoint, TopOpeBRepDSPointIterator,
 };
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::standard::real::{real_first, real_last};
@@ -23,6 +23,45 @@ fn null_interference() -> Failure {
         "TopOpeBRepDS_HDataStructure: null interference; expected an interference handle",
         "TopOpeBRepDS_HDataStructure",
     )
+}
+
+/// The interference stored on its surface or curve of the data structure (nothing for
+/// the other kinds); `store_on_geometry_ds(&mut ds, &i)?`.
+pub(crate) fn store_on_geometry_ds(
+    ds: &mut TopOpeBRepDSDataStructure,
+    i: &Handle<TopOpeBRepDSInterference>,
+) -> Result<(), Failure> {
+    let ii = i.get().ok_or_else(null_interference)?;
+    let (g, gt) = (ii.geometry(), ii.geometry_type());
+    match gt {
+        TopOpeBRepDSKind::Surface => {
+            ds.change_surface_interferences(g).append(i.clone());
+        }
+        TopOpeBRepDSKind::Curve => {
+            ds.change_curve_interferences(g).append(i.clone());
+        }
+        _ => {}
+    }
+    Ok(())
+}
+
+/// `HDS->StoreInterference(I, S)` on the data structure itself: on a kept shape (and
+/// its geometry); Standard_ProgramError for another shape;
+/// `store_interference_ds(&mut ds, &i, &face)?`.
+pub(crate) fn store_interference_ds(
+    ds: &mut TopOpeBRepDSDataStructure,
+    i: &Handle<TopOpeBRepDSInterference>,
+    s: &Shape,
+) -> Result<(), Failure> {
+    if !ds.has_shape(s, true) {
+        return Err(Failure::with_type(
+            "Standard_ProgramError",
+            "StoreInterference on shape out of DS",
+            "TopOpeBRepDS_HDataStructure",
+        ));
+    }
+    ds.change_shape_interferences(s).append(i.clone());
+    store_on_geometry_ds(ds, i)
 }
 
 /// `FUN_TopOpeBRepDS_SortOnParameter(List, SList)`: the point and vertex interferences
@@ -175,19 +214,7 @@ impl TopOpeBRepDSHDataStructure {
 
     /// The interference stored on its surface or curve (nothing for the other kinds).
     fn store_on_geometry(&self, i: &Handle<TopOpeBRepDSInterference>) -> Result<(), Failure> {
-        let ii = i.get().ok_or_else(null_interference)?;
-        let (g, gt) = (ii.geometry(), ii.geometry_type());
-        let mut ds = self.change_ds();
-        match gt {
-            TopOpeBRepDSKind::Surface => {
-                ds.change_surface_interferences(g).append(i.clone());
-            }
-            TopOpeBRepDSKind::Curve => {
-                ds.change_curve_interferences(g).append(i.clone());
-            }
-            _ => {}
-        }
-        Ok(())
+        store_on_geometry_ds(&mut self.change_ds(), i)
     }
 
     /// `StoreInterference(I, LI, str)`: appended to `li`, and stored on its surface or
@@ -208,17 +235,7 @@ impl TopOpeBRepDSHDataStructure {
         i: &Handle<TopOpeBRepDSInterference>,
         s: &Shape,
     ) -> Result<(), Failure> {
-        if !self.ds().has_shape(s, true) {
-            return Err(Failure::with_type(
-                "Standard_ProgramError",
-                "StoreInterference on shape out of DS",
-                "TopOpeBRepDS_HDataStructure",
-            ));
-        }
-        self.change_ds()
-            .change_shape_interferences(s)
-            .append(i.clone());
-        self.store_on_geometry(i)
+        store_interference_ds(&mut self.change_ds(), i, s)
     }
 
     /// `StoreInterference(I, IS, str)`: on the shape of index `is`;

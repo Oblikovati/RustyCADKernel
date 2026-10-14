@@ -1,6 +1,4 @@
 //! Exact translation of TopOpeBRepDS_BuildTool_Test.cxx at OCCT 3d097a0.
-// Copyright (c) 2026 OPEN CASCADE SAS
-// LGPL-2.1 with OCCT exception; see licenses/.
 use rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSBuildTool;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::Explorer;

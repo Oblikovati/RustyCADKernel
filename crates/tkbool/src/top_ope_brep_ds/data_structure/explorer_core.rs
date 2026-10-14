@@ -1,8 +1,5 @@
 // Shared translation of the PointExplorer and CurveExplorer traversal at
 // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
-// Copyright (c) 1995-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-// Licensed under LGPL-2.1 with the OCCT exception; see licenses/.
 use super::{TopOpeBRepDSCurve, TopOpeBRepDSDataStructure, TopOpeBRepDSPoint};
 
 pub(super) trait ExplorerGeometry: Default {
