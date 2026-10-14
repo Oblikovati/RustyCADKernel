@@ -27,3 +27,6 @@ mod pipeline_tests;
 mod progress_tests;
 #[cfg(test)]
 mod test_fixture;
+
+#[cfg(test)]
+mod diagnostic_baseline_tests;

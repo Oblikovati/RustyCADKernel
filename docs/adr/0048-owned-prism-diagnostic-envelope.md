@@ -1,0 +1,68 @@
+# ADR 0048: owned prism diagnostic envelope V1
+
+Status: approved bounded design; implementation in progress, private only.
+
+## Decision
+
+RustyCADKernel#10 needs an actionable immutable refusal even when an operation's
+local diagnostic containers cannot yet be projected losslessly. Operation class
+and diagnostic projection coverage are independent. Failed, incomplete, cancelled
+and declined operations retain their original class; missing diagnostic coverage
+never promotes a body or erases a failure.
+
+This slice starts with actual owned-request admission and construction native
+refusals, then the publication outer wrapper. Reuse the ADR0043 bounded join
+projector and the original typed numerical/native causes. Do not mirror working
+transactions, flatten supported causes to strings, or replace numerical evidence
+with counts. Unsupported payloads receive owned typed incomplete-diagnostic
+coverage with their original local failure retained for inspection.
+
+## Context and identity
+
+Construct diagnostic context only from the actual sealed preparation state. Own
+the complete original request, including caller IDs, revisions, source
+multiplicity and pole bits, declared plane, selection, extrusion and every policy
+and work limit. The validated semantic plan is optional: early admission can
+fail before a plan exists. Never manufacture a dictionary for that case.
+
+One read-only preparation view supplies request, phase, optional plan and retained
+stage presence for both preparation success and failure. It borrows local state;
+it is not a published result and does not expose mutable owners. A single shared
+full-request encoder retains floating-point bits, including signed zero and NaN
+payloads on refused input. The final outcome owner reuses that codec unchanged.
+
+Internal authored tokens are reused between operations. Matching an internal
+operation token and options alone cannot distinguish two callers with identical
+geometry. Publication must therefore attach a sealed resolver context during the
+actual publication invocation. A later arbitrary `(failure, preparation,
+bindings)` tuple cannot qualify authored IDs. Verify the request policy and
+operation/source dictionary binding before attribution; absent or foreign context
+is typed projection-incomplete. Reuse resolver correspondence rather than adding
+a second role/ancestry resolver.
+
+## Scope and migration
+
+The envelope is private and versioned independently of existing preparation and
+publication behavior. Native message/stack bytes, exception type/parent, phase,
+callback checkpoint/ordinal and original operation class stay intact. Later
+census/contact/history/measure containers remain explicit incomplete projections
+until their concrete reachable payloads have typed adapters. Body projection
+errors are supplied by the separate body-view owner.
+
+Kernel#10's operation-contract owner owns the migration/deletion task: finish the
+bounded actual-operation refusal corpus and remove any superseded lossy public
+adapter before the existing ADR0014 application R3 migration limit. This does not
+introduce a release, workspace version change, new geometry engine, or additional
+milestone. Earlier local failure paths remain selectable and unchanged.
+
+## Verification obligations
+
+Pin current local failures before structural access/encoder reuse. Exercise
+actual admission and early callbacks, native byte payloads, all request fields,
+foreign context, absent dictionaries, original class preservation and retained
+unsupported payloads. Compare independent expected request bytes, signed zero,
+NaN payloads and revision/source multiplicity. Verify process/thread replay,
+Send/Sync of owned envelopes, and input isolation. Local retained containers have
+no published lock-free ownership claim. Record source-frozen tests, docs, lint,
+formatting, sanitizer attempt and any incomplete gate separately. No native OCCT,
+GPU, release benchmark or application acceptance belongs to this slice.
