@@ -1,0 +1,75 @@
+# Complete prism history baseline
+
+Basis `e6955e6db466ae677956ad82537134fb97793b22`. Before structural changes,
+297 prism tests passed, with exact unchanged V1 frozen and lineage replay bytes.
+`baseline.json` pins toolchain, commands, platform and source bookends.
+`owned-expectations.json` states independent one-operation incidence expectations;
+it does not grant history completeness or body validity.
+
+## Structural exhaustive sweep queries
+
+The additive private query receipt distinguishes NotReached from Captured, and
+retains generated lists, both cap results (including null), and true/false native
+retirement for every actual copied-member query. Legacy output construction and
+serializers are unchanged. `retention.json` records 303 prism tests and exact
+unchanged lineage/frozen replay.
+
+The first new test incorrectly assumed that native wire retirement implies null
+cap results; its failure is retained in `retention-null-cap-assumption-red.log.gz`.
+`make_prism.rs::is_deleted` means absence of a used generated swept shape and is
+independent of cap images. The corrected structural invariant keeps both cap
+continuations together with the retired wire and empty generated list. This
+corrects an unpinned draft assertion; no owned baseline expectation changed.
+
+## Structural directed context retention
+
+`context-retention.json` records all 665 TKBO library tests passing, plus focused
+context/native-error checks and both exact V1 replay comparisons. Source bookends
+are unchanged. Initial and candidate copier observations retain every actual
+directed context and its actual Modified query result while the copier lives.
+Generated areas retain their complete directed context rows too. Native errors,
+NotReached, empty answers, ancestry and repeated child-slot multiplicity remain
+distinct. These operation-local identities are lookup operands, not published IDs.
+
+The neutral traversal extraction preserves legacy cumulative placement/orientation
+and error ordering. Its ancestor check still includes Location; it is not a claim
+of bounded safety for arbitrary cyclic input. New complete-history admission will
+check identity-only ancestor cycles and explicit depth/use limits separately.
+
+## Shared historical lineage projection
+
+The same member/context/sweep/retirement projection now accepts an already-bound
+body and its frozen directed keys, without callbacks or another freeze. Existing
+V1 inspection keeps its original sequence and exact bytes. Focused tests compare
+the owned observations byte for byte and refuse wrong-operation/missing-key and
+missing-observation cases. `lineage-projection.json` retains the source bookends
+and replay checks. This seam adds no geometry or body acceptance claim.
+
+## Exhaustive partition member query retention
+
+Actual Modified/Generated/IsDeleted answers, original/copied member identities,
+kind and supported-type query results are retained before builder retirement.
+The read-only `has_filled_history` observation distinguishes native unavailable
+history (whose compatibility queries return empty/false) from actual answers.
+Legacy callback/classification/relations and V1 bytes are unchanged.
+
+The intermediate full library run passed 771 tests and failed one new draft test:
+that draft incorrectly expected a null generation-origin query to fail. Existing
+History deliberately permits null generation origins; the corrected test retains
+its actual empty answer alongside native errors from the other queries. The
+earlier draft also expected NoSuchObject instead of Shape's actual NullObject.
+Both failures/logs remain. No owned expected-value fixture changed. Final focused
+query tests and both exact V1 replays pass on unchanged source; the final candidate
+will run the complete matrix again after behavior implementation.
+
+The debug measurement retains three actual rows per call and no returned images
+on the closed-Jordan fixture. The log records 1,000 repetitions and elapsed ns;
+inline row size is 184 bytes, excluding immutable Location storage and allocator
+overhead. This is a direct incremental capture-time measurement, not total
+allocation cost, peak-memory attribution, or release performance acceptance.
+
+Migration/deletion gate: after Kernel #10's ordered publisher consumes and checks
+the exhaustive queries on the one-operation corpus, retire the older implicit
+partition-history-only acceptance path within that milestone. Keep private V1
+diagnostic replay selectable until its recorded migration; normalized legacy
+relations alone never prove the new complete-history contract.

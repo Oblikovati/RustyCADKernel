@@ -194,6 +194,7 @@ mod tests {
     }
     fn empty_test_member() -> CopiedSources {
         CopiedSources {
+            contexts: Vec::new(),
             arguments: Default::default(),
             roots: Vec::new(),
             members: vec![(original_key(7), Shape::default())],

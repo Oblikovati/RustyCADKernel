@@ -4,6 +4,7 @@ mod admission;
 mod alerts;
 mod bindings;
 mod capture;
+pub(crate) mod complete_history;
 mod coverage;
 mod domain;
 mod encoding;
@@ -75,3 +76,5 @@ pub(crate) mod owned_refusal;
 #[cfg(test)]
 mod owned_refusal_baseline_tests;
 pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
+#[cfg(test)]
+pub(in crate::sketch_region_prism) mod publication_read_snapshot;

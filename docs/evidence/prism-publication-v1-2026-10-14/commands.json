@@ -1,0 +1,90 @@
+[
+  {
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--all-targets",
+      "--no-fail-fast",
+      "--",
+      "--test-threads=1"
+    ],
+    "name": "all-targets",
+    "returncode": 0,
+    "seconds": 709.0774186819981,
+    "test_summaries": [
+      "test result: ok. 963 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 314.78s",
+      "test result: ok. 646 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 371.08s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+    ]
+  },
+  {
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--doc"
+    ],
+    "name": "doctests",
+    "returncode": 0,
+    "seconds": 1.6568802340007096,
+    "test_summaries": [
+      "test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s"
+    ]
+  },
+  {
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "clippy",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "name": "clippy",
+    "returncode": 0,
+    "seconds": 0.1364711089991033,
+    "test_summaries": []
+  },
+  {
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "doc",
+      "-p",
+      "rustycad-tkbo",
+      "--all-features",
+      "--no-deps"
+    ],
+    "name": "docs",
+    "returncode": 0,
+    "seconds": 1.5632144440023694,
+    "test_summaries": []
+  },
+  {
+    "command": [
+      "/home/vmiguel/.cargo/bin/cargo",
+      "+1.99.0",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "name": "format",
+    "returncode": 0,
+    "seconds": 7.723274263000349,
+    "test_summaries": []
+  }
+]

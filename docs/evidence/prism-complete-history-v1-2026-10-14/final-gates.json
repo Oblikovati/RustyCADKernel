@@ -1,0 +1,228 @@
+{
+  "revision": "c3ea3d687c784e25e2d445bb1604e2a76f10c028",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "jobs": 2,
+  "source_files": 16011,
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 680.1698010479995,
+      "source_unchanged": true
+    },
+    {
+      "label": "docs",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 42.47852940200028,
+      "source_unchanged": true
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 16.481986261998827,
+      "source_unchanged": true
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 7.541281028999947,
+      "source_unchanged": true
+    },
+    {
+      "label": "history-process-1",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "complete_prism_history_replay_across_processes_and_threads",
+        "--all-features",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.92877958200188,
+      "source_unchanged": true
+    },
+    {
+      "label": "lineage-process-1",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "prism_copy_lineage_owned_bytes_replay_across_processes_and_threads",
+        "--all-features",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7120534380010213,
+      "source_unchanged": true
+    },
+    {
+      "label": "frozen-process-1",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--all-features",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9752395029972831,
+      "source_unchanged": true
+    },
+    {
+      "label": "history-process-2",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "complete_prism_history_replay_across_processes_and_threads",
+        "--all-features",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7797507569994195,
+      "source_unchanged": true
+    },
+    {
+      "label": "lineage-process-2",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "prism_copy_lineage_owned_bytes_replay_across_processes_and_threads",
+        "--all-features",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0231583729982958,
+      "source_unchanged": true
+    },
+    {
+      "label": "frozen-process-2",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--all-features",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9215881150012137,
+      "source_unchanged": true
+    }
+  ],
+  "replays": {
+    "history-process-1": {
+      "bytes": 421702,
+      "sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686",
+      "exact_bytes_equal_to_pre_style": true
+    },
+    "lineage-process-1": {
+      "bytes": 167821,
+      "sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec",
+      "exact_bytes_equal_to_pre_style": true
+    },
+    "frozen-process-1": {
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "exact_bytes_equal_to_pre_style": true
+    },
+    "history-process-2": {
+      "bytes": 421702,
+      "sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686",
+      "exact_bytes_equal_to_pre_style": true
+    },
+    "lineage-process-2": {
+      "bytes": 167821,
+      "sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec",
+      "exact_bytes_equal_to_pre_style": true
+    },
+    "frozen-process-2": {
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "exact_bytes_equal_to_pre_style": true
+    }
+  }
+}

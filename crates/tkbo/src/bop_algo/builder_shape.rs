@@ -126,6 +126,11 @@ impl BuilderShape {
         self.map_shape.clear(false);
     }
 
+    /// Observe availability without creating an empty history; `base.has_filled_history()`.
+    pub(crate) fn has_filled_history(&self) -> bool {
+        self.filled_history().is_some()
+    }
+
     fn filled_history(&self) -> Option<&History> {
         if self.fill_history {
             self.history.get()

@@ -22,30 +22,35 @@ pub(super) fn observe_sweep(
         .clone();
     let mut observed = Vec::new();
     let mut native_retired = Vec::new();
+    let mut queries = Vec::new();
     for base in bases {
-        observe_base(maker, base, &mut observed, &mut native_retired)?;
+        queries.push(observe_base(
+            maker,
+            base,
+            &mut observed,
+            &mut native_retired,
+        )?);
     }
-    let (bindings, transport_gaps) = body_bindings(&body, observed)?;
-    let relations = output_relations(&body, &bindings)?;
-    let mut result = retained_diagnostic(body, relations, native_retired);
-    result.bindings = bindings;
-    result.transport_gaps = transport_gaps;
-    Ok(result)
+    retained_diagnostic(body, observed, native_retired, queries)
 }
 fn retained_diagnostic(
     body: Shape,
-    relations: Vec<ArrangementRelation>,
+    observed: Vec<PrismNativeImage>,
     native_retired: Vec<ArrangementRelation>,
-) -> PrismDiagnostic {
-    PrismDiagnostic {
+    queries: Vec<PrismSweepQueryObservation>,
+) -> Result<PrismDiagnostic, PrismCause> {
+    let (bindings, transport_gaps) = body_bindings(&body, observed)?;
+    let relations = output_relations(&body, &bindings)?;
+    Ok(PrismDiagnostic {
+        sweep_queries: PrismSweepQueries::Captured(queries),
         surface_charts: None,
         body,
-        bindings: Vec::new(),
-        transport_gaps: Vec::new(),
+        bindings,
+        transport_gaps,
         relations,
         native_retired,
         coverage: None,
-    }
+    })
 }
 
 pub(super) fn output_relations(
@@ -63,39 +68,46 @@ fn observe_base(
     base: &ArrangementRelation,
     observed: &mut Vec<PrismNativeImage>,
     native_retired: &mut Vec<ArrangementRelation>,
-) -> Result<(), PrismCause> {
+) -> Result<PrismSweepQueryObservation, PrismCause> {
     // Generated() owns one scratch list; cloning its actual values now prevents later overwrite.
-    observe_generated(maker, base, observed)?;
-    observe_caps(maker, base, observed)?;
-    observe_retirement(maker, base, native_retired)
+    let generated = observe_generated(maker, base, observed)?;
+    let (first, last) = observe_caps(maker, base, observed)?;
+    let retired = observe_retirement(maker, base, native_retired)?;
+    Ok(PrismSweepQueryObservation {
+        query: base.clone(),
+        generated,
+        first,
+        last,
+        retired,
+    })
 }
 fn observe_retirement(
     maker: &mut BRepPrimAPIMakePrism,
     base: &ArrangementRelation,
     native_retired: &mut Vec<ArrangementRelation>,
-) -> Result<(), PrismCause> {
-    if maker
+) -> Result<bool, PrismCause> {
+    let retired = maker
         .is_deleted(&base.output)
-        .map_err(|f| mapped(PrismPhase::History, f))?
-    {
+        .map_err(|f| mapped(PrismPhase::History, f))?;
+    if retired {
         native_retired.push(base.clone());
     }
-    Ok(())
+    Ok(retired)
 }
 
 fn observe_caps(
     maker: &mut BRepPrimAPIMakePrism,
     base: &ArrangementRelation,
     observed: &mut Vec<PrismNativeImage>,
-) -> Result<(), PrismCause> {
+) -> Result<(Shape, Shape), PrismCause> {
     let first = maker
         .first_shape_of(&base.output)
         .map_err(|f| mapped(PrismPhase::History, f))?;
     let last = maker
         .last_shape_of(&base.output)
         .map_err(|f| mapped(PrismPhase::History, f))?;
-    append_cap_images(base, first, last, observed);
-    Ok(())
+    append_cap_images(base, first.clone(), last.clone(), observed);
+    Ok((first, last))
 }
 pub(super) fn all_parents(base: &ArrangementRelation) -> Vec<OriginalMemberIdentity> {
     let mut parents = Vec::new();
@@ -189,7 +201,7 @@ fn observe_generated(
     maker: &mut BRepPrimAPIMakePrism,
     base: &ArrangementRelation,
     observed: &mut Vec<PrismNativeImage>,
-) -> Result<(), PrismCause> {
+) -> Result<Vec<Shape>, PrismCause> {
     // Generated owns one scratch list; snapshot actual values before the next query overwrites it.
     let generated = maker
         .generated(&base.output)
@@ -202,7 +214,7 @@ fn observe_generated(
             generated_relation(output, base),
         ));
     }
-    Ok(())
+    Ok(generated.iter().cloned().collect())
 }
 fn append_cap_images(
     base: &ArrangementRelation,

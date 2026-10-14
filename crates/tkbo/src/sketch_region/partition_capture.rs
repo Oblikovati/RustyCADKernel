@@ -28,6 +28,8 @@ pub(super) fn capture_partition_with_space(
     space: Option<PartitionSpaceCapture>,
 ) -> PartitionObservation {
     let mut partial = OwnedPartitionSnapshot {
+        member_queries: super::PartitionMemberQueries::NotReached,
+        input_contexts: copied.contexts.clone(),
         source_shape_count: None,
         sources: Vec::new(),
         vertices: Vec::new(),
@@ -49,6 +51,8 @@ fn capture_context(
         .ok_or_else(|| missing_context("filler DS is None"))?;
     partial.source_shape_count = Some(structure.nb_source_shapes());
     let builder = builder.ok_or_else(|| missing_context("mapped builder is None"))?;
+    partial.member_queries =
+        super::partition_member_queries::capture_member_queries(copied, builder);
     capture_members(copied, structure)?;
     capture_sources(copied, structure, builder, partial, space)?;
     super::partition_vertices::capture_vertices(
