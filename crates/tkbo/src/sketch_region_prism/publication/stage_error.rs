@@ -44,11 +44,7 @@ pub(super) fn finish_child<T>(
         return result;
     };
     let phase = stop.checkpoint.phase;
-    let class = match stop.cause {
-        PublicationCallbackCause::Cancelled => PrismPublicationClass::Cancelled,
-        PublicationCallbackCause::Failed(_) => PrismPublicationClass::Failed,
-        PublicationCallbackCause::Exhausted => PrismPublicationClass::Incomplete,
-    };
+    let class = callback_class(&stop.cause);
     let downstream = result.err().map(|failure| Box::new(failure.cause));
     Err(PublicationStageFailure {
         phase,
@@ -84,5 +80,13 @@ impl From<Box<JoinedPrismMeasureFailure>> for PublicationStageFailure {
             class,
             cause: PublicationStageCause::Measures(cause),
         }
+    }
+}
+
+fn callback_class(cause: &PublicationCallbackCause) -> PrismPublicationClass {
+    match cause {
+        PublicationCallbackCause::Cancelled => PrismPublicationClass::Cancelled,
+        PublicationCallbackCause::Failed(_) => PrismPublicationClass::Failed,
+        PublicationCallbackCause::Exhausted => PrismPublicationClass::Incomplete,
     }
 }

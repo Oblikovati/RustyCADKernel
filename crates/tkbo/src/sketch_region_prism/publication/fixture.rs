@@ -104,3 +104,13 @@ impl PrismPublicationProgress for PublicationObserver {
         Ok(self.stop == Some(point.phase))
     }
 }
+
+pub(super) fn publication_phases() -> [PrismPublicationPhase; 5] {
+    [
+        PrismPublicationPhase::Join,
+        PrismPublicationPhase::Validation,
+        PrismPublicationPhase::History,
+        PrismPublicationPhase::Measures,
+        PrismPublicationPhase::Commit,
+    ]
+}

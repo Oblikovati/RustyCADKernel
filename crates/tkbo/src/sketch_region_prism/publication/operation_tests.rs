@@ -9,17 +9,7 @@ fn complete_operation_owns_same_body_checks_history_and_signed_measures() {
     let fixture = PublicationFixture::new();
     let mut observer = PublicationObserver::default();
     let result = fixture.publish(&mut observer);
-    assert_eq!(
-        result.completion(),
-        PrismPublicationCompletion::CompleteNamedPrismV1
-    );
-    assert!(result.validation().binds(result.join()));
-    assert!(result.history().binds(result.join()));
-    assert!(result.measures().matches_join(result.join()));
-    assert_eq!(result.requested(), fixture.requested);
-    assert!(!result.join().projection().is_valid_body());
-    assert_eq!(result.history().continued().len(), 3);
-    assert!(result.history().deleted_originals().is_empty());
+    assert_complete_views(&result, fixture.requested);
     assert_eq!(
         observer.seen.first().unwrap().phase,
         PrismPublicationPhase::Join
@@ -31,14 +21,7 @@ fn complete_operation_owns_same_body_checks_history_and_signed_measures() {
     assert_independent_scalars(&result);
 }
 fn assert_independent_scalars(result: &PublishedNamedPrism) {
-    let volume = result.signed_sweep_integral().enclosure();
-    assert_eq!(
-        volume,
-        [
-            f64::from_bits(0x4013333333333333),
-            f64::from_bits(0x4013333333333334)
-        ]
-    );
+    assert_signed_integral(result);
     let cap = [
         f64::from_bits(0x4003333333333333),
         f64::from_bits(0x4003333333333334),
@@ -94,24 +77,8 @@ fn missing_history_names_cannot_publish_or_reach_commit() {
 fn every_stage_cancellation_returns_no_body_and_allows_fresh_reuse() {
     let fixture = PublicationFixture::new();
     let baseline = fixture.publish(&mut PublicationObserver::default());
-    let sources = binding_sources(&fixture.operation.shapes);
-    for phase in [
-        PrismPublicationPhase::Join,
-        PrismPublicationPhase::Validation,
-        PrismPublicationPhase::History,
-        PrismPublicationPhase::Measures,
-        PrismPublicationPhase::Commit,
-    ] {
-        let mut observer = PublicationObserver {
-            stop: Some(phase),
-            ..Default::default()
-        };
-        let failure = publish_named_prism(&fixture.request(&sources), &mut observer)
-            .err()
-            .unwrap();
-        assert_eq!(failure.class, PrismPublicationClass::Cancelled);
-        assert_eq!(failure.phase, phase);
-        assert_eq!(observer.seen.last().unwrap().phase, phase);
+    for phase in publication_phases() {
+        assert_stage_cancelled(&fixture, phase);
         assert_eq!(
             fixture
                 .publish(&mut PublicationObserver::default())
@@ -137,4 +104,43 @@ fn assert_side_and_total_oracle(result: &PublishedNamedPrism) {
         result.measures().total_area().enclosure(),
         oracle_interval("total"),
     );
+}
+
+fn assert_complete_views(result: &PublishedNamedPrism, requested: PrismPublicationOptions) {
+    assert_eq!(
+        result.completion(),
+        PrismPublicationCompletion::CompleteNamedPrismV1
+    );
+    assert!(result.validation().binds(result.join()));
+    assert!(result.history().binds(result.join()));
+    assert!(result.measures().matches_join(result.join()));
+    assert_eq!(result.requested(), requested);
+    assert!(!result.join().projection().is_valid_body());
+    assert_eq!(result.history().continued().len(), 3);
+    assert!(result.history().deleted_originals().is_empty());
+}
+
+fn assert_signed_integral(result: &PublishedNamedPrism) {
+    let volume = result.signed_sweep_integral().enclosure();
+    assert_eq!(
+        volume,
+        [
+            f64::from_bits(0x4013333333333333),
+            f64::from_bits(0x4013333333333334)
+        ]
+    );
+}
+
+fn assert_stage_cancelled(fixture: &PublicationFixture, phase: PrismPublicationPhase) {
+    let sources = binding_sources(&fixture.operation.shapes);
+    let mut observer = PublicationObserver {
+        stop: Some(phase),
+        ..Default::default()
+    };
+    let failure = publish_named_prism(&fixture.request(&sources), &mut observer)
+        .err()
+        .unwrap();
+    assert_eq!(failure.class, PrismPublicationClass::Cancelled);
+    assert_eq!(failure.phase, phase);
+    assert_eq!(observer.seen.last().unwrap().phase, phase);
 }

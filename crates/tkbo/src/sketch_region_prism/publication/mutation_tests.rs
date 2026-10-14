@@ -47,12 +47,7 @@ fn final_source_and_body_raw_vertex_edits_refuse_without_mutating_previous_resul
         let previous = fixture.publish(&mut PublicationObserver::default());
         let bytes = previous.replay_bytes().to_vec();
         let fresh = read_snapshot(&previous);
-        let root = if body {
-            &fixture.operation.receipt.diagnostic.as_ref().unwrap().body
-        } else {
-            &fixture.operation.shapes[0]
-        };
-        let mut progress = vertex_edit(first_vertex(root));
+        let mut progress = vertex_edit(mutation_vertex(&fixture, body));
         let sources = binding_sources(&fixture.operation.shapes);
         let failure = publish_named_prism(&fixture.request(&sources), &mut progress)
             .err()
@@ -84,7 +79,9 @@ fn partition_edit(fixture: &PublicationFixture) -> CommitMutation {
     else {
         panic!("expected actual arrangement");
     };
-    let mut root = arranged.arrangement.clone();
+    remove_first_child(arranged.arrangement.clone())
+}
+fn remove_first_child(mut root: Shape) -> CommitMutation {
     let child = ShapeIterator::new(&root, true, true)
         .value()
         .unwrap()
@@ -127,19 +124,7 @@ fn extra_partition_query_failure_is_rechecked_after_unchanged_shared_join() {
     let previous = fixture.publish(&mut PublicationObserver::default());
     let bytes = previous.replay_bytes().to_vec();
     let fresh = read_snapshot(&previous);
-    let crate::sketch_region::PartitionObservation::Captured(partition) =
-        &mut fixture.operation.bridge.mapped.arrangement.partition
-    else {
-        panic!("expected retained partition");
-    };
-    let crate::sketch_region::PartitionMemberQueries::Captured { rows, .. } =
-        &mut partition.member_queries
-    else {
-        panic!("expected exhaustive member queries");
-    };
-    rows[0].deleted = Err(std::sync::Arc::new(Failure::out_of_range(
-        "changed original deletion query; expected completed answer",
-    )));
+    fail_partition_query(&mut fixture);
     let sources = binding_sources(&fixture.operation.shapes);
     let request = fixture.request(&sources);
     assert!(request.source.rebind(previous.join()).is_ok());
@@ -162,4 +147,29 @@ fn fresh_read_views_survive_all_operation_inputs_being_dropped() {
     assert!(result.validation().binds(result.join()));
     assert!(result.history().binds(result.join()));
     assert!(result.measures().matches_join(result.join()));
+}
+
+fn mutation_vertex(fixture: &PublicationFixture, body: bool) -> Shape {
+    let root = if body {
+        &fixture.operation.receipt.diagnostic.as_ref().unwrap().body
+    } else {
+        &fixture.operation.shapes[0]
+    };
+    first_vertex(root)
+}
+
+fn fail_partition_query(fixture: &mut PublicationFixture) {
+    let crate::sketch_region::PartitionObservation::Captured(partition) =
+        &mut fixture.operation.bridge.mapped.arrangement.partition
+    else {
+        panic!("expected retained partition");
+    };
+    let crate::sketch_region::PartitionMemberQueries::Captured { rows, .. } =
+        &mut partition.member_queries
+    else {
+        panic!("expected exhaustive member queries");
+    };
+    rows[0].deleted = Err(std::sync::Arc::new(Failure::out_of_range(
+        "changed original deletion query; expected completed answer",
+    )));
 }

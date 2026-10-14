@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! A prospective result remains local until the final callback-free source and history checks.
 use super::{history, progress::*, replay, request::*, result::*, stage_error::*, stages};
+use crate::sketch_region_prism::frozen::proof_join::JoinedPrismProof;
 
 /// Assemble one named operation; `publish_named_prism(&request, &mut progress)` never returns a partial body.
 pub(crate) fn publish_named_prism<'a>(
@@ -40,6 +41,13 @@ fn construct<'a>(
         .source
         .compose(request.requested.join, callbacks)
         .map_err(|cause| request.stage_failure(cause))?;
+    capture_children(request, join, callbacks)
+}
+fn capture_children<'a>(
+    request: &PrismPublicationRequest<'a>,
+    join: JoinedPrismProof,
+    callbacks: &mut PublicationCallbacks<'_>,
+) -> PublicationCheck<'a, PublishedNamedPrism> {
     let validation = stages::validation(&join, request.requested.validation, callbacks)
         .map_err(|cause| request.stage_failure(cause))?;
     let history = history::capture(request, &join, callbacks)?;

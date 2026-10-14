@@ -22,13 +22,7 @@ impl PrismPublicationProgress for FailingPublicationObserver {
 fn every_stage_observer_failure_preserves_typed_cause_and_stops_publication() {
     let fixture = PublicationFixture::new();
     let sources = binding_sources(&fixture.operation.shapes);
-    for phase in [
-        PrismPublicationPhase::Join,
-        PrismPublicationPhase::Validation,
-        PrismPublicationPhase::History,
-        PrismPublicationPhase::Measures,
-        PrismPublicationPhase::Commit,
-    ] {
+    for phase in publication_phases() {
         let mut observer = FailingPublicationObserver {
             phase,
             seen: Vec::new(),
