@@ -37,7 +37,7 @@ impl JoinedPrismTolerance {
         bytes
     }
 }
-fn conformance_rows(value: &JoinedConformanceEvidence, bytes: &mut Vec<u8>) {
+pub(super) fn conformance_rows(value: &JoinedConformanceEvidence, bytes: &mut Vec<u8>) {
     row_counts(value, bytes);
     for row in &value.placements {
         encode_joined_text(
@@ -72,7 +72,7 @@ fn trim(row: &JoinedTrimEvidence, bytes: &mut Vec<u8>) {
         bytes,
     );
 }
-fn frame(value: &UsableToleranceFrame, bytes: &mut Vec<u8>) {
+pub(super) fn frame(value: &UsableToleranceFrame, bytes: &mut Vec<u8>) {
     encode_frozen_placement(value.placement, bytes);
     bytes.push(match value.unscaled_determinant_sign {
         Ordering::Less => 0,
@@ -80,7 +80,7 @@ fn frame(value: &UsableToleranceFrame, bytes: &mut Vec<u8>) {
         Ordering::Greater => 2,
     });
 }
-fn scalar(value: &ExactEndpointCertificate, bytes: &mut Vec<u8>) {
+pub(super) fn scalar(value: &ExactEndpointCertificate, bytes: &mut Vec<u8>) {
     frame(&value.curve_frame, bytes);
     frame(&value.vertex_frame, bytes);
     encode_frozen_numbers([value.requested_spatial, value.effective_spatial], bytes);
@@ -122,7 +122,7 @@ pub(in crate::sketch_region_prism) fn cap(value: StoredToleranceCap, bytes: &mut
         encode_frozen_numbers([maximum], bytes);
     }
 }
-fn metadata(value: &JoinedToleranceMetadata, bytes: &mut Vec<u8>) {
+pub(super) fn metadata(value: &JoinedToleranceMetadata, bytes: &mut Vec<u8>) {
     encode_joined_text(&format!("{:?}/{:?}", value.entity, value.contexts), bytes);
     encode_stored_tolerance_observation(value.observation, bytes);
 }

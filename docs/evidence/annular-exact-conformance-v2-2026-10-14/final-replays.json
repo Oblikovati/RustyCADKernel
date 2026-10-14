@@ -1,0 +1,674 @@
+[
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::region_certificate::replay_tests::portable_region_certificate_process_receipt",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.29201991200534394,
+    "log": "final-replay-first-0.log.gz",
+    "reference": "baseline-1.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "region-json",
+        "bytes": 325,
+        "sha256": "39938f891c801dfdc0b8f9f8eaca52a841afe466ce4c90b2566fd76ba959f9d3"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::complete_history::operation_tests::complete_prism_history_replay_across_processes_and_threads",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.7813468940003077,
+    "log": "final-replay-first-1.log.gz",
+    "reference": "baseline-2.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "complete-prism-history-v1",
+        "bytes": 421702,
+        "sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::lineage::replay_tests::prism_copy_lineage_owned_bytes_replay_across_processes_and_threads",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.3214570510026533,
+    "log": "final-replay-first-2.log.gz",
+    "reference": "baseline-3.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "prism-copy-lineage-v1",
+        "bytes": 167821,
+        "sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 2.143969398995978,
+    "log": "final-replay-first-3.log.gz",
+    "reference": "baseline-4.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "frozen-prism-v1",
+        "bytes": 89921,
+        "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.043542241997784,
+    "log": "final-replay-first-4.log.gz",
+    "reference": "baseline-5.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "joined-measures-v1",
+        "bytes": 193495,
+        "sha256": "78bf68fc0feccec38f467abc8108bec7e4b52a1875a7ec6786bf933dcfc15f93"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::publication::replay_tests::publication_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.193330790993059,
+    "log": "final-replay-first-5.log.gz",
+    "reference": "baseline-6.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "named-prism-publication-v1",
+        "bytes": 2202990,
+        "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::joined_volume::tests::joined_volume_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.3087501840054756,
+    "log": "final-replay-first-6.log.gz",
+    "reference": "baseline-7.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "joined-volume-v1",
+        "bytes": 601860,
+        "sha256": "15f229b2a11115e2c5f4a7f37e5e845e0b5576f71aa83d8ec865de39941f180e"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::region_certificate::annular_binding::replay_tests::annular_binding_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.4394257419990026,
+    "log": "final-replay-first-7.log.gz",
+    "reference": "baseline-8.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "actual-annular-binding-v2",
+        "bytes": 202740,
+        "sha256": "a85c47f20fa53f120facf964e88b2b10cfa047e0e22005f47d1a078b137a182c"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::exact_tolerance::joined_replay_tests::exact_tolerance_bytes_replay_across_threads_and_operations",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.0516971940014628,
+    "log": "final-replay-first-8.log.gz",
+    "reference": "baseline-9.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "prism-exact-tolerance-v2",
+        "bytes": 453096,
+        "sha256": "862c6e77b67e450ddeda02d65b4cfe43881e0cc6c1aa929ae5a091a72bcd1fb7"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::annular_join::replay_tests::annular_frozen_join_owned_process_receipt",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.5901927719969535,
+    "log": "final-replay-first-9.log.gz",
+    "reference": "baseline-10.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "named-annular-frozen-domain-v2",
+        "bytes": 536690,
+        "sha256": "7daf5bf9b081a784b1225dd2bc1989d0b1a5f131e44d378abeb898c849cdd1b1"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::exact_tolerance::joined_cancel_tests::exact_conformance_callback_trace_baseline",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.2147613819979597,
+    "log": "final-replay-first-10.log.gz",
+    "reference": "baseline-11.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "callback-trace",
+        "bytes": 819,
+        "sha256": "249050c3331e846ff46252b1ddff711cc2d97007afab595c1a1ce36fcd9fbf47"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::exact_tolerance::annular::replay_tests::annular_exact_tolerance_replays_across_processes_threads_and_owned_input_drop",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit": 0,
+    "seconds": 1.8344741559994873,
+    "log": "final-replay-first-11.log.gz",
+    "reference": "behavior-pinned-1.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "annular-exact-tolerance-v2",
+        "bytes": 1208718,
+        "sha256": "94baef819300743d3d6c849b84a2e732df08c9c37b8d1d729519ec29e5dbae53"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::region_certificate::replay_tests::portable_region_certificate_process_receipt",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.15268590099731227,
+    "log": "final-replay-second-0.log.gz",
+    "reference": "baseline-1.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "region-json",
+        "bytes": 325,
+        "sha256": "39938f891c801dfdc0b8f9f8eaca52a841afe466ce4c90b2566fd76ba959f9d3"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::complete_history::operation_tests::complete_prism_history_replay_across_processes_and_threads",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.8843324970002868,
+    "log": "final-replay-second-1.log.gz",
+    "reference": "baseline-2.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "complete-prism-history-v1",
+        "bytes": 421702,
+        "sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::lineage::replay_tests::prism_copy_lineage_owned_bytes_replay_across_processes_and_threads",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.9549064669990912,
+    "log": "final-replay-second-2.log.gz",
+    "reference": "baseline-3.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "prism-copy-lineage-v1",
+        "bytes": 167821,
+        "sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 1.2535438159975456,
+    "log": "final-replay-second-3.log.gz",
+    "reference": "baseline-4.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "frozen-prism-v1",
+        "bytes": 89921,
+        "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.667606760005583,
+    "log": "final-replay-second-4.log.gz",
+    "reference": "baseline-5.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "joined-measures-v1",
+        "bytes": 193495,
+        "sha256": "78bf68fc0feccec38f467abc8108bec7e4b52a1875a7ec6786bf933dcfc15f93"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::publication::replay_tests::publication_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.9247462490020553,
+    "log": "final-replay-second-5.log.gz",
+    "reference": "baseline-6.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "named-prism-publication-v1",
+        "bytes": 2202990,
+        "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::joined_volume::tests::joined_volume_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.7229097570016165,
+    "log": "final-replay-second-6.log.gz",
+    "reference": "baseline-7.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "joined-volume-v1",
+        "bytes": 601860,
+        "sha256": "15f229b2a11115e2c5f4a7f37e5e845e0b5576f71aa83d8ec865de39941f180e"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::region_certificate::annular_binding::replay_tests::annular_binding_process_replay",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.680548420001287,
+    "log": "final-replay-second-7.log.gz",
+    "reference": "baseline-8.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "actual-annular-binding-v2",
+        "bytes": 202740,
+        "sha256": "a85c47f20fa53f120facf964e88b2b10cfa047e0e22005f47d1a078b137a182c"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::exact_tolerance::joined_replay_tests::exact_tolerance_bytes_replay_across_threads_and_operations",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.792685860003985,
+    "log": "final-replay-second-8.log.gz",
+    "reference": "baseline-9.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "prism-exact-tolerance-v2",
+        "bytes": 453096,
+        "sha256": "862c6e77b67e450ddeda02d65b4cfe43881e0cc6c1aa929ae5a091a72bcd1fb7"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::annular_join::replay_tests::annular_frozen_join_owned_process_receipt",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.4971312150009908,
+    "log": "final-replay-second-9.log.gz",
+    "reference": "baseline-10.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "named-annular-frozen-domain-v2",
+        "bytes": 536690,
+        "sha256": "7daf5bf9b081a784b1225dd2bc1989d0b1a5f131e44d378abeb898c849cdd1b1"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::exact_tolerance::joined_cancel_tests::exact_conformance_callback_trace_baseline",
+      "--",
+      "--nocapture",
+      "--test-threads=1",
+      "--exact"
+    ],
+    "exit": 0,
+    "seconds": 0.19247062999784248,
+    "log": "final-replay-second-10.log.gz",
+    "reference": "baseline-11.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "callback-trace",
+        "bytes": 819,
+        "sha256": "249050c3331e846ff46252b1ddff711cc2d97007afab595c1a1ce36fcd9fbf47"
+      }
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::exact_tolerance::annular::replay_tests::annular_exact_tolerance_replays_across_processes_threads_and_owned_input_drop",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit": 0,
+    "seconds": 1.6106618129997514,
+    "log": "final-replay-second-11.log.gz",
+    "reference": "behavior-pinned-1.log.gz",
+    "full_bytes_equal": true,
+    "source_unchanged": true,
+    "payloads": [
+      {
+        "tag": "annular-exact-tolerance-v2",
+        "bytes": 1208718,
+        "sha256": "94baef819300743d3d6c849b84a2e732df08c9c37b8d1d729519ec29e5dbae53"
+      }
+    ]
+  }
+]

@@ -13,16 +13,19 @@ pub(crate) enum JoinedEvidenceClass {
 impl JoinedConformanceFailure {
     /// Classify the retained typed cause; example: `failure.classification()`.
     pub(crate) fn classification(&self) -> JoinedEvidenceClass {
-        match &self.cause {
-            JoinedConformanceCause::Cancelled => JoinedEvidenceClass::Cancelled,
-            JoinedConformanceCause::Endpoint { cause, .. } => endpoint_class(cause),
-            JoinedConformanceCause::Closure { cause, .. } => closure_class(cause),
-            _ => JoinedEvidenceClass::Incomplete,
-        }
+        classify_conformance_cause(&self.cause)
+    }
+}
+pub(super) fn classify_conformance_cause(cause: &JoinedConformanceCause) -> JoinedEvidenceClass {
+    match cause {
+        JoinedConformanceCause::Cancelled => JoinedEvidenceClass::Cancelled,
+        JoinedConformanceCause::Endpoint { cause, .. } => endpoint_class(cause),
+        JoinedConformanceCause::Closure { cause, .. } => closure_class(cause),
+        _ => JoinedEvidenceClass::Incomplete,
     }
 }
 
-fn endpoint_class(cause: &ExactEndpointFailure) -> JoinedEvidenceClass {
+pub(super) fn endpoint_class(cause: &ExactEndpointFailure) -> JoinedEvidenceClass {
     if let ExactEndpointFailure::Residual(report) = cause
         && matches!(report.decision, Ok(ResidualDecision::Exceeds { .. }))
     {

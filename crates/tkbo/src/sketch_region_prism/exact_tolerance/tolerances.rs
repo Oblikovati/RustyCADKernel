@@ -41,7 +41,7 @@ fn inspect_metadata(
     }
     let request = metadata_request(join, cap);
     work.phase = JoinedTolerancePhase::Metadata;
-    append_metadata(join.projection(), request, progress, work)?;
+    append_metadata(join.projection(), request, 8, progress, work)?;
     refuse_caps(&work.metadata)?;
     work.phase = JoinedTolerancePhase::Commit;
     work.entity = None;
@@ -52,9 +52,10 @@ fn metadata_request(join: &JoinedPrismProof, cap: StoredToleranceCap) -> PrismTo
     PrismToleranceRequest::new(cap, join.projection().limits().spatial_limit)
         .expect("immutable joined operation already admitted its finite spatial request")
 }
-fn append_metadata(
+pub(super) fn append_metadata(
     projection: &FrozenPrismProjection,
     request: PrismToleranceRequest,
+    expected: usize,
     progress: &mut impl JoinedToleranceProgress,
     work: &mut MetadataWork,
 ) -> Result<(), JoinedToleranceCause> {
@@ -67,24 +68,21 @@ fn append_metadata(
         work.poll(progress)?;
         work.metadata.push(observe_node(projection, node, request)?);
     }
-    complete_metadata_count(work.metadata.len())
+    complete_metadata_count(work.metadata.len(), expected)
 }
-fn complete_metadata_count(actual: usize) -> Result<(), JoinedToleranceCause> {
-    if actual != 8 {
-        return Err(JoinedToleranceCause::Census {
-            actual,
-            expected: 8,
-        });
+fn complete_metadata_count(actual: usize, expected: usize) -> Result<(), JoinedToleranceCause> {
+    if actual != expected {
+        return Err(JoinedToleranceCause::Census { actual, expected });
     }
     Ok(())
 }
-struct MetadataWork {
-    phase: JoinedTolerancePhase,
-    entity: Option<FrozenPrismKey>,
-    metadata: Vec<JoinedToleranceMetadata>,
+pub(super) struct MetadataWork {
+    pub phase: JoinedTolerancePhase,
+    pub entity: Option<FrozenPrismKey>,
+    pub metadata: Vec<JoinedToleranceMetadata>,
 }
 impl MetadataWork {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Self {
             phase: JoinedTolerancePhase::Admission,
             entity: None,
@@ -92,7 +90,7 @@ impl MetadataWork {
         }
     }
 
-    fn poll(
+    pub fn poll(
         &self,
         progress: &mut impl JoinedToleranceProgress,
     ) -> Result<(), JoinedToleranceCause> {

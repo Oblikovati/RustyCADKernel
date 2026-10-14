@@ -59,3 +59,5 @@ mod joined_failure_tests;
 
 #[allow(unused_imports)]
 pub(in crate::sketch_region_prism) use replay_limits::limits as encode_exact_prism_limits;
+
+pub(in crate::sketch_region_prism) mod annular;

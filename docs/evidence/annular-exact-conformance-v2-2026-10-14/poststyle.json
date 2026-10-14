@@ -1,0 +1,64 @@
+{
+  "head": "97233c2b9c321ea3cea2823e2498e7cabf59d882",
+  "source_unchanged": true,
+  "records": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "exact_tolerance::annular",
+        "--",
+        "--test-threads=2"
+      ],
+      "exit": 0,
+      "seconds": 22.713052491999406,
+      "log": "poststyle-0.log.gz",
+      "results": [
+        "test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 1416 filtered out; finished in 3.29s"
+      ]
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::exact_tolerance::annular::replay_tests::annular_exact_tolerance_replays_across_processes_threads_and_owned_input_drop",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "seconds": 1.5669491110020317,
+      "log": "poststyle-1.log.gz",
+      "results": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1432 filtered out; finished in 1.47s"
+      ]
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 9.252582596003776,
+      "log": "poststyle-2.log.gz",
+      "results": []
+    }
+  ]
+}

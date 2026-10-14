@@ -23,7 +23,7 @@ pub(in crate::sketch_region_prism) use types::*;
 pub(in crate::sketch_region_prism) use winding::annular_boundary_directions;
 type AnnularDirectionCheck<T> = Result<T, AnnularDirectionCause>;
 #[cfg(test)]
-mod fixture;
+pub(in crate::sketch_region_prism) mod fixture;
 #[cfg(test)]
 mod lifecycle_tests;
 #[cfg(test)]

@@ -12,50 +12,74 @@ pub(super) fn certify_joined_trims(
     work: &mut ConformanceWork,
     progress: &mut impl JoinedConformanceProgress,
 ) -> ConformanceCheck {
-    count("complete named faces", join.faces().len(), 3)?;
-    for face in join.faces() {
-        append_face_trims(join, face, work, progress)?;
-    }
-    complete_trim_contexts(join, work)
+    certify_projection_trims(
+        join.projection(),
+        join.faces().iter(),
+        (3, 6),
+        work,
+        progress,
+    )
 }
-fn complete_trim_contexts(join: &JoinedPrismProof, work: &ConformanceWork) -> ConformanceCheck {
+
+// A sealed caller supplies actual named faces, never a role-only correspondence.
+pub(super) fn certify_projection_trims<'a>(
+    projection: &FrozenPrismProjection,
+    faces: impl ExactSizeIterator<Item = &'a JoinedPrismFace>,
+    expected: (usize, usize),
+    work: &mut ConformanceWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> ConformanceCheck {
+    count("complete named faces", faces.len(), expected.0)?;
+    for face in faces {
+        append_face_trims(projection, face, work, progress)?;
+    }
+    complete_trim_contexts(projection, expected.1, work)
+}
+fn complete_trim_contexts(
+    projection: &FrozenPrismProjection,
+    total: usize,
+    work: &ConformanceWork,
+) -> ConformanceCheck {
     let contexts = trim_contexts(&work.evidence.trims);
     count(
         "complete directed trim proofs",
         work.evidence.trims.len(),
-        6,
+        total,
     )?;
-    let coedges = &join.projection().incidence().coedges;
+    let coedges = &projection.incidence().coedges;
     let expected: BTreeSet<_> = coedges.iter().map(|row| row.occurrence.clone()).collect();
-    if contexts.len() != 6 || contexts != expected {
+    if contexts.len() != total || contexts != expected {
         return Err(JoinedConformanceCause::Mismatch {
             quantity: "joined trim and actual coedge bijection",
         });
     }
     Ok(())
 }
+
 fn trim_contexts(rows: &[JoinedTrimEvidence]) -> BTreeSet<FrozenUseKey> {
     rows.iter().map(|row| row.occurrence.clone()).collect()
 }
 
 fn append_face_trims(
-    join: &JoinedPrismProof,
+    projection: &FrozenPrismProjection,
     face: &JoinedPrismFace,
     work: &mut ConformanceWork,
     progress: &mut impl JoinedConformanceProgress,
 ) -> ConformanceCheck {
     work.entity = Some(face.definition);
     work.occurrence = Some(face.occurrence.clone());
-    let actual = bound_face(join, face.definition)?;
+    let actual = bound_face(projection, face.definition)?;
     trim_identity_coverage(actual, face.trims.len())?;
     for trim in &face.trims {
         append_trim(actual, trim, work, progress)?;
     }
     Ok(())
 }
-fn bound_face(join: &JoinedPrismProof, key: FrozenPrismKey) -> ConformanceCheck<&FrozenPrismFace> {
-    let faces: Vec<_> = join
-        .projection()
+fn bound_face(
+    projection: &FrozenPrismProjection,
+    key: FrozenPrismKey,
+) -> ConformanceCheck<&FrozenPrismFace> {
+    let faces: Vec<_> = projection
         .faces()
         .iter()
         .filter(|row| row.key == key)
