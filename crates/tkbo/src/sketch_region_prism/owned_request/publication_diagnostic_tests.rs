@@ -201,15 +201,36 @@ fn assert_native_stop(stop: &OwnedPublicationCallback) {
     );
 }
 
+/// ADR0056 follow-up: an attributed history finding without a local owner is now moved whole
+/// into the owned diagnostic; its exact typed operands and codec bytes replace the former gap.
 #[test]
-fn actual_history_and_measure_refusals_keep_exact_originals_and_typed_family_gaps() {
+fn actual_history_refusal_moves_its_complete_finding_into_owned_evidence() {
     let mut history = request(2);
     history.policy.publication.history.version = 17;
-    assert_actual_gap(
-        history,
-        PublicationPendingPayload::History,
-        PrismPublicationPhase::History,
+    let mut observer = NamedPublicationObserver::default();
+    with_refusal(history, &mut observer, |packet| {
+        let (diagnostic, retained) = project_invoked_publication_refusal(packet).into_parts();
+        assert!(retained.is_none() && diagnostic.gaps().is_empty());
+        assert_eq!(diagnostic.phase(), PrismPublicationPhase::History);
+        assert_owned_history(&diagnostic);
+    });
+}
+fn assert_owned_history(diagnostic: &OwnedPrismPublicationDiagnostic) {
+    let OwnedPublicationDiagnosticCause::History(owned) = diagnostic.cause() else {
+        panic!("expected owned history finding");
+    };
+    let cause = format!("{:?}", owned.finding().cause);
+    assert!(
+        cause.contains("complete history behavior version"),
+        "{cause}"
     );
+    let tag = b"Martensite.PublicationHistoryDiagnostic/v1\0";
+    assert!(owned.encoded().starts_with(tag));
+    let (replay, encoded) = (diagnostic.replay_bytes(), owned.encoded());
+    assert!(replay.windows(encoded.len()).any(|w| w == encoded));
+}
+#[test]
+fn actual_measure_refusals_keep_exact_originals_and_typed_family_gaps() {
     let mut measures = request(2);
     measures.policy.publication.measures.version = 17;
     assert_actual_gap(

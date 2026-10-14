@@ -72,6 +72,25 @@ pub(crate) enum OwnedPublicationDiagnosticCause {
         phase: PrismHistoryPhase,
     },
     Unprojected(PublicationPendingPayload),
+    /// The actual owned history finding, moved from its carrier, plus its exact codec bytes.
+    History(Box<OwnedPublicationHistory>),
+}
+pub(crate) struct OwnedPublicationHistory {
+    pub(super) finding:
+        Box<crate::sketch_region_prism::frozen::complete_history::PrismHistoryFinding>,
+    pub(super) encoded: Vec<u8>,
+}
+impl OwnedPublicationHistory {
+    /// Borrow the actual history finding; `history.finding().cause` keeps its typed operands.
+    pub(crate) fn finding(
+        &self,
+    ) -> &crate::sketch_region_prism::frozen::complete_history::PrismHistoryFinding {
+        &self.finding
+    }
+    /// Borrow the explicit-tag finding bytes; `history.encoded()` has no Debug fallback.
+    pub(crate) fn encoded(&self) -> &[u8] {
+        &self.encoded
+    }
 }
 pub(crate) struct OwnedPrismPublicationDiagnostic {
     pub(super) context: OwnedPrismDiagnosticContext,

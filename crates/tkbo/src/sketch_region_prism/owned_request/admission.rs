@@ -77,7 +77,9 @@ fn admit_source_count(
     }
     Ok(())
 }
-fn validate_poles(source: &OwnedPolynomialBoundary) -> Result<(), OwnedPrismAdmissionCause> {
+pub(super) fn validate_poles(
+    source: &OwnedPolynomialBoundary,
+) -> Result<(), OwnedPrismAdmissionCause> {
     let maximum = rustycad_tkg3d::geom::GeomBezierCurve::max_degree() as usize + 1;
     let actual = source.world_poles.len();
     if !(2..=maximum).contains(&actual) {
@@ -134,7 +136,9 @@ pub(crate) enum DeclaredPlaneComponent {
     U,
     V,
 }
-fn finite_plane(plane: rustycad_tkmath::gp::Plane3) -> Result<(), OwnedPrismAdmissionCause> {
+pub(super) fn finite_plane(
+    plane: rustycad_tkmath::gp::Plane3,
+) -> Result<(), OwnedPrismAdmissionCause> {
     use DeclaredPlaneComponent::*;
     let frame = plane.position();
     for (component, point) in [

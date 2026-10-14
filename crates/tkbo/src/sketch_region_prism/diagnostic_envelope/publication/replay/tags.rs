@@ -42,7 +42,9 @@ pub(super) fn join(value: PrismProofJoinPhase) -> u8 {
         PrismProofJoinPhase::Commit => 4,
     }
 }
-pub(super) fn freeze(value: FreezePhase) -> u8 {
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) fn freeze(
+    value: FreezePhase,
+) -> u8 {
     match value {
         FreezePhase::Admission => 0,
         FreezePhase::Identity => 1,

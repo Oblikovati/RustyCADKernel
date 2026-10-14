@@ -42,18 +42,27 @@ pub(in crate::sketch_region_prism) fn resolve_generated_context(
     source: &RegionObservedContext,
     target: &[RegionObservedContext],
 ) -> HistoryCheck<usize> {
-    let mut matches = Vec::new();
-    for (index, row) in target.iter().enumerate() {
-        if matches_trace(source, row)? {
-            matches.push(index);
-        }
-    }
+    let matches = generated_context_matches(source, target)?;
     history_count(
         "unique exact directed generated correspondence",
         matches.len(),
         1,
     )?;
     Ok(matches[0])
+}
+/// Every exact directed generated correspondence in one candidate; may be empty.
+/// Example: `generated_context_matches(source, targets)?.len()` counts candidates reached.
+pub(in crate::sketch_region_prism) fn generated_context_matches(
+    source: &RegionObservedContext,
+    target: &[RegionObservedContext],
+) -> HistoryCheck<Vec<usize>> {
+    let mut matches = Vec::new();
+    for (index, row) in target.iter().enumerate() {
+        if matches_trace(source, row)? {
+            matches.push(index);
+        }
+    }
+    Ok(matches)
 }
 fn matches_trace(
     source: &RegionObservedContext,
