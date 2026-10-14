@@ -9,7 +9,7 @@ pub(super) fn capture(
     copied: &AnnularCopyCapture,
     boundaries: &[AnnularBoundaryBinding],
     cancelled: &mut impl FnMut() -> bool,
-) -> AnnularCheck<'static, Vec<AnnularBoundChart>> {
+) -> AnnularCheck<'static, (Vec<AnnularBoundChart>, Vec<RegionObservedContext>)> {
     let actual = capture_actual_charts(receipt, cancelled, admit_faces)
         .map_err(|cause| Box::new(AnnularBindingCause::Chart(Box::new(cause))))?;
     let diagnostic = receipt
@@ -28,7 +28,7 @@ pub(super) fn capture(
     }
     complete_roles(&charts, boundaries)?;
     charts.sort_by_key(|c| (c.identity.role as u8, c.source_boundary));
-    Ok(charts)
+    Ok((charts, snapshots))
 }
 fn admit_faces(faces: &[PrismBodyContext]) -> Result<(), PrismBindingFailure> {
     if faces.len() == 4 {

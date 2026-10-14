@@ -19,6 +19,10 @@ pub(in crate::sketch_region_prism) enum AnnularBindingCause<'a> {
         stage: AnnularBindingStage,
         cause: Failure,
     },
+    Stopped {
+        callback: Box<AnnularBindingCause<'a>>,
+        observed: Option<Box<AnnularBindingCause<'a>>>,
+    },
 }
 pub(super) type AnnularCheck<'a, T = ()> = Result<T, Box<AnnularBindingCause<'a>>>;
 pub(super) fn require(

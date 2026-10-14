@@ -31,15 +31,71 @@ pub(super) fn copy_inputs(
     let first = contexts(&selected.face)?;
     let second = contexts(&copied.base)?;
     let members = correspondence::pair_members(names, &first, &second, &copied.observations)?;
-    copy_relations(selected, copied)?;
+    let current = current_selected(request, &names.actual)?;
+    current_relations(&current.relations, &selected.relations)?;
+    copy_relations(current, copied)?;
     let selected = capture_sources(&selected.face).map_err(snapshot_failure)?;
     let actual_copy = capture_sources(&copied.base).map_err(snapshot_failure)?;
+    current_snapshot(&actual_copy, &copied.chart_sources)?;
     compare_sources(region, names, &members, &selected, &actual_copy)?;
     Ok(AnnularCopyCapture {
         members,
         selected,
         copied: actual_copy,
     })
+}
+fn current_selected<'a>(
+    request: &'a TwoLoopRegionRequest<'_, '_>,
+    identity: &PartitionOccurrenceIdentity,
+) -> AnnularCheck<'static, &'a crate::sketch_region_candidates::RegionCandidate> {
+    let batch = super::super::borrowed_batch(request.bridge)
+        .ok_or_else(|| missing("current actual candidate batch"))?;
+    let rows: Vec<_> = batch
+        .candidates
+        .iter()
+        .filter(|c| PartitionOccurrenceIdentity::capture(&c.face) == *identity)
+        .collect();
+    require("one current selected face owner", rows.len(), 1)?;
+    Ok(rows[0])
+}
+fn current_relations(
+    current: &[ArrangementRelation],
+    retained: &[ArrangementRelation],
+) -> AnnularCheck<'static> {
+    require(
+        "all retained selected relation rows",
+        retained.len(),
+        current.len(),
+    )?;
+    for row in current {
+        same_parents(row, relation(retained, &row.output)?)?;
+    }
+    Ok(())
+}
+fn current_snapshot(
+    current: &CapturedPrismSources,
+    retained: &super::super::super::surface_charts::PrismChartSources,
+) -> AnnularCheck<'static> {
+    let old = retained.as_ref().map_err(|e| snapshot_failure(e.clone()))?;
+    let encode = super::super::super::frozen::encode_prism_source_geometry;
+    holds(
+        "current actual copied snapshot coefficients",
+        encode(current) == encode(old),
+    )?;
+    holds("current copied snapshot face", current.face == old.face)?;
+    for boundary in &current.boundaries {
+        let rows: Vec<_> = old
+            .boundaries
+            .iter()
+            .filter(|b| b.occurrence == boundary.occurrence)
+            .collect();
+        require("one retained source boundary occurrence", rows.len(), 1)?;
+        holds(
+            "current copied snapshot endpoint identities and parameters",
+            boundary.endpoints == rows[0].endpoints,
+        )?;
+    }
+    Ok(())
 }
 pub(super) fn selected_names<'a>(
     request: &'a TwoLoopRegionRequest<'_, '_>,
