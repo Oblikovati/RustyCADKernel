@@ -1,6 +1,6 @@
 # ADR 0028: typed GUI surface outcomes
 
-Status: accepted; implementation complete, final verification pending.
+Status: accepted; implementation and candidate checks complete; coordinator integration pending.
 
 Owner: Martensite Vulkan maintainer; application consumer Oblikovati#3630.
 This is active application-blocker priority 2, independent of the C1 geometry work.
@@ -103,3 +103,10 @@ not claim physical presentation visibility, detection of an unreported resize
 away and back wholly between observations, or arbitrary concurrent native/view
 operation safety. Thread-safety claims require their own host concurrency and
 ThreadSanitizer evidence; prior host startup failures remain incomplete evidence.
+
+## Candidate receipt
+
+Frozen source `89d2c0a1e` passed the bounded functional/native matrix described in
+[the candidate evidence](../evidence/gui-surface-outcomes-v2-2026-10-14/README.md).
+The retained TSan startup failure is incomplete; paired debug-profile/shared-host
+timing is not controlled previous-release performance or application acceptance.
