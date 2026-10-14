@@ -100,3 +100,14 @@ fn scalar_policy_and_observations_are_send_sync() {
     send_sync::<StoredToleranceObservation>();
     send_sync::<ToleranceScalarError>();
 }
+
+#[test]
+fn explicit_cap_value_is_replayable_without_rounding_or_a_hidden_default() {
+    assert_eq!(StoredToleranceCap::NoLimit.maximum(), None);
+    for cap in [
+        StoredToleranceCap::report(0.125).unwrap(),
+        StoredToleranceCap::refuse(0.125).unwrap(),
+    ] {
+        assert_eq!(cap.maximum().unwrap().to_bits(), 0.125_f64.to_bits());
+    }
+}

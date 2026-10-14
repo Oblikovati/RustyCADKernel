@@ -50,6 +50,16 @@ impl StoredToleranceCap {
         Ok(Self::Refuse(StoredToleranceLimit(maximum)))
     }
 
+    /// Preserve the exact metadata cap for reports; example: `cap.maximum()`.
+    pub(crate) fn maximum(self) -> Option<f64> {
+        match self {
+            Self::NoLimit => None,
+            Self::Report(StoredToleranceLimit(cap)) | Self::Refuse(StoredToleranceLimit(cap)) => {
+                Some(cap)
+            }
+        }
+    }
+
     fn decision(self, raw: f64) -> StoredCapDecision {
         match self {
             Self::NoLimit => StoredCapDecision::ExplicitNoLimit,
