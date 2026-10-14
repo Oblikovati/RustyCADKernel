@@ -82,9 +82,22 @@ fn check_retained_trim(
     expected: &PrismAuthoredTrimUse,
 ) {
     assert_eq!(retain_trim(chart, captured), *expected);
-    let mut repeated = captured.clone();
+    let mut repeated = copy_captured_trim(captured);
     repeated.parents.push(captured.parents[0].clone());
     let retained = retain_trim(chart, &repeated);
     assert_eq!(retained.parents, repeated.parents);
     assert_eq!(retained.parents.len(), expected.parents.len() + 1);
+}
+
+fn copy_captured_trim(captured: &CapturedPrismTrim) -> CapturedPrismTrim {
+    CapturedPrismTrim {
+        output: captured.output.clone(),
+        source: captured.source.clone(),
+        parents: captured.parents.clone(),
+        role: captured.role,
+        pcurve: captured.pcurve.clone(),
+        interval: captured.interval,
+        space: captured.space.clone(),
+        expected: captured.expected.clone(),
+    }
 }
