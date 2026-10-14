@@ -1,0 +1,24 @@
+{
+  "source": "694ac1e9f9d0b9153acc44c54bb252665a3fec61",
+  "baseline": "d6484a2d5",
+  "structural_only": true,
+  "checks": {
+    "lineage_before_and_after": 27,
+    "history_after": 45,
+    "strict_all_target_clippy": "passed",
+    "fmt": "passed"
+  },
+  "unchanged_replay": {
+    "lineage_bytes": 167821,
+    "lineage_sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec",
+    "history_bytes": 421702,
+    "history_sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686"
+  },
+  "commands": [
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib frozen::lineage --jobs 2 -- --nocapture",
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib complete_history --jobs 2 -- --nocapture",
+    "rustup run 1.99.0 cargo clippy -p rustycad-tkbo --all-targets --all-features --jobs 2 -- -D warnings",
+    "rustup run 1.99.0 cargo fmt --all -- --check"
+  ],
+  "scope": "Borrowed observation predicate only; caller still proves unique complete target coverage, native member queries and complete history. Absent copied observations remain false."
+}

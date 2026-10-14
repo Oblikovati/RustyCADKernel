@@ -33,8 +33,17 @@ fn unique_trace(
     source: &RegionObservedContext,
     target: &BoundHistoricalContexts<'_>,
 ) -> HistoryCheck<PrismHistoryUseKey> {
+    let index = resolve_generated_context(source, target.actual)?;
+    Ok(target.owned[index].key.clone())
+}
+/// Lookup actual relative endpoint correspondence under its retained edge ancestry.
+/// Example: `resolve_generated_context(source, targets)`; target order never authors a name.
+pub(in crate::sketch_region_prism) fn resolve_generated_context(
+    source: &RegionObservedContext,
+    target: &[RegionObservedContext],
+) -> HistoryCheck<usize> {
     let mut matches = Vec::new();
-    for (index, row) in target.actual.iter().enumerate() {
+    for (index, row) in target.iter().enumerate() {
         if matches_trace(source, row)? {
             matches.push(index);
         }
@@ -44,7 +53,7 @@ fn unique_trace(
         matches.len(),
         1,
     )?;
-    Ok(target.owned[matches[0]].key.clone())
+    Ok(matches[0])
 }
 fn matches_trace(
     source: &RegionObservedContext,

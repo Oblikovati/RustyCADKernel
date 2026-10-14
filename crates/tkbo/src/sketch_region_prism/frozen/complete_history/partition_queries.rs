@@ -44,7 +44,7 @@ fn query_rows<'a>(
             required: "exhaustive native partition member queries",
         });
     };
-    admit_history_availability(*history_requested, *history_available)?;
+    admit_partition_history_availability(*history_requested, *history_available)?;
     Ok(rows)
 }
 fn project_query(
@@ -54,10 +54,11 @@ fn project_query(
     copied: &BoundHistoricalContexts<'_>,
     partition: &BoundHistoricalContexts<'_>,
 ) -> HistoryCheck<PrismPartitionQuery> {
-    admit_query(query, original)?;
+    admit_unchanged_partition_query(query, original)?;
     let copied_index = parent_rows::occurrence_index(copied, &query.copied)?;
     bind_initial_query(request, query, original)?;
-    let continued = unique_partition_trace(&copied.actual[copied_index], partition)?;
+    let continued =
+        resolve_native_partition_context(&copied.actual[copied_index], partition.actual)?;
     Ok(PrismPartitionQuery {
         original: super::super::identities::original_key(request.publication, &query.original)
             .map_err(|e| PrismHistoryCause::Frozen(Box::new(e)))?,
@@ -70,7 +71,10 @@ fn project_query(
         continued: partition.owned[continued].key.clone(),
     })
 }
-fn admit_query(query: &PartitionMemberQuery, original: &RegionObservedContext) -> HistoryCheck<()> {
+pub(in crate::sketch_region_prism) fn admit_unchanged_partition_query(
+    query: &PartitionMemberQuery,
+    original: &RegionObservedContext,
+) -> HistoryCheck<()> {
     history_count(
         "native query kind equals original census",
         usize::from(*native_result(&query.kind)? == original.kind),
@@ -98,12 +102,13 @@ fn bind_initial_query(
         1,
     )
 }
-fn unique_partition_trace(
+/// Lookup the unique unchanged trace beneath the actual partition root.
+/// Example: `resolve_native_partition_context(source, targets)`; its index is not identity.
+pub(in crate::sketch_region_prism) fn resolve_native_partition_context(
     source: &RegionObservedContext,
-    partition: &BoundHistoricalContexts<'_>,
+    partition: &[RegionObservedContext],
 ) -> HistoryCheck<usize> {
     let found: Vec<_> = partition
-        .actual
         .iter()
         .enumerate()
         .filter(|(_, target)| same_partition_tail(source, target))
@@ -159,7 +164,7 @@ fn original_query<'a>(
     Ok(rows[0])
 }
 
-fn admit_history_availability(
+pub(in crate::sketch_region_prism) fn admit_partition_history_availability(
     history_requested: bool,
     history_available: bool,
 ) -> HistoryCheck<()> {

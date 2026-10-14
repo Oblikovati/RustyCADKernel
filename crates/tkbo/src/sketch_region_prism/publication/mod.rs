@@ -38,3 +38,7 @@ pub(crate) use stage_error::{
 };
 #[cfg(test)]
 mod refusal_tests;
+
+#[cfg(test)]
+#[path = "../owned_request/names/body_map/publication_tests.rs"]
+mod semantic_map_tests;

@@ -55,7 +55,7 @@ pub(super) fn legacy_names(
     append_legacy(&mut result, members, uses)?;
     Ok(result)
 }
-fn append_member(
+pub(in crate::sketch_region_prism) fn append_member(
     names: &mut PrismHistoricalStageBindings,
     actual: &PartitionOccurrenceIdentity,
     member: AuthoredPrismId,
@@ -78,7 +78,7 @@ fn append_member(
     });
     Ok(())
 }
-fn context_snapshot(
+pub(in crate::sketch_region_prism) fn context_snapshot(
     actual: &crate::sketch_region::RegionDirectedContext,
 ) -> HistoryCheck<RegionObservedContext> {
     Ok(RegionObservedContext {
