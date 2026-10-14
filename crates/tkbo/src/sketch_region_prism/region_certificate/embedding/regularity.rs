@@ -15,7 +15,9 @@ pub(super) fn actual_boundary(
     let source = current_source(binding, side)?;
     polynomial_regularity(binding.region.census_occurrence, source, options, cancelled)
 }
-fn polynomial_regularity(
+/// Apply the existing bounded polynomial check; `polynomial_regularity(id,source,options,cancel)`.
+/// A regular curve alone does not establish a closed embedded region.
+pub(in crate::sketch_region_prism) fn polynomial_regularity(
     curve_id: u64,
     source: &CapturedSpaceRepresentation,
     options: BezierRegularityOptions,

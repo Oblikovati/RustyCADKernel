@@ -97,7 +97,7 @@ pub(super) fn pcurve<'a>(
     work.holds("full native pcurve interval", interval == [0., 1.])?;
     Ok(captured)
 }
-fn poles<'a>(actual: i32, work: &mut TwoLoopWork<'_>) -> TwoLoopCheck<'a, ()> {
+pub(super) fn poles<'a>(actual: i32, work: &mut TwoLoopWork<'_>) -> TwoLoopCheck<'a, ()> {
     let count = usize::try_from(actual).map_err(|_| {
         work.failure(TwoLoopRegionCause::Scalar {
             operand: "pole count",

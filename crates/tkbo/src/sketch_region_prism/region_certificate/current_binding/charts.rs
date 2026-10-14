@@ -28,6 +28,17 @@ pub(in crate::sketch_region_prism) fn capture_actual_charts(
     cancelled: &mut impl FnMut() -> bool,
     admit_faces: impl FnOnce(&[PrismBodyContext]) -> PrismBindingCheck,
 ) -> PrismBindingCheck<Vec<BoundPrismChart>> {
+    capture_actual_charts_guarded(receipt, cancelled, admit_faces, &mut || Ok(()))
+}
+/// Admit current native operands immediately before each capture; `capture_actual_charts_guarded(receipt,cancel,admit,&mut preflight)`.
+/// The legacy entry supplies a no-op guard; callbacks and existing checks retain their order.
+pub(in crate::sketch_region_prism) fn capture_actual_charts_guarded(
+    receipt: &PrismReceipt,
+    cancelled: &mut impl FnMut() -> bool,
+    admit_faces: impl FnOnce(&[PrismBodyContext]) -> PrismBindingCheck,
+    preflight: &mut impl FnMut() -> PrismBindingCheck,
+) -> PrismBindingCheck<Vec<BoundPrismChart>> {
+    preflight()?;
     let diagnostic = need(receipt.diagnostic.as_ref(), "measurement actual body")?;
     let copied = need(receipt.copied.as_ref(), "measurement actual copied base")?;
     history::current_history(diagnostic, copied)?;
@@ -36,6 +47,7 @@ pub(in crate::sketch_region_prism) fn capture_actual_charts(
     complete_face_images(diagnostic, &faces)?;
     let mut charts = Vec::new();
     for face in &faces {
+        preflight()?;
         charts.push(capture_current(face, receipt, cancelled)?);
     }
     Ok(charts)

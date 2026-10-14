@@ -1,0 +1,117 @@
+{
+  "integration_revision": "8567dd39c7cc792187a4575aaca7be8cf55f3892",
+  "candidate_revision": "8567dd39c",
+  "candidate_base": "cbce3e541",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 101,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "768cbef683d0be106525a284c753d08ea708d89facdbc73f694b6e2620c66d88"
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "9638c5cada5392330776a11e1fa02a3c90867fa05cc272c78b1f8be936bb1d2e"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 101,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "f326cee5c97faa300ac8baac561d36b4b07aa4799cdf0e0e14ac3e7d51747e07"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "2977cbf122d0ce2b0a9ca84be1e72241c751d169e970b8e55655f8eebcce7d99"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/domains.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/regularity.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/trim_incidence.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/trim_incidence_tests.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/domains.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/regularity.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/trim_incidence.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/trim_incidence_tests.rs": "A"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": false
+}

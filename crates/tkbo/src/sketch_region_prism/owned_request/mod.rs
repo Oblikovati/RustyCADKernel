@@ -37,6 +37,7 @@ mod test_fixture;
 
 #[cfg(test)]
 mod diagnostic_baseline_tests;
+mod resolver;
 
 #[cfg(test)]
 mod diagnostic_access_tests;
@@ -53,7 +54,6 @@ mod diagnostic_runtime_tests;
 
 #[cfg(test)]
 mod diagnostic_codec_tests;
-mod resolver;
 
 #[cfg(test)]
 pub(in crate::sketch_region_prism) use resolver::fixture::{

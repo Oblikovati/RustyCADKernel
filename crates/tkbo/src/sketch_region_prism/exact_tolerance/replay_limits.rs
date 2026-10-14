@@ -4,7 +4,7 @@ use crate::sketch_region_prism::frozen::{
     FrozenPrismLimits, encode_frozen_numbers, proof_join::encode_joined_root_options,
 };
 use rustycad_tkmath::predicates::roots::RootIsolationOptions;
-pub(super) fn limits(value: &FrozenPrismLimits, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn limits(value: &FrozenPrismLimits, bytes: &mut Vec<u8>) {
     encode_frozen_numbers(value.seed, bytes);
     encode_frozen_numbers(value.extrusion, bytes);
     encode_joined_root_options(value.roots, bytes);

@@ -3,11 +3,13 @@
 mod binding;
 mod charts;
 #[allow(unused_imports)]
-pub(in crate::sketch_region_prism) use charts::capture_actual_charts;
+pub(in crate::sketch_region_prism) use charts::{capture_actual_charts, capture_actual_charts_guarded};
 mod replay;
 mod types;
 use super::super::surface_charts::*;
 use super::*;
+#[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use binding::current_selection as rebind_prism_selection;
 pub(crate) use binding::poll as poll_prism_binding;
 #[cfg(test)]
 pub(crate) use replay::same_charts;
