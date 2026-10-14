@@ -21,6 +21,7 @@ pub(super) fn joined_bytes(
     let mut bytes = Vec::new();
     text("martensite.same-body-prism-proof/v1", &mut bytes);
     block(&projection.replay_bytes(), &mut bytes);
+    replay_options::embedding(proof.requested(), &mut bytes);
     text(
         &format!(
             "{:?}/{:?}/{:?}",

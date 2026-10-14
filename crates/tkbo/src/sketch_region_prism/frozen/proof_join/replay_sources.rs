@@ -92,11 +92,9 @@ pub(super) fn closure(
                 [point.requested_world_limit, point.exact_certificate_limit],
                 &mut row,
             );
+            replay_options::roots(point.roots, &mut row);
             replay::text(
-                &format!(
-                    "{:?}/{:?}/{}",
-                    point.roots, point.decision, point.bisections
-                ),
+                &format!("{:?}/{}", point.decision, point.bisections),
                 &mut row,
             );
             rows.push(row);

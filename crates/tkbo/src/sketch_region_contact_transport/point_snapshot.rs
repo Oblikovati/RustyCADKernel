@@ -24,3 +24,19 @@ pub(crate) struct ContactPointQuerySnapshot {
     pub roots: RootIsolationOptions,
     pub requested_world_limit: f64,
 }
+impl ContactPointQuerySnapshot {
+    /// Borrow the original transported query; `snapshot.source_query()` keeps exact maps and root settings.
+    pub(crate) fn source_query(
+        &self,
+    ) -> rustycad_tkmath::predicates::roots::metric_bounds::TransportedResidualQuery<'_> {
+        crate::sketch_region_source_conformance::assemble_query(
+            &self.representation,
+            &self.captured,
+            &self.support,
+            self.interval,
+            self.maps,
+            0.,
+            self.roots,
+        )
+    }
+}
