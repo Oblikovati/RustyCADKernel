@@ -1,0 +1,116 @@
+{
+  "source_revision": "d493ed441f0c37d06117f9556012d419f6b4a84b",
+  "source_status_before": "",
+  "source_scope": "all tracked crates files, .cargo files, Cargo.toml, Cargo.lock, rust-toolchain.toml, ADR0025",
+  "source_file_count": 15663,
+  "manifest_before_uncompressed_sha256": "e9d775c3b5185d6188fe55870000416d05ec1ec3c62331c8f3664141b00e0ddd",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_TARGET_DIR": "/home/vmiguel/git/oblikovati-workspace/Martensite-bezier-regularity/target"
+  },
+  "commands": [
+    {
+      "name": "all-targets",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--all-targets"
+      ],
+      "environment": {},
+      "exit_code": 0,
+      "elapsed_seconds": 171.4137032032013,
+      "log_sha256": "e0ad8a32ae19a9a9f67dde6bbac50c5331a2a94c609e900b3bf4f2591831ff83"
+    },
+    {
+      "name": "doctests",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--doc"
+      ],
+      "environment": {},
+      "exit_code": 0,
+      "elapsed_seconds": 1.2050507068634033,
+      "log_sha256": "a18c1bd9e94ea2aa424185b68d7cfac5b9d554ceb3e1080fa80ecfed9fcc6e11"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "environment": {},
+      "exit_code": 0,
+      "elapsed_seconds": 30.091277599334717,
+      "log_sha256": "3a6c11dc493bdfac344e10653799fc69afa7fb2a8d0759ce891424eec9e281e9"
+    },
+    {
+      "name": "rustdoc",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "doc",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--no-deps"
+      ],
+      "environment": {
+        "RUSTDOCFLAGS": "-D warnings"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.643216848373413,
+      "log_sha256": "d2621f06378a65468aec309deabca44600cee6d214a0434446e8afc1d3a17c1d"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "fmt",
+        "-p",
+        "rustycad-tkmath",
+        "--check"
+      ],
+      "environment": {},
+      "exit_code": 0,
+      "elapsed_seconds": 0.5780699253082275,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "exclusions": [
+    "No TKBO acceptance change",
+    "No GPU or live OCCT",
+    "No release performance acceptance",
+    "TSan incomplete: historical host startup controls fail; no new TSan run or bypass"
+  ],
+  "manifest_after_uncompressed_sha256": "e9d775c3b5185d6188fe55870000416d05ec1ec3c62331c8f3664141b00e0ddd",
+  "source_unchanged": true,
+  "source_status_after": "",
+  "source_revision_after": "d493ed441f0c37d06117f9556012d419f6b4a84b",
+  "all_commands_passed": true
+}

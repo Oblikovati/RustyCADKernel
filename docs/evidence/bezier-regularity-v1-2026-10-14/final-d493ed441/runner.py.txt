@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""Run serial frozen TKMath checks and retain source bookends and command logs."""
+import gzip
+import hashlib
+import json
+import os
+import platform
+import subprocess
+import time
+from pathlib import Path
+
+ROOT = Path('/home/vmiguel/git/oblikovati-workspace/Martensite-bezier-regularity')
+OUT = Path(__file__).resolve().parent
+CARGO = str(Path.home() / '.cargo/bin/cargo')
+ENV = dict(os.environ, CARGO_BUILD_JOBS='2', CARGO_TARGET_DIR=str(ROOT / 'target'))
+ADR = 'docs/adr/0025-source-bound-bezier-regularity.md'
+
+def capture(arguments):
+    return subprocess.check_output(arguments, cwd=ROOT, env=ENV, text=True).strip()
+
+def manifest():
+    names = capture(['git', 'ls-files']).splitlines()
+    selected = [name for name in names if name.startswith(('crates/', '.cargo/'))
+                or name in ['Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', ADR]]
+    return {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+            for name in selected if (ROOT / name).is_file()}
+
+def packed(name, value):
+    content = (json.dumps(value, sort_keys=True, indent=2) + '\n').encode()
+    (OUT / name).write_bytes(gzip.compress(content, mtime=0))
+    return hashlib.sha256(content).hexdigest()
+
+before = manifest()
+receipt = {
+    'source_revision': capture(['git', 'rev-parse', 'HEAD']),
+    'source_status_before': capture(['git', 'status', '--porcelain']),
+    'source_scope': 'all tracked crates files, .cargo files, Cargo.toml, Cargo.lock, rust-toolchain.toml, ADR0025',
+    'source_file_count': len(before),
+    'manifest_before_uncompressed_sha256': packed('source-before.json.gz', before),
+    'rustc': capture([str(Path.home() / '.cargo/bin/rustc'), '+1.99.0', '-Vv']),
+    'cargo': capture([CARGO, '+1.99.0', '-V']),
+    'platform': platform.platform(),
+    'machine': platform.machine(),
+    'environment': {'CARGO_BUILD_JOBS': '2', 'CARGO_TARGET_DIR': str(ROOT / 'target')},
+    'commands': [],
+    'exclusions': ['No TKBO acceptance change', 'No GPU or live OCCT',
+                   'No release performance acceptance',
+                   'TSan incomplete: historical host startup controls fail; no new TSan run or bypass'],
+}
+base = [CARGO, '+1.99.0']
+checks = [
+    ('all-targets', base + ['test', '--locked', '-p', 'rustycad-tkmath', '--all-features', '--all-targets'], {}),
+    ('doctests', base + ['test', '--locked', '-p', 'rustycad-tkmath', '--all-features', '--doc'], {}),
+    ('clippy', base + ['clippy', '--locked', '-p', 'rustycad-tkmath', '--all-features', '--all-targets', '--', '-D', 'warnings'], {}),
+    ('rustdoc', base + ['doc', '--locked', '-p', 'rustycad-tkmath', '--all-features', '--no-deps'], {'RUSTDOCFLAGS': '-D warnings'}),
+    ('fmt', base + ['fmt', '-p', 'rustycad-tkmath', '--check'], {}),
+]
+for name, arguments, additions in checks:
+    started = time.time()
+    with (OUT / (name + '.log')).open('wb') as log:
+        result = subprocess.run(arguments, cwd=ROOT, env=dict(ENV, **additions), stdout=log, stderr=subprocess.STDOUT)
+    entry = {'name': name, 'command': arguments, 'environment': additions,
+             'exit_code': result.returncode, 'elapsed_seconds': time.time() - started,
+             'log_sha256': hashlib.sha256((OUT / (name + '.log')).read_bytes()).hexdigest()}
+    receipt['commands'].append(entry)
+    (OUT / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    print(json.dumps(entry), flush=True)
+after = manifest()
+receipt['manifest_after_uncompressed_sha256'] = packed('source-after.json.gz', after)
+receipt['source_unchanged'] = before == after
+receipt['source_status_after'] = capture(['git', 'status', '--porcelain'])
+receipt['source_revision_after'] = capture(['git', 'rev-parse', 'HEAD'])
+receipt['all_commands_passed'] = all(c['exit_code'] == 0 for c in receipt['commands'])
+(OUT / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+print(json.dumps({'completed': True, 'unchanged': before == after, 'passed': receipt['all_commands_passed']}), flush=True)
