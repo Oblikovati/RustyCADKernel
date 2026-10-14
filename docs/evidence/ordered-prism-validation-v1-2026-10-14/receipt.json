@@ -1,0 +1,319 @@
+{
+  "source_revision": "c1d2267b3d4cd00e6f67460347ec432609c7aaad",
+  "integration_base": "bb5f065290ddbe0059384970b1d2ca3fefa9d118",
+  "reviewed_behavior": "dec0d4566cf36cf8d05a0a9ebbf775c19d43244c",
+  "source_files_unchanged": 12686,
+  "tracked_fixture_files_unchanged": 5642,
+  "all_targets": [
+    {
+      "passed": 850,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 646,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0
+    }
+  ],
+  "doctests": [
+    {
+      "passed": 35,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0
+    }
+  ],
+  "commands": [
+    {
+      "name": "all-targets",
+      "command": [
+        "/home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "returncode": 0,
+      "seconds": 550.5924745610027
+    },
+    {
+      "name": "doctests",
+      "command": [
+        "/home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "returncode": 0,
+      "seconds": 1.1334116340003675
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "/home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "returncode": 0,
+      "seconds": 2.857009097999253
+    },
+    {
+      "name": "format",
+      "command": [
+        "/home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "returncode": 0,
+      "seconds": 6.754812305000087
+    }
+  ],
+  "replays": {
+    "binary": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+    "binary_sha256_before": "f849782e787a5152eb384e8538064c1724873e315167a030054b39b73e9fbf5e",
+    "binary_sha256_after": "f849782e787a5152eb384e8538064c1724873e315167a030054b39b73e9fbf5e",
+    "runs": [
+      {
+        "name": "ordered",
+        "repeat": 1,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::ordered_validation::replay_tests::ordered_validation_process_receipt",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 1394630,
+        "sha256": "af47d670e1d33f0a7cac93d73c92e490e7e5dc28909d2a6a5b78e3dceac9c21f"
+      },
+      {
+        "name": "ordered",
+        "repeat": 2,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::ordered_validation::replay_tests::ordered_validation_process_receipt",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 1394630,
+        "sha256": "af47d670e1d33f0a7cac93d73c92e490e7e5dc28909d2a6a5b78e3dceac9c21f"
+      },
+      {
+        "name": "containment-v1",
+        "repeat": 1,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 89921,
+        "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4"
+      },
+      {
+        "name": "containment-v1",
+        "repeat": 2,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 89921,
+        "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4"
+      },
+      {
+        "name": "topology",
+        "repeat": 1,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::topology::replay_tests::exact_topology_report_replays_across_threads_and_processes",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 96088,
+        "sha256": "852bd440732f89512ab35e27c2f13b70d00b9af818c3dc3266122b3bee75a9a7"
+      },
+      {
+        "name": "topology",
+        "repeat": 2,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::topology::replay_tests::exact_topology_report_replays_across_threads_and_processes",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 96088,
+        "sha256": "852bd440732f89512ab35e27c2f13b70d00b9af818c3dc3266122b3bee75a9a7"
+      },
+      {
+        "name": "join",
+        "repeat": 1,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::proof_join::tests::joined_math_byte_receipt",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 193080,
+        "sha256": "de1f88a80716a820eddc03254425f0400b5743e425126e3d43bf843ae2908871"
+      },
+      {
+        "name": "join",
+        "repeat": 2,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::proof_join::tests::joined_math_byte_receipt",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 193080,
+        "sha256": "de1f88a80716a820eddc03254425f0400b5743e425126e3d43bf843ae2908871"
+      },
+      {
+        "name": "orientation",
+        "repeat": 1,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::joined_orientation::tests::replay_tests::joined_orientation_process_receipt",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 215177,
+        "sha256": "d642f0f81b03da8689cd7930d2fa27b269faec055d9629bdb507422bcd321968"
+      },
+      {
+        "name": "orientation",
+        "repeat": 2,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::frozen::joined_orientation::tests::replay_tests::joined_orientation_process_receipt",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 215177,
+        "sha256": "d642f0f81b03da8689cd7930d2fa27b269faec055d9629bdb507422bcd321968"
+      },
+      {
+        "name": "tolerance",
+        "repeat": 1,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::exact_tolerance::joined_replay_tests::exact_tolerance_bytes_replay_across_threads_and_operations",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 453096,
+        "sha256": "862c6e77b67e450ddeda02d65b4cfe43881e0cc6c1aa929ae5a091a72bcd1fb7"
+      },
+      {
+        "name": "tolerance",
+        "repeat": 2,
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-ordered-validation/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "--exact",
+          "sketch_region_prism::exact_tolerance::joined_replay_tests::exact_tolerance_bytes_replay_across_threads_and_operations",
+          "--nocapture"
+        ],
+        "returncode": 0,
+        "rows": 1,
+        "bytes": 453096,
+        "sha256": "862c6e77b67e450ddeda02d65b4cfe43881e0cc6c1aa929ae5a091a72bcd1fb7"
+      }
+    ]
+  },
+  "tsan": {
+    "source_revision": "dec0d4566cf36cf8d05a0a9ebbf775c19d43244c",
+    "host": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+    "toolchain": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+    "sanitized_control": {
+      "command": [
+        "target/prism-ordered-validation-v1/tsan-build/x86_64-unknown-linux-gnu/debug/martensite-ordered-validation-tsan-control"
+      ],
+      "returncode": -11,
+      "sha256": "f1c8f1b0c5406ddf3bf06b1fc5f57b5208bdb5253a2319d116fe79bdd4772955",
+      "main_marker": false
+    },
+    "unsanitized_build": {
+      "command": [
+        "/home/vmiguel/.rustup/toolchains/nightly-2026-09-25-x86_64-unknown-linux-gnu/bin/rustc",
+        "target/prism-ordered-validation-v1/tsan-control/src/main.rs",
+        "-o",
+        "target/prism-ordered-validation-v1/tsan-unsanitized-control"
+      ],
+      "returncode": 0
+    },
+    "unsanitized_control": {
+      "returncode": 0,
+      "main_marker": true,
+      "sha256": "0aa6704559b49ae3f7a644e16957df6429c74c687176a9d2fa34c423f07450c5"
+    },
+    "validation_tsan_suite": {
+      "built": false,
+      "executed": false
+    },
+    "host_masking": false
+  },
+  "exclusions": [
+    "No live OCCT",
+    "No GPU or application acceptance",
+    "No benchmark or release acceptance",
+    "TSan validation suite not built/executed; sanitized startup control failed"
+  ]
+}

@@ -5,12 +5,16 @@ mod domains;
 mod error;
 mod regularity;
 mod table;
+mod table_validation;
+#[cfg(test)]
+mod table_validation_tests;
 mod types;
 use super::super::surface_charts::*;
 use super::current_binding::*;
 use super::*;
 pub(crate) use error::*;
 use rustycad_tkmath::predicates::roots::metric_bounds::*;
+pub(crate) use table_validation::{PrismEmbeddingTableFailure, check_prism_embedding_table};
 pub(crate) use types::*;
 
 /// Inspect the bounded theorem; `inspect_prism_embedding(bridge,sources,receipt,options,cancel)`.
