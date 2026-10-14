@@ -6,8 +6,8 @@ pub(in crate::sketch_region_prism::frozen) struct NativeHistoryInputs<'a> {
     pub receipt: &'a crate::sketch_region_prism::PrismReceipt,
     pub publication: &'a PrismPublicationBindings,
 }
-impl PrismHistoryRequest<'_, '_> {
-    pub(super) fn native_inputs(&self) -> NativeHistoryInputs<'_> {
+impl<'a> PrismHistoryRequest<'a, '_> {
+    pub(super) fn native_inputs(&self) -> NativeHistoryInputs<'a> {
         NativeHistoryInputs {
             bridge: self.bridge,
             receipt: self.receipt,

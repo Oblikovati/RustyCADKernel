@@ -11,9 +11,9 @@ mod types;
 pub(crate) use types::*;
 mod census;
 mod limits;
-mod operands;
+pub(super) mod operands;
 pub(super) mod parent_rows;
-mod partition_queries;
+pub(super) mod partition_queries;
 mod stage_names;
 mod stages;
 use super::*;
@@ -32,14 +32,14 @@ pub(in crate::sketch_region_prism) mod fixture;
 
 mod observation_types;
 pub(crate) use observation_types::*;
-mod candidate_copy;
-mod generated;
+pub(super) mod candidate_copy;
+pub(super) mod generated;
 mod generated_directed;
 mod intermediate;
 pub(super) mod observed_values;
-mod relations;
+pub(super) mod relations;
 pub(crate) use intermediate::PrismIntermediateHistory;
-mod partition_metadata;
+pub(super) mod partition_metadata;
 pub(crate) use partition_metadata::{
     PrismPartitionEndpoint, PrismPartitionMetadata, PrismPartitionVertex,
 };
@@ -51,7 +51,7 @@ pub(crate) use continuation::PrismOriginalContinuation;
 mod capture;
 mod result;
 pub(crate) use result::*;
-mod operation;
+pub(super) mod operation;
 mod replay;
 pub(crate) use operation::{
     inspect_bound_prism_history, inspect_complete_prism_history, rebind_complete_prism_history,
@@ -61,7 +61,7 @@ mod admission;
 #[cfg(test)]
 mod adversarial_tests;
 pub(super) mod budget;
-mod diagnostics;
+pub(super) mod diagnostics;
 #[cfg(test)]
 mod operation_tests;
 mod sweep_coverage;

@@ -103,6 +103,11 @@ pub(crate) enum HistoryArrangementVariant {
 pub(super) fn admit_observations<'a>(
     request: &PrismHistoryRequest<'a, '_>,
 ) -> Result<(), PrismHistoryFailure<'a>> {
+    admit_native_observations(&request.native_inputs())
+}
+pub(in crate::sketch_region_prism::frozen) fn admit_native_observations<'a>(
+    request: &NativeHistoryInputs<'a>,
+) -> Result<(), PrismHistoryFailure<'a>> {
     admit_partition(request)?;
     admit_arrangement(request)?;
     let Some(copy) = &request.bridge.mapped.copied else {
@@ -116,19 +121,23 @@ pub(super) fn admit_observations<'a>(
     }
     Ok(())
 }
-fn admit_partition<'a>(
-    request: &PrismHistoryRequest<'a, '_>,
-) -> Result<(), PrismHistoryFailure<'a>> {
+fn admit_partition<'a>(request: &NativeHistoryInputs<'a>) -> Result<(), PrismHistoryFailure<'a>> {
     let PartitionObservation::Incomplete { failure, .. } =
         &request.bridge.mapped.arrangement.partition
     else {
         return Ok(());
     };
-    let parents = parent_rows::original_keys(request.publication, &failure.parents)
-        .map_err(|cause| operation::failure(request, PrismHistoryPhase::Admission, cause))?;
+    let parents =
+        parent_rows::original_keys(request.publication, &failure.parents).map_err(|cause| {
+            operation::native_failure(
+                request.publication.operation,
+                PrismHistoryPhase::Admission,
+                cause,
+            )
+        })?;
     let cause = partition_diagnostic(failure, parents);
-    let mut result = operation::failure(
-        request,
+    let mut result = operation::native_failure(
+        request.publication.operation,
         PrismHistoryPhase::Admission,
         PrismHistoryCause::Legacy(Box::new(cause)),
     );
@@ -154,9 +163,7 @@ fn partition_cause(cause: &PartitionReadCause) -> HistoryPartitionReadCause {
         }
     }
 }
-fn admit_arrangement<'a>(
-    request: &PrismHistoryRequest<'a, '_>,
-) -> Result<(), PrismHistoryFailure<'a>> {
+fn admit_arrangement<'a>(request: &NativeHistoryInputs<'a>) -> Result<(), PrismHistoryFailure<'a>> {
     let actual = &request.bridge.mapped.arrangement.completion;
     let variant = match actual {
         ArrangementCompletion::Arranged(_) => return Ok(()),
@@ -170,8 +177,8 @@ fn admit_arrangement<'a>(
         ArrangementCompletion::Cancelled(phase) => HistoryArrangementVariant::Cancelled(*phase),
         ArrangementCompletion::Incomplete(_) => HistoryArrangementVariant::Incomplete,
     };
-    let mut error = operation::failure(
-        request,
+    let mut error = operation::native_failure(
+        request.publication.operation,
         PrismHistoryPhase::Admission,
         PrismHistoryCause::Legacy(Box::new(HistoricalLegacyCause::Arrangement { variant })),
     );
@@ -179,13 +186,13 @@ fn admit_arrangement<'a>(
     Err(error)
 }
 fn candidate_failure<'a>(
-    request: &PrismHistoryRequest<'a, '_>,
+    request: &NativeHistoryInputs<'a>,
     observation: Option<usize>,
     cause: &'a CandidateCause,
 ) -> PrismHistoryFailure<'a> {
     let variant = candidate_variant(cause);
-    let mut error = operation::failure(
-        request,
+    let mut error = operation::native_failure(
+        request.publication.operation,
         PrismHistoryPhase::Admission,
         PrismHistoryCause::Legacy(Box::new(HistoricalLegacyCause::Candidate {
             observation,

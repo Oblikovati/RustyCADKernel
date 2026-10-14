@@ -62,6 +62,11 @@ fn context_failure(
 pub(super) fn partition<'a>(
     request: &PrismHistoryRequest<'a, '_>,
 ) -> HistoryCheck<&'a OwnedPartitionSnapshot> {
+    partition_native(&request.native_inputs())
+}
+pub(in crate::sketch_region_prism::frozen) fn partition_native<'a>(
+    request: &NativeHistoryInputs<'a>,
+) -> HistoryCheck<&'a OwnedPartitionSnapshot> {
     let PartitionObservation::Captured(rows) = &request.bridge.mapped.arrangement.partition else {
         return Err(PrismHistoryCause::Missing {
             required: "complete observed partition",

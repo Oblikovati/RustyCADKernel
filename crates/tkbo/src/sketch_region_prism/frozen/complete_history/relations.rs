@@ -59,7 +59,7 @@ fn validate_partition(
     };
     same_parents(PrismHistoryStage::Partition, &row.parents, &expected)
 }
-pub(super) fn same_parents(
+pub(in crate::sketch_region_prism::frozen) fn same_parents(
     stage: PrismHistoryStage,
     actual: &[Vec<FrozenOriginalKey>; 3],
     expected: &[Vec<FrozenOriginalKey>; 3],
@@ -80,11 +80,24 @@ pub(super) fn generated(
     rows: &[PrismGeneratedMember],
     links: &[PrismCandidateCopyLink],
 ) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
-    let actual = parent_rows::relation_rows(
+    generated_relations(
         request.publication,
         bound,
+        stage,
         &operands::candidate(request, stage)?.relations,
-    )?;
+        rows,
+        links,
+    )
+}
+pub(in crate::sketch_region_prism::frozen) fn generated_relations(
+    publication: &PrismPublicationBindings,
+    bound: &BoundHistoricalContexts<'_>,
+    stage: PrismHistoryStage,
+    native: &[crate::sketch_region::ArrangementRelation],
+    rows: &[PrismGeneratedMember],
+    links: &[PrismCandidateCopyLink],
+) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
+    let actual = parent_rows::relation_rows(publication, bound, native)?;
     for row in rows {
         let parents = generated_parents(row, rows, links);
         same_parents(stage, &row.parents, &parents)?;

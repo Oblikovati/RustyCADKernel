@@ -44,10 +44,16 @@ pub(super) fn capture(
     let vertices = snapshot
         .vertices
         .iter()
-        .map(|v| vertex(request, copied, v))
+        .map(|v| vertex(&request.native_inputs(), copied, v))
         .collect::<HistoryCheck<Vec<_>>>()?;
     history_count("one native physical closure vertex", vertices.len(), 1)?;
-    let result = metadata(request, copied, source, source_shape_count, vertices)?;
+    let result = metadata(
+        &request.native_inputs(),
+        copied,
+        source,
+        source_shape_count,
+        vertices,
+    )?;
     admit_parents(request, &result)?;
     Ok(result)
 }
@@ -76,8 +82,8 @@ fn space(
         })
         .transpose()
 }
-fn vertex(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn vertex(
+    request: &NativeHistoryInputs<'_>,
     copied: &BoundHistoricalContexts<'_>,
     row: &PartitionVertexObservation,
 ) -> HistoryCheck<PrismPartitionVertex> {
@@ -93,7 +99,7 @@ fn vertex(
     })
 }
 fn endpoints(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     copied: &BoundHistoricalContexts<'_>,
     source: &SourcePartitionObservation,
 ) -> HistoryCheck<Vec<PrismPartitionEndpoint>> {
@@ -126,7 +132,7 @@ fn admit_parents(
         "partition vertex retains both original closure use parents",
     )
 }
-pub(super) fn replay(value: &PrismPartitionMetadata) -> Vec<u8> {
+pub(in crate::sketch_region_prism::frozen) fn replay(value: &PrismPartitionMetadata) -> Vec<u8> {
     let mut bytes = format!("partition-metadata-v1;count={:?};source={:?};parents={:?};range={:?};reference={:?};blocks={:?};images-present={:?};endpoints={:?};vertices={:?};",
         value.source_shape_count, value.source, value.parents, value.range_bits, value.has_reference, value.block_count,
         value.images_present, value.endpoints, value.vertices).into_bytes();
@@ -153,8 +159,8 @@ fn endpoint_parameter(
     )
 }
 
-fn metadata(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn metadata(
+    request: &NativeHistoryInputs<'_>,
     copied: &BoundHistoricalContexts<'_>,
     source: &SourcePartitionObservation,
     source_shape_count: i32,
@@ -175,7 +181,9 @@ fn metadata(
     Ok(result)
 }
 
-fn admit_unsplit(source: &SourcePartitionObservation) -> HistoryCheck<()> {
+pub(in crate::sketch_region_prism::frozen) fn admit_unsplit(
+    source: &SourcePartitionObservation,
+) -> HistoryCheck<()> {
     history_count(
         "unreferenced V1 source",
         usize::from(source.has_reference),
@@ -190,10 +198,10 @@ fn admit_unsplit(source: &SourcePartitionObservation) -> HistoryCheck<()> {
 }
 
 fn bind_endpoint_vertex(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     endpoint: &crate::sketch_region::SourceVertexObservation,
 ) -> HistoryCheck<()> {
-    let matches: Vec<_> = operands::partition(request)?
+    let matches: Vec<_> = operands::partition_native(request)?
         .vertices
         .iter()
         .filter(|v| v.shape_index == endpoint.shape_index)
@@ -215,7 +223,7 @@ fn bind_endpoint_vertex(
 }
 
 fn project_endpoint(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     copied: &BoundHistoricalContexts<'_>,
     source: &SourcePartitionObservation,
     endpoint: &crate::sketch_region::SourceVertexObservation,

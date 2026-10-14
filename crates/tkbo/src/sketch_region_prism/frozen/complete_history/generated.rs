@@ -7,7 +7,7 @@ use crate::sketch_region_candidates::{
 pub(super) fn areas<'a>(
     request: &PrismHistoryRequest<'a, '_>,
 ) -> HistoryCheck<&'a [GeneratedAreaSnapshot]> {
-    match &candidate_copy::inspection(request)?.generated_topology {
+    match &candidate_copy::inspection(&request.native_inputs())?.generated_topology {
         GeneratedTopologyObservation::Observed(rows) => Ok(rows),
         GeneratedTopologyObservation::NotReached => Err(PrismHistoryCause::Missing {
             required: "generated topology observation",
@@ -73,7 +73,20 @@ pub(super) fn project(
     copied: &BoundHistoricalContexts<'_>,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<Vec<PrismGeneratedMember>> {
-    let rows = &area(request, bound, stage)?.members;
+    project_area(
+        &request.native_inputs(),
+        bound,
+        copied,
+        area(request, bound, stage)?,
+    )
+}
+pub(in crate::sketch_region_prism::frozen) fn project_area(
+    request: &NativeHistoryInputs<'_>,
+    bound: &BoundHistoricalContexts<'_>,
+    copied: &BoundHistoricalContexts<'_>,
+    area: &GeneratedAreaSnapshot,
+) -> HistoryCheck<Vec<PrismGeneratedMember>> {
+    let rows = &area.members;
     history_count(
         "one generated member row per directed context",
         rows.len(),
@@ -95,7 +108,7 @@ pub(super) fn project(
     Ok(observed_values::sorted(result))
 }
 fn member(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     bound: &BoundHistoricalContexts<'_>,
     copied: &BoundHistoricalContexts<'_>,
     row: &GeneratedMemberSnapshot,
@@ -147,7 +160,7 @@ fn descendants(
     Ok(observed_values::sorted(result))
 }
 fn copy_members(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     copied: &BoundHistoricalContexts<'_>,
     row: &GeneratedMemberSnapshot,
 ) -> HistoryCheck<Vec<PrismHistoryMemberKey>> {

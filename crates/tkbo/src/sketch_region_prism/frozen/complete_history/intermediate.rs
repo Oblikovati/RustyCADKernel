@@ -70,7 +70,7 @@ fn candidate_history(
     let selected = stages::stage(stages, PrismHistoryStage::Selected)?;
     let complement = stages::stage(stages, PrismHistoryStage::Complement)?;
     let copy_links = candidate_copy::copy_links(request, stages, queries, relations)?;
-    let copy_tree = candidate_copy::project_tree(request, copied)?;
+    let copy_tree = candidate_copy::project_tree(&request.native_inputs(), copied)?;
     let directed = generated_directed::project(copied, selected, complement)?;
     let omitted_administrative_container = administrative_container(copied)?;
     Ok(PrismCandidateHistory {

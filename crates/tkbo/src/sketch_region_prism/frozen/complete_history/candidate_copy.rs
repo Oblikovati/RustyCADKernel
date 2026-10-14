@@ -5,8 +5,8 @@ use crate::sketch_region_candidates::{
     CandidateCopiedMember, CandidateCopyInspection, CandidateCopyTreeObservation,
 };
 use stages::BoundHistoryStage;
-pub(super) fn inspection<'a>(
-    request: &PrismHistoryRequest<'a, '_>,
+pub(in crate::sketch_region_prism::frozen) fn inspection<'a>(
+    request: &NativeHistoryInputs<'a>,
 ) -> HistoryCheck<&'a CandidateCopyInspection> {
     request
         .bridge
@@ -25,7 +25,24 @@ pub(super) fn copy_links(
 ) -> HistoryCheck<Vec<PrismCandidateCopyLink>> {
     let source = stages::stage(stages, PrismHistoryStage::Partition)?;
     let copied = stages::stage(stages, PrismHistoryStage::CandidateCopy)?;
-    let observed = &inspection(request)?.links;
+    let observed = &inspection(&request.native_inputs())?.links;
+    project_copy_links(
+        &request.native_inputs(),
+        observed,
+        source,
+        copied,
+        queries,
+        relations,
+    )
+}
+pub(in crate::sketch_region_prism::frozen) fn project_copy_links(
+    request: &NativeHistoryInputs<'_>,
+    observed: &[crate::sketch_region_candidates::CandidateImageCopyLink],
+    source: &BoundHistoricalContexts<'_>,
+    copied: &BoundHistoricalContexts<'_>,
+    queries: &[PrismHistoricalCopyQuery],
+    relations: &[PrismHistoricalRelation],
+) -> HistoryCheck<Vec<PrismCandidateCopyLink>> {
     history_count(
         "exhaustive candidate copy member links",
         observed.len(),
@@ -41,7 +58,7 @@ pub(super) fn copy_links(
     Ok(observed_values::sorted(result))
 }
 fn copy_link(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     source: &BoundHistoricalContexts<'_>,
     copied: &BoundHistoricalContexts<'_>,
     link: &crate::sketch_region_candidates::CandidateImageCopyLink,
@@ -94,8 +111,8 @@ fn match_link(
         "copier retains every partition parent and class",
     )
 }
-pub(super) fn tree<'a>(
-    request: &PrismHistoryRequest<'a, '_>,
+pub(in crate::sketch_region_prism::frozen) fn tree<'a>(
+    request: &NativeHistoryInputs<'a>,
 ) -> HistoryCheck<&'a [CandidateCopiedMember]> {
     match &inspection(request)?.copied_tree {
         CandidateCopyTreeObservation::Captured(rows) => Ok(rows),
@@ -107,8 +124,8 @@ pub(super) fn tree<'a>(
         }
     }
 }
-pub(super) fn project_tree(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn project_tree(
+    request: &NativeHistoryInputs<'_>,
     copied: &BoundHistoricalContexts<'_>,
 ) -> HistoryCheck<Vec<PrismCopiedTreeMember>> {
     let rows = tree(request)?;
@@ -141,8 +158,8 @@ fn tree_member(
         point_bits: observed_values::point(&row.vertex_point)?,
     })
 }
-pub(super) fn tree_key(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn tree_key(
+    request: &NativeHistoryInputs<'_>,
     copied: &BoundHistoricalContexts<'_>,
     index: usize,
 ) -> HistoryCheck<PrismHistoryMemberKey> {
