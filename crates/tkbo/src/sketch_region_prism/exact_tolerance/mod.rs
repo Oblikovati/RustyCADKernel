@@ -47,6 +47,7 @@ mod joined_metadata_tests;
 mod joined_operand_tests;
 
 mod replay;
+pub(crate) use replay::encode_stored_tolerance_observation;
 mod replay_limits;
 
 #[cfg(test)]
