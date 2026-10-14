@@ -1,0 +1,130 @@
+{
+  "revision": "0f0cde5f6d5ad808338192c05b2e8b45761bf354",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "source_files": 12912,
+  "toolchain": "1.99.0",
+  "jobs": 2,
+  "pid": 3751283,
+  "all_target_tests": 1869,
+  "failed": 0,
+  "ignored": 0,
+  "doctests": 35,
+  "adapter_tests_in_full_matrix": 32,
+  "source_unchanged": true,
+  "replays": {
+    "publication-diagnostic": {
+      "bytes": 27122,
+      "sha256": "60678228ea0662cbea41f30128d2d60c922d47103ea1f1d30376f8ee32c7caea",
+      "two_processes_equal": true,
+      "historical_expected_sha256": null
+    },
+    "typed-preparation": {
+      "bytes": 5807,
+      "sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8",
+      "two_processes_equal": true,
+      "historical_expected_sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8"
+    },
+    "publication-v1": {
+      "bytes": 2202990,
+      "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107",
+      "two_processes_equal": true,
+      "historical_expected_sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107"
+    },
+    "publication-v2": {
+      "bytes": 2202990,
+      "sha256": "e68be877959b90ae723b2386ae83db09e0a169149571433d5f3e01fe1be7d878",
+      "two_processes_equal": true,
+      "historical_expected_sha256": "e68be877959b90ae723b2386ae83db09e0a169149571433d5f3e01fe1be7d878"
+    },
+    "semantic-map": {
+      "bytes": 10571,
+      "sha256": "ffbdcd9461a1acb2349d514610a6f24b6cdadd03b460bf9394a65240b88247ff",
+      "two_processes_equal": true,
+      "historical_expected_sha256": "ffbdcd9461a1acb2349d514610a6f24b6cdadd03b460bf9394a65240b88247ff"
+    },
+    "owned-request": {
+      "bytes": 615,
+      "sha256": "77d1dc98202696ae7ece26d1f58fdf2891f52da26bf563be63b6150f86d97aa5",
+      "two_processes_equal": true,
+      "historical_expected_sha256": null
+    }
+  },
+  "binary_sha256": "e323c762cc1c2fb06fe5356241e92767643b2a9dbe03898424abb62fa15b9b72",
+  "commands": [
+    [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "--test-threads=1"
+    ],
+    {
+      "gate": "doctests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "exit_code": 0
+    },
+    {
+      "gate": "clippy",
+      "argv": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0
+    },
+    {
+      "gate": "fmt",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "gate": "rendered-docs",
+      "argv": [
+        "cargo",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--no-deps",
+        "--all-features"
+      ],
+      "exit_code": 0
+    },
+    {
+      "gate": "replay",
+      "argv": [
+        "python3",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication-diagnostics/target/publication-diagnostic-frozen/replay.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "exclusions": [
+    "ThreadSanitizer suite incomplete: retained unchanged-host startup failure; no repeated control",
+    "No live OCCT/native/GPU work",
+    "No release benchmark or application acceptance",
+    "Incomplete typed projection families retain exact local originals; not complete public owned failure API"
+  ],
+  "archive_sha256": "ccbce8a7d355c53b34cd36c9bdcd80b1eebda874eabbe9a94c5676eb8e7ce5f0"
+}

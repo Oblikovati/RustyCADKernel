@@ -91,8 +91,8 @@ Send/Sync claim.
 The context receipt encodes full request operands and the actual optional
 semantic envelope. It is not a diagnostic-cause persistence format. Development
 process/thread fixtures append typed cause observations solely for byte-for-byte
-test comparisons. A publication wrapper is still pending the resolver-issued
-actual-invocation packet; this prefix provides no arbitrary header/failure pairing
+test comparisons. At that initial prefix, a publication wrapper remained pending the resolver-issued
+actual-invocation packet; that prefix provided no arbitrary header/failure pairing
 entrypoint and no publication-completeness claim.
 
 ## Native failure provenance seam
@@ -129,8 +129,8 @@ encode its retained local owners.
 The earlier context-only bytes and test-only context-plus-Debug observation stay
 unchanged for historical replay. New full typed process/thread evidence uses the
 actual envelope codec and independent literal/field fixtures. The publication
-phase vocabulary is encoded, but publication attribution/construction still
-requires the pending sealed actual-invocation packet; this codec adds no such
+phase vocabulary was encoded at that prefix, while publication attribution/construction
+required the sealed actual-invocation packet; that codec added no such
 constructor or body-completion claim.
 
 ## Explicit publication diagnostic retention V2
