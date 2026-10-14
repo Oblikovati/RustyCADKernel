@@ -12,18 +12,7 @@ fn extra_generated_area_and_missing_descendant_never_disappear_from_universe_cov
             panic!("actual areas")
         };
         if duplicate {
-            let mut other = TwoLoopFixture::nested();
-            let GeneratedTopologyObservation::Observed(other_areas) = &mut other
-                .bridge
-                .mapped
-                .copied
-                .as_mut()
-                .unwrap()
-                .generated_topology
-            else {
-                panic!("other actual areas")
-            };
-            areas.push(other_areas.pop().unwrap());
+            areas.push(extra_native_area());
         } else {
             areas[0].members.pop();
         }
@@ -47,6 +36,29 @@ fn actual_distinct_same_parent_members_keep_separate_authored_keys() {
 #[test]
 fn duplicated_member_parent_is_retained_or_refused_and_never_silently_deduplicated() {
     let mut fixture = TwoLoopFixture::nested();
+    duplicate_actual_parent(&mut fixture);
+    assert!(matches!(
+        inspect(&fixture, &mut OperationProgress),
+        TwoLoopRegionOutcome::Incomplete(_)
+    ));
+}
+
+fn extra_native_area() -> crate::sketch_region_candidates::GeneratedAreaSnapshot {
+    let mut other = TwoLoopFixture::nested();
+    let GeneratedTopologyObservation::Observed(other_areas) = &mut other
+        .bridge
+        .mapped
+        .copied
+        .as_mut()
+        .unwrap()
+        .generated_topology
+    else {
+        panic!("other actual areas")
+    };
+    other_areas.pop().unwrap()
+}
+
+fn duplicate_actual_parent(fixture: &mut TwoLoopFixture) {
     let batch = fixture
         .bridge
         .mapped
@@ -63,8 +75,4 @@ fn duplicated_member_parent_is_retained_or_refused_and_never_silently_deduplicat
         .find(|r| !r.generated.is_empty())
         .unwrap();
     relation.generated.push(relation.generated[0].clone());
-    assert!(matches!(
-        inspect(&fixture, &mut OperationProgress),
-        TwoLoopRegionOutcome::Incomplete(_)
-    ));
 }

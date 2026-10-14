@@ -39,17 +39,8 @@ fn domain_row<'a>(
     names: [RegionSourceId; 2],
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, TwoLoopPairProof> {
-    let proof = domain_certificate(census, domain).ok_or_else(|| refusal(census, domain, work))?;
+    let proof = required_domain(census, domain, work)?;
     let [first, second] = domain.occurrences;
-    work.holds(
-        "pair source indices in complete two-source roster",
-        first < 2 && second < 2,
-    )?;
-    work.count(
-        "closure-only self / empty cross domain",
-        proof.contact_count(),
-        usize::from(first == second),
-    )?;
     work.units("pair proof", 1)?;
     let denominators = proof.denominators();
     Ok(TwoLoopPairProof {
@@ -89,17 +80,7 @@ fn refusal<'a>(
     {
         match &retained.outcome {
             Ok(report) => {
-                failure.cause = if report.completion() == BezierPairCompletion::Complete {
-                    TwoLoopRegionCause::Stale {
-                        operand: "retained complete pair source/policy binding",
-                    }
-                } else {
-                    TwoLoopRegionCause::PairRefusal {
-                        completion: report.completion(),
-                        policy: report.policy(),
-                        work: report.work(),
-                    }
-                };
+                failure.cause = report_cause(report);
                 failure.local = Some(TwoLoopLocalDiagnostic::Pair(report));
             }
             Err(cause) => failure.cause = TwoLoopRegionCause::PairCapture(cause.clone()),
@@ -179,4 +160,37 @@ fn closure<'a>(
         point: contact.point,
         achieved_world_error: contact.achieved_world_error,
     }))
+}
+
+fn required_domain<'a>(
+    census: &'a BoundaryCensus,
+    domain: &BoundaryDomain,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, BezierPairCertificate<'a>> {
+    let proof = domain_certificate(census, domain).ok_or_else(|| refusal(census, domain, work))?;
+    let [first, second] = domain.occurrences;
+    work.holds(
+        "pair source indices in complete two-source roster",
+        first < 2 && second < 2,
+    )?;
+    work.count(
+        "closure-only self / empty cross domain",
+        proof.contact_count(),
+        usize::from(first == second),
+    )?;
+    Ok(proof)
+}
+
+fn report_cause(report: &BezierPairReport) -> TwoLoopRegionCause {
+    if report.completion() == BezierPairCompletion::Complete {
+        TwoLoopRegionCause::Stale {
+            operand: "retained complete pair source/policy binding",
+        }
+    } else {
+        TwoLoopRegionCause::PairRefusal {
+            completion: report.completion(),
+            policy: report.policy(),
+            work: report.work(),
+        }
+    }
 }

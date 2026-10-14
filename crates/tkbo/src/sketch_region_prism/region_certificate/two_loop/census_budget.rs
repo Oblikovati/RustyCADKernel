@@ -9,13 +9,7 @@ pub(super) fn admit<'a>(
 ) -> TwoLoopCheck<'a, ()> {
     work.units("retained census domain", census.domains.len())?;
     work.units("retained census obligation", census.missing.len())?;
-    if !census.reports.is_empty() || !census.failures.is_empty() {
-        let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
-            stage: "unexpected non-pair census report or failure",
-        });
-        failure.local = Some(TwoLoopLocalDiagnostic::Census(census));
-        return Err(failure);
-    }
+    legacy_roster(census, work)?;
     let Some(paired) = &census.paired else {
         return Ok(());
     };
@@ -42,6 +36,20 @@ fn report_sources<'a>(
             "retained pair source weight",
             curve.weights.map_or(0, <[f64]>::len),
         )?;
+    }
+    Ok(())
+}
+
+pub(super) fn legacy_roster<'a>(
+    census: &'a BoundaryCensus,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    if !census.reports.is_empty() || !census.failures.is_empty() {
+        let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
+            stage: "unexpected non-pair census report or failure",
+        });
+        failure.local = Some(TwoLoopLocalDiagnostic::Census(census));
+        return Err(failure);
     }
     Ok(())
 }

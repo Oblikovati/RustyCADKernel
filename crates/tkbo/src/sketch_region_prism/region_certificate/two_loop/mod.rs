@@ -13,9 +13,9 @@ mod domain_refusal_tests;
 mod endpoints;
 mod failure;
 #[cfg(test)]
-mod fixture;
+pub(in crate::sketch_region_prism) mod fixture;
 #[cfg(test)]
-mod fixture_bindings;
+pub(in crate::sketch_region_prism) mod fixture_bindings;
 mod geometry;
 mod history_budget;
 #[cfg(test)]
@@ -77,3 +77,5 @@ mod refusal_tests;
 
 #[cfg(test)]
 mod membership_refusal_tests;
+
+pub(crate) use failure_class::TwoLoopRefusalClass;

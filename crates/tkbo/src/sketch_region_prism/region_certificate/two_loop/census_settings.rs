@@ -22,19 +22,8 @@ pub(super) fn capture<'a>(
             hypothesis: "actual pair provider evidence",
         })
     })?;
-    work.count(
-        "all paired occurrence captures",
-        paired.occurrences.len(),
-        2,
-    )?;
-    work.count("all actual pair reports", paired.reports.len(), 3)?;
-    if !census.failures.is_empty() || !census.reports.is_empty() {
-        let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
-            stage: "unexpected non-pair census report or failure",
-        });
-        failure.local = Some(TwoLoopLocalDiagnostic::Census(census));
-        return Err(failure);
-    }
+    paired_counts(paired.occurrences.len(), paired.reports.len(), work)?;
+    super::census_budget::legacy_roster(census, work)?;
     work.units("census settings", 1)?;
     Ok(TwoLoopCensusSettings {
         requested_roots: census.requested.roots,
@@ -44,4 +33,14 @@ pub(super) fn capture<'a>(
         reused_reports: paired.reused_reports,
         chart_rank,
     })
+}
+
+fn paired_counts<'a>(
+    occurrences: usize,
+    reports: usize,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    work.count("all paired occurrence captures", occurrences, 2)?;
+    work.count("all actual pair reports", reports, 3)?;
+    Ok(())
 }

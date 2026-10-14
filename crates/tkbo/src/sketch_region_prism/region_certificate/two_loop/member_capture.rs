@@ -33,26 +33,7 @@ pub(super) fn capture<'a>(
         originals,
         work,
     )?];
-    for wire in geometry::children(&candidate.face, ShapeEnum::Wire, 2, work)? {
-        let matches: Vec<_> = names
-            .wires
-            .iter()
-            .filter(|n| n.actual == PartitionOccurrenceIdentity::capture(&wire))
-            .collect();
-        work.count("named actual member wire", matches.len(), 1)?;
-        append_wire(
-            &wire,
-            TwoLoopMemberKey {
-                candidate: names.name,
-                wire: Some(matches[0].name),
-                role: TwoLoopMemberRole::Wire,
-            },
-            candidate,
-            originals,
-            &mut rows,
-            work,
-        )?;
-    }
+    append_named_wires(candidate, names, originals, &mut rows, work)?;
     work.count(
         "all actual member relation rows",
         candidate.relations.len(),
@@ -101,22 +82,11 @@ fn one<'a>(
     originals: &[OriginalUseBinding],
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, TwoLoopMemberProof> {
-    let identity = PartitionOccurrenceIdentity::capture(shape);
-    let relations: Vec<_> = candidate
-        .relations
-        .iter()
-        .filter(|r| PartitionOccurrenceIdentity::capture(&r.output) == identity)
-        .collect();
-    work.count("unique actual member relation", relations.len(), 1)?;
-    let relation = relations[0];
+    let relation = member_relation(shape, candidate, work)?;
     geometry::reversed(shape.orientation(), work)?;
     let placement = captured_placement(shape.location().transformation())
         .map_err(|e| work.failure(TwoLoopRegionCause::Capture(std::sync::Arc::new(e.into()))))?;
-    let raw_tolerance = if key.role == TwoLoopMemberRole::Wire {
-        None
-    } else {
-        Some(geometry::raw_tolerance(shape, work)?)
-    };
+    let raw_tolerance = member_tolerance(shape, key.role, work)?;
     work.units("directed member proof", 1)?;
     Ok(TwoLoopMemberProof {
         key,
@@ -129,4 +99,72 @@ fn one<'a>(
             generated: member_parents::parents(&relation.generated, originals, work)?,
         },
     })
+}
+
+fn member_relation<'a, 'b>(
+    shape: &Shape,
+    candidate: &'b RegionCandidate,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, &'b crate::sketch_region::ArrangementRelation> {
+    let identity = PartitionOccurrenceIdentity::capture(shape);
+    let relations: Vec<_> = candidate
+        .relations
+        .iter()
+        .filter(|r| PartitionOccurrenceIdentity::capture(&r.output) == identity)
+        .collect();
+    work.count("unique actual member relation", relations.len(), 1)?;
+    let relation = relations[0];
+    Ok(relation)
+}
+
+fn append_named_wires<'a>(
+    candidate: &RegionCandidate,
+    names: &TwoLoopCandidateBinding,
+    originals: &[OriginalUseBinding],
+    rows: &mut Vec<TwoLoopMemberProof>,
+    work: &mut TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    for wire in geometry::children(&candidate.face, ShapeEnum::Wire, 2, work)? {
+        let name = named_wire(&wire, names, work)?;
+        append_wire(
+            &wire,
+            TwoLoopMemberKey {
+                candidate: names.name,
+                wire: Some(name),
+                role: TwoLoopMemberRole::Wire,
+            },
+            candidate,
+            originals,
+            rows,
+            work,
+        )?;
+    }
+    Ok(())
+}
+
+fn member_tolerance<'a>(
+    shape: &Shape,
+    role: TwoLoopMemberRole,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, Option<f64>> {
+    let raw_tolerance = if role == TwoLoopMemberRole::Wire {
+        None
+    } else {
+        Some(geometry::raw_tolerance(shape, work)?)
+    };
+    Ok(raw_tolerance)
+}
+
+fn named_wire<'a>(
+    wire: &Shape,
+    names: &TwoLoopCandidateBinding,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, u64> {
+    let matches: Vec<_> = names
+        .wires
+        .iter()
+        .filter(|n| n.actual == PartitionOccurrenceIdentity::capture(wire))
+        .collect();
+    work.count("named actual member wire", matches.len(), 1)?;
+    Ok(matches[0].name)
 }

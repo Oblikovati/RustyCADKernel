@@ -69,14 +69,11 @@ fn borrowed_domain_views_expose_all_operands_and_explicit_remaining_gates() {
     assert_eq!(proof.domains().len(), 3);
     assert_eq!(proof.candidates().len(), 3);
     assert_eq!(proof.nesting().native_signs, [1, 1]);
-    assert!(
-        proof
-            .census_settings()
-            .chart_rank
-            .compare_f64(0.)
-            .unwrap()
-            .is_gt()
-    );
+    check_remaining_views(&proof);
+}
+
+fn check_remaining_views(proof: &TwoLoopRegionCertificate) {
+    check_chart_rank(proof);
     assert_eq!(proof.requested(), fixture_bindings::options());
     assert!(proof.retained_units() > 0);
     assert!(!proof.replay_bytes().is_empty());
@@ -89,5 +86,16 @@ fn borrowed_domain_views_expose_all_operands_and_explicit_remaining_gates() {
         proof
             .limitations()
             .contains(&super::TwoLoopRegionLimitation::OrderedBodyValidation)
+    );
+}
+
+fn check_chart_rank(proof: &TwoLoopRegionCertificate) {
+    assert!(
+        proof
+            .census_settings()
+            .chart_rank
+            .compare_f64(0.)
+            .unwrap()
+            .is_gt()
     );
 }

@@ -95,13 +95,7 @@ fn complete_disjoint_unnested_boundaries_fail_the_native_closure_nesting_witness
     let sources = fixture.sources();
     let captured =
         super::source_tests::capture(&fixture).unwrap_or_else(|_| panic!("actual source proof"));
-    let identities = TwoLoopRegionIdentities {
-        operation: 77,
-        outer: OUTER,
-        inner: INNER,
-        selected: 301,
-        candidates: Vec::new(),
-    };
+    let identities = unbound_candidate_names();
     let request = TwoLoopRegionRequest {
         bridge: &fixture.bridge,
         sources: &sources,
@@ -110,9 +104,27 @@ fn complete_disjoint_unnested_boundaries_fail_the_native_closure_nesting_witness
         material_seed: [0.25, 0.25],
         requested: fixture_bindings::options(),
     };
+    check_unnested_witness(&request, &captured);
+}
+
+fn unbound_candidate_names() -> super::request::TwoLoopRegionIdentities {
+    super::request::TwoLoopRegionIdentities {
+        operation: 77,
+        outer: OUTER,
+        inner: INNER,
+        selected: 301,
+        candidates: Vec::new(),
+    }
+}
+
+fn check_unnested_witness(
+    request: &super::request::TwoLoopRegionRequest<'_, '_>,
+    captured: &[super::outcome::TwoLoopSourceProof],
+) {
+    use super::failure::TwoLoopRegionCause;
     let mut progress = OperationProgress;
     let mut work = TwoLoopWork::new(77, request.requested, &mut progress);
-    let failure = super::nesting::capture(&request, &captured, &mut work)
+    let failure = super::nesting::capture(request, captured, &mut work)
         .err()
         .unwrap();
     assert!(matches!(

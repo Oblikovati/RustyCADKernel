@@ -17,7 +17,7 @@ use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 
 pub(super) const OUTER: RegionSourceId = RegionSourceId(101);
 pub(super) const INNER: RegionSourceId = RegionSourceId(202);
-pub(super) struct TwoLoopFixture {
+pub(in crate::sketch_region_prism) struct TwoLoopFixture {
     pub outer: Shape,
     pub inner: Shape,
     pub bridge: PairedContactTransaction,
@@ -105,4 +105,13 @@ fn bridge(sources: &[ArrangementSource<'_>]) -> PairedContactTransaction {
     };
     transport_partition_contacts(census(sources), mapped(sources), policy, sources, |_| false)
         .unwrap_or_else(|_| panic!("authored loops; expected retained bridge"))
+}
+
+pub(super) fn oriented_fixture(
+    orientation: rustycad_tkg3d::top_abs::Orientation,
+) -> TwoLoopFixture {
+    TwoLoopFixture::for_edges(
+        cubic(1., [0., 0.]).oriented(orientation),
+        cubic(0.5, [0.5, 0.5]).oriented(orientation),
+    )
 }

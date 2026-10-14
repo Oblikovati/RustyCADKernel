@@ -114,3 +114,10 @@ impl<'a> TwoLoopRegionFailure<'a> {
         self
     }
 }
+
+impl TwoLoopRegionFailure<'_> {
+    /// Preserve the original native/cancelled class through wrappers; `failure.classification()`.
+    pub(crate) fn classification(&self) -> super::TwoLoopRefusalClass {
+        super::failure_class::classify(self)
+    }
+}

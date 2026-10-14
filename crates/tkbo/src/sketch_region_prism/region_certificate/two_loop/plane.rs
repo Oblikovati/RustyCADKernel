@@ -12,22 +12,7 @@ pub(super) fn inspect<'a>(
     sources: &[TwoLoopSourceProof],
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, DyadicBound> {
-    let batch = super::super::borrowed_batch(request.bridge).ok_or_else(|| {
-        work.failure(TwoLoopRegionCause::Missing {
-            hypothesis: "actual declared plane",
-        })
-    })?;
-    let expected = CapturedPlaneSupport {
-        frame: captured_plane_frame(batch.plane.position()),
-        placement: captured_placement(Transform3::default()).expect("finite identity"),
-    };
-    for row in sources {
-        work.holds(
-            "declared and actual common plane",
-            super::super::boundary::same_support(&expected, &row.support),
-        )?;
-    }
-    let normal = *batch.plane.axis().direction().coordinates();
+    let normal = declared_chart(request, sources, work)?;
     let support = &sources[0].support;
     let mut cancelled = None;
     let result = affine_prism_jacobian(support.frame, support.placement, normal, || {
@@ -44,4 +29,27 @@ pub(super) fn inspect<'a>(
     )?;
     work.units("exact chart rank proof", 1)?;
     Ok(exact)
+}
+
+fn declared_chart<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    sources: &[TwoLoopSourceProof],
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, [f64; 3]> {
+    let batch = super::super::borrowed_batch(request.bridge).ok_or_else(|| {
+        work.failure(TwoLoopRegionCause::Missing {
+            hypothesis: "actual declared plane",
+        })
+    })?;
+    let expected = CapturedPlaneSupport {
+        frame: captured_plane_frame(batch.plane.position()),
+        placement: captured_placement(Transform3::default()).expect("finite identity"),
+    };
+    for row in sources {
+        work.holds(
+            "declared and actual common plane",
+            super::super::boundary::same_support(&expected, &row.support),
+        )?;
+    }
+    Ok(*batch.plane.axis().direction().coordinates())
 }

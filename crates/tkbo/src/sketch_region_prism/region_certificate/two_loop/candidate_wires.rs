@@ -16,35 +16,11 @@ pub(super) fn capture<'a>(
     originals: &[super::member_parents::OriginalUseBinding],
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, TwoLoopWireProof> {
-    work.holds(
-        "authored wire maps actual directed occurrence",
-        binding.actual == PartitionOccurrenceIdentity::capture(wire),
-    )?;
-    geometry::reversed(wire.orientation(), work)?;
-    let edges = geometry::children(wire, ShapeEnum::Edge, 1, work)?;
-    work.count("one full Jordan edge per candidate wire", edges.len(), 1)?;
-    let actual = &edges[0];
-    let segment = segment(candidate, actual, work)?;
-    let source = source(segment, binding, sources, work)?;
-    work.holds(
-        "metadata actual original boundary parent",
-        originals.iter().any(|p| {
-            p.key.source == binding.source
-                && p.key.role == super::member_types::TwoLoopMemberRole::Boundary
-                && p.actual == segment.parents[0]
-        }),
-    )?;
-    let space = geometry::space(actual, work)?;
-    let pcurve = geometry::pcurve(actual, &candidate.face, work)?;
+    let (actual, segment, source) = bound_wire(candidate, wire, binding, sources, originals, work)?;
+    let space = geometry::space(&actual, work)?;
+    let pcurve = geometry::pcurve(&actual, &candidate.face, work)?;
     metadata(segment, &pcurve, work)?;
-    work.holds(
-        "candidate space equals complete source",
-        same_space_representation(&space, &source.copied),
-    )?;
-    work.holds(
-        "candidate pcurve equals complete source",
-        same_metric_curve(&pcurve, &source.pcurve),
-    )?;
+    same_source(&space, &pcurve, source, work)?;
     work.units("named candidate wire", 1)?;
     work.units("candidate wire original parent", segment.parents.len())?;
     Ok(TwoLoopWireProof {
@@ -52,7 +28,7 @@ pub(super) fn capture<'a>(
         source: binding.source,
         wire_orientation: wire.orientation(),
         edge_orientation: actual.orientation(),
-        closure: endpoints::capture(actual, &space, work)?,
+        closure: endpoints::capture(&actual, &space, work)?,
         parents: segment.parents.iter().map(|p| p.source).collect(),
         space,
         pcurve,
@@ -122,14 +98,64 @@ fn metadata<'a>(
     )?;
     work.holds(
         "metadata exact pole bits",
-        poles.iter().flatten().map(|v| v.to_bits()).eq(segment
-            .controls
-            .iter()
-            .flatten()
-            .map(|v| v.to_bits())),
+        same_pole_bits(poles, &segment.controls),
     )?;
     work.holds(
         "polynomial metadata weights",
         weights.is_none() && segment.weights.is_none(),
     )
+}
+
+fn bound_wire<'a, 'b>(
+    candidate: &'b RegionCandidate,
+    wire: &Shape,
+    binding: &TwoLoopWireBinding,
+    sources: &'b [TwoLoopSourceProof],
+    originals: &[super::member_parents::OriginalUseBinding],
+    work: &mut TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, (Shape, &'b CandidateSegment, &'b TwoLoopSourceProof)> {
+    work.holds(
+        "authored wire maps actual directed occurrence",
+        binding.actual == PartitionOccurrenceIdentity::capture(wire),
+    )?;
+    geometry::reversed(wire.orientation(), work)?;
+    let edges = geometry::children(wire, ShapeEnum::Edge, 1, work)?;
+    work.count("one full Jordan edge per candidate wire", edges.len(), 1)?;
+    let actual = &edges[0];
+    let segment = segment(candidate, actual, work)?;
+    let source = source(segment, binding, sources, work)?;
+    work.holds(
+        "metadata actual original boundary parent",
+        originals.iter().any(|p| {
+            p.key.source == binding.source
+                && p.key.role == super::member_types::TwoLoopMemberRole::Boundary
+                && p.actual == segment.parents[0]
+        }),
+    )?;
+    Ok((actual.clone(), segment, source))
+}
+
+fn same_source<'a>(
+    space: &CapturedSpaceRepresentation,
+    pcurve: &CapturedMetricCurve<2>,
+    source: &TwoLoopSourceProof,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    work.holds(
+        "candidate space equals complete source",
+        same_space_representation(space, &source.copied),
+    )?;
+    work.holds(
+        "candidate pcurve equals complete source",
+        same_metric_curve(pcurve, &source.pcurve),
+    )?;
+    Ok(())
+}
+
+fn same_pole_bits(first: &[[f64; 2]], second: &[[f64; 2]]) -> bool {
+    first
+        .iter()
+        .flatten()
+        .map(|v| v.to_bits())
+        .eq(second.iter().flatten().map(|v| v.to_bits()))
 }

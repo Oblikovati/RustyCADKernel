@@ -6,13 +6,7 @@ pub(super) fn inspect<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, ()> {
-    super::super::containment::generated_universe(request.bridge).map_err(|cause| {
-        let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
-            stage: "current generated candidate universe",
-        });
-        failure.local = Some(TwoLoopLocalDiagnostic::Region(Box::new(cause)));
-        failure
-    })?;
+    generated_universe(request, work)?;
     let current = inspect_outputs(
         &request.bridge.mapped.arrangement.partition,
         request.bridge.mapped.copied.as_ref(),
@@ -30,5 +24,19 @@ pub(super) fn inspect<'a>(
         });
         return Err(failure);
     }
+    Ok(())
+}
+
+fn generated_universe<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    super::super::containment::generated_universe(request.bridge).map_err(|cause| {
+        let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
+            stage: "current generated candidate universe",
+        });
+        failure.local = Some(TwoLoopLocalDiagnostic::Region(Box::new(cause)));
+        failure
+    })?;
     Ok(())
 }

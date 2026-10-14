@@ -10,19 +10,7 @@ impl TwoLoopRegionProgress for SourceProgress {
 }
 pub(super) fn capture(fixture: &TwoLoopFixture) -> TwoLoopCheck<'_, Vec<TwoLoopSourceProof>> {
     let originals = fixture.sources();
-    let identities = TwoLoopRegionIdentities {
-        operation: 77,
-        outer: OUTER,
-        inner: INNER,
-        selected: 301,
-        candidates: Vec::new(),
-    };
-    let requested = TwoLoopRegionOptions {
-        behavior: TwoLoopRegionBehavior::NestedPolynomialV2,
-        winding: RootIsolationOptions::new(0.001),
-        maximum_retained_units: 4096,
-        maximum_poles: 33,
-    };
+    let (identities, requested) = source_request_options();
     let request = TwoLoopRegionRequest {
         bridge: &fixture.bridge,
         sources: &originals,
@@ -43,23 +31,7 @@ fn both_actual_sources_preserve_native_closure_roles_and_exact_stage_proofs() {
     let proofs = capture(&fixture).unwrap_or_else(|e| panic!("source proof: {:?}", e.cause));
     assert_eq!(proofs.len(), 2);
     for proof in &proofs {
-        assert_eq!(proof.stages.len(), 3);
-        assert_eq!(
-            proof
-                .closure
-                .iter()
-                .map(|p| p.parameter)
-                .collect::<Vec<_>>(),
-            [0., 1.]
-        );
-        assert_eq!(
-            proof
-                .copied_closure
-                .iter()
-                .map(|p| p.parameter)
-                .collect::<Vec<_>>(),
-            [0., 1.]
-        );
+        check_source_closure(proof);
     }
     assert_eq!(proofs[1].closure[0].local_point, [0.5, 0.5, 0.]);
 }
@@ -85,12 +57,65 @@ fn reversed_actual_edges_keep_native_endpoint_roles_and_recorded_orientation() {
 }
 #[test]
 fn same_identity_curve_and_vertex_mutations_cannot_reuse_source_proofs() {
+    let fixture = TwoLoopFixture::nested();
+    let before = capture(&fixture).unwrap_or_else(|e| panic!("source proof: {:?}", e.cause));
+    move_inner_endpoint(&fixture);
+    assert!(matches!(
+        capture(&fixture).err().unwrap().cause,
+        TwoLoopRegionCause::ResidualMismatch(_)
+    ));
+    assert_eq!(before[1].closure[0].local_point, [0.5, 0.5, 0.]);
+    let fixture = TwoLoopFixture::nested();
+    crate::sketch_region_prism::isolation_tests::set_pole(
+        &rustycad_tkbrep::topods::edge(&fixture.outer).unwrap(),
+        5.,
+    );
+    assert!(capture(&fixture).is_err());
+}
+
+fn source_request_options() -> (TwoLoopRegionIdentities, TwoLoopRegionOptions) {
+    let identities = TwoLoopRegionIdentities {
+        operation: 77,
+        outer: OUTER,
+        inner: INNER,
+        selected: 301,
+        candidates: Vec::new(),
+    };
+    let requested = TwoLoopRegionOptions {
+        behavior: TwoLoopRegionBehavior::NestedPolynomialV2,
+        winding: RootIsolationOptions::new(0.001),
+        maximum_retained_units: 4096,
+        maximum_poles: 33,
+    };
+    (identities, requested)
+}
+
+fn check_source_closure(proof: &TwoLoopSourceProof) {
+    assert_eq!(proof.stages.len(), 3);
+    assert_eq!(
+        proof
+            .closure
+            .iter()
+            .map(|p| p.parameter)
+            .collect::<Vec<_>>(),
+        [0., 1.]
+    );
+    assert_eq!(
+        proof
+            .copied_closure
+            .iter()
+            .map(|p| p.parameter)
+            .collect::<Vec<_>>(),
+        [0., 1.]
+    );
+}
+
+fn move_inner_endpoint(fixture: &TwoLoopFixture) {
     use rustycad_tkbrep::{
         brep::BRepBuilder,
         topods::{ShapeIterator, edge, vertex},
     };
-    let fixture = TwoLoopFixture::nested();
-    let before = capture(&fixture).unwrap_or_else(|e| panic!("source proof: {:?}", e.cause));
+
     let endpoint = ShapeIterator::new(&fixture.inner, true, true)
         .value()
         .unwrap()
@@ -102,12 +127,4 @@ fn same_identity_curve_and_vertex_mutations_cannot_reuse_source_proofs() {
             1e-7,
         )
         .unwrap();
-    assert!(matches!(
-        capture(&fixture).err().unwrap().cause,
-        TwoLoopRegionCause::ResidualMismatch(_)
-    ));
-    assert_eq!(before[1].closure[0].local_point, [0.5, 0.5, 0.]);
-    let fixture = TwoLoopFixture::nested();
-    crate::sketch_region_prism::isolation_tests::set_pole(&edge(&fixture.outer).unwrap(), 5.);
-    assert!(capture(&fixture).is_err());
 }

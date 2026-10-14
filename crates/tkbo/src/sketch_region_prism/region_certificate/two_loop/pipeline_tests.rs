@@ -34,6 +34,10 @@ fn check_nested_candidates(fixture: &TwoLoopFixture) {
             .sum::<usize>(),
         4
     );
+    check_unique_ring_selection(batch);
+}
+
+fn check_unique_ring_selection(batch: &crate::sketch_region_candidates::CandidateBatch) {
     let result = classify_candidates(
         batch,
         [0.25, 0.25],

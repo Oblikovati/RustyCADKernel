@@ -47,22 +47,7 @@ fn complete_nested_partition_binds_annulus_and_both_complementary_dispositions()
         let identities = fixture_bindings::identities(&fixture);
         let captured = capture(&fixture, &identities, [1., 1.], [0.25, 0.25])
             .unwrap_or_else(|e| panic!("candidate: {:?}", e.cause));
-        assert_eq!(
-            captured.iter().map(|r| r.name).collect::<Vec<_>>(),
-            [301, 302, 303]
-        );
-        assert_eq!(
-            captured[0].disposition,
-            TwoLoopCandidateDisposition::SelectedAnnulus
-        );
-        assert_eq!(
-            captured[1].disposition,
-            TwoLoopCandidateDisposition::RejectedInnerDomain
-        );
-        assert_eq!(
-            captured[2].disposition,
-            TwoLoopCandidateDisposition::RejectedOuterComplement
-        );
+        check_dispositions(&captured);
     }
 }
 #[test]
@@ -96,4 +81,23 @@ fn private_inner_and_material_witnesses_are_hypotheses_not_authority() {
             TwoLoopRegionCause::WindingLocation { .. }
         ));
     }
+}
+
+fn check_dispositions(captured: &[TwoLoopCandidateProof]) {
+    assert_eq!(
+        captured.iter().map(|r| r.name).collect::<Vec<_>>(),
+        [301, 302, 303]
+    );
+    assert_eq!(
+        captured[0].disposition,
+        TwoLoopCandidateDisposition::SelectedAnnulus
+    );
+    assert_eq!(
+        captured[1].disposition,
+        TwoLoopCandidateDisposition::RejectedInnerDomain
+    );
+    assert_eq!(
+        captured[2].disposition,
+        TwoLoopCandidateDisposition::RejectedOuterComplement
+    );
 }

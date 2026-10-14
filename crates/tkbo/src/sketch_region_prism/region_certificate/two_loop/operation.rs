@@ -27,21 +27,9 @@ fn inspect<'a>(
     work.poll(TwoLoopRegionStage::Membership)?;
     let candidates = candidates::capture(request, &sources, &nesting, &mut work)?;
     current_history::inspect(request, &mut work)?;
-    let binding = replay::binding(request, &sources, &domains, &candidates, &census);
-    let replay = replay::complete(&binding, &nesting, work.retained_units);
-    let proof = TwoLoopRegionCertificate {
-        operation: request.identities.operation,
-        selected: request.identities.selected,
-        requested: request.requested,
-        sources,
-        domains,
-        candidates,
-        nesting,
-        census,
-        retained_units: work.retained_units,
-        binding,
-        replay,
-    };
+    let proof = assemble(
+        request, sources, domains, census, nesting, candidates, &work,
+    );
     work.poll(TwoLoopRegionStage::Commit)?;
     rebind_two_loop_region(request, &proof)?;
     Ok(proof)
@@ -110,8 +98,36 @@ impl TwoLoopRegionProgress for SilentRebind {
 }
 fn outcome(failure: Box<TwoLoopRegionFailure<'_>>) -> TwoLoopRegionOutcome<'_> {
     match super::failure_class::classify(&failure) {
-        super::failure_class::RefusalClass::Cancelled => TwoLoopRegionOutcome::Cancelled(failure),
-        super::failure_class::RefusalClass::Failed => TwoLoopRegionOutcome::Failed(failure),
+        super::failure_class::TwoLoopRefusalClass::Cancelled => {
+            TwoLoopRegionOutcome::Cancelled(failure)
+        }
+        super::failure_class::TwoLoopRefusalClass::Failed => TwoLoopRegionOutcome::Failed(failure),
         _ => TwoLoopRegionOutcome::Incomplete(failure),
+    }
+}
+
+fn assemble(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    sources: Vec<TwoLoopSourceProof>,
+    domains: Vec<super::pair_types::TwoLoopPairProof>,
+    census: census_settings::TwoLoopCensusSettings,
+    nesting: super::nesting::TwoLoopNestingProof,
+    candidates: Vec<TwoLoopCandidateProof>,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopRegionCertificate {
+    let binding = replay::binding(request, &sources, &domains, &candidates, &census);
+    let replay = replay::complete(&binding, &nesting, work.retained_units);
+    TwoLoopRegionCertificate {
+        operation: request.identities.operation,
+        selected: request.identities.selected,
+        requested: request.requested,
+        sources,
+        domains,
+        candidates,
+        nesting,
+        census,
+        retained_units: work.retained_units,
+        binding,
+        replay,
     }
 }

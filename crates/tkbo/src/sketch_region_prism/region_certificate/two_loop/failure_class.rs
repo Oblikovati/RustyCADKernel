@@ -13,20 +13,20 @@ use rustycad_tkmath::predicates::roots::{
 };
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(super) enum RefusalClass {
+pub(crate) enum TwoLoopRefusalClass {
     Incomplete,
     Failed,
     Cancelled,
 }
-pub(super) fn classify(failure: &TwoLoopRegionFailure<'_>) -> RefusalClass {
+pub(super) fn classify(failure: &TwoLoopRegionFailure<'_>) -> TwoLoopRefusalClass {
     let direct = owned(&failure.cause);
-    if direct != RefusalClass::Incomplete {
+    if direct != TwoLoopRefusalClass::Incomplete {
         return direct;
     }
     failure.local.as_ref().map_or(direct, local)
 }
-fn owned(cause: &TwoLoopRegionCause) -> RefusalClass {
-    use RefusalClass::*;
+fn owned(cause: &TwoLoopRegionCause) -> TwoLoopRefusalClass {
+    use TwoLoopRefusalClass::*;
     match cause {
         TwoLoopRegionCause::Native(_) => Failed,
         TwoLoopRegionCause::Cancelled => Cancelled,
@@ -43,8 +43,8 @@ fn owned(cause: &TwoLoopRegionCause) -> RefusalClass {
         _ => Incomplete,
     }
 }
-fn local(cause: &TwoLoopLocalDiagnostic<'_>) -> RefusalClass {
-    use RefusalClass::*;
+fn local(cause: &TwoLoopLocalDiagnostic<'_>) -> TwoLoopRefusalClass {
+    use TwoLoopRefusalClass::*;
     match cause {
         TwoLoopLocalDiagnostic::Arrangement(completion) => arrangement(completion),
         TwoLoopLocalDiagnostic::Candidate(cause) => candidate(cause),
@@ -60,8 +60,8 @@ fn local(cause: &TwoLoopLocalDiagnostic<'_>) -> RefusalClass {
         _ => Incomplete,
     }
 }
-fn arrangement(completion: &ArrangementCompletion) -> RefusalClass {
-    use RefusalClass::*;
+fn arrangement(completion: &ArrangementCompletion) -> TwoLoopRefusalClass {
+    use TwoLoopRefusalClass::*;
     match completion {
         ArrangementCompletion::Cancelled(_) => Cancelled,
         ArrangementCompletion::Failed(_) => Failed,
@@ -70,8 +70,8 @@ fn arrangement(completion: &ArrangementCompletion) -> RefusalClass {
         _ => Incomplete,
     }
 }
-fn candidate(cause: &CandidateCause) -> RefusalClass {
-    use RefusalClass::*;
+fn candidate(cause: &CandidateCause) -> TwoLoopRefusalClass {
+    use TwoLoopRefusalClass::*;
     match cause {
         CandidateCause::Mapped(_) => Failed,
         CandidateCause::Cancelled(_) => Cancelled,
@@ -81,49 +81,49 @@ fn candidate(cause: &CandidateCause) -> RefusalClass {
         _ => Incomplete,
     }
 }
-fn source(cause: &SourceConformanceCause) -> RefusalClass {
+fn source(cause: &SourceConformanceCause) -> TwoLoopRefusalClass {
     match cause {
         SourceConformanceCause::Capture(cause) => geometry(cause),
         SourceConformanceCause::Exact(cause) => residual(cause),
-        _ => RefusalClass::Incomplete,
+        _ => TwoLoopRefusalClass::Incomplete,
     }
 }
-fn source_faults(faults: &[SourceBindingFault]) -> RefusalClass {
+fn source_faults(faults: &[SourceBindingFault]) -> TwoLoopRefusalClass {
     first_class(faults.iter().map(|fault| match fault {
         SourceBindingFault::CurrentGeometry { cause, .. } => source(cause),
-        _ => RefusalClass::Incomplete,
+        _ => TwoLoopRefusalClass::Incomplete,
     }))
 }
-fn first_class(classes: impl Iterator<Item = RefusalClass>) -> RefusalClass {
+fn first_class(classes: impl Iterator<Item = TwoLoopRefusalClass>) -> TwoLoopRefusalClass {
     let mut ordered = classes;
     ordered
-        .find(|class| *class != RefusalClass::Incomplete)
-        .unwrap_or(RefusalClass::Incomplete)
+        .find(|class| *class != TwoLoopRefusalClass::Incomplete)
+        .unwrap_or(TwoLoopRefusalClass::Incomplete)
 }
-fn geometry(cause: &CapturedGeometryCause) -> RefusalClass {
+fn geometry(cause: &CapturedGeometryCause) -> TwoLoopRefusalClass {
     match cause {
-        CapturedGeometryCause::Native(_) => RefusalClass::Failed,
+        CapturedGeometryCause::Native(_) => TwoLoopRefusalClass::Failed,
         CapturedGeometryCause::Exact(cause) => residual(cause),
-        _ => RefusalClass::Incomplete,
+        _ => TwoLoopRefusalClass::Incomplete,
     }
 }
-fn surface(cause: &super::super::super::surface_charts::PrismSurfaceCause) -> RefusalClass {
+fn surface(cause: &super::super::super::surface_charts::PrismSurfaceCause) -> TwoLoopRefusalClass {
     use super::super::super::surface_charts::PrismSurfaceCause;
     match cause {
         PrismSurfaceCause::SourceSnapshot(cause) => surface(cause),
         PrismSurfaceCause::Capture(cause) => geometry(cause),
         PrismSurfaceCause::Exact(cause) => residual(cause),
-        _ => RefusalClass::Incomplete,
+        _ => TwoLoopRefusalClass::Incomplete,
     }
 }
-fn residual(cause: &ResidualError) -> RefusalClass {
+fn residual(cause: &ResidualError) -> TwoLoopRefusalClass {
     match cause {
         ResidualError::Roots(cause) => numerical(cause),
         ResidualError::Signs(cause) => numerical(cause),
-        _ => RefusalClass::Incomplete,
+        _ => TwoLoopRefusalClass::Incomplete,
     }
 }
-fn numerical(cause: &(dyn std::error::Error + 'static)) -> RefusalClass {
+fn numerical(cause: &(dyn std::error::Error + 'static)) -> TwoLoopRefusalClass {
     if matches!(
         cause.downcast_ref::<RootIsolationError>(),
         Some(RootIsolationError::Cancelled)
@@ -131,7 +131,9 @@ fn numerical(cause: &(dyn std::error::Error + 'static)) -> RefusalClass {
         cause.downcast_ref::<BezierWireError>(),
         Some(BezierWireError::Cancelled { .. })
     ) {
-        return RefusalClass::Cancelled;
+        return TwoLoopRefusalClass::Cancelled;
     }
-    cause.source().map_or(RefusalClass::Incomplete, numerical)
+    cause
+        .source()
+        .map_or(TwoLoopRefusalClass::Incomplete, numerical)
 }
