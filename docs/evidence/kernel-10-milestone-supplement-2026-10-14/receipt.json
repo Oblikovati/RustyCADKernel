@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-14",
+  "operation": "read-only authenticated GitHub API audit",
+  "source_revision": "d596b9b0b",
+  "repository": "Oblikovati/Martensite",
+  "milestones_returned": 21,
+  "commands": [
+    "gh api 'repos/Oblikovati/Martensite/milestones?state=all&per_page=100'",
+    "gh api repos/Oblikovati/Martensite/issues/11",
+    "gh api repos/Oblikovati/Martensite/issues/12",
+    "gh api repos/Oblikovati/Martensite/issues/13"
+  ],
+  "prior_acceptance_document_revision": "57754d8648c8fc3cf45a3c3492055be164545dec",
+  "updated_document_sha256": "b9fe732d35869b03b152dd646d5fbaffefc9e5c9680bc983aa4c5880c318e113",
+  "responses": [
+    {
+      "path": "milestones.json.gz",
+      "sha256": "dbee46b8bd72bfaff12061064d2f8136596c3bbdd289bf385475f5872433fdf2",
+      "raw_sha256": "fac0f4d2da1a96c25644d9da5157897549f30db0e47786d62999190c8f9d4915"
+    },
+    {
+      "path": "c1-11.json.gz",
+      "sha256": "0d1d3579aa5063e0eee725ea53bf07dfe6fb4f5934c9bd454fffc61d91f2bb40",
+      "raw_sha256": "2b2e7568a02fc79f29b942dc336170b033a22411c7b7c67679a94e7d0d45a502"
+    },
+    {
+      "path": "c1-12.json.gz",
+      "sha256": "d8f63b4bf86fcbce2aab713b5d486a66207b67c85c802a66c0eba44b1f2b2638",
+      "raw_sha256": "d7e4ac75275c3240a9aa14c009f30cbebfd2b3fa3bc406b64447ffa1b121c858"
+    },
+    {
+      "path": "c1-13.json.gz",
+      "sha256": "f2e2dfcf1d6a58173d56794602406036aa6e6d7d13048dbb8039eeef35782c98",
+      "raw_sha256": "fc07133d816ebf3ee276cff152a82b56ca10644f6cdec835e35a3dbbde16ab22"
+    }
+  ],
+  "conclusion": "C1#11/12/13 are canonical existing operation gates; single-Jordan private operation does not complete the with-hole consumer workflow or RustyCADKernel#10",
+  "remote_mutations": false,
+  "implementation_or_test_credit": false
+}

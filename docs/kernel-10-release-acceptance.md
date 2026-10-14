@@ -43,6 +43,34 @@ is required; new OCCT execution is neither an oracle nor a completion requiremen
 under the replacement rules. Go sources are comparison provenance to audit for
 known defects, never a production fallback or copied sampled classification policy.
 
+## Canonical milestone repository supplement
+
+The Q1–X2/T1 milestone plan in AGENTS belongs to the separate
+[Oblikovati/Martensite repository](https://github.com/Oblikovati/Martensite/milestones).
+It is not absent merely because this checkout's `Oblikovati/RustyCADKernel`
+remote has no milestones. Root rechecked the live milestone list and the three
+C1 issues on 2026-10-14; the [supplemental source receipt](evidence/kernel-10-milestone-supplement-2026-10-14/receipt.json)
+retains those responses. The earlier audit receipt describes its original
+`57754d864` document snapshot; this supplement extends that authority inventory.
+
+- [Martensite#11](https://github.com/Oblikovati/Martensite/issues/11) requires a
+  real-consumer operation result with owned revision, completion, validation,
+  history and diagnostics; incomplete history or validation forbids strict success.
+- [Martensite#12](https://github.com/Oblikovati/Martensite/issues/12) requires
+  requested/effective/achieved quality and method, bounded integration with its
+  error, and explicit inconclusive analytic refusal. Tessellation cannot close it.
+- [Martensite#13](https://github.com/Oblikovati/Martensite/issues/13) specifies a
+  parameterized **sketch with a hole**, prism, dependent reference, edit,
+  undo/redo, save/reopen and display. Per-face surface types, loop counts and
+  closed-form areas must pass through the new result. Production and diagnostics
+  use one implementation; whole-body volume alone cannot pass.
+
+These are existing canonical gates, not new milestone assignments for
+RustyCADKernel#10. The single-Jordan polynomial operation in E7/E8 is a necessary
+bounded prerequisite. It does not satisfy the with-hole operation, consumer
+workflow or C1 completion. Repository-qualified issue numbers are required:
+`Martensite#10` is a different issue from `RustyCADKernel#10`.
+
 ## Evidence vocabulary and source locations
 
 - **Integrated bounded proof:** accepted source/evidence for a stated private
