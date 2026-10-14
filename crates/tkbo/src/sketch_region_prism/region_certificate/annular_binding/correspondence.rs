@@ -56,7 +56,9 @@ fn complete_pairs(members: &[AnnularCopiedMember]) -> AnnularCheck<'static> {
     }
     Ok(())
 }
-pub(in crate::sketch_region_prism) fn snapshot(context: &PrismBodyContext) -> AnnularCheck<'static, RegionObservedContext> {
+pub(in crate::sketch_region_prism) fn snapshot(
+    context: &PrismBodyContext,
+) -> AnnularCheck<'static, RegionObservedContext> {
     snapshot_directed_history_context(context)
         .map_err(|cause| Box::new(AnnularBindingCause::History(Box::new(cause))))
 }

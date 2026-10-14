@@ -128,7 +128,9 @@ fn geometry(cause: &CapturedGeometryCause) -> TwoLoopRefusalClass {
         _ => TwoLoopRefusalClass::Incomplete,
     }
 }
-pub(in crate::sketch_region_prism) fn surface(cause: &super::super::super::surface_charts::PrismSurfaceCause) -> TwoLoopRefusalClass {
+pub(in crate::sketch_region_prism) fn surface(
+    cause: &super::super::super::surface_charts::PrismSurfaceCause,
+) -> TwoLoopRefusalClass {
     use super::super::super::surface_charts::PrismSurfaceCause;
     match cause {
         PrismSurfaceCause::SourceSnapshot(cause) => surface(cause),

@@ -22,7 +22,11 @@ pub(in crate::sketch_region_prism) fn map_two_loop_original_parents<'a>(
         &mut progress,
     );
     work.stage = TwoLoopRegionStage::Membership;
-    work.count("two admitted original parent sources", request.sources.len(), 2)?;
+    work.count(
+        "two admitted original parent sources",
+        request.sources.len(),
+        2,
+    )?;
     work.units("original parent mapper directed roster", 6)?;
     work.units("original parent mapper outer rows", parent_slices.len())?;
     let originals = member_parents::originals(request, &mut work)?;
