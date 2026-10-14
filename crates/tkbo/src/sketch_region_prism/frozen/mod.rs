@@ -86,3 +86,6 @@ pub(in crate::sketch_region_prism) mod publication_read_snapshot;
 
 #[allow(unused_imports)]
 pub(in crate::sketch_region_prism) use capture::capture_limits as capture_prism_limits;
+
+#[cfg(test)]
+mod annular_fixture;
