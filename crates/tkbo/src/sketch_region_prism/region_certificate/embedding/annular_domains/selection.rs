@@ -41,27 +41,31 @@ pub(super) fn retain_trims(chart: &AnnularBoundChart) -> HypothesisCheck<Vec<Ann
         .captured
         .trims
         .iter()
-        .map(|trim| {
-            let matches: Vec<_> = chart
-                .trims
-                .iter()
-                .filter(|identity| {
-                    identity.role == trim.role
-                        && identity.source.occurrence == trim.source
-                        && identity.output.occurrence == trim.output
-                })
-                .collect();
-            require(
-                "annular embedding unique full directed trim",
-                matches.len(),
-                1,
-            )?;
-            Ok(AnnularAuthoredTrim {
-                identity: matches[0].clone(),
-                operand: trim_incidence::retain_trim(&chart.chart, trim),
-            })
-        })
+        .map(|trim| retain_one_trim(chart, trim))
         .collect()
+}
+fn retain_one_trim(
+    chart: &AnnularBoundChart,
+    trim: &crate::sketch_region_prism::surface_charts::CapturedPrismTrim,
+) -> HypothesisCheck<AnnularAuthoredTrim> {
+    let matches: Vec<_> = chart
+        .trims
+        .iter()
+        .filter(|identity| {
+            identity.role == trim.role
+                && identity.source.occurrence == trim.source
+                && identity.output.occurrence == trim.output
+        })
+        .collect();
+    require(
+        "annular embedding unique full directed trim",
+        matches.len(),
+        1,
+    )?;
+    Ok(AnnularAuthoredTrim {
+        identity: matches[0].clone(),
+        operand: trim_incidence::retain_trim(&chart.chart, trim),
+    })
 }
 pub(super) fn seam_endpoints(
     boundary: &AnnularBoundaryBinding,

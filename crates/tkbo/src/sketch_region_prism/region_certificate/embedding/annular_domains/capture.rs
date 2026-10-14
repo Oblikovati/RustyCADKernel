@@ -52,6 +52,16 @@ fn side(
         chart.chart.proof.side_height,
         "annular embedding exact side height",
     )?;
+    Ok(AnnularFaceDomain {
+        identity: chart.identity.clone(),
+        kind: side_kind(boundary, height),
+        trims: side_trims(chart, boundary)?,
+    })
+}
+fn side_trims(
+    chart: &AnnularBoundChart,
+    boundary: &AnnularBoundaryBinding,
+) -> HypothesisCheck<Vec<AnnularAuthoredTrim>> {
     let trims = selection::retain_trims(chart)?;
     require(
         "annular embedding complete side trim census",
@@ -59,11 +69,7 @@ fn side(
         4,
     )?;
     selection::seam_endpoints(boundary, &trims)?;
-    Ok(AnnularFaceDomain {
-        identity: chart.identity.clone(),
-        kind: side_kind(boundary, height),
-        trims,
-    })
+    Ok(trims)
 }
 fn side_kind(boundary: &AnnularBoundaryBinding, height: f64) -> AnnularDomainKind {
     AnnularDomainKind::Side {
