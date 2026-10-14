@@ -37,7 +37,11 @@ pub(super) fn selection(batch: &CandidateBatch, seed: [f64; 2]) -> SeedSelection
     let CandidateClassification::Incomplete {
         selection, missing, ..
     } = result;
-    assert!(missing.len() >= 5);
+    assert!(missing.contains(&MissingCertificate::Construction));
+    assert!(missing.contains(&MissingCertificate::SearchCompleteness));
+    assert!(missing.contains(&MissingCertificate::SelfIntersection));
+    assert!(missing.contains(&MissingCertificate::Tolerance));
+    assert!(!missing.contains(&MissingCertificate::SharedIncidenceReuse));
     selection
 }
 pub(crate) fn rectangle(x: f64, y: f64, width: f64, height: f64) -> Vec<Shape> {
@@ -238,10 +242,14 @@ fn numerical_cancellation_keeps_original_typed_cause() {
     use rustycad_tkmath::predicates::roots::bezier_line::BezierWireError;
     let batch = candidates(&rectangle(0., 0., 4., 4.));
     let outcome = classify_candidates(&batch, [1., 1.], RootIsolationOptions::new(0.001), || true);
-    assert!(matches!(
-        outcome,
-        Err(CandidateCause::Numerical(BezierWireError::Cancelled { .. }))
-    ));
+    let Err(CandidateCause::CapturedOperation(retained)) = outcome else {
+        panic!("expected captured operation cancellation");
+    };
+    assert!(
+        matches!(retained.cause.as_ref(),CandidateCause::CapturedNumerical(failure)
+        if matches!(failure.cause(),BezierWireError::Cancelled {..}))
+    );
+    assert_eq!(retained.retained.work.operation_bisections, 0);
 }
 
 fn empty_candidate_batch() -> CandidateBatch {

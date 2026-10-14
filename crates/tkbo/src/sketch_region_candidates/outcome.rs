@@ -36,6 +36,8 @@ pub(crate) enum CandidateCause {
     Incomplete(CandidateGap),
     Cancelled(CandidatePhase),
     Numerical(BezierWireError),
+    CapturedNumerical(rustycad_tkmath::predicates::roots::bezier_line::CapturedBezierWireFailure),
+    CapturedOperation(Box<super::captured_store::CandidateCapturedFailure>),
 }
 pub(crate) enum CandidateGap {
     WindingOrientationOverflow {
@@ -96,5 +98,6 @@ pub(crate) enum CandidateClassification {
         requested: rustycad_tkmath::predicates::roots::RootIsolationOptions,
         remaining: rustycad_tkmath::predicates::roots::RootIsolationOptions,
         achieved_error: Option<f64>,
+        captured: Box<super::captured_store::CandidateCaptureReceipt>,
     },
 }

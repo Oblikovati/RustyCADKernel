@@ -22,6 +22,15 @@ mod source_relations;
 mod statuses;
 #[cfg(test)]
 mod tests;
+mod tolerance;
+mod tolerance_capture;
+mod tolerance_curves;
+mod tolerance_placement;
+#[cfg(test)]
+mod tolerance_test_support;
+#[cfg(test)]
+mod tolerance_tests;
+mod tolerance_types;
 #[cfg(test)]
 mod traversal_tests;
 

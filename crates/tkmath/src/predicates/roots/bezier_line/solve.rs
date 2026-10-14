@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::{
-    DyadicBound, RootIsolation, RootIsolationError, RootIsolationOptions, bernstein, chain, isolate,
+    DyadicBound, RootIsolation, RootIsolationError, RootIsolationOptions, bernstein,
 };
 use super::{BezierLineContact, BezierLineError, BezierStage, projection::Projection};
 use num_bigint::BigInt;
@@ -35,26 +35,7 @@ fn solve(
     let polynomial = bernstein::from_integer_controls(controls, options.max_degree, cancelled)?;
     solve_polynomial(polynomial, bounds, width, options, cancelled)
 }
-pub(super) fn solve_polynomial(
-    polynomial: super::super::polynomial::IntegerPolynomial,
-    bounds: [DyadicBound; 2],
-    width: DyadicBound,
-    options: RootIsolationOptions,
-    cancelled: &mut impl FnMut() -> bool,
-) -> Result<RootIsolation, RootIsolationError> {
-    solve_polynomial_accounted(polynomial, bounds, width, options, cancelled, &mut || {})
-}
-pub(super) fn solve_polynomial_accounted(
-    polynomial: super::super::polynomial::IntegerPolynomial,
-    bounds: [DyadicBound; 2],
-    width: DyadicBound,
-    options: RootIsolationOptions,
-    cancelled: &mut impl FnMut() -> bool,
-    completed_split: &mut impl FnMut(),
-) -> Result<RootIsolation, RootIsolationError> {
-    let tower = chain::multiplicity_tower(polynomial, cancelled)?;
-    isolate::isolate_accounted(&tower, bounds, width, options, cancelled, completed_split)
-}
+pub(super) use super::super::polynomial_solve::{solve_polynomial, solve_polynomial_accounted};
 pub(super) fn regular_denominator(
     controls: Vec<BigInt>,
     bounds: [DyadicBound; 2],
