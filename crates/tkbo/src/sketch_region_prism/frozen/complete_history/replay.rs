@@ -20,6 +20,7 @@ pub(super) fn finish(
     let mut result = PrismCompleteHistory {
         binding,
         requested: request.requested,
+        measured_operand_rows: budget::admit(request)?,
         captured,
         joined: request.joined.replay_bytes().to_vec(),
         replay: Vec::new(),
@@ -33,8 +34,8 @@ fn block(bytes: &[u8], result: &mut Vec<u8>) {
     result.extend(bytes);
 }
 fn encode(value: &PrismCompleteHistory) -> Vec<u8> {
-    let mut result = format!("martensite-complete-prism-history-v1;binding={:?};requested={:?};effective={:?};intermediate={:?};sweep={:?};continued={:?};original-deleted={:?};member-coverage=complete;directed-coverage=complete;whole-body-validation=not-claimed;",
-        value.binding, value.requested, value.requested, value.captured.intermediate, value.captured.sweep, value.captured.continued, value.deleted).into_bytes();
+    let mut result = format!("martensite-complete-prism-history-v1;binding={:?};requested={:?};effective={:?};measured-operand-rows={:?};intermediate={:?};sweep={:?};continued={:?};original-deleted={:?};member-coverage=complete;directed-coverage=complete;whole-body-validation=not-claimed;",
+        value.binding, value.requested, value.requested, value.measured_operand_rows, value.captured.intermediate, value.captured.sweep, value.captured.continued, value.deleted).into_bytes();
     block(
         &partition_metadata::replay(&value.captured.partition),
         &mut result,

@@ -45,6 +45,10 @@ pub(crate) struct PrismHistoricalContext {
     pub children: Vec<PrismHistoryUseKey>,
 }
 pub(crate) enum PrismHistoryCause {
+    AtUse {
+        entity: PrismHistoryUseKey,
+        cause: Box<PrismHistoryCause>,
+    },
     Legacy(diagnostics::HistoricalLegacyCause),
     Lineage(Box<super::super::lineage::PrismLineageInspection>),
     LineageCancelled(FreezePhase),
@@ -179,6 +183,11 @@ pub(crate) enum HistoricalDiagnosticKind {
 impl std::fmt::Debug for PrismHistoryCause {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Self::AtUse { entity, cause } => formatter
+                .debug_struct("AtUse")
+                .field("entity", entity)
+                .field("cause", cause)
+                .finish(),
             Self::Legacy(value) => formatter
                 .debug_tuple("UnsupportedLegacyDiagnostic")
                 .field(value)
@@ -234,6 +243,31 @@ impl std::fmt::Debug for PrismHistoryCause {
                 .field("observation", observation)
                 .field("retained_rows", retained_rows)
                 .finish(),
+        }
+    }
+}
+
+impl PrismHistoryCause {
+    pub(super) fn at_use(self, entity: PrismHistoryUseKey) -> Self {
+        Self::AtUse {
+            entity,
+            cause: Box::new(self),
+        }
+    }
+    pub(super) fn primary_use(&self) -> Option<PrismHistoryUseKey> {
+        match self {
+            Self::AtUse { entity, .. } => Some(entity.clone()),
+            _ => None,
+        }
+    }
+    pub(super) fn failure_class(&self) -> PrismHistoryFailureClass {
+        match self {
+            Self::AtUse { cause, .. } => cause.failure_class(),
+            Self::Native(_) | Self::Geometry(_) => PrismHistoryFailureClass::Failed,
+            Self::Legacy(cause) if diagnostics::legacy_failed(cause) => {
+                PrismHistoryFailureClass::Failed
+            }
+            _ => PrismHistoryFailureClass::Incomplete,
         }
     }
 }

@@ -21,7 +21,7 @@ pub(super) fn project_partition_queries(
         original.actual.len(),
     )?;
     let mut result = Vec::new();
-    for actual in original.actual {
+    for (index, actual) in original.actual.iter().enumerate() {
         let identity = stage_names::original_identity(request, &actual.occurrence)?;
         let rows: Vec<_> = observed.iter().filter(|q| q.original == identity).collect();
         history_count(
@@ -29,7 +29,10 @@ pub(super) fn project_partition_queries(
             rows.len(),
             1,
         )?;
-        result.push(project_query(request, rows[0], actual, copied, partition)?);
+        result.push(
+            project_query(request, rows[0], actual, copied, partition)
+                .map_err(|cause| cause.at_use(original.owned[index].key.clone()))?,
+        );
     }
     result.sort();
     Ok(result)

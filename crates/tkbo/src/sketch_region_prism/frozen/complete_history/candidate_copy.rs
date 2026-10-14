@@ -62,13 +62,18 @@ fn copy_link(
     let parents = parent_rows::parents(request, &link.preserved, &link.modified, &link.generated)?;
     let kind = *partition_queries::native_result(&link.kind)? as u8;
     let supported = *partition_queries::native_result(&link.history_supported)?;
-    observed_values::equal(&supported, &(kind != rustycad_tkg3d::top_abs::ShapeEnum::Compound as u8), "supported leaf history versus administrative container")?;
+    observed_values::equal(
+        &supported,
+        &(kind != rustycad_tkg3d::top_abs::ShapeEnum::Compound as u8),
+        "supported leaf history versus administrative container",
+    )?;
     observed_values::equal(
         &kind,
         &source.owned[index].occurrence.member.kind,
         "copier member kind matches original",
     )?;
-    match_link(&original, &image, &parents, queries, relations)?;
+    match_link(&original, &image, &parents, queries, relations)
+        .map_err(|cause| cause.at_use(original.clone()))?;
     Ok(PrismCandidateCopyLink {
         original,
         image,

@@ -325,3 +325,14 @@ fn complete_history_entry_rechecks_all_operands_and_owns_send_sync_evidence() {
     assert!(!result.is_valid_body());
     assert!(reproject_complete_prism_history(&request, &result).is_ok());
 }
+
+/// Reuse semantic fixture authorship; `authored_history_inputs(&operation,&lookup_join)` supplies names only.
+pub(in crate::sketch_region_prism) fn authored_history_inputs(
+    operation: &JoinFixture,
+    join: &JoinedPrismProof,
+) -> (PrismCopyBindings, PrismHistoryBindings) {
+    (
+        super::super::lineage::tests::authored_copy_bindings(&operation.receipt),
+        additional_names(operation, join),
+    )
+}

@@ -8,6 +8,7 @@ use rustycad_tkbrep::topods::Shape;
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) struct PrismNativeSweepAnswer {
     pub definition: FrozenPrismKey,
+    pub parents: [Vec<FrozenOriginalKey>; 3],
     pub native_orientation: u8,
     pub native_placement_bits: [u64; 13],
     pub outputs: Vec<FrozenUseKey>,
@@ -49,7 +50,7 @@ pub(super) fn capture(
             .len(),
         copied.actual.len(),
     )?;
-    cover_bindings(bound, &result)?;
+    sweep_coverage::compare(request, bound, copied, &result)?;
     cover_retirement(request, bound, copied, &result)?;
     Ok(observed_values::sorted(result))
 }
@@ -85,18 +86,19 @@ fn query_row(
     let generated = query
         .generated
         .iter()
-        .map(|s| required_answer(bound, query, PrismImageRole::Generated, s))
+        .map(|s| required_answer(request, bound, query, PrismImageRole::Generated, s))
         .collect::<HistoryCheck<_>>()?;
     Ok(PrismCompleteSweepQuery {
         copied: copied.owned[index].key.clone(),
         parents,
         generated,
-        first: answer(bound, query, PrismImageRole::First, &query.first)?,
-        last: answer(bound, query, PrismImageRole::Last, &query.last)?,
+        first: answer(request, bound, query, PrismImageRole::First, &query.first)?,
+        last: answer(request, bound, query, PrismImageRole::Last, &query.last)?,
         retired: query.retired,
     })
 }
 fn answer(
+    request: &PrismHistoryRequest<'_>,
     bound: &BoundProjection<'_>,
     query: &PrismSweepQueryObservation,
     role: PrismImageRole,
@@ -105,9 +107,10 @@ fn answer(
     if native.is_null() {
         return Ok(None);
     }
-    required_answer(bound, query, role, native).map(Some)
+    required_answer(request, bound, query, role, native).map(Some)
 }
 fn required_answer(
+    request: &PrismHistoryRequest<'_>,
     bound: &BoundProjection<'_>,
     query: &PrismSweepQueryObservation,
     role: PrismImageRole,
@@ -128,9 +131,15 @@ fn required_answer(
             required: "actual transported context for native query answer",
         });
     }
+    let parents = parent_rows::relation_parents(request, &bindings[0].native.returned)?;
     let mut outputs = Vec::new();
     let mut definitions = std::collections::BTreeSet::new();
     for binding in bindings {
+        relations::same_parents(
+            PrismHistoryStage::SweepBase,
+            &parent_rows::relation_parents(request, &binding.native.returned)?,
+            &parents,
+        )?;
         let indices: Vec<_> = bound
             .contexts
             .iter()
@@ -172,26 +181,12 @@ fn required_answer(
         *out = value.to_bits();
     }
     Ok(PrismNativeSweepAnswer {
+        parents,
         definition: *definitions.first().expect("one bound definition"),
         native_orientation: native.orientation() as u8,
         native_placement_bits: bits,
         outputs: observed_values::sorted(outputs),
     })
-}
-fn cover_bindings(
-    bound: &BoundProjection<'_>,
-    queries: &[PrismCompleteSweepQuery],
-) -> HistoryCheck<()> {
-    let count = queries
-        .iter()
-        .flat_map(|q| q.generated.iter().chain(&q.first).chain(&q.last))
-        .map(|a| a.outputs.len())
-        .sum();
-    history_count(
-        "all positive native bindings covered by exhaustive actual query answers",
-        count,
-        bound.diagnostic.bindings.len(),
-    )
 }
 fn cover_retirement(
     request: &PrismHistoryRequest<'_>,

@@ -52,12 +52,18 @@ pub(crate) struct PrismHistorySourceBinding {
 pub(crate) struct PrismCompleteHistory {
     pub(super) binding: PrismHistorySourceBinding,
     pub(super) requested: PrismHistoryOptions,
+    pub(super) measured_operand_rows: usize,
     pub(super) captured: capture::CapturedPrismHistory,
     pub(super) joined: Vec<u8>,
     pub(super) replay: Vec<u8>,
     pub(super) deleted: Vec<FrozenOriginalKey>,
 }
 impl PrismCompleteHistory {
+    /// Counted stored operand units, not an execution-work estimate; `history.measured_operand_rows()`.
+    pub(crate) fn measured_operand_rows(&self) -> usize {
+        self.measured_operand_rows
+    }
+
     /// Borrow complete deterministic operands and conclusions; `history.replay_bytes()`.
     pub(crate) fn replay_bytes(&self) -> &[u8] {
         &self.replay

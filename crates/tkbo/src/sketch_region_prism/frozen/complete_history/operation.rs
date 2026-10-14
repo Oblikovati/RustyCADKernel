@@ -94,19 +94,13 @@ pub(super) fn failure<'a>(
     phase: PrismHistoryPhase,
     cause: PrismHistoryCause,
 ) -> PrismHistoryFailure<'a> {
-    let class = if matches!(
-        cause,
-        PrismHistoryCause::Native(_) | PrismHistoryCause::Geometry(_)
-    ) {
-        PrismHistoryFailureClass::Failed
-    } else {
-        PrismHistoryFailureClass::Incomplete
-    };
+    let class = cause.failure_class();
+    let entity = cause.primary_use();
     PrismHistoryFailure {
         finding: PrismHistoryFinding {
             operation: request.publication.operation,
             phase,
-            entity: None,
+            entity,
             class,
             cause,
         },

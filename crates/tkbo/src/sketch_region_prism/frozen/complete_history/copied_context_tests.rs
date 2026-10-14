@@ -62,9 +62,11 @@ fn directed_copier_projection_preserves_query_error_and_wrong_image_refusal() {
         "recorded test query failure",
     ));
     rows.queries[0].images = Err(expected.clone());
-    let Err(PrismHistoryCause::Native(cause)) = project(&rows) else {
+    let Err(PrismHistoryCause::AtUse { entity, cause }) = project(&rows) else {
         panic!("native query failure expected");
     };
+    assert_eq!(entity.0.last().unwrap().0.stage, PrismHistoryStage::Original);
+    let PrismHistoryCause::Native(cause) = *cause else { panic!("preserved native cause expected"); };
     assert_eq!(cause.message(), expected.message());
     let mut rows = copy_fixture();
     rows.queries[0].images = Ok(vec![rows.source[0].occurrence.clone()]);

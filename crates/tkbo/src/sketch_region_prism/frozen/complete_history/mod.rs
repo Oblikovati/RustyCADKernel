@@ -25,7 +25,7 @@ mod context_tests;
 mod copied_context_tests;
 
 #[cfg(test)]
-mod fixture;
+pub(in crate::sketch_region_prism) mod fixture;
 
 mod observation_types;
 pub(crate) use observation_types::*;
@@ -54,9 +54,10 @@ pub(crate) use operation::{
     inspect_complete_prism_history, rebind_complete_prism_history, reproject_complete_prism_history,
 };
 mod admission;
-mod diagnostics;
 #[cfg(test)]
 mod adversarial_tests;
 mod budget;
+mod diagnostics;
 #[cfg(test)]
 mod operation_tests;
+mod sweep_coverage;

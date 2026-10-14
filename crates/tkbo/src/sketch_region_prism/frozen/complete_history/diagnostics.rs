@@ -286,3 +286,24 @@ fn join_variant(cause: &PrismProofJoinCause) -> HistoryJoinVariant {
         }
     }
 }
+
+pub(super) fn legacy_failed(cause: &HistoricalLegacyCause) -> bool {
+    match cause {
+        HistoricalLegacyCause::Candidate {
+            variant: HistoryCandidateVariant::Native(_),
+            ..
+        }
+        | HistoricalLegacyCause::Partition {
+            cause: HistoryPartitionReadCause::Native(_),
+            ..
+        }
+        | HistoricalLegacyCause::Arrangement {
+            variant: HistoryArrangementVariant::Failed,
+        }
+        | HistoricalLegacyCause::Join {
+            variant: HistoryJoinVariant::FailedCapture { .. },
+            ..
+        } => true,
+        _ => false,
+    }
+}

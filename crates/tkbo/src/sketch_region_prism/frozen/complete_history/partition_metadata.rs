@@ -144,6 +144,8 @@ fn endpoints(
             1,
         )?;
         let index = parent_rows::occurrence_index(copied, &endpoint.occurrence)?;
+        endpoint_parameter(source, endpoint)
+            .map_err(|cause| cause.at_use(copied.owned[index].key.clone()))?;
         result.push(PrismPartitionEndpoint {
             use_key: copied.owned[index].key.clone(),
             vertex: copied.owned[index].occurrence.member,
@@ -203,4 +205,20 @@ pub(super) fn replay(value: &PrismPartitionMetadata) -> Vec<u8> {
         super::super::encoding::space(space, &mut bytes);
     }
     bytes
+}
+
+fn endpoint_parameter(
+    source: &SourcePartitionObservation,
+    endpoint: &crate::sketch_region::SourceVertexObservation,
+) -> HistoryCheck<()> {
+    // BRepTool::range_end swaps the closed-edge endpoint role for a reversed source edge.
+    // In this admitted F/R full-range domain this is exactly the relative child orientation.
+    let reversed = census::forward_reversed(endpoint.occurrence.orientation)?
+        ^ census::forward_reversed(source.occurrence.orientation)?;
+    let expected = source.range[usize::from(reversed)].to_bits();
+    observed_values::equal(
+        &endpoint.parameter.to_bits(),
+        &expected,
+        "native endpoint parameter bound to actual directed source role",
+    )
 }

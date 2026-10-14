@@ -26,7 +26,8 @@ pub(super) fn project_copier_queries(
     )?;
     let mut result = Vec::new();
     for (index, actual) in source.actual.iter().enumerate() {
-        let target = unique_copy(observed, actual, copied)?;
+        let target = unique_copy(observed, actual, copied)
+            .map_err(|cause| cause.at_use(source.owned[index].key.clone()))?;
         result.push(query_row(
             observed,
             actual,
