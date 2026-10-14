@@ -1,6 +1,6 @@
 # ADR0057: Exact annular conformance and stored tolerance policy
 
-Status: private implementation in progress; no ordered body completion.
+Status: implemented private integration candidate; no ordered body completion.
 Scope: RustyCADKernel#10 prerequisite over ADR0052's sealed actual annular join.
 
 ## Decision
