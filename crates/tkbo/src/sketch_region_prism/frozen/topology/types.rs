@@ -14,6 +14,7 @@ pub(crate) enum TopologyInvariant {
     ConnectedFaces,
     SphereEuler,
     Commit,
+    FaceDomainEuler,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) struct TopologyCheckpoint {

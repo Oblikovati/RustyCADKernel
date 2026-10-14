@@ -27,3 +27,10 @@ mod tests;
 mod traversal_binding;
 #[cfg(test)]
 mod traversal_tests;
+
+#[cfg(test)]
+mod domain_fixture;
+#[cfg(test)]
+mod domain_policy_fixture;
+#[cfg(test)]
+mod domain_tests;
