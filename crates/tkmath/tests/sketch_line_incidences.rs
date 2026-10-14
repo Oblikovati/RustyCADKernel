@@ -7,6 +7,8 @@ mod fixture;
 use fixture::*;
 
 mod conics;
+mod curve_selection;
+mod curve_sources;
 mod failures;
 mod generated;
 mod isolation;

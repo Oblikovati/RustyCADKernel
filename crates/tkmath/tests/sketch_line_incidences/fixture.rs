@@ -7,6 +7,16 @@ pub const ERROR: f64 = 1e-12;
 pub fn source(points: [[f64; 2]; 2], domain: SketchLineDomain) -> SketchIncidenceSource {
     SketchIncidenceSource::line(1, points, domain)
 }
+pub fn curve_source(
+    curve: SketchIncidenceCurve,
+    domain: SketchLineDomain,
+) -> SketchIncidenceSource {
+    SketchIncidenceSource {
+        id: 1,
+        curve,
+        domain,
+    }
+}
 pub fn target(id: u64, curve: SketchIncidenceCurve) -> SketchIncidenceTarget {
     SketchIncidenceTarget { id, curve }
 }
