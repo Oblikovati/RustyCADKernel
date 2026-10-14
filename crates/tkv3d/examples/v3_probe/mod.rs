@@ -1,5 +1,6 @@
 //! The TKV3d probe operations, one module per C++ probe file under tools/oracle.
 pub mod ais_attribute_filters;
+pub mod ais_context_attributes;
 pub mod ais_shape;
 pub mod brep_font;
 pub mod dsg_prs;

@@ -53,7 +53,10 @@ pub use context_members::AisContextHandle;
 mod context_selector_reference;
 pub use context_selector_reference::AisMainSelectorRef;
 
+mod context_attributes;
+mod context_defaults;
 mod context_updates;
+pub use context_defaults::AisEntityOwners;
 mod interactive_object_members;
 pub use interactive_object_members::{
     AisApplicationOwner, AisInteractiveObjectMembers, ais_interactive_object_dump_json,

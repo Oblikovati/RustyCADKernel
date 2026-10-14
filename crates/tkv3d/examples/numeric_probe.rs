@@ -22,6 +22,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_brepfont_text", v3_probe::brep_font::text_case),
     // DsgPrs presentations (v3_probe/dsg_prs.rs)
     ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
+    // AIS_InteractiveContext attribute members (v3_probe/ais_context_attributes.rs)
+    (
+        "v3_ais_ctx_attr",
+        v3_probe::ais_context_attributes::context_attributes_case,
+    ),
     // AIS_Shape (v3_probe/ais_shape.rs)
     ("v3_ais_shape", v3_probe::ais_shape::ais_shape_case),
     // AIS filters and graphic tool (v3_probe/ais_attribute_filters.rs)

@@ -82,6 +82,7 @@
 #include "tkv3d_probe_std_prs_faces.cxx"
 #include "tkv3d_probe_ais_attribute_filters.cxx"
 #include "tkv3d_probe_ais_shape.cxx"
+#include "tkv3d_probe_ais_context_attributes.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFont regularization and builders (tkv3d_probe_brep_font.cxx)
  {"v3_brepfont_regularize", v3_brepfont_regularize},
@@ -98,6 +99,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_ais_attr_filter", v3_ais_attr_filter},
  // AIS_Shape (tkv3d_probe_ais_shape.cxx)
  {"v3_ais_shape", v3_ais_shape},
+ // AIS_InteractiveContext attribute members (tkv3d_probe_ais_context_attributes.cxx)
+ {"v3_ais_ctx_attr", v3_ais_ctx_attr},
  {"v3_ais_rubber_band", v3_ais_rubber_band},
  {"v3_ais_trihedron", v3_ais_trihedron},
  {"v3_ais_point_cloud", v3_ais_point_cloud},

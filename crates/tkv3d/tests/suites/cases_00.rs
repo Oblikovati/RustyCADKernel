@@ -17,6 +17,8 @@ pub mod ais_axis;
 pub mod ais_circle;
 #[path = "../ais_context.rs"]
 pub mod ais_context;
+#[path = "../ais_context_attributes.rs"]
+pub mod ais_context_attributes;
 #[path = "../ais_context_display.rs"]
 pub mod ais_context_display;
 #[path = "../ais_context_lifecycle.rs"]
