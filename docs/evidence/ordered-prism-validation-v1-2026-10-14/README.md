@@ -94,3 +94,25 @@ inputs. There is no sampled acceptance, source mutation, new geometry engine,
 GUI/GPU or application gate here. Command elapsed times describe execution only;
 no controlled previous-release benchmark, performance or release acceptance is
 claimed. The coordinator owns final integration and combined main acceptance.
+
+## Final joined-measures reconciliation
+
+Main `d596b9b0b` was merged as `e7e5703d8637c5944ce283f1fea26930636dee34` after preserving the full
+receipt above. The only conflict was the frozen module registration union;
+the shared hypothesis helper remains single and identical. The supplemental
+[receipt](measure-reconciliation/receipt.json) records 39 equal
+owned validation/embedding/hypothesis source files and 12700
+unchanged Rust/build files across the reconciliation checks. The original full
+1,498-test receipt is not relabelled as this later source.
+
+Ordered validation 26, hypothesis 6, embedding
+40 and joined-measure 15 tests passed;
+35 documentation tests, all-target/all-feature strict Clippy and
+format also passed. Twelve external replay runs match the original six receipts
+byte for byte. Final combined main acceptance remains with the coordinator.
+
+An unrelated Git automatic-GC attempt during evidence commit `415d8dcbc` was
+rejected by the existing release hook while packing existing tag refs. The
+commit succeeded. The observed output/shared maintenance log are retained in
+the supplement. Later commits use command-local `gc.auto=0` only; no persistent
+configuration, release tag update or hook bypass was performed.
