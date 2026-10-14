@@ -47,6 +47,11 @@ pub use view_enums::*;
 pub use vkey::*;
 pub use vkey_set::{AspectVKeySet, AspectVKeySetState};
 pub use window::{AspectWindow, AspectWindowBase, AspectWindowFields, AspectWindowMembers};
+mod native_window_lifecycle;
+pub use native_window_lifecycle::{
+    AspectNativeWindowClosure, AspectNativeWindowClosureCause, AspectNativeWindowFailure,
+    AspectNativeWindowOperation,
+};
 pub use window_input_listener::{
     ASPECT_TOUCH_ID_ALL, AspectWindowInputListener, AspectWindowInputListenerBase,
     AspectWindowInputListenerMembers,

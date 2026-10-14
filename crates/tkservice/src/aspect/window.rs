@@ -84,6 +84,10 @@ pub trait AspectWindow: Transient {
     fn size(&self) -> (i32, i32);
     /// The native window id; `window.native_handle()`.
     fn native_handle(&self) -> AspectDrawable;
+    /// Delivered native closure, if tracked; `window.native_window_closure()` retains its original ID.
+    fn native_window_closure(&self) -> Option<super::AspectNativeWindowClosure> {
+        None
+    }
     /// The native parent window id; `window.native_parent_handle()`.
     fn native_parent_handle(&self) -> AspectDrawable;
     /// The native frame-buffer configuration; `window.native_fb_config()`.
