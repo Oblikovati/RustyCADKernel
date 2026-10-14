@@ -1,0 +1,129 @@
+{
+  "integration_revision": "0e1f2ef8f025d83f2ffcb7178a9820d06c0f1eed",
+  "candidate_revision": "63f75308c",
+  "candidate_base": "38a5edf66",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "2f14dc5410bb1ecf86361ceb941d9e42aba6ac51489e669d7aab29480c3e6eec"
+      },
+      "tests": {
+        "passed": 4169,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "c10ffa0ea9a33dcd394ab887691543ba047e1d0bb81a13a52eecaa5aa71a1ec3"
+      },
+      "tests": {
+        "passed": 86,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "5d4dcdb3afb0fdc5f99b1b7bb3ceeeae4ad321b61ab3ca378ad74f39ac1547e9"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "45513cd5cc60ef82022d2542cad08d940ab6ccc1632eba614202b67bb9ecd120"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkmath/src/predicates/roots/bezier_line.rs": true,
+    "crates/tkmath/src/predicates/roots/bezier_line/incidence.rs": true,
+    "crates/tkmath/src/predicates/roots/bezier_line/incidence/access.rs": true,
+    "crates/tkmath/src/predicates/roots/bezier_line/incidence/directed.rs": true,
+    "crates/tkmath/src/predicates/roots/bezier_line/incidence/directed/error.rs": true,
+    "crates/tkmath/src/predicates/roots/bezier_line/incidence/directed/tests.rs": true,
+    "crates/tkmath/src/predicates/roots/bezier_line/incidence/directed/types.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_line.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_line/directed_failures.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_line/directed_incidences.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_line/directed_ownership.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_line/directed_process_replay.rs": true,
+    "crates/tkmath/tests/exact_roots/bezier_line/incidence_assets/directed-third-jacobian.json": true,
+    "crates/tkmath/tests/exact_roots/bezier_line/incidence_assets/owned-preparation-baseline.txt": true,
+    "crates/tkmath/tests/exact_roots/bezier_line/incidences_retained_baseline.rs": true
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
