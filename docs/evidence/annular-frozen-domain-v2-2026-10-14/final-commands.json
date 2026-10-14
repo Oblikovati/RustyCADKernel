@@ -1,0 +1,60 @@
+[
+  {
+    "label": "all-targets",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--all-targets",
+      "--all-features"
+    ],
+    "exit": 0,
+    "seconds": 435.24704530800227
+  },
+  {
+    "label": "docs",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--doc",
+      "--all-features"
+    ],
+    "exit": 0,
+    "seconds": 1.6459499789998517
+  },
+  {
+    "label": "clippy",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "clippy",
+      "-p",
+      "rustycad-tkbo",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 10.890918436001812
+  },
+  {
+    "label": "fmt",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 7.601925285998732
+  }
+]
