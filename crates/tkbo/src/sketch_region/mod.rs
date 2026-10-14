@@ -68,3 +68,8 @@ mod observed_contexts;
 pub(crate) use observed_contexts::*;
 #[cfg(test)]
 mod observed_context_tests;
+
+mod partition_member_queries;
+pub(crate) use partition_member_queries::{PartitionMemberQueries, PartitionMemberQuery};
+#[cfg(test)]
+mod partition_member_query_tests;

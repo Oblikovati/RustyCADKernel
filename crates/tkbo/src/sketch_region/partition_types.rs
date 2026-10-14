@@ -18,6 +18,7 @@ pub(crate) enum PartitionObservation {
     },
 }
 pub(crate) struct OwnedPartitionSnapshot {
+    pub member_queries: super::PartitionMemberQueries,
     pub input_contexts: Vec<super::CopiedSourceContexts>,
     pub source_shape_count: Option<i32>,
     pub sources: Vec<SourcePartitionObservation>,

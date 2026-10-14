@@ -44,3 +44,32 @@ V1 inspection keeps its original sequence and exact bytes. Focused tests compare
 the owned observations byte for byte and refuse wrong-operation/missing-key and
 missing-observation cases. `lineage-projection.json` retains the source bookends
 and replay checks. This seam adds no geometry or body acceptance claim.
+
+## Exhaustive partition member query retention
+
+Actual Modified/Generated/IsDeleted answers, original/copied member identities,
+kind and supported-type query results are retained before builder retirement.
+The read-only `has_filled_history` observation distinguishes native unavailable
+history (whose compatibility queries return empty/false) from actual answers.
+Legacy callback/classification/relations and V1 bytes are unchanged.
+
+The intermediate full library run passed 771 tests and failed one new draft test:
+that draft incorrectly expected a null generation-origin query to fail. Existing
+History deliberately permits null generation origins; the corrected test retains
+its actual empty answer alongside native errors from the other queries. The
+earlier draft also expected NoSuchObject instead of Shape's actual NullObject.
+Both failures/logs remain. No owned expected-value fixture changed. Final focused
+query tests and both exact V1 replays pass on unchanged source; the final candidate
+will run the complete matrix again after behavior implementation.
+
+The debug measurement retains three actual rows per call and no returned images
+on the closed-Jordan fixture. The log records 1,000 repetitions and elapsed ns;
+inline row size is 184 bytes, excluding immutable Location storage and allocator
+overhead. This is a direct incremental capture-time measurement, not total
+allocation cost, peak-memory attribution, or release performance acceptance.
+
+Migration/deletion gate: after Kernel #10's ordered publisher consumes and checks
+the exhaustive queries on the one-operation corpus, retire the older implicit
+partition-history-only acceptance path within that milestone. Keep private V1
+diagnostic replay selectable until its recorded migration; normalized legacy
+relations alone never prove the new complete-history contract.
