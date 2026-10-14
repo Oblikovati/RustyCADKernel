@@ -54,4 +54,3 @@ mod diagnostic_runtime_tests;
 
 #[cfg(test)]
 mod diagnostic_codec_tests;
-mod resolver;
