@@ -135,3 +135,9 @@ pub use bezier_regularity::{
     BezierRegularityReport, BezierRegularitySource, BezierRegularityStage,
     certify_bezier_regularity,
 };
+
+mod enclosure_sum;
+pub use enclosure_sum::{
+    CertifiedEnclosureSum, EnclosureSumCause, EnclosureSumError, EnclosureSumOperation,
+    EnclosureSumOptions, sum_nonnegative_enclosures,
+};
