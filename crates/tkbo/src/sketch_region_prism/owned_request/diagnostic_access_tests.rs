@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! The seam exposes exactly the existing local state, without synthesizing names or outcomes.
 use super::{diagnostic_access::*, pipeline::*, progress::*, test_fixture::*};
+use crate::sketch_region_contact_transport::ContactTransportPhase;
 #[test]
 fn failed_admission_view_keeps_original_request_and_missing_plan() {
     let mut input = request();
@@ -64,9 +65,7 @@ impl OwnedPrismProgress for PhaseStopObserver {
 #[test]
 fn intermediate_views_retain_inputs_then_census_and_partition_before_transport() {
     use RetainedPreparationStage::*;
-    let phase = OwnedPrismPhase::Contact(
-        crate::sketch_region_contact_transport::ContactTransportPhase::SourceBinding,
-    );
+    let phase = OwnedPrismPhase::Contact(ContactTransportPhase::SourceBinding);
     for (phase, expected) in [
         (
             OwnedPrismPhase::Census,
