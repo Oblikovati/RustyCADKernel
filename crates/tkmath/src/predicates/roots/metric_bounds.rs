@@ -122,3 +122,14 @@ pub use polynomial_side::{
     PolynomialSideFailure, PolynomialSideOptions, PolynomialSideWork,
     certify_polynomial_side_integral,
 };
+
+#[cfg(test)]
+mod regularity_baseline_tests;
+
+mod bezier_regularity;
+pub use bezier_regularity::{
+    BezierRegularityCause, BezierRegularityCompletion, BezierRegularityDecision,
+    BezierRegularityFailure, BezierRegularityOptions, BezierRegularityQuery,
+    BezierRegularityReport, BezierRegularitySource, BezierRegularityStage,
+    certify_bezier_regularity,
+};

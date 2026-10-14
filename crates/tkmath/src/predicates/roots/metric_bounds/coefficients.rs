@@ -21,12 +21,26 @@ fn embedded_bezier<const DIM: usize>(
     role: &'static str,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<HomogeneousCurve, ResidualError> {
+    embedded_bezier_using(curve, embedding, role, cancelled, weight)
+}
+fn embedded_bezier_using<const DIM: usize>(
+    curve: MetricBezier<'_, DIM>,
+    embedding: MetricEmbedding<DIM>,
+    role: &'static str,
+    cancelled: &mut impl FnMut() -> bool,
+    weight_coefficient: fn(MetricBezier<'_, DIM>, usize) -> Result<BigInt, ResidualError>,
+) -> Result<HomogeneousCurve, ResidualError> {
     validate_curve(curve, role)?;
     let axes = exact_embedding(embedding)?;
     let mut controls: HomogeneousCurve = std::array::from_fn(|_| Vec::new());
     for (index, pole) in curve.poles.iter().enumerate() {
         poll(cancelled)?;
-        append_pole(&mut controls, pole, weight(curve, index)?, &axes)?;
+        append_pole(
+            &mut controls,
+            pole,
+            weight_coefficient(curve, index)?,
+            &axes,
+        )?;
     }
     let mut coefficients: HomogeneousCurve = std::array::from_fn(|_| Vec::new());
     for (target, source) in coefficients.iter_mut().zip(controls) {
@@ -35,7 +49,7 @@ fn embedded_bezier<const DIM: usize>(
     remove_shared_power_of_two(&mut coefficients);
     Ok(coefficients)
 }
-fn validate_curve<const DIM: usize>(
+pub(super) fn validate_curve<const DIM: usize>(
     curve: MetricBezier<'_, DIM>,
     role: &'static str,
 ) -> Result<(), ResidualError> {
@@ -174,4 +188,24 @@ fn place_row(curve: &HomogeneousCurve, axis: &[BigInt], target: &mut [BigInt]) {
             target[index] += &axis[coordinate] * coefficient;
         }
     }
+}
+
+/// Signed admission is confined to callers that certify denominator root freedom.
+pub(super) fn embedded_signed_bezier<const DIM: usize>(
+    curve: MetricBezier<'_, DIM>,
+    embedding: MetricEmbedding<DIM>,
+    role: &'static str,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<HomogeneousCurve, ResidualError> {
+    embedded_bezier_using(curve, embedding, role, cancelled, signed_weight)
+}
+fn signed_weight<const DIM: usize>(
+    curve: MetricBezier<'_, DIM>,
+    index: usize,
+) -> Result<BigInt, ResidualError> {
+    scalar(
+        curve.weights.map_or(1., |weights| weights[index]),
+        "weight",
+        index,
+    )
 }
