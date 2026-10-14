@@ -125,15 +125,24 @@ pub(in crate::sketch_region_prism) fn authored_inputs(
     receipt: &PrismReceipt,
     joined: AnnularFrozenDomain,
 ) -> AnnularHistoryNames {
-    let roles = SourceRoles::new(request);
-    let copied = copy_bindings(receipt, &roles);
-    let historical = history_bindings(request, &roles);
+    let (copied, historical) = authored_names(request, receipt);
     AnnularHistoryNames {
         joined,
         copied,
         historical,
         requested: PrismHistoryOptions::annular_v2(),
     }
+}
+/// Author copy and intermediate scope names before any join; `authored_names(region, receipt)`.
+pub(in crate::sketch_region_prism) fn authored_names(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+) -> (PrismCopyBindings, AnnularHistoryBindings) {
+    let roles = SourceRoles::new(request);
+    (
+        copy_bindings(receipt, &roles),
+        history_bindings(request, &roles),
+    )
 }
 /// Semantic source of each physical definition, recorded from authored input/candidate roles.
 pub(in crate::sketch_region_prism) struct SourceRoles {

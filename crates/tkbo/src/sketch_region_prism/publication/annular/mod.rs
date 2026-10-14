@@ -29,4 +29,4 @@ use crate::sketch_region_prism::region_certificate::{
 };
 
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism) mod tests;

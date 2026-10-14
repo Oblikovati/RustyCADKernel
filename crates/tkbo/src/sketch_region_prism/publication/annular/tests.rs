@@ -10,7 +10,7 @@ use crate::sketch_region_prism::frozen::annular_orientation::fixture::join_optio
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::predicates::roots::metric_bounds::*;
 
-fn options() -> AnnularPublicationOptions {
+pub(in crate::sketch_region_prism) fn options() -> AnnularPublicationOptions {
     let stored_cap = StoredToleranceCap::refuse(1.).unwrap();
     AnnularPublicationOptions {
         version: 1,

@@ -11,7 +11,7 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-pub(in crate::sketch_region_prism::frozen) fn authored(
+pub(in crate::sketch_region_prism) fn authored(
     request: &TwoLoopRegionRequest<'_, '_>,
     receipt: &PrismReceipt,
     binding: &AnnularPrismBinding,

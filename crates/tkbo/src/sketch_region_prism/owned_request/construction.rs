@@ -33,6 +33,14 @@ impl ConstructedPolynomialSource {
 pub(super) fn construct_owned_polynomial(
     source: &OwnedPolynomialBoundary,
 ) -> Result<ConstructedPolynomialSource, Failure> {
+    construct_owned_polynomial_as(source, source_identity())
+}
+/// Construct one owned closed polynomial under an explicit authored source identity.
+/// Example: `construct_owned_polynomial_as(&outer, RegionSourceId(outer.source.0))`.
+pub(super) fn construct_owned_polynomial_as(
+    source: &OwnedPolynomialBoundary,
+    identity: RegionSourceId,
+) -> Result<ConstructedPolynomialSource, Failure> {
     let curve = polynomial_curve(source)?;
     let first = source
         .world_poles
@@ -47,6 +55,7 @@ pub(super) fn construct_owned_polynomial(
         edge.into_shape(),
         closure,
         source.reversed_traversal,
+        identity,
     ))
 }
 fn polynomial_curve(source: &OwnedPolynomialBoundary) -> Result<Handle<dyn GeomCurve>, Failure> {
@@ -62,6 +71,7 @@ fn retain_constructor_handles(
     edge: Shape,
     closure: Vertex,
     reversed: bool,
+    identity: RegionSourceId,
 ) -> ConstructedPolynomialSource {
     let orientation = if reversed {
         Orientation::Reversed
@@ -74,7 +84,7 @@ fn retain_constructor_handles(
         native_start: closure.oriented(Orientation::Forward),
         native_end: closure.oriented(Orientation::Reversed),
         closure,
-        identity: source_identity(),
+        identity,
     }
 }
 

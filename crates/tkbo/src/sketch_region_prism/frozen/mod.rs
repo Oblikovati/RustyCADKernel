@@ -89,7 +89,7 @@ pub(in crate::sketch_region_prism) mod publication_read_snapshot;
 pub(in crate::sketch_region_prism) use capture::capture_limits as capture_prism_limits;
 
 #[cfg(test)]
-mod annular_fixture;
+pub(in crate::sketch_region_prism) mod annular_fixture;
 pub(in crate::sketch_region_prism) mod annular_join;
 pub(in crate::sketch_region_prism) mod annular_orientation;
 
