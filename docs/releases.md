@@ -26,7 +26,36 @@ that fetched revision. All internal dependency versions must match the workspace
 release. GitHub assets provide the tested source packages; they are not a Cargo
 registry. This process does not publish to crates.io.
 
-## Owner release check
+## Mandatory local verification before tagging
+
+Run the single release entry point against committed `main` before creating a
+release tag:
+
+```sh
+python3 tools/pre_release.py --tag v0.2.7 --source ../OCCT
+```
+
+The command checks a clean temporary checkout of committed HEAD and leaves user
+edits untouched. Local verification and CI share
+`tools/release_verification_plan.py`: test discovery, the exact formatter
+(including `include!` test files), workspace Clippy, tests and doctests,
+warning-denied documentation, coverage, Vulkan functional/shader/performance
+checks, dependency policy, source inventory and tooling tests. It then runs the
+same extracted-package matrix used by the release workflow, before any tag exists.
+Use the workflow's pinned `cargo-nextest`, `cargo-llvm-cov` and `cargo-deny`
+versions and Linux native prerequisites. Inherited Cargo aliases and toolchain
+overrides are cleared, and driver caches are isolated by workflow job group.
+
+Only successful checks create the annotated tag. The command installs the owned
+reference-transaction hook; a direct release-tag command without matching
+source, plan, command logs and sealed-package receipts is rejected. Existing
+custom hooks are preserved. Ordinary branch commits and merges remain allowed.
+The script does not push or publish. Temporary checkouts and build caches are
+physically deleted after success or failure; logs, coverage/performance reports
+and sealed assets remain under `target/pre-release`. Failed checks retain partial
+reports, performance output and extracted-package diagnostic receipts too.
+
+## Owner release check after tagging
 
 On a clean checkout at the release tag, use the pinned Rust toolchain and run:
 
