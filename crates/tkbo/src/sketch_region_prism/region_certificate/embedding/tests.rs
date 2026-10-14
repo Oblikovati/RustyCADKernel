@@ -23,7 +23,7 @@ fn attempt(
         cancelled,
     )
 }
-fn embedded(
+pub(super) fn embedded(
     bridge: &PairedContactTransaction,
     shapes: &[Shape],
     receipt: &PrismReceipt,

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "read_at_utc": "2026-10-14T15:14:47.317455+00:00",
+  "baseline_main": "bb5f065290ddbe0059384970b1d2ca3fefa9d118",
+  "release_acceptance": "incomplete",
+  "remote_reads_only": true,
+  "kernel_milestones_api_count": 0,
+  "sources": [
+    {
+      "kind": "github_issue",
+      "url": "https://github.com/Oblikovati/RustyCADKernel/issues/10",
+      "number": 10,
+      "title": "Provide verified analytic sketch-region construction for application features",
+      "state": "open",
+      "updated_at": "2026-10-13T07:58:18Z",
+      "milestone": null,
+      "body_sha256": "a51a1083daf7a765a1633529a10329a276d6132b4557b3935837135950b5e6a2"
+    },
+    {
+      "kind": "github_issue",
+      "url": "https://github.com/Oblikovati/Oblikovati/issues/3563",
+      "number": 3563,
+      "title": "Port the Oblikovati application to Rust using the Rust API and Martensite",
+      "state": "open",
+      "updated_at": "2026-10-10T12:38:08Z",
+      "milestone": null,
+      "body_sha256": "9ebb8a109bb3d5b41af64a814f6b67c4d80388d881732ed3739b1465e7c96721"
+    },
+    {
+      "kind": "github_file",
+      "url": "https://github.com/Oblikovati/Oblikovati/blob/rust/architecture/rust-port/milestones.md",
+      "git_blob_sha": "cc5de930bf0f0b57f4b4877403cdefcfc013856f",
+      "sha256": "c7daf3d94d713a0814f476fe776656e8fbaa8bb3c8b1f1b2d81696a5e0dcd75c"
+    },
+    {
+      "kind": "github_file",
+      "url": "https://github.com/Oblikovati/Oblikovati/blob/rust/architecture/rust-port/martensite.md",
+      "git_blob_sha": "f03f94696b854385f9adc633c319ea9667ee31d6",
+      "sha256": "62029e0e13f3acefc5eee3635b7ce42ff4e881d8436a4425d7b2effac614df66"
+    },
+    {
+      "kind": "root_working_file",
+      "path": "AGENTS.md",
+      "sha256": "61defa98bd934272a0a008486ccfaa6d635986647512cf362166f95a470916d7"
+    },
+    {
+      "kind": "root_working_file",
+      "path": "docs/application-blockers.md",
+      "sha256": "bbf1de164bc18ed7dde844b61a3ed7c56a787904146dc1941a59311f44e13fc4"
+    },
+    {
+      "kind": "root_working_file",
+      "path": "docs/porting-plan.md",
+      "sha256": "72977be53b3e8038972f86785fb6dd0bb4aa4cc987995baf4c45c5b93a96856c"
+    },
+    {
+      "kind": "root_working_file",
+      "path": "docs/adr/0014-owned-analytic-sketch-regions.md",
+      "sha256": "1ec181ac514081a1e9903b81cf14d7d40a2875da88dac29d275428fd7e5bc80e"
+    },
+    {
+      "kind": "root_working_file",
+      "path": "docs/evidence/kernel-10-release-authorization-2026-10-14.json",
+      "sha256": "f34c9b37a0ccbcb922833bd31144a127e298738cf817c26f044270c2c77ccb33"
+    }
+  ],
+  "issue_requirements": [
+    {
+      "id": 1,
+      "status": "adr_and_private_hook_implemented"
+    },
+    {
+      "id": 2,
+      "status": "partial_private_admission_public_contract_missing"
+    },
+    {
+      "id": 3,
+      "status": "partial_proofs_composition_history_public_outcomes_pending"
+    },
+    {
+      "id": 4,
+      "status": "bounded_exact_primitives_general_region_gate_pending"
+    },
+    {
+      "id": 5,
+      "status": "incomplete_operation_corpus"
+    },
+    {
+      "id": 6,
+      "status": "incomplete_named_solid_edit_roundtrip"
+    },
+    {
+      "id": 7,
+      "status": "authorized_conditionally_not_ready"
+    }
+  ],
+  "active_candidate_snapshots": [
+    {
+      "component": "ordered_validation",
+      "revision": "dec0d4566cf36cf8d05a0a9ebbf775c19d43244c",
+      "executed": "26 focused tests and strict Clippy in recorded prefix logs",
+      "acceptance": "not integrated full gate at baseline"
+    },
+    {
+      "component": "joined_measures",
+      "revision": "64c6fa30b0e0130e602be3784122ff8327ef8b62",
+      "executed": "reviewed prefix; prior20703816f50legacy14joined718cancel preserved; generated8cases added",
+      "acceptance": "reconciliation/full gate pending at baseline"
+    },
+    {
+      "component": "exact_tolerance",
+      "revision": "378fc0db8699c7dbc67cec10535e31f50c723146",
+      "executed": "6292 tests302docs plus lint/fmt; reconciliation e9890ebc8 has41focused21orientation",
+      "acceptance": "integrated source at baseline bb5f06529; root combined gate pending at audit start; complete publication pending"
+    },
+    {
+      "component": "complete_history",
+      "revision": "52cd40d4c512a0f387dc77cabe781b7fa884acf5",
+      "working_changes": true,
+      "executed": "owner reports7actual-operation WIP tests",
+      "acceptance": "uncommitted; no full certificate acceptance"
+    },
+    {
+      "component": "publication",
+      "revision": "97400f5f05ebc0d1138a5df75aa3510eaa6adbd6",
+      "working_changes": true,
+      "executed": "owner reports4baseline/progress tests",
+      "acceptance": "no complete entry or success constructor at observation"
+    }
+  ],
+  "limitations": [
+    "No new tests or native oracle executed by this audit.",
+    "Active candidate checks do not become integrated or public release evidence.",
+    "Ordinary-host TSan acceptance remains incomplete.",
+    "No full Kernel10 extracted-package/public application acceptance established."
+  ],
+  "next_after_complete_operation_gate": "Owned application-facing request and typed immutable outcome/diagnostic boundary over the proven shared operation, without weakening broader corpus or naming requirements.",
+  "matrix_sha256": "9d7f7d14428ab9a6f359a031c0b4ae24cb26afc6f0256f44fb7843e026053fb1"
+}

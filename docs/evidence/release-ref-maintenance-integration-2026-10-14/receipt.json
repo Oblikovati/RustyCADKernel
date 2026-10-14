@@ -1,0 +1,78 @@
+{
+  "revision": "12faf0730da7c060e9d98c13f7a8552d6fcdad2d",
+  "candidate_source": "255f626f905d62bfdd6688e21e6e2b0c6c8dfc7d",
+  "candidate_source_files_exact": true,
+  "candidate_archive_payload_hashes_verified": 28,
+  "verification_functions_ast_identical": [
+    "require_equal",
+    "object_field",
+    "evidence_path",
+    "verify_log",
+    "verify_gate",
+    "planned_gate_names",
+    "plan_command_roster",
+    "command_identity",
+    "verify_command_rosters",
+    "verify_gates",
+    "verify_packages",
+    "verify_annotation",
+    "verify_source",
+    "verify_tag",
+    "main"
+  ],
+  "commands": [
+    {
+      "name": "release",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_release_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "test_counts": [
+        "94"
+      ]
+    },
+    {
+      "name": "pre-release",
+      "command": [
+        "python3",
+        "tools/run_tool_tests.py",
+        "--jobs",
+        "2",
+        "--pattern",
+        "test_pre_release*.py"
+      ],
+      "exit_code": 0,
+      "test_counts": []
+    },
+    {
+      "name": "verification",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_verify_release_gate.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "test_counts": [
+        "8"
+      ]
+    }
+  ],
+  "source_bookends_equal": true,
+  "source_count": 3739,
+  "scope": "Installed hook exercised only in isolated temporary repositories; no actual main tags, config, host protections, release publication or remote writes",
+  "formatting": "Candidate Black25.1.0 gate retained; source identical"
+}

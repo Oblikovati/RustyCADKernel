@@ -22,6 +22,13 @@ impl JoinFixture {
     pub(in crate::sketch_region_prism) fn new() -> Self {
         let (bridge, shapes) = fixture();
         let receipt = run(&bridge, &shapes);
+        Self::from_inputs(bridge, shapes, receipt)
+    }
+    pub(in crate::sketch_region_prism) fn from_inputs(
+        bridge: PairedContactTransaction,
+        shapes: Vec<Shape>,
+        receipt: PrismReceipt,
+    ) -> Self {
         let authored = super::super::tests::authored_bindings(&receipt, &shapes[0]);
         let region = receipt.region.as_ref().unwrap().decision.as_ref().unwrap();
         let contact = AuthoredClosureContact {

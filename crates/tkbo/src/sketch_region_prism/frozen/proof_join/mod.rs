@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0035: bind existing proofs to the same authored immutable projection.
 mod access;
+mod operands;
 mod operation;
 mod probe;
+mod rebind;
 pub(crate) use operation::{compose_prism_proof, rebind_joined_prism_proof};
 mod closure;
 mod error;
@@ -25,3 +27,8 @@ mod tests;
 
 #[cfg(test)]
 pub(in crate::sketch_region_prism) mod operation_tests;
+
+pub(in crate::sketch_region_prism) use replay::{
+    block as encode_joined_block, text as encode_joined_text,
+};
+pub(in crate::sketch_region_prism) use replay_options::roots as encode_joined_root_options;

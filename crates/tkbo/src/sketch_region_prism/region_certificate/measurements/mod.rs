@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0027: source-bound scalar subset, separate from body acceptance and publication.
+mod operand_errors;
+pub(crate) use operand_errors::*;
 mod scalars;
 mod types;
 use super::super::surface_charts::*;
@@ -24,13 +26,17 @@ pub(crate) fn inspect_prism_measurements(
     let measures = scalars::measure_subset(
         &captured.region,
         &captured.charts,
-        receipt,
+        requested_extrusion(receipt),
         options,
         &mut cancelled,
     )?;
     poll_prism_binding(&mut cancelled)?;
     rebind_current_prism_binding(bridge, sources, receipt, &captured)?;
     Ok(complete_inspection(captured, measures))
+}
+fn requested_extrusion(receipt: &PrismReceipt) -> [f64; 3] {
+    let vector = receipt.limits.requested.extrusion;
+    [vector.x(), vector.y(), vector.z()]
 }
 fn complete_inspection(
     captured: CurrentPrismBinding,
@@ -46,7 +52,7 @@ fn complete_inspection(
 }
 
 #[cfg(test)]
-pub(in crate::sketch_region_prism::region_certificate) mod tests;
+pub(in crate::sketch_region_prism) mod tests;
 
 mod complete;
 pub(crate) use complete::*;

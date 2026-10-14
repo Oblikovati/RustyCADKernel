@@ -2,11 +2,11 @@
 //! Full non-address operand replay is assembled after actual identity linkage.
 use super::*;
 
-pub(super) fn text(value: &str, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn text(value: &str, bytes: &mut Vec<u8>) {
     bytes.extend((value.len() as u64).to_le_bytes());
     bytes.extend(value.as_bytes());
 }
-pub(super) fn block(value: &[u8], bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn block(value: &[u8], bytes: &mut Vec<u8>) {
     bytes.extend((value.len() as u64).to_le_bytes());
     bytes.extend(value);
 }

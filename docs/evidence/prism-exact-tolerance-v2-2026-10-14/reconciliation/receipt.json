@@ -1,0 +1,92 @@
+{
+  "source_commit": "e9890ebc8323320164763373216b60a6e7b8130e",
+  "integrated_main": "0d2bef9d9974ba157761bbf8a1bcc272e5393c34",
+  "original_frozen_source": "378fc0db8699c7dbc67cec10535e31f50c723146",
+  "original_receipt_commit": "29b6a9994",
+  "source_inputs": {
+    "count": 38886,
+    "before_equals_after": true
+  },
+  "candidate_files": 38,
+  "conflict_resolution": "frozen/mod.rs only: retained both existing encoder reexports and incoming joined_orientation registration; no numerical edits",
+  "exact_tolerance_source_unchanged": true,
+  "checks": {
+    "focused": {
+      "passed": 41,
+      "failed": 0,
+      "ignored": 0,
+      "exit_code": 0
+    },
+    "orientation": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0,
+      "exit_code": 0
+    },
+    "clippy": {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "exit_code": 0
+    },
+    "fmt": {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "exit_code": 0
+    }
+  },
+  "commands": [
+    "cargo +1.99.0 test -p rustycad-tkbo --lib sketch_region_prism::exact_tolerance::",
+    "cargo +1.99.0 test -p rustycad-tkbo --lib sketch_region_prism::frozen::joined_orientation::",
+    "cargo +1.99.0 clippy -p rustycad-tkbo --all-targets --all-features -- -D warnings",
+    "cargo +1.99.0 fmt --all -- --check"
+  ],
+  "replays": {
+    "exact": {
+      "command": [
+        "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::exact_tolerance::joined_replay_tests::exact_tolerance_bytes_replay_across_threads_and_operations",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "independent_processes": 2,
+      "bytes": 453096,
+      "sha256": "862c6e77b67e450ddeda02d65b4cfe43881e0cc6c1aa929ae5a091a72bcd1fb7",
+      "matches_owned_baseline": true
+    },
+    "frozen-v1": {
+      "command": [
+        "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "independent_processes": 2,
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "matches_owned_baseline": true
+    },
+    "inspection-v1": {
+      "command": [
+        "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "independent_processes": 2,
+      "bytes": 3629,
+      "sha256": "a3bbc53e1b5be36f87331ff1319ce1e47b078447b694844d21f004abdaaaf8a7",
+      "matches_owned_baseline": true
+    },
+    "binary": {
+      "path": "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "sha256": "bc57ffe00ee075b2655f88e557eb2e3f0ed3cb358b8aecc0d6ef2b71a1e63091"
+    }
+  },
+  "status": "reconciled source green; root main integration and combined validation remain required",
+  "sanitizer": "unchanged incomplete host control; see original frozen receipt"
+}

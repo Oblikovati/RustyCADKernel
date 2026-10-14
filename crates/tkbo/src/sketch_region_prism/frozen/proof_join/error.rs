@@ -46,3 +46,7 @@ pub(super) fn failure(
         cause,
     }
 }
+
+pub(super) fn join_link_cause(cause: PrismFreezeCause) -> PrismProofJoinCause {
+    PrismProofJoinCause::Link(Box::new(cause))
+}

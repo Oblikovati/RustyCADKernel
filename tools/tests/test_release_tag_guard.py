@@ -23,6 +23,13 @@ from release_tag_guard import (
 
 REVISION = "a" * 40
 OID = "b" * 40
+REFERENCE_QUERY = (
+    "rev-parse",
+    "--verify",
+    "--quiet",
+    "--end-of-options",
+    "refs/tags/v0.2.8",
+)
 PLAN = b"""from types import SimpleNamespace as Record
 GATE_NAMES = ('tests', 'docs', 'coverage')
 def verification_gates(root, source):
@@ -43,6 +50,8 @@ class FakeGuardGit:
         self.root = Path.cwd()
 
     def read(self, *arguments: str) -> bytes:
+        if arguments == REFERENCE_QUERY:
+            raise subprocess.CalledProcessError(1, ["git", *arguments])
         responses = {
             ("cat-file", "-t", OID): self.kind.encode(),
             ("cat-file", "-p", OID): b"object "

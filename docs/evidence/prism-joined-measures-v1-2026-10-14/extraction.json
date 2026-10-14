@@ -1,0 +1,50 @@
+{
+  "baseline": "f33490bc8142f30fd4bffe66d12208c073903af7",
+  "kind": "structural extraction; no numerical or callback changes",
+  "focused_before": 46,
+  "focused_after": 47,
+  "same_scalar_replay": [
+    "{\"operation\":\"martensite.prism-measure-subset\",\"behavior\":1,\"first_cap_bits\":[4612586738352862003, 4612586738352862004],\"last_cap_bits\":[4612586738352862003, 4612586738352862004],\"sweep_bits\":[4617090337980232499, 4617090337980232500],\"winding\":1,\"reversed\":false,\"charts\":3,\"pending\":\"side,total\",\"body\":\"incomplete\"}",
+    "{\"operation\":\"martensite.prism-complete-measures\",\"behavior\":1,\"side\":[4622672716990783206, 4622678330738697749],\"total\":[4625285847038352447, 4625288653912309720],\"work\":46,\"winding\":1,\"body\":\"incomplete\"}"
+  ],
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    }
+  ],
+  "source_sha256": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/complete/mod.rs": "ddf020ea3651b4b7e57fd418f7390397f3a1b240c0c9497ed593cf9663cff6bf",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/mod.rs": "c8981ff81cdd34cb611a64003bc83144b6d8422fe61c7a04e90cca0c1fbea8ac",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/scalars.rs": "abc5faedb1447f021041d21647fdaeb2f73b611792e6a47557da96e3500ba35e",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/complete.rs": "8b3396f664e0b380f4f9adb6d270a28f8efebe58b3dbef9166fab09ec589e6df",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/tests/complete/owned.rs": "784b8e33beb7af848ac4d757751cc99d3f43020706ba89a094009d49c900bc11"
+  },
+  "limitations": [
+    "Scalar evidence only; no joined operation or body validity.",
+    "This focused gate does not replace the final complete TKBO matrix."
+  ]
+}

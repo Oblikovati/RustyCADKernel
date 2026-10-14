@@ -1,0 +1,170 @@
+{
+  "integration_revision": "12faf0730da7c060e9d98c13f7a8552d6fcdad2d",
+  "candidate_revision": "e7e5703d8",
+  "candidate_base": "d596b9b0b",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "da6d8eb902a50be7abb58dfc5251dcccff3516dc58754072e8024918672cc440"
+      },
+      "tests": {
+        "passed": 1517,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "d87f078bef5c2c60ad82102f0e364a2b154b2c2671f62f079aab4b89d0886f10"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "079047b207cf2dea19dfb64d9afada7a2f78e30c567e76509c03dd25be39dc7a"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "45141b20007610ae9390e685c7ebf56ec89748caf36afc8fdffcd8e7eaa42356"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/adapters.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/cancellation_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/certificate.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/checks.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/classification.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/classification_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/errors.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/execution.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/intersection.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/isolation_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/joined_baseline_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/operation_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/options.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/policy_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/progress.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/replay_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/stage_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/stages.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/test_support.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/work.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation_baseline_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/domains.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table_validation.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table_validation_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/adapters.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/cancellation_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/certificate.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/checks.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/classification.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/classification_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/errors.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/execution.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/intersection.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/isolation_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/joined_baseline_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/operation_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/options.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/policy_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/progress.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/replay.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/replay_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/stage_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/stages.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/test_support.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation/work.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/ordered_validation_baseline_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/domains.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table_validation.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/table_validation_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/embedding/tests.rs": "M"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
