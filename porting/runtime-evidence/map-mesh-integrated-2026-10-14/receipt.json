@@ -1,0 +1,42 @@
+{
+  "source_revision": "cb0b7464c413f63e773fc123c942e3a8d64d20f1",
+  "date": "2026-10-14",
+  "platform": "Linux x86_64",
+  "rust": "1.99.0",
+  "checks": [
+    {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p rustycad-tkernel -p martensite-tkmeshvs --locked",
+      "exit_code": 0,
+      "log": "tests.log.gz",
+      "sha256": "b8a69d4fdc90fb159252218ac35a6191d7e08258a6a71deba2944ac1c0e994de",
+      "passed": 5382,
+      "failed": 0,
+      "ignored": 0,
+      "summary_records": 25
+    },
+    {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 clippy -p rustycad-tkernel -p martensite-tkmeshvs --all-targets --locked -- -D warnings",
+      "exit_code": 0,
+      "log": "clippy.log.gz",
+      "sha256": "fda1738181fad1065a0479c18ec5a809878d0eccba425aab74d4930758ec6ed2"
+    },
+    {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 fmt -p rustycad-tkernel -p martensite-tkmeshvs -- --check",
+      "exit_code": 0,
+      "log": "format.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  ],
+  "integration_notes": [
+    "Documentation-only c814d12b3 committed while tests ran; measured source unchanged.",
+    "TKernel total 5323; TKMeshVS total 59 including 9 doctests. The integrated selection regression adds one test beyond candidate branch totals.",
+    "Current vector Map allocation policy preserved. ADR 0017 remains proposed and unaccepted.",
+    "Mesh connectivity is immutable combinatorial output, not a geometric model operation.",
+    "Candidate TSan run remains incomplete: instrumented target and trivial control exit 139. No full concurrency acceptance claimed.",
+    "No native OCCT executions or original legacy-test mapping changes."
+  ],
+  "candidates": [
+    "684efa49c",
+    "55a2a34cd"
+  ]
+}

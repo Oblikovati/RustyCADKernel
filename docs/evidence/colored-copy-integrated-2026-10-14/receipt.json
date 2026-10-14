@@ -1,0 +1,45 @@
+{
+  "source_revision": "fb38ed8ac9371cb812255987f5e9c0f9c70235b2",
+  "date": "2026-10-14",
+  "scope": "Integrated colored-copy appearance and failure/reuse contracts; no full geometry isolation or kernel operation acceptance.",
+  "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p rustycad-tkv3d --all-targets --all-features --locked",
+  "exit_code": 0,
+  "suites": [
+    {
+      "passed": 381,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 546,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "total_passed": 928,
+  "failed": 0,
+  "ignored": 0,
+  "platform": "Linux 7.1.5-76070105-generic x86_64",
+  "rust_compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "log_sha256": "876197ff00c5d552f35b00012a1ab924d019930ad8ce8445c8a88fb944d50825",
+  "ownership_limitations": [
+    "Topology remains shared and mutable; tests pin this limitation explicitly.",
+    "No deep geometry isolation, cancellation or full concurrency acceptance."
+  ],
+  "integration": "Only reviewed test/doc commit 7bcd3d986 was cherry-picked. Seven earlier HLR/adaptor retirement commits remain unmerged on porting/martensite-colored-copy-source; its checkout is preserved."
+}
