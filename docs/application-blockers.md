@@ -74,7 +74,7 @@ This blocks the visible command controls, sketch selection controls, and placeme
 field widgets. It therefore takes precedence over trim/extension expansion and
 broader renderer coverage. Keep the existing scene and rendering regression gates.
 
-Next action: expose a kernel-owned attach/replace/clear operation for an owned GUI
+Kernel contract: a kernel-owned attach/replace/clear operation for an owned GUI
 layer on an existing native view, with expected target extent. Preserve the model
 scene, clear color, layer ordering, float colors, UVs, intersected clip chains and
 alpha blending. Keep device, swapchain, capture and resource retirement in the
@@ -89,6 +89,17 @@ edges, atlas lifetime and validation on software Vulkan and the native GPU. Rele
 the tested contract, then run the application's full gate with native GUI commands.
 The consumer requirements are recorded in application
 `architecture/rust-port/implementation-imgui-packets.md`.
+
+Local kernel implementation is integrated at `7754197ab`: owned attach/replace/clear,
+GUI alpha isolation and actual native extent rejection pass on both drivers. The
+[integration receipt](evidence/gui-integration-2026-10-14/receipt.json) records
+673 tests per driver, fresh native capture equality, canonical extracted GUI
+regressions and the independently checked 1,400-sample performance run. Five
+existing ignored tests remain explicit. The measured source is `9c9f10dfa`;
+integrated functional and package checks identify `7754197ab` separately.
+Next action: include this contract in the next authorized tested package and run
+the consuming application gate. Publication and application acceptance remain
+open; these local checks do not lower this blocker or authorize remote writes.
 
 ## 4. Certify the incidences consumed by trim and extension
 
