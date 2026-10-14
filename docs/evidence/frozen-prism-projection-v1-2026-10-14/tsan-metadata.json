@@ -1,0 +1,14 @@
+{
+  "toolchain": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+  "build_command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 RUSTFLAGS='-Zsanitizer=thread -Cforce-frame-pointers=yes' cargo +nightly-2026-09-25 build -Zbuild-std --target x86_64-unknown-linux-gnu --manifest-path target/frozen-tsan-control/Cargo.toml --target-dir target/frozen-tsan-build",
+  "build_exit_code": 0,
+  "unsanitized_build_command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +nightly-2026-09-25 build --manifest-path target/frozen-tsan-control/Cargo.toml --target-dir target/frozen-control-unsanitized",
+  "projection_target_status": "not built or executed after failed ordinary-host startup control",
+  "projection_target_planned_command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 RUSTFLAGS='-Zsanitizer=thread -Cforce-frame-pointers=yes' cargo +nightly-2026-09-25 test -Zbuild-std --target x86_64-unknown-linux-gnu --target-dir target/frozen-tsan-build -p rustycad-tkbo --lib --locked -- frozen::replay_tests:: --nocapture",
+  "host_changes": false,
+  "acceptance": "incomplete",
+  "binary_sha256": {
+    "target/frozen-tsan-build/x86_64-unknown-linux-gnu/debug/martensite-frozen-tsan-control": "c1ed91b216f96224fdce70dd487effa3d725b3d2cef9f868fafda8748d4dedba",
+    "target/frozen-control-unsanitized/debug/martensite-frozen-tsan-control": "66403e45ba9f549be86c354c03932d4bff505d907823bbbf48c492d673593793"
+  }
+}

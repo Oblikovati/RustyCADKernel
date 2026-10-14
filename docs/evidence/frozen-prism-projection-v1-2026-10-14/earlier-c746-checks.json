@@ -1,0 +1,65 @@
+[
+  {
+    "label": "all-targets",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbrep",
+      "-p",
+      "rustycad-tkbo",
+      "--all-targets",
+      "--all-features",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 303.6747437180002,
+    "source_unchanged": true
+  },
+  {
+    "label": "doctests",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbrep",
+      "-p",
+      "rustycad-tkbo",
+      "--doc",
+      "--all-features",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 5.784934612000143,
+    "source_unchanged": true
+  },
+  {
+    "label": "clippy",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "clippy",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbrep",
+      "-p",
+      "rustycad-tkbo",
+      "--all-targets",
+      "--all-features",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 101,
+    "elapsed_seconds": 43.387019142999634,
+    "source_unchanged": true
+  }
+]

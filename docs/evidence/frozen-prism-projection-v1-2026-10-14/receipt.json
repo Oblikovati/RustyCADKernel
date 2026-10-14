@@ -1,0 +1,209 @@
+{
+  "source_revision": "2e0cf4817da4f47f8f0b3e8bba28dc8a7425c6e1",
+  "base_revision": "ab5fe6414104a420718dad11e03f5a729798791e",
+  "platform": {
+    "uname": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "jobs": 2
+  },
+  "scope": "private owned diagnostic capture only; never a valid body",
+  "behavior_version": 1,
+  "policy": {
+    "maximum_directed_occurrences": 4096,
+    "maximum_polynomial_poles": 17,
+    "exact_endpoint_spatial_limit": 0,
+    "excess": "refuse without truncation",
+    "rational_weights": "unsupported including explicit unit weights",
+    "orientations": [
+      "Forward",
+      "Reversed"
+    ],
+    "graph_import": "fresh CumulativeOccurrenceV2 + Audit"
+  },
+  "fixture": {
+    "path": "crates/tkbo/tests/frozen_prism_projection/closed_cubic_v1.json",
+    "first_commit": "2b16e03e4",
+    "unchanged": true,
+    "sha256": "363ea471a8d82f3040dc74e883be3dbd675777bc71d3ea21e4b116b54e4a1130"
+  },
+  "oracle_kinds": [
+    "independent closed-cell incidence invariants",
+    "independent polynomial formulas",
+    "separately attributed stored-chart baseline",
+    "exact existing transported residual proof machinery",
+    "source/context/history/ownership invariants"
+  ],
+  "structural_replay": {
+    "bytes": 89921,
+    "unchanged_across_refactor_boxing_attribution": true
+  },
+  "thread_stress": {
+    "independent_operations": "8 workers x4 independent local captures vs4 serial captures",
+    "shared_reads": "8 workers x32 repeated borrowed-root serializations"
+  },
+  "audit": {
+    "frozen_files": 31,
+    "max_file_lines": 342,
+    "maximum_function_body_lines": 20,
+    "convention": "executable body excludes formatted signature and docs; no filler or artificial signature-driven splitting"
+  },
+  "sanitizer": "incomplete; instrumented trivial startup control SIGSEGV (-11), empty stdout/stderr; projection target unexecuted; see tsan-metadata.json",
+  "exclusions": [
+    "no successful body publication",
+    "all4 current ordered whole-body stages incomplete",
+    "historical validation unbound",
+    "no composed intermediate retirement/deletion credit",
+    "selection/affine evidence not imported",
+    "aggregate achieved error unknown",
+    "unsupported required diagnostic payloads refused",
+    "no concurrent legacy alias writes during capture",
+    "no live OCCT or GPU",
+    "no accepted-workload previous-release benchmark",
+    "no application acceptance"
+  ],
+  "checks": [
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 14.23441611599992,
+      "source_unchanged": true,
+      "passed_tests": 0,
+      "log": "final-clippy.log.gz"
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.148899486999653,
+      "source_unchanged": true,
+      "passed_tests": 0,
+      "log": "final-fmt.log.gz"
+    },
+    {
+      "label": "all-targets",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 200.80760415400073,
+      "source_unchanged": true,
+      "passed_tests": 6030,
+      "log": "final-all-targets.log.gz"
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.647908478998943,
+      "source_unchanged": true,
+      "passed_tests": 302,
+      "log": "final-doctests.log.gz"
+    },
+    {
+      "label": "process-first",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.1871773549992213,
+      "source_unchanged": true,
+      "passed_tests": 1,
+      "log": "final-process-first.log.gz"
+    },
+    {
+      "label": "process-second",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.192710242999965,
+      "source_unchanged": true,
+      "passed_tests": 1,
+      "log": "final-process-second.log.gz"
+    }
+  ],
+  "source_bookends_equal": true,
+  "source_file_count": 15724,
+  "process_replay": {
+    "equal": true,
+    "bytes": 89921,
+    "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+    "equals_pre_refactor_and_pre_attribution": true
+  },
+  "checks_summary": {
+    "clippy": 0,
+    "fmt": 0,
+    "all-targets": 6030,
+    "doctests": 302,
+    "process-first": 1,
+    "process-second": 1
+  }
+}
