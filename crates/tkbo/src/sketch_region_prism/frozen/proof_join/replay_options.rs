@@ -6,7 +6,7 @@ use rustycad_tkmath::predicates::roots::{
     metric_bounds::{BezierRegularityOptions, MetricParameterMap},
 };
 
-pub(super) fn roots(value: RootIsolationOptions, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn roots(value: RootIsolationOptions, bytes: &mut Vec<u8>) {
     bytes.extend(value.version.to_le_bytes());
     encoding::numbers([value.max_width], bytes);
     bytes.extend(value.max_bisections.to_le_bytes());
