@@ -1,0 +1,168 @@
+{
+  "source_revision": "ac5f2db3aaa2ff371f2461ff41979d32547286f4",
+  "base_revision": "38a5edf6633ff3683d536a191f241497f8e3077d",
+  "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-directed-incidence-signs",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "RUSTDOCFLAGS_for_docs": "-D warnings"
+  },
+  "commands": [
+    {
+      "label": "all-targets",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 99.561,
+      "source_unchanged": true
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--doc"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.257,
+      "source_unchanged": true
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 48.375,
+      "source_unchanged": true
+    },
+    {
+      "label": "docs",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "doc",
+        "--locked",
+        "-p",
+        "rustycad-tkmath",
+        "--all-features",
+        "--no-deps"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.071,
+      "source_unchanged": true
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "fmt",
+        "-p",
+        "rustycad-tkmath",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.633,
+      "source_unchanged": true
+    }
+  ],
+  "recorded_utc": "2026-10-14T11:32:07.932283+00:00",
+  "behavior_version": 1,
+  "source_manifest_entries": 1900,
+  "source_manifest_sha256": "04a2d6cada0a59cff592e3518f8eb862318cf874a64b18d119283768f8933b07",
+  "source_before_equals_after": true,
+  "test_totals": {
+    "unit": 174,
+    "integration": 2926,
+    "doctests": 51
+  },
+  "acceptance_scope": "Owned directed endpoint positions aligned to one complete support isolation and selected world contacts; no consumer migration or nearest-hit ordering.",
+  "oracle_kinds": [
+    "Exact rational polynomial evaluation through Jacobian",
+    "Closed-form dyadic and algebraic comparisons",
+    "Owned unchanged pre-refactor baseline",
+    "Invariants, generated cases, mutation isolation, cancellation and deterministic replay"
+  ],
+  "exclusions": [
+    "Ordinary-host ThreadSanitizer incomplete: retained startup controls failed; this target was not run under TSan and no bypass was used.",
+    "No full certified trim/extension operation, TKBO or application acceptance.",
+    "No broad API mapping or parity credit.",
+    "No GPU or new live OCCT/native oracle.",
+    "No release performance or peak-memory comparison; debug bench output is incidental to all-targets checks."
+  ],
+  "post_validation_changes": "Evidence-only follow-up and ADR 0022 clarification: explicitly name 1/3 minus each binary64 endpoint. No Rust, fixture, manifest or behavior edits.",
+  "artifacts": {
+    "source-fingerprints.json.gz": {
+      "sha256": "ea46bb4828a3425d1354483775839cc09df1e759d2e4090309efd74bfd155a7a",
+      "uncompressed_sha256": "04a2d6cada0a59cff592e3518f8eb862318cf874a64b18d119283768f8933b07",
+      "uncompressed_bytes": 227776
+    },
+    "all-targets.log.gz": {
+      "sha256": "d3f0f3b32fe9085bc2bc31b8a6dfc5533ede960cb936f7c8f7d64d59a20ed8d2",
+      "uncompressed_sha256": "1c08ef12702006ba9fdf680e482e69dad59960c726701cba97b40010a78c5a8b",
+      "uncompressed_bytes": 245617
+    },
+    "doctests.log.gz": {
+      "sha256": "4b5bbcca340b298a20cba23c46821e6a356952e93ef60d675cd3bc75f5331c1b",
+      "uncompressed_sha256": "f3f401a03e0f659955e6114dd38acf9ed21ded5a26aa1fbe40485218d763bcdd",
+      "uncompressed_bytes": 6099
+    },
+    "clippy.log.gz": {
+      "sha256": "7ab6512f2e093139836c84878a48a1bc6da25593f32f6a80036b8c836565cfa2",
+      "uncompressed_sha256": "a0a28e89b06b105f9d5bd0e6545fc224ad5932db34b48eb39e34f4dc1bbc8e68",
+      "uncompressed_bytes": 1957
+    },
+    "docs.log.gz": {
+      "sha256": "e3ae77ddbbfd1439794835284e7dd29d90d310a2bc3659b550b622e84dd39b8d",
+      "uncompressed_sha256": "ac4f2108e8f7e3d546a056a0561cf96e5e37e554e6f32b63c18c897f467bf8d2",
+      "uncompressed_bytes": 579
+    },
+    "fmt.log.gz": {
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "owned-baseline-check.log.gz": {
+      "sha256": "ec8dbec756699fc734178c87be764f76596de5a807a9044b0442c1562e89fd45",
+      "uncompressed_sha256": "469fa9481248c8a1f58f6825ce6e0fbedd83546bbd990faab16f03b57cd7440f",
+      "uncompressed_bytes": 509
+    },
+    "structural-incidence-tests.log.gz": {
+      "sha256": "18fea78be9b571c04d50d6c24e389824f4296b111bac811535fcbc2712ffc2c3",
+      "uncompressed_sha256": "210ec83e95aa4a01abf987cdfd161cfc3d5f1d238e13247af377ba1c4e1096bd",
+      "uncompressed_bytes": 3748
+    }
+  },
+  "preparation": {
+    "baseline_source_revision": "38a5edf6633ff3683d536a191f241497f8e3077d",
+    "baseline_test_commit": "2c57739090217c8718c7cf14a198001c86169f13",
+    "structural_content_commit": "533a5786cdcdc6d66f9cb068de0eb49b41d18869",
+    "note": "Baseline check (1 pass) and structural check (17 passes) ran on working content before the respective commits. New directed modules were not registered during either check.",
+    "baseline_fixture_sha256": "7fe53097e247c2ceabb219f669f6e963df7777f189b49afe98dedc7ca40cf2af"
+  }
+}

@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::*;
 use rustycad_tkmath::predicates::roots::bezier_line::*;
+mod directed_failures;
+mod directed_incidences;
+mod directed_ownership;
+mod directed_process_replay;
 mod failures;
 mod fixture;
 mod incidences;
@@ -8,6 +12,7 @@ mod incidences_degree_policy;
 mod incidences_failures;
 mod incidences_generated;
 mod incidences_native;
+mod incidences_retained_baseline;
 mod ownership;
 mod rays;
 mod winding;

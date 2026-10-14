@@ -129,7 +129,7 @@ impl BezierIncidenceDegrees {
     pub fn terminal_sign_product(&self) -> Option<usize> {
         self.terminal_sign_product
     }
-    /// Read applied segment cap, None for Support; example: `degrees.effective_domain_limit()`.
+    /// Read applied endpoint cap, None when signs were skipped; example: `degrees.effective_domain_limit()`.
     pub fn effective_domain_limit(&self) -> Option<u16> {
         self.effective_domain_limit
     }
