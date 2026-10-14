@@ -111,3 +111,15 @@ fn original_parent_budget_keeps_prior_reservation_and_original_limit() {
         assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { requested: 19, measured: 20, .. }));
     });
 }
+#[test]
+fn polynomial_descriptor_admission_retains_original_caps_and_negative_count_cause() {
+    exercise(|mut request, _| {
+        request.requested.maximum_poles = 4;
+        request.requested.maximum_retained_units = 10;
+        assert_eq!(super::admit_two_loop_polynomial_counts(&request, &[4,0], 4).unwrap_or_else(|_| panic!("exact cumulative geometry cap")),10);
+        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[5], 0) else { panic!("expected pole cap"); };
+        assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { operand: "polynomial poles", requested:4, measured:5 }));
+        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[-1], 0) else { panic!("expected negative count"); };
+        assert!(matches!(failure.cause, TwoLoopRegionCause::Scalar { operand: "pole count", actual:-1., .. }));
+    });
+}

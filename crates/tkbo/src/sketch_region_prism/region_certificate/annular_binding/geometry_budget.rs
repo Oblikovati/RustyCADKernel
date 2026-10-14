@@ -104,3 +104,24 @@ fn no_alternate(representation: &'static str, present: bool) -> AnnularCheck<'st
 fn representation(expected: &'static str, actual: &str) -> Box<AnnularBindingCause<'static>> {
     Box::new(AnnularBindingCause::Capture(super::super::super::surface_charts::PrismSurfaceCause::Unsupported { representation: expected, actual: actual.to_owned() }))
 }
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn raw_missing_and_rational_representation_refusals_keep_actual_values() {
+        let Err(cause) = space_count(&Handle::default()) else { panic!("expected null space refusal"); };
+        assert!(matches!(*cause, AnnularBindingCause::Capture(super::super::super::super::surface_charts::PrismSurfaceCause::Unsupported { actual, .. }) if actual == "null"));
+        assert!(plane_count(&Handle::default()).is_err());
+        let curve = CapturedMetricCurve::Bezier { poles: vec![[0.,0.];2], weights: Some(vec![1.,2.]) };
+        let Err(cause) = captured_count(&curve) else { panic!("expected rational representation refusal"); };
+        assert!(matches!(*cause, AnnularBindingCause::Capture(super::super::super::super::surface_charts::PrismSurfaceCause::Unsupported { actual, .. }) if actual == "rational retained source Bézier"));
+    }
+    #[test]
+    fn alternate_and_fixed_line_metadata_keep_native_capture_policy() {
+        assert!(no_alternate("authored evaluator", false).is_ok());
+        let Err(cause) = no_alternate("authored evaluator", true) else { panic!("expected alternate evaluator refusal"); };
+        assert!(matches!(*cause, AnnularBindingCause::Capture(super::super::super::super::surface_charts::PrismSurfaceCause::AlternateEvaluator { representation: "authored evaluator" })));
+        let curve = CapturedMetricCurve::Line { origin:[0.,0.], direction:[1.,0.] };
+        assert_eq!(captured_count(&curve).unwrap_or_else(|_| panic!("fixed line descriptor")),0);
+    }
+}
