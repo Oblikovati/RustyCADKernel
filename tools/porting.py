@@ -9,6 +9,8 @@ import re
 import subprocess
 import sys
 from api_inventory_status import compiler_status_lines, current_workspace_digest
+from api_inventory.inputs import JSONObject, object_rows, text_field
+from legacy_status import legacy_status_lines
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "porting/baseline.json"
@@ -121,36 +123,33 @@ def snapshot(source):
     }
 
 
-def status():
+def _source_inventory_lines(inventory: JSONObject) -> list[str]:
+    toolkits = object_rows(inventory.get("toolkits"), "toolkits")
+    counts = collections.Counter(text_field(t, "module") for t in toolkits)
+    lines = [f"{module}: {count} toolkits" for module, count in counts.items()]
+    lines.extend(
+        [
+            f"Total: {len(toolkits)} toolkits; {sum(len(t['packages']) for t in toolkits)} packages",
+            f"Recursive source header candidates (not the installed API boundary): {sum(len(t['header_candidates']) for t in toolkits)}",
+            f"GoogleTest source files: {sum(len(t['gtest_sources']) for t in toolkits)}",
+            f"GoogleTest declaration candidates: {sum(len(t['gtest_declaration_candidates']) for t in toolkits)}",
+            f"DRAW case candidates: {len(inventory['draw_case_candidates'])}",
+            f"All regression files (including support): {len(inventory['upstream_test_files'])}",
+        ]
+    )
+    return lines
+
+
+def status() -> None:
     inventory = json.loads(INVENTORY.read_text())
     ledger = json.loads((ROOT / "porting/parity.json").read_text())
-    counts = collections.Counter(t["module"] for t in inventory["toolkits"])
-    for module, count in counts.items():
-        print(f"{module}: {count} toolkits")
+    for line in _source_inventory_lines(inventory):
+        print(line)
     print(
-        f"Total: {len(inventory['toolkits'])} toolkits; "
-        f"{sum(len(t['packages']) for t in inventory['toolkits'])} packages"
+        f"API ledger rows: {len(ledger['api'])}; test ledger rows: {len(ledger['tests'])}"
     )
-    print(
-        f"Recursive source header candidates (not the installed API boundary): {sum(len(t['header_candidates']) for t in inventory['toolkits'])}"
-    )
-    print(
-        f"GoogleTest source files: {sum(len(t['gtest_sources']) for t in inventory['toolkits'])}"
-    )
-    print(
-        f"GoogleTest declaration candidates: {sum(len(t['gtest_declaration_candidates']) for t in inventory['toolkits'])}"
-    )
-    print(f"DRAW case candidates: {len(inventory['draw_case_candidates'])}")
-    print(
-        f"All regression files (including support): {len(inventory['upstream_test_files'])}"
-    )
-    print(f"API mappings: {len(ledger['api'])}; test mappings: {len(ledger['tests'])}")
-    for toolkit in inventory["toolkits"]:
-        mapped = [row for row in ledger["tests"] if row["toolkit"] == toolkit["name"]]
-        if mapped:
-            print(
-                f"{toolkit['name']}: {len(mapped)}/{len(toolkit['gtest_declaration_candidates'])} GoogleTest declarations mapped (source discovery, not full runtime/DRAW coverage)"
-            )
+    for line in legacy_status_lines(inventory, ledger):
+        print(line)
     for line in compiler_status_lines(ROOT, current_workspace_digest()):
         print(line)
 
