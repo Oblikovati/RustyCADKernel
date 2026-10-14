@@ -45,3 +45,6 @@ mod paired_native_tests;
 
 #[cfg(test)]
 mod paired_domain_tests;
+
+#[cfg(test)]
+mod paired_constant_tests;

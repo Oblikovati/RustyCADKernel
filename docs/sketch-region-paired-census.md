@@ -10,8 +10,10 @@ The existing source-bound callers now receive that attached evidence.
 Every unordered occurrence pair and each canonical self domain remain present
 in deterministic traversal order. The provider owns the actual controls,
 optional rational weights, and captured interval. Each report retains its source
-slots, query mode, requested policy, remaining effective policy, complete root
-and sign evidence, paired-parameter graph, and outward world-error construction.
+slots, query mode, requested policy, remaining effective policy and its actual proof variant. Graph proofs retain
+complete root and sign evidence, paired-parameter graphs and outward world-error
+construction; constant exclusions retain their exact source equation witness
+without fabricated graph or sign execution.
 Only complete reports lend certificates. Complete empty, invalid capture,
 unsupported or inconclusive domains, numerical failure and cancellation remain
 distinct. Same-physical cross-occurrence coincidence is explicitly incomplete;
@@ -53,3 +55,10 @@ vertex incidence, complete canonical identity and separately certified parameter
 and world construction limits. Partition observations and parent membership do
 not supply exhaustive search. Prism chart/injectivity, achieved error, composed
 deletion coverage and application persistent naming remain separate obligations.
+
+Empty source admission preserves `CensusCause::Input(ArrangementCause::Empty)`;
+it does not create a completed healthy body or a vacuous domain certificate.
+An admitted receipt whose occurrence universe has been removed retains missing
+source and exhaustive-domain obligations even when no numerical report exists.
+Exact constant exclusions retain genuine source equations and denominators;
+they supply completed-empty self domains without fabricated graph certificates.

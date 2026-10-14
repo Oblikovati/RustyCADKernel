@@ -61,7 +61,7 @@ fn actual_closed_cubic_self_uses_general_provider_and_retains_remaining_obligati
     );
     assert_remaining(&census);
 }
-fn assert_remaining(census: &BoundaryCensus) {
+pub(super) fn assert_remaining(census: &BoundaryCensus) {
     for gap in [
         CertificationObligation::MappedSplitCorrespondence,
         CertificationObligation::CandidateSearchAndCoverage,
@@ -169,8 +169,8 @@ fn assert_full_graph_evidence(proof: &BezierPairCertificate<'_>) {
             .all(|proof| proof.roots().is_empty())
     );
     assert_eq!(
-        proof.accepted_candidates().len(),
-        proof.candidates().1.roots().len()
+        proof.graph().unwrap().accepted_candidates().len(),
+        proof.graph().unwrap().candidates().1.roots().len()
     );
 }
 

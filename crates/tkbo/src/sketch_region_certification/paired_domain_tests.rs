@@ -13,8 +13,8 @@ fn complete_distinct_empty_retains_original_candidates_excluded_by_actual_trim()
     let census = paired(&shapes);
     let proof = complete_distinct(&census);
     assert_eq!(proof.contact_count(), 0);
-    assert_eq!(proof.candidates().1.roots().len(), 1);
-    assert_eq!(proof.accepted_candidates(), [false]);
+    assert_eq!(proof.graph().unwrap().candidates().1.roots().len(), 1);
+    assert_eq!(proof.graph().unwrap().accepted_candidates(), [false]);
     assert_eq!(
         distinct_record(&census)
             .outcome
