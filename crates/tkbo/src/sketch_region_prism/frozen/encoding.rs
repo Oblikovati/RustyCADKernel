@@ -6,7 +6,7 @@ pub(in crate::sketch_region_prism) use crate::sketch_region_source_conformance::
     curve, numbers, placement, plane, space,
 };
 
-pub(super) fn surface(value: &CapturedPrismSurface, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn surface(value: &CapturedPrismSurface, bytes: &mut Vec<u8>) {
     match value {
         CapturedPrismSurface::Plane(value) => {
             bytes.push(0);

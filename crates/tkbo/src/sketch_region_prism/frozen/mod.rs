@@ -76,6 +76,7 @@ pub(crate) mod ordered_validation;
 pub(crate) mod owned_refusal;
 #[cfg(test)]
 mod owned_refusal_baseline_tests;
+pub(super) use encoding::surface as encode_frozen_surface;
 pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
 #[cfg(test)]
 pub(in crate::sketch_region_prism) mod publication_read_snapshot;

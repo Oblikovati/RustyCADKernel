@@ -30,6 +30,11 @@ impl FrozenPrismProjection {
     pub(crate) fn incidence(&self) -> &super::graph::FrozenGraphIncidence {
         &self.graph
     }
+    /// Borrow captured cyclic order; `projection.wire_traversals()` is absent for V1.
+    pub(crate) fn wire_traversals(&self) -> Option<&[super::traversal::FrozenWireTraversal]> {
+        // ADR0047 must reuse graph traversal: containment children need not be cyclic.
+        self.wire_traversals.as_deref()
+    }
     /// Borrow zero-equality certificates over frozen operands; example: `projection.endpoint_proofs().len()`.
     pub(crate) fn endpoint_proofs(&self) -> &[super::endpoints::FrozenEndpointProof] {
         &self.endpoints

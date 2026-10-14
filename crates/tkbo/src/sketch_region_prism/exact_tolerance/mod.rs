@@ -48,6 +48,7 @@ mod joined_operand_tests;
 
 mod replay;
 pub(in crate::sketch_region_prism) use replay::cap as encode_stored_tolerance_cap;
+pub(crate) use replay::encode_stored_tolerance_observation;
 mod replay_limits;
 
 #[cfg(test)]
