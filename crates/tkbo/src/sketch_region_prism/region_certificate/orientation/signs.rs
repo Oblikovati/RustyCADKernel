@@ -11,14 +11,16 @@ pub(super) fn occurrence_sign(key: &PartitionOccurrenceIdentity) -> OrientationC
         }),
     }
 }
-pub(super) fn orientation(sign: i8) -> Orientation {
+/// Convert an already admitted unit sign; `orientation(-1)` is reversed.
+pub(in crate::sketch_region_prism) fn orientation(sign: i8) -> Orientation {
     match sign {
         1 => Orientation::Forward,
         -1 => Orientation::Reversed,
         _ => unreachable!("internal sign {sign}; expected -1 or 1"),
     }
 }
-pub(super) fn determinant_sign(
+/// Read the exact retained determinant; `determinant_sign(value)` refuses zero.
+pub(in crate::sketch_region_prism) fn determinant_sign(
     value: &rustycad_tkmath::predicates::roots::DyadicBound,
 ) -> OrientationCheck<i8> {
     use std::cmp::Ordering;
