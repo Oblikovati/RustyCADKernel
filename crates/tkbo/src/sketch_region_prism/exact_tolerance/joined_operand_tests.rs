@@ -51,20 +51,7 @@ fn missing_duplicate_and_stale_raw_body_contexts_refuse_before_reuse() {
         .cloned()
         .collect();
     assert!(endpoint_check(&join, &raw).is_err());
-    let mut duplicate = join.raw_vertices().to_vec();
-    duplicate.push(chosen[0].clone());
-    assert!(endpoint_check(&join, &duplicate).is_err());
-    let mut stale = join.raw_vertices().to_vec();
-    stale
-        .iter_mut()
-        .find(|row| row.occurrence == key)
-        .unwrap()
-        .placement
-        .origin[0] += 1.;
-    assert!(matches!(
-        endpoint_check(&join, &stale),
-        Err(JoinedConformanceCause::Mismatch { .. })
-    ));
+    duplicate_and_stale(&join, chosen[0]);
 }
 #[test]
 fn physical_endpoint_reuse_requires_raw_local_bit_equality() {
@@ -117,6 +104,31 @@ fn semantic_closure_missing_duplicate_orientation_and_stale_operands_refuse() {
     raw[index] = join.raw_closure_points()[index].clone();
     raw[index].orientation = Orientation::Forward;
     assert!(super::joined_closures::closure_rows(&raw, "original").is_err());
+    missing_closure(raw, index);
+}
+
+fn duplicate_and_stale(join: &JoinedPrismProof, chosen: &JoinedVertexOperand) {
+    let key = chosen.occurrence.clone();
+    let mut duplicate = join.raw_vertices().to_vec();
+    duplicate.push(chosen.clone());
+    assert!(endpoint_check(join, &duplicate).is_err());
+    let mut stale = join.raw_vertices().to_vec();
+    stale
+        .iter_mut()
+        .find(|row| row.occurrence == key)
+        .unwrap()
+        .placement
+        .origin[0] += 1.;
+    assert!(matches!(
+        endpoint_check(join, &stale),
+        Err(JoinedConformanceCause::Mismatch { .. })
+    ));
+}
+
+fn missing_closure(
+    mut raw: Vec<crate::sketch_region_prism::frozen::proof_join::JoinedClosurePointOperand>,
+    index: usize,
+) {
     raw.remove(index);
     assert!(matches!(
         super::joined_closures::closure_rows(&raw, "original"),

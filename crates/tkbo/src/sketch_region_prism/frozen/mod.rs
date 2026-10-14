@@ -70,3 +70,4 @@ mod ordered_validation_baseline_tests;
 
 pub(crate) mod joined_orientation;
 pub(crate) mod ordered_validation;
+pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};

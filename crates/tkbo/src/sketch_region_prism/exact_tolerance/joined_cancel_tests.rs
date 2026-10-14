@@ -52,20 +52,25 @@ fn every_metadata_callback_cancels_with_exact_completed_prefix() {
             .is_ok()
     );
     for stop in 1..=baseline.phases.len() {
-        let mut progress = StopTolerance {
-            stop,
-            ..Default::default()
-        };
-        let refusal = certify_joined_prism_tolerances(
-            &join,
-            &proof,
-            StoredToleranceCap::NoLimit,
-            &mut progress,
-        )
-        .err()
-        .unwrap();
-        assert_eq!(refusal.classification(), JoinedEvidenceClass::Cancelled);
-        assert_eq!(progress.phases, baseline.phases[..stop]);
-        assert_eq!(refusal.metadata.len(), stop.saturating_sub(2).min(8));
+        assert_metadata_stop(&join, &proof, &baseline, stop);
     }
+}
+
+fn assert_metadata_stop(
+    join: &JoinedPrismProof,
+    proof: &JoinedPrismConformance,
+    baseline: &StopTolerance,
+    stop: usize,
+) {
+    let mut progress = StopTolerance {
+        stop,
+        ..Default::default()
+    };
+    let refusal =
+        certify_joined_prism_tolerances(join, proof, StoredToleranceCap::NoLimit, &mut progress)
+            .err()
+            .unwrap();
+    assert_eq!(refusal.classification(), JoinedEvidenceClass::Cancelled);
+    assert_eq!(progress.phases, baseline.phases[..stop]);
+    assert_eq!(refusal.metadata.len(), stop.saturating_sub(2).min(8));
 }

@@ -23,10 +23,10 @@ impl JoinedConformanceFailure {
 }
 
 fn endpoint_class(cause: &ExactEndpointFailure) -> JoinedEvidenceClass {
-    if let ExactEndpointFailure::Residual(report) = cause {
-        if matches!(report.decision, Ok(ResidualDecision::Exceeds { .. })) {
-            return JoinedEvidenceClass::Failed;
-        }
+    if let ExactEndpointFailure::Residual(report) = cause
+        && matches!(report.decision, Ok(ResidualDecision::Exceeds { .. }))
+    {
+        return JoinedEvidenceClass::Failed;
     }
     JoinedEvidenceClass::Incomplete
 }

@@ -45,3 +45,12 @@ mod joined_test_support;
 mod joined_metadata_tests;
 #[cfg(test)]
 mod joined_operand_tests;
+
+mod replay;
+mod replay_limits;
+
+#[cfg(test)]
+mod joined_replay_tests;
+
+#[cfg(test)]
+mod joined_failure_tests;

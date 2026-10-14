@@ -11,6 +11,18 @@ pub(super) fn certify_projection_frames(
     work: &mut ConformanceWork,
     progress: &mut impl JoinedConformanceProgress,
 ) -> ConformanceCheck {
+    occurrence_frames(projection, work, progress)?;
+    curve_frames(projection, work, progress)?;
+    for face in projection.faces() {
+        face_frames(face, work, progress)?;
+    }
+    Ok(())
+}
+fn occurrence_frames(
+    projection: &FrozenPrismProjection,
+    work: &mut ConformanceWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> ConformanceCheck {
     for occurrence in projection.uses() {
         work.occurrence = Some(occurrence.key.clone());
         let entity =
@@ -24,6 +36,13 @@ pub(super) fn certify_projection_frames(
         )?;
     }
     work.occurrence = None;
+    Ok(())
+}
+fn curve_frames(
+    projection: &FrozenPrismProjection,
+    work: &mut ConformanceWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> ConformanceCheck {
     for node in projection.nodes() {
         if let Some(curve) = &node.curve {
             append_frame(
@@ -35,9 +54,6 @@ pub(super) fn certify_projection_frames(
             )?;
         }
     }
-    for face in projection.faces() {
-        face_frames(face, work, progress)?;
-    }
     Ok(())
 }
 
@@ -46,28 +62,7 @@ fn face_frames(
     work: &mut ConformanceWork,
     progress: &mut impl JoinedConformanceProgress,
 ) -> ConformanceCheck {
-    let actual = match &face.surface {
-        CapturedPrismSurface::Plane(plane) => plane.placement,
-        CapturedPrismSurface::Extrusion { placement, .. } => *placement,
-    };
-    append_frame(
-        face.key,
-        actual,
-        JoinedFrameRole::FaceRepresentation,
-        work,
-        progress,
-    )?;
-    let source = match &face.source {
-        CapturedChartSource::Cap(plane) => plane.placement,
-        CapturedChartSource::Side(curve) => curve.placement,
-    };
-    append_frame(
-        face.key,
-        source,
-        JoinedFrameRole::SourceRepresentation,
-        work,
-        progress,
-    )?;
+    face_support_frames(face, work, progress)?;
     for trim in &face.trims {
         work.occurrence = Some(trim.occurrence.clone());
         append_frame(
@@ -80,6 +75,31 @@ fn face_frames(
     }
     work.occurrence = None;
     Ok(())
+}
+fn face_support_frames(
+    face: &FrozenPrismFace,
+    work: &mut ConformanceWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> ConformanceCheck {
+    let (actual, source) = face_placements(face);
+    for (placement, role) in [
+        (actual, JoinedFrameRole::FaceRepresentation),
+        (source, JoinedFrameRole::SourceRepresentation),
+    ] {
+        append_frame(face.key, placement, role, work, progress)?;
+    }
+    Ok(())
+}
+fn face_placements(face: &FrozenPrismFace) -> (MetricEmbedding<3>, MetricEmbedding<3>) {
+    let actual = match &face.surface {
+        CapturedPrismSurface::Plane(plane) => plane.placement,
+        CapturedPrismSurface::Extrusion { placement, .. } => *placement,
+    };
+    let source = match &face.source {
+        CapturedChartSource::Cap(plane) => plane.placement,
+        CapturedChartSource::Side(curve) => curve.placement,
+    };
+    (actual, source)
 }
 
 fn append_frame(

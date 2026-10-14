@@ -15,20 +15,21 @@ pub(super) fn certify_source_closures(
         join.raw_closure_points().len(),
         12,
     )?;
-    for stage in [
-        "original",
-        "census",
-        "partition",
-        "selected",
-        "complement",
-        "copied",
-    ] {
+    for stage in CLOSURE_STAGES {
         work.poll(progress)?;
         let rows = closure_rows(join.raw_closure_points(), stage)?;
         append_closure(join, rows, work)?;
     }
     Ok(())
 }
+const CLOSURE_STAGES: [&str; 6] = [
+    "original",
+    "census",
+    "partition",
+    "selected",
+    "complement",
+    "copied",
+];
 
 pub(super) fn closure_rows<'a>(
     raw: &'a [JoinedClosurePointOperand],
@@ -42,19 +43,21 @@ pub(super) fn closure_rows<'a>(
             expected: 2,
         });
     }
-    let forward = rows
-        .iter()
-        .find(|row| row.orientation == Orientation::Forward);
-    let reversed = rows
-        .iter()
-        .find(|row| row.orientation == Orientation::Reversed);
-    let (Some(forward), Some(reversed)) = (forward, reversed) else {
-        return Err(missing(
-            "one forward and one reversed semantic closure context",
-        ));
-    };
+    let forward = oriented_closure(&rows, Orientation::Forward)?;
+    let reversed = oriented_closure(&rows, Orientation::Reversed)?;
     equivalent_closures(forward, reversed)?;
-    Ok([*forward, *reversed])
+    Ok([forward, reversed])
+}
+fn oriented_closure<'a>(
+    rows: &[&'a JoinedClosurePointOperand],
+    orientation: Orientation,
+) -> ConformanceCheck<&'a JoinedClosurePointOperand> {
+    rows.iter()
+        .copied()
+        .find(|row| row.orientation == orientation)
+        .ok_or(missing(
+            "one forward and one reversed semantic closure context",
+        ))
 }
 
 fn equivalent_closures(
@@ -81,8 +84,23 @@ fn append_closure(
     work: &mut ConformanceWork,
 ) -> ConformanceCheck {
     let raw = rows[0];
+    let certificate = closure_certificate(join, raw)?;
+    work.evidence.closures.push(JoinedClosureEvidence {
+        contact: raw.contact,
+        original: raw.original.clone(),
+        stage: raw.stage,
+        orientations: rows.iter().map(|row| row.orientation).collect(),
+        local_point: raw.local_point,
+        certificate,
+    });
+    Ok(())
+}
+fn closure_certificate(
+    join: &JoinedPrismProof,
+    raw: &JoinedClosurePointOperand,
+) -> ConformanceCheck<super::scalar::ExactEndpointCertificate> {
     let query = join.closure_query();
-    let certificate = certify_exact_source_point(
+    certify_exact_source_point(
         query.source_query(),
         query.bounds.clone(),
         raw.local_point,
@@ -93,14 +111,5 @@ fn append_closure(
         original: raw.original.clone(),
         stage: raw.stage,
         cause: Box::new(cause),
-    })?;
-    work.evidence.closures.push(JoinedClosureEvidence {
-        contact: raw.contact,
-        original: raw.original.clone(),
-        stage: raw.stage,
-        orientations: rows.iter().map(|row| row.orientation).collect(),
-        local_point: raw.local_point,
-        certificate,
-    });
-    Ok(())
+    })
 }
