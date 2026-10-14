@@ -331,3 +331,27 @@ The user requested finishing the current batch and a handoff. Broader work is
 paused; [the handoff](handoff-kernel-10-2026-10-14.json) records exact revisions,
 remaining work and preserved older worktrees. No follow-on porting task, PR, push
 or release was performed during this wrap-up.
+
+### Annular history, publication and owned preparation supplement (2026-10-15)
+
+A worktree branch (not yet integrated or root-gated) adds, on top of `6f158ea74`:
+
+- ADR0058 V2 complete annular history issuer: six original directed uses
+  continued through source-specific copies and native partition queries,
+  continuation-derived partition parents, all three authored candidates with
+  sealed dispositions, captured flat parents bound to native sweep rows, two
+  separate intermediate wire retirements, certified-empty original deletion.
+- ADR0060 named annular publication: one join, ordered validation, V2 history
+  and four-face measures bound to one source; terminal callback before the
+  callback-free source rebind and history reprojection. Closed-form cap areas
+  (9/5) and sweep magnitude (18/5) lie inside the certified enclosures.
+- ADR0061 owned annular preparation from owned coefficients through the shared
+  census/partition/copy/contact/prism pipelines; it publishes end to end.
+- ADR0056 follow-up: complete publication history findings are owned.
+
+Still open: physical-volume certification and semantic naming for the
+annulus, owned projection of annular publication/preparation causes and of
+resolution/preparation/partial-transaction families, a public owned outcome,
+general analytic profiles beyond two nested closed polynomial loops,
+persistent split identity, consumer edit/undo/reopen/display, sanitizer and
+owner release/package/performance gates. Nothing here closes Kernel #10.
