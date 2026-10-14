@@ -63,6 +63,8 @@ pub mod legacy_top_ope_brep_ds_build_tool;
 pub mod point_explorer;
 #[path = "../top_ope_brep_build.rs"]
 pub mod top_ope_brep_build;
+#[path = "../top_ope_brep_build_parts.rs"]
+pub mod top_ope_brep_build_parts;
 #[path = "../top_ope_brep_ds_build_tool.rs"]
 pub mod top_ope_brep_ds_build_tool;
 #[path = "../top_ope_brep_ds_interference.rs"]
