@@ -15,14 +15,14 @@ pub(super) fn current_points(
     receipt: &PrismReceipt,
 ) -> RegionCheck<Vec<ClosurePointEvidence>> {
     let mut evidence = Vec::new();
-    for (stage, shape) in current_closure_vertices(bridge, sources, receipt)? {
+    visit_current_closure_vertices(bridge, sources, receipt, |stage, shape| {
         let context = ClosurePointContext {
             stage,
             occurrence: PartitionOccurrenceIdentity::capture(&shape),
         };
         bind_partition_point(bridge, &context)?;
-        append_point(bridge, context, current_coordinates(&shape)?, &mut evidence)?;
-    }
+        append_point(bridge, context, current_coordinates(&shape)?, &mut evidence)
+    })?;
     Ok(evidence)
 }
 /// Reuse the actual directed closure census; e.g. `current_closure_vertices(bridge, sources, receipt)`.
@@ -40,6 +40,20 @@ pub(crate) fn current_closure_vertices(
         );
     }
     Ok(vertices)
+}
+fn visit_current_closure_vertices(
+    bridge: &PairedContactTransaction,
+    sources: &[ArrangementSource<'_>],
+    receipt: &PrismReceipt,
+    mut visit: impl FnMut(ClosurePointStage, Shape) -> RegionCheck,
+) -> RegionCheck {
+    // Keep legacy first-failure precedence: measure one stage before enumerating the next.
+    for (stage, root) in current_roots(bridge, sources, receipt)? {
+        for shape in actual_vertices(root)? {
+            visit(stage, shape)?;
+        }
+    }
+    Ok(())
 }
 fn current_roots<'a>(
     bridge: &'a PairedContactTransaction,
