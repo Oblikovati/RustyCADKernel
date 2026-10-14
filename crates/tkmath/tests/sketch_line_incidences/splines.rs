@@ -7,6 +7,47 @@ use SketchLinePosition::{AtEnd, AtStart, Interior};
 const SEGMENT: SketchLineDomain = SketchLineDomain::Segment;
 
 #[test]
+fn closed_wrapped_spline_seam_and_self_crossing_form_one_exact_tie() {
+    // Wrapped uniform cubic: both ends are (A + 4B + C)/6 = (0, 0), on the line.
+    // The poles are symmetric about the origin, so the curve also crosses itself there.
+    let poles = [
+        [-6., 0.],
+        [0., 0.],
+        [6., 0.],
+        [4., 3.],
+        [-4., -3.],
+        [-6., 0.],
+        [0., 0.],
+        [6., 0.],
+    ];
+    let knots: Vec<f64> = (0..12).map(f64::from).collect();
+    let curve = spline(3, &poles, &knots, [3., 8.]);
+    let report = certify(
+        source([[-10., 0.], [10., 0.]], SEGMENT),
+        &[target(5, curve)],
+    );
+    let seam = report
+        .ordered()
+        .iter()
+        .find(|group| group.members().len() == 3)
+        .unwrap_or_else(|| panic!("the seam contacts share one exact group: {report:#?}"));
+    let ends: Vec<_> = seam
+        .members()
+        .iter()
+        .map(|member| summary(report.contact(*member)))
+        .collect();
+    assert_eq!(
+        ends,
+        [
+            (5, Interior, AtStart, TargetEnd, [None, Some(3)]),
+            (5, Interior, Interior, Crossing, [Some(1), Some(1)]),
+            (5, Interior, AtEnd, TargetEnd, [Some(3), None]),
+        ]
+    );
+    assert_exact_point(report.contact(seam.members()[0]), [0., 0.]);
+}
+
+#[test]
 fn inflection_of_a_cubic_is_a_triple_crossing() {
     // Bernstein y controls (-1, 1, -1, 1) expand to (2u - 1)^3; x = 3u.
     let poles = [[0., -1.], [1., 1.], [2., -1.], [3., 1.]];

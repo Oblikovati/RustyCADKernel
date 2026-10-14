@@ -9,6 +9,7 @@ use fixture::*;
 mod conics;
 mod failures;
 mod generated;
+mod isolation;
 mod lines;
 mod ordering;
 mod selection;
