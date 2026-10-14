@@ -3,5 +3,6 @@
 #[cfg(test)]
 mod baseline_tests;
 mod progress;
+mod source;
 mod stage_error;
 mod stages;

@@ -15,6 +15,7 @@ pub(super) struct PublicationStageFailure {
     pub cause: PublicationStageCause,
 }
 pub(super) enum PublicationStageCause {
+    Join(Box<crate::sketch_region_prism::frozen::proof_join::PrismProofJoinFailure>),
     Validation(Box<OrderedPrismValidationFailure>),
     Measures(Box<JoinedPrismMeasureFailure>),
     Binding {
