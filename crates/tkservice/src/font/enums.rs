@@ -16,6 +16,12 @@ pub enum FontFontAspect {
     Italic = 2,
     /// bold+italic aspect.
     BoldItalic = 3,
+    /// Unnamed native value `-4` retained from the C++ enumeration.
+    NativeMinus4 = -4,
+    /// Unnamed native value `-3` retained from the C++ enumeration.
+    NativeMinus3 = -3,
+    /// Unnamed native value `-2` retained from the C++ enumeration.
+    NativeMinus2 = -2,
 }
 impl FontFontAspect {
     /// Obsolete alias `Font_FA_Undefined` of [`Self::Undefined`].

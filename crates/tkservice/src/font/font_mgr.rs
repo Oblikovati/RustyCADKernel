@@ -86,6 +86,8 @@ impl FontFontMgr {
             FontFontAspect::Bold => "bold",
             FontFontAspect::Italic => "italic",
             FontFontAspect::BoldItalic => "bold-italic",
+            // Pinned Font_FontMgr.hxx preserves its post-switch invalid diagnostic.
+            _ => "invalid",
         }
     }
     /// Whether fonts fall back to other fonts for unsupported Unicode subsets.

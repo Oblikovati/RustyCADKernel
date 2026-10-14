@@ -25,3 +25,6 @@ pub use two_colors::{
     MeshVSColorOutputs, MeshVSTwoColors, bind_two_colors, extract_color, extract_colors,
     extract_colors_into,
 };
+
+pub mod tool;
+pub use tool::MeshVSTool;

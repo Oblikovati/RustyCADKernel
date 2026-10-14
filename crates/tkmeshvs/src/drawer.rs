@@ -6,6 +6,7 @@ mod source;
 mod storage;
 pub use copying::MeshVSDrawerBaseType;
 use rustycad_tkernel::standard::StandardTransient;
+pub(crate) use source::registered_drawer;
 pub use source::{MeshVSDrawerSource, meshvs_drawer_assign};
 use storage::DrawerMaps;
 /// Genuine native drawer state; `let drawer=MeshVSDrawer::default(); drawer.set_integer(7,42)`.

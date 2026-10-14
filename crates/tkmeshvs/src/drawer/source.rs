@@ -2,16 +2,17 @@
 //! Derived Assign dispatch uses the actual owned base and the original caller slot.
 use super::MeshVSDrawer;
 use rustycad_tkernel::standard::{
-    Handle, HandleObserver, HandleReference, ProjectedHandleReference, RuntimeType, RuntimeTyped,
-    Transient,
+    Failure, Handle, HandleObserver, HandleReference, ProjectedHandleReference, RuntimeType,
+    RuntimeTyped, Transient, raise_native_failure,
 };
 /// Extend actual native storage; `source.drawer_base().set_integer(7,42)`.
 pub trait MeshVSDrawerSource: Transient {
-    /// Return the actual inherited drawer; `source.drawer_base()` never copies maps.
+    /// Extension accessor; `source.drawer_base()` does not control qualified native operations.
     fn drawer_base(&self) -> &MeshVSDrawer;
     /// Native virtual Assign; `source.assign(&other)` preserves borrowed argument counts.
     fn assign(&self, other: &dyn HandleReference<dyn MeshVSDrawerSource>) {
-        meshvs_drawer_assign(self.drawer_base(), other);
+        let actual = raise_native_failure(registered_drawer(self));
+        meshvs_drawer_assign(actual, other);
     }
 }
 impl MeshVSDrawerSource for MeshVSDrawer {
@@ -31,7 +32,7 @@ impl RuntimeTyped for dyn MeshVSDrawerSource {
 impl std::ops::Deref for dyn MeshVSDrawerSource {
     type Target = MeshVSDrawer;
     fn deref(&self) -> &MeshVSDrawer {
-        self.drawer_base()
+        raise_native_failure(registered_drawer(self))
     }
 }
 impl HandleReference<dyn MeshVSDrawerSource> for Handle<MeshVSDrawer> {
@@ -78,9 +79,23 @@ fn assign_channel<T: Clone>(
     let Some(source) = observed.get() else {
         return;
     };
-    let source = source.drawer_base();
+    let source = raise_native_failure(registered_drawer(source));
     if std::ptr::eq(target, source) {
         return;
     }
     select(target).write().assign(&select(source).read());
+}
+
+/// Qualified native storage access must not dispatch the Rust extension accessor.
+pub(crate) fn registered_drawer<T: Transient + ?Sized>(
+    source: &T,
+) -> Result<&MeshVSDrawer, Failure> {
+    source
+        .project(std::any::TypeId::of::<MeshVSDrawer>())
+        .and_then(|actual| actual.downcast_ref::<MeshVSDrawer>())
+        .ok_or_else(|| {
+            rustycad_tkernel::standard::exceptions::program_error(
+                "MeshVS_Drawer base=missing: expected actual registered MeshVS_Drawer subobject",
+            )
+        })
 }

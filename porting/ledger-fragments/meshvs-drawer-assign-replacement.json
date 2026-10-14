@@ -1,0 +1,20 @@
+[
+  {
+    "upstream_id": "MeshVS_Drawer::Assign",
+    "toolkit": "TKMeshVS",
+    "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_Drawer.hxx",
+    "source_sha256": "e01979a20c3ec8e16301a38aa5a2333d03fcce3c4b880e777d1402b4fb2b1642",
+    "cpp_declaration_id": "97b39393738040f8bc0e6f9b717487e5b128a964863e4f34824e7092001b7588",
+    "rust_item": "martensite_tkmeshvs::MeshVSDrawerSource::assign",
+    "status": "implemented",
+    "rust_declaration_selectors": [
+      {
+        "path": "martensite_tkmeshvs::MeshVSDrawerSource::assign",
+        "declaration_sha256": "6b0fff6e1cdbcd73ffe58fcf861eccc5c349399cfe0657f6dfdf63d9a9cdd642",
+        "impl_context": null
+      }
+    ],
+    "notes": "Martensite MeshVS actual typed drawer storage, pinned17row native two-repeat oracle and Rust-only replay including value copies and derived Assign failure/count ordering. Descriptor-field RTTI remains required/open; no whole toolkit/rendering claim. See docs/meshvs-drawer.md. Parity gap audit2026-10-14: Qualified native map assignment reads original inherited storage directly. Current Rust default/copy path calls overridable drawer_base and can run an extra callback or use alternate maps. Registered-base follow-up is not integrated. See porting/runtime-evidence/qualified-drawer-capping-gaps-2026-10-14/receipt.json. Qualified-base correction: actual registered MeshVS_Drawer projection replaces the extension accessor for receiver and source. Three-row derived native control repeated exactly, red-before Rust accessor-redirection regressions and current-source/extracted replay prove original maps, zero accessor callbacks and actual counts. See porting/runtime-evidence/meshvs-tool-projection-2026-10-14; historical gap receipt retained. Full Drawer descriptor/virtualDelete class scope remains open.",
+    "rust_kind": "function"
+  }
+]
