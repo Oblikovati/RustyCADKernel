@@ -1,0 +1,11 @@
+{
+  "detected": "deterministic archive mtimes allowed stale reused benchmark executable; final-extracted old6-test benchmark excluded from final-source acceptance",
+  "original_dependency_archive_source_differences": {
+    "martensite-vulkan-0.2.7.crate": [
+      "examples/ordered_stencil_performance.rs"
+    ]
+  },
+  "repair": "cargo clean -p martensite-vulkan inside extracted workspace; fresh build and full runtimes required",
+  "preserved_prior_logs": "logs/final-extracted-*; superseded for final-source acceptance",
+  "repair_result": "fresh-extracted717 tests/75executables both26,18stencil tests both25; explicitly7 benchmark tests inclCLI; all0"
+}
