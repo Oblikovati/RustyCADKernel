@@ -47,3 +47,6 @@ fn complete_inspection(
 
 #[cfg(test)]
 mod tests;
+
+mod complete;
+pub(crate) use complete::*;

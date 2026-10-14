@@ -71,3 +71,10 @@ fn assert_each_cancel_poll(
         );
     }
 }
+
+#[test]
+fn additive_complete_measurements_preserve_subset_v1_baseline() {
+    // ADR0031 retains the ADR0027 scalar contract and explicit pending side/total rows.
+    let expected = include_str!("subset-v1.json").trim_end();
+    assert_eq!(portable_receipt(), expected);
+}
