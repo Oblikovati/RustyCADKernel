@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Every actual face and trim is keyed by its full ancestry, including repeated seam uses.
 use super::super::super::{contexts::body_contexts, surface_charts::PrismTrimRole};
-use super::super::current_binding::{BoundPrismChart, PrismBindingFailure, capture_actual_charts_guarded};
+use super::super::current_binding::{
+    BoundPrismChart, PrismBindingFailure, capture_actual_charts_guarded,
+};
 use super::*;
 
 pub(super) fn capture(
@@ -27,7 +29,9 @@ pub(super) fn capture_guarded(
         }
         Ok(())
     });
-    if let Some(cause) = refusal { return Err(cause); }
+    if let Some(cause) = refusal {
+        return Err(cause);
+    }
     let actual = actual.map_err(|cause| Box::new(AnnularBindingCause::Chart(Box::new(cause))))?;
     preflight()?;
     let diagnostic = receipt

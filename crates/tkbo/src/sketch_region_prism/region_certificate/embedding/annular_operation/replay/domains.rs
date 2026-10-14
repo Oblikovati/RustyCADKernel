@@ -99,20 +99,37 @@ fn bound_trim_owner<'a>(
     value: &AnnularAuthoredTrim,
     binding: &'a AnnularPrismBinding,
 ) -> ReplayCheck<&'a AnnularBoundChart> {
-    let mut matches = binding.charts().iter().filter(|chart| {
-        chart.trims.contains(&value.identity)
-            && chart.chart.captured.trims.iter().any(|trim| {
-                super::super::super::trim_incidence::retain_trim(&chart.chart, trim)
-                    == value.operand
-            })
-    });
-    let first = matches.next();
-    if first.is_none() || matches.next().is_some() {
+    let matches: Vec<_> = binding
+        .charts()
+        .iter()
+        .flat_map(|chart| {
+            chart
+                .chart
+                .captured
+                .trims
+                .iter()
+                .filter(move |trim| same_bound_trim(value, chart, trim))
+                .map(move |_| chart)
+        })
+        .collect();
+    let [owner] = matches.as_slice() else {
         return Err(Box::new(AnnularBindingCause::Count {
             required: "one full-context source/face/trim/parent operand in binding replay",
-            actual: usize::from(first.is_some()) * 2,
+            actual: matches.len(),
             expected: 1,
         }));
-    }
-    Ok(first.expect("checked unique owned trim"))
+    };
+    Ok(*owner)
+}
+fn same_bound_trim(
+    value: &AnnularAuthoredTrim,
+    chart: &AnnularBoundChart,
+    trim: &crate::sketch_region_prism::surface_charts::CapturedPrismTrim,
+) -> bool {
+    // Kernel #10: both cap rims share a role; identity and operands must select the same row.
+    chart.trims.contains(&value.identity)
+        && trim.source == value.identity.source.occurrence
+        && trim.output == value.identity.output.occurrence
+        && trim.role == value.identity.role
+        && super::super::super::trim_incidence::retain_trim(&chart.chart, trim) == value.operand
 }

@@ -197,7 +197,9 @@ fn physical_incidence(rows: &[RegionObservedContext], bytes: &mut Vec<u8>) {
 }
 
 fn hierarchy(value: &AnnularHierarchyBudget, bytes: &mut Vec<u8>) {
-    for fixed in [3_u64, 9, 3, 9, 5, 48] { bytes.extend(fixed.to_le_bytes()); }
+    for fixed in [3_u64, 9, 3, 9, 5, 48] {
+        bytes.extend(fixed.to_le_bytes());
+    }
     bytes.extend((value.maximum_retained_units as u64).to_le_bytes());
     bytes.extend((value.retained_units as u64).to_le_bytes());
     for root in value.roots {
