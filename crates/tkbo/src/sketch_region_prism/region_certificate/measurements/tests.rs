@@ -66,7 +66,7 @@ fn scalar_inspection_owns_send_sync_captures() {
 #[path = "tests/history.rs"]
 pub(in crate::sketch_region_prism::region_certificate) mod history_tests;
 #[path = "tests/mutation.rs"]
-pub(in crate::sketch_region_prism::region_certificate) mod mutation_tests;
+pub(in crate::sketch_region_prism) mod mutation_tests;
 
 fn measurement_attempt(
     bridge: &PairedContactTransaction,
@@ -89,4 +89,4 @@ fn assert_hypothesis(error: PrismMeasureFailure, expected: &str) {
     assert_eq!(name, expected);
 }
 #[path = "tests/complete.rs"]
-mod complete_tests;
+pub(in crate::sketch_region_prism) mod complete_tests;
