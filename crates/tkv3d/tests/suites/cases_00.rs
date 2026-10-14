@@ -61,6 +61,8 @@ pub mod ais_rubber_band_subclass;
 pub mod ais_selection;
 #[path = "../ais_selection_actions_test.rs"]
 pub mod ais_selection_actions_test;
+#[path = "../ais_shape.rs"]
+pub mod ais_shape;
 #[path = "../ais_text_label.rs"]
 pub mod ais_text_label;
 #[path = "../ais_trihedron.rs"]

@@ -1,5 +1,10 @@
 // Shape-family registrations stay in the AIS namespace; leaf and parent interfaces share native RTTI.
 mod shape;
+mod shape_object;
+pub use shape_object::{
+    AisShape, AisShapeParameters, ais_shape_compute, ais_shape_compute_hlr,
+    ais_shape_compute_hlr_presentation, ais_shape_dump_json, ais_shape_selection_mode,
+};
 mod textured_shape;
 mod textured_shape_file_ref;
 mod textured_shape_mapping;

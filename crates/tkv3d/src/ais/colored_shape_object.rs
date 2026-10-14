@@ -71,6 +71,15 @@ impl PrsMgrPresentableObject for AisColoredShape {
         // Native invalidation flags belong to this inherited actual parent.
         &self.base.shape.interactive.presentable
     }
+    fn compute_hlr(
+        &self,
+        projector: &Handle<rustycad_tkservice::graphic3d::Graphic3dCamera>,
+        trsf: &Handle<rustycad_tkmath::toploc::Datum3>,
+        prs: &Handle<dyn rustycad_tkservice::graphic3d::Graphic3dStructureSource>,
+    ) -> Result<(), Failure> {
+        // AIS_ColoredShape inherits the AIS_Shape hidden line presentation.
+        super::ais_shape_compute_hlr(self, projector, trsf, prs)
+    }
     fn accept_display_mode(&self, mode: i32) -> bool {
         // The genuine inherited AIS_Shape predicate includes modes zero through two.
         (0..=2).contains(&mode)
