@@ -1,0 +1,36 @@
+{
+  "source": "41b0250edac2e374892393594f055efe12a0800c",
+  "status": "review checkpoint; actual complete body and final toolkit gate pending",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "jobs": 2,
+  "focused_tests": 26,
+  "strict_all_target_all_feature_clippy": true,
+  "fmt": true,
+  "tkbo_and_workspace_manifest_hashes": 1223,
+  "bookends_equal": true,
+  "symbolic_partial_row_replay": {
+    "bytes": 11672,
+    "sha256": "5467f12ce3ddab08422e0462a8201d638dea184500ebeb920a0ffa7074112e30",
+    "two_process_equal": true,
+    "four_thread_vs_serial": "passed in focused suite",
+    "process_peak_rss_kib": [
+      25748,
+      24780
+    ],
+    "cost_scope": "symbolic map plus one member, one vertex use and one face; process overhead included; not a complete accepted body benchmark"
+  },
+  "publication_v1": {
+    "bytes": 2202990,
+    "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107",
+    "unchanged": true
+  },
+  "ownership": "owned row clones plus borrowed read adapters; no per-read coefficient copy; source mutation/drop tests recompute row bytes",
+  "exclusions": [
+    "No production semantic map issuer or actual complete body view created",
+    "No full TKBO suite on this row checkpoint yet",
+    "No actual body copy/allocation timing/capacity measurement yet",
+    "No new TSan run; retained host startup limitation remains",
+    "No public API/export, hole/general-profile admission or release acceptance"
+  ]
+}
