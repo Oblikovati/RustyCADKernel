@@ -1,0 +1,115 @@
+{
+  "source_revision": "61bb40d3ee8075ed019d83f09195bb46de604d61",
+  "supersedes_current_body_acceptance": "receipt.json",
+  "historical_source_evidence_preserved": true,
+  "red": {
+    "production_parent": "eef8bc42ee4c209d350037808a1d20bfc083dd3e",
+    "exit": 101,
+    "regression": "live_copied_curve_mutation_preserves_scalar_history_but_invalidates_current_geometry",
+    "cause": "actual same-TShape curve pole mutation did not invalidate cached descriptor binding",
+    "test_location_note": "Original red test in binding_mutation_tests moved unchanged in intent to live_geometry_tests."
+  },
+  "checks": {
+    "corrected_all_targets_successes": 870,
+    "corrected_all_targets_groups": 5,
+    "final_certification_tests": 44,
+    "final_extracted_lib_successes": 223,
+    "doctests": 35,
+    "clippy": "all-targets -D warnings terminal0",
+    "fmt_discovery_diff": "terminal0",
+    "all31_archives_clean_vcs": true,
+    "changed_members_equal_before_and_after": 26,
+    "source_note": "Full870 run preceded only final read-only inspection regression addition/helper extraction; final focused44 and clean extracted full223 include that sixth added regression. Production bodies identical."
+  },
+  "correction": {
+    "historical_owned_scalar_proof_unchanged": true,
+    "current_brep_recaptured": true,
+    "actual_mutation_tests": [
+      "copied 3D Bezier pole",
+      "stored pcurve line origin",
+      "shared plane/support frame",
+      "missing support Native Failure",
+      "unsupported cylindrical support",
+      "repeated inspection preserves coefficients/topology flags"
+    ],
+    "current_parameter_map_requires_fresh_correspondence": true,
+    "capture_failures_retained_typed": true,
+    "clone_is_not_input_isolation": true
+  },
+  "acceptance": {
+    "request_limited_representation_only": true,
+    "new_cpp_claims": 0,
+    "canonical_contact": false,
+    "dual_axis": false,
+    "world3d_composition": false,
+    "partition": false,
+    "whole_region": false,
+    "gpu_submission_changed": false
+  },
+  "logs": {
+    "live-curve-red.log": {
+      "raw_sha256": "e14f89b501a487a31daf92477bbc0a8ec3dbca89636752b461fc2bf39d3db259",
+      "gzip_sha256": "fea172a348175cf1fe4b4e6a4a67e8bb81610932ed0a370d0e664184eca24d59",
+      "raw_bytes": 2820,
+      "passed": 0,
+      "failed_success_lines": 0,
+      "groups": 0
+    },
+    "live-geometry-green.log": {
+      "raw_sha256": "a8ec5bb6b159dcd43e0836bf009f85edf2e1021f8a19e38625b187e7f8b428a2",
+      "gzip_sha256": "6f3b42c1595db8d0e488a0b91bb52fb12d531281f5b61731526681708fd201a8",
+      "raw_bytes": 6080,
+      "passed": 44,
+      "failed_success_lines": 0,
+      "groups": 1
+    },
+    "corrected-all-targets.log": {
+      "raw_sha256": "44a0917efc5aabda262c5d4f6c54eb73148dc0f12396b5c7bf48cc80bcfebd88",
+      "gzip_sha256": "5ab6eb141f6d100644a0597a44fda1af8c1d3cef97beb24c152f915e9ce0b9e2",
+      "raw_bytes": 87923,
+      "passed": 870,
+      "failed_success_lines": 0,
+      "groups": 5
+    },
+    "corrected-docs.log": {
+      "raw_sha256": "18e5c3d4cd824e7a79f2cdbaa0c1727f096ea30e5b21b78d95b622c1377777fe",
+      "gzip_sha256": "3779a4c6360eebf1631d5f328723806dbb8df5a047720a6ead437a13208cc7f1",
+      "raw_bytes": 4055,
+      "passed": 35,
+      "failed_success_lines": 0,
+      "groups": 1
+    },
+    "corrected-clippy.log": {
+      "raw_sha256": "4a88d5f822a6d83d295bc65b32ac4d202512df15672cadabdaa0342a5dfd92ac",
+      "gzip_sha256": "801926cf4b748b54e55a20838418470411a0cac68a67181a42fafad066057e42",
+      "raw_bytes": 180,
+      "passed": 0,
+      "failed_success_lines": 0,
+      "groups": 0
+    },
+    "corrected-discovery.log": {
+      "raw_sha256": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4",
+      "gzip_sha256": "6f3b066b0b64cca5c7f1ef7b63f8cfba5ae90ede8c417606b16dd4e4f2f5ed0b",
+      "raw_bytes": 63,
+      "passed": 0,
+      "failed_success_lines": 0,
+      "groups": 0
+    },
+    "corrected-package.log": {
+      "raw_sha256": "a35843a8893c837994567d3420ad97cb0f519ba430be44b1b5ea11d389f42194",
+      "gzip_sha256": "886e2715592989a8c8f5976607fd3d55ca804e11df1b0abf09678a66af41831a",
+      "raw_bytes": 10774,
+      "passed": 0,
+      "failed_success_lines": 0,
+      "groups": 0
+    },
+    "corrected-extracted-lib.log": {
+      "raw_sha256": "55410e2220f3da1f5bb5f7ae67e1c7dd237a4269e1ab3adf63574f7e6228b5ef",
+      "gzip_sha256": "d7314d3222c8ce406f6b21840ffa3cd95f81825b334abe4d7cba65b28cf1e3f1",
+      "raw_bytes": 28536,
+      "passed": 223,
+      "failed_success_lines": 0,
+      "groups": 1
+    }
+  }
+}
