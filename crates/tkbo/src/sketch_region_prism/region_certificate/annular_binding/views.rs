@@ -2,7 +2,15 @@
 //! Borrowed views retain the whole region proof; no public constructor grants binding authority.
 use super::*;
 impl AnnularPrismBinding {
-    /// Borrow all classed original copy/image parents and measured mapping work; `binding.parents()`.
+    /// Read the admitted actual traversal census and caller cap; `binding.hierarchy_budget()`.
+    pub(in crate::sketch_region_prism) fn hierarchy_budget(&self) -> &AnnularHierarchyBudget {
+        &self.operands.hierarchy
+    }
+    /// Read aggregate retained structural units, including the prior reservation; `binding.retained_units()`.
+    pub(in crate::sketch_region_prism) fn retained_units(&self) -> usize {
+        self.operands.parents.retained_units
+    }
+    /// Borrow full classed and captured-flat parents plus aggregate structural work; `binding.parents()`.
     pub(in crate::sketch_region_prism) fn parents(&self) -> &AnnularParentCapture {
         &self.operands.parents
     }

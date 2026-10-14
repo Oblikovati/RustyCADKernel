@@ -24,19 +24,13 @@ pub(in crate::sketch_region_prism) fn with_actual<R>(
 ) -> R {
     with_prepared(|request, receipt| run(request, fresh_region(request), receipt))
 }
-pub(in crate::sketch_region_prism) fn fresh_region(
-    request: &TwoLoopRegionRequest<'_, '_>,
-) -> Box<TwoLoopRegionCertificate> {
-    let TwoLoopRegionOutcome::Inspected(region) =
-        inspect_two_loop_region(request, &mut ContinueRegion)
-    else {
+pub(in crate::sketch_region_prism) fn fresh_region(request: &TwoLoopRegionRequest<'_, '_>) -> Box<TwoLoopRegionCertificate> {
+    let TwoLoopRegionOutcome::Inspected(region) = inspect_two_loop_region(request, &mut ContinueRegion) else {
         panic!("expected independent nested region proof");
     };
     region
 }
-pub(super) fn with_prepared<R>(
-    run: impl FnOnce(&TwoLoopRegionRequest<'_, '_>, &mut PrismReceipt) -> R,
-) -> R {
+pub(super) fn with_prepared<R>(run: impl FnOnce(&TwoLoopRegionRequest<'_, '_>, &mut PrismReceipt) -> R) -> R {
     let fixture = TwoLoopFixture::nested();
     let sources = fixture.sources();
     let identities = fixture_bindings::identities(&fixture);

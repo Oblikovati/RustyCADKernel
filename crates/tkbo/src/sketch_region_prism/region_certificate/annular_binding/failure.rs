@@ -39,6 +39,7 @@ pub(in crate::sketch_region_prism) enum AnnularBindingCause<'a> {
         actual: usize,
         expected: usize,
     },
+    BudgetOverflow { quantity: &'static str, retained: usize, increment: usize },
     Cancelled(AnnularBindingStage),
     Callback {
         stage: AnnularBindingStage,
