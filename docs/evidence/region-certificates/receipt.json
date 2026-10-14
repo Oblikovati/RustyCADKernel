@@ -1,0 +1,312 @@
+{
+  "operation": "martensite.source-bound-region-certificate",
+  "behavior_version": 1,
+  "source_revision": "874b704379dfb3cc93d297d0014fe8ca9ee58908",
+  "initial_source_revision": "fbeffb3023b4f230cd2ec36cd8c75f27473eb68f",
+  "base_revision": "b6e39c42a339908eee2fd2c9e5b8a99d2dbff9cc",
+  "branch": "extension/martensite-region-certificates",
+  "decision": "docs/adr/0014-owned-analytic-sketch-regions.md",
+  "platform": {
+    "uname": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n"
+  },
+  "options": {
+    "seed": [
+      1,
+      1
+    ],
+    "extrusion": [
+      0,
+      0,
+      2
+    ],
+    "spatial_limit": 1e-08,
+    "parameter_limit": 1e-08,
+    "contact_world_limit": 1e-08,
+    "fresh_closure_certificate_limit": 0.0,
+    "root_options": {
+      "version": 1,
+      "max_width": 0.001,
+      "max_degree": 32,
+      "max_bisections": 4096
+    },
+    "fresh_point_domain": "exact singleton t=0, paired u=1 established separately",
+    "point_completed_bisections": 0
+  },
+  "outcome": {
+    "body": "incomplete",
+    "candidate_obligations_discharged_conditionally": [
+      "Construction",
+      "SharedIncidenceReuse",
+      "CandidateHistoryCoverage",
+      "SearchCompleteness"
+    ],
+    "selected_winding": 1,
+    "complementary_winding": -1,
+    "orientation": "Forward",
+    "boundary_reversed": false,
+    "achieved_error": "unknown; only individual certified zero residuals recorded",
+    "publication": "not provided"
+  },
+  "oracles": [
+    "independent closed form x=12t(1-t)^2, y=12t^2(1-t), strictly increasing ratio y/x=t/(1-t)",
+    "positive rational denominator and identical ratio for weights [1,2,2,1]",
+    "exact source/copy coefficient identities and current zero closure point residuals",
+    "topology/history/multiplicity invariants",
+    "generated scaled/reversed/degenerate/mutation examples",
+    "unchanged native fixtures: historical replay only"
+  ],
+  "tests": {
+    "focused_region": 40,
+    "all-targets": 4162,
+    "doctests": 84,
+    "extracted-tests": 138,
+    "worker_count": 8,
+    "fresh_rebuilds_per_worker": 4,
+    "process_bytes_equal": true,
+    "portable_receipt": {
+      "operation": "martensite.region-certificate",
+      "version": 1,
+      "winding": 1,
+      "reversed": false,
+      "orientation": "Forward",
+      "boundary_count": 1,
+      "report": 0,
+      "root": 0,
+      "poles": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          4.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "closure_points": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "body": "incomplete"
+    },
+    "extracted_source_files": 107,
+    "audited_functions": 151,
+    "region_module_files": 20
+  },
+  "commands": [
+    {
+      "label": "all-targets",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 194.03249144554138,
+      "source_unchanged": true
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 3.82867169380188,
+      "source_unchanged": true
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 54.71220302581787,
+      "source_unchanged": true
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--check"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 1.345111608505249,
+      "source_unchanged": true
+    },
+    {
+      "label": "extracted-lock",
+      "command": [
+        "cargo",
+        "generate-lockfile",
+        "--manifest-path",
+        "/tmp/martensite-region-certificates-final/extracted/Cargo.toml",
+        "--offline"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.06346726417541504,
+      "source_unchanged": true
+    },
+    {
+      "label": "extracted-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/tmp/martensite-region-certificates-final/extracted/Cargo.toml",
+        "--offline",
+        "--locked",
+        "--lib"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 4.129131555557251,
+      "source_unchanged": true
+    },
+    {
+      "label": "process-first",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "portable_region_certificate_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.2164287567138672,
+      "source_unchanged": true
+    },
+    {
+      "label": "process-second",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "portable_region_certificate_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-region-certificates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.1907186508178711,
+      "source_unchanged": true
+    }
+  ],
+  "source_bookends_all_equal": true,
+  "source_hash_manifest": {
+    "archive_path": "final/source-before.json",
+    "file_count": 2704,
+    "sha256": "8aa96102b225229a258df0450ed1d176e77358247c77eb8dca1802007d47db17"
+  },
+  "process_receipt_sha256": "94acdf5c9db123fa3f21248852439553f49b9f026f03b42a5379af1a5513c139",
+  "retained_corpus_sha256": {
+    "tests/support/metric_residual_cases.rs": "8bb92e6e9041a8332285474bfa48528cb3a2f41ab8db179bc6dd1dc49dce799c",
+    "tests/fixtures/certified_bezier_pairs/native.tsv": "e2d0cc3628187c824202047a072c4e58b095e4265ed6a1f7c1208ecd92ed98ec"
+  },
+  "preserved_failures": {
+    "initial_context_expectation": {
+      "passed": 10,
+      "failed": 8
+    },
+    "review_first": {
+      "passed": 31,
+      "failed": 1
+    },
+    "review_isolated": {
+      "passed": 29,
+      "failed": 3
+    },
+    "old_frozen_pipeline": "interrupted during compilation before edits; diagnostic-only",
+    "other": "initial test-builder compile and large-error Clippy failures retained"
+  },
+  "exclusions": [
+    "No healthy region or solid publication",
+    "Full ordered body/self-intersection/tolerance validation incomplete",
+    "No area/volume acceptance or previous-release accepted-workload benchmark",
+    "No application acceptance",
+    "Ordinary-host ThreadSanitizer acceptance remains incomplete; no new sanitizer run in this slice",
+    "No OCCT execution or new native fixture capture",
+    "No host instrumentation masking, disabling or exclusion",
+    "No global mutable algorithm state or unsafe trait implementation added"
+  ],
+  "retention": "runs.tar.gz contains final commands/logs/hash bookends, standalone extracted sources/lock/support/historical fixture, all initial attempt logs and interrupted old-run record; build artifacts excluded",
+  "artifact_sha256": {
+    "README.md": "cbeb253edefda2c5a8546310aa0c8e71c17115b43915cd43cc4a0cfb8032d874",
+    "runs.tar.gz": "114577de0e41a752cc2e65be1d3de39a7cc83b6fa81c27504adbccb4f38a3031"
+  }
+}
