@@ -22,7 +22,7 @@ does not alter TKBO or clear any region publication gap.
 This is additive behavior version 1. The existing signed polynomial boundary
 and sweep integrals and mapped integration APIs remain available unchanged;
 there is no superseded production path or migration adapter to delete. The
-owning region #10 / C1#12 integration gate must consume source-bound evidence
+owning RustyCADKernel#10 / Martensite#12 (C1) integration gate must consume source-bound evidence
 before its operation can complete. It retains its existing deletion task and
 milestone deadline. The next compatible patch target is 0.2.8; version changes
 and publication remain the coordinator's work.
