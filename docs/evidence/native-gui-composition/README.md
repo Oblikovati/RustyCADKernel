@@ -43,5 +43,19 @@ commands use the pinned validation wrapper, two Cargo build jobs, no incremental
 compilation and zero dev/test debug information. See the public usage and commands
 in `docs/native-gui-composition.md`.
 
-Optimized native performance evidence is pending a coordinator-approved quiet-host
-slot. No timing claim is made by these functional runs.
+The coordinator-approved frozen timing window completed on both devices using
+existing executables, seven native-view workloads, 20 warmup frames and 100 samples
+per workload. All 1,400 samples are finite and positive. Four pinned-validation
+native bookends passed; their actual-window/capture buffers remain byte-identical
+across phases and devices. Seven hash bookends verified all 827 inputs, both
+executables and six driver/validation files unchanged. The sampled process monitor
+observed no competing compiler, test or benchmark workload; ordinary desktop GPU
+owners are retained in the readiness/final receipts. Whole-process peak RSS was
+107,380 KiB on lavapipe and 66,880 KiB on AMD. Raw samples and exact commands are
+retained; this is no speedup, baseline acceptance or GPU-memory claim.
+
+`run_frozen_performance.py` is the exact one-off observation script retained for
+reproducibility, not a new production tool or test selection interface. The source
+revision bound to the runs is `9c9f10dfa08d7b6286a0e2422e26d67ddd527784`.
+`performance-freeze.json` records the earlier pre-GO freeze proposal; the completed
+results, commands and bookends supersede its pending-GO field.

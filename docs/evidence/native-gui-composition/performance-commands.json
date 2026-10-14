@@ -1,0 +1,131 @@
+[
+  {
+    "profile": "lavapipe",
+    "phase": "pre",
+    "argv": [
+      "python3",
+      "tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/debug/examples/native_gui_acceptance",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/gui-composition-proof/lavapipe-pre"
+    ],
+    "environment_override": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+      "LP_NATIVE_VECTOR_WIDTH": "128",
+      "LIBGL_ALWAYS_SOFTWARE": "1",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition",
+    "log": "target/gui-composition-proof/performance-lavapipe-pre.log",
+    "exit_code": 0
+  },
+  {
+    "profile": "lavapipe",
+    "phase": "timing",
+    "argv": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/gui-composition-proof/performance-lavapipe-rss.log",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/release/examples/native_gui_performance",
+      "20",
+      "100"
+    ],
+    "environment_override": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+      "LP_NATIVE_VECTOR_WIDTH": "128",
+      "LIBGL_ALWAYS_SOFTWARE": "1",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition",
+    "log": "target/gui-composition-proof/performance-lavapipe-timing.log",
+    "exit_code": 0
+  },
+  {
+    "profile": "lavapipe",
+    "phase": "post",
+    "argv": [
+      "python3",
+      "tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/debug/examples/native_gui_acceptance",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/gui-composition-proof/lavapipe-post"
+    ],
+    "environment_override": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+      "LP_NATIVE_VECTOR_WIDTH": "128",
+      "LIBGL_ALWAYS_SOFTWARE": "1",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition",
+    "log": "target/gui-composition-proof/performance-lavapipe-post.log",
+    "exit_code": 0
+  },
+  {
+    "profile": "amd",
+    "phase": "pre",
+    "argv": [
+      "python3",
+      "tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/debug/examples/native_gui_acceptance",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/gui-composition-proof/amd-pre"
+    ],
+    "environment_override": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition",
+    "log": "target/gui-composition-proof/performance-amd-pre.log",
+    "exit_code": 0
+  },
+  {
+    "profile": "amd",
+    "phase": "timing",
+    "argv": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/gui-composition-proof/performance-amd-rss.log",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/release/examples/native_gui_performance",
+      "20",
+      "100"
+    ],
+    "environment_override": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition",
+    "log": "target/gui-composition-proof/performance-amd-timing.log",
+    "exit_code": 0
+  },
+  {
+    "profile": "amd",
+    "phase": "post",
+    "argv": [
+      "python3",
+      "tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/debug/examples/native_gui_acceptance",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/gui-composition-proof/amd-post"
+    ],
+    "environment_override": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition",
+    "log": "target/gui-composition-proof/performance-amd-post.log",
+    "exit_code": 0
+  }
+]
