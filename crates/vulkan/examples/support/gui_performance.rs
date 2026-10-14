@@ -14,11 +14,12 @@ const GUI_WORKLOADS: [&str; 7] = [
     "font-retire",
     "alpha-order",
 ];
-/// Run the frozen accepted workloads after timing GO; example: `benchmark_gui(20,100)`.
-pub fn benchmark_gui(warmup: usize, samples: usize) {
+/// Run the frozen accepted workloads after timing GO; example: `benchmark_gui(20,100,RenderGuiSurfacePolicy::CheckedV2)`.
+pub fn benchmark_gui(warmup: usize, samples: usize, policy: RenderGuiSurfacePolicy) {
     let mut options = device_options::validation_options();
     options.validation = false;
-    let driver = Graphic3dRenderDriver::new(options).unwrap();
+    let driver = Graphic3dRenderDriver::with_gui_surface_policy(options, policy).unwrap();
+    println!("{{\"gui_surface_policy\":\"{policy:?}\"}}");
     println!("MARTENSITE_DEVICE={}", driver.device_name());
     println!("MARTENSITE_DEVICE_IDENTITY={:?}", driver.driver_identity());
     for workload in GUI_WORKLOADS {

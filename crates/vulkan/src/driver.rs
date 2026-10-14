@@ -1,4 +1,5 @@
 //! Graphic3d factory routes ordinary structure/view creation to Martensite rendering.
+use crate::retained_texture_images::RetainedTextureImages;
 use crate::{
     RenderBackend, RenderError, VulkanOptions, VulkanRenderer,
     driver_backend::{DriverBackend, SharedRenderDevice},
@@ -24,6 +25,7 @@ pub struct Graphic3dRenderDriver {
     pub(crate) texture_images: Arc<crate::retained_texture_images::RetainedTextureImages>,
     views: SharedState<Vec<WeakHandle<dyn Graphic3dCView>>>,
     limit: u32,
+    gui_surface: crate::RenderGuiSurfacePolicy,
     vertical_sync: Arc<SharedState<bool>>,
 }
 struct DriverBuildInputs {
@@ -34,6 +36,7 @@ struct DriverBuildInputs {
     edges: crate::RenderMeshEdgePipeline,
     lighting: crate::RenderLightingPipeline,
     unlit: crate::RenderUnlitFaceColorPolicy,
+    gui_surface: crate::RenderGuiSurfacePolicy,
 }
 rustycad_tkernel::impl_transient!(Graphic3dRenderDriver, "Martensite_RenderDriver", StandardTransient, transient, interfaces:[dyn Graphic3dGraphicDriver]);
 impl Graphic3dRenderDriver {
@@ -87,7 +90,14 @@ impl Graphic3dRenderDriver {
         edges: crate::RenderMeshEdgePipeline,
         lighting: crate::RenderLightingPipeline,
     ) -> Result<Handle<Self>, RenderError> {
-        Self::with_pipeline_policies(options, coordinates, edges, lighting, Default::default())
+        Self::with_pipeline_policies(
+            options,
+            coordinates,
+            edges,
+            lighting,
+            Default::default(),
+            Default::default(),
+        )
     }
     pub(super) fn with_pipeline_policies(
         options: VulkanOptions,
@@ -95,10 +105,9 @@ impl Graphic3dRenderDriver {
         edges: crate::RenderMeshEdgePipeline,
         lighting: crate::RenderLightingPipeline,
         unlit: crate::RenderUnlitFaceColorPolicy,
+        gui_surface: crate::RenderGuiSurfacePolicy,
     ) -> Result<Handle<Self>, RenderError> {
-        unlit.validate(lighting)?;
-        let renderer = VulkanRenderer::new(options)?;
-        let limit = renderer.capture_limit();
+        let (renderer, limit) = validated_renderer(options, unlit, lighting)?;
         Ok(Self::build(DriverBuildInputs {
             backend: DriverBackend::Vulkan(Box::new(renderer)),
             limit,
@@ -107,6 +116,7 @@ impl Graphic3dRenderDriver {
             edges,
             lighting,
             unlit,
+            gui_surface,
         }))
     }
     /// Inject a named backend and its extent limit; `Graphic3dRenderDriver::with_backend(recorder, 4096)?`.
@@ -146,6 +156,7 @@ impl Graphic3dRenderDriver {
             fonts,
             coordinate_pipeline,
             Default::default(),
+            Default::default(),
         )
     }
     pub(super) fn with_injected_policies(
@@ -154,10 +165,9 @@ impl Graphic3dRenderDriver {
         fonts: Arc<dyn crate::TextLayoutSource>,
         coordinates: crate::RenderTextureCoordinatePipeline,
         unlit: crate::RenderUnlitFaceColorPolicy,
+        gui_surface: crate::RenderGuiSurfacePolicy,
     ) -> Result<Handle<Self>, RenderError> {
-        if limit == 0 || limit > i32::MAX as u32 {
-            return Err(rejected(limit, "a positive 31-bit capture limit"));
-        }
+        validate_capture_limit(limit)?;
         Ok(Self::build(DriverBuildInputs {
             backend: DriverBackend::Injected(Box::new(backend)),
             limit,
@@ -166,14 +176,12 @@ impl Graphic3dRenderDriver {
             edges: Default::default(),
             lighting: Default::default(),
             unlit,
+            gui_surface,
         }))
     }
     fn build(inputs: DriverBuildInputs) -> Handle<Self> {
-        let texture_images = Arc::new(
-            crate::retained_texture_images::RetainedTextureImages::with_coordinate_pipeline(
-                inputs.coordinates,
-            ),
-        );
+        let retained = RetainedTextureImages::with_coordinate_pipeline(inputs.coordinates);
+        let texture_images = Arc::new(retained);
         Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dGraphicDriverBase::new(&Handle::default()),
@@ -185,6 +193,7 @@ impl Graphic3dRenderDriver {
             texture_images,
             views: SharedState::default(),
             limit: inputs.limit,
+            gui_surface: inputs.gui_surface,
             vertical_sync: Arc::new(SharedState::new(false)),
         })
     }
@@ -247,6 +256,7 @@ impl Graphic3dGraphicDriver for Graphic3dRenderDriver {
             self.device.clone(),
             self.limit,
             self.vertical_sync.clone(),
+            self.gui_surface,
         )?
         .cast();
         self.views.write().push(view.downgrade());
@@ -330,4 +340,21 @@ impl Graphic3dGraphicDriver for Graphic3dRenderDriver {
             .unwrap_or_default();
         !output.is_null()
     }
+}
+
+fn validated_renderer(
+    options: VulkanOptions,
+    unlit: crate::RenderUnlitFaceColorPolicy,
+    lighting: crate::RenderLightingPipeline,
+) -> Result<(VulkanRenderer, u32), RenderError> {
+    unlit.validate(lighting)?;
+    let renderer = VulkanRenderer::new(options)?;
+    let limit = renderer.capture_limit();
+    Ok((renderer, limit))
+}
+fn validate_capture_limit(limit: u32) -> Result<(), RenderError> {
+    if limit == 0 || limit > i32::MAX as u32 {
+        return Err(rejected(limit, "a positive 31-bit capture limit"));
+    }
+    Ok(())
 }

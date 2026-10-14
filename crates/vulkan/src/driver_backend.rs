@@ -60,9 +60,10 @@ impl DriverBackend {
         frame: &RenderFrame,
         target: &mut crate::backend::WindowPresenter,
         vsync: bool,
+        policy: crate::RenderGuiSurfacePolicy,
     ) -> Result<FrameCapture, RenderError> {
         match self {
-            Self::Vulkan(device) => device.render_window(frame, target, vsync),
+            Self::Vulkan(device) => device.render_window(frame, target, vsync, policy),
             Self::Injected(_) => Err(crate::error::rejected(
                 "injected backend",
                 "a Vulkan window presenter",

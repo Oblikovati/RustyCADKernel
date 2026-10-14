@@ -23,8 +23,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let arguments: Vec<String> = std::env::args().collect();
     let warmup = parse_gui_count(arguments.get(1), 20)?;
     let samples = parse_gui_count(arguments.get(2), 100)?;
-    gui_performance::benchmark_gui(warmup, samples);
+    let policy = parse_gui_policy(arguments.get(3))?;
+    gui_performance::benchmark_gui(warmup, samples, policy);
     Ok(())
+}
+fn parse_gui_policy(
+    value: Option<&String>,
+) -> Result<martensite_vulkan::RenderGuiSurfacePolicy, Box<dyn std::error::Error>> {
+    use martensite_vulkan::RenderGuiSurfacePolicy::{CheckedV2, LegacyV1};
+    match value.map(String::as_str) {
+        None | Some("legacy") => Ok(LegacyV1),
+        Some("checked") => Ok(CheckedV2),
+        Some(other) => {
+            Err(format!("GUI surface policy {other:?}; expected legacy or checked").into())
+        }
+    }
 }
 fn parse_gui_count(
     value: Option<&String>,
@@ -43,6 +56,20 @@ fn parse_gui_count(
 }
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn gui_performance_policy_is_explicit_and_legacy_by_default() {
+        use martensite_vulkan::RenderGuiSurfacePolicy::{CheckedV2, LegacyV1};
+        assert_eq!(super::parse_gui_policy(None).unwrap(), LegacyV1);
+        assert_eq!(
+            super::parse_gui_policy(Some(&"legacy".into())).unwrap(),
+            LegacyV1
+        );
+        assert_eq!(
+            super::parse_gui_policy(Some(&"checked".into())).unwrap(),
+            CheckedV2
+        );
+        assert!(super::parse_gui_policy(Some(&"unknown".into())).is_err());
+    }
     #[test]
     fn gui_performance_counts_preserve_defaults_and_refuse_zero() {
         assert_eq!(super::parse_gui_count(None, 20).unwrap(), 20);
