@@ -41,7 +41,8 @@ fn construct<'a>(
     poll(cancelled)?;
     *phase = AnnularEmbeddingPhase::CurrentBinding;
     rebind_annular_prism_v2(request, receipt, &binding).map_err(AnnularEmbeddingCause::Binding)?;
-    let evidence = propose(binding, requested, phase, cancelled)?;
+    let mut evidence = propose(binding, requested, phase, cancelled)?;
+    evidence.replay = replay::encode(&evidence).map_err(AnnularEmbeddingCause::Encoding)?;
     *phase = AnnularEmbeddingPhase::Commit;
     poll(cancelled)?;
     rebind_annular_prism_v2(request, receipt, &evidence.binding)
@@ -64,6 +65,7 @@ fn propose(
     let incidences = ten_rows(&domains)?;
     complete_pairs(&domains, &incidences)?;
     Ok(AnnularEmbeddingEvidence {
+        replay: Vec::new(),
         requested,
         binding,
         regularity,

@@ -2,6 +2,10 @@
 use super::*;
 
 impl AnnularEmbeddingEvidence {
+    /// Borrow exact proof bytes; `evidence.replay_bytes()` retains all four domain claims.
+    pub(in crate::sketch_region_prism) fn replay_bytes(&self) -> &[u8] {
+        &self.replay
+    }
     /// Borrow the actual source binding; `evidence.binding()` grants no mutation.
     pub(in crate::sketch_region_prism) fn binding(&self) -> &AnnularPrismBinding {
         &self.binding

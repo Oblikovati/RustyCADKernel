@@ -3,6 +3,7 @@
 mod access;
 mod classification;
 mod operation;
+mod replay;
 mod types;
 use super::super::{annular_binding::*, hypothesis::*, two_loop::TwoLoopRegionRequest};
 use super::{annular_coverage::*, annular_domains::*, annular_regularity::*, annular_table::*};
@@ -15,3 +16,6 @@ pub(in crate::sketch_region_prism) use types::*;
 mod cancellation_tests;
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod replay_tests;

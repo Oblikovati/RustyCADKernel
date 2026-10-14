@@ -44,6 +44,9 @@ fn actual_entry_composes_owned_domains_without_promoting_legacy_body_completion(
         ));
         evidence
     });
+    assert_actual_views(&evidence);
+}
+fn assert_actual_views(evidence: &AnnularEmbeddingEvidence) {
     assert_eq!(evidence.requested(), options());
     assert_eq!(evidence.regularity().boundaries.len(), 2);
     assert_eq!(evidence.incidences().len(), 10);
@@ -75,13 +78,7 @@ fn unsupported_version_refuses_before_cancellation_callback_and_keeps_request() 
         assert_eq!(failure.selected_candidate, request.identities.selected);
         assert_eq!(failure.requested, requested);
         assert_eq!(failure.phase, AnnularEmbeddingPhase::Admission);
-        assert!(matches!(
-            failure.cause,
-            AnnularEmbeddingCause::Version {
-                actual: 9,
-                expected: 2
-            }
-        ));
+        assert_version_cause(&failure.cause);
     });
 }
 
@@ -102,4 +99,14 @@ fn callback_free_embedding_rebind_detects_source_change() {
         assert_eq!(failure.requested, evidence.requested());
         assert!(matches!(failure.cause, AnnularEmbeddingCause::Binding(_)));
     });
+}
+
+fn assert_version_cause(cause: &AnnularEmbeddingCause<'_>) {
+    assert!(matches!(
+        cause,
+        AnnularEmbeddingCause::Version {
+            actual: 9,
+            expected: 2
+        }
+    ));
 }

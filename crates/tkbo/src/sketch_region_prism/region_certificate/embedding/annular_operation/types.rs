@@ -20,6 +20,7 @@ pub(in crate::sketch_region_prism) enum AnnularEmbeddingCause<'a> {
     Operands(RegionHypothesisCause),
     Regularity(Box<AnnularRegularityFailure>),
     Coverage(AnnularPairCoverageFailure<AnnularChartIdentity>),
+    Encoding(Box<AnnularBindingCause<'a>>),
     Cancelled,
 }
 pub(in crate::sketch_region_prism) struct AnnularEmbeddingFailure<'a> {
@@ -30,6 +31,7 @@ pub(in crate::sketch_region_prism) struct AnnularEmbeddingFailure<'a> {
     pub cause: AnnularEmbeddingCause<'a>,
 }
 pub(in crate::sketch_region_prism) struct AnnularEmbeddingEvidence {
+    pub(super) replay: Vec<u8>,
     pub(super) requested: AnnularEmbeddingOptions,
     pub(super) binding: AnnularPrismBinding,
     pub(super) regularity: AnnularRegularityReport,

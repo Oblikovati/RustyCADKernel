@@ -6,40 +6,62 @@ use super::*;
 fn observed_checkpoints() -> usize {
     with_actual(|request, region, receipt| {
         let bound = binding(request, region, receipt);
-        let mut count = 0;
-        assert!(
-            inspect_bound_annular_embedding(request, receipt, bound, options(), || {
-                count += 1;
-                false
-            })
-            .is_ok()
-        );
-        count
+        count_checkpoints(request, receipt, bound)
     })
+}
+fn count_checkpoints(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+    bound: AnnularPrismBinding,
+) -> usize {
+    let mut count = 0;
+    assert!(
+        inspect_bound_annular_embedding(request, receipt, bound, options(), || {
+            count += 1;
+            false
+        })
+        .is_ok()
+    );
+    count
 }
 #[test]
 fn every_actual_external_cancellation_cutoff_prevents_embedding_issuance() {
-    let count = observed_checkpoints();
-    assert!(count > 3);
-    for stop in 1..=count {
-        assert_cancelled_at(stop);
-    }
-    assert_eq!(observed_checkpoints(), count);
-}
-fn assert_cancelled_at(stop: usize) {
+    use super::super::super::annular_binding::tests::fresh_region;
     with_actual(|request, region, receipt| {
-        let bound = binding(request, region, receipt);
-        let mut count = 0;
-        let failure = inspect_bound_annular_embedding(request, receipt, bound, options(), || {
-            count += 1;
-            count == stop
-        })
-        .err()
-        .unwrap();
-        assert_eq!(count, stop);
-        assert_eq!(failure.classification(), TwoLoopRefusalClass::Cancelled);
-        assert_eq!(failure.operation, request.identities.operation);
+        let count = count_checkpoints(request, receipt, binding(request, region, receipt));
+        assert!(count > 3);
+        for stop in 1..=count {
+            assert_cancelled_at(
+                request,
+                receipt,
+                binding(request, fresh_region(request), receipt),
+                stop,
+            );
+        }
+        let final_count = count_checkpoints(
+            request,
+            receipt,
+            binding(request, fresh_region(request), receipt),
+        );
+        assert_eq!(final_count, count);
     });
+}
+fn assert_cancelled_at(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+    bound: AnnularPrismBinding,
+    stop: usize,
+) {
+    let mut count = 0;
+    let failure = inspect_bound_annular_embedding(request, receipt, bound, options(), || {
+        count += 1;
+        count == stop
+    })
+    .err()
+    .unwrap();
+    assert_eq!(count, stop);
+    assert_eq!(failure.classification(), TwoLoopRefusalClass::Cancelled);
+    assert_eq!(failure.operation, request.identities.operation);
 }
 #[test]
 fn final_callback_mutation_refuses_the_stale_complete_proposal() {
