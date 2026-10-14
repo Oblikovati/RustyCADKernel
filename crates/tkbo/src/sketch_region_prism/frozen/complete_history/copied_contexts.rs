@@ -4,7 +4,7 @@ use super::*;
 use crate::sketch_region::{RegionContextCopyQuery, RegionCopyContexts, RegionObservedContext};
 use std::collections::BTreeSet;
 
-pub(super) fn project_copier_queries(
+pub(in crate::sketch_region_prism::frozen) fn project_copier_queries(
     observed: &RegionCopyContexts,
     source: &BoundHistoricalContexts<'_>,
     copied: &BoundHistoricalContexts<'_>,

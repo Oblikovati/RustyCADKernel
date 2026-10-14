@@ -27,6 +27,13 @@ pub(super) fn capture(
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
 ) -> HistoryCheck<Vec<PrismCompleteSweepQuery>> {
+    capture_native(&request.native_inputs(), bound, copied)
+}
+pub(in crate::sketch_region_prism::frozen) fn capture_native(
+    request: &NativeHistoryInputs<'_>,
+    bound: &BoundProjection<'_>,
+    copied: &BoundHistoricalContexts<'_>,
+) -> HistoryCheck<Vec<PrismCompleteSweepQuery>> {
     let PrismSweepQueries::Captured(queries) = &bound.diagnostic.sweep_queries else {
         return Err(PrismHistoryCause::Missing {
             required: "exhaustive completed sweep query outcomes",
@@ -47,7 +54,7 @@ pub(super) fn capture(
     Ok(observed_values::sorted(result))
 }
 fn query_row(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
     query: &PrismSweepQueryObservation,
@@ -56,7 +63,7 @@ fn query_row(
         copied,
         &PartitionOccurrenceIdentity::capture(&query.query.output),
     )?;
-    let parents = parent_rows::relation_parents(request, &query.query)?;
+    let parents = parent_rows::relation_parents(request.publication, &query.query)?;
     admit_query_parents(request, query, &parents)?;
     let generated = query
         .generated
@@ -73,7 +80,7 @@ fn query_row(
     })
 }
 fn answer(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     bound: &BoundProjection<'_>,
     query: &PrismSweepQueryObservation,
     role: PrismImageRole,
@@ -85,14 +92,14 @@ fn answer(
     required_answer(request, bound, query, role, native).map(Some)
 }
 fn required_answer(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     bound: &BoundProjection<'_>,
     query: &PrismSweepQueryObservation,
     role: PrismImageRole,
     native: &Shape,
 ) -> HistoryCheck<PrismNativeSweepAnswer> {
     let bindings = native_bindings(bound, query, role, native)?;
-    let parents = parent_rows::relation_parents(request, &bindings[0].native.returned)?;
+    let parents = parent_rows::relation_parents(request.publication, &bindings[0].native.returned)?;
     let (definition, outputs) = transported_outputs(request, bound, &bindings, &parents)?;
     let bits = native_placement(native)?;
     Ok(PrismNativeSweepAnswer {
@@ -104,13 +111,16 @@ fn required_answer(
     })
 }
 fn cover_retirement(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
     queries: &[PrismCompleteSweepQuery],
 ) -> HistoryCheck<()> {
-    let retired =
-        parent_rows::relation_rows_subset(request, copied, &bound.diagnostic.native_retired)?;
+    let retired = parent_rows::relation_rows_subset(
+        request.publication,
+        copied,
+        &bound.diagnostic.native_retired,
+    )?;
     let expected: Vec<_> = queries
         .iter()
         .filter(|q| q.retired)
@@ -140,7 +150,7 @@ fn admit_query_keys(result: &[PrismCompleteSweepQuery], expected: usize) -> Hist
 }
 
 fn admit_query_parents(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     query: &PrismSweepQueryObservation,
     parents: &[Vec<FrozenOriginalKey>; 3],
 ) -> HistoryCheck<()> {
@@ -160,7 +170,7 @@ fn admit_query_parents(
     relations::same_parents(
         PrismHistoryStage::SweepBase,
         parents,
-        &parent_rows::relation_parents(request, matches[0])?,
+        &parent_rows::relation_parents(request.publication, matches[0])?,
     )?;
     Ok(())
 }
@@ -190,7 +200,7 @@ fn native_bindings<'a>(
 }
 
 fn transported_outputs(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     bound: &BoundProjection<'_>,
     bindings: &[&crate::sketch_region_prism::PrismImageBinding],
     parents: &[Vec<FrozenOriginalKey>; 3],
@@ -223,14 +233,14 @@ fn native_placement(native: &Shape) -> HistoryCheck<[u64; 13]> {
 }
 
 fn transported_output(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     bound: &BoundProjection<'_>,
     binding: &crate::sketch_region_prism::PrismImageBinding,
     parents: &[Vec<FrozenOriginalKey>; 3],
 ) -> HistoryCheck<usize> {
     relations::same_parents(
         PrismHistoryStage::SweepBase,
-        &parent_rows::relation_parents(request, &binding.native.returned)?,
+        &parent_rows::relation_parents(request.publication, &binding.native.returned)?,
         parents,
     )?;
     let indices = output_context_indices(bound, binding)?;

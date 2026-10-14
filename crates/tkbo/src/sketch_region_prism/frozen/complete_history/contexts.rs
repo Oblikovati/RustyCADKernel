@@ -4,7 +4,7 @@ use super::*;
 use crate::sketch_region::RegionObservedContext;
 use std::collections::BTreeSet;
 
-pub(super) fn bind_historical_contexts<'a>(
+pub(in crate::sketch_region_prism::frozen) fn bind_historical_contexts<'a>(
     operation: AuthoredPrismId,
     names: &PrismHistoricalStageBindings,
     rows: &'a [RegionObservedContext],

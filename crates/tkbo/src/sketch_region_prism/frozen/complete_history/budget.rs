@@ -4,12 +4,15 @@ use super::*;
 use crate::sketch_region::{
     PartitionObservation, RegionContextObservation, RegionCopyContextObservation,
 };
-struct HistoryRowBudget {
-    used: usize,
-    maximum: usize,
+pub(in crate::sketch_region_prism::frozen) struct HistoryRowBudget {
+    pub used: usize,
+    pub maximum: usize,
 }
 impl HistoryRowBudget {
-    fn add(&mut self, amount: usize) -> HistoryCheck<()> {
+    pub(in crate::sketch_region_prism::frozen) fn add(
+        &mut self,
+        amount: usize,
+    ) -> HistoryCheck<()> {
         self.used = self
             .used
             .checked_add(amount)
@@ -27,7 +30,7 @@ impl HistoryRowBudget {
         }
         Ok(())
     }
-    fn relations(
+    pub(in crate::sketch_region_prism::frozen) fn relations(
         &mut self,
         rows: &[crate::sketch_region::ArrangementRelation],
     ) -> HistoryCheck<()> {
@@ -39,7 +42,7 @@ impl HistoryRowBudget {
         }
         Ok(())
     }
-    fn contexts(
+    pub(in crate::sketch_region_prism::frozen) fn contexts(
         &mut self,
         rows: &[crate::sketch_region::RegionObservedContext],
     ) -> HistoryCheck<()> {
@@ -50,7 +53,10 @@ impl HistoryRowBudget {
         }
         Ok(())
     }
-    fn copy(&mut self, copied: &RegionCopyContextObservation) -> HistoryCheck<()> {
+    pub(in crate::sketch_region_prism::frozen) fn copy(
+        &mut self,
+        copied: &RegionCopyContextObservation,
+    ) -> HistoryCheck<()> {
         if let RegionCopyContextObservation::Captured(rows) = copied {
             self.contexts(&rows.source)?;
             self.contexts(&rows.copied)?;
@@ -71,9 +77,7 @@ pub(super) fn admit(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<usize
         maximum: request.requested.limits.maximum_rows,
     };
     authored(request, &mut budget)?;
-    partition(request, &mut budget)?;
-    candidate(request, &mut budget)?;
-    receipt(request, &mut budget)?;
+    admit_native(&request.native_inputs(), &mut budget)?;
     Ok(budget.used)
 }
 fn authored(
@@ -95,10 +99,7 @@ fn authored(
     authored_contexts(request, budget)?;
     Ok(())
 }
-fn partition(
-    request: &PrismHistoryRequest<'_, '_>,
-    budget: &mut HistoryRowBudget,
-) -> HistoryCheck<()> {
+fn partition(request: &NativeHistoryInputs<'_>, budget: &mut HistoryRowBudget) -> HistoryCheck<()> {
     let rows = match &request.bridge.mapped.arrangement.partition {
         PartitionObservation::Captured(rows)
         | PartitionObservation::Incomplete { partial: rows, .. } => rows,
@@ -134,10 +135,7 @@ fn partition_source(
     }
     Ok(())
 }
-fn candidate(
-    request: &PrismHistoryRequest<'_, '_>,
-    budget: &mut HistoryRowBudget,
-) -> HistoryCheck<()> {
+fn candidate(request: &NativeHistoryInputs<'_>, budget: &mut HistoryRowBudget) -> HistoryCheck<()> {
     let Some(copy) = &request.bridge.mapped.copied else {
         return Ok(());
     };
@@ -168,10 +166,7 @@ fn generated(
     generated_areas(areas, budget)?;
     Ok(())
 }
-fn receipt(
-    request: &PrismHistoryRequest<'_, '_>,
-    budget: &mut HistoryRowBudget,
-) -> HistoryCheck<()> {
+fn receipt(request: &NativeHistoryInputs<'_>, budget: &mut HistoryRowBudget) -> HistoryCheck<()> {
     let receipt = request.receipt;
     budget.add(receipt.input.rejected.len())?;
     budget.add(receipt.input.input_deleted.len())?;
@@ -305,7 +300,7 @@ fn generated_areas(
 }
 
 fn selected_copy(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     budget: &mut HistoryRowBudget,
 ) -> HistoryCheck<()> {
     if let Some(copy) = &request.receipt.copied {
@@ -319,7 +314,7 @@ fn selected_copy(
 }
 
 fn sweep_operands(
-    request: &PrismHistoryRequest<'_, '_>,
+    request: &NativeHistoryInputs<'_>,
     budget: &mut HistoryRowBudget,
 ) -> HistoryCheck<()> {
     if let Some(body) = &request.receipt.diagnostic {
@@ -339,6 +334,15 @@ fn sweep_operands(
         }
     }
     Ok(())
+}
+
+pub(in crate::sketch_region_prism::frozen) fn admit_native(
+    request: &NativeHistoryInputs<'_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    partition(request, budget)?;
+    candidate(request, budget)?;
+    receipt(request, budget)
 }
 
 #[cfg(test)]

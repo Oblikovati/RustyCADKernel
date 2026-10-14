@@ -5,45 +5,45 @@ use crate::sketch_region::{
     ArrangementRelation, OriginalMemberIdentity, PartitionOccurrenceIdentity,
 };
 
-pub(super) fn original_keys(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn original_keys(
+    publication: &PrismPublicationBindings,
     parents: &[OriginalMemberIdentity],
 ) -> HistoryCheck<Vec<FrozenOriginalKey>> {
     let mut result = parents
         .iter()
         .map(|p| {
-            super::super::identities::original_key(request.publication, p)
+            super::super::identities::original_key(publication, p)
                 .map_err(|e| PrismHistoryCause::Frozen(Box::new(e)))
         })
         .collect::<HistoryCheck<Vec<_>>>()?;
     result.sort();
     Ok(result)
 }
-pub(super) fn parents(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn parents(
+    publication: &PrismPublicationBindings,
     preserved: &[OriginalMemberIdentity],
     modified: &[OriginalMemberIdentity],
     generated: &[OriginalMemberIdentity],
 ) -> HistoryCheck<[Vec<FrozenOriginalKey>; 3]> {
     Ok([
-        original_keys(request, preserved)?,
-        original_keys(request, modified)?,
-        original_keys(request, generated)?,
+        original_keys(publication, preserved)?,
+        original_keys(publication, modified)?,
+        original_keys(publication, generated)?,
     ])
 }
-pub(super) fn relation_parents(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn relation_parents(
+    publication: &PrismPublicationBindings,
     relation: &ArrangementRelation,
 ) -> HistoryCheck<[Vec<FrozenOriginalKey>; 3]> {
     parents(
-        request,
+        publication,
         &relation.preserved,
         &relation.modified,
         &relation.generated,
     )
 }
-pub(super) fn relation_rows(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn relation_rows(
+    publication: &PrismPublicationBindings,
     bound: &BoundHistoricalContexts<'_>,
     rows: &[ArrangementRelation],
 ) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
@@ -57,13 +57,13 @@ pub(super) fn relation_rows(
         let row = exact_relation(rows, &actual.occurrence)?;
         result.push(PrismHistoricalRelation {
             output: bound.owned[index].key.clone(),
-            parents: relation_parents(request, row)?,
+            parents: relation_parents(publication, row)?,
         });
     }
     result.sort();
     Ok(result)
 }
-pub(super) fn occurrence_index(
+pub(in crate::sketch_region_prism::frozen) fn occurrence_index(
     bound: &BoundHistoricalContexts<'_>,
     actual: &PartitionOccurrenceIdentity,
 ) -> HistoryCheck<usize> {
@@ -77,7 +77,7 @@ pub(super) fn occurrence_index(
     history_count("one actual bounded directed occurrence", found.len(), 1)?;
     Ok(found[0])
 }
-pub(super) fn physical_index(
+pub(in crate::sketch_region_prism::frozen) fn physical_index(
     bound: &BoundHistoricalContexts<'_>,
     actual: &PartitionOccurrenceIdentity,
 ) -> HistoryCheck<usize> {
@@ -95,8 +95,8 @@ pub(super) fn physical_index(
     Ok(first)
 }
 
-pub(super) fn relation_rows_subset(
-    request: &PrismHistoryRequest<'_, '_>,
+pub(in crate::sketch_region_prism::frozen) fn relation_rows_subset(
+    publication: &PrismPublicationBindings,
     bound: &BoundHistoricalContexts<'_>,
     rows: &[ArrangementRelation],
 ) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
@@ -105,7 +105,7 @@ pub(super) fn relation_rows_subset(
         let index = occurrence_index(bound, &PartitionOccurrenceIdentity::capture(&row.output))?;
         result.push(PrismHistoricalRelation {
             output: bound.owned[index].key.clone(),
-            parents: relation_parents(request, row)?,
+            parents: relation_parents(publication, row)?,
         });
     }
     Ok(observed_values::sorted(result))

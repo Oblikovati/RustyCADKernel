@@ -88,11 +88,18 @@ pub(super) fn failure<'a>(
     phase: PrismHistoryPhase,
     cause: PrismHistoryCause,
 ) -> PrismHistoryFailure<'a> {
+    native_failure(request.publication.operation, phase, cause)
+}
+pub(in crate::sketch_region_prism::frozen) fn native_failure<'a>(
+    operation: AuthoredPrismId,
+    phase: PrismHistoryPhase,
+    cause: PrismHistoryCause,
+) -> PrismHistoryFailure<'a> {
     let class = cause.failure_class();
     let entity = cause.primary_use();
     PrismHistoryFailure {
         finding: Box::new(PrismHistoryFinding {
-            operation: request.publication.operation,
+            operation,
             phase,
             entity,
             class,

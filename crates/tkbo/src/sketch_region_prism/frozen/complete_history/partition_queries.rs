@@ -141,7 +141,7 @@ fn native_images(
         })
         .collect()
 }
-pub(super) fn native_result<T>(
+pub(in crate::sketch_region_prism::frozen) fn native_result<T>(
     result: &Result<T, std::sync::Arc<rustycad_tkernel::standard::Failure>>,
 ) -> HistoryCheck<&T> {
     result
