@@ -8,6 +8,10 @@ pub(super) struct NamedSourceContext {
     pub directed_use: SemanticNameRole,
 }
 pub(super) enum ResolutionCause {
+    Binding(
+        Box<crate::sketch_region_prism::region_certificate::current_binding::PrismBindingFailure>,
+    ),
+    Prism(Box<crate::sketch_region_prism::PrismCause>),
     PlanVersion {
         actual: u32,
         expected: u32,

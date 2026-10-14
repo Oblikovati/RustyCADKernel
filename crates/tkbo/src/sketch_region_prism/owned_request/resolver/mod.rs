@@ -15,3 +15,10 @@ mod source_tests;
 
 #[cfg(test)]
 mod partition_tests;
+
+mod current;
+mod generated;
+mod selected_copy;
+
+#[cfg(test)]
+mod generated_tests;
