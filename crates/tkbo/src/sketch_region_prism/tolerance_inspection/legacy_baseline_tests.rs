@@ -27,18 +27,22 @@ fn original_path_has_all_authored_directed_incidence_obligations() {
     let contexts = body_contexts(body)
         .ok()
         .expect("complete acyclic prism contexts");
-    for (kind, expected) in [
-        (ShapeEnum::Solid, 1),
-        (ShapeEnum::Shell, 1),
-        (ShapeEnum::Face, 3),
-        (ShapeEnum::Wire, 3),
-        (ShapeEnum::Edge, 6),
-        (ShapeEnum::Vertex, 12),
-    ] {
+    for (kind, expected) in expected_contexts() {
         let actual = contexts
             .iter()
             .filter(|row| row.occurrence.shape_type().unwrap() == kind)
             .count();
         assert_eq!(actual, expected, "authored {kind:?} context multiplicity");
     }
+}
+
+fn expected_contexts() -> [(ShapeEnum, usize); 6] {
+    [
+        (ShapeEnum::Solid, 1),
+        (ShapeEnum::Shell, 1),
+        (ShapeEnum::Face, 3),
+        (ShapeEnum::Wire, 3),
+        (ShapeEnum::Edge, 6),
+        (ShapeEnum::Vertex, 12),
+    ]
 }
