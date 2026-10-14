@@ -2,6 +2,7 @@
 use rustycad_tkernel::{ncollection::Array1, standard::Failure};
 use rustycad_tkg2d::geom2d::Geom2dBSplineCurve;
 use rustycad_tkmath::gp::Point2;
+use rustycad_tkmath::predicates::roots::sketch_incidence::SketchIncidenceSpline;
 /// Copied poles and full knots, including wrapped closure; each native curve is independent.
 #[derive(Clone, Debug, PartialEq)]
 pub struct SketchSplineDefinition {
@@ -15,6 +16,19 @@ impl SketchSplineDefinition {
             degree,
             poles,
             flat_knots,
+        }
+    }
+    /// Exact certified-incidence input over the whole knot domain (ADR 0060).
+    /// Poles and knots are copied bit for bit; no geometry is rebuilt.
+    /// Example: `let spline = definition.incidence_spline();`.
+    pub fn incidence_spline(&self) -> SketchIncidenceSpline {
+        let degree = usize::try_from(self.degree).expect("constructed degree is positive");
+        SketchIncidenceSpline {
+            degree,
+            poles: self.poles.iter().map(|pole| [pole.x(), pole.y()]).collect(),
+            weights: None,
+            flat_knots: self.flat_knots.clone(),
+            bounds: [self.flat_knots[degree], self.flat_knots[self.poles.len()]],
         }
     }
     /// Inspect degree; example: `assert_eq!(definition.degree(), 3)`.

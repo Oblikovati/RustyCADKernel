@@ -71,21 +71,25 @@ fn definitions() -> Vec<(String, SketchSplineDefinition)> {
     result
 }
 fn incidence_curve(definition: &SketchSplineDefinition) -> SketchIncidenceCurve {
-    let degree = definition.degree() as usize;
-    let knots = definition.flat_knots().to_vec();
-    let poles: Vec<[f64; 2]> = definition
-        .poles()
-        .iter()
-        .map(|pole| [pole.x(), pole.y()])
-        .collect();
-    let bounds = [knots[degree], knots[poles.len()]];
-    SketchIncidenceCurve::Spline(SketchIncidenceSpline {
-        degree,
-        poles,
-        weights: None,
-        flat_knots: knots,
-        bounds,
-    })
+    SketchIncidenceCurve::Spline(definition.incidence_spline())
+}
+#[test]
+fn incidence_spline_copies_the_recipe_bit_for_bit() {
+    for (_, definition) in definitions() {
+        let spline = definition.incidence_spline();
+        let degree = definition.degree() as usize;
+        assert_eq!(spline.degree, degree);
+        assert_eq!(spline.flat_knots, definition.flat_knots());
+        let poles: Vec<[f64; 2]> = definition
+            .poles()
+            .iter()
+            .map(|pole| [pole.x(), pole.y()])
+            .collect();
+        assert_eq!(spline.poles, poles);
+        assert_eq!(spline.weights, None);
+        let knots = definition.flat_knots();
+        assert_eq!(spline.bounds, [knots[degree], knots[poles.len()]]);
+    }
 }
 #[test]
 fn owned_sketch_splines_match_the_mapped_intersector_on_every_line() {
