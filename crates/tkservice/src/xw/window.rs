@@ -34,6 +34,7 @@ pub struct XwWindow {
     base: AspectWindowBase,
     /// The fields, shared by every handle.
     pub fields: SharedState<XwWindowFields>,
+    native_closure: SharedState<Option<crate::aspect::AspectNativeWindowClosure>>,
 }
 rustycad_tkernel::impl_transient!(XwWindow, "Xw_Window", dyn AspectWindow, transient, interfaces: [dyn AspectWindow]);
 
@@ -62,6 +63,7 @@ impl XwWindow {
             transient: StandardTransient::default(),
             base: AspectWindowBase::default(),
             fields: SharedState::new(fields),
+            native_closure: SharedState::default(),
         };
         window.base.fields_mut().display = display.clone();
         window
@@ -178,6 +180,24 @@ impl XwWindow {
         api.flush(display);
         Some((display, api.window_attributes(display, window)))
     }
+
+    pub(super) fn retire_destroyed_window(&self, destroyed: u64) -> Option<bool> {
+        let mut fields = self.fields.write();
+        let mut closure = self.native_closure.write();
+        if let Some(previous) = *closure {
+            return (previous.original_handle == destroyed).then_some(false);
+        }
+        if destroyed == 0 || fields.x_window != destroyed {
+            return None;
+        }
+        *closure = Some(crate::aspect::AspectNativeWindowClosure {
+            original_handle: destroyed,
+            cause: crate::aspect::AspectNativeWindowClosureCause::DestroyNotify,
+            behavior_version: 1,
+        });
+        *fields = XwWindowFields::default();
+        Some(true)
+    }
 }
 
 /// The resize mode of the border moves: bit 1 left, 2 right, 4 top, 8 bottom.
@@ -248,10 +268,13 @@ impl AspectWindow for XwWindow {
         resize_mode(mask)
     }
     fn do_mapping(&self) -> bool {
-        true
+        self.native_window_closure().is_none()
     }
     /// The width over the height (of the stored rectangle for a virtual window).
     fn ratio(&self) -> f64 {
+        if self.native_window_closure().is_some() {
+            return 0.;
+        }
         match self.live_attributes() {
             Some((_, a)) => f64::from(a.width) / f64::from(a.height),
             None => {
@@ -281,6 +304,9 @@ impl AspectWindow for XwWindow {
     }
     fn native_handle(&self) -> AspectDrawable {
         self.fields.read().x_window
+    }
+    fn native_window_closure(&self) -> Option<crate::aspect::AspectNativeWindowClosure> {
+        *self.native_closure.read()
     }
     fn native_parent_handle(&self) -> AspectDrawable {
         0
@@ -313,3 +339,7 @@ impl AspectWindow for XwWindow {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "window_closure_tests.rs"]
+mod window_closure_tests;

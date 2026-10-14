@@ -73,6 +73,11 @@ impl XwXEvent {
         // SAFETY: plain integer member of the union.
         unsafe { self.raw.configure.window }
     }
+    /// The destroyed ID, distinct from the event's receiving parent.
+    pub(crate) fn destroyed_window(&self) -> u64 {
+        // SAFETY: the caller has identified DestroyNotify before reading this member.
+        unsafe { self.raw.destroy_window.window }
+    }
     /// `xclient.data.l[0]`.
     pub(crate) fn client_long0(&self) -> i64 {
         // SAFETY: plain integer member of the union.

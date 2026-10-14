@@ -153,6 +153,7 @@ def vulkan_gates(root: Path) -> tuple[VerificationGate, ...]:
     acceptance = (
         GateCommand(xvfb_example("offscreen_acceptance")),
         GateCommand(xvfb_example("lighting_acceptance")),
+        GateCommand(xvfb_example("native_window_lifecycle")),
         GateCommand(
             (*xvfb_example("native_gui_rapid", screen=(1920, 1080)),
              "--", "target/native-gui-framebuffer")

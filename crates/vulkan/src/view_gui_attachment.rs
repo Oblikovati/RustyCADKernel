@@ -1,6 +1,7 @@
 //! Replacement validates first; retained frame snapshots own their atlases through GPU completion.
 use crate::view_gui_layer::{GuiLayerPacket, validate_gui_layer};
 use crate::{Graphic3dRenderView, RenderError, RenderLayer, error::rejected};
+use rustycad_tkservice::aspect::AspectNativeWindowOperation;
 use rustycad_tkservice::graphic3d::{Graphic3dCView, Graphic3dCViewMembers};
 impl Graphic3dRenderView {
     /// Attach or atomically replace an owned GUI packet; `view.attach_gui_layer([800,600], layer)?`.
@@ -18,7 +19,7 @@ impl Graphic3dRenderView {
         extent: [u32; 2],
         layer: RenderLayer,
     ) -> Result<GuiLayerPacket, RenderError> {
-        self.require_gui_live_view()?;
+        self.require_gui_live_view(AspectNativeWindowOperation::AttachGui)?;
         validate_gui_layer(&layer)?;
         let actual = crate::view_target::capture_extent(self, self.limit)?;
         if actual != extent {
@@ -35,11 +36,15 @@ impl Graphic3dRenderView {
     }
     /// Clear UI while retaining model content; `view.clear_gui_layer()?; view.try_redraw()?`.
     pub fn clear_gui_layer(&self) -> Result<(), RenderError> {
-        self.require_gui_live_view()?;
+        self.require_gui_live_view(AspectNativeWindowOperation::ClearGui)?;
         self.install_gui_packet(None);
         Ok(())
     }
-    fn require_gui_live_view(&self) -> Result<(), RenderError> {
+    fn require_gui_live_view(
+        &self,
+        operation: AspectNativeWindowOperation,
+    ) -> Result<(), RenderError> {
+        self.require_native_target(operation)?;
         if self.is_removed() || !self.is_defined() {
             return Err(rejected(
                 "undefined or removed view",

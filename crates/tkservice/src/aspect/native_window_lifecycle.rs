@@ -1,37 +1,50 @@
-//! Delivered destruction is a terminal native target state (ADR 0017, behavior v1).
+//! Delivered destruction is a terminal native target state (ADR 0018, behavior v1).
 use super::AspectDrawable;
 use std::fmt;
 
 /// The checked operation; e.g. `AspectNativeWindowOperation::Capture`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AspectNativeWindowOperation {
+    /// Read a completed frame.
     Capture,
+    /// Render a new frame.
     Redraw,
+    /// Apply a native extent notification.
     Resize,
+    /// Bind a view to a target.
     Bind,
+    /// Install a GUI packet.
     AttachGui,
+    /// Retire a GUI packet.
     ClearGui,
 }
 
 /// Evidence that retired a target; e.g. `AspectNativeWindowClosureCause::DestroyNotify`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AspectNativeWindowClosureCause {
+    /// The matching native destruction event was delivered.
     DestroyNotify,
 }
 
 /// Original target identity survives retirement; inspect `closure.original_handle`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct AspectNativeWindowClosure {
+    /// The destroyed identity, retained after the live native handle becomes zero.
     pub original_handle: AspectDrawable,
+    /// Evidence establishing terminal closure.
     pub cause: AspectNativeWindowClosureCause,
+    /// The native-window-lifecycle decision governing this state.
     pub behavior_version: u32,
 }
 
 /// A typed closed-target failure; match `AspectNativeWindowFailure::Closed { .. }`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AspectNativeWindowFailure {
+    /// The operation cannot succeed on a known closed native target.
     Closed {
+        /// The refused operation.
         operation: AspectNativeWindowOperation,
+        /// Original target, cause and behavior version.
         closure: AspectNativeWindowClosure,
     },
 }
