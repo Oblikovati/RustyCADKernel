@@ -140,3 +140,5 @@ pub(crate) use measurements::{
 };
 #[cfg(test)]
 mod embedding_baseline_tests;
+
+pub(crate) mod embedding;
