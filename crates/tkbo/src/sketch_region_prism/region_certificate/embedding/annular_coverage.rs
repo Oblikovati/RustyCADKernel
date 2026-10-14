@@ -24,7 +24,7 @@ pub(super) enum AnnularPairCoverageFailure<K> {
 }
 
 /// Check exact context-key multiplicities; `check_annular_pair_keys(&keys,&pairs)` adds no geometry authority.
-/// Four domains and ten rows bound all work; the enclosing operation polls before and after this callback-free check.
+/// Four domains and ten rows bound comparison count; callers bound each context depth and poll before/after.
 pub(super) fn check_annular_pair_keys<K: Clone + Eq>(
     domains: &[K; 4],
     pairs: &[(&K, &K)],
