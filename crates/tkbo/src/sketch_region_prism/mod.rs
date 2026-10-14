@@ -9,6 +9,7 @@ pub(crate) mod frozen;
 mod history;
 mod outcome;
 mod surface_charts;
+mod tolerance_inspection;
 mod transaction;
 pub(crate) use outcome::*;
 pub(crate) use transaction::retain_selected_prism;
