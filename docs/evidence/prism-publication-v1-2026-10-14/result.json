@@ -1,0 +1,104 @@
+{
+  "all_tracked_inputs_unchanged": true,
+  "commands": [
+    {
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--all-targets",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "name": "all-targets",
+      "returncode": 0,
+      "seconds": 709.0774186819981,
+      "test_summaries": [
+        "test result: ok. 963 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 314.78s",
+        "test result: ok. 646 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 371.08s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--doc"
+      ],
+      "name": "doctests",
+      "returncode": 0,
+      "seconds": 1.6568802340007096,
+      "test_summaries": [
+        "test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s"
+      ]
+    },
+    {
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "name": "clippy",
+      "returncode": 0,
+      "seconds": 0.1364711089991033,
+      "test_summaries": []
+    },
+    {
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--no-deps"
+      ],
+      "name": "docs",
+      "returncode": 0,
+      "seconds": 1.5632144440023694,
+      "test_summaries": []
+    },
+    {
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "name": "format",
+      "returncode": 0,
+      "seconds": 7.723274263000349,
+      "test_summaries": []
+    }
+  ],
+  "host": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "jobs": 2,
+  "replays": {
+    "binary": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+    "pairs": 10,
+    "sha256": "752617fd76136d49152cd9707b7b07e66125b00a5384035dd0579fa3d1b86cb1"
+  },
+  "scope": "TKBO only; TKMath/TKBRep sources unchanged; no public release or application acceptance",
+  "source_revision": "3e8bb7dc394dae4bfc4295a7b3366fdfa41018be",
+  "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "tsan": "incomplete: publication suite not built or run; retained host startup control fails before program marker"
+}
