@@ -13,7 +13,19 @@ pub(crate) fn certify_captured_endpoint(
     point: [f64; 3],
     spatial_limit: f64,
 ) -> TransportedResidualReport {
-    let query = transported_endpoint_query(curve, parameter, point, spatial_limit);
+    certify_captured_placed_endpoint(curve, parameter, point, identity_placement(), spatial_limit)
+}
+
+/// Preserve local point transport as exact operands; example: `certify_captured_placed_endpoint(curve, 0., local, placement, 0.)`.
+/// The caller establishes placement usability; this query preserves the original metric decisions.
+pub(crate) fn certify_captured_placed_endpoint(
+    curve: &CapturedSpaceRepresentation,
+    parameter: f64,
+    local_point: [f64; 3],
+    placement: MetricEmbedding<3>,
+    spatial_limit: f64,
+) -> TransportedResidualReport {
+    let query = transported_endpoint_query(curve, parameter, local_point, placement, spatial_limit);
     certify_transported_residual(query, || false)
 }
 
@@ -26,10 +38,11 @@ fn transported_endpoint_query(
     curve: &CapturedSpaceRepresentation,
     parameter: f64,
     point: [f64; 3],
+    placement: MetricEmbedding<3>,
     spatial_limit: f64,
 ) -> TransportedResidualQuery<'_> {
     TransportedResidualQuery {
-        residual: endpoint_query(curve, point, spatial_limit),
+        residual: endpoint_query(curve, point, placement, spatial_limit),
         maps: [
             MetricParameterMap::Endpoints([parameter, parameter]),
             MetricParameterMap::Identity,
@@ -40,6 +53,7 @@ fn transported_endpoint_query(
 fn endpoint_query(
     curve: &CapturedSpaceRepresentation,
     point: [f64; 3],
+    placement: MetricEmbedding<3>,
     spatial_limit: f64,
 ) -> PlanarResidualQuery<'_> {
     PlanarResidualQuery {
@@ -47,7 +61,7 @@ fn endpoint_query(
         pcurve: constant_origin(),
         curve_embedding: curve.placement,
         plane_embedding: endpoint_embedding(point),
-        plane_placement: identity_placement(),
+        plane_placement: placement,
         interval: [0., 1.],
         spatial_limit,
         options: captured_endpoint_root_options(),
