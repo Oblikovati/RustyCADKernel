@@ -3,7 +3,7 @@
 #include <MeshVS_DisplayModeFlags.hxx>
 #include <MeshVS_EntityType.hxx>
 #include <iostream>
-int main() {
+static void DrawerAttributesFirst() {
   std::cout << "MeshVS_DA_InteriorStyle " << int(MeshVS_DA_InteriorStyle) << "\n";
   std::cout << "MeshVS_DA_InteriorColor " << int(MeshVS_DA_InteriorColor) << "\n";
   std::cout << "MeshVS_DA_BackInteriorColor " << int(MeshVS_DA_BackInteriorColor) << "\n";
@@ -20,6 +20,8 @@ int main() {
   std::cout << "MeshVS_DA_MarkerColor " << int(MeshVS_DA_MarkerColor) << "\n";
   std::cout << "MeshVS_DA_MarkerScale " << int(MeshVS_DA_MarkerScale) << "\n";
   std::cout << "MeshVS_DA_TextColor " << int(MeshVS_DA_TextColor) << "\n";
+}
+static void DrawerAttributesSecond() {
   std::cout << "MeshVS_DA_TextHeight " << int(MeshVS_DA_TextHeight) << "\n";
   std::cout << "MeshVS_DA_TextFont " << int(MeshVS_DA_TextFont) << "\n";
   std::cout << "MeshVS_DA_TextExpansionFactor " << int(MeshVS_DA_TextExpansionFactor) << "\n";
@@ -36,6 +38,8 @@ int main() {
   std::cout << "MeshVS_DA_ColorReflection " << int(MeshVS_DA_ColorReflection) << "\n";
   std::cout << "MeshVS_DA_ShrinkCoeff " << int(MeshVS_DA_ShrinkCoeff) << "\n";
   std::cout << "MeshVS_DA_MaxFaceNodes " << int(MeshVS_DA_MaxFaceNodes) << "\n";
+}
+static void DrawerAttributesLast() {
   std::cout << "MeshVS_DA_ComputeTime " << int(MeshVS_DA_ComputeTime) << "\n";
   std::cout << "MeshVS_DA_ComputeSelectionTime " << int(MeshVS_DA_ComputeSelectionTime) << "\n";
   std::cout << "MeshVS_DA_DisplayNodes " << int(MeshVS_DA_DisplayNodes) << "\n";
@@ -44,6 +48,8 @@ int main() {
   std::cout << "MeshVS_DA_SmoothShading " << int(MeshVS_DA_SmoothShading) << "\n";
   std::cout << "MeshVS_DA_SupressBackFaces " << int(MeshVS_DA_SupressBackFaces) << "\n";
   std::cout << "MeshVS_DA_User " << int(MeshVS_DA_User) << "\n";
+}
+static void DisplayMasks() {
   std::cout << "MeshVS_DMF_WireFrame " << int(MeshVS_DMF_WireFrame) << "\n";
   std::cout << "MeshVS_DMF_Shading " << int(MeshVS_DMF_Shading) << "\n";
   std::cout << "MeshVS_DMF_Shrink " << int(MeshVS_DMF_Shrink) << "\n";
@@ -60,6 +66,8 @@ int main() {
   std::cout << "MeshVS_DMF_SelectionPrs " << int(MeshVS_DMF_SelectionPrs) << "\n";
   std::cout << "MeshVS_DMF_HilightPrs " << int(MeshVS_DMF_HilightPrs) << "\n";
   std::cout << "MeshVS_DMF_User " << int(MeshVS_DMF_User) << "\n";
+}
+static void EntityMasks() {
   std::cout << "MeshVS_ET_NONE " << int(MeshVS_ET_NONE) << "\n";
   std::cout << "MeshVS_ET_Node " << int(MeshVS_ET_Node) << "\n";
   std::cout << "MeshVS_ET_0D " << int(MeshVS_ET_0D) << "\n";
@@ -68,4 +76,11 @@ int main() {
   std::cout << "MeshVS_ET_Volume " << int(MeshVS_ET_Volume) << "\n";
   std::cout << "MeshVS_ET_Element " << int(MeshVS_ET_Element) << "\n";
   std::cout << "MeshVS_ET_All " << int(MeshVS_ET_All) << "\n";
+}
+int main() {
+  DrawerAttributesFirst();
+  DrawerAttributesSecond();
+  DrawerAttributesLast();
+  DisplayMasks();
+  EntityMasks();
 }
