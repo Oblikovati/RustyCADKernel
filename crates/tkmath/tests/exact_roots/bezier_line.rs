@@ -4,6 +4,7 @@ use rustycad_tkmath::predicates::roots::bezier_line::*;
 mod failures;
 mod fixture;
 mod incidences;
+mod incidences_retained_baseline;
 mod incidences_degree_policy;
 mod incidences_failures;
 mod incidences_generated;

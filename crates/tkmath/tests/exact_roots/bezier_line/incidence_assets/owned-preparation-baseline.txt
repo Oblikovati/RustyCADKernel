@@ -1,0 +1,187 @@
+Ok(
+    BezierIncidenceReport {
+        source: BezierIncidenceSource {
+            curve_id: 91,
+            line_id: 27,
+            controls: [
+                [
+                    0.0,
+                    -3.0,
+                ],
+                [
+                    0.0,
+                    -1.0,
+                ],
+                [
+                    0.0,
+                    1.0,
+                ],
+                [
+                    4.0,
+                    3.0,
+                ],
+            ],
+            weights: None,
+            line: [
+                [
+                    0.0,
+                    0.0,
+                ],
+                [
+                    4.0,
+                    0.0,
+                ],
+            ],
+            interval: [
+                0.0,
+                1.0,
+            ],
+            domain: Support,
+            domain_sign: BezierDomainSignOptions {
+                version: 1,
+                degree_limit: Explicit(
+                    1,
+                ),
+            },
+            root_options: RootIsolationOptions {
+                version: 1,
+                max_width: 0.001,
+                max_bisections: 4096,
+                max_degree: 1,
+            },
+            requested_world_error: 1e-10,
+        },
+        denominator_isolation: RootIsolation {
+            roots: [],
+            bisections: 0,
+        },
+        degrees: BezierIncidenceDegrees {
+            source_basis: 3,
+            normal: 1,
+            denominator: 0,
+            origin_conversion: None,
+            terminal_conversion: None,
+            origin_sign_product: None,
+            terminal_sign_product: None,
+            effective_domain_limit: None,
+        },
+        support_isolation: RootIsolation {
+            roots: [
+                RootBracket {
+                    lower: DyadicBound {
+                        significand: 1,
+                        exponent: -1,
+                    },
+                    upper: DyadicBound {
+                        significand: 1,
+                        exponent: -1,
+                    },
+                    multiplicity: 1,
+                },
+            ],
+            bisections: 1,
+        },
+        in_domain: [
+            true,
+        ],
+        contacts: [
+            CertifiedBezierIncidence {
+                support_root_index: 0,
+                parameter: RootBracket {
+                    lower: DyadicBound {
+                        significand: 1,
+                        exponent: -1,
+                    },
+                    upper: DyadicBound {
+                        significand: 1,
+                        exponent: -1,
+                    },
+                    multiplicity: 1,
+                },
+                world_bounds: [
+                    [
+                        0.5,
+                        0.5,
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                    ],
+                ],
+                point: [
+                    0.5,
+                    0.0,
+                ],
+                achieved_world_error: 0.0,
+            },
+        ],
+        bisections: 1,
+    },
+)
+Err(
+    BezierIncidenceFailure {
+        evidence: BezierIncidenceFailureEvidence {
+            source: BezierIncidenceSource {
+                curve_id: 91,
+                line_id: 27,
+                controls: [
+                    [
+                        0.0,
+                        -3.0,
+                    ],
+                    [
+                        0.0,
+                        -1.0,
+                    ],
+                    [
+                        0.0,
+                        1.0,
+                    ],
+                    [
+                        4.0,
+                        3.0,
+                    ],
+                ],
+                weights: None,
+                line: [
+                    [
+                        0.0,
+                        0.0,
+                    ],
+                    [
+                        4.0,
+                        0.0,
+                    ],
+                ],
+                interval: [
+                    0.0,
+                    1.0,
+                ],
+                domain: Segment,
+                domain_sign: BezierDomainSignOptions {
+                    version: 1,
+                    degree_limit: Explicit(
+                        1,
+                    ),
+                },
+                root_options: RootIsolationOptions {
+                    version: 1,
+                    max_width: 0.001,
+                    max_bisections: 4096,
+                    max_degree: 1,
+                },
+                requested_world_error: 1e-10,
+            },
+            cause: DomainSignAdmission(
+                Direction(
+                    Degree {
+                        actual: 3,
+                        limit: 1,
+                    },
+                ),
+            ),
+            support_isolation: None,
+            last_root: None,
+        },
+    },
+)
