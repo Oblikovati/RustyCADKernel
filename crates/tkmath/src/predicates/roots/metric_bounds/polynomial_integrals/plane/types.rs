@@ -21,31 +21,37 @@ impl CertifiedPolynomialPlaneMeasure {
     /// Read the adjacent enclosing world-area endpoints, including underflow.
     /// Example: `let [lower, upper] = report.enclosure();`.
     pub fn enclosure(&self) -> [f64; 2] {
+        // Value copies prevent readers from changing certified endpoints.
         self.enclosure
     }
     /// Read the deterministic lower endpoint; this never overstates the exact scalar.
     /// Example: `assert_eq!(report.representative(), report.enclosure()[0]);`.
     pub fn representative(&self) -> f64 {
+        // Choosing the lower endpoint makes scalar replay deterministic.
         self.enclosure[0]
     }
     /// Read the upward-rounded enclosure width in world coordinates squared.
     /// Example: `assert!(report.absolute_error_bound() <= report.requested_options().absolute_error_limit);`.
     pub fn absolute_error_bound(&self) -> f64 {
+        // The retained width bounds error even when the exact square root is irrational.
         self.absolute_error_bound
     }
     /// Read the original admission and world-area error policy.
     /// Example: `assert_eq!(report.requested_options().behavior_version, 1);`.
     pub fn requested_options(&self) -> PolynomialIntegralOptions {
+        // The policy snapshot belongs to this completed arithmetic request.
         self.options
     }
     /// Read the effective policy; bounds and tolerance are never clamped or widened.
     /// Example: `assert_eq!(report.effective_options(), report.requested_options());`.
     pub fn effective_options(&self) -> PolynomialIntegralOptions {
+        // Admission refuses excess limits, so no hidden clamp needs reconstruction.
         self.options
     }
     /// Identify algebraic enclosure evidence without implying geometric validity.
     /// Example: `let evidence = report.evidence();`.
     pub fn evidence(&self) -> PolynomialPlaneEvidence {
+        // The algebraic tag keeps this report distinct from rational-only integration.
         PolynomialPlaneEvidence::CertifiedAlgebraicBound
     }
 }

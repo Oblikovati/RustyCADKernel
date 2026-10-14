@@ -35,16 +35,14 @@ fn duplicate_native_parent_cannot_replace_composed_parent_multiset() {
     assert_hypothesis(error, "all current composed parent dispositions");
 }
 #[test]
-fn missing_duplicate_or_reparented_face_bindings_are_incomplete() {}
-#[test]
-fn reparented_context_is_not_current_body_membership() {
+fn missing_image_bindings_leave_unattributed_body_members_incomplete() {
     let error = reject_edit(|receipt| {
         receipt.diagnostic.as_mut().unwrap().bindings.clear();
     });
-    assert!(matches!(
-        error,
-        PrismMeasureFailure::Region(_) | PrismMeasureFailure::Chart(_)
-    ));
+    assert_hypothesis(error, "attributed actual body member");
+}
+#[test]
+fn reparented_context_is_not_current_body_membership() {
     let error = reject_edit(|receipt| {
         receipt.diagnostic.as_mut().unwrap().bindings[0]
             .context

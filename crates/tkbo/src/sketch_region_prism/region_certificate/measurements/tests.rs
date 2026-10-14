@@ -50,6 +50,7 @@ fn current_jordan_cap_and_sweep_subset_completes_without_body_promotion() {
     assert!(receipt.limits.achieved_error.is_none());
 }
 fn assert_encloses(enclosure: [f64; 2], expected: f64) {
+    // Smoke checks supplement the independently pinned rational endpoint bits.
     assert!(enclosure[0] <= expected && expected <= enclosure[1]);
 }
 #[test]

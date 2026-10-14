@@ -14,6 +14,7 @@ pub(super) fn gram_determinant(columns: &ExactSupportColumns) -> ExactRatio {
     ExactRatio::from_dyadic(&dyadic)
 }
 fn dot_product(first: &[BigInt; 3], second: &[BigInt; 3]) -> BigInt {
+    // Integer products preserve cancellation in nearly dependent support columns.
     first.iter().zip(second).map(|(a, b)| a * b).sum()
 }
 pub(super) fn rounded_plane_measure(

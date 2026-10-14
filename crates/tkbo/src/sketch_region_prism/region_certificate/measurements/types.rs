@@ -51,16 +51,19 @@ pub(crate) enum PrismMeasureFailure {
 }
 impl From<RegionCertificateCause> for PrismMeasureFailure {
     fn from(cause: RegionCertificateCause) -> Self {
+        // Preserve the exact failed source hypothesis for this private refusal.
         Self::Region(cause)
     }
 }
 impl From<PrismSurfaceCause> for PrismMeasureFailure {
     fn from(cause: PrismSurfaceCause) -> Self {
+        // Keep representation and proof-stage context instead of a generic rejection.
         Self::Chart(cause)
     }
 }
 impl From<PrismCompletion> for PrismMeasureFailure {
     fn from(cause: PrismCompletion) -> Self {
+        // Legacy body diagnostics remain separate from immutable scalar evidence.
         Self::Body(cause)
     }
 }

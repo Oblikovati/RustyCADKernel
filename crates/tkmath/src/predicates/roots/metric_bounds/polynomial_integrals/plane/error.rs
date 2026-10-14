@@ -31,16 +31,19 @@ pub enum PolynomialPlaneFailure {
 }
 impl From<PolynomialIntegralError> for PolynomialPlaneFailure {
     fn from(cause: PolynomialIntegralError) -> Self {
+        // Native integration retains its own occurrence and policy context.
         Self::Boundary(Box::new(cause))
     }
 }
 impl From<ResidualError> for PolynomialPlaneFailure {
     fn from(cause: ResidualError) -> Self {
+        // Metric admission preserves the offending placed coefficient.
         Self::Metric(Box::new(cause))
     }
 }
 impl From<RootIsolationError> for PolynomialPlaneFailure {
     fn from(cause: RootIsolationError) -> Self {
+        // Cancellation retains the same root-error chain as existing metric arithmetic.
         Self::Metric(Box::new(ResidualError::Roots(cause)))
     }
 }
@@ -55,6 +58,7 @@ impl std::fmt::Display for PolynomialPlaneError {
 }
 impl std::fmt::Display for PolynomialPlaneFailure {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // Diagnostics pair the offending payload with the refused admission condition.
         write!(formatter, "{self:?}; expected {}", self.expected())
     }
 }
@@ -70,6 +74,7 @@ impl PolynomialPlaneFailure {
 }
 impl std::error::Error for PolynomialPlaneError {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        // Preserve typed causes for callers inspecting incomplete arithmetic.
         Some(&self.cause)
     }
 }
