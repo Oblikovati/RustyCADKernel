@@ -46,24 +46,34 @@ pub(super) fn require(
     actual: usize,
     expected: usize,
 ) -> Result<(), RegionCertificateCause> {
-    if actual != expected {
-        return Err(RegionCertificateCause::Hypothesis {
-            name,
-            actual,
-            expected,
-        });
-    }
-    Ok(())
+    super::hypothesis::require(name, actual, expected).map_err(RegionCertificateCause::from)
 }
 pub(super) fn holds(name: &'static str, condition: bool) -> Result<(), RegionCertificateCause> {
     // Preserve the failed hypothesis without pretending that an unsupported domain is invalid.
-    let actual = usize::from(condition);
-    require(name, actual, 1)
+    super::hypothesis::holds(name, condition).map_err(RegionCertificateCause::from)
 }
 
 pub(super) type RegionCheck<T = ()> = Result<T, RegionCertificateCause>;
 
 pub(super) fn need<T>(value: Option<T>, hypothesis: &'static str) -> RegionCheck<T> {
     // Missing evidence is incomplete; it cannot be substituted with a previous status row.
-    value.ok_or(RegionCertificateCause::MissingEvidence { hypothesis })
+    super::hypothesis::need(value, hypothesis).map_err(RegionCertificateCause::from)
+}
+
+impl From<super::hypothesis::RegionHypothesisCause> for RegionCertificateCause {
+    fn from(cause: super::hypothesis::RegionHypothesisCause) -> Self {
+        use super::hypothesis::RegionHypothesisCause;
+        match cause {
+            RegionHypothesisCause::Missing { hypothesis } => Self::MissingEvidence { hypothesis },
+            RegionHypothesisCause::Condition {
+                name,
+                actual,
+                expected,
+            } => Self::Hypothesis {
+                name,
+                actual,
+                expected,
+            },
+        }
+    }
 }

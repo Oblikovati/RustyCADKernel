@@ -8,6 +8,9 @@ mod identity_multiset;
 pub(crate) use closure_types::*;
 mod containment;
 mod history;
+pub(crate) mod hypothesis;
+#[cfg(test)]
+mod hypothesis_tests;
 mod inspect;
 mod rebind;
 mod source;
