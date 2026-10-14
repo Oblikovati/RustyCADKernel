@@ -59,6 +59,7 @@ mod topology_baseline_tests;
 
 pub(crate) mod topology;
 
+pub(crate) mod lineage;
 mod traversal;
 #[cfg(test)]
 mod traversal_tests;

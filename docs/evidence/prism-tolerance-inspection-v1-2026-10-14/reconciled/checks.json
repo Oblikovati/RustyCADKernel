@@ -1,0 +1,130 @@
+[
+  {
+    "label": "focused",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::tolerance_inspection",
+      "--",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "seconds": 129.30877566337585,
+    "log": "focused.log.gz"
+  },
+  {
+    "label": "frozen-tests",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen",
+      "--",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "seconds": 1.3257856369018555,
+    "log": "frozen-tests.log.gz"
+  },
+  {
+    "label": "clippy",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "clippy",
+      "-p",
+      "rustycad-tkmath",
+      "-p",
+      "rustycad-tkbrep",
+      "-p",
+      "rustycad-tkbo",
+      "--all-targets",
+      "--all-features",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 36.578041553497314,
+    "log": "clippy.log.gz"
+  },
+  {
+    "label": "fmt",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 6.948893308639526,
+    "log": "fmt.log.gz"
+  },
+  {
+    "label": "process-first",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "seconds": 0.8685500621795654,
+    "log": "process-first.log.gz"
+  },
+  {
+    "label": "process-second",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "seconds": 0.6445622444152832,
+    "log": "process-second.log.gz"
+  },
+  {
+    "label": "frozen-replay",
+    "command": [
+      "cargo",
+      "+1.99.0",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "seconds": 0.9478204250335693,
+    "log": "frozen-replay.log.gz"
+  }
+]

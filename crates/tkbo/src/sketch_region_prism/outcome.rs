@@ -129,7 +129,16 @@ pub(crate) struct PrismInputHistory {
     pub selected: Option<crate::sketch_region_candidates::RegionCandidate>,
     pub declared_plane: rustycad_tkmath::gp::Plane3,
 }
+/// Native copy observations retain aliases only in the private operation receipt.
+/// They establish historical member correspondence, never isolated geometry or directed pairing.
+#[derive(Clone)]
+pub(crate) struct PrismCopyObservation {
+    pub selected: ArrangementRelation,
+    pub native_image: Shape,
+    pub copied_image: Shape,
+}
 pub(crate) struct PrismCopiedSelection {
+    pub observations: Vec<PrismCopyObservation>,
     pub chart_sources: super::surface_charts::PrismChartSources,
     pub base: Shape,
     pub relations: Vec<ArrangementRelation>,
