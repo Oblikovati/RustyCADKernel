@@ -171,3 +171,43 @@ fn assert_regular_domains(certificate: &BezierPairCertificate<'_>) {
             .is_empty()
     );
 }
+fn rational_query(swapped: bool, reversed_line: bool) -> CapturedBezierPair {
+    let controls = [[0., 0.], [0.5, 1.]];
+    let rational = BezierPairCurve { controls: &controls, weights: Some(&[1., 2.]), interval: [0., 1.] };
+    let line = if reversed_line { [[1., 0.], [0., 1.]] } else { [[0., 1.], [1., 0.]] };
+    if swapped { return CapturedBezierPair::capture_pair(curve(&line), rational).unwrap(); }
+    CapturedBezierPair::capture_pair(rational, curve(&line)).unwrap()
+}
+#[test]
+fn independent_nonsymmetric_pair_source_permutation_and_reversal_preserve_exact_contact() {
+    let mut requested = policy();
+    requested.requested_world_error = 5e-17;
+    for (swapped, reversed) in [(false, false), (false, true), (true, false)] {
+        let report = rational_query(swapped, reversed).certify(requested, || false);
+        assert_eq!(report.completion(), BezierPairCompletion::Complete);
+        assert_rational_correspondence(&report, swapped, reversed);
+    }
+}
+fn assert_rational_correspondence(report: &BezierPairReport, swapped: bool, reversed: bool) {
+    let proof = report.complete().unwrap();
+    let contact = proof.contact(0).unwrap();
+    assert_eq!(proof.contact_count(), 1);
+    let expected = if swapped { 0.5 } else if reversed { 2. / 3. } else { 1. / 3. };
+    assert!(contact.paired_parameter_bounds[0] <= expected && expected <= contact.paired_parameter_bounds[1]);
+    assert_eq!(contact.point, [1. / 3., 2. / 3.]);
+    assert!(contact.achieved_world_error <= 5e-17);
+}
+#[test]
+fn distinct_tangent_endpoint_retains_actual_even_multiplicity_without_duplicate_contact() {
+    let parabola = [[0., 0.], [0.5, 0.], [1., 1.]];
+    let line = [[0., 0.], [1., 0.]];
+    let query = CapturedBezierPair::capture_pair(curve(&parabola), curve(&line)).unwrap();
+    let report = query.certify(policy(), || false);
+    let proof = report.complete().unwrap();
+    assert_eq!(proof.contact_count(), 1);
+    let contact = proof.contact(0).unwrap();
+    assert_eq!(contact.parameter.multiplicity(), 2);
+    assert_eq!(contact.parameter.bounds().0.compare_f64(0.).unwrap(), std::cmp::Ordering::Equal);
+    assert_eq!(contact.paired_parameter_bounds, [0., 0.]);
+    assert_eq!(contact.point, [0., 0.]);
+}

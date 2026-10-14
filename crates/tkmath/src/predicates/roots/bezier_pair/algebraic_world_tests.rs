@@ -58,3 +58,49 @@ pub(super) fn verify_independent_world_error(
     assert!(contact.world.achieved_error > 0. && contact.world.achieved_error <= requested);
     assert!(contact.world.bounds[1][0] <= 0.5 && contact.world.bounds[1][1] >= 0.5);
 }
+#[test]
+fn permuted_rational_pair_certifies_exact_third_root_and_actual_world_error() {
+    let proof = permuted_rational_proof();
+    assert_eq!(
+        proof
+            .candidate_certificate
+            .polynomial
+            .primitive(1)
+            .unwrap()
+            .0,
+        vec![(-1).into(), 3.into()]
+    );
+    let contact = &proof.contacts[0];
+    let third = ExactRatio::new(1.into(), 3.into());
+    assert!(ExactRatio::from_dyadic(contact.root.bounds().0) <= third);
+    assert!(ExactRatio::from_dyadic(contact.root.bounds().1) >= third);
+    assert!(contact.u_bounds[0] <= 0.5 && contact.u_bounds[1] >= 0.5);
+    assert_exact_third_world_radius(contact);
+}
+fn permuted_rational_proof() -> super::operation::PairOperationProof {
+    let left = OwnedBezierSource::capture(&[[0., 1.], [1., 0.]], None, [0., 1.]).unwrap();
+    let right =
+        OwnedBezierSource::capture(&[[0., 0.], [0.5, 1.]], Some(&[1., 2.]), [0., 1.]).unwrap();
+    compute(
+        [left, right],
+        false,
+        RootIsolationOptions::new(0.01),
+        5e-17,
+        &mut || false,
+    )
+    .unwrap()
+}
+fn assert_exact_third_world_radius(contact: &super::operation::PairContact) {
+    let exact = [
+        ExactRatio::new(1.into(), 3.into()),
+        ExactRatio::new(2.into(), 3.into()),
+    ];
+    let mut squared = ExactRatio::from_finite(0.);
+    for (coordinate, expected) in contact.world.point.iter().zip(exact) {
+        let delta = ExactRatio::from_finite(*coordinate).subtract(&expected);
+        squared = squared.add(&delta.multiply(&delta));
+    }
+    let radius = ExactRatio::from_finite(contact.world.achieved_error);
+    assert!(squared <= radius.multiply(&radius));
+    assert!(contact.world.achieved_error <= 5e-17);
+}
