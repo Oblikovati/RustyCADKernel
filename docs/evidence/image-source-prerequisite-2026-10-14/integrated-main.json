@@ -1,0 +1,41 @@
+{
+  "source_revision": "5e493a414e625b080040148d75b9459f99d3ccb7",
+  "date": "2026-10-14",
+  "platform": "Linux x86_64",
+  "candidate": "c9841b4a23b05356c2b2764ce426a500b9074c32",
+  "source_hashes_match_candidate": true,
+  "tests": {
+    "library": 147,
+    "toolkit": 162,
+    "doctests": 1,
+    "failed": 0,
+    "ignored": 0
+  },
+  "checks": [
+    {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p rustycad-tkservice --locked",
+      "exit_code": 0,
+      "log": "integrated-tests.log.gz",
+      "sha256": "1a7a3913773cabafa6deaf12219968f1fc782edc79c42ab871cbef3e79133e39"
+    },
+    {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 check -p rustycad-tkv3d -p martensite-vulkan --all-targets --locked",
+      "exit_code": 0,
+      "log": "integrated-consumers.log.gz",
+      "sha256": "ec75159bdeabf06a21b69e48192c9b6a0733fbf131514b0a201f9724cf6b15cf"
+    },
+    {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 clippy -p rustycad-tkservice --all-targets --locked -- -D warnings",
+      "exit_code": 0,
+      "log": "integrated-clippy.log.gz",
+      "sha256": "55c398e5b55ee7c7d944ed872222ffbeef734fbc374dbbdcbdf5706079056412"
+    },
+    {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 fmt -p rustycad-tkservice -- --check",
+      "exit_code": 0,
+      "log": "integrated-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  ],
+  "scope": "Typed mutable image builder adapter only; original concrete allocation behavior and fixtures unchanged. No constructed owner or old dump branch imported. No GPU, package, performance, or full ToPixMap acceptance claim."
+}
