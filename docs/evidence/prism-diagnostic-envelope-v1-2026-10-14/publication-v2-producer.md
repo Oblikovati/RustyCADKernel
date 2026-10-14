@@ -32,3 +32,17 @@ remains incomplete because of the already recorded unchanged-host startup
 failure; no redundant control was run. No native OCCT, GPU, controlled release
 performance comparison, public refusal completeness or application acceptance
 is claimed.
+
+## Independent scoped review
+
+The coordinator assigned `/root/immutable_mesh_topology_candidate` a read-only
+review of fixed source `8d04f0896`, baseline `75dab08f3`, structural prefix
+`b83215772` and evidence `8adbd8373`. The reviewer accepted the bounded producer
+scope with no blocker: exact V1 selection, explicit V2 retention of actual
+phase/class/cause, unchanged outer callback precedence, absent-child semantics,
+and unchanged final source/history gates. The reviewer verified the eight
+changed source hashes, 12,858 source bookends, archive hash, recorded 42 tests
+and 35 doctests, and all two-process replay payloads. V2 differs only in the
+recorded requested-version field. The reviewer made no edits and ran no builds
+or tests. The coordinator approved proceeding to the adapter once the separate
+sealed-packet dependency review resolves.
