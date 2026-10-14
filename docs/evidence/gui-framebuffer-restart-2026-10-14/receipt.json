@@ -1,0 +1,339 @@
+{
+  "source_revision": "f4f714f7aea6b060b081833a290900f952fb9d70",
+  "date": "2026-10-14",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "environment": {
+    "DISPLAY": ":1",
+    "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+    "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+  },
+  "lavapipe_override": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+  },
+  "runs": [
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/amd-rapid-0"
+      ],
+      "exit": 0,
+      "seconds": 6.077035125000009
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/amd-rapid-1"
+      ],
+      "exit": 0,
+      "seconds": 6.277143921000032
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/amd-rapid-2"
+      ],
+      "exit": 0,
+      "seconds": 6.477255993000028
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/amd-rapid-3"
+      ],
+      "exit": 0,
+      "seconds": 6.377778216000024
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/amd-rapid-4"
+      ],
+      "exit": 0,
+      "seconds": 6.477849730000003
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/lavapipe-rapid-0"
+      ],
+      "exit": 0,
+      "seconds": 6.477587386999971,
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json"
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/lavapipe-rapid-1"
+      ],
+      "exit": 0,
+      "seconds": 7.436698012000022,
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json"
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_acceptance",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/amd-acceptance/overlay"
+      ],
+      "exit": 0,
+      "seconds": 0.465475855999955,
+      "icd": "/usr/share/vulkan/icd.d/radeon_icd.json"
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_acceptance",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/gui-framebuffer-evidence/restarted/lavapipe-acceptance/overlay"
+      ],
+      "exit": 0,
+      "seconds": 0.9157278140000358,
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json"
+    }
+  ],
+  "source_sha256": {
+    "crates/vulkan/examples/triangle_edges_capture.rs": "286f0edc4be8d796c1fe360fb8cf6530a2b0f531fb110c995d21a59632465733",
+    "crates/vulkan/examples/ais_textured_shape_performance.rs": "56d14dfa4fac4617fc7b9089319db0828fba3ca0b7b8c65083897a7ec2420f03",
+    "crates/vulkan/examples/oit_performance.rs": "c6892105a55a0e3d31472ba82aab36b0a6fa3f3a1ae5cc8c15dd5a1db0b9ffb5",
+    "crates/vulkan/examples/window_capture.rs": "3652b9dc777e1dc781bc7ee83a50813266e5a718e9bae2105904b107382bf936",
+    "crates/vulkan/examples/blend_native_functional.rs": "2bb87a78e575dfee8127b5e503984e41d30c04697eca7694906816ab00bb6d16",
+    "crates/vulkan/examples/clipping_transport_performance.rs": "de1f77859737bd127c47e1751e4c9049c61c6238b26c96dd0f6cc8c090fe5b72",
+    "crates/vulkan/examples/text_capture.rs": "2c175eae6a65f40bef7fbd80eb983a082bceb890c013b3d00176c64e230c04d5",
+    "crates/vulkan/examples/decal_text_performance.rs": "b61a73d3912c89006d710e18658861d1d4cfd50a7a909ae42899100ab72a6cc8",
+    "crates/vulkan/examples/ais_colored_shape_performance.rs": "e18dad1272940329b33bdbeb8ec6bb9dfffa67ec5b1ac492bd6b2db055c0801e",
+    "crates/vulkan/examples/fixed_lighting_capture.rs": "d3193b6d8c561975d76490b581136881b5d8ada786f149371ac57a0b82f2e7e1",
+    "crates/vulkan/examples/ordered_stencil_capture.rs": "37efefdec47385addfc694e9ffa169cff13d5bcb31767febb744e49f60456016",
+    "crates/vulkan/examples/xr_device_performance.rs": "2b6f3e38b8244c23c7f95f1fdde3f52b91f0ed62533cd35e4203378ba095c79e",
+    "crates/vulkan/examples/subtitle_native_replay.rs": "adfad225354746aa005331f768463509ad01c0774907f18a548ded92d7b67553",
+    "crates/vulkan/examples/pixel_text_capture.rs": "157b8c3318fcae68757ece36994a98671c50ddb592838cd2c0f26f4ade0117ec",
+    "crates/vulkan/examples/ais_point_capture.rs": "276a333f5b2d324e7911e4b11a9c73b9d844afef653a9338822c37cdb1025739",
+    "crates/vulkan/examples/object_animation_capture.rs": "1b4c885b1f046f02aa29a1f3e37731421ff5f070c9f621f4719e0fb7b3953d33",
+    "crates/vulkan/examples/ais_trihedron_capture.rs": "784a89f396adb4603b4a192fa782e0705c233bc6bc1bd5ffc271e77a251c6836",
+    "crates/vulkan/examples/ais_light_source_capture.rs": "b88c90fceb10b8e043386e5c4eed1817a858b9dbc3cbf3761de7831c6f39aee1",
+    "crates/vulkan/examples/ais_text_label_capture.rs": "9ad3181d4d999c8fd2334e112e5f6247173174a84795cfe5169f3872795d7472",
+    "crates/vulkan/examples/blend_functional.rs": "c0d27f9b73f451ea9c39cad5b951b720a65905ef95cc1df81955094c10971990",
+    "crates/vulkan/examples/subtitle_text_capture.rs": "9b7ea878f4af18fd7ccd9737f009357fc5ff8a141873a5d848fe43612dcdc1c8",
+    "crates/vulkan/examples/plane_trihedron_capture.rs": "abccff076b1a02676b50fdc5b8872896f33d8d6d8fc5ed0f647a700733a1b5c9",
+    "crates/vulkan/examples/graphic3d_capture.rs": "95a8d13efc3291e99fea2c5db362ca16a34c48d0b363d15b2332088134a834b3",
+    "crates/vulkan/examples/text_culling_performance.rs": "b4c57837b24f285441be3fc04a62ccb3f7fa8f1987fdc0d7e93fd723fdefacc5",
+    "crates/vulkan/examples/lighting_capture.rs": "428389663febfdd8b3154392f812ec79c630a072bb3be8e872e2f520c8aa92c8",
+    "crates/vulkan/examples/group_flipping_capture.rs": "4863782be6263014b25231ebb4bcb235958b2469bc5642061552b80faf336149",
+    "crates/vulkan/examples/ordered_stencil_performance.rs": "7f8caaf13778a709ac5edc2a05431176fac5a4abb413a31ff051d70541e5de6d",
+    "crates/vulkan/examples/oit_transition.rs": "e5186036385afa9a7986533d2aa3fc130f2b6d04f99e7bc4bf0bfb569c86041a",
+    "crates/vulkan/examples/text_culling_capture.rs": "5024cbddd406b88b11ef2c5b97fe0173385e6f84357db70583091eb9e23bac6e",
+    "crates/vulkan/examples/blend_text_capture.rs": "1d9d97c0ecca002e4dfdbf1677d40b55829d4a02499f8bb282fc7fddc6272d15",
+    "crates/vulkan/examples/blend_text_performance.rs": "71ef69bcac6c0aa65e5c7bebada460e4c794d9fce74958aedf3e8dc4b52381a1",
+    "crates/vulkan/examples/ais_axis_capture.rs": "b937fcd38d3b3a5acd254f0432df0ab5512eba425d647b853ef684efa188a829",
+    "crates/vulkan/examples/xr_device_capture.rs": "f2b3daa90c3f7c1a9eeb1696852464923e7eab42847e8b88fe6c8367552df030",
+    "crates/vulkan/examples/lighting_acceptance.rs": "dda82d2e224c1f7ff1383bd3380dea65b28e6fd2470b1beed0a295a67370e5be",
+    "crates/vulkan/examples/oit_capture.rs": "de63d52b072e3e48f34938bbf4b5684d7eaec95cb0b07f0d72b7516166d06d82",
+    "crates/vulkan/examples/fixed_lighting_cap_capture.rs": "0368bdcb3e97f4e52f8cfbcef551af09d02078edbda60da1e6ecde2f0635efb0",
+    "crates/vulkan/examples/plane_presentation_capture.rs": "84c64c6d40bd0f8a1f64ae98af90ff382d7c8ad49c2359fad16b66162943d2d8",
+    "crates/vulkan/examples/ais_capture.rs": "6866ec5d564e9dc8bb4ae54c3400d3625f3804f47eb160979ddb74ee63fb48ee",
+    "crates/vulkan/examples/native_gui_rapid.rs": "4f40c99e8fed41f735ef047abcbcaff8fb4289fde11b509b481fbc73e94095ae",
+    "crates/vulkan/examples/native_gui_acceptance.rs": "604f3f223f09103ef1841f214fa326a909a1d2b2c3b6d568ff75249db155770a",
+    "crates/vulkan/examples/window_acceptance.rs": "7c4d4ba360735e2eb9299f2eeb220c90c1a7a7c2fd2991f4a7583a3c18d43d96",
+    "crates/vulkan/examples/triangle_edges_performance.rs": "fdc94f495477855aa16a3f27a04eb885026dd644787407607c3044f9972e852c",
+    "crates/vulkan/examples/blend_color_probe.rs": "a82abbb9243bdaebce3079ae644736eb3eb396e72f18e612ab9f689850c3905c",
+    "crates/vulkan/examples/surface_texture_performance.rs": "abb4d92c0e60c501e6608fb226ba18f0d47e65add41adcf87614beabc9a18394",
+    "crates/vulkan/examples/quadrangle_capture.rs": "586bc662484464e0bda6f2e309c965e0d4b6ad94bd71c60e5116df6ac17be44f",
+    "crates/vulkan/examples/clipping_acceptance.rs": "e89cb33f2ee910670178bfca01dbd78eea23f3c0310ceedb7d104d0745bb0517",
+    "crates/vulkan/examples/texture_generation_capture.rs": "6c77583fbecab8f4c5d39b1d0da68e2053c0879df21de3aeb5c5a6fe70b9c946",
+    "crates/vulkan/examples/view_cube_capture.rs": "4e689bd77e773d083bdd9956e01887269c24f4c11e13a7301e81d3c84a27704b",
+    "crates/vulkan/examples/capping_acceptance.rs": "838cb4d17074c0721f920b075eead1e5232dcc3fe792f5d16ea0f2fb4b27e70e",
+    "crates/vulkan/examples/ais_plane_capture.rs": "634802131124abff50eeffdeab053fa53fb74d21e8e0b2598fad96c2afd98a77",
+    "crates/vulkan/examples/renderer_performance.rs": "b7910155a96c569684b42244262f475b0d06be967ff2c9af77f45c2739e1911f",
+    "crates/vulkan/examples/subtitle_functional.rs": "f5a79a13c5f3053cb307411b72d5b4db05609fcf0ebb18ec9824a5b23f9e5b19",
+    "crates/vulkan/examples/material_probe.rs": "dc02a2652833c6e42be87fedcfd8489c057784e840889f8e9268ca5ee8f87d02",
+    "crates/vulkan/examples/ais_line_capture.rs": "17a229306c27c2bd6d706a28948025f285ecf94d8840523f6c74f81c88b59173",
+    "crates/vulkan/examples/ais_circle_capture.rs": "b4ff02e53ece7d41ab9ea4b4900a7fe3c8b8f1c6012c276a8d2c2eb3dd9bf482",
+    "crates/vulkan/examples/subtitle_text_performance.rs": "eecfb3c54e48bb9087c326b99668f40cd13e8cbadb400b17b50f73eff47b3db9",
+    "crates/vulkan/examples/texture_dependency_performance.rs": "c16ab2cc55d5c98cf7a9c9f1cb2301de67fe0020b9ff21fe1c3e34b5da0fad37",
+    "crates/vulkan/examples/native_gui_performance.rs": "9af6b817017ed376743534da7749a6e6a54df78891b5e25cb78d43d164bc97cb",
+    "crates/vulkan/examples/offscreen_acceptance.rs": "26edca1d09e59e53b58e4a00ed24bc4d5e4d7b662c6a2acae1fdec55cb7bad47",
+    "crates/vulkan/examples/ais_rubber_band_capture.rs": "50132047b2abe4d58b1252af14860a99beb9c0efea462cd4714f971924276412",
+    "crates/vulkan/examples/ais_textured_shape_capture.rs": "6a092a0f5018d91ed92181175977938b56f864d5cdcecf99858eaabdba71d7ae",
+    "crates/vulkan/examples/blend_native_replay.rs": "438691cddc09b97d05337b8d6ae455b9ca4d539f8fdf0e58ce154c16ae8b97ce",
+    "crates/vulkan/examples/decal_text_capture.rs": "2335fd7b9baae7f2633eae7f6037039efc6a7d11f26758f9a0edb630898403f9",
+    "crates/vulkan/examples/ais_colored_shape_capture.rs": "aed90f71a17df1c33b0bdda4d70a664c9bf0cf657ca521ab4a4e378f39c19c70",
+    "crates/vulkan/examples/fixed_lighting_texture_capture.rs": "bcd52703d1a8be38917e42870b0a0cdfc3cd6efca9a9a253b6cdfd007c108ac1",
+    "crates/vulkan/examples/view_cube_performance.rs": "0fa552c344e3d4f8dca7c6e9df3b01f8e9e829ec30d1e5d7900d5d5f3e93c783",
+    "crates/vulkan/examples/decal_functional.rs": "777c483d6e4fdb75ae41a62fecf0631b382eef8a5d6f8b04ea88e70e49dd1493",
+    "crates/vulkan/examples/fixed_lighting_performance.rs": "198dbde5e6648ba88b7a582877c789a885a1a6f1feafe7b8877c5bdabfc7538b",
+    "crates/vulkan/examples/capping_texture_edges_performance.rs": "c8874f5ff13a490feb53ffc48efe01f93944a79530f0b7e9b79b9e8e0a269275",
+    "crates/vulkan/examples/capping_texture_capture.rs": "c6bc4e416fdf9b923d22a31c6831acc531b22a93aa60cde77437bd72905d762c",
+    "crates/vulkan/examples/decal_native_replay.rs": "db6cdf42d10f7b3caa2bf421488a9649c5e0769d235ffb67360496f66fe0670c",
+    "crates/vulkan/examples/surface_texture_capture.rs": "28633dbccb255253ab161d8ea190608b2caaba59ed251e7ae7d1bb8be30c8ffb",
+    "crates/vulkan/examples/shadow_text_performance.rs": "ae199f45defc545a776f1eb8408105084683f02b645e998a8addac94ff026a66",
+    "crates/vulkan/examples/ais_point_cloud_capture.rs": "bcf7a7cc4740970e999e7650e78791d8e855b11af040fa72accd530e360cc529",
+    "crates/vulkan/examples/support/decorated_text_capture.rs": "d31341171d741b52946804e8d9ea2f7e590e9bbf06a6f16c9343730c50e2da9a",
+    "crates/vulkan/examples/support/group_flipping_performance.rs": "8ff47778a8c6637de51e322816547e5963224d05a805d775b143dee767fe6fab",
+    "crates/vulkan/examples/support/window_runtime.rs": "64d099d31ddfb1916904c0880073442f56d2302e270dbb3069441b2def199be1",
+    "crates/vulkan/examples/support/ais_point_cloud_performance.rs": "973b6e191fe541042b79dc05bb0c270d5818947894cc2678ad542979e38d64d3",
+    "crates/vulkan/examples/support/text_performance.rs": "418a573f4f32dd176f2c6f9c1003ee8e3d47d5b93f67afb7475a597915ac8979",
+    "crates/vulkan/examples/support/ais_point_performance.rs": "1aaec66c6c7271fd85e5b5fed3fdeffba38452e4374f4ed115a953ae5a4cb063",
+    "crates/vulkan/examples/support/blend_native_basic.rs": "6fd9f9685e14b114769830ee97d9e6caaf5795b06d4d2c0fc2e69c837bbabea1",
+    "crates/vulkan/examples/support/gui_timing_samples.rs": "10cfe61c3444b6679e1e12d8ede3dfa40a5136bb2c97d6b2f4d3477a483522b1",
+    "crates/vulkan/examples/support/line_alpha_goldens.rs": "8c46e5c02a94565562f2cbdb96051407da981eb1e3bcd844f57d05769de96831",
+    "crates/vulkan/examples/support/bound_performance.rs": "67af1d2f63b50ab64f9ef94bb4d74772c56e550b7f2f1ddb6b72c13aa82b959f",
+    "crates/vulkan/examples/support/ais_rubber_band_performance.rs": "5b584be6c448d1930c056eb3f9592be13d47fb0b266196cee3267107d70de769",
+    "crates/vulkan/examples/support/native_window.rs": "14d1da35fa40840f189debfd7060f6d49bf4a0e89b6480af494c57cfff38fff4",
+    "crates/vulkan/examples/support/ais_line_performance.rs": "7fb00385ab786f87f36304e6d77efc2c088881adc418805ca48e4c15ad2951a0",
+    "crates/vulkan/examples/support/ais_performance.rs": "27915ddb21de65327cff2c7b267364baaafb697439fb94837753ec646b1efcb2",
+    "crates/vulkan/examples/support/plane_trihedron_runtime.rs": "19f94416f9056e450ff836aae89e0c3c589ebb9dd4c5e797c6a75f186d91b04e",
+    "crates/vulkan/examples/support/ais_axis_performance.rs": "80d7228d2905c21c0756a738ba422a87fe2521f9b5c4d4bf00b1c45ec3dd07bd",
+    "crates/vulkan/examples/support/blend_native_pixel.rs": "402d2ece6e6271b0d9f7529d23727e2927b0f95f1fc6b5cda22adffa151617f9",
+    "crates/vulkan/examples/support/clipping_performance.rs": "e87461ba3b93d1907d99276bed780abbcfe92a53b52331d43efa496a7f114a25",
+    "crates/vulkan/examples/support/polygon_offset_runtime.rs": "0117b7b0d36bcf3d57899e98d6d0de9d114155d2f6565fbe7ef2b29f91661ecd",
+    "crates/vulkan/examples/support/text_capture_request.rs": "5fe6bb7f65565c205c0237b246ad987a9ea88843cd1697ac15b109a241ac65da",
+    "crates/vulkan/examples/support/ais_trihedron_performance.rs": "ae35b9a5eb7c9e14807b798dbc6d1d5591131a000c7898435affd51486a4134e",
+    "crates/vulkan/examples/support/blend_native_extras.rs": "805b5994c1571afed04729cf951ac0ada1027adbfe26862dd4f78fbb287c0432",
+    "crates/vulkan/examples/support/plane_presentation_performance.rs": "75876e85ed58e467f81bbdca6107ac291fa881f1e808f9dae22fc5322782418a",
+    "crates/vulkan/examples/support/blend_native_assets.rs": "d606ee1547fa619524857736206c7007aa6b72d6047b156e36c22006406608c1",
+    "crates/vulkan/examples/support/line_lighting_acceptance.rs": "630ef0bd2a2b9d9a16307549ff48e7287cc263912bec3b0dcb4077cbaeacf864",
+    "crates/vulkan/examples/support/ais_lifecycle.rs": "791981fa0f3294b417a79a83531d938d3fb3d2db837367820a49b17b9dcfaa8b",
+    "crates/vulkan/examples/support/plane_trihedron_performance.rs": "ab9c1b0c88eaf7f46a85394744aa429fa1a01d9513ce1ea17644f3b1c7b4475d",
+    "crates/vulkan/examples/support/fixed_lighting_updates.rs": "365da42f8c42a9379d73383d5cb12352b794d46d3cab49deec95b516d15b3d14",
+    "crates/vulkan/examples/support/text_family_request.rs": "0d2ad26499d48cecf0d2e6f5db62bd52d141ae14c07038449b14d746673747f8",
+    "crates/vulkan/examples/support/retained_redraw_samples.rs": "7843120971ea01ed634f67c1e20740ada36899ecb40b0757ca78ec2ab5df7c94",
+    "crates/vulkan/examples/support/capping_performance.rs": "867f870d864c2189329154e51d7d32681e6e90d6c28f397f5e9509fa205e99d7",
+    "crates/vulkan/examples/support/native_golden.rs": "5d5d2b41a7649a999b72e11e054650fb9773013ee1b93aca672908d7db18789e",
+    "crates/vulkan/examples/support/device_options.rs": "47d989bede51c052c7c3dfceadd937dbf9b25af690174c1c4e4bdade39710dfd",
+    "crates/vulkan/examples/support/camera_animation_performance.rs": "15ea275760cab2ffd2b0a4d395c5db062ccd34f9c61bd32118cea6a5601d3e54",
+    "crates/vulkan/examples/support/surface_runtime.rs": "af1d64227e1ade466755f30ad7b74f87075620273fc3ddef01167521f7eb8125",
+    "crates/vulkan/examples/support/gui_acceptance.rs": "032a5fe9896184b85e155133c954442d19f17d5938f3861e7a5a58ffc8493d90",
+    "crates/vulkan/examples/support/ais_circle_runtime.rs": "cc4172704ce38c853d1847f921a1a0445a3ed9a02c11bf5d7ba3de520e3ba991",
+    "crates/vulkan/examples/support/fixed_capture_arguments.rs": "564252f052856304cde5154a2faf345fb33bc614373f72bebdae2ff2850fbf5b",
+    "crates/vulkan/examples/support/decal_native_decals.rs": "e4baa4653bf4169e7ce5cbb3917be7422b7256606b64b6a368fed4d6a3c56b97",
+    "crates/vulkan/examples/support/blend_capture.rs": "a2b717ea14415c83c8c3d58239ade72ac1ca7891754e8e29939247b5e610b61b",
+    "crates/vulkan/examples/support/color_runtime.rs": "e7407d56987a4ca103f66cd6ac974b9b546be5088cd9645ae4a790732bf6d4a8",
+    "crates/vulkan/examples/support/gui_native_extent.rs": "e19220e601d6fa61613e15e1d65414df32a0a510b44bd93d6d06f475b6698c6c",
+    "crates/vulkan/examples/support/alpha_redraw_performance.rs": "ee56b90c880487bc117ab1cb5cceacc94a1ae69c672a1acb56c6ab1ea3e6439f",
+    "crates/vulkan/examples/support/line_alpha_performance.rs": "585b0dba5f599e07a9fbbf3385ca55dbb72385dc1beeb61099de6b088e56151d",
+    "crates/vulkan/examples/support/view_capture.rs": "15f56e66a8632f6531b110e97ede7815146ae20fe0d33b4565c7fee1b2324b81",
+    "crates/vulkan/examples/support/ais_removal_runtime.rs": "d74fe42197f9a6665d20af8a5b174a27bf40416e9084b250636838ed7243184d",
+    "crates/vulkan/examples/support/capture_request.rs": "ec2d84a5f7b1325b90d8595b3566e2eac6e67f43127bfbcd5ebfd099b03d14c7",
+    "crates/vulkan/examples/support/ais_axis_runtime.rs": "f22946b710d8a8396bc030df3bed095e67ddc5037c7398d56ea86c8e14d45717",
+    "crates/vulkan/examples/support/lighting_performance.rs": "9ac6f2531612eed84320524fae87c422944a8be5c01f5b81fe13df041d35567e",
+    "crates/vulkan/examples/support/ais_circle_performance.rs": "fb3b8cad5c94198660a49ec9e6feaee73625d67ac1c557bc037aaa4fd015ffc9",
+    "crates/vulkan/examples/support/ais_point_runtime.rs": "716391388d8728b83dafbd00238cfef554f1cd772d3573b202be7c67398d7f5e",
+    "crates/vulkan/examples/support/ais_text_label_performance.rs": "76612991b6d6ecc4678a6777590b9690a4da2bdcb99141f36309c50ac4200550",
+    "crates/vulkan/examples/support/pixel_text_performance.rs": "f5baba11b0a14ab1967635a23dcb80aeae20524bc11cc23ea5e1b1be133fe128",
+    "crates/vulkan/examples/support/decal_native_shadows.rs": "c855ed0dd791d48c605f20afe63bac58c1784c53773f93bab6e8386da8ff5b1a",
+    "crates/vulkan/examples/support/persistence_runtime.rs": "6b917e7c5f57b1be7c8ef2c5e858d26bdaa20d3d349a1c505d9914162c03b328",
+    "crates/vulkan/examples/support/rapid_gui_framebuffer.rs": "35384d96e0e8043ef4f0bc4c0228986aad1b4c09d6553a8286ed23563eb2ce5f",
+    "crates/vulkan/examples/support/subtitle_capture_scene.rs": "eb05a62c2aa803ea0b37d6391d100fff069dc6957b32f66aabf4cd9b0f30d8be",
+    "crates/vulkan/examples/support/transparency_acceptance.rs": "330d15c32e78fedc360a7bcab2ddd6bcc4c6f4221988916ed0ef3e93b3a53006",
+    "crates/vulkan/examples/support/lighting_geometry.rs": "fb3caef191bfc96412abe53e7059cc2d58a73dbd50869f8a3fc26e5c44e249a1",
+    "crates/vulkan/examples/support/point_alpha_runtime.rs": "a44bb4252111ce0794b7602d8da9afe90837ad5a88448566bdec1aa5371adcdd",
+    "crates/vulkan/examples/support/viewer_runtime.rs": "ae2d0c9692635f87d20da58d2bd0aa8be292b1bb3a193843b0a7b67a8f1d011f",
+    "crates/vulkan/examples/support/stdprs_runtime.rs": "47877a6ccc1788df20900b4f5b9babdf92c55793998bbb6b5640e7b24c9ea80b",
+    "crates/vulkan/examples/support/homogeneous_performance.rs": "a310fe15a18a1bb3dd49c92edef9c4d18b36226ceaeb3991c1f963a14cf85248",
+    "crates/vulkan/examples/support/decal_native_subtitles.rs": "0bdd27cb6f429afc520e5ecb06425eaa16a602a7183dcaeb7d96acfb752f11c2",
+    "crates/vulkan/examples/support/point_alpha_goldens.rs": "9e92ae91fedbf176b0e0d20cea761c89b7fcb4539ef6148da7f99661ad519369",
+    "crates/vulkan/examples/support/text_runtime.rs": "8f204a1a663b31965b8e240494b8b29d8fe8c6ce2118a5958d6c4a3599bd001e",
+    "crates/vulkan/examples/support/object_animation_performance.rs": "5238b83b5c2aa4faffddbf4c139925730bfd3942ec84308b480e551699d1ec4d",
+    "crates/vulkan/examples/support/blend_boundary_runtime.rs": "6d4269caa349ab72aaeac9cdbadd6a3904bba8b4fb7437f7fca02a28e91d636b",
+    "crates/vulkan/examples/support/retained_text_performance.rs": "226052b81f58349b469752f1aac09b0b84514305e3983e84f7ab1d09cea1a253",
+    "crates/vulkan/examples/support/capping_runtime.rs": "d53ac77bb359fc61de6a1467d2b49166be5fd1f3c046e5d7036ec64c969f108f",
+    "crates/vulkan/examples/support/ais_runtime.rs": "799b05f1d0aa5910c47b58fe9c5d1865963d5cf69bdd11f34143ef93241eae7c",
+    "crates/vulkan/examples/support/ais_plane_performance.rs": "0e9abe3f76d8a441a044fbd09a518cd6300b6d8c6af4c9656bb29044b86a79eb",
+    "crates/vulkan/examples/support/line_alpha_runtime.rs": "cec6ac320f08669f0771704ba34394e9c143f488168fbe45616701537b82c813",
+    "crates/vulkan/examples/support/ais_line_runtime.rs": "bea48ae3ff0a3b9e98ddaadda6ddf3723147ee9109446e48e668f3196d6e7777",
+    "crates/vulkan/examples/support/window_performance.rs": "a2e1ade7d49f60c55a11716b92a9dc4ec02c8557858c09dce6269e388358950e",
+    "crates/vulkan/examples/support/persistence_performance.rs": "83c11a37ab1baeaf5338478b5d408f423f6c0c2978a06e751d6fa85f0e715b55",
+    "crates/vulkan/examples/support/curve_performance.rs": "eeb5c46511960c94d2b37364062a1b1bc7ed018bbd00530d35bf20d0506b578a",
+    "crates/vulkan/examples/support/window_scene.rs": "40194764f20f25fd5aee5e6b56233d2eec88a155e3914e15429a8841a69e8047",
+    "crates/vulkan/examples/support/decal_native_assets.rs": "51f6f9d855a2bfbd82f31e6cfc466314ddfd2e268e8b034c4df41b0e0eea6544",
+    "crates/vulkan/examples/support/framebuffer_capture_image.rs": "77d4d9f1db212b6bbab36a26a5d58262be24b1fc8f694a8fcd7404f114e12bf9",
+    "crates/vulkan/examples/support/point_alpha_performance.rs": "b60531e12bc0f97ba09f8750ae46ae2ba5121b795bd62e5f6a776b8e836b3ff7",
+    "crates/vulkan/examples/support/gui_acceptance_scene.rs": "0f23da450634dc46d22404be3c3e90c20afab3ab6da51203c4c4fc1f11c92ea5",
+    "crates/vulkan/examples/support/line_runtime.rs": "a8f383be6120d57031eed49f6232fce4d7fe5ee2dd13543d28537cb2cf973ac8",
+    "crates/vulkan/examples/support/gui_performance.rs": "f2f0d54bf89fb19470a3af7bd6dc424b7e6b1967615a39710aaf1bc28e546712",
+    "crates/vulkan/examples/support/subtitle_native_assets.rs": "87bef3d973dfeb3993dd2b054dc3856661951af036fab05680659fd608158736",
+    "Cargo.lock": "53fef96fad424c314b571b2fb4e2a6075e208afe5f8e8914ca47499c515c6812",
+    "crates/vulkan/Cargo.toml": "544605e763662537e663b23f192b36545825325daf73e3abd59bf2ab59fed1ed",
+    "tools/release_verification_plan.py": "0fd6b41fe64e7b96c51e44494bb52b9f0be8316f6147d0256f0194472f9a31c6"
+  },
+  "external_sha256": {
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_rapid": "c984f0d7b3071ff6d4b8d87444fe86cce83f4ae23d0b368ff2ef33389222e051",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-diagnostic/target/debug/examples/native_gui_acceptance": "b7bcaf3a07d3177bd6afb3a1eb8780169aff3f2b375b032f93301b91e309a368",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json": "f328caf95d75607075575cf5849b4e765f9eabe111ea5be7f971c92a9a7d1a58",
+    "/usr/share/vulkan/icd.d/radeon_icd.json": "bca32a660ca32a42b598d53cdc63b3e3e917ea40c0b3b1e00fdbd3115280b51d",
+    "/usr/share/vulkan/icd.d/lvp_icd.json": "8468db31369dbd0140b68783f1a7943e6158cadcf5314e949e6be31f42068e13",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu/libVkLayer_khronos_validation.so": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104"
+  },
+  "tests": {
+    "gui_per_driver": {
+      "library": 7,
+      "toolkit": 19,
+      "rapid_helpers_filtered": 4
+    },
+    "rapid_helpers_unfiltered": 10,
+    "release_verification_plan": 8
+  },
+  "independent_pixel_comparison": {
+    "processes": 7,
+    "stages": {
+      "blue": {
+        "rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998"
+      },
+      "green": {
+        "rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264"
+      },
+      "rapid3gui-0": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "rapid3gui-1": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "rapid3gui-2": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "rapid3gui-3": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "cleared": {
+        "rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264"
+      },
+      "restored": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      }
+    },
+    "overlay_cross_driver_equal": true
+  },
+  "lifecycle_badwindow_resolved": false,
+  "performance_measured": false,
+  "performance_exclusion": "Other cargo/rustc/llvm-cov jobs active. No quiet host reservation; no timing claim.",
+  "kernel_acceptance": "No kernel numerical or geometry behavior changed.",
+  "application_acceptance": "Not evaluated; framebuffer checks do not close application acceptance.",
+  "build_invocation_failures": [
+    "Default cargo used rustc 1.95.0 below MSRV; explicit cargo +1.99.0 succeeded.",
+    "Initial unittest command omitted PYTHONPATH=tools; corrected invocation passed."
+  ],
+  "independent_stale_frame_negative_check": {
+    "exit": 1,
+    "symptom": "rapid3gui-0.rgba: expected exact analytic image",
+    "expected_failure": true
+  },
+  "archive": {
+    "path": "raw.tar.gz",
+    "sha256": "cbb53194b1434b8b188e238803341075b02a2eac46ef6e42c4e7dcbe5f3bd0a9",
+    "members": 346
+  }
+}
