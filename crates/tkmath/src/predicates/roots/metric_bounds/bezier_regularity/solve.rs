@@ -55,6 +55,7 @@ fn construct(
     query: BezierRegularityQuery<'_>,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<coefficients::HomogeneousCurve, BezierRegularityCause> {
+    admit_stored_degree(query)?;
     coefficients::embedded_signed_bezier(
         MetricBezier {
             poles: query.poles,
@@ -65,6 +66,22 @@ fn construct(
         cancelled,
     )
     .map_err(BezierRegularityCause::Coefficients)
+}
+fn admit_stored_degree(query: BezierRegularityQuery<'_>) -> Result<(), BezierRegularityCause> {
+    coefficients::validate_curve(
+        MetricBezier {
+            poles: query.poles,
+            weights: query.weights,
+        },
+        "regularity curve",
+    )
+    .map_err(BezierRegularityCause::Coefficients)?;
+    let actual = query.poles.len() - 1;
+    let limit = query.options.max_stored_degree;
+    if actual > usize::from(limit) {
+        return Err(BezierRegularityCause::StoredDegree { actual, limit });
+    }
+    Ok(())
 }
 fn admit(
     query: BezierRegularityQuery<'_>,

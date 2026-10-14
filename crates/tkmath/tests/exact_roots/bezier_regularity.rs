@@ -6,6 +6,7 @@ mod generated;
 mod ownership;
 mod replay;
 mod signed;
+mod stored_degree;
 const CUBIC: [[f64; 3]; 4] = [[0., 0., 0.], [4., 0., 0.], [0., 4., 0.], [0., 0., 0.]];
 const IRRATIONAL: [[f64; 3]; 4] = [[0., 0., 0.], [1., 0., 0.], [-1., 0., 0.], [0., 0., 0.]];
 fn query(poles: &[[f64; 3]]) -> BezierRegularityQuery<'_> {

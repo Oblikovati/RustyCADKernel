@@ -40,6 +40,15 @@ algebraic multiplicity in Q, not geometric contact order. Endpoints and singleto
 intervals are included. Root brackets retain exact dyadic bounds and achieved
 width; a regular result makes no numerical lower-speed-bound claim.
 
+Before power expansion, the explicit `max_stored_degree` bounds supplied pole
+count minus one, including elevated constant representations. The version-1
+constructor initially copies `roots.max_degree` into this separate field;
+subsequent changes to either limit do not alter the other. A stored-degree
+excess is a typed refusal before construction polling or expansion. Empty poles
+and mismatched weights retain the existing shape diagnostics. Owned input
+retention still takes O(input size) even on refusal; this is an expansion bound,
+not a total allocation or elapsed-time bound.
+
 The original root degree limit applies separately to D and Q after exact degree
 reduction. Neither degree nor width nor total subdivision budget is widened.
 Completed subdivisions are counted even if later work cancels or exhausts the

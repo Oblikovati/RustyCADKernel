@@ -7,13 +7,19 @@ use super::super::MetricEmbedding;
 pub struct BezierRegularityOptions {
     /// Only behavior version 1 is admitted.
     pub version: u32,
+    /// Largest stored Bernstein degree admitted before power expansion, independent of reduced degrees.
+    pub max_stored_degree: u16,
     /// One degree limit and total subdivision budget for denominator and squared speed.
     pub roots: RootIsolationOptions,
 }
 impl BezierRegularityOptions {
-    /// Select behavior 1 without widening root limits; example: `BezierRegularityOptions::v1(roots)`.
+    /// Select behavior 1, initially copying the root degree cap into the separate stored cap; example: `BezierRegularityOptions::v1(roots)`.
     pub fn v1(roots: RootIsolationOptions) -> Self {
-        Self { version: 1, roots }
+        Self {
+            version: 1,
+            max_stored_degree: roots.max_degree,
+            roots,
+        }
     }
 }
 /// Stored space-curve coefficients and placement; signed finite weights are admitted explicitly.
@@ -27,7 +33,7 @@ pub struct BezierRegularityQuery<'a> {
     pub weights: Option<&'a [f64]>,
     /// Exact supplied affine placement; singular placements are not assumed invertible.
     pub placement: MetricEmbedding<3>,
-    /// Closed native parameter interval inside [0,1], without rescaling the basis.
+    /// Closed native parameter interval inside `[0,1]`, without rescaling the basis.
     pub interval: [f64; 2],
     /// Explicit behavior and complete root-search policy.
     pub options: BezierRegularityOptions,

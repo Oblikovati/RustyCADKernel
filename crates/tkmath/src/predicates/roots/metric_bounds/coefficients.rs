@@ -49,7 +49,7 @@ fn embedded_bezier_using<const DIM: usize>(
     remove_shared_power_of_two(&mut coefficients);
     Ok(coefficients)
 }
-fn validate_curve<const DIM: usize>(
+pub(super) fn validate_curve<const DIM: usize>(
     curve: MetricBezier<'_, DIM>,
     role: &'static str,
 ) -> Result<(), ResidualError> {

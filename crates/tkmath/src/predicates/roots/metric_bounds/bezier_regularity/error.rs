@@ -21,8 +21,15 @@ pub enum BezierRegularityStage {
 pub enum BezierRegularityCause {
     /// Unsupported regularity behavior version; expected 1.
     Version(u32),
-    /// Closed native interval must be finite, ordered and within [0,1].
+    /// Closed native interval must be finite, ordered and within `[0,1]`.
     Domain([f64; 2]),
+    /// Stored degree exceeds its explicit pre-expansion limit, regardless of reduced degree.
+    StoredDegree {
+        /// Supplied pole count minus one.
+        actual: usize,
+        /// Requested stored-degree admission cap.
+        limit: u16,
+    },
     /// Original shape, finite-coefficient or exact-construction cause.
     Coefficients(ResidualError),
     /// Original root error and its operation stage.
@@ -67,7 +74,9 @@ impl BezierRegularityCause {
         use BezierRegularityCompletion::*;
         match self {
             Self::Version(_) | Self::Domain(_) => Invalid,
-            Self::ZeroDenominator | Self::DenominatorZeros(_) => Declined,
+            Self::StoredDegree { .. } | Self::ZeroDenominator | Self::DenominatorZeros(_) => {
+                Declined
+            }
             Self::Roots { cause, .. } | Self::Coefficients(ResidualError::Roots(cause)) => {
                 root_completion(cause)
             }
@@ -93,6 +102,10 @@ impl fmt::Display for BezierRegularityCause {
             Self::Domain(interval) => write!(
                 f,
                 "regularity interval {interval:?}; expected finite 0 <= first <= last <= 1"
+            ),
+            Self::StoredDegree { actual, limit } => write!(
+                f,
+                "stored degree {actual}; expected at most {limit} before power expansion"
             ),
             Self::Coefficients(cause) => write!(
                 f,
