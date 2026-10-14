@@ -28,25 +28,12 @@ pub(super) fn capture<'a>(
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, TwoLoopNestingProof> {
     let before = work.retained_units;
-    work.count("two bound nesting sources", sources.len(), 2)?;
-    work.holds(
-        "source proof roles match request",
-        sources[0].name == request.identities.outer && sources[1].name == request.identities.inner,
-    )?;
-    work.holds(
-        "same exact certified plane chart",
-        super::super::boundary::same_support(&sources[0].support, &sources[1].support),
-    )?;
+    source_roles(request, sources, work)?;
     let chart_point = closure_image(&sources[1], work)?;
-    let outer_at_inner_closure = winding::query(&sources[0], chart_point, work)?;
-    let outer_sign = winding::unit_interior(&outer_at_inner_closure, work)?;
-    let inner_interior = winding::query(&sources[1], request.inner_interior, work)?;
-    let inner_sign = winding::unit_interior(&inner_interior, work)?;
+    let (outer_at_inner_closure, inner_interior, outer_sign, inner_sign) =
+        witnesses(request, sources, chart_point, work)?;
     let material = material(request, sources, work)?;
-    work.holds(
-        "same Jordan winding at both certified outer-interior witnesses",
-        winding::unit_interior(&material[0], work)? == outer_sign,
-    )?;
+    material_orientation(&material, outer_sign, work)?;
     work.units("strict nesting record", 1)?;
     Ok(TwoLoopNestingProof {
         outer: sources[0].name,
@@ -64,21 +51,7 @@ fn closure_image<'a>(
     source: &TwoLoopSourceProof,
     work: &TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, [f64; 2]> {
-    let CapturedMetricCurve::Bezier { poles, weights } = &source.pcurve else {
-        return Err(work.failure(TwoLoopRegionCause::Missing {
-            hypothesis: "native polynomial closure image",
-        }));
-    };
-    work.holds("non-rational closure image", weights.is_none())?;
-    let point = poles.first().copied().ok_or_else(|| {
-        work.failure(TwoLoopRegionCause::Missing {
-            hypothesis: "native closure control",
-        })
-    })?;
-    work.holds(
-        "closed native planar polynomial",
-        poles.last() == Some(&point),
-    )?;
+    let point = closed_polynomial_point(source, work)?;
     // Full-range source-conformance and endpoint residuals bind this exact t=0 pole to the native vertex.
     work.holds(
         "certified native parameter-zero closure",
@@ -106,4 +79,73 @@ fn material<'a>(
         }));
     }
     Ok([outer, inner])
+}
+
+fn source_roles<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    sources: &[TwoLoopSourceProof],
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    work.count("two bound nesting sources", sources.len(), 2)?;
+    work.holds(
+        "source proof roles match request",
+        sources[0].name == request.identities.outer && sources[1].name == request.identities.inner,
+    )?;
+    work.holds(
+        "same exact certified plane chart",
+        super::super::boundary::same_support(&sources[0].support, &sources[1].support),
+    )?;
+    Ok(())
+}
+
+fn closed_polynomial_point<'a>(
+    source: &TwoLoopSourceProof,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, [f64; 2]> {
+    let CapturedMetricCurve::Bezier { poles, weights } = &source.pcurve else {
+        return Err(work.failure(TwoLoopRegionCause::Missing {
+            hypothesis: "native polynomial closure image",
+        }));
+    };
+    work.holds("non-rational closure image", weights.is_none())?;
+    let point = poles.first().copied().ok_or_else(|| {
+        work.failure(TwoLoopRegionCause::Missing {
+            hypothesis: "native closure control",
+        })
+    })?;
+    work.holds(
+        "closed native planar polynomial",
+        poles.last() == Some(&point),
+    )?;
+    Ok(point)
+}
+
+fn witnesses<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    sources: &[TwoLoopSourceProof],
+    chart_point: [f64; 2],
+    work: &mut TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, (TwoLoopWindingProof, TwoLoopWindingProof, i64, i64)> {
+    let outer_at_inner_closure = winding::query(&sources[0], chart_point, work)?;
+    let outer_sign = winding::unit_interior(&outer_at_inner_closure, work)?;
+    let inner_interior = winding::query(&sources[1], request.inner_interior, work)?;
+    let inner_sign = winding::unit_interior(&inner_interior, work)?;
+    Ok((
+        outer_at_inner_closure,
+        inner_interior,
+        outer_sign,
+        inner_sign,
+    ))
+}
+
+fn material_orientation<'a>(
+    material: &[TwoLoopWindingProof; 2],
+    outer_sign: i64,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    work.holds(
+        "same Jordan winding at both certified outer-interior witnesses",
+        winding::unit_interior(&material[0], work)? == outer_sign,
+    )?;
+    Ok(())
 }

@@ -106,3 +106,12 @@ fn bridge(sources: &[ArrangementSource<'_>]) -> PairedContactTransaction {
     transport_partition_contacts(census(sources), mapped(sources), policy, sources, |_| false)
         .unwrap_or_else(|_| panic!("authored loops; expected retained bridge"))
 }
+
+pub(super) fn oriented_fixture(
+    orientation: rustycad_tkg3d::top_abs::Orientation,
+) -> TwoLoopFixture {
+    TwoLoopFixture::for_edges(
+        cubic(1., [0., 0.]).oriented(orientation),
+        cubic(0.5, [0.5, 0.5]).oriented(orientation),
+    )
+}

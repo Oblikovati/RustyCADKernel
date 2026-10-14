@@ -45,20 +45,7 @@ fn copies<'a>(
         return Err(failure);
     };
     work.units("copied member observation", rows.len())?;
-    let batch = copy
-        .completion
-        .as_ref()
-        .unwrap_or_else(|_| unreachable!("admitted actual candidates"));
-    super::operand_budget::relations(&batch.unrepresented, work)?;
-    work.units("candidate metadata", batch.candidates.len())?;
-    for candidate in &batch.candidates {
-        work.units("candidate wire metadata", candidate.wires.len())?;
-        for wire in &candidate.wires {
-            super::operand_budget::segments(&wire.segments, work)?;
-        }
-        super::operand_budget::relations(&candidate.relations, work)?;
-    }
-    work.units("observed original deletion", batch.input_deleted.len())?;
+    candidate_metadata(copy, work)?;
     Ok(())
 }
 fn generated<'a>(
@@ -115,5 +102,26 @@ fn parents<'a>(
     for rows in [first, second, third] {
         work.units("history kinded parent operand", rows.len())?;
     }
+    Ok(())
+}
+
+fn candidate_metadata<'a>(
+    copy: &'a CandidateCopyInspection,
+    work: &mut TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    let batch = copy
+        .completion
+        .as_ref()
+        .unwrap_or_else(|_| unreachable!("admitted actual candidates"));
+    super::operand_budget::relations(&batch.unrepresented, work)?;
+    work.units("candidate metadata", batch.candidates.len())?;
+    for candidate in &batch.candidates {
+        work.units("candidate wire metadata", candidate.wires.len())?;
+        for wire in &candidate.wires {
+            super::operand_budget::segments(&wire.segments, work)?;
+        }
+        super::operand_budget::relations(&candidate.relations, work)?;
+    }
+    work.units("observed original deletion", batch.input_deleted.len())?;
     Ok(())
 }

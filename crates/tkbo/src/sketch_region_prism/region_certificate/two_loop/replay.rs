@@ -107,15 +107,7 @@ fn candidate(row: &TwoLoopCandidateProof, bytes: &mut Vec<u8>) {
     for wire in &row.wires {
         boundary(wire, bytes);
     }
-    count(row.members.len(), bytes);
-    for member in &row.members {
-        debug(&(member.key, member.orientation, &member.parents), bytes);
-        placement(member.placement, bytes);
-        bytes.push(u8::from(member.raw_tolerance.is_some()));
-        if let Some(raw) = member.raw_tolerance {
-            numbers([raw], bytes);
-        }
-    }
+    members(&row.members, bytes);
 }
 fn boundary(row: &TwoLoopWireProof, bytes: &mut Vec<u8>) {
     debug(
@@ -131,4 +123,16 @@ fn boundary(row: &TwoLoopWireProof, bytes: &mut Vec<u8>) {
     space(&row.space, bytes);
     curve(&row.pcurve, bytes);
     endpoints(&row.closure, bytes);
+}
+
+fn members(rows: &[super::member_types::TwoLoopMemberProof], bytes: &mut Vec<u8>) {
+    count(rows.len(), bytes);
+    for member in rows {
+        debug(&(member.key, member.orientation, &member.parents), bytes);
+        placement(member.placement, bytes);
+        bytes.push(u8::from(member.raw_tolerance.is_some()));
+        if let Some(raw) = member.raw_tolerance {
+            numbers([raw], bytes);
+        }
+    }
 }

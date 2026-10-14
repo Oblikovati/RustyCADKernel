@@ -19,7 +19,7 @@ fn failure(cause: TwoLoopRegionCause) -> Box<TwoLoopRegionFailure<'static>> {
 fn wrapped_native_and_exact_cancellation_keep_the_original_failure_class() {
     let native = CapturedGeometryCause::Native(Failure::new("named source failure"));
     let wrapped = failure(TwoLoopRegionCause::Geometry(Arc::new(native)));
-    assert_eq!(classify(&wrapped), RefusalClass::Failed);
+    assert_eq!(wrapped.classification(), TwoLoopRefusalClass::Failed);
     let nested = super::super::super::surface_charts::PrismSurfaceCause::SourceSnapshot(Arc::new(
         super::super::super::surface_charts::PrismSurfaceCause::Exact(ResidualError::Roots(
             RootIsolationError::Cancelled,
@@ -27,12 +27,12 @@ fn wrapped_native_and_exact_cancellation_keep_the_original_failure_class() {
     ));
     assert_eq!(
         classify(&failure(TwoLoopRegionCause::Capture(Arc::new(nested)))),
-        RefusalClass::Cancelled
+        TwoLoopRefusalClass::Cancelled
     );
     let exhausted = failure(TwoLoopRegionCause::Residual(ResidualError::Roots(
         RootIsolationError::SubdivisionLimit { limit: 0 },
     )));
-    assert_eq!(classify(&exhausted), RefusalClass::Incomplete);
+    assert_eq!(classify(&exhausted), TwoLoopRefusalClass::Incomplete);
 }
 #[test]
 fn borrowed_source_and_candidate_causes_retain_class_and_typed_payload() {
@@ -41,22 +41,18 @@ fn borrowed_source_and_candidate_causes_retain_class_and_typed_payload() {
         stage: ConstructionStage::CopiedPlane,
     });
     refusal.local = Some(TwoLoopLocalDiagnostic::Source(&source));
-    assert_eq!(classify(&refusal), RefusalClass::Cancelled);
+    assert_eq!(classify(&refusal), TwoLoopRefusalClass::Cancelled);
     let candidate = CandidateCause::Mapped(Failure::new("native candidate failure"));
     refusal.local = Some(TwoLoopLocalDiagnostic::Candidate(&candidate));
-    assert_eq!(classify(&refusal), RefusalClass::Failed);
+    assert_eq!(classify(&refusal), TwoLoopRefusalClass::Failed);
     let cancelled = CandidateCause::Cancelled(CandidatePhase::Capture);
     refusal.local = Some(TwoLoopLocalDiagnostic::Candidate(&cancelled));
-    assert_eq!(classify(&refusal), RefusalClass::Cancelled);
+    assert_eq!(classify(&refusal), TwoLoopRefusalClass::Cancelled);
 }
 #[test]
 fn failed_and_cancelled_upstream_arrangements_cannot_hide_behind_existing_candidates() {
     let mut fixture = TwoLoopFixture::nested();
-    fixture.bridge.mapped.arrangement.completion =
-        ArrangementCompletion::Failed(ArrangementCause::Failure {
-            phase: ArrangementPhase::History,
-            cause: Failure::new("native history failure"),
-        });
+    fail_arrangement(&mut fixture);
     let TwoLoopRegionOutcome::Failed(refusal) = inspect(&fixture, &mut OperationProgress) else {
         panic!("existing candidate after failed arrangement; expected Failed");
     };
@@ -85,19 +81,7 @@ fn current_pair_capture_failure_preserves_owned_cause_and_stale_success_is_disti
         panic!("capture failure; expected incomplete");
     };
     assert!(matches!(refusal.cause, TwoLoopRegionCause::PairCapture(_)));
-    let mut fixture = TwoLoopFixture::nested();
-    fixture.bridge.census.paired.as_mut().unwrap().reports[0]
-        .effective
-        .requested_world_error = 0.25;
-    let TwoLoopRegionOutcome::Incomplete(refusal) = inspect(&fixture, &mut OperationProgress)
-    else {
-        panic!("stale complete report; expected incomplete");
-    };
-    assert!(matches!(refusal.cause, TwoLoopRegionCause::Stale { .. }));
-    assert!(matches!(
-        refusal.local,
-        Some(TwoLoopLocalDiagnostic::Pair(_))
-    ));
+    check_stale_pair();
 }
 #[test]
 fn every_actual_candidate_retains_signed_domain_and_material_conclusions() {
@@ -112,4 +96,28 @@ fn every_actual_candidate_retains_signed_domain_and_material_conclusions() {
         actual,
         [(301, [1, -1], 1), (302, [0, 1], 0), (303, [-1, 0], -1)]
     );
+}
+
+fn fail_arrangement(fixture: &mut TwoLoopFixture) {
+    fixture.bridge.mapped.arrangement.completion =
+        ArrangementCompletion::Failed(ArrangementCause::Failure {
+            phase: ArrangementPhase::History,
+            cause: Failure::new("native history failure"),
+        });
+}
+
+fn check_stale_pair() {
+    let mut fixture = TwoLoopFixture::nested();
+    fixture.bridge.census.paired.as_mut().unwrap().reports[0]
+        .effective
+        .requested_world_error = 0.25;
+    let TwoLoopRegionOutcome::Incomplete(refusal) = inspect(&fixture, &mut OperationProgress)
+    else {
+        panic!("stale complete report; expected incomplete");
+    };
+    assert!(matches!(refusal.cause, TwoLoopRegionCause::Stale { .. }));
+    assert!(matches!(
+        refusal.local,
+        Some(TwoLoopLocalDiagnostic::Pair(_))
+    ));
 }

@@ -22,10 +22,7 @@ fn options() -> TwoLoopRegionOptions {
 #[test]
 fn exact_witnesses_have_independent_expected_winding_and_native_reversal() {
     for orientation in [Orientation::Forward, Orientation::Reversed] {
-        let fixture = TwoLoopFixture::for_edges(
-            cubic(1., [0., 0.]).oriented(orientation),
-            cubic(0.5, [0.5, 0.5]).oriented(orientation),
-        );
+        let fixture = oriented_fixture(orientation);
         let proofs = source_tests::capture(&fixture).unwrap_or_else(|e| panic!("{:?}", e.cause));
         let mut progress = WindingProgress { stop: false };
         let mut work = TwoLoopWork::new(77, options(), &mut progress);
@@ -33,11 +30,7 @@ fn exact_witnesses_have_independent_expected_winding_and_native_reversal() {
             .unwrap_or_else(|e| panic!("{:?}", e.cause));
         let inner = winding::query(&proofs[1], [1., 1.], &mut work)
             .unwrap_or_else(|e| panic!("{:?}", e.cause));
-        let expected = if orientation == Orientation::Forward {
-            1
-        } else {
-            -1
-        };
+        let expected = native_sign(orientation);
         assert_eq!(winding::unit_interior(&outer, &work).ok(), Some(expected));
         assert_eq!(winding::unit_interior(&inner, &work).ok(), Some(expected));
         assert_eq!(
@@ -74,12 +67,21 @@ fn winding_cancel_and_exhaustion_preserve_typed_refusal_and_attempt_work() {
             .cause,
         TwoLoopRegionCause::Cancelled
     ));
+    check_exhausted_winding(&proofs[0]);
+}
+#[test]
+fn owned_winding_evidence_is_send_and_sync() {
+    fn assert_owned<T: Send + Sync>() {}
+    assert_owned::<winding::TwoLoopWindingProof>();
+}
+
+fn check_exhausted_winding(proof: &super::outcome::TwoLoopSourceProof) {
     let mut progress = WindingProgress { stop: false };
     let mut requested = options();
     requested.winding.max_bisections = 0;
     let mut work = TwoLoopWork::new(77, requested, &mut progress);
     assert!(matches!(
-        winding::query(&proofs[0], [0.5, 0.5], &mut work)
+        winding::query(proof, [0.5, 0.5], &mut work)
             .err()
             .unwrap()
             .cause,
@@ -87,8 +89,11 @@ fn winding_cancel_and_exhaustion_preserve_typed_refusal_and_attempt_work() {
     ));
     assert_eq!(work.winding_bisections, 0);
 }
-#[test]
-fn owned_winding_evidence_is_send_and_sync() {
-    fn assert_owned<T: Send + Sync>() {}
-    assert_owned::<winding::TwoLoopWindingProof>();
+
+fn native_sign(orientation: Orientation) -> i64 {
+    if orientation == Orientation::Forward {
+        1
+    } else {
+        -1
+    }
 }

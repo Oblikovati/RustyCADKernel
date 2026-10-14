@@ -36,19 +36,7 @@ fn inclusive_whole_operation_operand_budget_and_pole_limit_are_enforced() {
         panic!("one short; expected typed limit")
     };
     assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { .. }));
-    requested = fixture_bindings::options();
-    requested.maximum_poles = 3;
-    let TwoLoopRegionOutcome::Incomplete(failure) = with_options(&fixture, requested) else {
-        panic!("four poles; expected limit3 refusal")
-    };
-    assert!(matches!(
-        failure.cause,
-        TwoLoopRegionCause::Limit {
-            operand: "polynomial poles",
-            requested: 3,
-            measured: 4
-        }
-    ));
+    check_pole_limit(&fixture);
 }
 struct CancelAt {
     cutoff: usize,
@@ -72,18 +60,38 @@ fn every_actual_cancellation_cutoff_preserves_source_and_later_reuse() {
         polls: 0,
     };
     accepted(inspect(&fixture, &mut counter));
-    for cutoff in 1..=counter.polls {
+    check_cancellation_cutoffs(&fixture, counter.polls);
+    assert_eq!(
+        accepted(inspect(&fixture, &mut OperationProgress)).replay,
+        baseline
+    );
+}
+
+fn check_pole_limit(fixture: &TwoLoopFixture) {
+    let mut requested = fixture_bindings::options();
+    requested.maximum_poles = 3;
+    let TwoLoopRegionOutcome::Incomplete(failure) = with_options(fixture, requested) else {
+        panic!("four poles; expected limit3 refusal")
+    };
+    assert!(matches!(
+        failure.cause,
+        TwoLoopRegionCause::Limit {
+            operand: "polynomial poles",
+            requested: 3,
+            measured: 4
+        }
+    ));
+}
+
+fn check_cancellation_cutoffs(fixture: &TwoLoopFixture, polls: usize) {
+    for cutoff in 1..=polls {
         let mut progress = CancelAt { cutoff, polls: 0 };
         assert!(
             matches!(
-                inspect(&fixture, &mut progress),
+                inspect(fixture, &mut progress),
                 TwoLoopRegionOutcome::Cancelled(_)
             ),
             "cutoff {cutoff}"
         );
     }
-    assert_eq!(
-        accepted(inspect(&fixture, &mut OperationProgress)).replay,
-        baseline
-    );
 }

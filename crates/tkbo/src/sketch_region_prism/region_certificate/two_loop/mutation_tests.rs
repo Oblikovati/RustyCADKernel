@@ -27,18 +27,7 @@ impl TwoLoopRegionProgress for RemoveWire {
 fn current_face_membership_changes_before_capture_and_at_commit_are_refused() {
     for stage in [TwoLoopRegionStage::Membership, TwoLoopRegionStage::Commit] {
         let fixture = TwoLoopFixture::nested();
-        let batch = super::super::borrowed_batch(&fixture.bridge).unwrap();
-        let face = batch
-            .candidates
-            .iter()
-            .find(|c| c.wires.len() == 2)
-            .unwrap()
-            .face
-            .clone();
-        let child = ShapeIterator::new(&face, true, true)
-            .value()
-            .unwrap()
-            .clone();
+        let (face, child) = ring_face_and_wire(&fixture);
         let mut progress = RemoveWire {
             stage,
             parent: face.into(),
@@ -80,20 +69,7 @@ fn final_report_alert_cannot_be_discarded_or_promote_partial_geometry() {
     let TwoLoopRegionOutcome::Incomplete(failure) = inspect(&fixture, &mut progress) else {
         panic!("required diagnostic; expected incomplete")
     };
-    assert!(progress.visited);
-    assert!(matches!(
-        failure.cause,
-        TwoLoopRegionCause::UnsupportedDiagnostic {
-            stage: "required candidate report alert payload"
-        }
-    ));
-    assert!(matches!(
-        failure.local,
-        Some(TwoLoopLocalDiagnostic::Report {
-            gravity: Gravity::Fail,
-            ..
-        })
-    ));
+    check_report_refusal(&progress, &failure);
 }
 #[test]
 fn source_mutation_preserves_owned_bytes_but_prevents_rebinding_with_same_names() {
@@ -116,4 +92,37 @@ fn source_mutation_preserves_owned_bytes_but_prevents_rebinding_with_same_names(
     };
     assert!(super::operation::rebind_two_loop_region(&request, &proof).is_err());
     assert_eq!(proof.replay, bytes);
+}
+
+fn ring_face_and_wire(fixture: &TwoLoopFixture) -> (rustycad_tkbrep::topods::Face, Shape) {
+    let batch = super::super::borrowed_batch(&fixture.bridge).unwrap();
+    let face = batch
+        .candidates
+        .iter()
+        .find(|c| c.wires.len() == 2)
+        .unwrap()
+        .face
+        .clone();
+    let child = ShapeIterator::new(&face, true, true)
+        .value()
+        .unwrap()
+        .clone();
+    (face, child)
+}
+
+fn check_report_refusal(progress: &AddReport, failure: &TwoLoopRegionFailure<'_>) {
+    assert!(progress.visited);
+    assert!(matches!(
+        failure.cause,
+        TwoLoopRegionCause::UnsupportedDiagnostic {
+            stage: "required candidate report alert payload"
+        }
+    ));
+    assert!(matches!(
+        failure.local,
+        Some(TwoLoopLocalDiagnostic::Report {
+            gravity: Gravity::Fail,
+            ..
+        })
+    ));
 }

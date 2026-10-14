@@ -19,22 +19,19 @@ pub(super) fn inspect<'a>(
         failure.local = Some(TwoLoopLocalDiagnostic::Candidate(cause));
         failure
     })?;
-    if !copy.observation_failures.is_empty() {
-        let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
-            stage: "actual copy observation failures",
-        });
-        failure.local = Some(TwoLoopLocalDiagnostic::Copy(copy));
-        return Err(failure);
-    }
+    copy_observations(copy, work)?;
+    report(&batch.mapped_report, work)
+}
+fn report<'a>(
+    report: &'a rustycad_tkernel::message::Report,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
     for gravity in Gravity::ALL {
-        if !batch.mapped_report.get_alerts(gravity).is_empty() {
+        if !report.get_alerts(gravity).is_empty() {
             let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
                 stage: "required candidate report alert payload",
             });
-            failure.local = Some(TwoLoopLocalDiagnostic::Report {
-                gravity,
-                report: &batch.mapped_report,
-            });
+            failure.local = Some(TwoLoopLocalDiagnostic::Report { gravity, report });
             return Err(failure);
         }
     }
@@ -56,4 +53,18 @@ fn arrangement<'a>(
     });
     failure.local = Some(TwoLoopLocalDiagnostic::Arrangement(completion));
     Err(failure)
+}
+
+fn copy_observations<'a>(
+    copy: &'a crate::sketch_region_candidates::CandidateCopyInspection,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    if !copy.observation_failures.is_empty() {
+        let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
+            stage: "actual copy observation failures",
+        });
+        failure.local = Some(TwoLoopLocalDiagnostic::Copy(copy));
+        return Err(failure);
+    }
+    Ok(())
 }

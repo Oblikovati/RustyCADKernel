@@ -42,11 +42,7 @@ fn endpoint<'a>(
 ) -> TwoLoopCheck<'a, TwoLoopEndpointProof> {
     let parameter = parameter(shape, child, work)?;
     let local_point = local_point(child, work)?;
-    let placement = captured_placement(child.location().transformation()).map_err(|cause| {
-        work.failure(TwoLoopRegionCause::Capture(std::sync::Arc::new(
-            cause.into(),
-        )))
-    })?;
+    let placement = endpoint_placement(child, work)?;
     let proof = certify_captured_placed_endpoint(curve, parameter, local_point, placement, 0.);
     let residual = proof
         .decision
@@ -103,4 +99,16 @@ fn exact<'a>(decision: &ResidualDecision, work: &TwoLoopWork<'_>) -> TwoLoopChec
         return Ok(());
     }
     Err(work.failure(TwoLoopRegionCause::ResidualMismatch(decision.clone())))
+}
+
+fn endpoint_placement<'a>(
+    child: &Shape,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding<3>> {
+    let placement = captured_placement(child.location().transformation()).map_err(|cause| {
+        work.failure(TwoLoopRegionCause::Capture(std::sync::Arc::new(
+            cause.into(),
+        )))
+    })?;
+    Ok(placement)
 }

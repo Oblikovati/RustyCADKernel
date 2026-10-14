@@ -39,16 +39,7 @@ fn rank_callback_curve_growth_is_admitted_before_legacy_recapture() {
     let fixture = TwoLoopFixture::nested();
     let sources = fixture.sources();
     let identities = fixture_bindings::identities(&fixture);
-    let mut options = fixture_bindings::options();
-    options.maximum_poles = 4;
-    let request = TwoLoopRegionRequest {
-        bridge: &fixture.bridge,
-        sources: &sources,
-        identities: &identities,
-        inner_interior: [1., 1.],
-        material_seed: [0.25, 0.25],
-        requested: options,
-    };
+    let request = rank_request(&fixture, &sources, &identities);
     let mut progress = ReplaceDuringRank {
         edge: edge(&fixture.outer).unwrap(),
         sources_polls: 0,
@@ -58,6 +49,10 @@ fn rank_callback_curve_growth_is_admitted_before_legacy_recapture() {
     else {
         panic!("rank mutation; expected preadmission limit");
     };
+    check_rank_refusal(&progress, &failure);
+}
+
+fn check_rank_refusal(progress: &ReplaceDuringRank, failure: &TwoLoopRegionFailure<'_>) {
     assert!(progress.sources_polls >= 2);
     assert!(matches!(
         failure.cause,
@@ -68,4 +63,21 @@ fn rank_callback_curve_growth_is_admitted_before_legacy_recapture() {
         }
     ));
     assert!(failure.entities.contains(&TwoLoopEntity::Source(OUTER)));
+}
+
+fn rank_request<'a, 'b>(
+    fixture: &'a TwoLoopFixture,
+    sources: &'b [crate::sketch_region::ArrangementSource<'a>],
+    identities: &'b TwoLoopRegionIdentities,
+) -> TwoLoopRegionRequest<'a, 'b> {
+    let mut options = fixture_bindings::options();
+    options.maximum_poles = 4;
+    TwoLoopRegionRequest {
+        bridge: &fixture.bridge,
+        sources,
+        identities,
+        inner_interior: [1., 1.],
+        material_seed: [0.25, 0.25],
+        requested: options,
+    }
 }
