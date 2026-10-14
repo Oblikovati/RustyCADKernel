@@ -24,7 +24,7 @@ pub(super) fn surface(value: &CapturedPrismSurface, bytes: &mut Vec<u8>) {
         }
     }
 }
-pub(super) fn chart(value: &CapturedSurfaceChart) -> Vec<u8> {
+pub(in crate::sketch_region_prism) fn chart(value: &CapturedSurfaceChart) -> Vec<u8> {
     let mut bytes = Vec::new();
     chart_source(&value.source, &mut bytes);
     surface(&value.actual, &mut bytes);
@@ -73,7 +73,7 @@ pub(super) fn expectation(value: &CapturedTrimExpectation, bytes: &mut Vec<u8>) 
         }
     }
 }
-pub(super) fn sources(value: &CapturedPrismSources) -> Vec<u8> {
+pub(in crate::sketch_region_prism) fn sources(value: &CapturedPrismSources) -> Vec<u8> {
     let mut bytes = Vec::new();
     plane(&value.support, &mut bytes);
     bytes.extend((value.boundaries.len() as u64).to_le_bytes());
