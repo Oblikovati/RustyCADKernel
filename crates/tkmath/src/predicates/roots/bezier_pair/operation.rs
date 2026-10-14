@@ -194,7 +194,8 @@ impl GraphTask<'_> {
         let polynomial = &self.projection.cleared_originals[axis];
         let roots = self.isolated_candidates(polynomial, cancelled)?;
         let membership = self.membership(&roots, axis, cancelled)?;
-        let contacts = self.construct(&roots, membership.accepted.clone(), cancelled)?;
+        let contacts =
+            self.construct(polynomial, &roots, membership.accepted.clone(), cancelled)?;
         let certificate = CandidateCertificate::new(polynomial.clone(), roots, membership);
         Ok(GraphOutcome {
             contacts,

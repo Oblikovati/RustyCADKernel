@@ -15,7 +15,12 @@ pub(super) enum PairOperationFailure {
     NonLinearFiber,
     PositiveDimensional,
     World(EnvelopeFailure),
-    WorldResolution,
+    WorldResolution {
+        requested_error: f64,
+        last_root: Box<super::super::RootBracket>,
+        enclosure: Option<([[f64; 2]; 2], [f64; 2], f64)>,
+    },
+    RefinementInvariant(Box<super::super::RootIsolation>),
     Graph(super::graph_enclosure::GraphEnvelopeFailure),
     WorldRequest(f64),
 }
@@ -32,6 +37,20 @@ impl PairOperationFailure {
             Self::ExceptionalFiber(certificate) => Some(certificate),
             Self::DenominatorRoots(certificate) => Some(certificate),
             Self::WorldRequest(value) => Some(value),
+            _ => self.refinement_cause(),
+        }
+    }
+    fn refinement_cause(&self) -> Option<&dyn std::fmt::Debug> {
+        match self {
+            Self::RefinementInvariant(isolation) => Some(isolation),
+            Self::WorldResolution {
+                requested_error,
+                last_root,
+                enclosure,
+            } => {
+                let _ = (requested_error, enclosure);
+                Some(last_root)
+            }
             _ => None,
         }
     }

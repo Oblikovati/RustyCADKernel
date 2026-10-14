@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Root signs certify the graph against both original equations, not approximate matching.
 use super::super::{
-    RootIsolation, RootIsolationError, RootIsolationOptions, chain, checked_policy_interval,
-    isolate, polynomial::IntegerPolynomial, signs,
+    RootIsolation, RootIsolationError, RootIsolationOptions, checked_policy_interval,
+    polynomial::IntegerPolynomial, polynomial_solve, signs,
 };
 use super::polynomial::ExactCoefficientPolynomial;
 
@@ -15,9 +15,8 @@ pub(super) fn solve(
 ) -> Result<RootIsolation, RootIsolationError> {
     let (bounds, width) = checked_policy_interval(interval, options)?;
     let source = polynomial.primitive(options.max_degree)?;
-    let tower = chain::multiplicity_tower(source, cancelled)?;
-    isolate::isolate_accounted(
-        &tower,
+    polynomial_solve::solve_polynomial_accounted(
+        source,
         bounds,
         width,
         budget.effective(options),

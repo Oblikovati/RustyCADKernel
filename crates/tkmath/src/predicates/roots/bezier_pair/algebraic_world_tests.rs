@@ -18,7 +18,7 @@ fn irrational_curved_pair_retains_joint_root_and_certified_world_radius() {
         vec![(-1).into(), 0.into(), 2.into()]
     );
     verify_exact_sqrt_half_bracket(&contact.root);
-    verify_independent_world_error(contact);
+    verify_independent_world_error(contact, 1e-6);
 }
 fn irrational_proof() -> super::operation::PairOperationProof {
     let source =
@@ -36,14 +36,17 @@ fn irrational_proof() -> super::operation::PairOperationProof {
     )
     .unwrap()
 }
-fn verify_exact_sqrt_half_bracket(root: &super::super::RootBracket) {
+pub(super) fn verify_exact_sqrt_half_bracket(root: &super::super::RootBracket) {
     let lower = ExactRatio::from_dyadic(root.bounds().0);
     let upper = ExactRatio::from_dyadic(root.bounds().1);
     let half = ExactRatio::from_finite(0.5);
     assert!(lower.multiply(&lower) < half);
     assert!(upper.multiply(&upper) > half);
 }
-fn verify_independent_world_error(contact: &super::operation::PairContact) {
+pub(super) fn verify_independent_world_error(
+    contact: &super::operation::PairContact,
+    requested: f64,
+) {
     let x = ExactRatio::from_finite(contact.world.point[0]);
     let y = ExactRatio::from_finite(contact.world.point[1]).subtract(&ExactRatio::from_finite(0.5));
     let lower = x.subtract(&ExactRatio::from_dyadic(contact.root.bounds().0));
@@ -52,6 +55,6 @@ fn verify_independent_world_error(contact: &super::operation::PairContact) {
     let bound_squared = x_squared.add(&y.multiply(&y));
     let radius = ExactRatio::from_finite(contact.world.achieved_error);
     assert!(bound_squared <= radius.multiply(&radius));
-    assert!(contact.world.achieved_error > 0. && contact.world.achieved_error <= 1e-6);
+    assert!(contact.world.achieved_error > 0. && contact.world.achieved_error <= requested);
     assert!(contact.world.bounds[1][0] <= 0.5 && contact.world.bounds[1][1] >= 0.5);
 }

@@ -12,6 +12,7 @@ mod operation;
 #[cfg(test)]
 mod operation_tests;
 
+mod construction_refine;
 mod contact_construction;
 mod graph_enclosure;
 mod membership;
