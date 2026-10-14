@@ -61,6 +61,21 @@ fn resolve_topology_root(
     Ok(root)
 }
 
+fn resolve_root_with_alias(
+    graph: &BRepGraph,
+    shape: &Shape,
+    populated: &Shape,
+    roots: &[NodeId],
+    old_count: u32,
+    stored_in_ref: bool,
+) -> Result<NodeId, Failure> {
+    let root = resolve_topology_root(graph, shape, populated, roots, old_count)?;
+    if stored_in_ref && root.is_valid() {
+        bind_source_shape_aliases(graph, shape, populated)?;
+    }
+    Ok(root)
+}
+
 // The shape to populate (without its own location when the reference keeps it) and
 // whether the reference keeps it.
 fn populate_shape_for(
@@ -99,6 +114,8 @@ impl ShapesViewMut<'_> {
         self.add_with_options_and_behavior(shape, options, PCurveImportBehavior::default())
     }
 
+    /// Lookup selection applies to newly extracted definitions; existing definitions are reused unchanged.
+    /// Use a fresh graph and audit for migration; an append status is not graph-wide validation.
     /// Append using explicit stored-pcurve lookup; `view.add_with_options_and_behavior(&shape, &Options::default(), PCurveImportBehavior::LegacyLocalV1)`.
     pub fn add_with_options_and_behavior(
         &mut self,
@@ -121,21 +138,18 @@ impl ShapesViewMut<'_> {
         behavior: PCurveImportBehavior,
     ) -> Result<AddResult, Failure> {
         let old_count = snapshot_count_for_kind(self.graph, shape.shape_type()?);
-        let (populate_shape, stored_in_ref) =
-            populate_shape_for(shape, options, NodeId::default())?;
-        let mut flat_roots = Vec::new();
-        let status = append_impl_with_behavior(
+        let (populated, stored_in_ref) = populate_shape_for(shape, options, NodeId::default())?;
+        let mut roots = Vec::new();
+        let status =
+            append_impl_with_behavior(self.graph, &populated, options, &mut roots, behavior)?;
+        let topology_root = resolve_root_with_alias(
             self.graph,
-            &populate_shape,
-            options,
-            &mut flat_roots,
-            behavior,
+            shape,
+            &populated,
+            &roots,
+            old_count,
+            stored_in_ref,
         )?;
-        let topology_root =
-            resolve_topology_root(self.graph, shape, &populate_shape, &flat_roots, old_count)?;
-        if stored_in_ref && topology_root.is_valid() {
-            bind_source_shape_aliases(self.graph, shape, &populate_shape)?;
-        }
         Ok(AddResult {
             status,
             topology_root,
