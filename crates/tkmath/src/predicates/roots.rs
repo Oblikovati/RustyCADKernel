@@ -16,6 +16,8 @@ mod polynomial;
 mod polynomial_solve;
 /// Exact signs of a second polynomial at each isolated source root.
 pub mod signs;
+/// Certified sketch line incidences for trim and extension (ADR 0060).
+pub mod sketch_incidence;
 pub use dyadic::DyadicBound;
 pub use error::RootIsolationError;
 
