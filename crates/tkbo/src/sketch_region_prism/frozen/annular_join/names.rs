@@ -9,16 +9,20 @@ pub(super) fn inspect<'a>(
     authored: &PrismPublicationBindings,
 ) -> AnnularFrozenCheck<'a, ()> {
     if authored.operation.0 != request.identities.operation {
-        return Err(identity("same authored operation as actual annular proof", 0).into());
+        return Err(AnnularFrozenCause::AuthoredIdentity {
+            quantity: "same authored operation as actual annular proof",
+            actual: authored.operation,
+            expected: AuthoredPrismId(request.identities.operation),
+        });
     }
     originals(request, authored)?;
     sources(binding, authored)?;
     if authored.selected_region.0 != binding.region().selected_candidate_id() {
-        return Err(identity(
-            "same authored selected-region name as bound two-loop proof",
-            0,
-        )
-        .into());
+        return Err(AnnularFrozenCause::AuthoredIdentity {
+            quantity: "same authored selected region as bound two-loop proof",
+            actual: authored.selected_region,
+            expected: AuthoredPrismId(binding.region().selected_candidate_id()),
+        });
     }
     Ok(())
 }

@@ -22,14 +22,14 @@ pub(super) fn with_named<T>(
     run: impl FnOnce(
         &TwoLoopRegionRequest<'_, '_>,
         &mut PrismReceipt,
-        &PrismPublicationBindings,
+        &mut PrismPublicationBindings,
         AnnularEmbeddingEvidence,
     ) -> T,
 ) -> T {
     with_actual(|request, region, receipt| {
         let binding = bind_annular_prism_v2(request, region, receipt, &mut ContinueAnnularFixture)
             .unwrap_or_else(|_| panic!("actual binding"));
-        let names = authored(request, receipt, &binding);
+        let mut names = authored(request, receipt, &binding);
         let proof = inspect_bound_annular_embedding(
             request,
             receipt,
@@ -38,7 +38,7 @@ pub(super) fn with_named<T>(
             || false,
         )
         .unwrap_or_else(|_| panic!("actual embedding"));
-        run(request, receipt, &names, proof)
+        run(request, receipt, &mut names, proof)
     })
 }
 pub(super) fn joined() -> AnnularFrozenDomain {

@@ -22,6 +22,11 @@ pub(in crate::sketch_region_prism) enum AnnularFrozenPhase {
     Commit,
 }
 pub(in crate::sketch_region_prism) enum AnnularFrozenCause<'a> {
+    AuthoredIdentity {
+        quantity: &'static str,
+        actual: AuthoredPrismId,
+        expected: AuthoredPrismId,
+    },
     Version {
         actual: u32,
         expected: u32,

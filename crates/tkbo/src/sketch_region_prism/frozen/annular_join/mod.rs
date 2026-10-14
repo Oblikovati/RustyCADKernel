@@ -19,6 +19,14 @@ pub(in crate::sketch_region_prism) use operation::join_annular_frozen_domain;
 pub(in crate::sketch_region_prism) use rebind::rebind_annular_frozen_domain;
 pub(in crate::sketch_region_prism) use types::*;
 #[cfg(test)]
+mod mutation_tests;
+#[cfg(test)]
 mod operation_tests;
 #[cfg(test)]
+mod refusal_tests;
+#[cfg(test)]
+mod replay_tests;
+#[cfg(test)]
 mod tests;
+#[cfg(test)]
+mod topology_tests;
