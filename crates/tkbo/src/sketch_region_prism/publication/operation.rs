@@ -8,7 +8,14 @@ pub(crate) fn publish_named_prism<'a>(
     request: &PrismPublicationRequest<'a>,
     progress: &mut dyn PrismPublicationProgress,
 ) -> PublicationCheck<'a, PublishedNamedPrism> {
-    admit(request)?;
+    publish_with_version(request, progress, 1)
+}
+fn publish_with_version<'a>(
+    request: &PrismPublicationRequest<'a>,
+    progress: &mut dyn PrismPublicationProgress,
+    version: u32,
+) -> PublicationCheck<'a, PublishedNamedPrism> {
+    admit(request, version)?;
     let mut callbacks = PublicationCallbacks::new(progress);
     let mut result = construct(request, &mut callbacks)?;
     result.replay = replay::encode(&result);
@@ -20,14 +27,14 @@ pub(crate) fn publish_named_prism<'a>(
     history::reproject(request, &result)?;
     Ok(result)
 }
-fn admit<'a>(request: &PrismPublicationRequest<'a>) -> PublicationCheck<'a, ()> {
-    if request.requested.version != 1 {
+fn admit<'a>(request: &PrismPublicationRequest<'a>, version: u32) -> PublicationCheck<'a, ()> {
+    if request.requested.version != version {
         return Err(request.failure(
             PrismPublicationPhase::Admission,
             PrismPublicationClass::Incomplete,
             PrismPublicationCause::UnsupportedVersion {
                 actual: request.requested.version,
-                expected: 1,
+                expected: version,
             },
         ));
     }
