@@ -3,7 +3,10 @@ use super::super::super::super::tests::request;
 use super::super::super::measurements::tests::domain_tests::with_request;
 use super::*;
 
-fn pole_source(reverse_poles: bool, reverse_traversal: bool) -> Shape {
+pub(in crate::sketch_region_prism) fn pole_source(
+    reverse_poles: bool,
+    reverse_traversal: bool,
+) -> Shape {
     let mut poles = [[0., 0.], [4., 0.], [0., 4.], [0., 0.]];
     if reverse_poles {
         poles.reverse();

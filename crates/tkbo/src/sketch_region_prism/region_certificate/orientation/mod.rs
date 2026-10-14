@@ -99,4 +99,4 @@ fn finalize(
     })
 }
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism) mod tests;

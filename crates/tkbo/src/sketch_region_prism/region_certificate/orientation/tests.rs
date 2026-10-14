@@ -5,7 +5,7 @@ use crate::sketch_region_partition_bindings::binding_sources;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkmath::predicates::roots::{RootIsolationOptions, metric_bounds::*};
 #[path = "tests/domain.rs"]
-mod domain_tests;
+pub(in crate::sketch_region_prism) mod domain_tests;
 #[path = "tests/mutation.rs"]
 mod mutation_tests;
 #[path = "tests/refusal.rs"]
