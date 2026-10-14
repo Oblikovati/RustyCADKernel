@@ -79,6 +79,10 @@ The operation runs these checks in order:
    domain, after the local manifold and connectivity checks. Counts alone are
    never sufficient.
 
+Euler and links treat each admitted one-wire face as an abstract 2-cell. The
+actual Jordan-disk cap and rectangle-side chart images require the separate
+source-bound geometry/embedding join; this certificate does not prove them.
+
 Whole-shell reversal preserves these combinatorial obligations. Reversing one
 face and its descendants can violate edge pairing. Consistently reversed wires
 may still satisfy this certificate. **Geometric outwardness, chart-normal/trim

@@ -29,11 +29,13 @@ pub(super) fn rejected(
     source: &FrozenPrismProjection,
     expected: TopologyInvariant,
 ) -> TopologyFailure {
+    let before = source.replay_bytes();
     let FrozenTopologyOutcome::Failed(failure) =
         certify_frozen_topology(source, &mut NamedTopologyProgress::default())
     else {
         panic!("expected witnessed combinatorial failure at {expected:?}");
     };
+    assert_eq!(source.replay_bytes(), before);
     assert_eq!(failure.checkpoint.invariant, expected);
     failure
 }
