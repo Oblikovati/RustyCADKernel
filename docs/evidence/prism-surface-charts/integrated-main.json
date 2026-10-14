@@ -1,0 +1,94 @@
+{
+  "source_revision": "40e4dd8c7313d134ee65d1df6accefcf60af6245",
+  "candidate_revision": "dfb6b81ed",
+  "date": "2026-10-14",
+  "toolchain": "Rust 1.99.0",
+  "platform": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "integrated-tests.log.gz",
+      "sha256": "961bf39e127e75712c345766fccb4f520cbc4719aeace5b7a3c56e8ef7953a1e",
+      "tests": {
+        "passed": 4122,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "integrated-docs.log.gz",
+      "sha256": "8e6aa03fb67d5fdaf3ca2b3f82108aea6b53968accebfb4dfcf2e2984014dead",
+      "tests": {
+        "passed": 84,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "integrated-clippy.log.gz",
+      "sha256": "aaa9d2ef95b72cc325702740893164d0862a0448e516ebc3dbfe4bea37a2a567"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "integrated-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  ],
+  "source_hashes_match_candidate": true,
+  "source_bookends": {
+    "unchanged": true,
+    "files": 15475,
+    "manifest": "integrated-source-bookends.json.gz",
+    "sha256": "87ebb7edcbd8f2d2d4fdd692d501076067b76a2916b8bdbbbc4f70df6b9cd663"
+  },
+  "scope": "Actual prism surface and trim coefficient correspondence against frozen pre-sweep source charts. Full region/prism success, ordered solid validation, achieved error and application acceptance remain incomplete. Candidate ordinary-host ThreadSanitizer failure remains incomplete; no sanitizer success, performance or complete API parity claim."
+}
