@@ -4,6 +4,8 @@ mod boundaries;
 mod capture;
 mod charts;
 mod correspondence;
+pub(in crate::sketch_region_prism) use correspondence::snapshot as snapshot_annular_context;
+pub(in crate::sketch_region_prism) use replay::context as encode_annular_context;
 mod failure;
 mod failure_class;
 mod operation;

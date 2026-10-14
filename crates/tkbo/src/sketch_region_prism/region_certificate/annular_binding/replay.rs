@@ -157,7 +157,7 @@ fn contexts(rows: &[RegionObservedContext], bytes: &mut Vec<u8>) -> AnnularCheck
     }
     Ok(())
 }
-fn context(row: &RegionObservedContext, bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
+pub(in crate::sketch_region_prism) fn context(row: &RegionObservedContext, bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
     bytes.push(row.kind as u8);
     bytes.extend((row.child_slots.len() as u64).to_le_bytes());
     for slot in &row.child_slots {
