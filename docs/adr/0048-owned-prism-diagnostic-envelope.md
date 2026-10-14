@@ -107,3 +107,28 @@ No constructor, mutation, hierarchy, buffer ownership or native behavior changes
 Baseline commit `8d9b35390` pins these distinctions before the accessors are added.
 The final coordinated release accounts for this additive API; no mid-workspace
 version change or replacement migration is introduced by these read-only methods.
+
+## Typed owned-envelope replay V1
+
+`OwnedPrismDiagnostic::replay_bytes()` is separate from
+`OwnedPrismDiagnosticContext::replay_bytes()`. The envelope format starts with
+`Martensite.OwnedPrismDiagnostic/v1` and a NUL, followed by a length-delimited
+context, explicit outer phase, original class, projection coverage, supported
+cause, optional callback and ordered coverage gaps. Integer fields use explicit
+little-endian widths; refused floating-point fields preserve their binary64 bits.
+Every current admission case, native field, phase and gap has an explicit tag.
+There is no Debug/Display serialization or message parsing.
+
+A native payload records exception type, optional explicit parent, base message
+bytes, stack bytes and optional derived-message bytes. `None` and `Some(empty)`
+remain different. Unsupported local transaction payloads are represented by
+explicit coverage gaps and retained outside the owned envelope. Complete encoding
+of that owned envelope never upgrades incomplete diagnostic coverage or claims to
+encode its retained local owners.
+
+The earlier context-only bytes and test-only context-plus-Debug observation stay
+unchanged for historical replay. New full typed process/thread evidence uses the
+actual envelope codec and independent literal/field fixtures. The publication
+phase vocabulary is encoded, but publication attribution/construction still
+requires the pending sealed actual-invocation packet; this codec adds no such
+constructor or body-completion claim.

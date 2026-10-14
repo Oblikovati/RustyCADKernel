@@ -2,6 +2,7 @@
 //! ADR0048: owned diagnostic coverage is independent of the original operation class.
 mod context;
 mod preparation;
+mod replay;
 mod types;
 mod views;
 use super::owned_request::{names::*, *};
