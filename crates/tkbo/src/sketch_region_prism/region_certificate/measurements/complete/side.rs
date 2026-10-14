@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
-use super::super::super::types::need;
 use super::*;
 
 pub(super) fn measure_side(
     binding: &CurrentPrismBinding,
     options: PolynomialSideOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<CertifiedPolynomialSideIntegral, CompletePrismMeasureFailure> {
+) -> Result<CertifiedPolynomialSideIntegral, BoundPrismMeasureFailure> {
     let chart = unique_side(binding)?;
     let (basis, placement) = side_operands(chart)?;
     certify_polynomial_side_integral(
@@ -20,19 +19,19 @@ pub(super) fn measure_side(
     .map_err(|cause| side_failure(chart, cause))
 }
 
-fn side_operands(chart: &BoundPrismChart) -> Result<SideOperands<'_>, CompletePrismMeasureFailure> {
+fn side_operands(chart: &BoundPrismChart) -> Result<SideOperands<'_>, BoundPrismMeasureFailure> {
     let height = chart.proof.side_height.filter(|h| h.is_finite() && *h > 0.);
-    need(height, "fresh positive side height identity").map_err(PrismBindingFailure::from)?;
+    scalar_need(height, "fresh positive side height identity")
+        .map_err(BoundPrismMeasureFailure::SideOperand)?;
     match &chart.captured.actual {
         CapturedPrismSurface::Extrusion {
             basis, placement, ..
         } => Ok((basis, *placement)),
-        _ => Err(
-            PrismBindingFailure::from(RegionCertificateCause::MissingEvidence {
+        _ => Err(BoundPrismMeasureFailure::SideOperand(
+            ScalarOperandCause::Missing {
                 hypothesis: "actual polynomial extrusion side",
-            })
-            .into(),
-        ),
+            },
+        )),
     }
 }
 
@@ -42,21 +41,18 @@ type SideOperands<'a> = (
 );
 fn unique_side(
     binding: &CurrentPrismBinding,
-) -> Result<&BoundPrismChart, CompletePrismMeasureFailure> {
-    need(
+) -> Result<&BoundPrismChart, BoundPrismMeasureFailure> {
+    scalar_need(
         binding
             .charts
             .iter()
             .find(|chart| chart.role == PrismImageRole::Generated),
         "unique currently measured side",
     )
-    .map_err(|cause| PrismBindingFailure::from(cause).into())
+    .map_err(BoundPrismMeasureFailure::SideOperand)
 }
-fn side_failure(
-    chart: &BoundPrismChart,
-    cause: PolynomialSideError,
-) -> CompletePrismMeasureFailure {
-    CompletePrismMeasureFailure::Side {
+fn side_failure(chart: &BoundPrismChart, cause: PolynomialSideError) -> BoundPrismMeasureFailure {
+    BoundPrismMeasureFailure::Side {
         source: chart.source.clone(),
         output: chart.output.clone(),
         cause: Box::new(cause),

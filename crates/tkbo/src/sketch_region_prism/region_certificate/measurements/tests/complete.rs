@@ -51,7 +51,7 @@ fn full_failure_name(failure: CompletePrismMeasureFailure) -> String {
         CompletePrismMeasureFailure::Total(cause) => format!("total {cause:?}"),
     }
 }
-fn oracle_interval(quantity: &str) -> [f64; 2] {
+pub(in crate::sketch_region_prism) fn oracle_interval(quantity: &str) -> [f64; 2] {
     let fixture = include_str!(concat!(
         env!("CARGO_MANIFEST_DIR"),
         "/../tkmath/tests/fixtures/prism_complete_measures/closed_cubic.tsv"
@@ -67,7 +67,10 @@ fn oracle_interval(quantity: &str) -> [f64; 2] {
         .collect();
     [f64::from_bits(bits[0]), f64::from_bits(bits[1])]
 }
-fn assert_contains_interval(observed: [f64; 2], expected: [f64; 2]) {
+pub(in crate::sketch_region_prism) fn assert_contains_interval(
+    observed: [f64; 2],
+    expected: [f64; 2],
+) {
     assert!(
         observed[0] <= expected[0],
         "{observed:?} must contain {expected:?}"
@@ -122,6 +125,8 @@ fn complete_inspection_and_all_owned_components_are_send_sync() {
 mod domain_tests;
 #[path = "complete/mutation.rs"]
 mod mutation_tests;
+#[path = "complete/owned.rs"]
+mod owned_tests;
 #[path = "complete/policy.rs"]
 mod policy_tests;
 #[path = "complete/replay.rs"]

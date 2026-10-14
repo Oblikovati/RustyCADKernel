@@ -8,6 +8,9 @@ mod identity_multiset;
 pub(crate) use closure_types::*;
 mod containment;
 mod history;
+pub(crate) mod hypothesis;
+#[cfg(test)]
+mod hypothesis_tests;
 mod inspect;
 mod rebind;
 mod source;
@@ -134,7 +137,7 @@ pub(in crate::sketch_region_prism) mod tests;
 mod point_tests;
 
 pub(crate) mod current_binding;
-mod measurements;
+pub(in crate::sketch_region_prism) mod measurements;
 #[allow(unused_imports)]
 pub(crate) use measurements::{
     PrismMeasureInspection, PrismMeasureOptions, inspect_prism_measurements,
@@ -149,4 +152,8 @@ pub(crate) mod orientation;
 pub(crate) use measurements::{
     CompletePrismMeasureInspection, CompletePrismMeasureOptions,
     inspect_complete_prism_measurements,
+};
+
+pub(crate) use measurements::{
+    BoundPrismMeasureFailure, CompletePrismMeasures, PrismScalarFailure, measure_bound_prism,
 };

@@ -1,0 +1,183 @@
+{
+  "source_revision": "d6c52c3e53a27ac5fdbd5574a28c689346538596",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "steps": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 167.67486078500224,
+      "counts": [
+        [
+          790,
+          0,
+          0
+        ],
+        [
+          646,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1654172950002248,
+      "counts": [
+        [
+          35,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 4.803625582000677,
+      "counts": []
+    },
+    {
+      "label": "format",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 6.486047813999903,
+      "counts": []
+    },
+    {
+      "label": "docs",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--no-deps",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 1.4359048459991754,
+      "counts": []
+    },
+    {
+      "label": "joined-process-1",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5462317800011078,
+      "counts": [
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "label": "joined-process-2",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5603592810002738,
+      "counts": [
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_count": 15910,
+  "replay_bytes": 193495,
+  "replay_sha256": "78bf68fc0feccec38f467abc8108bec7e4b52a1875a7ec6786bf933dcfc15f93",
+  "two_processes_equal_to_pinned": true,
+  "scope": "TKBO source only; unchanged dependencies retain preceding owner gates",
+  "limitations": [
+    "Private conditional scalar evidence; no body validity or release acceptance.",
+    "TSan not executed for this source; current host sanitizer startup failure remains incomplete.",
+    "No full API/test parity or application claim."
+  ]
+}

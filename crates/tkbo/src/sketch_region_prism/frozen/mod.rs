@@ -65,5 +65,6 @@ mod traversal;
 #[cfg(test)]
 mod traversal_tests;
 
+pub(crate) mod joined_measures;
 pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
 pub(crate) mod joined_orientation;

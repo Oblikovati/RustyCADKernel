@@ -51,3 +51,10 @@ impl From<RegionCertificateCause> for PrismEmbeddingCause {
         Self::from(PrismBindingFailure::from(cause))
     }
 }
+
+impl From<super::super::hypothesis::RegionHypothesisCause> for PrismEmbeddingCause {
+    fn from(cause: super::super::hypothesis::RegionHypothesisCause) -> Self {
+        let legacy = RegionCertificateCause::from(cause);
+        Self::from(legacy)
+    }
+}

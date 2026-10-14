@@ -49,7 +49,7 @@ fn edited_original_copy_and_side_never_reuse_measured_coefficients() {
         assert_encloses(original.measures.first_cap.enclosure(), 2.4);
     }
 }
-pub(in crate::sketch_region_prism::region_certificate) fn edit_target(
+pub(in crate::sketch_region_prism) fn edit_target(
     target: usize,
     shapes: &[Shape],
     receipt: &PrismReceipt,
