@@ -5,11 +5,13 @@
 #include <MeshVS_DisplayModeFlags.hxx>
 #include <MeshVS_EntityType.hxx>
 #include <Standard_ConstructionError.hxx>
+#include <Standard_Type.hxx>
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
 class AssignProbe : public MeshVS_Drawer {
 public:
+  DEFINE_STANDARD_RTTIEXT(AssignProbe, MeshVS_Drawer)
   int fault=0;
   void Assign(const occ::handle<MeshVS_Drawer>& source) override {
     std::cout << "callback " << GetRefCount() << " " << source->GetRefCount() << "\n";
@@ -18,6 +20,7 @@ public:
     if(fault==2) throw std::logic_error("drawer assign foreign after copy");
   }
 };
+IMPLEMENT_STANDARD_RTTIEXT(AssignProbe, MeshVS_Drawer)
 static void Scalars(const occ::handle<MeshVS_Drawer>& drawer) {
   int integer=91; double real=7.25; bool boolean=true;
   std::cout << "miss " << drawer->GetInteger(7,integer) << " " << integer << " "
