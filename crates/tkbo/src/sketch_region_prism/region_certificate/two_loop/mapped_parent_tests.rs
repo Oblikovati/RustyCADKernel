@@ -1,0 +1,88 @@
+// SPDX-License-Identifier: GPL-2.0-only
+//! Authored native roles and independent structural-unit arithmetic pin the shared lookup adapter.
+use super::{
+    failure::*, fixture::TwoLoopFixture, fixture_bindings, mapped_parents::*, member_types::*,
+    request::*,
+};
+use crate::sketch_region::{OriginalMemberIdentity, PartitionOccurrenceIdentity, RegionSourceId};
+fn exercise<R>(run: impl FnOnce(TwoLoopRegionRequest<'_, '_>, OriginalMemberIdentity) -> R) -> R {
+    let fixture = TwoLoopFixture::nested();
+    let sources = fixture.sources();
+    let identities = fixture_bindings::identities(&fixture);
+    let actual = PartitionOccurrenceIdentity::capture(sources[0].shape);
+    let parent = OriginalMemberIdentity {
+        source: RegionSourceId(101),
+        topology_address: actual.topology_address,
+        location: actual.location,
+        orientation: actual.orientation,
+    };
+    let request = TwoLoopRegionRequest {
+        bridge: &fixture.bridge,
+        sources: &sources,
+        identities: &identities,
+        inner_interior: [1., 1.],
+        material_seed: [0.25, 0.25],
+        requested: fixture_bindings::options(),
+    };
+    run(request, parent)
+}
+#[test]
+fn parent_mapper_preserves_duplicate_kind_and_empty_rows_with_exact_budget() {
+    exercise(|mut request, parent| {
+        let parents = [parent.clone(), parent.clone(), parent];
+        request.requested.maximum_retained_units = 15; // Six bindings + four children + two rows + three parents.
+        let result = map_two_loop_original_parents(&request, &[&parents, &[]])
+            .unwrap_or_else(|e| panic!("{:?}", e.cause));
+        assert_eq!(result.retained_units, 15);
+        assert_eq!(
+            result.rows,
+            [
+                vec![
+                    TwoLoopOriginalUse {
+                        source: RegionSourceId(101),
+                        role: TwoLoopMemberRole::Boundary
+                    };
+                    3
+                ],
+                vec![]
+            ]
+        );
+    });
+}
+#[test]
+fn parent_mapper_one_short_budget_keeps_original_limit_cause() {
+    exercise(|mut request, parent| {
+        let parents = [parent.clone(), parent.clone(), parent];
+        request.requested.maximum_retained_units = 14;
+        let Err(failure) = map_two_loop_original_parents(&request, &[&parents, &[]]) else {
+            panic!("expected exact aggregate limit refusal");
+        };
+        assert!(matches!(
+            failure.cause,
+            TwoLoopRegionCause::Limit {
+                requested: 14,
+                measured: 15,
+                ..
+            }
+        ));
+        assert_eq!(failure.operation, 77);
+        assert_eq!(failure.stage, TwoLoopRegionStage::Membership);
+    });
+}
+#[test]
+fn parent_mapper_refuses_foreign_authored_source_without_coordinate_matching() {
+    exercise(|request, mut parent| {
+        parent.source = RegionSourceId(999);
+        let Err(failure) = map_two_loop_original_parents(&request, &[&[parent]]) else {
+            panic!("expected foreign parent refusal");
+        };
+        assert!(matches!(
+            failure.cause,
+            TwoLoopRegionCause::Count {
+                actual: 0,
+                expected: 1,
+                ..
+            }
+        ));
+    });
+}
