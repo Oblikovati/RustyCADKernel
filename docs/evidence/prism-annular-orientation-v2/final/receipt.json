@@ -1,0 +1,152 @@
+{
+  "source": "db8706a7595fe99bd7b6d25da6b2d3860399b7dd",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "jobs": 2,
+  "target": "/tmp/martensite-annular-orientation-target",
+  "scope": "TKBO all targets/features, docs, strict Clippy/fmt; unchanged TKMath/TKBRep not separately rerun",
+  "checks": [
+    {
+      "label": "clippy",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 3.7293985650030663,
+      "summaries": []
+    },
+    {
+      "label": "tests",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 362.07105631099694,
+      "summaries": [
+        "test result: ok. 1406 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 285.57s",
+        "test result: ok. 646 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 56.78s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 1.6977387839942821,
+      "summaries": [
+        "test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s"
+      ]
+    },
+    {
+      "label": "docs",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--no-deps",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 1.7100551150069805,
+      "summaries": []
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 10.551016561999859,
+      "summaries": []
+    },
+    {
+      "label": "orientation-v1-1",
+      "command": [
+        "/tmp/martensite-annular-orientation-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::region_certificate::orientation::tests::replay_tests::prism_orientation_process_receipt",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "seconds": 0.22079176300030667,
+      "summaries": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1405 filtered out; finished in 0.21s"
+      ]
+    },
+    {
+      "label": "orientation-v1-2",
+      "command": [
+        "/tmp/martensite-annular-orientation-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::region_certificate::orientation::tests::replay_tests::prism_orientation_process_receipt",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "seconds": 0.2765501729954849,
+      "summaries": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1405 filtered out; finished in 0.27s"
+      ]
+    },
+    {
+      "label": "joined-orientation-v1-1",
+      "command": [
+        "/tmp/martensite-annular-orientation-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::frozen::joined_orientation::tests_replay::joined_orientation_process_receipt",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "seconds": 0.0055133029964054,
+      "summaries": [
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1406 filtered out; finished in 0.00s"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "name": "orientation-v1",
+      "bytes": 752,
+      "sha256": "67df03c3156f98f17484f304d3a67078534778fa6fbe87882c8234ef5ac50f31",
+      "independent_processes": 2,
+      "retained_baseline": "docs/evidence/prism-annular-orientation-v2/shared-signs/baseline-orientation-1.bin.gz"
+    }
+  ],
+  "tsan": "Not executed: retained host startup limitation; no sanitizer acceptance claim",
+  "tracked_input_bookends_equal": true,
+  "input_files": 50861
+}

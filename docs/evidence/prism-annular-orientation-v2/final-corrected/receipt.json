@@ -1,0 +1,47 @@
+{
+  "source": "473166a75bbaf05c81e24877dbd00570cf31a9d2",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "jobs": 2,
+  "target": "/tmp/martensite-annular-orientation-target",
+  "scope": "TKBO all targets/features, docs, strict Clippy/fmt; unchanged TKMath/TKBRep not separately rerun",
+  "checks": [
+    {
+      "label": "clippy",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 0.12888180500158342,
+      "summaries": []
+    },
+    {
+      "label": "tests",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features"
+      ],
+      "exit": 101,
+      "seconds": 36.78809913099394,
+      "summaries": []
+    }
+  ],
+  "replays": [],
+  "tsan": "Not executed: retained host startup limitation; no sanitizer acceptance claim",
+  "tracked_input_bookends_equal": true,
+  "input_files": 50861
+}
