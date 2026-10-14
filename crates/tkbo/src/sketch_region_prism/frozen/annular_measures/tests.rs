@@ -98,3 +98,6 @@ fn whole_report_and_terminal_partial_evidence_are_send_sync() {
     static_assertions::assert_impl_all!(AnnularMeasuredFace: Send, Sync);
     static_assertions::assert_impl_all!(AnnularMeasureOptions: Send, Sync);
 }
+
+#[path = "baseline_tests.rs"]
+mod baseline;
