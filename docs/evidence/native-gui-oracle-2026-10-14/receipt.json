@@ -1,0 +1,78 @@
+{
+  "kernel_release": "v0.2.7",
+  "kernel_release_source": "d40ed71b704efd08310a4c56a1c1c3a64d4e3e9b",
+  "current_main": "720fb440fb19d83b1c947598517e569a50836671",
+  "observed_problem": "Client XGetImage is stale while compositor displays current GUI. No renderer cause/fix is established.",
+  "environment": {
+    "session": "wayland",
+    "Xwayland": ":1 -rootless",
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+    "DISPLAY": ":1"
+  },
+  "original_pinned_reproduction": {
+    "empty_scene_runs": 2,
+    "failures": 2,
+    "mismatch_pixels_each": 33000
+  },
+  "diagnostic_compile_argv": [
+    "rustc",
+    "--edition=2024",
+    "target/native-gui-stale/capture_repro.rs",
+    "-L",
+    "dependency=../oblikovati-rust/target/debug/deps",
+    "--extern",
+    "oblikovati_viewport=../oblikovati-rust/target/debug/deps/liboblikovati_viewport-cd9fdd142effda19.rlib",
+    "--extern",
+    "oblikovati_gui=../oblikovati-rust/target/debug/deps/liboblikovati_gui-a61d4c3c506ec2a8.rlib",
+    "-o",
+    "target/native-gui-stale/capture-repro"
+  ],
+  "diagnostic_scope": "Same minimal consumer source with dump-on-failure and optional45second hold; directly linked cached consumer rlibs hash-bound below. Diagnostic probe distinct from immutable original binary.",
+  "capture_extent": [
+    1440,
+    900
+  ],
+  "verified_gui_rectangle": [
+    8,
+    8,
+    300,
+    110
+  ],
+  "native_gui_mismatch_before": 33000,
+  "native_gui_mismatch_after": 33000,
+  "compositor_gui_mismatch_between": 0,
+  "redraws_between_bracketed_reads": 0,
+  "compositor_capture_argv": [
+    "cosmic-screenshot",
+    "--interactive=false",
+    "--modal=false",
+    "--notify=false",
+    "--save-dir",
+    "target/native-gui-stale/compositor-temporary"
+  ],
+  "crop": "300x110+1208+409; managed X11 client origin1200,401 from xwininfo",
+  "host_capture_bounds": "Only visible GUI rectangle verified independently. Other portions were occluded by a neighboring window and are not acceptance evidence.",
+  "privacy": "Uncropped desktop and larger own-window crops physically deleted; only own GUI rectangle retained.",
+  "acceptance": "Oracle fault established; corrected full-frame native/software harness and original application gate remain required. No class/API credit, no release or renderer behavior change.",
+  "input_sha256": {
+    "/tmp/native-gui-minimal": "3c0125218b12b6da7ac1f0f017358e690a0056d84dc255d8fe6d0371dba058a3",
+    "../experiments/native-gui-presentation/rapid.rs": "ae2c8ea8f7f1bb66c85a556b2b8eb03b474e0a34907214390140a1c28cd2ad5e",
+    "target/native-gui-stale/capture-repro": "7d23c03a5d8c03eb2bca0a9ddb1b47238707e243def0059f0244ba258128026a",
+    "../oblikovati-rust/target/debug/deps/liboblikovati_viewport-cd9fdd142effda19.rlib": "0c8ed21cd366757b5a32178b83de3658af2f82d83ad12e29d183bbacb2fe2073",
+    "../oblikovati-rust/target/debug/deps/liboblikovati_gui-a61d4c3c506ec2a8.rlib": "6bbd773846fd6f6b655dad88a17301fc53c6e4bc7d8b9ed08003be2f3d11f089"
+  },
+  "artifacts_sha256": {
+    "capture-empty-0.log.gz": "6b1ed6e3f2cc7f0f8eaf3bfec143103df9dc97015f2b8267535b98e51b92adb7",
+    "capture_repro.rs": "8cd7f1977816059fca9d91f8fdf90c7a5ecc544070662e1889dae203cb79b8a9",
+    "client-after-compositor.rgba.gz": "b3311bb8c2daa7dd316abe2746402a3b910dd81bf0ac66c42cde3f05046d2df9",
+    "client-before-compositor.rgba.gz": "b3311bb8c2daa7dd316abe2746402a3b910dd81bf0ac66c42cde3f05046d2df9",
+    "compositor-gui-simultaneous.png": "651eefcd9f6f284591987a0e27b76dcfd9d1be3dbf8a56a6894bc9c977defe6e",
+    "compositor-gui-simultaneous.rgba.gz": "4bfb1f2997cf48153e7c2535f48c21ee7212a88d84ff4d2babf002dbeb21428e",
+    "gpu-gui.rgba.gz": "4bfb1f2997cf48153e7c2535f48c21ee7212a88d84ff4d2babf002dbeb21428e",
+    "hold-empty-2.log.gz": "f577b57c9fbf464ff0db954e19f1898393985fbe6393f8fe26eca499cd7bb7cf",
+    "hold-empty-3.log.gz": "19fccd5d605bd8e74e4eb283ff16cf0f414fdd7ee3ed8b996044dc32c9e42b3f",
+    "read_client_gui.py": "4a515ad37244db02406beae3b45f86d82ca94e9063ed4194c5ca1f601f521973",
+    "repro-empty-0.log.gz": "ad7e48696a5411a8661ba0f8284cea47387006e74d6504aed5faa06eea38d9e3",
+    "repro-empty-1.log.gz": "b9babc53732090bf2edd35ba5e08bcf487ace60ad9414cc7cb20cf8b15e38c32"
+  }
+}
