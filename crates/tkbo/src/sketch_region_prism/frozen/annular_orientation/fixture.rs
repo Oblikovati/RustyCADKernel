@@ -16,18 +16,26 @@ use rustycad_tkmath::{
     predicates::roots::{RootIsolationOptions, metric_bounds::BezierRegularityOptions},
 };
 #[derive(Default, Clone, Copy)]
-pub(super) struct Variant {
+pub(in crate::sketch_region_prism) struct Variant {
     pub stored_reverse: [bool; 2],
     pub traversed_reverse: [bool; 2],
     pub reflected: bool,
     pub negative_sweep: bool,
 }
-pub(super) fn with_variant<R>(
+pub(in crate::sketch_region_prism) fn with_variant<R>(
     variant: Variant,
     run: impl FnOnce(&AnnularFrozenDomain, &TwoLoopFixture) -> R,
 ) -> R {
+    with_source_order(variant, false, run)
+}
+/// Reorder request rows only; source IDs and native construction correspondence remain authored.
+pub(in crate::sketch_region_prism) fn with_source_order<R>(
+    variant: Variant,
+    reversed: bool,
+    run: impl FnOnce(&AnnularFrozenDomain, &TwoLoopFixture) -> R,
+) -> R {
     let fixture = source_fixture(variant);
-    let sources = fixture.sources();
+    let sources = ordered_sources(&fixture, reversed);
     let identities = fixture_bindings::identities(&fixture);
     let request = TwoLoopRegionRequest {
         bridge: &fixture.bridge,
@@ -42,6 +50,16 @@ pub(super) fn with_variant<R>(
     let receipt = retained_annular_sweep_with_request(&fixture, sweep);
     let joined = join(&request, &receipt);
     run(&joined, &fixture)
+}
+fn ordered_sources(
+    fixture: &TwoLoopFixture,
+    reversed: bool,
+) -> [crate::sketch_region::ArrangementSource<'_>; 2] {
+    let mut sources = fixture.sources();
+    if reversed {
+        sources.reverse();
+    }
+    sources
 }
 fn source_fixture(variant: Variant) -> TwoLoopFixture {
     let outer = source(1., [0., 0.], 0, variant);
