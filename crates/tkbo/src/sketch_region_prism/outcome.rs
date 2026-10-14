@@ -98,6 +98,7 @@ pub(crate) struct PrismImageBinding {
     pub transported: Shape,
 }
 pub(crate) struct PrismDiagnostic {
+    pub surface_charts: Option<super::surface_charts::PrismSurfaceInspection>,
     pub body: Shape,
     pub bindings: Vec<PrismImageBinding>,
     pub transport_gaps: Vec<PrismGap>,
@@ -129,6 +130,7 @@ pub(crate) struct PrismInputHistory {
     pub declared_plane: rustycad_tkmath::gp::Plane3,
 }
 pub(crate) struct PrismCopiedSelection {
+    pub chart_sources: super::surface_charts::PrismChartSources,
     pub base: Shape,
     pub relations: Vec<ArrangementRelation>,
 }

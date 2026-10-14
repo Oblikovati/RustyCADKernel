@@ -56,3 +56,39 @@ to two; explicit geometry copying proves only the tested success and subsequent
 source-mutation case. These tests seed the corpus, not production completion,
 ordered validation, naming or full isolation. No API completion credit follows
 from this ADR.
+
+
+## Actual sweep coefficient correspondence, diagnostic version 1
+
+The existing copied-selection/sweep/history pipeline captures the isolated
+source support, boundary curves, pcurves, ranges and endpoint occurrence keys
+before sweep. Actual output planes, extrusion bases, directions, placements,
+pcurves and 3D trims are then captured independently through explicit history
+contexts. A later shared-source/output edit cannot redefine the expectation.
+
+The admitted correspondence domain is planar caps with full native `[0,1]`
+polynomial or positive-weight rational Bézier boundaries and stored linear
+extrusion sides with standard evaluators. Cap affine coefficients, translated
+3D boundaries and native pcurves must match exactly. Side basis coefficients,
+stored direction multiplied by trim height, all four rectangular pcurves and
+3D trims must match exactly, including both occurrences of a closed-edge seam.
+Stored placement chains remain separate to avoid rounded composition. Exact
+homogeneous polynomial identities reuse the existing metric coefficient kernel.
+A normalized direction/height product that differs from the requested extrusion
+is incomplete; there is no tolerance relaxation or canonical-surface retry.
+
+Every face/trim keeps the existing source and output occurrence keys and all
+original parents. Current body containment must agree with retained history;
+missing, additional or reparented faces cannot inherit old proofs. Scalar
+observations describe the captured revision, not later mutable geometry.
+Compatibility occurrence wrappers remain private and thread-confined.
+
+This is coefficient correspondence, not a side-surface regularity theorem or
+publication gate. Region/source correspondence, domain injectivity and complete
+ordered solid validation still govern the single complete operation. The
+combined prism gap and unknown achieved error remain explicit; no successful
+body, replacement deletion or application acceptance follows from these proofs.
+Existing behavior remains available; this additive diagnostic version introduces
+no new release or migration gate. Issue #10 retains its existing deletion task
+and full-operation corpus requirement. See the immutable
+[surface chart evidence](../evidence/prism-surface-charts/README.md).

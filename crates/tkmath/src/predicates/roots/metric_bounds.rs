@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact supplied-representation geometry; no mapped tolerance algorithm is replaced.
 mod arithmetic;
+mod curve_identity;
+pub use curve_identity::{CurveIdentityDecision, MetricCurveChain, compare_curve_chains};
+#[cfg(test)]
+mod curve_identity_tests;
 mod mapped;
 mod parameter;
 mod prism_jacobian;

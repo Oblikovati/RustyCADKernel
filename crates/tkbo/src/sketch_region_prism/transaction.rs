@@ -128,7 +128,12 @@ fn retain_copy(receipt: &mut PrismReceipt) -> Result<(), PrismCompletion> {
         .as_ref()
         .expect("unique selected candidate retained");
     let (base, relations) = copied_selection(selected).map_err(PrismCompletion::Failed)?;
-    receipt.copied = Some(PrismCopiedSelection { base, relations });
+    let chart_sources = super::surface_charts::capture_sources(&base);
+    receipt.copied = Some(PrismCopiedSelection {
+        base,
+        relations,
+        chart_sources,
+    });
     Ok(())
 }
 fn retain_rejected(batch: CandidateBatch, receipt: &mut PrismReceipt) {
@@ -170,6 +175,7 @@ fn sweep(
     retain_body(&mut maker, receipt)?;
     checkpoint(receipt, progress, PrismPhase::History)?;
     retain_history(&mut maker, receipt)?;
+    super::surface_charts::retain_surface_charts(receipt, progress)?;
     capture_coverage_gaps(receipt);
     checkpoint(receipt, progress, PrismPhase::Validation)?;
     inspect_output(receipt);
@@ -184,6 +190,7 @@ fn retain_body(
         .map_err(|failure| PrismCompletion::Failed(mapped(PrismPhase::Sweep, failure)))?
         .clone();
     receipt.diagnostic = Some(PrismDiagnostic {
+        surface_charts: None,
         body,
         bindings: Vec::new(),
         transport_gaps: Vec::new(),

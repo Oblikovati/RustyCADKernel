@@ -1,0 +1,177 @@
+{
+  "evidence_version": 1,
+  "code_revision": "1389bc35e1181d2b0ea412e19fe7c21280a0014b",
+  "base_revision": "171fd9bc0cdda36158609460d5beedcb9336ad5c",
+  "behavior_version": "Additive diagnostic surface correspondence v1; existing incomplete operation contract and all prior mapped behavior retained. No successful body or release migration.",
+  "platform": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "source_sha256": {
+    "crates/tkbo/src/sketch_region_candidates/tests.rs": "77da0dc8550b920a761b47f2feb69c799d779b877a359296f6e05e30e4bcf96c",
+    "crates/tkbo/src/sketch_region_prism/geometry_tests.rs": "584f1cfb56ea3cde2347a9b9da0150c2b62c54a2327367d9f0ca35825edc9eeb",
+    "crates/tkbo/src/sketch_region_prism/history.rs": "36ff2d0cf3c6e04fb0934ed93d6b0bdc7a5114bebc8d343f3eef4d30d9b63e55",
+    "crates/tkbo/src/sketch_region_prism/mod.rs": "2b7b2c8961c0be375a5d45e4d7caeb8441f24ef1263e73485c7ee123cd6f3dca",
+    "crates/tkbo/src/sketch_region_prism/outcome.rs": "26c4d8c0751d057c2187317922c65e668b8b262939a221975263c3b7b6d74758",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/cap.rs": "5489d7d2c8f4a04338b7ea2d6fb4cf2d91ecf1a5044632a85dde854836f881d7",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/capture.rs": "558fb7603eded18e1b2f56a79ea99aad2f2b55d727abe5fdd63d379bcd34cd9e",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/coverage.rs": "016310e7a5858b484d48719dd027e4a8a9f0a8ee53960a9057abe650afb8721e",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/degenerate_tests.rs": "de1f20a5a15132e58b3031351f82b60aed1779758da03f1f8fd7ef324dd9ea93",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/expected_tests.rs": "b08bb41684f800e14ff0ea67f85179e0733557238f6e38e00767d89c05d44367",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/identity.rs": "8657165b5a333186466e1bc64eb1654db63657a2d88a8357a2c93382d85d2caf",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/inspection.rs": "bdeb451059ba66636c392297f644d0d0859b524ab663e2e694c84b8c4d590f3e",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/mod.rs": "43c94b2e457f52523ff1823951de02823c07eb69ef3cdd7f893a0db235c44157",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/mutation_tests.rs": "012643eec1161f1f1557964cababa6c6ade47d53a61bc7ba4d078fc438086574",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/progress.rs": "aeb43208ccce554786bf8cc265fedd5679f487f83b79e2c580fd074743510074",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/progress_tests.rs": "8bcf9a34c98609e53b1f0daf01a905b017b37d55bb70a9e479865c2ef824befd",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/replay_tests.rs": "6a1341c8c1203163f6d0c653bab5af0c62e00f615843bee1a9e2339a02e0ed45",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/side.rs": "75ca2e7a1cb5aaa777f8e6c830168366313785d5c1ac3bc4787a8b5886557b72",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/side_trims.rs": "647b73b37488640c09e80b15f98944d8976d5e7706c3d3477e4afa9f409fb766",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/sources.rs": "10d18e189133feffb724d14c699759b9acda2d12a7c48861cdd7d4d97263f424",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/tests.rs": "102b29dda17b9a14f77df3820fe92fbab15b22c815449cfe6c9888dfda8af333",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/trim_binding.rs": "c990483386c916f66aae6b5d58c1e96fc67649a3f36956e71dd589fb40172b95",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/trim_capture.rs": "1dbf2250716cce964279bf1c56b3ebdfeb3a2a188959634f912eb23874119536",
+    "crates/tkbo/src/sketch_region_prism/surface_charts/types.rs": "0621c2aad472c3169406db36ef551f0a9fa03574bd40e03393bf498bb1afe0f8",
+    "crates/tkbo/src/sketch_region_prism/transaction.rs": "5200ae23489aef065b311a55db3e4ae6c5dece92ae6b48666a32ba43d86d4e57",
+    "crates/tkmath/src/predicates/roots/metric_bounds.rs": "40477f9a2876da6d861f8ac447dccf24c4bf3e3ad766550e95f2f6285f824bf9",
+    "crates/tkmath/src/predicates/roots/metric_bounds/curve_identity.rs": "ecdd488a2449ed4fe907031d2faeeffae3770d86abc56fca62991f567d670a9a",
+    "crates/tkmath/src/predicates/roots/metric_bounds/curve_identity_tests.rs": "89745dcb522b5693248ace488633067e25228fd8e366e2e89b1ce102920b53c0",
+    "docs/adr/0014-owned-analytic-sketch-regions.md": "815ff6fc5028182127aa61560db61d9dc33f6d80a26ac10c6872668c9bcaf14e",
+    "Cargo.toml": "fa1245128377029158057bc148f54578f27a9305d4e83612452b405a2288fb4f",
+    "Cargo.lock": "53fef96fad424c314b571b2fb4e2a6075e208afe5f8e8914ca47499c515c6812",
+    "rust-toolchain.toml": "b3014764cf8f6250e128ca74673c16b3ffe75a7cddfecaacf30e3fd2152a6d7c"
+  },
+  "verification": {
+    "committed_all_targets": {
+      "passed": 4122,
+      "failed": 0,
+      "groups": [
+        [
+          421,
+          0
+        ],
+        [
+          646,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          149,
+          0
+        ],
+        [
+          2904,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "committed_doctests": {
+      "passed": 84,
+      "failed": 0,
+      "groups": [
+        [
+          35,
+          0
+        ],
+        [
+          49,
+          0
+        ]
+      ]
+    },
+    "clippy": "pass; warnings denied",
+    "fmt": "pass",
+    "new_bridge_tests": 20,
+    "new_scalar_tests": 9,
+    "extracted_predicate_tests": {
+      "passed": 138,
+      "failed": 0,
+      "groups": [
+        [
+          138,
+          0
+        ]
+      ]
+    },
+    "ordinary_host_tsan": {
+      "build": "passed",
+      "cargo_exit": 101,
+      "execution": "SIGSEGV before test output; acceptance incomplete",
+      "host_protection": "unchanged"
+    },
+    "scalar_process_comparison": "equal bytes; each executes 64 cases serially, on eight threads, then serial reuse",
+    "chart_process_comparison": "equal proof bytes; each checks actual independent coefficients/trims and eight workers x five operation-local rebuilds against serial results",
+    "function_limits": {
+      "files": 21,
+      "functions": 156,
+      "bounds": "4\u201320 physical function lines; files <500"
+    }
+  },
+  "oracle_kinds": [
+    "independent literal cap support/translation coefficients and cubic side basis/direction/pcurves",
+    "homogeneous algebraic degree elevation and common rational weight scaling",
+    "generated exact quadratic middle-pole perturbations",
+    "exact separated placement cancellation at 2^53",
+    "generated zero/negative/nonfinite trim heights and missing/duplicated seam occurrences",
+    "explicit physical/context history keys and all original parents",
+    "source isolation, shared geometry edits, cancellation/failure prefix and fresh request reuse"
+  ],
+  "options": {
+    "representative_seed": [
+      1,
+      1
+    ],
+    "extrusion": [
+      0,
+      0,
+      2
+    ],
+    "source_native_range": [
+      0,
+      1
+    ],
+    "root_parameter_width": 0.001,
+    "spatial_limit": 1e-08,
+    "parameter_limit": 1e-08,
+    "chart_tolerances": "none: exact coefficient identities and native range equality; no clamps or widened limits",
+    "surface_domain": "planar caps; full polynomial/positive-weight rational Bezier boundaries; stored linear extrusion sides; standard evaluators"
+  },
+  "initial_failures": [
+    {
+      "log": "martensite-surface-chart-focused-2.log",
+      "scope": "unpinned initial working-tree attempt",
+      "reason": "Incorrect raw cap-origin expectation ignored translated occurrence placement; live post-sweep source comparison admitted a shared source/output support edit. Fixed by literal raw-origin+placement expectations and pre-sweep owned coefficient snapshots, with a retained co-mutation regression."
+    },
+    {
+      "log": "martensite-surface-chart-focused-4.log",
+      "scope": "unpinned snapshot correction attempt",
+      "reason": "Edited copied source shares actual 3D trim, not independently copied surface basis. Exact rejection is TrimSpaceCurve. Regression now asserts frozen source coefficient/identity, unchanged basis pole=4 and edited actual trim pole=6, with the precise stage."
+    },
+    {
+      "log": "martensite-surface-chart-clippy.log",
+      "reason": "Large cap-only expectation variant; boxed its stored 3D representation and reran clippy/full committed suite."
+    }
+  ],
+  "operation_acceptance": "Incomplete: conditional coefficient correspondence does not certify regularity, complete source/region construction, ordered solid validation, tolerance/error bounds, or publication. Combined prism gap and unknown achieved error remain.",
+  "exclusions": [
+    "No native OCCT execution, new capture, external oracle or changed native fixtures; fixture replays are historical only.",
+    "No faceting, evaluator sampling or volume-based acceptance.",
+    "No full prism result Send/Sync claim; occurrence-containing adapters remain private/thread-confined. Scalar coefficients/proofs have compile-time checks; no new unsafe impl.",
+    "Ordinary-host TSan acceptance remains incomplete; no host protection masking or disabled instrumentation.",
+    "No accepted-operation performance comparison: no completed accepted region/prism workload yet. All-target bench hooks are recorded but do not establish a previous-release benchmark.",
+    "No application/GPU validation or replacement deletion gate."
+  ]
+}
