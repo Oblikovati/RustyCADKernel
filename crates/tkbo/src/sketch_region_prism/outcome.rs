@@ -97,7 +97,22 @@ pub(crate) struct PrismImageBinding {
     pub context: PrismBodyContext,
     pub transported: Shape,
 }
+/// Actual completed query tuple; aliases remain private until an owned history projection.
+#[derive(Clone)]
+pub(crate) struct PrismSweepQueryObservation {
+    pub query: ArrangementRelation,
+    pub generated: Vec<Shape>,
+    pub first: Shape,
+    pub last: Shape,
+    pub retired: bool,
+}
+/// Absence is unknown; captured empty queries are explicit observations, not body acceptance.
+pub(crate) enum PrismSweepQueries {
+    NotReached,
+    Captured(Vec<PrismSweepQueryObservation>),
+}
 pub(crate) struct PrismDiagnostic {
+    pub sweep_queries: PrismSweepQueries,
     pub surface_charts: Option<super::surface_charts::PrismSurfaceInspection>,
     pub body: Shape,
     pub bindings: Vec<PrismImageBinding>,
