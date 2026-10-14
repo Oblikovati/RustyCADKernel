@@ -4,10 +4,12 @@
 //! no Gauss error estimate is reclassified and no geometric validity is inferred.
 mod arithmetic;
 mod error;
+mod plane;
 mod types;
 use super::super::{certificate_arithmetic::ExactRatio, error::poll};
 use super::{MetricEmbedding, affine_prism_jacobian};
 pub use error::{PolynomialIntegralError, PolynomialIntegralFailure};
+pub use plane::*;
 pub use types::*;
 
 /// Certify the ordered signed Green integral on every supplied full native `[0,1]` range.
