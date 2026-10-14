@@ -28,7 +28,7 @@ mod operation_tests;
 #[cfg(test)]
 mod domain_tests;
 #[cfg(test)]
-mod mutation_tests;
+pub(in crate::sketch_region_prism) mod mutation_tests;
 #[cfg(test)]
 mod replay_tests;
 pub(crate) use progress::{PublicationCallbackCause, PublicationCallbackStop};
