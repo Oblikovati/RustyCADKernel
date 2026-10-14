@@ -132,3 +132,37 @@ actual envelope codec and independent literal/field fixtures. The publication
 phase vocabulary is encoded, but publication attribution/construction still
 requires the pending sealed actual-invocation packet; this codec adds no such
 constructor or body-completion claim.
+
+## Explicit publication diagnostic retention V2
+
+Baseline `75dab08f3` pins the V1 callback wrapper: its outer phase/class describe
+the callback, and its retained downstream value contains only the child's cause.
+The child's former phase/class cannot be reconstructed from that payload. The
+owned adapter must distinguish the publication-operation class from a child
+classification and record unavailable legacy child headers explicitly.
+
+An additive `publish_named_prism_v2` entry requires publication options version 2.
+The original `publish_named_prism` entry continues to require version 1, including
+its exact refusal of any other requested version. Both entries share one admitted
+geometry, history, measurement, callback and final-rebind implementation. V2
+selects `CallbackWithChild`, which retains the complete actual child stage failure
+(phase, class and cause) before callback precedence replaces the outer header.
+Absent children remain absent; nested children retain each distinct header. No
+legacy receipt is retroactively enriched. Successful V2 results identify
+`CompleteNamedPrismV2` and encode requested version 2 in the existing V1 wire
+format; all child proof bytes remain identical for identical accepted inputs.
+Wire-format version and requested publication behavior are separate.
+
+The Kernel#10 operation-contract owner must migrate actual invocation consumers
+to V2 and delete the lossy V1 producer after the retained-header corpus and full
+operation migration gate, within the existing ADR0014 application R3 limit. V1
+remains explicitly selectable for historical replay until that recorded migration.
+This private additive behavior neither expands the geometry domain nor changes
+the workspace release version. The future invocation adapter must select V2
+explicitly and retain that choice in the actual request context.
+
+Complete caller-qualified refusal publication still requires the sealed actual
+invocation packet and bounded typed adapters/codecs. Validation, measure, history
+and unsupported join numerical/frozen families remain explicit completion tasks;
+unsupported local owners cannot become lossless diagnostics through Debug text
+or a known outer class. Preserving producer headers does not close those gaps.

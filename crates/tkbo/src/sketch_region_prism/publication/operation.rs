@@ -10,13 +10,20 @@ pub(crate) fn publish_named_prism<'a>(
 ) -> PublicationCheck<'a, PublishedNamedPrism> {
     publish_with_version(request, progress, 1)
 }
+/// Retain complete downstream callback diagnostics; `publish_named_prism_v2(&request, &mut progress)` requires version 2.
+pub(crate) fn publish_named_prism_v2<'a>(
+    request: &PrismPublicationRequest<'a>,
+    progress: &mut dyn PrismPublicationProgress,
+) -> PublicationCheck<'a, PublishedNamedPrism> {
+    publish_with_version(request, progress, 2)
+}
 fn publish_with_version<'a>(
     request: &PrismPublicationRequest<'a>,
     progress: &mut dyn PrismPublicationProgress,
     version: u32,
 ) -> PublicationCheck<'a, PublishedNamedPrism> {
     admit(request, version)?;
-    let mut callbacks = PublicationCallbacks::new(progress);
+    let mut callbacks = callbacks_for_version(progress, version);
     let mut result = construct(request, &mut callbacks)?;
     result.replay = replay::encode(&result);
     request.callback(PrismPublicationPhase::Commit, &mut callbacks)?;
@@ -26,6 +33,15 @@ fn publish_with_version<'a>(
         .map_err(|cause| request.stage_failure(cause))?;
     history::reproject(request, &result)?;
     Ok(result)
+}
+fn callbacks_for_version(
+    progress: &mut dyn PrismPublicationProgress,
+    version: u32,
+) -> PublicationCallbacks<'_> {
+    if version == 2 {
+        return PublicationCallbacks::retaining_children(progress);
+    }
+    PublicationCallbacks::new(progress)
 }
 fn admit<'a>(request: &PrismPublicationRequest<'a>, version: u32) -> PublicationCheck<'a, ()> {
     if request.requested.version != version {

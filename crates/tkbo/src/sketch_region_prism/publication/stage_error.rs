@@ -25,6 +25,10 @@ pub(crate) enum PublicationStageCause {
         stop: Box<PublicationCallbackStop>,
         downstream: Option<Box<PublicationStageCause>>,
     },
+    CallbackWithChild {
+        stop: Box<PublicationCallbackStop>,
+        downstream: Option<Box<PublicationStageFailure>>,
+    },
 }
 pub(super) fn binding_failure(
     phase: PrismPublicationPhase,
@@ -45,15 +49,28 @@ pub(super) fn finish_child<T>(
     };
     let phase = stop.checkpoint.phase;
     let class = callback_class(&stop.cause);
-    let downstream = result.err().map(|failure| Box::new(failure.cause));
+    let cause = callback_cause(result.err(), stop, callbacks.retains_child_failure());
     Err(PublicationStageFailure {
         phase,
         class,
-        cause: PublicationStageCause::Callback {
-            stop: Box::new(stop),
-            downstream,
-        },
+        cause,
     })
+}
+fn callback_cause(
+    child: Option<PublicationStageFailure>,
+    stop: PublicationCallbackStop,
+    retain_child: bool,
+) -> PublicationStageCause {
+    if retain_child {
+        return PublicationStageCause::CallbackWithChild {
+            stop: Box::new(stop),
+            downstream: child.map(Box::new),
+        };
+    }
+    PublicationStageCause::Callback {
+        stop: Box::new(stop),
+        downstream: child.map(|failure| Box::new(failure.cause)),
+    }
 }
 impl From<Box<OrderedPrismValidationFailure>> for PublicationStageFailure {
     fn from(cause: Box<OrderedPrismValidationFailure>) -> Self {
@@ -90,3 +107,7 @@ fn callback_class(cause: &PublicationCallbackCause) -> PrismPublicationClass {
         PublicationCallbackCause::Exhausted => PrismPublicationClass::Incomplete,
     }
 }
+
+#[cfg(test)]
+#[path = "stage_v2_tests.rs"]
+mod v2_tests;
