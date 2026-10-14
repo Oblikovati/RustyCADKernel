@@ -17,6 +17,7 @@ pub(crate) struct BoundaryCensus {
     pub source_binding: Option<crate::sketch_region_source_conformance::BoundSourceConformance>,
     pub domains: Vec<BoundaryDomain>,
     pub reports: Vec<BezierIncidenceReport>,
+    pub paired: Option<super::paired_types::PairedCensusEvidence>,
     pub failures: Vec<BezierIncidenceFailure>,
     pub requested: CensusPolicy,
     pub bisections: u64,
@@ -39,6 +40,12 @@ pub(crate) enum DomainEvidence {
         line: usize,
     },
     NumericalFailure(usize),
+    PairedReport {
+        report: usize,
+        reused: bool,
+        // Each directed occurrence position maps to the retained report parameter axis; self keeps t/u distinct.
+        source_slots: [usize; 2],
+    },
     Unsupported(CensusGap),
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -47,6 +54,10 @@ pub(crate) enum CensusGap {
     BezierPair,
     SamePhysicalCurve,
     EmptyBoundaryUniverse,
+    MissingOccurrence {
+        occurrences: [usize; 2],
+        count: usize,
+    },
 }
 pub(crate) enum CensusCause {
     Input(ArrangementCause),
@@ -134,6 +145,42 @@ impl BoundaryCensus {
         {
             current.push(CertificationObligation::SourceConversionAndPlane);
         }
+        if self.paired.is_some() {
+            restore_paired_obligations(self, &mut current);
+        }
         current
     }
+}
+
+fn restore_pair_obligation(
+    census: &BoundaryCensus,
+    current: &mut Vec<CertificationObligation>,
+    gap: CertificationObligation,
+) {
+    let valid = match gap {
+        CertificationObligation::ExhaustivePairAndSelfDomains => {
+            super::paired_binding::paired_domains_certified(census)
+        }
+        CertificationObligation::FailedWorkAccounting => {
+            super::paired_binding::paired_work_exact(census)
+        }
+        _ => false,
+    };
+    if !valid && !current.contains(&gap) {
+        current.push(gap);
+    }
+}
+
+fn restore_paired_obligations(census: &BoundaryCensus, current: &mut Vec<CertificationObligation>) {
+    super::paired_binding::restore_operation_obligations(current);
+    restore_pair_obligation(
+        census,
+        current,
+        CertificationObligation::ExhaustivePairAndSelfDomains,
+    );
+    restore_pair_obligation(
+        census,
+        current,
+        CertificationObligation::FailedWorkAccounting,
+    );
 }

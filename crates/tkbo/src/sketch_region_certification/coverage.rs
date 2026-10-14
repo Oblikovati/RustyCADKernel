@@ -29,6 +29,12 @@ pub(crate) fn inspect_contact_coverage(
     arranged: &OwnedArrangement,
     plane: Plane3,
 ) -> Result<Vec<ContactCoverage>, Failure> {
+    if census.paired.is_some() {
+        return Err(Failure::new(&format!(
+            "paired census domains={}; expected legacy one-axis line diagnostic evidence",
+            census.domains.len()
+        )));
+    }
     let scope = CoverageScope {
         census,
         arranged,

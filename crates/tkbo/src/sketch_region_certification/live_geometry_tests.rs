@@ -10,7 +10,7 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkmath::gp::{Point2, Point3};
 fn live_census() -> BoundaryCensus {
-    enumerate_source_bound_census(
+    enumerate_source_bound_line_diagnostic(
         capture(&curved_crossing()),
         policy(),
         source_policy(),
