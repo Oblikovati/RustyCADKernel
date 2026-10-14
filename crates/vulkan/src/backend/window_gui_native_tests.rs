@@ -47,8 +47,10 @@ impl WindowPresentationProbe for NativeResizeProbe<'_> {
     }
 }
 fn native_injected_fault() -> RenderError {
+    // Oblikovati#3630: inject the same VK_ERROR_DEVICE_LOST shape real submissions return,
+    // so a device fault observed alongside a native resize is proven to remain a fault.
     let operation = "owned native submission fault 3630";
-    RenderError::rejected(operation, "successful device submission")
+    super::runtime::vk_error(operation, ash::vk::Result::ERROR_DEVICE_LOST)
 }
 fn native_gui_frame([width, height]: [u32; 2]) -> RenderFrame {
     let points = [[-1., -1., 0.], [1., -1., 0.], [1., 1., 0.], [-1., 1., 0.]];
