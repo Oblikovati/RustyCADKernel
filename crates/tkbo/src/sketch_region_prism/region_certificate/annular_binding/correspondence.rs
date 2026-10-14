@@ -145,7 +145,11 @@ pub(super) fn preserve_physical_sharing(members: &[AnnularCopiedMember]) -> Annu
     use super::super::history::same_physical;
     for first in members {
         for second in members {
-            holds("copied physical definitions preserve and reflect selected sharing", same_physical(&first.selected.occurrence, &second.selected.occurrence) == same_physical(&first.copied.occurrence, &second.copied.occurrence))?;
+            holds(
+                "copied physical definitions preserve and reflect selected sharing",
+                same_physical(&first.selected.occurrence, &second.selected.occurrence)
+                    == same_physical(&first.copied.occurrence, &second.copied.occurrence),
+            )?;
         }
     }
     Ok(())

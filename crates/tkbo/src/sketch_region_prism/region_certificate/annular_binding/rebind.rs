@@ -31,10 +31,15 @@ pub(super) fn check<'a>(
     Ok(())
 }
 fn same_contexts(old: &AnnularPrismOperands, new: &AnnularPrismOperands) -> AnnularCheck<'static> {
-    holds("same hierarchy budget and exact census", old.hierarchy == new.hierarchy)?;
+    holds(
+        "same hierarchy budget and exact census",
+        old.hierarchy == new.hierarchy,
+    )?;
     holds(
         "same complete original copy and native image parent classes",
-        old.parents.copies == new.parents.copies && old.parents.images == new.parents.images && old.parents.captured == new.parents.captured,
+        old.parents.copies == new.parents.copies
+            && old.parents.images == new.parents.images
+            && old.parents.captured == new.parents.captured,
     )?;
     holds(
         "same complete current body context census",

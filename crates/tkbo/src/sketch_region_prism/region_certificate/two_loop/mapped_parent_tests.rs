@@ -116,11 +116,21 @@ fn parent_mapper_checks_zero_one_three_sources_before_budget_or_native_query() {
 fn original_parent_budget_keeps_prior_reservation_and_original_limit() {
     exercise(|mut request, parent| {
         request.requested.maximum_retained_units = 20;
-        let result = map_two_loop_original_parents_after(&request, &[&[parent.clone()]], 8).unwrap_or_else(|_| panic!("exact 8+6+4+1+1 budget"));
+        let result = map_two_loop_original_parents_after(&request, &[&[parent.clone()]], 8)
+            .unwrap_or_else(|_| panic!("exact 8+6+4+1+1 budget"));
         assert_eq!(result.retained_units, 20);
         request.requested.maximum_retained_units = 19;
-        let Err(failure) = map_two_loop_original_parents_after(&request, &[&[parent]], 8) else { panic!("expected cumulative limit"); };
-        assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { requested: 19, measured: 20, .. }));
+        let Err(failure) = map_two_loop_original_parents_after(&request, &[&[parent]], 8) else {
+            panic!("expected cumulative limit");
+        };
+        assert!(matches!(
+            failure.cause,
+            TwoLoopRegionCause::Limit {
+                requested: 19,
+                measured: 20,
+                ..
+            }
+        ));
     });
 }
 #[test]
@@ -128,10 +138,32 @@ fn polynomial_descriptor_admission_retains_original_caps_and_negative_count_caus
     exercise(|mut request, _| {
         request.requested.maximum_poles = 4;
         request.requested.maximum_retained_units = 10;
-        assert_eq!(super::admit_two_loop_polynomial_counts(&request, &[4,0], 4).unwrap_or_else(|_| panic!("exact cumulative geometry cap")),10);
-        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[5], 0) else { panic!("expected pole cap"); };
-        assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { operand: "polynomial poles", requested:4, measured:5 }));
-        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[-1], 0) else { panic!("expected negative count"); };
-        assert!(matches!(failure.cause, TwoLoopRegionCause::Scalar { operand: "pole count", actual:-1., .. }));
+        assert_eq!(
+            super::admit_two_loop_polynomial_counts(&request, &[4, 0], 4)
+                .unwrap_or_else(|_| panic!("exact cumulative geometry cap")),
+            10
+        );
+        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[5], 0) else {
+            panic!("expected pole cap");
+        };
+        assert!(matches!(
+            failure.cause,
+            TwoLoopRegionCause::Limit {
+                operand: "polynomial poles",
+                requested: 4,
+                measured: 5
+            }
+        ));
+        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[-1], 0) else {
+            panic!("expected negative count");
+        };
+        assert!(matches!(
+            failure.cause,
+            TwoLoopRegionCause::Scalar {
+                operand: "pole count",
+                actual: -1.,
+                ..
+            }
+        ));
     });
 }

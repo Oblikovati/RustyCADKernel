@@ -42,7 +42,11 @@ pub(super) fn capture<'a>(
     progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'a, AnnularPrismOperands> {
     let hierarchy = bounds::inspect(receipt, request.requested.maximum_retained_units)?;
-    let metadata_units = metadata_budget::inspect(receipt, hierarchy.retained_units, request.requested.maximum_retained_units)?;
+    let metadata_units = metadata_budget::inspect(
+        receipt,
+        hierarchy.retained_units,
+        request.requested.maximum_retained_units,
+    )?;
     let reserved = geometry_budget::inspect(request, receipt, metadata_units)?;
     let limits = settings::capture(request, receipt)?;
     selection(request, receipt, progress)?;
@@ -82,16 +86,26 @@ pub(super) fn poll(
     poll_owned(progress, stage)?;
     preflight(request, receipt)
 }
-fn poll_owned(progress: &mut dyn AnnularBindingProgress, stage: AnnularBindingStage) -> AnnularCheck<'static> {
+fn poll_owned(
+    progress: &mut dyn AnnularBindingProgress,
+    stage: AnnularBindingStage,
+) -> AnnularCheck<'static> {
     match progress.checkpoint(stage) {
         Ok(false) => Ok(()),
         Ok(true) => Err(Box::new(AnnularBindingCause::Cancelled(stage))),
         Err(cause) => Err(Box::new(AnnularBindingCause::Callback { stage, cause })),
     }
 }
-pub(super) fn preflight(request: &TwoLoopRegionRequest<'_, '_>, receipt: &PrismReceipt) -> AnnularCheck<'static> {
+pub(super) fn preflight(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+) -> AnnularCheck<'static> {
     let hierarchy = bounds::inspect(receipt, request.requested.maximum_retained_units)?;
-    let reserved = metadata_budget::inspect(receipt, hierarchy.retained_units, request.requested.maximum_retained_units)?;
+    let reserved = metadata_budget::inspect(
+        receipt,
+        hierarchy.retained_units,
+        request.requested.maximum_retained_units,
+    )?;
     geometry_budget::inspect(request, receipt, reserved).map(|_| ())
 }
 fn selection(
@@ -116,9 +130,13 @@ fn chart_capture(
     progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'static, (Vec<AnnularBoundChart>, Vec<RegionObservedContext>)> {
     let mut callback = None;
-    let result = charts::capture_guarded(receipt, copy, boundaries, &mut || {
-        stop(progress, AnnularBindingStage::Charts, &mut callback)
-    }, &mut || preflight(request, receipt));
+    let result = charts::capture_guarded(
+        receipt,
+        copy,
+        boundaries,
+        &mut || stop(progress, AnnularBindingStage::Charts, &mut callback),
+        &mut || preflight(request, receipt),
+    );
     finish_callback(result, callback)
 }
 fn stop(
