@@ -6,6 +6,7 @@ pub(super) fn inspect<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     work: &TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, ()> {
+    arrangement(&request.bridge.mapped.arrangement.completion, work)?;
     let copy = request.bridge.mapped.copied.as_ref().ok_or_else(|| {
         work.failure(TwoLoopRegionCause::Missing {
             hypothesis: "actual candidate copy stage",
@@ -38,4 +39,21 @@ pub(super) fn inspect<'a>(
         }
     }
     Ok(())
+}
+
+fn arrangement<'a>(
+    completion: &'a crate::sketch_region::ArrangementCompletion,
+    work: &TwoLoopWork<'_>,
+) -> TwoLoopCheck<'a, ()> {
+    if matches!(
+        completion,
+        crate::sketch_region::ArrangementCompletion::Arranged(_)
+    ) {
+        return Ok(());
+    }
+    let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
+        stage: "required actual arrangement completion",
+    });
+    failure.local = Some(TwoLoopLocalDiagnostic::Arrangement(completion));
+    Err(failure)
 }

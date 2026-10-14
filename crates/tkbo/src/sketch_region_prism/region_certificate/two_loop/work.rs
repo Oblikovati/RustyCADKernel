@@ -29,9 +29,14 @@ impl<'p> TwoLoopWork<'p> {
         Box::new(TwoLoopRegionFailure {
             operation: self.operation,
             stage: self.stage,
-            entities: Vec::new(),
             requested: self.requested,
             retained_units: self.retained_units,
+            entities: match &cause {
+                TwoLoopRegionCause::WindingLocation { source, .. } => {
+                    vec![TwoLoopEntity::Source(*source)]
+                }
+                _ => Vec::new(),
+            },
             cause,
             local: None,
         })

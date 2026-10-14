@@ -85,18 +85,25 @@ fn refusal<'a>(
         hypothesis: "complete source-bound pair certificate",
     });
     if let DomainEvidence::PairedReport { report, .. } = domain.evidence
-        && let Some(Ok(report)) = census
-            .paired
-            .as_ref()
-            .and_then(|p| p.reports.get(report))
-            .map(|r| &r.outcome)
+        && let Some(retained) = census.paired.as_ref().and_then(|p| p.reports.get(report))
     {
-        failure.cause = TwoLoopRegionCause::PairRefusal {
-            completion: report.completion(),
-            policy: report.policy(),
-            work: report.work(),
-        };
-        failure.local = Some(TwoLoopLocalDiagnostic::Pair(report));
+        match &retained.outcome {
+            Ok(report) => {
+                failure.cause = if report.completion() == BezierPairCompletion::Complete {
+                    TwoLoopRegionCause::Stale {
+                        operand: "retained complete pair source/policy binding",
+                    }
+                } else {
+                    TwoLoopRegionCause::PairRefusal {
+                        completion: report.completion(),
+                        policy: report.policy(),
+                        work: report.work(),
+                    }
+                };
+                failure.local = Some(TwoLoopLocalDiagnostic::Pair(report));
+            }
+            Err(cause) => failure.cause = TwoLoopRegionCause::PairCapture(cause.clone()),
+        }
     }
     failure
 }

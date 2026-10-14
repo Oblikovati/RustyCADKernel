@@ -93,7 +93,15 @@ fn endpoints(rows: &[TwoLoopEndpointProof], bytes: &mut Vec<u8>) {
 }
 fn candidate(row: &TwoLoopCandidateProof, bytes: &mut Vec<u8>) {
     bytes.extend(row.name.to_le_bytes());
-    debug(&(row.orientation, row.disposition), bytes);
+    debug(
+        &(
+            row.orientation,
+            row.disposition,
+            row.signed_signature,
+            row.material_winding,
+        ),
+        bytes,
+    );
     plane(&row.support, bytes);
     count(row.wires.len(), bytes);
     for wire in &row.wires {

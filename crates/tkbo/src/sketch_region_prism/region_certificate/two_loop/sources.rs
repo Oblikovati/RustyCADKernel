@@ -112,7 +112,8 @@ fn current_original<'a>(
         "current original identity",
         original_identity(source.identity, &edge) == old.original,
     )?;
-    let current = geometry::space(source.shape, work)?;
+    let current = geometry::space(source.shape, work)
+        .map_err(|cause| cause.at(TwoLoopEntity::Source(source.identity)))?;
     let captured = old
         .representation
         .as_ref()
@@ -174,7 +175,8 @@ pub(super) fn preflight<'a>(
 ) -> TwoLoopCheck<'a, ()> {
     // Bound stored evaluators before the legacy conformance checker recaptures them internally.
     for source in request.sources {
-        geometry::space(source.shape, work)?;
+        geometry::space(source.shape, work)
+            .map_err(|cause| cause.at(TwoLoopEntity::Source(source.identity)))?;
     }
     for segment in &request.bridge.census.inputs.segments {
         geometry::space(&segment.edge, work)?;

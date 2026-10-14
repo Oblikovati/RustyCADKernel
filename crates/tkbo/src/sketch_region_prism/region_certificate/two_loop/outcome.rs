@@ -69,6 +69,10 @@ pub(crate) struct TwoLoopCandidateProof {
     pub(crate) support: CapturedPlaneSupport,
     pub(crate) wires: Vec<TwoLoopWireProof>,
     pub(crate) disposition: TwoLoopCandidateDisposition,
+    /// Outer/inner winding contributions normalized by each proved native Jordan orientation.
+    pub(crate) signed_signature: [i64; 2],
+    /// At the certified material seed: outer interior contributes one, inner exterior zero.
+    pub(crate) material_winding: i64,
     pub(crate) members: Vec<super::member_types::TwoLoopMemberProof>,
 }
 pub(crate) struct TwoLoopWireProof {

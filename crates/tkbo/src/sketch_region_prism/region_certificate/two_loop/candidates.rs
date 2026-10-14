@@ -39,7 +39,10 @@ pub(super) fn capture<'a>(
             .filter(|c| PartitionOccurrenceIdentity::capture(&c.face) == binding.actual)
             .collect();
         work.count("one actual candidate per authored binding", actual.len(), 1)?;
-        result.push(one(actual[0], binding, sources, nesting, &originals, work)?);
+        result.push(
+            one(actual[0], binding, sources, nesting, &originals, work)
+                .map_err(|cause| cause.at(TwoLoopEntity::Candidate(binding.name)))?,
+        );
     }
     dispositions(&result, request.identities.selected, work)?;
     result.sort_by_key(|row| row.name);
@@ -87,11 +90,13 @@ fn one<'a>(
             .filter(|w| PartitionOccurrenceIdentity::capture(w) == named.actual)
             .collect();
         work.count("one actual wire per authored binding", rows.len(), 1)?;
-        wires.push(candidate_wires::capture(
-            candidate, rows[0], named, sources, originals, work,
-        )?);
+        wires.push(
+            candidate_wires::capture(candidate, rows[0], named, sources, originals, work)
+                .map_err(|cause| cause.at(TwoLoopEntity::Wire(named.name)))?,
+        );
     }
-    let disposition = disposition(&wires, candidate.face.orientation(), sources, nesting, work)?;
+    let (disposition, signature) =
+        disposition(&wires, candidate.face.orientation(), sources, nesting, work)?;
     wires.sort_by_key(|row| row.name);
     work.units("named candidate", 1)?;
     Ok(TwoLoopCandidateProof {
@@ -100,6 +105,8 @@ fn one<'a>(
         support,
         wires,
         disposition,
+        signed_signature: signature,
+        material_winding: signature[0],
         members: super::member_capture::capture(candidate, binding, originals, work)?,
     })
 }
@@ -109,7 +116,7 @@ fn disposition<'a>(
     sources: &[TwoLoopSourceProof],
     nesting: &TwoLoopNestingProof,
     work: &TwoLoopWork<'_>,
-) -> TwoLoopCheck<'a, TwoLoopCandidateDisposition> {
+) -> TwoLoopCheck<'a, (TwoLoopCandidateDisposition, [i64; 2])> {
     let mut signature = [0_i64; 2];
     for wire in wires {
         let source = sources
@@ -123,9 +130,12 @@ fn disposition<'a>(
         signature = signature.map(|v| -v);
     }
     match (wires.len(), signature) {
-        (2, [1, -1]) => Ok(TwoLoopCandidateDisposition::SelectedAnnulus),
-        (1, [0, 1]) => Ok(TwoLoopCandidateDisposition::RejectedInnerDomain),
-        (1, [-1, 0]) => Ok(TwoLoopCandidateDisposition::RejectedOuterComplement),
+        (2, [1, -1]) => Ok((TwoLoopCandidateDisposition::SelectedAnnulus, signature)),
+        (1, [0, 1]) => Ok((TwoLoopCandidateDisposition::RejectedInnerDomain, signature)),
+        (1, [-1, 0]) => Ok((
+            TwoLoopCandidateDisposition::RejectedOuterComplement,
+            signature,
+        )),
         _ => Err(work.failure(TwoLoopRegionCause::CandidateSignature {
             actual: signature,
             wires: wires.len(),

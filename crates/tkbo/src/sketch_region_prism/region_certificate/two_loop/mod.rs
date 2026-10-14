@@ -66,3 +66,11 @@ mod source_budget;
 
 #[cfg(test)]
 mod budget_tests;
+
+mod failure_class;
+
+#[cfg(test)]
+mod callback_budget_tests;
+
+#[cfg(test)]
+mod refusal_tests;

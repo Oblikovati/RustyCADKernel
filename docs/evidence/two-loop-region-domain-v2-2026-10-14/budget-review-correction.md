@@ -31,3 +31,23 @@ parent/coefficient accounting, whole-operation exact/short budget, all cancellat
 cutoffs, process/thread comparisons, and final live rebinding. See the compressed
 complete log and source digest manifest. This is focused evidence, not the pending
 full candidate acceptance gate. The independent correction re-review is pending.
+
+## Follow-up: callbacks during exact chart-rank evaluation
+
+Independent re-review accepted the nested-roster accounting at `a75f005ed` but
+identified an ordering hole: `plane::inspect` invokes external progress after the
+second evaluator admission. Its callback could grow a curve before pair binding
+recaptures live geometry. A new regression replaced a four-pole original with five
+poles during the rank callback with requested cap four. The red run failed the
+expected typed `Limit` assertion (the later stale-binding check refused instead).
+The correction moves evaluator admission immediately after rank evaluation, with
+no external callback between admission and pair current-binding checks.
+
+The full focused run now passes 41 tests (40 two-loop plus one matching legacy),
+including the new rank mutation regression. Original red and full green logs are
+retained. This checkpoint also preserves native/cancelled classes through owned
+and local typed cause wrappers, rejects a failed/cancelled arrangement even if a
+candidate batch remains, retains owned pair-capture failures, distinguishes stale
+complete reports, and records signed domain/material winding conclusions per
+candidate. Those additions change only the unpublished V2 proof bytes; its complete
+draft payload is now pinned before later structural cleanup. V1 paths are unchanged.

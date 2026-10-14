@@ -43,6 +43,10 @@ pub(super) fn capture<'a>(
     let inner_interior = winding::query(&sources[1], request.inner_interior, work)?;
     let inner_sign = winding::unit_interior(&inner_interior, work)?;
     let material = material(request, sources, work)?;
+    work.holds(
+        "same Jordan winding at both certified outer-interior witnesses",
+        winding::unit_interior(&material[0], work)? == outer_sign,
+    )?;
     work.units("strict nesting record", 1)?;
     Ok(TwoLoopNestingProof {
         outer: sources[0].name,

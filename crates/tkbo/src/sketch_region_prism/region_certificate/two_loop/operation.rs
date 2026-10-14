@@ -64,8 +64,9 @@ fn initial<'a>(
     work.poll(TwoLoopRegionStage::Sources)?;
     let sources = sources::capture(request, work)?;
     work.poll(TwoLoopRegionStage::Census)?;
-    sources::preflight(request, work)?;
     let rank = super::plane::inspect(request, &sources, work)?;
+    // Rank evaluation polls the caller; re-admit live evaluators after its last callback.
+    sources::preflight(request, work)?;
     let census = census_settings::capture(&request.bridge.census, rank, work)?;
     let names = sources::census_names(request, work)?;
     let domains = pair_capture::domains(&request.bridge.census, names, work)?;
@@ -108,9 +109,9 @@ impl TwoLoopRegionProgress for SilentRebind {
     }
 }
 fn outcome(failure: Box<TwoLoopRegionFailure<'_>>) -> TwoLoopRegionOutcome<'_> {
-    match failure.cause {
-        TwoLoopRegionCause::Cancelled => TwoLoopRegionOutcome::Cancelled(failure),
-        TwoLoopRegionCause::Native(_) => TwoLoopRegionOutcome::Failed(failure),
+    match super::failure_class::classify(&failure) {
+        super::failure_class::RefusalClass::Cancelled => TwoLoopRegionOutcome::Cancelled(failure),
+        super::failure_class::RefusalClass::Failed => TwoLoopRegionOutcome::Failed(failure),
         _ => TwoLoopRegionOutcome::Incomplete(failure),
     }
 }

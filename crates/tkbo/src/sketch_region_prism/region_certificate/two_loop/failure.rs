@@ -61,6 +61,7 @@ pub(crate) enum TwoLoopRegionCause {
         expected: &'static str,
     },
     Residual(ResidualError),
+    PairCapture(Box<BezierPairCaptureFailure>),
     PairRefusal {
         completion: BezierPairCompletion,
         policy: BezierPairPolicy,
@@ -86,6 +87,7 @@ pub(crate) enum TwoLoopRegionCause {
     ResidualMismatch(rustycad_tkmath::predicates::roots::metric_bounds::ResidualDecision),
 }
 pub(crate) enum TwoLoopLocalDiagnostic<'a> {
+    Arrangement(&'a crate::sketch_region::ArrangementCompletion),
     PartitionObservation(&'a crate::sketch_region::PartitionObservation),
     Copy(&'a crate::sketch_region_candidates::CandidateCopyInspection),
     Report {
@@ -102,4 +104,13 @@ pub(crate) enum TwoLoopLocalDiagnostic<'a> {
     Region(Box<super::super::RegionCertificateCause>),
     Source(&'a crate::sketch_region_source_conformance::SourceConformanceCause),
     SourceBinding(Vec<crate::sketch_region_source_conformance::SourceBindingFault>),
+}
+
+impl<'a> TwoLoopRegionFailure<'a> {
+    pub(super) fn at(mut self: Box<Self>, entity: TwoLoopEntity) -> Box<Self> {
+        if !self.entities.contains(&entity) {
+            self.entities.push(entity);
+        }
+        self
+    }
 }
