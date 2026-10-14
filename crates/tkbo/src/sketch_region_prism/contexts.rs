@@ -1,48 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Actual child paths supply context orientation; native returned images remain separate keys.
 use super::{copying::mapped, outcome::*};
-use rustycad_tkbrep::topods::{Shape, ShapeIterator};
+use rustycad_tkbrep::topods::Shape;
 pub(super) fn body_contexts(body: &Shape) -> Result<Vec<PrismBodyContext>, PrismCause> {
-    let mut contexts = Vec::new();
-    collect_contexts(body, &mut Vec::new(), &mut Vec::new(), &mut contexts)?;
-    Ok(contexts)
-}
-fn collect_contexts(
-    shape: &Shape,
-    ancestors: &mut Vec<Shape>,
-    slots: &mut Vec<usize>,
-    contexts: &mut Vec<PrismBodyContext>,
-) -> Result<(), PrismCause> {
-    if ancestors.iter().any(|parent| parent.is_same(shape)) {
-        return Err(PrismCause::CyclicBodyContext {
-            member: shape.clone(),
-        });
-    }
-    contexts.push(context_record(shape, ancestors, slots));
-    ancestors.push(shape.clone());
-    collect_children(shape, ancestors, slots, contexts)?;
-    ancestors.pop();
-    Ok(())
-}
-fn collect_children(
-    shape: &Shape,
-    ancestors: &mut Vec<Shape>,
-    slots: &mut Vec<usize>,
-    contexts: &mut Vec<PrismBodyContext>,
-) -> Result<(), PrismCause> {
-    let mut iterator = ShapeIterator::new(shape, true, true);
-    let mut index = 0;
-    while iterator.more() {
-        slots.push(index);
-        let child = iterator
-            .value()
-            .map_err(|f| mapped(PrismPhase::History, f))?;
-        collect_contexts(child, ancestors, slots, contexts)?;
-        slots.pop();
-        index += 1;
-        iterator.next();
-    }
-    Ok(())
+    crate::sketch_region::strict_region_contexts(body).map_err(|cause| match cause {
+        crate::sketch_region::RegionContextFailure::Native(failure) => {
+            mapped(PrismPhase::History, failure)
+        }
+        crate::sketch_region::RegionContextFailure::RepeatedAncestor { member } => {
+            PrismCause::CyclicBodyContext { member }
+        }
+    })
 }
 /// Retain source-backed image/context transport; `bind_observed_images(rows,contexts)`.
 pub(super) fn bind_observed_images(
@@ -74,13 +42,6 @@ fn bind_image(
     }
 }
 
-fn context_record(shape: &Shape, ancestors: &[Shape], slots: &[usize]) -> PrismBodyContext {
-    PrismBodyContext {
-        occurrence: shape.clone(),
-        ancestors: ancestors.to_vec(),
-        child_slots: slots.to_vec(),
-    }
-}
 fn verified_binding(
     image: &PrismNativeImage,
     context: &PrismBodyContext,

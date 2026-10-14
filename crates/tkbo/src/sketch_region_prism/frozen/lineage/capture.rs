@@ -73,6 +73,14 @@ fn capture_lineage(
     inputs: &LineageInputs<'_>,
     result: &mut PrismLineageInspection,
 ) -> LineageCheck<()> {
+    let contexts = capture_contexts(inputs, result)?;
+    result.sweep = sweep::capture_sweep(inputs, &contexts)?;
+    finish_observations(inputs, result)
+}
+pub(super) fn capture_contexts(
+    inputs: &LineageInputs<'_>,
+    result: &mut PrismLineageInspection,
+) -> LineageCheck<directed::BoundCopyContexts> {
     admit_lineage(inputs)?;
     result.members = members::capture_members(inputs)?;
     result.member_coverage = CopyLineageCoverage::Complete;
@@ -80,12 +88,17 @@ fn capture_lineage(
     let contexts = directed::bind_contexts(inputs)?;
     result.directed = directed::pair_contexts(inputs, &contexts)?;
     result.contexts = directed::owned_contexts(inputs, &contexts)?;
-    result.sweep = sweep::capture_sweep(inputs, &contexts)?;
+    Ok(contexts)
+}
+pub(super) fn finish_observations(
+    inputs: &LineageInputs<'_>,
+    result: &mut PrismLineageInspection,
+) -> LineageCheck<()> {
     result.retired = sweep::capture_retirement(inputs)?;
     result.directed_coverage = CopyLineageCoverage::Complete;
     Ok(())
 }
-fn empty(operation: AuthoredPrismId) -> PrismLineageInspection {
+pub(super) fn empty(operation: AuthoredPrismId) -> PrismLineageInspection {
     PrismLineageInspection {
         operation,
         member_coverage: CopyLineageCoverage::Incomplete,
@@ -99,7 +112,7 @@ fn empty(operation: AuthoredPrismId) -> PrismLineageInspection {
         projection: None,
     }
 }
-fn declined(
+pub(super) fn declined(
     mut result: PrismLineageInspection,
     finding: CopyLineageFinding,
 ) -> PrismLineageOutcome {

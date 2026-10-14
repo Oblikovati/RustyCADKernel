@@ -16,6 +16,7 @@ pub(crate) struct GeneratedMemberSnapshot {
     pub generated: Vec<OriginalMemberIdentity>,
 }
 pub(crate) struct GeneratedAreaSnapshot {
+    pub contexts: crate::sketch_region::RegionContextObservation,
     pub ordinal: usize,
     pub members: Vec<GeneratedMemberSnapshot>,
 }
@@ -56,6 +57,7 @@ fn capture_generated_areas(
 ) -> Result<(), CandidateCause> {
     for (ordinal, area) in builder.areas().iter().enumerate() {
         areas.push(GeneratedAreaSnapshot {
+            contexts: crate::sketch_region::observe_region_contexts(area),
             ordinal,
             members: Vec::new(),
         });

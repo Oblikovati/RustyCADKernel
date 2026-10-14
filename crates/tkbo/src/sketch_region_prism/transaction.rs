@@ -192,6 +192,7 @@ fn retain_body(
         .map_err(|failure| PrismCompletion::Failed(mapped(PrismPhase::Sweep, failure)))?
         .clone();
     receipt.diagnostic = Some(PrismDiagnostic {
+        sweep_queries: PrismSweepQueries::NotReached,
         surface_charts: None,
         body,
         bindings: Vec::new(),
