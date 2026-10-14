@@ -461,3 +461,7 @@ fn certify_source_domain(
     super::source_certificate::certify(&sources[source_index], options, budget, cancelled)
         .map_err(|cause| super::operation_failure::source_domain_failure(source_index, cause))
 }
+
+#[cfg(test)]
+#[path = "operation_storage_tests.rs"]
+mod storage_tests;

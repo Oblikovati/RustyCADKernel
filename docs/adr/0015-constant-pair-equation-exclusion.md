@@ -49,3 +49,21 @@ and call sequence. The witness is selected from an original reduced coordinate
 equation, not an exceptional-factor-dependent pseudo-remainder. The generated
 sign-policy version is still validated before any newly successful exclusion;
 no generated sign degree or evaluation is invented for a skipped stage.
+
+## Allocation and performance acceptance
+
+The explicit evidence variants use boxed prepared graph/constant payloads and a
+boxed retained graph payload to bound enum storage without dead field records.
+A graph completion reaches two `Box::new` constructor sites (prepared and retained
+proof); a constant exclusion reaches one prepared-payload site. These are source
+constructor counts, not measured total allocator calls: BigInt/vector allocations,
+optimizer elision, allocator overhead and allocation lifetimes are not inferred.
+A test-only receipt records actual current payload/enum sizes on the pinned host.
+
+The numerical and package acceptance above does **not** establish performance
+acceptance. Identical six accepted capture+certify+accept+drop workloads must compare
+the existing frozen baseline and new frozen executable during a coordinated quiet
+interval, with 20 warmups, 100 raw samples per case and per-process peak RSS. That
+comparative time/peak-memory gate remains pending; no contended times or successful
+functional benchmark verification can close it. Frozen executables and provenance
+are retained outside the removable worktree so cleanup does not erase this task.
