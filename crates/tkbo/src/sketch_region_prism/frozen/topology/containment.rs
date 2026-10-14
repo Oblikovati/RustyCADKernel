@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::*;
-use super::{execution::TopologyWork, model::*, types::*};
+use super::{domain::FaceDomainPolicy, execution::TopologyWork, model::*, types::*};
 use std::collections::BTreeMap;
 
 pub(super) fn check(
     index: &TopologyIndex<'_>,
+    domain: &impl FaceDomainPolicy,
     work: &mut TopologyWork<'_>,
 ) -> TopologyResult<FrozenPrismKey> {
     let mut references = BTreeMap::new();
@@ -14,7 +15,7 @@ pub(super) fn check(
             TopologyInvariant::ClosedContainment,
             index.occurrences.len() + position + 1,
         )?;
-        children(index, occurrence, &mut references)?;
+        children(index, occurrence, &mut references, domain)?;
         *definitions.entry(definition(&occurrence.key)?).or_insert(0) += 1;
     }
     definition_counts(index, &definitions)?;
@@ -37,9 +38,14 @@ fn children(
     index: &TopologyIndex<'_>,
     parent: &FrozenPrismUse,
     references: &mut BTreeMap<FrozenUseKey, usize>,
+    domain: &impl FaceDomainPolicy,
 ) -> TopologyResult<()> {
     let kind = definition(&parent.key)?.kind;
-    child_count(parent, kind)?;
+    if kind == 4 {
+        domain.check_face_children(parent, index)?;
+    } else {
+        child_count(parent, kind)?;
+    }
     for key in &parent.children {
         let child = index.occurrence(key)?;
         direct_child(parent, key, kind)?;
@@ -63,7 +69,7 @@ fn direct_child(parent: &FrozenPrismUse, key: &FrozenUseKey, kind: u8) -> Topolo
 fn child_count(parent: &FrozenPrismUse, kind: u8) -> TopologyResult<()> {
     let actual = parent.children.len();
     let expected = match kind {
-        2 | 4 => Some(1),
+        2 => Some(1),
         6 => Some(2),
         7 => Some(0),
         _ => None,

@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::{AuthoredPrismId, FrozenPrismKey, FrozenPrismProjection};
 use super::{
-    admission, containment, incidence, links, model::*, pairing, traversal_binding, types::*, wires,
+    admission, containment, domain::*, incidence, links, model::*, pairing, traversal_binding,
+    types::*, wires,
 };
 
 pub(super) struct TopologyWork<'a> {
@@ -48,18 +49,27 @@ fn certify(
     source: &FrozenPrismProjection,
     work: &mut TopologyWork<'_>,
 ) -> TopologyResult<FrozenTopologyCertificate> {
+    let root = check_incidence(source, &LegacySingleJordanDomain, work)?;
+    work.poll(TopologyInvariant::Commit, 0)?;
+    Ok(completed(source, root))
+}
+/// Shared finite incidence; only the owning version can publish its completed certificate.
+pub(super) fn check_incidence(
+    source: &FrozenPrismProjection,
+    domain: &impl FaceDomainPolicy,
+    work: &mut TopologyWork<'_>,
+) -> TopologyResult<FrozenPrismKey> {
     admission::check(source, work)?;
     let mut index = admission::index(source, work)?;
-    let root = containment::check(&index, work)?;
+    let root = containment::check(&index, domain, work)?;
     incidence::check(source, &mut index, work)?;
     traversal_binding::check(source, &mut index, work)?;
     let corners = wires::check(&index, work)?;
     let adjacency = pairing::check(&index, work)?;
     links::check(&index, &corners, work)?;
     pairing::connected(&adjacency, work)?;
-    pairing::euler(source.graph.counts, work)?;
-    work.poll(TopologyInvariant::Commit, 0)?;
-    Ok(completed(source, root))
+    domain.check_euler(source, &index, work)?;
+    Ok(root)
 }
 fn completed(source: &FrozenPrismProjection, root: FrozenPrismKey) -> FrozenTopologyCertificate {
     FrozenTopologyCertificate {
