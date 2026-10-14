@@ -2,8 +2,12 @@
 //! Exact signs of supplied binary64 coordinates, separate from metric tolerance.
 //! This extension does not change mapped OCCT decisions (ADR 0003, issue #10).
 
+mod compare;
 /// Certified polynomial roots for extension topology.
 pub mod roots;
+mod triple_product;
+pub use compare::{compare_line_projections_2d, compare_squared_distances_2d};
+pub use triple_product::compare_scalar_triple_product_3d;
 
 use num_bigint::{BigInt, Sign};
 use std::fmt;
@@ -22,9 +26,9 @@ pub enum OrientationSign {
 /// A coordinate outside the finite binary64 domain, in input traversal order.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct NonFiniteCoordinate {
-    /// Zero-based point index within the owning input (a, b, c for orientation).
+    /// Zero-based supplied point or vector index (a, b, c for orientation).
     pub point: usize,
-    /// Zero-based coordinate index (x, y).
+    /// Zero-based coordinate index (x, y, and z for three-dimensional inputs).
     pub axis: usize,
     /// Rejected coordinate, including its NaN or infinity payload.
     pub value: f64,
@@ -64,6 +68,10 @@ pub fn orient2d(
         Sign::NoSign => OrientationSign::Zero,
         Sign::Plus => OrientationSign::Positive,
     })
+}
+
+fn exact_dot(left: &[BigInt; 2], right: &[BigInt; 2]) -> BigInt {
+    &left[0] * &right[0] + &left[1] * &right[1]
 }
 
 fn exact_determinant(left: &[BigInt; 2], right: &[BigInt; 2]) -> BigInt {

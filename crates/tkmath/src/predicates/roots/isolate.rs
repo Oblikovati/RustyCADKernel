@@ -34,9 +34,21 @@ pub(super) fn isolate(
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<RootIsolation, RootIsolationError> {
+    isolate_accounted(tower, bounds, width, options, cancelled, &mut || {})
+}
+// Captured operations charge real completed splits even if a later poll fails.
+// The compatibility entry point above intentionally retains its original result.
+pub(super) fn isolate_accounted(
+    tower: &[SturmChain],
+    bounds: [DyadicBound; 2],
+    width: DyadicBound,
+    options: RootIsolationOptions,
+    cancelled: &mut impl FnMut() -> bool,
+    completed_split: &mut impl FnMut(),
+) -> Result<RootIsolation, RootIsolationError> {
     let mut work = SubdivisionWork::new(tower, width, options.max_bisections);
     work.seed(bounds, cancelled)?;
-    work.run(cancelled)
+    work.run(cancelled, completed_split)
 }
 struct SubdivisionWork<'a> {
     tower: &'a [SturmChain],
@@ -74,6 +86,7 @@ impl<'a> SubdivisionWork<'a> {
     fn run(
         mut self,
         cancelled: &mut impl FnMut() -> bool,
+        completed_split: &mut impl FnMut(),
     ) -> Result<RootIsolation, RootIsolationError> {
         while let Some(cell) = self.pending.pop() {
             poll(cancelled)?;
@@ -86,6 +99,7 @@ impl<'a> SubdivisionWork<'a> {
                 continue;
             }
             self.split(cell, cancelled)?;
+            completed_split();
         }
         Ok(self.result)
     }
@@ -176,3 +190,7 @@ fn contains_root(
     }
     Ok(root_count(&first, &chain.endpoint(upper.clone(), cancelled)?)? != 0)
 }
+
+#[cfg(test)]
+#[path = "isolate_accounting_tests.rs"]
+mod accounting_tests;

@@ -1,0 +1,111 @@
+{
+  "project": "Martensite",
+  "base_revision": "7e754661e",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "platform": "Linux 7.1.5-76070105-generic x86_64",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compile_command": [
+    "g++",
+    "-std=c++17",
+    "-O0",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_copy_isolation.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKTopAlgo",
+    "-lTKBRep",
+    "-lTKG3d",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "/tmp/martensite-copy-native-reuse"
+  ],
+  "native_runs_identical": true,
+  "native_rows": 4,
+  "native_binary_sha256": "76389f0323c80f7bf9da5d3d9a86e1b013512ed12a1297327be07d25299b8a58",
+  "native_sdk_header_sha256": {
+    "BRepBuilderAPI_Copy.hxx": "2a4994f8c365532b8a21077611e4cec9bd296713b60533a60dbb0a5c8ce49015",
+    "BRepBuilderAPI_MakeEdge.hxx": "319721103a1b87c59b3f4b96c648fbb7af4cf90727ef7638510674e0b941cd37",
+    "BRep_Builder.hxx": "ad20f1bc08931b15a28bf0c8030e9432380dfa436baca600e3abbda22b3d7613",
+    "BRep_Tool.hxx": "2f1c08834e2a4e4b2bd8e04527c6a23bf6dbd6f98dffe09a727855a8e4f16adc",
+    "Geom_Line.hxx": "d0cafdffe62534d2717f4b964d30bd831db96d98a9fa127d1adce1443149e28b",
+    "Poly_Polygon3D.hxx": "74bef4b1ce6a3741e274e0cac9f63d42f33bbe178f5933af69d478ce09672312",
+    "Standard_DimensionMismatch.hxx": "36613cc3ca176db51def5ef40eb44e20825847215b6478907a2ff9c5e362a201",
+    "Standard_NullObject.hxx": "27e76ed099486921e2df2956e887197463e9152a5c146849fd5d0352b49cc3eb",
+    "TopoDS.hxx": "5e5977d082eb5c5645cf1b4d3943bc919ea2ed4a9b2bcfdbb3627a62abe14bee",
+    "gp_Lin.hxx": "010e1f57b45345f24a6466bc716989a07d40e910efbb3ca269dfafe1158c1222"
+  },
+  "native_upstream_source_sha256": {
+    "ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Copy.cxx": "c32a0ca6fe6bda4d8c19970c38c44747ed38136924acab48520bcd53dda40efd",
+    "ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.cxx": "00fd67d3f08f44a0cd793b16292ff907c96aaecf81b2c5a8eb85680116f617c8",
+    "ModelingData/TKBRep/BRepTools/BRepTools_Modifier.cxx": "4c5ee6d7bed8b857d48d427925aa5ce0e90c137a69d13848ddf935aa92fbef55",
+    "FoundationClasses/TKMath/Poly/Poly_Polygon3D.cxx": "52d23d664a319fa43b03cc782fdc8c19edb4a27c77e7bf31e697cf14373f023b"
+  },
+  "native_library_sha256": {
+    "TKTopAlgo": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a",
+    "TKBRep": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "TKG3d": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "TKMath": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "corpus_source_sha256": {
+    "crates/tktopalgo/tests/brep_builder_api_copy_isolation.rs": "24e89940df63acde0f3af7e4eef3fdff3d751cbefb5e3c19de8715e4f1a411ca",
+    "crates/tktopalgo/tests/copy_isolation/fixture.rs": "9ff394c1a9e9f970b9ad4aeff735459f7d2ab6b1fbc448d7c9070de63d329649",
+    "crates/tktopalgo/tests/copy_isolation/geometry.rs": "e93f560bf72532c806c1469d587053617185a0b68043c7e2840e0e36f36fcd4d",
+    "crates/tktopalgo/tests/copy_isolation/mesh.rs": "5bdcacf3be6e14fc48f912b860053a8b974b7a1af86902416c8277f2eb6b9a4e",
+    "crates/tktopalgo/tests/copy_isolation/native_mesh_failure.expected": "55b2a8384595df585b0079b4b398c1e10252f680065e364b293d89ca0f612f50",
+    "crates/tktopalgo/tests/copy_isolation/native_reuse.expected": "1fda982dcc439a569898cfb579e23f476ee0a363ad4e4a34d8d55b765bad04c3",
+    "crates/tktopalgo/tests/copy_isolation/representation_failure.rs": "bdf61e74f22636625d73f5b8f26c7b743fb59877920c9a86f9fad45b9832801f",
+    "crates/tktopalgo/tests/copy_isolation/topology.rs": "8db006bf887aaf1a885f69f80c87e71db13bb5f9e80a590c9b9c15201aa03220",
+    "crates/tktopalgo/tests/suites/cases_00.rs": "ad0703aeb116794f5e9fa7074cd48376f8e40232cd9f28655c45dd64cf503d0d",
+    "tools/oracle/martensite_copy_isolation.cxx": "e8780c6e68fc2eec8b457d2953baa4a5522995c9bfcc970d6c6628b3fc7b18b1",
+    "crates/tktopalgo/tests/copy_isolation/README.md": "7e48b13db8a491b0848ee7289e498a8e740a237ec81bc5cfd2cf9749c83363d2"
+  },
+  "executed_checks": [
+    {
+      "command": "cargo test -p rustycad-tktopalgo --all-targets",
+      "exit": 0,
+      "passed": 307,
+      "new_tests": 7,
+      "failed": 0
+    },
+    {
+      "command": "cargo clippy -p rustycad-tktopalgo --all-targets -- -D warnings",
+      "exit": 0
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit": 0
+    },
+    {
+      "command": "rustfmt --edition 2024 --check crates/tktopalgo/tests/brep_builder_api_copy_isolation.rs crates/tktopalgo/tests/copy_isolation/*.rs",
+      "exit": 0
+    },
+    {
+      "command": "python3 tools/toolkit_test_suites.py",
+      "exit": 0
+    }
+  ],
+  "production_changes": false,
+  "api_promotions": false,
+  "exclusions": [
+    "No global isolation certificate or sealed application result wrapper",
+    "No in-flight copy cancellation; boundary cancellation belongs to arrangement stage",
+    "No native class completion",
+    "No performance measurements"
+  ],
+  "development_diagnostics": [
+    "Provisional fresh-result expectation failed; actual pinned native cached-result rows match Rust. No production fix.",
+    "Fresh-copy fixture tolerance expectation was generalized after the source mutation intentionally raises tolerance. Compile-only test API corrections resolved."
+  ],
+  "proof_log_sha256": {
+    "alltargets-00.log": "0bde9a9fe1629adf2ae436e3779673fd14677589dc8015a7880450d9b0591b52",
+    "clippy.log": "c1cf83efdc1f4d7c1234b9b91c2db36d2b6519959fda941080639faa6385f0d4",
+    "discovery.log": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "included-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native-first.log": "ff5aae78446264399be2854d3a371bcd385589c5be859a4661deaeed9e0d1f08",
+    "native-second.log": "ff5aae78446264399be2854d3a371bcd385589c5be859a4661deaeed9e0d1f08"
+  }
+}

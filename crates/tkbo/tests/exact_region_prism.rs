@@ -7,19 +7,13 @@ use rustycad_tkbrep::{
     topods::{Shape, edge, face},
     toptools::IndexedMapOfShape,
 };
-use rustycad_tkernel::{
-    ncollection::{Array1, List},
-    standard::Handle,
-};
+use rustycad_tkernel::{ncollection::List, standard::Handle};
 use rustycad_tkg3d::{
-    geom::{GeomBezierCurve, GeomCurve},
+    geom::GeomBezierCurve,
     top_abs::{Orientation, ShapeEnum},
 };
 use rustycad_tkmath::gp::{Plane3, Point3};
-use rustycad_tktopalgo::{
-    brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace},
-    brep_lib,
-};
+use rustycad_tktopalgo::{brep_builder_api::BRepBuilderAPIMakeFace, brep_lib};
 #[path = "exact_region_prism/classification.rs"]
 mod classification;
 #[path = "exact_region_prism/ownership.rs"]
@@ -37,22 +31,10 @@ impl BuilderHooks for NonemptyProbe {
         self.0.options().report().merge(filler.options().report());
     }
 }
-fn cubic_source(scale: f64, reverse: bool) -> Shape {
-    let points = [
-        Point3::new(0., 0., 0.),
-        Point3::new(4. * scale, 0., 0.),
-        Point3::new(0., 4. * scale, 0.),
-        Point3::new(0., 0., 0.),
-    ];
-    let poles = Array1::from_shared(&points, 1);
-    let curve: Handle<dyn GeomCurve> = Handle::new(GeomBezierCurve::new(&poles).unwrap()).cast();
-    let source = BRepBuilderAPIMakeEdge::from_curve(&curve)
-        .unwrap()
-        .edge()
-        .unwrap();
-    let orientation = [Orientation::Forward, Orientation::Reversed][usize::from(reverse)];
-    source.oriented(orientation)
-}
+#[path = "support/closed_analytic_cubic.rs"]
+mod cubic_fixture;
+use cubic_fixture::closed_analytic_cubic as cubic_source;
+
 fn arrange(arguments: &List<Shape>) -> NonemptyProbe {
     let mut filler = BOPAlgoPaveFiller::new();
     filler.set_arguments(arguments);

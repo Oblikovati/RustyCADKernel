@@ -78,8 +78,10 @@ mod draw_state;
 
 mod point_sprite;
 
+mod gui_native_extent;
 mod window_blit;
 mod window_chain;
+mod window_submission;
 mod window_support;
 mod window_surface;
 mod window_sync;
@@ -102,21 +104,14 @@ impl VulkanRenderer {
         let commands = submission::CommandSubmission::new(&self.runtime)?;
         let index = presenter.acquire([frame.width, frame.height], vsync)?;
         let chain = presenter.chain.as_mut().expect("acquired swapchain");
+        gui_native_extent::validate(frame, chain.config.extent)?;
         record::record_frame(&self.runtime, commands.command, &resources, frame);
         window_blit::record(&self.runtime, commands.command, &resources, chain, index);
-        let waits = [ash::vk::SemaphoreSubmitInfo::default()
-            .semaphore(chain.sync.acquired)
-            .stage_mask(ash::vk::PipelineStageFlags2::TRANSFER)];
-        let signals = [ash::vk::SemaphoreSubmitInfo::default()
-            .semaphore(chain.sync.rendered)
-            .stage_mask(ash::vk::PipelineStageFlags2::ALL_COMMANDS)];
-        commands.finish_synced(&waits, &signals)?;
+        window_submission::finish(&commands, chain)?;
         self.commit_fragment_alpha(frame, resources.fragment_alpha.ending);
         self.commit_stencil(frame, resources.stencil.ending);
-        chain.present(
-            self.runtime.queues[presenter.present_family as usize],
-            index,
-        )?;
+        let queue = self.runtime.queues[presenter.present_family as usize];
+        chain.present(queue, index)?;
         resources.capture()
     }
 }

@@ -22,7 +22,7 @@ pub(super) fn from_integer_controls(
 ) -> Result<IntegerPolynomial, RootIsolationError> {
     IntegerPolynomial::from_integers(power_coefficients(differences, cancelled)?, limit)
 }
-fn power_coefficients(
+pub(super) fn power_coefficients(
     mut differences: Vec<BigInt>,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<Vec<BigInt>, RootIsolationError> {

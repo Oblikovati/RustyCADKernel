@@ -1,0 +1,107 @@
+{
+  "compiled_source_commit": "a00c9471a4e3804c08901f5634de0320108c75d2",
+  "checkpoint": "5158ef6a8",
+  "checked_main_dependency": "4df6064ad",
+  "refresh_merge": "a758260bfd7fa750ce2ea72b33a0ce4971553f44",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc_verbose": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "commands": [
+    {
+      "cwd": "owned checkout",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features"
+      ]
+    },
+    {
+      "cwd": "owned checkout",
+      "argv": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ]
+    },
+    {
+      "cwd": "canonical31 archive stage",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--locked"
+      ]
+    },
+    {
+      "cwd": "canonical31 archive stage",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ]
+    },
+    {
+      "cwd": "both source and stage",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ]
+    }
+  ],
+  "build_environment": {
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2"
+  },
+  "logs_sha256": {
+    "final-shared-all-targets.log": "67317c035b8f5016960f9c0ea631899117da4b2354054a102f67f6bcd699fec5",
+    "final-shared-clippy.log": "848542c4a9db9a3f98d401aa1e9f32dc4e69c74bafc725556097e5c0744f154f",
+    "final-shared-docs.log": "54054d80c985c6cc3d57ec559d9ee6a49c12ffdb99c3896fa7a7df4cce93c420",
+    "extracted-default-tests.log": "8cb42e9b233656aa7a36c872c38572b3cdfc76dd0553756f09bb438e92b71dd9",
+    "extracted-all-features-tests.log": "36cc6be8c1763435e83c2ed76c58f332b7458e713449628f86ed9e67e84daf7c",
+    "extracted-doc-tests.log": "c147c5398849d6b7333913e3194b6cf9f7ff43c7828d0bb2cf5922789a6425ab",
+    "package-preparation.log": "f626d1f2b1a4d616d288385095a25b817b0d028d8934a3e4f2d50b9f70b3b17c",
+    "canonical-discovery.log": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4",
+    "changed-leaf-format.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "workspace-format-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "native_origin_scope": "Observed scalar provenance only; independent polynomial certificate is not whole native census replay.",
+  "whole_ordered_validation_complete": false,
+  "benchmark_measured": false,
+  "baseline_accepted": false,
+  "remaining": [
+    "General pair/self-contact certification",
+    "All required body-kind representation/context tolerance coverage",
+    "Certified source plane/parameter construction and contact correspondence"
+  ]
+}

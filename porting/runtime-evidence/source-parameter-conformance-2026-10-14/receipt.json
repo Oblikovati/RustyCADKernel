@@ -1,0 +1,139 @@
+{
+  "source_revision": "cb456234dbbbd062e8f373deb63e242c079a31b8",
+  "structural_revision": "2acd43051",
+  "base_revision": "eebf3997ed43bbb7fd08470c1e5edb1f5303a83e",
+  "source_sha256": {
+    "crates/tkbo/src/lib.rs": "5f0f3f4d053df8180c9c1f1fcf7466fe675f0cb89e44ffa0ca972a9d4b976c15",
+    "crates/tkbo/src/sketch_region/copy_inputs.rs": "8a164b09c0e9e3b39a2e4c390ef1f38cf7d8ff79368f85fb5bcfde9b0a494a73",
+    "crates/tkbo/src/sketch_region/mod.rs": "67ccebf5c93642e403839c95f0f402a2fa365cf66f0d2d3b52caffc46e5627c8",
+    "crates/tkbo/src/sketch_region_certification/capture.rs": "2299b6d2dbed2423739c3fbdb8f6cebc61b3c75d0687a9bdec015c117f9627c1",
+    "crates/tkbo/src/sketch_region_certification/outcome.rs": "e86c08904f3925493d0ab335cc203b494d923bfe2ecd79a1e78e1d8f21da4fb2",
+    "crates/tkbo/src/sketch_region_geometry_capture/cause.rs": "ad98b12e2a699ee71ecf7cbbf938320089c64be27d8fe047e8520390e1821d07",
+    "crates/tkbo/src/sketch_region_geometry_capture/curves.rs": "84a0a9216e34fcb70775e21493899d5c8a1558797145e13fe82aa540bba02ef5",
+    "crates/tkbo/src/sketch_region_geometry_capture/mod.rs": "4d96d46829946faef35fda42060907d16c78f9f7c4943a549b00ec564873def3",
+    "crates/tkbo/src/sketch_region_geometry_capture/placement.rs": "35de560c9713ad30186f556f55755a7c56992a0019865aeabb112a094ec79c57",
+    "crates/tkbo/src/sketch_region_source_conformance/capture.rs": "58965c6731d8858255e115a967ba4463c01d8f68a70a52c157d2aafc4cafa9ae",
+    "crates/tkbo/src/sketch_region_source_conformance/inspect.rs": "106ad094615420acd316ec998401f06750e8bd0862fa476bd67e1e0a255ab242",
+    "crates/tkbo/src/sketch_region_source_conformance/membership.rs": "46f6daad6f3045eb626b8b17b197595b39bdc115963799bbb00df5f199a7fc03",
+    "crates/tkbo/src/sketch_region_source_conformance/mod.rs": "f28e906db22c0929707cc89fce11d45241b2acc6740645cd1d7a6356adc057da",
+    "crates/tkbo/src/sketch_region_source_conformance/query.rs": "50f540780a0af268a89b01765f4443e10169a74b7bedd9eb3f889e62c6d3c5c3",
+    "crates/tkbo/src/sketch_region_source_conformance/tests.rs": "2f4f8d3040b0e967dd469962141d57908228a3e9e5eb583c485f200dfea174f9",
+    "crates/tkbo/src/sketch_region_source_conformance/types.rs": "5b506980110f0e736d9242cd492f3bb19c8999602117e67ed2828c17a74414f3",
+    "crates/tkbo/src/sketch_region_validation/mod.rs": "b96f5fb7fb08d5fe528123a5e25819e2101115391293625cc95c6626c40275dc",
+    "crates/tkbo/src/sketch_region_validation/tolerance_capture.rs": "df5faa8b6f96f59202c17911c9c9e0cfc96bb86978254086e96541b88ddd2010",
+    "crates/tkbo/src/sketch_region_validation/tolerance_types.rs": "6127e951704fb6922a7da3eaf7f929b29ee4d81dce053ce95957294382c504f8",
+    "crates/tkmath/src/predicates/roots/metric_bounds.rs": "b53212cea6524706858522fff4f165ba520632d88aaa5ff0b65372bc8d5c47a6",
+    "crates/tkmath/src/predicates/roots/metric_bounds/inequality.rs": "0125382755bd39f0a52fd90c4620b328556c4e9bf09d844e4733da843beee74f",
+    "crates/tkmath/src/predicates/roots/metric_bounds/mapped.rs": "6974425f095f19bebb8916900f2596ab0480720609d08356fc2033637b628933",
+    "crates/tkmath/src/predicates/roots/metric_bounds/parameter.rs": "31eb191785ada961e62f4fd53d37f8a583f1663fc6f60664ada9e7e97cde3a15",
+    "crates/tkmath/src/predicates/roots/metric_bounds/parameter_tests.rs": "ee5ad90c278d9008743037366c03786467e6b21289d27201ae9a6aad9732a3c1",
+    "crates/tkmath/src/predicates/roots/metric_bounds/proof.rs": "fc6cd7e98e0be9a5c55bfc535005db17133a89af9c41f548bca748a852fa09e9",
+    "crates/tkmath/src/predicates/roots/metric_bounds/tests.rs": "4398a8f946bfa832ed666e8de2566b2ca594293c6c0af6ab810cef0611c3b773",
+    "crates/tkmath/src/predicates/roots/metric_bounds/types.rs": "2a31a3b6db4c8cfcfc35ec1536508c86db0fa021abdc8f5ca7322043b064384a",
+    "docs/source-parameter-conformance.md": "8ccc97e1cfa74797f69db01ec8ea3c9db518ebe65da4e41691c8039ca78c2ef4"
+  },
+  "checks": {
+    "all_targets_successes": 3761,
+    "all_targets_groups": 8,
+    "final_source_regressions": 18,
+    "final_source_lib_extracted_successes": 169,
+    "metric_regressions_extracted_successes": 31,
+    "doctests": 47,
+    "clippy": "two affected crates all-targets -D warnings terminal0",
+    "formatter": "cargo fmt --all --check terminal0",
+    "discovery": "all integration-test sources registered",
+    "canonical_archives": 31,
+    "changed_crate_files_byte_equal_before_and_after": 27,
+    "all_targets_source_note": "Full 3761-success run preceded only final varying-height aggregate-budget test addition and public report example comment. Final canonical archives match all27changed crate files before/after replay; canonical fullTKBOlib169 includes all18final source regressions, metric31 includes all12new transport regressions. No production body changes after full run."
+  },
+  "logs": {
+    "structural-capture.log": {
+      "raw_sha256": "366ef08684aa16dbb6619e26b0dd11d37ceedfdb0f3b07279bade03d45018d64",
+      "gzip_sha256": "a23eed6c3d7faf62b3fd064ff0324b856e280cf8950447e4eeb0718fc927795c",
+      "raw_bytes": 4378,
+      "test_results": [
+        "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 142 filtered out; finished in 0.00s"
+      ]
+    },
+    "target-final-tests.log": {
+      "raw_sha256": "9920b8c772b7e39a59db7cd22258490652799aedb50266fd7dec154378198c12",
+      "gzip_sha256": "c1b992e4714ba7daf53aa0f4eb71ff7697ae504559c9f921b25614e98c8d7481",
+      "raw_bytes": 307509,
+      "test_results": [
+        "test result: ok. 168 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.59s",
+        "test result: ok. 646 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 51.43s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 63 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s",
+        "test result: ok. 2882 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 70.15s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    "final-focused-source.log": {
+      "raw_sha256": "c0a59e2124ba46d12269792bd9b1afcfacbe9208fd140dd97dd6a34c35c5aa0c",
+      "gzip_sha256": "44e634f0aedfc71103810d707baf48bd868a8e0991026176e215fd96bbd2249d",
+      "raw_bytes": 2704,
+      "test_results": [
+        "test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 151 filtered out; finished in 0.02s"
+      ]
+    },
+    "final-clippy.log": {
+      "raw_sha256": "dfd812cbcc6d74e7eb46ca34918cbfd0613faf421c765004fbf099062e5a1259",
+      "gzip_sha256": "5c1e2604c8414f62c2af76444e89da002c9e203e68e131d4f68772a6f8212b30",
+      "raw_bytes": 1416,
+      "test_results": []
+    },
+    "final-docs.log": {
+      "raw_sha256": "0219fd8698e0fbad95a6f374576311b643a8f7db40a66f0c3baa839ab33280d4",
+      "gzip_sha256": "216460028e1f6724da659a91a480c35d4ddae6a188fdbf94fdf314e37d813eef",
+      "raw_bytes": 9485,
+      "test_results": [
+        "test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 47 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s"
+      ]
+    },
+    "package-prepare.log": {
+      "raw_sha256": "9639b1b7c139f8a8f5bfba0d6782a539ae464ddb71657d2b7698e108dd13140a",
+      "gzip_sha256": "1fff0e6b758a6133647e402a4eed717069f8c22b1d997dca669bcc6e87377992",
+      "raw_bytes": 10681,
+      "test_results": []
+    },
+    "extracted-metric.log": {
+      "raw_sha256": "393994f19913667f1f3351a54a229529c5357f8b42ce87ab402ec40bdb296afe",
+      "gzip_sha256": "26c32654f8c8fc16dcf25946817b3cdfcadb776628eda5c6d6d747983e956930",
+      "raw_bytes": 6416,
+      "test_results": [
+        "test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 32 filtered out; finished in 0.06s"
+      ]
+    },
+    "extracted-tkbo.log": {
+      "raw_sha256": "4840909348c73ae45797c294e1dded193fd0193dbe1959a7ffe6779837086b44",
+      "gzip_sha256": "caf30e457095e407dbc66a9a9771ea093dfd8553eb2faafb034183f6dcbd074b",
+      "raw_bytes": 19732,
+      "test_results": [
+        "test result: ok. 169 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.09s"
+      ]
+    }
+  },
+  "platform": "Linux x86_64 host; Rust1.99.0 pinned toolchain",
+  "build_environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0"
+  },
+  "occt_launched_by_tests": false,
+  "unsafe_added": false,
+  "native_api_promotions": 0,
+  "classes_promoted": 0,
+  "mapped_algorithms_changed": false,
+  "extension_scope": "Owned original/full-key coefficient captures; full supplied Line/Bezier parameter and plane representation inequality; exact affine bracket membership and actual failed-work accounting. No contact identity/partition/candidate/region acceptance.",
+  "unsupported": "Other analytic bases explicitly incomplete; no line or faceted fallback.",
+  "performance": "No timing executed or claimed. Frozen winding artifact directory untouched.",
+  "deferred_original_scope": {
+    "worktree": "../Martensite-clip-plane-chain",
+    "revision": "84b295358",
+    "status": "preserved unfinished camera/chain/Iterator/RTTI/lifetime scope"
+  }
+}

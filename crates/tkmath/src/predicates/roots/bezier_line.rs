@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact supplied-curve parameter classification; no B-rep is built (ADR 0006).
 mod error;
+mod incidence;
+pub use incidence::{
+    BezierConstructionEnclosure, BezierDomainDegreeLimit, BezierDomainSignOptions,
+    BezierIncidenceCause, BezierIncidenceCompletion, BezierIncidenceDegrees,
+    BezierIncidenceFailure, BezierIncidenceQuery, BezierIncidenceReport, BezierIncidenceSource,
+    BezierLineDomain, CertifiedBezierIncidence, certify_bezier_line_incidences,
+};
 mod projection;
 mod ray;
 pub use ray::{BezierRayError, classify_bezier_ray_contacts};
@@ -12,7 +19,9 @@ pub use error::{BezierInput, BezierLineError, BezierStage};
 pub use winding::{BezierWinding, bezier_winding_contribution};
 pub use wire::{
     BezierWireError, BezierWireLocation, BezierWireQuery, BezierWireResult, BezierWireSegment,
-    classify_bezier_wire,
+    CaptureWorkReceipt, CapturedBezierWindingProof, CapturedBezierWireFailure,
+    CapturedBezierWireInput, CapturedBezierWireOccurrence, CapturedBezierWireResult,
+    CapturedBezierWireStore, CapturedWindingEvidence, classify_bezier_wire,
 };
 
 /// Borrowed controls of a polynomial or rational Bézier curve and an infinite line.

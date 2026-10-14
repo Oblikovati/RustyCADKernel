@@ -45,3 +45,9 @@ mod edge_reference_scope;
 mod edge_reference_tests;
 
 mod face_reference_scope;
+
+mod borrowed_shape_batch;
+pub use borrowed_shape_batch::borrowed_shape_batch;
+
+#[cfg(test)]
+mod borrowed_shape_batch_tests;

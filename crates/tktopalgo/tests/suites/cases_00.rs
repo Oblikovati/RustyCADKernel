@@ -13,6 +13,8 @@ pub mod brep_bnd_lib_obb;
 pub mod brep_builder_api_behavior;
 #[path = "../brep_builder_api_copy.rs"]
 pub mod brep_builder_api_copy;
+#[path = "../brep_builder_api_copy_isolation.rs"]
+pub mod brep_builder_api_copy_isolation;
 #[path = "../brep_builder_api_make_edge.rs"]
 pub mod brep_builder_api_make_edge;
 #[path = "../brep_builder_api_make_face.rs"]

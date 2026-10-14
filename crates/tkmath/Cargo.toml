@@ -12,19 +12,19 @@ workspace = true
 num-bigint = { version = "=0.4.6", default-features = false }
 num-complex = "=0.4.6"
 rustc_apfloat = "=0.2.3"
-rustycad-cmath = { path = "../cmath", version = "0.2.5" }
-rustycad-tkernel = { path = "../tkernel", version = "0.2.5" }
+rustycad-cmath = { path = "../cmath", version = "0.2.7" }
+rustycad-tkernel = { path = "../tkernel", version = "0.2.7" }
 
 [features]
 # Matches checks compiled into OCCT's out-of-line gp_Mat methods under OCCT_DEBUG.
 occt-debug-checks = []
 
 [dev-dependencies]
-rustycad-tkg3d = { path = "../tkg3d", version = "0.2.5" }
-rustycad-tkbrep = { path = "../tkbrep", version = "0.2.5" }
-rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.5" }
-rustycad-tkprim = { path = "../tkprim", version = "0.2.5" }
-rustycad-tkmesh = { path = "../tkmesh", version = "0.2.5" }
+rustycad-tkg3d = { path = "../tkg3d", version = "0.2.7" }
+rustycad-tkbrep = { path = "../tkbrep", version = "0.2.7" }
+rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.7" }
+rustycad-tkprim = { path = "../tkprim", version = "0.2.7" }
+rustycad-tkmesh = { path = "../tkmesh", version = "0.2.7" }
 
 [[example]]
 name = "rustycad-tkmath-numeric-probe"
@@ -53,4 +53,24 @@ harness = false
 [[bench]]
 name = "bezier_wire"
 path = "benches/bezier_wire.rs"
+harness = false
+
+[[bench]]
+name = "bezier_incidence"
+path = "benches/bezier_incidence.rs"
+harness = false
+
+[[bench]]
+name = "captured_winding"
+path = "benches/captured_winding.rs"
+harness = false
+
+[[bench]]
+name = "metric_bounds"
+path = "benches/metric_bounds.rs"
+harness = false
+
+[[bench]]
+name = "certified_bezier_pairs"
+path = "benches/certified_bezier_pairs.rs"
 harness = false

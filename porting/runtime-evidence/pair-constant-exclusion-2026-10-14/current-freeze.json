@@ -1,0 +1,70 @@
+{
+  "source_revision": "8330828decb6dce07322da4a43af8839d51df3a4",
+  "source_root_at_freeze": "/home/vmiguel/git/oblikovati-workspace/Martensite-pair-constant-exclusion",
+  "source_manifest": "/tmp/martensite-bezier-pair-performance-8330828de/source-manifest.jsonl.gz",
+  "source_manifest_sha256": "f54899cb8784e972238d803a53f12454d2f257eb19c49fcf357ea46c106d471d",
+  "source_file_count": 47000,
+  "archive_revision": "05c872d1f2fab3b48f49480e90a6b9ffc9c0cf7c",
+  "archive_scope": "Exact numerically tested source05 archives; source833 adds only cfg(test) layout module and evidence/ADR metadata. Archives were not rewritten.",
+  "archives": "/tmp/martensite-bezier-pair-performance-8330828de/packages",
+  "archive_count": 32,
+  "corpus": {
+    "crates/tkmath/benches/certified_bezier_pairs.rs": "837dd49921079e5163f3343e9802f1108d79018492dc06d937f0c871a003db60",
+    "crates/tkmath/benches/certified_bezier_pairs/cases.rs": "58bc21ca80111e11da2d8d224f1ecc8ae3a1312b8d06a44b503e0158be9d6939"
+  },
+  "baseline_bundle": "/tmp/martensite-bezier-pair-performance-889427484",
+  "operation": "capture+certify+accept+drop",
+  "warmup": 20,
+  "samples": 100,
+  "case_count": 6,
+  "performance_executed": false,
+  "baseline_accepted": false,
+  "peak_memory": "/usr/bin/time -v per selected workload, including process startup/all-case verification; pending root GO",
+  "comparative_attribution": "Baseline and current repository/dependency revisions differ; no exclusive attribution to Box overhead.",
+  "binary": "/tmp/martensite-bezier-pair-performance-8330828de/certified_bezier_pairs",
+  "binary_sha256": "e32b409b54736da59afc1a134736f6278d0e023e670988a5973f4bcefe9a36a6",
+  "original_binary": "/home/vmiguel/git/oblikovati-workspace/Martensite-pair-constant-exclusion/target/release/deps/certified_bezier_pairs-2423589cf8bf0610",
+  "functional_verification": {
+    "argv": [
+      "/tmp/martensite-bezier-pair-performance-8330828de/certified_bezier_pairs"
+    ],
+    "exit_code": 0,
+    "verified_workloads": 6,
+    "timings_requested": false,
+    "stdout_sha256": "793c81622f538a73cefdcd8980c4783f1f1760a1a50b5c0aff4a4deacfd05bbd",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "build": {
+    "argv": [
+      "cargo",
+      "bench",
+      "-p",
+      "rustycad-tkmath",
+      "--bench",
+      "certified_bezier_pairs",
+      "--no-run",
+      "--message-format=json"
+    ],
+    "exit_code": 0,
+    "profile": {
+      "opt_level": "3",
+      "debuginfo": "line-tables-only",
+      "debug_assertions": false,
+      "overflow_checks": false,
+      "test": true
+    },
+    "features": [],
+    "env": {
+      "CARGO_PROFILE_DEV_DEBUG": "0",
+      "CARGO_PROFILE_TEST_DEBUG": "0",
+      "CARGO_INCREMENTAL": "0",
+      "CARGO_BUILD_JOBS": "2",
+      "RUSTFLAGS": null,
+      "CARGO_ENCODED_RUSTFLAGS": null
+    },
+    "rustc_vv": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "cargo_v": "cargo 1.99.0 (5f94df478 2026-08-27)\n",
+    "stdout_sha256": "42cbb9f40a460af26cabb81d87e0f43f42a2d6afc90882458152468a3a5937ff",
+    "stderr_sha256": "5df83a5d8c5457466de8da822d1373b70a28fbaedc55e308808816d5dead2a91"
+  }
+}

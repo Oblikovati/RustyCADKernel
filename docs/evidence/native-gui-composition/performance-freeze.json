@@ -1,0 +1,44 @@
+{
+  "base_revision": "63ad971f16faea43fd10436a68625a698fe2ff65",
+  "source_manifest": "target/gui-composition-proof/frozen-source-sha256.json",
+  "source_manifest_sha256": "0d8053808f22d03662c549621e727cf879f625609f6d6e7452eb901e656a60b8",
+  "sources": 827,
+  "binary": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/release/examples/native_gui_performance",
+  "binary_sha256": "c584daa26f82d58681163b743ce4ea934e82ccdf9bc1e579b38f04929b798123",
+  "binary_size": 185350528,
+  "acceptance_binary": "/home/vmiguel/git/oblikovati-workspace/Martensite-native-gui-composition/target/debug/examples/native_gui_acceptance",
+  "acceptance_binary_sha256": "5745a6a8a53dd28696de8996b1b3c2dccddc1c828edb393bc24fff7d38b42f5a",
+  "warmup": 20,
+  "samples_per_workload": 100,
+  "workloads": [
+    "model",
+    "static",
+    "replace",
+    "resize",
+    "clip",
+    "font-retire",
+    "alpha-order"
+  ],
+  "timing_validation": false,
+  "native_extent": [
+    64,
+    64
+  ],
+  "display": ":1",
+  "vertical_sync": false,
+  "profiles": {
+    "lavapipe": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+      "LP_NATIVE_VECTOR_WIDTH": "128",
+      "LIBGL_ALWAYS_SOFTWARE": "1",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "amd": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    }
+  },
+  "measurement": "/usr/bin/time -v <frozen binary> 20 100",
+  "performance_go_received": false
+}

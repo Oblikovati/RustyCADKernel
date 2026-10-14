@@ -35,6 +35,10 @@ pub mod graphic_buffers;
 pub mod graphic_submission;
 #[path = "../group_flipping.rs"]
 pub mod group_flipping;
+#[path = "../gui_composition.rs"]
+pub mod gui_composition;
+#[path = "../gui_gpu_composition.rs"]
+pub mod gui_gpu_composition;
 #[path = "../homogeneous_vertices.rs"]
 pub mod homogeneous_vertices;
 #[path = "../light_name_dump_boundary.rs"]
@@ -57,6 +61,8 @@ pub mod oit_transparency;
 pub mod ordered_stencil;
 #[path = "../point_alpha.rs"]
 pub mod point_alpha;
+#[path = "../point_alpha_context.rs"]
+pub mod point_alpha_context;
 #[path = "../point_lighting.rs"]
 pub mod point_lighting;
 #[path = "../point_primitives.rs"]

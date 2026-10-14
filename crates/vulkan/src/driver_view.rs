@@ -14,18 +14,26 @@ use rustycad_tkservice::{aspect::*, graphic3d::*, image::ImagePixMap};
 /// Renderer-backed Graphic3d view; `view.cast::<Graphic3dRenderView>().capture()?`.
 pub struct Graphic3dRenderView {
     transient: StandardTransient,
-    retained: Graphic3dRetainedView,
+    pub(crate) retained: Graphic3dRetainedView,
     device: SharedRenderDevice,
-    limit: u32,
+    pub(crate) limit: u32,
     vertical_sync: std::sync::Arc<SharedState<bool>>,
     presenter: SharedState<Option<crate::backend::WindowPresenter>>,
     window_error: SharedState<Option<RenderError>>,
-    outcome: SharedState<Option<Result<FrameCapture, RenderError>>>,
+    pub(crate) outcome: SharedState<Option<Result<FrameCapture, RenderError>>>,
+    pub(crate) gui_layers: SharedState<crate::view_gui_layer::GuiLayerSlot>,
     raster_feedback: crate::raster_feedback::RasterFailureFeedback,
     stencil_feedback: crate::stencil_feedback::StencilFeedback,
     fragment_alpha_feedback: crate::fragment_alpha_feedback::FragmentAlphaFeedback,
 }
 rustycad_tkernel::impl_transient!(Graphic3dRenderView, "Martensite_RenderView", StandardTransient, transient, interfaces:[dyn Graphic3dCView, dyn Graphic3dDataStructureManager]);
+type RenderViewCreationInputs = (
+    StandardTransient,
+    Graphic3dRetainedView,
+    SharedRenderDevice,
+    u32,
+    std::sync::Arc<SharedState<bool>>,
+);
 impl Graphic3dRenderView {
     pub(crate) fn create(
         manager: &Handle<Graphic3dStructureManager>,
@@ -34,21 +42,33 @@ impl Graphic3dRenderView {
         limit: u32,
         vertical_sync: std::sync::Arc<SharedState<bool>>,
     ) -> Result<Handle<Self>, Failure> {
-        let view = Handle::new(Self {
-            transient: StandardTransient::default(),
-            retained: Graphic3dRetainedView::new(manager, layers)?,
+        let inputs = (
+            StandardTransient::default(),
+            Graphic3dRetainedView::new(manager, layers)?,
+            device,
+            limit,
+            vertical_sync,
+        );
+        let view = Handle::new(Self::initialized_gui_view(inputs));
+        graphic3d_cview_register(&view.cast())?;
+        Ok(view)
+    }
+    fn initialized_gui_view(inputs: RenderViewCreationInputs) -> Self {
+        let (transient, retained, device, limit, vertical_sync) = inputs;
+        Self {
+            transient,
+            retained,
             device,
             limit,
             vertical_sync,
             presenter: SharedState::default(),
             window_error: SharedState::default(),
             outcome: SharedState::default(),
+            gui_layers: SharedState::default(),
             raster_feedback: Default::default(),
             stencil_feedback: Default::default(),
             fragment_alpha_feedback: Default::default(),
-        });
-        graphic3d_cview_register(&view.cast())?;
-        Ok(view)
+        }
     }
     /// Inspect this view's completed stencil context; `render_view.stencil_context_state()`.
     pub fn stencil_context_state(&self) -> crate::RenderStencilState {
@@ -59,6 +79,14 @@ impl Graphic3dRenderView {
         if self.is_removed() {
             return Err(rejected("removed view", "a live view capture"));
         }
+        let requires_extent = self.gui_layers.read().packet.is_some();
+        let extent = requires_extent
+            .then(|| capture_extent(self, self.limit))
+            .transpose()?;
+        let gui = self.gui_layers.read();
+        if let Some(extent) = extent {
+            gui.snapshot(extent)?;
+        }
         self.outcome
             .read()
             .clone()
@@ -66,15 +94,33 @@ impl Graphic3dRenderView {
     }
     /// Render the current view and retain errors for void Graphic3d callbacks; `render_view.try_redraw()?`.
     pub fn try_redraw(&self) -> Result<(), RenderError> {
+        let epoch = self.gui_layers.read().epoch.clone();
         let outcome = self.render_current();
+        self.publish_gui_outcome(&epoch, outcome)
+    }
+    fn publish_gui_outcome(
+        &self,
+        epoch: &std::sync::Arc<()>,
+        mut outcome: Result<FrameCapture, RenderError>,
+    ) -> Result<(), RenderError> {
+        let gui = self.gui_layers.read();
+        if !std::sync::Arc::ptr_eq(epoch, &gui.epoch) {
+            outcome = Err(rejected(
+                "GUI changed during rendering",
+                "a redraw with an unchanged GUI packet",
+            ));
+        }
         let result = outcome.as_ref().map(|_| ()).map_err(Clone::clone);
         *self.outcome.write() = Some(outcome);
-        if result.is_ok() {
+        self.update_gui_redraw_status(result.is_ok());
+        result
+    }
+    fn update_gui_redraw_status(&self, succeeded: bool) {
+        if succeeded {
             self.retained.redraw();
         } else {
             self.retained.invalidate();
         }
-        result
     }
     fn render_current(&self) -> Result<FrameCapture, RenderError> {
         if !self.is_defined() || self.is_removed() {
@@ -83,12 +129,20 @@ impl Graphic3dRenderView {
         if let Some(error) = self.window_error.read().as_ref() {
             return Err(error.clone());
         }
-        let extent = capture_extent(self, self.limit)?;
-        let mut frame = frame_for_view(self, extent, self.retained.render_clip_planes())?;
+        let mut frame = self.gui_composed_frame()?;
         frame.attach_raster_feedback(&self.raster_feedback);
         frame.attach_stencil_context(&self.stencil_feedback);
         frame.attach_fragment_alpha(&self.fragment_alpha_feedback);
         self.render_target(&frame)
+    }
+    fn gui_composed_frame(&self) -> Result<crate::RenderFrame, RenderError> {
+        let extent = capture_extent(self, self.limit)?;
+        let packet = self.gui_layers.read().snapshot(extent)?;
+        let mut frame = frame_for_view(self, extent, self.retained.render_clip_planes())?;
+        if let Some(packet) = packet {
+            crate::view_gui_composition::append_gui_packet(&mut frame, packet)?;
+        }
+        Ok(frame)
     }
 }
 impl Graphic3dRenderView {
@@ -138,6 +192,8 @@ impl Graphic3dCView for Graphic3dRenderView {
     }
     fn remove(&self) {
         self.release_presenter();
+        let retired = self.gui_layers.write().retire_removed();
+        drop(retired);
         graphic3d_cview_remove(self);
     }
     fn redraw(&self) {
@@ -147,6 +203,9 @@ impl Graphic3dCView for Graphic3dRenderView {
         let _ = self.try_redraw();
     }
     fn resized(&self) {
+        if self.gui_layers.write().resized() {
+            self.invalidate_gui_capture();
+        }
         graphic3d_cview_resized(self);
         self.invalidate();
     }

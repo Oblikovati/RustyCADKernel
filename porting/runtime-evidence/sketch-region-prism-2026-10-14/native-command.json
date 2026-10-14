@@ -1,0 +1,20 @@
+{
+  "build": [
+    "c++",
+    "-std=c++17",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_prism_history.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKPrim",
+    "-lTKTopAlgo",
+    "-lTKBRep",
+    "-lTKG3d",
+    "-lTKG2d",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "target/prism/native-history"
+  ],
+  "exit": 1
+}

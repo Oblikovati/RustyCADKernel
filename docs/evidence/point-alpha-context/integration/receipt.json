@@ -1,0 +1,105 @@
+{
+  "revision": "81ec965e809e94c8f31b2cb33be57329986b9405",
+  "final_revision": "81ec965e809e94c8f31b2cb33be57329986b9405",
+  "results": [
+    {
+      "profile": "lavapipe",
+      "command": [
+        "cargo",
+        "run",
+        "--locked",
+        "-p",
+        "martensite-vulkan",
+        "--example",
+        "offscreen_acceptance"
+      ],
+      "exit": 0,
+      "log": "lavapipe-offscreen_acceptance.log",
+      "sha256": "e6db2290be04e4c5e60ebe48f068842c0d2341a5209eb44156d881bf9ddda2f7"
+    },
+    {
+      "profile": "lavapipe",
+      "command": [
+        "cargo",
+        "run",
+        "--locked",
+        "-p",
+        "martensite-vulkan",
+        "--example",
+        "lighting_acceptance"
+      ],
+      "exit": 0,
+      "log": "lavapipe-lighting_acceptance.log",
+      "sha256": "5ea0add227803b9b619d189db331df3e6c9ceb513ab4e6c9c83f321227ae260c"
+    },
+    {
+      "profile": "host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "log": "host-tests.log",
+      "sha256": "aa274dfd1506a76134ef06f5e6b9d7e4eabfce13502805ec27f8a031c611dfb3"
+    },
+    {
+      "profile": "host",
+      "command": [
+        "cargo",
+        "run",
+        "--locked",
+        "-p",
+        "martensite-vulkan",
+        "--example",
+        "offscreen_acceptance"
+      ],
+      "exit": 0,
+      "log": "host-offscreen_acceptance.log",
+      "sha256": "f1049435cca5f043cce78ee48b5f38201b43b23b75b20a0136f3f3e1565d8a6a"
+    },
+    {
+      "profile": "host",
+      "command": [
+        "cargo",
+        "run",
+        "--locked",
+        "-p",
+        "martensite-vulkan",
+        "--example",
+        "lighting_acceptance"
+      ],
+      "exit": 0,
+      "log": "host-lighting_acceptance.log",
+      "sha256": "40def6145c5b36d0c02ac268d8524ba60792f1201478dbf9fb9aef667c7e4b3c"
+    }
+  ],
+  "performance": false,
+  "published": false,
+  "integrated_commit": "248978e42cab363d4d037d22fa316f311eccea34",
+  "lavapipe_tests": {
+    "passed": 648,
+    "failed": 0,
+    "ignored": 5,
+    "groups": 71,
+    "log_sha256": "65fc0533225788a1c8d79d3d71ae3d3d66b40bdfeaa9bdef45bbaa17d7a65f43"
+  },
+  "cleanup": {
+    "checkout": "/home/vmiguel/git/oblikovati-workspace/Martensite-point-persistence-diagnostic",
+    "branch": "diagnostic/application-point-persistence",
+    "integrated_commit": "248978e42cab363d4d037d22fa316f311eccea34",
+    "allocated_unique_bytes": 4313223168,
+    "clean": true,
+    "process_users": [],
+    "archive_created": false,
+    "checkout_deleted": true,
+    "branch_deleted": true
+  },
+  "production_behavior_changes": false,
+  "original_21_assets_unchanged": true,
+  "api_promotions": false,
+  "scope": "Native-retained alpha and real opaque sprite reset acceptance controls; no GPU performance or global API completion claim"
+}

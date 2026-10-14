@@ -1,5 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
+mod captured;
 mod endpoint;
+pub use captured::{
+    CaptureWorkReceipt, CapturedBezierWindingProof, CapturedBezierWireFailure,
+    CapturedBezierWireInput, CapturedBezierWireOccurrence, CapturedBezierWireResult,
+    CapturedBezierWireStore, CapturedWindingEvidence,
+};
 mod error;
 mod types;
 mod walk;

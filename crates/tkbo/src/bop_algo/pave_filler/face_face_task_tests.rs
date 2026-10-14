@@ -37,7 +37,7 @@ fn nearby_face_task_keeps_identity_transform() {
     assert_native_curve_row(&task, false);
 }
 
-fn configured_task(far: bool) -> BOPAlgoFaceFaceTask<'static> {
+fn configured_task<'a>(far: bool) -> BOPAlgoFaceFaceTask<'a> {
     let (faces, boxes) = if far {
         (far_plane_faces(), far_plane_boxes())
     } else {
@@ -157,4 +157,54 @@ fn void_boxes_follow_native_failure_alert_path() {
     let mut task = BOPAlgoFaceFaceTask::default();
     task.perform_parallel().unwrap();
     assert!(task.parallel_options().has_errors());
+}
+
+struct ToggleProgress {
+    cancelled: std::sync::Arc<std::sync::atomic::AtomicBool>,
+}
+impl rustycad_tkernel::message::ProgressIndicatorHooks for ToggleProgress {
+    fn show(&self, _: &rustycad_tkernel::message::ProgressScope<'_>, _: f64, _: bool) {
+        // The test controls cancellation without console or timing side effects.
+    }
+    fn user_break(&self) -> bool {
+        // The same task can resume after explicit caller reset.
+        self.cancelled.load(std::sync::atomic::Ordering::Acquire)
+    }
+}
+
+#[test]
+fn real_face_pair_cancellation_precedes_intersector_and_can_resume() {
+    let (flag, indicator) = toggle_indicator();
+    let range = indicator.start();
+    let mut task = configured_task(false);
+    task.set_progress_range(&range);
+    task.perform_parallel().unwrap();
+    assert_before_task_cancel(&task);
+    flag.store(false, std::sync::atomic::Ordering::Release);
+    task.parallel_options().clear();
+    let resumed = indicator.start();
+    task.set_progress_range(&resumed);
+    task.perform_parallel().unwrap();
+    assert!(task.intersector().is_done());
+    assert!(!task.parallel_options().has_errors());
+}
+
+fn toggle_indicator() -> (
+    std::sync::Arc<std::sync::atomic::AtomicBool>,
+    rustycad_tkernel::message::ProgressIndicator,
+) {
+    let flag = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(true));
+    let indicator = rustycad_tkernel::message::ProgressIndicator::new(Box::new(ToggleProgress {
+        cancelled: flag.clone(),
+    }));
+    (flag, indicator)
+}
+
+fn assert_before_task_cancel(task: &BOPAlgoFaceFaceTask<'_>) {
+    use rustycad_tkernel::standard::RuntimeTyped;
+    assert!(!task.intersector().is_done());
+    assert!(
+        task.parallel_options()
+            .has_error(crate::bop_algo::AlertUserBreak::static_type())
+    );
 }

@@ -93,6 +93,10 @@ pub mod bvh_tree;
 pub mod bvh_tree_handle;
 #[path = "../bvh_triangulation.rs"]
 pub mod bvh_triangulation;
+#[path = "../certified_bezier_pair_exclusions.rs"]
+pub mod certified_bezier_pair_exclusions;
+#[path = "../certified_bezier_pairs.rs"]
+pub mod certified_bezier_pairs;
 #[path = "../class2d_assignment_returns.rs"]
 pub mod class2d_assignment_returns;
 #[path = "../coherent_allocator_behavior.rs"]
@@ -145,6 +149,8 @@ pub mod elclib_behavior;
 pub mod elslib_behavior;
 #[path = "../empty_bounds_behavior.rs"]
 pub mod empty_bounds_behavior;
+#[path = "../exact_comparisons.rs"]
+pub mod exact_comparisons;
 #[path = "../exact_orientation.rs"]
 pub mod exact_orientation;
 #[path = "../frame_behavior.rs"]
@@ -249,9 +255,3 @@ pub mod math_bracketed_root;
 pub mod math_brent_minimum;
 #[path = "../math_compute_kronrod_points_and_weights.rs"]
 pub mod math_compute_kronrod_points_and_weights;
-#[path = "../math_crout.rs"]
-pub mod math_crout;
-#[path = "../math_direct_polynomial_roots.rs"]
-pub mod math_direct_polynomial_roots;
-#[path = "../math_double_tab.rs"]
-pub mod math_double_tab;

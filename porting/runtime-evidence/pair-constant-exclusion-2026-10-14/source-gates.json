@@ -1,0 +1,57 @@
+[
+  {
+    "name": "source-tests",
+    "argv": [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkmath",
+      "--all-targets",
+      "--all-features"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "source-docs",
+    "argv": [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkmath",
+      "--doc",
+      "--all-features"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "source-clippy",
+    "argv": [
+      "cargo",
+      "clippy",
+      "-p",
+      "rustycad-tkmath",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "source-format",
+    "argv": [
+      "python3",
+      "tools/check_rust_format.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "source-discovery",
+    "argv": [
+      "python3",
+      "tools/toolkit_test_suites.py"
+    ],
+    "exit_code": 0
+  }
+]

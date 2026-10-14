@@ -1,0 +1,69 @@
+{
+  "base_revision": "7e754661e5011dfff6c7f02c0fc3dd5de50cec6b",
+  "platform": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+  "scope": "bounded complete isolated Bezier/line certificate operation; blocker10/all-curve/application acceptance open",
+  "tests": [
+    {
+      "command": "cargo test -p rustycad-tkmath --all-features --lib --test toolkit --bench bezier_incidence",
+      "result": "26 library +2858 toolkit pass; six accepted inputs verify without timing; before Box-only failure evidence adaptation"
+    },
+    {
+      "command": "cargo test -p rustycad-tkmath --all-features --lib --test toolkit incidence",
+      "result": "20 focused toolkit pass after Box representation and source mutation tests"
+    },
+    {
+      "command": "cargo test -p rustycad-tkmath --all-features --test toolkit higher_rational",
+      "result": "1 pass; generic nonuniform rational degree8/16 even roots"
+    },
+    {
+      "command": "cargo test -p rustycad-tkmath --doc --all-features",
+      "result": "47 pass"
+    },
+    {
+      "command": "cargo clippy -p rustycad-tkmath --all-targets --all-features -- -D warnings",
+      "result": "exit0 final"
+    },
+    {
+      "command": "cargo fmt --all --check",
+      "result": "exit0 final"
+    },
+    {
+      "command": "cargo bench -p rustycad-tkmath --bench bezier_incidence --no-run",
+      "result": "exit0"
+    },
+    {
+      "command": "target/release/deps/bezier_incidence-c12388a22937c22f",
+      "result": "six accepted workloads verified, timings_requested=false"
+    }
+  ],
+  "policy": {
+    "root_degree_default": 32,
+    "max_bisections_default": 4096,
+    "domain_sign_version": 1,
+    "world_error_never_widened": true,
+    "subdivision_accounting": "denominator + initial normal + all refinements; exact sign/rounding arithmetic not an operation-budget claim"
+  },
+  "excluded": [
+    "coincident overlap construction",
+    "other curve representations",
+    "reusable captured wire certificate operation",
+    "application issue10 closure",
+    "HLR deferred branch",
+    "native OCCT CI/production dependency",
+    "performance acceptance pending quiet GO"
+  ],
+  "support_correction": {
+    "original_source": "a9b3896597e68c6a45388434cc7a75facc1f1c13",
+    "red": "runtime unwrap failed with DomainSignAdmission(Direction(Degree actual3 limit1)); exit101, not compiler error",
+    "behavior": "Support skips endpoint conversion/sign stages; unsupported policy versions remain invalid; Segment caps unchanged",
+    "metadata": "None effective cap/sign degrees plus domain_sign_applied false distinguishes skipped from exact-zero applied stage",
+    "affected_tests": "14 library +83 toolkit pass; six bench workloads verify, no timings",
+    "clippy": "all-target/all-feature -D warnings exit0",
+    "docs": "47 pass",
+    "format": "cargo fmt --all --check exit0",
+    "mapped_line_ray": "unchanged source and affected regressions pass",
+    "old_freeze": "historical independently audited but untimed source-a9 preparation, not final-source timing evidence",
+    "release_preparation": "relinked final conditioned source, six accepted workloads verify without --measure",
+    "compiler": "nightly2026-09-25 format61, 77 public items/13 actual reexports, exact current-source SHA"
+  }
+}

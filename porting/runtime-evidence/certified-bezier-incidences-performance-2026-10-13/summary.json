@@ -1,0 +1,61 @@
+{
+  "rows": [
+    {
+      "workload": "linear",
+      "samples": 100,
+      "median_ns": 294345.0,
+      "mean_ns": 285625.18,
+      "p95_ns": 306367,
+      "peak_process_rss_kib": 4948,
+      "contacts": 1
+    },
+    {
+      "workload": "rational-support",
+      "samples": 100,
+      "median_ns": 22108895.5,
+      "mean_ns": 22372597.74,
+      "p95_ns": 23733894,
+      "peak_process_rss_kib": 5032,
+      "contacts": 2
+    },
+    {
+      "workload": "rational-segment",
+      "samples": 100,
+      "median_ns": 10836900.0,
+      "mean_ns": 10881843.78,
+      "p95_ns": 11181072,
+      "peak_process_rss_kib": 5032,
+      "contacts": 1
+    },
+    {
+      "workload": "cubic-three",
+      "samples": 100,
+      "median_ns": 715885.0,
+      "mean_ns": 765024.11,
+      "p95_ns": 1014577,
+      "peak_process_rss_kib": 5056,
+      "contacts": 3
+    },
+    {
+      "workload": "quartic-repeated",
+      "samples": 100,
+      "median_ns": 516881.5,
+      "mean_ns": 517824.24,
+      "p95_ns": 526033,
+      "peak_process_rss_kib": 5008,
+      "contacts": 2
+    },
+    {
+      "workload": "completed-empty",
+      "samples": 100,
+      "median_ns": 6276.5,
+      "mean_ns": 6504.24,
+      "p95_ns": 7243,
+      "peak_process_rss_kib": 5308,
+      "contacts": 0
+    }
+  ],
+  "p95_method": "nearest-rank",
+  "baseline_accepted": false,
+  "scope": "complete query + acceptance checks + result drop; processRSS includes corpus setup; CPU-only"
+}

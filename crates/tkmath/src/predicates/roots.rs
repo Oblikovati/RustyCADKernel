@@ -3,11 +3,17 @@
 mod bernstein;
 /// Exact parameter contacts between a planar Bézier curve and an infinite line.
 pub mod bezier_line;
+/// Source-bound exact Bézier pair and canonical self-contact certificates.
+pub mod bezier_pair;
+mod certificate_arithmetic;
 mod chain;
 mod dyadic;
 mod error;
 mod isolate;
+/// Exact planar curve/pcurve residual inequalities on finite same-parameter domains.
+pub mod metric_bounds;
 mod polynomial;
+mod polynomial_solve;
 /// Exact signs of a second polynomial at each isolated source root.
 pub mod signs;
 pub use dyadic::DyadicBound;

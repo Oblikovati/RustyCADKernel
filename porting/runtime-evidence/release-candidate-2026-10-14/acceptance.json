@@ -1,0 +1,81 @@
+{
+  "source_revision": "0f41e92b5431137acf791c248b47bebb21d70405",
+  "base_revision": "b6a61a370",
+  "files": {
+    "tools/release_inventory.py": "6621a65131c43cae374532634d7df9ae716c05e300bd75699e7949b510500f44",
+    "tools/release_packages.py": "849679fb4a669c0692629bbdf5618cf344744f84e3f19bff023312819976603f",
+    "tools/tests/test_release_packages.py": "8a35e56871a2ac910ea736237fe58a14d4e126e568eb9ce78a8c35a282900323"
+  },
+  "python": "Python 3.12.3",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_release*py"
+      ],
+      "environment": {
+        "PYTHONPATH": "tools"
+      },
+      "exit": 0,
+      "tests": 63
+    },
+    {
+      "argv": [
+        "/tmp/martensite-publication-format/bin/black",
+        "--check",
+        "tools/release_inventory.py",
+        "tools/release_packages.py",
+        "tools/tests/test_release_packages.py"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0
+    }
+  ],
+  "functions_formatted_lines": {
+    "clean_release_revision": 9,
+    "release_revision": 9,
+    "build_release": 4,
+    "build_release_candidate": 4,
+    "build_verified_release": 17,
+    "release_plan": 6,
+    "checked_release_plan": 15
+  },
+  "logs": {
+    "focused.log": {
+      "sha256": "08ab85676762666e873ef7408e6f22ea8f45fee659a09186ba6558bc427cbc55",
+      "retained": "focused.log.gz"
+    },
+    "related.log": {
+      "sha256": "ba0e1419e678e31bba63b2abf4bca9c42e64355d47bca8dbd23e57dd0e1d21e7",
+      "retained": "related.log.gz"
+    },
+    "format.log": {
+      "sha256": "eb509511f07d955385d4faa9c86dcc3bc364bd0e324d4a23de291c25f28e544d",
+      "retained": "format.log.gz"
+    },
+    "format-check.log": {
+      "sha256": "45a468fa6205768496f23f1716ebb7575e9b723449d2099b88bf2afef60b721f",
+      "retained": "format-check.log.gz"
+    }
+  },
+  "scope": "Named fake command boundary and real temporary archive bytes; no full workspace packaging or publication executed. Existing tagged contract preserved. Candidate shares packaging/profile/sealing flow and never looks up or creates a tag.",
+  "excluded": [
+    "workflow changes",
+    "tag creation",
+    "remote actions",
+    "full native or Rust toolkit builds"
+  ]
+}

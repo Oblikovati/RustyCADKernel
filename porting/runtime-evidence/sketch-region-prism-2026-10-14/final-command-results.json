@@ -1,0 +1,64 @@
+[
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "-p",
+      "rustycad-tkbo",
+      "-p",
+      "rustycad-tkprim",
+      "-p",
+      "rustycad-tktopalgo",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "log": "clippy-final.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "-p",
+      "rustycad-tkprim",
+      "-p",
+      "rustycad-tktopalgo",
+      "--all-features",
+      "--doc"
+    ],
+    "exit": 0,
+    "log": "docs-final.log"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/toolkit_test_suites.py"
+    ],
+    "exit": 0,
+    "log": "discovery-final.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit": 0,
+    "log": "format-final.log"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "log": "diff-final.log"
+  }
+]
