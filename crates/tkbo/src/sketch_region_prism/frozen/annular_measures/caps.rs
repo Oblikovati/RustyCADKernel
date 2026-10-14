@@ -9,17 +9,7 @@ pub(super) fn measure_caps(
     for role in [PrismImageRole::First, PrismImageRole::Last] {
         let named = operands::named_cap(work.join, role)?;
         work.entity = Some(named.chart.occurrence.clone());
-        let face = operands::frozen_face(work.join, named)?;
-        let support = operands::support(face)?;
-        let curves = cap_curves(named, face, &work.boundaries)?;
-        let report = certify_polynomial_plane_measure(
-            &curves,
-            support.frame,
-            support.placement,
-            work.requested.cap_area,
-            &mut *cancelled,
-        )
-        .map_err(AnnularMeasureCause::Cap)?;
+        let report = cap_report(work, named, cancelled)?;
         work.partial.faces.push(AnnularMeasuredFace {
             named: named.clone(),
             measure: AnnularFaceMeasure::Cap(report),
@@ -89,21 +79,12 @@ fn sweep_curve(
     binding: &crate::sketch_region_prism::region_certificate::annular_binding::AnnularPrismBinding,
     direction: AnnularBoundaryDirection,
 ) -> MeasureCheck<OrientedMetricCurve<'_>> {
-    let found: Vec<_> = binding
-        .boundaries()
-        .iter()
-        .filter(|row| row.source == direction.source)
-        .collect();
-    count(
-        "one copied boundary for signed material source",
-        found.len(),
-        1,
-    )?;
+    let occurrence = copied_occurrence(binding, direction.source)?;
     let actual: Vec<_> = binding
         .copied_sources()
         .boundaries
         .iter()
-        .filter(|row| row.occurrence == found[0].copied.occurrence)
+        .filter(|row| &row.occurrence == occurrence)
         .collect();
     count(
         "one exact copied polynomial for signed material source",
@@ -114,4 +95,39 @@ fn sweep_curve(
         return Err(operand("complete copied material interval [0,1]"));
     }
     Ok(operands::normalized(actual[0].pcurve.borrow(), direction))
+}
+
+fn cap_report(
+    work: &MeasureWork<'_>,
+    named: &NamedAnnularFace,
+    cancelled: &mut impl FnMut() -> bool,
+) -> MeasureCheck<CertifiedPolynomialPlaneMeasure> {
+    let face = operands::frozen_face(work.join, named)?;
+    let support = operands::support(face)?;
+    let curves = cap_curves(named, face, &work.boundaries)?;
+    certify_polynomial_plane_measure(
+        &curves,
+        support.frame,
+        support.placement,
+        work.requested.cap_area,
+        &mut *cancelled,
+    )
+    .map_err(AnnularMeasureCause::Cap)
+}
+
+fn copied_occurrence(
+    binding: &crate::sketch_region_prism::region_certificate::annular_binding::AnnularPrismBinding,
+    source: crate::sketch_region::RegionSourceId,
+) -> MeasureCheck<&crate::sketch_region::PartitionOccurrenceIdentity> {
+    let found: Vec<_> = binding
+        .boundaries()
+        .iter()
+        .filter(|row| row.source == source)
+        .collect();
+    count(
+        "one copied boundary for signed material source",
+        found.len(),
+        1,
+    )?;
+    Ok(&found[0].copied.occurrence)
 }
