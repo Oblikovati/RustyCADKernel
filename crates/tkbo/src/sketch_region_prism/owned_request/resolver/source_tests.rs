@@ -2,12 +2,12 @@
 use super::*;
 use crate::sketch_region::PartitionObservation;
 use rustycad_tkg3d::top_abs::Orientation;
-fn operation(reversed: bool) -> PreparedPolynomialPrism {
+pub(super) fn operation(reversed: bool) -> PreparedPolynomialPrism {
     let mut request = super::super::test_fixture::request();
     request.sources[0].reversed_traversal = reversed;
     super::super::test_fixture::prepared(request)
 }
-fn plan_for(prepared: &PreparedPolynomialPrism) -> SingleBoundaryNamePlan {
+pub(super) fn plan_for(prepared: &PreparedPolynomialPrism) -> SingleBoundaryNamePlan {
     let request = &prepared.retained.request;
     SingleBoundaryNamePlan::v2(
         request.sources[0].names(request.operation),
@@ -15,7 +15,7 @@ fn plan_for(prepared: &PreparedPolynomialPrism) -> SingleBoundaryNamePlan {
     )
     .unwrap()
 }
-fn initial_copy(prepared: &PreparedPolynomialPrism) -> RegionCopyContexts {
+pub(super) fn initial_copy(prepared: &PreparedPolynomialPrism) -> RegionCopyContexts {
     let bridge = prepared.retained.bridge.as_ref().unwrap();
     let PartitionObservation::Captured(partition) = &bridge.mapped.arrangement.partition else {
         panic!("actual partition required");
@@ -31,10 +31,10 @@ fn initial_copy(prepared: &PreparedPolynomialPrism) -> RegionCopyContexts {
         .unwrap_or_else(|_| panic!("actual complete copy observations required"))
         .clone()
 }
-fn checked<T>(value: ResolveCheck<T>) -> T {
+pub(super) fn checked<T>(value: ResolveCheck<T>) -> T {
     value.unwrap_or_else(|_| panic!("expected uniquely resolved actual context"))
 }
-fn original(
+pub(super) fn original(
     prepared: &PreparedPolynomialPrism,
     copy: &RegionCopyContexts,
 ) -> Vec<NamedSourceContext> {
@@ -53,7 +53,7 @@ fn actual_original_and_copy_preserve_native_roles_under_traversal_reversal() {
         assert_eq!((names.len(), copied.len()), (3, 3));
     }
 }
-fn assert_endpoint_roles(names: &[NamedSourceContext], reversed: bool) {
+pub(super) fn assert_endpoint_roles(names: &[NamedSourceContext], reversed: bool) {
     let expected = if reversed {
         [Orientation::Reversed, Orientation::Forward]
     } else {
@@ -190,4 +190,17 @@ fn duplicate_named_use_cannot_replace_another_context_at_equal_count() {
     names[1] = names[2].clone();
     assert!(complete_context_coverage(&names, &copy.source).is_err());
     assert!(copied::copied_contexts(&copy, &names).is_err());
+}
+
+#[test]
+fn current_source_census_rejects_stale_child_paths_before_role_resolution() {
+    let prepared = operation(false);
+    let mut copy = initial_copy(&prepared);
+    let vertex = copy
+        .source
+        .iter_mut()
+        .find(|row| !row.child_slots.is_empty())
+        .unwrap();
+    vertex.child_slots[0] += 8;
+    assert!(source::original_contexts(&prepared, &copy.source).is_err());
 }

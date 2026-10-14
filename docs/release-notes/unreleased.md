@@ -3,6 +3,21 @@
 Next compatible patch target: **0.2.8**. Workspace version changes and publication
 remain with the release coordinator.
 
+## Private prism publication diagnostic retention V2
+
+ADR0048 adds an explicit private publication V2 entry that retains each actual
+downstream callback failure's phase, class and cause. The V1 entry and its legacy
+admission/refusal/replay behavior remain selectable. V2 uses the same geometry,
+validation, history, measurement and final-rebind pipeline; successful child
+proof bytes remain unchanged, with the requested publication version recorded.
+
+RustyCADKernel#10's operation-contract owner owns consumer migration and deletion
+of the lossy V1 producer after the complete-operation retained-header corpus gate,
+within ADR0014's existing application R3 limit. Old discarded headers are never
+inferred retroactively. Caller-qualified immutable failure publication remains
+pending the sealed invocation adapter and explicit unsupported-payload coverage.
+No workspace version, public body domain or application acceptance changes.
+
 ## Private ordered joined prism validation
 
 ADR0039 adds explicit validation behavior v1 for the admitted single-Jordan

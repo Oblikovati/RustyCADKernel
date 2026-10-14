@@ -1,0 +1,55 @@
+{
+  "source_revision": "a3b345b7eefc25321cbe16b61a78ccfaf2d7184b",
+  "behavior_source": "d504ae5b7",
+  "scope": "Actual single-Jordan correspondence and sealed private publication/map issuance checkpoint",
+  "dictionary_version": 2,
+  "map_schema_version": 1,
+  "actual_definitions": 13,
+  "actual_uses": 26,
+  "checks": {
+    "focused_owned_request": 89,
+    "strict_all_target_clippy": "passed",
+    "fmt": "passed",
+    "exact_source_bookends": 16101
+  },
+  "bookend_scope": [
+    "tracked crates",
+    "Cargo.toml",
+    "Cargo.lock",
+    ".cargo"
+  ],
+  "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28), explicitly rustup-selected",
+  "platform": "Linux 7.1.5-76070105-generic x86_64",
+  "commands": [
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib --all-features -j2 owned_request -- --nocapture",
+    "rustup run 1.99.0 cargo clippy -p rustycad-tkbo --all-targets --all-features -j2 -- -D warnings",
+    "rustup run 1.99.0 cargo fmt --all -- --check"
+  ],
+  "preserved_failures": [
+    "initial borrowed-shape compile errors",
+    "stale child-slot helper-local regression",
+    "generated candidate test ownership/Debug setup errors",
+    "selected-region ID incorrectly bound to Selected instead of copied SweepBase",
+    "actual generated root rejected by V1 symbolic map domain",
+    "large local failure enum/test lint findings",
+    "d504 test default-field reassignment strict lint failure"
+  ],
+  "exclusions": [
+    "No full affected suite yet",
+    "No new exact cross-process replay or concurrency acceptance for actual issuer yet",
+    "No standard-host TSan acceptance",
+    "No complete reservation applicability report yet",
+    "No one-call owned preparation-to-body operation or monotonic whole-operation callback sequence",
+    "No public API, general-profile domain or release completion"
+  ],
+  "legacy_replays": {
+    "complete_history": {
+      "bytes": 421702,
+      "sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686"
+    },
+    "symbolic_map": {
+      "bytes": 10571,
+      "sha256": "ffbdcd9461a1acb2349d514610a6f24b6cdadd03b460bf9394a65240b88247ff"
+    }
+  }
+}

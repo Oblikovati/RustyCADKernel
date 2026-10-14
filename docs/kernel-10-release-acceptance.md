@@ -155,6 +155,24 @@ records startup failure on both installed nightly runtimes. The injected host
 library is observed, but its causal responsibility is unproved. No actual
 operation sanitizer pass or host-security workaround is claimed.
 
+## Actual semantic resolver and portable body integration supplement
+
+Source `fd98c89fd`, evidence `4e75cb9da`:
+[combined root receipt](evidence/prism-resolver-body-integration-2026-10-14/INTEGRATED.md).
+The actual sealed invocation now binds authored names to the constructed operation,
+retains reservation coverage, and projects the accepted private publication into
+an immutable portable body. Root ran 1,931 tests and 35 doctests plus strict lint,
+formatting and documentation. Eighteen processes reproduced nine complete
+candidate payloads; source hashes and candidate passing names were preserved.
+Both completed worktrees and branches were deleted after checks.
+
+This advances actual single-boundary semantic correspondence and owned body
+reads. It does not close the public one-call outcome, complete owned failures,
+general profiles or the sketch-with-hole consumer workflow. The annular binding,
+embedding and named topology paths remain development candidates until their
+combined proof, ordered validation, measurements, history and publication gates
+are integrated. Release condition remains unsatisfied.
+
 ## Every issue requirement
 
 | Issue item | Concrete implementation / executed evidence | Precise remaining acceptance |
