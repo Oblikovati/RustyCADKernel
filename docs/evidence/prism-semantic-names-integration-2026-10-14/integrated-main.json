@@ -1,0 +1,128 @@
+{
+  "integration_revision": "d9ace3f96911cd4e1fbabe8fcf34243a76624290",
+  "candidate_revision": "4c9511d80",
+  "candidate_base": "4cf1da12b",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "b6f3500d2ec7e078387ee92b1c4cb08f97ca1f9379a55c8cad1b678d7e1fc81c"
+      },
+      "tests": {
+        "passed": 1531,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "974c0810abed54af6dc997130453bde263b5d6503fd56934042f211cdd891973"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "3a3fdea96f5f62b6235f2951eafbf939eaa216f1fe25b5bf9cc80d19c5c76e67"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "7b7259fe77d61e1489679b48d65d1965ced6f2752691bcb65453fe13e5d90d30"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/fixtures/names-v1.bin": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/identities.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/plan.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/roles.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/tests.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/owned_request/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/fixtures/names-v1.bin": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/identities.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/plan.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/replay.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/roles.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/names/tests.rs": "A"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
