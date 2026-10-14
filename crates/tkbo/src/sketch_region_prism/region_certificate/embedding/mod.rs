@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0029: injective affine sweep over named trimmed domains and the authored seam quotient.
 mod access;
+mod annular_coverage;
 mod domains;
 mod error;
 mod regularity;
