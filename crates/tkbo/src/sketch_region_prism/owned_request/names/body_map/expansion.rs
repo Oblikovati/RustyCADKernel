@@ -122,7 +122,7 @@ fn check_operation(plan: &SingleBoundaryNamePlan, actual: u64) -> MapCheck<()> {
         return Err(failure(
             plan,
             PrismSemanticMapCause::Operation {
-                actual: actual,
+                actual,
                 expected,
             },
         ));
