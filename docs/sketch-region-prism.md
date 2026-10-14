@@ -59,6 +59,48 @@ and volume do not establish the injective-extrusion/surface-chart theorem or
 complete analytic solid validation. No public successful body, API completion,
 application acceptance or document naming policy is introduced.
 
+## Exact affine support-map evidence
+
+Evidence version 1 now reads the selected face's actual planar support and full
+placement after the existing deep copy. For
+`F(u,v,w) = placement(frame(u,v)) + w * extrusion`, it retains the exact constant
+signed Jacobian `det(dF/du, dF/dv, extrusion)`. A nonzero value proves this affine
+map is injective on its complete parameter space; zero identifies a singular
+map. This is a topological nondegeneracy sign, with no metric tolerance threshold.
+It is not a volume measurement or an achieved modelling-error estimate.
+
+The computation reuses exact homogeneous line embedding/placement and the exact
+scalar triple-product determinant. It never subtracts rounded world endpoints
+or multiplies transformed normals in binary64. Support origin and placement
+coefficients must all be finite even though translations do not affect the
+derivative. The unit-weight affine denominators remain positive powers of two,
+so the signed determinant is retained as an exact `DyadicBound`. No root search,
+sampling, new solver, tolerance adjustment or approximation is involved.
+
+The observation owns its support scalars, requested extrusion and copied face
+occurrence attribution. Unsupported supports and numerical input errors retain
+typed causes. The copy/sweep cancellation boundaries bracket this fixed-size
+calculation; completed evidence survives later failure and cancellation. A later
+mutation of either input or copied geometry cannot change retained scalars, but
+those scalars do not authorize the changed geometry. Receipt-local shape keys
+are neither persistent identities nor evidence of immutable published geometry.
+
+This is additive diagnostic evidence: existing operation behavior, requested
+limits, success policy and replay remain unchanged. The combined
+`PrismInjectivityAndSurfaceCharts` acceptance gap stays open until source
+correspondence, region validity and actual generated cap/side surface charts are
+proved together. No body can succeed on this scalar theorem alone. The owning
+issue #10 deletion and migration gate from ADR0014 still applies.
+
+Independent checks cover an oblique composite determinant of exactly 501,
+rounded matrix cancellation, every finite binary64 power-of-two scale,
+singular/tangent and near-tangent sweeps, actual face placement and handedness,
+unsupported support, scalar input errors, operation reuse, cancellation and
+source/copy mutation. The pure exact computation is also compared across eight
+threads. The [exact determinant receipt](evidence/prism-transversality/exact-oblique-determinant.json)
+records the independent FLINT rational calculation. Native fixtures remain
+historical replay only; no native captures were added.
+
 Run the private regressions with:
 
 ```sh

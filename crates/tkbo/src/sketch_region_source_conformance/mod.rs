@@ -6,6 +6,7 @@ mod membership;
 mod query;
 pub(crate) use query::{captured_map, source_query};
 mod types;
+pub(crate) use capture::capture_support;
 pub(crate) use capture::{capture_construction, capture_originals, capture_space_representation};
 pub(crate) use inspect::inspect_source_conformance;
 pub(crate) use membership::native_parameter_membership;

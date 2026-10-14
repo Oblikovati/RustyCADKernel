@@ -133,6 +133,7 @@ pub(crate) struct PrismCopiedSelection {
     pub relations: Vec<ArrangementRelation>,
 }
 pub(crate) struct PrismReceipt {
+    pub affine_chart: Option<super::affine_chart::PrismAffineChartObservation>,
     pub completion: PrismCompletion,
     pub phase: PrismPhase,
     pub limits: PrismLimits,

@@ -30,7 +30,11 @@ fn exact_vector3(vector: [f64; 3], index: usize) -> Result<[BigInt; 3], NonFinit
         exact_coordinate(vector[2], index, 2)?,
     ])
 }
-fn exact_triple_product(first: &[BigInt; 3], second: &[BigInt; 3], third: &[BigInt; 3]) -> BigInt {
+pub(super) fn exact_triple_product(
+    first: &[BigInt; 3],
+    second: &[BigInt; 3],
+    third: &[BigInt; 3],
+) -> BigInt {
     let cross: [BigInt; 3] = std::array::from_fn(|axis| {
         let next = (axis + 1) % 3;
         let last = (axis + 2) % 3;

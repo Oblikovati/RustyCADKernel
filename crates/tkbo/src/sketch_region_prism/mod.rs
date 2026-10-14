@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0014 retained private prism transaction; diagnostic output is never a healthy body.
+mod affine_chart;
+#[cfg(test)]
+mod affine_chart_tests;
 mod contexts;
 mod copying;
 mod history;
