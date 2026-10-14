@@ -29,3 +29,52 @@ fn baseline_row(name: &str, graph: &BRepGraph) -> String {
         definition.orientation.is_reversed
     )
 }
+#[test]
+fn explicit_legacy_entrypoints_retain_replay_and_null_status() {
+    use rustycad_tkbrep::brep_graph_inc::populate::{self, PCurveImportBehavior::LegacyLocalV1};
+    let moved = translated(&single_use_face());
+    let mut graph = BRepGraph::new();
+    let options = Options {
+        create_auto_product: false,
+        ..Options::default()
+    };
+    graph
+        .shapes_mut()
+        .add_with_options_and_behavior(&moved, &options, LegacyLocalV1)
+        .unwrap();
+    let expected = baseline_row("legacy", &graph);
+    populate::perform_with_behavior(&mut graph, &moved, false, &populate::Options, LegacyLocalV1)
+        .unwrap();
+    assert_eq!(baseline_row("legacy", &graph), expected);
+    assert_legacy_append_entries(&moved, &expected);
+    let result = populate::perform_with_behavior(
+        &mut graph,
+        &Shape::default(),
+        false,
+        &populate::Options,
+        LegacyLocalV1,
+    )
+    .unwrap();
+    assert_eq!(result, populate::BuildStatus::Failed);
+    assert_eq!(graph.topo().co_edges().nb(), 0);
+}
+fn assert_legacy_append_entries(shape: &Shape, expected: &str) {
+    use rustycad_tkbrep::brep_graph_inc::populate::{self, PCurveImportBehavior::LegacyLocalV1};
+    let mut graph = BRepGraph::new();
+    populate::append_with_behavior(&mut graph, shape, false, &populate::Options, LegacyLocalV1)
+        .unwrap();
+    assert_eq!(baseline_row("legacy", &graph), expected);
+    let mut graph = BRepGraph::new();
+    let mut roots = Vec::new();
+    populate::append_flattened_with_behavior(
+        &mut graph,
+        shape,
+        false,
+        &mut roots,
+        &populate::Options,
+        LegacyLocalV1,
+    )
+    .unwrap();
+    assert_eq!(baseline_row("legacy", &graph), expected);
+    assert_eq!(roots.len(), 1);
+}

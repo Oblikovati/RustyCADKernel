@@ -202,13 +202,14 @@ pub(super) fn extract_edge_definition(
 /// polygon on the FORWARD face and the polygon on the face's raw triangulation.
 pub(super) fn extract_edge_in_face(
     edge: &Edge,
+    pcurve_edge: &Edge,
     forward_face: &Face,
     triangulation: &Handle<Triangulation>,
     context: &FacePCurveContext,
     parent_location: &Location,
 ) -> Result<ExtractedEdge, Failure> {
     let mut data = extract_edge_definition(edge, parent_location)?;
-    if let Some((pcurve, first, last)) = extract_stored_pcurve(edge, context)? {
+    if let Some((pcurve, first, last)) = extract_stored_pcurve(pcurve_edge, context)? {
         data.pcurve2d = pcurve;
         data.pc_first = first;
         data.pc_last = last;

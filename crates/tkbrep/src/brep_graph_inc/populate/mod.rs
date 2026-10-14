@@ -10,6 +10,10 @@
 //! coedges in queue order, then synthesises natural-restriction boundaries.
 mod boundary_builder;
 mod context;
+mod entry;
+mod pcurve_behavior;
+pub use entry::{append_flattened_with_behavior, append_with_behavior, perform_with_behavior};
+pub use pcurve_behavior::PCurveImportBehavior;
 mod extract;
 mod face;
 mod locations;
@@ -62,17 +66,12 @@ pub fn perform(
     parallel: bool,
     options: &Options,
 ) -> Result<BuildStatus, Failure> {
-    graph.clear()?;
-    if shape.is_null() {
-        return Ok(BuildStatus::Failed);
-    }
-    build_topology(
+    perform_with_behavior(
         graph,
         shape,
         parallel,
-        TopologyBuildMode::FullHierarchy,
         options,
-        None,
+        PCurveImportBehavior::default(),
     )
 }
 
@@ -95,16 +94,13 @@ pub fn append_flattened(
     appended_roots: &mut Vec<NodeId>,
     options: &Options,
 ) -> Result<BuildStatus, Failure> {
-    if shape.is_null() {
-        return Ok(BuildStatus::Failed);
-    }
-    build_topology(
+    append_flattened_with_behavior(
         graph,
         shape,
         parallel,
-        TopologyBuildMode::Flattened,
+        appended_roots,
         options,
-        Some(appended_roots),
+        PCurveImportBehavior::default(),
     )
 }
 
@@ -126,16 +122,12 @@ pub fn append(
     parallel: bool,
     options: &Options,
 ) -> Result<BuildStatus, Failure> {
-    if shape.is_null() {
-        return Ok(BuildStatus::Failed);
-    }
-    build_topology(
+    append_with_behavior(
         graph,
         shape,
         parallel,
-        TopologyBuildMode::FullHierarchy,
         options,
-        None,
+        PCurveImportBehavior::default(),
     )
 }
 
@@ -148,6 +140,7 @@ fn build_topology(
     mode: TopologyBuildMode,
     _options: &Options,
     appended_roots: Option<&mut Vec<NodeId>>,
+    behavior: PCurveImportBehavior,
 ) -> Result<BuildStatus, Failure> {
     let supplement = graph.topo_supplement();
     let mut build = BuildContext::new(
@@ -159,12 +152,16 @@ fn build_topology(
             .map(|layer| layer as &dyn TopoSupplementHooks),
         appended_roots,
     );
-    run_topology_build(&mut build, shape)
+    run_topology_build(&mut build, shape, behavior)
 }
 
 // `runTopologyBuild`: traversal, face extraction, face registration and boundary
 // synthesis; warnings from unsupported natural boundaries or wire orders.
-fn run_topology_build(build: &mut BuildContext<'_>, root: &Shape) -> Result<BuildStatus, Failure> {
+fn run_topology_build(
+    build: &mut BuildContext<'_>,
+    root: &Shape,
+    behavior: PCurveImportBehavior,
+) -> Result<BuildStatus, Failure> {
     traverse::traverse_topology(build, root, &Location::default())?;
     let warning_status = |warn: bool| {
         if warn {
@@ -177,7 +174,7 @@ fn run_topology_build(build: &mut BuildContext<'_>, root: &Shape) -> Result<Buil
         return Ok(warning_status(build.has_wire_order_warnings));
     }
     let mut faces = std::mem::take(&mut build.pending_faces);
-    extract_all_faces(&mut faces, build.parallel)?;
+    extract_all_faces(&mut faces, build.parallel, behavior)?;
     let unsupported = faces.iter().any(|face| face.unsupported_natural_boundary);
     register::register_face_data(build, &faces)?;
     synthesize::synthesize_face_boundaries(build, &faces)?;
@@ -187,7 +184,11 @@ fn run_topology_build(build: &mut BuildContext<'_>, root: &Shape) -> Result<Buil
 
 // The `OSD_Parallel::For` over the queued faces; the error of the lowest failing face
 // is returned, so that parallel and sequential runs report the same failure.
-fn extract_all_faces(faces: &mut [FaceBuildData], parallel: bool) -> Result<(), Failure> {
+fn extract_all_faces(
+    faces: &mut [FaceBuildData],
+    parallel: bool,
+    behavior: PCurveImportBehavior,
+) -> Result<(), Failure> {
     let workload = Workload {
         primary_items: faces.len() as u32,
         ..Workload::default()
@@ -195,7 +196,7 @@ fn extract_all_faces(faces: &mut [FaceBuildData], parallel: bool) -> Result<(), 
     let is_parallel = ParallelPolicy::should_run(parallel, &workload);
     let first_error: Mutex<Option<(usize, Failure)>> = Mutex::new(None);
     let extract = |(index, face): (usize, &mut FaceBuildData)| {
-        let Err(error) = extract_face_data(face) else {
+        let Err(error) = extract_face_data(face, behavior) else {
             return;
         };
         let mut slot = first_error

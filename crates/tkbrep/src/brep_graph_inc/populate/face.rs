@@ -4,6 +4,7 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The per-face extraction of population: the independent work of the parallel phase.
+use super::PCurveImportBehavior;
 use super::extract::{ExtractedEdge, FacePCurveContext, extract_edge_in_face};
 use super::locations::{located_surface, located_triangulation};
 use crate::brep::BRepTool;
@@ -110,7 +111,10 @@ pub(super) fn has_infinite_required_bound(surface: &dyn GeomSurface) -> bool {
 /// `extractFaceData(theData)`: the definition-frame surface and triangulation, the
 /// tolerance, the wires of the FORWARD face with their edge uses in explorer order, and
 /// the natural-restriction flags of a face without wires.
-pub(super) fn extract_face_data(data: &mut FaceBuildData) -> Result<(), Failure> {
+pub(super) fn extract_face_data(
+    data: &mut FaceBuildData,
+    behavior: PCurveImportBehavior,
+) -> Result<(), Failure> {
     let face = data.face.clone();
     let face_parent = (&data.definition_location * &face.location().inverted()?)?;
     let (raw_surface, surface_location) = BRepTool::surface_with_location(&face)?;
@@ -135,7 +139,8 @@ pub(super) fn extract_face_data(data: &mut FaceBuildData) -> Result<(), Failure>
         }
         let wire = topods::Wire::unchecked(child);
         let explorer_face = raw_surface.is_some().then_some(&forward);
-        let extracted = extract_wire_in_face(data, &wire, &forward, &context, explorer_face)?;
+        let extracted =
+            extract_wire_in_face(data, &wire, &forward, &context, explorer_face, behavior)?;
         data.wires.push(extracted);
     }
     flag_natural_boundary(data, &face)
@@ -148,6 +153,7 @@ fn extract_wire_in_face(
     forward: &Face,
     context: &FacePCurveContext,
     explorer_face: Option<&Face>,
+    behavior: PCurveImportBehavior,
 ) -> Result<ExtractedWire, Failure> {
     let mut extracted = ExtractedWire {
         shape: wire.clone(),
@@ -160,8 +166,15 @@ fn extract_wire_in_face(
         }
         let edge = topods::Edge::unchecked(child);
         let location = extracted.definition_location.clone();
-        let edge_data =
-            extract_edge_in_face(&edge, forward, &data.raw_triangulation, context, &location)?;
+        let lookup = behavior.lookup_edge(&edge, forward, wire)?;
+        let edge_data = extract_edge_in_face(
+            &edge,
+            &lookup,
+            forward,
+            &data.raw_triangulation,
+            context,
+            &location,
+        )?;
         extracted.edges.push(edge_data);
     }
     extracted.has_partial_explorer_order = !order_extracted_wire(&mut extracted, explorer_face)?;
