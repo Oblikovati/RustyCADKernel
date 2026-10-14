@@ -23,7 +23,7 @@ pub(super) fn tolerance(
     join: &JoinedPrismProof,
     geometry: &JoinedPrismConformance,
     cap: StoredToleranceCap,
-) -> Result<JoinedPrismTolerance, JoinedToleranceFailure> {
+) -> Result<JoinedPrismTolerance, Box<JoinedToleranceFailure>> {
     certify_joined_prism_tolerances(join, geometry, cap, &mut NeverCancel)
 }
 pub(super) fn zero() -> rustycad_tkmath::predicates::roots::DyadicBound {

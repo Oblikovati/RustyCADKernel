@@ -16,30 +16,26 @@ pub(super) fn certify_joined_trims(
     for face in join.faces() {
         append_face_trims(join, face, work, progress)?;
     }
-    let contexts: BTreeSet<_> = work
-        .evidence
-        .trims
-        .iter()
-        .map(|row| row.occurrence.clone())
-        .collect();
+    complete_trim_contexts(join, work)
+}
+fn complete_trim_contexts(join: &JoinedPrismProof, work: &ConformanceWork) -> ConformanceCheck {
+    let contexts = trim_contexts(&work.evidence.trims);
     count(
         "complete directed trim proofs",
         work.evidence.trims.len(),
         6,
     )?;
-    let expected: BTreeSet<_> = join
-        .projection()
-        .incidence()
-        .coedges
-        .iter()
-        .map(|row| row.occurrence.clone())
-        .collect();
+    let coedges = &join.projection().incidence().coedges;
+    let expected: BTreeSet<_> = coedges.iter().map(|row| row.occurrence.clone()).collect();
     if contexts.len() != 6 || contexts != expected {
         return Err(JoinedConformanceCause::Mismatch {
             quantity: "joined trim and actual coedge bijection",
         });
     }
     Ok(())
+}
+fn trim_contexts(rows: &[JoinedTrimEvidence]) -> BTreeSet<FrozenUseKey> {
+    rows.iter().map(|row| row.occurrence.clone()).collect()
 }
 
 fn append_face_trims(
@@ -50,57 +46,76 @@ fn append_face_trims(
 ) -> ConformanceCheck {
     work.entity = Some(face.definition);
     work.occurrence = Some(face.occurrence.clone());
-    let actual: Vec<_> = join
-        .projection()
-        .faces()
-        .iter()
-        .filter(|row| row.key == face.definition)
-        .collect();
-    let actual = *one(&actual, "one captured face for joined trim identities")?;
+    let actual = bound_face(join, face.definition)?;
     trim_identity_coverage(actual, face.trims.len())?;
     for trim in &face.trims {
-        work.occurrence = Some(trim.occurrence.clone());
-        work.poll(progress)?;
-        let matching: Vec<_> = actual
-            .trims
-            .iter()
-            .filter(|row| row.occurrence == trim.occurrence)
-            .collect();
-        one(&matching, "one actual trim for joined exact identity")?;
-        work.evidence.trims.push(JoinedTrimEvidence {
-            face: face.definition,
-            occurrence: trim.occurrence.clone(),
-            squared_upper: DyadicBound::from_f64(0.).expect("exact zero"),
-        });
+        append_trim(actual, trim, work, progress)?;
     }
     Ok(())
 }
+fn bound_face(join: &JoinedPrismProof, key: FrozenPrismKey) -> ConformanceCheck<&FrozenPrismFace> {
+    let faces: Vec<_> = join
+        .projection()
+        .faces()
+        .iter()
+        .filter(|row| row.key == key)
+        .collect();
+    one(&faces, "one captured face for joined trim identities").copied()
+}
+fn append_trim(
+    actual: &FrozenPrismFace,
+    trim: &JoinedPrismTrim,
+    work: &mut ConformanceWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> ConformanceCheck {
+    work.occurrence = Some(trim.occurrence.clone());
+    work.poll(progress)?;
+    let matching: Vec<_> = actual
+        .trims
+        .iter()
+        .filter(|row| row.occurrence == trim.occurrence)
+        .collect();
+    one(&matching, "one actual trim for joined exact identity")?;
+    work.evidence
+        .trims
+        .push(zero_trim(actual.key, trim.occurrence.clone()));
+    Ok(())
+}
+fn zero_trim(face: FrozenPrismKey, occurrence: FrozenUseKey) -> JoinedTrimEvidence {
+    JoinedTrimEvidence {
+        face,
+        occurrence,
+        squared_upper: DyadicBound::from_f64(0.).expect("exact zero"),
+    }
+}
 
 fn trim_identity_coverage(face: &FrozenPrismFace, expected: usize) -> ConformanceCheck {
-    let pcurves = face
-        .proof
-        .identities
-        .iter()
-        .filter(|stage| **stage == PrismChartStage::TrimPCurve)
-        .count();
-    let curves = face
-        .proof
-        .identities
-        .iter()
-        .filter(|stage| **stage == PrismChartStage::TrimSpaceCurve)
-        .count();
-    count("actual pcurve identity coverage", pcurves, expected)?;
+    count(
+        "actual pcurve identity coverage",
+        stage_count(face, PrismChartStage::TrimPCurve),
+        expected,
+    )?;
     count(
         "actual trim role coverage",
         face.proof.trim_roles.len(),
         expected,
     )?;
-    if curves < expected {
+    space_identity_coverage(stage_count(face, PrismChartStage::TrimSpaceCurve), expected)
+}
+fn space_identity_coverage(actual: usize, expected: usize) -> ConformanceCheck {
+    if actual < expected {
         return Err(JoinedConformanceCause::Count {
             quantity: "actual space-curve identity coverage",
-            actual: curves,
+            actual,
             expected,
         });
     }
     Ok(())
+}
+fn stage_count(face: &FrozenPrismFace, stage: PrismChartStage) -> usize {
+    face.proof
+        .identities
+        .iter()
+        .filter(|actual| **actual == stage)
+        .count()
 }

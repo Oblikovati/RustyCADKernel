@@ -7,10 +7,10 @@ use crate::sketch_region_prism::frozen::proof_join::JoinedPrismProof;
 pub(crate) fn certify_joined_prism_conformance(
     join: &JoinedPrismProof,
     progress: &mut impl JoinedConformanceProgress,
-) -> Result<JoinedPrismConformance, JoinedConformanceFailure> {
+) -> Result<JoinedPrismConformance, Box<JoinedConformanceFailure>> {
     let mut work = ConformanceWork::new();
     if let Err(cause) = run_conformance(join, &mut work, progress) {
-        return Err(work.failed(cause, join));
+        return Err(Box::new(work.failed(cause, join)));
     }
     Ok(JoinedPrismConformance {
         binding: join.replay_bytes().to_vec(),
@@ -25,11 +25,7 @@ fn run_conformance(
     progress: &mut impl JoinedConformanceProgress,
 ) -> ConformanceCheck {
     work.phase(JoinedConformancePhase::Admission, progress)?;
-    count(
-        "raw directed body vertex contexts",
-        join.raw_vertices().len(),
-        12,
-    )?;
+    admit_raw_census(join)?;
     work.phase(JoinedConformancePhase::Placements, progress)?;
     super::joined_frames::certify_projection_frames(join.projection(), work, progress)?;
     work.phase(JoinedConformancePhase::Endpoints, progress)?;
@@ -39,4 +35,11 @@ fn run_conformance(
     work.phase(JoinedConformancePhase::Trims, progress)?;
     super::joined_trims::certify_joined_trims(join, work, progress)?;
     work.phase(JoinedConformancePhase::Commit, progress)
+}
+fn admit_raw_census(join: &JoinedPrismProof) -> ConformanceCheck {
+    count(
+        "raw directed body vertex contexts",
+        join.raw_vertices().len(),
+        12,
+    )
 }

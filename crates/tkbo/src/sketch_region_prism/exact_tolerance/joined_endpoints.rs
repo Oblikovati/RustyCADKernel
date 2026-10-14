@@ -14,16 +14,7 @@ pub(super) fn certify_body_endpoints(
 ) -> ConformanceCheck {
     for &(edge, first, last) in &join.projection().incidence().endpoints {
         let curve = endpoint_curve(join.projection(), edge)?;
-        for (vertex, side, parameter) in [
-            (first, CanonicalEndpointSide::First, curve.interval[0]),
-            (last, CanonicalEndpointSide::Last, curve.interval[1]),
-        ] {
-            let endpoint = EndpointObligation {
-                edge,
-                vertex,
-                side,
-                parameter,
-            };
+        for endpoint in obligations(edge, first, last, curve.interval) {
             append_endpoint(join, endpoint, curve, work, progress)?;
         }
     }
@@ -33,6 +24,23 @@ pub(super) fn certify_body_endpoints(
         6,
     )?;
     complete_raw_contexts(join, work)
+}
+fn obligations(
+    edge: FrozenPrismKey,
+    first: FrozenPrismKey,
+    last: FrozenPrismKey,
+    interval: [f64; 2],
+) -> [EndpointObligation; 2] {
+    [
+        (first, CanonicalEndpointSide::First, interval[0]),
+        (last, CanonicalEndpointSide::Last, interval[1]),
+    ]
+    .map(|(vertex, side, parameter)| EndpointObligation {
+        edge,
+        vertex,
+        side,
+        parameter,
+    })
 }
 
 fn append_endpoint(
@@ -46,26 +54,42 @@ fn append_endpoint(
     work.occurrence = None;
     work.poll(progress)?;
     let uses = endpoint_uses(join.projection(), join.raw_vertices(), endpoint, work)?;
+    work.evidence
+        .endpoints
+        .push(endpoint_evidence(endpoint, curve, &uses)?);
+    Ok(())
+}
+fn endpoint_evidence(
+    endpoint: EndpointObligation,
+    curve: &CapturedSpaceRepresentation,
+    uses: &[&proof_join::JoinedVertexOperand],
+) -> ConformanceCheck<JoinedEndpointEvidence> {
     let raw = uses[0];
+    let contexts = uses.iter().map(|row| row.occurrence.clone()).collect();
     let certificate =
-        certify_exact_endpoint(curve, endpoint.parameter, raw.local_point, raw.placement).map_err(
-            |cause| JoinedConformanceCause::Endpoint {
-                vertex: endpoint.vertex,
-                side: endpoint.side,
-                contexts: uses.iter().map(|row| row.occurrence.clone()).collect(),
-                cause: Box::new(cause),
-            },
-        )?;
-    work.evidence.endpoints.push(JoinedEndpointEvidence {
+        certify_exact_endpoint(curve, endpoint.parameter, raw.local_point, raw.placement)
+            .map_err(|cause| endpoint_failure(endpoint, uses, cause))?;
+    Ok(JoinedEndpointEvidence {
         edge: endpoint.edge,
         vertex: endpoint.vertex,
         side: endpoint.side,
         parameter: endpoint.parameter,
-        contexts: uses.iter().map(|row| row.occurrence.clone()).collect(),
+        contexts,
         local_point: raw.local_point,
         certificate,
-    });
-    Ok(())
+    })
+}
+fn endpoint_failure(
+    endpoint: EndpointObligation,
+    uses: &[&proof_join::JoinedVertexOperand],
+    cause: super::scalar::ExactEndpointFailure,
+) -> JoinedConformanceCause {
+    JoinedConformanceCause::Endpoint {
+        vertex: endpoint.vertex,
+        side: endpoint.side,
+        contexts: uses.iter().map(|row| row.occurrence.clone()).collect(),
+        cause: Box::new(cause),
+    }
 }
 
 fn endpoint_curve(
@@ -97,7 +121,13 @@ fn complete_raw_contexts(join: &JoinedPrismProof, work: &ConformanceWork) -> Con
         .flat_map(|row| row.contexts.iter().cloned())
         .collect();
     count("all directed raw endpoint proof contexts", actual.len(), 12)?;
-    if actual.into_iter().collect::<BTreeSet<_>>() != expected {
+    same_context_set(actual.into_iter().collect(), expected)
+}
+fn same_context_set(
+    actual: BTreeSet<FrozenUseKey>,
+    expected: BTreeSet<FrozenUseKey>,
+) -> ConformanceCheck {
+    if actual != expected {
         return Err(JoinedConformanceCause::Mismatch {
             quantity: "complete directed endpoint/raw-vertex bijection",
         });

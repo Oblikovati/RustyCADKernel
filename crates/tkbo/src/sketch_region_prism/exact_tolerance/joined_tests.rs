@@ -10,24 +10,7 @@ fn actual_join_has_complete_exact_raw_endpoint_closure_and_trim_evidence() {
     assert_eq!(proof.evidence().endpoints.len(), 6);
     assert_eq!(proof.evidence().closures.len(), 6);
     assert_eq!(proof.evidence().trims.len(), 6);
-    assert_eq!(
-        proof
-            .evidence()
-            .endpoints
-            .iter()
-            .map(|r| r.contexts.len())
-            .sum::<usize>(),
-        12
-    );
-    assert_eq!(
-        proof
-            .evidence()
-            .closures
-            .iter()
-            .map(|r| r.orientations.len())
-            .sum::<usize>(),
-        12
-    );
+    context_counts(&proof);
     exact_bounds(&proof);
 }
 fn exact_bounds(proof: &JoinedPrismConformance) {
@@ -60,16 +43,7 @@ fn metadata_report_and_refuse_retain_all_rows_after_reusing_geometry() {
             .sum::<usize>(),
         21
     );
-    let refusal = tolerance(&join, &geometry, StoredToleranceCap::refuse(0.).unwrap())
-        .err()
-        .unwrap();
-    assert_eq!(refusal.classification(), JoinedEvidenceClass::Failed);
-    assert_eq!(refusal.metadata.len(), 8);
-    assert!(matches!(
-        refusal.cause,
-        JoinedToleranceCause::RefusedCap { .. }
-    ));
-    assert!(tolerance(&join, &geometry, StoredToleranceCap::NoLimit).is_ok());
+    assert_caps(&join, &geometry);
 }
 #[test]
 fn independently_named_contact_join_cannot_reuse_another_conformance_proof() {
@@ -108,4 +82,38 @@ fn exact_policy_keeps_operation_budget_and_no_body_validity_promotion() {
     assert_eq!(metadata.cap(), StoredToleranceCap::NoLimit);
     assert_eq!(metadata.version(), 2);
     assert!(!join.projection().is_valid_body());
+}
+
+fn context_counts(proof: &JoinedPrismConformance) {
+    assert_eq!(
+        proof
+            .evidence()
+            .endpoints
+            .iter()
+            .map(|r| r.contexts.len())
+            .sum::<usize>(),
+        12
+    );
+    assert_eq!(
+        proof
+            .evidence()
+            .closures
+            .iter()
+            .map(|r| r.orientations.len())
+            .sum::<usize>(),
+        12
+    );
+}
+
+fn assert_caps(join: &JoinedPrismProof, geometry: &JoinedPrismConformance) {
+    let refusal = tolerance(join, geometry, StoredToleranceCap::refuse(0.).unwrap())
+        .err()
+        .unwrap();
+    assert_eq!(refusal.classification(), JoinedEvidenceClass::Failed);
+    assert_eq!(refusal.metadata.len(), 8);
+    assert!(matches!(
+        refusal.cause,
+        JoinedToleranceCause::RefusedCap { .. }
+    ));
+    assert!(tolerance(join, geometry, StoredToleranceCap::NoLimit).is_ok());
 }

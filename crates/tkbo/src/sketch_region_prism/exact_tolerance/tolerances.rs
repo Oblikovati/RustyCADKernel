@@ -15,14 +15,10 @@ pub(crate) fn certify_joined_prism_tolerances(
     conformance: &JoinedPrismConformance,
     cap: StoredToleranceCap,
     progress: &mut impl JoinedToleranceProgress,
-) -> Result<JoinedPrismTolerance, JoinedToleranceFailure> {
-    let mut work = MetadataWork {
-        phase: JoinedTolerancePhase::Admission,
-        entity: None,
-        metadata: Vec::new(),
-    };
+) -> Result<JoinedPrismTolerance, Box<JoinedToleranceFailure>> {
+    let mut work = MetadataWork::new();
     if let Err(cause) = inspect_metadata(join, conformance, cap, progress, &mut work) {
-        return Err(work.failure(join, cap, cause));
+        return Err(Box::new(work.failure(join, cap, cause)));
     }
     Ok(JoinedPrismTolerance {
         binding: join.replay_bytes().to_vec(),
@@ -43,15 +39,18 @@ fn inspect_metadata(
     if !conformance.binds(join) {
         return Err(JoinedToleranceCause::ConformanceBinding);
     }
-    // The shared request validates the world quantity but only observes raw metadata here.
-    let request = PrismToleranceRequest::new(cap, join.projection().limits().spatial_limit)
-        .expect("immutable joined operation already admitted its finite spatial request");
+    let request = metadata_request(join, cap);
     work.phase = JoinedTolerancePhase::Metadata;
     append_metadata(join.projection(), request, progress, work)?;
     refuse_caps(&work.metadata)?;
     work.phase = JoinedTolerancePhase::Commit;
     work.entity = None;
     work.poll(progress)
+}
+fn metadata_request(join: &JoinedPrismProof, cap: StoredToleranceCap) -> PrismToleranceRequest {
+    // The shared request validates the world quantity but only observes raw metadata here.
+    PrismToleranceRequest::new(cap, join.projection().limits().spatial_limit)
+        .expect("immutable joined operation already admitted its finite spatial request")
 }
 fn append_metadata(
     projection: &FrozenPrismProjection,
@@ -68,9 +67,12 @@ fn append_metadata(
         work.poll(progress)?;
         work.metadata.push(observe_node(projection, node, request)?);
     }
-    if work.metadata.len() != 8 {
+    complete_metadata_count(work.metadata.len())
+}
+fn complete_metadata_count(actual: usize) -> Result<(), JoinedToleranceCause> {
+    if actual != 8 {
         return Err(JoinedToleranceCause::Census {
-            actual: work.metadata.len(),
+            actual,
             expected: 8,
         });
     }
@@ -82,6 +84,14 @@ struct MetadataWork {
     metadata: Vec<JoinedToleranceMetadata>,
 }
 impl MetadataWork {
+    fn new() -> Self {
+        Self {
+            phase: JoinedTolerancePhase::Admission,
+            entity: None,
+            metadata: Vec::new(),
+        }
+    }
+
     fn poll(
         &self,
         progress: &mut impl JoinedToleranceProgress,

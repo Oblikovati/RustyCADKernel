@@ -8,12 +8,7 @@ pub(super) fn observe_node(
     node: &FrozenPrismNode,
     request: PrismToleranceRequest,
 ) -> Result<JoinedToleranceMetadata, JoinedToleranceCause> {
-    let raw = required(node.raw_tolerance, node.key, "raw stored entity tolerance")?;
-    let effective = required(
-        node.effective_tolerance,
-        node.key,
-        "effective compatibility accessor",
-    )?;
+    let (raw, effective) = raw_effective(node)?;
     let observation =
         request
             .observe(raw, effective)
@@ -21,17 +16,31 @@ pub(super) fn observe_node(
                 entity: node.key,
                 cause,
             })?;
-    let contexts = projection
-        .uses()
-        .iter()
-        .filter(|row| definition(&row.key) == Some(node.key))
-        .map(|row| row.key.clone())
-        .collect();
     Ok(JoinedToleranceMetadata {
         entity: node.key,
-        contexts,
+        contexts: metadata_contexts(projection, node.key),
         observation,
     })
+}
+fn raw_effective(node: &FrozenPrismNode) -> Result<(f64, f64), JoinedToleranceCause> {
+    let raw = required(node.raw_tolerance, node.key, "raw stored entity tolerance")?;
+    let effective = required(
+        node.effective_tolerance,
+        node.key,
+        "effective compatibility accessor",
+    )?;
+    Ok((raw, effective))
+}
+fn metadata_contexts(
+    projection: &FrozenPrismProjection,
+    entity: FrozenPrismKey,
+) -> Vec<FrozenUseKey> {
+    projection
+        .uses()
+        .iter()
+        .filter(|row| definition(&row.key) == Some(entity))
+        .map(|row| row.key.clone())
+        .collect()
 }
 fn required(
     value: Option<f64>,

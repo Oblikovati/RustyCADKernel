@@ -30,29 +30,14 @@ fn immutable_certificate_types_are_send_sync() {
     send_sync::<JoinedPrismTolerance>();
     send_sync::<JoinedConformanceFailure>();
     send_sync::<JoinedToleranceFailure>();
+    send_sync::<JoinedConformanceCause>();
+    send_sync::<JoinedToleranceCause>();
 }
 #[test]
 fn replay_distinguishes_explicit_caps_signed_zero_and_option_tags() {
     let join = JoinFixture::new().compose(|| false).ok().unwrap();
     let geometry = conformance(&join);
-    let encode = |cap| {
-        tolerance(&join, &geometry, cap)
-            .ok()
-            .unwrap()
-            .replay_bytes()
-    };
-    assert_ne!(
-        encode(StoredToleranceCap::report(0.).unwrap()),
-        encode(StoredToleranceCap::report(-0.).unwrap())
-    );
-    assert_ne!(
-        encode(StoredToleranceCap::report(1.).unwrap()),
-        encode(StoredToleranceCap::refuse(1.).unwrap())
-    );
-    assert_ne!(
-        encode(StoredToleranceCap::NoLimit),
-        encode(StoredToleranceCap::report(1.).unwrap())
-    );
+    distinct_cap_receipts(&join, &geometry);
 }
 #[test]
 fn independently_owned_proofs_survive_live_body_metadata_mutation() {
@@ -63,24 +48,7 @@ fn independently_owned_proofs_survive_live_body_metadata_mutation() {
         .ok()
         .unwrap();
     let before = metadata.replay_bytes();
-    let vertex = fixture
-        .receipt
-        .diagnostic
-        .as_ref()
-        .unwrap()
-        .bindings
-        .iter()
-        .find(|row| {
-            row.context.occurrence.shape_type().ok()
-                == Some(rustycad_tkg3d::top_abs::ShapeEnum::Vertex)
-        })
-        .unwrap();
-    rustycad_tkbrep::brep::access::vertex_tshape(
-        &vertex.context.occurrence,
-        "exact tolerance isolation test",
-    )
-    .unwrap()
-    .set_tolerance(0.125);
+    mutate_body_metadata(&fixture);
     assert_eq!(metadata.replay_bytes(), before);
     assert!(fixture.rebind(&join).is_err());
     assert!(geometry.binds(&join));
@@ -100,4 +68,41 @@ fn every_optional_limit_numeric_bit_and_presence_is_retained() {
     assert_ne!(positive, encode(limits));
     limits.achieved_error = None;
     assert_ne!(positive, encode(limits));
+}
+
+fn mutate_body_metadata(fixture: &JoinFixture) {
+    let vertex = fixture
+        .receipt
+        .diagnostic
+        .as_ref()
+        .unwrap()
+        .bindings
+        .iter()
+        .find(|row| {
+            row.context.occurrence.shape_type().ok()
+                == Some(rustycad_tkg3d::top_abs::ShapeEnum::Vertex)
+        })
+        .unwrap();
+    rustycad_tkbrep::brep::access::vertex_tshape(
+        &vertex.context.occurrence,
+        "exact tolerance isolation test",
+    )
+    .unwrap()
+    .set_tolerance(0.125);
+}
+
+fn distinct_cap_receipts(join: &JoinedPrismProof, geometry: &JoinedPrismConformance) {
+    let encode = |cap| tolerance(join, geometry, cap).ok().unwrap().replay_bytes();
+    assert_ne!(
+        encode(StoredToleranceCap::report(0.).unwrap()),
+        encode(StoredToleranceCap::report(-0.).unwrap())
+    );
+    assert_ne!(
+        encode(StoredToleranceCap::report(1.).unwrap()),
+        encode(StoredToleranceCap::refuse(1.).unwrap())
+    );
+    assert_ne!(
+        encode(StoredToleranceCap::NoLimit),
+        encode(StoredToleranceCap::report(1.).unwrap())
+    );
 }

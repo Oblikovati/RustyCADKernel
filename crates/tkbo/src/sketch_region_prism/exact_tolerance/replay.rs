@@ -38,14 +38,7 @@ impl JoinedPrismTolerance {
     }
 }
 fn conformance_rows(value: &JoinedConformanceEvidence, bytes: &mut Vec<u8>) {
-    for count in [
-        value.placements.len(),
-        value.endpoints.len(),
-        value.closures.len(),
-        value.trims.len(),
-    ] {
-        bytes.extend((count as u64).to_le_bytes());
-    }
+    row_counts(value, bytes);
     for row in &value.placements {
         encode_joined_text(
             &format!("{:?}/{:?}/{:?}", row.entity, row.occurrence, row.role),
@@ -60,11 +53,24 @@ fn conformance_rows(value: &JoinedConformanceEvidence, bytes: &mut Vec<u8>) {
         closure(row, bytes);
     }
     for row in &value.trims {
-        encode_joined_text(
-            &format!("{:?}/{:?}/{}", row.face, row.occurrence, row.squared_upper),
-            bytes,
-        );
+        trim(row, bytes);
     }
+}
+fn row_counts(value: &JoinedConformanceEvidence, bytes: &mut Vec<u8>) {
+    for count in [
+        value.placements.len(),
+        value.endpoints.len(),
+        value.closures.len(),
+        value.trims.len(),
+    ] {
+        bytes.extend((count as u64).to_le_bytes());
+    }
+}
+fn trim(row: &JoinedTrimEvidence, bytes: &mut Vec<u8>) {
+    encode_joined_text(
+        &format!("{:?}/{:?}/{}", row.face, row.occurrence, row.squared_upper),
+        bytes,
+    );
 }
 fn frame(value: &UsableToleranceFrame, bytes: &mut Vec<u8>) {
     encode_frozen_placement(value.placement, bytes);

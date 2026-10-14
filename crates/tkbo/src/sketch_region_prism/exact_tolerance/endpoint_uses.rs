@@ -27,11 +27,7 @@ pub(super) fn endpoint_uses<'a>(
     {
         rows.push(edge_endpoint_use(projection, raw, edge, endpoint, work)?);
     }
-    count(
-        "two directed uses of each canonical endpoint",
-        rows.len(),
-        2,
-    )?;
+    endpoint_use_count(rows.len())?;
     equivalent_uses(&rows)?;
     Ok(rows)
 }
@@ -115,4 +111,8 @@ pub(super) fn actual_use<'a>(
 
 pub(super) fn definition(key: &FrozenUseKey) -> Option<FrozenPrismKey> {
     key.0.last().map(|(definition, _)| *definition)
+}
+
+fn endpoint_use_count(actual: usize) -> ConformanceCheck {
+    count("two directed uses of each canonical endpoint", actual, 2)
 }
