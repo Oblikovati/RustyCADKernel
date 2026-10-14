@@ -14,6 +14,7 @@ mod hypothesis_tests;
 mod inspect;
 mod rebind;
 mod source;
+mod two_loop;
 mod types;
 use super::*;
 use crate::sketch_region::ArrangementSource;
