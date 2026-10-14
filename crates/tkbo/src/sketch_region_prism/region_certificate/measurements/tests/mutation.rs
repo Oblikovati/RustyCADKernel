@@ -13,7 +13,10 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkmath::gp::Point3;
 
-pub(super) fn live_face(receipt: &PrismReceipt, role: PrismImageRole) -> Face {
+pub(in crate::sketch_region_prism::region_certificate) fn live_face(
+    receipt: &PrismReceipt,
+    role: PrismImageRole,
+) -> Face {
     let diagnostic = receipt.diagnostic.as_ref().unwrap();
     let binding = diagnostic
         .bindings
@@ -46,7 +49,11 @@ fn edited_original_copy_and_side_never_reuse_measured_coefficients() {
         assert_encloses(original.measures.first_cap.enclosure(), 2.4);
     }
 }
-pub(super) fn edit_target(target: usize, shapes: &[Shape], receipt: &PrismReceipt) {
+pub(in crate::sketch_region_prism::region_certificate) fn edit_target(
+    target: usize,
+    shapes: &[Shape],
+    receipt: &PrismReceipt,
+) {
     match target {
         0 => set_pole(&edge(&shapes[0]).unwrap(), 5.),
         1 => set_pole(

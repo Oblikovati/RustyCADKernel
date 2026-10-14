@@ -49,7 +49,12 @@ side-direction identity is E=-h times the placed stored direction. Never assume
 that the stored surface's second parameter equals normalized sweep parameter s.
 
 Run `certify_bezier_regularity` on the fresh Generated chart's actual captured
-source poles, optional weights, placement and full native interval. Reuse the
+source poles, placement and full native interval. Version 1 admits only a stored
+polynomial boundary (`weights=None`). Any explicit stored weight array, including
+uniform weights, is refused with its occurrence key and weights retained in a
+typed `PolynomialRequired` cause. The shared Jordan/chart proofs admit some
+positive rational inputs, but that broader domain does not widen this theorem.
+Rational theorem admission requires a separate reviewed scope decision. Reuse the
 existing source/copy/chart identities to bind that report to the Jordan boundary
 and the actual extrusion basis. An unrelated retained regularity report or a
 retained success flag supplies no evidence. A stationary or everywhere-stationary

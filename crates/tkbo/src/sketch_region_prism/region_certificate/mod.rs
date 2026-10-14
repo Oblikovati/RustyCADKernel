@@ -141,6 +141,8 @@ pub(crate) use measurements::{
 #[cfg(test)]
 mod embedding_baseline_tests;
 
+pub(crate) mod embedding;
+
 #[allow(unused_imports)]
 pub(crate) use measurements::{
     CompletePrismMeasureInspection, CompletePrismMeasureOptions,

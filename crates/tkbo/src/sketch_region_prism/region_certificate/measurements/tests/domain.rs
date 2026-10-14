@@ -14,7 +14,7 @@ fn generated_scaled_reversed_boundaries_keep_closed_form_world_measures() {
         assert_measure_bits(&measured, scale, 2.);
     }
 }
-pub(super) fn with_request(
+pub(in crate::sketch_region_prism::region_certificate) fn with_request(
     bridge: &PairedContactTransaction,
     shapes: &[rustycad_tkbrep::topods::Shape],
     request: PrismRequest,
