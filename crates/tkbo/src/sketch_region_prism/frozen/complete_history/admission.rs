@@ -27,6 +27,7 @@ pub(super) fn admit(request: &PrismHistoryRequest<'_>) -> HistoryCheck<()> {
             .len(),
         ids.len(),
     )?;
+    budget::admit(request)?;
     preflight(request)
 }
 fn preflight(request: &PrismHistoryRequest<'_>) -> HistoryCheck<()> {

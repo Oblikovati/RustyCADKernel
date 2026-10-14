@@ -55,3 +55,8 @@ pub(crate) use operation::{
 };
 mod admission;
 mod diagnostics;
+#[cfg(test)]
+mod adversarial_tests;
+mod budget;
+#[cfg(test)]
+mod operation_tests;
