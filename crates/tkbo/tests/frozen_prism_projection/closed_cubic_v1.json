@@ -1,0 +1,146 @@
+{
+  "schema": "martensite.frozen-prism-owned-fixture.v1",
+  "basis_revision": "2543ec6d0ccce52f6e9c6811eb61a003532afd04",
+  "oracle_kinds": [
+    "independent closed-cell incidence",
+    "independent polynomial formulas",
+    "reviewed stored chart baseline"
+  ],
+  "authored_ids": {
+    "operation": 700,
+    "region": 701,
+    "wire": 702,
+    "curve": 703,
+    "endpoint": 704,
+    "region_wire_use": 710,
+    "boundary_curve_use": 711,
+    "curve_start_use": 712,
+    "curve_end_use": 713
+  },
+  "polynomial_poles": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      4,
+      0,
+      0
+    ],
+    [
+      0,
+      4,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "extrusion": [
+    0,
+    0,
+    2
+  ],
+  "physical_formulas": {
+    "curve": [
+      "12*t*(1-t)^2",
+      "12*t^2*(1-t)",
+      "0"
+    ],
+    "side": "C(t)+s*[0,0,2], 0<=t,s<=1",
+    "conditional_signed_area": "12/5",
+    "conditional_signed_sweep_measure": "24/5"
+  },
+  "incidence": {
+    "vertices": 2,
+    "edges": 3,
+    "coedges": 6,
+    "wires": 3,
+    "faces": 3,
+    "shells": 1,
+    "solids": 1,
+    "cap_coedges_each": 1,
+    "side_coedges": 4,
+    "edge_face_uses_each": 2,
+    "euler": 2
+  },
+  "stored_chart_baseline": {
+    "source": "crates/tkbo/src/sketch_region_prism/surface_charts/expected_tests.rs at basis_revision",
+    "side_direction": [
+      0,
+      0,
+      -1
+    ],
+    "side_height": 2,
+    "cap_heights": [
+      0,
+      2
+    ],
+    "side_trim_roles": {
+      "First": {
+        "origin": [
+          0,
+          0
+        ],
+        "direction": [
+          1,
+          0
+        ],
+        "interval": [
+          0,
+          1
+        ]
+      },
+      "Last": {
+        "origin": [
+          0,
+          -2
+        ],
+        "direction": [
+          1,
+          0
+        ],
+        "interval": [
+          0,
+          1
+        ]
+      },
+      "Start": {
+        "origin": [
+          0,
+          0
+        ],
+        "direction": [
+          0,
+          -1
+        ],
+        "interval": [
+          0,
+          2
+        ]
+      },
+      "End": {
+        "origin": [
+          1,
+          0
+        ],
+        "direction": [
+          0,
+          -1
+        ],
+        "interval": [
+          0,
+          2
+        ]
+      }
+    }
+  },
+  "exclusions": [
+    "No live OCCT execution",
+    "Euler and scalar integrals are not body-validity proofs",
+    "Authored IDs are semantic fixture declarations, never return-order or coordinate ranks"
+  ]
+}
