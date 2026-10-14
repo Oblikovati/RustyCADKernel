@@ -32,6 +32,7 @@ mod view_gui_composition;
 mod view_gui_layer;
 mod view_scene;
 mod view_target;
+mod view_window_lifecycle;
 pub use driver::Graphic3dRenderDriver;
 pub use driver_view::Graphic3dRenderView;
 

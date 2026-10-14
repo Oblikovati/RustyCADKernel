@@ -5,7 +5,7 @@ use crate::aspect::{
     ASPECT_VKEY_FLAGS_ALT, ASPECT_VKEY_FLAGS_CTRL, ASPECT_VKEY_FLAGS_NONE, ASPECT_VKEY_FLAGS_SHIFT,
     ASPECT_VKEY_MOUSE_LEFT_BUTTON, ASPECT_VKEY_MOUSE_MIDDLE_BUTTON, ASPECT_VKEY_MOUSE_NONE,
     ASPECT_VKEY_MOUSE_RIGHT_BUTTON, AspectScrollDelta, AspectVKey, AspectVKeyBasic as K,
-    AspectVKeyFlags, AspectVKeyMouse, AspectWindowInputListener,
+    AspectVKeyFlags, AspectVKeyMouse, AspectWindow as _, AspectWindowInputListener,
     AspectWindowInputListenerMembers as _, AspectXAtom,
 };
 use crate::xlib::{XwXEvent, keysym as ks, xconst as x, xlib};
@@ -104,6 +104,8 @@ impl XwWindow {
     ) -> Result<bool, Failure> {
         let window = self.fields.read().x_window;
         match event.event_type() {
+            x::DestroyNotify => Ok(self.process_destroyed_window(listener, event)),
+            _ if self.native_window_closure().is_some() => Ok(false),
             x::ClientMessage => Ok(self.process_client(listener, event, window)),
             x::FocusIn | x::FocusOut => {
                 if event.any_window() == window {
@@ -130,6 +132,19 @@ impl XwWindow {
             x::MotionNotify => self.process_motion(listener, event, window),
             _ => Ok(false),
         }
+    }
+    fn process_destroyed_window(
+        &self,
+        listener: &mut dyn AspectWindowInputListener,
+        event: &XwXEvent,
+    ) -> bool {
+        let Some(notify) = self.retire_destroyed_window(event.destroyed_window()) else {
+            return false;
+        };
+        if notify {
+            listener.process_close();
+        }
+        true
     }
     /// The close request of the window manager.
     fn process_client(

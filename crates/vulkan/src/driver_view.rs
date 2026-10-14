@@ -76,21 +76,19 @@ impl Graphic3dRenderView {
     }
     /// Read the last frame or its error; `render_view.capture()?` never conceals a failed redraw.
     pub fn capture(&self) -> Result<FrameCapture, RenderError> {
-        if self.is_removed() {
-            return Err(rejected("removed view", "a live view capture"));
-        }
-        let requires_extent = self.gui_layers.read().packet.is_some();
-        let extent = requires_extent
-            .then(|| capture_extent(self, self.limit))
-            .transpose()?;
+        self.require_capture_target()?;
+        let extent = self.gui_capture_extent()?;
         let gui = self.gui_layers.read();
         if let Some(extent) = extent {
             gui.snapshot(extent)?;
         }
-        self.outcome
+        let outcome = self
+            .outcome
             .read()
             .clone()
-            .unwrap_or_else(|| Err(rejected("no redraw", "a successfully rendered view")))
+            .unwrap_or_else(|| Err(rejected("no redraw", "a successfully rendered view")));
+        self.require_capture_target()?;
+        outcome
     }
     /// Render the current view and retain errors for void Graphic3d callbacks; `render_view.try_redraw()?`.
     pub fn try_redraw(&self) -> Result<(), RenderError> {
@@ -101,15 +99,10 @@ impl Graphic3dRenderView {
     fn publish_gui_outcome(
         &self,
         epoch: &std::sync::Arc<()>,
-        mut outcome: Result<FrameCapture, RenderError>,
+        outcome: Result<FrameCapture, RenderError>,
     ) -> Result<(), RenderError> {
         let gui = self.gui_layers.read();
-        if !std::sync::Arc::ptr_eq(epoch, &gui.epoch) {
-            outcome = Err(rejected(
-                "GUI changed during rendering",
-                "a redraw with an unchanged GUI packet",
-            ));
-        }
+        let outcome = self.check_publication_target(&gui.epoch, epoch, outcome);
         let result = outcome.as_ref().map(|_| ()).map_err(Clone::clone);
         *self.outcome.write() = Some(outcome);
         self.update_gui_redraw_status(result.is_ok());
@@ -123,6 +116,7 @@ impl Graphic3dRenderView {
         }
     }
     fn render_current(&self) -> Result<FrameCapture, RenderError> {
+        self.require_native_target(AspectNativeWindowOperation::Redraw)?;
         if !self.is_defined() || self.is_removed() {
             return Err(rejected("undefined or removed view", "a defined live view"));
         }
@@ -175,7 +169,7 @@ impl Graphic3dRenderView {
         }
         result
     }
-    fn release_presenter(&self) {
+    pub(crate) fn release_presenter(&self) {
         let _device = self.device.write();
         self.presenter.write().take();
     }
@@ -203,6 +197,9 @@ impl Graphic3dCView for Graphic3dRenderView {
         let _ = self.try_redraw();
     }
     fn resized(&self) {
+        if self.reject_closed_resize() {
+            return;
+        }
         if self.gui_layers.write().resized() {
             self.invalidate_gui_capture();
         }
@@ -223,7 +220,7 @@ impl Graphic3dCView for Graphic3dRenderView {
             )
         });
         self.retained.set_window(parent, window, context);
-        self.invalidate();
+        self.invalidate_window_binding();
     }
     fn buffer_dump(&self, image: &ImagePixMap, kind: &Graphic3dBufferType) -> bool {
         self.capture()
@@ -260,3 +257,7 @@ impl Graphic3dCView for Graphic3dRenderView {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "view_binding_tests.rs"]
+mod view_binding_tests;

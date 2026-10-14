@@ -203,3 +203,32 @@ fn x_window_pointer_failures_stop_before_processing_input() {
     assert!(window.process_message(&mut listener, &mut motion).is_err());
     assert!(listener.events.is_empty());
 }
+
+/// A destruction event keeps its parent and destroyed XID distinct on 64-bit Linux.
+#[cfg(target_os = "linux")]
+fn destroyed_window_event(parent: u64, destroyed: u64) -> XwXEvent {
+    let mut bytes = [0u8; XwXEvent::SIZE];
+    bytes[0..4].copy_from_slice(&17_i32.to_ne_bytes());
+    bytes[32..40].copy_from_slice(&parent.to_ne_bytes());
+    bytes[40..48].copy_from_slice(&destroyed.to_ne_bytes());
+    XwXEvent::from_bytes(&bytes)
+}
+
+#[cfg(target_os = "linux")]
+#[test]
+fn delivered_destroy_matches_target_and_notifies_close_once() {
+    let Ok(display) = AspectDisplayConnection::new() else { return; };
+    let display = Handle::new(display);
+    let owner = XwWindow::create(&display, "destroy event", 0, 0, 16, 16).unwrap();
+    let window = XwWindow::wrap(&display, owner.native_handle(), 0).unwrap();
+    let original = window.native_handle();
+    let mut listener = RecordingInputListener::default();
+    let mut foreign = destroyed_window_event(original, original + 1);
+    assert!(!window.process_message(&mut listener, &mut foreign).unwrap());
+    let mut destroyed = destroyed_window_event(original + 1, original);
+    assert!(window.process_message(&mut listener, &mut destroyed).unwrap());
+    assert!(window.process_message(&mut listener, &mut destroyed).unwrap());
+    assert_eq!(listener.events, ["close"]);
+    assert_eq!(window.native_window_closure().unwrap().original_handle, original);
+    assert_eq!(window.native_handle(), 0);
+}

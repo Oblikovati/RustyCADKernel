@@ -31,6 +31,11 @@ impl GuiLayerSlot {
         self.packet.as_ref()?;
         self.replace(None)
     }
+    /// Even model-only pending frames need a new generation (6e50a8f76); `slot.invalidate_binding()`.
+    pub fn invalidate_binding(&mut self) {
+        self.stale = self.packet.is_some();
+        self.epoch = Arc::new(());
+    }
     pub fn resized(&mut self) -> bool {
         if self.packet.is_none() {
             return false;
@@ -110,6 +115,7 @@ mod tests {
         let mut slot = GuiLayerSlot::default();
         let initial = slot.epoch.clone();
         assert!(!slot.resized());
+        assert!(Arc::ptr_eq(&initial, &slot.epoch));
         assert!(slot.retire_removed().is_none());
         slot.replace(Some(packet.clone()));
         assert!(!Arc::ptr_eq(&initial, &slot.epoch));
