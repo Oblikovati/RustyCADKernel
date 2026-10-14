@@ -30,10 +30,24 @@ mod wf_shape_edges;
 mod wf_shape_vertices;
 pub use wf_shape_edges::StdPrsWfShape;
 
+mod hlr_shape;
+mod pole_presentations;
 mod shaded_shape_volumes;
 mod shape_planarity;
+mod wf_restricted_face;
+mod wf_surface;
+/// `StdPrs_BndBox`: the bounding box presentation, an alias of `Prs3d_BndBox`.
+pub type StdPrsBndBox = crate::prs3d::Prs3dBndBox;
+pub use hlr_shape::{
+    StdPrsHlrPolyShape, StdPrsHlrShape, StdPrsHlrShapeI, StdPrsHlrToolShape, std_prs_hlr_projector,
+};
+pub use pole_presentations::{
+    StdPrsPoleCurve, StdPrsShadedSurface, StdPrsToolVertex, StdPrsWfPoleSurface,
+};
 pub use shaded_shape_volumes::StdPrsVolume;
 pub use shape_planarity::StdPrsShapeTool;
+pub use wf_restricted_face::{StdPrsWfDeflectionRestrictedFace, StdPrsWfRestrictedFace};
+pub use wf_surface::{StdPrsWfDeflectionSurface, StdPrsWfSurface};
 
 mod shaded_shape_boundaries;
 mod shaded_shape_presentation;

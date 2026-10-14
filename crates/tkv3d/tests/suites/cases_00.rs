@@ -151,6 +151,8 @@ pub mod std_select_filters;
 pub mod stdprs_curve;
 #[path = "../stdprs_deflection.rs"]
 pub mod stdprs_deflection;
+#[path = "../stdprs_faces.rs"]
+pub mod stdprs_faces;
 #[path = "../texture_retirement_chain.rs"]
 pub mod texture_retirement_chain;
 #[path = "../texture_retirement_projection.rs"]
