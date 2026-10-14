@@ -13,7 +13,7 @@ use rustycad_tkg3d::geom::{
     GeomBezierCurve, GeomCurve, GeomPlane, GeomSurfaceOfLinearExtrusion, GeomSweptSurface,
 };
 
-pub(super) fn capture_chart(
+pub(in crate::sketch_region_prism) fn capture_chart(
     binding: &PrismImageBinding,
     bindings: &[PrismImageBinding],
     extrusion: [f64; 3],

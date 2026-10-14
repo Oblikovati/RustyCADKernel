@@ -12,7 +12,7 @@ mod sources;
 mod trim_binding;
 mod trim_capture;
 mod types;
-pub(super) use capture::capture_bezier_edge;
+pub(super) use capture::{capture_bezier_edge, capture_chart};
 pub(super) use inspection::retain_surface_charts;
 pub(super) use sources::capture_sources;
 pub(crate) use types::*;
@@ -29,7 +29,7 @@ mod replay_tests;
 #[cfg(test)]
 mod tests;
 
-fn prove_chart(
+pub(super) fn prove_chart(
     chart: &CapturedSurfaceChart,
     role: super::PrismImageRole,
     cancelled: &mut impl FnMut() -> bool,
