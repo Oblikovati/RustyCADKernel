@@ -4,13 +4,13 @@ use rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding;
 use rustycad_tkmath::predicates::{NonFiniteCoordinate, compare_scalar_triple_product_3d};
 use std::cmp::Ordering;
 
-pub(super) struct UsableToleranceFrame {
+pub(crate) struct UsableToleranceFrame {
     pub placement: MetricEmbedding<3>,
     pub unscaled_determinant_sign: Ordering,
 }
 
 #[derive(Debug, PartialEq)]
-pub(super) enum ToleranceFrameFailure {
+pub(crate) enum ToleranceFrameFailure {
     Origin { axis: usize, actual: f64 },
     Scale { actual: f64 },
     Matrix(NonFiniteCoordinate),

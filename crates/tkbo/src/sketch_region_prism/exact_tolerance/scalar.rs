@@ -7,12 +7,12 @@ use crate::sketch_region_source_conformance::{
 use rustycad_tkmath::predicates::roots::{DyadicBound, RootIsolationOptions, metric_bounds::*};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(super) enum EndpointFrameRole {
+pub(crate) enum EndpointFrameRole {
     CurveRepresentation,
     VertexOccurrence,
 }
 
-pub(super) enum ExactEndpointFailure {
+pub(crate) enum ExactEndpointFailure {
     Frame {
         role: EndpointFrameRole,
         cause: ToleranceFrameFailure,
@@ -20,7 +20,7 @@ pub(super) enum ExactEndpointFailure {
     Residual(TransportedResidualReport),
 }
 
-pub(super) struct ExactEndpointCertificate {
+pub(crate) struct ExactEndpointCertificate {
     pub curve_frame: UsableToleranceFrame,
     pub vertex_frame: UsableToleranceFrame,
     pub requested_spatial: f64,

@@ -4,7 +4,7 @@ use super::scalar::*;
 use crate::sketch_region_source_conformance::with_captured_point_comparator;
 use rustycad_tkmath::predicates::roots::{DyadicBound, metric_bounds::*};
 
-pub(super) enum ExactClosureFailure {
+pub(crate) enum ExactClosureFailure {
     SourceBounds { actual: [DyadicBound; 2] },
     Endpoint(Box<ExactEndpointFailure>),
 }
