@@ -34,9 +34,17 @@ fn denominator_root_is_not_geometry_or_success_and_owned_sources_survive_repair(
     let repaired = source(&controls, None);
     let invalid = source(&controls, Some(&[1., 0., -1.]));
     controls.fill([f64::NAN, f64::NAN]);
+    let failure = run([a.clone(), invalid]).err().unwrap();
     assert!(matches!(
-        run([a.clone(), invalid]),
-        Err(PairOperationFailure::DenominatorRoots(_))
+        failure,
+        PairOperationFailure::SourceDomain {
+            source_index: 1,
+            ..
+        }
+    ));
+    assert!(matches!(
+        failure.original_cause(),
+        PairOperationFailure::DenominatorRoots(_)
     ));
     assert_eq!(run([a, repaired]).unwrap().contacts.len(), 1);
 }

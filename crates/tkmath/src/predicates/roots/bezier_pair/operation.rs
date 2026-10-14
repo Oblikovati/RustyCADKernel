@@ -223,8 +223,8 @@ fn checked_equations(
     ),
     PairOperationFailure,
 > {
-    let left = super::source_certificate::certify(&sources[0], options, budget, cancelled)?;
-    let right = super::source_certificate::certify(&sources[1], options, budget, cancelled)?;
+    let left = certify_source_domain(sources, 0, options, budget, cancelled)?;
+    let right = certify_source_domain(sources, 1, options, budget, cancelled)?;
     let equations = PairedEquations::derive(&left.homogeneous, &right.homogeneous, cancelled)
         .map_err(PairOperationFailure::Root)?;
     let equations = divide_if_self(equations, self_domain, cancelled)?;
@@ -325,4 +325,15 @@ fn admitted_signs(
     options
         .effective(projection, self_domain)
         .map_err(PairOperationFailure::SignPolicy)
+}
+
+fn certify_source_domain(
+    sources: &[OwnedBezierSource; 2],
+    source_index: usize,
+    options: RootIsolationOptions,
+    budget: &super::work_budget::PairWorkBudget,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<super::source_certificate::SourceCertificate, PairOperationFailure> {
+    super::source_certificate::certify(&sources[source_index], options, budget, cancelled)
+        .map_err(|cause| super::operation_failure::source_domain_failure(source_index, cause))
 }

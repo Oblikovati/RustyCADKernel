@@ -14,6 +14,13 @@ pub(super) struct OwnedBezierSource {
 #[derive(Clone, Debug, PartialEq)]
 /// Original capture or exact homogeneous-conversion cause.
 pub enum PairSourceFailure {
+    /// Captured curve ordinal and unchanged original capture cause.
+    Curve {
+        /// Input curve ordinal, zero or one.
+        curve_index: usize,
+        /// Unchanged original failure.
+        cause: Box<PairSourceFailure>,
+    },
     /// Empty controls; expected at least one Bernstein control.
     EmptyControls,
     /// Weight count differs from the actual control count.
@@ -141,6 +148,12 @@ fn positive_gcd(left: BigInt, right: &BigInt) -> BigInt {
     left
 }
 
+pub(super) fn capture_context(curve_index: usize, cause: PairSourceFailure) -> PairSourceFailure {
+    PairSourceFailure::Curve {
+        curve_index,
+        cause: Box::new(cause),
+    }
+}
 impl std::fmt::Display for PairSourceFailure {
     fn fmt(&self, output: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(

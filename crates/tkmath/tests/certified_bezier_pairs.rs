@@ -143,17 +143,12 @@ fn public_capture_failure_includes_actual_offending_counts_and_expected_shape() 
         weights: Some(&[1.]),
         interval: [0., 1.],
     };
-    let failure = CapturedBezierPair::capture_pair(bad, curve(&controls)).unwrap_err();
-    assert!(matches!(
-        failure,
-        BezierPairCaptureFailure::WeightCount {
-            controls: 2,
-            weights: 1
-        }
-    ));
-    let message = failure.to_string();
-    assert!(message.contains("controls: 2") && message.contains("weights: 1"));
-    assert!(message.contains("one weight per control"));
+    for (left, right, index) in [(bad, curve(&controls), 0), (curve(&controls), bad, 1)] {
+        let failure = CapturedBezierPair::capture_pair(left, right).unwrap_err();
+        assert_capture_curve_counts(&failure, index);
+        assert_capture_message(&failure);
+    }
+
 }
 
 fn assert_regular_domains(certificate: &BezierPairCertificate<'_>) {
@@ -210,4 +205,41 @@ fn distinct_tangent_endpoint_retains_actual_even_multiplicity_without_duplicate_
     assert_eq!(contact.parameter.bounds().0.compare_f64(0.).unwrap(), std::cmp::Ordering::Equal);
     assert_eq!(contact.paired_parameter_bounds, [0., 0.]);
     assert_eq!(contact.point, [0., 0.]);
+}
+
+fn assert_capture_curve_counts(failure: &BezierPairCaptureFailure, expected_index: usize) {
+    let BezierPairCaptureFailure::Curve { curve_index, cause } = failure else {panic!("expected captured curve context, got {failure:?}");};
+    assert_eq!(*curve_index, expected_index);
+    assert!(matches!(cause.as_ref(), BezierPairCaptureFailure::WeightCount {controls: 2,weights: 1}));
+}
+#[test]
+fn actual_right_source_singularity_retains_domain_and_original_denominator_roots() {
+    let controls = [[0., 0.], [0.5, 0.], [1., 1.]];
+    let singular = BezierPairCurve {controls: &controls, weights: Some(&[1., 0., -1.]), interval: [0., 1.]};
+    let query = CapturedBezierPair::capture_pair(curve(&controls), singular).unwrap();
+    let report = query.certify(policy(), || false);
+    assert_eq!(report.completion(), BezierPairCompletion::Incomplete);
+    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {panic!("expected original source failure");};
+    assert!(matches!(failure, BezierPairOperationFailure::SourceDomain {source_index: 1, ..}));
+    let BezierPairOperationFailure::DenominatorRoots(roots) = failure.original_cause() else {panic!("expected actual denominator root isolation");};
+    assert_eq!(roots.roots()[0].bounds().0.compare_f64(0.5).unwrap(), std::cmp::Ordering::Equal);
+    assert!(report.complete().is_none());
+}
+#[test]
+fn actual_left_nonfinite_coordinate_is_invalid_and_preserves_original_point_cause() {
+    let left = [[f64::NAN, 0.], [1., 1.]];
+    let right = [[0., 1.], [1., 0.]];
+    let query = CapturedBezierPair::capture_pair(curve(&left), curve(&right)).unwrap();
+    let report = query.certify(policy(), || false);
+    assert_eq!(report.completion(), BezierPairCompletion::Invalid);
+    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {panic!("expected original source failure");};
+    assert!(matches!(failure, BezierPairOperationFailure::SourceDomain {source_index: 0, ..}));
+    assert!(matches!(failure.original_cause(), BezierPairOperationFailure::Source(BezierPairCaptureFailure::Coordinate(_))));
+    assert!(report.source().captured_curves()[0].controls[0][0].is_nan());
+}
+
+fn assert_capture_message(failure: &BezierPairCaptureFailure) {
+    let message = failure.to_string();
+    assert!(message.contains("controls: 2") && message.contains("weights: 1"));
+    assert!(message.contains("one weight per control"));
 }

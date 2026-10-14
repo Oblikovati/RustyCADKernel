@@ -20,8 +20,10 @@ impl CapturedBezierPair {
         left: BezierPairCurve<'_>,
         right: BezierPairCurve<'_>,
     ) -> Result<Self, BezierPairCaptureFailure> {
-        let left = OwnedBezierSource::capture(left.controls, left.weights, left.interval)?;
-        let right = OwnedBezierSource::capture(right.controls, right.weights, right.interval)?;
+        let left = OwnedBezierSource::capture(left.controls, left.weights, left.interval)
+            .map_err(|cause| super::source::capture_context(0, cause))?;
+        let right = OwnedBezierSource::capture(right.controls, right.weights, right.interval)
+            .map_err(|cause| super::source::capture_context(1, cause))?;
         Ok(Self::distinct(left, right))
     }
     /// Read the retained controls and trims without an owning snapshot. Example: `query.captured_curves()[0].controls`.

@@ -7,6 +7,13 @@ use super::source::PairSourceFailure;
 #[derive(Debug)]
 /// Typed noncompletion; no successful partial geometry accompanies these causes.
 pub enum PairOperationFailure {
+    /// Actual input domain ordinal with its unchanged original typed cause.
+    SourceDomain {
+        /// Source curve ordinal, zero or one.
+        source_index: usize,
+        /// Original failure without reclassification or string conversion.
+        cause: Box<PairOperationFailure>,
+    },
     /// Original source capture/conversion cause.
     Source(PairSourceFailure),
     /// Original primary isolation or completed-work exhaustion cause.
@@ -45,6 +52,13 @@ pub enum PairOperationFailure {
 }
 
 impl PairOperationFailure {
+    /// Read the original typed cause through source-domain context. Example: `cause.original_cause()`.
+    pub fn original_cause(&self) -> &Self {
+        match self {
+            Self::SourceDomain { cause, .. } => cause.original_cause(),
+            other => other,
+        }
+    }
     fn typed_cause(&self) -> Option<&dyn std::fmt::Debug> {
         match self {
             Self::Source(cause) => Some(cause),
@@ -62,6 +76,7 @@ impl PairOperationFailure {
     }
     fn refinement_cause(&self) -> Option<&dyn std::fmt::Debug> {
         match self {
+            Self::SourceDomain { cause, .. } => Some(cause),
             Self::RefinementInvariant(isolation) => Some(isolation),
             Self::WorldResolution {
                 requested_error,
@@ -87,5 +102,15 @@ impl std::fmt::Display for PairOperationFailure {
             output,
             "{self:?}; expected complete finite product-domain proof"
         )
+    }
+}
+
+pub(super) fn source_domain_failure(
+    source_index: usize,
+    cause: PairOperationFailure,
+) -> PairOperationFailure {
+    PairOperationFailure::SourceDomain {
+        source_index,
+        cause: Box::new(cause),
     }
 }

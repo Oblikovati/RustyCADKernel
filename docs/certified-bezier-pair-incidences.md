@@ -9,6 +9,8 @@ closed parameter trims. Distinct mode captures both inputs; canonical self mode
 captures one actual source and selects `t < u`. Source and policy are retained
 by every report after source mutation, cancellation, failure and query destruction.
 Caller occurrence identities and geometric proximity do not certify roots.
+Capture and source-validation failures retain the affected input curve ordinal
+with the unchanged original typed cause; no wrapper converts it to a string.
 
 The provider derives both original homogeneous coordinate equations. For self
 queries it divides both exactly by `t-u`. Generic polynomial pseudo-remainder

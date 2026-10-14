@@ -19,6 +19,7 @@ pub enum BezierPairCompletion {
     Incomplete,
 }
 pub(super) fn operation_completion(cause: &Cause) -> BezierPairCompletion {
+    let cause = cause.original_cause();
     if cancelled_cause(cause) {
         return BezierPairCompletion::Cancelled;
     }

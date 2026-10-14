@@ -51,7 +51,8 @@ impl CapturedBezierPair {
         weights: Option<&[f64]>,
         interval: [f64; 2],
     ) -> Result<Self, PairSourceFailure> {
-        let source = OwnedBezierSource::capture(controls, weights, interval)?;
+        let source = OwnedBezierSource::capture(controls, weights, interval)
+            .map_err(|cause| super::source::capture_context(0, cause))?;
         Ok(Self {
             sources: [source.clone(), source],
             domain: CapturedPairDomain::SelfOffDiagonal,
