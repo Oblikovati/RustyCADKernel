@@ -16,9 +16,11 @@
 //! ```
 pub mod drawer;
 pub mod flags;
+pub mod node_pairs;
 pub mod two_colors;
 pub use drawer::{MeshVSDrawer, MeshVSDrawerSource, meshvs_drawer_assign};
 pub use flags::{MeshVSDisplayModeFlags, MeshVSDrawerAttribute, MeshVSEntityType};
+pub use node_pairs::{MeshVSNodePair, MeshVSSymmetricPairHasher, MeshVSTwoNodes};
 pub use two_colors::{
     MeshVSColorOutputs, MeshVSTwoColors, bind_two_colors, extract_color, extract_colors,
     extract_colors_into,
