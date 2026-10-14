@@ -11,7 +11,7 @@ from typing import TextIO
 import unittest
 from unittest.mock import patch
 
-from release_verification_plan import GateCommand, VerificationGate
+from release_verification_plan import VERIFICATION_ENV, GateCommand, VerificationGate
 from verify_release_gate import NativeGateExecutor, gate_arguments, run_gate, main
 from test_release_verification_plan import ShaderWorkspaceFixture
 
@@ -67,7 +67,7 @@ class GateRunnerTests(unittest.TestCase):
             )
         self.assertEqual(status, 101)
         self.assertEqual(len(fake.calls), 1)
-        self.assertEqual(fake.calls[0][2], inherited)
+        self.assertEqual(fake.calls[0][2], {**inherited, **dict(VERIFICATION_ENV)})
         self.assertIn("'space argument'", output.getvalue())
 
     def test_env_override_is_command_local_and_all_success_commands_execute(
@@ -89,6 +89,32 @@ class GateRunnerTests(unittest.TestCase):
         self.assertEqual(fake.calls[0][2]["RUSTDOCFLAGS"], "-D warnings")
         self.assertEqual(fake.calls[1][2]["RUSTDOCFLAGS"], "original")
         self.assertEqual(inherited["RUSTDOCFLAGS"], "original")
+
+    def test_empty_gate_is_rejected_before_any_execution(self) -> None:
+        fake = RecordingGateExecutor(())
+        gate = VerificationGate("omitted", ())
+        with self.assertRaisesRegex(ValueError, "omitted.*expected at least one"):
+            run_gate(gate, Path("."), {}, fake)
+        self.assertEqual(fake.calls, [])
+
+    def test_shared_defaults_override_inherited_policy_but_keep_local_jobs(
+        self,
+    ) -> None:
+        inherited = {
+            "CARGO_INCREMENTAL": "1",
+            "CARGO_BUILD_JOBS": "2",
+            "VK_DRIVER_FILES": "actual.json",
+        }
+        fake = RecordingGateExecutor((0,))
+        command = GateCommand(("checked",), (("CARGO_PROFILE_DEV_DEBUG", "7"),))
+        with contextlib.redirect_stdout(io.StringIO()):
+            run_gate(VerificationGate("test", (command,)), Path("."), inherited, fake)
+        environment = fake.calls[0][2]
+        self.assertEqual(environment["CARGO_INCREMENTAL"], "0")
+        self.assertEqual(environment["CARGO_PROFILE_DEV_DEBUG"], "7")
+        self.assertEqual(environment["CARGO_BUILD_JOBS"], "2")
+        self.assertEqual(environment["VK_DRIVER_FILES"], "actual.json")
+        self.assertEqual(inherited["CARGO_INCREMENTAL"], "1")
 
     def test_signal_status_uses_shell_convention(self) -> None:
         fake = RecordingGateExecutor((-11,))
