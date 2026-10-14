@@ -33,8 +33,8 @@ impl Graphic3dRenderView {
         self.require_native_target(AspectNativeWindowOperation::Redraw)?;
         if !std::sync::Arc::ptr_eq(current_epoch, rendered_epoch) {
             return Err(crate::error::rejected(
-                "GUI changed during rendering",
-                "a redraw with an unchanged GUI packet",
+                "composition or window binding changed during rendering",
+                "a redraw with unchanged composition and window binding",
             ));
         }
         outcome
