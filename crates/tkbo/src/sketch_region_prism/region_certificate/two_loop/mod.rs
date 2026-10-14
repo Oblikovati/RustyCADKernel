@@ -20,9 +20,17 @@ mod geometry;
 mod history_budget;
 #[cfg(test)]
 mod limit_tests;
+mod mapped_geometry;
+#[cfg(test)]
+mod mapped_parent_tests;
+mod mapped_parents;
+pub(in crate::sketch_region_prism) use mapped_geometry::admit_two_loop_polynomial_counts;
 mod member_capture;
 mod member_parents;
 mod member_types;
+pub(in crate::sketch_region_prism) use mapped_parents::{
+    TwoLoopMappedParents, map_two_loop_original_parents, map_two_loop_original_parents_after,
+};
 #[cfg(test)]
 mod mutation_tests;
 mod nesting;
@@ -80,9 +88,12 @@ mod membership_refusal_tests;
 
 pub(crate) use failure_class::TwoLoopRefusalClass;
 #[allow(unused_imports)]
-pub(in crate::sketch_region_prism) use member_types::{
-    TwoLoopMemberKey, TwoLoopMemberParents, TwoLoopMemberRole,
+pub(in crate::sketch_region_prism) use failure_class::{
+    candidate as classify_region_candidate_cause, surface as classify_region_surface_cause,
 };
-
+#[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use member_types::{
+    TwoLoopMemberKey, TwoLoopMemberParents, TwoLoopMemberRole, TwoLoopOriginalUse,
+};
 #[cfg(test)]
 mod native_refusal_tests;

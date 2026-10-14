@@ -181,7 +181,7 @@ fn child_keys(bound: &BoundProjection<'_>, path: &[usize]) -> Vec<FrozenUseKey> 
         .map(|(index, _)| bound.use_names[index].clone())
         .collect()
 }
-fn capture_limits(receipt: &PrismReceipt) -> FrozenPrismLimits {
+pub(in crate::sketch_region_prism) fn capture_limits(receipt: &PrismReceipt) -> FrozenPrismLimits {
     let requested = receipt.limits.requested;
     let effective = &receipt.limits.effective;
     let vector = requested.extrusion;

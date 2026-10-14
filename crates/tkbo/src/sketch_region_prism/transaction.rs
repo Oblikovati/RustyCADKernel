@@ -242,7 +242,7 @@ fn checkpoint(
         Err(failure) => Err(PrismCompletion::Failed(mapped(phase, failure))),
     }
 }
-fn admit_request(request: &PrismRequest) -> Result<(), PrismCause> {
+pub(super) fn admit_request(request: &PrismRequest) -> Result<(), PrismCause> {
     let vector = [
         request.extrusion.x(),
         request.extrusion.y(),

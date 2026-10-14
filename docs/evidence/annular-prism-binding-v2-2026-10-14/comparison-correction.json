@@ -1,0 +1,7 @@
+{
+  "cause": "Current main adds named-prism-publication-v2 under the same substring test filter; old comparator assumed one emitted payload per filter.",
+  "observations": "Both processes retain exact original V1 payload and identical additional V2 payload.",
+  "correction": "Rerun all eight original full test names with --exact, twice, under unchanged original full-payload comparator. Extra V2 output from ambiguous run is retained separately; no numerical baseline update.",
+  "source_changed": false,
+  "initial_tag_comparison": "Retained separately as ambiguous-comparison receipts; not the final baseline gate."
+}

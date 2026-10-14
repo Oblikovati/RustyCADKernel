@@ -1,0 +1,104 @@
+{
+  "source": "29ec9aff367d05bc2cf90c92105abb95f78b078f",
+  "source_files": 16275,
+  "platform": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+  "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "commands": [
+    {
+      "label": "all-targets",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "--test-threads=2"
+      ],
+      "exit": 0,
+      "seconds": 639.6409607389942,
+      "source_unchanged": true,
+      "log": "final-all-targets.log.gz",
+      "results": [
+        "test result: ok. 1318 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 391.03s",
+        "test result: ok. 646 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 208.76s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "docs",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 2.0311472449975554,
+      "source_unchanged": true,
+      "log": "final-docs.log.gz",
+      "results": [
+        "test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s"
+      ]
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 8.315373296994949,
+      "source_unchanged": true,
+      "log": "final-clippy.log.gz",
+      "results": []
+    },
+    {
+      "label": "rustdoc",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--no-deps",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 2.015455639004358,
+      "source_unchanged": true,
+      "log": "final-rustdoc.log.gz",
+      "results": []
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 8.093480865994934,
+      "source_unchanged": true,
+      "log": "final-fmt.log.gz",
+      "results": []
+    }
+  ]
+}
