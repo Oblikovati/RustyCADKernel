@@ -93,3 +93,22 @@ fn versioned_capture_types_are_send_sync_and_own_traversal_values() {
     assert_eq!(original.replay_bytes(), bytes);
     assert_ne!(changed.replay_bytes(), bytes);
 }
+
+#[test]
+fn borrowed_traversal_view_preserves_capture_identity_and_all_replay_bytes() {
+    let legacy = fresh_projection();
+    let ordered = ordered_projection();
+    let before = ordered.replay_bytes();
+    assert!(legacy.wire_traversals().is_none());
+    let borrowed = ordered.wire_traversals().unwrap();
+    assert_eq!(borrowed.len(), 3);
+    assert_eq!(
+        borrowed.iter().map(|row| row.coedges.len()).sum::<usize>(),
+        6
+    );
+    assert!(std::ptr::eq(
+        borrowed,
+        ordered.wire_traversals.as_deref().unwrap()
+    ));
+    assert_eq!(ordered.replay_bytes(), before);
+}
