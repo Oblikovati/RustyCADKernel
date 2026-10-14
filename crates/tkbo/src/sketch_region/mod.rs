@@ -32,3 +32,15 @@ mod occurrence_tests;
 pub(crate) use occurrences::equal_occurrences;
 
 pub(crate) use copy_inputs::{admit_sources, copy_sources};
+
+mod partition_observation;
+mod partition_types;
+pub(crate) use partition_observation::observe_owned_partition;
+pub(crate) use partition_types::*;
+#[cfg(test)]
+mod partition_tests;
+
+mod partition_capture;
+
+mod partition_blocks;
+mod partition_diagnostics;

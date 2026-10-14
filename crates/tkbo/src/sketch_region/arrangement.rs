@@ -18,19 +18,25 @@ impl BuilderHooks for NonemptyArrangement {
 pub(super) trait ArrangementExecutor {
     fn execute(&mut self, copied: &CopiedSources) -> Result<BOPAlgoBuilder, ArrangementCause>;
 }
-struct MappedArrangementExecutor;
-impl ArrangementExecutor for MappedArrangementExecutor {
+pub(super) struct MappedArrangementExecutor<'a> {
+    pub(super) observation: Option<&'a mut super::partition_types::PartitionObservation>,
+}
+impl ArrangementExecutor for MappedArrangementExecutor<'_> {
     fn execute(&mut self, copied: &CopiedSources) -> Result<BOPAlgoBuilder, ArrangementCause> {
         let mut filler = BOPAlgoPaveFiller::new();
         filler.set_arguments(&copied.arguments);
         filler.set_non_destructive(true);
-        filler.perform_internal().map_err(interference_failure)?;
+        let performed = filler.perform_internal();
+        if performed.is_err() {
+            self.capture(copied, &filler, None);
+        }
+        performed.map_err(interference_failure)?;
         let mut builder = NonemptyArrangement(BOPAlgoBuilder::new());
         builder.0.set_arguments(&copied.arguments);
         builder.0.set_non_destructive(true);
-        builder
-            .perform_internal1(&mut filler)
-            .map_err(interference_failure)?;
+        let performed = builder.perform_internal1(&mut filler);
+        self.capture(copied, &filler, Some(&builder.0));
+        performed.map_err(interference_failure)?;
         Ok(builder.0)
     }
 }
@@ -40,7 +46,11 @@ pub(crate) fn arrange_owned_sources(
     sources: &[ArrangementSource<'_>],
     cancelled: &mut dyn FnMut(ArrangementPhase) -> bool,
 ) -> ArrangementCompletion {
-    arrange_with_executor(sources, cancelled, &mut MappedArrangementExecutor)
+    arrange_with_executor(
+        sources,
+        cancelled,
+        &mut MappedArrangementExecutor { observation: None },
+    )
 }
 pub(super) fn arrange_with_executor(
     sources: &[ArrangementSource<'_>],
@@ -120,4 +130,17 @@ fn execute_copied(
     let builder = executor.execute(copied)?;
     reject_reports(&builder)?;
     Ok(builder)
+}
+
+impl MappedArrangementExecutor<'_> {
+    fn capture(
+        &mut self,
+        copied: &CopiedSources,
+        filler: &BOPAlgoPaveFiller,
+        builder: Option<&BOPAlgoBuilder>,
+    ) {
+        if let Some(observer) = self.observation.as_deref_mut() {
+            *observer = super::partition_capture::capture_mapped_partition(copied, filler, builder);
+        }
+    }
 }
