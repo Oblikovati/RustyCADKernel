@@ -56,7 +56,7 @@ def process_pair(label, selector, prefix, kind, baseline):
         output = run(f'{label}-{index}', CARGO + ['test', '-p', 'rustycad-tkbo', '--lib', '--all-features', '--locked',
                      selector, '--', '--exact', '--nocapture', '--test-threads=1'])
         assert '1 passed; 0 failed' in output
-        rows = [line.removeprefix(prefix) for line in output.splitlines() if line.startswith(prefix)]
+        rows = [line.split(prefix, 1)[1] for line in output.splitlines() if prefix in line]
         assert len(rows) == 1, (selector, len(rows))
         payload = bytes.fromhex(rows[0]) if kind == 'hex' else bytes(ast.literal_eval(rows[0]))
         values.append(payload)
