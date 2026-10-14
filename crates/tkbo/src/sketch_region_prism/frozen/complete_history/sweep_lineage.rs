@@ -6,11 +6,15 @@ pub(super) fn capture(
     request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
 ) -> HistoryCheck<PrismLineageInspection> {
-    match super::super::lineage::project_prism_lineage(
-        bound,
-        request.joined.projection(),
-        request.copied,
-    ) {
+    capture_projection(bound, request.joined.projection(), request.copied)
+}
+/// Project reviewed copy/sweep lineage over one frozen body; `capture_projection(bound, frozen, names)`.
+pub(in crate::sketch_region_prism::frozen) fn capture_projection(
+    bound: &BoundProjection<'_>,
+    projection: &FrozenPrismProjection,
+    copied: &PrismCopyBindings,
+) -> HistoryCheck<PrismLineageInspection> {
+    match super::super::lineage::project_prism_lineage(bound, projection, copied) {
         PrismLineageOutcome::Inspected(rows) => Ok(*rows),
         PrismLineageOutcome::Incomplete(rows) | PrismLineageOutcome::Failed(rows) => {
             Err(PrismHistoryCause::Lineage(rows))
@@ -20,7 +24,7 @@ pub(super) fn capture(
         }
     }
 }
-pub(super) fn historical(key: &CopyUseKey) -> PrismHistoryUseKey {
+pub(in crate::sketch_region_prism::frozen) fn historical(key: &CopyUseKey) -> PrismHistoryUseKey {
     PrismHistoryUseKey(
         key.0
             .iter()
@@ -41,7 +45,7 @@ pub(super) fn historical(key: &CopyUseKey) -> PrismHistoryUseKey {
             .collect(),
     )
 }
-pub(super) fn copied_use(
+pub(in crate::sketch_region_prism::frozen) fn copied_use(
     lineage: &PrismLineageInspection,
     selected: &PrismHistoryUseKey,
 ) -> HistoryCheck<PrismHistoryUseKey> {

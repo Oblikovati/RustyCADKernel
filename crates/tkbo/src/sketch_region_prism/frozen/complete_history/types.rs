@@ -256,7 +256,7 @@ impl PrismHistoryCause {
 }
 
 impl PrismHistoryCause {
-    pub(super) fn at_use(self, entity: PrismHistoryUseKey) -> Self {
+    pub(in crate::sketch_region_prism::frozen) fn at_use(self, entity: PrismHistoryUseKey) -> Self {
         Self::AtUse {
             entity,
             cause: Box::new(self),

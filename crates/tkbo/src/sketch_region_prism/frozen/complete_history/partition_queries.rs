@@ -126,7 +126,7 @@ fn same_partition_tail(source: &RegionObservedContext, target: &RegionObservedCo
         && target.occurrence == source.occurrence
         && target.ancestors[1..] == source.ancestors
 }
-fn native_images(
+pub(in crate::sketch_region_prism::frozen) fn native_images(
     result: &Result<
         Vec<PartitionOccurrenceIdentity>,
         std::sync::Arc<rustycad_tkernel::standard::Failure>,

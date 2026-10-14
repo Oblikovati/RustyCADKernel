@@ -95,4 +95,4 @@ pub(in crate::sketch_region_prism) mod annular_orientation;
 
 pub(in crate::sketch_region_prism) mod annular_measures;
 
-mod annular_history;
+pub(in crate::sketch_region_prism) mod annular_history;

@@ -46,7 +46,7 @@ pub(crate) use partition_metadata::{
 pub(super) mod sweep;
 pub(crate) use sweep::{PrismCompleteSweepQuery, PrismNativeSweepAnswer};
 mod continuation;
-mod sweep_lineage;
+pub(super) mod sweep_lineage;
 pub(crate) use continuation::PrismOriginalContinuation;
 mod capture;
 mod result;
@@ -67,7 +67,9 @@ mod operation_tests;
 mod sweep_coverage;
 
 pub(in crate::sketch_region_prism) use copied_contexts::resolve_native_copy_context;
-pub(in crate::sketch_region_prism) use generated_directed::resolve_generated_context;
+pub(in crate::sketch_region_prism) use generated_directed::{
+    generated_context_matches, resolve_generated_context,
+};
 pub(in crate::sketch_region_prism) use operands::{
     copied_contexts as retained_copy_contexts, current_contexts as capture_history_contexts,
     observed_contexts as retained_history_contexts, resolve_certified_candidate,
@@ -75,6 +77,7 @@ pub(in crate::sketch_region_prism) use operands::{
 pub(in crate::sketch_region_prism) use partition_queries::resolve_native_partition_context;
 
 pub(in crate::sketch_region_prism) use census::admit_stage as admit_history_stage_contexts;
+pub(in crate::sketch_region_prism::frozen) use census::forward_reversed as forward_reversed_history_use;
 pub(in crate::sketch_region_prism) use partition_queries::{
     admit_partition_history_availability, admit_unchanged_partition_query,
 };
