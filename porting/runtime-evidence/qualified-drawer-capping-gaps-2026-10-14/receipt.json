@@ -1,0 +1,19 @@
+{
+  "source_revision": "026ed7ad748e774477880ce8abf464c3afaddc4f",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "production_source_sha256": {
+    "crates/tkmeshvs/src/drawer/source.rs": "7c126e99352e1bf89f11eaf6e8fcbf226240b1f5b6d2bcd310ebec366e254a96",
+    "crates/tkservice/src/graphic3d/clip_plane_capping.rs": "69e77e1707d7ff55314afe99d9c1aaa1c0d9e5f19cf38e627df032a62509d16a"
+  },
+  "native_source_sha256": {
+    "src/Visualization/TKMeshVS/MeshVS/MeshVS_Drawer.cxx": "f9dbd04774b78ef43fd775f3acb0bec39a398b2c357ae02a281538b0f7422102",
+    "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx": "b62304139f39d0b4f59adbbf89819573d2e91cbfb75c9275628b6b3f2a73cf41",
+    "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.cxx": "f72919dbc4e81b014876cde8f613eb00bb70549e56aadaba6f4a1ccf989b63fa"
+  },
+  "partial_claims": {
+    "MeshVS_Drawer::Assign": "Qualified native map assignment reads original inherited storage directly. Current Rust default/copy path calls overridable drawer_base and can run an extra callback or use alternate maps. Registered-base follow-up is not integrated.",
+    "Graphic3d_ClipPlane::CappingAspect": "Native returns the original const Handle field without another owner; Rust clones an owning Handle. Borrowed slot identity/count/lifetime parity remains open.",
+    "Graphic3d_ClipPlane::SetCappingAspect": "Native accepts/stores null and increments myAspectMod in this defined call. Rust rejects null with Standard_ProgramError and preserves the prior aspect. Native later undefined dereferences do not make the setter input undefined."
+  },
+  "evidence_kind": "direct source contradiction; derived-accessor and original capping-slot regressions owned by active porting tasks; no new runtime pass claimed"
+}
