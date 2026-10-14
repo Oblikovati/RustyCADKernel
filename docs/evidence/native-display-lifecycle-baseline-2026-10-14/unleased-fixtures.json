@@ -1,0 +1,96 @@
+{
+  "source_revision": "4757e8b35b97cd6760b41b6bbca4e5ce4eb76ec1",
+  "source_sha256": "8fae4eecd1f2c15ef8da45805faa29d176a8a4b302d465925ec2b398acd5686d",
+  "evidence_kind": "Owned source-reviewed call/state expectations; execute through named fake native I/O after structural seam extraction. No new native run.",
+  "cases": [
+    {
+      "name": "fresh_named_open",
+      "initial_display": 0,
+      "initial_owned": false,
+      "requested": 0,
+      "open_result": 41,
+      "calls": [
+        "open(:fixture)",
+        "atom(41)"
+      ],
+      "result_display": 41,
+      "result_owned": true,
+      "result_atom": 73
+    },
+    {
+      "name": "owned_named_reset",
+      "initial_display": 41,
+      "initial_owned": true,
+      "requested": 0,
+      "open_result": 42,
+      "calls": [
+        "close(41)",
+        "open(:fixture)",
+        "atom(42)"
+      ],
+      "result_display": 42,
+      "result_owned": true,
+      "result_atom": 73
+    },
+    {
+      "name": "owned_to_borrowed",
+      "initial_display": 41,
+      "initial_owned": true,
+      "requested": 55,
+      "open_result": 42,
+      "calls": [
+        "close(41)",
+        "atom(55)"
+      ],
+      "result_display": 55,
+      "result_owned": false,
+      "result_atom": 73
+    },
+    {
+      "name": "borrowed_named_reset",
+      "initial_display": 55,
+      "initial_owned": false,
+      "requested": 0,
+      "open_result": 42,
+      "calls": [
+        "open(:fixture)",
+        "atom(42)"
+      ],
+      "result_display": 42,
+      "result_owned": true,
+      "result_atom": 73
+    },
+    {
+      "name": "failed_owned_named_reset",
+      "initial_display": 41,
+      "initial_owned": true,
+      "requested": 0,
+      "open_result": 0,
+      "calls": [
+        "close(41)",
+        "open(:fixture)"
+      ],
+      "result_display": 0,
+      "result_owned": false,
+      "result_atom": null,
+      "error": "Can not connect to the server \":fixture\""
+    },
+    {
+      "name": "owned_self_alias_hazard",
+      "initial_display": 41,
+      "initial_owned": true,
+      "requested": 41,
+      "open_result": 42,
+      "calls": [
+        "close(41)",
+        "atom(41)"
+      ],
+      "result_display": 41,
+      "result_owned": false,
+      "result_atom": 73,
+      "scope": "Preserved source hazard; fake traces do not certify using the freed pointer"
+    }
+  ],
+  "unchanged_metadata": "init does not reset default visual/config; old atoms cleared, successful DeleteWindow atom replaces map",
+  "drop_order": "free nonzero default visual, then close owned nonzero display"
+}
