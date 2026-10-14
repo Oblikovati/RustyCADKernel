@@ -127,7 +127,7 @@ mod rejection_tests;
 #[cfg(test)]
 mod replay_tests;
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism) mod tests;
 
 #[cfg(test)]
 mod point_tests;
