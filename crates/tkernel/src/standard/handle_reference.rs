@@ -1,5 +1,7 @@
 //! Erase a genuine handle-slot borrow, preserving live replacement and intrusive ownership counts.
-use super::{Handle, HandleFieldRef, HandleObserver, RuntimeTyped};
+use super::{
+    Failure, Handle, HandleFieldRef, HandleObserver, RetainedHandleReference, RuntimeTyped,
+};
 use std::marker::PhantomData;
 
 /// Project a genuine live handle slot into a registered base/interface without owning it.
@@ -20,6 +22,11 @@ impl<'a, T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> ProjectedHandleRefe
 impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> HandleReference<U>
     for ProjectedHandleReference<'_, T, U>
 {
+    fn retain_reference(&self) -> Result<RetainedHandleReference<U>, Failure> {
+        self.source
+            .retain_reference()
+            .map(RetainedHandleReference::project)
+    }
     fn observe(&self) -> HandleObserver<U> {
         // Reread on every use: a callback may have replaced the original caller's slot.
         self.source.observe().observe_as::<U>()
@@ -39,6 +46,16 @@ impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> HandleReference<U>
 /// Native constHandle reference contract for local slots and retained fields.
 /// Example: `let observed=reference.observe(); assert_eq!(reference.object_address(),observed.object_address())`.
 pub trait HandleReference<T: ?Sized + RuntimeTyped> {
+    /// Retain a supported original slot, never its target; `let alias=slot.retain_reference()?`.
+    fn retain_reference(&self) -> Result<RetainedHandleReference<T>, Failure> {
+        Err(Failure::with_message(
+            "Standard_ProgramError",
+            &format!(
+                "handle slot {:p} has borrowed lifetime; expected an explicit retained-slot capability",
+                self.reference_address()
+            ),
+        ))
+    }
     /// Lease the current target without owning it; `let target=reference.observe()`.
     fn observe(&self) -> HandleObserver<T>;
     /// Identify the actual handle slot, independently of its target; `reference.reference_address()`.

@@ -1,0 +1,143 @@
+{
+  "format": 1,
+  "source_revision": "ed90dad8aae812a2397df60589c6155de0019598",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rust_toolchain": "1.99.0-x86_64-unknown-linux-gnu",
+  "environment": {
+    "PATH_prefix": "/home/vmiguel/.cargo/bin",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2"
+  },
+  "gates": [
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkernel",
+        "--all-targets",
+        "--all-features"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/kernel-all-final.log.gz",
+      "sha256": "73a04fd6e14bb39c5e77c0112603928cb53852ba6c0edc6c127383f219b46e88",
+      "uncompressed_sha256": "b2c05254d57b1fec01992997c4b3c6fca75a3e290817ebac854bb5a3f7e1c574",
+      "passes": 5028,
+      "groups": 29,
+      "failures": 0
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkernel",
+        "--doc"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/kernel-docs.log.gz",
+      "sha256": "193f2182498da9ff4745ca4192ce6cb4ec327729c0ac0a96a747105510396278",
+      "uncompressed_sha256": "af2f19f8b414aff139eb3681a48e585d59ad2cd775f3822b3e4ce3d41a9f4174",
+      "passes": 292,
+      "groups": 2,
+      "failures": 0
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkernel",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/kernel-clippy-final.log.gz",
+      "sha256": "a3ea38ae017f3c2faafe251655ec068cafecf335731f9b5840f1dcd2979c79e4",
+      "uncompressed_sha256": "8fe1a016180ad118671e7e4b3038c3e2a06a63e340be7636195a998c5664440e"
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "target/picked-slot-extracted/Cargo.toml",
+        "-p",
+        "rustycad-tkernel",
+        "scoped_handle_reference",
+        "--lib",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/extracted-focused.log.gz",
+      "sha256": "77c76fd3a1fcdddf43bc86051d45c5901b6c54804caf50ed5d3b921f4c6d0a99",
+      "uncompressed_sha256": "961c1967e9d21e20242cfa7f9a15a9b192e7a96dd0c4ee6d84699bb959a351d4",
+      "passes": 7,
+      "groups": 1,
+      "failures": 0
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "target/picked-slot-extracted/Cargo.toml",
+        "-p",
+        "rustycad-tkernel",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/extracted-all.log.gz",
+      "sha256": "16467af4b6f46ee6d34b82e1ade429be885a7cb3afc34a5728df073e01dabcce",
+      "uncompressed_sha256": "f421ac9336210f41591db3b480c7842035deda9f76f3812b16a45f7aa960eea8",
+      "passes": 5028,
+      "groups": 29,
+      "failures": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/check_rust_format.py"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/format-final.log.gz",
+      "sha256": "b0ea7461078bcb7495ff4f52d18476992d8b6f70c89fb32921784b252c8328c0",
+      "uncompressed_sha256": "d5ea3b094219abd3ca85bd7921304556ad90101689e9f0eecc77ab79f4da5610"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/toolkit_test_suites.py"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/discovery-final.log.gz",
+      "sha256": "6f3b066b0b64cca5c7f1ef7b63f8cfba5ae90ede8c417606b16dd4e4f2f5ed0b",
+      "uncompressed_sha256": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4"
+    },
+    {
+      "argv": [
+        "cargo",
+        "package",
+        "--workspace",
+        "--locked",
+        "--no-verify",
+        "--exclude-lockfile"
+      ],
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/picked-view-retention-2026-10-14/logs/package-final.log.gz",
+      "sha256": "21044758440a4696caec8a2128d3fbc0bc6d74810c0e4746a7e6a73f798cf5b1",
+      "uncompressed_sha256": "833f2944a81080aab6373590ee4e4f65aeef71e70c8bd04eb8a1607ec9aefde2"
+    }
+  ],
+  "runtime_scope": "Kernel slot transport; actual native Frame scene attribution only, no Rust full Frame credit",
+  "gpu_work": false,
+  "performance_measured": false,
+  "external_owned_temporary_paths": []
+}
