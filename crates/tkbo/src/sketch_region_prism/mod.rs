@@ -49,6 +49,7 @@ mod graph_import_tests;
 #[cfg(test)]
 mod copy_retention_tests;
 
+mod publication;
 #[cfg(test)]
 mod sweep_query_tests;
 
