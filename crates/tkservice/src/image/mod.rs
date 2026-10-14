@@ -10,6 +10,8 @@ mod pix_map;
 mod pix_map_data;
 mod pix_map_init;
 mod pix_map_ops;
+#[cfg(test)]
+mod pix_map_owned_contract_tests;
 mod pixel;
 mod pixel_convert;
 mod texture;
