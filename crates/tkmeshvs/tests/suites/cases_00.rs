@@ -9,3 +9,5 @@ pub mod flags;
 pub mod invariants;
 #[path = "../metadata_reference.rs"]
 pub mod metadata_reference;
+#[path = "../tool_contracts.rs"]
+pub mod tool_contracts;

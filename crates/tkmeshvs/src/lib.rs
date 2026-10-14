@@ -18,3 +18,6 @@ pub mod drawer;
 pub mod flags;
 pub use drawer::{MeshVSDrawer, MeshVSDrawerSource, meshvs_drawer_assign};
 pub use flags::{MeshVSDisplayModeFlags, MeshVSDrawerAttribute, MeshVSEntityType};
+
+pub mod tool;
+pub use tool::MeshVSTool;
