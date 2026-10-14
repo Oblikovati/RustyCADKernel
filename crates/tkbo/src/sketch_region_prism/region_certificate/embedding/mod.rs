@@ -8,6 +8,7 @@ mod table;
 mod table_validation;
 #[cfg(test)]
 mod table_validation_tests;
+pub(in crate::sketch_region_prism) mod trim_incidence;
 mod types;
 use super::super::surface_charts::*;
 use super::current_binding::*;
@@ -95,3 +96,6 @@ fn finalize(
 }
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod trim_incidence_tests;
