@@ -1,5 +1,6 @@
 #pragma once
 #include <OpenGl_ArbFBO.hxx>
+#include "martensite_stencil_attachment.hxx"
 // Record actual draw attachment bits and state before the renderer executes each draw.
 struct NativeStencilDrawTrace {
   occ::handle<OpenGl_Context> context;
@@ -25,7 +26,9 @@ struct NativeStencilDrawTrace {
     output<<"{\"mode\":"<<mode<<",\"count\":"<<count<<",\"bits\":"<<integer(GL_STENCIL_BITS)
       <<",\"framebuffer\":"<<integer(GL_DRAW_FRAMEBUFFER_BINDING)<<",\"program\":"<<integer(GL_CURRENT_PROGRAM)
       <<",\"stencil_pixel\":"<<stencil_pixel()<<",\"enabled\":"<<int(gl->glIsEnabled(GL_STENCIL_TEST))<<",\"func\":"<<integer(GL_STENCIL_FUNC)
-      <<",\"ref\":"<<integer(GL_STENCIL_REF)<<",\"mask\":"<<integer(GL_STENCIL_VALUE_MASK)<<"}\n";
+      <<",\"ref\":"<<integer(GL_STENCIL_REF)<<",\"mask\":"<<integer(GL_STENCIL_VALUE_MASK);
+    NativeStencilAttachment(context).emit(output,integer(GL_DRAW_FRAMEBUFFER_BINDING));
+    output<<"}\n";
   }
   static void APIENTRY observe(GLenum mode,GLsizei count,GLenum type,const void* indices) {
     active->emit(mode,count);active->original(mode,count,type,indices);

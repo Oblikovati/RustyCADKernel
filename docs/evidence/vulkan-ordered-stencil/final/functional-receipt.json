@@ -1,0 +1,41 @@
+{
+  "format": 1,
+  "status": "functional-proof-complete; full-suite/extracted/performance pending",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_base": "d109db622e6b05e49ab09fcc0de4cc29b970bc08",
+  "timestamp_utc": "2026-10-14T07:02:36.058161+00:00",
+  "scope": {
+    "cases": 87,
+    "profiles": [
+      "software",
+      "host"
+    ],
+    "native_repeats": 2,
+    "rust_repeats": 2,
+    "runs": 696,
+    "strict_passed": 174,
+    "rgba": "exact",
+    "depth": "finite absolute <=1e-6; unchanged",
+    "state_fields": 8,
+    "no_api_or_class_credit": true
+  },
+  "raw_members": 7115,
+  "artifacts": {
+    "raw-functional.tar.gz": "e1a802ec3b9581e45baf0b94c54e1250fd6ed072bd9600576323d72b7cebaaf2",
+    "raw-member-hashes.json.gz": "3600a1d573e8ce0de90a0db0ce5ec79b72cacf1358436624a8dd2dfb945259c3"
+  },
+  "fixtures": {
+    "native-cases.txt": "f72be40f312e944df297c89fc457b858768ccbb9e006e7e7ce70e642839f8310",
+    "software-native.bin": "d3b9b7818040407dd945e64dc8b68e49a4a5cee855e630f73b4f78cf5be1b4b0",
+    "host-native.bin": "305226337102628d0322aff1ce48f227781580ad951eef23f8dd3cecf8eec471",
+    "native-lifecycle.txt": "c96cf5887bc358e175141a146bd5f5c2e6d4da14fd2db4f9e84c6150786ae5f9"
+  },
+  "notes": [
+    "Earlier six text-reset failures and native invalid displayed-Structure::Remove teardown remain attributed, not erased.",
+    "Corrected native lifecycle uses Erase then Remove. Rust injected fault is pre-submission transport, not native device-loss repair.",
+    "Native default drawable internal format is unavailable (-1); actual scene FBO is D24S8 with8 stencil bits.",
+    "Independent Rust87-case replay passed both profiles without OCCT runtime.",
+    "Mesa25.2.8 libraries extracted from cached packages into isolated runtime; no system driver changes.",
+    "No benchmark timing run or accepted baseline."
+  ]
+}

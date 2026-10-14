@@ -9,16 +9,12 @@ pub fn capture_view(
     prefix: &str,
     full: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let options = capture_options(width, height, full);
     for (kind, extension) in [
         (Graphic3dBufferType::Rgba, "rgba"),
         (Graphic3dBufferType::Depth, "depth"),
     ] {
-        let options = V3dImageDumpOptions {
-            buffer_type: kind,
-            ..options
-        };
-        capture_image(view, &options, &format!("{prefix}.{extension}"))?;
+        let bytes = capture_buffer(view, width, height, full, kind)?;
+        std::fs::write(format!("{prefix}.{extension}"), bytes)?;
     }
     Ok(())
 }
@@ -38,11 +34,24 @@ fn capture_options(width: i32, height: i32, full: bool) -> V3dImageDumpOptions<'
     }
 }
 
-fn capture_image(
+/// Read native-compatible bytes without filesystem I/O; `capture_buffer(view,64,64,false,Graphic3dBufferType::Rgba)`.
+pub fn capture_buffer(
+    view: &V3dView,
+    width: i32,
+    height: i32,
+    full: bool,
+    kind: Graphic3dBufferType,
+) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+    let options = V3dImageDumpOptions {
+        buffer_type: kind,
+        ..capture_options(width, height, full)
+    };
+    capture_image_bytes(view, &options)
+}
+fn capture_image_bytes(
     view: &V3dView,
     options: &V3dImageDumpOptions,
-    path: &str,
-) -> Result<(), Box<dyn std::error::Error>> {
+) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     let image = ImagePixMap::default();
     if !view.to_pix_map(&image, options)? {
         return Err(format!(
@@ -51,6 +60,9 @@ fn capture_image(
         )
         .into());
     }
+    Ok(tight_capture_bytes(&image, options))
+}
+fn tight_capture_bytes(image: &ImagePixMap, options: &V3dImageDumpOptions) -> Vec<u8> {
     let pixels = image.data();
     let bytes: Vec<u8> = (0..options.height as usize)
         .flat_map(|y| {
@@ -59,6 +71,5 @@ fn capture_image(
                 .copied()
         })
         .collect();
-    std::fs::write(path, bytes)?;
-    Ok(())
+    bytes
 }

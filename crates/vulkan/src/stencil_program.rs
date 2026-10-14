@@ -4,6 +4,13 @@ use crate::PrimitiveDraw;
 pub(crate) enum StencilCommand {
     Options(bool),
     CappingRestore,
+    TextReset,
+}
+impl StencilCommand {
+    fn opaque_pass_only(self) -> bool {
+        // Native ShouldRender excludes both non-fill elements; the capping sentry runs independently.
+        matches!(self, Self::Options(_) | Self::TextReset)
+    }
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) struct StencilBoundary {
@@ -30,6 +37,14 @@ impl StencilProgram {
             command,
         });
     }
+    pub fn ordered_geometry(&mut self, draws: Vec<PrimitiveDraw>, text: bool) {
+        // OCCT 3d097a0 OpenGl_Text.cxx:895 disables testing after initialized nonempty text.
+        let reset = text && !draws.is_empty();
+        self.geometry(draws);
+        if reset {
+            self.command(StencilCommand::TextReset);
+        }
+    }
     pub fn geometry(&mut self, draws: Vec<PrimitiveDraw>) {
         self.draws.extend(draws);
     }
@@ -49,7 +64,7 @@ fn filtered_stencil_boundary(
     blended: &[bool],
     transparent: bool,
 ) -> Option<StencilBoundary> {
-    if transparent && matches!(event.command, StencilCommand::Options(_)) {
+    if transparent && event.command.opaque_pass_only() {
         return None;
     }
     Some(StencilBoundary {

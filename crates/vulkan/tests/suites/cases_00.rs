@@ -59,6 +59,10 @@ pub mod object_animation_capture_cases;
 pub mod oit_transparency;
 #[path = "../ordered_stencil.rs"]
 pub mod ordered_stencil;
+#[path = "../ordered_stencil_lifecycle.rs"]
+pub mod ordered_stencil_lifecycle;
+#[path = "../ordered_stencil_native_replay.rs"]
+pub mod ordered_stencil_native_replay;
 #[path = "../point_alpha.rs"]
 pub mod point_alpha;
 #[path = "../point_alpha_context.rs"]

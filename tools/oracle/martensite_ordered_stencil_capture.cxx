@@ -38,13 +38,18 @@ static void stencil_capture_state(const NativeTextPolicyProbe& probe,const std::
   }
   output<<'\n';
 }
-int main(int argc,char** argv) {
-  if(argc!=4&&argc!=5)throw Standard_Failure(("received argc="+std::to_string(argc)+"; expected mode method prefix and optional seed0..255").c_str());
-  auto probe=create_policy_probe();texture_camera(probe.view);const std::string mode=argv[1];
+static void stencil_gl_identity(const NativeTextPolicyProbe& probe) {
+  const auto gl=probe.workspace->GetGlContext()->core11fwd;
+  std::cerr<<"OCCT_GL_VERSION="<<gl->glGetString(GL_VERSION)<<'\n';
+  std::cerr<<"OCCT_GL_VENDOR="<<gl->glGetString(GL_VENDOR)<<'\n';
+}
+static int stencil_capture_seed(int argc,char** argv) {
   const int seed=argc==5?std::stoi(argv[4]):0;
   if(seed<0||seed>255)throw Standard_Failure(("received seed="+std::to_string(seed)+"; expected0..255").c_str());
-  NativeStencilSeed seeded(probe.workspace->GetGlContext(),seed);
-  NativeStencilDrawTrace stencil_trace(probe.workspace->GetGlContext(),argv[3]);
+  return seed;
+}
+static void stencil_execute_capture(const NativeTextPolicyProbe& probe,char** argv) {
+  const std::string mode=argv[1];
   oit_native_parameters(probe.view,argv[2],0,0,4);
   const auto layered=mode.rfind("layer-",0)==0?oit_native_layers(probe.viewer,mode):std::vector<occ::handle<Graphic3d_Structure>>{};
   const auto structure=layered.empty()?oit_native_geometry(probe.viewer,false,mode=="line"?"line-mask":mode=="point"?"sprite-opaque":mode=="text"?"text-colored":"two"):layered.front();
@@ -54,5 +59,16 @@ int main(int argc,char** argv) {
   if(mode=="remove-executed")structure->Groups().First()->Remove();
   NativeOitDrawTrace trace(probe.workspace->GetGlContext(),argv[3]);
   if(layered.empty())texture_capture(probe.view,argv[3]);else oit_native_full_capture(probe.view,argv[3]);
-  stencil_capture_state(probe,argv[3]);probe.view->Remove();return 0;
+  stencil_capture_state(probe,argv[3]);
 }
+#ifndef MARTENSITE_STENCIL_CAPTURE_NO_MAIN
+int main(int argc,char** argv) {
+  if(argc!=4&&argc!=5)throw Standard_Failure(("received argc="+std::to_string(argc)+"; expected mode method prefix and optional seed0..255").c_str());
+  auto probe=create_policy_probe();stencil_gl_identity(probe);texture_camera(probe.view);
+  const int seed=stencil_capture_seed(argc,argv);
+  NativeStencilSeed seeded(probe.workspace->GetGlContext(),seed);
+  NativeStencilDrawTrace stencil_trace(probe.workspace->GetGlContext(),argv[3]);
+  stencil_execute_capture(probe,argv);
+  probe.view->Remove();return 0;
+}
+#endif

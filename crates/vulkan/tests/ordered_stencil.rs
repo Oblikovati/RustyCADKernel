@@ -72,3 +72,28 @@ fn cap_fill_only_filter_excludes_group_stencil_options_and_restores_context() {
     }
     fixture.finish();
 }
+#[test]
+fn point_line_and_text_controls_contain_actual_nonfill_primitive_payloads() {
+    for mode in ["point", "line", "text"] {
+        assert_nonfill_stencil_payload(mode);
+    }
+}
+fn assert_nonfill_stencil_payload(mode: &str) {
+    let backend = recording_device::RecordingDevice::default();
+    let driver = Graphic3dRenderDriver::with_backend(backend.clone(), 128).unwrap();
+    let fixture = stencil_scene::OrderedStencilScene::new(&driver, mode, "unordered");
+    fixture.initial_redraw(mode).unwrap();
+    let frame = backend.last_frame();
+    let index = frame
+        .draws()
+        .iter()
+        .position(|draw| match mode {
+            "point" => draw.topology() == PrimitiveTopology::Points,
+            "line" => draw.topology() == PrimitiveTopology::Lines,
+            "text" => draw.textured_style().is_some(),
+            _ => false,
+        })
+        .unwrap();
+    assert!(frame.stencil_draw_states()[index].is_enabled());
+    fixture.finish();
+}

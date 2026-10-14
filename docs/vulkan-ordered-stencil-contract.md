@@ -31,3 +31,9 @@ Native repeated traces, committed image/depth assets, independent Rust replay,
 both-device validation/captures and identical time/peak-memory workloads are
 required before integration. No parity or API completion is claimed by this
 initial contract audit.
+
+Valid native text is another state boundary: `OpenGl_Text.cxx:895` disables
+stencil after glyph rendering, while empty/uninitialized text returns earlier.
+The retained timeline therefore carries a text reset after actual glyph draws,
+preserving all other context fields. See the final functional proof for original
+red captures, unchanged comparison gates and full87-case repeated evidence.

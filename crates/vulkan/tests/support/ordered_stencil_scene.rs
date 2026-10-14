@@ -64,6 +64,9 @@ fn apply_mode(scene: &ViewerScene, mode: &str) {
             .set_stencil_test_options(true);
         return;
     }
+    apply_ordinary_stencil_mode(scene, mode);
+}
+fn apply_ordinary_stencil_mode(scene: &ViewerScene, mode: &str) {
     let group = &scene.group;
     group.clear(false);
     group.set_group_primitives_aspect(&super::oit_scene::oit_fill_aspect(0, "two").cast());

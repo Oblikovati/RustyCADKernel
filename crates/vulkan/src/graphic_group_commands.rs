@@ -40,10 +40,7 @@ impl GroupGeometry {
         context: &crate::text_submission::TextSceneContext<'_>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         match self {
-            Self::Text(text) => context.draws(&text, aspects).map(|mut draws| {
-                crate::text_culling::apply_text_face_culling(&mut draws, &**aspects, closed);
-                draws
-            }),
+            Self::Text(text) => lower_ordered_text(context, &text, aspects, closed),
             Self::Primitives(primitive) => super::lower_group_surface(
                 &primitive,
                 aspects,
@@ -54,6 +51,18 @@ impl GroupGeometry {
             ),
         }
     }
+}
+
+fn lower_ordered_text(
+    context: &crate::text_submission::TextSceneContext<'_>,
+    text: &Graphic3dText,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    closed: bool,
+) -> Result<Vec<PrimitiveDraw>, RenderError> {
+    context.draws(text, aspects).map(|mut draws| {
+        crate::text_culling::apply_text_face_culling(&mut draws, &**aspects, closed);
+        draws
+    })
 }
 
 fn advance_aspect(

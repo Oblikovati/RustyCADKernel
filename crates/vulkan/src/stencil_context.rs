@@ -75,6 +75,10 @@ impl RenderStencilState {
                     self.comparison(StencilCompare::NotEqual, 1, 0xFF);
                 }
             }
+            StencilCommand::TextReset => {
+                // Ordinary text leaves comparison, operations and write-mask untouched.
+                self.enabled = false;
+            }
             StencilCommand::CappingRestore => {
                 self.enabled = false;
                 self.comparison(StencilCompare::Always, 0, 0xFF);

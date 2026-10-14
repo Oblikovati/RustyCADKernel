@@ -88,11 +88,13 @@ impl Graphic3dDrawGroup {
         let mut program = StencilProgram::default();
         let mut flips = crate::group_flipping::GroupFlipStack::scene(context, matrix)?;
         for command in commands {
-            if let Some(geometry) = command.advance(&mut aspects, &mut flips, &mut program) {
-                program.geometry(
-                    self.lower_ordered_geometry(geometry, &aspects, &flips, &policy, context)?,
-                );
-            }
+            let Some(geometry) = command.advance(&mut aspects, &mut flips, &mut program) else {
+                continue;
+            };
+            let text = matches!(geometry, GroupGeometry::Text(_));
+            let draws =
+                self.lower_ordered_geometry(geometry, &aspects, &flips, &policy, context)?;
+            program.ordered_geometry(draws, text);
         }
         Ok(program)
     }
