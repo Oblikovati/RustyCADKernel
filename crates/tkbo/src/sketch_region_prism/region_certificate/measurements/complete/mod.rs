@@ -15,18 +15,25 @@ pub(crate) fn inspect_complete_prism_measurements(
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<CompletePrismMeasureInspection, CompletePrismMeasureFailure> {
     let binding = capture_current_prism_binding(bridge, sources, receipt, &mut cancelled)?;
-    let measures = measure_all(&binding, receipt, options, &mut cancelled)?;
+    let measures = measure_bound_prism(
+        &binding,
+        requested_extrusion(receipt),
+        options,
+        &mut cancelled,
+    )?;
     poll_prism_binding(&mut cancelled)?;
     rebind_current_prism_binding(bridge, sources, receipt, &binding)?;
     Ok(CompletePrismMeasureInspection { binding, measures })
 }
-fn measure_all(
+/// Integrate captured operands without entering mutable geometry; `measure_bound_prism(binding, extrusion, options, cancel)`.
+/// The caller binds the supplied extrusion to the captured charts; this supplies scalar evidence only.
+pub(crate) fn measure_bound_prism(
     binding: &CurrentPrismBinding,
-    receipt: &PrismReceipt,
+    extrusion: [f64; 3],
     requested: CompletePrismMeasureOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<CompletePrismMeasures, CompletePrismMeasureFailure> {
-    let subset = bound_subset(binding, receipt, requested.subset, cancelled)?;
+    let subset = bound_subset(binding, extrusion, requested.subset, cancelled)?;
     let side = side::measure_side(binding, requested.side_area, cancelled)?;
     let total = total_measure(&subset, &side, requested.total_area, cancelled)?;
     Ok(CompletePrismMeasures {
@@ -39,14 +46,14 @@ fn measure_all(
 
 fn bound_subset(
     binding: &CurrentPrismBinding,
-    receipt: &PrismReceipt,
+    extrusion: [f64; 3],
     options: PrismMeasureOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PrismMeasureSubset, CompletePrismMeasureFailure> {
     scalars::measure_subset(
         &binding.region,
         &binding.charts,
-        receipt,
+        extrusion,
         options,
         cancelled,
     )

@@ -122,6 +122,8 @@ fn complete_inspection_and_all_owned_components_are_send_sync() {
 mod domain_tests;
 #[path = "complete/mutation.rs"]
 mod mutation_tests;
+#[path = "complete/owned.rs"]
+mod owned_tests;
 #[path = "complete/policy.rs"]
 mod policy_tests;
 #[path = "complete/replay.rs"]

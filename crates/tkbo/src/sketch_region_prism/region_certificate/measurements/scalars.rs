@@ -7,12 +7,10 @@ use rustycad_tkg3d::top_abs::Orientation;
 pub(super) fn measure_subset(
     region: &RegionCertificate,
     charts: &[MeasuredPrismChart],
-    receipt: &PrismReceipt,
+    extrusion: [f64; 3],
     requested: PrismMeasureOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> MeasureCheck<PrismMeasureSubset> {
-    let vector = receipt.limits.requested.extrusion;
-    let extrusion = [vector.x(), vector.y(), vector.z()];
     let signed_volume = sweep_measure(region, extrusion, requested.signed_volume, cancelled)?;
     Ok(PrismMeasureSubset {
         first_cap: cap_measure(charts, PrismImageRole::First, requested.cap_area, cancelled)?,

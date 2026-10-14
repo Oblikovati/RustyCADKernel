@@ -24,13 +24,17 @@ pub(crate) fn inspect_prism_measurements(
     let measures = scalars::measure_subset(
         &captured.region,
         &captured.charts,
-        receipt,
+        requested_extrusion(receipt),
         options,
         &mut cancelled,
     )?;
     poll_prism_binding(&mut cancelled)?;
     rebind_current_prism_binding(bridge, sources, receipt, &captured)?;
     Ok(complete_inspection(captured, measures))
+}
+fn requested_extrusion(receipt: &PrismReceipt) -> [f64; 3] {
+    let vector = receipt.limits.requested.extrusion;
+    [vector.x(), vector.y(), vector.z()]
 }
 fn complete_inspection(
     captured: CurrentPrismBinding,
