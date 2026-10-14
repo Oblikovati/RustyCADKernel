@@ -12,6 +12,12 @@ pub(super) fn fixture() -> (
 ) {
     let (source, receipt) = authored_receipt();
     let publication = authored_bindings(&receipt, &source);
+    let authored = authored_copy_bindings(&receipt);
+    (source, receipt, publication, authored)
+}
+pub(in crate::sketch_region_prism::frozen) fn authored_copy_bindings(
+    receipt: &PrismReceipt,
+) -> PrismCopyBindings {
     let selected = receipt.input.selected.as_ref().unwrap();
     let selected_members = selected
         .relations
@@ -21,13 +27,13 @@ pub(super) fn fixture() -> (
             member: semantic_member(&row.output),
         })
         .collect();
-    let authored = PrismCopyBindings {
+    PrismCopyBindings {
         selected_members,
         selected_uses: authored_uses(&selected.face),
         copied_uses: authored_uses(&receipt.copied.as_ref().unwrap().base),
-    };
-    (source, receipt, publication, authored)
+    }
 }
+
 fn semantic_member(shape: &Shape) -> AuthoredPrismId {
     AuthoredPrismId(match shape.shape_type().unwrap() {
         ShapeEnum::Face => 1701,

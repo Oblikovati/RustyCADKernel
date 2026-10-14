@@ -43,7 +43,11 @@ fn prepare_candidate_copy(
 ) -> Result<(BRepBuilderAPICopy, CandidateParents), CandidateCause> {
     let mut copier = BRepBuilderAPICopy::with_shape(&owned.arrangement, true, true)
         .map_err(CandidateCause::Mapped)?;
-    super::copy_observation::capture_tree_if_present(collector.as_deref_mut(), &mut copier);
+    super::copy_observation::capture_tree_if_present(
+        collector.as_deref_mut(),
+        &mut copier,
+        &owned.arrangement,
+    );
     let parents = copy_parents_observing(owned, &mut copier, collector)?;
     Ok((copier, parents))
 }
