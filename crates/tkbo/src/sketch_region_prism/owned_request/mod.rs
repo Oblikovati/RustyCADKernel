@@ -40,3 +40,5 @@ mod diagnostic_baseline_tests;
 
 #[cfg(test)]
 mod diagnostic_access_tests;
+
+pub(crate) mod request_replay;
