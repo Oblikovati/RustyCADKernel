@@ -1,5 +1,5 @@
 import gzip,hashlib,json,os,pathlib,re,subprocess,sys,time
-root=pathlib.Path('/home/vmiguel/git/oblikovati-workspace/Martensite-prism-annular-construction')
+root=pathlib.Path(__file__).resolve().parents[3]
 out=root/'docs/evidence/annular-prism-construction-v1-2026-10-14';out.mkdir(parents=True,exist_ok=True)
 phase=sys.argv[1]
 env=os.environ.copy();env['PATH']='/home/vmiguel/.cargo/bin:'+env['PATH'];env['CARGO_BUILD_JOBS']='2'
