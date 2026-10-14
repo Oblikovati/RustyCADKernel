@@ -2,6 +2,7 @@
 //! ADR0041 complete-operation publication seam; legacy diagnostic receipts remain unchanged.
 #[cfg(test)]
 mod baseline_tests;
+pub(crate) mod body_view;
 mod progress;
 mod source;
 mod stage_error;
