@@ -7,19 +7,13 @@ use rustycad_tkbrep::{
     topods::{Shape, edge, face},
     toptools::IndexedMapOfShape,
 };
-use rustycad_tkernel::{
-    ncollection::List,
-    standard::Handle,
-};
+use rustycad_tkernel::{ncollection::List, standard::Handle};
 use rustycad_tkg3d::{
     geom::GeomBezierCurve,
     top_abs::{Orientation, ShapeEnum},
 };
 use rustycad_tkmath::gp::{Plane3, Point3};
-use rustycad_tktopalgo::{
-    brep_builder_api::{BRepBuilderAPIMakeFace},
-    brep_lib,
-};
+use rustycad_tktopalgo::{brep_builder_api::BRepBuilderAPIMakeFace, brep_lib};
 #[path = "exact_region_prism/classification.rs"]
 mod classification;
 #[path = "exact_region_prism/ownership.rs"]

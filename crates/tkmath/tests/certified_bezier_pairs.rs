@@ -148,7 +148,6 @@ fn public_capture_failure_includes_actual_offending_counts_and_expected_shape() 
         assert_capture_curve_counts(&failure, index);
         assert_capture_message(&failure);
     }
-
 }
 
 fn assert_regular_domains(certificate: &BezierPairCertificate<'_>) {
@@ -168,9 +167,19 @@ fn assert_regular_domains(certificate: &BezierPairCertificate<'_>) {
 }
 fn rational_query(swapped: bool, reversed_line: bool) -> CapturedBezierPair {
     let controls = [[0., 0.], [0.5, 1.]];
-    let rational = BezierPairCurve { controls: &controls, weights: Some(&[1., 2.]), interval: [0., 1.] };
-    let line = if reversed_line { [[1., 0.], [0., 1.]] } else { [[0., 1.], [1., 0.]] };
-    if swapped { return CapturedBezierPair::capture_pair(curve(&line), rational).unwrap(); }
+    let rational = BezierPairCurve {
+        controls: &controls,
+        weights: Some(&[1., 2.]),
+        interval: [0., 1.],
+    };
+    let line = if reversed_line {
+        [[1., 0.], [0., 1.]]
+    } else {
+        [[0., 1.], [1., 0.]]
+    };
+    if swapped {
+        return CapturedBezierPair::capture_pair(curve(&line), rational).unwrap();
+    }
     CapturedBezierPair::capture_pair(rational, curve(&line)).unwrap()
 }
 #[test]
@@ -187,8 +196,17 @@ fn assert_rational_correspondence(report: &BezierPairReport, swapped: bool, reve
     let proof = report.complete().unwrap();
     let contact = proof.contact(0).unwrap();
     assert_eq!(proof.contact_count(), 1);
-    let expected = if swapped { 0.5 } else if reversed { 2. / 3. } else { 1. / 3. };
-    assert!(contact.paired_parameter_bounds[0] <= expected && expected <= contact.paired_parameter_bounds[1]);
+    let expected = if swapped {
+        0.5
+    } else if reversed {
+        2. / 3.
+    } else {
+        1. / 3.
+    };
+    assert!(
+        contact.paired_parameter_bounds[0] <= expected
+            && expected <= contact.paired_parameter_bounds[1]
+    );
     assert_eq!(contact.point, [1. / 3., 2. / 3.]);
     assert!(contact.achieved_world_error <= 5e-17);
 }
@@ -202,27 +220,55 @@ fn distinct_tangent_endpoint_retains_actual_even_multiplicity_without_duplicate_
     assert_eq!(proof.contact_count(), 1);
     let contact = proof.contact(0).unwrap();
     assert_eq!(contact.parameter.multiplicity(), 2);
-    assert_eq!(contact.parameter.bounds().0.compare_f64(0.).unwrap(), std::cmp::Ordering::Equal);
+    assert_eq!(
+        contact.parameter.bounds().0.compare_f64(0.).unwrap(),
+        std::cmp::Ordering::Equal
+    );
     assert_eq!(contact.paired_parameter_bounds, [0., 0.]);
     assert_eq!(contact.point, [0., 0.]);
 }
 
 fn assert_capture_curve_counts(failure: &BezierPairCaptureFailure, expected_index: usize) {
-    let BezierPairCaptureFailure::Curve { curve_index, cause } = failure else {panic!("expected captured curve context, got {failure:?}");};
+    let BezierPairCaptureFailure::Curve { curve_index, cause } = failure else {
+        panic!("expected captured curve context, got {failure:?}");
+    };
     assert_eq!(*curve_index, expected_index);
-    assert!(matches!(cause.as_ref(), BezierPairCaptureFailure::WeightCount {controls: 2,weights: 1}));
+    assert!(matches!(
+        cause.as_ref(),
+        BezierPairCaptureFailure::WeightCount {
+            controls: 2,
+            weights: 1
+        }
+    ));
 }
 #[test]
 fn actual_right_source_singularity_retains_domain_and_original_denominator_roots() {
     let controls = [[0., 0.], [0.5, 0.], [1., 1.]];
-    let singular = BezierPairCurve {controls: &controls, weights: Some(&[1., 0., -1.]), interval: [0., 1.]};
+    let singular = BezierPairCurve {
+        controls: &controls,
+        weights: Some(&[1., 0., -1.]),
+        interval: [0., 1.],
+    };
     let query = CapturedBezierPair::capture_pair(curve(&controls), singular).unwrap();
     let report = query.certify(policy(), || false);
     assert_eq!(report.completion(), BezierPairCompletion::Incomplete);
-    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {panic!("expected original source failure");};
-    assert!(matches!(failure, BezierPairOperationFailure::SourceDomain {source_index: 1, ..}));
-    let BezierPairOperationFailure::DenominatorRoots(roots) = failure.original_cause() else {panic!("expected actual denominator root isolation");};
-    assert_eq!(roots.roots()[0].bounds().0.compare_f64(0.5).unwrap(), std::cmp::Ordering::Equal);
+    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {
+        panic!("expected original source failure");
+    };
+    assert!(matches!(
+        failure,
+        BezierPairOperationFailure::SourceDomain {
+            source_index: 1,
+            ..
+        }
+    ));
+    let BezierPairOperationFailure::DenominatorRoots(roots) = failure.original_cause() else {
+        panic!("expected actual denominator root isolation");
+    };
+    assert_eq!(
+        roots.roots()[0].bounds().0.compare_f64(0.5).unwrap(),
+        std::cmp::Ordering::Equal
+    );
     assert!(report.complete().is_none());
 }
 #[test]
@@ -232,9 +278,20 @@ fn actual_left_nonfinite_coordinate_is_invalid_and_preserves_original_point_caus
     let query = CapturedBezierPair::capture_pair(curve(&left), curve(&right)).unwrap();
     let report = query.certify(policy(), || false);
     assert_eq!(report.completion(), BezierPairCompletion::Invalid);
-    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {panic!("expected original source failure");};
-    assert!(matches!(failure, BezierPairOperationFailure::SourceDomain {source_index: 0, ..}));
-    assert!(matches!(failure.original_cause(), BezierPairOperationFailure::Source(BezierPairCaptureFailure::Coordinate(_))));
+    let Some(BezierPairFailure::Operation(failure)) = report.failure() else {
+        panic!("expected original source failure");
+    };
+    assert!(matches!(
+        failure,
+        BezierPairOperationFailure::SourceDomain {
+            source_index: 0,
+            ..
+        }
+    ));
+    assert!(matches!(
+        failure.original_cause(),
+        BezierPairOperationFailure::Source(BezierPairCaptureFailure::Coordinate(_))
+    ));
     assert!(report.source().captured_curves()[0].controls[0][0].is_nan());
 }
 
