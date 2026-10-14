@@ -8,7 +8,7 @@ use super::super::{
     },
 };
 use super::{
-    graph_enclosure,
+    graph_enclosure::{self, PairedParameterEnvelope},
     operation::{GraphTask, PairContact, PairOperationFailure},
     polynomial::ExactCoefficientPolynomial,
 };
@@ -70,7 +70,7 @@ impl GraphTask<'_> {
         root: &RootBracket,
         world: &Option<WorldEnvelope>,
         cancelled: &mut impl FnMut() -> bool,
-    ) -> Result<Option<[f64; 2]>, PairOperationFailure> {
+    ) -> Result<Option<PairedParameterEnvelope>, PairOperationFailure> {
         let Some(_world) = world.as_ref().filter(|world| self.certified_world(world)) else {
             return Ok(None);
         };
@@ -98,7 +98,7 @@ fn graph_attempt(
     task: &GraphTask<'_>,
     root: &RootBracket,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<Option<[f64; 2]>, PairOperationFailure> {
+) -> Result<Option<PairedParameterEnvelope>, PairOperationFailure> {
     use graph_enclosure::GraphEnvelopeFailure;
     match graph_enclosure::enclose_u(task.projection, root, cancelled) {
         Ok(bounds) => Ok(Some(bounds)),
@@ -124,14 +124,15 @@ fn resolution_limit(
 
 fn owned_contact(
     candidate: (usize, RootBracket),
-    u_bounds: [f64; 2],
+    u_bounds: PairedParameterEnvelope,
     world: WorldEnvelope,
 ) -> PairContact {
     let (candidate_index, root) = candidate;
     PairContact {
         candidate_index,
         root,
-        u_bounds,
+        u_bounds: u_bounds.rounded,
+        exact_u: u_bounds.exact,
         world,
     }
 }
