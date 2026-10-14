@@ -34,7 +34,11 @@ fn plane(report: &CertifiedPolynomialPlaneMeasure, bytes: &mut Vec<u8>) {
     integral_options(report.requested_options(), bytes);
     integral_options(report.effective_options(), bytes);
 }
-fn integral_options(options: PolynomialIntegralOptions, bytes: &mut Vec<u8>) {
+/// Reuse the unchanged scalar request format; `encode_joined_integral_options(options, bytes)`.
+pub(in crate::sketch_region_prism) fn integral_options(
+    options: PolynomialIntegralOptions,
+    bytes: &mut Vec<u8>,
+) {
     bytes.extend(options.behavior_version.to_le_bytes());
     bytes.extend(options.max_degree.to_le_bytes());
     bytes.extend(options.max_curves.to_le_bytes());
@@ -47,7 +51,11 @@ fn side(report: &CertifiedPolynomialSideIntegral, bytes: &mut Vec<u8>) {
     bytes.extend(report.work().subdivisions.to_le_bytes());
     bytes.extend(report.work().interval_bounds.to_le_bytes());
 }
-fn side_options(options: PolynomialSideOptions, bytes: &mut Vec<u8>) {
+/// Reuse the unchanged scalar request format; `encode_joined_side_options(options, bytes)`.
+pub(in crate::sketch_region_prism) fn side_options(
+    options: PolynomialSideOptions,
+    bytes: &mut Vec<u8>,
+) {
     bytes.extend(options.behavior_version.to_le_bytes());
     bytes.extend(options.max_degree.to_le_bytes());
     bytes.extend(options.max_subdivisions.to_le_bytes());
@@ -62,7 +70,11 @@ fn total(report: &CertifiedEnclosureSum, bytes: &mut Vec<u8>) {
         numbers(*component, bytes);
     }
 }
-fn total_options(options: EnclosureSumOptions, bytes: &mut Vec<u8>) {
+/// Reuse the unchanged scalar request format; `encode_joined_total_options(options, bytes)`.
+pub(in crate::sketch_region_prism) fn total_options(
+    options: EnclosureSumOptions,
+    bytes: &mut Vec<u8>,
+) {
     bytes.extend(options.behavior_version.to_le_bytes());
     bytes.extend(options.max_components.to_le_bytes());
     numbers([options.absolute_error_limit], bytes);

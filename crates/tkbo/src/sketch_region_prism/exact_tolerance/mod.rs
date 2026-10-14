@@ -47,6 +47,7 @@ mod joined_metadata_tests;
 mod joined_operand_tests;
 
 mod replay;
+pub(in crate::sketch_region_prism) use replay::cap as encode_stored_tolerance_cap;
 mod replay_limits;
 
 #[cfg(test)]

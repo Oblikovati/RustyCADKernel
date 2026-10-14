@@ -2,6 +2,7 @@
 //! ADR0033: exact finite incidence certificate, independent of geometric body validity.
 mod admission;
 mod containment;
+mod domain;
 mod execution;
 mod incidence;
 mod links;
@@ -26,3 +27,10 @@ mod tests;
 mod traversal_binding;
 #[cfg(test)]
 mod traversal_tests;
+
+#[cfg(test)]
+mod domain_fixture;
+#[cfg(test)]
+mod domain_policy_fixture;
+#[cfg(test)]
+mod domain_tests;

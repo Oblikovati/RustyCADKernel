@@ -1,0 +1,128 @@
+{
+  "integration_revision": "0a429b1afca284e3f759c55eb1ea4bfc878b95e6",
+  "candidate_revision": "c8559bf9a",
+  "candidate_base": "21b94bdb2",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "7b6972cabc58c454ce29d799a769ffdf6c451d7dc1e2e4c00d1662c1be08e6f1"
+      },
+      "tests": {
+        "passed": 1698,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "8bb6d800d3e3c94788f6081b0c77717618dcd27cf7c389a4a14d3aebbe922212"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "52d47d2afb53cccfdecd8f8aa85b291ac3a2d475ae995d723dfbab4ae0dde49e"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "48afd3b4ce76c088782cef38f327184dd1179cd7c40b3da8504140d707b13c53"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/containment.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain_fixture.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain_policy_fixture.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/execution.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/fixtures.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/types.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/containment.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain_fixture.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain_policy_fixture.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/domain_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/execution.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/fixtures.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology/types.rs": "M"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}

@@ -1,0 +1,36 @@
+{
+  "source_bookends_equal": true,
+  "source_files": 16091,
+  "commands": [
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 58.06716372200026
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 7.360187771999335
+    }
+  ]
+}

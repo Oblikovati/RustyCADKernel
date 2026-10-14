@@ -13,7 +13,7 @@ mod operation;
 mod replay;
 mod request;
 mod result;
-pub(crate) use operation::publish_named_prism;
+pub(crate) use operation::{publish_named_prism, publish_named_prism_v2};
 pub(crate) use progress::{
     PrismPublicationCheckpoint, PrismPublicationPhase, PrismPublicationProgress,
 };
@@ -36,6 +36,10 @@ pub(crate) use source::PrismPublicationSource;
 pub(crate) use stage_error::{
     PrismPublicationClass, PublicationStageCause, PublicationStageFailure,
 };
+#[cfg(test)]
+mod diagnostic_baseline_tests;
+#[cfg(test)]
+mod operation_v2_tests;
 #[cfg(test)]
 mod refusal_tests;
 

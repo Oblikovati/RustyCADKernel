@@ -38,6 +38,26 @@ impl NamedCellComplex {
         first
     }
     pub(super) fn projection(&self) -> FrozenPrismProjection {
+        let (mut projection, shell) = self.start_projection();
+        for (position, word) in self.faces.iter().enumerate() {
+            self.add_face(&mut projection, shell, position, word);
+        }
+        finish(projection)
+    }
+    pub(super) fn domain_projection(&self, faces: &[Vec<Vec<i32>>]) -> FrozenPrismProjection {
+        let (mut projection, shell) = self.start_projection();
+        let mut wire_identity = 0u64;
+        for (position, loops) in faces.iter().enumerate() {
+            let face = authored(4, position as u64);
+            let face_use = add_use(&mut projection, Some(shell), face, false, 1);
+            for word in loops {
+                self.add_wire(&mut projection, face_use, face, wire_identity, word);
+                wire_identity += 1;
+            }
+        }
+        finish(projection)
+    }
+    fn start_projection(&self) -> (FrozenPrismProjection, usize) {
         let mut projection = fresh_projection();
         projection.nodes.clear();
         projection.uses.clear();
@@ -46,10 +66,7 @@ impl NamedCellComplex {
         let root = add_use(&mut projection, None, authored(2, 1), false, 1);
         let shell = add_use(&mut projection, Some(root), authored(3, 1), false, 1);
         self.add_endpoints(&mut projection);
-        for (position, word) in self.faces.iter().enumerate() {
-            self.add_face(&mut projection, shell, position, word);
-        }
-        finish(projection)
+        (projection, shell)
     }
     fn add_endpoints(&self, projection: &mut FrozenPrismProjection) {
         for (position, (first, last)) in self.edges.iter().enumerate() {
@@ -68,8 +85,18 @@ impl NamedCellComplex {
         word: &[i32],
     ) {
         let face = authored(4, position as u64);
-        let wire = authored(5, position as u64);
         let face_use = add_use(projection, Some(shell), face, false, 1);
+        self.add_wire(projection, face_use, face, position as u64, word);
+    }
+    fn add_wire(
+        &self,
+        projection: &mut FrozenPrismProjection,
+        face_use: usize,
+        face: FrozenPrismKey,
+        identity: u64,
+        word: &[i32],
+    ) {
+        let wire = authored(5, identity);
         let wire_use = add_use(projection, Some(face_use), wire, false, 1);
         for (slot, signed) in word.iter().enumerate() {
             self.add_edge(projection, wire_use, [face, wire], slot, *signed);

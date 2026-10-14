@@ -34,6 +34,7 @@ pub(super) struct PublicationCallbacks<'a> {
     ordinal: usize,
     halted: bool,
     stopped: Option<PublicationCallbackStop>,
+    retain_child_failure: bool,
 }
 impl<'a> PublicationCallbacks<'a> {
     pub fn new(progress: &'a mut dyn PrismPublicationProgress) -> Self {
@@ -42,7 +43,19 @@ impl<'a> PublicationCallbacks<'a> {
             ordinal: 0,
             halted: false,
             stopped: None,
+            retain_child_failure: false,
         }
+    }
+    /// Select V2 diagnostic retention; `PublicationCallbacks::retaining_children(progress)` keeps actual child headers.
+    pub fn retaining_children(progress: &'a mut dyn PrismPublicationProgress) -> Self {
+        let mut callbacks = Self::new(progress);
+        callbacks.retain_child_failure = true;
+        callbacks
+    }
+    /// Read the operation-local retention decision; `callbacks.retains_child_failure()` never infers missing legacy headers.
+    pub fn retains_child_failure(&self) -> bool {
+        // ADR0048 V1 remains selectable; only explicit V2 keeps child headers.
+        self.retain_child_failure
     }
     pub fn cancelled(&mut self, phase: PrismPublicationPhase) -> bool {
         if self.halted {

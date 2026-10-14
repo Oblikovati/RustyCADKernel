@@ -1,0 +1,45 @@
+   Compiling rustycad-tkbo v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-prism-diagnostic-envelope/crates/tkbo)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 19.57s
+     Running unittests src/lib.rs (target/debug/deps/rustycad_tkbo-3743221922cb8a91)
+
+running 22 tests
+test sketch_region_prism::affine_chart_tests::near_tangent_exact_nonzero_evidence_does_not_promote_the_diagnostic_to_success ... ok
+test sketch_region_prism::frozen::diagnostic_tests::captured_intersection_failure_is_typed_and_never_a_validity_pass ... ok
+test sketch_region_prism::frozen::diagnostic_tests::nominal_fixture_native_alert_is_exact_dataless_intersection_failure ... ok
+test sketch_region_prism::frozen::diagnostic_tests::unknown_and_owner_bearing_alerts_explicitly_refuse_capture ... ok
+test sketch_region_prism::frozen::ordered_validation::policy_tests::report_exceedance_completes_with_diagnostic_and_explicit_policy_changes_bytes ... ok
+test sketch_region_prism::frozen::owned_refusal::tests::frozen_tests::nested_frozen_diagnostic_retains_complete_entity_context_and_payload ... ok
+test sketch_region_prism::frozen::owned_refusal::tests::frozen_tests::unsupported_frozen_diagnostic_stays_projection_incomplete ... ok
+test sketch_region_prism::isolation_tests::diagnostic_prism_isolated_from_source_and_candidate_geometry_mesh_flags ... ok
+test sketch_region_prism::isolation_tests::previous_diagnostic_survives_failure_cancel_recovery_on_same_source ... ok
+test sketch_region_prism::owned_request::diagnostic_access_tests::failed_admission_view_keeps_original_request_and_missing_plan ... ok
+test sketch_region_prism::owned_request::diagnostic_access_tests::later_failed_view_names_constructed_owner_without_publishing_it ... ok
+test sketch_region_prism::owned_request::diagnostic_access_tests::prepared_view_retains_every_existing_owner_in_declared_stage_order ... FAILED
+test sketch_region_prism::owned_request::diagnostic_baseline_tests::diagnostic_baseline_callback_error_keeps_native_bytes_and_terminal_checkpoint ... ok
+test sketch_region_prism::owned_request::diagnostic_baseline_tests::diagnostic_baseline_empty_request_retains_declined_class_without_plan ... ok
+test sketch_region_prism::owned_request::diagnostic_baseline_tests::diagnostic_baseline_invalid_float_retains_payload_bits_and_original_revision ... ok
+test sketch_region_prism::owned_request::diagnostic_baseline_tests::diagnostic_baseline_later_callback_retains_constructed_local_source ... ok
+test sketch_region_validation::diagnostic_tests::absent_analyzer_result_preserves_exact_affected_occurrence ... ok
+test sketch_region_validation::diagnostic_tests::empty_body_status_is_a_failed_topological_body ... ok
+test sketch_region_validation::diagnostic_tests::empty_statuses_and_check_failure_are_incomplete ... ok
+test sketch_region_validation::diagnostic_tests::geometric_defects_keep_native_status_order ... ok
+test sketch_region_validation::diagnostic_tests::occurrence_parent_sets_are_complete_sorted_and_orientation_specific ... ok
+test sketch_region_validation::diagnostic_tests::real_missing_surface_blocks_self_check_with_affected_source ... ok
+
+failures:
+
+---- sketch_region_prism::owned_request::diagnostic_access_tests::prepared_view_retains_every_existing_owner_in_declared_stage_order stdout ----
+
+thread 'sketch_region_prism::owned_request::diagnostic_access_tests::prepared_view_retains_every_existing_owner_in_declared_stage_order' (3172404) panicked at crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_access_tests.rs:42:5:
+assertion `left == right` failed
+  left: [ConstructedSource, ContactTransport, Prism]
+ right: [ConstructedSource, BoundaryInputs, Census, Partition, ContactTransport, Prism]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    sketch_region_prism::owned_request::diagnostic_access_tests::prepared_view_retains_every_existing_owner_in_declared_stage_order
+
+test result: FAILED. 21 passed; 1 failed; 0 ignored; 0 measured; 1026 filtered out; finished in 0.89s
+
+error: test failed, to rerun pass `-p rustycad-tkbo --lib`

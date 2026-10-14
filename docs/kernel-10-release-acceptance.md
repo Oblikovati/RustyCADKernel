@@ -133,6 +133,28 @@ general profiles and holes, persistent edit/persistence references, sanitizer an
 release-package acceptance remain open. Neither this supplement nor the private
 `CompleteNamedPrismV1` status closes Kernel #10 or authorizes an early release.
 
+## Owned boundary and physical-volume integration supplement
+
+The subsequent actual-main gates add two bounded prerequisites:
+
+| Constituent | Integrated source and root evidence | Verified scope |
+| --- | --- | --- |
+| Conditional physical volume | Source `805e33928`, integrated source `53147a45c`, [root receipt](evidence/prism-joined-volume-integration-2026-10-14/INTEGRATED.md) | 1,641 tests +35 doctests; exact orientation transports the signed enclosure and representative without changing certified error or policy. Six process outputs preserve volume, measures and publication. |
+| Owned request preparation and refusal projection | Sources `06a9f7e71` / `893373d1e`, integrated source `ff70563b9`, [root receipt](evidence/owned-prism-boundary-integration-2026-10-14/INTEGRATED.md) | 1,689 tests +35 doctests; owned coefficients construct native endpoint identities independently of traversal. Supported diagnostic projections own their values; unsupported retained payloads remain explicitly incomplete. Twenty-six process outputs preserve thirteen full receipts. |
+
+Both matrices passed strict Clippy, formatting and warning-denied generated
+documentation with unchanged source bookends. Their overlapping totals describe
+their own revisions. Completed worktrees and branches were deleted after checks.
+The preparation candidate's 3,696 observed cancellation prefixes remain covered
+by its identical integrated test; no portable whole-preparation replay is claimed.
+
+Actual semantic correspondence, portable body publication, complete owned
+diagnostics, general profiles including holes, persistent consumer references
+and release-package acceptance remain open. The [sanitizer diagnosis](evidence/prism-tsan-startup-diagnosis-2026-10-14/README.md)
+records startup failure on both installed nightly runtimes. The injected host
+library is observed, but its causal responsibility is unproved. No actual
+operation sanitizer pass or host-security workaround is claimed.
+
 ## Every issue requirement
 
 | Issue item | Concrete implementation / executed evidence | Precise remaining acceptance |
