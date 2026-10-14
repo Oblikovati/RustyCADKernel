@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 from api_inventory_status import compiler_status_lines, current_workspace_digest
+from legacy_status import legacy_status_lines
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "porting/baseline.json"
@@ -121,7 +122,7 @@ def snapshot(source):
     }
 
 
-def status():
+def status() -> None:
     inventory = json.loads(INVENTORY.read_text())
     ledger = json.loads((ROOT / "porting/parity.json").read_text())
     counts = collections.Counter(t["module"] for t in inventory["toolkits"])
@@ -144,13 +145,11 @@ def status():
     print(
         f"All regression files (including support): {len(inventory['upstream_test_files'])}"
     )
-    print(f"API mappings: {len(ledger['api'])}; test mappings: {len(ledger['tests'])}")
-    for toolkit in inventory["toolkits"]:
-        mapped = [row for row in ledger["tests"] if row["toolkit"] == toolkit["name"]]
-        if mapped:
-            print(
-                f"{toolkit['name']}: {len(mapped)}/{len(toolkit['gtest_declaration_candidates'])} GoogleTest declarations mapped (source discovery, not full runtime/DRAW coverage)"
-            )
+    print(
+        f"API ledger rows: {len(ledger['api'])}; test ledger rows: {len(ledger['tests'])}"
+    )
+    for line in legacy_status_lines(inventory, ledger):
+        print(line)
     for line in compiler_status_lines(ROOT, current_workspace_digest()):
         print(line)
 
