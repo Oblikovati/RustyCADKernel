@@ -1,0 +1,195 @@
+{
+  "source_revision": "9699a8adf561196aa296984ea5546dde0650476d",
+  "provenance": {
+    "revision": "9699a8adf561196aa296984ea5546dde0650476d",
+    "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)\n",
+    "jobs": 2,
+    "platform": [
+      "Linux",
+      "pop-os",
+      "7.1.5-76070105-generic",
+      "#202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A",
+      "x86_64"
+    ],
+    "source_files": 50683,
+    "environment": {
+      "RUSTFLAGS": null,
+      "LD_PRELOAD": null,
+      "LD_LIBRARY_PATH": null,
+      "CARGO_TARGET_DIR": null
+    }
+  },
+  "commands": [
+    {
+      "name": "all-targets",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "seconds": 2425.969914674759
+    },
+    {
+      "name": "doctests",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 1.2087619304656982
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 3.43806791305542
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 6.635513782501221
+    },
+    {
+      "name": "docs",
+      "command": [
+        "cargo",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--no-deps"
+      ],
+      "exit": 0,
+      "seconds": 32.429073333740234
+    }
+  ],
+  "all_target_results": [
+    {
+      "passed": 1358,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 646,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "all_target_passed": 2006,
+  "doctests": [
+    {
+      "passed": 35,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "tracked_file_bookends": {
+    "count": 50683,
+    "equal": true
+  },
+  "replay": {
+    "binary": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-owned-projection-failure/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+    "binary_sha256": "4bba5de593affeb96b4b04ab31207d5ee82e5c52d1694ba96775afa40e2b8f82",
+    "binary_after_sha256": "4bba5de593affeb96b4b04ab31207d5ee82e5c52d1694ba96775afa40e2b8f82",
+    "rows": [
+      {
+        "name": "projection",
+        "filter": "owned_projection_refusal_process_receipt",
+        "environment": "MARTENSITE_PROJECTION_REFUSAL_RECEIPT",
+        "bytes": 26813998,
+        "sha256": "14ef17daddb88ad7e2ed59adc438a17b855f212265d7b78e9272357e2229c0bc",
+        "processes_equal": true,
+        "legacy_baseline_equal": null
+      },
+      {
+        "name": "complete",
+        "filter": "complete_operation_replay_across_processes",
+        "environment": "MARTENSITE_COMPLETE_OWNED_RECEIPT",
+        "bytes": 9583467,
+        "sha256": "09c3de2d8d60981dacc60240f9a7d945f833177b514f64ab495e5b45dfefd00e",
+        "processes_equal": true,
+        "legacy_baseline_equal": true
+      },
+      {
+        "name": "preparation",
+        "filter": "full_typed_refusal_process_receipt",
+        "environment": "MARTENSITE_TYPED_DIAGNOSTIC_RECEIPT",
+        "bytes": 5807,
+        "sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8",
+        "processes_equal": true,
+        "legacy_baseline_equal": true
+      },
+      {
+        "name": "publication",
+        "filter": "full_publication_diagnostic_process_receipt",
+        "environment": "MARTENSITE_PUBLICATION_DIAGNOSTIC_RECEIPT",
+        "bytes": 27122,
+        "sha256": "60678228ea0662cbea41f30128d2d60c922d47103ea1f1d30376f8ee32c7caea",
+        "processes_equal": true,
+        "legacy_baseline_equal": true
+      }
+    ]
+  },
+  "archive_sha256": "35f57c6edd5ffd662a9bce1b87f441f281aa4709a91c2d2a154af5960ee3ace9",
+  "scope": "Private actual Projection family only. Other scoped families returned in identical original Box. Accepted publication is failure context, not outer success.",
+  "review": {
+    "reviewer": "coordinator",
+    "source": "9699a8adf",
+    "scope": "ownership/move, classification, full request and accepted-publication envelope, body/volume typed encoders",
+    "finding": "No blocker found in reviewed scope",
+    "reviewer_executed_tests": false
+  },
+  "retained_development_failures": [
+    "baseline/key-seam.log: system rustc1.95 selected by missing PATH pin; corrected1.99 invocation passed",
+    "focused-first.log: test AuthoredPrismId import corrected to frozen facade",
+    "clippy-prefix.log: redundant let-return and176byte Err; corrected with identical boxed unsupported error return"
+  ],
+  "exclusions": [
+    "ThreadSanitizer incomplete at retained unchanged-host startup control; no repeat or bypass",
+    "No live OCCT/native GPU runs",
+    "No release performance or application acceptance claim",
+    "Preparation, Resolution and Publication full owned refusal families remain incomplete"
+  ]
+}

@@ -6,8 +6,8 @@ mod phases;
 mod tags;
 use super::*;
 use crate::sketch_region_prism::frozen::proof_join::{encode_joined_block, encode_joined_text};
-pub(super) use native::append as append_native_failure;
-pub(super) use phases::publication as publication_phase_tag;
+pub(in crate::sketch_region_prism) use native::append as append_native_failure;
+pub(in crate::sketch_region_prism) use phases::publication as publication_phase_tag;
 pub(super) use tags::class as diagnostic_class_tag;
 impl OwnedPrismDiagnostic {
     /// Replay supported diagnostic values and explicit coverage; `diagnostic.replay_bytes()` never serializes retained local owners.
@@ -92,3 +92,5 @@ mod coverage_tests;
 mod native_tests;
 #[cfg(test)]
 mod phase_tests;
+
+pub(in crate::sketch_region_prism) use phases::preparation as append_preparation_phase;

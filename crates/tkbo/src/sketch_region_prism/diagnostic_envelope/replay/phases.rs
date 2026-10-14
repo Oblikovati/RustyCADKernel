@@ -17,7 +17,7 @@ pub(super) fn append(value: PrismDiagnosticPhase, bytes: &mut Vec<u8>) {
         }
     }
 }
-pub(super) fn preparation(value: OwnedPrismPhase, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn preparation(value: OwnedPrismPhase, bytes: &mut Vec<u8>) {
     match value {
         OwnedPrismPhase::Admission => bytes.push(0),
         OwnedPrismPhase::Construction => bytes.push(1),
@@ -64,9 +64,7 @@ fn prism(value: PrismPhase) -> u8 {
         PrismPhase::Validation => 5,
     }
 }
-pub(in crate::sketch_region_prism::diagnostic_envelope) fn publication(
-    value: PrismPublicationPhase,
-) -> u8 {
+pub(in crate::sketch_region_prism) fn publication(value: PrismPublicationPhase) -> u8 {
     match value {
         PrismPublicationPhase::Admission => 0,
         PrismPublicationPhase::Join => 1,
