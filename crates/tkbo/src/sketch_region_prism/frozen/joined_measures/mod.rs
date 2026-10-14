@@ -5,7 +5,9 @@ mod admission;
 mod error;
 mod replay;
 pub(in crate::sketch_region_prism) use replay::{
-    integral_options as encode_joined_integral_options, side_options as encode_joined_side_options,
+    integral_options as encode_joined_integral_options, plane as encode_joined_plane,
+    scalar as encode_joined_scalar, side as encode_joined_side,
+    side_options as encode_joined_side_options, total as encode_joined_total,
     total_options as encode_joined_total_options,
 };
 mod types;
@@ -13,6 +15,7 @@ use super::proof_join::{JoinedPrismFace, JoinedPrismProof};
 use super::{AuthoredPrismId, FrozenUseKey};
 use crate::sketch_region_prism::{PrismImageRole, region_certificate::*};
 pub(crate) use error::*;
+pub(in crate::sketch_region_prism) use error::{integral_cancelled, plane_cancelled};
 use rustycad_tkmath::predicates::roots::metric_bounds::*;
 pub(crate) use types::*;
 #[cfg(test)]

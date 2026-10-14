@@ -6,7 +6,14 @@ use super::{
 };
 use num_bigint::BigInt;
 
-pub(super) fn admit_policy(options: PolynomialSideOptions) -> Result<(), Fault> {
+/// Validate the original side-integration policy before a caller allocates a shared work budget.
+/// This performs no geometry work, clamping or cancellation polling.
+/// ```
+/// use rustycad_tkmath::predicates::roots::metric_bounds::*;
+/// validate_polynomial_side_options(PolynomialSideOptions::default())?;
+/// # Ok::<(), PolynomialSideFailure>(())
+/// ```
+pub fn admit_policy(options: PolynomialSideOptions) -> Result<(), Fault> {
     if options.behavior_version != 1
         || options.max_degree > 16
         || options.max_subdivisions > 65536
