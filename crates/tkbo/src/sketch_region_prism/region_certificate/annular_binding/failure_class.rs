@@ -47,3 +47,10 @@ fn body(cause: &PrismCause) -> TwoLoopRefusalClass {
         _ => TwoLoopRefusalClass::Incomplete,
     }
 }
+
+impl AnnularBindingCause<'_> {
+    /// Read the existing retained-cause class; `cause.classification()` grants no body authority.
+    pub(in crate::sketch_region_prism) fn classification(&self) -> TwoLoopRefusalClass {
+        classify(self)
+    }
+}
