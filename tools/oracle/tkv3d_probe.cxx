@@ -77,12 +77,15 @@
 #include "tkv3d_probe_ais_trihedron.cxx"
 #include "tkv3d_probe_ais_rubber_band.cxx"
 #include "tkv3d_probe_brep_font.cxx"
+#include "tkv3d_probe_dsg_prs.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFont regularization and builders (tkv3d_probe_brep_font.cxx)
  {"v3_brepfont_regularize", v3_brepfont_regularize},
  {"v3_brepfont_curve", v3_brepfont_curve},
  {"v3_brepfont_glyph", v3_brepfont_glyph},
  {"v3_brepfont_text", v3_brepfont_text},
+ // DsgPrs presentations (tkv3d_probe_dsg_prs.cxx)
+ {"v3_dsgprs", v3_dsgprs},
  {"v3_ais_rubber_band", v3_ais_rubber_band},
  {"v3_ais_trihedron", v3_ais_trihedron},
  {"v3_ais_point_cloud", v3_ais_point_cloud},

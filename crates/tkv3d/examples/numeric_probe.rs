@@ -20,6 +20,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_brepfont_curve", v3_probe::brep_font::curve_case),
     ("v3_brepfont_glyph", v3_probe::brep_font::glyph_case),
     ("v3_brepfont_text", v3_probe::brep_font::text_case),
+    // DsgPrs presentations (v3_probe/dsg_prs.rs)
+    ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
     (
         "v3_ais_rubber_band",
         v3_probe::ais_rubber_band::rubber_band_case,
