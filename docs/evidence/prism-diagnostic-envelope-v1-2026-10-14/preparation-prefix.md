@@ -48,3 +48,15 @@ No native OCCT/GPU workload, performance comparison, complete operation,
 publication/refusal corpus or release acceptance is claimed. The private local
 retention carrier is not asserted to be a published Send/Sync result. Root review
 and final serialized integration remain required.
+
+## Independent source review
+
+The body-view owner reviewed fixed source `1117e2fcf` read-only and reported no
+blocker within the early-preparation scope. Review covered class/coverage
+separation, independent nested-cause gaps, unchanged original-box retention,
+immutable native buffers, independently cloned actual request context and the
+explicit context-only replay/publication-attribution exclusions. The reviewer
+performed no tests or edits. Root approved this bounded prefix; full-operation
+refusal replay must separately encode every supported cause, class, coverage and
+checkpoint without treating the test-only Debug observation as a persistence
+format.
