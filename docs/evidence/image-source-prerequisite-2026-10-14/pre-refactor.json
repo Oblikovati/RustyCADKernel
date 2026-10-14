@@ -1,0 +1,26 @@
+{
+  "base_revision": "c47191e0492c715e24410b999e547ef500854750",
+  "phase": "Before production refactor; only owned fixture module and registration added.",
+  "command": "CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 cargo test --locked -j 4 -p rustycad-tkservice --lib pix_map_owned_contract_tests",
+  "exit": 0,
+  "passed": 4,
+  "fixture": "crates/tkservice/src/image/pix_map_owned_contract_tests.rs",
+  "fixture_sha256": "1be92caf7634165b974f735b2dfde0f1f5af7aad4e183a209253c54007aad52b",
+  "expected_kind": "Owned current-behavior fixtures with independently calculated byte counts and explicit fill values; no OCCT execution or transcript used.",
+  "expectations": [
+    "row stride at least pixel width times bytes per pixel; slice stride times height; total slice bytes times depth",
+    "allocation zeroes storage including padding",
+    "clear removes pixels while preserving format and row order",
+    "zero dimensions refuse after clearing; requested format is retained",
+    "zero-depth InitZero3D refuses; no flat-image substitution"
+  ],
+  "toolchain": [
+    "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "binary: rustc",
+    "commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4",
+    "commit-date: 2026-09-28",
+    "host: x86_64-unknown-linux-gnu",
+    "release: 1.99.0",
+    "LLVM version: 23.1.1"
+  ]
+}

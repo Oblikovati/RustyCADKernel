@@ -41,7 +41,8 @@ impl Default for ImagePixMap {
         }
     }
 }
-rustycad_tkernel::impl_transient!(ImagePixMap, "Image_PixMap", StandardTransient, transient);
+rustycad_tkernel::impl_transient!(ImagePixMap, "Image_PixMap", StandardTransient, transient,
+    interfaces:[dyn super::ImagePixMapSource]);
 
 impl ImagePixMap {
     /// True on a big-endian host; `ImagePixMap::is_big_endian_host()`.

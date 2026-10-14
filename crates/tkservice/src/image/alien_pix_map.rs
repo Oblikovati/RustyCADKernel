@@ -29,7 +29,8 @@ impl Deref for ImageAlienPixMap {
         &self.base
     }
 }
-rustycad_tkernel::impl_transient!(ImageAlienPixMap, "Image_AlienPixMap", ImagePixMap, base);
+rustycad_tkernel::impl_transient!(ImageAlienPixMap, "Image_AlienPixMap", ImagePixMap, base,
+    interfaces:[dyn super::ImagePixMapSource]);
 
 /// "Error: no image library available" to the default messenger.
 fn no_library() {
