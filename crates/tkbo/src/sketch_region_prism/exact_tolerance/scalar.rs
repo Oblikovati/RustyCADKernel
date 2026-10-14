@@ -40,6 +40,20 @@ pub(super) fn certify_exact_endpoint(
     let curve_frame = endpoint_frame(curve.placement, EndpointFrameRole::CurveRepresentation)?;
     let vertex_frame = endpoint_frame(placement, EndpointFrameRole::VertexOccurrence)?;
     let report = certify_captured_placed_endpoint(curve, parameter, local_point, placement, 0.);
+    complete_zero_report(
+        curve_frame,
+        vertex_frame,
+        captured_endpoint_root_options(),
+        report,
+    )
+}
+
+pub(super) fn complete_zero_report(
+    curve_frame: UsableToleranceFrame,
+    vertex_frame: UsableToleranceFrame,
+    roots: RootIsolationOptions,
+    report: TransportedResidualReport,
+) -> Result<ExactEndpointCertificate, ExactEndpointFailure> {
     let bisections = report.bisections;
     let proven_squared_upper =
         exact_zero_bound(&report).ok_or(ExactEndpointFailure::Residual(report))?;
@@ -48,6 +62,7 @@ pub(super) fn certify_exact_endpoint(
         vertex_frame,
         proven_squared_upper,
         bisections,
+        roots,
     ))
 }
 
@@ -56,19 +71,20 @@ fn zero_certificate(
     vertex_frame: UsableToleranceFrame,
     proven_squared_upper: DyadicBound,
     bisections: u64,
+    effective_roots: RootIsolationOptions,
 ) -> ExactEndpointCertificate {
     ExactEndpointCertificate {
         curve_frame,
         vertex_frame,
         requested_spatial: 0.,
         effective_spatial: 0.,
-        effective_roots: captured_endpoint_root_options(),
+        effective_roots,
         proven_squared_upper,
         bisections,
     }
 }
 
-fn endpoint_frame(
+pub(super) fn endpoint_frame(
     placement: MetricEmbedding<3>,
     role: EndpointFrameRole,
 ) -> Result<UsableToleranceFrame, ExactEndpointFailure> {
