@@ -18,6 +18,7 @@ impl ExactCoefficientPolynomial {
         }
         Self(coefficients)
     }
+    #[cfg(test)]
     pub fn constant(value: BigInt) -> Self {
         let coefficients = vec![value];
         Self::new(coefficients)

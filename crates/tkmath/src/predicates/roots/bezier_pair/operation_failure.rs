@@ -5,24 +5,42 @@ use super::super::{
 use super::equations::DiagonalDivisionFailure;
 use super::source::PairSourceFailure;
 #[derive(Debug)]
-pub(super) enum PairOperationFailure {
+/// Typed noncompletion; no successful partial geometry accompanies these causes.
+pub enum PairOperationFailure {
+    /// Original source capture/conversion cause.
     Source(PairSourceFailure),
+    /// Original primary isolation or completed-work exhaustion cause.
     Root(RootIsolationError),
+    /// Original exact algebraic-root sign cause.
     Sign(RootSignError),
+    /// Rejected generated-sign policy or representability.
     SignPolicy(super::sign_policy::PairSignPolicyFailure),
+    /// Exact self-diagonal division failed.
     Diagonal(DiagonalDivisionFailure),
+    /// Actual denominator roots prevent regular source-domain completion.
     DenominatorRoots(super::super::RootIsolation),
+    /// Actual alpha/beta common root leaves a whole fibre unresolved.
     ExceptionalFiber(super::super::signs::RootSignEvaluation),
+    /// Generic ideal reduction did not establish a linear fibre.
     NonLinearFiber,
+    /// Both cleared originals vanish; correspondence overlap remains unproved.
     PositiveDimensional,
+    /// Original world construction cause.
     World(EnvelopeFailure),
+    /// The current point construction cannot meet the request at this singleton root.
     WorldResolution {
+        /// Unchanged offending construction-error request.
         requested_error: f64,
+        /// Last exact certified root bracket.
         last_root: Box<super::super::RootBracket>,
+        /// Last world bounds, constructed point and achieved error, if available.
         enclosure: Option<([[f64; 2]; 2], [f64; 2], f64)>,
     },
+    /// Re-isolation failed unique-root containment or multiplicity invariants.
     RefinementInvariant(Box<super::super::RootIsolation>),
+    /// Original paired-parameter graph enclosure cause.
     Graph(super::graph_enclosure::GraphEnvelopeFailure),
+    /// Offending nonfinite or nonpositive world error request.
     WorldRequest(f64),
 }
 

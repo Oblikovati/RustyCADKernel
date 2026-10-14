@@ -12,15 +12,21 @@ pub(super) enum CapturedPairDomain {
     SelfOffDiagonal,
 }
 #[derive(Clone, Debug, PartialEq)]
-pub(super) struct CapturedBezierPair {
+/// Immutable captured distinct curves or one source for canonical self contacts.
+pub struct CapturedBezierPair {
     sources: [OwnedBezierSource; 2],
     domain: CapturedPairDomain,
 }
 #[derive(Clone, Copy, Debug, PartialEq)]
-pub(super) struct PairQueryPolicy {
+/// Versioned primary root, generated-sign and independent world-error policy.
+pub struct PairQueryPolicy {
+    /// Query policy version; expected one.
     pub version: u32,
+    /// Primary polynomial admission, initial bracket width and global split limit.
     pub roots: RootIsolationOptions,
+    /// Separate versioned admission for generated exact sign polynomials.
     pub signs: PairSignOptions,
+    /// Finite positive Euclidean construction error; never widened.
     pub requested_world_error: f64,
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -33,12 +39,13 @@ pub(super) struct CapturedPairOutcome {
     pub outcome: Result<AccountedPairOutcome, PairQueryPreparationFailure>,
 }
 impl CapturedBezierPair {
-    pub fn distinct(left: OwnedBezierSource, right: OwnedBezierSource) -> Self {
+    pub(super) fn distinct(left: OwnedBezierSource, right: OwnedBezierSource) -> Self {
         Self {
             sources: [left, right],
             domain: CapturedPairDomain::Distinct,
         }
     }
+    /// Capture one actual source for canonical t<u contacts, excluding the entire diagonal. Example: `CapturedBezierPair::self_off_diagonal(&controls, None, [0., 1.])?`.
     pub fn self_off_diagonal(
         controls: &[[f64; 2]],
         weights: Option<&[f64]>,
@@ -50,12 +57,12 @@ impl CapturedBezierPair {
             domain: CapturedPairDomain::SelfOffDiagonal,
         })
     }
-    pub fn sources(&self) -> &[OwnedBezierSource; 2] {
+    pub(super) fn sources(&self) -> &[OwnedBezierSource; 2] {
         let captured = &self.sources;
         // This returns the query's captured allocation, not caller-owned mutable controls.
         captured
     }
-    pub fn evaluate(
+    pub(super) fn evaluate(
         &self,
         policy: PairQueryPolicy,
         cancelled: &mut impl FnMut() -> bool,

@@ -10,10 +10,15 @@ pub(super) struct BivariateEquation(pub Vec<ExactCoefficientPolynomial>);
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub(super) struct PairedEquations(pub [BivariateEquation; 2]);
 #[derive(Clone, Debug, PartialEq)]
-pub(super) enum DiagonalDivisionFailure {
+/// Exact self-diagonal division failure; no approximate cancellation is used.
+pub enum DiagonalDivisionFailure {
+    /// Original coefficient-ring arithmetic or cancellation cause.
     Algebra(RootIsolationError),
+    /// The supplied pair was not exactly divisible by the diagonal.
     NonzeroRemainder {
+        /// Original coordinate equation index, expected zero or one.
         axis: usize,
+        /// Number of remaining nonzero-axis polynomial coefficients.
         coefficient_count: usize,
     },
 }

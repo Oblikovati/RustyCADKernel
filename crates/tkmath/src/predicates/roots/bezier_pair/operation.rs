@@ -32,6 +32,7 @@ pub(super) struct AccountedPairOutcome {
     pub completion: Result<PairOperationProof, PairOperationFailure>,
     pub work: super::work_budget::PairWorkReceipt,
 }
+#[cfg(test)]
 pub(super) fn compute(
     sources: [OwnedBezierSource; 2],
     self_domain: bool,
@@ -41,6 +42,7 @@ pub(super) fn compute(
 ) -> Result<PairOperationProof, PairOperationFailure> {
     compute_accounted(sources, self_domain, options, requested_error, cancelled).completion
 }
+#[cfg(test)]
 pub(super) fn compute_accounted(
     sources: [OwnedBezierSource; 2],
     self_domain: bool,

@@ -7,8 +7,11 @@ pub(super) struct PairWorkBudget {
     completed: Cell<u16>,
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(super) struct PairWorkReceipt {
+/// Requested global budget and actual completed split events, including failure.
+pub struct PairWorkReceipt {
+    /// Original maximum completed subdivisions for the full query.
     pub requested: u16,
+    /// Successful split events across all stages, including before failure/cancel.
     pub completed: u16,
 }
 impl PairWorkBudget {

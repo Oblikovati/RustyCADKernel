@@ -4,14 +4,21 @@ use super::super::signs::RootSignEvaluation;
 use super::polynomial::ExactCoefficientPolynomial;
 use std::cmp::Ordering;
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(super) enum MembershipRule {
+/// Exact comparison required by a retained algebraic-root predicate.
+pub enum MembershipRule {
+    /// Query polynomial must vanish.
     Zero,
+    /// Query polynomial must not vanish.
     Nonzero,
+    /// Query polynomial must be zero or positive.
     Nonnegative,
+    /// Query polynomial must be zero or negative.
     Nonpositive,
+    /// Query polynomial must be strictly positive.
     Positive,
 }
 impl MembershipRule {
+    /// Apply this exact predicate to an algebraic-root sign. Example: `BezierPairMembershipRule::Positive.accepts(std::cmp::Ordering::Greater)`.
     pub fn accepts(self, sign: Ordering) -> bool {
         match self {
             Self::Zero => sign == Ordering::Equal,

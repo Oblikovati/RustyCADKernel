@@ -8,9 +8,13 @@ use super::super::{
 use super::{polynomial::ExactCoefficientPolynomial, projection::LinearFiberProjection};
 use num_bigint::BigInt;
 #[derive(Clone, Debug, PartialEq)]
-pub(super) enum GraphEnvelopeFailure {
+/// Original algebraic graph enclosure noncompletion.
+pub enum GraphEnvelopeFailure {
+    /// Original polynomial evaluation or cancellation cause.
     Root(RootIsolationError),
+    /// Alpha interval still contains zero; refinement could not separate it.
     UnresolvedLeadingInterval,
+    /// A finite binary64 outward graph enclosure could not be constructed.
     Binary64Overflow,
 }
 pub(super) fn enclose_u(

@@ -2,34 +2,48 @@
 //! Generated sign admission is explicit; it never widens primary isolation admission.
 use super::projection::LinearFiberProjection;
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(super) enum PairSignAdmission {
+/// Declared generated-polynomial degree admission, separate from primary isolation.
+pub enum PairSignAdmission {
+    /// Conservative bound derived from the actual original-ideal projection.
     DerivedProjection,
+    /// Explicit maximum generated-sign degree; never silently widened.
     Explicit(u16),
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(super) struct PairSignOptions {
+/// Versioned generated-sign admission request.
+pub struct PairSignOptions {
+    /// Sign policy version; expected one.
     pub version: u32,
+    /// Source-derived or explicit generated-sign degree admission.
     pub degree_limit: PairSignAdmission,
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(super) struct EffectivePairSigns {
+/// Requested admission plus measured conservative bound and effective cap.
+pub struct EffectivePairSigns {
+    /// Original requested sign policy.
     pub requested: PairSignOptions,
+    /// Source-bound maximum of retained original/domain/diagonal sign degrees.
     pub conservative_generated_degree: usize,
+    /// Actual generated-sign admission cap.
     pub effective_limit: u16,
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(super) enum PairSignPolicyFailure {
+/// Generated-sign policy could not be admitted.
+pub enum PairSignPolicyFailure {
+    /// Offending policy version; expected one.
     Version(u32),
+    /// Actual derived degree exceeds u16 policy representation.
     DerivedDegreeOverflow(usize),
 }
 impl PairSignOptions {
+    /// Admit source-derived sign degrees explicitly; primary isolation admission stays independent. Example: `BezierPairSignOptions::derived()`.
     pub fn derived() -> Self {
         Self {
             version: 1,
             degree_limit: PairSignAdmission::DerivedProjection,
         }
     }
-    pub fn effective(
+    pub(super) fn effective(
         self,
         row: &LinearFiberProjection,
         self_domain: bool,

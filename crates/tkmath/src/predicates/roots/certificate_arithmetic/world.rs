@@ -16,9 +16,13 @@ pub(in crate::predicates::roots) struct WorldEnvelope {
     pub error_squared: ExactRatio,
 }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(in crate::predicates::roots) enum EnvelopeFailure {
+/// Original exact world-enclosure noncompletion.
+pub enum EnvelopeFailure {
+    /// Caller cancellation before complete enclosure.
     Cancelled,
+    /// Denominator interval contains zero; a regular point is not yet enclosed.
     DenominatorUnresolved,
+    /// Finite binary64 enclosure or radius representation could not be constructed.
     Binary64Overflow,
 }
 impl HomogeneousCurve {

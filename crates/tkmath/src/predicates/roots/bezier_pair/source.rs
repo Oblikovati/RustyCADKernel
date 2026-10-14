@@ -12,11 +12,27 @@ pub(super) struct OwnedBezierSource {
     pub interval: [f64; 2],
 }
 #[derive(Clone, Debug, PartialEq)]
-pub(super) enum PairSourceFailure {
+/// Original capture or exact homogeneous-conversion cause.
+pub enum PairSourceFailure {
+    /// Empty controls; expected at least one Bernstein control.
     EmptyControls,
-    WeightCount { controls: usize, weights: usize },
+    /// Weight count differs from the actual control count.
+    WeightCount {
+        /// Captured number of controls.
+        controls: usize,
+        /// Offending supplied weight count.
+        weights: usize,
+    },
+    /// Nonfinite coordinate with original point/axis/value provenance.
     Coordinate(NonFiniteCoordinate),
-    Weight { index: usize, value: f64 },
+    /// Nonfinite homogeneous weight.
+    Weight {
+        /// Original control index.
+        index: usize,
+        /// Offending weight value.
+        value: f64,
+    },
+    /// Original exact arithmetic or cancellation cause.
     Algebra(RootIsolationError),
 }
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -124,6 +140,17 @@ fn positive_gcd(left: BigInt, right: &BigInt) -> BigInt {
     }
     left
 }
+
+impl std::fmt::Display for PairSourceFailure {
+    fn fmt(&self, output: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            output,
+            "{self:?}; expected finite nonempty Bernstein controls with one weight per control"
+        )
+    }
+}
+impl std::error::Error for PairSourceFailure {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
