@@ -5,6 +5,7 @@ mod mapped;
 mod parameter;
 pub use mapped::{
     TransportedResidualQuery, TransportedResidualReport, certify_transported_residual,
+    certify_transported_residual_on_bounds,
 };
 pub use parameter::MetricParameterMap;
 mod coefficients;
@@ -92,3 +93,6 @@ mod tests;
 
 #[cfg(test)]
 mod parameter_tests;
+
+#[cfg(test)]
+mod transported_contact_bounds_tests;

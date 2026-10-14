@@ -7,6 +7,8 @@ pub(crate) use outcome::*;
 #[cfg(test)]
 mod fixtures;
 #[cfg(test)]
+pub(crate) use fixtures::{binding_sources, single_root_edges};
+#[cfg(test)]
 mod tests;
 
 #[cfg(test)]
@@ -26,6 +28,8 @@ mod integrity_tests;
 #[cfg(test)]
 mod source_domain_tests;
 mod source_domains;
+#[cfg(test)]
+pub(crate) use source_domains::PartitionSourceDomainCause;
 
 mod candidate_history;
 mod copy_disposition;
@@ -45,6 +49,8 @@ mod corpus;
 #[cfg(test)]
 mod corpus_tests;
 #[cfg(test)]
+pub(crate) use {corpus::partition_binding_sources, corpus_tests::inspect_corpus_sources};
+#[cfg(test)]
 mod image_partition_tests;
 mod image_partitions;
 #[cfg(test)]
@@ -62,3 +68,5 @@ mod generated_binding_tests;
 
 #[cfg(test)]
 mod generated_native_copy_tests;
+
+pub(crate) use transaction::{inspect_outputs, required_partition_proofs};

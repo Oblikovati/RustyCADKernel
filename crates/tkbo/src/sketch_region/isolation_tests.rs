@@ -88,7 +88,7 @@ fn world_start(shape: &rustycad_tkbrep::topods::Shape) -> Point3 {
     let curve = BRepTool::curve(&edge(shape).unwrap()).unwrap().0;
     curve.value(0.).unwrap()
 }
-fn add_polygon(source: &rustycad_tkbrep::topods::Shape) -> Handle<Polygon3D> {
+pub(crate) fn add_polygon(source: &rustycad_tkbrep::topods::Shape) -> Handle<Polygon3D> {
     let vertices = [Point3::new(0., 0., 0.), Point3::new(1., 2., 0.)];
     let points = Array1::from_shared(&vertices, 1);
     let polygon = Handle::new(Polygon3D::from_nodes(&points));

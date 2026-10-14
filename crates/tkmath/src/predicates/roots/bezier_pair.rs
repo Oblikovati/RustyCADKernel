@@ -97,3 +97,15 @@ pub use coefficient_view::{ExactPairCoefficient, ExactPairPolynomial};
 
 mod completion;
 pub use completion::BezierPairCompletion;
+
+mod public_parameter_enclosure;
+pub use public_parameter_enclosure::ExactBezierPairParameterEnclosure;
+#[cfg(test)]
+mod exact_parameter_retention_tests;
+
+mod native_parameter_construction;
+pub use native_parameter_construction::{
+    MeasuredPairParameter, PairParameterConstructionFailure, PairParameterDecision,
+};
+#[cfg(test)]
+mod native_parameter_construction_tests;

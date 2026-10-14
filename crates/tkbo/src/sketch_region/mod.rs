@@ -51,3 +51,6 @@ mod partition_occurrence;
 #[cfg(test)]
 mod partition_policy_tests;
 mod partition_source_vertices;
+
+#[cfg(test)]
+pub(crate) use isolation_tests::add_polygon as arrangement_polygon_fixture;

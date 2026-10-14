@@ -40,3 +40,9 @@ mod sketch_region_partition_bindings;
 // ADR0014: retained diagnostic prism history cannot publish an uncertified healthy body.
 #[allow(dead_code, unused_imports)]
 mod sketch_region_prism;
+
+// ADR0014 retains contact construction gaps until independent whole-operation acceptance.
+#[allow(dead_code)]
+mod sketch_region_contact_transport;
+
+mod sketch_region_vertex_observation;

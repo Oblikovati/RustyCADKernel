@@ -11,7 +11,7 @@ pub(super) fn paired(shapes: &[Shape]) -> BoundaryCensus {
     enumerate_source_bound_census(capture(shapes), policy(), source_policy(), || false)
         .unwrap_or_else(|_| panic!("expected retained paired census"))
 }
-pub(super) fn bezier_shape(controls: &[[f64; 2]], weights: Option<&[f64]>) -> Shape {
+pub(crate) fn bezier_shape(controls: &[[f64; 2]], weights: Option<&[f64]>) -> Shape {
     use rustycad_tkernel::{ncollection::Array1, standard::Handle};
     use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve};
     use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
@@ -29,7 +29,7 @@ pub(super) fn bezier_shape(controls: &[[f64; 2]], weights: Option<&[f64]>) -> Sh
         .unwrap()
         .into_shape()
 }
-pub(super) fn curved_pair() -> Vec<Shape> {
+pub(crate) fn curved_pair() -> Vec<Shape> {
     vec![
         bezier_shape(&[[0., 0.], [0.5, 0.], [1., 1.]], None),
         bezier_shape(&[[0., 0.5], [0.5, 0.5], [1., -0.5]], None),

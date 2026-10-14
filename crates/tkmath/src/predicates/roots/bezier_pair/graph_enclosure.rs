@@ -17,11 +17,24 @@ pub enum GraphEnvelopeFailure {
     /// A finite binary64 outward graph enclosure could not be constructed.
     Binary64Overflow,
 }
+pub(super) struct PairedParameterEnvelope {
+    pub exact: RatioInterval,
+    pub rounded: [f64; 2],
+}
 pub(super) fn enclose_u(
     projection: &LinearFiberProjection,
     root: &RootBracket,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<[f64; 2], GraphEnvelopeFailure> {
+) -> Result<PairedParameterEnvelope, GraphEnvelopeFailure> {
+    let exact = exact_graph_interval(projection, root, cancelled)?;
+    let rounded = rounded_bounds(&exact)?;
+    Ok(PairedParameterEnvelope { exact, rounded })
+}
+fn exact_graph_interval(
+    projection: &LinearFiberProjection,
+    root: &RootBracket,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<RatioInterval, GraphEnvelopeFailure> {
     let interval = parameter_interval(root);
     let alpha = power_enclosure(&projection.alpha, &interval, cancelled)?;
     let reciprocal = alpha
@@ -32,10 +45,10 @@ pub(super) fn enclose_u(
         &interval,
         cancelled,
     )?;
-    let value = beta.multiply(&reciprocal);
-    rounded_bounds(&value)
+    Ok(beta.multiply(&reciprocal))
 }
-fn parameter_interval(root: &RootBracket) -> RatioInterval {
+
+pub(super) fn parameter_interval(root: &RootBracket) -> RatioInterval {
     RatioInterval {
         lower: ExactRatio::from_dyadic(root.bounds().0),
         upper: ExactRatio::from_dyadic(root.bounds().1),

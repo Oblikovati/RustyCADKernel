@@ -6,7 +6,7 @@ use rustycad_tkbrep::topods::Shape;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::{gp::Transform3, toploc::Location};
 
-pub(super) fn partition_binding_sources(mode: usize) -> Vec<Shape> {
+pub(crate) fn partition_binding_sources(mode: usize) -> Vec<Shape> {
     if mode == 0 {
         return two_root_edges();
     }

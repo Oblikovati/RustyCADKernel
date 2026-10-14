@@ -15,6 +15,9 @@ pub struct CertifiedBezierPairContact<'a> {
     pub parameter: &'a RootBracket,
     /// Outward bounds on the other parameter, linked through the exact ideal-row graph.
     pub paired_parameter_bounds: [f64; 2],
+    /// Exact rational graph enclosure computed before outward binary64 conversion.
+    pub exact_paired_parameter:
+        super::public_parameter_enclosure::ExactBezierPairParameterEnclosure<'a>,
     /// Conservative world bounds for the common exact point.
     pub world_bounds: [[f64; 2]; 2],
     /// Deterministic rounded point chosen inside the construction pipeline.
@@ -68,6 +71,10 @@ impl<'a> BezierPairCertificate<'a> {
             candidate_index: contact.candidate_index,
             parameter: &contact.root,
             paired_parameter_bounds: contact.u_bounds,
+            exact_paired_parameter:
+                super::public_parameter_enclosure::ExactBezierPairParameterEnclosure::new(
+                    &contact.exact_u,
+                ),
             world_bounds: contact.world.bounds,
             point: contact.world.point,
             achieved_world_error: contact.world.achieved_error,

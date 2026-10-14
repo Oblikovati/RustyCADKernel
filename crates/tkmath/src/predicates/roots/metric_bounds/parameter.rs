@@ -39,7 +39,9 @@ impl MetricParameterMap {
             [last, first]
         })
     }
-    fn exact_coefficients(self) -> Result<[BigInt; 2], ResidualError> {
+    pub(in crate::predicates::roots) fn exact_coefficients(
+        self,
+    ) -> Result<[BigInt; 2], ResidualError> {
         let endpoints = match self {
             Self::Identity => [0., 1.],
             Self::Endpoints(e) => e,

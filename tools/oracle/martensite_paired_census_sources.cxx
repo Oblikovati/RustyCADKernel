@@ -22,20 +22,8 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
-using CensusControls = std::vector<std::array<double, 2>>;
-static TopoDS_Shape CensusEdge(const CensusControls& controls, const std::vector<double>& weights = {})
-{
-  NCollection_Array1<gp_Pnt> poles(1, static_cast<int>(controls.size()));
-  for (int i=1; i<=poles.Upper(); ++i) poles(i)=gp_Pnt(controls[i-1][0],controls[i-1][1],0.);
-  occ::handle<Geom_BezierCurve> curve;
-  if (weights.empty()) curve=new Geom_BezierCurve(poles);
-  else {
-    NCollection_Array1<double> native(1, static_cast<int>(weights.size()));
-    for (int i=1; i<=native.Upper(); ++i) native(i)=weights[i-1];
-    curve=new Geom_BezierCurve(poles,native);
-  }
-  return BRepBuilderAPI_MakeEdge(curve).Edge();
-}
+#include "martensite_analytic_edge_fixture.hxx"
+
 static void EmitDescriptor(const char* name, int occurrence, int physical, const TopoDS_Edge& edge, const TopoDS_Face& support)
 {
   BRepLib::BuildPCurveForEdgeOnPlane(edge,support);

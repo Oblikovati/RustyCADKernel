@@ -17,6 +17,7 @@ pub(super) struct PairContact {
     pub candidate_index: usize,
     pub root: RootBracket,
     pub u_bounds: [f64; 2],
+    pub exact_u: super::super::certificate_arithmetic::RatioInterval,
     pub world: WorldEnvelope,
 }
 pub(super) struct PairOperationProof {
