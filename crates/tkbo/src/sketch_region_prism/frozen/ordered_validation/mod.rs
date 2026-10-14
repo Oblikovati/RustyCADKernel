@@ -3,4 +3,6 @@
 mod stages;
 pub(crate) use stages::{OrderedPrismStage, OrderedPrismStageStatus, OrderedPrismStageTrace};
 #[cfg(test)]
+mod joined_baseline_tests;
+#[cfg(test)]
 mod stage_tests;
