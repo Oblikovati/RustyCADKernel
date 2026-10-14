@@ -117,3 +117,10 @@ mod tool_r_face_edge_tests;
 mod tool_r_face_ownership_tests;
 #[cfg(test)]
 mod tool_r_face_source_fake;
+
+mod brep_font;
+mod brep_font_cache;
+mod brep_font_glyph_cache;
+mod brep_font_impl;
+pub use brep_font::{StdPrsBRepFont, StdPrsBRepFontGlyphOptions, StdPrsBRepFontTextOptions};
+pub use brep_font_cache::StdPrsBRepFontCache;

@@ -107,6 +107,16 @@ pub mod frustum_core;
 pub mod image_dump_light_name;
 #[path = "../image_dump_options_values.rs"]
 pub mod image_dump_options_values;
+#[path = "../legacy_ais_colored_shape.rs"]
+pub mod legacy_ais_colored_shape;
+#[path = "../legacy_brepfont_builder.rs"]
+pub mod legacy_brepfont_builder;
+#[path = "../legacy_brepfont_planar_region.rs"]
+pub mod legacy_brepfont_planar_region;
+#[path = "../legacy_brepfont_regularizer.rs"]
+pub mod legacy_brepfont_regularizer;
+#[path = "../legacy_stdprs_brep_font.rs"]
+pub mod legacy_stdprs_brep_font;
 #[path = "../legacy_sensitive_primitive_array.rs"]
 pub mod legacy_sensitive_primitive_array;
 #[path = "../plane_presentations.rs"]
