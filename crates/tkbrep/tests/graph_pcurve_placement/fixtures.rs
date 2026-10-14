@@ -59,3 +59,17 @@ pub(super) fn imported(shape: &Shape, auto_product: bool) -> BRepGraph {
         .unwrap();
     graph
 }
+pub(super) fn imported_v2(shape: &Shape, auto_product: bool) -> BRepGraph {
+    use rustycad_tkbrep::brep_graph_inc::populate::PCurveImportBehavior::CumulativeOccurrenceV2;
+    let options = Options {
+        create_auto_product: auto_product,
+        track_added_nodes: true,
+        ..Options::default()
+    };
+    let mut graph = BRepGraph::new();
+    graph
+        .shapes_mut()
+        .add_with_options_and_behavior(shape, &options, CumulativeOccurrenceV2)
+        .unwrap();
+    graph
+}

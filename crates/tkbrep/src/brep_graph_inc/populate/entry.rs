@@ -18,6 +18,8 @@ pub fn perform_with_behavior(
     graph.clear()?;
     append_with_behavior(graph, shape, parallel, options, behavior)
 }
+/// New definitions use this lookup behavior; reused definitions retain their original pcurves.
+/// Rebuild with `perform_with_behavior` and audit to migrate existing definitions.
 /// Append full hierarchy with an explicit pcurve behavior; `append_with_behavior(&mut graph, &shape, false, &Options, PCurveImportBehavior::LegacyLocalV1)`.
 pub fn append_with_behavior(
     graph: &mut BRepGraph,
@@ -39,6 +41,8 @@ pub fn append_with_behavior(
         behavior,
     )
 }
+/// New definitions use this lookup behavior; reused definitions retain their original pcurves.
+/// Rebuild with `perform_with_behavior` and audit to migrate existing definitions.
 /// Append flattened roots with an explicit pcurve behavior; `append_flattened_with_behavior(&mut graph, &shape, false, &mut roots, &Options, PCurveImportBehavior::LegacyLocalV1)`.
 pub fn append_flattened_with_behavior(
     graph: &mut BRepGraph,

@@ -10,16 +10,24 @@ pub enum PCurveImportBehavior {
     /// Original local-edge lookup, including missing pcurves on some located faces.
     #[default]
     LegacyLocalV1,
+    /// Resolve a stored pcurve using the complete face/wire/edge occurrence location.
+    CumulativeOccurrenceV2,
 }
 impl PCurveImportBehavior {
     pub(super) fn lookup_edge<'e>(
         self,
         edge: &'e Edge,
-        _face: &Face,
-        _wire: &Wire,
+        face: &Face,
+        wire: &Wire,
     ) -> Result<Cow<'e, Edge>, Failure> {
         match self {
             Self::LegacyLocalV1 => Ok(Cow::Borrowed(edge)),
+            Self::CumulativeOccurrenceV2 => {
+                // ADR 0026: lookup and stored surface must share the source occurrence frame.
+                // Definition placement belongs to the importer and must not enter this key.
+                let parent = (face.location() * wire.location())?;
+                Ok(Cow::Owned(Edge::unchecked(edge.moved(&parent, false)?)))
+            }
         }
     }
 }

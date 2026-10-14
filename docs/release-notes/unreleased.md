@@ -59,3 +59,17 @@ back interior RGBA. Textured and fixed-function behavior is unchanged.
 Default migration and V1 deletion remain gated by
 [ADR 0021](../adr/0021-unlit-side-colors.md); this entry does not change workspace
 versions, activate the default, or complete a release/milestone.
+
+## Opt-in cumulative pcurve import
+
+BRepGraph import can select `populate::PCurveImportBehavior::CumulativeOccurrenceV2`
+through the additive `*_with_behavior` population entrypoints or
+`ShapesViewMut::add_with_options_and_behavior`. This preserves stored pcurves
+on located face/wire/edge occurrences, including both directed seam uses.
+Existing entrypoints and `Options` layouts keep their V1 behavior.
+
+Selection applies to new definitions only: append reuses existing definitions
+without repair. Migrate by rebuilding a fresh graph with V2 and auditing it;
+a successful import is not body validation. Polygon/triangulation lookup and
+mutable graph ownership are unchanged. Default migration and V1 production
+removal remain gated by [ADR0026](../adr/0026-cumulative-pcurve-import.md).
