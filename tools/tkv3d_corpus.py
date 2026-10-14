@@ -58,5 +58,6 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     __import__('tkv3d_corpus_sensitive_entity_set').append_sensitive_entity_set_requests(requests)
     __import__('tkv3d_corpus_selectable_object_set').append_selectable_object_set_requests(requests)
     __import__('tkv3d_corpus_bvh_thread_pool').append_bvh_thread_pool_requests(requests)
+    __import__('tkv3d_corpus_brep_font').append_brep_font_requests(requests)
     __import__('tkv3d_corpus_viewer_selector_state').append_viewer_selector_state_requests(requests)
     __import__('tkv3d_corpus_selection_manager').append_selection_manager_requests(requests)

@@ -1,4 +1,5 @@
 //! The TKV3d probe operations, one module per C++ probe file under tools/oracle.
+pub mod brep_font;
 pub mod prs3d;
 pub mod v3d;
 

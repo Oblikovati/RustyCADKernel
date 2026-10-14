@@ -12,6 +12,14 @@ type ProbeCase = fn(&[f64]);
 /// The dispatch table of tools/oracle/tkv3d_probe.cxx (`probe_cases`); each package adds its
 /// operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
+    // BRepFont regularization and builders (v3_probe/brep_font.rs)
+    (
+        "v3_brepfont_regularize",
+        v3_probe::brep_font::regularize_case,
+    ),
+    ("v3_brepfont_curve", v3_probe::brep_font::curve_case),
+    ("v3_brepfont_glyph", v3_probe::brep_font::glyph_case),
+    ("v3_brepfont_text", v3_probe::brep_font::text_case),
     (
         "v3_ais_rubber_band",
         v3_probe::ais_rubber_band::rubber_band_case,
