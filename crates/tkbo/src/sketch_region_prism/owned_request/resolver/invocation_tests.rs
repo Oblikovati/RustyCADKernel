@@ -94,8 +94,7 @@ fn cancelled_packet_request(operation: u64) -> super::super::request::OwnedPolyn
         plan_for(&prepared),
         &mut || false,
     ));
-    let mut progress = PublicationObserver::default();
-    progress.stop = Some(0);
+    let mut progress = stopping_observer();
     let packet = invocation.publish(&mut progress).err().unwrap();
     let owned = packet.request().clone();
     assert_eq!(packet.plan().identities().operation, owned.operation);
@@ -134,4 +133,11 @@ fn prepared_caller(operation: u64) -> PreparedPolynomialPrism {
     let mut request = super::super::test_fixture::request();
     request.operation = CallerOperationId(operation);
     super::super::test_fixture::prepared(request)
+}
+
+fn stopping_observer() -> PublicationObserver {
+    PublicationObserver {
+        stop: Some(0),
+        ..PublicationObserver::default()
+    }
 }
