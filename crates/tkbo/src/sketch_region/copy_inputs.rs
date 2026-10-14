@@ -5,7 +5,13 @@ use rustycad_tkbrep::topods::{Shape, borrowed_shape_batch};
 use rustycad_tkernel::{ncollection::List, standard::Failure};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPICopy, BRepBuilderAPIMakeShape};
 
+#[derive(Clone)]
+pub(crate) struct CopiedSourceContexts {
+    pub source: RegionSourceId,
+    pub observation: super::RegionCopyContextObservation,
+}
 pub(crate) struct CopiedSources {
+    pub contexts: Vec<CopiedSourceContexts>,
     pub arguments: List<Shape>,
     pub roots: Vec<(RegionSourceId, Shape)>,
     pub members: Vec<(OriginalMemberIdentity, Shape)>,
@@ -31,19 +37,31 @@ pub(crate) fn copy_sources(
     let batch = source_compound(sources).map_err(copy_failure)?;
     let mut copier = validated_copier(&batch)?;
     let mut copied = CopiedSources {
+        contexts: Vec::new(),
         arguments: List::default(),
         roots: Vec::new(),
         members: Vec::new(),
     };
     for source in sources {
-        let root = copied_entity(&mut copier, source.shape, source.identity)?;
-        copied
-            .arguments
-            .append(root.oriented(source.shape.orientation()));
-        copied.roots.push((source.identity, root));
-        collect_copied_members(&mut copier, source, &mut copied.members)?;
+        copy_source(&mut copier, source, &mut copied)?;
     }
     Ok(copied)
+}
+fn copy_source(
+    copier: &mut BRepBuilderAPICopy,
+    source: &ArrangementSource<'_>,
+    copied: &mut CopiedSources,
+) -> Result<(), ArrangementCause> {
+    let root = copied_entity(copier, source.shape, source.identity)?;
+    let argument = root.oriented(source.shape.orientation());
+    copied.arguments.append(argument.clone());
+    copied.roots.push((source.identity, root));
+    collect_copied_members(copier, source, &mut copied.members)?;
+    copied.contexts.push(CopiedSourceContexts {
+        source: source.identity,
+        observation: super::observe_copy_contexts(source.shape, &argument, copier),
+    });
+    Ok(())
 }
 fn source_compound(sources: &[ArrangementSource<'_>]) -> Result<Shape, Failure> {
     let components: Vec<&Shape> = sources.iter().map(|source| source.shape).collect();

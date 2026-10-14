@@ -50,3 +50,6 @@ mod graph_import_tests;
 mod copy_retention_tests;
 
 mod owned_request;
+mod publication;
+#[cfg(test)]
+mod sweep_query_tests;

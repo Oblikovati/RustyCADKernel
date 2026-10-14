@@ -31,7 +31,9 @@ mod occurrence_tests;
 
 pub(crate) use occurrences::equal_occurrences;
 
-pub(crate) use copy_inputs::{admit_sources, copy_sources, original_identity};
+pub(crate) use copy_inputs::{
+    CopiedSourceContexts, admit_sources, copy_sources, original_identity,
+};
 
 mod partition_observation;
 mod partition_types;
@@ -54,3 +56,20 @@ mod partition_source_vertices;
 
 #[cfg(test)]
 pub(crate) use isolation_tests::add_polygon as arrangement_polygon_fixture;
+
+mod directed_contexts;
+pub(crate) use directed_contexts::{
+    RegionContextFailure, RegionDirectedContext, strict_region_contexts,
+};
+#[cfg(test)]
+mod directed_context_tests;
+
+mod observed_contexts;
+pub(crate) use observed_contexts::*;
+#[cfg(test)]
+mod observed_context_tests;
+
+mod partition_member_queries;
+pub(crate) use partition_member_queries::{PartitionMemberQueries, PartitionMemberQuery};
+#[cfg(test)]
+mod partition_member_query_tests;

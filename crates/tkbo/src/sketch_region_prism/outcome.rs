@@ -86,18 +86,28 @@ pub(crate) struct PrismNativeImage {
     pub role: PrismImageRole,
     pub returned: ArrangementRelation,
 }
-#[derive(Clone)]
-pub(crate) struct PrismBodyContext {
-    pub occurrence: Shape,
-    pub ancestors: Vec<Shape>,
-    pub child_slots: Vec<usize>,
-}
+pub(crate) use crate::sketch_region::RegionDirectedContext as PrismBodyContext;
 pub(crate) struct PrismImageBinding {
     pub native: PrismNativeImage,
     pub context: PrismBodyContext,
     pub transported: Shape,
 }
+/// Actual completed query tuple; aliases remain private until an owned history projection.
+#[derive(Clone)]
+pub(crate) struct PrismSweepQueryObservation {
+    pub query: ArrangementRelation,
+    pub generated: Vec<Shape>,
+    pub first: Shape,
+    pub last: Shape,
+    pub retired: bool,
+}
+/// Absence is unknown; captured empty queries are explicit observations, not body acceptance.
+pub(crate) enum PrismSweepQueries {
+    NotReached,
+    Captured(Vec<PrismSweepQueryObservation>),
+}
 pub(crate) struct PrismDiagnostic {
+    pub sweep_queries: PrismSweepQueries,
     pub surface_charts: Option<super::surface_charts::PrismSurfaceInspection>,
     pub body: Shape,
     pub bindings: Vec<PrismImageBinding>,

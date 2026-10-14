@@ -10,9 +10,16 @@ pub(super) fn capture_sweep(
 ) -> LineageCheck<Vec<CopySweepObservation>> {
     let bound = super::super::bindings::bind_projection(inputs.receipt, inputs.publication)
         .map_err(|e| inputs.frozen(CopyLineagePhase::Sweep, e))?;
+    capture_bound_sweep(inputs, copied, &bound)
+}
+pub(super) fn capture_bound_sweep(
+    inputs: &LineageInputs<'_>,
+    copied: &directed::BoundCopyContexts,
+    bound: &super::super::bindings::BoundProjection<'_>,
+) -> LineageCheck<Vec<CopySweepObservation>> {
     let mut result = Vec::new();
     for binding in &bound.diagnostic.bindings {
-        result.push(sweep_row(inputs, copied, &bound, binding)?);
+        result.push(sweep_row(inputs, copied, bound, binding)?);
     }
     result.sort();
     if result.windows(2).any(|rows| rows[0] == rows[1]) {
