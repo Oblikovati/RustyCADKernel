@@ -1,6 +1,6 @@
 # ADR0053: scoped composition of the owned polynomial prism operation
 
-Status: implementation in progress; private, bounded operation only.
+Status: private bounded implementation and candidate verification complete; main integration pending.
 
 ## Decision
 
@@ -48,3 +48,10 @@ checks from pending checks and from ordinary-host ThreadSanitizer limitations.
 
 This private composition does not close Kernel#10 general analytic profiles,
 multi-boundary/hole coverage, application C1 acceptance, or public owned failures.
+
+## Candidate evidence
+
+[Final source-frozen evidence](../evidence/scoped-owned-prism-v1/FINAL.md) records
+the actual complete operation, 1,957 affected tests, 35 doctests, every outer
+cancellation/native-failure prefix and exact process/thread receipts. The public
+owned-failure and ordinary-host ThreadSanitizer gates remain incomplete.
