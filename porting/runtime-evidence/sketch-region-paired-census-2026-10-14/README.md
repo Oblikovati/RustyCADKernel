@@ -28,3 +28,13 @@ not suppressed, ignored or counted as green. A receipt-script path-index error
 after successful final native execution was corrected before hashes were saved.
 
 The original full two-ToPixMap task remains preserved separately and incomplete.
+
+Final clean extracted acceptance passed 5,628 tests in 11 groups and 298
+doctests in four groups at `38e819d2098c5de5cf34a78cd52c2d6ae014e8c3`.
+All 31 `.cargo_vcs_info.json` records identify that clean revision; 15,343
+source/fixture/shader files were byte-equal before and after execution. Original
+Cargo manifests match all 31 packed `Cargo.toml.orig` files; normalized manifests
+and canonical generated workspace are recorded separately. Nineteen actual
+executables are hashed with resolved-library diagnostics showing no OCCT links.
+Loader/native SDK environment variables were unset for the Rust-only gate.
+Archive verification does not seal or publish a release.
