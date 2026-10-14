@@ -1,0 +1,53 @@
+{
+  "integration_revision": "50faff0e389b407d4a054612e3c31f6ce0a99f77",
+  "verified_at_utc": "2026-10-14T09:05:08.738551+00:00",
+  "toolchain": "1.99.0",
+  "checks": [
+    {
+      "scope": "all-targets",
+      "passed": 4075,
+      "failed": 0,
+      "ignored": 0,
+      "exit_code": 0,
+      "log": "docs/evidence/sketch-region-contact-transport/raw/integrated-all-targets.log.gz",
+      "sha256": "df7df0954ad8d59967f1efa404b1403ca8887eb0e05d37251626242170398d78",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features"
+      ]
+    },
+    {
+      "scope": "doctests",
+      "passed": 84,
+      "failed": 0,
+      "ignored": 0,
+      "exit_code": 0,
+      "log": "docs/evidence/sketch-region-contact-transport/raw/integrated-doctests.log.gz",
+      "sha256": "9ceb7a59c9059b484609468839d1371a8a3df2bf9def4d44edbc79b582fac337",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--doc"
+      ]
+    }
+  ],
+  "crate_source_equality": "TKBO/TKMath match accepted branch checkpoint 3b1055f72 exactly",
+  "scope": "Contact transport diagnostics and TKBO/TKMath regression suites; no completed region/prism operation, GPU, concurrency or performance acceptance is claimed.",
+  "build_environment": {
+    "CARGO_BUILD_JOBS": "2"
+  }
+}
