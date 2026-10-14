@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "ExtractColors",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "01c132ccd703a8e8cd07e48c06ebb3db78c0326f8798f5151b1f05a113432ebf",
+      "rust_item": "martensite_tkmeshvs::extract_colors",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::extract_colors",
+          "declaration_sha256": "46e040d08a5e14c96fea8e4433c7dde72c3f4cd524821bd4e67c095478903996",
+          "impl_context": null
+        },
+        {
+          "path": "martensite_tkmeshvs::extract_colors_into",
+          "declaration_sha256": "47e180419ac40b43096c8a9d7db59f1fe942bed30b62689b064dd784025f0c12",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation.",
+      "rust_items": [
+        "martensite_tkmeshvs::extract_colors",
+        "martensite_tkmeshvs::extract_colors_into"
+      ]
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors::b2",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "0e87cb45e4a8dc2fb472604605263566c8033136b25210a6d4d198a4c9251758",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::b2",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::b2",
+          "declaration_sha256": "eeb1870125935f8ec3f3292ed6e8fe93ee4bfbb2307b74105c32235c08ea1dfd",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "std::hash<MeshVS_TwoColors>::operator()",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "10590024525065117653fe2c0c520b654d0b61245c91aa973ee2063df2967638",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+          "declaration_sha256": "e3f18c24536cea25b918ecbbdea7280d049787e6693f9b3ac4bcbe5fe5b079e7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoColors",
+                "resolved_item_path": "martensite_tkmeshvs::two_colors::MeshVSTwoColors"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "HashKey",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashKey"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors::b1",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "37f4444dc6858ae3ac192f20a0de8d9f208a415034a63e1d17a0d77603e332aa",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::b1",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::b1",
+          "declaration_sha256": "bfdf0ef7591e761185c6709fadec4d3e43a4fcc6b3f168f0da38e9777718f012",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "531c0cfc485d7571b22ad260926bc65547d64c4bf3d89c728200c6fd1c563338",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors",
+          "declaration_sha256": "2dcc09ca9b140ee95a5ea24c027386ede3b4cfcc278e18c80195c94a07117784",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors::operator==",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "5e464ad32ca07465946e09f4b31421a68aefa63beaa990fddf584f2954fa0b7f",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::<core::cmp::PartialEq>::eq",
+          "declaration_sha256": "833612d6080c03e295acceeb6af00b235bcc02b14ce9cc8f2bce696098135116",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoColors",
+                "resolved_item_path": "martensite_tkmeshvs::two_colors::MeshVSTwoColors"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PartialEq",
+              "resolved_item_path": "core::cmp::PartialEq"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors::r1",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "95b87816ade913495c8b47ef87b699302bee8d51f937a416015f8cefbad94e8b",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::r1",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::r1",
+          "declaration_sha256": "1c96ee7969caa01c33b95cb5e14842f363974067416faddf3c06bdc334d86f4d",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "acad2480a7a96453481c53cd70db390f0efafe45190a44bfa9419e7f2335dc90",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+          "declaration_sha256": "d17c038f278c32feff5d7cb4f9e1ebf525bcd3f9aff2a46f5867f02e61170246",
+          "impl_context": null
+        },
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+          "declaration_sha256": "e3f18c24536cea25b918ecbbdea7280d049787e6693f9b3ac4bcbe5fe5b079e7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "MeshVSTwoColors",
+                "resolved_item_path": "martensite_tkmeshvs::two_colors::MeshVSTwoColors"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "HashKey",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashKey"
+            }
+          }
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DefaultHashPolicy",
+        "martensite_tkmeshvs::MeshVSTwoColors::<rustycad_tkernel::ncollection::HashKey>::occt_hash"
+      ]
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors::g1",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "c34292e8798ba7b2cf0d2bb4f2a34a0505e9a2e8bba75fad57a1788873d49a4b",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::g1",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::g1",
+          "declaration_sha256": "9968e024fc896574fc9705427b243e75ba9e36138f9934f37d7726bb655abadb",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors::g2",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "e68fa4a659e41a593f9bad9eea9981f733982af5c1e8ba8720790237db3e183d",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::g2",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::g2",
+          "declaration_sha256": "a829b33fe983718d54bd3548dcbaf7fefac78406e9bdb3930fe17af6927f4266",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "BindTwoColors",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "f093ff7a92f77e0f4e37f29af4d70d21bdaa97f79889c963494c9232001f57fc",
+      "rust_item": "martensite_tkmeshvs::bind_two_colors",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::bind_two_colors",
+          "declaration_sha256": "e5003c2117993d3074720eac376e3a9473950db24f94a033b98c6c1a5675b073",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors::r2",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "f4e52b935d3f1270648a378e3c344cd8ad56cd597af4a1e0f534aea253ed693e",
+      "rust_item": "martensite_tkmeshvs::MeshVSTwoColors::r2",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors::r2",
+          "declaration_sha256": "7ae97904e5d80efe0ec6aa7a41651ec5ee3d73cf3018c3caa256fd526b5f3fd4",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    },
+    {
+      "upstream_id": "ExtractColor",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_TwoColors.hxx",
+      "source_sha256": "3691bd213344c4d98de5e8104c858c65ece3a98821e3dc0c85de8eb29b8889eb",
+      "cpp_declaration_id": "f57632a0bbb91f718892339623a6f8763ae6886799aa92ff7d13b3a5aa2b0405",
+      "rust_item": "martensite_tkmeshvs::extract_color",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "martensite_tkmeshvs::extract_color",
+          "declaration_sha256": "918a03f121d9c0a6356799f0525694197eda224ca8a565b327c009f70e5e455c",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite ordered sRGB byte pairs; native bitfield values, equality, six-byte wrapping hash and both extraction functions retain native behavior. ExtractColors includes explicit safe same-output aliasing. Pinned774row two-repeat native corpus, independent every-field/map tests, source and canonical extracted Rust-only package gates. See porting/runtime-evidence/meshvs-two-colors-2026-10-14; hash policy uses project-owned DefaultHashPolicy plus the exact MeshVSTwoColors HashKey implementation."
+    }
+  ]
+}
