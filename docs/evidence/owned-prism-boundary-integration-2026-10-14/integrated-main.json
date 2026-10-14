@@ -1,0 +1,169 @@
+{
+  "integration_revision": "ff70563b9451ad4580246ad41cc97298edf029e0",
+  "candidate_revision": "893373d1e",
+  "candidate_base": "80c107451",
+  "preparation_candidate": "06a9f7e71",
+  "preparation_base": "8a891a633",
+  "preparation_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/owned_request/admission.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/admission_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/classification.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/construction.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostics.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/domain_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/partition.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/pipeline.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/pipeline_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/progress.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/progress_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/stages.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/test_fixture.rs": true
+  },
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "e08836caca234c04c3045948738b71059fea86f0ea8b031ce27848a9b7248dec"
+      },
+      "tests": {
+        "passed": 1689,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "e298cfe3b45cc630502d5c716ad986b80f92500ccaad8edcaca6649fde7442b2"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "1d2a584197eeba1acb36362d0f050f89b929a44caf96c9e3a8ca702bfebcd7ac"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "9f10e6f802e90ce5718b55ed3f41e198f61bf9c9813e7cb882ce37cc3f1c1d7f"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": false,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/binding.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/candidate.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/case_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/embedding.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/frozen_diagnostic.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/frozen_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/identity.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/join.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/region.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/source.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/views.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal_baseline_tests.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/binding.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/candidate.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/case_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/embedding.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/frozen_diagnostic.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/frozen_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/identity.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/join.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/region.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/source.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal/views.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/owned_refusal_baseline_tests.rs": "A"
+  },
+  "resolved_module_registration": {
+    "path": "crates/tkbo/src/sketch_region_prism/frozen/mod.rs",
+    "candidate_sha256": "84deae68e4fdc6091ac2ed15f761f1a5d263f796183fc4ff347899fe32624b54",
+    "expected_combination_sha256": "0b5eac354edeab9b2b4c1777af233a5e825d2bfae9bd4bfca4b27cdc4ea48ccf",
+    "actual_sha256": "0b5eac354edeab9b2b4c1777af233a5e825d2bfae9bd4bfca4b27cdc4ea48ccf",
+    "matches_exact_combination": true,
+    "reason": "Preserve owned-refusal registration plus already-integrated conditional-volume registration; no other edits"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
