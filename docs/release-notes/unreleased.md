@@ -3,6 +3,29 @@
 Next compatible patch target: **0.2.8**. Workspace version changes and publication
 remain with the release coordinator.
 
+## Opt-in checked GUI surface outcomes
+
+`Graphic3dRenderDriver::with_gui_surface_policy` and
+`with_backend_and_gui_surface_policy` select immutable `CheckedV2` GUI target
+checking. Existing constructors retain `LegacyV1` replay. Use
+`RenderError::gui_surface_outcome()` to distinguish surface-only refusal from an
+actual fault accompanied by surface evidence. Inspect `primary_failure()` and
+`observed_failure()` for compound details; native window/display getters retain
+their typed causes. Never treat a compound renderer fault as resize recovery.
+
+A fresh packet and successful redraw are required after an observed target
+change. Old captures remain unavailable after away/back extent or explicit
+same-handle rebind. No automatic retry or stale-image fallback is introduced.
+The original primary is fixed; repeated real observations replace one latest
+companion, while closure remains distinct. Unknown native extents refuse instead
+of substituting requested dimensions. Ordinary model rendering is unchanged.
+
+Migration/deletion task `GUI-SURFACE-LEGACY-DELETE` belongs to the Martensite Vulkan
+maintainer and Oblikovati#3630 consumer, with a one-milestone limit after recorded
+consumer adoption. Default changes/removal require a separate version decision.
+This additive API targets the next compatible patch above; it is not application
+acceptance or a publication. See [ADR0028](../adr/0028-typed-gui-surface-outcomes.md).
+
 ## Conditional polynomial extrusion-side integral
 
 `certify_polynomial_side_integral` adds behavior v1 for full-[0,1] polynomial

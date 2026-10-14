@@ -1,73 +1,11 @@
 //! Revision-bound legacy fault ordering for Oblikovati#3630; no native I/O.
+#[path = "support/gui_surface_fixture.rs"]
+mod fixture;
+use fixture::*;
 use martensite_vulkan::*;
-use rustycad_tkernel::standard::{Handle, SharedState, WeakHandle};
-use rustycad_tkservice::{
-    aspect::{AspectNeutralWindow, AspectWindowMembers},
-    graphic3d::*,
-};
-use std::sync::Arc;
-
-struct GuiFaultFixture {
-    view: Handle<Graphic3dRenderView>,
-    window: Handle<AspectNeutralWindow>,
-}
-impl GuiFaultFixture {
-    fn new(driver: &Handle<Graphic3dRenderDriver>) -> Self {
-        let manager = Handle::new(Graphic3dStructureManager::new(&driver.cast()).unwrap());
-        let view = driver
-            .create_view(&manager)
-            .unwrap()
-            .cast::<Graphic3dRenderView>();
-        let window = Handle::new(AspectNeutralWindow::default());
-        window.set_virtual(true);
-        window.set_size(64, 64);
-        view.set_window(&Handle::default(), &window.cast(), 0);
-        Self { view, window }
-    }
-}
-#[derive(Clone, Default)]
-struct ResizeAndFailBackend {
-    target: Arc<SharedState<WeakHandle<Graphic3dRenderView>>>,
-    window: Arc<SharedState<Handle<AspectNeutralWindow>>>,
-    resize: Arc<SharedState<Option<bool>>>,
-}
-impl RenderBackend for ResizeAndFailBackend {
-    fn render(&mut self, _frame: &RenderFrame) -> Result<FrameCapture, RenderError> {
-        self.deliver_resize();
-        let fault = injected_primary_fault();
-        Err(fault)
-    }
-}
-impl ResizeAndFailBackend {
-    fn deliver_resize(&self) {
-        let Some(return_to_original) = *self.resize.read() else {
-            return;
-        };
-        let window = self.window.read().clone();
-        let target = self.target.read().observe();
-        window.set_size(80, 72);
-        target.resized();
-        if return_to_original {
-            window.set_size(64, 64);
-            target.resized();
-        }
-    }
-}
-fn injected_primary_fault() -> RenderError {
-    let operation = "owned device fault sentinel 3630";
-    RenderError::rejected(operation, "successful device submission")
-}
 fn legacy_fixture(with_gui: bool) -> (GuiFaultFixture, ResizeAndFailBackend) {
-    let backend = ResizeAndFailBackend::default();
-    let driver = Graphic3dRenderDriver::with_backend(backend.clone(), 128).unwrap();
-    let scene = GuiFaultFixture::new(&driver);
-    *backend.target.write() = scene.view.downgrade();
-    *backend.window.write() = scene.window.clone();
-    if with_gui {
-        let packet = RenderLayer::new(Vec::new(), false, false, false);
-        scene.view.attach_gui_layer([64, 64], packet).unwrap();
-    }
-    (scene, backend)
+    let policy = None;
+    gui_fault_fixture(with_gui, policy)
 }
 fn assert_legacy_resize_masks_fault(return_to_original: bool) {
     let (scene, backend) = legacy_fixture(true);

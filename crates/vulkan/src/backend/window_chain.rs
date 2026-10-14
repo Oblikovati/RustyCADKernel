@@ -136,7 +136,12 @@ impl WindowChain {
         self.stale = suboptimal;
         Ok(index)
     }
-    pub fn present(&mut self, queue: vk::Queue, index: u32) -> Result<(), RenderError> {
+    pub fn present(
+        &mut self,
+        queue: vk::Queue,
+        index: u32,
+        contract: super::window_gui_contract::WindowGuiContract,
+    ) -> Result<(), RenderError> {
         let waits = [self.sync.rendered];
         let swaps = [self.handle];
         let indices = [index];
@@ -148,16 +153,20 @@ impl WindowChain {
             .image_indices(&indices)
             .push_next(&mut fence_info);
         let result = unsafe { self.loader.queue_present(queue, &info) };
-        self.complete_present(result)
+        self.complete_present(result, contract)
     }
-    fn complete_present(&mut self, result: Result<bool, vk::Result>) -> Result<(), RenderError> {
+    fn complete_present(
+        &mut self,
+        result: Result<bool, vk::Result>,
+        contract: super::window_gui_contract::WindowGuiContract,
+    ) -> Result<(), RenderError> {
         complete_present_state(
             result,
             &mut self.sync.pending,
             &mut self.acquired_index,
             &mut self.stale,
         );
-        legacy_present_result(result)
+        contract.present_result(result)
     }
 }
 impl Drop for WindowChain {
@@ -209,6 +218,26 @@ fn present_was_enqueued(result: Result<bool, vk::Result>) -> bool {
                 | vk::Result::ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
     )
 }
+
+fn complete_present_state(
+    result: Result<bool, vk::Result>,
+    pending: &mut bool,
+    acquired: &mut Option<u32>,
+    stale: &mut bool,
+) {
+    *pending = present_was_enqueued(result);
+    if *pending {
+        *acquired = None;
+    }
+    *stale |= matches!(result, Ok(true) | Err(vk::Result::ERROR_OUT_OF_DATE_KHR));
+}
+pub(super) fn legacy_present_result(result: Result<bool, vk::Result>) -> Result<(), RenderError> {
+    match result {
+        Ok(_) | Err(vk::Result::ERROR_OUT_OF_DATE_KHR) => Ok(()),
+        Err(error) => Err(vk_error("present window frame", error)),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -271,24 +300,5 @@ mod tests {
         ] {
             assert!(!present_was_enqueued(Err(result)));
         }
-    }
-}
-
-fn complete_present_state(
-    result: Result<bool, vk::Result>,
-    pending: &mut bool,
-    acquired: &mut Option<u32>,
-    stale: &mut bool,
-) {
-    *pending = present_was_enqueued(result);
-    if *pending {
-        *acquired = None;
-    }
-    *stale |= matches!(result, Ok(true) | Err(vk::Result::ERROR_OUT_OF_DATE_KHR));
-}
-fn legacy_present_result(result: Result<bool, vk::Result>) -> Result<(), RenderError> {
-    match result {
-        Ok(_) | Err(vk::Result::ERROR_OUT_OF_DATE_KHR) => Ok(()),
-        Err(error) => Err(vk_error("present window frame", error)),
     }
 }

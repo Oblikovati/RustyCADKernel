@@ -1,6 +1,6 @@
 # ADR 0028: typed GUI surface outcomes
 
-Status: accepted design; implementation and verification pending.
+Status: accepted; implementation complete, final verification pending.
 
 Owner: Martensite Vulkan maintainer; application consumer Oblikovati#3630.
 This is active application-blocker priority 2, independent of the C1 geometry work.
@@ -16,7 +16,14 @@ The public inspection seam is `RenderError::gui_surface_outcome()`. It separates
 a surface-change-only refusal from a primary renderer fault accompanied by an
 observed surface change. The latter retains the original `RenderError`, typed
 window/display causes, and error source chain. Consumers must propagate that
-primary fault. No message parsing or automatic retry is part of this contract.
+primary fault. `primary_failure()` is the immediate retained layer, not a leaf
+identity. `observed_failure()` exposes the latest distinct real observation fault
+at that layer. Repeated observation replaces this one companion rather than
+appending a collection; the original primary remains fixed. Closure has a
+separate typed cause. Compound observed errors retain their own primary, closure
+and surface evidence. Follow the primary/source chain and companion getter;
+`FaultWithSurfaceChange.fault` may itself be compound. No message parsing or
+automatic retry is part of this contract.
 
 A change records the operation phase, accepted extent, observed extent when
 known, separate target and composition revision evidence, and whether the current
@@ -32,7 +39,10 @@ draw must not invalidate a newer packet installed after that draw started.
 Successful publication and capture require a current target and current packet.
 They never substitute a previous successful image for refused or failed work.
 Native checks use current surface capabilities, not only a cached swapchain
-extent or application wrapper metadata. These are observations, not an atomic
+extent or application wrapper metadata. Unknown (`u32::MAX`) or zero native
+capability dimensions refuse authoritative observation as a real fault; requested
+or clamped dimensions are not presented as native observations. Legacy swapchain
+configuration selection is unchanged. These are observations, not an atomic
 guarantee against arbitrary unreported native mutations.
 
 ## Presentation ownership
@@ -49,7 +59,13 @@ The existing legacy acquire recreation remains revision-bound replay behavior.
 Checked GUI work refuses positively observed target change without adding a
 retry loop. Private operation-local presentation probes have a production no-op
 adapter and named fake/native-resize test adapters; there is no public test hook
-or global mutable injection state.
+or global mutable injection state. Any failed native GUI operation retires its
+swapchain through the existing release/fence path, including a failure after
+acquisition or submission but before present. Checked out-of-date acquisition
+marks the chain stale before refusal. Recovery may use the same presenter but
+cannot reuse signalled binary semaphores or an acquired image from the failed
+operation. A target closing during checked redraw/capture stores a typed failure,
+retains an earlier fault, and cannot leave a successful stale frame published.
 
 ## Baseline and migration
 

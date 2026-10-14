@@ -1,7 +1,16 @@
 //! Martensite's Vulkan 1.3 renderer with immutable submissions and offscreen captures.
 #[allow(unsafe_code)]
 mod backend;
+mod driver_gui_surface;
 mod error;
+#[cfg(test)]
+mod gui_surface_error_tests;
+mod gui_surface_outcome;
+mod gui_target_stamp;
+pub use gui_surface_outcome::{
+    RenderGuiFreshPacket, RenderGuiSurfaceCause, RenderGuiSurfaceChange, RenderGuiSurfaceOutcome,
+    RenderGuiSurfacePhase, RenderGuiSurfacePolicy,
+};
 mod render_driver_identity;
 pub use render_driver_identity::RenderDriverIdentity;
 mod scene;
