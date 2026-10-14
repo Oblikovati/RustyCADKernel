@@ -4,7 +4,7 @@ mod admission;
 mod alerts;
 mod bindings;
 mod capture;
-mod complete_history;
+pub(crate) mod complete_history;
 mod coverage;
 mod domain;
 mod encoding;

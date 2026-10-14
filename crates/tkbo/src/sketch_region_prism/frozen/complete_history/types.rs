@@ -44,8 +44,10 @@ pub(crate) struct PrismHistoricalContext {
     pub occurrence: PrismHistoricalOccurrence,
     pub children: Vec<PrismHistoryUseKey>,
 }
-#[derive(Debug)]
 pub(crate) enum PrismHistoryCause {
+    Legacy(diagnostics::HistoricalLegacyCause),
+    Lineage(Box<super::super::lineage::PrismLineageInspection>),
+    LineageCancelled(FreezePhase),
     Count {
         required: &'static str,
         actual: usize,
@@ -57,9 +59,25 @@ pub(crate) enum PrismHistoryCause {
     Changed {
         operand: &'static str,
     },
+    ParentsMismatch {
+        stage: PrismHistoryStage,
+        actual: [Vec<FrozenOriginalKey>; 3],
+        expected: [Vec<FrozenOriginalKey>; 3],
+    },
     Bounds(HistoryBoundCause),
+    ContextRead {
+        stage: PrismHistoryStage,
+        cause: HistoricalContextReadCause,
+    },
     Frozen(Box<PrismFreezeCause>),
     Native(std::sync::Arc<rustycad_tkernel::standard::Failure>),
+    Geometry(std::sync::Arc<crate::sketch_region_geometry_capture::CapturedGeometryCause>),
+    UnsupportedDiagnostic {
+        stage: PrismHistoryStage,
+        kind: HistoricalDiagnosticKind,
+        observation: Option<usize>,
+        retained_rows: usize,
+    },
 }
 pub(super) type HistoryCheck<T> = Result<T, PrismHistoryCause>;
 
@@ -93,4 +111,129 @@ pub(crate) struct PrismHistoricalCopyQuery {
     pub source: PrismHistoryUseKey,
     pub native_images: Vec<PrismHistoricalOccurrence>,
     pub copied: PrismHistoryUseKey,
+}
+
+/// Explicit additional intermediate identities; `PrismHistoryBindings { complementary_region, intermediate }`.
+pub(crate) struct PrismHistoryBindings {
+    pub complementary_region: AuthoredPrismId,
+    pub intermediate: Vec<PrismHistoricalStageBindings>,
+}
+pub(crate) struct PrismHistoryRequest<'a> {
+    pub bridge: &'a crate::sketch_region_contact_transport::PairedContactTransaction,
+    pub sources: &'a [crate::sketch_region::ArrangementSource<'a>],
+    pub receipt: &'a crate::sketch_region_prism::PrismReceipt,
+    pub publication: &'a PrismPublicationBindings,
+    pub copied: &'a super::super::lineage::PrismCopyBindings,
+    pub historical: &'a PrismHistoryBindings,
+    pub joined: &'a super::super::proof_join::JoinedPrismProof,
+    pub requested: PrismHistoryOptions,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) struct PrismHistoryOptions {
+    pub version: u32,
+    pub limits: PrismHistoryLimits,
+}
+impl PrismHistoryOptions {
+    /// Bounded one-Jordan history behavior; `PrismHistoryOptions::v1()` refuses unsupported domains.
+    pub(crate) fn v1() -> Self {
+        Self {
+            version: 1,
+            limits: PrismHistoryLimits::bounded_v1(),
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum HistoricalContextReadCause {
+    NotReached,
+    RepeatedAncestor,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) struct PrismHistoricalRelation {
+    pub output: PrismHistoryUseKey,
+    pub parents: [Vec<FrozenOriginalKey>; 3],
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) struct PrismPartitionQuery {
+    pub original: FrozenOriginalKey,
+    pub copied: PrismHistoricalOccurrence,
+    pub kind: u8,
+    pub supported: bool,
+    pub modified: Vec<PrismHistoricalOccurrence>,
+    pub generated: Vec<PrismHistoricalOccurrence>,
+    pub deleted: bool,
+    pub continued: PrismHistoryUseKey,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum HistoricalDiagnosticKind {
+    GeneratedObservation,
+    CandidateCompletion,
+    CandidateObservation,
+    PartitionRead,
+    ArrangementCompletion,
+}
+
+impl std::fmt::Debug for PrismHistoryCause {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Legacy(value) => formatter
+                .debug_tuple("UnsupportedLegacyDiagnostic")
+                .field(value)
+                .finish(),
+            Self::Lineage(value) => formatter
+                .debug_tuple("Lineage")
+                .field(&value.findings())
+                .finish(),
+            Self::LineageCancelled(phase) => formatter
+                .debug_tuple("LineageCancelled")
+                .field(phase)
+                .finish(),
+            Self::Count {
+                required,
+                actual,
+                expected,
+            } => formatter
+                .debug_struct("Count")
+                .field("required", required)
+                .field("actual", actual)
+                .field("expected", expected)
+                .finish(),
+            Self::Missing { required } => formatter.debug_tuple("Missing").field(required).finish(),
+            Self::Changed { operand } => formatter.debug_tuple("Changed").field(operand).finish(),
+            Self::ParentsMismatch {
+                stage,
+                actual,
+                expected,
+            } => formatter
+                .debug_struct("ParentsMismatch")
+                .field("stage", stage)
+                .field("actual", actual)
+                .field("expected", expected)
+                .finish(),
+            Self::Bounds(value) => formatter.debug_tuple("Bounds").field(value).finish(),
+            Self::ContextRead { stage, cause } => formatter
+                .debug_struct("ContextRead")
+                .field("stage", stage)
+                .field("cause", cause)
+                .finish(),
+            Self::Frozen(value) => formatter.debug_tuple("Frozen").field(value).finish(),
+            Self::Native(value) => formatter.debug_tuple("Native").field(value).finish(),
+            Self::Geometry(value) => formatter.debug_tuple("Geometry").field(value).finish(),
+            Self::UnsupportedDiagnostic {
+                stage,
+                kind,
+                observation,
+                retained_rows,
+            } => formatter
+                .debug_struct("UnsupportedDiagnostic")
+                .field("stage", stage)
+                .field("kind", kind)
+                .field("observation", observation)
+                .field("retained_rows", retained_rows)
+                .finish(),
+        }
+    }
 }

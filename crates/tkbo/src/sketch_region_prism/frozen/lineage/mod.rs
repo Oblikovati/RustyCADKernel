@@ -85,7 +85,7 @@ impl LineageInputs<'_> {
 }
 
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism::frozen) mod tests;
 
 #[cfg(test)]
 mod isolation_tests;
