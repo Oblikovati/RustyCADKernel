@@ -1,0 +1,167 @@
+{
+  "kernel": "Martensite",
+  "base_revision": "eb63c68438e4b31ce0b799aa62412ded57c2da98",
+  "decision": "New additive polynomial-integral behavior version 1; existing metric and Gauss integration semantics unchanged. No prior behavior is replaced or migration required.",
+  "scope": "Full [0,1] oriented signed boundary integral and affine sweep integral, conditional on separately proven region boundary coverage/orientation and sweep injectivity. No geometry/body validity inference.",
+  "derivation": "For cubic poles (0,0),(4,0),(0,4),(0,0): x=12t-24t^2+12t^3, y=12t^2-12t^3. Half the cross derivative is 72t^2-144t^3+72t^4. An antiderivative vanishing at zero is 24t^3-36t^4+(72/5)t^5. Determinant of standard planar frame with extrusion(0,0,2) is2. Jacobian evaluates the independently derived antiderivatives; this establishes scalar values only.",
+  "jacobian": {
+    "operation_id": "polynomial.map.evaluate",
+    "schema_provenance": "Inspected math.find operation polynomial.map.evaluate on 2026-10-14: canonical QQ sparse terms in descending exponent order; rational point has identical ordered axis; degree <=127 and coefficient components <=256 decimal digits; output exact rational value.",
+    "evaluations": [
+      {
+        "payload": {
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "72",
+                    "den": "5"
+                  },
+                  "exponents": [
+                    5
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-36",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "24",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    3
+                  ]
+                }
+              ]
+            }
+          },
+          "point": {
+            "variables": [
+              "t"
+            ],
+            "values": [
+              {
+                "num": "1",
+                "den": "1"
+              }
+            ]
+          }
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"operation_id\": \"polynomial.map.evaluate\",\n  \"runtime_ms\": 3,\n  \"output\": {\n    \"value\": {\n      \"num\": \"12\",\n      \"den\": \"5\"\n    }\n  }\n}"
+            }
+          ],
+          "structuredContent": {
+            "operation_id": "polynomial.map.evaluate",
+            "runtime_ms": 3,
+            "output": {
+              "value": {
+                "num": "12",
+                "den": "5"
+              }
+            }
+          },
+          "isError": false
+        }
+      },
+      {
+        "payload": {
+          "polynomial": {
+            "domain": "QQ",
+            "variables": [
+              "t"
+            ],
+            "polynomial": {
+              "terms": [
+                {
+                  "coefficient": {
+                    "num": "144",
+                    "den": "5"
+                  },
+                  "exponents": [
+                    5
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "-72",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    4
+                  ]
+                },
+                {
+                  "coefficient": {
+                    "num": "48",
+                    "den": "1"
+                  },
+                  "exponents": [
+                    3
+                  ]
+                }
+              ]
+            }
+          },
+          "point": {
+            "variables": [
+              "t"
+            ],
+            "values": [
+              {
+                "num": "1",
+                "den": "1"
+              }
+            ]
+          }
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"operation_id\": \"polynomial.map.evaluate\",\n  \"runtime_ms\": 2,\n  \"output\": {\n    \"value\": {\n      \"num\": \"24\",\n      \"den\": \"5\"\n    }\n  }\n}"
+            }
+          ],
+          "structuredContent": {
+            "operation_id": "polynomial.map.evaluate",
+            "runtime_ms": 2,
+            "output": {
+              "value": {
+                "num": "24",
+                "den": "5"
+              }
+            }
+          },
+          "isError": false
+        }
+      }
+    ]
+  },
+  "fixture_policy": "Expected values are independently derived before implementation. No OCCT execution or expected-value regeneration. Existing exact coefficient/derivative/Jacobian primitive behavior pinned separately before extension.",
+  "limits": {
+    "behavior_version": 1,
+    "hard_max_degree": 16,
+    "hard_max_curves": 64,
+    "domain": [
+      0,
+      1
+    ],
+    "rational_weights": "unsupported, explicit incomplete",
+    "error": "Only exact rational integration plus outward binary64 conversion; finite nonnegative requested absolute rounding bound, no silent widening/clamping or sampled-estimate promotion."
+  }
+}

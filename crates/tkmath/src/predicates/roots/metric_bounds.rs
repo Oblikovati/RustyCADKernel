@@ -104,3 +104,14 @@ mod parameter_tests;
 
 #[cfg(test)]
 mod transported_contact_bounds_tests;
+
+#[cfg(test)]
+mod integral_baseline_tests;
+
+mod polynomial_integrals;
+pub use polynomial_integrals::{
+    CertifiedPolynomialMeasure, OrientedMetricCurve, PolynomialIntegralError,
+    PolynomialIntegralEvidence, PolynomialIntegralFailure, PolynomialIntegralOperation,
+    PolynomialIntegralOptions, certify_polynomial_boundary_integral,
+    certify_polynomial_sweep_integral,
+};

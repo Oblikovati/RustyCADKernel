@@ -1,0 +1,97 @@
+{
+  "kernel": "Martensite",
+  "base_revision": "eb63c68438e4b31ce0b799aa62412ded57c2da98",
+  "baseline_commit": "30b98c7b3",
+  "behavior_version": 1,
+  "platform": "Linux 7.1.5-76070105-generic x86_64 GNU/Linux",
+  "rust_compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "scope": "Only conditional signed full-[0,1] boundary and affine-sweep scalar integration; no boundary validity, geometric approximation error, region/body, renderer or application acceptance.",
+  "policy": {
+    "default": {
+      "behavior_version": 1,
+      "max_degree": 16,
+      "max_curves": 64,
+      "absolute_error_limit": 1e-12
+    },
+    "effective": "Identical to requested policy; unsupported policy or excess stored degree/occurrence count refuses the request without truncation or clamps. Error cap must be finite and nonnegative.",
+    "representative": "Lower endpoint of adjacent-binary64 enclosure. Absolute error is the exact rational scalar minus that endpoint, rounded upward independently. No intermediate area or determinant rounding occurs before the exact sweep product."
+  },
+  "independent_oracles": [
+    "Owned Green-integral antiderivative fixture; exact Jacobian math polynomial.map.evaluate requests, responses and inspected schema provenance in decision.json",
+    "Polygon closed forms: square1, triangle1/2; open affine-line cross product -1/2; constant curve0",
+    "Generated degree1,2,4,8,16 x=t,y=t^n closed with diagonal: area1/2-1/(n+1)=(n-1)/(2(n+1))",
+    "Generated degree0..16 forward/reverse occurrence pairs cancel exactly; singular sweep and repeated-control cases are exact zero scalars"
+  ],
+  "baseline_fixture": {
+    "path": "crates/tkmath/src/predicates/roots/metric_bounds/polynomial-integrals-fixture.txt",
+    "sha256": "8d8a61bee2de99d120420a5284c830e3b50884e7876d871f339f87920bd64071",
+    "changed_after_initial_commit": false
+  },
+  "commands": [
+    {
+      "command": "~/.cargo/bin/cargo test -p rustycad-tkmath",
+      "exit_code": 0,
+      "unit_tests": 160,
+      "toolkit_tests": 2904,
+      "doctests": 50,
+      "failed": 0,
+      "ignored": 0,
+      "note": "Final production code. Three additional unit tests added during this run are covered by the subsequent final focused run."
+    },
+    {
+      "command": "~/.cargo/bin/cargo test -p rustycad-tkmath --lib metric_bounds",
+      "exit_code": 0,
+      "tests": 64,
+      "new_integral_tests": 22,
+      "new_baseline_tests": 2,
+      "existing_metric_tests": 40,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "command": "~/.cargo/bin/cargo clippy -p rustycad-tkmath --lib --tests -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "~/.cargo/bin/cargo fmt -p rustycad-tkmath -- --check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "ownership_determinism": [
+    "Compile-time Send+Sync for all7 public types, standard owned report scalar fields and no unsafe implementation",
+    "Caller controls unchanged after success, failure and cancellation; later source edits and report cloning do not alter earlier report",
+    "Cancellation at every polled step of the representative complete sweep discards local work; subsequent request equals earlier result",
+    "Four threads each compute8 sweeps and compare exact report values with shared serial report",
+    "Two serial subprocesses and one parallel subprocess return byte-identical canonical enclosure/error-bit rows; probe invokes only current Rust unit-test executable"
+  ],
+  "error_checks": [
+    "Every fixture enclosure contains independent exact rational value",
+    "Upward error bound covers exact representative difference; predecessor binary64 bound is too small whenever nonzero",
+    "Underflow retains [0,minimum-subnormal] enclosure and nonzero error; huge boundary scalar is explicitly unrepresentable",
+    "Unrepresentable intermediate boundary scalar can yield representable sweep scalar through exact multiplication before any rounding",
+    "Typed incomplete failures retain requested policy, scalar operation, diagnostic occurrence index and original metric cause chain"
+  ],
+  "sanitizer": {
+    "status": "incomplete; no current integral target sanitizer acceptance and no full concurrency acceptance claimed",
+    "control_command": "/tmp/martensite-immutable-topology-tsan-package/target/x86_64-unknown-linux-gnu/debug/tsan-startup-smoke",
+    "control_exit_code": 139,
+    "control_stdout": "",
+    "control_stderr": "",
+    "control_source": "fn main() { println!(\"tsan startup\"); }",
+    "control_toolchain": "rustc 1.101.0-nightly (8d1a76430 2026-10-06), instrumented std built with -Zbuild-std and RUSTFLAGS=-Zsanitizer=thread",
+    "build_and_prior_failure_record": "porting/runtime-evidence/meshvs-volume-topology-2026-10-14/tsan-failure.txt",
+    "interpretation": "The previously built independent startup control was rerun during this task and again crashed before output. No host security change or ABI/runtime-check bypass was attempted. Successful language-enforced Send/Sync and deterministic stress are separate evidence."
+  },
+  "exclusions": [
+    "Rational weights, general nonpolynomial curves and trimmed/subinterval integration are unsupported; no curve substitution/fallback is performed",
+    "Coverage, closedness, non-self-intersection, orientation validity, support compatibility and sweep injectivity must be bound/proved by the consuming TKBO pipeline",
+    "No released accepted integral implementation existed for identical-workload previous-release performance comparison; no performance-regression claim",
+    "No live OCCT source or executable, no GPU, no Windows/macOS or32-bit target checks",
+    "No allocator-exhaustion simulation or process-level OOM recovery"
+  ],
+  "status": "Candidate Rust validation complete; TSan acceptance incomplete as documented; awaiting coordinating review/integration."
+}
