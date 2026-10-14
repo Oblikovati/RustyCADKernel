@@ -95,3 +95,14 @@ fn native_policy_rows() -> Vec<&'static str> {
     assert_eq!(rows.len(), 535);
     rows
 }
+
+#[test]
+fn conversion_recovers_after_rejected_values() {
+    for native_value in [0, -1, 1, 4, 2, i32::MAX, 3, i32::MIN, 0] {
+        let converted = mesh_selection_method_from_native(native_value);
+        assert_eq!(
+            converted.map(|method| method as i32),
+            (0..4).contains(&native_value).then_some(native_value)
+        );
+    }
+}
