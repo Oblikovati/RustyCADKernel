@@ -1,0 +1,157 @@
+{
+  "source_revision": "37edad5fc982413f36789e2bbb6308c72648207a",
+  "merged_main": "0ceea4561241f3aaf94a18b0a1b3d9b4a3c3fecf",
+  "original_source": "edf1de5ff4eaa68d5fbc03b1f30dfe909825b0c1",
+  "original_evidence_commit": "b527cdbe9",
+  "merge_resolution": "automatic ort merge; region_certificate/mod.rs auto-merged; no manual source edits",
+  "checks": [
+    {
+      "label": "focused",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::tolerance_inspection",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 129.30877566337585,
+      "log": "focused.log.gz"
+    },
+    {
+      "label": "frozen-tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::frozen",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3257856369018555,
+      "log": "frozen-tests.log.gz"
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkmath",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 36.578041553497314,
+      "log": "clippy.log.gz"
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 6.948893308639526,
+      "log": "fmt.log.gz"
+    },
+    {
+      "label": "process-first",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8685500621795654,
+      "log": "process-first.log.gz"
+    },
+    {
+      "label": "process-second",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6445622444152832,
+      "log": "process-second.log.gz"
+    },
+    {
+      "label": "frozen-replay",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9478204250335693,
+      "log": "frozen-replay.log.gz"
+    }
+  ],
+  "test_counts": {
+    "focused": 39,
+    "frozen-tests": 35
+  },
+  "source_comparison": {
+    "files": 15792,
+    "identical": true,
+    "changed": []
+  },
+  "process_replay": {
+    "arithmetic_bytes": 3629,
+    "equal": true,
+    "sha256": "a3bbc53e1b5be36f87331ff1319ce1e47b078447b694844d21f004abdaaaf8a7",
+    "frozen_bytes": 89921,
+    "frozen_sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+    "frozen_matches_baseline": true
+  },
+  "candidate_crate_files": 34,
+  "integration_gate": "root will run full integrated matrix after serialized embedding merge; this reconciliation is focused",
+  "next_policy": "ADR0036 exact represented-geometry tolerance V2; fresh main worktree after current integration/deletion, composed with ADR0035 same-body proof join"
+}

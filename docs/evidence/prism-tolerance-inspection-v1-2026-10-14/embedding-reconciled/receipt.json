@@ -1,0 +1,50 @@
+{
+  "source_revision": "ed0475f8cd1bd42df3d120e7a27e49779901cb96",
+  "merged_main": "f4cd79ae2d6a447e78302d07062df23b1ce5f9ed",
+  "previous_candidate": "79e29212d",
+  "original_source": "edf1de5ff4eaa68d5fbc03b1f30dfe909825b0c1",
+  "resolution": "automatic ort merge; no manual edits",
+  "candidate_crate_files": 34,
+  "changed_candidate_files": [
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs"
+  ],
+  "registration_change": "add pub(crate) mod embedding; from main; no tolerance/helper/source fixture behavior changes",
+  "checks": [
+    {
+      "label": "focused",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "sketch_region_prism::tolerance_inspection"
+      ],
+      "exit_code": 0,
+      "seconds": 20.735735416412354,
+      "log": "focused.log.gz"
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 6.645735740661621,
+      "log": "fmt.log.gz"
+    }
+  ],
+  "focused_tests": 39,
+  "source_comparison": {
+    "files": 15804,
+    "identical": true,
+    "changed": []
+  },
+  "scope": "registration reconciliation only; original fullmatrix and two-process replay retained; root runs combined integrated full checks"
+}

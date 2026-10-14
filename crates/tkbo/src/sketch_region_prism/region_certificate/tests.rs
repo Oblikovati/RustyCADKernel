@@ -8,7 +8,7 @@ use crate::sketch_region_contact_transport::test_fixture::{
 use crate::sketch_region_partition_bindings::binding_sources;
 use rustycad_tkbrep::topods::Shape;
 
-pub(super) fn fixture() -> (PairedContactTransaction, Vec<Shape>) {
+pub(in crate::sketch_region_prism) fn fixture() -> (PairedContactTransaction, Vec<Shape>) {
     fixture_for(vec![crate::closed_analytic_cubic::closed_analytic_cubic(
         1., false,
     )])
@@ -18,7 +18,10 @@ pub(super) fn fixture_for(shapes: Vec<Shape>) -> (PairedContactTransaction, Vec<
     let bridge = finish_fixture_request(census, mapped, &binding_sources(&shapes));
     (bridge, shapes)
 }
-pub(super) fn run(bridge: &PairedContactTransaction, shapes: &[Shape]) -> PrismReceipt {
+pub(in crate::sketch_region_prism) fn run(
+    bridge: &PairedContactTransaction,
+    shapes: &[Shape],
+) -> PrismReceipt {
     retain_source_bound_prism(
         bridge,
         &binding_sources(shapes),
