@@ -1,0 +1,91 @@
+{
+  "revision": "06b02aa0484409de03d1a5ecd9040abaae6d544a",
+  "main_dependency": "bb5f065290ddbe0059384970b1d2ca3fefa9d118",
+  "conflict": "frozen/mod.rs registration: exact union preserves joined_measures and shared encoder exports",
+  "steps": [
+    {
+      "label": "measures",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "frozen::joined_measures::"
+      ],
+      "exit_code": 0,
+      "counts": [
+        [
+          "15",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "label": "tolerance",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "exact_tolerance::"
+      ],
+      "exit_code": 0,
+      "counts": [
+        [
+          "41",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "counts": []
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "counts": []
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "two_processes_match_frozen_candidate": true,
+  "replay_bytes": 193495,
+  "replay_sha256": "78bf68fc0feccec38f467abc8108bec7e4b52a1875a7ec6786bf933dcfc15f93",
+  "original_candidate_changed_files": [
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs"
+  ],
+  "unchanged_measurement_source": true,
+  "cargo_check_exit": 0
+}
