@@ -1,0 +1,30 @@
+{
+  "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "sources": {
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.cxx": "ce7a4c77521b9c6f82fb94b642180e59b745aec62ef2e440917c06ff7cd2deca",
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.cxx": "9769c35dd4b7fa8034036acf9f913aba0147c05c65b849d244d24ff898cd9e76"
+  },
+  "dependency_commands": [
+    {
+      "command": [
+        "c++",
+        "-std=c++17",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+        "-MM",
+        "tools/oracle/martensite_prism_history.cxx"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "c++",
+        "-std=c++17",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+        "-MM",
+        "tools/oracle/martensite_prism_orientation.cxx"
+      ],
+      "exit": 0
+    }
+  ],
+  "headers": 381
+}

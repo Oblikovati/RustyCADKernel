@@ -22,3 +22,7 @@ pub(crate) use boundaries::capture_segment as capture_boundary_segment;
 
 #[cfg(test)]
 mod captured_tests;
+
+pub(crate) use generation::composed_copy_relation;
+
+pub(crate) use ancestry::append_unique as append_original_parents;
