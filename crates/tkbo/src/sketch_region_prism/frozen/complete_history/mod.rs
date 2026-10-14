@@ -70,3 +70,12 @@ pub(in crate::sketch_region_prism) use operands::{
     observed_contexts as retained_history_contexts,
 };
 pub(in crate::sketch_region_prism) use partition_queries::resolve_native_partition_context;
+
+pub(in crate::sketch_region_prism) use census::admit_stage as admit_history_stage_contexts;
+pub(in crate::sketch_region_prism) use partition_queries::{
+    admit_partition_history_availability, admit_unchanged_partition_query,
+};
+pub(in crate::sketch_region_prism) use stage_names::{
+    append_member as append_historical_member,
+    context_snapshot as snapshot_directed_history_context,
+};
