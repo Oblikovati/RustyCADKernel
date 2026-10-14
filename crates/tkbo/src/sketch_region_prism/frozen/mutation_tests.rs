@@ -9,13 +9,13 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
-enum ContainmentEdit {
+pub(super) enum ContainmentEdit {
     Remove,
     Replace,
     Reorder,
 }
 
-struct RemoveNamedChild {
+pub(super) struct RemoveNamedChild {
     edit: ContainmentEdit,
     phase: FreezePhase,
     parent: Shape,
@@ -39,7 +39,7 @@ impl FreezeProgress for RemoveNamedChild {
         Ok(false)
     }
 }
-fn remove_child_progress(
+pub(super) fn remove_child_progress(
     receipt: &super::super::PrismReceipt,
     kind: ShapeEnum,
     phase: FreezePhase,

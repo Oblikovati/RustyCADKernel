@@ -1,0 +1,13 @@
+{
+  "base": "1978079a46f48a948d5185d7228c0af12df24c8f",
+  "command": "PATH=/home/vmiguel/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin:$PATH CARGO_BUILD_JOBS=2 cargo test -p rustycad-tkbo --lib topology_baseline_tests -- --test-threads=1",
+  "sha256": {
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": "953bc058fa633961b6a86c84251ae5ad1a565bb99f1b59e91c4abf7a375814e0",
+    "crates/tkbo/src/sketch_region_prism/frozen/topology_baseline_tests.rs": "ffeea8046acf6067ece2bbacd1f424bd6c404242941c40db5989c7f970ee3cfd",
+    "crates/tkbo/src/sketch_region_prism/frozen/graph.rs": "aeebd5d3cefce9e6aff8c5c475e3c356ad4cf1865e3073e869b9fe65591f3442",
+    "crates/tkbo/src/sketch_region_prism/frozen/capture.rs": "b5ea10cff5f12ab9367050853fe99f106d0e8767784b077ffd87d923ddf3fdfb"
+  },
+  "result": "2 passed; 0 failed; 554 filtered out",
+  "oracle": "Owned pre-certificate cubic extrusion incidence; no body validity claim",
+  "tool_selection": "Initial cargo +1.99.0 failed before compilation because /usr/bin/cargo is not a rustup shim; corrected by explicit toolchain PATH."
+}
