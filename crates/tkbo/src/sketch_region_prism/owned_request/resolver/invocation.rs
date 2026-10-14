@@ -60,7 +60,7 @@ impl ResolvedPrismInvocation<'_> {
     ) -> Result<ResolvedPrismPublication, Box<InvokedPrismPublicationFailure<'a>>> {
         let requested = self.prepared.retained.request.clone();
         let request = self.publication_request();
-        match publish_named_prism(&request, progress) {
+        match publish_requested_invocation(&request, progress) {
             Ok(result) => Ok(ResolvedPrismPublication {
                 request: requested,
                 plan: self.plan.clone(),
@@ -89,6 +89,20 @@ impl ResolvedPrismInvocation<'_> {
         }
     }
 }
+
+fn publish_requested_invocation<'a>(
+    request: &PrismPublicationRequest<'a>,
+    progress: &mut dyn PrismPublicationProgress,
+) -> Result<PublishedNamedPrism, Box<PrismPublicationFailure<'a>>> {
+    if request.requested.version == 2 {
+        return publish_named_prism_v2(request, progress);
+    }
+    publish_named_prism(request, progress)
+}
+
+#[cfg(test)]
+#[path = "invocation_v2_tests.rs"]
+mod retention_tests;
 impl ResolvedPrismPublication {
     /// Transfer the sealed payload after projection; `invoked.into_parts()` retains the exact request.
     pub(in crate::sketch_region_prism::owned_request) fn into_parts(
