@@ -3,8 +3,8 @@
 ## Provenance and scope
 
 Base `1978079a46f48a948d5185d7228c0af12df24c8f`; baseline fixture commit
-`1eff9bed1`; behavior-preserving shared graph extraction `a1e4bb957`; final
-source revision `77978c638`. This is the private exact combinatorial prerequisite
+`1eff9bed1`; behavior-preserving shared graph extraction `a1e4bb957`; original
+candidate source revision `77978c638`. This is the private exact combinatorial prerequisite
 for RustyCADKernel#10, specified by [ADR0033](../../adr/0033-private-frozen-prism-topology.md).
 No valid body, geometric outwardness, embedding, application or release
 acceptance is claimed. No live OCCT, GPU, native desktop, tessellation oracle,
@@ -19,15 +19,41 @@ python3 docs/evidence/frozen-prism-topology-v1-2026-10-14/replay.py target/prism
 It runs all TKBO targets/features, doctests, documentation with warnings denied,
 Clippy with warnings denied, package formatting, two independent process replays
 (each also checks eight ordinary host threads), and the legacy frozen replay.
-All commands use jobs2. Source bookends cover tracked files outside this evidence
-directory; final command/results and exact replay hashes are in `summary.json`.
-Raw command logs and source snapshots are retained in `candidate-raw-evidence.tar.gz` (original frozen run) and the final reconciled archive.
+All commands use jobs2. Source bookends cover all tracked files except
+`docs/evidence/`; final command/results and exact replay hashes are in `summary.json`.
+Raw command logs and source snapshots are retained in
+`candidate-raw-evidence.tar.gz` (original frozen run) and
+`reconciled-raw-evidence.tar.gz` (final reconciled run).
 
 The original frozen run passed 591 library + 646 toolkit + 2 example tests,
 35 doctests, docs/Clippy/fmt and both process replay checks. Its 96,088-byte
 certificate SHA-256 is `852bd440732f89512ab35e27c2f13b70d00b9af818c3dc3266122b3bee75a9a7`.
 The later failed-input isolation assertion and main reconciliation are recorded
 separately; the original receipt is not relabeled.
+
+## Final reconciled gate
+
+The explicit failed-input before/after replay assertion was added in
+`fd56f385b`. Main `e6955e6db` was then merged as source `9262459aa`; the only
+conflict was the exact union of topology/traversal and lineage module
+registrations. The original source receipt above remains unchanged.
+
+The complete runner was rerun on `9262459aa` with output under
+`target/prism-topology-v1/reconciled-final`. It passed 686 library + 646 toolkit +
+2 example tests (1,334 executions), 35 doctests, documentation and Clippy with
+warnings denied, formatting, both independent process replays and legacy replay.
+The focused topology check before the merge commit passed all 31 tests.
+
+Both source bookends contain the same revision and SHA-256 hashes for all 38,797
+tracked non-evidence files. Certificate and legacy replay lengths and hashes are
+identical to the original candidate values reported here. The final command
+receipt is `summary.json`; reconciliation provenance is `reconciliation.json`.
+`reconciled-artifact-hashes.json` lists every retained raw artifact, including
+both full source maps and the registration merge diff. Archive SHA-256:
+`f15df9cbfebc3bef1cc550f15e032504b18f1219e14b98ab46cf0d433b6ce7e7`.
+
+These are candidate checks. The coordinator separately records integrated-main
+verification; this receipt does not relabel that future combined source.
 
 ## Independent expectations and retained red evidence
 
