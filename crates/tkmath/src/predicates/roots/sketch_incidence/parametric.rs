@@ -81,12 +81,7 @@ pub(super) fn span_roots(
         source,
         range: span.range,
     };
-    let roots = isolation
-        .roots()
-        .iter()
-        .map(|bracket| context.span_root(bracket, work))
-        .collect::<Result<Vec<_>, _>>()?;
-    Ok(Some(roots))
+    context.all_roots(&isolation, work).map(Some)
 }
 pub(super) fn dyadic(value: f64) -> DyadicBound {
     DyadicBound::from_f64(value).expect("admitted finite parameter")
@@ -118,15 +113,30 @@ struct RootContext<'a> {
     range: Option<[f64; 2]>,
 }
 impl RootContext<'_> {
-    fn span_root(&self, bracket: &RootBracket, work: &mut Work<'_>) -> Result<SpanRoot, Cause> {
-        let mut target = IsolatedRoot::from_bracket(self.target_equation, bracket);
-        let [left, right] = side_signs(&self.target_equation.polynomial, bracket);
+    fn all_roots(
+        &self,
+        isolation: &RootIsolation,
+        work: &mut Work<'_>,
+    ) -> Result<Vec<SpanRoot>, Cause> {
+        isolation
+            .roots()
+            .iter()
+            .map(|bracket| self.span_root(bracket, work))
+            .collect()
+    }
+    // A root exactly at a span end has no side within this span.
+    fn open_sides(&self, target: &IsolatedRoot) -> [bool; 2] {
         let ends = self.range.map(|range| range.map(dyadic));
         let at = |index: usize| {
             ends.as_ref()
                 .is_some_and(|ends| target.exact() == Some(&ends[index]))
         };
-        let open = [!at(0), !at(1)];
+        [!at(0), !at(1)]
+    }
+    fn span_root(&self, bracket: &RootBracket, work: &mut Work<'_>) -> Result<SpanRoot, Cause> {
+        let mut target = IsolatedRoot::from_bracket(self.target_equation, bracket);
+        let [left, right] = side_signs(&self.target_equation.polynomial, bracket);
+        let open = self.open_sides(&target);
         work.enter(SketchIncidenceStage::Classification);
         let line = self.line_root(&mut target, work)?;
         work.enter(SketchIncidenceStage::Construction);

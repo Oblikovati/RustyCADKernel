@@ -41,28 +41,20 @@ pub(super) fn contacts(
 fn equation<'a>(
     request: &ConicRequest<'a>,
 ) -> (CenteredLine, Vec<BigInt>, Option<&'a SketchConicSector>) {
-    match request.curve {
-        SketchIncidenceCurve::Circle {
-            center,
-            radius,
-            sector,
-        } => {
-            let line = CenteredLine::new(request.points, *center);
-            let coefficients = circle_equation(&line, *radius);
-            (line, coefficients, sector.as_ref())
-        }
-        SketchIncidenceCurve::Ellipse {
-            center,
-            major_axis,
-            radii,
-            sector,
-        } => {
-            let line = CenteredLine::new(request.points, *center);
-            let coefficients = ellipse_equation(&line, *major_axis, *radii);
-            (line, coefficients, sector.as_ref())
-        }
+    use SketchIncidenceCurve::{Circle, Ellipse};
+    let (center, sector) = match request.curve {
+        Circle { center, sector, .. } | Ellipse { center, sector, .. } => (*center, sector),
         other => unreachable!("curve {other:?}; expected a circle or ellipse"),
-    }
+    };
+    let line = CenteredLine::new(request.points, center);
+    let coefficients = match request.curve {
+        Ellipse {
+            major_axis, radii, ..
+        } => ellipse_equation(&line, *major_axis, *radii),
+        Circle { radius, .. } => circle_equation(&line, *radius),
+        _ => unreachable!("conic checked above"),
+    };
+    (line, coefficients, sector.as_ref())
 }
 fn classify(
     equation: &Arc<RootEquation>,
