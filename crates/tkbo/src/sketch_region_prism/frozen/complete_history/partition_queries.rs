@@ -57,7 +57,8 @@ fn project_query(
     admit_query(query, original)?;
     let copied_index = parent_rows::occurrence_index(copied, &query.copied)?;
     bind_initial_query(request, query, original)?;
-    let continued = unique_partition_trace(&copied.actual[copied_index], partition)?;
+    let continued =
+        resolve_native_partition_context(&copied.actual[copied_index], partition.actual)?;
     Ok(PrismPartitionQuery {
         original: super::super::identities::original_key(request.publication, &query.original)
             .map_err(|e| PrismHistoryCause::Frozen(Box::new(e)))?,
@@ -98,12 +99,13 @@ fn bind_initial_query(
         1,
     )
 }
-fn unique_partition_trace(
+/// Lookup the unique unchanged trace beneath the actual partition root.
+/// Example: `resolve_native_partition_context(source, targets)`; its index is not identity.
+pub(in crate::sketch_region_prism) fn resolve_native_partition_context(
     source: &RegionObservedContext,
-    partition: &BoundHistoricalContexts<'_>,
+    partition: &[RegionObservedContext],
 ) -> HistoryCheck<usize> {
     let found: Vec<_> = partition
-        .actual
         .iter()
         .enumerate()
         .filter(|(_, target)| same_partition_tail(source, target))

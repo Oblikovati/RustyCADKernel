@@ -13,7 +13,7 @@ pub(super) struct HistoryStageOperands {
     pub stage: PrismHistoryStage,
     pub rows: Vec<RegionObservedContext>,
 }
-pub(super) fn current_contexts(
+pub(in crate::sketch_region_prism) fn current_contexts(
     root: &Shape,
     stage: PrismHistoryStage,
     limits: PrismHistoryLimits,
@@ -21,7 +21,7 @@ pub(super) fn current_contexts(
     bounds::preflight_history_root(root, limits).map_err(PrismHistoryCause::Bounds)?;
     observed_contexts(&crate::sketch_region::observe_region_contexts(root), stage).cloned()
 }
-pub(super) fn observed_contexts(
+pub(in crate::sketch_region_prism) fn observed_contexts(
     rows: &RegionContextObservation,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<&Vec<RegionObservedContext>> {
@@ -34,7 +34,7 @@ pub(super) fn observed_contexts(
         RegionContextObservation::Incomplete(cause) => Err(context_failure(stage, cause)),
     }
 }
-pub(super) fn copied_contexts(
+pub(in crate::sketch_region_prism) fn copied_contexts(
     rows: &RegionCopyContextObservation,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<&RegionCopyContexts> {
