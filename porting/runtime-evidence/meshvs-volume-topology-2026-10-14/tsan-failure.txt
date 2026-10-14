@@ -1,0 +1,50 @@
+Martensite immutable topology candidate: ThreadSanitizer runtime limitation
+Date: 2026-10-14
+Host: Linux 7.1.5-76070105-generic x86_64 GNU/Linux
+Toolchain: rustc 1.101.0-nightly (8d1a76430 2026-10-06)
+
+Setup command (exit 0):
+/home/vmiguel/.cargo/bin/rustup component add rust-src --toolchain nightly
+
+Temporary /tmp/martensite-immutable-topology-tsan-package/Cargo.toml at target run:
+[package]
+name = "martensite-immutable-topology-tsan"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[[bin]]
+name = "martensite-immutable-topology-tsan"
+path = "/home/vmiguel/git/oblikovati-workspace/Martensite-independent-meshvs-topology/porting/runtime-evidence/meshvs-volume-topology-2026-10-14/immutable-probe.rs"
+
+Target command (exit 139):
+RUSTFLAGS='-Zsanitizer=thread' /home/vmiguel/.cargo/bin/cargo +nightly run --manifest-path /tmp/martensite-immutable-topology-tsan-package/Cargo.toml -Zbuild-std --target x86_64-unknown-linux-gnu -- parallel > /tmp/martensite-immutable-topology-tsan.txt
+
+Verbatim final target command output:
+   Compiling martensite-immutable-topology-tsan v0.0.0 (/tmp/martensite-immutable-topology-tsan-package)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 12.98s
+     Running `/tmp/martensite-immutable-topology-tsan-package/target/x86_64-unknown-linux-gnu/debug/martensite-immutable-topology-tsan parallel`
+/bin/bash: line 12: 226414 Segmentation fault      (core dumped) RUSTFLAGS='-Zsanitizer=thread' /home/vmiguel/.cargo/bin/cargo +nightly run --manifest-path /tmp/martensite-immutable-topology-tsan-package/Cargo.toml -Zbuild-std --target x86_64-unknown-linux-gnu -- parallel > /tmp/martensite-immutable-topology-tsan.txt
+
+Control source /tmp/martensite-immutable-topology-tsan-package/smoke.rs:
+fn main() { println!("tsan startup"); }
+
+Manifest addition before control command:
+[[bin]]
+name = "tsan-startup-smoke"
+path = "smoke.rs"
+
+Control command (exit 139):
+RUSTFLAGS='-Zsanitizer=thread' /home/vmiguel/.cargo/bin/cargo +nightly run --manifest-path /tmp/martensite-immutable-topology-tsan-package/Cargo.toml -Zbuild-std --target x86_64-unknown-linux-gnu --bin tsan-startup-smoke
+
+Verbatim control command output:
+   Compiling martensite-immutable-topology-tsan v0.0.0 (/tmp/martensite-immutable-topology-tsan-package)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running `/tmp/martensite-immutable-topology-tsan-package/target/x86_64-unknown-linux-gnu/debug/tsan-startup-smoke`
+
+Neither program emitted its expected stdout. No sanitizer diagnostic was emitted.
+Both builds used -Zbuild-std with the sanitizer setting for the standard library;
+no ABI mismatch override, host security change or runtime check bypass was used.
+These failures establish no TSan acceptance. The separate compile-time Send/Sync
+assertions (standard owned vectors, no unsafe implementation), deterministic
+multithread stress and process comparisons pass. Full concurrency acceptance is
+not claimed while sanitizer verification is incomplete.

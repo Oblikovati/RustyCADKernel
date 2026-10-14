@@ -1,5 +1,5 @@
 {
-  "scope": "Two static MeshVS_DataSource3D factories only; no full class, inherited interface, RTTI, cached getters, renderer or application acceptance claim.",
+  "scope": "Two Martensite static visualization-connectivity constructors only. Historical OCCT mapping identifies provenance, not API compatibility or acceptance. No full class, inherited interface, RTTI, cached getters, renderer, solid-geometry or application acceptance claim.",
   "base_rust_commit": "42ba6552d38f5c65c86709dec20b87eb0f5df5ac",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "occt_checkout_clean": true,
@@ -67,7 +67,6 @@
       "rust_path": "martensite_tkmeshvs::create_prism_topology"
     }
   ],
-  "storage": "Handle<HArray1<Sequence<i32>>>; face array and node sequences are one-based; node-index values follow native zero/apex numbering; each static invocation allocates fresh mutable storage.",
   "legacy_test_audit": {
     "direct_upstream_tests_found": false,
     "search_roots": [
@@ -86,7 +85,8 @@
     "Native undefined signed-overflow domains and resource-exhausting allocations; native allocation-failure parity is not claimed",
     "Windows/macOS and rendering/application acceptance"
   ],
-  "validation": {
+  "historical_candidate_storage": "Handle<HArray1<Sequence<i32>>>; face array and node sequences are one-based; node-index values follow native zero/apex numbering; each static invocation allocates fresh mutable storage.",
+  "historical_candidate_validation": {
     "status": "passed locally; candidate not yet integrated",
     "commands": [
       {
@@ -119,5 +119,84 @@
     ],
     "rust_test_runtime": "Committed fixture compiled by include_str!; no OCCT source reads, native subprocess, or OCCT dynamic library dependency.",
     "generated_invariants": "Prism and pyramid for base-point counts 3 through 32: every edge occurs exactly twice with opposite orientation."
+  },
+  "storage": "Immutable MeshVSVolumeTopology with private Vec<i32> nodes and Vec<usize> face offsets; only borrowed immutable slices exposed. One-based face identifiers, zero-based slice positions, unchanged prism node values and apex/base numbering. Clone owns independent vectors; equality compares values. No unsafe, lock, global or thread-local state.",
+  "unpublished_api_decision": {
+    "reviewed_candidate_commit": "7e6b1eb4c09b1ed3f84b06e36cd0dc38dfe785c7",
+    "consumer_audit": "Before mutation, repository symbol search found only the candidate module/tests, lib reexports and this scope artifact. git branch --contains found only porting/independent-meshvs-topology; git tag --contains returned no tags. No existing released API consumer found.",
+    "version_policy": "Candidate refinement before integration/publication; no released API or package version changed. Historical mutable ownership is not a replay mode of this new API.",
+    "return_type": "Result<MeshVSVolumeTopology, MeshVSTopologyError>",
+    "invalid_counts": "Every i32 count below 3 returns TooFewBasePoints including operation and requested count; historical null rows map to this explicit failure. No successful empty result.",
+    "overflow": "Prism requires n <= i32::MAX / 2 + 1 (last node 2n-1); pyramid requires n <= i32::MAX-1 (last face n+1). Checked storage arithmetic and per-vector isize byte limits run before allocation. Exceeding a bound returns IndexOverflow.",
+    "allocation": "Two try_reserve_exact calls run before filling topology. AllocationFailure retains TryReserveError and operation/count; no partial result is published. Resource-exhausting allocations are not attempted in tests, and OS overcommit/process termination cannot be caught.",
+    "fixture_policy": "The original 26 rows and SHA256 remain unchanged. First 24 rows assert exact face ordering and rejection correspondence; last two mutable-handle rows remain provenance only and are explicitly excluded from immutable API ownership assertions.",
+    "geometry_policy": "Only integer combinatorial connectivity is constructed. No geometric input, measured error, tolerance, healing, entity history, geometry validation, model operation receipt or kernel publication acceptance is claimed."
+  },
+  "validation": {
+    "status": "Rust checks passed locally; TSan execution incomplete on host; candidate not yet integrated",
+    "rust_compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "platform": "Linux 7.1.5-76070105-generic x86_64 GNU/Linux",
+    "commands": [
+      {
+        "command": "~/.cargo/bin/cargo fmt -p martensite-tkmeshvs -- --check",
+        "exit_code": 0
+      },
+      {
+        "command": "~/.cargo/bin/cargo test -p martensite-tkmeshvs",
+        "exit_code": 0,
+        "unit_tests": 5,
+        "toolkit_tests": 44,
+        "topology_toolkit_tests": 10,
+        "doctests": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "command": "~/.cargo/bin/cargo clippy -p martensite-tkmeshvs --all-targets -- -D warnings",
+        "exit_code": 0
+      },
+      {
+        "command": "git diff --check",
+        "exit_code": 0
+      }
+    ],
+    "oracles": [
+      "Unchanged attributed owned fixture for exact face ordering and count rejection correspondence; no native execution or source consultation in this revision",
+      "Independently stated triangular prism and tetrahedral pyramid faces",
+      "Generated counts 3..=32: exactly two opposite uses per edge",
+      "Generated counts 3..=64: expected node set, edge count, no repeated face node, Euler characteristic V-E+F=2"
+    ],
+    "ownership_checks": [
+      "Private clone vectors have distinct allocations; unit test mutates clone nodes/offsets and verifies original untouched",
+      "Invalid calls and dropping earlier results preserve subsequent/previous values",
+      "Compile-time Send+Sync assertions for all three public types",
+      "Eight threads each repeat 64 independent constructions and shared reads, matching serial results"
+    ],
+    "bounds_checks": "Minimum/negative counts and invalid face IDs cover i32::MIN/MAX. Maximum accepted integer sizes are checked without allocating. First overflowing counts are rejected before allocation. Deterministic usize::MAX reservation exercises typed allocation failure without giant allocation.",
+    "process_reproducibility": {
+      "source": "immutable-probe.rs",
+      "compile": "~/.cargo/bin/rustc --edition 2024 porting/runtime-evidence/meshvs-volume-topology-2026-10-14/immutable-probe.rs -o /tmp/martensite-immutable-topology-probe",
+      "runs": [
+        "/tmp/martensite-immutable-topology-probe (two separate processes)",
+        "/tmp/martensite-immutable-topology-probe parallel"
+      ],
+      "comparison": "cmp passes for both serial process outputs and for serial versus parallel output; fixed factory/count/face order",
+      "output_sha256": "1ff523053265a46c58014659208293c4aa1b3921d084945b3a398644c7a72430"
+    },
+    "thread_sanitizer": {
+      "status": "incomplete: instrumented executable exits 139 before output; trivial println-only instrumented executable also exits 139",
+      "compiler": "rustc 1.101.0-nightly (8d1a76430 2026-10-06)",
+      "build": "RUSTFLAGS='-Zsanitizer=thread' /home/vmiguel/.cargo/bin/cargo +nightly run --manifest-path /tmp/martensite-immutable-topology-tsan-package/Cargo.toml -Zbuild-std --target x86_64-unknown-linux-gnu -- parallel > /tmp/martensite-immutable-topology-tsan.txt",
+      "build_result": "passed with instrumented std; no unsafe ABI mismatch override",
+      "initial_attempt": "Direct rustc sanitizer build refused uninstrumented std ABI; corrected by installing nightly rust-src and -Zbuild-std",
+      "runtime_claim": "No TSan pass or full concurrency acceptance claimed; runtime crash is reproduced without Martensite code. Compile-time Send/Sync follows safe owned standard vectors and is independent of sanitizer verification.",
+      "verbatim_failure_record": "tsan-failure.txt"
+    },
+    "exclusions": [
+      "No live OCCT probe, regenerated expected values, native ABI equivalence or mutable ownership compatibility",
+      "No actual giant allocation, allocator OOM/OS kill simulation, 32-bit runtime, Windows/macOS checks",
+      "No geometry, renderer or application acceptance; no prior released factory implementation exists for release benchmark comparison",
+      "ThreadSanitizer runtime verification remains incomplete as recorded above"
+    ]
   }
 }

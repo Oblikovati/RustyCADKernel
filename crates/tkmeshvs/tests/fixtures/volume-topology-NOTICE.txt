@@ -21,3 +21,15 @@ This fixture stays with the Rust tests if removable oracle infrastructure goes a
 Tests read it with include_str! and have no OCCT source/build/runtime dependency.
 No original upstream test directly invoking these two methods was found; these
 are newly generated native regression cases, not claimed legacy translations.
+
+Immutable unpublished candidate revision (2026-10-14):
+The first 24 rows remain exact connectivity/order and rejected-input evidence.
+The final two rows remain unchanged historical evidence of OCCT mutable handle
+semantics. Martensite does not replay those ownership semantics: successful
+factories now return private owned Rust vectors with immutable face slices,
+value equality, independent deep clones and no shared mutable state. Counts below
+three return typed TooFewBasePoints errors rather than a null handle. Bounds and
+allocation failures are explicit typed errors; native failure parity is not claimed.
+No live native program was consulted or executed for this revision. Independent
+closed-connectivity, edge-orientation, Euler and node-set checks supplement the
+historical fixture. This is visualization connectivity, not accepted solid geometry.
