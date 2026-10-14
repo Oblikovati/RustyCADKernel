@@ -66,6 +66,11 @@ impl AspectWindowBase {
 pub trait AspectWindow: Transient {
     /// The embedded base; `window.window_base().fields().is_virtual`.
     fn window_base(&self) -> &AspectWindowBase;
+    /// The native binding, defaulting to display metadata; `window.native_display_connection()`.
+    /// Native owners override this when their resource lifetime is pinned independently.
+    fn native_display_connection(&self) -> Handle<AspectDisplayConnection> {
+        self.window_base().fields().display.clone()
+    }
     /// True when the window is mapped on screen; `window.is_mapped()`.
     fn is_mapped(&self) -> bool;
     /// Maps the window; `window.map()`.

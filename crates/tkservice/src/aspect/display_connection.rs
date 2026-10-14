@@ -15,6 +15,12 @@ use std::sync::Arc;
 #[path = "display_native_calls.rs"]
 mod native_calls;
 use native_calls::{NativeDisplayCalls, XlibDisplayCalls};
+#[path = "display_lifecycle_failure.rs"]
+mod lifecycle_failure;
+pub use lifecycle_failure::*;
+#[path = "display_connection_lease.rs"]
+mod connection_lease;
+pub use connection_lease::AspectDisplayConnectionLease;
 
 /// The locked fields of the connection.
 #[derive(Debug, Default)]
@@ -31,6 +37,7 @@ struct ConnectionState {
     display_name: AsciiString,
     /// `myIsOwnDisplay`: the connection opened the display and closes it.
     is_own_display: bool,
+    leases: AspectDisplayLeaseCounts,
 }
 
 /// A window-system connection; `AspectDisplayConnection::new()?` opens `$DISPLAY`.
@@ -124,11 +131,31 @@ impl AspectDisplayConnection {
         state.default_visual_info = visual;
         state.default_fb_config = fb_config;
     }
-    /// `Init(theDisplay)`: closes an owned display, then wraps `display` or (when 0) opens
-    /// the named one. Example: `connection.init(0)?`.
+    /// Legacy error adapter: refuses retained reset, then initializes when unleased.
+    /// Structured cause is lost; migrate to `connection.init_checked(0)?` (ADR0019 deletion task).
+    /// Example: `connection.init(0)?`.
     pub fn init(&self, display: usize) -> Result<(), Failure> {
+        self.init_checked(display)
+            .map_err(AspectDisplayLifecycleFailure::into_legacy_failure)
+    }
+    /// Initialize with structured lifecycle diagnostics; `connection.init_checked(0)?`.
+    pub fn init_checked(&self, display: usize) -> Result<(), AspectDisplayLifecycleFailure> {
         let mut state = self.state.write();
-        platform::init(&mut state, display, self.native.as_ref())
+        let failure = self.lifecycle_failure(
+            &state,
+            AspectDisplayOperation::Initialize,
+            display,
+            AspectDisplayLifecycleCause::Retained,
+        );
+        if state.leases != AspectDisplayLeaseCounts::default() {
+            return Err(failure);
+        }
+        platform::init(&mut state, display, self.native.as_ref()).map_err(|native| {
+            AspectDisplayLifecycleFailure {
+                cause: AspectDisplayLifecycleCause::Native(Box::new(native)),
+                ..failure
+            }
+        })
     }
 }
 
@@ -227,3 +254,24 @@ mod tests {
 #[cfg(all(test, target_os = "linux"))]
 #[path = "display_connection_baseline.rs"]
 mod baseline;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "display_connection_lifecycle_tests.rs"]
+mod lifecycle_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "display_lease_drop_tests.rs"]
+mod lease_drop_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "display_lease_thread_tests.rs"]
+mod lease_thread_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+pub(crate) fn recorded_display_fixture(
+    address: usize,
+) -> rustycad_tkernel::standard::Handle<AspectDisplayConnection> {
+    let connection = baseline::fake_connection(baseline::RecordingDisplayCalls::new(address));
+    connection.init_checked(0).unwrap();
+    rustycad_tkernel::standard::Handle::new(connection)
+}

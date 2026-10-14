@@ -4,13 +4,22 @@ use rustycad_tkernel::standard::Failure;
 use std::sync::Mutex;
 
 pub(super) struct RecordingDisplayCalls {
-    pub open_result: usize,
+    pub open_result: std::sync::atomic::AtomicUsize,
+    pub open_step: usize,
     pub calls: Mutex<Vec<String>>,
 }
 impl RecordingDisplayCalls {
     pub fn new(open_result: usize) -> Arc<Self> {
         Arc::new(Self {
-            open_result,
+            open_result: std::sync::atomic::AtomicUsize::new(open_result),
+            open_step: 0,
+            calls: Mutex::default(),
+        })
+    }
+    pub fn advancing() -> Arc<Self> {
+        Arc::new(Self {
+            open_result: std::sync::atomic::AtomicUsize::new(41),
+            open_step: 1,
             calls: Mutex::default(),
         })
     }
@@ -25,6 +34,7 @@ impl NativeDisplayCalls for RecordingDisplayCalls {
             String::from_utf8_lossy(name.as_bytes())
         ));
         self.open_result
+            .fetch_add(self.open_step, std::sync::atomic::Ordering::Relaxed)
     }
     fn close(&self, display: usize) {
         self.calls.lock().unwrap().push(format!("close({display})"));

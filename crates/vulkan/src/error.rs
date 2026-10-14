@@ -1,9 +1,14 @@
 //! Errors name the rejected input or operation and its expected contract.
-use rustycad_tkservice::aspect::AspectNativeWindowFailure;
+use rustycad_tkservice::aspect::{AspectDisplayLifecycleFailure, AspectNativeWindowFailure};
 use std::fmt;
 /// A renderer input, capability or device failure; inspect with `error.to_string()`.
 #[derive(Clone, PartialEq, Eq)]
-pub struct RenderError(String, Option<AspectNativeWindowFailure>);
+pub struct RenderError(String, Option<NativeLifecycleFailure>);
+#[derive(Clone, PartialEq, Eq)]
+enum NativeLifecycleFailure {
+    Window(AspectNativeWindowFailure),
+    Display(AspectDisplayLifecycleFailure),
+}
 impl RenderError {
     /// Describe a rejected backend input; `RenderError::rejected(0, "positive extent")`.
     pub fn rejected(value: impl fmt::Debug, expected: &str) -> Self {
@@ -11,12 +16,33 @@ impl RenderError {
     }
     /// Inspect a closed target without parsing text; `error.native_window_failure()`.
     pub fn native_window_failure(&self) -> Option<&AspectNativeWindowFailure> {
-        self.1.as_ref()
+        match &self.1 {
+            Some(NativeLifecycleFailure::Window(failure)) => Some(failure),
+            _ => None,
+        }
+    }
+    /// Inspect native connection admission failure; `error.native_display_failure()`.
+    pub fn native_display_failure(&self) -> Option<&AspectDisplayLifecycleFailure> {
+        match &self.1 {
+            Some(NativeLifecycleFailure::Display(failure)) => Some(failure),
+            _ => None,
+        }
     }
 }
 impl From<AspectNativeWindowFailure> for RenderError {
     fn from(failure: AspectNativeWindowFailure) -> Self {
-        Self(failure.to_string(), Some(failure))
+        Self(
+            failure.to_string(),
+            Some(NativeLifecycleFailure::Window(failure)),
+        )
+    }
+}
+impl From<AspectDisplayLifecycleFailure> for RenderError {
+    fn from(failure: AspectDisplayLifecycleFailure) -> Self {
+        Self(
+            failure.to_string(),
+            Some(NativeLifecycleFailure::Display(failure)),
+        )
     }
 }
 impl fmt::Debug for RenderError {
@@ -31,9 +57,11 @@ impl fmt::Display for RenderError {
 }
 impl std::error::Error for RenderError {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
-        self.1
-            .as_ref()
-            .map(|failure| failure as &dyn std::error::Error)
+        match &self.1 {
+            Some(NativeLifecycleFailure::Window(failure)) => Some(failure),
+            Some(NativeLifecycleFailure::Display(failure)) => Some(failure),
+            None => None,
+        }
     }
 }
 pub(crate) fn rejected(value: impl fmt::Debug, expected: &str) -> RenderError {
@@ -69,5 +97,19 @@ mod tests {
         assert_eq!(failure.native_window_failure(), Some(&cause));
         assert_eq!(failure.to_string(), cause.to_string());
         assert!(std::error::Error::source(&failure).is_some());
+    }
+    #[test]
+    fn display_render_errors_preserve_structured_admission_cause() {
+        let cause = rustycad_tkservice::aspect::AspectDisplayConnection::acquire_lease(
+            &rustycad_tkernel::standard::Handle::default(),
+            AspectDisplayLeasePurpose::VulkanInstance,
+        )
+        .err()
+        .unwrap();
+        let failure = RenderError::from(cause.clone());
+        assert_eq!(failure.native_display_failure(), Some(&cause));
+        assert!(failure.native_window_failure().is_none());
+        assert!(std::error::Error::source(&failure).is_some());
+        assert_eq!(failure.to_string(), cause.to_string());
     }
 }

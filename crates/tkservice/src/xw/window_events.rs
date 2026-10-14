@@ -204,7 +204,7 @@ impl XwWindow {
         &self,
     ) -> rustycad_tkernel::standard::Handle<crate::aspect::AspectDisplayConnection> {
         use crate::aspect::AspectWindow as _;
-        self.window_base().fields().display.clone()
+        self.native_display_connection()
     }
 }
 
