@@ -1,0 +1,469 @@
+{
+  "source_revision": "4757e8b35b97cd6760b41b6bbca4e5ce4eb76ec1",
+  "candidate_revision": "f4673f952",
+  "date": "2026-10-14",
+  "platform": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+  "toolchain": "Rust 1.99.0",
+  "source_bookends": {
+    "tracked_source_build_files": 15548,
+    "unchanged": true
+  },
+  "executable_bookends": {
+    "count": 3,
+    "unchanged": true
+  },
+  "checks": [
+    {
+      "command": "cargo +1.99.0 test -p rustycad-tkservice -p rustycad-tkv3d --all-targets --all-features --locked",
+      "exit_code": 0,
+      "log": "integrated-toolkit-tests.log.gz",
+      "sha256": "249a599f0b8e9ec23bd9e01188e974a28960665c6a73fc1e5b7fc8ce3ec1db81",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "tests": {
+        "passed": 1243,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": "cargo +1.99.0 build -p martensite-vulkan --example native_gui_rapid --example native_gui_acceptance --example native_window_lifecycle --locked",
+      "exit_code": 0,
+      "log": "integrated-build.log.gz",
+      "sha256": "76dd9e069d1dfdefaacf5885e040bf5b6ec91935e974085bdad59c6ce31b871c",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin",
+        "CARGO_BUILD_JOBS": "2"
+      }
+    },
+    {
+      "command": "cargo +1.99.0 test -p rustycad-tkservice -p rustycad-tkv3d -p martensite-vulkan --doc --all-features --locked",
+      "exit_code": 0,
+      "log": "integrated-docs.log.gz",
+      "sha256": "610efa9d623cbda6247a60dff267e34599b22ec731d5cd90a59b4f2c66bc0c90",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "tests": {
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": "cargo +1.99.0 clippy -p rustycad-tkservice -p rustycad-tkv3d -p martensite-vulkan --all-targets --all-features --locked -- -D warnings",
+      "exit_code": 0,
+      "log": "integrated-clippy.log.gz",
+      "sha256": "a2ce736a3df1799cdccf7eab5387a60921908d881b2e94d1f614128122aa1f7f",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin",
+        "CARGO_BUILD_JOBS": "2"
+      }
+    },
+    {
+      "command": "cargo +1.99.0 fmt --all -- --check",
+      "exit_code": 0,
+      "log": "integrated-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "environment": {
+        "PATH_prefix": "/home/vmiguel/.cargo/bin"
+      }
+    },
+    {
+      "command": "PYTHONPATH=tools PYTHONDONTWRITEBYTECODE=1 python3 -m unittest tools.tests.test_release_verification_plan",
+      "exit_code": 0,
+      "log": "integrated-release-plan.log.gz",
+      "sha256": "7ce2ac63dfcf1ec2e0f544f8631c6b208da4f65a7ca17e3780c687d64139df1e",
+      "tests": {
+        "passed": 8,
+        "failed": 0
+      }
+    },
+    {
+      "command": "python3 docs/evidence/native-window-lifecycle-v1-2026-10-14/run_native_checks.py target/native-lifecycle-integrated-4757e8b35",
+      "exit_code": 0,
+      "log": "integrated-native.log.gz",
+      "sha256": "90db414bb2f92e584e1f1aaf053051e9ccd660c66c44736ffb3c75e476babbbd"
+    },
+    {
+      "command": "python3 docs/evidence/gui-framebuffer-restart-2026-10-14/check_framebuffers.py target/native-lifecycle-integrated-4757e8b35",
+      "exit_code": 0,
+      "log": "integrated-pixel-check.log.gz",
+      "sha256": "538268071a64e104cba006dfbdc766a2f18f7316ad78d6b35309e3d398d0b4f6"
+    },
+    {
+      "driver": "amd",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "exit_code": 0,
+      "log": "integrated-vulkan-amd.log.gz",
+      "sha256": "8b57825146b4b815fb8401f0219b7b6eb783d3da0c7bb063aac5e2825fe00b21",
+      "tests": {
+        "passed": 747,
+        "failed": 0,
+        "ignored": 5
+      },
+      "ignored_cases": [
+        "test ais_textured_shape_native_replay::textured_full_native_matrix_preserves_all_unresolved_diagnostics ... ignored, Full strict matrix retains exact-color rounding and software line-coverage diagnostics",
+        "test fixed_lighting_replay::complete_fixed_lighting_strict_native_diagnostic ... ignored, retains native AMD one-byte and rotated-depth strict diagnostics; no gate relaxation",
+        "test fixed_lighting_replay::fixed_cap_point_source_preserves_homogeneous_lighting ... ignored, GL2.1 lighting is undefined for eye-space w=0 section vertices; retain configured-driver diagnostic",
+        "test oit_transparency::sprite_mask_strict_native_buffers_retain_the_coverage_diagnostic ... ignored, configured native sprite coverage differs by one row; strict raw diagnostic stays unchanged",
+        "test triangle_edge_replay::full_textured_cap_edge_strict_native_diagnostic ... ignored, Strict native raster/offset diagnostics remain partial; run explicitly on each profile"
+      ]
+    },
+    {
+      "driver": "lavapipe",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--no-fail-fast",
+        "--",
+        "--test-threads=1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "exit_code": 0,
+      "log": "integrated-vulkan-lavapipe.log.gz",
+      "sha256": "6420bb75bf48b5420e1d3983138b40f018bc9e141e923b909579e9a9b401238c",
+      "tests": {
+        "passed": 747,
+        "failed": 0,
+        "ignored": 5
+      },
+      "ignored_cases": [
+        "test ais_textured_shape_native_replay::textured_full_native_matrix_preserves_all_unresolved_diagnostics ... ignored, Full strict matrix retains exact-color rounding and software line-coverage diagnostics",
+        "test fixed_lighting_replay::complete_fixed_lighting_strict_native_diagnostic ... ignored, retains native AMD one-byte and rotated-depth strict diagnostics; no gate relaxation",
+        "test fixed_lighting_replay::fixed_cap_point_source_preserves_homogeneous_lighting ... ignored, GL2.1 lighting is undefined for eye-space w=0 section vertices; retain configured-driver diagnostic",
+        "test oit_transparency::sprite_mask_strict_native_buffers_retain_the_coverage_diagnostic ... ignored, configured native sprite coverage differs by one row; strict raw diagnostic stays unchanged",
+        "test triangle_edge_replay::full_textured_cap_edge_strict_native_diagnostic ... ignored, Strict native raster/offset diagnostics remain partial; run explicitly on each profile"
+      ]
+    }
+  ],
+  "native_runs": [
+    {
+      "name": "amd-rapid-0",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/amd-rapid-0"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 6.928184753000096
+    },
+    {
+      "name": "amd-rapid-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/amd-rapid-1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 6.126418838000063
+    },
+    {
+      "name": "amd-rapid-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/amd-rapid-2"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 5.925807257000088
+    },
+    {
+      "name": "amd-rapid-3",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/amd-rapid-3"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 6.026188685999841
+    },
+    {
+      "name": "amd-rapid-4",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/amd-rapid-4"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 6.176253094999993
+    },
+    {
+      "name": "lavapipe-rapid-0",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/lavapipe-rapid-0"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 6.278200550999827
+    },
+    {
+      "name": "lavapipe-rapid-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/lavapipe-rapid-1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 5.925497827000072
+    },
+    {
+      "name": "amd-acceptance",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_acceptance",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/amd-acceptance/overlay"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.3142363540000588
+    },
+    {
+      "name": "lavapipe-acceptance",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_acceptance",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/native-lifecycle-integrated-4757e8b35/lavapipe-acceptance/overlay"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.6651282000002539
+    },
+    {
+      "name": "amd-lifecycle-0",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_window_lifecycle"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.11391929100045672
+    },
+    {
+      "name": "amd-lifecycle-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_window_lifecycle"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.11400400799993804
+    },
+    {
+      "name": "amd-lifecycle-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_window_lifecycle"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.11459710600047401
+    },
+    {
+      "name": "lavapipe-lifecycle-0",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_window_lifecycle"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.21430290399985097
+    },
+    {
+      "name": "lavapipe-lifecycle-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_window_lifecycle"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.2642064420006136
+    },
+    {
+      "name": "lavapipe-lifecycle-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_window_lifecycle"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 0.21406537399980152
+    }
+  ],
+  "independent_framebuffer_checks": {
+    "processes": 7,
+    "stages": {
+      "blue": {
+        "rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998"
+      },
+      "green": {
+        "rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264"
+      },
+      "rapid3gui-0": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "rapid3gui-1": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "rapid3gui-2": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "rapid3gui-3": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      },
+      "cleared": {
+        "rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264"
+      },
+      "restored": {
+        "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+        "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+        "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+      }
+    },
+    "overlay_cross_driver_equal": true
+  },
+  "raw_artifact": {
+    "file": "integrated-raw.tar.gz",
+    "sha256": "58e42d3756cde1ac3d0696d366aed4217abc1068f639c82d56254f7a92d846df"
+  },
+  "scope": "Delivered destruction retirement, typed closed-target failures and unconditional explicit-rebind generation invalidation. Existing valid rendering pixels unchanged.",
+  "exclusions": [
+    "Historical intermittent BadWindow attribution remains unproven.",
+    "Unreported external destruction and shared-display reset remain separate work.",
+    "Existing ignored Vulkan cases remain ignored and listed; no full API/test parity claim.",
+    "No application, performance, package publication, full view concurrency or ThreadSanitizer acceptance."
+  ]
+}
