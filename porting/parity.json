@@ -97029,12 +97029,76 @@
       "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
     },
     {
+      "upstream_id": "Transfer_StatusVoid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusResult.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusResult::StatusVoid",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusResult: the Rust #[repr(i32)] enum keeps the native order and discriminant 0; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "Transfer_StatusDefined",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusResult.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusResult::StatusDefined",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusResult: the Rust #[repr(i32)] enum keeps the native order and discriminant 1; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "Transfer_StatusUsed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusResult.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusResult::StatusUsed",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusResult: the Rust #[repr(i32)] enum keeps the native order and discriminant 2; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
       "upstream_id": "Transfer_StatusExec",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusExec.hxx",
       "rust_item": "rustycad_tkxsbase::transfer::TransferStatusExec",
       "status": "implemented",
       "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_StatusInitial",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusExec.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusExec::StatusInitial",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusExec: the Rust #[repr(i32)] enum keeps the native order and discriminant 0; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "Transfer_StatusRun",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusExec.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusExec::StatusRun",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusExec: the Rust #[repr(i32)] enum keeps the native order and discriminant 1; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "Transfer_StatusDone",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusExec.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusExec::StatusDone",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusExec: the Rust #[repr(i32)] enum keeps the native order and discriminant 2; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "Transfer_StatusError",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusExec.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusExec::StatusError",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusExec: the Rust #[repr(i32)] enum keeps the native order and discriminant 3; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "Transfer_StatusLoop",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusExec.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusExec::StatusLoop",
+      "status": "implemented",
+      "notes": "Enumerator of Transfer_StatusExec: the Rust #[repr(i32)] enum keeps the native order and discriminant 4; the test every_enumerator_keeps_native_value pins it."
     },
     {
       "upstream_id": "Transfer_Binder::Transfer_Binder",
@@ -103023,12 +103087,84 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; occ::handle<Standard_Type> is &RuntimeType; HSequence arguments are slices (None for null); native exceptions and null dereferences are Failure errors."
     },
     {
+      "upstream_id": "IFSelect_RetVoid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ReturnStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectReturnStatus::RetVoid",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_ReturnStatus: the Rust #[repr(i32)] enum keeps the native order and discriminant 0; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_RetDone",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ReturnStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectReturnStatus::RetDone",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_ReturnStatus: the Rust #[repr(i32)] enum keeps the native order and discriminant 1; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_RetError",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ReturnStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectReturnStatus::RetError",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_ReturnStatus: the Rust #[repr(i32)] enum keeps the native order and discriminant 2; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_RetFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ReturnStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectReturnStatus::RetFail",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_ReturnStatus: the Rust #[repr(i32)] enum keeps the native order and discriminant 3; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_RetStop",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ReturnStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectReturnStatus::RetStop",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_ReturnStatus: the Rust #[repr(i32)] enum keeps the native order and discriminant 4; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
       "upstream_id": "IFSelect_RemainMode",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_RemainMode.hxx",
       "rust_item": "rustycad_tkxsbase::if_select::IFSelectRemainMode",
       "status": "implemented",
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; occ::handle<Standard_Type> is &RuntimeType; HSequence arguments are slices (None for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_RemainForget",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_RemainMode.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRemainMode::RemainForget",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_RemainMode: the Rust #[repr(i32)] enum keeps the native order and discriminant 0; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_RemainCompute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_RemainMode.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRemainMode::RemainCompute",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_RemainMode: the Rust #[repr(i32)] enum keeps the native order and discriminant 1; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_RemainDisplay",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_RemainMode.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRemainMode::RemainDisplay",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_RemainMode: the Rust #[repr(i32)] enum keeps the native order and discriminant 2; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_RemainUndo",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_RemainMode.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRemainMode::RemainUndo",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_RemainMode: the Rust #[repr(i32)] enum keeps the native order and discriminant 3; the test every_enumerator_keeps_native_value pins it."
     },
     {
       "upstream_id": "IFSelect_PrintCount",
@@ -103039,6 +103175,78 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; occ::handle<Standard_Type> is &RuntimeType; HSequence arguments are slices (None for null); native exceptions and null dereferences are Failure errors."
     },
     {
+      "upstream_id": "IFSelect_ItemsByEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::ItemsByEntity",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 0; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_CountByItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::CountByItem",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 1; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_ShortByItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::ShortByItem",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 2; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_ListByItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::ListByItem",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 3; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_EntitiesByItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::EntitiesByItem",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 4; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_CountSummary",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::CountSummary",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 5; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_GeneralInfo",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::GeneralInfo",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 6; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_Mapping",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::Mapping",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 7; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_ResultCount",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintCount::ResultCount",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintCount: the Rust #[repr(i32)] enum keeps the native order and discriminant 8; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
       "upstream_id": "IFSelect_PrintFail",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintFail.hxx",
@@ -103047,12 +103255,76 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; occ::handle<Standard_Type> is &RuntimeType; HSequence arguments are slices (None for null); native exceptions and null dereferences are Failure errors."
     },
     {
+      "upstream_id": "IFSelect_FailOnly",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintFail.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintFail::FailOnly",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintFail: the Rust #[repr(i32)] enum keeps the native order and discriminant 0; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_FailAndWarn",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_PrintFail.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectPrintFail::FailAndWarn",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_PrintFail: the Rust #[repr(i32)] enum keeps the native order and discriminant 1; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
       "upstream_id": "IFSelect_EditValue",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditValue.hxx",
       "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditValue",
       "status": "implemented",
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; occ::handle<Standard_Type> is &RuntimeType; HSequence arguments are slices (None for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Optional",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditValue.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditValue::Optional",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_EditValue: the Rust #[repr(i32)] enum keeps the native order and discriminant 0; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_Editable",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditValue.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditValue::Editable",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_EditValue: the Rust #[repr(i32)] enum keeps the native order and discriminant 1; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_EditProtected",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditValue.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditValue::EditProtected",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_EditValue: the Rust #[repr(i32)] enum keeps the native order and discriminant 2; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_EditComputed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditValue.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditValue::EditComputed",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_EditValue: the Rust #[repr(i32)] enum keeps the native order and discriminant 3; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_EditRead",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditValue.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditValue::EditRead",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_EditValue: the Rust #[repr(i32)] enum keeps the native order and discriminant 4; the test every_enumerator_keeps_native_value pins it."
+    },
+    {
+      "upstream_id": "IFSelect_EditDynamic",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditValue.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditValue::EditDynamic",
+      "status": "implemented",
+      "notes": "Enumerator of IFSelect_EditValue: the Rust #[repr(i32)] enum keeps the native order and discriminant 5; the test every_enumerator_keeps_native_value pins it."
     },
     {
       "upstream_id": "IFSelect_IntParam::IFSelect_IntParam",
