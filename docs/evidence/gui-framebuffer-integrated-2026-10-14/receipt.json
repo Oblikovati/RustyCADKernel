@@ -1,0 +1,471 @@
+{
+  "source_revision": "c47191e0492c715e24410b999e547ef500854750",
+  "date": "2026-10-14",
+  "source_comparison": {
+    "revision_before": "c47191e0492c715e24410b999e547ef500854750",
+    "revision_after": "c47191e0492c715e24410b999e547ef500854750",
+    "files_compared": 15526,
+    "changed_files": [],
+    "executable_hashes_unchanged": true
+  },
+  "source_hashes_before": "source-before.json",
+  "source_hashes_after": "source-after.json",
+  "executable_sha256": {
+    "native_gui_rapid": "de453a9419c5fe6102ca25409461a7154b041f99579a51f128e6abac3c4ced71",
+    "native_gui_acceptance": "8e18a3541e6d69a03ccd26074cd9fb4f9eca4fe0a46a56651f8fb714c0040819"
+  },
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "platform": "Linux 7.1.5-76070105-generic x86_64 GNU/Linux",
+  "build": {
+    "command": "/home/vmiguel/.cargo/bin/cargo +1.99.0 build -p martensite-vulkan --example native_gui_rapid --example native_gui_acceptance --locked",
+    "exit": 0
+  },
+  "runner": {
+    "command": "python3 target/gui-integrated-c47191e04/run_native_checks.py",
+    "exit": 0,
+    "script_sha256": "df86eacb14c2ddcf5828cd182efc59a8689aa917f82e691504c48d05c5867463"
+  },
+  "runs": [
+    {
+      "name": "amd-rapid-0",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/amd-rapid-0"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 5.823687151000058
+    },
+    {
+      "name": "amd-rapid-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/amd-rapid-1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 5.823140840000178
+    },
+    {
+      "name": "amd-rapid-2",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/amd-rapid-2"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 5.823532285000056
+    },
+    {
+      "name": "amd-rapid-3",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/amd-rapid-3"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 5.924917833000109
+    },
+    {
+      "name": "amd-rapid-4",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/amd-rapid-4"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 6.329504563
+    },
+    {
+      "name": "lavapipe-rapid-0",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/lavapipe-rapid-0"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 6.837614846999941
+    },
+    {
+      "name": "lavapipe-rapid-1",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_rapid",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/lavapipe-rapid-1"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 13.250625666000133
+    },
+    {
+      "name": "amd-acceptance",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_acceptance",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/amd-acceptance/overlay"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 1.0157865159999346
+    },
+    {
+      "name": "lavapipe-acceptance",
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/debug/examples/native_gui_acceptance",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/gui-integrated-c47191e04/lavapipe-acceptance/overlay"
+      ],
+      "environment": {
+        "DISPLAY": ":1",
+        "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d",
+        "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu",
+        "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+        "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.json"
+      },
+      "exit": 0,
+      "wall_seconds_not_performance": 1.416526087000193
+    }
+  ],
+  "check": {
+    "command": "python3 docs/evidence/gui-framebuffer-restart-2026-10-14/check_framebuffers.py target/gui-integrated-c47191e04",
+    "exit": 0,
+    "result": {
+      "processes": 7,
+      "stages": {
+        "blue": {
+          "rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998"
+        },
+        "green": {
+          "rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264"
+        },
+        "rapid3gui-0": {
+          "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+        },
+        "rapid3gui-1": {
+          "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+        },
+        "rapid3gui-2": {
+          "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+        },
+        "rapid3gui-3": {
+          "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+        },
+        "cleared": {
+          "rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264"
+        },
+        "restored": {
+          "rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+          "depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+          "ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404"
+        }
+      },
+      "overlay_cross_driver_equal": true
+    }
+  },
+  "external_sha256": {
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json": "f328caf95d75607075575cf5849b4e765f9eabe111ea5be7f971c92a9a7d1a58",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation/extracted/usr/lib/x86_64-linux-gnu/libVkLayer_khronos_validation.so": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104",
+    "/usr/share/vulkan/icd.d/radeon_icd.json": "bca32a660ca32a42b598d53cdc63b3e3e917ea40c0b3b1e00fdbd3115280b51d",
+    "/usr/share/vulkan/icd.d/lvp_icd.json": "8468db31369dbd0140b68783f1a7943e6158cadcf5314e949e6be31f42068e13"
+  },
+  "artifact_sha256": {
+    "amd-acceptance/overlay.depth": "3035aac5fb87474c303702f9030301b4e6bb7aee93be3710b8ab8dcea201db70",
+    "amd-acceptance/overlay.ppm": "c9531b02672dcb305a4e1faa0e6fe94214f68f9fa25c41c3323287fd1e0bed84",
+    "amd-acceptance/overlay.rgba": "37476c442380c351c6ad1c47f10e7a86dc188cbad20cfe2de914492c5f064fa0",
+    "amd-acceptance/run.log": "822d9e3fffd5054c5916929034ead7098a1ea3378f2c4cbb06fb14fda8c28a5b",
+    "amd-rapid-0/blue.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/blue.ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998",
+    "amd-rapid-0/blue.rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+    "amd-rapid-0/cleared.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/cleared.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-0/cleared.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-0/green.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/green.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-0/green.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-0/rapid3gui-0.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/rapid3gui-0.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-0/rapid3gui-0.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-0/rapid3gui-1.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/rapid3gui-1.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-0/rapid3gui-1.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-0/rapid3gui-2.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/rapid3gui-2.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-0/rapid3gui-2.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-0/rapid3gui-3.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/rapid3gui-3.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-0/rapid3gui-3.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-0/restored.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-0/restored.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-0/restored.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-0/run.log": "457f67c976a0c28a82b33b7607cbe807165b4d2f8c09bc26e23619e26566bb7f",
+    "amd-rapid-1/blue.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/blue.ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998",
+    "amd-rapid-1/blue.rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+    "amd-rapid-1/cleared.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/cleared.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-1/cleared.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-1/green.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/green.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-1/green.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-1/rapid3gui-0.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/rapid3gui-0.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-1/rapid3gui-0.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-1/rapid3gui-1.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/rapid3gui-1.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-1/rapid3gui-1.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-1/rapid3gui-2.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/rapid3gui-2.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-1/rapid3gui-2.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-1/rapid3gui-3.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/rapid3gui-3.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-1/rapid3gui-3.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-1/restored.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-1/restored.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-1/restored.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-1/run.log": "457f67c976a0c28a82b33b7607cbe807165b4d2f8c09bc26e23619e26566bb7f",
+    "amd-rapid-2/blue.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/blue.ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998",
+    "amd-rapid-2/blue.rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+    "amd-rapid-2/cleared.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/cleared.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-2/cleared.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-2/green.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/green.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-2/green.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-2/rapid3gui-0.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/rapid3gui-0.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-2/rapid3gui-0.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-2/rapid3gui-1.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/rapid3gui-1.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-2/rapid3gui-1.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-2/rapid3gui-2.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/rapid3gui-2.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-2/rapid3gui-2.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-2/rapid3gui-3.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/rapid3gui-3.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-2/rapid3gui-3.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-2/restored.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-2/restored.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-2/restored.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-2/run.log": "457f67c976a0c28a82b33b7607cbe807165b4d2f8c09bc26e23619e26566bb7f",
+    "amd-rapid-3/blue.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/blue.ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998",
+    "amd-rapid-3/blue.rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+    "amd-rapid-3/cleared.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/cleared.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-3/cleared.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-3/green.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/green.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-3/green.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-3/rapid3gui-0.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/rapid3gui-0.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-3/rapid3gui-0.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-3/rapid3gui-1.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/rapid3gui-1.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-3/rapid3gui-1.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-3/rapid3gui-2.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/rapid3gui-2.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-3/rapid3gui-2.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-3/rapid3gui-3.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/rapid3gui-3.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-3/rapid3gui-3.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-3/restored.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-3/restored.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-3/restored.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-3/run.log": "457f67c976a0c28a82b33b7607cbe807165b4d2f8c09bc26e23619e26566bb7f",
+    "amd-rapid-4/blue.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/blue.ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998",
+    "amd-rapid-4/blue.rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+    "amd-rapid-4/cleared.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/cleared.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-4/cleared.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-4/green.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/green.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "amd-rapid-4/green.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "amd-rapid-4/rapid3gui-0.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/rapid3gui-0.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-4/rapid3gui-0.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-4/rapid3gui-1.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/rapid3gui-1.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-4/rapid3gui-1.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-4/rapid3gui-2.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/rapid3gui-2.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-4/rapid3gui-2.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-4/rapid3gui-3.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/rapid3gui-3.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-4/rapid3gui-3.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-4/restored.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "amd-rapid-4/restored.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "amd-rapid-4/restored.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "amd-rapid-4/run.log": "457f67c976a0c28a82b33b7607cbe807165b4d2f8c09bc26e23619e26566bb7f",
+    "build.log": "268b48eb77e9a951843ed218af2905bbd60777f6fee25dcbc2ab28e4084f86d2",
+    "compiler.txt": "b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+    "desktop.txt": "5e16935bf1e3cad69fe41892845690a420b767de4673d906f5276106755f16c6",
+    "executables-after.json": "079a27cea81cd999f4798e9c2819429f456b3e7740f4e593b9d1894a6a9b8c7a",
+    "executables-before.json": "079a27cea81cd999f4798e9c2819429f456b3e7740f4e593b9d1894a6a9b8c7a",
+    "independent-comparison.json": "bf60853d34713491830856bfd1b4969e1eb09f54ed122e829f61db1b05e860ac",
+    "lavapipe-acceptance/overlay.depth": "3035aac5fb87474c303702f9030301b4e6bb7aee93be3710b8ab8dcea201db70",
+    "lavapipe-acceptance/overlay.ppm": "c9531b02672dcb305a4e1faa0e6fe94214f68f9fa25c41c3323287fd1e0bed84",
+    "lavapipe-acceptance/overlay.rgba": "37476c442380c351c6ad1c47f10e7a86dc188cbad20cfe2de914492c5f064fa0",
+    "lavapipe-acceptance/run.log": "31ba9bacba83e6f9003e5c91c181168663a807c071eb300f5af22fa551e697e7",
+    "lavapipe-rapid-0/blue.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/blue.ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998",
+    "lavapipe-rapid-0/blue.rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+    "lavapipe-rapid-0/cleared.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/cleared.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "lavapipe-rapid-0/cleared.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "lavapipe-rapid-0/green.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/green.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "lavapipe-rapid-0/green.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "lavapipe-rapid-0/rapid3gui-0.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/rapid3gui-0.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-0/rapid3gui-0.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-0/rapid3gui-1.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/rapid3gui-1.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-0/rapid3gui-1.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-0/rapid3gui-2.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/rapid3gui-2.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-0/rapid3gui-2.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-0/rapid3gui-3.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/rapid3gui-3.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-0/rapid3gui-3.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-0/restored.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-0/restored.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-0/restored.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-0/run.log": "255c1525a25b46ad53c8218610f813861682cfa88a43360f5fa36a334e7bbd2e",
+    "lavapipe-rapid-1/blue.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/blue.ppm": "d052f795ab46deff3354359dcf9da7a01e16d674e771b19985a1aab7a2558998",
+    "lavapipe-rapid-1/blue.rgba": "fd7053db8308e169c98faa541860f017ff7e784ce8e589bd9937158df59bfd78",
+    "lavapipe-rapid-1/cleared.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/cleared.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "lavapipe-rapid-1/cleared.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "lavapipe-rapid-1/green.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/green.ppm": "38e045d23113d90056c195e99f8337a94f8c3a4205f94a0e91556b5bd87df264",
+    "lavapipe-rapid-1/green.rgba": "fdd2ed531b99142ce5382655688ca3242adba9fc4bb24ac3a600e9a63762a7b0",
+    "lavapipe-rapid-1/rapid3gui-0.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/rapid3gui-0.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-1/rapid3gui-0.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-1/rapid3gui-1.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/rapid3gui-1.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-1/rapid3gui-1.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-1/rapid3gui-2.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/rapid3gui-2.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-1/rapid3gui-2.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-1/rapid3gui-3.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/rapid3gui-3.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-1/rapid3gui-3.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-1/restored.depth": "83df7678732d7459538b7548595fd036ebd6ae57ec659cbe512996b43c10252c",
+    "lavapipe-rapid-1/restored.ppm": "4d6b46c65ed5bb075e9f6fdcf420722f9d81110d37228a9054506a321e2a1404",
+    "lavapipe-rapid-1/restored.rgba": "1281e9f0d21e9e04b0eeaabb2b7e6c2970e776ba9256a63fa7d7d06df429ca16",
+    "lavapipe-rapid-1/run.log": "255c1525a25b46ad53c8218610f813861682cfa88a43360f5fa36a334e7bbd2e",
+    "platform.txt": "a0ab5f35ab738310fedc6634280887dfd5a05125b52b9038e263d22597e0eef5",
+    "processes.txt": "bf02b08dd475e3939078163a8c270b89e52a0422632eeed4a9227f0524e434a2",
+    "run_native_checks.py": "df86eacb14c2ddcf5828cd182efc59a8689aa917f82e691504c48d05c5867463",
+    "runner.log": "ee4c618fc406b0e7f13e1947791e65b9385e6d40d2b88568992f65fa278c41d4",
+    "runs.json": "5b4c906f5e335d61a5382fe373f7f2e9a8017a56bb7f9760c8300770491b0e53",
+    "source-after.json": "3a334e66580bc6892a8bfaa6a5a466af3b50c3658e923d613053c2991bed6d09",
+    "source-before.json": "3a334e66580bc6892a8bfaa6a5a466af3b50c3658e923d613053c2991bed6d09",
+    "source-comparison.json": "669a09655f1a04fb2f5a3e067ec7497333ca1ca8c48f1921ecf2dbd7fb9e3386"
+  },
+  "historical_badwindow_resolved": false,
+  "performance_measured": false,
+  "scope": "Integrated completed-framebuffer GUI functional verification only. No current full renderer/application acceptance claim. No native OCCT run. Earlier lifecycle failure remains unresolved.",
+  "uncommitted_main_files": "Pre-existing docs/AGENTS changes left untouched; all new artifacts are under target.",
+  "worktree_cleanup": "diagnostic/martensite-native-gui-stale has no needed uncommitted artifacts or active processes; relevant older evidence is committed and current integrated evidence is in main target.",
+  "raw_archive": {
+    "path": "target/gui-integrated-c47191e04.raw.tar.gz",
+    "sha256": "22eec5bc0962bf3258d3125cdbd3fbe5ceaf07f49d98c47d5f4a96ece2e5a1ef",
+    "bytes": 2386025,
+    "members": 207,
+    "receipt_in_archive": false,
+    "command": "tar --exclude='gui-integrated-c47191e04/receipt.json' -czf target/gui-integrated-c47191e04.raw.tar.gz -C target gui-integrated-c47191e04",
+    "exit": 0,
+    "retained_path": "raw.tar.gz"
+  },
+  "packaging_note": "First archive attempt reported directory changed because receipt creation overlapped packaging (exit 1). Rebuilt after evidence stabilized, excluding the independently stored receipt, exit 0. Native runtime and image checks were unaffected.",
+  "integration_cpu_checks": [
+    {
+      "source_revision": "c47191e0492c715e24410b999e547ef500854750",
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p martensite-vulkan --example native_gui_rapid --locked",
+      "exit": 0,
+      "passed": 12,
+      "failed": 0,
+      "ignored": 0,
+      "log": "helper-tests.log.gz"
+    },
+    {
+      "source_revision": "cb0b7464c413f63e773fc123c942e3a8d64d20f1",
+      "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_release_verification_plan",
+      "exit": 0,
+      "passed": 8,
+      "failed": 0,
+      "log": "release-plan-tests.log.gz",
+      "initial_invocation": "Omitting PYTHONPATH failed import before tests; retained in release-plan-initial-import-error.log.gz."
+    }
+  ],
+  "retained_extra_sha256": {
+    "helper-tests.log.gz": "403bccf4f3f47addb5ac71c7b76e488fd9e9b59359ba1175c41356f6ac523523",
+    "raw.tar.gz": "22eec5bc0962bf3258d3125cdbd3fbe5ceaf07f49d98c47d5f4a96ece2e5a1ef",
+    "release-plan-initial-import-error.log.gz": "5f23e351a6a84666eab76019897775d9fef6deb522fd20df4b9d7e8b744c64d7",
+    "release-plan-tests.log.gz": "5c39b23085b85b905f87b6a7e4c5a73273246bb2294a820a02fc5dbcc45f9f23"
+  }
+}
