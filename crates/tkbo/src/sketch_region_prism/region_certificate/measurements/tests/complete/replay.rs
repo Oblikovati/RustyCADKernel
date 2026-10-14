@@ -18,7 +18,7 @@ fn fresh_full_receipt() -> String {
 #[test]
 fn complete_prism_measure_process_receipt() {
     let receipt = fresh_full_receipt();
-    assert!(receipt.contains("\"body\":\"incomplete\""));
+    assert_eq!(receipt, include_str!("complete-v1.json").trim_end());
     println!("{receipt}");
 }
 #[test]

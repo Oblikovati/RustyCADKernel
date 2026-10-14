@@ -1,0 +1,241 @@
+{
+  "base_revision": "979aa17b2",
+  "baseline_revision": "9026f7e51",
+  "behavior_version": 1,
+  "borrowed_extraction_revision": "7863c33ee",
+  "candidate_files": {
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/access.rs": "31ee098aa994de646bd3ec33a4577493900db0e88399b56b748b79dfb8ee4189",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/error.rs": "b4c3178d2d1bdf9032cf6447281df286dd429a1d9be53e723ce2cec49fc2007c",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/faces.rs": "3c9d88b1c01f5aab67e904674be31387581d714bd18d13117444cf9ea16dc440",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/mod.rs": "7c963670fb55a9d7d478da6bc37ae3f467e486b2807c3a0e9d6e63ea59e984af",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/naming.rs": "316e360a513e70c17e5fda79c9b1b4945212ac31f6c92dad9e820f0e1aadf0df",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/naming_tests.rs": "e9b259e3e36dac6dac7966afd1696560688e5a01a4378a46108f37ea0dff8ead",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/replay.rs": "3475c0ca5e3239395d4c76251f3552d2d4a7607f89b0109d3c6b591d408f3219",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests.rs": "f8a401681ab02a735290a063dd5666164dbc01502a1b64ba015a852e2157c32f",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_binding.rs": "69fd0e95378da2ca5522d6dce2a7d9448f8d058be9600f44157928e2da7f42ea",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_domain.rs": "366c9de42d22c1f7a8d9338eb4d98a060f315d53db4009cacc35226895d38626",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_refusal.rs": "12cd8ac5ec8421a8efb56cdacf27125c3a5842eecfbecaf17cee9143f0fa91ed",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_replay.rs": "10adeb1b443c2ef619cf18e9ec9581389757b63bcfdffcd5251b8912ca428f3c",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/trims.rs": "f07b26dc173b17548db2bc2f7519d8b02ac93fb709b819103c6947c3ceea3460",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/types.rs": "d199464dbce02f963b2e672f99384f1642642d7d13feb3c80779ebe93cd2da2e",
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": "2b3b5f02b832ba963e41593f49a8ab4a162168b491b1da758de10a623830a25e",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/evaluate.rs": "fd2c540a11ef41a75a406282a6177e349418e44e6a1050db2ad537cb1e825587",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/evaluation_error.rs": "b873832c4887f89422efd59bc48ae9dbe66af2ab4a5b4b579c1cf1c40fb34d5c",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/faces.rs": "c2dcd740f83e078d1b3c96ccd618b8edfab27747b3565c25926b482845024e24",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/mod.rs": "5a7ca59fd167da6eba84162fa7d956b21b6d0f5e9006662fa6be22236edae15f",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/signs.rs": "f26b69c2bbc245808489325ad24f479f3a9841a306c6b140ceac005b6cd376b0",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests.rs": "503535c838dcd20751a75f2ec284e7725bcffc2536f502abbba1e3373b57d0bc",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/callbacks-v1.json": "33628c188c39ec09d893e5f37737be59de0b5f35df2032b82140a888e00e3206",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/compatibility.rs": "021c7e5ecfeb8c889b624ee6a8a5275cb9d7da260293af68000cf9da33973010",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/domain.rs": "09553324e71e715438c39ebe88934e829a867459ef431261ac85ed1e8de02c1b",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/evaluation.rs": "a50ebcf2fef73508dd17546995a843ef7ce1d5547caffe9e8259d4928959b8c5",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/orientation-v1.json": "bd7b752c9fe4d852c78a549ee407a2c48a930c3ef26adcd4e5c924fc9819a6b5",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/refusal.rs": "3b7b48088e220f2440875baa430995145281383ed1eb6a759fca50c38f3087f9",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/replay.rs": "a6d7fecbba2c12175e9c241a866d4fa6ca5d3b0b5895e6b56f4672d1180f24be",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/trims.rs": "033e6c716017e0f1a72d4ae7cae164168ee3fa973e507023f25b3f5aad5341a5",
+    "docs/adr/0038-joined-prism-orientation.md": "04f465791086f1011eb646b262b5cb40fbde7afda971f89f5cd945287f66ec8f"
+  },
+  "checks": {
+    "doctests": 35,
+    "focused": 21,
+    "legacy": 30,
+    "tests": 1413
+  },
+  "dependency_revision": "93fac56f2",
+  "exclusions": [
+    "no native OCCT execution or new native fixtures",
+    "no tessellation or GPU acceptance",
+    "no live capture or second mapping engine",
+    "no host protection or instrumentation changes",
+    "no public body or Kernel#10 completion",
+    "no performance claim"
+  ],
+  "independent_expectations": {
+    "algebra_source": "ADR0034 retained exact algebra; no new evaluator",
+    "faces_per_case": 3,
+    "pole_traversal_extrusion_combinations": 8,
+    "trims_per_case": 6
+  },
+  "matrix": {
+    "commands": [
+      {
+        "command": [
+          "rustc",
+          "-Vv"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "toolchain",
+        "seconds": 0.006955146789550781
+      },
+      {
+        "command": [
+          "cargo",
+          "-V"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "cargo-version",
+        "seconds": 0.003852367401123047
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-features",
+          "frozen::joined_orientation",
+          "--",
+          "--nocapture"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "focused",
+        "seconds": 12.691900730133057
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-features",
+          "region_certificate::orientation",
+          "--",
+          "--nocapture"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "legacy",
+        "seconds": 0.729118824005127
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-targets",
+          "--all-features"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "tests",
+        "seconds": 135.73725652694702
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--doc",
+          "--all-features"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "doctests",
+        "seconds": 1.1578772068023682
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "-p",
+          "rustycad-tkbo",
+          "--offline",
+          "--locked",
+          "--all-targets",
+          "--all-features",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "clippy",
+        "seconds": 59.41577768325806
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+        "exit_code": 0,
+        "name": "fmt",
+        "seconds": 8.051687717437744
+      }
+    ],
+    "revision": "660a1bbaee30f4a8338890bd1c24bca8f994a0cf",
+    "source_files": 15893,
+    "source_unchanged": true
+  },
+  "operation": "Martensite private joined prism orientation",
+  "owned_error_revision": "07922628f",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "replay": {
+    "complete_joined_bytes": 215177,
+    "independent_workers": 8,
+    "operations_per_worker": 4,
+    "separate_processes": 2,
+    "unchanged_from_e6ed_prefix": true,
+    "unchanged_legacy_callbacks": 1949,
+    "unchanged_legacy_orientation": true
+  },
+  "review_correction": {
+    "correction": "07922628f narrow owned five-cause/two-phase enum and exhaustive unchanged legacy adapters",
+    "finding": "pure error type admitted unreachable mutable legacy Embedding/Binding diagnostics",
+    "source": "e6ed1e400"
+  },
+  "sanitizer": {
+    "command": {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--offline",
+        "--locked",
+        "-Zbuild-std",
+        "--target",
+        "x86_64-unknown-linux-gnu",
+        "--lib",
+        "sketch_region_prism::frozen::joined_orientation::tests::replay_tests::independent_workers_and_two_processes_match_complete_owned_bytes",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-joined-orientation",
+      "exit_code": 101,
+      "seconds": 121.29938220977783
+    },
+    "environment_changes": {
+      "CARGO_BUILD_JOBS": "2",
+      "CARGO_TARGET_DIR": "/tmp/martensite-joined-orientation-checks/tsan-target",
+      "PATH": "/home/vmiguel/.rustup/toolchains/nightly-2026-09-25-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin",
+      "RUSTFLAGS": "-Zsanitizer=thread"
+    },
+    "host_instrumentation_changes": false,
+    "source_unchanged": true,
+    "status": "incomplete",
+    "test_output_started": false
+  },
+  "scope": {
+    "body": "incomplete; conditional exact directions only",
+    "freshness": "owned join; explicit live rebind remains join-owner responsibility"
+  },
+  "source_revision": "660a1bbaee30f4a8338890bd1c24bca8f994a0cf"
+}

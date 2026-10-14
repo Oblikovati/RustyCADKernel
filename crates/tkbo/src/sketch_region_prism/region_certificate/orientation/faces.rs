@@ -34,7 +34,7 @@ fn require_face_orientation(
     signs::occurrence_sign(&domain.face)?;
     let actual = domain.face.orientation;
     if actual != expected {
-        return Err(PrismOrientationCause::Face {
+        return Err(PrismOrientationEvaluationCause::Face {
             domain: Box::new(domain.clone()),
             actual,
             expected,

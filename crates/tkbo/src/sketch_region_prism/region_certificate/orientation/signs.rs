@@ -5,7 +5,7 @@ pub(super) fn occurrence_sign(key: &PartitionOccurrenceIdentity) -> OrientationC
     match key.orientation {
         Orientation::Forward => Ok(1),
         Orientation::Reversed => Ok(-1),
-        actual => Err(PrismOrientationCause::Unsupported {
+        actual => Err(PrismOrientationEvaluationCause::Unsupported {
             entity: Box::new(key.clone()),
             actual,
         }),
@@ -25,7 +25,7 @@ pub(super) fn determinant_sign(
     match value.compare_f64(0.).expect("finite exact zero") {
         Ordering::Less => Ok(-1),
         Ordering::Greater => Ok(1),
-        Ordering::Equal => Err(PrismOrientationCause::ZeroJacobian),
+        Ordering::Equal => Err(PrismOrientationEvaluationCause::ZeroJacobian),
     }
 }
 pub(super) fn native_winding(
@@ -47,7 +47,7 @@ fn require_selected_winding(actual: i64) -> OrientationCheck<i64> {
     if actual == 1 {
         return Ok(actual);
     }
-    Err(PrismOrientationCause::Winding {
+    Err(PrismOrientationEvaluationCause::Winding {
         actual,
         expected: 1,
     })
