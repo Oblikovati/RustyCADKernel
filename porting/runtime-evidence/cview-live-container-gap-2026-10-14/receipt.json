@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "main_source_revision": "bebcacd543b83453597d414fa4f2314872ca6b89",
+  "unfinished_fix_checkpoint": "9066b711e",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "upstream_source_sha256": "adbbbb8c6453611932ce4bdca56ed74882d6fa2133fc82f52e96471168c01888",
+  "current_source_sha256": {
+    "crates/tkservice/src/graphic3d/cview.rs": "faef8fcd407e54a371af778da38b1a231ca516d6ab52b704f1e3f376ef632ade",
+    "crates/tkservice/src/graphic3d/cview_computed.rs": "f39429ce67c8d6dc251e78ef476889e737f3584ee26753097eee4e6443103b91"
+  },
+  "partial_api_selectors": [
+    "Graphic3d_CView::Compute",
+    "Graphic3d_CView::myStructsToCompute",
+    "Graphic3d_CView::myStructsComputed",
+    "Graphic3d_CView::myStructsDisplayed"
+  ],
+  "gap": "Compute clones owning computed/displayed handles and snapshots traversal; native uses original Sequence/Map fields and live iterators. Vector relocation also changes original key identities. Bounded fixes are not full arbitrary Map Exchange coverage.",
+  "retained_evidence": {
+    "provenance.json": {
+      "raw_sha256": "51d4f56d0e51962f955d64931e6e020fd9d7af9c766df18bb8a4bd4198b5df03",
+      "compressed_sha256": "f140b998b1c4c24c392df47f888d929fc6ae75f8ac0a8f4d1f730cbee2410a7c"
+    },
+    "cview-snapshot-owner-red.log": {
+      "raw_sha256": "313eebc8385cc598ea161fcb0ce95d9e3028d1d99ea165e46d8708abcbe48e33",
+      "compressed_sha256": "00a9005e3d0880333ab8f7e73b660aa0c9740c6ade16d625391e5b37565105b7"
+    },
+    "cview-computed-borrow-red.log": {
+      "raw_sha256": "3f8cf95e0c7d574406bd916bccbb70bd7369017191918cd6b35fa303d56be487",
+      "compressed_sha256": "caf2f0726d2285cfefd9d91556f83cf6a5af4462f6ad61bb26d8acde7edaae0d"
+    },
+    "stable-node-red.log": {
+      "raw_sha256": "7d923ba9c0c582db58ae11c18817d27d76ec37ea4a59012830e0d477c276b906",
+      "compressed_sha256": "226c9cdb2c31766c5eb1d56d60ba9f5466d51aac771dfbf5257a5a84e3ddfb3d"
+    },
+    "first.rows": {
+      "raw_sha256": "2dfa45a9eed7f2a35256e08be80d6bf616aec58d074ea6ff10d2f1bd53c7c841",
+      "compressed_sha256": "dcb696c75087d1d5aad889ff827f2b560de17aa72c14ecddeb7d2275dd6fd347"
+    },
+    "second.rows": {
+      "raw_sha256": "2dfa45a9eed7f2a35256e08be80d6bf616aec58d074ea6ff10d2f1bd53c7c841",
+      "compressed_sha256": "dcb696c75087d1d5aad889ff827f2b560de17aa72c14ecddeb7d2275dd6fd347"
+    },
+    "exchange-first.rows": {
+      "raw_sha256": "bf381a5543d003ac706709f807ef2e5faafc4ca939600786aae1ee554b36297b",
+      "compressed_sha256": "eb9b0698db6bc5f8899ec0663f2969b524110eff9919ba3d102221c1a6b3af22"
+    },
+    "exchange-second.rows": {
+      "raw_sha256": "bf381a5543d003ac706709f807ef2e5faafc4ca939600786aae1ee554b36297b",
+      "compressed_sha256": "eb9b0698db6bc5f8899ec0663f2969b524110eff9919ba3d102221c1a6b3af22"
+    }
+  },
+  "full_family_complete": false
+}

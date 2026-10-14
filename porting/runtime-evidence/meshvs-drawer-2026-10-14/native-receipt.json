@@ -1,0 +1,26 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compile_argv": [
+    "c++",
+    "-std=c++17",
+    "-MMD",
+    "-MF",
+    "target/meshvs-drawer/native.d",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_meshvs_drawer.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKMeshVS",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "target/meshvs-drawer/native"
+  ],
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "input_count": 228,
+  "records": 17,
+  "two_repeats_byte_equal_fixture": true,
+  "fixture_sha256": "0b570ad211a64c7b7a40fedc381bd8c1bdc09ad5ab1cf6d2f1a79246bbf32968"
+}

@@ -1,0 +1,17 @@
+[package]
+autotests = false
+name = "martensite-tkmeshvs"
+description = "Martensite mesh visualization appearance drawer"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel", version = "0.2.7" }
+rustycad-tkservice = { path = "../tkservice", version = "0.2.7" }
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"
