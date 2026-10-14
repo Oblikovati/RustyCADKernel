@@ -128,3 +128,6 @@ fn check_named_trims(join: &JoinedPrismProof, named: &JoinedPrismFace, face: &Jo
         assert_dispositions(join, trim.parent_dispositions());
     }
 }
+
+#[path = "tests_domain.rs"]
+mod domain_tests;

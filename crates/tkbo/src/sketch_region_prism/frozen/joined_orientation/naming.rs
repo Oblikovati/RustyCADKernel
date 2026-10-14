@@ -52,6 +52,7 @@ pub(super) fn distinct_uses(
     mut keys: Vec<&FrozenUseKey>,
     expected: usize,
 ) -> JoinedDirectionCheck<()> {
+    count("all named directed contexts", keys.len(), expected)?;
     keys.sort();
     keys.dedup();
     count("distinct authored directed contexts", keys.len(), expected)

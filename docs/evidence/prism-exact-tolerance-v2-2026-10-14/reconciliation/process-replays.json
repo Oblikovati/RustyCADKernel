@@ -1,0 +1,45 @@
+{
+  "exact": {
+    "command": [
+      "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "sketch_region_prism::exact_tolerance::joined_replay_tests::exact_tolerance_bytes_replay_across_threads_and_operations",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "independent_processes": 2,
+    "bytes": 453096,
+    "sha256": "862c6e77b67e450ddeda02d65b4cfe43881e0cc6c1aa929ae5a091a72bcd1fb7",
+    "matches_owned_baseline": true
+  },
+  "frozen-v1": {
+    "command": [
+      "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "independent_processes": 2,
+    "bytes": 89921,
+    "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+    "matches_owned_baseline": true
+  },
+  "inspection-v1": {
+    "command": [
+      "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "sketch_region_prism::tolerance_inspection::replay_tests::tolerance_arithmetic_replays_across_repeated_operations_and_independent_workers",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "independent_processes": 2,
+    "bytes": 3629,
+    "sha256": "a3bbc53e1b5be36f87331ff1319ce1e47b078447b694844d21f004abdaaaf8a7",
+    "matches_owned_baseline": true
+  },
+  "binary": {
+    "path": "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+    "sha256": "bc57ffe00ee075b2655f88e557eb2e3f0ed3cb358b8aecc0d6ef2b71a1e63091"
+  }
+}

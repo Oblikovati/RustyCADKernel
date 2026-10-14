@@ -89,3 +89,18 @@ fn isolated_distinct_names_do_not_collapse_two_authored_uses() {
         })
     ));
 }
+
+#[test]
+fn isolated_extra_duplicate_use_cannot_hide_behind_expected_unique_count() {
+    let projection = fresh_projection();
+    let a = &projection.uses()[0].key;
+    let b = &projection.uses()[1].key;
+    assert!(matches!(
+        naming::distinct_uses(vec![a, a, b], 2),
+        Err(JoinedPrismOrientationCause::Count {
+            actual: 3,
+            expected: 2,
+            ..
+        })
+    ));
+}

@@ -25,13 +25,16 @@ pub(super) fn capture(
     let mut bytes = Vec::new();
     for (stage, shape) in vertices {
         let key = PartitionOccurrenceIdentity::capture(&shape);
-        replay_sources::occurrence(&key, &mut bytes).map_err(link)?;
-        encoding::numbers(raw_vertices::local_point(&shape).map_err(link)?, &mut bytes);
+        replay_sources::occurrence(&key, &mut bytes).map_err(join_link_cause)?;
+        encoding::numbers(
+            raw_vertices::local_point(&shape).map_err(join_link_cause)?,
+            &mut bytes,
+        );
         contexts.push((stage, key));
     }
-    let bound = bind_projection(receipt, bindings).map_err(link)?;
+    let bound = bind_projection(receipt, bindings).map_err(join_link_cause)?;
     raw_vertices::append(
-        &raw_vertices::capture_bound(&bound).map_err(link)?,
+        &raw_vertices::capture_bound(&bound).map_err(join_link_cause)?,
         &mut bytes,
     );
     Ok(InitialRawProbe { contexts, bytes })
@@ -45,7 +48,7 @@ fn admit_shapes(
         .copied
         .as_ref()
         .and_then(|value| value.completion.as_ref().ok())
-        .ok_or_else(|| link(missing("current paired closure candidates")))?;
+        .ok_or_else(|| join_link_cause(missing("current paired closure candidates")))?;
     for (name, actual, expected) in [
         ("one actual closure source", sources.len(), 1),
         (
@@ -56,7 +59,7 @@ fn admit_shapes(
         ("two actual closure candidates", batch.candidates.len(), 2),
     ] {
         if actual != expected {
-            return Err(link(PrismFreezeCause::Count {
+            return Err(join_link_cause(PrismFreezeCause::Count {
                 entity: name,
                 actual,
                 expected,
@@ -75,9 +78,6 @@ pub(super) fn same(
         });
     }
     Ok(())
-}
-fn link(cause: PrismFreezeCause) -> PrismProofJoinCause {
-    PrismProofJoinCause::Link(Box::new(cause))
 }
 
 #[cfg(test)]
