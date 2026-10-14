@@ -71,6 +71,7 @@ mod ordered_validation_baseline_tests;
 pub(crate) mod joined_measures;
 pub(crate) mod joined_orientation;
 pub(crate) mod ordered_validation;
+pub(crate) mod owned_refusal;
 #[cfg(test)]
 mod owned_refusal_baseline_tests;
 pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
