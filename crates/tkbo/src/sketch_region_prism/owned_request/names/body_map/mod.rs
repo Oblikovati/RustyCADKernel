@@ -5,7 +5,8 @@ mod expansion;
 mod replay;
 mod types;
 pub(crate) use replay::{
-    encode_frozen_member_key, encode_semantic_member_key, encode_semantic_use_key,
+    encode_frozen_member_key, encode_frozen_use_key, encode_semantic_member_key,
+    encode_semantic_use_key,
 };
 pub(crate) use types::*;
 #[cfg(test)]

@@ -12,10 +12,17 @@ fn annular_receipt() -> PrismReceipt {
 pub(in crate::sketch_region_prism) fn retained_annular_sweep(
     fixture: &TwoLoopFixture,
 ) -> PrismReceipt {
+    retained_annular_sweep_with_request(fixture, request([0.25, 0.25]))
+}
+/// Reuse the original retained builder with explicit test sweep operands.
+pub(in crate::sketch_region_prism) fn retained_annular_sweep_with_request(
+    fixture: &TwoLoopFixture,
+    requested: PrismRequest,
+) -> PrismReceipt {
     let batch = super::region_certificate::borrowed_batch(&fixture.bridge)
         .expect("expected actual completed candidate capture");
     let view = super::region_certificate::temporary_view(batch);
-    retain_selected_prism(view, request([0.25, 0.25]), &mut progress(None, None))
+    retain_selected_prism(view, requested, &mut progress(None, None))
 }
 
 #[test]

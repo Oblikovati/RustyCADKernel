@@ -42,7 +42,13 @@ fn require_face_orientation(
     }
     Ok(actual)
 }
-pub(super) fn outward_sign(role: PrismImageRole, native: i8, jacobian: i8) -> i8 {
+/// Apply the stored-chart sign convention; `outward_sign(role,boundary_sign,jacobian)`.
+/// The caller proves its material-boundary sign and nonzero affine product first.
+pub(in crate::sketch_region_prism) fn outward_sign(
+    role: PrismImageRole,
+    native: i8,
+    jacobian: i8,
+) -> i8 {
     // ADR0034: stored v=-h*s reverses the side parameter normal, with h>0 from embedding.
     match role {
         PrismImageRole::First => -jacobian,
