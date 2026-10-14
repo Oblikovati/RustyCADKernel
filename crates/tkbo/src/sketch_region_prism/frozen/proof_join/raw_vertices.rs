@@ -4,7 +4,8 @@ use super::*;
 use rustycad_tkbrep::brep::access::vertex_tshape;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-pub(super) fn capture(
+/// Capture exact local vertices under existing named contexts; `capture_frozen_raw_vertices(bound, projection)`.
+pub(in crate::sketch_region_prism::frozen) fn capture(
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,
 ) -> CaptureResult<Vec<JoinedVertexOperand>> {
@@ -76,7 +77,11 @@ pub(super) fn local_point(actual: &rustycad_tkbrep::topods::Shape) -> CaptureRes
     }
     Ok(value)
 }
-pub(super) fn append(rows: &[JoinedVertexOperand], bytes: &mut Vec<u8>) {
+/// Reuse the existing exact raw-vertex encoding; `encode_frozen_raw_vertices(rows, bytes)`.
+pub(in crate::sketch_region_prism::frozen) fn append(
+    rows: &[JoinedVertexOperand],
+    bytes: &mut Vec<u8>,
+) {
     bytes.extend((rows.len() as u64).to_le_bytes());
     for row in rows {
         replay::text(&format!("{:?}/{:?}", row.vertex, row.occurrence), bytes);

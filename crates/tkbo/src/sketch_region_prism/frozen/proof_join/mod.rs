@@ -34,3 +34,15 @@ pub(in crate::sketch_region_prism) use replay::{
 pub(in crate::sketch_region_prism) use replay_options::{
     embedding as encode_joined_embedding_options, roots as encode_joined_root_options,
 };
+
+#[allow(unused_imports)]
+pub(super) use links::link_face as link_frozen_chart;
+#[allow(unused_imports)]
+pub(super) use parents::{
+    append_remaining_history as append_frozen_remaining_history,
+    current_dispositions as link_frozen_parent_dispositions,
+};
+#[allow(unused_imports)]
+pub(super) use raw_vertices::append as encode_frozen_raw_vertices;
+#[allow(unused_imports)]
+pub(super) use raw_vertices::capture as capture_frozen_raw_vertices;

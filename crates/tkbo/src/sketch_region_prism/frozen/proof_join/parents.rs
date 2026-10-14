@@ -13,7 +13,8 @@ pub(super) fn original_multiset(
     keys.sort();
     Ok(keys)
 }
-pub(super) fn current_dispositions(
+/// Retain every current classed parent; `link_frozen_parent_dispositions(bound, projection)`.
+pub(in crate::sketch_region_prism::frozen) fn current_dispositions(
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,
 ) -> CaptureResult<Vec<JoinedParentDispositions>> {
@@ -65,7 +66,8 @@ fn check_projected_set(
     }
     Ok(())
 }
-pub(super) fn append_remaining_history(
+/// Encode existing remaining history without a completeness claim; `append_frozen_remaining_history(bound, bytes)`.
+pub(in crate::sketch_region_prism::frozen) fn append_remaining_history(
     bound: &BoundProjection<'_>,
     bytes: &mut Vec<u8>,
 ) -> CaptureResult<()> {

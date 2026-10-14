@@ -90,3 +90,12 @@ fn assert_depth_limit(root: &Shape, mut limits: PrismHistoryLimits) {
         })
     ));
 }
+
+#[test]
+fn hierarchy_census_counts_each_actual_ancestry_element() {
+    let edge = crate::closed_analytic_cubic::closed_analytic_cubic(1., false);
+    let root = borrowed_shape_batch(&[&edge, &edge]).unwrap();
+    let census = preflight_history_census(&root, PrismHistoryLimits::bounded_v1()).unwrap();
+    assert_eq!(census.directed_uses, 7);
+    assert_eq!(census.ancestor_elements, 10);
+}
