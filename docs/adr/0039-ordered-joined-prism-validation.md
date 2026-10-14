@@ -89,8 +89,8 @@ application acceptance. No standalone validator test authorizes a release.
 
 Owned baseline fixtures first retain mapped coverage, the typed historical
 intersection alert, legacy V1 replay and missing publication obligations. The
-new corpus exercises every stage's success/refusal/incomplete/cancel outcome,
-strict early stopping, actual named rim/seam correspondence, unknown current
+new corpus exercises complete ordered execution, typed stage classifications,
+all observed cancellation/callback-failure boundaries, strict early stopping, actual named rim/seam correspondence, unknown current
 proof refusal, source isolation, exact process/thread replay and the complete
 closed cubic fixture. Named test adapters exercise control flow; they never
 serve as geometric acceptance evidence.
@@ -106,3 +106,36 @@ targets the next compatible patch; it changes no workspace release version.
 Ordinary thread replay and Send/Sync assertions do not replace ThreadSanitizer.
 Any sanitizer startup failure remains incomplete. No application, performance or
 release acceptance follows from this validation-only prerequisite.
+
+## Private interface and proof reuse
+
+`validate_joined_prism(join, OrderedPrismValidationOptions::v1(cap), progress)`
+returns `CompleteValidation`, `Failed`, `Incomplete`, or `Cancelled`.
+`OrderedPrismValidationMode::ExactSingleJordanPolynomialPrism` names the current
+check mode. The certificate exposes each retained constituent proof, complete
+source binding, current trace and unchanged historical coverage. Its replay
+uses the constituent portable encoders and length-delimited full joined bytes;
+it never serializes native allocation identities as names. The SI receipt's
+full joined bytes already contain the actual named domains and conclusions.
+
+The operation-local progress adapter exposes the stage, typed child checkpoint
+and monotonically increasing ordinal. A callback failure retains the original
+`Failure` and maps to incomplete; callback cancellation maps to cancelled.
+Conformance and tolerance preserve their original boxed failures, including
+private partial evidence and affected contexts. An observed interruption stops
+before any later stage. A final commit checkpoint precedes completion of the
+last stage, so cancelling there cannot leak a successful certificate.
+
+The single conformance proof is returned by geometry and borrowed by tolerance.
+Its exact residual/root evidence and the unchanged operation limits remain
+separate from stored metadata, topological `NotApplicable`, and the separate
+certified area/volume operation. No aggregate modelling error is invented.
+
+A deliberately moved live generated vertex is rejected during join embedding
+admission before a `JoinedPrismProof` exists. That case is upstream refusal
+coverage, not a claimed validation geometry-failure execution. Negative
+conformance scalar witnesses and malformed topology/SI correspondence remain
+covered by their constituent owned corpora; no forged-join production hook is
+introduced for testing. Subsequent live source mutation leaves a completed
+immutable validation receipt unchanged and makes the required final live rebind
+refuse, demonstrating why this certificate alone cannot publish an operation.

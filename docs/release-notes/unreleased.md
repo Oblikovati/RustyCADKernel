@@ -3,6 +3,22 @@
 Next compatible patch target: **0.2.8**. Workspace version changes and publication
 remain with the release coordinator.
 
+## Private ordered joined prism validation
+
+ADR0039 adds explicit validation behavior v1 for the admitted single-Jordan
+polynomial prism. One immutable joined proof is checked in topology, geometry,
+self-intersection and tolerance order; exact conformance is computed once and
+reused by the explicit stored-tolerance cap policy. Typed incomplete, failed and
+cancelled outcomes preserve stage context and original constituent causes.
+Historical mapped intersection failures remain in the receipt as historical
+evidence. Existing mapped validation and frozen replay stay selectable.
+
+This is validation-only evidence. Publication still requires complete history,
+certified requested/effective/achieved measures and final callback-free source
+rebinding. RustyCADKernel#10 owns migration/deletion of mapped checker authority
+for this admitted path after the full-operation corpus gate, within ADR0014's
+application R3 limit. No workspace version or application acceptance changes.
+
 ## Opt-in checked GUI surface outcomes
 
 `Graphic3dRenderDriver::with_gui_surface_policy` and
