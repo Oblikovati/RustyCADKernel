@@ -26,6 +26,9 @@ impl TwoLoopFixture {
     pub fn nested() -> Self {
         let outer = cubic(1., [0., 0.]);
         let inner = cubic(0.5, [0.5, 0.5]);
+        Self::for_edges(outer, inner)
+    }
+    pub fn for_edges(outer: Shape, inner: Shape) -> Self {
         let bridge = bridge(&authored_sources(&outer, &inner));
         Self {
             outer,
@@ -63,7 +66,7 @@ pub(super) fn cubic(scale: f64, offset: [f64; 2]) -> Shape {
 fn roots() -> RootIsolationOptions {
     RootIsolationOptions::new(0.001)
 }
-fn census(sources: &[ArrangementSource<'_>]) -> BoundaryCensus {
+pub(super) fn census(sources: &[ArrangementSource<'_>]) -> BoundaryCensus {
     let inputs = capture_boundary_inputs(sources, Plane3::default())
         .unwrap_or_else(|_| panic!("authored loops; expected source capture"));
     let policy = CensusPolicy {
@@ -102,4 +105,13 @@ fn bridge(sources: &[ArrangementSource<'_>]) -> PairedContactTransaction {
     };
     transport_partition_contacts(census(sources), mapped(sources), policy, sources, |_| false)
         .unwrap_or_else(|_| panic!("authored loops; expected retained bridge"))
+}
+
+pub(super) fn oriented_fixture(
+    orientation: rustycad_tkg3d::top_abs::Orientation,
+) -> TwoLoopFixture {
+    TwoLoopFixture::for_edges(
+        cubic(1., [0., 0.]).oriented(orientation),
+        cubic(0.5, [0.5, 0.5]).oriented(orientation),
+    )
 }

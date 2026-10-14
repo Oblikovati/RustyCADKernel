@@ -77,3 +77,34 @@ commit/rebind protocol, before exposing any completed result.
 The initial version neither accepts multiple/hole profiles nor closes persistent
 split identity, application edit/undo/save-reopen/display, canonical Martensite#13
 or Kernel #10 release acceptance. The older stages and fixtures remain selectable.
+
+## Shared portable body-name map seam
+
+The first resolver prefix adds only an immutable read Interface and strict table
+checks. Its production issuer remains unavailable until actual constructor,
+copy/history and full-context correspondence is implemented. A test-only explicit
+row constructor can check a supplied accepted publication's key universe; token
+validity and publication bytes alone are not semantic correspondence evidence.
+Symbolic fixtures are explicitly unbound to a real publication. The unchanged
+legacy publication fixture refuses, rather than gaining dictionary meaning through
+an order-based translation.
+
+`SemanticMemberKey` expands the full frozen definition key into the caller
+operation/boundary namespace, dictionary source-member slot, sweep role and kind.
+`SemanticUseKey` retains every member/use step in its complete ancestry. A generic
+FaceUse or LoopUse slot alone never identifies an occurrence. Output roles such as
+FirstCap are separate checked metadata. V1 reserves no First/Last/SideWire member
+tokens: those three definitions retain their qualified source/sweep/kind keys;
+LoopUse is never repurposed as a member identity. The 97 V1 reservations and prior
+name/child serializers remain unchanged. Actual applicability and complete stage
+coverage are later resolver obligations, not inferred from dictionary reservation.
+
+The map checks exact unique domains in both directions, canonical expansion,
+source/use role applicability, ancestor prefixes and reverse collisions. Its own
+versioned replay contains the full unchanged name envelope and publication bytes,
+plus every sorted member and directed mapping row. These owned scalar types have
+no mutable geometry, address, cache, lock or allocator callback. The body-read
+projection consumes this one map and checks all referenced member/use keys; it
+must not allocate or decode a second naming scheme. Complete owned request bits,
+revision labels and policies belong to the separate request envelope, not the
+existing names-only envelope.
