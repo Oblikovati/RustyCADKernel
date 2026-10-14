@@ -50,7 +50,7 @@ pub(super) fn space(value: &CapturedSpaceRepresentation, bytes: &mut Vec<u8>) {
     placement(value.placement, bytes);
     bytes.push(u8::from(value.same_parameter));
 }
-pub(super) fn surface(value: &CapturedPrismSurface, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn surface(value: &CapturedPrismSurface, bytes: &mut Vec<u8>) {
     match value {
         CapturedPrismSurface::Plane(value) => {
             bytes.push(0);

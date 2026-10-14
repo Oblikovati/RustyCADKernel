@@ -73,6 +73,7 @@ pub(crate) mod joined_measures;
 pub(crate) mod joined_orientation;
 pub(crate) mod joined_volume;
 pub(crate) mod ordered_validation;
+pub(super) use encoding::surface as encode_frozen_surface;
 pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
 #[cfg(test)]
 pub(in crate::sketch_region_prism) mod publication_read_snapshot;
