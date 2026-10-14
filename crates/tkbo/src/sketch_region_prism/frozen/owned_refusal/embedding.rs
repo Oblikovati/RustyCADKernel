@@ -9,7 +9,7 @@ pub(super) fn project(
     let (header, cause) = EmbeddingHeader::from_local(failure, original);
     match project_cause(cause) {
         Ok(cause) => Ok(header.complete(cause)),
-        Err(error) => Err(header.incomplete(error)),
+        Err(error) => Err(header.incomplete(*error)),
     }
 }
 fn name_failure(
@@ -62,7 +62,7 @@ impl EmbeddingHeader {
     }
     fn incomplete(
         self,
-        error: Box<RetainedProjection<PrismEmbeddingCause>>,
+        error: RetainedProjection<PrismEmbeddingCause>,
     ) -> Box<RetainedProjection<PrismEmbeddingFailure>> {
         error.map(PrismRefusalPath::Embedding, |cause| PrismEmbeddingFailure {
             requested: self.requested,

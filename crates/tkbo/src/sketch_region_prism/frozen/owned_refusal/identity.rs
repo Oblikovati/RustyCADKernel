@@ -47,7 +47,7 @@ impl PrismRefusalIdentityContext<'_> {
 }
 impl<T> RetainedProjection<T> {
     pub(super) fn map<U>(
-        mut self: Box<Self>,
+        mut self,
         path: PrismRefusalPath,
         convert: impl FnOnce(T) -> U,
     ) -> Box<RetainedProjection<U>> {

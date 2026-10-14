@@ -38,7 +38,7 @@ fn project_bound(
     let (header, cause) = JoinHeader::from_local(failure, class);
     match project_cause(cause, context) {
         Ok(cause) => header.complete(cause),
-        Err(error) => header.incomplete(error),
+        Err(error) => header.incomplete(*error),
     }
 }
 struct JoinHeader {
@@ -73,7 +73,7 @@ impl JoinHeader {
     }
     fn incomplete(
         self,
-        error: Box<RetainedProjection<PrismProofJoinCause>>,
+        error: RetainedProjection<PrismProofJoinCause>,
     ) -> PrismJoinRefusalProjection {
         let failure = PrismProofJoinFailure {
             operation: self.operation,
