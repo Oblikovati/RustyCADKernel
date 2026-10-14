@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "scope": "Martensite existing MeshVS selection-policy declaration accounting; no production behavior or baseline changes.",
+  "capture_revision": "eb63c68438e4b31ce0b799aa62412ded57c2da98",
+  "capture_source_policy": "Immutable worktree source at eb63c68438e4b31ce0b799aa62412ded57c2da98; this does not assert that a later integration revision has identical sources.",
+  "capture_toolchain": "nightly-2026-09-25",
+  "test_toolchain": "1.99.0",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rust_capture_inputs": {
+    "cargo_metadata_sha256": "ca039adc991fa227cb7b3d214a663fccf2d83d1a49386b6cc435fba0ea1569e0",
+    "tool_versions": {
+      "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n",
+      "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n"
+    },
+    "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
+    "workspace_file_count": 15553,
+    "workspace_inputs_sha256": "a6e083926ddf839bd5e111cd425be4fa5c3144f97b6d173d40435bc88471918b",
+    "workspace_revision": "eb63c68438e4b31ce0b799aa62412ded57c2da98"
+  },
+  "capture_libraries": 32,
+  "reachable_rust_paths": 98459,
+  "candidate_declarations": 24,
+  "new_registered_declarations": 21,
+  "registered_cpp_declaration_ids": [
+    "c731ba17999cac33c16237642f916925cb1efc2cb44fc111ca04c921ad95bec9",
+    "f658589be88dc5b15841cb6429b26bdf9d76b1393fc8e3c7e5fb41aa7abe02cf",
+    "612283ba5ac769361ec551013d8e03f94744724f82c7d7a204143eb9f090fc0c",
+    "54cb653f50e8373f5d8f36cae844b1eeba3f802f74075e1dcca74332729e1dab",
+    "bfe1d704ecfd9fac6c27bac57b9125fde366119438da22e2229e87aae8ceaffa",
+    "74699d76725191f1a5e79ee5163848ab8d32490f451a1109dc7357e30ca5b643",
+    "f2b9c02d38495577dcb5347c1557b9f73919d5cf060e2d83c5cf05ada237b6f7",
+    "084464dbdcac2c3d245eafcfe4d12cd8d2a530e9110c9cdf68306f2068176813",
+    "879b5acd68d6462c2e9e85e836eebbb27284688f01ebfc044a77e2f06486df94",
+    "f2169e302c10643eb303f99a241780bf9e04e8ee7f63413b860c12908614ba54",
+    "202bb7b3b6bab68c01a314e1f4be2dee064dd24031ab70fb71cd5bac3d2d645d",
+    "efbc1f0b53c56dccd5a7ba0efc65c4063caa9ca7d6985bc824b0a46666794057",
+    "6b672f96b5ec959a141bbddb80f7cac20b5a861c5c0923ad2c144e6267972309",
+    "d7c433b2c798e11464017ce67f99193e75a3904ea85df40153c1f275ead557d1",
+    "30c2d820ee73cdc796a57e7fca6633c495076c5f81afb746e066338def86ad0a",
+    "62dbd4833098674c4ce3665fce4069d458939c55e172edcb2fa4c953af33d41c",
+    "0ca4df3e046d06b9b17a252a04880a5202939df7be6b6ac5054eca6a01b86b09",
+    "65be2c5c5fbe381fe97ec3a41ba84e14b3c334a3f7a837f3a0cf22098de88143",
+    "ae50a928cf4a8ffd3cbab73e16f062014914c26853f36aaa9f804aa6a0dfca79",
+    "0c02b0f79613585bcc3559d615a9e797e985154a55587db6fe3f64e602d103a4",
+    "1fcf82c427b292bb81865222e3517d0548a16308ee20acf13ea1339c133a8087"
+  ],
+  "withheld_declarations": [
+    {
+      "id": "4184a23c8ac262233cfc34ef9392dad08d541d470eeba2b71046385939ec131f",
+      "kind": "Enum",
+      "qualified_name": "(unnamed enum at /home/vmiguel/git/oblikovati-workspace/OCCT/src/Visualization/TKMeshVS/MeshVS/MeshVS_BuilderPriority.hxx:21:1)",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_BuilderPriority.hxx",
+      "disposition": "unclaimed",
+      "reason": "Integer priority alias and named constants do not establish a distinct Rust counterpart for the anonymous enum type."
+    },
+    {
+      "id": "da2323bc6e9a2748f860a7d43facfcbdab379de1a1e1c286681131695c29c262",
+      "kind": "Enum",
+      "qualified_name": "MeshVS_SelectionModeFlags",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_SelectionModeFlags.hxx",
+      "disposition": "unclaimed",
+      "reason": "One Rust transparent signed-mask struct does not by itself settle separate enum and typedef declaration credit."
+    },
+    {
+      "id": "a33258f603ce273b79dbfab71a3a152c79688b56ec0dc7d5f984d08a59b97eae",
+      "kind": "Typedef",
+      "qualified_name": "MeshVS_SelectionModeFlags",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_SelectionModeFlags.hxx",
+      "disposition": "unclaimed",
+      "reason": "One Rust transparent signed-mask struct does not by itself settle separate enum and typedef declaration credit."
+    }
+  ],
+  "unchanged_existing_linkage_refresh": {
+    "ledger_rows": 12,
+    "selector_hashes": 13,
+    "implemented_rows": 11,
+    "partial_rows": 1,
+    "audit": "porting/audits/meshvs-selection-policy-selector-refresh.json",
+    "new_declaration_or_runtime_credit": 0
+  },
+  "accounting_stages": {
+    "previous_published_snapshot": {
+      "matched_declared_mappings": 53218,
+      "cpp_declarations_with_resolved_implemented_claim": 53211,
+      "unclaimed_cpp_count": 40073,
+      "unresolved_row_count": 0
+    },
+    "fresh_capture_original_ledger": {
+      "matched_declared_mappings": 53207,
+      "cpp_declarations_with_resolved_implemented_claim": 53200,
+      "unclaimed_cpp_count": 40073,
+      "unresolved_row_count": 12
+    },
+    "fresh_capture_plus21_before_selector_refresh": {
+      "matched_declared_mappings": 53228,
+      "cpp_declarations_with_resolved_implemented_claim": 53221,
+      "unclaimed_cpp_count": 40052,
+      "unresolved_row_count": 12
+    },
+    "final": {
+      "matched_declared_mappings": 53239,
+      "cpp_declarations_with_resolved_implemented_claim": 53232,
+      "unclaimed_cpp_count": 40052,
+      "unresolved_row_count": 0
+    }
+  },
+  "retained_cpp_provenance_sha256": {
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "porting/api-inventory/occt-alias-reachability.jsonl.gz": "70435ad294b82be1f56288442581b1d83d1a01e77a49a2ee365ad0598b20d706",
+    "porting/api-inventory/occt-capture-gap-audit.json": "29643b973b1f0d0b3789fcffbdc6bf8d520012d64d9d8ce7894d7257c065059d",
+    "porting/api-inventory/occt-compiler-summaries.jsonl.gz": "4a281177ed06d20e4c6689a871c4354dd713a136f76b0dc1483accd58df36afb",
+    "porting/api-inventory/occt-context-retries.jsonl.gz": "cc1f0ffd8ba2e96e958a3605347d8ea664f64cb3eab9268fc0542d7fc1321bfa",
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-inventory/occt-diagnostics.jsonl.gz": "aacc84a5c0ee8e02d201b44ac94fdc19f822254a158b7b52f4492c2ddce7d86b",
+    "porting/api-inventory/occt-headers.jsonl.gz": "f6360706da3e81219c3cec0a4ba8a618a8d14cf0f4bb2ad1a8dd56fda4407077",
+    "porting/api-inventory/occt-included-files.jsonl.gz": "cf5715b7e02b5b180b4140c3d0716713275a0a89a930beade59829b6edfc9dc4",
+    "porting/api-inventory/occt-macros.jsonl.gz": "6237425735b1a66d28ab3610a82ab44f1e4504fd8b8d03750e11646dffc2b9e0",
+    "porting/api-inventory/occt-manifest.json": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
+    "porting/api-inventory/occt-skipped-ranges.jsonl.gz": "f7fff78b64dd38eddf43e646d85b67b86050a08ecad8603d87ca0ecc9c86484b",
+    "porting/api-inventory/occt-transitive-context-plan.json": "acd6d305378397fbac8df1f17cfa04d9eeaed8d28e6c8cc9f79197953a9c4fea",
+    "porting/api-inventory/occt-unsupported.jsonl.gz": "138c795fcb72b5374e12a79e6d9e58f77d8090419e836b1f842a4e17d5e3506a",
+    "porting/api-proof-toolchain.json": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a"
+  },
+  "retained_cpp_denominator": 108622,
+  "cpp_manifest_header_status": {
+    "included_fragment": 384,
+    "missing_compile_configuration": 28,
+    "parse_failed": 6,
+    "parsed": 5639,
+    "parsed_with_context": 260
+  },
+  "configuration_matrix_complete": false,
+  "declaration_crosswalk_proof": false,
+  "behavioral_equivalence_proven": false,
+  "proof_gaps_unchanged_from_previous_snapshot": true,
+  "current_rust_unresolved_links": 930,
+  "owned_source_fixture_and_evidence_sha256": {
+    "crates/tkmeshvs/src/selection_policy.rs": "b3393b95f0d78d66ae8a40bbba1ca84c14a8d1a7be736c05924e7dec5f834164",
+    "crates/tkmeshvs/tests/selection_policy.rs": "55d85170fad35e1766c654f8f7052f30a1aacf3b0c026ecdc7085174616a690b",
+    "crates/tkmeshvs/tests/fixtures/selection-policy-native.txt": "f6d729bf75a0847d882284b4aab086a6cccb5ee1f8ffd4a6a4978a0d0ed97ecd",
+    "crates/tkmeshvs/tests/fixtures/selection-policy-masks-0-native.txt": "8b5fe116fe01b0469a78584df7e61df20891a7f13a8257c8dd25ec54c591fc38",
+    "crates/tkmeshvs/tests/fixtures/selection-policy-masks-1-native.txt": "8d5a338774cdb6af8d5daa33c1a944677345ec05dc5c8ed8205dec9d64cce7a7",
+    "porting/runtime-evidence/meshvs-selection-policy-2026-10-14/receipt.json": "f1484934ce278b29cb1aba3c6705e7cfcf2f3b86ac97f462090f8a9b1e6be707",
+    "porting/audits/meshvs-selection-policy-api-tests.log.gz": "76b2b91400162b0ae0d85a879d5b8b531e3269fa62f785b73c617600b0d2d43d",
+    "porting/audits/meshvs-selection-policy-capture-manifest.json.gz": "aae5e45f28a6596fc2ed421faeddea6cf7ccbec37ed3d502cf02979e4f543eab",
+    "porting/audits/meshvs-selection-policy-selector-refresh.json": "861487692df1e5b70a4baf37b1edc24e60dafe2669a4181303b37d26225f2143"
+  },
+  "executed_rust_tests": {
+    "command": "CARGO_BUILD_JOBS=2 ~/.cargo/bin/cargo +1.99.0 test --locked -p martensite-tkmeshvs",
+    "unit": 5,
+    "integration": 45,
+    "doctests": 9,
+    "failures": 0,
+    "selection_subset_command": "CARGO_BUILD_JOBS=2 ~/.cargo/bin/cargo +1.99.0 test --locked -p martensite-tkmeshvs --test toolkit selection_policy",
+    "selection_subset": 5,
+    "selection_subset_already_in_full_count": true
+  },
+  "executed_tool_tests": {
+    "command_pattern": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p <module>",
+    "modules": {
+      "test_api_claim_preflight.py": 13,
+      "test_publish_api_snapshot.py": 3,
+      "test_api_coverage_report.py": 21,
+      "test_api_inventory_status.py": 5,
+      "test_api_metrics_report.py": 8
+    },
+    "failures": 0
+  },
+  "preflight_bindings": {
+    "new_claims": 21,
+    "refreshed_existing_claims": 12,
+    "cpp_resolution": "unique",
+    "rust_resolution": "unique",
+    "current_source_hashes_match": true
+  },
+  "pipeline_commands": [
+    "CARGO_BUILD_JOBS=2 PYTHONDONTWRITEBYTECODE=1 python3 tools/capture_rustdoc_json.py capture",
+    "CARGO_BUILD_JOBS=2 PYTHONDONTWRITEBYTECODE=1 python3 tools/capture_rustdoc_json.py verify",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tools/normalize_rustdoc_inventory.py",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tools/verify_api_claims.py <reviewed-claim-fragment> --rust target/api-proof/rust-api-inventory.json",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tools/api_coverage_report.py",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tools/publish_api_snapshot.py",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tools/publish_legacy_test_inventory.py",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tools/api_metrics_report.py",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tools/porting.py status"
+  ],
+  "limitations": [
+    "Historical OCCT artifacts retained without execution or regeneration; their configuration and denominator gaps remain explicit.",
+    "Declaration correspondence and owned-fixture replay do not establish whole-mesh selection execution, renderer behavior, toolkit parity, or cross-platform behavioral equivalence.",
+    "The anonymous priority enum and selection-flags enum/typedef pair remain unclaimed; no blanket header-completeness credit.",
+    "Existing legacy-test mapping counts are unchanged and are not runtime pass evidence.",
+    "Selector refresh restores existing linkage only; it does not establish a new semantic or behavioral claim."
+  ]
+}

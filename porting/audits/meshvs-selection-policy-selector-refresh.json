@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "scope": "Refresh13 selector hashes across12 existing MeshVS rows; no new mapping or runtime credit.",
+  "capture_revision": "eb63c68438e4b31ce0b799aa62412ded57c2da98",
+  "previous_capture_revision": "fe4e7ed5744b126bff7fc3a966fcd6ae952eec2c",
+  "cause": "Declaration fingerprints include reexport source hashes. Additions and documentation changes in lib.rs changed the export-file hash while all13 underlying declarations stayed identical.",
+  "verified_unchanged": [
+    "Rust path",
+    "canonical target",
+    "kind",
+    "signature",
+    "impl context",
+    "underlying source file and source SHA-256",
+    "C++ declaration ID",
+    "ledger status"
+  ],
+  "reexport_source_file": "crates/tkmeshvs/src/lib.rs",
+  "reexport_sha256_before": "4520e447758c89d22b13acaf22de6ffbbdbd447178cdfbb9398a69c3a20377d0",
+  "reexport_sha256_after": "d245eaca05638de03f8fabf1dc43bc2de7630b172ecc4e145131fd86c3070a40",
+  "reviewed_history": [
+    "1b25b19fa",
+    "7e6b1eb4c",
+    "89ab6471e",
+    "da59e5c61"
+  ],
+  "rows": [
+    {
+      "upstream_id": "MeshVS_Drawer",
+      "cpp_declaration_id": "5fda02397bc9cd9e76db52bc55b866866115aa9cf737a545cf838ffb7f35feb9",
+      "status_before_and_after": "partial",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSDrawer",
+          "declaration_sha256_before": "ea668aaa86774cd53065c919e037713e0f1e2581a0510706e2478572e2e82f1d",
+          "declaration_sha256_after": "ee1b1eb894cbec3533ad8b4fd13294be3bc663c98b5077cdee45f7db550c28de",
+          "unchanged_source_file": "crates/tkmeshvs/src/drawer.rs",
+          "unchanged_source_sha256": "e509e3253178de7747cd93e220a78f0831ee64720b55d40a1523259acd216a84"
+        }
+      ],
+      "after_resolution": "partial",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_DrawerAttribute",
+      "cpp_declaration_id": "86c9d6d1a085cb8673aa53a7cfdf38cda8362a1c551ef7cb50569ca43ab1f5a2",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSDrawerAttribute",
+          "declaration_sha256_before": "eb21bcbe3a7ee0345cd882a34d12c46b23ad908899f315787c6eca5275a51af6",
+          "declaration_sha256_after": "268d6b1e83bf26415189fc8e13fade86635e0bb1787dcc49b865e38819ca93fd",
+          "unchanged_source_file": "crates/tkmeshvs/src/flags.rs",
+          "unchanged_source_sha256": "5398b5a5f010314532b70f7930163fdfc724282baf4d0a0ce41983659b48a2fe"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_EntityType",
+      "cpp_declaration_id": "8805b6b63e121073da7a9f4c74b3a9268f0465eb99bfaa7f1379e387ea99298a",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSEntityType",
+          "declaration_sha256_before": "93c8cb9eb5f6859f69b85c522ba6d34e82122ffa6c118b5e082ec2733befef51",
+          "declaration_sha256_after": "2bef69965e1479a5999aecad90c90ef727309d45c6cb4b910f04b0cb263b8a0f",
+          "unchanged_source_file": "crates/tkmeshvs/src/flags.rs",
+          "unchanged_source_sha256": "5398b5a5f010314532b70f7930163fdfc724282baf4d0a0ce41983659b48a2fe"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_DisplayModeFlags",
+      "cpp_declaration_id": "ea6f4dc5ca2babb729b65fa28014619b49ab502bba9b484d26ea9e1d24714c1d",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSDisplayModeFlags",
+          "declaration_sha256_before": "7e129403c124455d73cf534a4f0dd078d46d9c26bd60745c9bd0c6e579beefdd",
+          "declaration_sha256_after": "847e7777c20b51ff053e6beabaa17307c539114bc9fa45de1adc2e1e33da917b",
+          "unchanged_source_file": "crates/tkmeshvs/src/flags.rs",
+          "unchanged_source_sha256": "5398b5a5f010314532b70f7930163fdfc724282baf4d0a0ce41983659b48a2fe"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_EntityType",
+      "cpp_declaration_id": "feaf64cdd1137674d20f79a2105d258fa59de21cc6089c742cd869b23a290b20",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSEntityType",
+          "declaration_sha256_before": "93c8cb9eb5f6859f69b85c522ba6d34e82122ffa6c118b5e082ec2733befef51",
+          "declaration_sha256_after": "2bef69965e1479a5999aecad90c90ef727309d45c6cb4b910f04b0cb263b8a0f",
+          "unchanged_source_file": "crates/tkmeshvs/src/flags.rs",
+          "unchanged_source_sha256": "5398b5a5f010314532b70f7930163fdfc724282baf4d0a0ce41983659b48a2fe"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "ExtractColors",
+      "cpp_declaration_id": "01c132ccd703a8e8cd07e48c06ebb3db78c0326f8798f5151b1f05a113432ebf",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::extract_colors",
+          "declaration_sha256_before": "7a5a4c0853a843538ceabab19817d61f8bde04669d10d6ce03f9a82dbd4494ad",
+          "declaration_sha256_after": "1a55c4eb80fe8552e7381fe5b09835d67917df4e427b5c947e9de5c8a95c466b",
+          "unchanged_source_file": "crates/tkmeshvs/src/two_colors.rs",
+          "unchanged_source_sha256": "c468860a64fbee0de62dea7cdca02d19208ea91c7e5b9024a189fc2574001cb5"
+        },
+        {
+          "path": "martensite_tkmeshvs::extract_colors_into",
+          "declaration_sha256_before": "4ee4774cba797e323002f6e107dd9997d561558709454db22d6e7a001b079db2",
+          "declaration_sha256_after": "7699a3942a2f70e8d3328af04d69a780584b8b4ca7b0b2a3ed5e88dee7add7ba",
+          "unchanged_source_file": "crates/tkmeshvs/src/two_colors.rs",
+          "unchanged_source_sha256": "c468860a64fbee0de62dea7cdca02d19208ea91c7e5b9024a189fc2574001cb5"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_TwoColors",
+      "cpp_declaration_id": "531c0cfc485d7571b22ad260926bc65547d64c4bf3d89c728200c6fd1c563338",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoColors",
+          "declaration_sha256_before": "b31b9d6313fcf5207bbadbab57bf127d450413e1d4eea129244516525f4bd555",
+          "declaration_sha256_after": "866eb22dc757f9b224bed3d9b08e9911910089773560e641684d24096920f200",
+          "unchanged_source_file": "crates/tkmeshvs/src/two_colors.rs",
+          "unchanged_source_sha256": "c468860a64fbee0de62dea7cdca02d19208ea91c7e5b9024a189fc2574001cb5"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "BindTwoColors",
+      "cpp_declaration_id": "f093ff7a92f77e0f4e37f29af4d70d21bdaa97f79889c963494c9232001f57fc",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::bind_two_colors",
+          "declaration_sha256_before": "cd2802bb2bae90d36753d7c50788c020d57a585e6a613222ea34f5355808a81f",
+          "declaration_sha256_after": "c67671609d01cbaa663de554bab3a2c165285704a39cea32fb0d1f5779a3f024",
+          "unchanged_source_file": "crates/tkmeshvs/src/two_colors.rs",
+          "unchanged_source_sha256": "c468860a64fbee0de62dea7cdca02d19208ea91c7e5b9024a189fc2574001cb5"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "ExtractColor",
+      "cpp_declaration_id": "f57632a0bbb91f718892339623a6f8763ae6886799aa92ff7d13b3a5aa2b0405",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::extract_color",
+          "declaration_sha256_before": "4641c5714371c70945889f31fd665c415d1aafe0cd988cfaab0dd250d5dc8457",
+          "declaration_sha256_after": "6d7f4ee213dd2ec6755436c0d38d3fc88ae7726cda3359d38d49a198a9e74e58",
+          "unchanged_source_file": "crates/tkmeshvs/src/two_colors.rs",
+          "unchanged_source_sha256": "c468860a64fbee0de62dea7cdca02d19208ea91c7e5b9024a189fc2574001cb5"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_NodePair",
+      "cpp_declaration_id": "2a3b9d4436daac9e96f21c2f8e928b9f8afbe5a56daf4207f4df153bb4507143",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSNodePair",
+          "declaration_sha256_before": "7843cbf08f3de770c49a6f01b01b78dc343e5a88527c7cf173fd178c86541843",
+          "declaration_sha256_after": "297c13097de48f59013467f99df9b09f3f96f07e59e2a6025b182446a54c5d1c",
+          "unchanged_source_file": "crates/tkmeshvs/src/node_pairs.rs",
+          "unchanged_source_sha256": "15e4bfed895fd2037375dd433e16fa3ba11a11ddd66187132406a3ec85284722"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_SymmetricPairHasher",
+      "cpp_declaration_id": "90ef98a91a1c8a3a1db98e5223ba3ac4b04d416bb6e85ee8660788779447e3d1",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSSymmetricPairHasher",
+          "declaration_sha256_before": "43a08f3ff6c9ecaa36297d6550d31a80410549d0b9eb7ce28705e81f2cfe3a46",
+          "declaration_sha256_after": "45a3f192846c2e25d8cbf7fe8eaadb3bc4b4a3d1974e5e3c3f188c7ec1dca14f",
+          "unchanged_source_file": "crates/tkmeshvs/src/node_pairs.rs",
+          "unchanged_source_sha256": "15e4bfed895fd2037375dd433e16fa3ba11a11ddd66187132406a3ec85284722"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    },
+    {
+      "upstream_id": "MeshVS_TwoNodes",
+      "cpp_declaration_id": "d17d4fa7e0eb36ae7cf667033020ce6b93d5c6805f3a7dd37b4ac9793eb8af36",
+      "status_before_and_after": "implemented",
+      "before_resolution": "unresolved",
+      "before_rust_status": "missing_rust_selection",
+      "selector_changes": [
+        {
+          "path": "martensite_tkmeshvs::MeshVSTwoNodes",
+          "declaration_sha256_before": "b37c72fb864a2cc14ff71b8e88694cb6aea9281604f2fd655e39210ce994f1ea",
+          "declaration_sha256_after": "7c67ed77aa1e33fba07bafc4f44984f25f6be8b45d966ccf452dab94da02facd",
+          "unchanged_source_file": "crates/tkmeshvs/src/node_pairs.rs",
+          "unchanged_source_sha256": "15e4bfed895fd2037375dd433e16fa3ba11a11ddd66187132406a3ec85284722"
+        }
+      ],
+      "after_resolution": "implemented",
+      "after_rust_status": "unique"
+    }
+  ]
+}
