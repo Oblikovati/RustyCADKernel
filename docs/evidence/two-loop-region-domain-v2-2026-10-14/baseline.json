@@ -1,0 +1,28 @@
+{
+  "revision": "80c1074511e0bc32220cc2a3899f5aa10a048bdc",
+  "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "jobs": 2,
+  "region_tests": 176,
+  "replays": [
+    {
+      "marker": "complete-prism-history-v1",
+      "bytes": 421702,
+      "sha256": "b5e276d00b09bf4a5590c57692f14a55913b5aa9f3ff0772d9c43384086e0686",
+      "log": "baseline-complete_prism_history_replay_across_processes_and_threads.log.gz"
+    },
+    {
+      "marker": "prism-copy-lineage-v1",
+      "bytes": 167821,
+      "sha256": "491a1a0a7d1a68505a31dcbc3ea52737d19542d44b3a9e5fb93a072614e397ec",
+      "log": "baseline-prism_copy_lineage_owned_bytes_replay_across_processes_and_threads.log.gz"
+    },
+    {
+      "marker": "frozen-prism-v1",
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "log": "baseline-frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations.log.gz"
+    }
+  ],
+  "source_unchanged": true,
+  "default_path_attempt": "Rust1.95 rejected package minimum before compilation; preserved baseline-region.log.gz"
+}

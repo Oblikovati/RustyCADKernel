@@ -1,0 +1,27 @@
+{
+  "source_commit": "9e9634893",
+  "baseline_commit": "4e82b841e",
+  "dependency_commit": "94e47df87",
+  "main_base": "0a429b1af",
+  "tests_command": [
+    "cargo",
+    "+1.99.0",
+    "test",
+    "-p",
+    "rustycad-tkbo",
+    "--all-features"
+  ],
+  "tests_exit": 0,
+  "unit_tests": 1055,
+  "toolkit_tests": 646,
+  "doctests": 35,
+  "shared_focused_tests": 4,
+  "lint_and_replay_source_bookends_equal": true,
+  "source_files": 16091,
+  "limitations": [
+    "Construction and raw chart operands only; no annular region or body certificate",
+    "No new numerical engine or behavior change",
+    "No new thread safety or sanitizer acceptance claim; existing host TSan startup blocker remains",
+    "Full tests ran on frozen source without edits; explicit source bookends accompany overlapping lint and both later replay runs"
+  ]
+}

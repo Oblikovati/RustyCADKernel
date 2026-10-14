@@ -25,7 +25,7 @@ pub(super) fn current_history(
     require_history(&current)?;
     shared_closure(bridge, &current, candidate)
 }
-fn require_history(current: &PartitionTransactionInspection) -> RegionCheck {
+pub(super) fn require_history(current: &PartitionTransactionInspection) -> RegionCheck {
     holds(
         "complete partition capture",
         current.capture_state == PartitionCaptureState::Captured,

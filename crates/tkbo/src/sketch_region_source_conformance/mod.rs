@@ -36,3 +36,5 @@ pub(crate) use endpoints::{
 };
 #[cfg(test)]
 mod point_comparator_tests;
+
+pub(crate) mod encoding;
