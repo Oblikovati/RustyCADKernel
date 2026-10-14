@@ -1,0 +1,104 @@
+{
+  "scope": "Add a fallible mutable image builder interface for derived allocation and clear dispatch over registered base storage. Existing concrete image behavior is unchanged.",
+  "base_revision": "c47191e0492c715e24410b999e547ef500854750",
+  "owned_fixture_commit": "862e046ed16a1c3cf5c529aaf07b1590528d9dda",
+  "implementation_provenance": "Image source projection and post-clear split adapted from preserved clipping candidate cbace6cb9; unpublished API refined to typed request/errors. No historical native fixture imported.",
+  "consumer_gap": "Main offers concrete image allocation but no callable derived image allocation/clear interface retaining registered image storage. ImagePixMapSource now supplies that builder entrypoint. ToPixMap and driver signatures are unchanged.",
+  "boundary": "Mutable builder adapter, not a published geometry operation result or validation certificate. No immutable image, receiver lifetime, whole-operation completion, or rendering acceptance claim. The source type is diagnostic context, not a unique or persistent image entity identifier.",
+  "api": [
+    "ImageAllocationRequest retains format, dimensions and requested stride; depth one selects a 2D image.",
+    "ImagePixMapSource::allocate_image and clear_image return Result<(), ImageSourceError>.",
+    "image_pix_map_original_base returns a borrow or typed missing-registration error without panic.",
+    "ImageSourceError records operation, dynamic source type, failure class, allocation request when applicable and optional original Failure cause.",
+    "The existing bool allocator supplies no failure cause; AllocationRefused has cause=None rather than an invented diagnosis.",
+    "Callback causes are preserved, including exception type, message and stack; Error::source exposes the original Failure."
+  ],
+  "version_policy": "New unpublished additive builder interface; no existing public contract or baseline changed. Existing behavior remains selectable through unchanged concrete methods; no breaking migration or behavior version change is introduced. Release versioning remains with the coordinator.",
+  "isolation": [
+    "Uses existing safe Transient::project; no unsafe, constructed owner, retirement, observer or weak upgrade code imported.",
+    "Projection only borrows existing storage and cannot extend its source lifetime; compile-fail doctest pins this boundary.",
+    "Source trait inherits Send + Sync; context types have compile-time assertions. This is not new stress/TSan evidence.",
+    "Zero-depth refusal is preserved; candidate zero-fill convenience with different behavior was omitted."
+  ],
+  "fixture_unchanged": true,
+  "post_clear_allocation_body_unchanged": true,
+  "expected_kind": "Owned current-behavior fixtures and independent byte counts, explicit fill values, identity and hook-count assertions. No live OCCT oracle.",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "build_environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "note": "Pre-refactor fixture build used -j4 before coordinator requested jobs=2."
+  },
+  "checks": [
+    {
+      "command": "cargo test --locked -p rustycad-tkservice --lib --tests",
+      "exit": 0,
+      "passed": 309,
+      "ignored": 0,
+      "executables": 2,
+      "log": "final-tests.log.gz"
+    },
+    {
+      "command": "cargo clippy --locked -p rustycad-tkservice --all-targets -- -D warnings",
+      "exit": 0,
+      "log": "final-clippy.log.gz"
+    },
+    {
+      "command": "cargo test --locked -p rustycad-tkservice --doc",
+      "exit": 0,
+      "passed": 1,
+      "log": "final-docs.log.gz"
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit": 0,
+      "log": "final-format.log.gz"
+    },
+    {
+      "command": "cargo check --locked -p rustycad-tkv3d -p martensite-vulkan --all-targets",
+      "exit": 0,
+      "log": "consumer-check.log.gz",
+      "status": "passed"
+    }
+  ],
+  "superseded_checks": [
+    "post-extraction-tests.log.gz, clippy.log.gz and format.log.gz describe the earlier unpublished bool interface before coordinator review.",
+    "typed-tests.log.gz predates final error payload boxing.",
+    "typed-clippy-initial.log.gz records the large-error diagnostic; final API boxes only the optional supplied Failure.",
+    "typed-error-source-red.log.gz records the preserved-cause downcast regression; Error::source now borrows through the box, and the same test passes."
+  ],
+  "exclusions": [
+    "No live OCCT, GPU, performance, package release, Miri, loom or ThreadSanitizer executions.",
+    "Preserved dump branch aa17f7e48 and its two red retirement diagnostics are unchanged.",
+    "No whole ToPixMap completion or final rendering acceptance."
+  ],
+  "source_sha256": {
+    "crates/tkservice/src/image/alien_pix_map.rs": "e86e1409d1fa06dee1e4bbf267cdb8f3da25facf4c5afb526a49197082c72fed",
+    "crates/tkservice/src/image/mod.rs": "821f096b3881eb6c37167d7dd6890b924d60ee0adc49c63ec98ca8b8bf18a9e2",
+    "crates/tkservice/src/image/pix_map.rs": "7257ff2768832481b1010ffb2b1c0e35adcae13f7b24787cdcbafbe6dc0015a9",
+    "crates/tkservice/src/image/pix_map_init.rs": "c4b0a8ea28840031414aa6eb393e4dd8ed019c8151924b0c8f8c20d5fddd3162",
+    "crates/tkservice/src/image/pix_map_owned_contract_tests.rs": "1be92caf7634165b974f735b2dfde0f1f5af7aad4e183a209253c54007aad52b",
+    "crates/tkservice/src/image/pix_map_source.rs": "0b1145f2b786975049fd07779dc5b0a284a0883a519cc9435b23e4cf06f3478d",
+    "crates/tkservice/src/image/pix_map_source_error.rs": "6369cb2492024b3b60ed532a3eb3b60dbc6bdce3651a9b14d40755d351a39ad7",
+    "crates/tkservice/src/image/pix_map_source_fixture.rs": "1b80d167160287998f88e17800d27a1ca7439e54a10bcd34db6f3c7f22b9fdd5",
+    "crates/tkservice/src/image/pix_map_source_tests.rs": "4c6b60b64cd999f9d1058031ad1955e44c90e23813c32ae274b5e625b4321026"
+  },
+  "logs_sha256": {
+    "clippy.log.gz": "c4d03a277818bf8706bfda344274ffc682176d574b800c5d5fc65924313d8d10",
+    "consumer-check.log.gz": "b359df0800941e85f243682d8b248ae65c7ac48a6be435c509373e740fb02d9f",
+    "final-clippy.log.gz": "cbf3cb84f2b4b5259c2d2573a199e294dd2dd9ec7aa6d4a6eacd7827475282de",
+    "final-docs.log.gz": "dfe8ad6ddc3dde2bf4e6382dd3870d6835a986a59cfe6194e4f203282634e379",
+    "final-format.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "final-tests.log.gz": "f7f3b4cbb98c1d819ab4fc765d1a6b47530aa0cb56fe46dc33261d92acf413c7",
+    "format.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "post-extraction-tests.log.gz": "b008f26978b777e280e0455fa19b37870594b54d909c9bbfa23cf42b25f55152",
+    "pre-refactor.log.gz": "4aace1ef0d5270d88775e0106f22fa6edba1cec8d3a94279b5f236f1d185a630",
+    "typed-clippy-initial.log.gz": "bc54bb27e819f8ce18add1f00b7666ad96ca56c9d7f3f55a9ce0e8fc62852234",
+    "typed-error-source-red.log.gz": "ea609ef47a40334e647ba001d3a673cf4226a7536b4ff4f1f347422827733294",
+    "typed-tests.log.gz": "cb745a830bce2d8e1508717b813ee4a75c90d15d52a8df10ff7be7368c940640"
+  },
+  "style_audit": "All added functions at most 20 lines after formatting; modules below 500 lines; no nested callback closures.",
+  "documentation_after_checks": "Only the source_type field comment was clarified after the final TKService test run; no implementation changed. Scoped formatter recheck and consumer compile passed afterward.",
+  "integration": "Awaiting coordinator integration into main; neither original dump nor clipping lifetime branch is imported."
+}

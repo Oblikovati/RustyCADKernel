@@ -12,6 +12,12 @@ mod pix_map_init;
 mod pix_map_ops;
 #[cfg(test)]
 mod pix_map_owned_contract_tests;
+mod pix_map_source;
+mod pix_map_source_error;
+#[cfg(test)]
+mod pix_map_source_fixture;
+#[cfg(test)]
+mod pix_map_source_tests;
 mod pixel;
 mod pixel_convert;
 mod texture;
@@ -32,6 +38,12 @@ pub use formats::{
 };
 pub use pix_map::{ImagePixMap, ImagePixMapState};
 pub use pix_map_data::{IMAGE_BOTTOM_UP, ImagePixMapData};
+pub use pix_map_source::{
+    ImagePixMapSource, image_pix_map_allocate, image_pix_map_clear, image_pix_map_original_base,
+};
+pub use pix_map_source_error::{
+    ImageAllocationRequest, ImageSourceError, ImageSourceFailureClass, ImageSourceOperation,
+};
 pub use pixel::ImagePixel;
 pub use pixel_convert::{
     image_color_from_raw_pixel, image_color_to_raw_pixel, image_convert_from_half_float,

@@ -69,6 +69,15 @@ impl ImagePixMap {
         size_row_bytes: usize,
     ) -> bool {
         self.clear();
+        self.init_trash_after_clear(format, size, size_row_bytes)
+    }
+    pub(super) fn init_trash_after_clear(
+        &self,
+        format: ImageFormat,
+        size: Vec3<usize>,
+        size_row_bytes: usize,
+    ) -> bool {
+        // Reuse the current allocation body after a derived clear callback has returned.
         let mut state = self.change_data();
         state.format = format;
         if has_zero_size(size) {
