@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "upstream_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "src/Visualization/TKV3d/V3d/V3d_View.cxx": "092de1c7865ddef1d6db53595be48b77297158f96205d70c18cf1d8459cc4012",
+    "src/Visualization/TKService/Graphic3d/Graphic3d_CView.cxx": "adbbbb8c6453611932ce4bdca56ed74882d6fa2133fc82f52e96471168c01888",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx": "a1172b06eec049b5016f2f478a354ce837811a78c0fdac5a76d99c1608509beb",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.cxx": "ea2a587de0fa3eda4455a3bf29fb73aab0ca628927bb531498e072f0d5d2c960"
+  },
+  "producers_sha256": {
+    "tools/oracle/martensite_picked_slot_retention.cxx": "4c892aeb8f06ecd3420762519fb286841a33de60221b2bf0b7a01a013403ac09",
+    "tools/oracle/martensite_picked_slot_reset_failure.cxx": "757ed3613c4639e41f1af4301959be7ca3720868ecd9abe43b55c9f967a49edc",
+    "tools/oracle/martensite_picked_slot_scene.hxx": "a0127c964295e35f76e6e67b0f13fce4bf063848460c1e70551ac5723226b908",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9"
+  },
+  "fixtures": {
+    "crates/tkernel/tests/fixtures/picked_view_retention/native-callbacks.txt": {
+      "sha256": "c3b8c29f606e0ebdf7754a83cf61145a93b46a4e67f666c0487a36f701633579",
+      "rows": 20,
+      "native_repeat_count": 2,
+      "byte_identical": true
+    },
+    "crates/tkernel/tests/fixtures/picked_view_retention/native-reset-failure.txt": {
+      "sha256": "5c0c5bce7f5b4e8c62680598c99ccf5774f8a92b303cf2eb88b7a3bae7de5009",
+      "rows": 14,
+      "native_repeat_count": 2,
+      "byte_identical": true
+    }
+  },
+  "native_compiler": "g++ -std=c++17",
+  "native_libraries": "existing target/occt-all-full: TKV3d TKService TKMath TKernel; no rebuild",
+  "native_expired_reference_read": false,
+  "full_frame_api_credit": false
+}

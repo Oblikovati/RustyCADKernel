@@ -73,6 +73,10 @@ pub use read_line_buffer::ReadLineBuffer;
 mod nonrecursive_mutex;
 pub use nonrecursive_mutex::{NonRecursiveMutex, NonRecursiveMutexGuard};
 
+mod retained_handle_reference;
+pub use retained_handle_reference::RetainedHandleReference;
+mod scoped_handle_reference;
+pub use scoped_handle_reference::ScopedHandleReferenceSlot;
 mod handle_reference;
 pub use handle_reference::{HandleReference, ProjectedHandleReference};
 mod handle_field_ref;
