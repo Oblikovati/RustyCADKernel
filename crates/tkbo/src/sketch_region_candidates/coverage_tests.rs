@@ -44,10 +44,10 @@ fn candidate_pcurve_mutation_isolated_from_published_arrangement_and_input() {
     let source = cubic::closed_analytic_cubic(1., false);
     let owned = arranged(std::slice::from_ref(&source));
     let original = first_arranged_edge(&owned);
-    let before = representation_count(&original);
+    let before = candidate_representation_count(&original);
     let batch = super::extract_candidates(&owned, Plane3::default(), &mut |_| false)
         .unwrap_or_else(|_| panic!("expected candidates"));
-    assert_eq!(representation_count(&original), before);
+    assert_eq!(candidate_representation_count(&original), before);
     mutate_source_curve(&source);
     assert!(matches!(
         selection(&batch, [1., 1.]),
@@ -55,7 +55,7 @@ fn candidate_pcurve_mutation_isolated_from_published_arrangement_and_input() {
     ));
     assert_copied_geometry(&batch);
 }
-fn representation_count(shape: &Shape) -> usize {
+pub(crate) fn candidate_representation_count(shape: &Shape) -> usize {
     rustycad_tkbrep::brep::access::edge_tshape(shape, "candidate isolation")
         .unwrap()
         .curves()

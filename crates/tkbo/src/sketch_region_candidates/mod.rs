@@ -23,6 +23,21 @@ pub(crate) use boundaries::capture_segment as capture_boundary_segment;
 #[cfg(test)]
 mod captured_tests;
 
+mod copy_observation;
+pub(crate) use copy_observation::{
+    CandidateCopyInspection, CandidateImageCopyLink, observe_candidate_copies,
+};
 pub(crate) use generation::composed_copy_relation;
 
 pub(crate) use ancestry::append_unique as append_original_parents;
+
+#[cfg(test)]
+pub(crate) use coverage_tests::candidate_representation_count;
+
+mod copy_tree;
+pub(crate) use copy_tree::{CandidateCopiedMember, CandidateCopyTreeObservation};
+
+mod generated_observation;
+pub(crate) use generated_observation::{
+    GeneratedAreaSnapshot, GeneratedMemberSnapshot, GeneratedTopologyObservation,
+};

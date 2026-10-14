@@ -20,6 +20,7 @@ pub(super) trait ArrangementExecutor {
 }
 pub(super) struct MappedArrangementExecutor<'a> {
     pub(super) observation: Option<&'a mut super::partition_types::PartitionObservation>,
+    pub(super) space_capture: Option<super::partition_types::PartitionSpaceCapture>,
 }
 impl ArrangementExecutor for MappedArrangementExecutor<'_> {
     fn execute(&mut self, copied: &CopiedSources) -> Result<BOPAlgoBuilder, ArrangementCause> {
@@ -49,7 +50,10 @@ pub(crate) fn arrange_owned_sources(
     arrange_with_executor(
         sources,
         cancelled,
-        &mut MappedArrangementExecutor { observation: None },
+        &mut MappedArrangementExecutor {
+            observation: None,
+            space_capture: None,
+        },
     )
 }
 pub(super) fn arrange_with_executor(
@@ -140,7 +144,12 @@ impl MappedArrangementExecutor<'_> {
         builder: Option<&BOPAlgoBuilder>,
     ) {
         if let Some(observer) = self.observation.as_deref_mut() {
-            *observer = super::partition_capture::capture_mapped_partition(copied, filler, builder);
+            *observer = super::partition_capture::capture_partition_with_space(
+                copied,
+                filler,
+                builder,
+                self.space_capture,
+            );
         }
     }
 }

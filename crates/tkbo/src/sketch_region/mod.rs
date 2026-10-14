@@ -35,7 +35,7 @@ pub(crate) use copy_inputs::{admit_sources, copy_sources, original_identity};
 
 mod partition_observation;
 mod partition_types;
-pub(crate) use partition_observation::observe_owned_partition;
+pub(crate) use partition_observation::{observe_owned_partition, observe_partition_space};
 pub(crate) use partition_types::*;
 #[cfg(test)]
 mod partition_tests;
@@ -45,4 +45,9 @@ mod partition_capture;
 mod partition_blocks;
 mod partition_diagnostics;
 
+mod partition_vertices;
+
 mod partition_occurrence;
+#[cfg(test)]
+mod partition_policy_tests;
+mod partition_source_vertices;
