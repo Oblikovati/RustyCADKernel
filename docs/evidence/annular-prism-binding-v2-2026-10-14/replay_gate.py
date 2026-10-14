@@ -10,6 +10,14 @@ def manifest():
 before=manifest();records=[]
 for case in filters:
  cmd=['cargo','+1.99.0','test','-p','rustycad-tkbo','--lib',case,'--','--nocapture','--test-threads=1']
+ if '--exact' in sys.argv[2:]:
+  baseline=json.loads((out/'prestyle-first.json').read_text())
+  record=next(row for row in baseline['commands'] if row['filter']==case)
+  old=gzip.decompress((out/record['log']).read_bytes()).decode()
+  names=re.findall(r'^test (\S+) \.\.\.',old,re.MULTILINE)
+  assert len(names)==1,(case,names)
+  cmd[6]=names[0]
+  cmd.append('--exact')
  start=time.monotonic();proc=subprocess.run(cmd,cwd=root,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
  log=out/(phase+'-'+case+'.log.gz');log.write_bytes(gzip.compress(proc.stdout,mtime=0))
  rows=re.findall(rb'([a-z0-9-]+)[:=]([0-9a-f]{100,})',proc.stdout)
