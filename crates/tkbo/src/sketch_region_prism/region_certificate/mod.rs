@@ -142,6 +142,7 @@ pub(crate) use measurements::{
 mod embedding_baseline_tests;
 
 pub(crate) mod embedding;
+pub(crate) mod orientation;
 
 #[allow(unused_imports)]
 pub(crate) use measurements::{
