@@ -84,3 +84,15 @@ fn actual_annular_embedding_process_receipt() {
             .collect::<String>()
     );
 }
+
+#[test]
+fn swapped_same_role_cap_operands_do_not_borrow_another_trims_parent_bridge() {
+    let mut evidence = actual_evidence();
+    let trims = &mut evidence.domains.first.trims;
+    assert_eq!(trims[0].identity.role, trims[1].identity.role);
+    assert_ne!(trims[0].identity.source, trims[1].identity.source);
+    let original = trims[0].operand.clone();
+    trims[0].operand = trims[1].operand.clone();
+    trims[1].operand = original;
+    assert!(replay::encode(&evidence).is_err());
+}
