@@ -88,3 +88,5 @@ fn assert_hypothesis(error: PrismMeasureFailure, expected: &str) {
     };
     assert_eq!(name, expected);
 }
+#[path = "tests/complete.rs"]
+mod complete_tests;

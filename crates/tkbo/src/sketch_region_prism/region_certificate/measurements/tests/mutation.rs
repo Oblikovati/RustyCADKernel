@@ -28,7 +28,7 @@ pub(in crate::sketch_region_prism::region_certificate) fn live_face(
         .unwrap();
     face(&binding.context.occurrence).unwrap()
 }
-fn side_basis(receipt: &PrismReceipt) -> Handle<GeomBezierCurve> {
+pub(super) fn side_basis(receipt: &PrismReceipt) -> Handle<GeomBezierCurve> {
     let surface = BRepTool::surface(&live_face(receipt, PrismImageRole::Generated)).unwrap();
     surface
         .cast::<GeomSurfaceOfLinearExtrusion>()
@@ -155,7 +155,7 @@ fn success_failure_and_cancellation_leave_supplied_original_and_copy_unchanged()
     measured(&bridge, &shapes, &receipt);
 }
 
-fn assert_target_failure(target: usize, failure: PrismMeasureFailure) {
+pub(super) fn assert_target_failure(target: usize, failure: PrismMeasureFailure) {
     if target == 2 {
         assert!(matches!(
             failure,

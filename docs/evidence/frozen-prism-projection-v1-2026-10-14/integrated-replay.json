@@ -1,0 +1,46 @@
+{
+  "integration_revision": "bdb88a54723bf14dc4be6be04a326043ef16a564",
+  "processes": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "log": "integrated-replay-first.log.gz",
+      "log_sha256": "5ab729baaca9560a472aefa61cd8de24d0e7bb752b2e38509d0a4cb82d474223"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "log": "integrated-replay-second.log.gz",
+      "log_sha256": "2cd78a2b5646e3c57d2165fa1779dcbfbc817a4357213cbd4eb679e1f5ab68d5"
+    }
+  ],
+  "matches_candidate": true
+}

@@ -17,6 +17,7 @@ pub struct Graphic3dRenderView {
     pub(crate) retained: Graphic3dRetainedView,
     device: SharedRenderDevice,
     pub(crate) limit: u32,
+    gui_surface: crate::RenderGuiSurfacePolicy,
     vertical_sync: std::sync::Arc<SharedState<bool>>,
     presenter: SharedState<Option<crate::backend::WindowPresenter>>,
     window_error: SharedState<Option<RenderError>>,
@@ -33,6 +34,7 @@ type RenderViewCreationInputs = (
     SharedRenderDevice,
     u32,
     std::sync::Arc<SharedState<bool>>,
+    crate::RenderGuiSurfacePolicy,
 );
 impl Graphic3dRenderView {
     pub(crate) fn create(
@@ -41,6 +43,7 @@ impl Graphic3dRenderView {
         device: SharedRenderDevice,
         limit: u32,
         vertical_sync: std::sync::Arc<SharedState<bool>>,
+        gui_surface: crate::RenderGuiSurfacePolicy,
     ) -> Result<Handle<Self>, Failure> {
         let inputs = (
             StandardTransient::default(),
@@ -48,19 +51,21 @@ impl Graphic3dRenderView {
             device,
             limit,
             vertical_sync,
+            gui_surface,
         );
         let view = Handle::new(Self::initialized_gui_view(inputs));
         graphic3d_cview_register(&view.cast())?;
         Ok(view)
     }
     fn initialized_gui_view(inputs: RenderViewCreationInputs) -> Self {
-        let (transient, retained, device, limit, vertical_sync) = inputs;
+        let (transient, retained, device, limit, vertical_sync, gui_surface) = inputs;
         Self {
             transient,
             retained,
             device,
             limit,
             vertical_sync,
+            gui_surface,
             presenter: SharedState::default(),
             window_error: SharedState::default(),
             outcome: SharedState::default(),
@@ -73,47 +78,6 @@ impl Graphic3dRenderView {
     /// Inspect this view's completed stencil context; `render_view.stencil_context_state()`.
     pub fn stencil_context_state(&self) -> crate::RenderStencilState {
         self.stencil_feedback.current()
-    }
-    /// Read the last frame or its error; `render_view.capture()?` never conceals a failed redraw.
-    pub fn capture(&self) -> Result<FrameCapture, RenderError> {
-        self.require_capture_target()?;
-        let extent = self.gui_capture_extent()?;
-        let gui = self.gui_layers.read();
-        if let Some(extent) = extent {
-            gui.snapshot(extent)?;
-        }
-        let outcome = self
-            .outcome
-            .read()
-            .clone()
-            .unwrap_or_else(|| Err(rejected("no redraw", "a successfully rendered view")));
-        self.require_capture_target()?;
-        outcome
-    }
-    /// Render the current view and retain errors for void Graphic3d callbacks; `render_view.try_redraw()?`.
-    pub fn try_redraw(&self) -> Result<(), RenderError> {
-        let epoch = self.gui_layers.read().epoch.clone();
-        let outcome = self.render_current();
-        self.publish_gui_outcome(&epoch, outcome)
-    }
-    fn publish_gui_outcome(
-        &self,
-        epoch: &std::sync::Arc<()>,
-        outcome: Result<FrameCapture, RenderError>,
-    ) -> Result<(), RenderError> {
-        let gui = self.gui_layers.read();
-        let outcome = self.check_publication_target(&gui.epoch, epoch, outcome);
-        let result = outcome.as_ref().map(|_| ()).map_err(Clone::clone);
-        *self.outcome.write() = Some(outcome);
-        self.update_gui_redraw_status(result.is_ok());
-        result
-    }
-    fn update_gui_redraw_status(&self, succeeded: bool) {
-        if succeeded {
-            self.retained.redraw();
-        } else {
-            self.retained.invalidate();
-        }
     }
     fn render_current(&self) -> Result<FrameCapture, RenderError> {
         self.require_native_target(AspectNativeWindowOperation::Redraw)?;
@@ -131,7 +95,11 @@ impl Graphic3dRenderView {
     }
     fn gui_composed_frame(&self) -> Result<crate::RenderFrame, RenderError> {
         let extent = capture_extent(self, self.limit)?;
-        let packet = self.gui_layers.read().snapshot(extent)?;
+        let packet = if self.checked_gui_policy() {
+            self.checked_gui_snapshot(extent)?
+        } else {
+            self.gui_layers.read().snapshot(extent)?
+        };
         let mut frame = frame_for_view(self, extent, self.retained.render_clip_planes())?;
         if let Some(packet) = packet {
             crate::view_gui_composition::append_gui_packet(&mut frame, packet)?;
@@ -155,14 +123,22 @@ impl Graphic3dRenderView {
         if !window.is_mapped() {
             return device.render(frame);
         }
+        self.render_mapped_target(frame, &mut device)
+    }
+    fn render_mapped_target(
+        &self,
+        frame: &crate::RenderFrame,
+        device: &mut crate::driver_backend::DriverBackend,
+    ) -> Result<FrameCapture, RenderError> {
         let mut presenter = self.presenter.write();
         if presenter.is_none() {
-            *presenter = Some(device.window_presenter(&window)?);
+            *presenter = Some(device.window_presenter(&self.window())?);
         }
         let result = device.render_window(
             frame,
             presenter.as_mut().unwrap(),
             *self.vertical_sync.read(),
+            self.gui_surface,
         );
         if result.is_err() {
             presenter.take();
@@ -261,3 +237,13 @@ impl Graphic3dCView for Graphic3dRenderView {
 #[cfg(test)]
 #[path = "view_binding_tests.rs"]
 mod view_binding_tests;
+
+#[path = "view_frame_publication.rs"]
+mod frame_publication;
+
+#[path = "view_gui_checked.rs"]
+mod gui_checked;
+
+#[cfg(test)]
+#[path = "gui_closure_tests.rs"]
+mod gui_closure_tests;

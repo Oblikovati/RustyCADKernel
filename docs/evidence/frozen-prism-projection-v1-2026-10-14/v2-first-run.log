@@ -1,0 +1,83 @@
+   Compiling rustycad-tkbrep v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-frozen-prism-projection/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-frozen-prism-projection/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-frozen-prism-projection/crates/tktopalgo)
+   Compiling rustycad-tkshhealing v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-frozen-prism-projection/crates/tkshhealing)
+   Compiling rustycad-tkprim v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-frozen-prism-projection/crates/tkprim)
+   Compiling rustycad-tkmesh v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-frozen-prism-projection/crates/tkmesh)
+   Compiling rustycad-tkbo v0.2.7 (/home/vmiguel/git/oblikovati-workspace/Martensite-frozen-prism-projection/crates/tkbo)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 43.97s
+     Running unittests src/lib.rs (target/debug/deps/rustycad_tkbo-3743221922cb8a91)
+
+running 19 tests
+test sketch_region_prism::frozen::isolation_tests::all_owned_output_types_are_send_and_sync_without_unsafe_impls ... ok
+
+thread 'sketch_region_prism::frozen::source_mutation_tests::source_and_body_mutation_cannot_change_already_frozen_output' (1716249) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test sketch_region_prism::frozen::source_mutation_tests::source_and_body_mutation_cannot_change_already_frozen_output ... FAILED
+test sketch_region_prism::frozen::source_mutation_tests::stale_source_coefficients_cannot_reuse_retained_chart_evidence ... ok
+
+thread 'sketch_region_prism::frozen::expected_tests::coverage_history_and_effective_limits_remain_explicit' (1716236) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::expected_tests::coverage_history_and_effective_limits_remain_explicit ... FAILED
+
+thread 'sketch_region_prism::frozen::mutation_tests::actual_root_children_are_rebound_at_commit' (1716244) panicked at crates/tkbo/src/sketch_region_prism/frozen/mutation_tests.rs:59:5:
+must reach mutation checkpoint Commit
+test sketch_region_prism::frozen::mutation_tests::actual_root_children_are_rebound_at_commit ... FAILED
+
+thread 'sketch_region_prism::frozen::identity_tests::every_directed_use_has_explicit_parent_and_one_incidence_binding' (1716238) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::identity_tests::every_directed_use_has_explicit_parent_and_one_incidence_binding ... FAILED
+test sketch_region_prism::frozen::mutation_tests::present_region_error_is_never_dropped_as_unbound_success ... ok
+test sketch_region_prism::frozen::tests::missing_authored_bindings_never_get_invented_ids ... ok
+
+thread 'sketch_region_prism::frozen::expected_tests::complete_frozen_geometry_matches_owned_cubic_fixture' (1716235) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::expected_tests::complete_frozen_geometry_matches_owned_cubic_fixture ... FAILED
+
+thread 'sketch_region_prism::frozen::identity_tests::authored_binding_input_order_does_not_change_owned_bytes' (1716237) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::identity_tests::authored_binding_input_order_does_not_change_owned_bytes ... FAILED
+
+thread 'sketch_region_prism::frozen::tests::complete_owned_capture_keeps_independent_incidence_counts' (1716251) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:119:82:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+
+thread 'sketch_region_prism::frozen::isolation_tests::clone_mutation_is_isolated_from_published_values' (1716242) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::tests::complete_owned_capture_keeps_independent_incidence_counts ... FAILED
+test sketch_region_prism::frozen::isolation_tests::clone_mutation_is_isolated_from_published_values ... FAILED
+
+thread 'sketch_region_prism::frozen::isolation_tests::every_phase_cancellation_failure_and_reuse_leave_input_unchanged' (1716243) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::isolation_tests::every_phase_cancellation_failure_and_reuse_leave_input_unchanged ... FAILED
+
+thread 'sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations' (1716247) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations ... FAILED
+
+thread 'sketch_region_prism::frozen::replay_tests::shared_published_projection_reads_are_lock_free_and_deterministic' (1716248) panicked at crates/tkbo/src/sketch_region_prism/frozen/tests.rs:184:13:
+PrismFreezeFailure { operation: AuthoredPrismId(700), phase: Evidence, entity: None, cause: UnsupportedDiagnostic { stage: None, actual: "unrepresented input or uncomposed intermediate retirement" } }
+test sketch_region_prism::frozen::replay_tests::shared_published_projection_reads_are_lock_free_and_deterministic ... FAILED
+test sketch_region_prism::frozen::tests::internal_and_external_body_orientations_are_explicitly_unsupported ... ok
+test sketch_region_prism::frozen::identity_tests::source_collision_and_selected_region_mismatch_refuse_capture ... ok
+test sketch_region_prism::frozen::mutation_tests::actual_root_children_are_rebound_before_graph_capture ... ok
+test sketch_region_prism::frozen::identity_tests::missing_duplicate_and_colliding_use_bindings_refuse_capture ... ok
+
+failures:
+
+failures:
+    sketch_region_prism::frozen::expected_tests::complete_frozen_geometry_matches_owned_cubic_fixture
+    sketch_region_prism::frozen::expected_tests::coverage_history_and_effective_limits_remain_explicit
+    sketch_region_prism::frozen::identity_tests::authored_binding_input_order_does_not_change_owned_bytes
+    sketch_region_prism::frozen::identity_tests::every_directed_use_has_explicit_parent_and_one_incidence_binding
+    sketch_region_prism::frozen::isolation_tests::clone_mutation_is_isolated_from_published_values
+    sketch_region_prism::frozen::isolation_tests::every_phase_cancellation_failure_and_reuse_leave_input_unchanged
+    sketch_region_prism::frozen::mutation_tests::actual_root_children_are_rebound_at_commit
+    sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations
+    sketch_region_prism::frozen::replay_tests::shared_published_projection_reads_are_lock_free_and_deterministic
+    sketch_region_prism::frozen::source_mutation_tests::source_and_body_mutation_cannot_change_already_frozen_output
+    sketch_region_prism::frozen::tests::complete_owned_capture_keeps_independent_incidence_counts
+
+test result: FAILED. 8 passed; 11 failed; 0 ignored; 0 measured; 464 filtered out; finished in 0.39s
+
+error: test failed, to rerun pass `-p rustycad-tkbo --lib`

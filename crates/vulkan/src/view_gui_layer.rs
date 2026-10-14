@@ -11,13 +11,22 @@ pub(crate) struct GuiLayerSlot {
     pub packet: Option<GuiLayerPacket>,
     pub stale: bool,
     pub epoch: Arc<()>,
+    pub target_epoch: Arc<()>,
+    pub composition_epoch: Arc<()>,
+    pub packet_target: Arc<()>,
+    pub last_draw: Option<crate::gui_target_stamp::GuiTargetStamp>,
 }
 impl Default for GuiLayerSlot {
     fn default() -> Self {
+        let target_epoch = Arc::new(());
         Self {
             packet: None,
             stale: false,
             epoch: Arc::new(()),
+            target_epoch: target_epoch.clone(),
+            packet_target: target_epoch,
+            composition_epoch: Arc::new(()),
+            last_draw: None,
         }
     }
 }
@@ -25,6 +34,8 @@ impl GuiLayerSlot {
     pub fn replace(&mut self, packet: Option<GuiLayerPacket>) -> Option<GuiLayerPacket> {
         self.stale = false;
         self.epoch = Arc::new(());
+        self.composition_epoch = Arc::new(());
+        self.packet_target = self.target_epoch.clone();
         std::mem::replace(&mut self.packet, packet)
     }
     pub fn retire_removed(&mut self) -> Option<GuiLayerPacket> {
@@ -33,10 +44,12 @@ impl GuiLayerSlot {
     }
     /// Even model-only pending frames need a new generation (6e50a8f76); `slot.invalidate_binding()`.
     pub fn invalidate_binding(&mut self) {
+        self.target_epoch = Arc::new(());
         self.stale = self.packet.is_some();
         self.epoch = Arc::new(());
     }
     pub fn resized(&mut self) -> bool {
+        self.target_epoch = Arc::new(());
         if self.packet.is_none() {
             return false;
         }

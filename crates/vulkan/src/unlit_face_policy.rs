@@ -58,6 +58,7 @@ mod tests {
             Default::default(),
             RenderLightingPipeline::FixedFunction,
             sides,
+            Default::default(),
         ) else {
             panic!("expected unsupported policy before device initialization");
         };

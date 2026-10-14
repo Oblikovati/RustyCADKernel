@@ -10,7 +10,7 @@ mod diagnostic_tests;
 #[cfg(test)]
 mod geometry_tests;
 mod inspection;
-mod outcome;
+pub(crate) mod outcome;
 mod self_check;
 #[cfg(test)]
 mod self_check_tests;

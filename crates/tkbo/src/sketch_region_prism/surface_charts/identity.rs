@@ -19,7 +19,7 @@ pub(super) fn linear_part(mut embedding: MetricEmbedding<3>) -> MetricEmbedding<
     embedding
 }
 
-pub(super) fn spatial_identity() -> MetricEmbedding<3> {
+pub(in crate::sketch_region_prism) fn spatial_identity() -> MetricEmbedding<3> {
     MetricEmbedding {
         linear: [[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]],
         origin: [0.; 3],

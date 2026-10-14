@@ -25,6 +25,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     gui_acceptance::font_retirement(true);
     gui_acceptance::model_alpha_scope(true);
     gui_native_extent::verify_native_gui_extent();
+    gui_native_extent::verify_checked_native_gui_extent();
     if let Some(prefix) = std::env::args().nth(1) {
         gui_acceptance::capture_native_overlay(&prefix)?;
     }

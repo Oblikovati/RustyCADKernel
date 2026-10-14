@@ -47,3 +47,6 @@ fn complete_inspection(
 
 #[cfg(test)]
 pub(in crate::sketch_region_prism::region_certificate) mod tests;
+
+mod complete;
+pub(crate) use complete::*;
