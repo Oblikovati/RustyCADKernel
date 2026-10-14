@@ -7,7 +7,7 @@ pub(super) struct NamedSourceContext {
     pub member: SemanticNameRole,
     pub directed_use: SemanticNameRole,
 }
-pub(in crate::sketch_region_prism::owned_request) enum ResolutionCause {
+pub(in crate::sketch_region_prism) enum ResolutionCause {
     Native(rustycad_tkernel::standard::Failure),
     EndpointParameter {
         actual: f64,

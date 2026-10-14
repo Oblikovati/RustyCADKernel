@@ -53,3 +53,5 @@ mod corpus_tests;
 mod mutation_tests;
 #[cfg(test)]
 mod replay_tests;
+
+pub(in crate::sketch_region_prism::owned_request) use types::ResolutionCause;
