@@ -115,3 +115,23 @@ self-intersection/tolerance validation and prism/body certificates remain
 independent obligations. No flags for those gates are discharged here. The
 one-axis diagnostic path retains the deletion task and one-milestone limit in
 [the paired census contract](sketch-region-paired-census.md).
+
+## Source revision verification
+
+Code checkpoint `2b074948d47b6f922d66d368a5ba9203549cd1fd` passes 4,075 affected
+TKBO/TKMath tests and 84 doctests with Rust 1.99.0, all features enabled. The same
+checks pass from canonical package archives with the original workspace hidden,
+network access disabled and the environment cleared. All 31 archives carry the
+clean checkpoint revision; their 12,134 Rust files match that source byte for byte.
+Clippy with warnings denied and the affected formatter checks pass.
+
+The source-revision regression fails when the partition's own originals replace
+the census originals. Its independent dyadic expectations also check the changed
+quarter-point value and unchanged endpoints/contact. Parameter measurements expose
+read-only values, and their public scalar types have compile-time `Send + Sync`
+assertions. The private shape transaction remains thread confined.
+
+The [verification receipt](evidence/sketch-region-contact-transport/receipt.json)
+retains commands, raw logs, archive equality, inherited fixture provenance and
+explicit exclusions. No native captures were regenerated. Whole-operation
+determinism, concurrency, validation and comparative performance gates remain open.

@@ -1,0 +1,73 @@
+{
+  "code_revision": "2b074948d47b6f922d66d368a5ba9203549cd1fd",
+  "inherited_base": "c6cdbc6c2",
+  "scope": "Private issue #10 contact-construction diagnostics; complete region/prism operation remains incomplete.",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "test_results": {
+    "recovered-all-targets-final.log": {
+      "passed": 4075,
+      "suite_counts": [
+        390,
+        646,
+        0,
+        2,
+        0,
+        133,
+        2904,
+        0
+      ]
+    },
+    "recovered-docs.log": {
+      "passed": 84,
+      "suite_counts": [
+        35,
+        49
+      ]
+    },
+    "recovered-extracted.log": {
+      "passed": 4159,
+      "suite_counts": [
+        390,
+        646,
+        0,
+        2,
+        0,
+        133,
+        2904,
+        0,
+        35,
+        49
+      ]
+    }
+  },
+  "clippy": "all targets, all features, warnings denied; passed",
+  "format": "cargo fmt TKBO/TKMath; passed",
+  "archive_equality": {
+    "packages": 31,
+    "matching_rust_files": 12134,
+    "clean_code_checkpoint": true
+  },
+  "extracted_isolation": "bwrap hides original workspace including native OCCT; network disabled; cleared environment; pinned Rust 1.99.0; offline and locked dependencies",
+  "independent_expected_results": [
+    "Dyadic cubic edit preserves endpoints and midpoint (0.5,0.3125,0) while quarter value changes from (0.2265625,0.0859375,0) to (0.2265625,0.103515625,0).",
+    "Rational parameter 1/3 is distinct from its binary64 display; native affine maps [2,5] and [5,2] yield exact values 3 and 4.",
+    "Line native map [2,5] at exact half parameter yields world point (3.5,0,0).",
+    "Original/copy mutation, retained receipt failure/cancellation/retry, alias-cache reuse and admission recomputation tests."
+  ],
+  "regression_sensitivity": "Replacing census.inputs.originals with mapped.originals makes source_edit_between_census_and_partition_cannot_reuse_contact_proof fail; corrected binding passes source and extracted suites. Temporary substitution was restored before commit.",
+  "historical_fixture": {
+    "sha256": "b6c5e0d461d3c3e001fc4824ea57aca84d0510e1b34bbe3664bb1804ab6d24a2",
+    "equals_both_inherited_captures": true,
+    "new_native_captures": 0,
+    "role": "Historical provenance and replay only; not an independent correctness oracle."
+  },
+  "remaining_gates": [
+    "General region operation completion and ordered topology/geometry/self-intersection/tolerance validation",
+    "Exhaustive search, complete history/deletion and cross-report identity",
+    "Immutable Send+Sync publication of currently thread-confined shape diagnostics",
+    "Whole-operation cross-process byte comparison, single/multi-thread comparison, stress and ThreadSanitizer",
+    "Previous-release comparative performance and peak memory; no improvement claimed",
+    "Application acceptance and release integration"
+  ]
+}
