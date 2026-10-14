@@ -18,6 +18,7 @@ use crate::sketch_region_prism::{PrismImageRole, surface_charts::PrismTrimRole};
 pub(in crate::sketch_region_prism) use error::*;
 pub(in crate::sketch_region_prism) use operation::inspect_annular_orientation;
 use rustycad_tkg3d::top_abs::Orientation;
+pub(in crate::sketch_region_prism) use trims::source_for_trim as annular_trim_source;
 pub(in crate::sketch_region_prism) use types::*;
 pub(in crate::sketch_region_prism) use winding::annular_boundary_directions;
 type AnnularDirectionCheck<T> = Result<T, AnnularDirectionCause>;
