@@ -35,3 +35,12 @@ The neutral traversal extraction preserves legacy cumulative placement/orientati
 and error ordering. Its ancestor check still includes Location; it is not a claim
 of bounded safety for arbitrary cyclic input. New complete-history admission will
 check identity-only ancestor cycles and explicit depth/use limits separately.
+
+## Shared historical lineage projection
+
+The same member/context/sweep/retirement projection now accepts an already-bound
+body and its frozen directed keys, without callbacks or another freeze. Existing
+V1 inspection keeps its original sequence and exact bytes. Focused tests compare
+the owned observations byte for byte and refuse wrong-operation/missing-key and
+missing-observation cases. `lineage-projection.json` retains the source bookends
+and replay checks. This seam adds no geometry or body acceptance claim.

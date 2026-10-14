@@ -4,12 +4,14 @@ mod capture;
 mod directed;
 mod members;
 mod names;
+mod projection;
 mod sweep;
 mod types;
 mod views;
 use super::super::{PrismBodyContext, PrismCopyObservation, PrismReceipt};
 use super::*;
 pub(crate) use capture::inspect_prism_lineage;
+pub(super) use projection::project_prism_lineage;
 use rustycad_tkbrep::topods::Shape;
 pub(crate) use types::*;
 
@@ -94,3 +96,6 @@ mod replay_tests;
 
 #[cfg(test)]
 mod member_identity_tests;
+
+#[cfg(test)]
+mod projection_tests;
