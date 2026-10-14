@@ -35,6 +35,10 @@ mod retention_tests;
 
 #[cfg(test)]
 mod refinement_tests;
+mod sign_policy;
 mod work_budget;
 #[cfg(test)]
 mod work_budget_tests;
+
+#[cfg(test)]
+mod sign_policy_tests;

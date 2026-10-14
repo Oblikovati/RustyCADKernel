@@ -20,7 +20,7 @@ impl GraphTask<'_> {
                 &self.projection.cleared_originals[axis],
                 &query.polynomial,
                 roots,
-                self.options.max_degree,
+                self.signs.effective_limit,
                 cancelled,
             )
             .map_err(PairOperationFailure::Sign)?;
