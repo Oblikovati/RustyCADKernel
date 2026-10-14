@@ -52,6 +52,12 @@ fn positive_volume_reuses_exact_binding_scalar_error_and_options() {
         ]
     );
     assert_eq!(volume.representative(), volume.enclosure()[0]);
+    assert_policies(&volume);
+    assert!(volume.matches_join(&join));
+    assert_eq!(volume.binding_bytes(), join.replay_bytes());
+    assert!(!join.projection().is_valid_body());
+}
+fn assert_policies(volume: &JoinedPrismVolume) {
     assert_eq!(
         volume.absolute_error_bound(),
         volume.source_integral().absolute_error_bound()
@@ -62,9 +68,6 @@ fn positive_volume_reuses_exact_binding_scalar_error_and_options() {
         volume.evidence(),
         JoinedVolumeEvidence::ExactSignTransportOfCertifiedIntegral
     );
-    assert!(volume.matches_join(&join));
-    assert_eq!(volume.binding_bytes(), join.replay_bytes());
-    assert!(!join.projection().is_valid_body());
 }
 #[test]
 fn version_and_both_foreign_proofs_refuse_before_callbacks() {
@@ -75,36 +78,43 @@ fn version_and_both_foreign_proofs_refuse_before_callbacks() {
         .unwrap();
     let (directions, measures) = children(&join);
     let (foreign_directions, foreign_measures) = children(&other);
-    for (d, m, version, expected) in [
-        (
-            &directions,
-            &measures,
-            9,
-            JoinedPrismVolumeCause::Version { expected: 1 },
-        ),
-        (
-            &foreign_directions,
-            &measures,
-            1,
-            JoinedPrismVolumeCause::Binding(VolumeOperand::Orientation),
-        ),
-        (
-            &directions,
-            &foreign_measures,
-            1,
-            JoinedPrismVolumeCause::Binding(VolumeOperand::Measures),
-        ),
+    check_version(&join, &directions, &measures);
+    for (d, m, proof) in [
+        (&foreign_directions, &measures, VolumeOperand::Orientation),
+        (&directions, &foreign_measures, VolumeOperand::Measures),
     ] {
-        let error = interpret_joined_prism_volume(&join, d, m, version, || {
-            panic!("invalid operands must not poll")
-        })
-        .err()
-        .unwrap();
-        assert_eq!(error.cause, expected);
-        assert_eq!(error.operation, join.projection().operation);
-        assert_eq!(error.entity, *join.original());
-        assert_eq!(error.class, JoinedVolumeFailureClass::Incomplete);
+        check_refusal(&join, d, m, 1, JoinedPrismVolumeCause::Binding(proof));
     }
+}
+fn check_version(
+    join: &JoinedPrismProof,
+    d: &JoinedPrismOrientationCertificate,
+    m: &JoinedPrismMeasures,
+) {
+    check_refusal(
+        join,
+        d,
+        m,
+        9,
+        JoinedPrismVolumeCause::Version { expected: 1 },
+    );
+}
+fn check_refusal(
+    join: &JoinedPrismProof,
+    d: &JoinedPrismOrientationCertificate,
+    m: &JoinedPrismMeasures,
+    version: u32,
+    expected: JoinedPrismVolumeCause,
+) {
+    let error = interpret_joined_prism_volume(join, d, m, version, || {
+        panic!("invalid operands must not poll")
+    })
+    .err()
+    .unwrap();
+    assert_eq!(error.cause, expected);
+    assert_eq!(error.operation, join.projection().operation);
+    assert_eq!(error.entity, *join.original());
+    assert_eq!(error.class, JoinedVolumeFailureClass::Incomplete);
 }
 #[test]
 fn both_cancellation_checkpoints_return_no_scalar_and_allow_reuse() {
@@ -166,6 +176,9 @@ fn independently_computed_and_shared_read_results_equal_serial_bytes() {
     for worker in workers {
         assert_eq!(worker.join().unwrap(), expected);
     }
+    check_shared_reads(baseline, &expected);
+}
+fn check_shared_reads(baseline: JoinedPrismVolume, expected: &[u8]) {
     let shared = std::sync::Arc::new(baseline);
     let readers: Vec<_> = (0..4)
         .map(|_| {

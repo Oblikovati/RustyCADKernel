@@ -27,6 +27,9 @@ fn exact_winding_traversal_jacobian_product_uses_all_factors() {
             Ok(expected)
         );
     }
+    reject_sign_factors();
+}
+fn reject_sign_factors() {
     let mut invalid = factors(1, 1, 1);
     invalid.candidate_facing = -1;
     assert_eq!(
@@ -50,6 +53,9 @@ fn signed_zero_underflow_bounds_remain_valid_without_metric_sign_inference() {
         transport::transport_enclosure([0., tiny], 1),
         Ok([0., tiny])
     );
+    reject_metric_contradictions();
+}
+fn reject_metric_contradictions() {
     for (bounds, sign) in [
         ([1., 2.], -1),
         ([-1., 1.], 1),

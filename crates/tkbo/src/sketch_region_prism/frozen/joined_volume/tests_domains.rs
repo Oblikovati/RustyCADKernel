@@ -38,6 +38,9 @@ fn check_height(poles: bool, traversal: bool, height: f64) {
         .ok()
         .unwrap();
     let volume = interpreted(&join);
+    assert_closed_volume(&volume);
+}
+fn assert_closed_volume(volume: &JoinedPrismVolume) {
     let exact_bounds = [
         f64::from_bits(0x4013333333333333),
         f64::from_bits(0x4013333333333334),
@@ -54,8 +57,5 @@ fn check_height(poles: bool, traversal: bool, height: f64) {
         volume.source_integral().representative() * f64::from(sign),
         representative
     );
-    assert_eq!(
-        volume.absolute_error_bound(),
-        volume.source_integral().absolute_error_bound()
-    );
+    assert_policies(volume);
 }
