@@ -226,3 +226,18 @@ fn zero_operation_refusal() -> PrismProofJoinFailure {
         cause: PrismProofJoinCause::MissingClosureQuery,
     }
 }
+
+#[test]
+fn owned_refusal_process_receipt() {
+    let fixture = NamedRefusalFixture::new();
+    let named = fixture.projected(missing_original(0xdeadbeef));
+    let numerical = fixture.projected(numerical_refusal());
+    let native = fixture.projected(body_refusal(PrismCause::Mapped {
+        phase: PrismPhase::Sweep,
+        failure: native(),
+    }));
+    let bytes = format!("{named:?}\n{numerical:?}\n{native:?}\n").into_bytes();
+    let hex: String = bytes.iter().map(|value| format!("{value:02x}")).collect();
+    assert!(!hex.is_empty());
+    println!("owned-prism-refusal-v1:{hex}");
+}
