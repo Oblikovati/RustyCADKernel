@@ -83,3 +83,6 @@ mod owned_refusal_baseline_tests;
 pub(super) use encoding::{numbers as encode_frozen_numbers, placement as encode_frozen_placement};
 #[cfg(test)]
 pub(in crate::sketch_region_prism) mod publication_read_snapshot;
+
+#[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use capture::capture_limits as capture_prism_limits;
