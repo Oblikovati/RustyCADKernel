@@ -8,7 +8,7 @@ use crate::sketch_region::{
 use stages::BoundHistoryStage;
 
 pub(super) fn project_partition_queries(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stages: &[BoundHistoryStage<'_>],
 ) -> HistoryCheck<Vec<PrismPartitionQuery>> {
     let observed = query_rows(request)?;
@@ -37,7 +37,9 @@ pub(super) fn project_partition_queries(
     result.sort();
     Ok(result)
 }
-fn query_rows<'a>(request: &PrismHistoryRequest<'a>) -> HistoryCheck<&'a [PartitionMemberQuery]> {
+fn query_rows<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+) -> HistoryCheck<&'a [PartitionMemberQuery]> {
     let PartitionMemberQueries::Captured {
         history_requested,
         history_available,
@@ -61,7 +63,7 @@ fn query_rows<'a>(request: &PrismHistoryRequest<'a>) -> HistoryCheck<&'a [Partit
     Ok(rows)
 }
 fn project_query(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     query: &PartitionMemberQuery,
     original: &RegionObservedContext,
     copied: &BoundHistoricalContexts<'_>,
@@ -111,7 +113,7 @@ fn admit_query(query: &PartitionMemberQuery, original: &RegionObservedContext) -
     )
 }
 fn bind_initial_query(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     query: &PartitionMemberQuery,
     original: &RegionObservedContext,
 ) -> HistoryCheck<()> {

@@ -179,3 +179,41 @@ fn counted_history_rows_honor_exact_boundary_and_one_short_without_clamping() {
     ));
     assert!(reproject_complete_prism_history(&request, &evidence).is_err());
 }
+
+#[test]
+fn nested_native_binding_parents_and_copy_observations_consume_declared_row_budget() {
+    let mut fixture = HistoryFixture::new();
+    let sources = binding_sources(&fixture.operation.shapes);
+    let measured = budget::admit(&fixture.request(&sources)).unwrap();
+    let returned = &mut fixture
+        .operation
+        .receipt
+        .diagnostic
+        .as_mut()
+        .unwrap()
+        .bindings[0]
+        .native
+        .returned;
+    let parent = returned
+        .modified
+        .iter()
+        .chain(&returned.generated)
+        .next()
+        .unwrap()
+        .clone();
+    returned.generated.push(parent);
+    let mut request = fixture.request(&sources);
+    assert_eq!(budget::admit(&request).unwrap(), measured + 1);
+    request.requested.limits.maximum_rows = measured;
+    assert!(budget::admit(&request).is_err());
+}
+#[test]
+fn conditional_history_projection_reuses_exact_standalone_operands() {
+    let fixture = HistoryFixture::new();
+    let sources = binding_sources(&fixture.operation.shapes);
+    let request = fixture.request(&sources);
+    let standalone = inspected(inspect_complete_prism_history(&request, |_| false));
+    let conditional = inspected(inspect_bound_prism_history(&request));
+    assert_eq!(conditional.replay_bytes(), standalone.replay_bytes());
+    assert!(rebind_complete_prism_history(&request, &conditional).is_ok());
+}

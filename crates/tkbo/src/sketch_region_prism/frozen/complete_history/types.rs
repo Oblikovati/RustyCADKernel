@@ -122,14 +122,14 @@ pub(crate) struct PrismHistoryBindings {
     pub complementary_region: AuthoredPrismId,
     pub intermediate: Vec<PrismHistoricalStageBindings>,
 }
-pub(crate) struct PrismHistoryRequest<'a> {
+pub(crate) struct PrismHistoryRequest<'a, 'join> {
     pub bridge: &'a crate::sketch_region_contact_transport::PairedContactTransaction,
     pub sources: &'a [crate::sketch_region::ArrangementSource<'a>],
     pub receipt: &'a crate::sketch_region_prism::PrismReceipt,
     pub publication: &'a PrismPublicationBindings,
     pub copied: &'a super::super::lineage::PrismCopyBindings,
     pub historical: &'a PrismHistoryBindings,
-    pub joined: &'a super::super::proof_join::JoinedPrismProof,
+    pub joined: &'join super::super::proof_join::JoinedPrismProof,
     pub requested: PrismHistoryOptions,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

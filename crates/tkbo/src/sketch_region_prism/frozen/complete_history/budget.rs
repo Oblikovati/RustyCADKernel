@@ -65,7 +65,7 @@ impl HistoryRowBudget {
         Ok(())
     }
 }
-pub(super) fn admit(request: &PrismHistoryRequest<'_>) -> HistoryCheck<usize> {
+pub(super) fn admit(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<usize> {
     let mut budget = HistoryRowBudget {
         used: 0,
         maximum: request.requested.limits.maximum_rows,
@@ -76,7 +76,10 @@ pub(super) fn admit(request: &PrismHistoryRequest<'_>) -> HistoryCheck<usize> {
     receipt(request, &mut budget)?;
     Ok(budget.used)
 }
-fn authored(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) -> HistoryCheck<()> {
+fn authored(
+    request: &PrismHistoryRequest<'_, '_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
     for count in [
         request.sources.len(),
         request.publication.originals.len(),
@@ -89,6 +92,15 @@ fn authored(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) ->
     ] {
         budget.add(count)?;
     }
+    for bindings in [
+        &request.publication.directed,
+        &request.copied.selected_uses,
+        &request.copied.copied_uses,
+    ] {
+        for row in bindings {
+            context_fields(&row.actual, budget)?;
+        }
+    }
     for stage in &request.historical.intermediate {
         budget.add(stage.members.len())?;
         budget.add(stage.uses.len())?;
@@ -98,7 +110,10 @@ fn authored(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) ->
     }
     Ok(())
 }
-fn partition(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) -> HistoryCheck<()> {
+fn partition(
+    request: &PrismHistoryRequest<'_, '_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
     let rows = match &request.bridge.mapped.arrangement.partition {
         PartitionObservation::Captured(rows)
         | PartitionObservation::Incomplete { partial: rows, .. } => rows,
@@ -160,7 +175,10 @@ fn partition_source(
     }
     Ok(())
 }
-fn candidate(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) -> HistoryCheck<()> {
+fn candidate(
+    request: &PrismHistoryRequest<'_, '_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
     let Some(copy) = &request.bridge.mapped.copied else {
         return Ok(());
     };
@@ -218,7 +236,10 @@ fn generated(
     }
     Ok(())
 }
-fn receipt(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) -> HistoryCheck<()> {
+fn receipt(
+    request: &PrismHistoryRequest<'_, '_>,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
     let receipt = request.receipt;
     budget.add(receipt.input.rejected.len())?;
     budget.add(receipt.input.input_deleted.len())?;
@@ -232,11 +253,18 @@ fn receipt(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) -> 
     if let Some(copy) = &receipt.copied {
         budget.relations(&copy.relations)?;
         budget.add(copy.observations.len())?;
+        for row in &copy.observations {
+            budget.relations(std::slice::from_ref(&row.selected))?;
+        }
     }
     if let Some(body) = &receipt.diagnostic {
         budget.relations(&body.relations)?;
         budget.relations(&body.native_retired)?;
         budget.add(body.bindings.len())?;
+        for row in &body.bindings {
+            context_fields(&row.context, budget)?;
+            budget.relations(std::slice::from_ref(&row.native.returned))?;
+        }
         if let crate::sketch_region_prism::PrismSweepQueries::Captured(rows) = &body.sweep_queries {
             budget.add(rows.len())?;
             for row in rows {
@@ -246,4 +274,30 @@ fn receipt(request: &PrismHistoryRequest<'_>, budget: &mut HistoryRowBudget) -> 
         }
     }
     Ok(())
+}
+
+fn context_fields(
+    context: &crate::sketch_region::RegionDirectedContext,
+    budget: &mut HistoryRowBudget,
+) -> HistoryCheck<()> {
+    budget.add(context.ancestors.len())?;
+    budget.add(context.child_slots.len())
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn row_accounting_overflow_is_typed_exhaustion_without_allocations() {
+        let mut budget = HistoryRowBudget {
+            used: usize::MAX,
+            maximum: usize::MAX,
+        };
+        assert!(matches!(
+            budget.add(1),
+            Err(PrismHistoryCause::Bounds(HistoryBoundCause::Exhausted {
+                actual: usize::MAX,
+                ..
+            }))
+        ));
+    }
 }

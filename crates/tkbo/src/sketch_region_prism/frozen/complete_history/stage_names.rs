@@ -6,7 +6,7 @@ use crate::sketch_region::{
 };
 
 pub(super) fn original_names(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     rows: &[RegionObservedContext],
 ) -> HistoryCheck<PrismHistoricalStageBindings> {
     history_count(
@@ -37,7 +37,7 @@ pub(super) fn original_names(
     Ok(result)
 }
 pub(super) fn original_identity(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     actual: &PartitionOccurrenceIdentity,
 ) -> HistoryCheck<OriginalMemberIdentity> {
     history_count("one authored Jordan input source", request.sources.len(), 1)?;
@@ -49,7 +49,7 @@ pub(super) fn original_identity(
     })
 }
 pub(super) fn legacy_names(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stage: PrismHistoryStage,
     rows: &[RegionObservedContext],
 ) -> HistoryCheck<PrismHistoricalStageBindings> {

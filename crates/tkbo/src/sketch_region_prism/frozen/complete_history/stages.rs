@@ -18,7 +18,7 @@ pub(super) struct BoundHistoryStage<'a> {
     pub contexts: BoundHistoricalContexts<'a>,
 }
 pub(super) fn capture_operands(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
 ) -> HistoryCheck<Vec<HistoryStageOperands>> {
     history_count("one original Jordan source", request.sources.len(), 1)?;
     let partition = operands::partition(request)?;
@@ -45,7 +45,7 @@ pub(super) fn capture_operands(
     Ok(result)
 }
 fn rows_for(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stage: PrismHistoryStage,
     initial: &crate::sketch_region::RegionCopyContexts,
 ) -> HistoryCheck<Vec<RegionObservedContext>> {
@@ -61,7 +61,7 @@ fn rows_for(
     }
 }
 fn original_rows(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     initial: &crate::sketch_region::RegionCopyContexts,
 ) -> HistoryCheck<Vec<RegionObservedContext>> {
     let rows = operands::current_contexts(
@@ -76,7 +76,9 @@ fn original_rows(
     )?;
     Ok(rows)
 }
-fn partition_rows(request: &PrismHistoryRequest<'_>) -> HistoryCheck<Vec<RegionObservedContext>> {
+fn partition_rows(
+    request: &PrismHistoryRequest<'_, '_>,
+) -> HistoryCheck<Vec<RegionObservedContext>> {
     let ArrangementCompletion::Arranged(owned) = &request.bridge.mapped.arrangement.completion
     else {
         return Err(PrismHistoryCause::Missing {
@@ -95,7 +97,7 @@ fn partition_rows(request: &PrismHistoryRequest<'_>) -> HistoryCheck<Vec<RegionO
     )?;
     Ok(rows)
 }
-fn sweep_rows(request: &PrismHistoryRequest<'_>) -> HistoryCheck<Vec<RegionObservedContext>> {
+fn sweep_rows(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<Vec<RegionObservedContext>> {
     let copied = request
         .receipt
         .copied
@@ -110,7 +112,7 @@ fn sweep_rows(request: &PrismHistoryRequest<'_>) -> HistoryCheck<Vec<RegionObser
     )
 }
 pub(super) fn candidate_copy<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
 ) -> HistoryCheck<&'a crate::sketch_region::RegionCopyContexts> {
     let copied = request
         .bridge
@@ -123,7 +125,7 @@ pub(super) fn candidate_copy<'a>(
     operands::copied_contexts(&copied.contexts, PrismHistoryStage::CandidateCopy)
 }
 pub(super) fn bind_stages<'a>(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     operands: &'a [HistoryStageOperands],
 ) -> HistoryCheck<Vec<BoundHistoryStage<'a>>> {
     history_count(
@@ -142,7 +144,7 @@ pub(super) fn bind_stages<'a>(
     Ok(result)
 }
 fn bind_stage<'a>(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     operand: &'a HistoryStageOperands,
 ) -> HistoryCheck<BoundHistoricalContexts<'a>> {
     let names = match operand.stage {
@@ -167,7 +169,7 @@ fn bind_stage<'a>(
     )
 }
 fn authored_stage<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<&'a PrismHistoricalStageBindings> {
     let rows: Vec<_> = request

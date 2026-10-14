@@ -2,7 +2,7 @@
 //! Stable authored keys order records; no lookup address, graph index or returned ordinal is serialized.
 use super::*;
 pub(super) fn finish(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     captured: capture::CapturedPrismHistory,
 ) -> HistoryCheck<PrismCompleteHistory> {
     let originals = captured

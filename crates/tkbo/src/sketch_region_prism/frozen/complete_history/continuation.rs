@@ -16,7 +16,7 @@ pub(crate) struct PrismOriginalContinuation {
     pub kept_last: Vec<FrozenUseKey>,
 }
 pub(super) fn prove(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     history: &PrismIntermediateHistory,
     lineage: &PrismLineageInspection,
     queries: &[PrismCompleteSweepQuery],
@@ -44,7 +44,7 @@ pub(super) fn prove(
     Ok(observed_values::sorted(result))
 }
 fn continue_original(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     history: &PrismIntermediateHistory,
     lineage: &PrismLineageInspection,
     queries: &[PrismCompleteSweepQuery],
@@ -71,7 +71,7 @@ fn continue_original(
     })
 }
 fn original_use(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     history: &PrismIntermediateHistory,
     original: &FrozenOriginalKey,
 ) -> HistoryCheck<PrismHistoryUseKey> {

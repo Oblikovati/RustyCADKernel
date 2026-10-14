@@ -29,7 +29,7 @@ pub(crate) struct PrismPartitionMetadata {
     pub vertices: Vec<PrismPartitionVertex>,
 }
 pub(super) fn capture(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     copied: &BoundHistoricalContexts<'_>,
 ) -> HistoryCheck<PrismPartitionMetadata> {
     let snapshot = operands::partition(request)?;
@@ -98,7 +98,7 @@ fn space(
         .transpose()
 }
 fn vertex(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     copied: &BoundHistoricalContexts<'_>,
     row: &PartitionVertexObservation,
 ) -> HistoryCheck<PrismPartitionVertex> {
@@ -114,7 +114,7 @@ fn vertex(
     })
 }
 fn endpoints(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     copied: &BoundHistoricalContexts<'_>,
     source: &SourcePartitionObservation,
 ) -> HistoryCheck<Vec<PrismPartitionEndpoint>> {
@@ -171,7 +171,7 @@ fn endpoints(
     Ok(observed_values::sorted(result))
 }
 fn admit_parents(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     metadata: &PrismPartitionMetadata,
 ) -> HistoryCheck<()> {
     let original = request.joined.original();
@@ -221,4 +221,52 @@ fn endpoint_parameter(
         &expected,
         "native endpoint parameter bound to actual directed source role",
     )
+}
+
+#[cfg(test)]
+mod endpoint_tests {
+    use super::*;
+    use crate::sketch_region::{PartitionOccurrenceIdentity, SourceVertexObservation};
+    use rustycad_tkbrep::{
+        brep::BRepTool,
+        topods::{ShapeIterator, edge, vertex},
+    };
+    #[test]
+    fn native_forward_and_reversed_closed_edges_bind_each_relative_endpoint_parameter() {
+        for reversed in [false, true] {
+            let shape = crate::closed_analytic_cubic::closed_analytic_cubic(1., reversed);
+            let typed = edge(&shape).unwrap();
+            let source = source(&shape);
+            let mut children = ShapeIterator::new(&shape, true, true);
+            while children.more() {
+                let child = children.value().unwrap();
+                let parameter = BRepTool::parameter(&vertex(child).unwrap(), &typed).unwrap();
+                let endpoint = SourceVertexObservation {
+                    shape_index: 1,
+                    occurrence: PartitionOccurrenceIdentity::capture(child),
+                    parameter,
+                };
+                endpoint_parameter(&source, &endpoint).unwrap();
+                let swapped = SourceVertexObservation {
+                    parameter: 1. - parameter,
+                    ..endpoint
+                };
+                assert!(endpoint_parameter(&source, &swapped).is_err());
+                children.next();
+            }
+        }
+    }
+    fn source(shape: &rustycad_tkbrep::topods::Shape) -> SourcePartitionObservation {
+        SourcePartitionObservation {
+            source_index: 0,
+            parents: vec![],
+            occurrence: PartitionOccurrenceIdentity::capture(shape),
+            range: [0., 1.],
+            space: None,
+            has_reference: false,
+            source_vertices: vec![],
+            blocks: vec![],
+            images: None,
+        }
+    }
 }

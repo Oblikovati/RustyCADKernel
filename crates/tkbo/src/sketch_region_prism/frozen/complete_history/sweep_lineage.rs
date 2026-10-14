@@ -3,7 +3,7 @@
 use super::super::{bindings::BoundProjection, lineage::*};
 use super::*;
 pub(super) fn capture(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
 ) -> HistoryCheck<PrismLineageInspection> {
     match super::super::lineage::project_prism_lineage(

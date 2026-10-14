@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Bounded traversal precedes legacy recapture; authored identities and query rows are never truncated.
 use super::*;
-pub(super) fn admit(request: &PrismHistoryRequest<'_>) -> HistoryCheck<()> {
+pub(super) fn admit(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<()> {
     history_count(
         "complete history behavior version",
         request.requested.version as usize,
@@ -30,7 +30,7 @@ pub(super) fn admit(request: &PrismHistoryRequest<'_>) -> HistoryCheck<()> {
     budget::admit(request)?;
     preflight(request)
 }
-fn preflight(request: &PrismHistoryRequest<'_>) -> HistoryCheck<()> {
+fn preflight(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<()> {
     let mut roots = vec![request.sources[0].shape];
     if let crate::sketch_region::ArrangementCompletion::Arranged(owned) =
         &request.bridge.mapped.arrangement.completion

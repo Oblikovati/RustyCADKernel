@@ -23,7 +23,7 @@ pub(crate) struct PrismCompleteSweepQuery {
     pub retired: bool,
 }
 pub(super) fn capture(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
 ) -> HistoryCheck<Vec<PrismCompleteSweepQuery>> {
@@ -55,7 +55,7 @@ pub(super) fn capture(
     Ok(observed_values::sorted(result))
 }
 fn query_row(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
     query: &PrismSweepQueryObservation,
@@ -98,7 +98,7 @@ fn query_row(
     })
 }
 fn answer(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
     query: &PrismSweepQueryObservation,
     role: PrismImageRole,
@@ -110,7 +110,7 @@ fn answer(
     required_answer(request, bound, query, role, native).map(Some)
 }
 fn required_answer(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
     query: &PrismSweepQueryObservation,
     role: PrismImageRole,
@@ -189,7 +189,7 @@ fn required_answer(
     })
 }
 fn cover_retirement(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
     queries: &[PrismCompleteSweepQuery],

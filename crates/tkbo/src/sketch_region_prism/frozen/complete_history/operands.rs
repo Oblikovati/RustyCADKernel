@@ -60,7 +60,7 @@ fn context_failure(
     }
 }
 pub(super) fn partition<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
 ) -> HistoryCheck<&'a OwnedPartitionSnapshot> {
     let PartitionObservation::Captured(rows) = &request.bridge.mapped.arrangement.partition else {
         return Err(PrismHistoryCause::Missing {
@@ -70,7 +70,7 @@ pub(super) fn partition<'a>(
     Ok(rows)
 }
 pub(super) fn candidates<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
 ) -> HistoryCheck<&'a CandidateBatch> {
     request
         .bridge
@@ -83,7 +83,7 @@ pub(super) fn candidates<'a>(
         })
 }
 pub(super) fn candidate<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<&'a RegionCandidate> {
     let region = &request.joined.embedding().binding().region;
@@ -105,7 +105,7 @@ pub(super) fn candidate<'a>(
     Ok(found[0])
 }
 pub(super) fn generated_contexts(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<Vec<RegionObservedContext>> {
     let actual = current_contexts(

@@ -25,7 +25,10 @@ impl HistoryFixture {
             historical,
         }
     }
-    pub fn request<'a>(&'a self, sources: &'a [ArrangementSource<'a>]) -> PrismHistoryRequest<'a> {
+    pub fn request<'a>(
+        &'a self,
+        sources: &'a [ArrangementSource<'a>],
+    ) -> PrismHistoryRequest<'a, '_> {
         PrismHistoryRequest {
             bridge: &self.operation.bridge,
             sources,

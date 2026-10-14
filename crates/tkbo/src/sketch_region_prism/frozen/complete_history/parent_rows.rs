@@ -6,7 +6,7 @@ use crate::sketch_region::{
 };
 
 pub(super) fn original_keys(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     parents: &[OriginalMemberIdentity],
 ) -> HistoryCheck<Vec<FrozenOriginalKey>> {
     let mut result = parents
@@ -20,7 +20,7 @@ pub(super) fn original_keys(
     Ok(result)
 }
 pub(super) fn parents(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     preserved: &[OriginalMemberIdentity],
     modified: &[OriginalMemberIdentity],
     generated: &[OriginalMemberIdentity],
@@ -32,7 +32,7 @@ pub(super) fn parents(
     ])
 }
 pub(super) fn relation_parents(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     relation: &ArrangementRelation,
 ) -> HistoryCheck<[Vec<FrozenOriginalKey>; 3]> {
     parents(
@@ -43,7 +43,7 @@ pub(super) fn relation_parents(
     )
 }
 pub(super) fn relation_rows(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundHistoricalContexts<'_>,
     rows: &[ArrangementRelation],
 ) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
@@ -113,7 +113,7 @@ pub(super) fn physical_index(
 }
 
 pub(super) fn relation_rows_subset(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundHistoricalContexts<'_>,
     rows: &[ArrangementRelation],
 ) -> HistoryCheck<Vec<PrismHistoricalRelation>> {

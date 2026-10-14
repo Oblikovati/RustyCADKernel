@@ -5,7 +5,7 @@ use crate::sketch_region_candidates::{
     GeneratedAreaSnapshot, GeneratedMemberSnapshot, GeneratedTopologyObservation,
 };
 pub(super) fn areas<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
 ) -> HistoryCheck<&'a [GeneratedAreaSnapshot]> {
     match &candidate_copy::inspection(request)?.generated_topology {
         GeneratedTopologyObservation::Observed(rows) => Ok(rows),
@@ -23,7 +23,7 @@ pub(super) fn areas<'a>(
     }
 }
 pub(super) fn area<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
     bound: &BoundHistoricalContexts<'_>,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<&'a GeneratedAreaSnapshot> {
@@ -44,7 +44,7 @@ pub(super) fn area<'a>(
     Ok(found[0])
 }
 fn verify_ordinal(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     area: &GeneratedAreaSnapshot,
     stage: PrismHistoryStage,
 ) -> HistoryCheck<()> {
@@ -68,7 +68,7 @@ fn verify_ordinal(
     )
 }
 pub(super) fn project(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundHistoricalContexts<'_>,
     copied: &BoundHistoricalContexts<'_>,
     stage: PrismHistoryStage,
@@ -95,7 +95,7 @@ pub(super) fn project(
     Ok(observed_values::sorted(result))
 }
 fn member(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundHistoricalContexts<'_>,
     copied: &BoundHistoricalContexts<'_>,
     row: &GeneratedMemberSnapshot,
@@ -158,7 +158,7 @@ fn descendants(
     Ok(observed_values::sorted(result))
 }
 fn copy_members(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     copied: &BoundHistoricalContexts<'_>,
     row: &GeneratedMemberSnapshot,
 ) -> HistoryCheck<Vec<PrismHistoryMemberKey>> {

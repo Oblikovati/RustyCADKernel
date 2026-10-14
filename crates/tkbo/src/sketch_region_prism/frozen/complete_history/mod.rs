@@ -51,7 +51,8 @@ pub(crate) use result::*;
 mod operation;
 mod replay;
 pub(crate) use operation::{
-    inspect_complete_prism_history, rebind_complete_prism_history, reproject_complete_prism_history,
+    inspect_bound_prism_history, inspect_complete_prism_history, rebind_complete_prism_history,
+    reproject_complete_prism_history,
 };
 mod admission;
 #[cfg(test)]

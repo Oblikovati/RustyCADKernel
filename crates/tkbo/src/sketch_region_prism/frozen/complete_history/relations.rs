@@ -4,7 +4,7 @@ use super::*;
 use crate::sketch_region::{ArrangementCompletion, OwnedArrangement};
 use stages::BoundHistoryStage;
 pub(super) fn arranged<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
 ) -> HistoryCheck<&'a OwnedArrangement> {
     match &request.bridge.mapped.arrangement.completion {
         ArrangementCompletion::Arranged(rows) => Ok(rows),
@@ -17,7 +17,7 @@ pub(super) fn arranged<'a>(
     }
 }
 pub(super) fn partition(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stages: &[BoundHistoryStage<'_>],
     queries: &[PrismPartitionQuery],
 ) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
@@ -81,7 +81,7 @@ pub(super) fn same_parents(
     Ok(())
 }
 pub(super) fn generated(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundHistoricalContexts<'_>,
     stage: PrismHistoryStage,
     rows: &[PrismGeneratedMember],
@@ -143,7 +143,7 @@ fn copied_parents(
     result
 }
 pub(super) fn receipt_regions(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stages: &[BoundHistoryStage<'_>],
     selected: &[PrismHistoricalRelation],
     complement: &[PrismHistoricalRelation],
@@ -188,7 +188,7 @@ pub(super) fn receipt_regions(
     )?;
     empty_input_dispositions(request)
 }
-fn empty_input_dispositions(request: &PrismHistoryRequest<'_>) -> HistoryCheck<()> {
+fn empty_input_dispositions(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<()> {
     let batch = operands::candidates(request)?;
     history_count(
         "exactly selected plus complementary candidate",

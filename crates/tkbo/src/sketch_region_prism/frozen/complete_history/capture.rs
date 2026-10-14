@@ -8,7 +8,7 @@ pub(super) struct CapturedPrismHistory {
     pub sweep: Vec<PrismCompleteSweepQuery>,
     pub continued: Vec<PrismOriginalContinuation>,
 }
-pub(super) fn capture(request: &PrismHistoryRequest<'_>) -> HistoryCheck<CapturedPrismHistory> {
+pub(super) fn capture(request: &PrismHistoryRequest<'_, '_>) -> HistoryCheck<CapturedPrismHistory> {
     let operands = stages::capture_operands(request)?;
     let stages = stages::bind_stages(request, &operands)?;
     let intermediate = intermediate::capture(request, &stages)?;

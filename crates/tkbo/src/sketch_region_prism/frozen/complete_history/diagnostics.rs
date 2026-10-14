@@ -101,7 +101,7 @@ pub(crate) enum HistoryArrangementVariant {
     Incomplete,
 }
 pub(super) fn admit_observations<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
 ) -> Result<(), PrismHistoryFailure<'a>> {
     admit_partition(request)?;
     admit_arrangement(request)?;
@@ -116,7 +116,9 @@ pub(super) fn admit_observations<'a>(
     }
     Ok(())
 }
-fn admit_partition<'a>(request: &PrismHistoryRequest<'a>) -> Result<(), PrismHistoryFailure<'a>> {
+fn admit_partition<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+) -> Result<(), PrismHistoryFailure<'a>> {
     let PartitionObservation::Incomplete { failure, .. } =
         &request.bridge.mapped.arrangement.partition
     else {
@@ -158,7 +160,9 @@ fn partition_cause(cause: &PartitionReadCause) -> HistoryPartitionReadCause {
         }
     }
 }
-fn admit_arrangement<'a>(request: &PrismHistoryRequest<'a>) -> Result<(), PrismHistoryFailure<'a>> {
+fn admit_arrangement<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+) -> Result<(), PrismHistoryFailure<'a>> {
     let actual = &request.bridge.mapped.arrangement.completion;
     let variant = match actual {
         ArrangementCompletion::Arranged(_) => return Ok(()),
@@ -181,7 +185,7 @@ fn admit_arrangement<'a>(request: &PrismHistoryRequest<'a>) -> Result<(), PrismH
     Err(error)
 }
 fn candidate_failure<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
     observation: Option<usize>,
     cause: &'a CandidateCause,
 ) -> PrismHistoryFailure<'a> {
@@ -247,7 +251,7 @@ fn candidate_gap(cause: &CandidateGap) -> HistoryCandidateVariant {
     }
 }
 pub(super) fn join_failure<'a>(
-    request: &PrismHistoryRequest<'a>,
+    request: &PrismHistoryRequest<'a, '_>,
     phase: PrismHistoryPhase,
     cause: PrismProofJoinFailure,
 ) -> PrismHistoryFailure<'a> {

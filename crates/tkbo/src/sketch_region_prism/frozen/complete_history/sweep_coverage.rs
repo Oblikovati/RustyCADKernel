@@ -11,7 +11,7 @@ struct SweepBindingOperand {
     parents: [Vec<FrozenOriginalKey>; 3],
 }
 pub(super) fn compare(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
     queries: &[PrismCompleteSweepQuery],
@@ -31,7 +31,7 @@ pub(super) fn compare(
     )
 }
 fn actual_binding(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     bound: &BoundProjection<'_>,
     copied: &BoundHistoricalContexts<'_>,
     binding: &crate::sketch_region_prism::PrismImageBinding,

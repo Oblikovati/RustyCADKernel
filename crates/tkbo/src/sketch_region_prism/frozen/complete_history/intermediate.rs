@@ -14,7 +14,7 @@ pub(crate) struct PrismIntermediateHistory {
     pub complementary_relations: Vec<PrismHistoricalRelation>,
 }
 pub(super) fn capture(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stages: &[BoundHistoryStage<'_>],
 ) -> HistoryCheck<PrismIntermediateHistory> {
     let initial_copy = initial_queries(request, stages)?;
@@ -60,7 +60,7 @@ pub(super) fn capture(
     })
 }
 fn initial_queries(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stages: &[BoundHistoryStage<'_>],
 ) -> HistoryCheck<Vec<PrismHistoricalCopyQuery>> {
     let initial = operands::copied_contexts(
@@ -74,7 +74,7 @@ fn initial_queries(
     )
 }
 fn candidate_queries(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stages: &[BoundHistoryStage<'_>],
 ) -> HistoryCheck<Vec<PrismHistoricalCopyQuery>> {
     copied_contexts::project_copier_queries(
@@ -84,7 +84,7 @@ fn candidate_queries(
     )
 }
 fn candidate_history(
-    request: &PrismHistoryRequest<'_>,
+    request: &PrismHistoryRequest<'_, '_>,
     stages: &[BoundHistoryStage<'_>],
     queries: &[PrismHistoricalCopyQuery],
     relations: &[PrismHistoricalRelation],
