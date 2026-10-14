@@ -1,0 +1,76 @@
+{
+  "source": "5685d1c0cd9140e67dd00ea05b5cf01076784d3c",
+  "commands": [
+    {
+      "name": "tests",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 90.34246778488159
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "--locked",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 46.81699800491333
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 6.594999313354492
+    }
+  ],
+  "input_files": 15697,
+  "inputs_unchanged": true,
+  "scope": "structural shared binding only; embedding theorem not implemented",
+  "cargo_build_jobs": 2,
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "base_revision": "ab5fe6414104a420718dad11e03f5a729798791e",
+  "focused_tests": 77,
+  "full_tests": 1147,
+  "doctests": 35,
+  "thread_sanitizer": "not run; retained host startup limitation remains incomplete",
+  "git_status_at_evidence_start": "clean (checked before creating this evidence directory)",
+  "decompressed_log_sha256": {
+    "tests": "1e3626617185152b5e7b814d7b5da4f746ce2f61a9427865d6427a3f7068b4e4",
+    "clippy": "c14f21492ff2d87891f74ea43b0c203a532644f01e88b0bdbe7314616f64b28a",
+    "fmt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "baseline-before-extraction": "5e3342ad46c17da19d251f358dacc88e87cf6e6cfe8bbe9a25d147ef8193da66",
+    "baseline-after-extraction": "fc935c1530e4f78e8f4e351a64a85d08b5cfb97ab9c6f2332c2c5d61850c3f0b",
+    "focused-final": "7a434368fb1a9b866e571d5a6a452b3c925283869bc29eb3601bb3f2aa5ed662",
+    "historical-owned-initial-compile-failure": "dee0299e3372b65e19d25071d3041cd610aaaefaaf156d8922b887147e78a424",
+    "historical-owned-fixed": "ec86d8cd0a71c56a9540c767aee89422edc1978082e191d57ffa6b9c27c39714",
+    "historical-owned-quartic": "fc70fcb6dddeabccf0891745b8eb75ddf237639d478413701b89df0156bc6646"
+  },
+  "before_manifest_sha256": "ce74125f12a74476de71c00f14dc2f92262d12ab779e8ababad845deaede48cb",
+  "after_manifest_sha256": "ce74125f12a74476de71c00f14dc2f92262d12ab779e8ababad845deaede48cb"
+}
