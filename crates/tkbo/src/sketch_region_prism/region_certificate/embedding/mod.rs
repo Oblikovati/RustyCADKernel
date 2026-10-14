@@ -3,6 +3,7 @@
 mod access;
 mod annular_coverage;
 mod annular_domains;
+mod annular_operation;
 mod annular_regularity;
 mod annular_table;
 mod domains;
