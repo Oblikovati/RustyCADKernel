@@ -29,6 +29,24 @@ pub(super) struct AnnularPrismOperands {
     pub body_contexts: Vec<RegionObservedContext>,
     pub limits: super::super::super::frozen::FrozenPrismLimits,
     pub signed_jacobian: rustycad_tkmath::predicates::roots::DyadicBound,
+    pub parents: AnnularParentCapture,
+}
+pub(in crate::sketch_region_prism) struct AnnularParentCapture {
+    pub copies: Vec<AnnularCopyParents>,
+    pub images: Vec<AnnularImageParents>,
+    pub retained_units: usize,
+}
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(in crate::sketch_region_prism) struct AnnularCopyParents {
+    pub key: TwoLoopMemberKey,
+    pub selected: [Vec<TwoLoopOriginalUse>; 3],
+    pub copied: [Vec<TwoLoopOriginalUse>; 3],
+}
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(in crate::sketch_region_prism) struct AnnularImageParents {
+    pub key: TwoLoopMemberKey,
+    pub identity: AnnularChartIdentity,
+    pub parents: [Vec<TwoLoopOriginalUse>; 3],
 }
 pub(in crate::sketch_region_prism) struct AnnularBoundaryBinding {
     pub source: RegionSourceId,

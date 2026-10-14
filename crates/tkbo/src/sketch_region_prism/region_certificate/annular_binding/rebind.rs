@@ -31,6 +31,10 @@ pub(super) fn check<'a>(
 }
 fn same_contexts(old: &AnnularPrismOperands, new: &AnnularPrismOperands) -> AnnularCheck<'static> {
     holds(
+        "same complete original copy and native image parent classes",
+        old.parents.copies == new.parents.copies && old.parents.images == new.parents.images,
+    )?;
+    holds(
         "same complete current body context census",
         old.body_contexts == new.body_contexts,
     )?;

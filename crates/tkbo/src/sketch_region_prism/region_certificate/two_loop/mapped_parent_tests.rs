@@ -86,3 +86,17 @@ fn parent_mapper_refuses_foreign_authored_source_without_coordinate_matching() {
         ));
     });
 }
+#[test]
+fn parent_mapper_checks_zero_one_three_sources_before_budget_or_native_query() {
+    for count in [0, 1, 3] {
+        exercise(|mut request, _| {
+            let null = rustycad_tkbrep::topods::Shape::default();
+            let sources: Vec<_> = (0..count).map(|i| crate::sketch_region::ArrangementSource { identity: RegionSourceId(101 + i as u64), shape: &null }).collect();
+            request.requested.maximum_retained_units = 0;
+            let request = TwoLoopRegionRequest { sources: &sources, ..request };
+            let Err(failure) = map_two_loop_original_parents(&request, &[]) else { panic!("expected source cardinality refusal"); };
+            assert!(matches!(failure.cause, TwoLoopRegionCause::Count { actual, expected: 2, .. } if actual == count));
+            assert_eq!(failure.retained_units, 0);
+        });
+    }
+}

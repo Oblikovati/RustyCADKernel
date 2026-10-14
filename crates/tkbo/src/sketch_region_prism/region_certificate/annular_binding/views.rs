@@ -2,6 +2,10 @@
 //! Borrowed views retain the whole region proof; no public constructor grants binding authority.
 use super::*;
 impl AnnularPrismBinding {
+    /// Borrow all classed original copy/image parents and measured mapping work; `binding.parents()`.
+    pub(in crate::sketch_region_prism) fn parents(&self) -> &AnnularParentCapture {
+        &self.operands.parents
+    }
     /// Borrow the exact retained region proof; `binding.region()`.
     pub(in crate::sketch_region_prism) fn region(&self) -> &TwoLoopRegionCertificate {
         &self.region
