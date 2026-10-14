@@ -12,20 +12,32 @@ pub(crate) fn surface_color_in_pipeline(
     style: &Handle<dyn Graphic3dAspectsSource>,
     pipeline: crate::RenderLightingPipeline,
 ) -> Result<[f32; 4], RenderError> {
+    surface_color_with_policies(style, pipeline, Default::default())
+}
+pub(crate) fn surface_color_with_policies(
+    style: &Handle<dyn Graphic3dAspectsSource>,
+    pipeline: crate::RenderLightingPipeline,
+    unlit: crate::RenderUnlitFaceColorPolicy,
+) -> Result<[f32; 4], RenderError> {
     let style = style
         .get()
         .ok_or_else(|| rejected("null aspects", "explicit solid aspects"))?;
-    validated_surface_color_in_pipeline(style, pipeline)
+    validated_surface_color_in_pipeline(style, pipeline, unlit)
 }
 #[cfg(test)]
 fn validated_surface_color(style: &dyn Graphic3dAspectsSource) -> Result<[f32; 4], RenderError> {
-    validated_surface_color_in_pipeline(style, crate::RenderLightingPipeline::Programmable)
+    validated_surface_color_in_pipeline(
+        style,
+        crate::RenderLightingPipeline::Programmable,
+        Default::default(),
+    )
 }
 fn validated_surface_color_in_pipeline(
     style: &dyn Graphic3dAspectsSource,
     pipeline: crate::RenderLightingPipeline,
+    unlit_policy: crate::RenderUnlitFaceColorPolicy,
 ) -> Result<[f32; 4], RenderError> {
-    validate_shading(style, pipeline)?;
+    validate_shading(style, pipeline, unlit_policy)?;
     validate_alpha_offset(style)?;
     let color = style.interior_color_rgba();
     Ok([
@@ -38,6 +50,7 @@ fn validated_surface_color_in_pipeline(
 fn validate_shading(
     style: &dyn Graphic3dAspectsSource,
     pipeline: crate::RenderLightingPipeline,
+    unlit_policy: crate::RenderUnlitFaceColorPolicy,
 ) -> Result<(), RenderError> {
     let pbr_fallback = pipeline == crate::RenderLightingPipeline::FixedFunction
         && matches!(
@@ -60,11 +73,12 @@ fn validate_shading(
             "solid Unlit, PhongFacet, Gouraud or Phong shading",
         ));
     }
-    validate_style_features(style, pipeline)
+    validate_style_features(style, pipeline, unlit_policy)
 }
 fn validate_style_features(
     style: &dyn Graphic3dAspectsSource,
     pipeline: crate::RenderLightingPipeline,
+    unlit_policy: crate::RenderUnlitFaceColorPolicy,
 ) -> Result<(), RenderError> {
     let features = (
         style.to_map_texture(),
@@ -75,7 +89,8 @@ fn validate_style_features(
         !style.to_use_vertex_color_for_back_faces(),
     );
     let unlit = style.shading_model() == Graphic3dTypeOfShadingModel::Unlit;
-    let programmable = pipeline == crate::RenderLightingPipeline::Programmable;
+    let programmable = pipeline == crate::RenderLightingPipeline::Programmable
+        && unlit_policy == crate::RenderUnlitFaceColorPolicy::LegacyV1;
     if features.1
         || features.3
         || (programmable && unlit && !features.0 && (features.4 || features.5))

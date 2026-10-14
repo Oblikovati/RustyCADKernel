@@ -17,12 +17,12 @@ pub(crate) fn apply_surface_lighting(
     let model =
         primitive_shading_model(draws, &**aspects, context.rendering.shading_model, pipeline);
     if model == Graphic3dTypeOfShadingModel::Unlit {
-        if crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure())
-            == crate::RenderLightingPipeline::FixedFunction
-        {
+        if pipeline == crate::RenderLightingPipeline::FixedFunction {
             return Ok(());
         }
-        return validate_unlit_draws(draws, &**aspects);
+        let policy =
+            crate::lighting_pipeline::structure_unlit_face_policy(&context.group.structure());
+        return crate::unlit_face_color::apply_unlit_face_policy(draws, &**aspects, policy);
     }
     apply_resolved_lighting(draws, primitive, aspects, context, model)
 }
@@ -59,7 +59,7 @@ fn fixed_compatible_shading(
         _ => model,
     }
 }
-fn validate_unlit_draws(
+pub(crate) fn validate_unlit_draws(
     draws: &[PrimitiveDraw],
     aspect: &dyn Graphic3dAspectsSource,
 ) -> Result<(), RenderError> {

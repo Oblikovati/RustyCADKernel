@@ -19,11 +19,21 @@ pub struct Graphic3dRenderDriver {
     device: SharedRenderDevice,
     text_source: Arc<dyn crate::TextLayoutSource>,
     pub(crate) mesh_edge_pipeline: crate::RenderMeshEdgePipeline,
+    pub(crate) unlit_face_color_policy: crate::RenderUnlitFaceColorPolicy,
     pub(crate) lighting_pipeline: crate::RenderLightingPipeline,
     pub(crate) texture_images: Arc<crate::retained_texture_images::RetainedTextureImages>,
     views: SharedState<Vec<WeakHandle<dyn Graphic3dCView>>>,
     limit: u32,
     vertical_sync: Arc<SharedState<bool>>,
+}
+struct DriverBuildInputs {
+    backend: DriverBackend,
+    limit: u32,
+    text_source: Arc<dyn crate::TextLayoutSource>,
+    coordinates: crate::RenderTextureCoordinatePipeline,
+    edges: crate::RenderMeshEdgePipeline,
+    lighting: crate::RenderLightingPipeline,
+    unlit: crate::RenderUnlitFaceColorPolicy,
 }
 rustycad_tkernel::impl_transient!(Graphic3dRenderDriver, "Martensite_RenderDriver", StandardTransient, transient, interfaces:[dyn Graphic3dGraphicDriver]);
 impl Graphic3dRenderDriver {
@@ -77,16 +87,27 @@ impl Graphic3dRenderDriver {
         edges: crate::RenderMeshEdgePipeline,
         lighting: crate::RenderLightingPipeline,
     ) -> Result<Handle<Self>, RenderError> {
+        Self::with_pipeline_policies(options, coordinates, edges, lighting, Default::default())
+    }
+    pub(super) fn with_pipeline_policies(
+        options: VulkanOptions,
+        coordinates: crate::RenderTextureCoordinatePipeline,
+        edges: crate::RenderMeshEdgePipeline,
+        lighting: crate::RenderLightingPipeline,
+        unlit: crate::RenderUnlitFaceColorPolicy,
+    ) -> Result<Handle<Self>, RenderError> {
+        unlit.validate(lighting)?;
         let renderer = VulkanRenderer::new(options)?;
         let limit = renderer.capture_limit();
-        Ok(Self::build(
-            DriverBackend::Vulkan(Box::new(renderer)),
+        Ok(Self::build(DriverBuildInputs {
+            backend: DriverBackend::Vulkan(Box::new(renderer)),
             limit,
-            Arc::new(crate::FreeTypeTextSource::default()),
+            text_source: Arc::new(crate::FreeTypeTextSource::default()),
             coordinates,
             edges,
             lighting,
-        ))
+            unlit,
+        }))
     }
     /// Inject a named backend and its extent limit; `Graphic3dRenderDriver::with_backend(recorder, 4096)?`.
     pub fn with_backend(
@@ -119,41 +140,51 @@ impl Graphic3dRenderDriver {
         fonts: Arc<dyn crate::TextLayoutSource>,
         coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
     ) -> Result<Handle<Self>, RenderError> {
-        if limit == 0 || limit > i32::MAX as u32 {
-            return Err(rejected(limit, "a positive 31-bit capture limit"));
-        }
-        Ok(Self::build(
-            DriverBackend::Injected(Box::new(backend)),
+        Self::with_injected_policies(
+            backend,
             limit,
             fonts,
             coordinate_pipeline,
-            crate::RenderMeshEdgePipeline::default(),
-            crate::RenderLightingPipeline::default(),
-        ))
+            Default::default(),
+        )
     }
-    fn build(
-        backend: DriverBackend,
+    pub(super) fn with_injected_policies(
+        backend: impl RenderBackend + Send + Sync + 'static,
         limit: u32,
-        text_source: Arc<dyn crate::TextLayoutSource>,
-        coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
-        mesh_edge_pipeline: crate::RenderMeshEdgePipeline,
-        lighting_pipeline: crate::RenderLightingPipeline,
-    ) -> Handle<Self> {
+        fonts: Arc<dyn crate::TextLayoutSource>,
+        coordinates: crate::RenderTextureCoordinatePipeline,
+        unlit: crate::RenderUnlitFaceColorPolicy,
+    ) -> Result<Handle<Self>, RenderError> {
+        if limit == 0 || limit > i32::MAX as u32 {
+            return Err(rejected(limit, "a positive 31-bit capture limit"));
+        }
+        Ok(Self::build(DriverBuildInputs {
+            backend: DriverBackend::Injected(Box::new(backend)),
+            limit,
+            text_source: fonts,
+            coordinates,
+            edges: Default::default(),
+            lighting: Default::default(),
+            unlit,
+        }))
+    }
+    fn build(inputs: DriverBuildInputs) -> Handle<Self> {
         let texture_images = Arc::new(
             crate::retained_texture_images::RetainedTextureImages::with_coordinate_pipeline(
-                coordinate_pipeline,
+                inputs.coordinates,
             ),
         );
         Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dGraphicDriverBase::new(&Handle::default()),
-            device: Arc::new(SharedState::new(backend)),
-            text_source,
-            mesh_edge_pipeline,
-            lighting_pipeline,
+            device: Arc::new(SharedState::new(inputs.backend)),
+            text_source: inputs.text_source,
+            mesh_edge_pipeline: inputs.edges,
+            lighting_pipeline: inputs.lighting,
+            unlit_face_color_policy: inputs.unlit,
             texture_images,
             views: SharedState::default(),
-            limit,
+            limit: inputs.limit,
             vertical_sync: Arc::new(SharedState::new(false)),
         })
     }

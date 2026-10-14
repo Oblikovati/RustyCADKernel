@@ -289,9 +289,10 @@ fn lower_styled_primitive(
     matrix: [f32; 16],
     highlighted: bool,
     lighting_pipeline: crate::RenderLightingPipeline,
+    unlit: crate::RenderUnlitFaceColorPolicy,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     let (color, line) =
-        primitive_style_in_pipeline(primitive.kind, aspects, closed, lighting_pipeline)?;
+        primitive_style_in_pipeline(primitive.kind, aspects, closed, lighting_pipeline, unlit)?;
     let (mode, factor, units) = aspects.polygon_offsets();
     let offset = crate::RenderPolygonOffset::new(mode, factor, units)?;
     if primitive.kind != Graphic3dTypeOfPrimitiveArray::Points {
@@ -346,6 +347,7 @@ fn lower_group_surface(
         matrix,
         highlighted,
         lighting_pipeline,
+        crate::lighting_pipeline::structure_unlit_face_policy(&context.group.structure()),
     )?;
     crate::retained_surface_texture::apply_surface_texture(
         &mut lowered,

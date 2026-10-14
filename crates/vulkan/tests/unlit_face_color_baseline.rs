@@ -1,6 +1,8 @@
 //! Owned V1 rejection contract captured before the additive side-color policy.
+#[allow(dead_code)] // Rejection replay needs submission success, not frame inspection.
 #[path = "support/recording_device.rs"]
 mod recording_device;
+#[allow(dead_code)] // The shared fixture also supports lifecycle/geometry cases.
 #[path = "support/viewer_scene.rs"]
 mod scene;
 #[path = "support/view_setup.rs"]

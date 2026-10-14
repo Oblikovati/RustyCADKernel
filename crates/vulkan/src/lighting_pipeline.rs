@@ -15,17 +15,29 @@ pub(crate) fn structure_lighting_pipeline(
         dyn rustycad_tkservice::graphic3d::Graphic3dStructureSource,
     >,
 ) -> RenderLightingPipeline {
+    structure_render_driver(structure)
+        .get()
+        .map_or_else(Default::default, |driver| driver.lighting_pipeline)
+}
+pub(crate) fn structure_unlit_face_policy(
+    structure: &rustycad_tkernel::standard::Handle<
+        dyn rustycad_tkservice::graphic3d::Graphic3dStructureSource,
+    >,
+) -> crate::RenderUnlitFaceColorPolicy {
+    structure_render_driver(structure)
+        .get()
+        .map_or_else(Default::default, |driver| driver.unlit_face_color_policy)
+}
+fn structure_render_driver(
+    structure: &rustycad_tkernel::standard::Handle<
+        dyn rustycad_tkservice::graphic3d::Graphic3dStructureSource,
+    >,
+) -> rustycad_tkernel::standard::Handle<crate::Graphic3dRenderDriver> {
     let manager = structure.structure_manager();
     let Some(manager) = manager.get() else {
-        return RenderLightingPipeline::default();
+        return Default::default();
     };
-    manager
-        .graphic_driver()
-        .cast::<crate::Graphic3dRenderDriver>()
-        .get()
-        .map_or_else(RenderLightingPipeline::default, |driver| {
-            driver.lighting_pipeline
-        })
+    manager.graphic_driver().cast()
 }
 
 #[cfg(test)]

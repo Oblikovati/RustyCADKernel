@@ -148,6 +148,7 @@ impl RasterPipelines {
         if draw.polygon_edge_style.is_some()
             || draw.mesh_edges.is_some()
             || draw.surface_texture_unavailable.is_some()
+            || draw.unlit_back_color.is_some()
             || draw.surface_texture.is_some()
             || draw.surface_cutoff.is_some()
             || draw.surface_forced_blend
@@ -216,6 +217,7 @@ fn special_variant_key(draw: &PrimitiveDraw) -> usize {
             )
         + 262144 * usize::from(crate::fixed_line_stipple::fixed_line_stipple(draw).is_some())
         + 524288 * usize::from(draw.fixed_function_lighting && draw.source_line_strip)
+        + 1048576 * usize::from(draw.unlit_back_color.is_some())
 }
 fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
     let mut kind = PipelineVariant::from_index(variant_index(draw), stencil);
@@ -230,7 +232,9 @@ fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
     kind.polygon_edges = draw.polygon_edge_style.is_some();
     kind.line |= kind.polygon_edges;
     kind.surface_texture = draw.surface_texture.is_some() && !draw.surface_texture_binding_only;
-    kind.surface_alpha = draw.surface_cutoff.is_some()
+    // The auxiliary surface family carries either UVs or V2 back RGBA, never both.
+    kind.surface_alpha = draw.unlit_back_color.is_some()
+        || draw.surface_cutoff.is_some()
         || (draw.surface_texture_unavailable.is_some() && !draw.surface_texture_binding_only);
     kind.capping = draw.capping_pass;
     kind.encoded_surface = encoded_surface_attachment(draw);
@@ -295,6 +299,17 @@ fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn unlit_side_color_uses_surface_family_without_aliasing_legacy_cache_key() {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        let legacy = special_variant_key(&draw);
+        draw.unlit_back_color = Some([0., 1., 0., 0.25]);
+        let kind = special_variant(&draw, false);
+        assert!(kind.surface_alpha && !kind.surface_texture && !kind.lighting);
+        assert_eq!(special_variant_key(&draw) - legacy, 1048576);
+        draw.surface_cutoff = Some(0.5);
+        assert_eq!(special_variant_key(&draw) - legacy, 1048832);
+    }
     #[test]
     fn encoded_surface_alias_is_distinct_without_requiring_glyph_logic_op() {
         let mut draw = encoded_incomplete_draw();

@@ -89,6 +89,7 @@ fn surface_constant_flags(draw: &PrimitiveDraw) -> u32 {
             16 + 2 * u32::from(style.vertex_override) + 4 * u32::from(style.back_vertex)
         })
         + 8 * u32::from(draw.surface_cutoff.is_some())
+        + 4096 * u32::from(draw.unlit_back_color.is_some())
         + crate::fixed_surface_environment::fixed_surface_environment_flags(draw)
 }
 fn uses_surface_constants(draw: &PrimitiveDraw) -> bool {
@@ -96,5 +97,6 @@ fn uses_surface_constants(draw: &PrimitiveDraw) -> bool {
         && (draw.surface_texture.is_some()
             || draw.surface_cutoff.is_some()
             || draw.surface_texture_unavailable.is_some()
-            || draw.mesh_edges.is_some())
+            || draw.mesh_edges.is_some()
+            || draw.unlit_back_color.is_some())
 }

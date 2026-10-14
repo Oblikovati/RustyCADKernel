@@ -103,11 +103,15 @@ pub mod texture_dependencies_replay;
 pub mod transform_persistence;
 #[path = "../triangle_edge_replay.rs"]
 pub mod triangle_edge_replay;
+#[path = "../unlit_face_color_baseline.rs"]
+pub mod unlit_face_color_baseline;
+#[path = "../unlit_face_color_gpu.rs"]
+pub mod unlit_face_color_gpu;
+#[path = "../unlit_face_color_retained.rs"]
+pub mod unlit_face_color_retained;
 #[path = "../view_culling.rs"]
 pub mod view_culling;
 #[path = "../viewer_integration.rs"]
 pub mod viewer_integration;
-#[path = "../unlit_face_color_baseline.rs"]
-pub mod unlit_face_color_baseline;
 #[path = "../xr_device_presentations.rs"]
 pub mod xr_device_presentations;
