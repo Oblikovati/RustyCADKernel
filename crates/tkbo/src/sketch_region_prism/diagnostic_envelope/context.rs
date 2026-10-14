@@ -6,6 +6,16 @@ use super::super::{
 };
 use super::*;
 impl OwnedPrismDiagnosticContext {
+    pub(super) fn from_invocation(packet: &InvokedPrismPublicationFailure<'_>) -> Self {
+        let request = packet.request().clone();
+        let plan = Some(packet.plan().clone());
+        let replay = encode_context(&request, plan.as_ref());
+        Self {
+            request,
+            plan,
+            replay,
+        }
+    }
     pub(super) fn from_preparation(failure: &OwnedPrismPreparationFailure) -> Self {
         let view = failure.diagnostic_context();
         let request = view.request().clone();

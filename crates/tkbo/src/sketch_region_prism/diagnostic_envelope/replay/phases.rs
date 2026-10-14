@@ -64,7 +64,9 @@ fn prism(value: PrismPhase) -> u8 {
         PrismPhase::Validation => 5,
     }
 }
-fn publication(value: PrismPublicationPhase) -> u8 {
+pub(in crate::sketch_region_prism::diagnostic_envelope) fn publication(
+    value: PrismPublicationPhase,
+) -> u8 {
     match value {
         PrismPublicationPhase::Admission => 0,
         PrismPublicationPhase::Join => 1,
