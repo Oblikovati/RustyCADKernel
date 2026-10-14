@@ -64,3 +64,17 @@ fn embedding_cancel(cause: PrismEmbeddingFailure) -> String {
         cause.original.is_some()
     )
 }
+
+#[test]
+fn borrowed_conclusions_equal_owned_orientation_without_recapture() {
+    let (bridge, shapes) = fixture();
+    let receipt = run(&bridge, &shapes);
+    let original = oriented(&bridge, &shapes, &receipt);
+    let borrowed = evaluate_prism_orientation(original.embedding(), original.requested())
+        .ok()
+        .unwrap();
+    assert_eq!(borrowed.winding(), original.winding());
+    assert_eq!(borrowed.jacobian_sign(), original.jacobian_sign());
+    assert_eq!(borrowed.faces(), original.faces());
+    static_assertions::assert_impl_all!(PrismOrientationConclusions: Send, Sync);
+}

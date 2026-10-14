@@ -2,6 +2,7 @@
 //! ADR0034: outward and induced trim orientation over the existing fresh embedding certificate.
 mod access;
 mod error;
+mod evaluate;
 mod faces;
 mod signs;
 mod trims;
@@ -12,6 +13,7 @@ use super::*;
 use crate::sketch_region::PartitionOccurrenceIdentity;
 use crate::sketch_region_prism::surface_charts::PrismTrimRole;
 pub(crate) use error::*;
+pub(crate) use evaluate::*;
 use rustycad_tkg3d::top_abs::Orientation;
 pub(crate) use types::*;
 type OrientationCheck<T> = Result<T, PrismOrientationCause>;
@@ -67,21 +69,16 @@ fn construct(
     embedding: PrismEmbeddingEvidence,
     requested: PrismOrientationOptions,
 ) -> Result<PrismOrientationEvidence, PrismOrientationFailure> {
-    let refuse = |phase, cause| failure(requested, phase, Some(&embedding), cause);
-    let winding = signs::native_winding(&embedding.binding().region)
-        .map_err(|cause| refuse(PrismOrientationPhase::Winding, cause))?;
-    let jacobian_sign = signs::determinant_sign(&embedding.binding().signed_jacobian)
-        .map_err(|cause| refuse(PrismOrientationPhase::Faces, cause))?;
-    let faces = faces::inspect_faces(&embedding, winding.increasing_parameter, jacobian_sign)
-        .map_err(|cause| refuse(PrismOrientationPhase::Faces, cause))?;
+    let conclusions = evaluate_prism_orientation(&embedding, requested)?;
     Ok(PrismOrientationEvidence {
         requested,
         embedding,
-        winding,
-        jacobian_sign,
-        faces,
+        winding: conclusions.winding,
+        jacobian_sign: conclusions.jacobian_sign,
+        faces: conclusions.faces,
     })
 }
+
 fn finalize(
     bridge: &PairedContactTransaction,
     sources: &[ArrangementSource<'_>],
