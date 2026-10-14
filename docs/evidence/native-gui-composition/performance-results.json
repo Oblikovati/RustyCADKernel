@@ -1,0 +1,133 @@
+{
+  "frozen_source_commit": "9c9f10dfa08d7b6286a0e2422e26d67ddd527784",
+  "completed_utc": "2026-10-14T00:28:22.079804+00:00",
+  "raw_samples": 1400,
+  "warmup": 20,
+  "observations": 18,
+  "contaminated": false,
+  "profiles": {
+    "lavapipe": {
+      "peak_process_rss_kib": 107380,
+      "workloads": [
+        {
+          "workload": "native-gui-model",
+          "samples": 100,
+          "median_ms": 0.407099,
+          "p95_ms": 0.5144019999999999,
+          "min_ms": 0.326124,
+          "max_ms": 0.659932
+        },
+        {
+          "workload": "native-gui-static",
+          "samples": 100,
+          "median_ms": 0.6155039999999999,
+          "p95_ms": 0.8878729999999999,
+          "min_ms": 0.502079,
+          "max_ms": 1.9784410000000001
+        },
+        {
+          "workload": "native-gui-replace",
+          "samples": 100,
+          "median_ms": 0.6130545,
+          "p95_ms": 0.9200630000000001,
+          "min_ms": 0.489857,
+          "max_ms": 1.5484559999999998
+        },
+        {
+          "workload": "native-gui-resize",
+          "samples": 100,
+          "median_ms": 8.1473745,
+          "p95_ms": 15.703083999999999,
+          "min_ms": 1.0353160000000001,
+          "max_ms": 16.178244000000003
+        },
+        {
+          "workload": "native-gui-clip",
+          "samples": 100,
+          "median_ms": 0.6024995,
+          "p95_ms": 0.7199329999999999,
+          "min_ms": 0.517919,
+          "max_ms": 1.078416
+        },
+        {
+          "workload": "native-gui-font-retire",
+          "samples": 100,
+          "median_ms": 0.5843615,
+          "p95_ms": 0.828834,
+          "min_ms": 0.48703199999999996,
+          "max_ms": 1.400712
+        },
+        {
+          "workload": "native-gui-alpha-order",
+          "samples": 100,
+          "median_ms": 0.7350255,
+          "p95_ms": 0.937495,
+          "min_ms": 0.6144769999999999,
+          "max_ms": 1.7376559999999999
+        }
+      ]
+    },
+    "amd": {
+      "peak_process_rss_kib": 66880,
+      "workloads": [
+        {
+          "workload": "native-gui-model",
+          "samples": 100,
+          "median_ms": 0.2558085,
+          "p95_ms": 0.59998,
+          "min_ms": 0.208766,
+          "max_ms": 0.9702550000000001
+        },
+        {
+          "workload": "native-gui-static",
+          "samples": 100,
+          "median_ms": 0.4119575,
+          "p95_ms": 0.63735,
+          "min_ms": 0.335531,
+          "max_ms": 1.2585199999999999
+        },
+        {
+          "workload": "native-gui-replace",
+          "samples": 100,
+          "median_ms": 0.36588750000000003,
+          "p95_ms": 0.6367280000000001,
+          "min_ms": 0.31885,
+          "max_ms": 1.210821
+        },
+        {
+          "workload": "native-gui-resize",
+          "samples": 100,
+          "median_ms": 1.0885949999999998,
+          "p95_ms": 1.697442,
+          "min_ms": 0.9399099999999999,
+          "max_ms": 1.947815
+        },
+        {
+          "workload": "native-gui-clip",
+          "samples": 100,
+          "median_ms": 0.36942299999999995,
+          "p95_ms": 0.507279,
+          "min_ms": 0.311136,
+          "max_ms": 0.733247
+        },
+        {
+          "workload": "native-gui-font-retire",
+          "samples": 100,
+          "median_ms": 0.3725395,
+          "p95_ms": 0.818465,
+          "min_ms": 0.31405099999999997,
+          "max_ms": 1.865303
+        },
+        {
+          "workload": "native-gui-alpha-order",
+          "samples": 100,
+          "median_ms": 0.428778,
+          "p95_ms": 0.7901619999999999,
+          "min_ms": 0.381466,
+          "max_ms": 1.230667
+        }
+      ]
+    }
+  },
+  "claims": "absolute existing-native-view timings and whole-process peak RSS only; no speedup, baseline acceptance, GPU memory or whole renderer completion claim"
+}
