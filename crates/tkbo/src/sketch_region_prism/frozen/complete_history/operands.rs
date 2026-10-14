@@ -92,7 +92,15 @@ pub(super) fn candidate<'a>(
     } else {
         &region.complementary_candidate.face
     };
-    let found: Vec<_> = candidates(request)?
+    resolve_certified_candidate(candidates(request)?, face)
+}
+/// Resolve the certified face identity in the actual batch without assigning rank-based names.
+/// Example: `resolve_certified_candidate(batch, &certificate.source_candidate.face)`.
+pub(in crate::sketch_region_prism) fn resolve_certified_candidate<'a>(
+    batch: &'a CandidateBatch,
+    face: &crate::sketch_region::PartitionOccurrenceIdentity,
+) -> HistoryCheck<&'a RegionCandidate> {
+    let found: Vec<_> = batch
         .candidates
         .iter()
         .filter(|c| crate::sketch_region::PartitionOccurrenceIdentity::capture(&c.face) == *face)

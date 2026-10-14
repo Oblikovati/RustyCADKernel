@@ -9,6 +9,7 @@ use rustycad_tkmath::predicates::roots::metric_bounds::CertifiedPolynomialMeasur
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum PrismPublicationCompletion {
     CompleteNamedPrismV1,
+    CompleteNamedPrismV2,
 }
 pub(crate) struct PublishedNamedPrism {
     pub(super) join: JoinedPrismProof,
@@ -41,6 +42,9 @@ pub(super) type PublicationCheck<'a, T> = Result<T, Box<PrismPublicationFailure<
 impl PublishedNamedPrism {
     /// Read authoritative completion; `result.completion()` does not rewrite historical receipt status.
     pub(crate) fn completion(&self) -> PrismPublicationCompletion {
+        if self.requested.version == 2 {
+            return PrismPublicationCompletion::CompleteNamedPrismV2;
+        }
         PrismPublicationCompletion::CompleteNamedPrismV1
     }
     /// Borrow the immutable body and exact operands; `result.join()` contains no mutable Shape.

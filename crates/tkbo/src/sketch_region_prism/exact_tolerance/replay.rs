@@ -124,9 +124,16 @@ pub(in crate::sketch_region_prism) fn cap(value: StoredToleranceCap, bytes: &mut
 }
 fn metadata(value: &JoinedToleranceMetadata, bytes: &mut Vec<u8>) {
     encode_joined_text(&format!("{:?}/{:?}", value.entity, value.contexts), bytes);
-    encode_frozen_numbers([value.observation.raw, value.observation.effective], bytes);
-    cap(value.observation.policy, bytes);
-    bytes.push(match value.observation.decision {
+    encode_stored_tolerance_observation(value.observation, bytes);
+}
+/// Reuse scalar metadata tags and exact bits; `encode_stored_tolerance_observation(value, bytes)`.
+pub(crate) fn encode_stored_tolerance_observation(
+    value: crate::sketch_region_prism::tolerance_inspection::StoredToleranceObservation,
+    bytes: &mut Vec<u8>,
+) {
+    encode_frozen_numbers([value.raw, value.effective], bytes);
+    cap(value.policy, bytes);
+    bytes.push(match value.decision {
         StoredCapDecision::Within => 0,
         StoredCapDecision::Reported => 1,
         StoredCapDecision::Refused => 2,

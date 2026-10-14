@@ -6,9 +6,9 @@ use crate::sketch_region_prism::frozen::publication_read_snapshot::read_snapshot
 use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 use rustycad_tkernel::standard::Failure;
 
-struct CommitMutation {
+pub(in crate::sketch_region_prism) struct CommitMutation {
     action: Box<dyn FnMut() + Send>,
-    commits: usize,
+    pub(in crate::sketch_region_prism) commits: usize,
 }
 impl PrismPublicationProgress for CommitMutation {
     fn checkpoint(&mut self, point: PrismPublicationCheckpoint) -> Result<bool, Failure> {
@@ -19,7 +19,7 @@ impl PrismPublicationProgress for CommitMutation {
         Ok(false)
     }
 }
-fn first_vertex(root: &Shape) -> Shape {
+pub(in crate::sketch_region_prism) fn first_vertex(root: &Shape) -> Shape {
     crate::sketch_region_prism::contexts::body_contexts(root)
         .ok()
         .unwrap()
@@ -30,7 +30,7 @@ fn first_vertex(root: &Shape) -> Shape {
         .unwrap()
         .occurrence
 }
-fn vertex_edit(target: Shape) -> CommitMutation {
+pub(in crate::sketch_region_prism) fn vertex_edit(target: Shape) -> CommitMutation {
     CommitMutation {
         commits: 0,
         action: Box::new(move || {

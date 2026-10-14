@@ -14,7 +14,7 @@ pub(super) fn original_contexts(
     actual: &[RegionObservedContext],
 ) -> ResolveCheck<Vec<NamedSourceContext>> {
     let source = require_local(prepared.retained.source.as_ref(), "constructor-held source")?;
-    admit_constructor_handles(source)?;
+    admit_original_source(prepared, source, actual)?;
     let root = PartitionOccurrenceIdentity::capture(&source.edge);
     let mut result = vec![named_context(
         actual,
@@ -27,6 +27,20 @@ pub(super) fn original_contexts(
     append_native_contexts(source, actual, &mut result)?;
     complete_context_coverage(&result, actual)?;
     Ok(result)
+}
+fn admit_original_source(
+    prepared: &PreparedPolynomialPrism,
+    source: &ConstructedPolynomialSource,
+    actual: &[RegionObservedContext],
+) -> ResolveCheck<()> {
+    admit_constructor_handles(source)?;
+    let limits = prepared.retained.request.policy.publication.history.limits;
+    let current = capture_history_contexts(&source.edge, PrismHistoryStage::Original, limits)?;
+    require_count(
+        "current source exactly matches retained original context census",
+        usize::from(current == actual),
+        1,
+    )
 }
 fn admit_constructor_handles(source: &ConstructedPolynomialSource) -> ResolveCheck<()> {
     let same = source.native_edge.is_same(&source.edge)

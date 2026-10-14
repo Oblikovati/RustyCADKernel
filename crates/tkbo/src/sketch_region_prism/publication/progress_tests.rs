@@ -68,3 +68,21 @@ fn exhausted_checkpoint_counter_refuses_before_callback() {
     ));
     assert!(progress.seen.is_empty());
 }
+
+#[test]
+fn v2_exhaustion_preserves_retention_selection_and_never_calls_observer() {
+    let mut progress = NamedPublicationProgress {
+        fail: false,
+        stop: None,
+        seen: Vec::new(),
+    };
+    let mut callbacks = PublicationCallbacks::retaining_children(&mut progress);
+    assert!(callbacks.retains_child_failure());
+    callbacks.ordinal = usize::MAX;
+    assert!(callbacks.cancelled(PrismPublicationPhase::Measures));
+    let stop = callbacks.take_stop().unwrap();
+    assert_eq!(stop.checkpoint.ordinal, usize::MAX);
+    assert_eq!(stop.checkpoint.phase, PrismPublicationPhase::Measures);
+    assert!(matches!(stop.cause, PublicationCallbackCause::Exhausted));
+    assert!(progress.seen.is_empty());
+}

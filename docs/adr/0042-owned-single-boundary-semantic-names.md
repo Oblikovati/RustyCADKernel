@@ -97,3 +97,14 @@ resolver may consume an explicit V2 plan authored before lookup and must compare
 its complete caller identities and exact selection bits to the retained request.
 No stage or aggregate names become caller inputs. This is no automatic migration
 of V1, and dictionary reservations remain distinct from observed coverage.
+
+### Actual copied-base root applicability in V2
+
+The actual publication join requires `selected_region` to name its copied base.
+With distinct stage names, Generated Solid/Shell keys therefore carry
+SweepBase/BoundedRegion (2056), rather than the earlier Selected/BoundedRegion
+(1544) used by the unbound symbolic map fixture. V2 adds this exact applicability
+case for kinds Solid/Shell and Generated role. V1 admission, dictionary bytes,
+map bytes and the symbolic fixture remain unchanged. Other stages and source
+roles do not inherit this rule. This records an observed interface requirement;
+it does not reuse a token with another meaning or relax publication.

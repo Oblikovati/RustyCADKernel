@@ -70,7 +70,7 @@ pub(in crate::sketch_region_prism) use copied_contexts::resolve_native_copy_cont
 pub(in crate::sketch_region_prism) use generated_directed::resolve_generated_context;
 pub(in crate::sketch_region_prism) use operands::{
     copied_contexts as retained_copy_contexts, current_contexts as capture_history_contexts,
-    observed_contexts as retained_history_contexts,
+    observed_contexts as retained_history_contexts, resolve_certified_candidate,
 };
 pub(in crate::sketch_region_prism) use partition_queries::resolve_native_partition_context;
 
@@ -82,3 +82,4 @@ pub(in crate::sketch_region_prism) use stage_names::{
     append_member as append_historical_member,
     context_snapshot as snapshot_directed_history_context,
 };
+
