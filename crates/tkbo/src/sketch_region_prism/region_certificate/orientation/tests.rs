@@ -117,3 +117,6 @@ fn owned_orientation_evidence_is_send_sync() {
     static_assertions::assert_impl_all!(PrismOrientationCause: Send, Sync);
     static_assertions::assert_impl_all!(PrismOrientationFailure: Send, Sync);
 }
+
+#[path = "tests/compatibility.rs"]
+mod compatibility_tests;
