@@ -1,0 +1,51 @@
+{
+  "kind": "independent exact rational evaluation",
+  "source_revision": "38a5edf6633ff3683d536a191f241497f8e3077d",
+  "tool": "Jacobian polynomial.map.evaluate",
+  "date": "2026-10-14",
+  "scope": "Evaluations of supplied rational polynomials only; Bernstein derivation documented in ADR 0022.",
+  "cases": [
+    {
+      "polynomial": "4*t-2",
+      "point": "1/2",
+      "result": {
+        "operation_id": "polynomial.map.evaluate",
+        "runtime_ms": 5,
+        "output": {
+          "value": {
+            "num": "0",
+            "den": "1"
+          }
+        }
+      }
+    },
+    {
+      "polynomial": "x-6004799503160661/18014398509481984",
+      "point": "1/3",
+      "result": {
+        "operation_id": "polynomial.map.evaluate",
+        "runtime_ms": 11,
+        "output": {
+          "value": {
+            "num": "1",
+            "den": "54043195528445952"
+          }
+        }
+      }
+    },
+    {
+      "polynomial": "x-3002399751580331/9007199254740992",
+      "point": "1/3",
+      "result": {
+        "operation_id": "polynomial.map.evaluate",
+        "runtime_ms": 3,
+        "output": {
+          "value": {
+            "num": "-1",
+            "den": "27021597764222976"
+          }
+        }
+      }
+    }
+  ]
+}

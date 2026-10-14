@@ -2,7 +2,9 @@
 //! Source-bound incidence certificates extend, rather than replace, mapped solvers.
 mod access;
 mod construct;
+mod directed;
 mod domain;
+pub use directed::*;
 mod domain_policy;
 mod error;
 mod refine;

@@ -6,7 +6,9 @@ pub use incidence::{
     BezierConstructionEnclosure, BezierDomainDegreeLimit, BezierDomainSignOptions,
     BezierIncidenceCause, BezierIncidenceCompletion, BezierIncidenceDegrees,
     BezierIncidenceFailure, BezierIncidenceQuery, BezierIncidenceReport, BezierIncidenceSource,
-    BezierLineDomain, CertifiedBezierIncidence, certify_bezier_line_incidences,
+    BezierLineDomain, CertifiedBezierIncidence, DirectedBezierIncidenceCause,
+    DirectedBezierIncidenceFailure, DirectedBezierIncidenceQuery, DirectedBezierIncidenceReport,
+    DirectedBezierPosition, certify_bezier_line_incidences, certify_directed_bezier_incidences,
 };
 mod projection;
 mod ray;
