@@ -189,3 +189,23 @@ fn place_row(curve: &HomogeneousCurve, axis: &[BigInt], target: &mut [BigInt]) {
         }
     }
 }
+
+/// Signed admission is confined to callers that certify denominator root freedom.
+pub(super) fn embedded_signed_bezier<const DIM: usize>(
+    curve: MetricBezier<'_, DIM>,
+    embedding: MetricEmbedding<DIM>,
+    role: &'static str,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<HomogeneousCurve, ResidualError> {
+    embedded_bezier_using(curve, embedding, role, cancelled, signed_weight)
+}
+fn signed_weight<const DIM: usize>(
+    curve: MetricBezier<'_, DIM>,
+    index: usize,
+) -> Result<BigInt, ResidualError> {
+    scalar(
+        curve.weights.map_or(1., |weights| weights[index]),
+        "weight",
+        index,
+    )
+}

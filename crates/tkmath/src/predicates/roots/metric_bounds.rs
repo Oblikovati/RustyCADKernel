@@ -125,3 +125,11 @@ pub use polynomial_side::{
 
 #[cfg(test)]
 mod regularity_baseline_tests;
+
+mod bezier_regularity;
+pub use bezier_regularity::{
+    BezierRegularityCause, BezierRegularityCompletion, BezierRegularityDecision,
+    BezierRegularityFailure, BezierRegularityOptions, BezierRegularityQuery,
+    BezierRegularityReport, BezierRegularitySource, BezierRegularityStage,
+    certify_bezier_regularity,
+};

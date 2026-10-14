@@ -1,0 +1,409 @@
+{
+  "payload": {
+    "coefficient_domain": "ZZ",
+    "variables": [
+      "t"
+    ],
+    "expression": {
+      "kind": "ADD",
+      "operands": [
+        {
+          "kind": "MULTIPLY",
+          "operands": [
+            {
+              "kind": "LITERAL",
+              "value": {
+                "num": "144",
+                "den": "1"
+              }
+            },
+            {
+              "kind": "ADD",
+              "operands": [
+                {
+                  "kind": "POWER",
+                  "base": {
+                    "kind": "ADD",
+                    "operands": [
+                      {
+                        "kind": "LITERAL",
+                        "value": {
+                          "num": "1",
+                          "den": "1"
+                        }
+                      },
+                      {
+                        "kind": "MULTIPLY",
+                        "operands": [
+                          {
+                            "kind": "LITERAL",
+                            "value": {
+                              "num": "-4",
+                              "den": "1"
+                            }
+                          },
+                          {
+                            "kind": "VARIABLE",
+                            "name": "t"
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "MULTIPLY",
+                        "operands": [
+                          {
+                            "kind": "LITERAL",
+                            "value": {
+                              "num": "3",
+                              "den": "1"
+                            }
+                          },
+                          {
+                            "kind": "POWER",
+                            "base": {
+                              "kind": "VARIABLE",
+                              "name": "t"
+                            },
+                            "exponent": 2
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "POWER",
+                  "base": {
+                    "kind": "ADD",
+                    "operands": [
+                      {
+                        "kind": "MULTIPLY",
+                        "operands": [
+                          {
+                            "kind": "LITERAL",
+                            "value": {
+                              "num": "2",
+                              "den": "1"
+                            }
+                          },
+                          {
+                            "kind": "VARIABLE",
+                            "name": "t"
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "MULTIPLY",
+                        "operands": [
+                          {
+                            "kind": "LITERAL",
+                            "value": {
+                              "num": "-3",
+                              "den": "1"
+                            }
+                          },
+                          {
+                            "kind": "POWER",
+                            "base": {
+                              "kind": "VARIABLE",
+                              "name": "t"
+                            },
+                            "exponent": 2
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "exponent": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "LITERAL",
+          "value": {
+            "num": "-16",
+            "den": "1"
+          }
+        },
+        {
+          "kind": "MULTIPLY",
+          "operands": [
+            {
+              "kind": "LITERAL",
+              "value": {
+                "num": "-32",
+                "den": "1"
+              }
+            },
+            {
+              "kind": "POWER",
+              "base": {
+                "kind": "ADD",
+                "operands": [
+                  {
+                    "kind": "MULTIPLY",
+                    "operands": [
+                      {
+                        "kind": "LITERAL",
+                        "value": {
+                          "num": "9",
+                          "den": "1"
+                        }
+                      },
+                      {
+                        "kind": "POWER",
+                        "base": {
+                          "kind": "VARIABLE",
+                          "name": "t"
+                        },
+                        "exponent": 2
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "MULTIPLY",
+                    "operands": [
+                      {
+                        "kind": "LITERAL",
+                        "value": {
+                          "num": "-9",
+                          "den": "1"
+                        }
+                      },
+                      {
+                        "kind": "VARIABLE",
+                        "name": "t"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "LITERAL",
+                    "value": {
+                      "num": "2",
+                      "den": "1"
+                    }
+                  }
+                ]
+              },
+              "exponent": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "result": {
+    "operation_id": "polynomial.expression.normalize",
+    "runtime_ms": 3,
+    "output": {
+      "source": {
+        "coefficient_domain": "ZZ",
+        "variables": [
+          "t"
+        ],
+        "expression": {
+          "kind": "ADD",
+          "operands": [
+            {
+              "kind": "MULTIPLY",
+              "operands": [
+                {
+                  "kind": "LITERAL",
+                  "value": {
+                    "num": "144",
+                    "den": "1"
+                  }
+                },
+                {
+                  "kind": "ADD",
+                  "operands": [
+                    {
+                      "kind": "POWER",
+                      "base": {
+                        "kind": "ADD",
+                        "operands": [
+                          {
+                            "kind": "LITERAL",
+                            "value": {
+                              "num": "1",
+                              "den": "1"
+                            }
+                          },
+                          {
+                            "kind": "MULTIPLY",
+                            "operands": [
+                              {
+                                "kind": "LITERAL",
+                                "value": {
+                                  "num": "-4",
+                                  "den": "1"
+                                }
+                              },
+                              {
+                                "kind": "VARIABLE",
+                                "name": "t"
+                              }
+                            ]
+                          },
+                          {
+                            "kind": "MULTIPLY",
+                            "operands": [
+                              {
+                                "kind": "LITERAL",
+                                "value": {
+                                  "num": "3",
+                                  "den": "1"
+                                }
+                              },
+                              {
+                                "kind": "POWER",
+                                "base": {
+                                  "kind": "VARIABLE",
+                                  "name": "t"
+                                },
+                                "exponent": 2
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "exponent": 2
+                    },
+                    {
+                      "kind": "POWER",
+                      "base": {
+                        "kind": "ADD",
+                        "operands": [
+                          {
+                            "kind": "MULTIPLY",
+                            "operands": [
+                              {
+                                "kind": "LITERAL",
+                                "value": {
+                                  "num": "2",
+                                  "den": "1"
+                                }
+                              },
+                              {
+                                "kind": "VARIABLE",
+                                "name": "t"
+                              }
+                            ]
+                          },
+                          {
+                            "kind": "MULTIPLY",
+                            "operands": [
+                              {
+                                "kind": "LITERAL",
+                                "value": {
+                                  "num": "-3",
+                                  "den": "1"
+                                }
+                              },
+                              {
+                                "kind": "POWER",
+                                "base": {
+                                  "kind": "VARIABLE",
+                                  "name": "t"
+                                },
+                                "exponent": 2
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "exponent": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "LITERAL",
+              "value": {
+                "num": "-16",
+                "den": "1"
+              }
+            },
+            {
+              "kind": "MULTIPLY",
+              "operands": [
+                {
+                  "kind": "LITERAL",
+                  "value": {
+                    "num": "-32",
+                    "den": "1"
+                  }
+                },
+                {
+                  "kind": "POWER",
+                  "base": {
+                    "kind": "ADD",
+                    "operands": [
+                      {
+                        "kind": "MULTIPLY",
+                        "operands": [
+                          {
+                            "kind": "LITERAL",
+                            "value": {
+                              "num": "9",
+                              "den": "1"
+                            }
+                          },
+                          {
+                            "kind": "POWER",
+                            "base": {
+                              "kind": "VARIABLE",
+                              "name": "t"
+                            },
+                            "exponent": 2
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "MULTIPLY",
+                        "operands": [
+                          {
+                            "kind": "LITERAL",
+                            "value": {
+                              "num": "-9",
+                              "den": "1"
+                            }
+                          },
+                          {
+                            "kind": "VARIABLE",
+                            "name": "t"
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "LITERAL",
+                        "value": {
+                          "num": "2",
+                          "den": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "exponent": 2
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "polynomial": {
+        "domain": "QQ",
+        "variables": [
+          "t"
+        ],
+        "polynomial": {
+          "terms": []
+        }
+      }
+    }
+  }
+}
