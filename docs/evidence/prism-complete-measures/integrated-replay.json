@@ -1,0 +1,79 @@
+{
+  "processes": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "complete_prism_measure_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "sha256": "a645fe4aebc0ae245fd296b3bd4db5393af331c9eee3516be9ce60ce40a58c13",
+      "matches_candidate": true
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--lib",
+        "complete_prism_measure_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "sha256": "a645fe4aebc0ae245fd296b3bd4db5393af331c9eee3516be9ce60ce40a58c13",
+      "matches_candidate": true
+    }
+  ],
+  "additional_integrated_tests": [
+    "sketch_region_prism::frozen::admission_tests::context_failures_preserve_native_cause_or_refuse_shape_payload",
+    "sketch_region_prism::frozen::admission_tests::present_affine_error_cannot_be_discarded_as_unbound_success",
+    "sketch_region_prism::frozen::admission_tests::report_alert_after_initial_admission_prevents_final_capture",
+    "sketch_region_prism::frozen::diagnostic_tests::captured_intersection_failure_is_typed_and_never_a_validity_pass",
+    "sketch_region_prism::frozen::diagnostic_tests::nominal_fixture_native_alert_is_exact_dataless_intersection_failure",
+    "sketch_region_prism::frozen::diagnostic_tests::unknown_and_owner_bearing_alerts_explicitly_refuse_capture",
+    "sketch_region_prism::frozen::domain_tests::fixed_policy_records_exact_endpoint_admission_and_refusal_limits",
+    "sketch_region_prism::frozen::domain_tests::occurrence_bounds_refuse_overflow_without_allocating",
+    "sketch_region_prism::frozen::domain_tests::polynomial_bounds_include_constants_and_reject_excess_without_truncation",
+    "sketch_region_prism::frozen::endpoint_tests::actual_vertex_changes_fail_fresh_endpoint_evidence",
+    "sketch_region_prism::frozen::error_context_tests::endpoint_numerical_error_keeps_edge_vertex_pair_and_original_cause",
+    "sketch_region_prism::frozen::error_context_tests::native_classification_and_message_survive_owned_context",
+    "sketch_region_prism::frozen::expected_tests::complete_frozen_geometry_matches_owned_cubic_fixture",
+    "sketch_region_prism::frozen::expected_tests::coverage_history_and_effective_limits_remain_explicit",
+    "sketch_region_prism::frozen::identity_tests::authored_binding_input_order_does_not_change_owned_bytes",
+    "sketch_region_prism::frozen::identity_tests::every_directed_use_has_explicit_parent_and_one_incidence_binding",
+    "sketch_region_prism::frozen::identity_tests::missing_duplicate_and_colliding_use_bindings_refuse_capture",
+    "sketch_region_prism::frozen::identity_tests::source_collision_and_selected_region_mismatch_refuse_capture",
+    "sketch_region_prism::frozen::isolation_tests::all_owned_output_types_are_send_and_sync_without_unsafe_impls",
+    "sketch_region_prism::frozen::isolation_tests::clone_mutation_is_isolated_from_published_values",
+    "sketch_region_prism::frozen::isolation_tests::every_phase_cancellation_failure_and_reuse_leave_input_unchanged",
+    "sketch_region_prism::frozen::mutation_tests::actual_root_children_are_rebound_at_commit",
+    "sketch_region_prism::frozen::mutation_tests::actual_root_children_are_rebound_before_graph_capture",
+    "sketch_region_prism::frozen::mutation_tests::actual_sibling_order_is_rebound_before_graph_and_at_commit",
+    "sketch_region_prism::frozen::mutation_tests::present_region_error_is_never_dropped_as_unbound_success",
+    "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+    "sketch_region_prism::frozen::replay_tests::shared_published_projection_reads_are_lock_free_and_deterministic",
+    "sketch_region_prism::frozen::source_mutation_tests::source_and_body_mutation_cannot_change_already_frozen_output",
+    "sketch_region_prism::frozen::source_mutation_tests::stale_source_coefficients_cannot_reuse_retained_chart_evidence",
+    "sketch_region_prism::frozen::tests::complete_owned_capture_keeps_independent_incidence_counts",
+    "sketch_region_prism::frozen::tests::internal_and_external_body_orientations_are_explicitly_unsupported",
+    "sketch_region_prism::frozen::tests::missing_authored_bindings_never_get_invented_ids",
+    "sketch_region_prism::frozen::tolerance_tests::commit_subfloor_mutations_are_detected_without_mutating_owned_results",
+    "sketch_region_prism::frozen::tolerance_tests::invalid_raw_values_are_refused_before_the_compatibility_floor",
+    "sketch_region_prism::frozen::tolerance_tests::zero_and_subfloor_raw_bytes_survive_the_same_effective_floor"
+  ]
+}
