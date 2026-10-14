@@ -16,5 +16,7 @@
 //! ```
 pub mod drawer;
 pub mod flags;
+pub mod two_colors;
 pub use drawer::{MeshVSDrawer, MeshVSDrawerSource, meshvs_drawer_assign};
 pub use flags::{MeshVSDisplayModeFlags, MeshVSDrawerAttribute, MeshVSEntityType};
+pub use two_colors::{MeshVSTwoColors, bind_two_colors, extract_color, extract_colors};
