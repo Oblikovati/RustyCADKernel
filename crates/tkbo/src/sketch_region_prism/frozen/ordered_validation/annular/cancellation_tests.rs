@@ -33,6 +33,9 @@ fn assert_cutoff(
     assert_eq!(progress.points, expected[..stop]);
     assert_eq!(failure.checkpoint, expected[stop - 1]);
     assert_eq!(failure.source.as_ref(), join.replay_bytes());
+    assert_failure_context(&failure, fail);
+}
+fn assert_failure_context(failure: &AnnularValidationFailure, fail: bool) {
     let class = if fail {
         OrderedPrismFailureClass::Failed
     } else {
@@ -40,7 +43,7 @@ fn assert_cutoff(
     };
     assert_eq!(failure.class, class);
     assert_callback(&failure.cause, fail);
-    assert_stopped_trace(&failure);
+    assert_stopped_trace(failure);
 }
 fn assert_callback(cause: &AnnularValidationCause, failed: bool) {
     let AnnularValidationCause::Callback { stop, downstream } = cause else {

@@ -96,6 +96,12 @@ impl<'a> AnnularValidationContext<'a> {
         };
         self.accept(result)
     }
+    /// Preserve the required stage on refusal; `context.refused(OrderedPrismFailureClass::Incomplete)`.
+    pub fn refused(&mut self, class: OrderedPrismFailureClass) {
+        self.trace
+            .record_prism_stage(self.current.stage, class.into())
+            .expect("annular validator refuses only its next required stage");
+    }
     pub fn passed(&mut self, stage: OrderedPrismStage) {
         self.trace
             .record_prism_stage(stage, OrderedPrismStageStatus::Passed)

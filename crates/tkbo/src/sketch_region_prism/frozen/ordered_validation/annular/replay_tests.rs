@@ -11,14 +11,7 @@ fn complete_child_blocks_and_tolerance_policy_survive_full_replay() {
     let join = joined();
     let proof = complete(&join);
     let replay = proof.replay_bytes();
-    for child in [
-        proof.orientation().replay_bytes(),
-        proof.conformance().replay_bytes(),
-        proof.intersection().replay_bytes(),
-        proof.tolerance().replay_bytes(),
-    ] {
-        assert!(replay.windows(child.len()).any(|slice| slice == child));
-    }
+    assert_child_blocks(&proof, &replay);
     let requested = AnnularValidationOptions {
         version: 2,
         stored_cap: StoredToleranceCap::report(1.).unwrap(),
@@ -27,6 +20,16 @@ fn complete_child_blocks_and_tolerance_policy_survive_full_replay() {
         .ok()
         .unwrap();
     assert_ne!(other.replay_bytes(), replay);
+}
+fn assert_child_blocks(proof: &AnnularValidationCertificate, replay: &[u8]) {
+    for child in [
+        proof.orientation().replay_bytes(),
+        proof.conformance().replay_bytes(),
+        proof.intersection().replay_bytes(),
+        proof.tolerance().replay_bytes(),
+    ] {
+        assert!(replay.windows(child.len()).any(|slice| slice == child));
+    }
 }
 #[test]
 fn results_outlive_source_and_concurrent_operations_match_serial_bytes() {
@@ -38,10 +41,11 @@ fn results_outlive_source_and_concurrent_operations_match_serial_bytes() {
     for worker in workers {
         assert_eq!(worker.join().unwrap(), expected);
     }
+    assert_shared_reads(&report, &expected);
+}
+fn assert_shared_reads(report: &AnnularValidationCertificate, expected: &[u8]) {
     std::thread::scope(|scope| {
         for _ in 0..8 {
-            let report = &report;
-            let expected = &expected;
             scope.spawn(move || {
                 for _ in 0..4 {
                     assert_eq!(report.replay_bytes(), *expected);

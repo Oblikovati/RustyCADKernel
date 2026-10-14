@@ -31,16 +31,19 @@ fn validate(
     partial.orientation = Some(checks::orientation(join, context)?);
     partial.conformance = Some(checks::conformance(join, context)?);
     partial.intersection = Some(checks::intersection(join, context)?);
+    complete_tolerance(join, requested.stored_cap, context, partial)
+}
+fn complete_tolerance(
+    join: &AnnularFrozenDomain,
+    cap: StoredToleranceCap,
+    context: &mut AnnularValidationContext<'_>,
+    partial: &mut AnnularValidationPartial,
+) -> ValidationCheck<()> {
     let geometry = partial
         .conformance
         .as_ref()
         .expect("geometry stage completed before tolerance");
-    partial.tolerance = Some(checks::tolerance(
-        join,
-        geometry,
-        requested.stored_cap,
-        context,
-    )?);
+    partial.tolerance = Some(checks::tolerance(join, geometry, cap, context)?);
     context.checkpoint(AnnularValidationCheck::Commit)?;
     context.passed(OrderedPrismStage::Tolerance);
     Ok(())
@@ -66,10 +69,7 @@ fn refused(
     partial: AnnularValidationPartial,
     stop: ValidationStop,
 ) -> Box<AnnularValidationFailure> {
-    context
-        .trace
-        .record_prism_stage(context.current.stage, stop.class.into())
-        .expect("annular validator refuses only its next required stage");
+    context.refused(stop.class);
     Box::new(AnnularValidationFailure {
         operation: join.projection().operation,
         requested,

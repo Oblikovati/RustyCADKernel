@@ -32,23 +32,24 @@ pub(super) fn complete(join: &AnnularFrozenDomain) -> AnnularValidationCertifica
 fn actual_annular_validation_has_all_ordered_exact_children_without_publication() {
     let join = joined();
     let proof = complete(&join);
-    for stage in OrderedPrismStage::ALL {
-        assert_eq!(proof.trace().status(stage), OrderedPrismStageStatus::Passed);
-    }
-    assert!(
-        proof.binds(&join) && proof.topology().binds(&join) && proof.orientation().binds(&join)
-    );
-    assert!(
-        proof.conformance().binds(&join)
-            && proof.intersection().binds(&join)
-            && proof.tolerance().binds(&join)
-    );
+    assert_complete_bindings(&join, &proof);
     assert_eq!(
         proof.mode(),
         AnnularValidationMode::ExactTwoBoundaryPolynomialPrism
     );
     assert_eq!(proof.requested(), options());
     assert_domain_evidence(&join, &proof);
+}
+fn assert_complete_bindings(join: &AnnularFrozenDomain, proof: &AnnularValidationCertificate) {
+    for stage in OrderedPrismStage::ALL {
+        assert_eq!(proof.trace().status(stage), OrderedPrismStageStatus::Passed);
+    }
+    assert!(proof.binds(join) && proof.topology().binds(join) && proof.orientation().binds(join));
+    assert!(
+        proof.conformance().binds(join)
+            && proof.intersection().binds(join)
+            && proof.tolerance().binds(join)
+    );
 }
 fn assert_domain_evidence(join: &AnnularFrozenDomain, proof: &AnnularValidationCertificate) {
     assert_eq!(proof.intersection().domains().len(), 4);

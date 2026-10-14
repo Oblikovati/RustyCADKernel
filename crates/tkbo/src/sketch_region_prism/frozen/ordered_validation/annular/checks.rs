@@ -32,16 +32,19 @@ pub(super) fn orientation(
             commit = true;
             stopped
         })
-        .map_err(|cause| ValidationStop {
-            class: direction_class(cause.classification()),
-            cause: AnnularValidationCause::Orientation(cause),
-        });
+        .map_err(direction_stop);
     let proof = context.accept(result)?;
     binding(
         proof.binds(join),
         "whole annular face/trim direction binding",
     )?;
     Ok(proof)
+}
+fn direction_stop(cause: Box<AnnularDirectionFailure>) -> ValidationStop {
+    ValidationStop {
+        class: direction_class(cause.classification()),
+        cause: AnnularValidationCause::Orientation(cause),
+    }
 }
 fn direction_class(class: TwoLoopRefusalClass) -> OrderedPrismFailureClass {
     match class {
