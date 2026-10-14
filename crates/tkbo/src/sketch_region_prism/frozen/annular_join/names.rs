@@ -8,28 +8,56 @@ pub(super) fn inspect<'a>(
     binding: &AnnularPrismBinding,
     authored: &PrismPublicationBindings,
 ) -> AnnularFrozenCheck<'a, ()> {
-    if authored.operation.0 != request.identities.operation {
-        return Err(AnnularFrozenCause::AuthoredIdentity {
-            quantity: "same authored operation as actual annular proof",
-            actual: authored.operation,
-            expected: AuthoredPrismId(request.identities.operation),
-        });
-    }
+    same_name(
+        authored.operation,
+        request.identities.operation,
+        "same authored operation as actual annular proof",
+    )?;
     originals(request, authored)?;
     sources(binding, authored)?;
-    if authored.selected_region.0 != binding.region().selected_candidate_id() {
+    same_name(
+        authored.selected_region,
+        binding.region().selected_candidate_id(),
+        "same authored selected region as bound two-loop proof",
+    )?;
+    Ok(())
+}
+fn same_name(
+    actual: AuthoredPrismId,
+    expected: u64,
+    quantity: &'static str,
+) -> AnnularFrozenCheck<'static, ()> {
+    if actual.0 != expected {
         return Err(AnnularFrozenCause::AuthoredIdentity {
-            quantity: "same authored selected region as bound two-loop proof",
-            actual: authored.selected_region,
-            expected: AuthoredPrismId(binding.region().selected_candidate_id()),
+            quantity,
+            actual,
+            expected: AuthoredPrismId(expected),
         });
     }
     Ok(())
 }
+
 fn originals<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     authored: &PrismPublicationBindings,
 ) -> AnnularFrozenCheck<'a, ()> {
+    let mut actual = mapped_originals(request, authored)?;
+    let mut expected = expected_originals(request);
+    actual.sort();
+    expected.sort();
+    if actual != expected || actual.len() != authored.originals.len() {
+        return Err(identity(
+            "exact six original directed roles without duplicates or extras",
+            actual.len(),
+        )
+        .into());
+    }
+    Ok(())
+}
+fn mapped_originals<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    authored: &PrismPublicationBindings,
+) -> AnnularFrozenCheck<'a, Vec<TwoLoopOriginalUse>> {
     let rows: Vec<_> = authored
         .originals
         .iter()
@@ -37,8 +65,10 @@ fn originals<'a>(
         .collect();
     let mapped =
         map_two_loop_original_parents(request, &rows).map_err(AnnularFrozenCause::Originals)?;
-    let mut actual = mapped.rows.into_iter().flatten().collect::<Vec<_>>();
-    let mut expected = request
+    Ok(mapped.rows.into_iter().flatten().collect::<Vec<_>>())
+}
+fn expected_originals(request: &TwoLoopRegionRequest<'_, '_>) -> Vec<TwoLoopOriginalUse> {
+    request
         .sources
         .iter()
         .flat_map(|s| {
@@ -52,18 +82,9 @@ fn originals<'a>(
                 role,
             })
         })
-        .collect::<Vec<_>>();
-    actual.sort();
-    expected.sort();
-    if actual != expected || actual.len() != authored.originals.len() {
-        return Err(identity(
-            "exact six original directed roles without duplicates or extras",
-            actual.len(),
-        )
-        .into());
-    }
-    Ok(())
+        .collect::<Vec<_>>()
 }
+
 fn sources(
     binding: &AnnularPrismBinding,
     authored: &PrismPublicationBindings,
@@ -77,17 +98,7 @@ fn sources(
     }
     let mut consumed = BTreeSet::new();
     for actual in expected {
-        let found: Vec<_> = authored
-            .sources
-            .iter()
-            .enumerate()
-            .filter(|(_, b)| same_definition(&b.actual, actual))
-            .map(|(i, _)| i)
-            .collect();
-        let index = *only_bound(
-            &found,
-            "one supplied name per physical copied member, no duplicates",
-        )?;
+        let index = source_index(authored, actual)?;
         if !consumed.insert(index) {
             return Err(identity(
                 "distinct copied members in certified source roster",
@@ -97,6 +108,24 @@ fn sources(
     }
     Ok(())
 }
+fn source_index(
+    authored: &PrismPublicationBindings,
+    actual: &PartitionOccurrenceIdentity,
+) -> CaptureResult<usize> {
+    let found: Vec<_> = authored
+        .sources
+        .iter()
+        .enumerate()
+        .filter(|(_, b)| same_definition(&b.actual, actual))
+        .map(|(i, _)| i)
+        .collect();
+    only_bound(
+        &found,
+        "one supplied name per physical copied member, no duplicates",
+    )
+    .copied()
+}
+
 fn source_roster(binding: &AnnularPrismBinding) -> Vec<&PartitionOccurrenceIdentity> {
     let mut rows = vec![&binding.copied_sources().face];
     for boundary in binding.boundaries() {

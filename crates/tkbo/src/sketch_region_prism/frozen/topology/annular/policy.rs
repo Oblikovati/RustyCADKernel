@@ -9,19 +9,8 @@ impl FaceDomainPolicy for BoundAnnularPolicy<'_> {
         face: &FrozenPrismUse,
         _index: &TopologyIndex<'_>,
     ) -> TopologyResult<()> {
-        let found: Vec<_> = self
-            .0
-            .faces()
-            .iter()
-            .filter(|f| f.chart.occurrence == face.key)
-            .collect();
-        count(
-            Some(&face.key),
-            found.len(),
-            1,
-            "one full-context certified annular parameter domain",
-        )?;
-        let expected = found[0].domain.boundary_uses();
+        let domain = self.face_domain(face)?;
+        let expected = domain.boundary_uses();
         let actual: BTreeSet<_> = face.children.iter().collect();
         if face.children.len() != expected.len()
             || actual != expected.iter().copied().collect()
@@ -61,6 +50,21 @@ impl FaceDomainPolicy for BoundAnnularPolicy<'_> {
     }
 }
 impl BoundAnnularPolicy<'_> {
+    fn face_domain(&self, face: &FrozenPrismUse) -> TopologyResult<&NamedAnnularDomain> {
+        let found: Vec<_> = self
+            .0
+            .faces()
+            .iter()
+            .filter(|f| f.chart.occurrence == face.key)
+            .collect();
+        count(
+            Some(&face.key),
+            found.len(),
+            1,
+            "one full-context certified annular parameter domain",
+        )?;
+        Ok(&found[0].domain)
+    }
     fn face_universe(
         &self,
         source: &FrozenPrismProjection,
@@ -72,15 +76,7 @@ impl BoundAnnularPolicy<'_> {
             .iter()
             .map(|face| &face.chart.occurrence)
             .collect();
-        let actual: BTreeSet<_> = index
-            .occurrences
-            .keys()
-            .filter(|key| {
-                key.0.last().is_some_and(|(key, _)| {
-                    key.kind == rustycad_tkg3d::top_abs::ShapeEnum::Face as u8
-                })
-            })
-            .collect();
+        let actual = indexed_faces(index);
         if expected != actual
             || expected.len() != self.0.faces().len()
             || source.replay_bytes() != self.0.projection().replay_bytes()
@@ -93,4 +89,16 @@ impl BoundAnnularPolicy<'_> {
         }
         Ok(())
     }
+}
+
+fn indexed_faces<'a>(index: &'a TopologyIndex<'_>) -> BTreeSet<&'a FrozenUseKey> {
+    index
+        .occurrences
+        .keys()
+        .filter(|key| {
+            key.0
+                .last()
+                .is_some_and(|(key, _)| key.kind == rustycad_tkg3d::top_abs::ShapeEnum::Face as u8)
+        })
+        .collect()
 }

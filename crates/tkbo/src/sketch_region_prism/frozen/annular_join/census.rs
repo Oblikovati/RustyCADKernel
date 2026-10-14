@@ -12,33 +12,33 @@ pub(super) fn inspect(
             expected: 2,
         });
     }
-    let mut measured = 0;
-    charge(&mut measured, 2, requested.maximum_name_units)?;
-    for count in [
-        bindings.originals.len(),
-        bindings.sources.len(),
-        bindings.directed.len(),
-    ] {
-        charge(&mut measured, count, requested.maximum_name_units)?;
-    }
-    for row in &bindings.directed {
-        charge(
-            &mut measured,
-            row.actual.ancestors.len(),
-            requested.maximum_name_units,
-        )?;
-        charge(
-            &mut measured,
-            row.actual.child_slots.len(),
-            requested.maximum_name_units,
-        )?;
-    }
+    let measured = measure_names(bindings, requested.maximum_name_units)?;
     Ok(AnnularNameCensus {
         requested,
         effective: requested,
         measured_units: measured,
     })
 }
+fn measure_names(
+    bindings: &PrismPublicationBindings,
+    maximum: usize,
+) -> AnnularFrozenCheck<'static, usize> {
+    let mut measured = 0;
+    charge(&mut measured, 2, maximum)?;
+    for count in [
+        bindings.originals.len(),
+        bindings.sources.len(),
+        bindings.directed.len(),
+    ] {
+        charge(&mut measured, count, maximum)?;
+    }
+    for row in &bindings.directed {
+        charge(&mut measured, row.actual.ancestors.len(), maximum)?;
+        charge(&mut measured, row.actual.child_slots.len(), maximum)?;
+    }
+    Ok(measured)
+}
+
 fn charge(
     measured: &mut usize,
     additional: usize,

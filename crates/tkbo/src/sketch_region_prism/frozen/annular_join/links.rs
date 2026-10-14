@@ -120,15 +120,7 @@ fn cap_wire(
     observed: &[RegionObservedContext],
     bound: &BoundProjection<'_>,
 ) -> CaptureResult<NamedAnnularWire> {
-    let boundaries: Vec<_> = binding
-        .boundaries()
-        .iter()
-        .filter(|b| b.source == source)
-        .collect();
-    let boundary = *only_bound(
-        &boundaries,
-        "one bound source for authored annular wire role",
-    )?;
+    let boundary = bound_boundary(binding, source)?;
     let rims: Vec<_> = domain
         .trims
         .iter()
@@ -144,6 +136,22 @@ fn cap_wire(
         occurrence: parent_wire(&key, &face.occurrence)?,
     })
 }
+fn bound_boundary(
+    binding: &AnnularPrismBinding,
+    source: RegionSourceId,
+) -> CaptureResult<&AnnularBoundaryBinding> {
+    let boundaries: Vec<_> = binding
+        .boundaries()
+        .iter()
+        .filter(|b| b.source == source)
+        .collect();
+    only_bound(
+        &boundaries,
+        "one bound source for authored annular wire role",
+    )
+    .copied()
+}
+
 fn shared_wire(face: &JoinedPrismFace) -> CaptureResult<FrozenUseKey> {
     let wires = face
         .trims
@@ -192,17 +200,7 @@ fn check_wire_coverage(
         .iter()
         .flat_map(|face| face.domain.boundary_uses())
         .collect::<Vec<_>>();
-    let mut expected = projection
-        .uses()
-        .iter()
-        .filter(|row| {
-            row.key
-                .0
-                .last()
-                .is_some_and(|(key, _)| key.kind == rustycad_tkg3d::top_abs::ShapeEnum::Wire as u8)
-        })
-        .map(|row| &row.key)
-        .collect::<Vec<_>>();
+    let mut expected = frozen_wires(projection);
     actual.sort();
     expected.sort();
     if actual != expected || actual.windows(2).any(|pair| pair[0] == pair[1]) {
@@ -212,4 +210,18 @@ fn check_wire_coverage(
         ));
     }
     Ok(())
+}
+
+fn frozen_wires(projection: &FrozenPrismProjection) -> Vec<&FrozenUseKey> {
+    projection
+        .uses()
+        .iter()
+        .filter(|row| {
+            row.key
+                .0
+                .last()
+                .is_some_and(|(key, _)| key.kind == rustycad_tkg3d::top_abs::ShapeEnum::Wire as u8)
+        })
+        .map(|row| &row.key)
+        .collect::<Vec<_>>()
 }

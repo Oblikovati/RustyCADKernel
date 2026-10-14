@@ -21,7 +21,7 @@ pub(in crate::sketch_region_prism) use types::*;
 #[cfg(test)]
 mod mutation_tests;
 #[cfg(test)]
-mod operation_tests;
+pub(in crate::sketch_region_prism) mod operation_tests;
 #[cfg(test)]
 mod refusal_tests;
 #[cfg(test)]

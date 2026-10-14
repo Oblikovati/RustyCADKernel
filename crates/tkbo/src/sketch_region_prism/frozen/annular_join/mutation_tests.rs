@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::mutation_tests::{ContainmentEdit, remove_child_progress};
-use super::operation_tests::{JoinProgress, with_named};
+use super::operation_tests::{JoinProgress, inspect_default, with_named};
 use super::*;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
@@ -19,16 +19,9 @@ fn final_annular_join_rebind_reads_actual_root_shell_and_wire_incidence() {
                 }
                 Ok(false)
             });
-            let failure = join_annular_frozen_domain(
-                request,
-                receipt,
-                names,
-                proof,
-                tests::options(),
-                &mut progress,
-            )
-            .err()
-            .unwrap();
+            let failure = inspect_default(request, receipt, names, proof, &mut progress)
+                .err()
+                .unwrap();
             assert_eq!(failure.phase, AnnularFrozenPhase::Commit);
             assert!(matches!(failure.cause, AnnularFrozenCause::Embedding(_)));
         });
@@ -39,10 +32,7 @@ fn success_failure_and_cancellation_leave_actual_source_projection_bytes_unchang
     for mode in 0..4 {
         with_named(|request, receipt, names, proof| {
             let before = frozen_bytes(receipt, names);
-            let mut requested = tests::options();
-            if mode == 3 {
-                requested.version = 9;
-            }
+            let requested = isolation_mode_options(mode);
             let result = join_annular_frozen_domain(
                 request,
                 receipt,
@@ -80,19 +70,20 @@ fn final_report_mutation_preserves_required_diagnostic_refusal() {
             }
             Ok(false)
         });
-        let failure = join_annular_frozen_domain(
-            request,
-            receipt,
-            names,
-            proof,
-            tests::options(),
-            &mut progress,
-        )
-        .err()
-        .unwrap();
+        let failure = inspect_default(request, receipt, names, proof, &mut progress)
+            .err()
+            .unwrap();
         assert_eq!(failure.phase, AnnularFrozenPhase::Commit);
         assert!(
             matches!(failure.cause, AnnularFrozenCause::Link(cause) if matches!(*cause, PrismFreezeCause::UnsupportedDiagnostic { .. }))
         );
     });
+}
+
+fn isolation_mode_options(mode: u32) -> AnnularFrozenOptions {
+    let mut requested = tests::options();
+    if mode == 3 {
+        requested.version = 9;
+    }
+    requested
 }
