@@ -106,6 +106,10 @@ with the retained Jacobian request/response in
 polynomials, not the Rust implementation. This fixture must remain a genuine
 refusal; if the current census cannot admit it, preserve that refusal without
 weakening census admission or fabricating a Jordan receipt.
+The owned current-path baseline retains the
+`ExhaustivePairAndSelfDomains` obligation for this quartic and all four region
+obligations on the incomplete prism receipt. Its direct regularity witness is
+therefore separate from admission by the current region pipeline.
 
 Before behavior work, owned tests pin current cubic operands, actual rim/seam
 uses, stationary quartic evidence and unchanged incomplete body/gap behavior.

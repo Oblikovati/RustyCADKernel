@@ -129,3 +129,19 @@ fn embedding_baseline_stationary_quartic_is_jordan_but_not_regular() {
     );
     assert_eq!(zero.multiplicity(), 2);
 }
+
+#[test]
+fn embedding_baseline_stationary_quartic_preserves_current_census_refusal() {
+    use crate::sketch_region_certification::{CertificationObligation, census_bezier_fixture};
+    let poles = [[0., 0.], [0., 0.], [4., 0.], [0., 4.], [0., 0.]];
+    let (bridge, shapes) = fixture_for(vec![census_bezier_fixture(&poles, None)]);
+    assert!(
+        bridge
+            .census
+            .current_obligations()
+            .contains(&CertificationObligation::ExhaustivePairAndSelfDomains)
+    );
+    let receipt = run(&bridge, &shapes);
+    assert_four_present(&receipt);
+    assert!(matches!(receipt.completion, PrismCompletion::Incomplete));
+}
