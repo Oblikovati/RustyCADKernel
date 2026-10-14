@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0031: all chart measures, conditional on the same current binding as subset v1.
+mod operand_errors;
+pub(crate) use operand_errors::*;
 mod side;
 mod types;
 use super::*;
@@ -32,7 +34,7 @@ pub(crate) fn measure_bound_prism(
     extrusion: [f64; 3],
     requested: CompletePrismMeasureOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<CompletePrismMeasures, CompletePrismMeasureFailure> {
+) -> Result<CompletePrismMeasures, BoundPrismMeasureFailure> {
     let subset = bound_subset(binding, extrusion, requested.subset, cancelled)?;
     let side = side::measure_side(binding, requested.side_area, cancelled)?;
     let total = total_measure(&subset, &side, requested.total_area, cancelled)?;
@@ -49,7 +51,7 @@ fn bound_subset(
     extrusion: [f64; 3],
     options: PrismMeasureOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<PrismMeasureSubset, CompletePrismMeasureFailure> {
+) -> Result<PrismMeasureSubset, BoundPrismMeasureFailure> {
     scalars::measure_subset(
         &binding.region,
         &binding.charts,
@@ -57,19 +59,19 @@ fn bound_subset(
         options,
         cancelled,
     )
-    .map_err(CompletePrismMeasureFailure::from)
+    .map_err(BoundPrismMeasureFailure::Subset)
 }
 fn total_measure(
     subset: &PrismMeasureSubset,
     side: &CertifiedPolynomialSideIntegral,
     options: EnclosureSumOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<CertifiedEnclosureSum, CompletePrismMeasureFailure> {
+) -> Result<CertifiedEnclosureSum, BoundPrismMeasureFailure> {
     let components = [
         subset.first_cap.enclosure(),
         subset.last_cap.enclosure(),
         side.enclosure(),
     ];
     sum_nonnegative_enclosures(&components, options, cancelled)
-        .map_err(CompletePrismMeasureFailure::Total)
+        .map_err(BoundPrismMeasureFailure::Total)
 }

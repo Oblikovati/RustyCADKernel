@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0027: source-bound scalar subset, separate from body acceptance and publication.
+mod operand_errors;
+use operand_errors::*;
 mod scalars;
 mod types;
 use super::super::surface_charts::*;

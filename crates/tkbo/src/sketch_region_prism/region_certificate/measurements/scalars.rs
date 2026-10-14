@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: GPL-2.0-only
-use super::super::types::{holds, need};
 use super::*;
 use crate::sketch_region_source_conformance::CapturedPlaneSupport;
 use rustycad_tkg3d::top_abs::Orientation;
@@ -10,7 +9,7 @@ pub(super) fn measure_subset(
     extrusion: [f64; 3],
     requested: PrismMeasureOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck<PrismMeasureSubset> {
+) -> ScalarCheck<PrismMeasureSubset> {
     let signed_volume = sweep_measure(region, extrusion, requested.signed_volume, cancelled)?;
     Ok(PrismMeasureSubset {
         first_cap: cap_measure(charts, PrismImageRole::First, requested.cap_area, cancelled)?,
@@ -25,8 +24,8 @@ fn cap_measure(
     role: PrismImageRole,
     options: PolynomialIntegralOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck<CertifiedPolynomialPlaneMeasure> {
-    let chart = need(
+) -> ScalarCheck<CertifiedPolynomialPlaneMeasure> {
+    let chart = ScalarOperandCause::need(
         charts.iter().find(|chart| chart.role == role),
         "unique measured cap",
     )?;
@@ -38,7 +37,7 @@ fn cap_measure(
         options,
         cancelled,
     )
-    .map_err(|cause| PrismMeasureFailure::Cap { role, cause })
+    .map_err(|cause| PrismScalarFailure::Cap { role, cause })
 }
 
 fn sweep_measure(
@@ -46,7 +45,7 @@ fn sweep_measure(
     extrusion: [f64; 3],
     options: PolynomialIntegralOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> MeasureCheck<CertifiedPolynomialMeasure> {
+) -> ScalarCheck<CertifiedPolynomialMeasure> {
     let support = &region.copied.support;
     let curves = [sweep_boundary(region)];
     certify_polynomial_sweep_integral(
@@ -57,14 +56,14 @@ fn sweep_measure(
         options,
         &mut *cancelled,
     )
-    .map_err(PrismMeasureFailure::Sweep)
+    .map_err(PrismScalarFailure::Sweep)
 }
 
 fn cap_inputs(
     chart: &MeasuredPrismChart,
-) -> MeasureCheck<(&CapturedPlaneSupport, OrientedMetricCurve<'_>)> {
+) -> ScalarCheck<(&CapturedPlaneSupport, OrientedMetricCurve<'_>)> {
     let support = planar_cap(&chart.captured.actual)?;
-    holds(
+    ScalarOperandCause::holds(
         "complete single cap native range",
         chart.captured.trims.len() == 1 && chart.captured.trims[0].interval == [0., 1.],
     )?;
@@ -82,10 +81,10 @@ fn sweep_boundary(region: &RegionCertificate) -> OrientedMetricCurve<'_> {
         reversed: region.boundary_reversed,
     }
 }
-fn planar_cap(actual: &CapturedPrismSurface) -> MeasureCheck<&CapturedPlaneSupport> {
+fn planar_cap(actual: &CapturedPrismSurface) -> ScalarCheck<&CapturedPlaneSupport> {
     match actual {
         CapturedPrismSurface::Plane(support) => Ok(support),
-        _ => Err(RegionCertificateCause::MissingEvidence {
+        _ => Err(ScalarOperandCause::Missing {
             hypothesis: "actual planar cap",
         }
         .into()),

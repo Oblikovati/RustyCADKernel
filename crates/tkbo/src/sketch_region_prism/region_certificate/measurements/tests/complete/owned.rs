@@ -12,6 +12,7 @@ fn captured_complete_measures_survive_disposal_of_every_mutable_input_owner() {
     drop(bridge);
     drop(shapes);
     let repeated = measure_bound_prism(&report.binding, extrusion, fast_options(), &mut || false)
+        .map_err(CompletePrismMeasureFailure::from)
         .map_err(full_failure_name)
         .unwrap();
     assert_same_measures(&report.measures, &repeated);
@@ -28,4 +29,56 @@ fn assert_same_measures(expected: &CompletePrismMeasures, actual: &CompletePrism
     assert_eq!(actual.side, expected.side);
     assert_eq!(actual.total, expected.total);
     assert_eq!(actual.requested, expected.requested);
+}
+
+#[test]
+fn pure_scalar_failures_are_owned_and_keep_old_missing_evidence_payloads() {
+    fn send_sync<T: Send + Sync>() {}
+    send_sync::<BoundPrismMeasureFailure>();
+    send_sync::<PrismScalarFailure>();
+    send_sync::<ScalarOperandCause>();
+    let cause = ScalarOperandCause::need::<usize>(None, "owned operand").unwrap_err();
+    let legacy = PrismMeasureFailure::from(PrismScalarFailure::from(cause));
+    assert!(matches!(
+        legacy,
+        PrismMeasureFailure::Region(RegionCertificateCause::MissingEvidence {
+            hypothesis: "owned operand"
+        })
+    ));
+    assert_eq!(
+        ScalarOperandCause::need(Some(42), "owned value").unwrap(),
+        42
+    );
+}
+
+#[test]
+fn pure_scalar_conditions_keep_old_actual_and_expected_counts() {
+    assert!(ScalarOperandCause::holds("exact equality", true).is_ok());
+    let cause = ScalarOperandCause::holds("exact equality", false).unwrap_err();
+    let legacy = RegionCertificateCause::from(cause);
+    assert!(matches!(
+        legacy,
+        RegionCertificateCause::Hypothesis {
+            name: "exact equality",
+            actual: 0,
+            expected: 1
+        }
+    ));
+}
+
+#[test]
+fn side_operand_conversion_preserves_nested_binding_region_failure() {
+    let cause = BoundPrismMeasureFailure::SideOperand(ScalarOperandCause::Missing {
+        hypothesis: "positive height",
+    });
+    let CompletePrismMeasureFailure::Binding(cause) = CompletePrismMeasureFailure::from(cause)
+    else {
+        panic!("expected legacy binding refusal");
+    };
+    assert!(matches!(
+        *cause,
+        PrismBindingFailure::Region(RegionCertificateCause::MissingEvidence {
+            hypothesis: "positive height"
+        })
+    ));
 }
