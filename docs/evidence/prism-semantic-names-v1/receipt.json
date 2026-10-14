@@ -1,0 +1,97 @@
+{
+  "scope": "Private fixed semantic name dictionary and opaque replay envelope; no geometry correspondence or publication authority",
+  "source_commit": "4c9511d80bf02ff9a9f6e9d554c7a4c57f313622",
+  "base_commit": "4cf1da12b",
+  "behavior_version": 1,
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "jobs": 2,
+  "source_bookends": {
+    "tracked_files": 15971,
+    "equal": true,
+    "manifest_sha256": "7f908071a773dd7261efc1ca9819738f5cad8fed113dafe93e5fae547c8f63c7"
+  },
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "owned_request::names",
+        "--jobs",
+        "2"
+      ],
+      "exit": 0,
+      "log": "frozen-0.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "frozen::replay_tests",
+        "--jobs",
+        "2"
+      ],
+      "exit": 0,
+      "log": "frozen-1.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--jobs",
+        "2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "log": "frozen-2.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "frozen-3.log"
+    }
+  ],
+  "test_counts": {
+    "cargo_semantic_names": 14,
+    "cargo_legacy_frozen_replay": 3,
+    "extracted_same_source": 14
+  },
+  "independent_oracle": "Literal Python stage/role/anchor and binary format fixture; production Rust is neither imported nor parsed",
+  "process_replay": {
+    "processes": 2,
+    "length": 3500,
+    "sha256": "57929d3816ce57bbec7d5fd19cd59dce1742783e5a5d34ec5d65733d14cb9b82",
+    "both_equal_literal_fixture": true
+  },
+  "thread_check": "Eight independent constructed envelopes equal serial bytes; compile-time Send/Sync for every added type",
+  "earlier_diagnostic": "cargo-focused.log:12 passed while final source additions occurred; not frozen acceptance",
+  "exclusions": [
+    "No actual correspondence adapter",
+    "No complete operation or public API",
+    "No full TKBO suite",
+    "No ThreadSanitizer execution",
+    "No geometry/native oracle or host modifications"
+  ],
+  "artifact": {
+    "path": "checks.tar.gz",
+    "sha256": "2fa853c7465a386498e282b9a516c104f0ff6cea94a97a0f4e51f1c435d6111b"
+  },
+  "extracted_test_binary_sha256": "4204274a916a0409a4ae2d28470ada37771a07251f2c3be2b483024d1d09fa7a"
+}
