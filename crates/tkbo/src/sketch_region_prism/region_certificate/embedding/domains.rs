@@ -84,17 +84,7 @@ fn retain_domain(chart: &BoundPrismChart, kind: PrismDomainKind) -> PrismFaceDom
             .captured
             .trims
             .iter()
-            .map(|trim| retain_trim(chart, trim))
+            .map(|trim| trim_incidence::retain_trim(chart, trim))
             .collect(),
-    }
-}
-fn retain_trim(chart: &BoundPrismChart, trim: &CapturedPrismTrim) -> PrismAuthoredTrimUse {
-    PrismAuthoredTrimUse {
-        face: chart.output.clone(),
-        output: trim.output.clone(),
-        source: trim.source.clone(),
-        parents: trim.parents.clone(),
-        role: trim.role,
-        interval: trim.interval,
     }
 }

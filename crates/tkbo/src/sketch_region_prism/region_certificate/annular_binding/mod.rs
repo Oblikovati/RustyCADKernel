@@ -16,9 +16,9 @@ mod settings;
 pub(in crate::sketch_region_prism) use operation::bind_annular_prism_v2;
 pub(in crate::sketch_region_prism) use rebind::rebind_annular_prism_v2;
 #[cfg(test)]
-pub(in crate::sketch_region_prism) mod tests;
-#[cfg(test)]
 mod contract_tests;
+#[cfg(test)]
+pub(in crate::sketch_region_prism) mod tests;
 mod types;
 mod views;
 use super::super::*;

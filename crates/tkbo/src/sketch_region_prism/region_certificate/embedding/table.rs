@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! J != 0 makes F(u,v,s)=A(u,v)+sE injective; apply only to the captured Jordan prism.
-use super::super::{
-    history::same_physical,
-    hypothesis::{HypothesisCheck as RegionCheck, holds, require},
-};
+use super::super::hypothesis::{HypothesisCheck as RegionCheck, require};
 use super::*;
 
 pub(super) fn six_rows(domains: &[PrismFaceDomain; 3]) -> RegionCheck<[PrismFaceIncidence; 6]> {
@@ -46,17 +43,9 @@ fn authored_trim(
 fn seam(side: &PrismFaceDomain) -> RegionCheck<PrismIncidenceConclusion> {
     let start = authored_trim(side, PrismTrimRole::Start)?;
     let end = authored_trim(side, PrismTrimRole::End)?;
-    holds(
-        "embedding authored seam physical correspondence",
-        same_physical(&start.output, &end.output) && same_physical(&start.source, &end.source),
-    )?;
-    Ok(PrismIncidenceConclusion::InjectiveModuloSeam {
-        start: start.clone(),
-        end: end.clone(),
-        native_endpoints: [0., 1.],
-        normalized_sweep: [0., 1.],
-    })
+    trim_incidence::seam_conclusion(start, end)
 }
+
 fn rim(
     cap: &PrismFaceDomain,
     side: &PrismFaceDomain,
@@ -65,18 +54,9 @@ fn rim(
 ) -> RegionCheck<PrismIncidenceConclusion> {
     let cap_trim = authored_trim(cap, role)?;
     let side_trim = authored_trim(side, role)?;
-    holds(
-        "embedding authored rim physical correspondence",
-        same_physical(&cap_trim.output, &side_trim.output)
-            && same_physical(&cap_trim.source, &side_trim.source),
-    )?;
-    Ok(PrismIncidenceConclusion::ExactlyRim {
-        cap: cap_trim.clone(),
-        side: side_trim.clone(),
-        native: [0., 1.],
-        normalized_sweep: sweep,
-    })
+    trim_incidence::rim_conclusion(cap_trim, side_trim, sweep)
 }
+
 fn row(
     first: &PrismFaceDomain,
     second: &PrismFaceDomain,

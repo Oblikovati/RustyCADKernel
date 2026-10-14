@@ -1,6 +1,21 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0029: injective affine sweep over named trimmed domains and the authored seam quotient.
 mod access;
+pub(in crate::sketch_region_prism) use annular_domains::{
+    AnnularAuthoredTrim, AnnularDomainKind, AnnularDomains, AnnularFaceDomain,
+};
+pub(in crate::sketch_region_prism) use annular_operation::*;
+pub(in crate::sketch_region_prism) use annular_regularity::{
+    AnnularBoundaryRegularity, AnnularRegularityOptions, AnnularRegularityReport,
+};
+pub(in crate::sketch_region_prism) use annular_table::{
+    AnnularFaceIncidence, AnnularIncidenceConclusion,
+};
+mod annular_coverage;
+mod annular_domains;
+mod annular_operation;
+mod annular_regularity;
+mod annular_table;
 mod domains;
 mod error;
 mod regularity;
@@ -8,6 +23,7 @@ mod table;
 mod table_validation;
 #[cfg(test)]
 mod table_validation_tests;
+pub(in crate::sketch_region_prism) mod trim_incidence;
 mod types;
 use super::super::surface_charts::*;
 use super::current_binding::*;
@@ -95,3 +111,6 @@ fn finalize(
 }
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod trim_incidence_tests;
