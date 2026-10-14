@@ -2,6 +2,31 @@
 //! Native, source and chart causes remain typed; correspondence alone does not complete a body.
 use super::*;
 use rustycad_tkernel::standard::Failure;
+pub(in crate::sketch_region_prism) struct AnnularBindingFailure<'a> {
+    pub operation: u64,
+    pub selected_candidate: u64,
+    pub stage: AnnularBindingStage,
+    pub requested_region: TwoLoopRegionOptions,
+    pub operation_limits: super::super::super::frozen::FrozenPrismLimits,
+    pub cause: Box<AnnularBindingCause<'a>>,
+}
+pub(in crate::sketch_region_prism) type AnnularBindingResult<'a, T> =
+    Result<T, Box<AnnularBindingFailure<'a>>>;
+pub(super) fn attributed<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    receipt: &PrismReceipt,
+    stage: AnnularBindingStage,
+    cause: Box<AnnularBindingCause<'a>>,
+) -> Box<AnnularBindingFailure<'a>> {
+    Box::new(AnnularBindingFailure {
+        operation: request.identities.operation,
+        selected_candidate: request.identities.selected,
+        stage,
+        requested_region: request.requested,
+        operation_limits: super::super::super::frozen::capture_prism_limits(receipt),
+        cause,
+    })
+}
 pub(in crate::sketch_region_prism) enum AnnularBindingCause<'a> {
     Region(Box<TwoLoopRegionFailure<'a>>),
     Chart(Box<super::super::current_binding::PrismBindingFailure>),

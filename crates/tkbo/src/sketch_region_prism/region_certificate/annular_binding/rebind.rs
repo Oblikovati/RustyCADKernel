@@ -6,6 +6,14 @@ pub(in crate::sketch_region_prism) fn rebind_annular_prism_v2<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     receipt: &PrismReceipt,
     binding: &AnnularPrismBinding,
+) -> AnnularBindingResult<'a, ()> {
+    check(request, receipt, binding)
+        .map_err(|cause| attributed(request, receipt, AnnularBindingStage::Commit, cause))
+}
+pub(super) fn check<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    receipt: &PrismReceipt,
+    binding: &AnnularPrismBinding,
 ) -> AnnularCheck<'a> {
     operation::region_rebind(request, &binding.region)?;
     let fresh = operation::capture(

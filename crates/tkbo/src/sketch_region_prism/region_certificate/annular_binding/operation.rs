@@ -8,6 +8,19 @@ pub(in crate::sketch_region_prism) fn bind_annular_prism_v2<'a>(
     region: Box<TwoLoopRegionCertificate>,
     receipt: &PrismReceipt,
     progress: &mut dyn AnnularBindingProgress,
+) -> AnnularBindingResult<'a, AnnularPrismBinding> {
+    let mut tracker = ProgressTracker {
+        progress,
+        stage: AnnularBindingStage::Admission,
+    };
+    bind(request, region, receipt, &mut tracker)
+        .map_err(|cause| attributed(request, receipt, tracker.stage, cause))
+}
+fn bind<'a>(
+    request: &TwoLoopRegionRequest<'a, '_>,
+    region: Box<TwoLoopRegionCertificate>,
+    receipt: &PrismReceipt,
+    progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'a, AnnularPrismBinding> {
     poll(progress, AnnularBindingStage::Admission)?;
     region_rebind(request, &region)?;
@@ -19,7 +32,7 @@ pub(in crate::sketch_region_prism) fn bind_annular_prism_v2<'a>(
         operands,
         replay,
     };
-    rebind::rebind_annular_prism_v2(request, receipt, &binding)?;
+    rebind::check(request, receipt, &binding)?;
     Ok(binding)
 }
 pub(super) fn capture<'a>(
@@ -120,5 +133,18 @@ impl AnnularBindingProgress for CallbackFree {
         _: AnnularBindingStage,
     ) -> Result<bool, rustycad_tkernel::standard::Failure> {
         Ok(false)
+    }
+}
+struct ProgressTracker<'p> {
+    progress: &'p mut dyn AnnularBindingProgress,
+    stage: AnnularBindingStage,
+}
+impl AnnularBindingProgress for ProgressTracker<'_> {
+    fn checkpoint(
+        &mut self,
+        stage: AnnularBindingStage,
+    ) -> Result<bool, rustycad_tkernel::standard::Failure> {
+        self.stage = stage;
+        self.progress.checkpoint(stage)
     }
 }

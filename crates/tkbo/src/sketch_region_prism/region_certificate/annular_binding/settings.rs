@@ -31,13 +31,14 @@ pub(super) fn capture(
         limits.effective_extrusion.map(|v| v.map(f64::to_bits))
             == Some(limits.extrusion.map(f64::to_bits)),
     )?;
+    // The diagnostic has not executed tolerance validation. A requested budget is not an applied one.
     holds(
-        "effective spatial request unchanged",
-        limits.effective_spatial.map(f64::to_bits) == Some(limits.spatial_limit.to_bits()),
+        "diagnostic spatial limit remains unapplied",
+        limits.effective_spatial.is_none(),
     )?;
     holds(
-        "effective parameter request unchanged",
-        limits.effective_parameter.map(f64::to_bits) == Some(limits.parameter_limit.to_bits()),
+        "diagnostic parameter limit remains unapplied",
+        limits.effective_parameter.is_none(),
     )?;
     holds(
         "effective roots unchanged",

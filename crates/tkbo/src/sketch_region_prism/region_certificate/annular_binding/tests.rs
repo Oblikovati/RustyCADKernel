@@ -15,7 +15,7 @@ impl TwoLoopRegionProgress for ContinueRegion {
         Ok(false)
     }
 }
-fn with_actual<R>(
+pub(in crate::sketch_region_prism) fn with_actual<R>(
     run: impl FnOnce(
         &TwoLoopRegionRequest<'_, '_>,
         Box<TwoLoopRegionCertificate>,
@@ -40,6 +40,12 @@ fn with_actual<R>(
     };
     let mut receipt = super::super::super::annular_construction::retained_annular_sweep(&fixture);
     run(&request, region, &mut receipt)
+}
+pub(in crate::sketch_region_prism) fn actual_binding() -> AnnularPrismBinding {
+    with_actual(|request, region, receipt| {
+        bind_annular_prism_v2(request, region, receipt, &mut ContinueBinding)
+            .unwrap_or_else(|cause| panic!("actual binding: {}", describe_refusal(&cause.cause)))
+    })
 }
 #[test]
 fn actual_copy_has_nine_source_keyed_directed_members_and_two_full_boundaries() {
@@ -162,7 +168,7 @@ fn actual_bound_entry_retains_original_region_limits_and_nonzero_signed_sweep() 
             .unwrap_or_else(|cause| {
                 panic!(
                     "expected current source/copy/chart binding: {}",
-                    describe_refusal(&cause)
+                    describe_refusal(&cause.cause)
                 )
             });
         assert_eq!(proof.region().selected_candidate_id(), 301);
@@ -171,6 +177,8 @@ fn actual_bound_entry_retains_original_region_limits_and_nonzero_signed_sweep() 
         assert!(proof.signed_jacobian().compare_f64(2.).unwrap().is_eq());
         assert_eq!(proof.limits().extrusion, [0., 0., 2.]);
         assert!(proof.limits().achieved_error.is_none());
+        assert!(proof.limits().effective_spatial.is_none());
+        assert!(proof.limits().effective_parameter.is_none());
         assert!(!proof.replay_bytes().is_empty());
         assert!(rebind_annular_prism_v2(request, receipt, &proof).is_ok());
         assert!(matches!(receipt.completion, PrismCompletion::Incomplete));
