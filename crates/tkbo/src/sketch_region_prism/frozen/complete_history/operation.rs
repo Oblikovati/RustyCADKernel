@@ -22,13 +22,7 @@ pub(crate) fn inspect_complete_prism_history<'a>(
         Ok(value) => value,
         Err(error) => return declined(error),
     };
-    if cancelled(PrismHistoryPhase::Commit) {
-        return cancelled_outcome(request, PrismHistoryPhase::Commit);
-    }
-    if let Err(error) = rebind_complete_prism_history(request, &captured) {
-        return declined(error);
-    }
-    PrismHistoryOutcome::Inspected(Box::new(captured))
+    commit_inspection(request, captured, cancelled)
 }
 /// Rebind standalone history after the last external callback; `rebind_complete_prism_history(&request,&history)`.
 pub(crate) fn rebind_complete_prism_history<'a>(
@@ -97,13 +91,13 @@ pub(super) fn failure<'a>(
     let class = cause.failure_class();
     let entity = cause.primary_use();
     PrismHistoryFailure {
-        finding: PrismHistoryFinding {
+        finding: Box::new(PrismHistoryFinding {
             operation: request.publication.operation,
             phase,
             entity,
             class,
             cause,
-        },
+        }),
         local_diagnostic: None,
     }
 }
@@ -136,4 +130,18 @@ pub(crate) fn inspect_bound_prism_history<'a>(
         Ok(value) => PrismHistoryOutcome::Inspected(Box::new(value)),
         Err(error) => declined(error),
     }
+}
+
+fn commit_inspection<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+    captured: PrismCompleteHistory,
+    mut cancelled: impl FnMut(PrismHistoryPhase) -> bool,
+) -> PrismHistoryOutcome<'a> {
+    if cancelled(PrismHistoryPhase::Commit) {
+        return cancelled_outcome(request, PrismHistoryPhase::Commit);
+    }
+    if let Err(error) = rebind_complete_prism_history(request, &captured) {
+        return declined(error);
+    }
+    PrismHistoryOutcome::Inspected(Box::new(captured))
 }

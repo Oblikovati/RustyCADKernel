@@ -42,41 +42,11 @@ impl HistoryFixture {
     }
 }
 fn additional_names(operation: &JoinFixture, join: &JoinedPrismProof) -> PrismHistoryBindings {
-    let PartitionObservation::Captured(partition) = &operation.bridge.mapped.arrangement.partition
-    else {
-        panic!("expected actual partition");
-    };
-    let initial = operands::copied_contexts(
-        &partition.input_contexts[0].observation,
-        PrismHistoryStage::InputCopy,
-    )
-    .unwrap();
+    let initial = initial_contexts(operation);
     let copier = operation.bridge.mapped.copied.as_ref().unwrap();
     let candidate =
         operands::copied_contexts(&copier.contexts, PrismHistoryStage::CandidateCopy).unwrap();
-    let complement = copier
-        .completion
-        .as_ref()
-        .ok()
-        .unwrap()
-        .candidates
-        .iter()
-        .find(|c| {
-            crate::sketch_region::PartitionOccurrenceIdentity::capture(&c.face)
-                == join
-                    .embedding()
-                    .binding()
-                    .region
-                    .complementary_candidate
-                    .face
-        })
-        .unwrap();
-    let complementary = operands::current_contexts(
-        &complement.face,
-        PrismHistoryStage::Complement,
-        PrismHistoryLimits::bounded_v1(),
-    )
-    .unwrap();
+    let complementary = complementary_contexts(operation, join);
     let intermediate = [
         (PrismHistoryStage::InputCopy, &initial.copied),
         (PrismHistoryStage::Partition, &candidate.source),
@@ -99,16 +69,7 @@ fn authored_stage(
     let mut uses = Vec::new();
     for row in rows {
         let member = semantic_member(stage, row.kind);
-        if !members
-            .iter()
-            .any(|b| same_definition(&b.actual, &row.occurrence))
-        {
-            assert!(!members.iter().any(|b| b.member == member));
-            members.push(PrismSourceBinding {
-                actual: row.occurrence.clone(),
-                member,
-            });
-        }
+        append_semantic_member(&mut members, row, member);
         uses.push(PrismHistoricalUseBinding {
             actual: row.clone(),
             authored_use: semantic_use(stage, row),
@@ -157,28 +118,8 @@ fn same_operation_fixture_has_exhaustive_historical_query_and_context_operands()
         1
     );
     assert_eq!(fixture.historical.intermediate.len(), 4);
-    for names in &fixture.historical.intermediate {
-        let rows: Vec<_> = names.uses.iter().map(|b| b.actual.clone()).collect();
-        contexts::bind_historical_contexts(
-            request.publication.operation,
-            names,
-            &rows,
-            request.requested.limits,
-        )
-        .unwrap();
-    }
-    assert_eq!(
-        operands::generated_contexts(&request, PrismHistoryStage::Selected)
-            .unwrap()
-            .len(),
-        5
-    );
-    assert_eq!(
-        operands::generated_contexts(&request, PrismHistoryStage::Complement)
-            .unwrap()
-            .len(),
-        5
-    );
+    assert_named_contexts(&fixture, &request);
+    assert_complementary_contexts(&request);
 }
 
 #[test]
@@ -197,14 +138,7 @@ fn full_semantic_stage_roster_binds_actual_censuses_with_no_implicit_names() {
             .collect::<Vec<_>>(),
         [3, 3, 4, 4, 5, 5, 5]
     );
-    let originals = stages::stage(&bound, PrismHistoryStage::Original).unwrap();
-    assert_eq!(
-        stage_names::original_names(&request, originals.actual)
-            .unwrap()
-            .uses
-            .len(),
-        3
-    );
+    assert_original_names(&request, &bound);
 }
 
 #[test]
@@ -277,12 +211,7 @@ fn exhaustive_sweep_queries_distinguish_retired_intermediate_wire_from_original_
         stages::stage(&stages, PrismHistoryStage::SweepBase).unwrap(),
     )
     .unwrap();
-    assert_eq!(queries.len(), 5);
-    assert_eq!(queries.iter().filter(|q| q.retired).count(), 1);
-    assert_eq!(lineage.retired().len(), 1);
-    let retired = queries.iter().find(|q| q.retired).unwrap();
-    assert!(retired.generated.is_empty());
-    assert!(retired.first.is_some() && retired.last.is_some());
+    assert_sweep_retirement(&queries, &lineage);
 }
 
 #[test]
@@ -338,4 +267,124 @@ pub(in crate::sketch_region_prism) fn authored_history_inputs(
         super::super::lineage::tests::authored_copy_bindings(&operation.receipt),
         additional_names(operation, join),
     )
+}
+
+fn complementary_contexts(
+    operation: &JoinFixture,
+    join: &JoinedPrismProof,
+) -> Vec<RegionObservedContext> {
+    let complement = complementary_candidate(operation, join);
+    operands::current_contexts(
+        &complement.face,
+        PrismHistoryStage::Complement,
+        PrismHistoryLimits::bounded_v1(),
+    )
+    .unwrap()
+}
+
+fn complementary_candidate<'a>(
+    operation: &'a JoinFixture,
+    join: &JoinedPrismProof,
+) -> &'a crate::sketch_region_candidates::RegionCandidate {
+    let copier = operation.bridge.mapped.copied.as_ref().unwrap();
+    copier
+        .completion
+        .as_ref()
+        .ok()
+        .unwrap()
+        .candidates
+        .iter()
+        .find(|c| {
+            crate::sketch_region::PartitionOccurrenceIdentity::capture(&c.face)
+                == join
+                    .embedding()
+                    .binding()
+                    .region
+                    .complementary_candidate
+                    .face
+        })
+        .unwrap()
+}
+
+fn append_semantic_member(
+    members: &mut Vec<PrismSourceBinding>,
+    row: &RegionObservedContext,
+    member: AuthoredPrismId,
+) {
+    if !members
+        .iter()
+        .any(|b| same_definition(&b.actual, &row.occurrence))
+    {
+        assert!(!members.iter().any(|b| b.member == member));
+        members.push(PrismSourceBinding {
+            actual: row.occurrence.clone(),
+            member,
+        });
+    }
+}
+
+fn assert_named_contexts(fixture: &HistoryFixture, request: &PrismHistoryRequest<'_, '_>) {
+    for names in &fixture.historical.intermediate {
+        let rows: Vec<_> = names.uses.iter().map(|b| b.actual.clone()).collect();
+        contexts::bind_historical_contexts(
+            request.publication.operation,
+            names,
+            &rows,
+            request.requested.limits,
+        )
+        .unwrap();
+    }
+}
+
+fn assert_original_names(
+    request: &PrismHistoryRequest<'_, '_>,
+    bound: &[stages::BoundHistoryStage<'_>],
+) {
+    let originals = stages::stage(bound, PrismHistoryStage::Original).unwrap();
+    assert_eq!(
+        stage_names::original_names(request, originals.actual)
+            .unwrap()
+            .uses
+            .len(),
+        3
+    );
+}
+
+fn assert_sweep_retirement(
+    queries: &[PrismCompleteSweepQuery],
+    lineage: &super::super::lineage::PrismLineageInspection,
+) {
+    assert_eq!(queries.len(), 5);
+    assert_eq!(queries.iter().filter(|q| q.retired).count(), 1);
+    assert_eq!(lineage.retired().len(), 1);
+    let retired = queries.iter().find(|q| q.retired).unwrap();
+    assert!(retired.generated.is_empty());
+    assert!(retired.first.is_some() && retired.last.is_some());
+}
+
+fn initial_contexts(operation: &JoinFixture) -> &crate::sketch_region::RegionCopyContexts {
+    let PartitionObservation::Captured(partition) = &operation.bridge.mapped.arrangement.partition
+    else {
+        panic!("expected actual partition");
+    };
+    operands::copied_contexts(
+        &partition.input_contexts[0].observation,
+        PrismHistoryStage::InputCopy,
+    )
+    .unwrap()
+}
+
+fn assert_complementary_contexts(request: &PrismHistoryRequest<'_, '_>) {
+    assert_eq!(
+        operands::generated_contexts(request, PrismHistoryStage::Selected)
+            .unwrap()
+            .len(),
+        5
+    );
+    assert_eq!(
+        operands::generated_contexts(request, PrismHistoryStage::Complement)
+            .unwrap()
+            .len(),
+        5
+    );
 }

@@ -20,22 +20,7 @@ pub(super) struct BoundHistoryStage<'a> {
 pub(super) fn capture_operands(
     request: &PrismHistoryRequest<'_, '_>,
 ) -> HistoryCheck<Vec<HistoryStageOperands>> {
-    history_count("one original Jordan source", request.sources.len(), 1)?;
-    let partition = operands::partition(request)?;
-    history_count(
-        "one initial copied source context receipt",
-        partition.input_contexts.len(),
-        1,
-    )?;
-    history_count(
-        "same caller-authored input source",
-        usize::from(partition.input_contexts[0].source == request.sources[0].identity),
-        1,
-    )?;
-    let initial = operands::copied_contexts(
-        &partition.input_contexts[0].observation,
-        PrismHistoryStage::InputCopy,
-    )?;
+    let initial = initial_contexts(request)?;
     let mut result = Vec::new();
     for stage in STAGES {
         let rows = rows_for(request, stage, initial)?;
@@ -192,4 +177,26 @@ pub(super) fn stage<'a, 'b>(
     let matches: Vec<_> = rows.iter().filter(|row| row.stage == stage).collect();
     history_count("one bound semantic history stage", matches.len(), 1)?;
     Ok(&matches[0].contexts)
+}
+
+fn initial_contexts<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+) -> HistoryCheck<&'a crate::sketch_region::RegionCopyContexts> {
+    history_count("one original Jordan source", request.sources.len(), 1)?;
+    let partition = operands::partition(request)?;
+    history_count(
+        "one initial copied source context receipt",
+        partition.input_contexts.len(),
+        1,
+    )?;
+    history_count(
+        "same caller-authored input source",
+        usize::from(partition.input_contexts[0].source == request.sources[0].identity),
+        1,
+    )?;
+    let initial = operands::copied_contexts(
+        &partition.input_contexts[0].observation,
+        PrismHistoryStage::InputCopy,
+    )?;
+    Ok(initial)
 }

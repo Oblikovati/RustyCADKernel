@@ -20,19 +20,7 @@ pub(super) fn original_names(
         uses: Vec::new(),
     };
     for row in rows {
-        let actual = original_identity(request, &row.occurrence)?;
-        let found: Vec<_> = request
-            .publication
-            .originals
-            .iter()
-            .filter(|b| b.actual == actual)
-            .collect();
-        history_count("unique actual original use binding", found.len(), 1)?;
-        append_member(&mut result, &row.occurrence, found[0].member)?;
-        result.uses.push(PrismHistoricalUseBinding {
-            actual: row.clone(),
-            authored_use: found[0].directed_use,
-        });
+        append_original(request, &mut result, row)?;
     }
     Ok(result)
 }
@@ -53,13 +41,7 @@ pub(super) fn legacy_names(
     stage: PrismHistoryStage,
     rows: &[RegionObservedContext],
 ) -> HistoryCheck<PrismHistoricalStageBindings> {
-    let (members, uses) = match stage {
-        PrismHistoryStage::Selected => (
-            &request.copied.selected_members,
-            &request.copied.selected_uses,
-        ),
-        _ => (&request.publication.sources, &request.copied.copied_uses),
-    };
+    let (members, uses) = legacy_bindings(request, stage);
     history_count(
         "complete authored legacy use census",
         uses.len(),
@@ -70,16 +52,7 @@ pub(super) fn legacy_names(
         members: Vec::new(),
         uses: Vec::new(),
     };
-    for binding in members {
-        append_member(&mut result, &binding.actual, binding.member)?;
-    }
-    for binding in uses {
-        let actual = context_snapshot(&binding.actual)?;
-        result.uses.push(PrismHistoricalUseBinding {
-            actual,
-            authored_use: binding.authored_use,
-        });
-    }
+    append_legacy(&mut result, members, uses)?;
     Ok(result)
 }
 fn append_member(
@@ -121,4 +94,57 @@ fn context_snapshot(
             .shape_type()
             .map_err(|cause| PrismHistoryCause::Native(std::sync::Arc::new(cause)))?,
     })
+}
+
+fn append_original(
+    request: &PrismHistoryRequest<'_, '_>,
+    result: &mut PrismHistoricalStageBindings,
+    row: &RegionObservedContext,
+) -> HistoryCheck<()> {
+    let actual = original_identity(request, &row.occurrence)?;
+    let found: Vec<_> = request
+        .publication
+        .originals
+        .iter()
+        .filter(|b| b.actual == actual)
+        .collect();
+    history_count("unique actual original use binding", found.len(), 1)?;
+    append_member(result, &row.occurrence, found[0].member)?;
+    result.uses.push(PrismHistoricalUseBinding {
+        actual: row.clone(),
+        authored_use: found[0].directed_use,
+    });
+    Ok(())
+}
+
+fn legacy_bindings<'a>(
+    request: &PrismHistoryRequest<'a, '_>,
+    stage: PrismHistoryStage,
+) -> (&'a [PrismSourceBinding], &'a [PrismDirectedBinding]) {
+    let (members, uses) = match stage {
+        PrismHistoryStage::Selected => (
+            &request.copied.selected_members,
+            &request.copied.selected_uses,
+        ),
+        _ => (&request.publication.sources, &request.copied.copied_uses),
+    };
+    (members, uses)
+}
+
+fn append_legacy(
+    result: &mut PrismHistoricalStageBindings,
+    members: &[PrismSourceBinding],
+    uses: &[PrismDirectedBinding],
+) -> HistoryCheck<()> {
+    for binding in members {
+        append_member(result, &binding.actual, binding.member)?;
+    }
+    for binding in uses {
+        let actual = context_snapshot(&binding.actual)?;
+        result.uses.push(PrismHistoricalUseBinding {
+            actual,
+            authored_use: binding.authored_use,
+        });
+    }
+    Ok(())
 }

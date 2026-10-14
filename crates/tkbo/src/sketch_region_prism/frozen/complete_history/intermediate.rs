@@ -22,32 +22,9 @@ pub(super) fn capture(
     let partition_relations = relations::partition(request, stages, &partition_queries)?;
     let candidate_copy = candidate_queries(request, stages)?;
     let candidates = candidate_history(request, stages, &candidate_copy, &partition_relations)?;
-    let selected_relations = relations::generated(
-        request,
-        stages::stage(stages, PrismHistoryStage::Selected)?,
-        PrismHistoryStage::Selected,
-        &candidates.selected,
-        &candidates.copy_links,
-    )?;
-    let complementary_relations = relations::generated(
-        request,
-        stages::stage(stages, PrismHistoryStage::Complement)?,
-        PrismHistoryStage::Complement,
-        &candidates.complement,
-        &candidates.copy_links,
-    )?;
-    relations::receipt_regions(
-        request,
-        stages,
-        &selected_relations,
-        &complementary_relations,
-    )?;
-    let contexts = observed_values::sorted(
-        stages
-            .iter()
-            .flat_map(|s| s.contexts.owned.clone())
-            .collect(),
-    );
+    let (selected_relations, complementary_relations) =
+        candidate_relations(request, stages, &candidates)?;
+    let contexts = all_contexts(stages);
     Ok(PrismIntermediateHistory {
         contexts,
         initial_copy,
@@ -119,4 +96,51 @@ fn administrative_container(
         1,
     )?;
     Ok(rows[0].key.clone())
+}
+
+fn candidate_relations(
+    request: &PrismHistoryRequest<'_, '_>,
+    stages: &[BoundHistoryStage<'_>],
+    candidates: &PrismCandidateHistory,
+) -> HistoryCheck<(Vec<PrismHistoricalRelation>, Vec<PrismHistoricalRelation>)> {
+    let selected_relations =
+        generated_relations(request, stages, candidates, PrismHistoryStage::Selected)?;
+    let complementary_relations =
+        generated_relations(request, stages, candidates, PrismHistoryStage::Complement)?;
+    relations::receipt_regions(
+        request,
+        stages,
+        &selected_relations,
+        &complementary_relations,
+    )?;
+    Ok((selected_relations, complementary_relations))
+}
+
+fn generated_relations(
+    request: &PrismHistoryRequest<'_, '_>,
+    stages: &[BoundHistoryStage<'_>],
+    candidates: &PrismCandidateHistory,
+    stage: PrismHistoryStage,
+) -> HistoryCheck<Vec<PrismHistoricalRelation>> {
+    let rows = if stage == PrismHistoryStage::Selected {
+        &candidates.selected
+    } else {
+        &candidates.complement
+    };
+    relations::generated(
+        request,
+        stages::stage(stages, stage)?,
+        stage,
+        rows,
+        &candidates.copy_links,
+    )
+}
+
+fn all_contexts(stages: &[BoundHistoryStage<'_>]) -> Vec<PrismHistoricalContext> {
+    observed_values::sorted(
+        stages
+            .iter()
+            .flat_map(|s| s.contexts.owned.clone())
+            .collect(),
+    )
 }

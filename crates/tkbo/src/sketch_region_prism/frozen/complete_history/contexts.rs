@@ -10,25 +10,7 @@ pub(super) fn bind_historical_contexts<'a>(
     rows: &'a [RegionObservedContext],
     limits: PrismHistoryLimits,
 ) -> HistoryCheck<BoundHistoricalContexts<'a>> {
-    limits.admit().map_err(PrismHistoryCause::Bounds)?;
-    history_count(
-        "nonzero operation identity",
-        usize::from(operation.0 != 0),
-        1,
-    )?;
-    history_count(
-        "nonempty historical context census",
-        usize::from(!rows.is_empty()),
-        1,
-    )?;
-    limits
-        .count("historical uses", rows.len(), limits.maximum_uses)
-        .map_err(PrismHistoryCause::Bounds)?;
-    history_count(
-        "one authored binding per historical use",
-        names.uses.len(),
-        rows.len(),
-    )?;
+    admit_context_roster(operation, names, rows, limits)?;
     let mut owned = Vec::new();
     for row in rows {
         owned.push(bind_context(operation, names, rows, row, limits)?);
@@ -81,16 +63,7 @@ fn check_context(row: &RegionObservedContext, limits: PrismHistoryLimits) -> His
             limits.maximum_depth,
         )
         .map_err(PrismHistoryCause::Bounds)?;
-    for (depth, ancestor) in row.ancestors.iter().enumerate() {
-        if ancestor.topology_address == row.occurrence.topology_address {
-            return Err(PrismHistoryCause::Bounds(
-                HistoryBoundCause::AncestorCycle {
-                    ancestor_depth: depth,
-                    repeated_depth: row.ancestors.len(),
-                },
-            ));
-        }
-    }
+    check_ancestor_cycle(row)?;
     Ok(())
 }
 fn check_context_bijection(
@@ -127,4 +100,46 @@ fn capture_children(rows: &[RegionObservedContext], owned: &mut [PrismHistorical
             .map(|(index, _)| keys[*index].clone())
             .collect();
     }
+}
+
+fn admit_context_roster(
+    operation: AuthoredPrismId,
+    names: &PrismHistoricalStageBindings,
+    rows: &[RegionObservedContext],
+    limits: PrismHistoryLimits,
+) -> HistoryCheck<()> {
+    limits.admit().map_err(PrismHistoryCause::Bounds)?;
+    history_count(
+        "nonzero operation identity",
+        usize::from(operation.0 != 0),
+        1,
+    )?;
+    history_count(
+        "nonempty historical context census",
+        usize::from(!rows.is_empty()),
+        1,
+    )?;
+    limits
+        .count("historical uses", rows.len(), limits.maximum_uses)
+        .map_err(PrismHistoryCause::Bounds)?;
+    history_count(
+        "one authored binding per historical use",
+        names.uses.len(),
+        rows.len(),
+    )?;
+    Ok(())
+}
+
+fn check_ancestor_cycle(row: &RegionObservedContext) -> HistoryCheck<()> {
+    for (depth, ancestor) in row.ancestors.iter().enumerate() {
+        if ancestor.topology_address == row.occurrence.topology_address {
+            return Err(PrismHistoryCause::Bounds(
+                HistoryBoundCause::AncestorCycle {
+                    ancestor_depth: depth,
+                    repeated_depth: row.ancestors.len(),
+                },
+            ));
+        }
+    }
+    Ok(())
 }

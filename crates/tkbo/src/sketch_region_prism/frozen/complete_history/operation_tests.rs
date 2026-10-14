@@ -33,13 +33,7 @@ fn every_history_phase_cancellation_returns_no_partial_evidence_and_preserves_re
         PrismHistoryPhase::Capture,
         PrismHistoryPhase::Commit,
     ] {
-        let mut reached = false;
-        let result = inspect_complete_prism_history(&request, |phase| {
-            reached |= phase == stop;
-            phase == stop
-        });
-        assert!(reached);
-        assert!(matches!(result, PrismHistoryOutcome::Cancelled { phase, .. } if phase == stop));
+        assert_cancelled_at(&request, stop);
         assert_eq!(
             inspected(inspect_complete_prism_history(&request, |_| false)).replay_bytes(),
             baseline.replay_bytes()
@@ -54,27 +48,16 @@ fn history_commit_rebind_detects_partition_root_change_without_changing_any_geom
     let baseline = inspected(inspect_complete_prism_history(&request, |_| false));
     let bytes = baseline.replay_bytes().to_vec();
     let mut root = relations::arranged(&request).unwrap().arrangement.clone();
-    let child = rustycad_tkbrep::topods::ShapeIterator::new(&root, true, true)
-        .value()
-        .unwrap()
-        .clone();
+    let child = first_child(&root);
     let mut changed = false;
     let result = inspect_complete_prism_history(&request, |phase| {
         if phase == PrismHistoryPhase::Commit {
-            root.set_free(true).unwrap();
-            rustycad_tkbrep::topods::Builder
-                .remove(&mut root, &child)
-                .unwrap();
+            remove_child(&mut root, &child);
             changed = true;
         }
         false
     });
-    assert!(changed);
-    assert!(matches!(
-        result,
-        PrismHistoryOutcome::Incomplete(_) | PrismHistoryOutcome::Failed(_)
-    ));
-    assert_eq!(baseline.replay_bytes(), bytes);
+    assert_root_mutation_refused(changed, result, &baseline, &bytes);
 }
 #[test]
 fn history_only_reproject_detects_rejected_history_changes_outside_joined_body() {
@@ -135,21 +118,7 @@ fn native_failure_keeps_typed_cause_and_previous_owned_result() {
         |_| false,
     ));
     let bytes = baseline.replay_bytes().to_vec();
-    let crate::sketch_region::PartitionObservation::Captured(partition) =
-        &mut fixture.operation.bridge.mapped.arrangement.partition
-    else {
-        panic!("partition");
-    };
-    let crate::sketch_region::PartitionMemberQueries::Captured { rows, .. } =
-        &mut partition.member_queries
-    else {
-        panic!("queries");
-    };
-    rows[0].deleted = Err(std::sync::Arc::new(
-        rustycad_tkernel::standard::Failure::out_of_range(
-            "history query 0; expected completed deletion answer",
-        ),
-    ));
+    inject_native_deletion_failure(&mut fixture.operation.bridge.mapped.arrangement.partition);
     let result = inspect_complete_prism_history(&fixture.request(&sources), |_| false);
     let PrismHistoryOutcome::Failed(failure) = result else {
         panic!("expected typed failed history");
@@ -185,23 +154,7 @@ fn nested_native_binding_parents_and_copy_observations_consume_declared_row_budg
     let mut fixture = HistoryFixture::new();
     let sources = binding_sources(&fixture.operation.shapes);
     let measured = budget::admit(&fixture.request(&sources)).unwrap();
-    let returned = &mut fixture
-        .operation
-        .receipt
-        .diagnostic
-        .as_mut()
-        .unwrap()
-        .bindings[0]
-        .native
-        .returned;
-    let parent = returned
-        .modified
-        .iter()
-        .chain(&returned.generated)
-        .next()
-        .unwrap()
-        .clone();
-    returned.generated.push(parent);
+    append_returned_parent(fixture.operation.receipt.diagnostic.as_mut().unwrap());
     let mut request = fixture.request(&sources);
     assert_eq!(budget::admit(&request).unwrap(), measured + 1);
     request.requested.limits.maximum_rows = measured;
@@ -216,4 +169,70 @@ fn conditional_history_projection_reuses_exact_standalone_operands() {
     let conditional = inspected(inspect_bound_prism_history(&request));
     assert_eq!(conditional.replay_bytes(), standalone.replay_bytes());
     assert!(rebind_complete_prism_history(&request, &conditional).is_ok());
+}
+
+fn assert_cancelled_at(request: &PrismHistoryRequest<'_, '_>, stop: PrismHistoryPhase) {
+    let mut reached = false;
+    let result = inspect_complete_prism_history(request, |phase| {
+        reached |= phase == stop;
+        phase == stop
+    });
+    assert!(reached);
+    assert!(matches!(result, PrismHistoryOutcome::Cancelled { phase, .. } if phase == stop));
+}
+
+fn first_child(root: &rustycad_tkbrep::topods::Shape) -> rustycad_tkbrep::topods::Shape {
+    rustycad_tkbrep::topods::ShapeIterator::new(root, true, true)
+        .value()
+        .unwrap()
+        .clone()
+}
+
+fn remove_child(root: &mut rustycad_tkbrep::topods::Shape, child: &rustycad_tkbrep::topods::Shape) {
+    root.set_free(true).unwrap();
+    rustycad_tkbrep::topods::Builder
+        .remove(root, child)
+        .unwrap();
+}
+
+fn inject_native_deletion_failure(observed: &mut crate::sketch_region::PartitionObservation) {
+    let crate::sketch_region::PartitionObservation::Captured(partition) = observed else {
+        panic!("partition");
+    };
+    let crate::sketch_region::PartitionMemberQueries::Captured { rows, .. } =
+        &mut partition.member_queries
+    else {
+        panic!("queries");
+    };
+    rows[0].deleted = Err(std::sync::Arc::new(
+        rustycad_tkernel::standard::Failure::out_of_range(
+            "history query 0; expected completed deletion answer",
+        ),
+    ));
+}
+
+fn append_returned_parent(body: &mut crate::sketch_region_prism::PrismDiagnostic) {
+    let returned = &mut body.bindings[0].native.returned;
+    let parent = returned
+        .modified
+        .iter()
+        .chain(&returned.generated)
+        .next()
+        .unwrap()
+        .clone();
+    returned.generated.push(parent);
+}
+
+fn assert_root_mutation_refused(
+    changed: bool,
+    result: PrismHistoryOutcome<'_>,
+    baseline: &PrismCompleteHistory,
+    bytes: &[u8],
+) {
+    assert!(changed);
+    assert!(matches!(
+        result,
+        PrismHistoryOutcome::Incomplete(_) | PrismHistoryOutcome::Failed(_)
+    ));
+    assert_eq!(baseline.replay_bytes(), bytes);
 }

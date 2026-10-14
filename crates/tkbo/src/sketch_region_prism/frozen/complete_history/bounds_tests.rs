@@ -25,16 +25,7 @@ fn bounded_history_counts_actual_repeated_uses_without_truncation() {
             ..
         })
     ));
-    limits.maximum_uses = 7;
-    limits.maximum_depth = 1;
-    assert!(matches!(
-        preflight_history_root(&root, limits),
-        Err(HistoryBoundCause::Exhausted {
-            quantity: "ancestor depth",
-            actual: 2,
-            maximum: 1
-        })
-    ));
+    assert_depth_limit(&root, limits);
 }
 #[test]
 fn bounded_history_rejects_changing_placement_tshape_cycle() {
@@ -85,4 +76,17 @@ fn compound() -> Compound {
     let mut result = Compound::default();
     Builder.make_compound(&mut result);
     result
+}
+
+fn assert_depth_limit(root: &Shape, mut limits: PrismHistoryLimits) {
+    limits.maximum_uses = 7;
+    limits.maximum_depth = 1;
+    assert!(matches!(
+        preflight_history_root(root, limits),
+        Err(HistoryBoundCause::Exhausted {
+            quantity: "ancestor depth",
+            actual: 2,
+            maximum: 1
+        })
+    ));
 }

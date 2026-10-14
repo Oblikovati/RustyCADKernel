@@ -16,19 +16,7 @@ pub(super) fn admit_stage(
             limits.maximum_uses,
         )
         .map_err(PrismHistoryCause::Bounds)?;
-    let kinds = required_kinds(stage);
-    history_count(
-        "complete bounded stage directed use census",
-        rows.len(),
-        kinds.len(),
-    )?;
-    for kind in kinds {
-        history_count(
-            "actual uses of required bounded stage kind",
-            rows.iter().filter(|r| r.kind == *kind).count(),
-            kinds.iter().filter(|k| *k == kind).count(),
-        )?;
-    }
+    admit_kinds(stage, rows)?;
     history_count(
         "one physical closure vertex per stage",
         physical_vertices(rows),
@@ -72,4 +60,21 @@ pub(super) fn forward_reversed(actual: Orientation) -> HistoryCheck<bool> {
             },
         ))),
     }
+}
+
+fn admit_kinds(stage: PrismHistoryStage, rows: &[RegionObservedContext]) -> HistoryCheck<()> {
+    let kinds = required_kinds(stage);
+    history_count(
+        "complete bounded stage directed use census",
+        rows.len(),
+        kinds.len(),
+    )?;
+    for kind in kinds {
+        history_count(
+            "actual uses of required bounded stage kind",
+            rows.iter().filter(|r| r.kind == *kind).count(),
+            kinds.iter().filter(|k| *k == kind).count(),
+        )?;
+    }
+    Ok(())
 }

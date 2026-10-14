@@ -89,6 +89,30 @@ are private at the baseline; see [lib.rs](../crates/tkbo/src/lib.rs). An inner
 Candidate-only files can be inspected with `git show <revision>:<path>` after
 integration; they are not falsely linked as files present at this baseline.
 
+## Integration supplement at `4cf1da12b`
+
+The original audit and E1–E8 observations below retain their recorded revisions.
+The following subsequent root checks advance three bounded constituents on
+local `main`; they do not close an issue-level requirement by themselves.
+
+| Constituent | Integrated source and root evidence | Verified scope |
+| --- | --- | --- |
+| E4 exact conformance and tolerance | Source `bb5f06529`, [root receipt](evidence/prism-exact-tolerance-integration-2026-10-14/INTEGRATED.md), evidence commit `75f2f717d` | 6,323 tests +302 documentation tests across TKMath/TKBRep/TKBO; 38 candidate files exact; six process outputs preserve complete V2 conformance/tolerance and older frozen/inspection bytes. |
+| E5 joined named measures | Source `d596b9b0b`, [root receipt](evidence/prism-joined-measures-integration-2026-10-14/INTEGRATED.md), evidence commit `f621c83c8` | 1,479 tests +35 documentation tests; all 1,438 frozen candidate passing test names retained; eight process outputs preserve named measures, legacy scalar and exact-tolerance bytes. The sweep integral remains signed. |
+| E6 ordered validation | Source `12faf0730`, [root receipt](evidence/ordered-prism-validation-integration-2026-10-14/INTEGRATED.md), evidence commit `4cf1da12b` | 1,517 tests +35 documentation tests; 30 candidate files exact; all 1,498 frozen candidate passing names retained; twelve process outputs preserve six full receipts, including ordered validation. |
+
+Each root check also passed strict Clippy, formatting, warning-denied generated
+documentation and unchanged source bookends. These totals describe their own
+revisions and overlapping suites; they must not be summed as distinct coverage.
+Completed worktrees and branches were deleted after integration and checks.
+
+Complete history (E7) and the single complete publication operation (E8) are
+still candidates at this supplement. Their focused tests, internal success
+types and independent review do not constitute main integration or a public
+operation. Owned caller requests, semantic naming, owned refusal projection,
+general profiles, the with-hole consumer workflow and owner release checks
+remain open. ThreadSanitizer acceptance remains incomplete.
+
 ## Every issue requirement
 
 | Issue item | Concrete implementation / executed evidence | Precise remaining acceptance |

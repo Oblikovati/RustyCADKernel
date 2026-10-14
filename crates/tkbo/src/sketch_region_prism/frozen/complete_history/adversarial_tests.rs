@@ -83,43 +83,16 @@ fn absent_duplicate_and_false_history_availability_do_not_prove_empty_deletion()
 #[test]
 fn exhaustive_candidate_links_and_generated_members_reject_gaps_duplicates_and_parent_loss() {
     refuse(|f| {
-        f.operation
-            .bridge
-            .mapped
-            .copied
-            .as_mut()
-            .unwrap()
-            .links
-            .pop();
+        candidate_links(f).pop();
     });
     refuse(|f| {
-        let rows = &mut f.operation.bridge.mapped.copied.as_mut().unwrap().links;
+        let rows = candidate_links(f);
         rows.push(rows[0].clone());
     });
-    refuse(|f| {
-        f.operation
-            .bridge
-            .mapped
-            .copied
-            .as_mut()
-            .unwrap()
-            .links
-            .iter_mut()
-            .find(|r| !r.generated.is_empty())
-            .unwrap()
-            .generated
-            .pop();
-    });
-    refuse(|f| {
-        let copy = f.operation.bridge.mapped.copied.as_mut().unwrap();
-        let crate::sketch_region_candidates::GeneratedTopologyObservation::Observed(rows) =
-            &mut copy.generated_topology
-        else {
-            panic!("areas");
-        };
-        rows[0].members.pop();
-    });
+    refuse(remove_generated_parent);
+    refuse(remove_generated_member);
 }
+
 #[test]
 fn complementary_rejected_receipt_must_equal_actual_batch_with_full_multiplicity() {
     refuse(|f| {
@@ -129,16 +102,7 @@ fn complementary_rejected_receipt_must_equal_actual_batch_with_full_multiplicity
         f.operation.receipt.input.rejected[0][0].generated.pop();
     });
     refuse(|f| {
-        let rows = f
-            .operation
-            .receipt
-            .input
-            .selected
-            .as_ref()
-            .unwrap()
-            .relations
-            .clone();
-        f.operation.receipt.input.rejected[0] = rows;
+        replace_rejected_with_selected(f);
     });
     refuse(|f| {
         let parent = f.operation.receipt.input.rejected[0][0].generated[0].clone();
@@ -182,13 +146,7 @@ fn exhaustive_sweep_query_census_preserves_empty_false_and_native_retirement() {
         sweep_queries(f)[0].first = Default::default();
     });
     refuse(|f| {
-        f.operation
-            .receipt
-            .diagnostic
-            .as_mut()
-            .unwrap()
-            .native_retired
-            .clear();
+        clear_retirement(f);
     });
 }
 #[test]
@@ -256,4 +214,57 @@ fn swapped_native_parameters_cannot_keep_the_same_original_directed_endpoint_ass
         endpoints[0].parameter = endpoints[1].parameter;
         endpoints[1].parameter = first;
     });
+}
+
+fn candidate_links(
+    fixture: &mut HistoryFixture,
+) -> &mut Vec<crate::sketch_region_candidates::CandidateImageCopyLink> {
+    &mut fixture
+        .operation
+        .bridge
+        .mapped
+        .copied
+        .as_mut()
+        .unwrap()
+        .links
+}
+fn remove_generated_parent(fixture: &mut HistoryFixture) {
+    candidate_links(fixture)
+        .iter_mut()
+        .find(|r| !r.generated.is_empty())
+        .unwrap()
+        .generated
+        .pop();
+}
+fn remove_generated_member(fixture: &mut HistoryFixture) {
+    let copy = fixture.operation.bridge.mapped.copied.as_mut().unwrap();
+    let crate::sketch_region_candidates::GeneratedTopologyObservation::Observed(rows) =
+        &mut copy.generated_topology
+    else {
+        panic!("areas");
+    };
+    rows[0].members.pop();
+}
+
+fn replace_rejected_with_selected(f: &mut HistoryFixture) {
+    let rows = f
+        .operation
+        .receipt
+        .input
+        .selected
+        .as_ref()
+        .unwrap()
+        .relations
+        .clone();
+    f.operation.receipt.input.rejected[0] = rows;
+}
+
+fn clear_retirement(f: &mut HistoryFixture) {
+    f.operation
+        .receipt
+        .diagnostic
+        .as_mut()
+        .unwrap()
+        .native_retired
+        .clear();
 }

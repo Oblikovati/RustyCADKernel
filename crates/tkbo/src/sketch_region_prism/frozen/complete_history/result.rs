@@ -29,7 +29,7 @@ pub(crate) enum PrismHistoryLocalDiagnostic<'a> {
     Candidate(&'a crate::sketch_region_candidates::CandidateCause),
 }
 pub(crate) struct PrismHistoryFailure<'a> {
-    pub finding: PrismHistoryFinding,
+    pub finding: Box<PrismHistoryFinding>,
     pub local_diagnostic: Option<PrismHistoryLocalDiagnostic<'a>>,
 }
 pub(crate) enum PrismHistoryOutcome<'a> {

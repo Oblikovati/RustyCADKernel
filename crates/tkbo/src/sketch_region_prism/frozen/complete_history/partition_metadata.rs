@@ -47,18 +47,7 @@ pub(super) fn capture(
         .map(|v| vertex(request, copied, v))
         .collect::<HistoryCheck<Vec<_>>>()?;
     history_count("one native physical closure vertex", vertices.len(), 1)?;
-    let result = PrismPartitionMetadata {
-        source_shape_count,
-        source: observed_values::occurrence(copied, &source.occurrence)?,
-        parents: parent_rows::original_keys(request, &source.parents)?,
-        range_bits: source.range.map(f64::to_bits),
-        space: space(&source.space)?,
-        has_reference: source.has_reference,
-        block_count: source.blocks.len(),
-        images_present: source.images.is_some(),
-        endpoints: endpoints(request, copied, source)?,
-        vertices,
-    };
+    let result = metadata(request, copied, source, source_shape_count, vertices)?;
     admit_parents(request, &result)?;
     Ok(result)
 }
@@ -73,17 +62,7 @@ fn admit(source: &SourcePartitionObservation, count: Option<i32>) -> HistoryChec
         &[0.0f64.to_bits(), 1.0f64.to_bits()],
         "full polynomial native interval",
     )?;
-    history_count(
-        "unreferenced V1 source",
-        usize::from(source.has_reference),
-        0,
-    )?;
-    history_count("unsplit V1 has no pave blocks", source.blocks.len(), 0)?;
-    history_count(
-        "unsplit V1 retains absent image binding",
-        usize::from(source.images.is_some()),
-        0,
-    )
+    admit_unsplit(source)
 }
 fn space(
     value: &Option<crate::sketch_region::PartitionSpaceRead>,
@@ -125,49 +104,9 @@ fn endpoints(
     )?;
     let mut result = Vec::new();
     for endpoint in &source.source_vertices {
-        let matches: Vec<_> = operands::partition(request)?
-            .vertices
-            .iter()
-            .filter(|v| v.shape_index == endpoint.shape_index)
-            .collect();
-        history_count(
-            "one native vertex index for source endpoint",
-            matches.len(),
-            1,
-        )?;
-        history_count(
-            "endpoint index binds actual same physical vertex",
-            usize::from(same_definition(
-                &matches[0].occurrence,
-                &endpoint.occurrence,
-            )),
-            1,
-        )?;
-        let index = parent_rows::occurrence_index(copied, &endpoint.occurrence)?;
-        endpoint_parameter(source, endpoint)
-            .map_err(|cause| cause.at_use(copied.owned[index].key.clone()))?;
-        result.push(PrismPartitionEndpoint {
-            use_key: copied.owned[index].key.clone(),
-            vertex: copied.owned[index].occurrence.member,
-            parameter_bits: endpoint.parameter.to_bits(),
-        });
+        result.push(project_endpoint(request, copied, source, endpoint)?);
     }
-    let mut parameters: Vec<_> = result.iter().map(|r| r.parameter_bits).collect();
-    parameters.sort();
-    observed_values::equal(
-        &parameters,
-        &vec![0.0f64.to_bits(), 1.0f64.to_bits()],
-        "exact full-range closure endpoint parameters",
-    )?;
-    history_count(
-        "distinct authored closure uses",
-        result
-            .iter()
-            .map(|r| &r.use_key)
-            .collect::<std::collections::BTreeSet<_>>()
-            .len(),
-        2,
-    )?;
+    admit_endpoint_census(&result)?;
     Ok(observed_values::sorted(result))
 }
 fn admit_parents(
@@ -180,16 +119,7 @@ fn admit_parents(
         &vec![original.clone()],
         "partition edge retains actual original source parent",
     )?;
-    let expected: Vec<_> = request
-        .publication
-        .originals
-        .iter()
-        .filter(|b| b.member != original.member)
-        .map(|b| {
-            super::super::identities::original_key(request.publication, &b.actual)
-                .map_err(|e| PrismHistoryCause::Frozen(Box::new(e)))
-        })
-        .collect::<HistoryCheck<_>>()?;
+    let expected = original_vertex_parents(request, original)?;
     observed_values::equal(
         &metadata.vertices[0].parents,
         &observed_values::sorted(expected),
@@ -223,14 +153,150 @@ fn endpoint_parameter(
     )
 }
 
+fn metadata(
+    request: &PrismHistoryRequest<'_, '_>,
+    copied: &BoundHistoricalContexts<'_>,
+    source: &SourcePartitionObservation,
+    source_shape_count: i32,
+    vertices: Vec<PrismPartitionVertex>,
+) -> HistoryCheck<PrismPartitionMetadata> {
+    let result = PrismPartitionMetadata {
+        source_shape_count,
+        source: observed_values::occurrence(copied, &source.occurrence)?,
+        parents: parent_rows::original_keys(request, &source.parents)?,
+        range_bits: source.range.map(f64::to_bits),
+        space: space(&source.space)?,
+        has_reference: source.has_reference,
+        block_count: source.blocks.len(),
+        images_present: source.images.is_some(),
+        endpoints: endpoints(request, copied, source)?,
+        vertices,
+    };
+    Ok(result)
+}
+
+fn admit_unsplit(source: &SourcePartitionObservation) -> HistoryCheck<()> {
+    history_count(
+        "unreferenced V1 source",
+        usize::from(source.has_reference),
+        0,
+    )?;
+    history_count("unsplit V1 has no pave blocks", source.blocks.len(), 0)?;
+    history_count(
+        "unsplit V1 retains absent image binding",
+        usize::from(source.images.is_some()),
+        0,
+    )
+}
+
+fn bind_endpoint_vertex(
+    request: &PrismHistoryRequest<'_, '_>,
+    endpoint: &crate::sketch_region::SourceVertexObservation,
+) -> HistoryCheck<()> {
+    let matches: Vec<_> = operands::partition(request)?
+        .vertices
+        .iter()
+        .filter(|v| v.shape_index == endpoint.shape_index)
+        .collect();
+    history_count(
+        "one native vertex index for source endpoint",
+        matches.len(),
+        1,
+    )?;
+    history_count(
+        "endpoint index binds actual same physical vertex",
+        usize::from(same_definition(
+            &matches[0].occurrence,
+            &endpoint.occurrence,
+        )),
+        1,
+    )?;
+    Ok(())
+}
+
+fn project_endpoint(
+    request: &PrismHistoryRequest<'_, '_>,
+    copied: &BoundHistoricalContexts<'_>,
+    source: &SourcePartitionObservation,
+    endpoint: &crate::sketch_region::SourceVertexObservation,
+) -> HistoryCheck<PrismPartitionEndpoint> {
+    bind_endpoint_vertex(request, endpoint)?;
+    let index = parent_rows::occurrence_index(copied, &endpoint.occurrence)?;
+    endpoint_parameter(source, endpoint)
+        .map_err(|cause| cause.at_use(copied.owned[index].key.clone()))?;
+    Ok(PrismPartitionEndpoint {
+        use_key: copied.owned[index].key.clone(),
+        vertex: copied.owned[index].occurrence.member,
+        parameter_bits: endpoint.parameter.to_bits(),
+    })
+}
+
+fn admit_endpoint_census(result: &[PrismPartitionEndpoint]) -> HistoryCheck<()> {
+    let mut parameters: Vec<_> = result.iter().map(|r| r.parameter_bits).collect();
+    parameters.sort();
+    observed_values::equal(
+        &parameters,
+        &vec![0.0f64.to_bits(), 1.0f64.to_bits()],
+        "exact full-range closure endpoint parameters",
+    )?;
+    history_count(
+        "distinct authored closure uses",
+        result
+            .iter()
+            .map(|r| &r.use_key)
+            .collect::<std::collections::BTreeSet<_>>()
+            .len(),
+        2,
+    )?;
+    Ok(())
+}
+
+fn original_vertex_parents(
+    request: &PrismHistoryRequest<'_, '_>,
+    original: &FrozenOriginalKey,
+) -> HistoryCheck<Vec<FrozenOriginalKey>> {
+    let expected: Vec<_> = request
+        .publication
+        .originals
+        .iter()
+        .filter(|b| b.member != original.member)
+        .map(|b| {
+            super::super::identities::original_key(request.publication, &b.actual)
+                .map_err(|e| PrismHistoryCause::Frozen(Box::new(e)))
+        })
+        .collect::<HistoryCheck<_>>()?;
+    Ok(expected)
+}
+
+#[cfg(test)]
+fn assert_native_endpoint(
+    source: &SourcePartitionObservation,
+    child: &rustycad_tkbrep::topods::Shape,
+    typed: &rustycad_tkbrep::topods::Edge,
+) {
+    let parameter = rustycad_tkbrep::brep::BRepTool::parameter(
+        &rustycad_tkbrep::topods::vertex(child).unwrap(),
+        typed,
+    )
+    .unwrap();
+    let endpoint = crate::sketch_region::SourceVertexObservation {
+        shape_index: 1,
+        occurrence: crate::sketch_region::PartitionOccurrenceIdentity::capture(child),
+        parameter,
+    };
+    endpoint_parameter(source, &endpoint).unwrap();
+    let swapped = crate::sketch_region::SourceVertexObservation {
+        parameter: 1. - parameter,
+        ..endpoint
+    };
+    assert!(endpoint_parameter(source, &swapped).is_err());
+}
+
 #[cfg(test)]
 mod endpoint_tests {
     use super::*;
-    use crate::sketch_region::{PartitionOccurrenceIdentity, SourceVertexObservation};
-    use rustycad_tkbrep::{
-        brep::BRepTool,
-        topods::{ShapeIterator, edge, vertex},
-    };
+    use crate::sketch_region::PartitionOccurrenceIdentity;
+    use rustycad_tkbrep::topods::{ShapeIterator, edge};
     #[test]
     fn native_forward_and_reversed_closed_edges_bind_each_relative_endpoint_parameter() {
         for reversed in [false, true] {
@@ -240,18 +306,7 @@ mod endpoint_tests {
             let mut children = ShapeIterator::new(&shape, true, true);
             while children.more() {
                 let child = children.value().unwrap();
-                let parameter = BRepTool::parameter(&vertex(child).unwrap(), &typed).unwrap();
-                let endpoint = SourceVertexObservation {
-                    shape_index: 1,
-                    occurrence: PartitionOccurrenceIdentity::capture(child),
-                    parameter,
-                };
-                endpoint_parameter(&source, &endpoint).unwrap();
-                let swapped = SourceVertexObservation {
-                    parameter: 1. - parameter,
-                    ..endpoint
-                };
-                assert!(endpoint_parameter(&source, &swapped).is_err());
+                assert_native_endpoint(&source, child, &typed);
                 children.next();
             }
         }

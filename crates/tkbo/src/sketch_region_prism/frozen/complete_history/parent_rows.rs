@@ -54,18 +54,10 @@ pub(super) fn relation_rows(
     )?;
     let mut result = Vec::new();
     for (index, actual) in bound.actual.iter().enumerate() {
-        let matched: Vec<_> = rows
-            .iter()
-            .filter(|r| PartitionOccurrenceIdentity::capture(&r.output) == actual.occurrence)
-            .collect();
-        history_count(
-            "one exact relation for actual directed context",
-            matched.len(),
-            1,
-        )?;
+        let row = exact_relation(rows, &actual.occurrence)?;
         result.push(PrismHistoricalRelation {
             output: bound.owned[index].key.clone(),
-            parents: relation_parents(request, matched[0])?,
+            parents: relation_parents(request, row)?,
         });
     }
     result.sort();
@@ -99,16 +91,7 @@ pub(super) fn physical_index(
     let first = *found.first().ok_or(PrismHistoryCause::Missing {
         required: "actual historical physical definition",
     })?;
-    let member = bound.owned[first].occurrence.member;
-    history_count(
-        "one authored historical physical key",
-        usize::from(
-            found
-                .iter()
-                .all(|i| bound.owned[*i].occurrence.member == member),
-        ),
-        1,
-    )?;
+    admit_physical_name(bound, &found, first)?;
     Ok(first)
 }
 
@@ -126,4 +109,38 @@ pub(super) fn relation_rows_subset(
         });
     }
     Ok(observed_values::sorted(result))
+}
+
+fn exact_relation<'a>(
+    rows: &'a [ArrangementRelation],
+    actual: &PartitionOccurrenceIdentity,
+) -> HistoryCheck<&'a ArrangementRelation> {
+    let matched: Vec<_> = rows
+        .iter()
+        .filter(|r| PartitionOccurrenceIdentity::capture(&r.output) == *actual)
+        .collect();
+    history_count(
+        "one exact relation for actual directed context",
+        matched.len(),
+        1,
+    )?;
+    Ok(matched[0])
+}
+
+fn admit_physical_name(
+    bound: &BoundHistoricalContexts<'_>,
+    found: &[usize],
+    first: usize,
+) -> HistoryCheck<()> {
+    let member = bound.owned[first].occurrence.member;
+    history_count(
+        "one authored historical physical key",
+        usize::from(
+            found
+                .iter()
+                .all(|i| bound.owned[*i].occurrence.member == member),
+        ),
+        1,
+    )?;
+    Ok(())
 }
