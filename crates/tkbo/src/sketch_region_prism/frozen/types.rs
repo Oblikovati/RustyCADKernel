@@ -58,6 +58,20 @@ pub(crate) struct PrismPublicationBindings {
     pub sources: Vec<PrismSourceBinding>,
     pub directed: Vec<PrismDirectedBinding>,
 }
+/// Select legacy containment bytes or additive ordered-wire evidence; example: `OrderedTraversalV2`.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum PrismFreezeBehavior {
+    ContainmentV1,
+    OrderedTraversalV2,
+}
+impl PrismFreezeBehavior {
+    pub(super) fn version(self) -> u32 {
+        match self {
+            Self::ContainmentV1 => 1,
+            Self::OrderedTraversalV2 => 2,
+        }
+    }
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum FreezePhase {
     Admission,
@@ -154,6 +168,7 @@ pub(crate) enum PrismFreezeCause {
 #[derive(Clone)]
 pub(crate) struct FrozenPrismProjection {
     pub(super) version: u32,
+    pub(super) wire_traversals: Option<Vec<super::traversal::FrozenWireTraversal>>,
     pub(super) capture_policy: super::domain::FrozenCapturePolicy,
     pub(super) operation: AuthoredPrismId,
     pub(super) region: AuthoredPrismId,

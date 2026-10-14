@@ -8,14 +8,7 @@ use std::collections::BTreeSet;
 fn owned_prism_keeps_two_loop_caps_and_one_same_face_seam() {
     let frozen = fresh_projection();
     assert_eq!(frozen.graph.counts, [2, 3, 6, 3, 3, 1, 1]);
-    let mut sizes: Vec<_> = frozen
-        .uses
-        .iter()
-        .filter(|row| row.key.0.last().unwrap().0.kind == ShapeEnum::Wire as u8)
-        .map(|row| row.children.len())
-        .collect();
-    sizes.sort();
-    assert_eq!(sizes, [1, 1, 4]);
+    wire_sizes(&frozen);
     assert_eq!(
         frozen
             .graph
@@ -28,6 +21,17 @@ fn owned_prism_keeps_two_loop_caps_and_one_same_face_seam() {
     assert_eq!(seam_count(&frozen), 1);
     assert!(!frozen.is_valid_body());
 }
+fn wire_sizes(frozen: &FrozenPrismProjection) {
+    let mut sizes: Vec<_> = frozen
+        .uses
+        .iter()
+        .filter(|row| row.key.0.last().unwrap().0.kind == ShapeEnum::Wire as u8)
+        .map(|row| row.children.len())
+        .collect();
+    sizes.sort();
+    assert_eq!(sizes, [1, 1, 4]);
+}
+
 fn seam_count(frozen: &FrozenPrismProjection) -> usize {
     frozen
         .graph
@@ -63,4 +67,60 @@ fn owned_prism_keeps_two_opposite_cumulative_uses_per_edge() {
         frozen.coverage.current,
         [crate::sketch_region_validation::StageCoverage::Incomplete; 4]
     );
+}
+
+#[test]
+fn owned_stored_side_children_are_not_a_cyclic_walk() {
+    use FrozenSweepRole::{First, Last};
+    let frozen = fresh_projection();
+    let wire = frozen
+        .uses
+        .iter()
+        .find(|row| row.children.len() == 4)
+        .unwrap();
+    let endpoints: Vec<_> = wire
+        .children
+        .iter()
+        .map(|key| local_endpoints(&frozen, key))
+        .collect();
+    let expected = [(First, Last), (Last, First), (First, First), (Last, Last)];
+    assert_eq!(endpoints, expected);
+    assert_noncyclic(&endpoints);
+}
+fn assert_noncyclic(endpoints: &[(FrozenSweepRole, FrozenSweepRole)]) {
+    let cyclic =
+        (0..endpoints.len()).all(|i| endpoints[i].1 == endpoints[(i + 1) % endpoints.len()].0);
+    assert!(
+        !cyclic,
+        "owned insertion order must remain distinct from traversal evidence"
+    );
+}
+
+fn local_endpoints(
+    frozen: &FrozenPrismProjection,
+    key: &FrozenUseKey,
+) -> (FrozenSweepRole, FrozenSweepRole) {
+    let coedge = frozen
+        .graph
+        .coedges
+        .iter()
+        .find(|row| &row.occurrence == key)
+        .unwrap();
+    let (_, first, last) = frozen
+        .graph
+        .endpoints
+        .iter()
+        .find(|row| row.0 == coedge.edge)
+        .unwrap();
+    directed_roles(*first, *last, coedge.reversed)
+}
+fn directed_roles(
+    first: FrozenPrismKey,
+    last: FrozenPrismKey,
+    reversed: bool,
+) -> (FrozenSweepRole, FrozenSweepRole) {
+    if reversed {
+        return (last.role, first.role);
+    }
+    (first.role, last.role)
 }
