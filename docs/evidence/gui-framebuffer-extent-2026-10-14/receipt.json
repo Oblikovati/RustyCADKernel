@@ -1,0 +1,75 @@
+{
+  "source_revision": "c4d395041336c401a46419b82d61b4d45650594e",
+  "source_sha256": "7bccc3568b2fe9c147e9b2d935b2c948f7b8a6221115f55efc1933e826c4c890",
+  "source_path": "crates/vulkan/examples/support/framebuffer_capture_image.rs",
+  "historical_driver_capture_revision": "f4f714f7aea6b060b081833a290900f952fb9d70",
+  "historical_driver_receipt": "../gui-framebuffer-restart-2026-10-14/receipt.json",
+  "new_driver_runs": false,
+  "performance_measured": false,
+  "lifecycle_badwindow_resolved": false,
+  "red": {
+    "command": "cargo +1.99.0 test -p martensite-vulkan --example native_gui_rapid --locked framebuffer_capture_image",
+    "exit": 101,
+    "passed": 4,
+    "failed": 2,
+    "expected_failures": [
+      "extreme dimensions overflowed usize multiplication",
+      "malformed depth error omitted depth values and expected depth shape"
+    ]
+  },
+  "checks": [
+    {
+      "command": "cargo +1.99.0 test -p martensite-vulkan --example native_gui_rapid --locked",
+      "exit": 0,
+      "passed": 12
+    },
+    {
+      "command": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_release_verification_plan.py",
+      "exit": 0,
+      "passed": 8
+    },
+    {
+      "command": "cargo +1.99.0 clippy -p martensite-vulkan --example native_gui_rapid --example native_gui_acceptance --locked -- -D warnings",
+      "exit": 0
+    },
+    {
+      "command": "cargo +1.99.0 build -p martensite-vulkan --example native_gui_rapid --example native_gui_acceptance --locked",
+      "exit": 0
+    },
+    {
+      "command": "rustfmt +1.99.0 --edition 2024 --check crates/vulkan/examples/support/framebuffer_capture_image.rs",
+      "exit": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit": 0
+    }
+  ],
+  "logs": {
+    "build.log": {
+      "raw_sha256": "398718ab6fd1bdac6d65fa4d8cfaea25b548f19f90bffe83c87fb2f45ed7aa7e",
+      "path": "build.log.gz"
+    },
+    "clippy.log": {
+      "raw_sha256": "58452f64177b01a091f4551542151af9b7ee2ed21114eac280fe1ee74e3c52db",
+      "path": "clippy.log.gz"
+    },
+    "format.log": {
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "format.log.gz"
+    },
+    "green.log": {
+      "raw_sha256": "dd70b263249e958252a2a48ff15100483300768cc0c3d0d19a7a3f89433399b0",
+      "path": "green.log.gz"
+    },
+    "plan-tests.log": {
+      "raw_sha256": "c6352adff70a6982c739a1cd77bbb43d2425eefd2dc2112b92b0ceebf2a6ca31",
+      "path": "plan-tests.log.gz"
+    },
+    "red.log": {
+      "raw_sha256": "cdceb9716a2636bd5b0585a4817e28d7d8e46073a77e74d3755bfa89c8352491",
+      "path": "red.log.gz"
+    }
+  },
+  "scope": "Example publication helper only; valid image bytes and renderer behavior unchanged. Required GPU lifecycle and fresh performance gates remain open."
+}
