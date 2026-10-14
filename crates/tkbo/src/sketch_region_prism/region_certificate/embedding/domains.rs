@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Name actual full trims by authored roles; no geometric ranking supplies identity.
-use super::super::types::{RegionCheck, holds, need, require};
+use super::super::hypothesis::{HypothesisCheck as RegionCheck, holds, need, require};
 use super::*;
 
 pub(super) fn capture_domains(binding: &CurrentPrismBinding) -> RegionCheck<[PrismFaceDomain; 3]> {

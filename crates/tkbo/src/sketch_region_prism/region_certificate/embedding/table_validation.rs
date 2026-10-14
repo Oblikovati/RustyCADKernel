@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0039 checks retained coverage using the existing theorem table, without another geometry query.
+use super::super::hypothesis::RegionHypothesisCause;
 use super::*;
 
 #[derive(Debug)]
@@ -7,7 +8,7 @@ pub(crate) enum PrismEmbeddingTableFailure {
     Cancelled {
         completed: usize,
     },
-    Reconstruction(Box<RegionCertificateCause>),
+    Reconstruction(Box<RegionHypothesisCause>),
     DomainMultiplicity {
         role: PrismImageRole,
         actual: usize,

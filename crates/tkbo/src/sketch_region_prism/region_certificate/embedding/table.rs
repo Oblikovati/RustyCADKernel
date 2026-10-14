@@ -2,7 +2,7 @@
 //! J != 0 makes F(u,v,s)=A(u,v)+sE injective; apply only to the captured Jordan prism.
 use super::super::{
     history::same_physical,
-    types::{RegionCheck, holds, require},
+    hypothesis::{HypothesisCheck as RegionCheck, holds, require},
 };
 use super::*;
 
