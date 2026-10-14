@@ -17,6 +17,7 @@
 pub mod drawer;
 pub mod flags;
 pub mod node_pairs;
+pub mod selection_policy;
 pub mod two_colors;
 pub use drawer::{MeshVSDrawer, MeshVSDrawerSource, meshvs_drawer_assign};
 pub use flags::{MeshVSDisplayModeFlags, MeshVSDrawerAttribute, MeshVSEntityType};

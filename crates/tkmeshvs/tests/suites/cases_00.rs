@@ -11,6 +11,8 @@ pub mod invariants;
 pub mod metadata_reference;
 #[path = "../node_pairs.rs"]
 pub mod node_pairs;
+#[path = "../selection_policy.rs"]
+pub mod selection_policy;
 #[path = "../tool_contracts.rs"]
 pub mod tool_contracts;
 #[path = "../tool_derived.rs"]
