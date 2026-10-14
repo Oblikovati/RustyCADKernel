@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Every actual face and trim is keyed by its full ancestry, including repeated seam uses.
 use super::super::super::{contexts::body_contexts, surface_charts::PrismTrimRole};
-use super::super::current_binding::{BoundPrismChart, PrismBindingFailure, capture_actual_charts};
+use super::super::current_binding::{BoundPrismChart, PrismBindingFailure, capture_actual_charts_guarded};
 use super::*;
 
 pub(super) fn capture(
@@ -10,8 +10,26 @@ pub(super) fn capture(
     boundaries: &[AnnularBoundaryBinding],
     cancelled: &mut impl FnMut() -> bool,
 ) -> AnnularCheck<'static, (Vec<AnnularBoundChart>, Vec<RegionObservedContext>)> {
-    let actual = capture_actual_charts(receipt, cancelled, admit_faces)
-        .map_err(|cause| Box::new(AnnularBindingCause::Chart(Box::new(cause))))?;
+    capture_guarded(receipt, copied, boundaries, cancelled, &mut || Ok(()))
+}
+pub(super) fn capture_guarded(
+    receipt: &PrismReceipt,
+    copied: &AnnularCopyCapture,
+    boundaries: &[AnnularBoundaryBinding],
+    cancelled: &mut impl FnMut() -> bool,
+    preflight: &mut impl FnMut() -> AnnularCheck<'static>,
+) -> AnnularCheck<'static, (Vec<AnnularBoundChart>, Vec<RegionObservedContext>)> {
+    let mut refusal = None;
+    let actual = capture_actual_charts_guarded(receipt, cancelled, admit_faces, &mut || {
+        if let Err(cause) = preflight() {
+            refusal = Some(cause);
+            return Err(PrismBindingFailure::Cancelled);
+        }
+        Ok(())
+    });
+    if let Some(cause) = refusal { return Err(cause); }
+    let actual = actual.map_err(|cause| Box::new(AnnularBindingCause::Chart(Box::new(cause))))?;
+    preflight()?;
     let diagnostic = receipt
         .diagnostic
         .as_ref()

@@ -155,6 +155,9 @@ fn all_current_parent_dispositions_are_owned_without_deduplicating_occurrences()
     let binding = tests::actual_binding();
     assert_eq!(binding.parents().copies.len(), 9);
     assert!(!binding.parents().images.is_empty());
+    assert_eq!(binding.parents().captured.len(), 16);
+    assert!(binding.retained_units() >= binding.hierarchy_budget().retained_units);
+    assert!(binding.retained_units() <= binding.hierarchy_budget().maximum_retained_units);
     assert!(binding.parents().retained_units > binding.parents().images.len());
     let face = binding
         .parents()
@@ -197,5 +200,43 @@ fn actual_callback_census_retains_all_stage_observations() {
             Some(&AnnularBindingStage::Admission)
         );
         assert_eq!(progress.stages.last(), Some(&AnnularBindingStage::Commit));
+    });
+}
+
+#[test]
+fn directed_endpoint_roles_cannot_hide_split_physical_copy_definition() {
+    tests::with_actual(|request, region, receipt| {
+        let mut capture = capture::copy_inputs(request, &region, receipt).unwrap_or_else(|_| panic!("actual copy"));
+        let endpoint = capture.members.iter_mut().find(|m| m.key.wire == Some(401) && m.key.role == TwoLoopMemberRole::NativeEnd).unwrap();
+        endpoint.copied.occurrence.topology_address = 0;
+        assert!(correspondence::preserve_physical_sharing(&capture.members).is_err());
+    });
+}
+#[test]
+fn captured_trim_parent_union_cannot_substitute_equal_count_foreign_parent() {
+    tests::with_actual(|request, region, receipt| {
+        let copy = capture::copy_inputs(request, &region, receipt).unwrap_or_else(|_| panic!("actual copy"));
+        let boundaries = boundaries::capture(&region, &copy, receipt).unwrap_or_else(|_| panic!("actual boundaries"));
+        let (mut charts, _) = charts::capture(receipt, &copy, &boundaries, &mut || false).unwrap_or_else(|_| panic!("actual charts"));
+        assert!(parents::capture(request, receipt, &copy, 0, &charts).is_ok());
+        charts[0].chart.captured.trims[0].parents[0].source = RegionSourceId(999);
+        let Err(cause) = parents::capture(request, receipt, &copy, 0, &charts) else { panic!("expected parent bridge refusal"); };
+        assert!(matches!(*cause, AnnularBindingCause::Count { required: "captured chart/trim parents equal legacy ordered unique projection", actual: 0, expected: 1 }));
+    });
+}
+#[test]
+fn legacy_flat_parents_keep_first_seen_order_while_classes_keep_duplicates() {
+    tests::with_actual(|request, _, _| {
+        let parents: Vec<_> = request.sources.iter().map(|source| {
+            let actual = PartitionOccurrenceIdentity::capture(source.shape);
+            crate::sketch_region::OriginalMemberIdentity { source: source.identity, topology_address: actual.topology_address, location: actual.location, orientation: actual.orientation }
+        }).collect();
+        let relation = crate::sketch_region::ArrangementRelation { output: rustycad_tkbrep::topods::Shape::default(), preserved: vec![parents[1].clone(), parents[0].clone(), parents[1].clone()], modified: vec![parents[0].clone(), parents[1].clone()], generated: vec![parents[1].clone()] };
+        let flat = super::super::super::history::all_parents(&relation);
+        assert_eq!(flat, [parents[1].clone(), parents[0].clone()]);
+        let rows: Vec<_> = flat.iter().map(std::slice::from_ref).collect();
+        let mapped = map_two_loop_original_parents(request, &rows).unwrap_or_else(|_| panic!("exact authored singleton parents"));
+        assert_eq!(mapped.rows, [vec![TwoLoopOriginalUse { source: RegionSourceId(202), role: TwoLoopMemberRole::Boundary }], vec![TwoLoopOriginalUse { source: RegionSourceId(101), role: TwoLoopMemberRole::Boundary }]]);
+        assert_eq!(relation.preserved.len() + relation.modified.len() + relation.generated.len(), 6);
     });
 }

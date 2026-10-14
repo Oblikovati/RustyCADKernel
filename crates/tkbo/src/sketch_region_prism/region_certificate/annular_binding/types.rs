@@ -30,11 +30,20 @@ pub(super) struct AnnularPrismOperands {
     pub limits: super::super::super::frozen::FrozenPrismLimits,
     pub signed_jacobian: rustycad_tkmath::predicates::roots::DyadicBound,
     pub parents: AnnularParentCapture,
+    pub hierarchy: AnnularHierarchyBudget,
+    pub metadata_units: usize,
+    pub geometry_units: usize,
 }
 pub(in crate::sketch_region_prism) struct AnnularParentCapture {
     pub copies: Vec<AnnularCopyParents>,
     pub images: Vec<AnnularImageParents>,
+    pub captured: Vec<AnnularCapturedParents>,
     pub retained_units: usize,
+}
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(in crate::sketch_region_prism) struct AnnularCapturedParents {
+    pub identity: AnnularChartIdentity,
+    pub parents: Vec<TwoLoopOriginalUse>,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(in crate::sketch_region_prism) struct AnnularCopyParents {
