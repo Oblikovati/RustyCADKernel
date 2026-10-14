@@ -41,7 +41,7 @@ pub(super) fn with_named<T>(
         run(request, receipt, &names, proof)
     })
 }
-pub(super) fn joined() -> AnnularFrozenDomain {
+pub(in crate::sketch_region_prism) fn joined() -> AnnularFrozenDomain {
     with_named(|request, receipt, names, proof| {
         join_annular_frozen_domain(
             request,
