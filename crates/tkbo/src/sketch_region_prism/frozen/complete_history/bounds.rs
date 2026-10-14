@@ -5,7 +5,7 @@ use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 
 /// Bound an actual hierarchy before recapture; `preflight_history_root(&root, limits)`.
 /// This grants no topology validity and excludes concurrent alias writes between reads.
-pub(super) fn preflight_history_root(
+pub(in crate::sketch_region_prism) fn preflight_history_root(
     root: &Shape,
     requested: PrismHistoryLimits,
 ) -> Result<usize, HistoryBoundCause> {
