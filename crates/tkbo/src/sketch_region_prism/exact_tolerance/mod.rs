@@ -51,3 +51,6 @@ mod replay_limits;
 
 #[cfg(test)]
 mod joined_replay_tests;
+
+#[cfg(test)]
+mod joined_failure_tests;

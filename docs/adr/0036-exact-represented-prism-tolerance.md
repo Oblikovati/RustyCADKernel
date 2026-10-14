@@ -89,6 +89,32 @@ allowance once usable frames and exact transport are established.
 - Noncommuting placements, reversal, complete seam contexts, missing/stale rows,
   typed cancellation and independent process replay remain explicit gates.
 
+## Immutable consumer seam
+
+`certify_joined_prism_conformance` accepts one complete immutable ADR0035 join.
+It returns the exact geometry certificate or a boxed typed failure retaining the
+operation, phase, entity/use context, original scalar cause, completed partial
+work, original operation limits and full joined operand binding. An exact
+`Exceeds` witness is failed; unavailable frames, unsupported source bounds and
+inconclusive/error reports are incomplete. Explicit callback cancellation remains
+cancelled. These classes are not inferred from diagnostic text.
+
+`certify_joined_prism_tolerances` requires that existing conformance certificate
+and verifies its complete joined bytes before applying the explicit cap. It
+retains all eight metadata rows before a Refuse result; Report is a completed
+observation with every exceedance still visible. It performs no geometry query.
+Both certificates expose immutable evidence views, `binds` and deterministic
+`replay_bytes`. The tolerance receipt embeds the reused conformance receipt;
+new numeric fields and option tags use exact bits. Frozen V1 encoding is unchanged.
+
+Every recorded cancellation checkpoint is independently replayed in tests.
+Immutable proofs survive live body mutation; the final composer must still
+perform its existing callback-free live rebind. A successful private immutable
+check is not permission to publish a mutated live source. Compile-time Send/Sync
+assertions and worker/repeated-operation byte tests cover success, failure and
+cause types; sanitizer acceptance is recorded separately with its actual host
+control result.
+
 ## Migration boundary
 
 `EXACT-PRISM-TOLERANCE-V2-COMPOSE` is due at the Martensite C1 milestone gate.
