@@ -39,6 +39,7 @@ fn trim_row(trim: &PrismTrimOrientation) -> String {
 #[test]
 fn prism_orientation_process_receipt() {
     let receipt = portable_receipt();
+    assert_eq!(receipt, include_str!("orientation-v1.json").trim());
     println!("{receipt}");
 }
 #[test]

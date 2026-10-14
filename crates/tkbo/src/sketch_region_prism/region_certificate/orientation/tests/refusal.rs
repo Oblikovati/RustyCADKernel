@@ -24,7 +24,7 @@ fn isolated_zero_jacobian_and_nonjordan_winding_are_typed_refusals() {
     binding.region.selected_winding = -1;
     assert!(matches!(
         signs::native_winding(&binding.region),
-        Err(PrismOrientationCause::Winding {
+        Err(PrismOrientationEvaluationCause::Winding {
             actual: -1,
             expected: 1
         })
@@ -42,7 +42,7 @@ fn isolated_zero_jacobian_refuses_orientation_only() {
     .unwrap();
     assert!(matches!(
         signs::determinant_sign(&zero),
-        Err(PrismOrientationCause::ZeroJacobian)
+        Err(PrismOrientationEvaluationCause::ZeroJacobian)
     ));
 }
 fn fresh_binding() -> CurrentPrismBinding {
@@ -62,7 +62,7 @@ fn isolated_flipped_faces_preserve_exact_role_and_expected_orientation() {
         domain.face.orientation = rustycad_tkg3d::top_abs::reverse(domain.face.orientation);
         let cause = faces::inspect_face(&domain, 1, 1).err().unwrap();
         assert!(
-            matches!(cause, PrismOrientationCause::Face { domain: rejected, actual, expected }
+            matches!(cause, PrismOrientationEvaluationCause::Face { domain: rejected, actual, expected }
             if rejected.face == domain.face && actual != expected && expected == row.expected)
         );
     }
@@ -79,7 +79,7 @@ fn isolated_each_trim_flip_is_attributed_including_both_seam_uses() {
                 rustycad_tkg3d::top_abs::reverse(domain.trims[index].output.orientation);
             let cause = faces::inspect_face(&domain, 1, 1).err().unwrap();
             assert!(
-                matches!(cause,PrismOrientationCause::Trim { authored, actual, expected }
+                matches!(cause,PrismOrientationEvaluationCause::Trim { authored, actual, expected }
                 if *authored == domain.trims[index] && actual != expected)
             );
         }
@@ -94,7 +94,7 @@ fn internal_and_external_orientations_never_become_signed_faces() {
         let mut domain = evidence.faces()[0].domain().clone();
         domain.face.orientation = unsupported;
         assert!(matches!(faces::inspect_face(&domain,1,1),
-            Err(PrismOrientationCause::Unsupported { entity, actual })
+            Err(PrismOrientationEvaluationCause::Unsupported { entity, actual })
             if *entity == domain.face && actual == unsupported));
     }
 }
