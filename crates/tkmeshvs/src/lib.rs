@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Martensite mesh appearance storage; rendering and the rest of TKMeshVS remain separate.
+//! Martensite mesh appearance and immutable visualization connectivity.
+//! Rendering and the remaining TKMeshVS interfaces are separate.
 //!
 //! ```
 //! use martensite_tkmeshvs::{MeshVSDrawer, MeshVSDrawerSource};

@@ -38,5 +38,19 @@
   "candidates": [
     "684efa49c",
     "55a2a34cd"
-  ]
+  ],
+  "followup": {
+    "base_revision": "786cba7c6",
+    "changes": "Update toolkit module description and extract thread-test helpers without changing factories, thread count, iteration count or assertions.",
+    "changed_source_sha256": {
+      "crates/tkmeshvs/src/lib.rs": "d245eaca05638de03f8fabf1dc43bc2de7630b172ecc4e145131fd86c3070a40",
+      "crates/tkmeshvs/tests/volume_topology.rs": "3b6ce35fd4a68b3d3389610eb1d76ee61ba9b3fa6e0e995ab6424fb40e839c8e"
+    },
+    "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p martensite-tkmeshvs --locked",
+    "exit_code": 0,
+    "passed": 59,
+    "failed": 0,
+    "ignored": 0,
+    "log": "connectivity-followup.log.gz"
+  }
 }

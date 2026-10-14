@@ -185,17 +185,22 @@ fn check_combinatorial_counts(topology: MeshVSVolumeTopology, vertices: i32, edg
 #[test]
 fn concurrent_construction_and_shared_reads_match_serial_results() {
     for (_, factory) in FACTORIES {
-        let serial = factory(64).unwrap();
-        std::thread::scope(|scope| {
-            for _ in 0..8 {
-                let serial = &serial;
-                scope.spawn(move || {
-                    for _ in 0..64 {
-                        assert_eq!(&factory(64).unwrap(), serial);
-                        assert_eq!(serial.face(1), serial.clone().face(1));
-                    }
-                });
-            }
-        });
+        assert_threaded_connectivity(factory);
+    }
+}
+
+fn assert_threaded_connectivity(factory: TopologyFactory) {
+    let serial = factory(64).unwrap();
+    std::thread::scope(|scope| {
+        for _ in 0..8 {
+            scope.spawn(|| repeat_connectivity_reads(factory, &serial));
+        }
+    });
+}
+
+fn repeat_connectivity_reads(factory: TopologyFactory, serial: &MeshVSVolumeTopology) {
+    for _ in 0..64 {
+        assert_eq!(&factory(64).unwrap(), serial);
+        assert_eq!(serial.face(1), serial.clone().face(1));
     }
 }
