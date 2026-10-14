@@ -120,3 +120,12 @@ fn owned_orientation_evidence_is_send_sync() {
 
 #[path = "tests/compatibility.rs"]
 mod compatibility_tests;
+
+/// Reuse existing actual geometry mutation; `mutate_orientation_fixture(target, shapes, receipt)`.
+pub(in crate::sketch_region_prism) fn mutate_orientation_fixture(
+    target: usize,
+    shapes: &[Shape],
+    receipt: &PrismReceipt,
+) {
+    super::super::measurements::tests::mutation_tests::edit_target(target, shapes, receipt);
+}
