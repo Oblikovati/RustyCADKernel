@@ -12,15 +12,32 @@ pub(super) fn current_charts(
     receipt: &PrismReceipt,
     cancelled: &mut impl FnMut() -> bool,
 ) -> PrismBindingCheck<Vec<BoundPrismChart>> {
+    let charts = capture_actual_charts(receipt, cancelled, |faces| {
+        require("single boundary prism face universe", faces.len(), 3)?;
+        Ok(())
+    })?;
+    complete_roles(&charts)?;
+    Ok(charts)
+}
+
+/// Capture individual chart operands; `capture_actual_charts(receipt,cancel,admit_faces)`.
+/// The admission callback supplies domain policy at the historical V1 check position.
+/// These operands alone certify neither a plural region nor a complete body binding.
+pub(in crate::sketch_region_prism) fn capture_actual_charts(
+    receipt: &PrismReceipt,
+    cancelled: &mut impl FnMut() -> bool,
+    admit_faces: impl FnOnce(&[PrismBodyContext]) -> PrismBindingCheck,
+) -> PrismBindingCheck<Vec<BoundPrismChart>> {
     let diagnostic = need(receipt.diagnostic.as_ref(), "measurement actual body")?;
     let copied = need(receipt.copied.as_ref(), "measurement actual copied base")?;
     history::current_history(diagnostic, copied)?;
-    let faces = complete_faces(diagnostic)?;
+    let faces = actual_faces(diagnostic)?;
+    admit_faces(&faces)?;
+    complete_face_images(diagnostic, &faces)?;
     let mut charts = Vec::new();
     for face in &faces {
         charts.push(capture_current(face, receipt, cancelled)?);
     }
-    complete_roles(&charts)?;
     Ok(charts)
 }
 fn capture_current(
@@ -43,15 +60,16 @@ fn capture_current(
     })
 }
 
-fn complete_faces(diagnostic: &PrismDiagnostic) -> PrismBindingCheck<Vec<PrismBodyContext>> {
-    let faces = actual_faces(diagnostic)?;
-    require("single boundary prism face universe", faces.len(), 3)?;
+fn complete_face_images(
+    diagnostic: &PrismDiagnostic,
+    faces: &[PrismBodyContext],
+) -> PrismBindingCheck {
     require(
         "all retained face images current",
-        missing_body_images(diagnostic, &faces)?.len(),
+        missing_body_images(diagnostic, faces)?.len(),
         0,
     )?;
-    Ok(faces)
+    Ok(())
 }
 fn complete_roles(charts: &[BoundPrismChart]) -> PrismBindingCheck {
     for role in [

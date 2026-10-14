@@ -2,6 +2,7 @@
 //! ADR0050 actual general construction baseline; no annular validity certificate.
 mod charts;
 mod counts;
+mod shared_capture;
 use super::{region_certificate::two_loop::fixture::TwoLoopFixture, tests::*, *};
 
 fn annular_receipt() -> PrismReceipt {

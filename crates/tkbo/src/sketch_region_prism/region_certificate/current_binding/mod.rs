@@ -2,6 +2,8 @@
 //! One fresh source/chart binding path shared by private inspections.
 mod binding;
 mod charts;
+#[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use charts::capture_actual_charts;
 mod replay;
 mod types;
 use super::super::surface_charts::*;
