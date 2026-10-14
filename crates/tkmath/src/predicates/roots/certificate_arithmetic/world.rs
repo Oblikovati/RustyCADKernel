@@ -83,7 +83,9 @@ struct AxisConstruction {
     point: f64,
     radius: ExactRatio,
 }
-fn finish_envelope(intervals: [RatioInterval; 2]) -> Result<WorldEnvelope, EnvelopeFailure> {
+pub(in crate::predicates::roots) fn finish_envelope(
+    intervals: [RatioInterval; 2],
+) -> Result<WorldEnvelope, EnvelopeFailure> {
     let [x, y] = intervals;
     let x = construct_axis(x)?;
     let y = construct_axis(y)?;

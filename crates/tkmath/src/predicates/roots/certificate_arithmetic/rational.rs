@@ -59,6 +59,14 @@ impl ExactRatio {
     pub(in crate::predicates::roots) fn sign(&self) -> Ordering {
         self.numerator.cmp(&BigInt::from(0))
     }
+    /// Reduced numerator; the sign of the value is carried here.
+    pub(in crate::predicates::roots) fn numerator(&self) -> &BigInt {
+        &self.numerator
+    }
+    /// Reduced, strictly positive denominator.
+    pub(in crate::predicates::roots) fn denominator(&self) -> &BigInt {
+        &self.denominator
+    }
 }
 impl Ord for ExactRatio {
     fn cmp(&self, other: &Self) -> Ordering {
