@@ -68,3 +68,11 @@ fn progress_and_hypothesis_refusals_retain_operation_stage_and_actual_values() {
         TwoLoopRegionCause::Missing { .. }
     ));
 }
+
+#[test]
+fn operation_work_and_progress_are_send_without_native_owner_transfer() {
+    fn assert_send<T: Send>() {}
+    assert_send::<TwoLoopWork<'_>>();
+    assert_send::<Box<dyn TwoLoopRegionProgress>>();
+    assert_send::<FixedProgress>();
+}

@@ -25,7 +25,12 @@ outer boundary about the inner boundary's bound native closure image; the witnes
 must equal that image in the common certified chart, without independently rounded
 projection. Disjoint Jordan boundaries plus this witness prove strict containment.
 Reversal preserves nesting but reverses the recorded winding sign. No assumption
-of positive native traversal is permitted.
+of positive native traversal is permitted. A private inner-interior witness must
+also have exact winding ±1 in the inner boundary. A separate material seed must
+have winding ±1 in the outer boundary and zero in the inner boundary. The witness
+bits, signed conclusions, policies and achieved work are retained. Future public
+orchestration must obtain and check these witnesses using the existing pipeline;
+application callers are not required to prove private intermediates.
 
 ## Interface checkpoint
 
@@ -57,7 +62,9 @@ is provenance only: identical labels cannot conceal different captured values.
 
 A callback-free `rebind_two_loop_region(request, certificate)` reprojects actual
 current geometry, contexts, observations and proof operands and compares complete
-owned replay. The inspection invokes it after the last external callback. Concurrent
+owned source/domain/candidate replay and rechecks current legacy history consistency.
+Complete composed copy/deletion history is explicitly excluded. The inspection
+invokes this rebind after the last external callback. Concurrent
 mutation through aliases is outside this operation-local capture contract.
 
 ## Bounds and failure policy
@@ -66,7 +73,13 @@ Retain the existing census's exact source and pair work accounting. The new wind
 work has an explicit operation budget; charge completed work on failure and refusal.
 A checked retained-operand budget applies before cloning nested coefficient,
 certificate, ancestry, parent and membership rows. Limits are inclusive; no
-truncation, implicit enlargement or wraparound is allowed.
+truncation, implicit enlargement or wraparound is allowed. Structural units count
+borrowed validation rosters and separately retained projection rows at their
+consumption boundaries; they are not bytes or a total instruction quota. Exact
+integer limb storage is not separately capped. Current evaluator coefficient
+preflight is repeated after the plane-rank callback and before pair recapture.
+Endpoint/chart admission uses exact zero residual, independently of later body
+tolerance acceptance.
 
 Missing source/actual membership, stale captures, unsupported representations,
 unproved equality, incomplete coverage and exhausted work are typed incompleteness.
@@ -74,6 +87,17 @@ Native computation failures and cancellation retain their classes and causes.
 Failure entities use authored IDs when bound. Owner-bearing legacy diagnostics
 remain available separately if an exact owned projection is unavailable; an
 unsupported payload cannot be replaced by a count or erased from success.
+
+## Ownership and invocation boundary
+
+The owned certificate is compiler-checked Send + Sync and read views take no lock.
+`TwoLoopRegionProgress: Send` and a compile-time assertion make the private
+`TwoLoopWork` progress/budget context Send. Synchronous input inspection borrows
+`PairedContactTransaction` and its retained native-owner graph; this change makes
+no transferability claim for that borrowed graph or owner-bearing local refusals.
+Independent operations run on separate threads; this is distinct from transferring
+native owners between threads and from sanitizer acceptance. No unsafe marker is
+introduced. Full public operation/thread-safety acceptance remains a separate gate.
 
 ## Independent corpus and acceptance
 

@@ -1,0 +1,26 @@
+{
+  "baseline": "8d9b35390",
+  "source": "2543a38ad",
+  "commands": [
+    "cargo test -p rustycad-tkernel --lib provenance_ -- --test-threads=1",
+    "cargo test -p rustycad-tkernel --lib --all-features -- --test-threads=1",
+    "cargo test -p rustycad-tkernel --test toolkit --all-features standard_ -- --test-threads=1",
+    "cargo test -p rustycad-tkernel --doc provenance -- --test-threads=1",
+    "cargo clippy -p rustycad-tkernel --all-targets --all-features -- -D warnings"
+  ],
+  "toolchain": "Rust 1.99.0",
+  "build_jobs": 2,
+  "tests": {
+    "baseline": 5,
+    "library": 358,
+    "standard_integration": 233,
+    "accessor_doctests": 2
+  },
+  "hashes": {
+    "crates/tkernel/src/standard/failure/provenance_tests.rs": "6c66bfc3e736cba40639c24479297214e9f6677f97d54a86ab61c4a9ea95a6d7",
+    "crates/tkernel/src/standard/failure/provenance_baseline_tests.rs": "21b8f1910a07004653fdceaf9cf8e9785be3456ee0a24b6e8571276268fcb17a",
+    "crates/tkernel/src/standard/failure/provenance.rs": "312416c149d85b1f18d16ead74b2782b4a9de6e5c1e127864fa987be2f67e4e7",
+    "crates/tkernel/src/standard/failure.rs": "2344e6e6668ae3ed85c057bf1e017467f5ae1c855b0d44109d6c98c937ab9e07"
+  },
+  "scope": "read-only additive methods; no constructor/ownership/behavior changes; full diagnostic codec pending"
+}

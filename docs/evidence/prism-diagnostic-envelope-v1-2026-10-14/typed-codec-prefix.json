@@ -1,0 +1,69 @@
+{
+  "source": "a3435588388ad82471a9824c659a0d1e1d8560a9",
+  "source_files": 12797,
+  "source_unchanged": true,
+  "request_tests": 82,
+  "codec_tests": 15,
+  "strict_clippy": true,
+  "fmt": true,
+  "processes": [
+    {
+      "name": "full",
+      "index": 0,
+      "command": [
+        "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::owned_request::diagnostic_codec_tests::full_typed_refusal_process_receipt",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "returncode": 0,
+      "bytes": 5807,
+      "sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8"
+    },
+    {
+      "name": "full",
+      "index": 1,
+      "command": [
+        "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::owned_request::diagnostic_codec_tests::full_typed_refusal_process_receipt",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "returncode": 0,
+      "bytes": 5807,
+      "sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8"
+    },
+    {
+      "name": "legacy-context",
+      "index": 0,
+      "command": [
+        "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::owned_request::diagnostic_runtime_tests::preparation_diagnostic_process_receipt",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "returncode": 0,
+      "bytes": 4333,
+      "sha256": "1b96918b7508fedfb093ff7139da58bfd4a7385096149e8de7051f89dbe00203"
+    },
+    {
+      "name": "legacy-context",
+      "index": 1,
+      "command": [
+        "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "sketch_region_prism::owned_request::diagnostic_runtime_tests::preparation_diagnostic_process_receipt",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "returncode": 0,
+      "bytes": 4333,
+      "sha256": "1b96918b7508fedfb093ff7139da58bfd4a7385096149e8de7051f89dbe00203"
+    }
+  ],
+  "binary_sha256": "8147a9b789410370a67cb2533ea1a81d9824d3d8127d5022be94dcb390475c17",
+  "admission_fixture_sha256": "dd761ed1224b9971a4f00d1ad7dd3e837a3056646725a2f3634053a347760eba",
+  "admission_fixture_bytes": 251,
+  "oracle": "independent Python explicit-field fixture + literal native/phase/class/gap bytes; existing full request/naming encoders reused",
+  "tsan": "actual suite incomplete; prior unchanged-host startup failure retained, no repeat",
+  "scope": "complete owned preparation envelope serialization; unsupported local owners and publication attribution excluded"
+}

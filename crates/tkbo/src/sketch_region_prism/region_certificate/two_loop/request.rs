@@ -53,7 +53,7 @@ pub(crate) enum TwoLoopRegionStage {
     Nesting,
     Commit,
 }
-pub(crate) trait TwoLoopRegionProgress {
+pub(crate) trait TwoLoopRegionProgress: Send {
     /// Observe bounded proof work; example: `progress.checkpoint(TwoLoopRegionStage::Sources)`.
     fn checkpoint(&mut self, stage: TwoLoopRegionStage) -> Result<bool, Failure>;
 }

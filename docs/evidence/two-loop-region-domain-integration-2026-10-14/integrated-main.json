@@ -1,0 +1,213 @@
+{
+  "integration_revision": "604ad1f527f5ff7ec97bf70626ed5888eb31e178",
+  "candidate_revision": "3566d0a1d",
+  "candidate_base": "94e47df878ec139e1bfdaf4e14925487ec94df71",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "4077b433f5f892c462ff23b180a190643646b9c424dfb3eac56d17efa063dcc4"
+      },
+      "tests": {
+        "passed": 1813,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "0eb2a69e0b31d01fa5a3d3a153956f840038cac23b43a01cbbffc279d633e4e9"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "13449537ec5c7015c86822580c12aeeae68f8fec2754b67d6c99408d0cff32cb"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "90e641b98c16b9c39d02d09c7113f3446cabf18d4add562c9ae319e6ba6040c0"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/admission.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/availability.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/budget_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/callback_budget_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/candidate_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/candidate_wires.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/candidates.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/census_budget.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/census_settings.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/current_history.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/domain_refusal_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/endpoints.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/failure.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/failure_class.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/fixture.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/fixture_bindings.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/geometry.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/history_budget.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/limit_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/member_capture.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/member_parents.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/member_types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/membership_refusal_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/mutation_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/native_refusal_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/nesting.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/operand_budget.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/operation.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/operation_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/outcome.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_capture.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_graph.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pipeline_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/plane.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/refusal_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/replay_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/request.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/source_budget.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/source_stages.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/source_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/sources.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/views.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/winding.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/winding_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/work.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/work_tests.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/region_certificate/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/admission.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/availability.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/budget_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/callback_budget_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/candidate_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/candidate_wires.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/candidates.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/census_budget.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/census_settings.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/current_history.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/domain_refusal_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/endpoints.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/failure.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/failure_class.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/fixture.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/fixture_bindings.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/geometry.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/history_budget.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/limit_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/member_capture.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/member_parents.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/member_types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/membership_refusal_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/mutation_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/native_refusal_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/nesting.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/operand_budget.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/operation.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/operation_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/outcome.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_capture.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_graph.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pair_types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/pipeline_tests.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/plane.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/refusal_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/replay.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/replay_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/request.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/source_budget.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/source_stages.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/source_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/sources.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/views.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/winding.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/winding_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/work.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/two_loop/work_tests.rs": "A"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0",
+    "CARGO_TARGET_DIR": "target/two-loop-integrated-cold"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}

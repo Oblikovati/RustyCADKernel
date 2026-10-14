@@ -13,20 +13,20 @@ impl AnnularBindingProgress for RecordedProgress {
 }
 #[test]
 fn every_observed_cancellation_prevents_annular_binding_issuance() {
-    let stages = tests::with_actual(|request, region, receipt| {
-        let mut progress = RecordedProgress::default();
-        assert!(bind_annular_prism_v2(request, region, receipt, &mut progress).is_ok());
-        progress.stages
-    });
-    for (index, stage) in stages.iter().enumerate() {
-        tests::with_actual(|request, region, receipt| {
+    tests::with_prepared(|request, receipt| {
+        let mut baseline = RecordedProgress::default();
+        assert!(bind_annular_prism_v2(request, tests::fresh_region(request), receipt, &mut baseline).is_ok());
+        for (index, stage) in baseline.stages.iter().enumerate() {
             let mut progress = RecordedProgress { stop: Some(index), ..Default::default() };
-            let Err(failure) = bind_annular_prism_v2(request, region, receipt, &mut progress) else { panic!("expected cancellation at {index}/{stage:?}"); };
+            let Err(failure) = bind_annular_prism_v2(request, tests::fresh_region(request), receipt, &mut progress) else { panic!("expected cancellation at {index}/{stage:?}"); };
             assert_eq!(failure.classification(), TwoLoopRefusalClass::Cancelled);
             assert_eq!(failure.stage, *stage);
-            assert_eq!(progress.stages, stages[..=index]);
-        });
-    }
+            assert_eq!(progress.stages, baseline.stages[..=index]);
+        }
+        let mut final_progress = RecordedProgress::default();
+        assert!(bind_annular_prism_v2(request, tests::fresh_region(request), receipt, &mut final_progress).is_ok());
+        assert_eq!(final_progress.stages, baseline.stages);
+    });
 }
 #[test]
 fn callback_failure_keeps_operation_stage_and_original_typed_cause() {
@@ -94,4 +94,16 @@ fn all_current_parent_dispositions_are_owned_without_deduplicating_occurrences()
     let expected: Vec<_> = [101, 202].into_iter().flat_map(|source| [TwoLoopMemberRole::Boundary, TwoLoopMemberRole::NativeStart, TwoLoopMemberRole::NativeEnd].map(|role| TwoLoopOriginalUse { source: RegionSourceId(source), role })).collect();
     assert_eq!(face.selected[2], expected);
     assert_eq!(face.copied[2], face.selected[2]);
+}
+#[test]
+fn actual_callback_census_retains_all_stage_observations() {
+    let started = std::time::Instant::now();
+    tests::with_actual(|request, region, receipt| {
+        let prepared = started.elapsed();
+        let mut progress = RecordedProgress::default();
+        assert!(bind_annular_prism_v2(request, region, receipt, &mut progress).is_ok());
+        println!("{{\"annular_checkpoint_count\":{},\"prepare_micros\":{},\"binding_micros\":{}}}", progress.stages.len(), prepared.as_micros(), started.elapsed().as_micros() - prepared.as_micros());
+        assert_eq!(progress.stages.first(), Some(&AnnularBindingStage::Admission));
+        assert_eq!(progress.stages.last(), Some(&AnnularBindingStage::Commit));
+    });
 }
