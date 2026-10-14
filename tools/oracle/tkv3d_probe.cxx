@@ -83,6 +83,7 @@
 #include "tkv3d_probe_ais_attribute_filters.cxx"
 #include "tkv3d_probe_ais_shape.cxx"
 #include "tkv3d_probe_ais_context_attributes.cxx"
+#include "tkv3d_probe_ais_connected.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFont regularization and builders (tkv3d_probe_brep_font.cxx)
  {"v3_brepfont_regularize", v3_brepfont_regularize},
@@ -101,6 +102,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_ais_shape", v3_ais_shape},
  // AIS_InteractiveContext attribute members (tkv3d_probe_ais_context_attributes.cxx)
  {"v3_ais_ctx_attr", v3_ais_ctx_attr},
+ // AIS connected objects (tkv3d_probe_ais_connected.cxx)
+ {"v3_ais_connected", v3_ais_connected},
  {"v3_ais_rubber_band", v3_ais_rubber_band},
  {"v3_ais_trihedron", v3_ais_trihedron},
  {"v3_ais_point_cloud", v3_ais_point_cloud},
@@ -108,6 +111,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_point_cloud_owner", v3_point_cloud_owner},
  {"v3_animation_object", v3_animation_object},
  {"v3_base_animation_object", v3_base_animation_object},
+ {"v3_animation_axis_rotation", v3_animation_axis_rotation},
  {"v3_context_location", v3_context_location},
  {"v3_ais_animation_edits", v3_ais_animation_edits},
  {"v3_animation_camera", v3_animation_camera},

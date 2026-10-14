@@ -1,5 +1,7 @@
 //! The AIS package: interactive objects and the interactive context.
+mod animation_axis_rotation;
 mod animation_object;
+pub use animation_axis_rotation::AisAnimationAxisRotation;
 mod base_animation_object;
 mod object_animation_transform;
 pub use animation_object::AisAnimationObject;
@@ -47,12 +49,18 @@ pub use interactive_context::{AisInteractiveContext, AisInteractiveContextFields
 pub use interactive_enums::{AisDragAction, AisKindOfInteractive};
 pub use interactive_object::{
     AisInteractiveObject, AisInteractiveObjectBase, AisInteractiveObjectFields,
+    ais_interactive_object_set_context,
 };
 mod context_members;
 pub use context_members::AisContextHandle;
 mod context_selector_reference;
 pub use context_selector_reference::AisMainSelectorRef;
 
+mod connected_interactive;
+pub use connected_interactive::{
+    AisConnectedInteractive, AisConnectedInteractiveFields, AisMultipleConnectedInteractive,
+    AisMultipleConnectedInteractiveFields,
+};
 mod context_attributes;
 mod context_defaults;
 mod context_updates;

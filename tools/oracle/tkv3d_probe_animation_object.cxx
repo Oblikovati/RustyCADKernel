@@ -1,5 +1,6 @@
 // Local recording views expose native invalidation without changing the shared null driver.
 #include <AIS_AnimationObject.hxx>
+#include <AIS_AnimationAxisRotation.hxx>
 class V3AnimationView : public SvView {
   bool invalidated = false;
 public:
@@ -75,5 +76,17 @@ void v3_base_animation_object(std::istream& input) {
   occ::handle<V3BaseAnimationObject> animation=new V3BaseAnimationObject(context,scene.object);
   animation->Start(true);
   GA_TRY(animation->updateTrsf(v3_animation_endpoint(kind,true)))
+  scene.state(animation);
+}
+// `v3_animation_axis_rotation Flags Start End Duration Pts`: a rotation about (1,2,3)+Z.
+void v3_animation_axis_rotation(std::istream& input) {
+  GaReader reader{input}; int flags=reader.integer();
+  double angleStart=reader.real(), angleEnd=reader.real(), duration=reader.real(), pts=reader.real();
+  V3ObjectAnimationScene scene(flags);
+  occ::handle<AIS_InteractiveContext> context=(flags&1)?occ::handle<AIS_InteractiveContext>():scene.context;
+  occ::handle<AIS_InteractiveObject> object=(flags&2)?occ::handle<AIS_InteractiveObject>():scene.object;
+  occ::handle<AIS_AnimationAxisRotation> animation=new AIS_AnimationAxisRotation("spin",context,object,gp_Ax1(gp_Pnt(1,2,3),gp_Dir(0,0,1)),angleStart,angleEnd);
+  animation->SetOwnDuration(duration); animation->Start(false);
+  GA_TRY(ga_flag(animation->Update(pts)))
   scene.state(animation);
 }

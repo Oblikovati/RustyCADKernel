@@ -59,6 +59,38 @@ pub fn base_case(args: &[f64]) {
     });
     scene.state(&animation);
 }
+/// `v3_animation_axis_rotation Flags Start End Duration Pts`: a rotation about (1,2,3)+Z.
+pub fn axis_rotation_case(args: &[f64]) {
+    let mut reader = Reader::new(args);
+    let flags = reader.integer();
+    let (start, end_angle, duration, pts) =
+        (reader.real(), reader.real(), reader.real(), reader.real());
+    let scene = ObjectAnimationScene::new(flags);
+    let object = if flags & 2 != 0 {
+        Handle::default()
+    } else {
+        scene.object.cast()
+    };
+    let axis = Axis1::new(
+        Point3::new(1., 2., 3.),
+        Direction3::new(0., 0., 1.).unwrap(),
+    );
+    let animation = AisAnimationAxisRotation::new(
+        "spin",
+        &scene.target_context(flags),
+        &object,
+        axis,
+        start,
+        end_angle,
+    );
+    animation.set_own_duration(duration);
+    animation.start(false).unwrap();
+    attempt(|| {
+        flag(animation.update(pts)?);
+        Ok(())
+    });
+    scene.state(&animation);
+}
 fn endpoint(kind: i32, end: bool) -> Transform3 {
     let mut result = Transform3::default();
     if kind == 1 {

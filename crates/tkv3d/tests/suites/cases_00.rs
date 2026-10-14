@@ -15,6 +15,8 @@ pub mod ais_attribute_filters;
 pub mod ais_axis;
 #[path = "../ais_circle.rs"]
 pub mod ais_circle;
+#[path = "../ais_connected.rs"]
+pub mod ais_connected;
 #[path = "../ais_context.rs"]
 pub mod ais_context;
 #[path = "../ais_context_attributes.rs"]

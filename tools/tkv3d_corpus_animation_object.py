@@ -13,3 +13,7 @@ def append_object_requests(requests: list[str]) -> None:
         requests.append(f"v3_animation_object {flags} {kind} {duration} {start} {pts}")
     for flags, kind in product([flag for flag in FLAGS if flag & 2 == 0], range(4)):
         requests.append(f"v3_base_animation_object {flags} {kind}")
+    for flags, angles, duration, pts in product(
+        FLAGS, [(0.0, 3.14159), (-1.0, 0.5), (2.0, 2.0)], [0.0, 2.0], [-1.0, 0.0, 0.7, 2.0, 3.0]
+    ):
+        requests.append(f"v3_animation_axis_rotation {flags} {angles[0]} {angles[1]} {duration} {pts}")
