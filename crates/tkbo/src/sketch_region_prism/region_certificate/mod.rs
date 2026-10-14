@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Opt-in borrowed entry; original receipts are never moved from or promoted to completion.
+pub(in crate::sketch_region_prism) mod annular_binding;
 mod boundary;
 mod closure_points;
 pub(crate) use closure_points::current_closure_vertices;
