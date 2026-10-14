@@ -36,19 +36,7 @@ fn every_annular_geometry_checkpoint_cancels_with_exact_prefix_and_reuse() {
         .ok()
         .unwrap()
         .replay_bytes();
-    for cutoff in 0..baseline.calls.len() {
-        let mut stop = StopGeometry {
-            cutoff: Some(cutoff),
-            calls: Vec::new(),
-        };
-        let failure = certify_annular_prism_conformance(&join, &mut stop)
-            .err()
-            .unwrap();
-        assert_eq!(failure.classification(), JoinedEvidenceClass::Cancelled);
-        assert_eq!(failure.phase, baseline.calls[cutoff]);
-        assert_eq!(stop.calls, baseline.calls[..=cutoff]);
-        assert_eq!(failure.binding, join.replay_bytes());
-    }
+    cancel_geometry_prefixes(&join, &baseline);
     assert_eq!(conformance(&join).replay_bytes(), expected);
     println!(
         "annular-conformance-cancellation-checkpoints={}",
@@ -66,21 +54,53 @@ fn every_annular_metadata_checkpoint_cancels_without_losing_prior_observations()
             .unwrap()
             .replay_bytes();
     assert_eq!(baseline.calls.len(), 16);
+    cancel_metadata_prefixes(&join, &proof, &baseline);
+    assert_metadata_reuse(&join, &proof, &expected);
+}
+
+fn cancel_geometry_prefixes(join: &AnnularFrozenDomain, baseline: &StopGeometry) {
+    for cutoff in 0..baseline.calls.len() {
+        let mut stop = StopGeometry {
+            cutoff: Some(cutoff),
+            calls: Vec::new(),
+        };
+        let failure = certify_annular_prism_conformance(join, &mut stop)
+            .err()
+            .unwrap();
+        assert_eq!(failure.classification(), JoinedEvidenceClass::Cancelled);
+        assert_eq!(failure.phase, baseline.calls[cutoff]);
+        assert_eq!(stop.calls, baseline.calls[..=cutoff]);
+        assert_eq!(failure.binding, join.replay_bytes());
+    }
+}
+
+fn cancel_metadata_prefixes(
+    join: &AnnularFrozenDomain,
+    proof: &AnnularPrismConformance,
+    baseline: &StopMetadata,
+) {
     for cutoff in 0..baseline.calls.len() {
         let mut stop = StopMetadata {
             cutoff: Some(cutoff),
             calls: Vec::new(),
         };
         let failure =
-            certify_annular_prism_tolerances(&join, &proof, StoredToleranceCap::NoLimit, &mut stop)
+            certify_annular_prism_tolerances(join, proof, StoredToleranceCap::NoLimit, &mut stop)
                 .err()
                 .unwrap();
         assert_eq!(failure.classification(), JoinedEvidenceClass::Cancelled);
         assert_eq!(failure.metadata.len(), cutoff.saturating_sub(1).min(14));
         assert_eq!(stop.calls, baseline.calls[..=cutoff]);
     }
+}
+
+fn assert_metadata_reuse(
+    join: &AnnularFrozenDomain,
+    proof: &AnnularPrismConformance,
+    expected: &[u8],
+) {
     assert_eq!(
-        certify_annular_prism_tolerances(&join, &proof, StoredToleranceCap::NoLimit, &mut Continue)
+        certify_annular_prism_tolerances(join, proof, StoredToleranceCap::NoLimit, &mut Continue)
             .ok()
             .unwrap()
             .replay_bytes(),

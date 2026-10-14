@@ -28,21 +28,7 @@ fn actual_annular_conformance_covers_both_loops_and_keeps_body_incomplete() {
     let joined = joined();
     let proof = conformance(&joined);
     assert!(proof.binds(&joined));
-    assert_eq!(proof.evidence().body.endpoints.len(), 12);
-    assert_eq!(
-        proof
-            .evidence()
-            .body
-            .endpoints
-            .iter()
-            .map(|row| row.contexts.len())
-            .sum::<usize>(),
-        24
-    );
-    assert_eq!(proof.evidence().body.trims.len(), 12);
-    assert_eq!(proof.evidence().closures.len(), 20);
-    assert_eq!(proof.evidence().source_reports.len(), 6);
-    assert_eq!(proof.evidence().supports.len(), 10);
+    assert_exact_census(&proof);
     assert!(!joined.projection().is_valid_body());
     assert_eq!(
         proof.operation_limits().spatial_limit.to_bits(),
@@ -63,9 +49,41 @@ fn actual_annular_metadata_reuses_geometry_and_keeps_all_refused_observations() 
     .unwrap();
     assert_eq!(accepted.metadata().len(), 14);
     assert!(accepted.binds(&joined));
+    assert_refused_metadata(&joined, &proof);
+}
+#[test]
+fn owned_annular_proofs_and_all_failures_are_send_sync() {
+    fn assert_owned<T: Send + Sync>() {}
+    assert_owned::<AnnularPrismConformance>();
+    assert_owned::<AnnularPrismTolerance>();
+    assert_owned::<AnnularConformanceFailure>();
+    assert_owned::<AnnularConformanceCause>();
+    assert_owned::<AnnularToleranceFailure>();
+    assert_owned::<AnnularConformanceEvidence>();
+}
+
+fn assert_exact_census(proof: &AnnularPrismConformance) {
+    assert_eq!(proof.evidence().body.endpoints.len(), 12);
+    assert_eq!(
+        proof
+            .evidence()
+            .body
+            .endpoints
+            .iter()
+            .map(|row| row.contexts.len())
+            .sum::<usize>(),
+        24
+    );
+    assert_eq!(proof.evidence().body.trims.len(), 12);
+    assert_eq!(proof.evidence().closures.len(), 20);
+    assert_eq!(proof.evidence().source_reports.len(), 6);
+    assert_eq!(proof.evidence().supports.len(), 10);
+}
+
+fn assert_refused_metadata(joined: &AnnularFrozenDomain, proof: &AnnularPrismConformance) {
     let refused = certify_annular_prism_tolerances(
-        &joined,
-        &proof,
+        joined,
+        proof,
         StoredToleranceCap::refuse(0.).unwrap(),
         &mut Continue,
     )
@@ -80,14 +98,4 @@ fn actual_annular_metadata_reuses_geometry_and_keeps_all_refused_observations() 
         refused.cause,
         JoinedToleranceCause::RefusedCap { .. }
     ));
-}
-#[test]
-fn owned_annular_proofs_and_all_failures_are_send_sync() {
-    fn assert_owned<T: Send + Sync>() {}
-    assert_owned::<AnnularPrismConformance>();
-    assert_owned::<AnnularPrismTolerance>();
-    assert_owned::<AnnularConformanceFailure>();
-    assert_owned::<AnnularConformanceCause>();
-    assert_owned::<AnnularToleranceFailure>();
-    assert_owned::<AnnularConformanceEvidence>();
 }

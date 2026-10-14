@@ -40,54 +40,24 @@ fn singular_support_refuses_a_previously_zero_report_with_source_context() {
 }
 #[test]
 fn duplicate_missing_noncanonical_parameters_and_duplicate_source_groups_refuse() {
-    let curve = constant_curve([0.; 3]);
     let mut work = AnnularExactWork::new();
     let rows = endpoints();
-    assert!(
-        super::source_closures::group(
-            context(),
-            &curve,
-            identity(),
-            &rows[..1],
-            &mut work,
-            &mut Continue
-        )
-        .is_err()
-    );
+    assert!(run_group(&rows[..1], &mut work).is_err());
     for parameter in [0., -0., 0.5] {
         let mut malformed = endpoints();
         malformed[1].parameter = parameter;
-        assert!(
-            super::source_closures::group(
-                context(),
-                &curve,
-                identity(),
-                &malformed,
-                &mut AnnularExactWork::new(),
-                &mut Continue
-            )
-            .is_err()
-        );
+        assert!(run_group(&malformed, &mut AnnularExactWork::new()).is_err());
     }
+    run_group(&rows, &mut work).ok().unwrap();
+    assert!(run_group(&rows, &mut work).is_err());
+}
+fn run_group(rows: &[TwoLoopEndpointProof], work: &mut AnnularExactWork) -> AnnularExactCheck {
     super::source_closures::group(
         context(),
-        &curve,
+        &constant_curve([0.; 3]),
         identity(),
-        &rows,
-        &mut work,
+        rows,
+        work,
         &mut Continue,
     )
-    .ok()
-    .unwrap();
-    assert!(
-        super::source_closures::group(
-            context(),
-            &curve,
-            identity(),
-            &rows,
-            &mut work,
-            &mut Continue
-        )
-        .is_err()
-    );
 }

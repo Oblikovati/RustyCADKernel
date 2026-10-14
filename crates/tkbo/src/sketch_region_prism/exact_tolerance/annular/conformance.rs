@@ -24,25 +24,8 @@ fn inspect(
     work: &mut AnnularExactWork,
     progress: &mut impl JoinedConformanceProgress,
 ) -> AnnularExactCheck {
-    work.body
-        .phase(JoinedConformancePhase::Admission, progress)?;
-    count(
-        "annular directed raw body vertices",
-        join.raw_vertices().len(),
-        24,
-    )?;
-    work.body
-        .phase(JoinedConformancePhase::Placements, progress)?;
-    certify_projection_frames(join.projection(), &mut work.body, progress)?;
-    work.body
-        .phase(JoinedConformancePhase::Endpoints, progress)?;
-    certify_projection_endpoints(
-        join.projection(),
-        join.raw_vertices(),
-        (12, 24),
-        &mut work.body,
-        progress,
-    )?;
+    admit_and_frames(join, work, progress)?;
+    body_endpoints(join, work, progress)?;
     work.body
         .phase(JoinedConformancePhase::Closures, progress)?;
     super::source_closures::inspect(join.embedding().binding(), work, progress)?;
@@ -56,5 +39,40 @@ fn inspect(
         progress,
     )?;
     work.body.phase(JoinedConformancePhase::Commit, progress)?;
+    Ok(())
+}
+
+fn admit_and_frames(
+    join: &AnnularFrozenDomain,
+    work: &mut AnnularExactWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> AnnularExactCheck {
+    work.body
+        .phase(JoinedConformancePhase::Admission, progress)?;
+    count(
+        "annular directed raw body vertices",
+        join.raw_vertices().len(),
+        24,
+    )?;
+    work.body
+        .phase(JoinedConformancePhase::Placements, progress)?;
+    certify_projection_frames(join.projection(), &mut work.body, progress)?;
+    Ok(())
+}
+
+fn body_endpoints(
+    join: &AnnularFrozenDomain,
+    work: &mut AnnularExactWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> AnnularExactCheck {
+    work.body
+        .phase(JoinedConformancePhase::Endpoints, progress)?;
+    certify_projection_endpoints(
+        join.projection(),
+        join.raw_vertices(),
+        (12, 24),
+        &mut work.body,
+        progress,
+    )?;
     Ok(())
 }

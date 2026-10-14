@@ -18,8 +18,7 @@ fn body_refusal(join: &AnnularFrozenDomain, raw: &[JoinedVertexOperand]) -> Join
         &mut ConformanceWork::new(),
         &mut Continue,
     )
-    .err()
-    .expect("malformed full-context operands must refuse")
+    .expect_err("malformed full-context operands must refuse")
 }
 #[test]
 fn missing_duplicate_foreign_and_mixed_raw_contexts_are_refused() {
@@ -35,18 +34,7 @@ fn missing_duplicate_foreign_and_mixed_raw_contexts_are_refused() {
         body_refusal(&join, &changed),
         JoinedConformanceCause::Count { .. }
     ));
-    changed = raw.to_vec();
-    changed[0].vertex.kind = 6;
-    assert!(matches!(
-        body_refusal(&join, &changed),
-        JoinedConformanceCause::Mismatch { .. }
-    ));
-    changed = raw.to_vec();
-    changed[0].local_point[0] += 0.125;
-    assert!(matches!(
-        body_refusal(&join, &changed),
-        JoinedConformanceCause::Mismatch { .. }
-    ));
+    foreign_and_mixed(&join, raw);
 }
 #[test]
 fn a_matching_revision_cannot_replace_full_geometry_binding() {
@@ -63,4 +51,19 @@ fn a_matching_revision_cannot_replace_full_geometry_binding() {
         JoinedToleranceCause::ConformanceBinding
     ));
     assert!(failure.metadata.is_empty());
+}
+
+fn foreign_and_mixed(join: &AnnularFrozenDomain, raw: &[JoinedVertexOperand]) {
+    let mut changed = raw.to_vec();
+    changed[0].vertex.kind = 6;
+    assert!(matches!(
+        body_refusal(join, &changed),
+        JoinedConformanceCause::Mismatch { .. }
+    ));
+    changed = raw.to_vec();
+    changed[0].local_point[0] += 0.125;
+    assert!(matches!(
+        body_refusal(join, &changed),
+        JoinedConformanceCause::Mismatch { .. }
+    ));
 }

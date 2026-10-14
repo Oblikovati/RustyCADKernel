@@ -24,40 +24,14 @@ pub(super) fn inspect(
     }
     candidates(binding, work, progress)?;
     super::source_copy::inspect(binding, work, progress)?;
-    count(
-        "all source/census/candidate/copied native endpoints",
-        work.upstream.closures.len(),
-        20,
-    )?;
-    count(
-        "all upstream source conformance reports",
-        work.upstream.source_reports.len(),
-        6,
-    )?;
-    count(
-        "all source-group support frames",
-        work.upstream.supports.len(),
-        10,
-    )?;
-    Ok(())
+    complete_sources(work)
 }
 fn original_and_census(
     source: &TwoLoopSourceProof,
     work: &mut AnnularExactWork,
     progress: &mut impl JoinedConformanceProgress,
 ) -> AnnularExactCheck {
-    for (stage, curve, endpoints) in [
-        (
-            AnnularClosureStage::Original,
-            &source.original,
-            &source.closure,
-        ),
-        (
-            AnnularClosureStage::Census,
-            &source.copied,
-            &source.copied_closure,
-        ),
-    ] {
+    for (stage, curve, endpoints) in source_groups(source) {
         let context = AnnularSourceContext {
             source: source.name,
             stage,
@@ -87,22 +61,7 @@ fn candidates(
     let mut wires = 0;
     for candidate in binding.region().candidates() {
         for wire in &candidate.wires {
-            let context = AnnularSourceContext {
-                source: wire.source,
-                stage: AnnularClosureStage::Candidate {
-                    candidate: candidate.name,
-                    wire: wire.name,
-                },
-                native: None,
-            };
-            group(
-                context,
-                &wire.space,
-                candidate.support.placement,
-                &wire.closure,
-                work,
-                progress,
-            )?;
+            candidate_wire(candidate, wire, work, progress)?;
             wires += 1;
         }
     }
@@ -129,30 +88,7 @@ pub(super) fn group(
     work.upstream
         .supports
         .push(AnnularSupportEvidence { context, frame });
-    for (native, parameter) in [
-        (CanonicalEndpointSide::First, 0_f64),
-        (CanonicalEndpointSide::Last, 1_f64),
-    ] {
-        let rows: Vec<_> = endpoints
-            .iter()
-            .filter(|row| row.parameter.to_bits() == parameter.to_bits())
-            .collect();
-        let row = *one(
-            &rows,
-            "one exact native parameter role per upstream endpoint",
-        )?;
-        append(
-            AnnularSourceContext {
-                native: Some(native),
-                ..context
-            },
-            curve,
-            row,
-            work,
-            progress,
-        )?;
-    }
-    Ok(())
+    native_endpoints(context, curve, endpoints, work, progress)
 }
 fn unique_group(
     context: AnnularSourceContext,
@@ -215,4 +151,111 @@ fn reused_origin(context: AnnularSourceContext) -> Option<AnnularSourceContext> 
         });
     }
     None
+}
+
+fn complete_sources(work: &AnnularExactWork) -> AnnularExactCheck {
+    count(
+        "all source/census/candidate/copied native endpoints",
+        work.upstream.closures.len(),
+        20,
+    )?;
+    count(
+        "all upstream source conformance reports",
+        work.upstream.source_reports.len(),
+        6,
+    )?;
+    count(
+        "all source-group support frames",
+        work.upstream.supports.len(),
+        10,
+    )?;
+    Ok(())
+}
+
+fn source_groups(
+    source: &TwoLoopSourceProof,
+) -> [(
+    AnnularClosureStage,
+    &CapturedSpaceRepresentation,
+    &[TwoLoopEndpointProof],
+); 2] {
+    [
+        (
+            AnnularClosureStage::Original,
+            &source.original,
+            &source.closure,
+        ),
+        (
+            AnnularClosureStage::Census,
+            &source.copied,
+            &source.copied_closure,
+        ),
+    ]
+}
+
+fn candidate_wire(
+    candidate: &TwoLoopCandidateProof,
+    wire: &TwoLoopWireProof,
+    work: &mut AnnularExactWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> AnnularExactCheck {
+    let context = AnnularSourceContext {
+        source: wire.source,
+        stage: AnnularClosureStage::Candidate {
+            candidate: candidate.name,
+            wire: wire.name,
+        },
+        native: None,
+    };
+    group(
+        context,
+        &wire.space,
+        candidate.support.placement,
+        &wire.closure,
+        work,
+        progress,
+    )?;
+    Ok(())
+}
+
+fn native_endpoints(
+    context: AnnularSourceContext,
+    curve: &CapturedSpaceRepresentation,
+    endpoints: &[TwoLoopEndpointProof],
+    work: &mut AnnularExactWork,
+    progress: &mut impl JoinedConformanceProgress,
+) -> AnnularExactCheck {
+    for (native, parameter) in [
+        (CanonicalEndpointSide::First, 0_f64),
+        (CanonicalEndpointSide::Last, 1_f64),
+    ] {
+        let row = native_endpoint(endpoints, parameter)?;
+        append(
+            AnnularSourceContext {
+                native: Some(native),
+                ..context
+            },
+            curve,
+            row,
+            work,
+            progress,
+        )?;
+    }
+    Ok(())
+}
+
+fn native_endpoint(
+    endpoints: &[TwoLoopEndpointProof],
+    parameter: f64,
+) -> AnnularExactCheck<&TwoLoopEndpointProof> {
+    let rows: Vec<_> = endpoints
+        .iter()
+        .filter(|row| row.parameter.to_bits() == parameter.to_bits())
+        .collect();
+    one(
+        &rows,
+        "one exact native parameter role per upstream endpoint",
+    )
+    .copied()
+    .map_err(Into::into)
 }
