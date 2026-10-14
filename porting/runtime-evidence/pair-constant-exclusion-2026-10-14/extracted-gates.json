@@ -1,0 +1,28 @@
+[
+  {
+    "name": "extracted-tests",
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "rustycad-tkmath",
+      "--all-targets",
+      "--all-features"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "extracted-docs",
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "rustycad-tkmath",
+      "--doc",
+      "--all-features"
+    ],
+    "exit_code": 0
+  }
+]

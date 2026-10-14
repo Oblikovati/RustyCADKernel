@@ -24,7 +24,8 @@ fn world_request_refines_the_same_joint_root_beyond_initial_parameter_width() {
     assert_eq!(proof.contacts.len(), 1);
     assert!(proof.contacts[0].world.achieved_error <= 1e-8);
     assert!(root_width_less_than(&proof.contacts[0].root, 1e-8));
-    assert!(outcome.work.completed > proof.candidate_certificate.isolation.bisections());
+    let initial = &proof.graph().unwrap().candidate_certificate.isolation;
+    assert!(outcome.work.completed > initial.bisections());
     assert_root_link(&proof);
     super::algebraic_world_tests::verify_exact_sqrt_half_bracket(&proof.contacts[0].root);
     super::algebraic_world_tests::verify_independent_world_error(&proof.contacts[0], 1e-8);
@@ -78,7 +79,12 @@ fn root_width_less_than(root: &super::super::RootBracket, limit: f64) -> bool {
 
 fn assert_root_link(proof: &PairOperationProof) {
     let contact = &proof.contacts[0];
-    let original = &proof.candidate_certificate.isolation.roots()[contact.candidate_index];
+    let original = &proof
+        .graph()
+        .unwrap()
+        .candidate_certificate
+        .isolation
+        .roots()[contact.candidate_index];
     let refined = &proof.contacts[0].root;
     assert!(refined.bounds().0 >= original.bounds().0);
     assert!(refined.bounds().1 <= original.bounds().1);
@@ -123,6 +129,8 @@ fn refinement_cancellation_retains_work_and_fresh_retry_is_identical() {
             > success
                 .completion
                 .as_ref()
+                .unwrap()
+                .graph()
                 .unwrap()
                 .candidate_certificate
                 .isolation

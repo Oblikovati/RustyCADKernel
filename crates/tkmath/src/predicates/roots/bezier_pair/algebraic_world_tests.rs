@@ -10,6 +10,8 @@ fn irrational_curved_pair_retains_joint_root_and_certified_world_radius() {
     assert!(contact.root.width().compare_f64(0.).unwrap().is_gt());
     assert_eq!(
         proof
+            .graph()
+            .unwrap()
             .candidate_certificate
             .polynomial
             .primitive(2)
@@ -63,6 +65,8 @@ fn permuted_rational_pair_certifies_exact_third_root_and_actual_world_error() {
     let proof = permuted_rational_proof();
     assert_eq!(
         proof
+            .graph()
+            .unwrap()
             .candidate_certificate
             .polynomial
             .primitive(1)

@@ -18,17 +18,17 @@ impl<'a> ExactPairPolynomial<'a> {
             coefficients: retained,
         }
     }
-    /// Read the exact reduced degree; `None` denotes zero. Example: `proof.candidates().0.polynomial_degree()`.
+    /// Read the exact reduced degree; `None` denotes zero. Example: `proof.graph().unwrap().candidates().0.polynomial_degree()`.
     pub fn polynomial_degree(&self) -> Option<usize> {
         let coefficients = self.coefficients;
         coefficients.len().checked_sub(1)
     }
-    /// Read the number of retained coefficients. Example: `proof.projection().alpha.coefficient_count()`.
+    /// Read the number of retained coefficients. Example: `proof.graph().unwrap().projection().alpha.coefficient_count()`.
     pub fn coefficient_count(&self) -> usize {
         let coefficients = self.coefficients;
         coefficients.len()
     }
-    /// Borrow an exact coefficient without replacing it with a rounded scalar. Example: `proof.projection().alpha.signed_coefficient(0).unwrap().to_string()`.
+    /// Borrow an exact coefficient without replacing it with a rounded scalar. Example: `proof.graph().unwrap().projection().alpha.signed_coefficient(0).unwrap().to_string()`.
     pub fn signed_coefficient(&self, index: usize) -> Option<ExactPairCoefficient<'a>> {
         let coefficient = self.coefficients.get(index)?;
         Some(ExactPairCoefficient { coefficient })
