@@ -45,25 +45,38 @@ atlas images survive producer destruction and packet snapshots; GPU resources
 remain in the existing fence-completed frame lifecycle. Remove releases the UI
 packet and presenter, without changing ordinary views that have no GUI packet.
 
-The ordinary toolkit GPU cases are display independent. The same assertions run
-against actual mapped X11 pixels through the explicit native harness:
+The ordinary toolkit GPU cases are display independent. The native harness runs
+the same assertions against completed model-plus-GUI framebuffer captures while
+exercising actual window and swapchain lifecycle, following
+[ADR 0016](adr/0016-framebuffer-images-for-rendering-acceptance.md):
 
 ```sh
 python3 tools/with_vulkan_validation.py --cache /path/to/pinned/cache -- \
   cargo test -p martensite-vulkan --lib --test toolkit gui_ --locked
 DISPLAY=:1 python3 tools/with_vulkan_validation.py --cache /path/to/pinned/cache -- \
   cargo run -p martensite-vulkan --example native_gui_acceptance --locked -- target/gui
+DISPLAY=:1 python3 tools/with_vulkan_validation.py --cache /path/to/pinned/cache -- \
+  cargo run -p martensite-vulkan --example native_gui_rapid --locked -- target/gui-rapid
 ```
 
-The native harness preserves RGBA, depth and actual-window RGBA buffers when given
-a prefix. It verifies replacement, removal, resize, font retirement, all four clip
+The native harness preserves completed framebuffer RGBA, depth and PPM images when
+given a prefix. It verifies replacement, removal, resize, font retirement, all four clip
 edges, asymmetric font UVs, straight alpha order, all three model transparency
 modes, selected-owner identity and selection bounds. Analytic sRGB expectations
-allow one quantization byte; actual native pixels must equal GPU capture exactly.
-No old oracle assets or numerical tolerances change. Software and native device
+allow one quantization byte. The rapid harness verifies all pixels of eight
+1440×900 captures against independent constant-color rectangle expectations,
+including the first completed frame after three GUI replacements, clear and
+restoration. It publishes images through temporary files and atomic rename.
+X11 image readback and compositor pixels are historical diagnostic evidence;
+window creation, mapping, events, resize and swapchain lifecycle remain separate
+functional requirements. No expected assets or numerical tolerances change. Software and native device
 runs, source fingerprints, validation provenance and separately reserved performance
 evidence are required before integration. This kernel extension does not close
 application R1V/R4, the full renderer port, or the deferred controller family.
+
+The [restart receipt](evidence/gui-framebuffer-restart-2026-10-14/README.md) retains
+an unexplained earlier `BadWindow` lifecycle failure alongside later successful
+framebuffer checks. Successful retries do not resolve that failure.
 
 The native performance example uses the same existing view and accepted packet
 shapes, with model-only, static, replace, resize, clip, atlas retirement and ordered

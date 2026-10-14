@@ -117,14 +117,16 @@ def coverage_gate() -> VerificationGate:
     return VerificationGate("coverage", (command,))
 
 
-def xvfb_example(name: str, release: bool = False) -> tuple[str, ...]:
+def xvfb_example(
+    name: str, release: bool = False, screen: tuple[int, int] = (1280, 1024)
+) -> tuple[str, ...]:
     """Keep the real graphical harness; e.g. xvfb_example('lighting_acceptance')."""
     profile = ("--release",) if release else ()
     return (
         "xvfb-run",
         "-a",
         "-s",
-        "-screen 0 1280x1024x24",
+        xvfb_screen(screen),
         "cargo",
         "run",
         "-p",
@@ -136,6 +138,13 @@ def xvfb_example(name: str, release: bool = False) -> tuple[str, ...]:
     )
 
 
+def xvfb_screen(screen: tuple[int, int]) -> str:
+    """Validate the test-owned screen; e.g. xvfb_screen((1920,1080))."""
+    if len(screen) != 2 or any(type(value) is not int or value <= 0 for value in screen):
+        raise ValueError(f"screen={screen!r}; expected two positive integer dimensions")
+    return f"-screen 0 {screen[0]}x{screen[1]}x24"
+
+
 def vulkan_gates(root: Path) -> tuple[VerificationGate, ...]:
     """Cold tests precede acceptance and timing; e.g. vulkan_gates(root)[0].name."""
     cold = GateCommand(
@@ -144,6 +153,14 @@ def vulkan_gates(root: Path) -> tuple[VerificationGate, ...]:
     acceptance = (
         GateCommand(xvfb_example("offscreen_acceptance")),
         GateCommand(xvfb_example("lighting_acceptance")),
+        GateCommand(
+            (*xvfb_example("native_gui_rapid", screen=(1920, 1080)),
+             "--", "target/native-gui-framebuffer")
+        ),
+        GateCommand(
+            (*xvfb_example("native_gui_acceptance"),
+             "--", "target/native-gui-framebuffer/accepted")
+        ),
     )
     return (
         VerificationGate("vulkan-cold", (cold,)),

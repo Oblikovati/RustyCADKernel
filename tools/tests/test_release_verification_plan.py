@@ -14,6 +14,7 @@ from release_verification_plan import (
     verification_gates,
     shader_commands,
     xvfb_example,
+    xvfb_screen,
 )
 
 
@@ -100,6 +101,26 @@ class VerificationPlanTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "expected nonempty"):
             shader_commands(self.fixture.root / "missing")
 
+    def test_rapid_framebuffer_main_joins_unchanged_original_acceptance(self) -> None:
+        commands = self.gates["vulkan-acceptance"].commands
+        self.assertEqual(commands[0].argv, xvfb_example("offscreen_acceptance"))
+        self.assertEqual(commands[1].argv, xvfb_example("lighting_acceptance"))
+        self.assertEqual(
+            commands[2].argv,
+            (*xvfb_example("native_gui_rapid", screen=(1920, 1080)),
+             "--", "target/native-gui-framebuffer"),
+        )
+        self.assertEqual(
+            commands[3].argv,
+            (*xvfb_example("native_gui_acceptance"),
+             "--", "target/native-gui-framebuffer/accepted"),
+        )
+        self.assertEqual(xvfb_example("original")[3], "-screen 0 1280x1024x24")
+        self.assertEqual(xvfb_screen((1920, 1080)), "-screen 0 1920x1080x24")
+        for invalid in [(0, 1080), (-1, 900), (True, 900), (1280,)]:
+            with self.assertRaisesRegex(ValueError, "expected two positive integer"):
+                xvfb_screen(invalid)
+
     def test_inventory_source_and_performance_log_are_explicit(self) -> None:
         self.assertEqual(self.gates["inventory"].commands[0].argv[-1], "../OCCT")
         performance = self.gates["vulkan-performance"].commands[0]
@@ -107,7 +128,7 @@ class VerificationPlanTests(unittest.TestCase):
             performance.stdout_path, Path("target/renderer-performance.log")
         )
         self.assertEqual(performance.argv, xvfb_example("renderer_performance", True))
-        self.assertEqual(len(self.gates["vulkan-acceptance"].commands), 2)
+        self.assertEqual(len(self.gates["vulkan-acceptance"].commands), 4)
 
     def test_workflow_calls_every_shared_gate_and_preserves_diagnostic_pipes(
         self,

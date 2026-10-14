@@ -3,6 +3,8 @@ use super::{device_options, gui_acceptance_scene::GuiAcceptanceScene, gui_packet
 use martensite_vulkan::*;
 use rustycad_tkernel::standard::Handle;
 use std::time::Instant;
+#[path = "gui_timing_samples.rs"]
+mod gui_timing_samples;
 const GUI_WORKLOADS: [&str; 7] = [
     "model",
     "static",
@@ -46,13 +48,11 @@ fn collect_gui_timings(
     samples: usize,
     packet: &RenderLayer,
 ) -> Vec<f64> {
-    for index in 0..warmup {
-        timed_gui_frame(scene, workload, index, packet);
-    }
-    (0..samples)
-        .map(|index| timed_gui_frame(scene, workload, index, packet))
-        .collect()
+    gui_timing_samples::collect_samples(warmup, samples, |index| {
+        timed_gui_frame(scene, workload, index, packet)
+    })
 }
+
 fn prepare_gui_workload(scene: &GuiAcceptanceScene, workload: &str, packet: &RenderLayer) {
     if workload == "model" {
         return;
