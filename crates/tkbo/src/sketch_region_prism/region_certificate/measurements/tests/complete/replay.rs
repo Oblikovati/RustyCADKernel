@@ -91,7 +91,7 @@ fn assert_cancel_stage(cutoff: usize, final_poll: usize, error: CompletePrismMea
         )),
         _ => assert!(matches!(
             error,
-            CompletePrismMeasureFailure::Binding(PrismBindingFailure::Cancelled)
+            CompletePrismMeasureFailure::Binding(cause) if matches!(*cause, PrismBindingFailure::Cancelled)
         )),
     }
 }

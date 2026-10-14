@@ -26,24 +26,24 @@ pub(crate) struct CompletePrismMeasures {
 }
 // Private failures may retain legacy mutable diagnostics; no partial successful body is returned.
 pub(crate) enum CompletePrismMeasureFailure {
-    Binding(PrismBindingFailure),
-    Subset(PrismMeasureFailure),
+    Binding(Box<PrismBindingFailure>),
+    Subset(Box<PrismMeasureFailure>),
     Side {
         source: PartitionOccurrenceIdentity,
         output: PartitionOccurrenceIdentity,
-        cause: PolynomialSideError,
+        cause: Box<PolynomialSideError>,
     },
     Total(EnclosureSumError),
 }
 impl From<PrismBindingFailure> for CompletePrismMeasureFailure {
     fn from(cause: PrismBindingFailure) -> Self {
         // Keep the shared binding refusal without reconstructing its provenance.
-        Self::Binding(cause)
+        Self::Binding(Box::new(cause))
     }
 }
 impl From<PrismMeasureFailure> for CompletePrismMeasureFailure {
     fn from(cause: PrismMeasureFailure) -> Self {
         // Subset arithmetic keeps its original typed quantity and policy.
-        Self::Subset(cause)
+        Self::Subset(Box::new(cause))
     }
 }

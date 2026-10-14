@@ -45,7 +45,7 @@ fn full_report(
 }
 fn full_failure_name(failure: CompletePrismMeasureFailure) -> String {
     match failure {
-        CompletePrismMeasureFailure::Binding(cause) => failure_name(&cause.into()),
+        CompletePrismMeasureFailure::Binding(cause) => failure_name(&(*cause).into()),
         CompletePrismMeasureFailure::Subset(cause) => failure_name(&cause),
         CompletePrismMeasureFailure::Side { cause, .. } => format!("side {cause:?}"),
         CompletePrismMeasureFailure::Total(cause) => format!("total {cause:?}"),

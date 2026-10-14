@@ -59,6 +59,6 @@ fn side_failure(
     CompletePrismMeasureFailure::Side {
         source: chart.source.clone(),
         output: chart.output.clone(),
-        cause,
+        cause: Box::new(cause),
     }
 }

@@ -50,7 +50,7 @@ fn bound_subset(
         options,
         cancelled,
     )
-    .map_err(CompletePrismMeasureFailure::Subset)
+    .map_err(CompletePrismMeasureFailure::from)
 }
 fn total_measure(
     subset: &PrismMeasureSubset,

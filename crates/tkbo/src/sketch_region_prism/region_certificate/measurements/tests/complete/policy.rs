@@ -47,7 +47,7 @@ fn cap_and_volume_failure_quantities_remain_original_subset_errors() {
         .unwrap();
     assert!(matches!(
         failure,
-        CompletePrismMeasureFailure::Subset(PrismMeasureFailure::Sweep(_))
+        CompletePrismMeasureFailure::Subset(cause) if matches!(*cause, PrismMeasureFailure::Sweep(_))
     ));
 }
 #[test]
@@ -61,10 +61,8 @@ fn cap_failure_quantity_remains_original_subset_error() {
         .unwrap();
     assert!(matches!(
         failure,
-        CompletePrismMeasureFailure::Subset(PrismMeasureFailure::Cap {
-            role: PrismImageRole::First,
-            ..
-        })
+        CompletePrismMeasureFailure::Subset(cause) if matches!(*cause, PrismMeasureFailure::Cap {
+            role: PrismImageRole::First, .. })
     ));
 }
 

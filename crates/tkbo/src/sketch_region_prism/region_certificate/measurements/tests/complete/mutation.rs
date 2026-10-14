@@ -40,13 +40,13 @@ fn complete_entry_refuses_missing_history_before_any_scalar_result() {
     let CompletePrismMeasureFailure::Binding(cause) = failure else {
         panic!("expected binding")
     };
-    assert_hypothesis(cause.into(), "attributed actual body member");
+    assert_hypothesis((*cause).into(), "attributed actual body member");
 }
 fn assert_exact_binding_target(target: usize, failure: CompletePrismMeasureFailure) {
     let CompletePrismMeasureFailure::Binding(cause) = failure else {
         panic!("expected binding")
     };
-    super::super::mutation_tests::assert_target_failure(target, cause.into());
+    super::super::mutation_tests::assert_target_failure(target, (*cause).into());
 }
 #[test]
 fn actual_side_direction_change_refuses_exact_identity_without_normalization_slack() {
@@ -56,15 +56,11 @@ fn actual_side_direction_change_refuses_exact_identity_without_normalization_sla
     let failure = full_attempt(&bridge, &shapes, &receipt, fast_options(), || false)
         .err()
         .unwrap();
-    assert!(matches!(
-        failure,
-        CompletePrismMeasureFailure::Binding(PrismBindingFailure::Chart(
-            PrismSurfaceCause::Identity {
-                stage: PrismChartStage::SideDirection,
-                ..
-            }
-        ))
-    ));
+    assert!(
+        matches!(failure, CompletePrismMeasureFailure::Binding(cause)
+        if matches!(*cause, PrismBindingFailure::Chart(PrismSurfaceCause::Identity {
+            stage: PrismChartStage::SideDirection, .. })))
+    );
 }
 #[test]
 fn complete_inspection_preserves_candidate_geometry_and_attached_mesh_caches() {
