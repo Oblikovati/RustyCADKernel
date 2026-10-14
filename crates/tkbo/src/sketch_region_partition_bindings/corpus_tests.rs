@@ -6,7 +6,7 @@ use crate::sketch_region_source_conformance::{capture_originals, capture_space_r
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 
-pub(super) fn inspect_corpus_sources(sources: &[Shape]) -> PartitionBoundOutputs {
+pub(crate) fn inspect_corpus_sources(sources: &[Shape]) -> PartitionBoundOutputs {
     let inputs = binding_sources(sources);
     let originals = capture_originals(&inputs).unwrap();
     let observed = observe_partition_space(&inputs, &mut |_| false, capture_space_representation);

@@ -16,7 +16,13 @@ pub(super) fn same_construction(
     a.occurrence == b.occurrence
         && a.copied_occurrence == b.copied_occurrence
         && a.parents == b.parents
-        && same_geometry(&a.copied, &b.copied, same_space_representation)
+        && same_construction_basis(a, b)
+}
+pub(crate) fn same_construction_basis(
+    a: &CapturedBoundaryConstruction,
+    b: &CapturedBoundaryConstruction,
+) -> bool {
+    same_geometry(&a.copied, &b.copied, same_space_representation)
         && same_geometry(&a.pcurve, &b.pcurve, same_metric_curve)
         && same_geometry(&a.support, &b.support, |a, b| {
             same_embedding(&a.frame, &b.frame) && same_embedding(&a.placement, &b.placement)

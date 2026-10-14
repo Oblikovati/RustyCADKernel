@@ -10,6 +10,7 @@ pub(crate) struct CandidateCopiedMember {
     pub index: usize,
     pub occurrence: PartitionOccurrenceIdentity,
     pub kind: ShapeEnum,
+    pub vertex_point: crate::sketch_region_vertex_observation::ObservedVertexPoint,
 }
 pub(crate) enum CandidateCopyTreeObservation {
     NotReached,
@@ -40,11 +41,18 @@ fn capture_copied_members(
     }
     for index in 1..=indexed.extent() {
         let member = indexed.find_key(index)?;
-        members.push(CandidateCopiedMember {
-            index,
-            occurrence: PartitionOccurrenceIdentity::capture(member),
-            kind: member.shape_type()?,
-        });
+        members.push(snapshot_copied_member(index, member)?);
     }
     Ok(())
+}
+
+fn snapshot_copied_member(index: usize, member: &Shape) -> Result<CandidateCopiedMember, Failure> {
+    let occurrence = PartitionOccurrenceIdentity::capture(member);
+    let kind = member.shape_type()?;
+    Ok(CandidateCopiedMember {
+        index,
+        occurrence,
+        kind,
+        vertex_point: crate::sketch_region_vertex_observation::snapshot_vertex_point(member, kind),
+    })
 }

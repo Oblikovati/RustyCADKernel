@@ -4,7 +4,7 @@ use super::super::RootIsolationOptions;
 use super::*;
 use std::cmp::Ordering;
 
-fn retained_rational_contact() -> BezierPairReport {
+pub(super) fn retained_rational_contact() -> BezierPairReport {
     let query = parameter_query();
     query.certify(parameter_policy(), || false)
 }

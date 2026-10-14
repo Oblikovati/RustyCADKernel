@@ -13,7 +13,7 @@ pub(super) fn two_root_edges() -> Vec<Shape> {
         Point3::new(1., 0., 0.),
     ])
 }
-pub(super) fn single_root_edges() -> Vec<Shape> {
+pub(crate) fn single_root_edges() -> Vec<Shape> {
     curved_line_edges([
         Point3::new(0., 0., 0.),
         Point3::new(0.5, 0., 0.),
@@ -39,7 +39,7 @@ pub(super) fn quadratic_edge(points: [Point3; 3]) -> Shape {
         .unwrap()
         .into_shape()
 }
-pub(super) fn binding_sources(shapes: &[Shape]) -> Vec<ArrangementSource<'_>> {
+pub(crate) fn binding_sources(shapes: &[Shape]) -> Vec<ArrangementSource<'_>> {
     shapes
         .iter()
         .enumerate()

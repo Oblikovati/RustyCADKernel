@@ -4,7 +4,7 @@ use super::types::*;
 use crate::sketch_region_geometry_capture::CapturedMetricCurve;
 use rustycad_tkmath::predicates::roots::metric_bounds::*;
 
-pub(super) fn source_query<'a>(
+pub(crate) fn source_query<'a>(
     original: &'a CapturedSpaceRepresentation,
     construction: &'a CapturedBoundaryConstruction,
     stage: ConstructionStage,
@@ -100,7 +100,7 @@ fn stage_basis(
     ))
 }
 
-fn captured_map(
+pub(crate) fn captured_map(
     construction: &CapturedBoundaryConstruction,
 ) -> Result<MetricParameterMap, SourceConformanceCause> {
     let pcurve = construction

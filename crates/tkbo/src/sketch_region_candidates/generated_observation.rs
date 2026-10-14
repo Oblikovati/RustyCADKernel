@@ -8,6 +8,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 pub(crate) struct GeneratedMemberSnapshot {
     pub occurrence: PartitionOccurrenceIdentity,
     pub kind: ShapeEnum,
+    pub vertex_point: crate::sketch_region_vertex_observation::ObservedVertexPoint,
     pub descendants: Vec<PartitionOccurrenceIdentity>,
     pub copy_indices: Vec<usize>,
     pub preserved: Vec<OriginalMemberIdentity>,
@@ -95,17 +96,35 @@ fn snapshot_generated_member(
     tree: &CandidateCopyTreeObservation,
 ) -> Result<GeneratedMemberSnapshot, CandidateCause> {
     let occurrence = PartitionOccurrenceIdentity::capture(&relation.output);
+    let copy_indices = actual_copy_indices(tree, &occurrence);
+    let geometry = generated_member_geometry(&relation.output)?;
     Ok(GeneratedMemberSnapshot {
-        copy_indices: actual_copy_indices(tree, &occurrence),
+        copy_indices,
         occurrence,
-        kind: relation
-            .output
-            .shape_type()
-            .map_err(CandidateCause::Mapped)?,
-        descendants: generated_descendants(&relation.output)?,
+        kind: geometry.kind,
+        vertex_point: geometry.vertex_point,
+        descendants: geometry.descendants,
         preserved: relation.preserved,
         modified: relation.modified,
         generated: relation.generated,
+    })
+}
+
+struct GeneratedMemberGeometry {
+    kind: ShapeEnum,
+    descendants: Vec<PartitionOccurrenceIdentity>,
+    vertex_point: crate::sketch_region_vertex_observation::ObservedVertexPoint,
+}
+fn generated_member_geometry(
+    shape: &rustycad_tkbrep::topods::Shape,
+) -> Result<GeneratedMemberGeometry, CandidateCause> {
+    let kind = shape.shape_type().map_err(CandidateCause::Mapped)?;
+    let descendants = generated_descendants(shape)?;
+    let vertex_point = crate::sketch_region_vertex_observation::snapshot_vertex_point(shape, kind);
+    Ok(GeneratedMemberGeometry {
+        kind,
+        descendants,
+        vertex_point,
     })
 }
 

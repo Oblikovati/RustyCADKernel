@@ -59,7 +59,7 @@ pub(crate) fn bind_partition_outputs(
         inspection,
     }
 }
-fn inspect_outputs(
+pub(crate) fn inspect_outputs(
     observation: &PartitionObservation,
     copied: Option<&CandidateCopyInspection>,
     originals: &[OriginalCurveCapture],
@@ -100,7 +100,7 @@ fn empty_transaction(observation: &PartitionObservation) -> PartitionTransaction
         missing: required_partition_proofs(),
     }
 }
-fn required_partition_proofs() -> Vec<RequiredPartitionProof> {
+pub(crate) fn required_partition_proofs() -> Vec<RequiredPartitionProof> {
     vec![
         RequiredPartitionProof::PairedContactIdentity,
         RequiredPartitionProof::NativeDualParameterTransport,

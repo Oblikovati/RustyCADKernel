@@ -16,6 +16,11 @@ impl<'a> ExactBezierPairParameterEnclosure<'a> {
         // WHY: issue #10 must compare actual graph evidence, never reinterpret its rounded display.
         Self { interval: retained }
     }
+    pub(super) fn interval(&self) -> &RatioInterval {
+        let retained = self.interval;
+        // The construction adapter borrows the already-owned certificate enclosure.
+        retained
+    }
     /// Compare the actual lower rational bound exactly; example: `contact.exact_paired_parameter.compare_lower(0.5)?`.
     pub fn compare_lower(&self, value: f64) -> Result<Ordering, ResidualError> {
         let supplied = finite_parameter(value)?;

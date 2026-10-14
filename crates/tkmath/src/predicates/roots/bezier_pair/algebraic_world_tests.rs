@@ -22,7 +22,7 @@ fn irrational_curved_pair_retains_joint_root_and_certified_world_radius() {
     verify_exact_sqrt_half_bracket(&contact.root);
     verify_independent_world_error(contact, 1e-6);
 }
-fn irrational_proof() -> super::operation::PairOperationProof {
+pub(super) fn irrational_proof() -> super::operation::PairOperationProof {
     let source =
         |controls: &[[f64; 2]]| OwnedBezierSource::capture(controls, None, [0., 1.]).unwrap();
     let sources = [

@@ -4,6 +4,7 @@ mod capture;
 mod inspect;
 mod membership;
 mod query;
+pub(crate) use query::{captured_map, source_query};
 mod types;
 pub(crate) use capture::{capture_construction, capture_originals, capture_space_representation};
 pub(crate) use inspect::inspect_source_conformance;
@@ -24,3 +25,5 @@ pub(crate) use binding_types::{BoundSourceConformance, SourceBindingFault};
 pub(crate) use descriptor_bits::same_space_representation;
 
 pub(crate) use snapshot_binding::binds_current_segment;
+
+pub(crate) use snapshot_binding::same_construction_basis;

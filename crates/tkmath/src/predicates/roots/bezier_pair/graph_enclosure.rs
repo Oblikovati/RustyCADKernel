@@ -48,7 +48,7 @@ fn exact_graph_interval(
     Ok(beta.multiply(&reciprocal))
 }
 
-fn parameter_interval(root: &RootBracket) -> RatioInterval {
+pub(super) fn parameter_interval(root: &RootBracket) -> RatioInterval {
     RatioInterval {
         lower: ExactRatio::from_dyadic(root.bounds().0),
         upper: ExactRatio::from_dyadic(root.bounds().1),
