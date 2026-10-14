@@ -1,0 +1,168 @@
+{
+  "integration_revision": "0d2bef9d9974ba157761bbf8a1bcc272e5393c34",
+  "candidate_revision": "660a1bbaee30f4a8338890bd1c24bca8f994a0cf",
+  "candidate_base": "93fac56f229fc299080f38581bdf3d5a82acbcfd",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "2858803ae75ab41f8a1ab3a426ea702c5e2bd08591cc484da99b345f58da9af4"
+      },
+      "tests": {
+        "passed": 1413,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "b9dc5a649e5f536a44acc25cf93633b040e3ec3ef7ca4cff007c2a161f33ed34"
+      },
+      "tests": {
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "dd07e5c3bdfe64f838e70f10ed201cba23da51cae96581a27c7c94d0bce2a3c8"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "6ac16c6bd2d56101b33bc26bb9c2cf2be19a39a57694037ce8e14bbcbb91d910"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/access.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/error.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/faces.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/naming.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/naming_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_binding.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_domain.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_refusal.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/trims.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/evaluate.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/evaluation_error.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/faces.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/signs.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/callbacks-v1.json": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/compatibility.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/domain.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/evaluation.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/orientation-v1.json": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/refusal.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/trims.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/access.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/error.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/faces.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/naming.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/naming_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/replay.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_binding.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_domain.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_refusal.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/tests_replay.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/trims.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_orientation/types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/frozen/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/evaluate.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/evaluation_error.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/faces.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/signs.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/callbacks-v1.json": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/compatibility.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/domain.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/evaluation.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/orientation-v1.json": "A",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/refusal.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/tests/replay.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/region_certificate/orientation/trims.rs": "M"
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}
