@@ -1,0 +1,78 @@
+{
+  "commands": [
+    {
+      "label": "after-1",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "--",
+        "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "after-2",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "--",
+        "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "math-docs",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "exit": 0
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_files": 16371,
+  "v1_full_bytes_equal": true
+}

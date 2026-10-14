@@ -82,14 +82,18 @@ fn arithmetic_cancelled(cause: &BoundPrismMeasureFailure) -> bool {
         _ => false,
     }
 }
-fn plane_cancelled(cause: &PolynomialPlaneFailure) -> bool {
+/// Preserve the nested arithmetic cancellation cause; `plane_cancelled(cause)`.
+pub(in crate::sketch_region_prism) fn plane_cancelled(cause: &PolynomialPlaneFailure) -> bool {
     match cause {
         PolynomialPlaneFailure::Boundary(cause) => integral_cancelled(&cause.cause),
         PolynomialPlaneFailure::Metric(cause) => metric_cancelled(cause),
         _ => false,
     }
 }
-fn integral_cancelled(cause: &PolynomialIntegralFailure) -> bool {
+/// Preserve the nested arithmetic cancellation cause; `integral_cancelled(cause)`.
+pub(in crate::sketch_region_prism) fn integral_cancelled(
+    cause: &PolynomialIntegralFailure,
+) -> bool {
     matches!(cause, PolynomialIntegralFailure::Metric(cause) if metric_cancelled(cause))
 }
 fn metric_cancelled(cause: &ResidualError) -> bool {

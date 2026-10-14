@@ -25,11 +25,16 @@ fn reports(measures: &CompletePrismMeasures, bytes: &mut Vec<u8>) {
     side(&measures.side, bytes);
     total(&measures.total, bytes);
 }
-fn scalar(enclosure: [f64; 2], error: f64, bytes: &mut Vec<u8>) {
+/// Reuse unchanged owned scalar bytes; `encode_joined_scalar(enclosure, error, bytes)`.
+pub(in crate::sketch_region_prism) fn scalar(enclosure: [f64; 2], error: f64, bytes: &mut Vec<u8>) {
     numbers(enclosure, bytes);
     numbers([error], bytes);
 }
-fn plane(report: &CertifiedPolynomialPlaneMeasure, bytes: &mut Vec<u8>) {
+/// Reuse unchanged owned scalar bytes; `encode_joined_plane(value, bytes)`.
+pub(in crate::sketch_region_prism) fn plane(
+    report: &CertifiedPolynomialPlaneMeasure,
+    bytes: &mut Vec<u8>,
+) {
     scalar(report.enclosure(), report.absolute_error_bound(), bytes);
     integral_options(report.requested_options(), bytes);
     integral_options(report.effective_options(), bytes);
@@ -44,7 +49,11 @@ pub(in crate::sketch_region_prism) fn integral_options(
     bytes.extend(options.max_curves.to_le_bytes());
     numbers([options.absolute_error_limit], bytes);
 }
-fn side(report: &CertifiedPolynomialSideIntegral, bytes: &mut Vec<u8>) {
+/// Reuse unchanged owned scalar bytes; `encode_joined_side(value, bytes)`.
+pub(in crate::sketch_region_prism) fn side(
+    report: &CertifiedPolynomialSideIntegral,
+    bytes: &mut Vec<u8>,
+) {
     scalar(report.enclosure(), report.absolute_error_bound(), bytes);
     side_options(report.requested_options(), bytes);
     side_options(report.effective_options(), bytes);
@@ -61,7 +70,8 @@ pub(in crate::sketch_region_prism) fn side_options(
     bytes.extend(options.max_subdivisions.to_le_bytes());
     numbers([options.absolute_error_limit], bytes);
 }
-fn total(report: &CertifiedEnclosureSum, bytes: &mut Vec<u8>) {
+/// Reuse unchanged owned scalar bytes; `encode_joined_total(value, bytes)`.
+pub(in crate::sketch_region_prism) fn total(report: &CertifiedEnclosureSum, bytes: &mut Vec<u8>) {
     scalar(report.enclosure(), report.absolute_error_bound(), bytes);
     total_options(report.requested_options(), bytes);
     total_options(report.effective_options(), bytes);

@@ -122,7 +122,7 @@ mod polynomial_side;
 pub use polynomial_side::{
     CertifiedPolynomialSideIntegral, PolynomialSideError, PolynomialSideEvidence,
     PolynomialSideFailure, PolynomialSideOptions, PolynomialSideWork,
-    certify_polynomial_side_integral,
+    certify_polynomial_side_integral, validate_polynomial_side_options,
 };
 
 #[cfg(test)]

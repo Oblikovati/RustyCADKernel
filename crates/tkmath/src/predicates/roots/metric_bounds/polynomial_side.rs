@@ -8,6 +8,7 @@ mod restriction;
 mod types;
 use super::super::certificate_arithmetic::ExactRatio;
 use super::{MetricCurve, MetricEmbedding};
+pub use arithmetic::admit_policy as validate_polynomial_side_options;
 pub use error::PolynomialSideFailure;
 pub use types::*;
 type Vector = [ExactRatio; 3];
@@ -59,3 +60,6 @@ mod invariant_tests;
 mod replay_tests;
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod policy_tests;
