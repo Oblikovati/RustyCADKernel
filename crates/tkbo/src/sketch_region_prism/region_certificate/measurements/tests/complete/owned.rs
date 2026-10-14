@@ -37,7 +37,7 @@ fn pure_scalar_failures_are_owned_and_keep_old_missing_evidence_payloads() {
     send_sync::<BoundPrismMeasureFailure>();
     send_sync::<PrismScalarFailure>();
     send_sync::<ScalarOperandCause>();
-    let cause = ScalarOperandCause::need::<usize>(None, "owned operand").unwrap_err();
+    let cause = scalar_need::<usize>(None, "owned operand").unwrap_err();
     let legacy = PrismMeasureFailure::from(PrismScalarFailure::from(cause));
     assert!(matches!(
         legacy,
@@ -45,16 +45,13 @@ fn pure_scalar_failures_are_owned_and_keep_old_missing_evidence_payloads() {
             hypothesis: "owned operand"
         })
     ));
-    assert_eq!(
-        ScalarOperandCause::need(Some(42), "owned value").unwrap(),
-        42
-    );
+    assert_eq!(scalar_need(Some(42), "owned value").unwrap(), 42);
 }
 
 #[test]
 fn pure_scalar_conditions_keep_old_actual_and_expected_counts() {
-    assert!(ScalarOperandCause::holds("exact equality", true).is_ok());
-    let cause = ScalarOperandCause::holds("exact equality", false).unwrap_err();
+    assert!(scalar_holds("exact equality", true).is_ok());
+    let cause = scalar_holds("exact equality", false).unwrap_err();
     let legacy = RegionCertificateCause::from(cause);
     assert!(matches!(
         legacy,

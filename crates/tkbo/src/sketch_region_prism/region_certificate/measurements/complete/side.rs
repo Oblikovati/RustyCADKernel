@@ -21,7 +21,7 @@ pub(super) fn measure_side(
 
 fn side_operands(chart: &BoundPrismChart) -> Result<SideOperands<'_>, BoundPrismMeasureFailure> {
     let height = chart.proof.side_height.filter(|h| h.is_finite() && *h > 0.);
-    ScalarOperandCause::need(height, "fresh positive side height identity")
+    scalar_need(height, "fresh positive side height identity")
         .map_err(BoundPrismMeasureFailure::SideOperand)?;
     match &chart.captured.actual {
         CapturedPrismSurface::Extrusion {
@@ -42,7 +42,7 @@ type SideOperands<'a> = (
 fn unique_side(
     binding: &CurrentPrismBinding,
 ) -> Result<&BoundPrismChart, BoundPrismMeasureFailure> {
-    ScalarOperandCause::need(
+    scalar_need(
         binding
             .charts
             .iter()

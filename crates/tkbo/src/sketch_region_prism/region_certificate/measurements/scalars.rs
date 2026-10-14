@@ -25,7 +25,7 @@ fn cap_measure(
     options: PolynomialIntegralOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> ScalarCheck<CertifiedPolynomialPlaneMeasure> {
-    let chart = ScalarOperandCause::need(
+    let chart = scalar_need(
         charts.iter().find(|chart| chart.role == role),
         "unique measured cap",
     )?;
@@ -63,7 +63,7 @@ fn cap_inputs(
     chart: &MeasuredPrismChart,
 ) -> ScalarCheck<(&CapturedPlaneSupport, OrientedMetricCurve<'_>)> {
     let support = planar_cap(&chart.captured.actual)?;
-    ScalarOperandCause::holds(
+    scalar_holds(
         "complete single cap native range",
         chart.captured.trims.len() == 1 && chart.captured.trims[0].interval == [0., 1.],
     )?;

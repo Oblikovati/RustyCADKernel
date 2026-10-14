@@ -5,13 +5,7 @@ pub(super) fn admit(
     join: &JoinedPrismProof,
     requested: JoinedPrismMeasureOptions,
 ) -> Result<[JoinedPrismFace; 3], JoinedPrismMeasureCause> {
-    if requested.version != 1 {
-        return Err(JoinedPrismMeasureCause::Version {
-            actual: requested.version,
-            expected: 1,
-        });
-    }
-
+    admit_version(requested.version)?;
     let binding = join.embedding().binding();
     count("captured polynomial prism charts", binding.charts.len(), 3)?;
     count(
@@ -84,6 +78,16 @@ fn check_chart_roles(join: &JoinedPrismProof) -> Result<(), JoinedPrismMeasureCa
             .filter(|chart| chart.role == role)
             .count();
         count("one captured chart for measured role", count_for_role, 1)?;
+    }
+    Ok(())
+}
+
+fn admit_version(actual: u32) -> Result<(), JoinedPrismMeasureCause> {
+    if actual != 1 {
+        return Err(JoinedPrismMeasureCause::Version {
+            actual,
+            expected: 1,
+        });
     }
     Ok(())
 }

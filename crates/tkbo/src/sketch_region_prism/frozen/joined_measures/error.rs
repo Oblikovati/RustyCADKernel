@@ -49,12 +49,7 @@ pub(super) fn failure(
     } else {
         JoinedMeasureFailureClass::Incomplete
     };
-    let mut entities: Vec<_> = join
-        .faces()
-        .iter()
-        .map(|face| face.occurrence.clone())
-        .collect();
-    entities.sort();
+    let entities = affected_faces(join);
     Box::new(JoinedPrismMeasureFailure {
         operation: join.projection().operation,
         entities,
@@ -99,4 +94,14 @@ fn integral_cancelled(cause: &PolynomialIntegralFailure) -> bool {
 }
 fn metric_cancelled(cause: &ResidualError) -> bool {
     matches!(cause, ResidualError::Roots(RootIsolationError::Cancelled))
+}
+
+fn affected_faces(join: &JoinedPrismProof) -> Vec<FrozenUseKey> {
+    let mut entities: Vec<_> = join
+        .faces()
+        .iter()
+        .map(|face| face.occurrence.clone())
+        .collect();
+    entities.sort();
+    entities
 }

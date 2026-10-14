@@ -56,13 +56,7 @@ fn changed_source_during_final_callback_requires_separate_source_rebind() {
     use crate::sketch_region_prism::region_certificate::measurements::tests::mutation_tests::edit_target;
     let fixture = JoinFixture::new();
     let join = fixture.compose(|| false).ok().unwrap();
-    let mut polls = 0;
-    let expected = inspect_joined_prism_measures(&join, options(), || {
-        polls += 1;
-        false
-    })
-    .unwrap()
-    .replay_bytes();
+    let (polls, expected) = measured_with_polls(&join);
     let mut current = 0;
     let report = inspect_joined_prism_measures(&join, options(), || {
         current += 1;
@@ -74,4 +68,14 @@ fn changed_source_during_final_callback_requires_separate_source_rebind() {
     .unwrap();
     assert_eq!(report.replay_bytes(), expected);
     assert!(fixture.rebind(&join).is_err());
+}
+
+fn measured_with_polls(join: &JoinedPrismProof) -> (usize, Vec<u8>) {
+    let mut polls = 0;
+    let report = inspect_joined_prism_measures(join, options(), || {
+        polls += 1;
+        false
+    })
+    .unwrap();
+    (polls, report.replay_bytes())
 }
