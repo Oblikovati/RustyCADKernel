@@ -15,9 +15,7 @@ pub(super) struct VulkanRuntime {
     pub(super) entry: Entry,
     pub window_support: bool,
     pub displays: rustycad_tkernel::standard::SharedState<
-        Vec<
-            rustycad_tkernel::standard::Handle<rustycad_tkservice::aspect::AspectDisplayConnection>,
-        >,
+        Vec<rustycad_tkservice::aspect::AspectDisplayConnectionLease>,
     >,
     pub queues: Vec<vk::Queue>,
     pub instance: Instance,

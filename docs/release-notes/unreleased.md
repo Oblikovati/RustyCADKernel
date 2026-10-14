@@ -17,5 +17,29 @@ rebind with the same native handle and extent. Submit a fresh packet and redraw
 before capture; numeric XID equality cannot establish a shared lifetime. Ordinary
 live-rendering output is unchanged. Prior fatal behavior is retained through
 revision-bound diagnostic replay; see the [migration decision](../adr/0018-delivered-native-window-destruction.md).
-Unreported native destruction, shared-display reinitialization, the original
+Unreported native destruction, externally initiated display reset, the original
 intermittent `BadWindow` and fresh performance acceptance remain open.
+
+## Retained native display connections
+
+Native-display-lifecycle v1 refuses `AspectDisplayConnection::init_checked` while
+owned/wrapped XwWindow objects or Vulkan instances retain native consumer leases.
+The old connection remains unchanged. Drop the retaining windows and Vulkan
+runtime before resetting, or create a separate connection. A removed view alone
+does not end Vulkan's connection retention.
+
+Use `init_checked` for typed operation/identity/cause/count diagnostics. Existing
+`init` remains a lossy legacy error adapter for one migration milestone only;
+[ADR0019](../adr/0019-retained-native-display-connections.md) records its deletion
+task and deadline. This does not certify externally owned or independently
+aliased raw display lifetimes. Existing self-alias and failed-unleased-reset
+hazards, historical intermittent BadWindow, performance and application
+acceptance remain open. Versioning and publication remain with the coordinator.
+
+XwWindow native operations and renderer admission use the original leased display,
+even when protected display metadata is replaced. Custom AspectWindow implementations
+retain the default metadata lookup and must define their own native binding lifetime.
+The explicit non-null invalidate_content display override is preserved and leased
+through its send callback; same-server XID validity and external raw lifetime remain
+caller obligations. Failed admission causes no send and cannot be reported by that
+legacy unit-return adapter; it is not a successful invalidation or delivery guarantee.

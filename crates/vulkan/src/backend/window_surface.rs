@@ -6,7 +6,7 @@ use super::{
 use crate::{RenderError, error::rejected};
 use ash::vk;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkservice::aspect::{AspectWindow, AspectWindowMembers};
+use rustycad_tkservice::aspect::AspectWindow;
 use std::sync::Arc;
 pub(crate) struct WindowPresenter {
     runtime: Arc<VulkanRuntime>,
@@ -21,48 +21,24 @@ impl WindowPresenter {
         runtime: &Arc<VulkanRuntime>,
         window: &Handle<dyn AspectWindow>,
     ) -> Result<Self, RenderError> {
-        let display = window.display_connection();
-        if !runtime.window_support
-            || display.is_null()
-            || display.get_display_aspect() == 0
-            || window.native_handle() == 0
-        {
-            return Err(rejected(
-                (runtime.window_support, window.native_handle()),
-                "a live Xlib window/display and Vulkan swapchain-maintenance support",
-            ));
-        }
-        // Mesa WSI caches connection pointers until instance teardown (wsi_common_x11.c).
-        // Closing/reopening displays earlier can reuse a pointer with stale XFixes negotiation.
-        let mut displays = runtime.displays.write();
-        if !displays
-            .iter()
-            .any(|saved| saved.get_display_aspect() == display.get_display_aspect())
-        {
-            displays.push(display);
-        }
-        drop(displays);
-        let display = window.display_connection();
-        let xlib = ash::khr::xlib_surface::Instance::new(&runtime.entry, &runtime.instance);
-        // Vulkan XIDs use C unsigned long; reject narrowing on LLP64 hosts.
-        #[allow(clippy::useless_conversion)]
-        let native_window = vk::Window::try_from(window.native_handle())
-            .map_err(|_| rejected(window.native_handle(), "an XID fitting C unsigned long"))?;
-        let info = vk::XlibSurfaceCreateInfoKHR::default()
-            .dpy(display.get_display_aspect() as *mut vk::Display)
-            .window(native_window);
-        let handle = unsafe { xlib.create_xlib_surface(&info, None) }
-            .map_err(|e| vk_error("create Xlib Vulkan surface", e))?;
-        let mut presenter = Self {
+        let handle = create_window_surface(runtime, window)?;
+        let mut presenter = Self::with_surface(runtime, window, handle);
+        presenter.present_family = presenter.choose_present_family()?;
+        Ok(presenter)
+    }
+    fn with_surface(
+        runtime: &Arc<VulkanRuntime>,
+        window: &Handle<dyn AspectWindow>,
+        handle: vk::SurfaceKHR,
+    ) -> Self {
+        Self {
             runtime: runtime.clone(),
             surface: ash::khr::surface::Instance::new(&runtime.entry, &runtime.instance),
             handle,
             chain: None,
             present_family: 0,
             _window: window.clone(),
-        };
-        presenter.present_family = presenter.choose_present_family()?;
-        Ok(presenter)
+        }
     }
     fn choose_present_family(&self) -> Result<u32, RenderError> {
         let order =
@@ -138,4 +114,54 @@ impl Drop for WindowPresenter {
         self.chain.take();
         unsafe { self.surface.destroy_surface(self.handle, None) };
     }
+}
+
+// Mesa WSI retention ends after instance teardown; a mutable Handle alone cannot pin it.
+fn retain_runtime_display(
+    runtime: &VulkanRuntime,
+    display: &Handle<rustycad_tkservice::aspect::AspectDisplayConnection>,
+) -> Result<usize, RenderError> {
+    use rustycad_tkservice::aspect::{AspectDisplayConnection, AspectDisplayLeasePurpose};
+    let lease =
+        AspectDisplayConnection::acquire_lease(display, AspectDisplayLeasePurpose::VulkanInstance)?;
+    let address = lease.display_address();
+    let mut retained = runtime.displays.write();
+    if !retained.iter().any(|saved| saved.same_connection(&lease)) {
+        retained.push(lease);
+    }
+    Ok(address)
+}
+
+fn checked_native_display(
+    runtime: &VulkanRuntime,
+    window: &Handle<dyn AspectWindow>,
+) -> Result<usize, RenderError> {
+    let display = window.native_display_connection();
+    if !runtime.window_support
+        || display.is_null()
+        || display.get_display_aspect() == 0
+        || window.native_handle() == 0
+    {
+        return Err(rejected(
+            (runtime.window_support, window.native_handle()),
+            "a live Xlib window/display and Vulkan swapchain-maintenance support",
+        ));
+    }
+    retain_runtime_display(runtime, &display)
+}
+fn create_window_surface(
+    runtime: &VulkanRuntime,
+    window: &Handle<dyn AspectWindow>,
+) -> Result<vk::SurfaceKHR, RenderError> {
+    let display_address = checked_native_display(runtime, window)?;
+    let xlib = ash::khr::xlib_surface::Instance::new(&runtime.entry, &runtime.instance);
+    // Vulkan XIDs use C unsigned long; reject narrowing on LLP64 hosts.
+    #[allow(clippy::useless_conversion)]
+    let native_window = vk::Window::try_from(window.native_handle())
+        .map_err(|_| rejected(window.native_handle(), "an XID fitting C unsigned long"))?;
+    let info = vk::XlibSurfaceCreateInfoKHR::default()
+        .dpy(display_address as *mut vk::Display)
+        .window(native_window);
+    unsafe { xlib.create_xlib_surface(&info, None) }
+        .map_err(|e| vk_error("create Xlib Vulkan surface", e))
 }

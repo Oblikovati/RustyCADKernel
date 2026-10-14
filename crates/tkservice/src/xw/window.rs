@@ -35,6 +35,7 @@ pub struct XwWindow {
     /// The fields, shared by every handle.
     pub fields: SharedState<XwWindowFields>,
     native_closure: SharedState<Option<crate::aspect::AspectNativeWindowClosure>>,
+    connection_lease: Option<crate::aspect::AspectDisplayConnectionLease>,
 }
 rustycad_tkernel::impl_transient!(XwWindow, "Xw_Window", dyn AspectWindow, transient, interfaces: [dyn AspectWindow]);
 
@@ -64,17 +65,55 @@ impl XwWindow {
             base: AspectWindowBase::default(),
             fields: SharedState::new(fields),
             native_closure: SharedState::default(),
+            connection_lease: None,
         };
         window.base.fields_mut().display = display.clone();
         window
     }
+    fn retain_connection(
+        &mut self,
+        display: &Handle<AspectDisplayConnection>,
+    ) -> Result<(), Failure> {
+        self.connection_lease = Some(
+            AspectDisplayConnection::acquire_lease(
+                display,
+                crate::aspect::AspectDisplayLeasePurpose::Window,
+            )
+            .map_err(crate::aspect::AspectDisplayLifecycleFailure::into_legacy_failure)?,
+        );
+        Ok(())
+    }
     /// The Xlib display address of the connection (0 without one).
     pub(crate) fn display_address(&self) -> usize {
-        self.base
-            .fields()
-            .display
-            .get()
-            .map_or(0, |d| d.get_display_aspect())
+        self.connection_lease
+            .as_ref()
+            .map_or(0, |lease| lease.display_address())
+    }
+    fn expose_connection_lease(
+        &self,
+        override_display: &Handle<AspectDisplayConnection>,
+    ) -> Result<
+        crate::aspect::AspectDisplayConnectionLease,
+        crate::aspect::AspectDisplayLifecycleFailure,
+    > {
+        let display = if override_display.is_null() {
+            self.native_display_connection()
+        } else {
+            override_display.clone()
+        };
+        AspectDisplayConnection::acquire_lease(
+            &display,
+            crate::aspect::AspectDisplayLeasePurpose::Window,
+        )
+    }
+    fn with_expose_connection(
+        &self,
+        display: &Handle<AspectDisplayConnection>,
+        send: impl FnOnce(usize),
+    ) -> Result<(), crate::aspect::AspectDisplayLifecycleFailure> {
+        let lease = self.expose_connection_lease(display)?;
+        send(lease.display_address());
+        Ok(())
     }
     /// `Xw_Window(display, title, left, top, width, height)`: a new window on the default
     /// visual; a non-positive size, a null display or a failed creation raise
@@ -96,7 +135,7 @@ impl XwWindow {
             y_bottom: top.wrapping_add(height),
             is_own_win: true,
         };
-        let window = Self::with_fields(display, fields);
+        let mut window = Self::with_fields(display, fields);
         if width <= 0 || height <= 0 {
             return Err(definition_error(&format!(
                 "Xw_Window, Coordinate(s) out of range: {width}x{height}; expected a positive size"
@@ -107,6 +146,7 @@ impl XwWindow {
                 "Xw_Window, X Display connection is undefined",
             ));
         };
+        window.retain_connection(display)?;
         let disp = connection.get_display_aspect();
         let created = xlib().map_or(0, |api| {
             api.create_window(
@@ -144,7 +184,7 @@ impl XwWindow {
             y_bottom: 512,
             is_own_win: false,
         };
-        let window = Self::with_fields(display, fields);
+        let mut window = Self::with_fields(display, fields);
         if x_window == 0 {
             return Err(definition_error("Xw_Window, given invalid X window"));
         }
@@ -153,6 +193,7 @@ impl XwWindow {
                 "Xw_Window, X Display connection is undefined",
             ));
         };
+        window.retain_connection(display)?;
         let disp = connection.get_display_aspect();
         let Some(api) = xlib() else {
             return Err(definition_error("Xw_Window, Visual is unavailable"));
@@ -219,6 +260,11 @@ fn resize_mode(mask: i32) -> Resize {
 impl AspectWindow for XwWindow {
     fn window_base(&self) -> &AspectWindowBase {
         &self.base
+    }
+    fn native_display_connection(&self) -> Handle<AspectDisplayConnection> {
+        self.connection_lease
+            .as_ref()
+            .map_or_else(Handle::default, |lease| lease.retained_connection())
     }
     /// A virtual window is mapped; a live one when viewable or unviewable.
     fn is_mapped(&self) -> bool {
@@ -328,14 +374,15 @@ impl AspectWindow for XwWindow {
             api.store_name(self.display_address(), window, &text);
         }
     }
-    /// Sends an expose event to the window (through `display`, else the window's display).
+    /// Sends an expose event through `display`, or the pinned binding when null.
+    /// The explicit override requires caller-owned same-server XID validity; unavailable
+    /// connections send nothing. Example: `window.invalidate_content(&Handle::default())`.
     fn invalidate_content(&self, display: &Handle<AspectDisplayConnection>) {
         let window = self.fields.read().x_window;
-        let address = display
-            .get()
-            .map_or_else(|| self.display_address(), |d| d.get_display_aspect());
         if let (true, Some(api)) = (window != 0, xlib()) {
-            api.send_expose(address, window);
+            // This legacy unit-return API cannot expose the typed admission failure.
+            let _ =
+                self.with_expose_connection(display, |address| api.send_expose(address, window));
         }
     }
 }
@@ -343,3 +390,7 @@ impl AspectWindow for XwWindow {
 #[cfg(test)]
 #[path = "window_closure_tests.rs"]
 mod window_closure_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "window_display_binding_tests.rs"]
+mod window_display_binding_tests;

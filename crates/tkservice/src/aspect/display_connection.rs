@@ -11,6 +11,16 @@ use super::{AspectFbConfig, AspectXAtom};
 use rustycad_tkernel::standard::{Failure, SharedState, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::collections::HashMap;
+use std::sync::Arc;
+#[path = "display_native_calls.rs"]
+mod native_calls;
+use native_calls::{NativeDisplayCalls, XlibDisplayCalls};
+#[path = "display_lifecycle_failure.rs"]
+mod lifecycle_failure;
+pub use lifecycle_failure::*;
+#[path = "display_connection_lease.rs"]
+mod connection_lease;
+pub use connection_lease::AspectDisplayConnectionLease;
 
 /// The locked fields of the connection.
 #[derive(Debug, Default)]
@@ -27,12 +37,14 @@ struct ConnectionState {
     display_name: AsciiString,
     /// `myIsOwnDisplay`: the connection opened the display and closes it.
     is_own_display: bool,
+    leases: AspectDisplayLeaseCounts,
 }
 
 /// A window-system connection; `AspectDisplayConnection::new()?` opens `$DISPLAY`.
 pub struct AspectDisplayConnection {
     transient: StandardTransient,
     state: SharedState<ConnectionState>,
+    native: Arc<dyn NativeDisplayCalls>,
 }
 rustycad_tkernel::impl_transient!(
     AspectDisplayConnection,
@@ -43,6 +55,9 @@ rustycad_tkernel::impl_transient!(
 
 impl AspectDisplayConnection {
     fn with_name(display_name: AsciiString) -> Self {
+        Self::with_native(display_name, Arc::new(XlibDisplayCalls))
+    }
+    fn with_native(display_name: AsciiString, native: Arc<dyn NativeDisplayCalls>) -> Self {
         let state = ConnectionState {
             display_name,
             ..Default::default()
@@ -50,6 +65,7 @@ impl AspectDisplayConnection {
         Self {
             transient: StandardTransient::default(),
             state: SharedState::new(state),
+            native,
         }
     }
     /// `Aspect_DisplayConnection()`: opens the display named by the `DISPLAY` environment
@@ -110,16 +126,36 @@ impl AspectDisplayConnection {
     pub fn set_default_visual_info(&self, visual: usize, fb_config: AspectFbConfig) {
         let mut state = self.state.write();
         if state.default_visual_info != 0 {
-            platform::free(state.default_visual_info);
+            self.native.free_visual(state.default_visual_info);
         }
         state.default_visual_info = visual;
         state.default_fb_config = fb_config;
     }
-    /// `Init(theDisplay)`: closes an owned display, then wraps `display` or (when 0) opens
-    /// the named one. Example: `connection.init(0)?`.
+    /// Legacy error adapter: refuses retained reset, then initializes when unleased.
+    /// Structured cause is lost; migrate to `connection.init_checked(0)?` (ADR0019 deletion task).
+    /// Example: `connection.init(0)?`.
     pub fn init(&self, display: usize) -> Result<(), Failure> {
+        self.init_checked(display)
+            .map_err(AspectDisplayLifecycleFailure::into_legacy_failure)
+    }
+    /// Initialize with structured lifecycle diagnostics; `connection.init_checked(0)?`.
+    pub fn init_checked(&self, display: usize) -> Result<(), AspectDisplayLifecycleFailure> {
         let mut state = self.state.write();
-        platform::init(&mut state, display)
+        let failure = self.lifecycle_failure(
+            &state,
+            AspectDisplayOperation::Initialize,
+            display,
+            AspectDisplayLifecycleCause::Retained,
+        );
+        if state.leases != AspectDisplayLeaseCounts::default() {
+            return Err(failure);
+        }
+        platform::init(&mut state, display, self.native.as_ref()).map_err(|native| {
+            AspectDisplayLifecycleFailure {
+                cause: AspectDisplayLifecycleCause::Native(Box::new(native)),
+                ..failure
+            }
+        })
     }
 }
 
@@ -127,68 +163,70 @@ impl Drop for AspectDisplayConnection {
     fn drop(&mut self) {
         let state = self.state.read();
         if state.default_visual_info != 0 {
-            platform::free(state.default_visual_info);
+            self.native.free_visual(state.default_visual_info);
         }
         if state.display != 0 && state.is_own_display {
-            platform::close(state.display);
+            self.native.close(state.display);
         }
     }
 }
 
-/// The `HAVE_XLIB` branch of the native code.
+/// The `HAVE_XLIB` branch; ordering is pinned by the owned unleased fixtures.
 #[cfg(target_os = "linux")]
 mod platform {
-    use super::{AspectXAtom, ConnectionState, display_connection_definition_error};
-    use crate::xlib::xlib;
+    use super::{
+        AspectXAtom, ConnectionState, NativeDisplayCalls, display_connection_definition_error,
+    };
     use rustycad_tkernel::standard::Failure;
-    use std::ffi::CString;
-
-    pub(super) fn free(address: usize) {
-        if let Some(api) = xlib() {
-            api.free(address);
-        }
-    }
-    pub(super) fn close(display: usize) {
-        if let Some(api) = xlib() {
-            api.close_display(display);
-        }
-    }
-    /// `Init`: a missing libX11 is reported as an unreachable server.
-    pub(super) fn init(state: &mut ConnectionState, display: usize) -> Result<(), Failure> {
-        if state.display != 0 && state.is_own_display {
-            close(state.display);
-        }
-        state.is_own_display = false;
-        state.atoms.clear();
-        state.display = if display != 0 { display } else { open(state) };
-        let Some(api) = xlib().filter(|_| state.display != 0) else {
-            let name = String::from_utf8_lossy(state.display_name.as_bytes()).into_owned();
-            return Err(display_connection_definition_error(&format!(
-                "Can not connect to the server \"{name}\""
-            )));
+    pub(super) fn init(
+        state: &mut ConnectionState,
+        display: usize,
+        native: &dyn NativeDisplayCalls,
+    ) -> Result<(), Failure> {
+        prepare_display(state, display, native);
+        let atom = (state.display != 0)
+            .then(|| native.delete_atom(state.display))
+            .flatten();
+        let Some(atom) = atom else {
+            return Err(connection_error(state));
         };
         state.is_own_display = display == 0;
-        let atom = api.intern_atom(state.display, c"WM_DELETE_WINDOW", false);
         state.atoms.insert(AspectXAtom::DeleteWindow, atom);
         Ok(())
     }
-    fn open(state: &ConnectionState) -> usize {
-        let Ok(name) = CString::new(state.display_name.as_bytes()) else {
-            return 0;
+    fn prepare_display(
+        state: &mut ConnectionState,
+        display: usize,
+        native: &dyn NativeDisplayCalls,
+    ) {
+        if state.display != 0 && state.is_own_display {
+            native.close(state.display);
+        }
+        state.is_own_display = false;
+        state.atoms.clear();
+        state.display = if display != 0 {
+            display
+        } else {
+            native.open(&state.display_name)
         };
-        xlib().map_or(0, |api| api.open_display(&name))
+    }
+    fn connection_error(state: &ConnectionState) -> Failure {
+        let name = String::from_utf8_lossy(state.display_name.as_bytes());
+        display_connection_definition_error(&format!("Can not connect to the server \"{name}\""))
     }
 }
 
 /// The native branch without Xlib: the connection only stores the given display.
 #[cfg(not(target_os = "linux"))]
 mod platform {
-    use super::ConnectionState;
+    use super::{ConnectionState, NativeDisplayCalls};
     use rustycad_tkernel::standard::Failure;
 
-    pub(super) fn free(_address: usize) {}
-    pub(super) fn close(_display: usize) {}
-    pub(super) fn init(state: &mut ConnectionState, display: usize) -> Result<(), Failure> {
+    pub(super) fn init(
+        state: &mut ConnectionState,
+        display: usize,
+        _native: &dyn NativeDisplayCalls,
+    ) -> Result<(), Failure> {
         state.display = display;
         state.is_own_display = display == 0;
         Ok(())
@@ -211,4 +249,29 @@ mod tests {
         );
         assert_eq!(failure.message(), "Can not connect to the server \":9999\"");
     }
+}
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "display_connection_baseline.rs"]
+mod baseline;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "display_connection_lifecycle_tests.rs"]
+mod lifecycle_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "display_lease_drop_tests.rs"]
+mod lease_drop_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+#[path = "display_lease_thread_tests.rs"]
+mod lease_thread_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+pub(crate) fn recorded_display_fixture(
+    address: usize,
+) -> rustycad_tkernel::standard::Handle<AspectDisplayConnection> {
+    let connection = baseline::fake_connection(baseline::RecordingDisplayCalls::new(address));
+    connection.init_checked(0).unwrap();
+    rustycad_tkernel::standard::Handle::new(connection)
 }

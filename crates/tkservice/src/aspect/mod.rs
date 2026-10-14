@@ -26,7 +26,11 @@ mod xr_session;
 
 pub use background::{AspectBackground, AspectGradientBackground};
 pub use circular_grid::{AspectCircularGrid, AspectCircularGridBase, AspectCircularGridMembers};
-pub use display_connection::AspectDisplayConnection;
+pub use display_connection::{
+    AspectDisplayConnection, AspectDisplayConnectionLease, AspectDisplayFailureClass,
+    AspectDisplayLeaseCounts, AspectDisplayLeasePurpose, AspectDisplayLifecycleCause,
+    AspectDisplayLifecycleFailure, AspectDisplayOperation,
+};
 pub use gen_id::AspectGenId;
 pub use grid::{AspectGrid, AspectGridBase, AspectGridFields, AspectGridMembers};
 pub use grid_params::AspectGridParams;
@@ -98,3 +102,6 @@ mod native_style_values;
 
 #[cfg(test)]
 mod native_style_values_tests;
+
+#[cfg(all(test, target_os = "linux"))]
+pub(crate) use display_connection::recorded_display_fixture;

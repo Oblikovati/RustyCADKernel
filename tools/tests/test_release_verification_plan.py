@@ -106,13 +106,14 @@ class VerificationPlanTests(unittest.TestCase):
         self.assertEqual(commands[0].argv, xvfb_example("offscreen_acceptance"))
         self.assertEqual(commands[1].argv, xvfb_example("lighting_acceptance"))
         self.assertEqual(commands[2].argv, xvfb_example("native_window_lifecycle"))
+        self.assertEqual(commands[3].argv, xvfb_example("native_display_lifecycle"))
         self.assertEqual(
-            commands[3].argv,
+            commands[4].argv,
             (*xvfb_example("native_gui_rapid", screen=(1920, 1080)),
              "--", "target/native-gui-framebuffer"),
         )
         self.assertEqual(
-            commands[4].argv,
+            commands[5].argv,
             (*xvfb_example("native_gui_acceptance"),
              "--", "target/native-gui-framebuffer/accepted"),
         )
@@ -129,7 +130,7 @@ class VerificationPlanTests(unittest.TestCase):
             performance.stdout_path, Path("target/renderer-performance.log")
         )
         self.assertEqual(performance.argv, xvfb_example("renderer_performance", True))
-        self.assertEqual(len(self.gates["vulkan-acceptance"].commands), 5)
+        self.assertEqual(len(self.gates["vulkan-acceptance"].commands), 6)
 
     def test_workflow_calls_every_shared_gate_and_preserves_diagnostic_pipes(
         self,
