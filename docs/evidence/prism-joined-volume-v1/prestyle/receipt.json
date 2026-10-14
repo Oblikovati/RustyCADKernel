@@ -1,0 +1,47 @@
+{
+  "revision": "b9859f186b5e5902e8864fe9b52a0ec17bf1e72a",
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "joined_volume::",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "tests": 12
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "--all-features",
+        "--locked",
+        "joined_volume::",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "tests": 12
+    }
+  ],
+  "source_unchanged": true,
+  "full_replay": {
+    "bytes": 601860,
+    "sha256": "15f229b2a11115e2c5f4a7f37e5e845e0b5576f71aa83d8ec865de39941f180e"
+  },
+  "scope": "pin before mechanical helper extraction;12focused tests, no full suite/publication/sanitizer claim"
+}
