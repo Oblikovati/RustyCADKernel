@@ -36,30 +36,38 @@ def status_mapping(name: str, status: str = "translated") -> JSONObject:
     }
 
 
+def mixed_mapping_status() -> list[str]:
+    """Exercise translated, pending and C++-only rows in one toolkit."""
+    ledger: JSONObject = {
+        "tests": [
+            status_mapping("Suite.Passed"),
+            status_mapping("Suite.Pending", "pending_dependency"),
+            status_mapping("Suite.Cpp", "not_applicable_to_rust"),
+        ]
+    }
+    return legacy_status_lines(
+        status_inventory("Suite.Passed", "Suite.Pending", "Suite.Cpp"), ledger
+    )
+
+
 class LegacyStatusTest(unittest.TestCase):
-    def test_pending_and_cpp_only_rows_never_inflate_mapped_counts(self) -> None:
-        ledger: JSONObject = {
-            "tests": [
-                status_mapping("Suite.Passed"),
-                status_mapping("Suite.Pending", "pending_dependency"),
-                status_mapping("Suite.Cpp", "not_applicable_to_rust"),
-            ]
-        }
-        lines = legacy_status_lines(
-            status_inventory("Suite.Passed", "Suite.Pending", "Suite.Cpp"), ledger
-        )
+    def test_pending_and_cpp_only_rows_never_inflate_global_counts(self) -> None:
         self.assertEqual(
-            lines[0],
+            mixed_mapping_status()[0],
             "GoogleTest total: 1/6 GoogleTest declarations mapped; "
             "3 unmapped; 1 pending dependencies; 1 not applicable to Rust; 0 mapping anomalies",
         )
+
+    def test_pending_and_cpp_only_rows_never_inflate_toolkit_counts(self) -> None:
         self.assertEqual(
-            lines[1],
+            mixed_mapping_status()[1],
             "TKA: 1/3 GoogleTest declarations mapped; "
             "0 unmapped; 1 pending dependencies; 1 not applicable to Rust; 0 mapping anomalies",
         )
+
+    def test_unmapped_toolkit_remains_visible_despite_matching_names(self) -> None:
         self.assertEqual(
-            lines[2],
+            mixed_mapping_status()[2],
             "TKB: 0/3 GoogleTest declarations mapped; "
             "3 unmapped; 0 pending dependencies; 0 not applicable to Rust; 0 mapping anomalies",
         )
