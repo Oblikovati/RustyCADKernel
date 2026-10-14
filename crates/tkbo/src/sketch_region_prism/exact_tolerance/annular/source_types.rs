@@ -29,7 +29,7 @@ pub(in crate::sketch_region_prism) struct AnnularClosureEvidence {
     pub orientation: Orientation,
     pub local_point: [f64; 3],
     /// Metadata from the reused source proof; copied actual metadata remains in the sealed join.
-    pub raw_tolerance: f64,
+    pub source_raw_tolerance: f64,
     pub certificate: ExactEndpointCertificate,
 }
 pub(in crate::sketch_region_prism) struct AnnularSourceReport {

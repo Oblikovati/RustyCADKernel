@@ -56,7 +56,7 @@ fn closure(row: &AnnularClosureEvidence, bytes: &mut Vec<u8>) {
         ),
         bytes,
     );
-    encode_frozen_numbers([row.parameter, row.raw_tolerance], bytes);
+    encode_frozen_numbers([row.parameter, row.source_raw_tolerance], bytes);
     encode_frozen_numbers(row.local_point, bytes);
     shared::scalar(&row.certificate, bytes);
 }

@@ -13,13 +13,7 @@ pub(super) fn inspect(
         binding.boundaries().len(),
         2,
     )?;
-    let candidates: Vec<_> = binding
-        .region()
-        .candidates()
-        .iter()
-        .filter(|row| row.name == binding.region().selected_candidate_id())
-        .collect();
-    let selected = *one(&candidates, "one selected annulus for copied closure")?;
+    let selected = selected_candidate(binding)?;
     for boundary in binding.boundaries() {
         let wires: Vec<_> = selected
             .wires
@@ -90,20 +84,7 @@ fn exact_endpoints(
         2,
     )?;
     for parameter in [0_f64, 1_f64] {
-        let actual: Vec<_> = boundary
-            .endpoints
-            .iter()
-            .filter(|row| row.parameter.to_bits() == parameter.to_bits())
-            .collect();
-        let proof: Vec<_> = wire
-            .closure
-            .iter()
-            .filter(|row| row.parameter.to_bits() == parameter.to_bits())
-            .collect();
-        same_endpoint(
-            one(&actual, "one copied native endpoint")?,
-            one(&proof, "one selected native endpoint proof")?,
-        )?;
+        compare_parameter(boundary, wire, parameter)?;
     }
     Ok(())
 }
@@ -120,5 +101,39 @@ fn same_endpoint(
         }
         .into());
     }
+    Ok(())
+}
+
+fn selected_candidate(binding: &AnnularPrismBinding) -> AnnularExactCheck<&TwoLoopCandidateProof> {
+    let candidates: Vec<_> = binding
+        .region()
+        .candidates()
+        .iter()
+        .filter(|row| row.name == binding.region().selected_candidate_id())
+        .collect();
+    one(&candidates, "one selected annulus for copied closure")
+        .copied()
+        .map_err(Into::into)
+}
+
+fn compare_parameter(
+    boundary: &AnnularBoundaryBinding,
+    wire: &TwoLoopWireProof,
+    parameter: f64,
+) -> AnnularExactCheck {
+    let actual: Vec<_> = boundary
+        .endpoints
+        .iter()
+        .filter(|row| row.parameter.to_bits() == parameter.to_bits())
+        .collect();
+    let proof: Vec<_> = wire
+        .closure
+        .iter()
+        .filter(|row| row.parameter.to_bits() == parameter.to_bits())
+        .collect();
+    same_endpoint(
+        one(&actual, "one copied native endpoint")?,
+        one(&proof, "one selected native endpoint proof")?,
+    )?;
     Ok(())
 }

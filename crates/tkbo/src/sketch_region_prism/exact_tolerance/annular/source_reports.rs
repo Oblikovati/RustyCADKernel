@@ -14,15 +14,7 @@ pub(super) fn retain(
         3,
     )?;
     for expected in [OriginalPlane, CopiedPlane, CapturedBasis] {
-        work.source_context = Some(AnnularSourceContext {
-            source: source.name,
-            native: None,
-            stage: if expected == OriginalPlane {
-                AnnularClosureStage::Original
-            } else {
-                AnnularClosureStage::Census
-            },
-        });
+        work.source_context = Some(report_context(source.name, expected));
         let rows: Vec<_> = source
             .stages
             .iter()
@@ -59,5 +51,21 @@ fn owned_report(
         effective_roots: row.effective_roots,
         bisections: row.bisections,
         residual: row.residual.clone(),
+    }
+}
+
+fn report_context(
+    source: crate::sketch_region::RegionSourceId,
+    expected: ConstructionStage,
+) -> AnnularSourceContext {
+    use ConstructionStage::OriginalPlane;
+    AnnularSourceContext {
+        source,
+        native: None,
+        stage: if expected == OriginalPlane {
+            AnnularClosureStage::Original
+        } else {
+            AnnularClosureStage::Census
+        },
     }
 }
