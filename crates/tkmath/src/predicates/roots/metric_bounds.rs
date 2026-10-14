@@ -3,6 +3,7 @@
 mod arithmetic;
 mod curve_identity;
 pub use curve_identity::{CurveIdentityDecision, MetricCurveChain, compare_curve_chains};
+mod affine_support;
 #[cfg(test)]
 mod curve_identity_tests;
 mod mapped;
