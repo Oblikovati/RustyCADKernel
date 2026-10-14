@@ -1,5 +1,5 @@
 //! Renderer-created groups make ordinary Graphic3d submissions reach the draw stream.
-use crate::{Graphic3dDrawGroup, PrimitiveDraw, RenderError, error::rejected};
+use crate::{Graphic3dDrawGroup, RenderError, error::rejected};
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
 use rustycad_tkservice::graphic3d::*;
 use std::collections::BTreeSet;
@@ -67,13 +67,13 @@ impl RenderStructure {
         extent: [u32; 2],
         rendering: &Graphic3dRenderingParams,
         clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
-    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
+    ) -> Result<crate::stencil_program::StencilProgram, RenderError> {
         if !self.is_visible_in_view(view_id) || self.is_culled() {
-            return Ok(vec![]);
+            return Ok(Default::default());
         }
         let fields = self.base.fields.read().clone();
         if crate::retained_clipping::structure_is_clipped(clipping, &fields)? {
-            return Ok(vec![]);
+            return Ok(Default::default());
         }
         crate::retained_capping::CappingScene {
             camera,

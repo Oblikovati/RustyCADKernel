@@ -23,6 +23,7 @@ pub struct Graphic3dRenderView {
     pub(crate) outcome: SharedState<Option<Result<FrameCapture, RenderError>>>,
     pub(crate) gui_layers: SharedState<crate::view_gui_layer::GuiLayerSlot>,
     raster_feedback: crate::raster_feedback::RasterFailureFeedback,
+    stencil_feedback: crate::stencil_feedback::StencilFeedback,
     fragment_alpha_feedback: crate::fragment_alpha_feedback::FragmentAlphaFeedback,
 }
 rustycad_tkernel::impl_transient!(Graphic3dRenderView, "Martensite_RenderView", StandardTransient, transient, interfaces:[dyn Graphic3dCView, dyn Graphic3dDataStructureManager]);
@@ -65,8 +66,13 @@ impl Graphic3dRenderView {
             outcome: SharedState::default(),
             gui_layers: SharedState::default(),
             raster_feedback: Default::default(),
+            stencil_feedback: Default::default(),
             fragment_alpha_feedback: Default::default(),
         }
+    }
+    /// Inspect this view's completed stencil context; `render_view.stencil_context_state()`.
+    pub fn stencil_context_state(&self) -> crate::RenderStencilState {
+        self.stencil_feedback.current()
     }
     /// Read the last frame or its error; `render_view.capture()?` never conceals a failed redraw.
     pub fn capture(&self) -> Result<FrameCapture, RenderError> {
@@ -125,6 +131,7 @@ impl Graphic3dRenderView {
         }
         let mut frame = self.gui_composed_frame()?;
         frame.attach_raster_feedback(&self.raster_feedback);
+        frame.attach_stencil_context(&self.stencil_feedback);
         frame.attach_fragment_alpha(&self.fragment_alpha_feedback);
         self.render_target(&frame)
     }

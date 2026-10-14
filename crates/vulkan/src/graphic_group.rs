@@ -1,6 +1,6 @@
 //! Retained Graphic3d commands distinguish the group style from later primitive styles.
 use crate::line_style::primitive_style_in_pipeline;
-use crate::{PrimitiveDraw, RenderError, error::rejected, primitive::PrimitiveSubmission};
+use crate::{PrimitiveDraw, RenderError, primitive::PrimitiveSubmission};
 use rustycad_tkernel::{
     ncollection::Vec4,
     standard::{Handle, SharedState, StandardTransient},
@@ -8,61 +8,15 @@ use rustycad_tkernel::{
 use rustycad_tkmath::gp::Axis2;
 use rustycad_tkservice::graphic3d::*;
 use std::sync::Arc;
-#[derive(Clone)]
-enum GroupCommand {
-    Aspects(Handle<dyn Graphic3dAspectsSource>),
-    Flipping(Option<Axis2>),
-    Geometry(GroupGeometry),
-}
-#[derive(Clone)]
-enum GroupGeometry {
-    Primitives(PrimitiveSubmission),
-    Text(Handle<Graphic3dText>),
-}
-impl GroupCommand {
-    fn advance(
-        self,
-        aspects: &mut Handle<dyn Graphic3dAspectsSource>,
-        flips: &mut crate::group_flipping::GroupFlipStack,
-    ) -> Option<GroupGeometry> {
-        match self {
-            Self::Aspects(style) => {
-                *aspects = style;
-                None
-            }
-            Self::Flipping(plane) => {
-                flips.apply(plane);
-                None
-            }
-            Self::Geometry(geometry) => Some(geometry),
-        }
-    }
-}
-impl GroupGeometry {
-    fn lower(
-        self,
-        aspects: &Handle<dyn Graphic3dAspectsSource>,
-        closed: bool,
-        matrix: [f32; 16],
-        highlighted: bool,
-        context: &crate::text_submission::TextSceneContext<'_>,
-    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-        match self {
-            Self::Text(text) => context.draws(&text, aspects).map(|mut draws| {
-                crate::text_culling::apply_text_face_culling(&mut draws, &**aspects, closed);
-                draws
-            }),
-            Self::Primitives(primitive) => {
-                lower_group_surface(&primitive, aspects, closed, matrix, highlighted, context)
-            }
-        }
-    }
-}
+#[path = "graphic_group_commands.rs"]
+mod commands;
+#[path = "graphic_group_extract.rs"]
+mod extraction;
+use commands::{GroupCommand, GroupGeometry};
 #[derive(Default)]
 struct GroupSubmissionState {
     aspects: Handle<dyn Graphic3dAspectsSource>,
     commands: Vec<GroupCommand>,
-    unsupported: Option<&'static str>,
 }
 /// A retained group feeding Martensite draw extraction; `Graphic3dDrawGroup::new(&structure)`.
 pub struct Graphic3dDrawGroup {
@@ -161,72 +115,9 @@ impl Graphic3dDrawGroup {
         rendering: &Graphic3dRenderingParams,
         global_clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-        crate::highlight_style::validate_structure(structure)?;
-        let (matrix, depth_clamp) =
-            crate::persistent_transform::group_clip_transform(self, camera, extent, structure)?;
-        let model = crate::persistent_transform::clipping_model(self, structure)?;
-        let clipping =
-            crate::retained_clipping::structure_clipping(global_clipping, structure, model)?;
-        let context = crate::text_submission::TextSceneContext {
-            group: self,
-            camera,
-            extent,
-            structure,
-            rendering,
-            fonts: self.text_source.as_ref(),
-            model_override: None,
-            clipping: clipping.as_ref(),
-        };
-        let mut draws =
-            self.extract_commands(matrix, structure.highlight, clipping.is_none(), &context)?;
-        for draw in &mut draws {
-            draw.depth_clamp = depth_clamp;
-            draw.mirrored = structure
-                .trsf
-                .get()
-                .is_some_and(|datum| datum.transformation().is_negative());
-            crate::highlight_style::apply_highlight(draw, structure)?;
-        }
-        Ok(draws)
-    }
-    fn extract_commands(
-        &self,
-        matrix: [f32; 16],
-        highlighted: bool,
-        allow_culling: bool,
-        context: &crate::text_submission::TextSceneContext<'_>,
-    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-        let (mut aspects, commands) = self.retained_commands()?;
-        let mut draws = Vec::new();
-        let mut flips = crate::group_flipping::GroupFlipStack::scene(context, matrix)?;
-        for command in commands {
-            let Some(geometry) = command.advance(&mut aspects, &mut flips) else {
-                continue;
-            };
-            let active = crate::text_submission::TextSceneContext {
-                model_override: flips.override_model(),
-                ..*context
-            };
-            let mut lowered = geometry.lower(
-                &aspects,
-                self.is_closed() && allow_culling,
-                flips.clip(),
-                highlighted,
-                &active,
-            )?;
-            apply_command_clipping(&mut lowered, &flips, context.clipping)?;
-            draws.extend(lowered);
-        }
-        Ok(draws)
-    }
-    fn retained_commands(
-        &self,
-    ) -> Result<(Handle<dyn Graphic3dAspectsSource>, Vec<GroupCommand>), RenderError> {
-        let state = self.submissions.read();
-        if let Some(feature) = state.unsupported {
-            return Err(rejected(feature, "an implemented group rendering feature"));
-        }
-        Ok((state.aspects.clone(), state.commands.clone()))
+        Ok(self
+            .program_in_structure(camera, extent, structure, rendering, global_clipping)?
+            .draws)
     }
     fn retain_primitive(&self, primitive: PrimitiveSubmission, evaluate_bounds: bool) {
         if self.is_deleted() {
@@ -337,9 +228,13 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
         self.record_text_bounds(text, evaluate_bounds);
     }
     fn set_stencil_test_options(&self, enabled: bool) {
-        if enabled {
-            self.submissions.write().unsupported = Some("stencil test");
+        if self.is_deleted() {
+            return;
         }
+        self.submissions
+            .write()
+            .commands
+            .push(GroupCommand::Stencil(enabled));
     }
     fn set_flipping_options(&self, enabled: bool, plane: &Axis2) {
         if self.is_deleted() {

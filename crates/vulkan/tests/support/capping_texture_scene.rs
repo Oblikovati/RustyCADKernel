@@ -3,7 +3,7 @@ use super::{scene, scene::ViewerScene, texture_scene::texture_handle};
 #[path = "capping_edge_boundaries.rs"]
 mod edge_boundaries;
 #[path = "capping_scene.rs"]
-mod section_geometry;
+pub(crate) mod section_geometry;
 #[path = "capping_section_mesh.rs"]
 mod section_mesh;
 use martensite_vulkan::Graphic3dRenderDriver;

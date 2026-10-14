@@ -97,12 +97,12 @@ fn unsupported_raster_states_fail_instead_of_being_ignored() {
     assert!(scene.group.triangle_draws(&scene.camera).is_ok());
 }
 #[test]
-fn unsupported_group_commands_remain_ordered_until_clear() {
+fn ordered_stencil_commands_do_not_poison_retained_geometry() {
     let scene = GraphicScene::new();
     scene.triangle();
     scene.group.set_stencil_test_options(true);
     scene.group.set_stencil_test_options(false);
-    assert!(scene.group.triangle_draws(&scene.camera).is_err());
+    assert_eq!(scene.group.triangle_draws(&scene.camera).unwrap().len(), 1);
     scene.group.clear(true);
     scene
         .group

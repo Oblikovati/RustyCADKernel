@@ -190,7 +190,7 @@ pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateC
 }
 
 fn dynamic_states(line: bool, stipple: bool) -> &'static [vk::DynamicState] {
-    const STATES: [vk::DynamicState; 10] = [
+    const STATES: [vk::DynamicState; 15] = [
         vk::DynamicState::VIEWPORT,
         vk::DynamicState::SCISSOR,
         vk::DynamicState::DEPTH_TEST_ENABLE,
@@ -199,15 +199,20 @@ fn dynamic_states(line: bool, stipple: bool) -> &'static [vk::DynamicState] {
         vk::DynamicState::FRONT_FACE,
         vk::DynamicState::DEPTH_BIAS,
         vk::DynamicState::DEPTH_BIAS_ENABLE,
+        vk::DynamicState::STENCIL_TEST_ENABLE,
+        vk::DynamicState::STENCIL_OP,
+        vk::DynamicState::STENCIL_COMPARE_MASK,
+        vk::DynamicState::STENCIL_WRITE_MASK,
+        vk::DynamicState::STENCIL_REFERENCE,
         vk::DynamicState::LINE_WIDTH,
         vk::DynamicState::LINE_STIPPLE_EXT,
     ];
     &STATES[..if stipple {
-        10
+        15
     } else if line {
-        9
+        14
     } else {
-        8
+        13
     }]
 }
 
@@ -236,7 +241,7 @@ mod tests {
         assert!(!dynamic_states(false, false).contains(&vk::DynamicState::LINE_WIDTH));
         assert!(dynamic_states(true, false).contains(&vk::DynamicState::LINE_WIDTH));
         assert_eq!(
-            &dynamic_states(true, false)[..8],
+            &dynamic_states(true, false)[..13],
             dynamic_states(false, false)
         );
     }

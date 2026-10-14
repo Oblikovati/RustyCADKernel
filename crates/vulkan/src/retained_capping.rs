@@ -9,7 +9,7 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::graphic3d::*;
 struct CapGroup {
     group: Handle<Graphic3dDrawGroup>,
-    draws: Vec<PrimitiveDraw>,
+    program: crate::stencil_program::StencilProgram,
 }
 pub(crate) struct CappingScene<'a> {
     pub camera: &'a Graphic3dCamera,
@@ -22,26 +22,37 @@ impl CappingScene<'_> {
     pub fn draws(
         &self,
         batches: Vec<Vec<Handle<dyn Graphic3dGroup>>>,
-    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
+    ) -> Result<crate::stencil_program::StencilProgram, RenderError> {
         let groups = batches
             .into_iter()
             .map(|batch| self.snapshot_batch(batch))
             .collect::<Result<Vec<_>, _>>()?;
+        let (caps, initialized) = self.stencil_caps(&groups)?;
+        // Ordinary geometry draws the instance before its own groups; capping reverses that order.
+        let mut program = crate::stencil_program::StencilProgram::default();
+        for group in groups.into_iter().rev().flatten() {
+            program.append(group.program);
+        }
+        program.geometry(caps);
+        if initialized {
+            program.command(crate::stencil_program::StencilCommand::CappingRestore);
+        }
+        Ok(program)
+    }
+    fn stencil_caps(
+        &self,
+        groups: &[Vec<CapGroup>],
+    ) -> Result<(Vec<PrimitiveDraw>, bool), RenderError> {
+        let planes = capping_planes(self.clipping, self.fields)?;
+        let initialized =
+            !planes.is_empty() && groups.iter().flatten().any(|group| group.group.is_closed());
         let mut caps = Vec::new();
-        for cap in capping_planes(self.clipping, self.fields)? {
-            for batch in &groups {
+        for cap in planes {
+            for batch in groups {
                 self.append_caps(&mut caps, batch, &cap)?;
             }
         }
-        // Ordinary geometry draws the instance before its own groups; capping reverses that order.
-        let mut draws: Vec<_> = groups
-            .into_iter()
-            .rev()
-            .flatten()
-            .flat_map(|group| group.draws)
-            .collect();
-        draws.extend(caps);
-        Ok(draws)
+        Ok((caps, initialized))
     }
     fn snapshot_batch(
         &self,
@@ -57,7 +68,7 @@ impl CappingScene<'_> {
         let source = retained
             .get()
             .ok_or_else(|| rejected(group.object_address(), "a Martensite draw group"))?;
-        let draws = source.draws_in_structure(
+        let program = source.program_in_structure(
             self.camera,
             Some(self.extent),
             self.fields,
@@ -66,7 +77,7 @@ impl CappingScene<'_> {
         )?;
         Ok(CapGroup {
             group: retained,
-            draws,
+            program,
         })
     }
     fn append_caps(
@@ -154,6 +165,7 @@ impl CappingScene<'_> {
             crate::persistent_transform::cap_mask_transform(self.camera, self.fields, self.extent)?;
         let clipping = RenderClipping::new(vec![vec![equation]], model)?;
         group
+            .program
             .draws
             .iter()
             .filter(|draw| is_cap_geometry(draw) && draw.polygon_edge_style.is_none())

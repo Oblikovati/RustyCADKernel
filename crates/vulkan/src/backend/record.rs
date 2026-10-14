@@ -97,7 +97,16 @@ pub(super) fn record_draws_selected(
     let mut encoded_attachment = false;
     let mut culling = (crate::RenderFaceCulling::None, false);
     super::capping_record::set_culling(runtime, command, culling);
-    for draw in &resources.draws[layer.draw_range.clone()] {
+    for (index, draw) in resources.draws[layer.draw_range.clone()].iter().enumerate() {
+        let draw_index = layer.draw_range.start + index;
+        if resources.stencil.clear_before[draw_index] {
+            super::capping_record::clear_stencil(runtime, command, resources.extent);
+        }
+        super::ordered_stencil_record::apply(
+            runtime,
+            command,
+            resources.stencil.during[draw_index],
+        );
         let pipeline = selection
             .map(|(phase, _)| {
                 draw.oit
@@ -345,6 +354,7 @@ pub(super) fn record_layer(
     );
     set_depth_policy(runtime, command, layer);
     record_draws(runtime, command, resources, layer);
+    super::ordered_stencil_record::finish_layer(runtime, command, resources, index);
     unsafe { runtime.device().cmd_end_rendering(command) };
 }
 pub(super) fn layer_dependency(runtime: &VulkanRuntime, command: vk::CommandBuffer) {

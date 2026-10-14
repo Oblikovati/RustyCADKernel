@@ -144,7 +144,7 @@ impl CompositeFixedState {
                 .min_sample_shading(1.),
             depth: vk::PipelineDepthStencilStateCreateInfo::default(),
             dynamic: vk::PipelineDynamicStateCreateInfo::default()
-                .dynamic_states(&[vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR]),
+                .dynamic_states(super::ordered_stencil_record::COMPOSITE_DYNAMIC),
         }
     }
     fn description<'a>(

@@ -39,6 +39,8 @@ pub(super) struct UploadedDraw {
     pub surface_image: Option<Arc<super::surface_image_descriptor::SurfaceImageBinding>>,
 }
 pub(super) struct FrameResources {
+    pub stencil: crate::stencil_plan::StencilPlan,
+    pub stencil_clear_value: u8,
     pub fragment_alpha: super::fragment_alpha_plan::FragmentAlphaPlan,
     pub multisample: Option<super::multisample_targets::MultisampleTargets>,
     pub oit: Option<super::oit_frame::OitFramePass>,
@@ -55,7 +57,9 @@ impl FrameResources {
         frame: &RenderFrame,
         pipeline: &RasterPipelines,
         initial_alpha: crate::legacy_fragment_alpha::LegacyFragmentAlpha,
+        initial_stencil: crate::RenderStencilState,
     ) -> Result<Self, RenderError> {
+        let stencil = crate::stencil_plan::StencilPlan::new(frame, initial_stencil);
         let fragment_alpha =
             super::fragment_alpha_plan::FragmentAlphaPlan::new(frame, initial_alpha);
         pipeline.surface_images.prune()?;
@@ -97,6 +101,8 @@ impl FrameResources {
         )?;
         Ok(Self {
             fragment_alpha,
+            stencil,
+            stencil_clear_value: frame.stencil_clear_value,
             multisample: super::multisample_targets::MultisampleTargets::new(
                 runtime,
                 extent,

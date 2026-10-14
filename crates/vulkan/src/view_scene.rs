@@ -1,7 +1,6 @@
 //! Resolve visible Graphic3d layers into the same immutable submissions used by offscreen tests.
 use crate::{
-    PrimitiveDraw, RenderError, RenderFrame, RenderLayer, driver_structure::RenderStructure,
-    error::rejected,
+    RenderError, RenderFrame, RenderLayer, driver_structure::RenderStructure, error::rejected,
 };
 use rustycad_tkernel::standard::{Handle, HandleObserver, HandleReference};
 use rustycad_tkservice::graphic3d::*;
@@ -133,10 +132,10 @@ fn layer_pass(
 ) -> Result<RenderLayer, RenderError> {
     let settings = layer.layer_settings();
     validate_layer(layer.layer_id(), &settings)?;
-    let mut draws = Vec::new();
+    let mut program = crate::stencil_program::StencilProgram::default();
     for priority in layer.array_of_structures() {
         for weak in priority.iter() {
-            draws.extend(structure_draws(
+            program.append(structure_draws(
                 &weak.upgrade(),
                 camera,
                 view_id,
@@ -147,8 +146,8 @@ fn layer_pass(
         }
     }
     let offset = settings.polygon_offset();
-    Ok(RenderLayer::new(
-        draws,
+    Ok(RenderLayer::from_stencil_program(
+        program,
         settings.to_enable_depth_test(),
         settings.to_enable_depth_write(),
         settings.to_clear_depth(),
@@ -166,9 +165,9 @@ fn structure_draws(
     extent: [u32; 2],
     rendering: &Graphic3dRenderingParams,
     clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
-) -> Result<Vec<PrimitiveDraw>, RenderError> {
+) -> Result<crate::stencil_program::StencilProgram, RenderError> {
     if structure.is_null() {
-        return Ok(vec![]);
+        return Ok(Default::default());
     }
     let retained = structure.cast::<RenderStructure>();
     retained

@@ -5,6 +5,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RECEIPT_ORACLE_PATHS = (
+    "tools/oracle/martensite_ordered_stencil_state.cxx",
+    "tools/oracle/martensite_ordered_stencil_capture.cxx",
+    "tools/oracle/martensite_stencil_seed.hxx",
+    "tools/oracle/martensite_stencil_draw_trace.hxx",
     "tools/oracle/martensite_oit_alpha_scope.cxx",
     "tools/oracle/martensite_oit_capability.cxx",
     "tools/oracle/martensite_oit_capture.cxx",
