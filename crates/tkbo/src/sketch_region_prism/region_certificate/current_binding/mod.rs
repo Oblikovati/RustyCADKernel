@@ -9,6 +9,8 @@ mod types;
 use super::super::surface_charts::*;
 use super::*;
 pub(crate) use binding::poll as poll_prism_binding;
+#[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use binding::current_selection as rebind_prism_selection;
 #[cfg(test)]
 pub(crate) use replay::same_charts;
 use rustycad_tkmath::predicates::roots::metric_bounds::*;

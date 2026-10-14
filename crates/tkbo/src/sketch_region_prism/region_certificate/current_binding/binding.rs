@@ -23,7 +23,7 @@ pub(super) fn current_region(
     poll(cancelled)?;
     Ok((region, jacobian))
 }
-fn current_selection(
+pub(in crate::sketch_region_prism) fn current_selection(
     bridge: &PairedContactTransaction,
     receipt: &PrismReceipt,
     cancelled: &mut impl FnMut() -> bool,
