@@ -60,9 +60,11 @@ fn initial<'a>(
     work.poll(TwoLoopRegionStage::Admission)?;
     admission::inspect(request, work)?;
     super::availability::inspect(request, work)?;
+    super::history_budget::admit(request, work)?;
     work.poll(TwoLoopRegionStage::Sources)?;
     let sources = sources::capture(request, work)?;
     work.poll(TwoLoopRegionStage::Census)?;
+    sources::preflight(request, work)?;
     let rank = super::plane::inspect(request, &sources, work)?;
     let census = census_settings::capture(&request.bridge.census, rank, work)?;
     let names = sources::census_names(request, work)?;

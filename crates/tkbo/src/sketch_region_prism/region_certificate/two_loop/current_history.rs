@@ -6,7 +6,6 @@ pub(super) fn inspect<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, ()> {
-    super::history_budget::admit(request, work)?;
     super::super::containment::generated_universe(request.bridge).map_err(|cause| {
         let mut failure = work.failure(TwoLoopRegionCause::UnsupportedDiagnostic {
             stage: "current generated candidate universe",

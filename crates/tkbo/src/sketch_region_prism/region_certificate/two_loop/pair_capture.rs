@@ -19,6 +19,7 @@ pub(super) fn domains<'a>(
         census.domains.len(),
         3,
     )?;
+    super::census_budget::admit(census, work)?;
     let mut rows = Vec::new();
     for domain in &census.domains {
         rows.push(domain_row(census, domain, names, work)?);

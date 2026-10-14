@@ -19,6 +19,7 @@ pub(super) fn capture<'a>(
     ] {
         work.count(name, actual, 2)?;
     }
+    super::source_budget::admit(&request.bridge.census, work)?;
     preflight(request, work)?;
     let inspection = source_stages::current(&request.bridge.census, work)?;
     let mut rows = Vec::new();
@@ -167,7 +168,7 @@ pub(super) fn census_names<'a>(
     Ok([segments[0].parents[0].source, segments[1].parents[0].source])
 }
 
-fn preflight<'a>(
+pub(super) fn preflight<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     work: &mut TwoLoopWork<'_>,
 ) -> TwoLoopCheck<'a, ()> {

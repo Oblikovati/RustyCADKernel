@@ -49,11 +49,16 @@ fn copies<'a>(
         .completion
         .as_ref()
         .unwrap_or_else(|_| unreachable!("admitted actual candidates"));
-    work.units("unrepresented copy disposition", batch.unrepresented.len())?;
-    work.units("observed original deletion", batch.input_deleted.len())?;
-    for row in &batch.unrepresented {
-        parents(&row.preserved, &row.modified, &row.generated, work)?;
+    super::operand_budget::relations(&batch.unrepresented, work)?;
+    work.units("candidate metadata", batch.candidates.len())?;
+    for candidate in &batch.candidates {
+        work.units("candidate wire metadata", candidate.wires.len())?;
+        for wire in &candidate.wires {
+            super::operand_budget::segments(&wire.segments, work)?;
+        }
+        super::operand_budget::relations(&candidate.relations, work)?;
     }
+    work.units("observed original deletion", batch.input_deleted.len())?;
     Ok(())
 }
 fn generated<'a>(
@@ -85,6 +90,9 @@ fn partition<'a>(
     work.units("partition source", snapshot.sources.len())?;
     work.units("partition vertex", snapshot.vertices.len())?;
     for source in &snapshot.sources {
+        if let Some(Ok(space)) = &source.space {
+            super::operand_budget::space(space, work)?;
+        }
         work.units("partition source parent", source.parents.len())?;
         work.units("partition endpoint", source.source_vertices.len())?;
         work.units("partition block", source.blocks.len())?;

@@ -59,3 +59,10 @@ pub(crate) use operation::{inspect_two_loop_region, rebind_two_loop_region};
 pub(crate) use outcome::*;
 pub(crate) use request::*;
 pub(crate) use views::TwoLoopRegionLimitation;
+
+mod census_budget;
+mod operand_budget;
+mod source_budget;
+
+#[cfg(test)]
+mod budget_tests;
