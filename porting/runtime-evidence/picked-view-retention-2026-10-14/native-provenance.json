@@ -32,5 +32,53 @@
   "native_compiler": "g++ -std=c++17",
   "native_libraries": "existing target/occt-all-full: TKV3d TKService TKMath TKernel; no rebuild",
   "native_expired_reference_read": false,
-  "full_frame_api_credit": false
+  "full_frame_api_credit": false,
+  "build_commands": {
+    "probe": [
+      "g++",
+      "-std=c++17",
+      "-I",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_picked_slot_retention.cxx",
+      "-L",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/picked-slot-native/probe"
+    ],
+    "reset-failure": [
+      "g++",
+      "-std=c++17",
+      "-I",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_picked_slot_reset_failure.cxx",
+      "-L",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/picked-slot-native/reset-failure"
+    ]
+  },
+  "direct_library_sha256": {
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "executions": {
+    "probe": [
+      "target/picked-slot-native/probe"
+    ],
+    "reset-failure": [
+      "target/picked-slot-native/reset-failure"
+    ]
+  }
 }
