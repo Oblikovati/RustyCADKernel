@@ -45,6 +45,10 @@ fn supplied_projection_retains_missing_historical_observation_failure() {
     else {
         panic!("missing observation must remain incomplete");
     };
+    assert_missing_observation(&result);
+}
+
+fn assert_missing_observation(result: &PrismLineageInspection) {
     assert_eq!(
         result.coverage(),
         (

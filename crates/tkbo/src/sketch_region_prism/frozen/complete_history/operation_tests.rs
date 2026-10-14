@@ -236,3 +236,48 @@ fn assert_root_mutation_refused(
     ));
     assert_eq!(baseline.replay_bytes(), bytes);
 }
+
+#[test]
+fn owned_count_and_missing_debug_preserve_original_field_labels() {
+    let count = PrismHistoryCause::Count {
+        required: "complete query census",
+        actual: 4,
+        expected: 5,
+    };
+    assert_eq!(
+        format!("{count:?}"),
+        "Count { required: \"complete query census\", actual: 4, expected: 5 }"
+    );
+    let missing = PrismHistoryCause::Missing { required: "query" };
+    assert_eq!(format!("{missing:?}"), "Missing(\"query\")");
+}
+#[test]
+fn owned_unsupported_debug_retains_stage_kind_index_and_rows() {
+    let cause = PrismHistoryCause::UnsupportedDiagnostic {
+        stage: PrismHistoryStage::CandidateCopy,
+        kind: HistoricalDiagnosticKind::GeneratedObservation,
+        observation: Some(2),
+        retained_rows: 5,
+    };
+    assert_eq!(
+        format!("{cause:?}"),
+        "UnsupportedDiagnostic { stage: CandidateCopy, kind: GeneratedObservation, observation: Some(2), retained_rows: 5 }"
+    );
+}
+#[test]
+fn boxed_legacy_and_context_debug_keep_original_payload() {
+    let legacy = diagnostics::HistoricalLegacyCause::Arrangement {
+        variant: diagnostics::HistoryArrangementVariant::CompletedEmpty { deleted: 0 },
+    };
+    let cause = PrismHistoryCause::Legacy(Box::new(legacy));
+    assert_eq!(
+        format!("{cause:?}"),
+        "UnsupportedLegacyDiagnostic(Arrangement { variant: CompletedEmpty { deleted: 0 } })"
+    );
+    let attributed =
+        PrismHistoryCause::Missing { required: "query" }.at_use(PrismHistoryUseKey(vec![]));
+    assert_eq!(
+        format!("{attributed:?}"),
+        "AtUse { entity: PrismHistoryUseKey([]), cause: Missing(\"query\") }"
+    );
+}
