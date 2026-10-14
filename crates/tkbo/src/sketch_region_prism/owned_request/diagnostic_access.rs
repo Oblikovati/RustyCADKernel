@@ -38,9 +38,9 @@ impl PreparationDiagnosticView<'_> {
         // No new request is synthesized from a successful subset of the operation.
         &self.retained.request
     }
-    /// Preserve the actual last-entered phase; `view.phase()`.
-    pub(crate) fn phase(&self) -> OwnedPrismPhase {
-        // The cause or retained container count cannot substitute for the original phase.
+    /// Preserve the outer entry boundary; `view.outer_entry_phase()` excludes later child phases.
+    pub(crate) fn outer_entry_phase(&self) -> OwnedPrismPhase {
+        // A child may have advanced; its typed cause/callback retains that separate phase.
         self.retained.phase
     }
     /// Borrow the validated dictionary if admission reached it; `view.plan().is_none()`.
@@ -48,8 +48,9 @@ impl PreparationDiagnosticView<'_> {
         // Failed admission must not manufacture a semantic dictionary.
         self.retained.plan.as_ref()
     }
-    /// Identify local owners requiring diagnostic coverage; `view.retained_stages()`.
-    pub(crate) fn retained_stages(&self) -> Vec<RetainedPreparationStage> {
+    /// List only outer owners; `view.outer_retained_stages()` excludes nested bridge/cause payloads.
+    pub(crate) fn outer_retained_stages(&self) -> Vec<RetainedPreparationStage> {
+        // An empty list cannot prove complete diagnostic coverage of a nested cause.
         use RetainedPreparationStage::*;
         [
             (ConstructedSource, self.retained.source.is_some()),

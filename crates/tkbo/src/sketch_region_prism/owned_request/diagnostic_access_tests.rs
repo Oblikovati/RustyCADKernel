@@ -10,9 +10,9 @@ fn failed_admission_view_keeps_original_request_and_missing_plan() {
         .unwrap();
     let view = failure.diagnostic_context();
     assert!(std::ptr::eq(view.request(), &failure.retained.request));
-    assert_eq!(view.phase(), OwnedPrismPhase::Admission);
+    assert_eq!(view.outer_entry_phase(), OwnedPrismPhase::Admission);
     assert!(view.plan().is_none());
-    assert!(view.retained_stages().is_empty());
+    assert!(view.outer_retained_stages().is_empty());
 }
 #[test]
 fn later_failed_view_names_constructed_owner_without_publishing_it() {
@@ -24,9 +24,9 @@ fn later_failed_view_names_constructed_owner_without_publishing_it() {
         .err()
         .unwrap();
     let view = failure.diagnostic_context();
-    assert_eq!(view.phase(), OwnedPrismPhase::SourceCapture);
+    assert_eq!(view.outer_entry_phase(), OwnedPrismPhase::SourceCapture);
     assert_eq!(
-        view.retained_stages(),
+        view.outer_retained_stages(),
         [RetainedPreparationStage::ConstructedSource]
     );
     assert!(std::ptr::eq(
@@ -40,10 +40,10 @@ fn prepared_view_names_outer_owners_after_children_move_into_contact_transaction
     let view = prepared.diagnostic_context();
     use RetainedPreparationStage::*;
     assert_eq!(
-        view.retained_stages(),
+        view.outer_retained_stages(),
         [ConstructedSource, ContactTransport, Prism]
     );
-    assert_eq!(view.phase(), prepared.retained.phase);
+    assert_eq!(view.outer_entry_phase(), prepared.retained.phase);
     assert!(std::ptr::eq(view.request(), &prepared.retained.request));
     assert!(std::ptr::eq(
         view.plan().unwrap(),
@@ -77,6 +77,40 @@ fn intermediate_views_retain_inputs_then_census_and_partition_before_transport()
         let failure = prepare_owned_polynomial_prism(request(), &mut PhaseStopObserver(phase))
             .err()
             .unwrap();
-        assert_eq!(failure.diagnostic_context().retained_stages(), expected);
+        assert_eq!(
+            failure.diagnostic_context().outer_retained_stages(),
+            expected
+        );
     }
+}
+
+struct ChildSweepFailure;
+impl OwnedPrismProgress for ChildSweepFailure {
+    fn checkpoint(
+        &mut self,
+        point: OwnedPrismCheckpoint,
+    ) -> Result<bool, rustycad_tkernel::standard::Failure> {
+        if point.phase == OwnedPrismPhase::Prism(crate::sketch_region_prism::PrismPhase::Sweep) {
+            return Err(rustycad_tkernel::standard::Failure::new(
+                "child sweep failure",
+            ));
+        }
+        Ok(false)
+    }
+}
+#[test]
+fn outer_prism_admission_does_not_replace_child_sweep_callback_phase() {
+    use crate::sketch_region_prism::PrismPhase;
+    let failure = prepare_owned_polynomial_prism(request(), &mut ChildSweepFailure)
+        .err()
+        .unwrap();
+    assert_eq!(
+        failure.diagnostic_context().outer_entry_phase(),
+        OwnedPrismPhase::Prism(PrismPhase::Admission)
+    );
+    assert_eq!(
+        failure.callback.as_ref().unwrap().checkpoint.phase,
+        OwnedPrismPhase::Prism(PrismPhase::Sweep)
+    );
+    assert_eq!(failure.class, super::OwnedPreparationClass::Failed);
 }

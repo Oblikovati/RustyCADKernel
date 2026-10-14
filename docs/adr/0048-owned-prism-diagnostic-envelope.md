@@ -25,9 +25,11 @@ multiplicity and pole bits, declared plane, selection, extrusion and every polic
 and work limit. The validated semantic plan is optional: early admission can
 fail before a plan exists. Never manufacture a dictionary for that case.
 
-One read-only preparation view supplies request, phase, optional plan and retained
-stage presence for both preparation success and failure. It borrows local state;
-it is not a published result and does not expose mutable owners. A single shared
+One read-only preparation view supplies request, outer entry phase, optional plan
+and outer retained-stage presence for both preparation success and failure. It borrows local state;
+it is not a published result and does not expose mutable owners. Child causes and
+callbacks retain their separate actual phases. The outer owner inventory excludes
+nested bridge/cause payloads and cannot establish complete diagnostic coverage. A single shared
 full-request encoder retains floating-point bits, including signed zero and NaN
 payloads on refused input. The final outcome owner reuses that codec unchanged.
 
