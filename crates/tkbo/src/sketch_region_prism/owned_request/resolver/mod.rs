@@ -39,9 +39,10 @@ mod invocation;
 mod invocation_tests;
 
 pub(in crate::sketch_region_prism::owned_request) use invocation::{
-    InvokedPrismPublicationFailure, ResolvedPrismInvocation, ResolvedPrismPublication,
-    resolve_invocation,
+    ResolvedPrismInvocation, ResolvedPrismPublication, resolve_invocation,
 };
 
 #[cfg(test)]
 pub(in crate::sketch_region_prism::owned_request) mod fixture;
+
+pub(in crate::sketch_region_prism) use invocation::InvokedPrismPublicationFailure;

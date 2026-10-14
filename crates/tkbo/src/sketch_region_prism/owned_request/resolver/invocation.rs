@@ -14,7 +14,7 @@ pub(in crate::sketch_region_prism::owned_request) struct ResolvedPrismInvocation
     sources: Vec<ArrangementSource<'a>>,
     bindings: bindings::InvocationBindings,
 }
-pub(in crate::sketch_region_prism::owned_request) struct InvokedPrismPublicationFailure<'a> {
+pub(in crate::sketch_region_prism) struct InvokedPrismPublicationFailure<'a> {
     request: OwnedPolynomialPrismRequest,
     plan: SingleBoundaryNamePlan,
     bindings: &'a PrismPublicationBindings,
@@ -114,31 +114,23 @@ impl ResolvedPrismPublication {
 }
 impl<'a> InvokedPrismPublicationFailure<'a> {
     /// Read exact caller input captured by this invocation; `invoked.request()`.
-    pub(in crate::sketch_region_prism::owned_request) fn request(
-        &self,
-    ) -> &OwnedPolynomialPrismRequest {
+    pub(in crate::sketch_region_prism) fn request(&self) -> &OwnedPolynomialPrismRequest {
         &self.request
     }
     /// Read the predeclared dictionary actually used by this invocation; `invoked.plan()`.
-    pub(in crate::sketch_region_prism::owned_request) fn plan(&self) -> &SingleBoundaryNamePlan {
+    pub(in crate::sketch_region_prism) fn plan(&self) -> &SingleBoundaryNamePlan {
         &self.plan
     }
     /// Borrow names from the actual failed invocation; `packet.bindings()` outlives the packet.
-    pub(in crate::sketch_region_prism::owned_request) fn bindings(
-        &self,
-    ) -> &'a PrismPublicationBindings {
+    pub(in crate::sketch_region_prism) fn bindings(&self) -> &'a PrismPublicationBindings {
         self.bindings
     }
     /// Retain the original outer class and nested cause; `packet.failure()`.
-    pub(in crate::sketch_region_prism::owned_request) fn failure(
-        &self,
-    ) -> &PrismPublicationFailure<'a> {
+    pub(in crate::sketch_region_prism) fn failure(&self) -> &PrismPublicationFailure<'a> {
         &self.failure
     }
     /// Consume this packet into its actual local child failure; `packet.into_failure()`.
-    pub(in crate::sketch_region_prism::owned_request) fn into_failure(
-        self,
-    ) -> Box<PrismPublicationFailure<'a>> {
+    pub(in crate::sketch_region_prism) fn into_failure(self) -> Box<PrismPublicationFailure<'a>> {
         self.failure
     }
 }
