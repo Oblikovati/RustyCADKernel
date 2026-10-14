@@ -113,6 +113,26 @@ operation. Owned caller requests, semantic naming, owned refusal projection,
 general profiles, the with-hole consumer workflow and owner release checks
 remain open. ThreadSanitizer acceptance remains incomplete.
 
+## Complete private operation integration supplement
+
+The subsequent actual-main gates advance the private representative operation:
+
+| Constituent | Integrated source and root evidence | Verified scope |
+| --- | --- | --- |
+| Semantic naming reservations | Source `4c9511d80`, root evidence `52d794b06` | 1,531 tests +35 doctests; full literal naming bytes reproduced in two processes. Reservations do not prove actual construction correspondence or persistent split identity. |
+| E7 complete history | Source `4d02ab813`, integrated source `c88ca1760`, [root receipt](evidence/prism-complete-history-integration-2026-10-14/INTEGRATED.md) | 1,598 tests +35 doctests; six process outputs preserve full history, lineage and frozen bytes. Complete original/intermediate query coverage is bound to the one actual private operation. |
+| E8 complete publication | Source `3e8bb7dc3`, integrated source `80c107451`, [root receipt](evidence/prism-publication-integration-2026-10-14/INTEGRATED.md) | 1,628 tests +35 doctests; one composer returns bound ordered validation, complete history, per-face measurements and the unchanged signed sweep integral. The terminal callback precedes callback-free source/history checks. |
+
+These overlapping test totals describe separate revisions. They are not distinct
+coverage counts. Each root matrix includes strict Clippy and formatting; its
+supplement records full process replay and generated-documentation checks.
+
+The complete private operation is still a single-Jordan polynomial domain.
+Owned caller construction, actual semantic correspondence, public owned outcomes,
+general profiles and holes, persistent edit/persistence references, sanitizer and
+release-package acceptance remain open. Neither this supplement nor the private
+`CompleteNamedPrismV1` status closes Kernel #10 or authorizes an early release.
+
 ## Every issue requirement
 
 | Issue item | Concrete implementation / executed evidence | Precise remaining acceptance |
