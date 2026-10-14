@@ -1,0 +1,80 @@
+{
+  "reviewed_revision": "d9daef1bc",
+  "reviewer": "/root/seam_pcurve_import",
+  "method": "read-only fixed-source review; reviewer executed no tests or edits",
+  "scope": [
+    "seven-stage actual census",
+    "copier ancestor correspondence",
+    "partition query completeness",
+    "parent class and multiplicity retention",
+    "selected/complement and generated correspondence",
+    "original continuation/deletion",
+    "final history reproject"
+  ],
+  "findings": [
+    {
+      "id": "H1",
+      "severity": "blocker",
+      "cause": "sweep coverage compared cardinality only; duplicate genuine Generated answer could replace another equal-cardinality answer",
+      "correction": "82b5d0bbe: exact multiset of authored query use, role, directed output use and all native parent classes"
+    },
+    {
+      "id": "H2",
+      "severity": "blocker",
+      "cause": "maximum_rows admitted/serialized but not consumed",
+      "correction": "4f7ebedab adds aggregate input-operand budget;82b5d0bbe owns measured count and exact/one-short tests"
+    },
+    {
+      "id": "H3",
+      "severity": "blocker",
+      "cause": "endpoint parameter multiset did not bind each parameter to actual directed endpoint role",
+      "correction": "82b5d0bbe: exact binary64 parameter bound to actual relative F/R source-child role"
+    },
+    {
+      "id": "H4",
+      "severity": "audit note",
+      "cause": "legacy failed/native/cancelled sources wrapped as Incomplete",
+      "correction": "82b5d0bbe propagates known native/failed classes; prior-source cancellation remains typed incomplete source prerequisite, current callback cancellation remains Cancelled; full local causes retained"
+    }
+  ],
+  "red_source": "4f7ebedab",
+  "red_result": "7 passed;2 failed: H1/H3 negative fixtures admitted corrupted operands",
+  "corrected_source": "82b5d0bbe",
+  "corrected_result": "36 passed;0 failed;760 filtered; no full acceptance claim",
+  "commands": [
+    "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p rustycad-tkbo --lib complete_history::adversarial_tests --locked -- --nocapture",
+    "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_BUILD_JOBS=2 cargo +1.99.0 test -p rustycad-tkbo --lib complete_history:: --locked -- --nocapture"
+  ],
+  "exclusions": [
+    "Draft runs lacked final source bookends; final unchanged-source matrix pending",
+    "No new OCCT/GPU executions",
+    "No sanitizer acceptance claimed",
+    "Style/body-length cleanup pending"
+  ],
+  "logs": [
+    {
+      "log": "history-review-regressions-red.log.gz",
+      "uncompressed_sha256": "d50f278e5bee37b131d180088ccbea409f44a3bfa5280f6a7cd45d3dbd809fdb"
+    },
+    {
+      "log": "history-review-corrections-draft.log.gz",
+      "uncompressed_sha256": "5e4f814301865b965bc1cd8e496e6f75c8b34567d07ae432d146acbae048a031"
+    },
+    {
+      "log": "history-reviewed-attribution.log.gz",
+      "uncompressed_sha256": "e919c8e7c90248539a42f6cc927dbaae786c3cece807b688e2ebe6d64b995c52"
+    },
+    {
+      "log": "history-sweep-draft.log.gz",
+      "uncompressed_sha256": "38a63ab9d6a70f7f64c3bf982dc23da43d153e7dfee547d6330a831e7af8c937"
+    },
+    {
+      "log": "history-sweep-draft-2.log.gz",
+      "uncompressed_sha256": "6ee033c0939b007c5dc8e4b485b09cbe254340de8b8eb4335a1bf1b0738be886"
+    },
+    {
+      "log": "history-adversarial-draft-2.log.gz",
+      "uncompressed_sha256": "3231801a06dbb31cbbb64fe4553a5549ff442dd982111749467a48482cf7c3e0"
+    }
+  ]
+}
