@@ -99,3 +99,5 @@ mod member_identity_tests;
 
 #[cfg(test)]
 mod projection_tests;
+
+pub(in crate::sketch_region_prism) use directed::matches_selected_copy_context;

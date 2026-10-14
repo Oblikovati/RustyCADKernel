@@ -15,4 +15,6 @@ mod body_keys;
 pub(crate) mod body_map;
 pub(crate) use body_keys::*;
 
+#[cfg(test)]
+mod v2_tests;
 pub(crate) use body_map::{encode_semantic_member_key, encode_semantic_use_key};

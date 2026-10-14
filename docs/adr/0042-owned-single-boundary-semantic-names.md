@@ -76,3 +76,35 @@ adapter; passing this dictionary corpus does not substitute for them.
 ThreadSanitizer and the full TKBO operation suite are not implied by the focused
 prefix checks. Source-bookended executed commands and exclusions are retained in
 the accompanying evidence receipt before handoff.
+
+## V2 aggregate vocabulary extension
+
+Actual Partition and CandidateCopy contexts contain an intermediate Compound
+wrapper. Historical member naming requires one physical definition per member
+symbol; assigning its Boundary symbol to both wrapper and edge would violate
+that contract. A bounded region or loop symbol is also not the meaning of this
+unclassified container. V2 therefore adds exactly four internal reservations:
+Partition Aggregate/ AggregateUse (1058/1059), and CandidateCopy Aggregate/
+AggregateUse (1314/1315). Roles 34 and 35 are explicit lexical constants. Their
+caller anchor is the source boundary; actual membership still requires complete
+native partition/copy provenance and ancestry correspondence.
+
+`SingleBoundaryNamePlan::v2` reserves 101 symbols. `v1` retains exactly 97 and
+rejects the four new tokens. Every earlier entry and V1 byte remains unchanged;
+V2 envelopes record version 2. The legacy request preparation still authors V1.
+A new whole-operation path must author V2 before construction; the private
+resolver may consume an explicit V2 plan authored before lookup and must compare
+its complete caller identities and exact selection bits to the retained request.
+No stage or aggregate names become caller inputs. This is no automatic migration
+of V1, and dictionary reservations remain distinct from observed coverage.
+
+### Actual copied-base root applicability in V2
+
+The actual publication join requires `selected_region` to name its copied base.
+With distinct stage names, Generated Solid/Shell keys therefore carry
+SweepBase/BoundedRegion (2056), rather than the earlier Selected/BoundedRegion
+(1544) used by the unbound symbolic map fixture. V2 adds this exact applicability
+case for kinds Solid/Shell and Generated role. V1 admission, dictionary bytes,
+map bytes and the symbolic fixture remain unchanged. Other stages and source
+roles do not inherit this rule. This records an observed interface requirement;
+it does not reuse a token with another meaning or relax publication.

@@ -161,6 +161,22 @@ fn matches_context(
     selected: &PrismBodyContext,
     copied: &PrismBodyContext,
 ) -> bool {
+    let observations = inputs
+        .receipt
+        .copied
+        .as_ref()
+        .map(|copy| copy.observations.as_slice())
+        .unwrap_or_default();
+    matches_selected_copy_context(observations, selected, copied)
+}
+/// Reuse retained physical images and directed ancestry before naming.
+/// Example: `matches_selected_copy_context(observations, selected, copied)`.
+/// The caller still proves unique complete correspondence and all member-history obligations.
+pub(in crate::sketch_region_prism) fn matches_selected_copy_context(
+    observations: &[PrismCopyObservation],
+    selected: &PrismBodyContext,
+    copied: &PrismBodyContext,
+) -> bool {
     if selected.ancestors.len() != copied.ancestors.len() {
         return false;
     }
@@ -169,17 +185,15 @@ fn matches_context(
         .iter()
         .chain([&selected.occurrence])
         .zip(copied.ancestors.iter().chain([&copied.occurrence]))
-        .all(|(first, second)| mapped_member(inputs, first, second))
+        .all(|(first, second)| mapped_member(observations, first, second))
 }
-fn mapped_member(inputs: &LineageInputs<'_>, selected: &Shape, copied: &Shape) -> bool {
+fn mapped_member(observations: &[PrismCopyObservation], selected: &Shape, copied: &Shape) -> bool {
     if selected.location() != copied.location() || selected.orientation() != copied.orientation() {
         return false;
     }
-    inputs.receipt.copied.as_ref().is_some_and(|c| {
-        c.observations
-            .iter()
-            .any(|o| o.selected.output.is_same(selected) && o.copied_image.is_same(copied))
-    })
+    observations
+        .iter()
+        .any(|o| o.selected.output.is_same(selected) && o.copied_image.is_same(copied))
 }
 pub(super) fn owned_contexts(
     inputs: &LineageInputs<'_>,

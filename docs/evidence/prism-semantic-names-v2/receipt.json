@@ -1,0 +1,44 @@
+{
+  "source_revision": "e3865d02eedeb2ab11416fd542a40ee5c6bdfeec",
+  "behavior_version": 2,
+  "v1_preserved": {
+    "entries": 97,
+    "literal_envelope_bytes": 3500,
+    "map_bytes": 10571,
+    "map_sha256": "ffbdcd9461a1acb2349d514610a6f24b6cdadd03b460bf9394a65240b88247ff"
+  },
+  "v2": {
+    "entries": 101,
+    "literal_tokens": [
+      1058,
+      1059,
+      1314,
+      1315
+    ],
+    "bytes": 3640,
+    "sha256": "ce6ad1cea652af6209db5759068b1970dd4f3408d675c3360ee5c081ff41552b"
+  },
+  "checks": {
+    "naming_tests": 40,
+    "prism_tests": 671,
+    "strict_all_target_clippy": "passed",
+    "fmt": "passed",
+    "independent_processes": 2,
+    "thread_count_in_probe": 4,
+    "source_bookends_equal": 16077
+  },
+  "commands": [
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib owned_request::names --jobs 2",
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib sketch_region_prism --jobs 2",
+    "rustup run 1.99.0 cargo clippy -p rustycad-tkbo --all-targets --all-features --jobs 2 -- -D warnings",
+    "rustup run 1.99.0 cargo fmt --all -- --check",
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib semantic_v2_replay_probe --jobs 2 -- --nocapture",
+    "rustup run 1.99.0 cargo test -p rustycad-tkbo --lib semantic_map_replay_probe --jobs 2 -- --nocapture"
+  ],
+  "limits": [
+    "Symbols reserve no observed entities or actual correspondence",
+    "No V1 preparation migration",
+    "No production resolver issuance",
+    "No new TSan or public operation completion claim"
+  ]
+}
