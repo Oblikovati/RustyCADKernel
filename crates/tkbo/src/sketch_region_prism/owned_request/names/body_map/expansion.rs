@@ -121,10 +121,7 @@ fn check_operation(plan: &SingleBoundaryNamePlan, actual: u64) -> MapCheck<()> {
     if actual != expected {
         return Err(failure(
             plan,
-            PrismSemanticMapCause::Operation {
-                actual,
-                expected,
-            },
+            PrismSemanticMapCause::Operation { actual, expected },
         ));
     }
     Ok(())
