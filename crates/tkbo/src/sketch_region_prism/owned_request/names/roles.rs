@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Explicit discriminants are a V1 vocabulary, not traversal positions or entity ordinals.
+//! Explicit versioned discriminants are lexical roles, never traversal positions or entity ordinals.
 #[repr(u8)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) enum SemanticNameStage {
@@ -49,6 +49,8 @@ pub(crate) enum SemanticNameRole {
     LastRimUse = 31,
     SeamStartUse = 32,
     SeamEndUse = 33,
+    Aggregate = 34,
+    AggregateUse = 35,
 }
 /// Compact lookup token only; the full dictionary supplies its operation/source meaning.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]

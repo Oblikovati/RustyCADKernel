@@ -4,7 +4,7 @@ use super::*;
 use crate::sketch_region::RegionObservedContext;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 
-pub(super) fn admit_stage(
+pub(in crate::sketch_region_prism) fn admit_stage(
     stage: PrismHistoryStage,
     rows: &[RegionObservedContext],
     limits: PrismHistoryLimits,

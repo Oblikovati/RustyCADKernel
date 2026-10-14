@@ -12,7 +12,7 @@ pub(super) fn project_copier_queries(
     admit_query_censuses(observed, source, copied)?;
     let mut result = Vec::new();
     for (index, actual) in source.actual.iter().enumerate() {
-        let target = unique_copy(observed, actual, copied)
+        let target = resolve_native_copy_context(observed, actual, copied.actual)
             .map_err(|cause| cause.at_use(source.owned[index].key.clone()))?;
         result.push(query_row(
             observed,
@@ -51,13 +51,15 @@ fn query_row(
         copied: copied.key.clone(),
     })
 }
-fn unique_copy(
+/// Resolve one local target index from actual native images at every directed ancestor.
+/// The index is lookup-only; example: `resolve_native_copy_context(rows, source, targets)`.
+pub(in crate::sketch_region_prism) fn resolve_native_copy_context(
     observed: &RegionCopyContexts,
     source: &RegionObservedContext,
-    copied: &BoundHistoricalContexts<'_>,
+    copied: &[RegionObservedContext],
 ) -> HistoryCheck<usize> {
     let mut found = Vec::new();
-    for (index, target) in copied.actual.iter().enumerate() {
+    for (index, target) in copied.iter().enumerate() {
         if mapped_context(observed, source, target)? {
             found.push(index);
         }

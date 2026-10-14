@@ -53,3 +53,12 @@ mod diagnostic_runtime_tests;
 
 #[cfg(test)]
 mod diagnostic_codec_tests;
+mod resolver;
+
+#[cfg(test)]
+pub(in crate::sketch_region_prism) use resolver::fixture::{
+    ResolvedPrismFixture, default_resolved_prism_fixture, resolved_prism_fixture,
+};
+
+/// Sealed local refusal from the actual resolver publication invocation.
+pub(in crate::sketch_region_prism) use resolver::InvokedPrismPublicationFailure;

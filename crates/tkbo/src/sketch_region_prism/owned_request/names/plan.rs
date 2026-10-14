@@ -12,6 +12,7 @@ pub(crate) struct SemanticNameEntry {
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) struct SingleBoundaryNamePlan {
+    version: u32,
     identities: SingleBoundaryIdentities,
     seed_bits: [u64; 2],
     entries: Vec<SemanticNameEntry>,
@@ -25,6 +26,7 @@ impl SingleBoundaryNamePlan {
         let SemanticSelectionIntent::BoundedRegionContaining { seed } = intent;
         validate_names(ids, seed)?;
         let mut plan = Self {
+            version: 1,
             identities: ids,
             seed_bits: seed.map(f64::to_bits),
             entries: vec![],
@@ -32,6 +34,29 @@ impl SingleBoundaryNamePlan {
         plan.reserve_vocabulary();
         plan.entries.sort_by_key(|entry| entry.token);
         Ok(plan)
+    }
+    /// Add aggregate symbols before lookup; example: `SingleBoundaryNamePlan::v2(ids, intent)`.
+    pub(crate) fn v2(
+        ids: SingleBoundaryIdentities,
+        intent: SemanticSelectionIntent,
+    ) -> Result<Self, SemanticNameFailure> {
+        let mut plan = Self::v1(ids, intent)?;
+        plan.version = 2;
+        for stage in [
+            SemanticNameStage::Partition,
+            SemanticNameStage::CandidateCopy,
+        ] {
+            plan.reserve(
+                stage,
+                &[SemanticNameRole::Aggregate, SemanticNameRole::AggregateUse],
+            );
+        }
+        plan.entries.sort_by_key(|entry| entry.token);
+        Ok(plan)
+    }
+    /// Naming behavior is separate from request policy version; example: `plan.version()`.
+    pub(crate) fn version(&self) -> u32 {
+        self.version
     }
     /// Complete reserved dictionary, not actual incidence coverage; example: `plan.entries()`.
     pub(crate) fn entries(&self) -> &[SemanticNameEntry] {
@@ -54,7 +79,7 @@ impl SingleBoundaryNamePlan {
             .find(|entry| entry.token.value() == token)
             .ok_or(SemanticNameFailure::UnknownToken {
                 actual: token,
-                version: 1,
+                version: self.version,
             })
     }
     fn reserve(&mut self, stage: SemanticNameStage, roles: &[SemanticNameRole]) {
