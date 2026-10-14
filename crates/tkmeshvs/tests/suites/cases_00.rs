@@ -11,3 +11,5 @@ pub mod invariants;
 pub mod metadata_reference;
 #[path = "../tool_contracts.rs"]
 pub mod tool_contracts;
+#[path = "../tool_derived.rs"]
+pub mod tool_derived;

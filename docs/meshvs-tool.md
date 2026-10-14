@@ -44,3 +44,12 @@ never execute OCCT. Exact floating-point bit rows cover every native enum-range
 value, every safe required-key omission, defaults/custom values, failure order,
 font bytes and planar/nonplanar/degenerate/signed-bound normal inputs. Independent
 invariants additionally cover repaired input reuse and retained previous results.
+
+Qualified getters, inherited operations and the default virtual Assign body
+project the registered actual MeshVS_Drawer subobject. The Rust extension
+accessor cannot redirect native nonvirtual map access. A named derived control
+has different actual/redirected maps and an accessor counter: all five factory
+forms, base assignment and inherited mutation retain the actual maps, zero
+accessor calls and native intrusive counts. The matched native control is a
+separate fixture from the original 194-row Tool corpus. Full Drawer descriptor
+reference and virtual Delete contracts still await the checked foundation.

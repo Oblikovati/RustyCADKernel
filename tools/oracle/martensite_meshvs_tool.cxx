@@ -8,6 +8,7 @@
 #include <Graphic3d_AspectText3d.hxx>
 #include <Graphic3d_HatchStyle.hxx>
 #include <Standard_Failure.hxx>
+#include <Font_FontMgr.hxx>
 #include <gp_Vec.hxx>
 #include <iostream>
 #include <cstring>
@@ -161,6 +162,12 @@ static void Normals() {
     {4,0,0,0,1,0,0,0,1,0},{-1,0,0,0},{0,0,0,0,0,0,1,1,1}};
   for(int index=0;index<int(rows.size());++index) NormalRow(index,index==8?-3:index==7||index==10||index==11?0:1,rows[index]);
 }
+static void EnumDiagnostics() {
+  for(int value=-8;value<=7;++value)
+    std::cerr << "line " << value << ' ' << Graphic3d_Aspects::DefaultLinePatternForType(Aspect_TypeOfLine(value)) << '\n';
+  for(int value=-4;value<=3;++value)
+    std::cerr << "font " << value << ' ' << Font_FontMgr::FontAspectToString(Font_FontAspect(value)) << '\n';
+}
 int main() {
-  Defaults();Missing();RawEnums();Failures();FontBytes();EarlyExit();Normals();
+  Defaults();Missing();RawEnums();Failures();FontBytes();EarlyExit();Normals();EnumDiagnostics();
 }
