@@ -1,6 +1,6 @@
 # ADR 0028: typed GUI surface outcomes
 
-Status: accepted; implementation and candidate checks complete; coordinator integration pending.
+Status: accepted; implementation and coordinator functional/native integration checks complete.
 
 Owner: Martensite Vulkan maintainer; application consumer Oblikovati#3630.
 This is active application-blocker priority 2, independent of the C1 geometry work.
@@ -110,3 +110,7 @@ Frozen source `89d2c0a1e` passed the bounded functional/native matrix described 
 [the candidate evidence](../evidence/gui-surface-outcomes-v2-2026-10-14/README.md).
 The retained TSan startup failure is incomplete; paired debug-profile/shared-host
 timing is not controlled previous-release performance or application acceptance.
+
+Coordinator replay at `15f2367e6` passed both drivers and retained exact candidate
+capture bytes; see [the integration receipt](../evidence/gui-surface-outcomes-v2-2026-10-14/INTEGRATED.md).
+Application adoption, release, migration deletion and sanitizer acceptance remain open.
