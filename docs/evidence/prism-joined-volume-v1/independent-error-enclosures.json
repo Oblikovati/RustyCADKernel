@@ -1,0 +1,98 @@
+{
+  "scope": "Independent Arb enclosures of representative error for exact 24/5; arithmetic only, no geometry acceptance.",
+  "operation": "interval.compute.enclosure",
+  "entries": [
+    {
+      "label": "positive_lower_error",
+      "payload": {
+        "expression": {
+          "op": "sub",
+          "children": [
+            {
+              "op": "const",
+              "value": {
+                "num": "24",
+                "den": "5"
+              }
+            },
+            {
+              "op": "const",
+              "value": {
+                "num": "5404319552844595",
+                "den": "1125899906842624"
+              }
+            }
+          ]
+        },
+        "argument": {
+          "num": "0",
+          "den": "1"
+        },
+        "precision_bits": 128
+      },
+      "operation_id": "interval.compute.enclosure",
+      "runtime_ms": 8,
+      "output": {
+        "status": "ENCLOSED",
+        "precision_bits": 128,
+        "lower": {
+          "mantissa": "944473296573929042739",
+          "exponent": -122
+        },
+        "upper": {
+          "mantissa": "3777893186295716170957",
+          "exponent": -124
+        },
+        "relative_accuracy_bits": 71,
+        "exact": false,
+        "detail": "Arb returned an outward-rounded enclosure with exact dyadic endpoints."
+      }
+    },
+    {
+      "label": "negative_transported_upper_error",
+      "payload": {
+        "expression": {
+          "op": "sub",
+          "children": [
+            {
+              "op": "const",
+              "value": {
+                "num": "1351079888211149",
+                "den": "281474976710656"
+              }
+            },
+            {
+              "op": "const",
+              "value": {
+                "num": "24",
+                "den": "5"
+              }
+            }
+          ]
+        },
+        "argument": {
+          "num": "0",
+          "den": "1"
+        },
+        "precision_bits": 128
+      },
+      "operation_id": "interval.compute.enclosure",
+      "runtime_ms": 2,
+      "output": {
+        "status": "ENCLOSED",
+        "precision_bits": 128,
+        "lower": {
+          "mantissa": "15111572745182864683827",
+          "exponent": -124
+        },
+        "upper": {
+          "mantissa": "3777893186295716170957",
+          "exponent": -122
+        },
+        "relative_accuracy_bits": 73,
+        "exact": false,
+        "detail": "Arb returned an outward-rounded enclosure with exact dyadic endpoints."
+      }
+    }
+  ]
+}
