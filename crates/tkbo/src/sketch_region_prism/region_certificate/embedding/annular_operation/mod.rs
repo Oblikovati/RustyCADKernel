@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0051 private annular embedding evidence, never ordered body validation or publication.
+mod classification;
 mod operation;
 mod types;
 use super::super::{annular_binding::*, hypothesis::*, two_loop::TwoLoopRegionRequest};
@@ -8,5 +9,7 @@ use crate::sketch_region_prism::PrismReceipt;
 pub(super) use operation::inspect_bound_annular_embedding;
 pub(super) use types::*;
 
+#[cfg(test)]
+mod cancellation_tests;
 #[cfg(test)]
 mod tests;

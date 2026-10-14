@@ -41,6 +41,19 @@ fn construct<'a>(
     poll(cancelled)?;
     *phase = AnnularEmbeddingPhase::CurrentBinding;
     rebind_annular_prism_v2(request, receipt, &binding).map_err(AnnularEmbeddingCause::Binding)?;
+    let evidence = propose(binding, requested, phase, cancelled)?;
+    *phase = AnnularEmbeddingPhase::Commit;
+    poll(cancelled)?;
+    rebind_annular_prism_v2(request, receipt, &evidence.binding)
+        .map_err(AnnularEmbeddingCause::Binding)?;
+    Ok(evidence)
+}
+fn propose(
+    binding: AnnularPrismBinding,
+    requested: AnnularEmbeddingOptions,
+    phase: &mut AnnularEmbeddingPhase,
+    cancelled: &mut impl FnMut() -> bool,
+) -> AnnularEmbeddingCheck<'static, AnnularEmbeddingEvidence> {
     *phase = AnnularEmbeddingPhase::Regularity;
     let operands = bound_regularity_operands(&binding)?;
     let regularity = certify_boundaries(operands, requested.regularity, cancelled)
@@ -50,9 +63,6 @@ fn construct<'a>(
     let domains = capture_annular_domains(&binding)?;
     let incidences = ten_rows(&domains)?;
     complete_pairs(&domains, &incidences)?;
-    *phase = AnnularEmbeddingPhase::Commit;
-    poll(cancelled)?;
-    rebind_annular_prism_v2(request, receipt, &binding).map_err(AnnularEmbeddingCause::Binding)?;
     Ok(AnnularEmbeddingEvidence {
         requested,
         binding,

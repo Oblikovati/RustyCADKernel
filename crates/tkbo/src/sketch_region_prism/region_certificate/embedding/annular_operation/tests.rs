@@ -14,7 +14,7 @@ impl AnnularBindingProgress for ContinueEmbeddingBinding {
     }
 }
 
-fn options() -> AnnularEmbeddingOptions {
+pub(super) fn options() -> AnnularEmbeddingOptions {
     AnnularEmbeddingOptions {
         version: 2,
         regularity: AnnularRegularityOptions {
@@ -23,7 +23,7 @@ fn options() -> AnnularEmbeddingOptions {
         },
     }
 }
-fn binding(
+pub(super) fn binding(
     request: &TwoLoopRegionRequest<'_, '_>,
     region: Box<super::super::super::two_loop::TwoLoopRegionCertificate>,
     receipt: &PrismReceipt,
