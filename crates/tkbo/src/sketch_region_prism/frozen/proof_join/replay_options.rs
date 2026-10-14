@@ -17,7 +17,8 @@ pub(super) fn regularity(value: BezierRegularityOptions, bytes: &mut Vec<u8>) {
     bytes.extend(value.max_stored_degree.to_le_bytes());
     roots(value.roots, bytes);
 }
-pub(super) fn embedding(value: PrismEmbeddingOptions, bytes: &mut Vec<u8>) {
+/// Reuse unchanged requested embedding bytes; `encode_joined_embedding_options(options, bytes)`.
+pub(in crate::sketch_region_prism) fn embedding(value: PrismEmbeddingOptions, bytes: &mut Vec<u8>) {
     bytes.extend(value.version.to_le_bytes());
     regularity(value.regularity, bytes);
 }
