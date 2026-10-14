@@ -16,7 +16,12 @@ use crate::sketch_region_prism::surface_charts::PrismTrimRole;
 pub(crate) use error::*;
 pub(crate) use evaluate::*;
 pub(crate) use evaluation_error::*;
+pub(in crate::sketch_region_prism) use faces::outward_sign as prism_outward_sign;
 use rustycad_tkg3d::top_abs::Orientation;
+pub(in crate::sketch_region_prism) use signs::{
+    determinant_sign as prism_determinant_sign, orientation as signed_prism_orientation,
+};
+pub(in crate::sketch_region_prism) use trims::expected_trim_direction;
 pub(crate) use types::*;
 type OrientationCheck<T> = Result<T, PrismOrientationEvaluationCause>;
 
@@ -101,5 +106,7 @@ fn finalize(
         )
     })
 }
+#[cfg(test)]
+mod shared_sign_tests;
 #[cfg(test)]
 pub(in crate::sketch_region_prism) mod tests;

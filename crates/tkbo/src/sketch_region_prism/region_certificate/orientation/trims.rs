@@ -23,18 +23,28 @@ fn inspect_trim(
     facing: i8,
 ) -> OrientationCheck<PrismTrimOrientation> {
     signs::occurrence_sign(&trim.output)?;
-    let boundary = if face == PrismImageRole::Generated {
-        rectangle_sign(trim.role)
-    } else {
-        native
-    };
-    let expected = signs::orientation(facing * boundary);
+    let expected = expected_trim_direction(face, trim.role, native, facing);
     let actual = require_trim_orientation(trim, expected)?;
     Ok(PrismTrimOrientation {
         authored: trim.clone(),
         actual,
         expected,
     })
+}
+/// Apply the unchanged induced-boundary convention; `expected_trim_direction(face,trim,native,facing)`.
+/// Supplied signs belong to a separately certified material domain; this primitive issues no proof.
+pub(in crate::sketch_region_prism) fn expected_trim_direction(
+    face: PrismImageRole,
+    role: PrismTrimRole,
+    native: i8,
+    facing: i8,
+) -> Orientation {
+    let boundary = if face == PrismImageRole::Generated {
+        rectangle_sign(role)
+    } else {
+        native
+    };
+    signs::orientation(facing * boundary)
 }
 fn require_trim_orientation(
     trim: &PrismAuthoredTrimUse,
