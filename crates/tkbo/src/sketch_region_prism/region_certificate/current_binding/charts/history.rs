@@ -11,20 +11,20 @@ use crate::sketch_region::ArrangementRelation;
 pub(super) fn current_history(
     diagnostic: &PrismDiagnostic,
     copied: &PrismCopiedSelection,
-) -> MeasureCheck {
+) -> PrismBindingCheck {
     require(
         "no unresolved image transport",
         diagnostic.transport_gaps.len(),
         0,
     )?;
     let contexts = body_contexts(&diagnostic.body)
-        .map_err(|cause| PrismMeasureFailure::Body(PrismCompletion::Failed(cause)))?;
+        .map_err(|cause| PrismBindingFailure::Body(PrismCompletion::Failed(cause)))?;
     for binding in &diagnostic.bindings {
         current_binding(binding, &contexts, &copied.relations)?;
     }
     unique_bindings(&diagnostic.bindings)?;
     let expected = output_relations(&diagnostic.body, &diagnostic.bindings)
-        .map_err(|cause| PrismMeasureFailure::Body(PrismCompletion::Failed(cause)))?;
+        .map_err(|cause| PrismBindingFailure::Body(PrismCompletion::Failed(cause)))?;
     relation_bijection(&expected, &diagnostic.relations)?;
     Ok(())
 }
@@ -32,7 +32,7 @@ fn current_binding(
     binding: &PrismImageBinding,
     contexts: &[PrismBodyContext],
     sources: &[ArrangementRelation],
-) -> MeasureCheck {
+) -> PrismBindingCheck {
     current_context(binding, contexts)?;
     let parents: Vec<_> = sources
         .iter()
@@ -41,7 +41,7 @@ fn current_binding(
     require("one copied query parent", parents.len(), 1)?;
     native_parents(&binding.native, parents[0])
 }
-fn native_parents(image: &PrismNativeImage, source: &ArrangementRelation) -> MeasureCheck {
+fn native_parents(image: &PrismNativeImage, source: &ArrangementRelation) -> PrismBindingCheck {
     // Cap copies preserve generated ancestry from the planar face construction.
     let expected = if image.role == PrismImageRole::Generated {
         generated_relation(&image.returned.output, source)
@@ -50,7 +50,10 @@ fn native_parents(image: &PrismNativeImage, source: &ArrangementRelation) -> Mea
     };
     same_relation(&expected, &image.returned)
 }
-fn current_context(binding: &PrismImageBinding, contexts: &[PrismBodyContext]) -> MeasureCheck {
+fn current_context(
+    binding: &PrismImageBinding,
+    contexts: &[PrismBodyContext],
+) -> PrismBindingCheck {
     require(
         "one actual image context",
         contexts
@@ -71,7 +74,7 @@ fn current_context(binding: &PrismImageBinding, contexts: &[PrismBodyContext]) -
     Ok(())
 }
 
-fn unique_bindings(bindings: &[PrismImageBinding]) -> MeasureCheck {
+fn unique_bindings(bindings: &[PrismImageBinding]) -> PrismBindingCheck {
     for binding in bindings {
         let count = bindings
             .iter()
@@ -88,7 +91,7 @@ fn unique_bindings(bindings: &[PrismImageBinding]) -> MeasureCheck {
 fn relation_bijection(
     expected: &[ArrangementRelation],
     actual: &[ArrangementRelation],
-) -> MeasureCheck {
+) -> PrismBindingCheck {
     require(
         "actual body relation coverage",
         actual.len(),
@@ -105,7 +108,7 @@ fn relation_bijection(
     Ok(())
 }
 
-fn same_relation(row: &ArrangementRelation, other: &ArrangementRelation) -> MeasureCheck {
+fn same_relation(row: &ArrangementRelation, other: &ArrangementRelation) -> PrismBindingCheck {
     holds(
         "attributed actual body member",
         !all_parents(row).is_empty(),

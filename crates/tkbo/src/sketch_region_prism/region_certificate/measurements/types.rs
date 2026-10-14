@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
+pub(crate) use super::super::current_binding::BoundPrismChart as MeasuredPrismChart;
 use super::*;
-use crate::sketch_region::{OriginalMemberIdentity, PartitionOccurrenceIdentity};
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub(crate) struct PrismMeasureOptions {
@@ -14,14 +14,6 @@ pub(crate) struct PrismMeasureInspection {
     pub charts: Vec<MeasuredPrismChart>,
     pub measures: PrismMeasureSubset,
     pub pending: [PendingMeasure; 2],
-}
-pub(crate) struct MeasuredPrismChart {
-    pub source: PartitionOccurrenceIdentity,
-    pub output: PartitionOccurrenceIdentity,
-    pub role: PrismImageRole,
-    pub parents: Vec<OriginalMemberIdentity>,
-    pub captured: CapturedSurfaceChart,
-    pub proof: PrismSurfaceProof,
 }
 pub(crate) struct PrismMeasureSubset {
     pub first_cap: CertifiedPolynomialPlaneMeasure,
@@ -68,3 +60,80 @@ impl From<PrismCompletion> for PrismMeasureFailure {
     }
 }
 pub(super) type MeasureCheck<T = ()> = Result<T, PrismMeasureFailure>;
+
+impl From<super::super::current_binding::PrismBindingFailure> for PrismMeasureFailure {
+    fn from(cause: super::super::current_binding::PrismBindingFailure) -> Self {
+        // Structural extraction preserves every previous measurement failure variant.
+        use super::super::current_binding::PrismBindingFailure as Binding;
+        match cause {
+            Binding::Region(cause) => Self::Region(cause),
+            Binding::Classification(cause) => Self::Classification(cause),
+            Binding::Chart(cause) => Self::Chart(cause),
+            Binding::Body(cause) => Self::Body(cause),
+            Binding::Cancelled => Self::Cancelled,
+        }
+    }
+}
+
+#[cfg(test)]
+mod binding_failure_tests {
+    use super::super::super::current_binding::PrismBindingFailure as Binding;
+    use super::*;
+
+    #[test]
+    fn shared_region_failure_keeps_exact_old_payload() {
+        let region = RegionCertificateCause::MissingEvidence {
+            hypothesis: "owned missing",
+        };
+        assert!(matches!(
+            PrismMeasureFailure::from(Binding::from(region)),
+            PrismMeasureFailure::Region(RegionCertificateCause::MissingEvidence {
+                hypothesis: "owned missing"
+            })
+        ));
+    }
+
+    #[test]
+    fn shared_chart_failure_keeps_exact_old_payload() {
+        let chart = PrismSurfaceCause::Count {
+            entity: "owned trim",
+            actual: 3,
+            expected: 4,
+        };
+        assert!(matches!(
+            PrismMeasureFailure::from(Binding::from(chart)),
+            PrismMeasureFailure::Chart(PrismSurfaceCause::Count {
+                entity: "owned trim",
+                actual: 3,
+                expected: 4
+            })
+        ));
+    }
+
+    #[test]
+    fn shared_body_and_cancellation_failures_keep_old_variants() {
+        assert!(matches!(
+            PrismMeasureFailure::from(Binding::from(PrismCompletion::Incomplete)),
+            PrismMeasureFailure::Body(PrismCompletion::Incomplete)
+        ));
+        assert!(matches!(
+            PrismMeasureFailure::from(Binding::Cancelled),
+            PrismMeasureFailure::Cancelled
+        ));
+    }
+
+    #[test]
+    fn shared_classification_failure_keeps_original_phase() {
+        use crate::sketch_region_candidates::CandidatePhase;
+        let cause = Box::new(CandidateCause::Cancelled(CandidatePhase::Capture));
+        let PrismMeasureFailure::Classification(cause) =
+            PrismMeasureFailure::from(Binding::Classification(cause))
+        else {
+            panic!("expected retained classification failure")
+        };
+        assert!(matches!(
+            *cause,
+            CandidateCause::Cancelled(CandidatePhase::Capture)
+        ));
+    }
+}

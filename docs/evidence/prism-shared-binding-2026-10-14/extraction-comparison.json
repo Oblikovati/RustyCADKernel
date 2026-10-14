@@ -1,0 +1,37 @@
+{
+  "baseline_revision": "b8efc36868994706d66d0b0cfd70c1e536a82706",
+  "source_revision": "5685d1c0cd9140e67dd00ea05b5cf01076784d3c",
+  "substitutions": {
+    "MeasureCheck": "PrismBindingCheck",
+    "PrismMeasureFailure": "PrismBindingFailure",
+    "MeasuredPrismChart": "BoundPrismChart",
+    "pub(super) fn poll": "pub(crate) fn poll",
+    "pub(super) fn same_charts": "pub(crate) fn same_charts"
+  },
+  "files": [
+    {
+      "old": "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/binding.rs",
+      "new": "crates/tkbo/src/sketch_region_prism/region_certificate/current_binding/binding.rs",
+      "formatted_exact_match": true,
+      "sha256": "b0a28942fb26e368243dae02e883b798ed43e5fdeadf4d2f246e09f7c9783689"
+    },
+    {
+      "old": "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/charts.rs",
+      "new": "crates/tkbo/src/sketch_region_prism/region_certificate/current_binding/charts.rs",
+      "formatted_exact_match": true,
+      "sha256": "1ca6985e309294d21cca53d9dce27e605519d73b578bbd1e5ede484585e746e6"
+    },
+    {
+      "old": "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/charts/history.rs",
+      "new": "crates/tkbo/src/sketch_region_prism/region_certificate/current_binding/charts/history.rs",
+      "formatted_exact_match": true,
+      "sha256": "d8402d1c2dafa3d675f131f55d1e614b25879dbc528bc32b9e6518ccfb5c3278"
+    },
+    {
+      "old": "crates/tkbo/src/sketch_region_prism/region_certificate/measurements/replay.rs",
+      "new": "crates/tkbo/src/sketch_region_prism/region_certificate/current_binding/replay.rs",
+      "formatted_exact_match": true,
+      "sha256": "b24a0a313dee33f059d08ae5a81a23fa07f949f7c655fe8f98b9d906f78165f3"
+    }
+  ]
+}

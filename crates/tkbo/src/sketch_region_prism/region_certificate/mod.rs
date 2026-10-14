@@ -132,8 +132,11 @@ mod tests;
 #[cfg(test)]
 mod point_tests;
 
+pub(crate) mod current_binding;
 mod measurements;
 #[allow(unused_imports)]
 pub(crate) use measurements::{
     PrismMeasureInspection, PrismMeasureOptions, inspect_prism_measurements,
 };
+#[cfg(test)]
+mod embedding_baseline_tests;

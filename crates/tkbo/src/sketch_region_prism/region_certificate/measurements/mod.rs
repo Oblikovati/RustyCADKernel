@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0027: source-bound scalar subset, separate from body acceptance and publication.
-mod binding;
-mod charts;
-mod replay;
 mod scalars;
 mod types;
 use super::super::surface_charts::*;
+#[cfg(test)]
+use super::current_binding as replay;
+use super::current_binding::*;
 use super::*;
 use rustycad_tkmath::predicates::roots::metric_bounds::*;
 pub(crate) use types::*;
@@ -20,30 +20,27 @@ pub(crate) fn inspect_prism_measurements(
     options: PrismMeasureOptions,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<PrismMeasureInspection, PrismMeasureFailure> {
-    let (region, signed_jacobian) =
-        binding::current_region(bridge, sources, receipt, &mut cancelled)?;
-    let charts = charts::current_charts(receipt, &mut cancelled)?;
-    let measures = scalars::measure_subset(&region, &charts, receipt, options, &mut cancelled)?;
-    binding::poll(&mut cancelled)?;
-    replay::rebind(bridge, sources, receipt, &region, &charts)?;
-    Ok(complete_inspection(
-        region,
-        charts,
-        measures,
-        signed_jacobian,
-    ))
+    let captured = capture_current_prism_binding(bridge, sources, receipt, &mut cancelled)?;
+    let measures = scalars::measure_subset(
+        &captured.region,
+        &captured.charts,
+        receipt,
+        options,
+        &mut cancelled,
+    )?;
+    poll_prism_binding(&mut cancelled)?;
+    rebind_current_prism_binding(bridge, sources, receipt, &captured)?;
+    Ok(complete_inspection(captured, measures))
 }
 fn complete_inspection(
-    region: RegionCertificate,
-    charts: Vec<MeasuredPrismChart>,
+    captured: CurrentPrismBinding,
     measures: PrismMeasureSubset,
-    signed_jacobian: rustycad_tkmath::predicates::roots::DyadicBound,
 ) -> PrismMeasureInspection {
     PrismMeasureInspection {
-        region,
-        charts,
+        region: captured.region,
+        charts: captured.charts,
         measures,
-        signed_jacobian,
+        signed_jacobian: captured.signed_jacobian,
         pending: [PendingMeasure::SideArea, PendingMeasure::TotalArea],
     }
 }
