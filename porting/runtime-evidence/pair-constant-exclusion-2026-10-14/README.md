@@ -39,3 +39,20 @@ verified accepted results with timings_requested=false.
 Canonical archives remain under target/package and the extracted workspace under
 target/pair-constant-proof/extracted until coordinator checks and physical cleanup.
 All commands, archive hashes, source-byte rows and executed logs are retained here.
+
+The independent current performance bundle is
+`/tmp/martensite-bezier-pair-performance-8330828de`, compiled from source833.
+Its unchanged six-case input corpus matches the existing source889 baseline.
+Default execution verifies all six accepted results without requesting timings.
+`current-freeze.json` binds the executable, 47,000-file source manifest, compiler
+profile, raw build and default verification. The copied 32 archives remain
+explicitly attributed to numerically tested source05, not rewritten as source833.
+Source833 additionally contains only the test-only box layout and ADR/evidence.
+
+Current layout reports graph payload304B/prepared graph408B/constant prepared272B,
+proof enum64B/preparation enum16B/retained record432B. Source constructor counts
+(two graph boxes, one constant prepared box) are not measured allocator totals,
+peak RSS, allocation lifetimes, or exclusive attribution of a future comparison.
+The identical accepted baseline/current time+peak-RSS gate is still pending a
+coordinator-controlled quiet interval; no `--measure` execution occurred.
+Both independent bundles remain intentionally retained after tree cleanup.
