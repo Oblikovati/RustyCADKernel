@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Reuse actual capture and exact chart proof; retained scalar bytes must still match.
 use super::super::surface_charts::*;
+use super::bindings::only_bound;
 use super::{
     bindings::{BoundProjection, missing},
     encoding,
@@ -27,7 +28,7 @@ pub(super) fn check_source_snapshot(bound: &BoundProjection<'_>) -> Result<(), P
     })?;
     let fresh = capture_sources(&copied.base)
         .map_err(|cause| PrismFreezeCause::Surface(PrismSurfaceCause::SourceSnapshot(cause)))?;
-    if encoding::sources(old) != encoding::sources(&fresh) {
+    if !same_source_contexts(old, &fresh) || encoding::sources(old) != encoding::sources(&fresh) {
         return Err(PrismFreezeCause::StaleCapture {
             representation: "pre-sweep source coefficients/endpoints",
         });
@@ -37,14 +38,7 @@ pub(super) fn check_source_snapshot(bound: &BoundProjection<'_>) -> Result<(), P
 pub(super) fn capture_faces(
     bound: &BoundProjection<'_>,
 ) -> Result<Vec<FrozenPrismFace>, PrismFreezeCause> {
-    let inspection = bound
-        .diagnostic
-        .surface_charts
-        .as_ref()
-        .ok_or(missing("retained chart inspection"))?;
-    if !inspection.scanned_all_faces || !inspection.uncovered_faces.is_empty() {
-        return Err(missing("complete retained chart coverage"));
-    }
+    let inspection = retained_inspection(bound)?;
     let mut result = Vec::new();
     for (index, context) in bound.contexts.iter().enumerate() {
         if context
@@ -62,10 +56,70 @@ pub(super) fn capture_faces(
     result.sort_by_key(|f| f.key);
     Ok(result)
 }
+fn retained_inspection<'a>(
+    bound: &'a BoundProjection<'_>,
+) -> Result<&'a PrismSurfaceInspection, PrismFreezeCause> {
+    let inspection = bound
+        .diagnostic
+        .surface_charts
+        .as_ref()
+        .ok_or(missing("retained chart inspection"))?;
+    if !inspection.uncovered_faces.is_empty() {
+        return Err(super::admission::unsupported(
+            "present uncovered-face chart diagnostics",
+        ));
+    }
+    if !inspection.scanned_all_faces {
+        return Err(missing("complete retained chart coverage"));
+    }
+    Ok(inspection)
+}
 fn capture_face(
     bound: &BoundProjection<'_>,
     index: usize,
 ) -> Result<FrozenPrismFace, PrismFreezeCause> {
+    let chart = fresh_chart(bound, index)?;
+    check_retained_chart(bound, index, &chart)?;
+    check_chart_domain(&chart)?;
+    let mut proof = PrismSurfaceProof::default();
+    prove_chart(
+        &chart,
+        face_binding(bound, index)?.native.role,
+        &mut || false,
+        &mut proof,
+    )
+    .map_err(PrismFreezeCause::Surface)?;
+    Ok(FrozenPrismFace {
+        key: bound.names[index],
+        source: chart.source,
+        surface: chart.actual,
+        trims: capture_trim_values(bound, index, chart.trims)?,
+        proof,
+    })
+}
+fn fresh_chart(
+    bound: &BoundProjection<'_>,
+    index: usize,
+) -> Result<CapturedSurfaceChart, PrismFreezeCause> {
+    let sources = &bound
+        .receipt
+        .copied
+        .as_ref()
+        .ok_or(missing("pre-sweep source"))?
+        .chart_sources;
+    let extrusion = bound.receipt.limits.requested.extrusion;
+    capture_chart(
+        face_binding(bound, index)?,
+        &bound.diagnostic.bindings,
+        [extrusion.x(), extrusion.y(), extrusion.z()],
+        sources,
+    )
+    .map_err(PrismFreezeCause::Surface)
+}
+fn face_binding<'a>(
+    bound: &'a BoundProjection<'_>,
+    index: usize,
+) -> Result<&'a super::super::PrismImageBinding, PrismFreezeCause> {
     let context = &bound.contexts[index];
     let candidates: Vec<_> = bound
         .diagnostic
@@ -73,46 +127,14 @@ fn capture_face(
         .iter()
         .filter(|b| same_context(&b.context, context))
         .collect();
-    let [binding] = candidates.as_slice() else {
-        return Err(missing("unique current face history"));
-    };
-    let sources = &bound.receipt.copied.as_ref().unwrap().chart_sources;
-    let extrusion = bound.receipt.limits.requested.extrusion;
-    let chart = capture_chart(
-        binding,
-        &bound.diagnostic.bindings,
-        [extrusion.x(), extrusion.y(), extrusion.z()],
-        sources,
-    )
-    .map_err(PrismFreezeCause::Surface)?;
-    check_retained_chart(bound, index, &chart)?;
-    check_chart_domain(&chart)?;
-    let mut proof = PrismSurfaceProof::default();
-    prove_chart(&chart, binding.native.role, &mut || false, &mut proof)
-        .map_err(PrismFreezeCause::Surface)?;
-    let trims = capture_trim_values(bound, index, chart.trims)?;
-    Ok(FrozenPrismFace {
-        key: bound.names[index],
-        surface: chart.actual,
-        trims,
-        proof,
-    })
+    only_bound(&candidates, "unique current face history").copied()
 }
 fn check_retained_chart(
     bound: &BoundProjection<'_>,
     index: usize,
     fresh: &CapturedSurfaceChart,
 ) -> Result<(), PrismFreezeCause> {
-    let key = PartitionOccurrenceIdentity::capture(&bound.contexts[index].occurrence);
-    let inspection = bound.diagnostic.surface_charts.as_ref().unwrap();
-    let found: Vec<_> = inspection
-        .entries
-        .iter()
-        .filter(|e| e.output == key)
-        .collect();
-    let [entry] = found.as_slice() else {
-        return Err(missing("one retained face chart"));
-    };
+    let entry = retained_entry(bound, index)?;
     let old = entry
         .captured
         .as_ref()
@@ -122,12 +144,34 @@ fn check_retained_chart(
             "present retained surface chart failure",
         ));
     }
-    if encoding::chart(old) != encoding::chart(fresh) {
+    if !same_trim_contexts(old, fresh) || encoding::chart(old) != encoding::chart(fresh) {
         return Err(PrismFreezeCause::StaleCapture {
             representation: "retained output surface/trim proof",
         });
     }
     Ok(())
+}
+fn retained_entry<'a>(
+    bound: &'a BoundProjection<'_>,
+    index: usize,
+) -> Result<&'a PrismSurfaceEntry, PrismFreezeCause> {
+    let key = PartitionOccurrenceIdentity::capture(&bound.contexts[index].occurrence);
+    let inspection = retained_inspection(bound)?;
+    let found: Vec<_> = inspection
+        .entries
+        .iter()
+        .filter(|entry| entry.output == key)
+        .collect();
+    let entry = *only_bound(&found, "one retained face chart")?;
+    let binding = face_binding(bound, index)?;
+    if entry.source != PartitionOccurrenceIdentity::capture(&binding.native.query)
+        || entry.role != binding.native.role
+    {
+        return Err(PrismFreezeCause::StaleCapture {
+            representation: "retained face source/history role",
+        });
+    }
+    Ok(entry)
 }
 fn check_chart_domain(chart: &CapturedSurfaceChart) -> Result<(), PrismFreezeCause> {
     if let CapturedPrismSurface::Extrusion { basis, .. } = &chart.actual {
@@ -162,6 +206,10 @@ fn capture_trim_values(
         let occurrence = trim_occurrence(bound, face_index, &trim.output)?;
         result.push(FrozenPrismTrim {
             occurrence,
+            source: super::identities::source_identity_name(bound.bindings, &trim.source)?,
+            parents: super::history::original_keys(bound.bindings, &trim.parents)?,
+            role: trim.role,
+            expected: trim.expected,
             pcurve: trim.pcurve,
             interval: trim.interval,
             space: trim.space,
@@ -185,13 +233,7 @@ fn trim_occurrence(
         })
         .map(|(i, _)| bound.use_names[i].clone())
         .collect();
-    match found.as_slice() {
-        [key] => Ok(key.clone()),
-        _ => Err(PrismFreezeCause::Identity {
-            required: "explicit unique directed trim occurrence",
-            actual: found.len(),
-        }),
-    }
+    only_bound(&found, "explicit unique directed trim occurrence").cloned()
 }
 pub(super) fn capture_nodes(
     bound: &BoundProjection<'_>,
@@ -225,6 +267,7 @@ fn capture_node(
         ShapeEnum::Face => capture_face_tolerance(&mut node, actual)?,
         _ => {}
     }
+    check_node_scalars(&node)?;
     Ok(node)
 }
 fn capture_vertex(
@@ -263,5 +306,42 @@ fn capture_face_tolerance(
         });
     }
     node.tolerance = Some(BRepTool::face_tolerance(&face).map_err(PrismFreezeCause::Native)?);
+    Ok(())
+}
+
+fn same_source_contexts(first: &CapturedPrismSources, second: &CapturedPrismSources) -> bool {
+    first.face == second.face
+        && first.boundaries.len() == second.boundaries.len()
+        && first
+            .boundaries
+            .iter()
+            .zip(&second.boundaries)
+            .all(|(a, b)| a.occurrence == b.occurrence && a.endpoints == b.endpoints)
+}
+fn same_trim_contexts(first: &CapturedSurfaceChart, second: &CapturedSurfaceChart) -> bool {
+    first.trims.len() == second.trims.len()
+        && first.trims.iter().zip(&second.trims).all(|(a, b)| {
+            a.output == b.output
+                && a.source == b.source
+                && a.parents == b.parents
+                && a.role == b.role
+        })
+}
+
+fn check_node_scalars(node: &FrozenPrismNode) -> Result<(), PrismFreezeCause> {
+    for actual in node.point.into_iter().flatten().chain(node.tolerance) {
+        if !actual.is_finite() {
+            return Err(PrismFreezeCause::InvalidScalar {
+                quantity: "finite vertex/tolerance",
+                actual,
+            });
+        }
+    }
+    if let Some(actual) = node.tolerance.filter(|value| *value < 0.) {
+        return Err(PrismFreezeCause::InvalidScalar {
+            quantity: "nonnegative entity tolerance",
+            actual,
+        });
+    }
     Ok(())
 }

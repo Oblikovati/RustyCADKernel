@@ -17,27 +17,13 @@ pub(super) fn bind_projection<'a>(
     bindings: &'a PrismPublicationBindings,
 ) -> Result<BoundProjection<'a>, PrismFreezeCause> {
     admit_identifiers(bindings)?;
-    let diagnostic = receipt
-        .diagnostic
-        .as_ref()
-        .ok_or(missing("diagnostic body"))?;
-    let contexts =
-        body_contexts(&diagnostic.body).map_err(|_| missing("acyclic complete body contexts"))?;
-    let mut bound = BoundProjection {
-        receipt,
-        diagnostic,
-        bindings,
-        contexts,
-        names: Vec::new(),
-        use_names: Vec::new(),
-    };
+    let mut bound = unbound_projection(receipt, bindings)?;
     bound.names = bound
         .contexts
         .iter()
         .map(|c| name_context(&bound, c))
         .collect::<Result<_, _>>()?;
-    check_orientations(&bound)?;
-    check_definition_collisions(&bound)?;
+    check_bound_definitions(&bound)?;
     bound.use_names = bind_uses(&bound)?;
     Ok(bound)
 }
@@ -52,10 +38,7 @@ fn admit_identifiers(bindings: &PrismPublicationBindings) -> Result<(), PrismFre
     ids.extend(bindings.sources.iter().map(|b| b.member));
     ids.extend(bindings.directed.iter().map(|b| b.authored_use));
     if ids.iter().any(|id| id.0 == 0) {
-        return Err(PrismFreezeCause::Identity {
-            required: "nonzero caller-authored identities",
-            actual: 0,
-        });
+        return Err(identity("nonzero caller-authored identities", 0));
     }
     if bindings.sources.is_empty() || bindings.directed.is_empty() || bindings.originals.is_empty()
     {
@@ -68,10 +51,10 @@ fn check_definition_collisions(bound: &BoundProjection<'_>) -> Result<(), PrismF
         let first = &bound.contexts[index].occurrence;
         for (other, name) in bound.names.iter().enumerate().take(index) {
             if key == name && !first.is_same(&bound.contexts[other].occurrence) {
-                return Err(PrismFreezeCause::Identity {
-                    required: "unique definition for authored key and sweep role",
-                    actual: 2,
-                });
+                return Err(identity(
+                    "unique definition for authored key and sweep role",
+                    2,
+                ));
             }
         }
     }
@@ -90,14 +73,7 @@ fn bind_uses(bound: &BoundProjection<'_>) -> Result<Vec<FrozenUseKey>, PrismFree
             bound.bindings.directed[binding].authored_use,
         )?);
     }
-    if consumed.len() != bound.bindings.directed.len()
-        || names.iter().collect::<BTreeSet<_>>().len() != names.len()
-    {
-        return Err(PrismFreezeCause::Identity {
-            required: "exactly one bound key per directed occurrence, no extras/collisions",
-            actual: consumed.len(),
-        });
-    }
+    check_use_coverage(bound, &names, consumed.len())?;
     Ok(names)
 }
 fn direct_binding(
@@ -112,13 +88,11 @@ fn direct_binding(
         .filter(|(_, b)| same_context(&b.actual, context))
         .map(|(i, _)| i)
         .collect();
-    match found.as_slice() {
-        [index] => Ok(*index),
-        _ => Err(PrismFreezeCause::Identity {
-            required: "one authored directed-use binding for actual context",
-            actual: found.len(),
-        }),
-    }
+    only_bound(
+        &found,
+        "one authored directed-use binding for actual context",
+    )
+    .copied()
 }
 fn ancestry_key(
     bound: &BoundProjection<'_>,
@@ -158,4 +132,63 @@ fn check_orientations(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCaus
         }
     }
     Ok(())
+}
+
+pub(super) fn identity(required: &'static str, actual: usize) -> PrismFreezeCause {
+    PrismFreezeCause::Identity { required, actual }
+}
+
+fn unbound_projection<'a>(
+    receipt: &'a PrismReceipt,
+    bindings: &'a PrismPublicationBindings,
+) -> Result<BoundProjection<'a>, PrismFreezeCause> {
+    let diagnostic = receipt
+        .diagnostic
+        .as_ref()
+        .ok_or(missing("diagnostic body"))?;
+    let contexts =
+        body_contexts(&diagnostic.body).map_err(|_| missing("acyclic complete body contexts"))?;
+    let bound = BoundProjection {
+        receipt,
+        diagnostic,
+        bindings,
+        contexts,
+        names: Vec::new(),
+        use_names: Vec::new(),
+    };
+    Ok(bound)
+}
+
+fn check_bound_definitions(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCause> {
+    check_orientations(bound)?;
+    super::source_bindings::check_sources(bound)?;
+    super::source_bindings::check_originals(bound)?;
+    check_definition_collisions(bound)?;
+    Ok(())
+}
+
+fn check_use_coverage(
+    bound: &BoundProjection<'_>,
+    names: &[FrozenUseKey],
+    consumed: usize,
+) -> Result<(), PrismFreezeCause> {
+    if consumed != bound.bindings.directed.len()
+        || names.iter().collect::<BTreeSet<_>>().len() != names.len()
+    {
+        return Err(identity(
+            "exactly one bound key per directed occurrence, no extras/collisions",
+            consumed,
+        ));
+    }
+    Ok(())
+}
+
+pub(super) fn only_bound<'a, T>(
+    values: &'a [T],
+    required: &'static str,
+) -> Result<&'a T, PrismFreezeCause> {
+    match values {
+        [value] => Ok(value),
+        _ => Err(identity(required, values.len())),
+    }
 }

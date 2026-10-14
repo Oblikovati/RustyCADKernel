@@ -11,11 +11,11 @@ use rustycad_tkmath::predicates::roots::{DyadicBound, RootIsolationOptions, metr
 /// Certified bound for exactly captured values, not an ordered whole-body validation pass.
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenEndpointProof {
-    pub(super) edge: FrozenPrismKey,
-    pub(super) vertex: FrozenPrismKey,
-    pub(super) parameter: f64,
-    pub(super) requested_spatial: f64,
-    pub(super) proven_squared_upper: DyadicBound,
+    pub(crate) edge: FrozenPrismKey,
+    pub(crate) vertex: FrozenPrismKey,
+    pub(crate) parameter: f64,
+    pub(crate) requested_spatial: f64,
+    pub(crate) proven_squared_upper: DyadicBound,
 }
 pub(super) fn certify_endpoints(
     nodes: &[FrozenPrismNode],

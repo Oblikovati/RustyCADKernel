@@ -18,6 +18,7 @@ pub(super) fn curve<const D: usize>(value: &CapturedMetricCurve<D>, bytes: &mut 
             numbers(poles.iter().flatten().copied(), bytes);
             bytes.push(u8::from(weights.is_some()));
             if let Some(weights) = weights {
+                bytes.extend((weights.len() as u64).to_le_bytes());
                 numbers(weights.iter().copied(), bytes);
             }
         }
@@ -63,16 +64,7 @@ pub(super) fn surface(value: &CapturedPrismSurface, bytes: &mut Vec<u8>) {
 }
 pub(super) fn chart(value: &CapturedSurfaceChart) -> Vec<u8> {
     let mut bytes = Vec::new();
-    match &value.source {
-        CapturedChartSource::Cap(value) => {
-            bytes.push(0);
-            plane(value, &mut bytes);
-        }
-        CapturedChartSource::Side(value) => {
-            bytes.push(1);
-            space(value, &mut bytes);
-        }
-    }
+    chart_source(&value.source, &mut bytes);
     surface(&value.actual, &mut bytes);
     numbers(value.extrusion, &mut bytes);
     bytes.extend((value.trims.len() as u64).to_le_bytes());
@@ -81,12 +73,27 @@ pub(super) fn chart(value: &CapturedSurfaceChart) -> Vec<u8> {
     }
     bytes
 }
+pub(super) fn chart_source(value: &CapturedChartSource, bytes: &mut Vec<u8>) {
+    match value {
+        CapturedChartSource::Cap(value) => {
+            bytes.push(0);
+            plane(value, bytes);
+        }
+        CapturedChartSource::Side(value) => {
+            bytes.push(1);
+            space(value, bytes);
+        }
+    }
+}
 fn trim_values(value: &CapturedPrismTrim, bytes: &mut Vec<u8>) {
     bytes.push(value.role as u8);
     curve(&value.pcurve, bytes);
     numbers(value.interval, bytes);
     space(&value.space, bytes);
-    match &value.expected {
+    expectation(&value.expected, bytes);
+}
+pub(super) fn expectation(value: &CapturedTrimExpectation, bytes: &mut Vec<u8>) {
+    match value {
         CapturedTrimExpectation::Cap {
             pcurve,
             interval,
@@ -112,6 +119,7 @@ pub(super) fn sources(value: &CapturedPrismSources) -> Vec<u8> {
         space(&boundary.space, &mut bytes);
         curve(&boundary.pcurve, &mut bytes);
         numbers(boundary.interval, &mut bytes);
+        bytes.extend((boundary.endpoints.len() as u64).to_le_bytes());
         numbers(
             boundary.endpoints.iter().map(|(_, parameter)| *parameter),
             &mut bytes,

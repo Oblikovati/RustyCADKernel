@@ -14,33 +14,35 @@ use rustycad_tktopalgo::brep_check::BRepCheckStatus;
 
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenPrismCoverage {
-    pub(super) current: [StageCoverage; 4],
-    pub(super) historical_unbound: [StageCoverage; 4],
-    pub(super) findings: Vec<FrozenValidationFinding>,
-    pub(super) limitations: Vec<FrozenPublicationGap>,
+    pub(crate) current: [StageCoverage; 4],
+    pub(crate) historical_unbound: [StageCoverage; 4],
+    pub(crate) findings: Vec<FrozenValidationFinding>,
+    pub(crate) limitations: Vec<FrozenPublicationGap>,
 }
 #[derive(Clone, Debug)]
 pub(crate) enum FrozenPublicationGap {
     WholeBodyValidationIncomplete,
     HistoricalValidationUnbound,
     SelectionEvidenceNotImported,
+    RejectedSelectionHistoryUnbound,
+    AffineEvidenceNotImported,
     Candidate(crate::sketch_region_candidates::MissingCertificate),
     PrismInjectivityAndSurfaceCharts,
     AchievedErrorUnknown,
 }
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenValidationFinding {
-    pub(super) stage: ValidationStage,
-    pub(super) coverage: StageCoverage,
-    pub(super) cause: FrozenValidationCause,
-    pub(super) affected: FrozenAffectedOccurrence,
-    pub(super) context: Option<FrozenAffectedOccurrence>,
+    pub(crate) stage: ValidationStage,
+    pub(crate) coverage: StageCoverage,
+    pub(crate) cause: FrozenValidationCause,
+    pub(crate) affected: FrozenAffectedOccurrence,
+    pub(crate) context: Option<FrozenAffectedOccurrence>,
 }
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenAffectedOccurrence {
-    pub(super) occurrences: Vec<FrozenUseKey>,
-    pub(super) original_parents: [Vec<FrozenOriginalKey>; 3],
-    pub(super) source_parents: Option<Vec<u64>>,
+    pub(crate) occurrences: Vec<FrozenUseKey>,
+    pub(crate) original_parents: [Vec<FrozenOriginalKey>; 3],
+    pub(crate) source_parents: Option<Vec<u64>>,
 }
 #[derive(Clone, Debug)]
 pub(crate) enum FrozenValidationCause {
@@ -105,6 +107,8 @@ pub(super) fn capture_coverage(
         FrozenPublicationGap::WholeBodyValidationIncomplete,
         FrozenPublicationGap::HistoricalValidationUnbound,
         FrozenPublicationGap::SelectionEvidenceNotImported,
+        FrozenPublicationGap::RejectedSelectionHistoryUnbound,
+        FrozenPublicationGap::AffineEvidenceNotImported,
     ];
     for gap in &bound.receipt.gaps {
         limitations.push(freeze_gap(gap)?);

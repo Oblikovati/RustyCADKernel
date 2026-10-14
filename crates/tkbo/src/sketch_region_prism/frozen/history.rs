@@ -25,6 +25,7 @@ pub(super) fn capture_history(
     let deleted = original_keys(bound.bindings, &bound.receipt.input.input_deleted)?;
     Ok(FrozenPrismHistory {
         originals: capture_originals(bound)?,
+        rejected_unbound: capture_rejected(bound)?,
         derived,
         deleted,
     })
@@ -108,4 +109,39 @@ fn capture_originals(
         ));
     }
     Ok(result)
+}
+
+fn capture_rejected(
+    bound: &BoundProjection<'_>,
+) -> Result<Vec<Vec<FrozenRejectedRelation>>, PrismFreezeCause> {
+    let mut result = Vec::new();
+    for candidate in &bound.receipt.input.rejected {
+        let mut relations = candidate
+            .iter()
+            .map(|row| rejected_relation(bound, row))
+            .collect::<Result<Vec<_>, _>>()?;
+        relations.sort();
+        result.push(relations);
+    }
+    result.sort();
+    Ok(result)
+}
+fn rejected_relation(
+    bound: &BoundProjection<'_>,
+    row: &crate::sketch_region::ArrangementRelation,
+) -> Result<FrozenRejectedRelation, PrismFreezeCause> {
+    let parents = [
+        original_keys(bound.bindings, &row.preserved)?,
+        original_keys(bound.bindings, &row.modified)?,
+        original_keys(bound.bindings, &row.generated)?,
+    ];
+    if parents.iter().all(Vec::is_empty) {
+        return Err(missing(
+            "all original parents for rejected selection relation",
+        ));
+    }
+    Ok(FrozenRejectedRelation {
+        output_kind: row.output.shape_type().map_err(PrismFreezeCause::Native)? as u8,
+        parents,
+    })
 }

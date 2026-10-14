@@ -66,14 +66,7 @@ fn bind_authored_source(
         if bindings.originals.iter().any(|b| b.actual == original) {
             continue;
         }
-        let endpoint = original.orientation != rustycad_tkg3d::top_abs::Orientation::Forward;
-        // Caller-authored source shape is a single closed cubic: its edge and endpoint roles are declared.
-        let is_edge = original.topology_address == source.tshape().object_address().addr();
-        let (member, use_id) = if is_edge {
-            (703, 711)
-        } else {
-            (704, if endpoint { 713 } else { 712 })
-        };
+        let (member, use_id) = authored_original(&original, source);
         bindings.originals.push(PrismOriginalBinding {
             actual: original,
             member: AuthoredPrismId(member),
@@ -162,4 +155,41 @@ fn internal_and_external_body_orientations_are_explicitly_unsupported() {
         }) if actual == orientation)
         );
     }
+}
+
+fn authored_original(
+    original: &crate::sketch_region::OriginalMemberIdentity,
+    source: &rustycad_tkbrep::topods::Shape,
+) -> (u64, u64) {
+    // The fixture authors one closed cubic and one endpoint; identity lookup verifies those roles.
+    if original.topology_address == source.tshape().object_address().addr() {
+        return (703, 711);
+    }
+    let edge = rustycad_tkbrep::topods::edge(source).unwrap();
+    let endpoint = rustycad_tkbrep::topexp::first_vertex(&edge, false);
+    assert_eq!(
+        original.topology_address,
+        endpoint.tshape().object_address().addr()
+    );
+    match original.orientation {
+        rustycad_tkg3d::top_abs::Orientation::Forward => (704, 712),
+        rustycad_tkg3d::top_abs::Orientation::Reversed => (704, 713),
+        actual => panic!("authored endpoint orientation {actual:?}; expected Forward/Reversed"),
+    }
+}
+pub(super) fn captured(result: PrismFreezeOutcome) -> FrozenPrismProjection {
+    match result {
+        PrismFreezeOutcome::Captured(projection) => projection,
+        PrismFreezeOutcome::Incomplete(failure) | PrismFreezeOutcome::Failed(failure) => {
+            panic!("{failure:?}")
+        }
+        PrismFreezeOutcome::Cancelled { phase, .. } => {
+            panic!("unexpected cancellation at {phase:?}")
+        }
+    }
+}
+pub(super) fn fresh_projection() -> FrozenPrismProjection {
+    let (source, receipt) = authored_receipt();
+    let bindings = authored_bindings(&receipt, &source);
+    captured(freeze_prism(&receipt, &bindings, &mut NamedFreezeProgress))
 }

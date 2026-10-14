@@ -10,6 +10,7 @@ mod geometry;
 mod graph;
 mod history;
 mod identities;
+mod source_bindings;
 mod types;
 mod views;
 pub(crate) use capture::freeze_prism;
@@ -19,3 +20,15 @@ mod tests;
 
 #[cfg(test)]
 mod mutation_tests;
+
+#[cfg(test)]
+mod identity_tests;
+#[cfg(test)]
+mod isolation_tests;
+
+#[cfg(test)]
+mod expected_tests;
+#[cfg(test)]
+mod replay_tests;
+#[cfg(test)]
+mod source_mutation_tests;

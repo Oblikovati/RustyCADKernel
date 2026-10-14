@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Addresses match explicit bindings temporarily; none become stable key material.
 use super::super::PrismBodyContext;
+use super::bindings::{identity, missing, only_bound};
 use super::{bindings::BoundProjection, types::*};
 use crate::sketch_region::PartitionOccurrenceIdentity;
 use rustycad_tkbrep::topods::Shape;
@@ -20,10 +21,10 @@ pub(super) fn name_context(
     match names.as_slice() {
         [name] => Ok(*name),
         [] => name_container(bound, actual, kind),
-        _ => Err(PrismFreezeCause::Identity {
-            required: "one source/sweep role per physical definition",
-            actual: names.len(),
-        }),
+        _ => Err(identity(
+            "one source/sweep role per physical definition",
+            names.len(),
+        )),
     }
 }
 fn image_names(
@@ -43,24 +44,26 @@ pub(super) fn source_name(
     bindings: &PrismPublicationBindings,
     source: &Shape,
 ) -> Result<AuthoredPrismId, PrismFreezeCause> {
-    let actual = PartitionOccurrenceIdentity::capture(source);
+    source_identity_name(bindings, &PartitionOccurrenceIdentity::capture(source))
+}
+pub(super) fn source_identity_name(
+    bindings: &PrismPublicationBindings,
+    actual: &PartitionOccurrenceIdentity,
+) -> Result<AuthoredPrismId, PrismFreezeCause> {
     let mut names: Vec<_> = bindings
         .sources
         .iter()
-        .filter(|b| same_definition(&actual, &b.actual))
+        .filter(|b| same_definition(actual, &b.actual))
         .map(|b| b.member)
         .collect();
     names.sort();
     names.dedup();
     match names.as_slice() {
         [name] if name.0 != 0 => Ok(*name),
-        _ => Err(PrismFreezeCause::Identity {
-            required: "one explicit authored source member",
-            actual: names.len(),
-        }),
+        _ => Err(identity("one explicit authored source member", names.len())),
     }
 }
-fn same_definition(
+pub(super) fn same_definition(
     first: &PartitionOccurrenceIdentity,
     second: &PartitionOccurrenceIdentity,
 ) -> bool {
@@ -87,34 +90,24 @@ fn name_container(
     if kind == ShapeEnum::Wire {
         return side_wire_name(bound, actual);
     }
-    if matches!(kind, ShapeEnum::Solid | ShapeEnum::Shell) {
-        let count = bound
-            .contexts
-            .iter()
-            .filter(|c| c.occurrence.shape_type().ok() == Some(kind))
-            .count();
-        if count == 1 {
-            return make_key(
-                bound,
-                bound.bindings.selected_region,
-                FrozenSweepRole::Generated,
-                &actual.occurrence,
-            );
-        }
+    if matches!(kind, ShapeEnum::Solid | ShapeEnum::Shell) && singular_kind(bound, kind) {
+        return make_key(
+            bound,
+            bound.bindings.selected_region,
+            FrozenSweepRole::Generated,
+            &actual.occurrence,
+        );
     }
-    Err(PrismFreezeCause::Identity {
-        required: "unambiguous observed history or singular bounded container",
-        actual: 0,
-    })
+    Err(identity(
+        "unambiguous observed history or singular bounded container",
+        0,
+    ))
 }
 fn side_wire_name(
     bound: &BoundProjection<'_>,
     actual: &PrismBodyContext,
 ) -> Result<FrozenPrismKey, PrismFreezeCause> {
-    let parent = actual.ancestors.last().ok_or(PrismFreezeCause::Missing {
-        required: "wire parent face",
-        actual: 0,
-    })?;
+    let parent = actual.ancestors.last().ok_or(missing("wire parent face"))?;
     let names = image_names(bound, parent)?;
     let count = bound
         .contexts
@@ -122,10 +115,10 @@ fn side_wire_name(
         .filter(|c| c.ancestors.last().is_some_and(|p| p.is_equal(parent)))
         .count();
     if names.len() != 1 || names[0].role != FrozenSweepRole::Generated || count != 1 {
-        return Err(PrismFreezeCause::Identity {
-            required: "one side boundary wire of one generated face",
-            actual: count,
-        });
+        return Err(identity(
+            "one side boundary wire of one generated face",
+            count,
+        ));
     }
     make_key(bound, names[0].source, names[0].role, &actual.occurrence)
 }
@@ -148,15 +141,19 @@ pub(super) fn original_key(
         .iter()
         .filter(|b| &b.actual == actual)
         .collect();
-    let [binding] = found.as_slice() else {
-        return Err(PrismFreezeCause::Identity {
-            required: "one explicit original member/directed-use binding",
-            actual: found.len(),
-        });
-    };
+    let binding = only_bound(&found, "one explicit original member/directed-use binding")?;
     Ok(FrozenOriginalKey {
         source: actual.source.0,
         member: binding.member,
         directed_use: binding.directed_use,
     })
+}
+
+fn singular_kind(bound: &BoundProjection<'_>, kind: ShapeEnum) -> bool {
+    bound
+        .contexts
+        .iter()
+        .filter(|c| c.occurrence.shape_type().ok() == Some(kind))
+        .count()
+        == 1
 }

@@ -14,6 +14,26 @@ impl FrozenPrismProjection {
     pub(crate) fn faces(&self) -> &[FrozenPrismFace] {
         &self.faces
     }
+    /// Borrow typed operation history; example: `projection.history().derived.len()`.
+    pub(crate) fn history(&self) -> &FrozenPrismHistory {
+        &self.history
+    }
+    /// Borrow explicit current gaps and historical observations; example: `projection.coverage().current`.
+    pub(crate) fn coverage(&self) -> &super::coverage::FrozenPrismCoverage {
+        &self.coverage
+    }
+    /// Borrow actual requested/effective settings; example: `projection.limits().achieved_error`.
+    pub(crate) fn limits(&self) -> &FrozenPrismLimits {
+        &self.limits
+    }
+    /// Borrow stable-key graph incidence; example: `projection.incidence().counts`.
+    pub(crate) fn incidence(&self) -> &super::graph::FrozenGraphIncidence {
+        &self.graph
+    }
+    /// Borrow zero-equality certificates over frozen operands; example: `projection.endpoint_proofs().len()`.
+    pub(crate) fn endpoint_proofs(&self) -> &[super::endpoints::FrozenEndpointProof] {
+        &self.endpoints
+    }
     /// No accepted body is produced by this diagnostic Interface; example: `assert!(!projection.is_valid_body())`.
     pub(crate) fn is_valid_body(&self) -> bool {
         false
@@ -68,9 +88,17 @@ fn node_bytes(node: &FrozenPrismNode, bytes: &mut Vec<u8>) {
 }
 fn face_bytes(face: &FrozenPrismFace, bytes: &mut Vec<u8>) {
     bytes.extend(format!("face={:?};proof={:?};", face.key, face.proof).bytes());
+    chart_source(&face.source, bytes);
     surface(&face.surface, bytes);
     for trim in &face.trims {
-        bytes.extend(format!("trim={:?};", trim.occurrence).bytes());
+        bytes.extend(
+            format!(
+                "trim={:?};source={:?};parents={:?};role={:?};",
+                trim.occurrence, trim.source, trim.parents, trim.role
+            )
+            .bytes(),
+        );
+        expectation(&trim.expected, bytes);
         curve(&trim.pcurve, bytes);
         numbers(trim.interval, bytes);
         space(&trim.space, bytes);

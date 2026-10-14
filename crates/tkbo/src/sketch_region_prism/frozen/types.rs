@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
-use super::super::surface_charts::{CapturedPrismSurface, PrismSurfaceCause, PrismSurfaceProof};
+use super::super::surface_charts::{
+    CapturedChartSource, CapturedPrismSurface, CapturedTrimExpectation, PrismSurfaceCause,
+    PrismSurfaceProof, PrismTrimRole,
+};
 use super::super::{PrismBodyContext, PrismImageRole};
 use crate::sketch_region::{OriginalMemberIdentity, PartitionOccurrenceIdentity};
 use crate::sketch_region_geometry_capture::CapturedMetricCurve;
@@ -96,6 +99,10 @@ pub(crate) enum PrismFreezeCause {
         representation: &'static str,
         actual: &'static str,
     },
+    InvalidScalar {
+        quantity: &'static str,
+        actual: f64,
+    },
     UnsupportedOrientation {
         actual: Orientation,
         expected: &'static str,
@@ -139,31 +146,37 @@ pub(crate) struct FrozenPrismProjection {
 }
 #[derive(Clone)]
 pub(crate) struct FrozenPrismNode {
-    pub(super) key: FrozenPrismKey,
-    pub(super) point: Option<[f64; 3]>,
-    pub(super) tolerance: Option<f64>,
-    pub(super) curve: Option<CapturedSpaceRepresentation>,
+    pub(crate) key: FrozenPrismKey,
+    pub(crate) point: Option<[f64; 3]>,
+    pub(crate) tolerance: Option<f64>,
+    pub(crate) curve: Option<CapturedSpaceRepresentation>,
 }
 #[derive(Clone)]
 pub(crate) struct FrozenPrismUse {
-    pub(super) key: FrozenUseKey,
-    pub(super) orientation: Orientation,
-    pub(super) placement: MetricEmbedding<3>,
-    pub(super) children: Vec<FrozenUseKey>,
+    pub(crate) key: FrozenUseKey,
+    pub(crate) orientation: Orientation,
+    pub(crate) placement: MetricEmbedding<3>,
+    pub(crate) children: Vec<FrozenUseKey>,
 }
 #[derive(Clone)]
 pub(crate) struct FrozenPrismFace {
-    pub(super) key: FrozenPrismKey,
-    pub(super) surface: CapturedPrismSurface,
-    pub(super) trims: Vec<FrozenPrismTrim>,
-    pub(super) proof: PrismSurfaceProof,
+    pub(crate) key: FrozenPrismKey,
+    /// Source operands are named by key.source and retained for replay of the exact proof.
+    pub(crate) source: CapturedChartSource,
+    pub(crate) surface: CapturedPrismSurface,
+    pub(crate) trims: Vec<FrozenPrismTrim>,
+    pub(crate) proof: PrismSurfaceProof,
 }
 #[derive(Clone)]
 pub(crate) struct FrozenPrismTrim {
-    pub(super) occurrence: FrozenUseKey,
-    pub(super) pcurve: CapturedMetricCurve<2>,
-    pub(super) interval: [f64; 2],
-    pub(super) space: CapturedSpaceRepresentation,
+    pub(crate) occurrence: FrozenUseKey,
+    pub(crate) source: AuthoredPrismId,
+    pub(crate) parents: Vec<FrozenOriginalKey>,
+    pub(crate) role: PrismTrimRole,
+    pub(crate) expected: CapturedTrimExpectation,
+    pub(crate) pcurve: CapturedMetricCurve<2>,
+    pub(crate) interval: [f64; 2],
+    pub(crate) space: CapturedSpaceRepresentation,
 }
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) struct FrozenOriginalKey {
@@ -173,37 +186,44 @@ pub(crate) struct FrozenOriginalKey {
 }
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenPrismHistory {
-    pub(super) originals: Vec<FrozenOriginalOccurrence>,
-    pub(super) derived: Vec<FrozenDerivedRelation>,
-    pub(super) deleted: Vec<FrozenOriginalKey>,
+    pub(crate) originals: Vec<FrozenOriginalOccurrence>,
+    pub(crate) rejected_unbound: Vec<Vec<FrozenRejectedRelation>>,
+    pub(crate) derived: Vec<FrozenDerivedRelation>,
+    pub(crate) deleted: Vec<FrozenOriginalKey>,
 }
 #[derive(Clone)]
 pub(crate) struct FrozenOriginalOccurrence {
-    pub(super) key: FrozenOriginalKey,
-    pub(super) orientation: Orientation,
-    pub(super) placement: MetricEmbedding<3>,
+    pub(crate) key: FrozenOriginalKey,
+    pub(crate) orientation: Orientation,
+    pub(crate) placement: MetricEmbedding<3>,
+}
+/// Rejected selection provenance has no invented output identity or retained geometry owner.
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) struct FrozenRejectedRelation {
+    pub(crate) output_kind: u8,
+    pub(crate) parents: [Vec<FrozenOriginalKey>; 3],
 }
 /// All original parents are retained; the mapped class is provenance of derivation.
 #[derive(Clone, Debug)]
 pub(crate) struct FrozenDerivedRelation {
-    pub(super) output: FrozenUseKey,
-    pub(super) preserved: Vec<FrozenOriginalKey>,
-    pub(super) modified: Vec<FrozenOriginalKey>,
-    pub(super) generated: Vec<FrozenOriginalKey>,
+    pub(crate) output: FrozenUseKey,
+    pub(crate) preserved: Vec<FrozenOriginalKey>,
+    pub(crate) modified: Vec<FrozenOriginalKey>,
+    pub(crate) generated: Vec<FrozenOriginalKey>,
 }
 #[derive(Clone, Copy)]
 pub(crate) struct FrozenPrismLimits {
-    pub(super) seed: [f64; 2],
-    pub(super) extrusion: [f64; 3],
-    pub(super) roots: RootIsolationOptions,
-    pub(super) spatial_limit: f64,
-    pub(super) parameter_limit: f64,
-    pub(super) effective_seed: Option<[f64; 2]>,
-    pub(super) effective_extrusion: Option<[f64; 3]>,
-    pub(super) effective_roots: Option<RootIsolationOptions>,
-    pub(super) effective_spatial: Option<f64>,
-    pub(super) effective_parameter: Option<f64>,
-    pub(super) achieved_error: Option<f64>,
+    pub(crate) seed: [f64; 2],
+    pub(crate) extrusion: [f64; 3],
+    pub(crate) roots: RootIsolationOptions,
+    pub(crate) spatial_limit: f64,
+    pub(crate) parameter_limit: f64,
+    pub(crate) effective_seed: Option<[f64; 2]>,
+    pub(crate) effective_extrusion: Option<[f64; 3]>,
+    pub(crate) effective_roots: Option<RootIsolationOptions>,
+    pub(crate) effective_spatial: Option<f64>,
+    pub(crate) effective_parameter: Option<f64>,
+    pub(crate) achieved_error: Option<f64>,
 }
 impl From<PrismImageRole> for FrozenSweepRole {
     fn from(role: PrismImageRole) -> Self {
