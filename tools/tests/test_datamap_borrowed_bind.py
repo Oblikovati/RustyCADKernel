@@ -9,6 +9,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
 from normalize_rustdoc_inventory import make_reachable_inventory
+from tkernel_d1_review import kept_partial_rows, review_outcome
+
+# Rows the 2026-10-15 D1 review kept partial (class-A gaps).
+D1_KEPT = kept_partial_rows(ROOT)
 
 SELECTOR = "NCollection_DataMap::Bind(const TheKeyType&,const TheItemType&)"
 CPP_ID = "a5f48fb286110250b400b7c10f88e6e51ac50f96f25230b85c37f876df86ac12"
@@ -21,7 +25,7 @@ class DataMapBorrowedBindMappingTest(unittest.TestCase):
         rows = [row for row in parity["api"] if row["upstream_id"] == SELECTOR]
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["rust_item"], RUST_TARGET)
-        self.assertEqual(rows[0]["status"], "partial")
+        self.assertEqual(review_outcome(rows[0], D1_KEPT), "implemented")
         self.assertEqual(len(read_cpp_rows(CPP_ID)), 1)
         self.assertEqual(len(read_rust_rows(RUST_TARGET)), 1)
 

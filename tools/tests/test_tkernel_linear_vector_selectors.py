@@ -55,7 +55,9 @@ EXPECTED = {
         "ae297df4aa7a28d7067bd7ea4cc3906b3f33dcc614e57363c7d6f9ad97381b06",
         "type-parameter-0-0 &(type-parameter-1-0 &&...)",
         "rustycad_tkernel::ncollection::LinearVector::emplace_append",
-        "partial",
+        # Implemented since the 2026-10-15 D1 review: only std::move_if_noexcept relocation
+        # (class B2) was left open.
+        "implemented",
     ),
 }
 

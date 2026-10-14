@@ -10,8 +10,11 @@ from pathlib import Path
 
 from api_crosswalk import cpp_candidates, cpp_indexes, header_owners
 from normalize_rustdoc_inventory import make_reachable_inventory
+from tkernel_d1_review import kept_partial_rows, review_outcome
 
 ROOT = Path(__file__).resolve().parents[2]
+# Rows the 2026-10-15 D1 review kept partial (class-A gaps).
+D1_KEPT = kept_partial_rows(ROOT)
 PREFIX = "rustycad_tkernel::ncollection::Map::"
 
 
@@ -39,7 +42,7 @@ class MapBorrowedInsertionBindingsTest(unittest.TestCase):
             self.assertEqual(status, "unique", selector)
             self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
             self.assertEqual(self.rows[selector]["rust_item"], binding["rust_item"])
-            self.assertEqual(self.rows[selector]["status"], "partial")
+            self.assertEqual(review_outcome(self.rows[selector], D1_KEPT), "implemented")
 
     def test_compiled_adapters_are_public_and_match_the_current_source(self) -> None:
         capture = ROOT / "porting/runtime-evidence/map-borrowed-add-rustdoc.json.gz"
