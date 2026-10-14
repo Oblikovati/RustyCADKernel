@@ -181,3 +181,53 @@ fn assert_blocked_after_topology(report: &crate::sketch_region_validation::Order
     assert_eq!(report.tolerance, StageCoverage::Blocked);
     assert_eq!(report.findings.len(), 1);
 }
+
+#[test]
+fn every_postselection_stop_retains_selected_and_completed_copy_history() {
+    for phase in [
+        PrismPhase::Copy,
+        PrismPhase::Sweep,
+        PrismPhase::History,
+        PrismPhase::Validation,
+    ] {
+        let result = cubic_receipt([1., 1.], &mut progress(Some(phase), None));
+        assert_postselection_history(&result, phase);
+        let failed = cubic_receipt([1., 1.], &mut progress(None, Some(phase)));
+        assert_postselection_history(&failed, phase);
+    }
+}
+fn assert_postselection_history(result: &PrismReceipt, phase: PrismPhase) {
+    let selected = result
+        .input
+        .selected
+        .as_ref()
+        .expect("selected occurrence retained before copy");
+    assert!(!selected.relations.is_empty());
+    assert_eq!(result.input.rejected.len(), 1);
+    if phase == PrismPhase::Copy {
+        assert!(result.copied.is_none());
+        return;
+    }
+    let copied = result
+        .copied
+        .as_ref()
+        .expect("completed isolated copy retained before sweep");
+    assert!(!copied.base.is_same(&selected.face));
+    assert_eq!(copied.relations.len(), selected.relations.len());
+    assert_copy_parent_kinds(&selected.relations, &copied.relations);
+}
+
+fn assert_copy_parent_kinds(before: &[ArrangementRelation], after: &[ArrangementRelation]) {
+    for (original, copied) in before.iter().zip(after) {
+        assert_eq!(copied.generated, original.generated);
+        assert_eq!(
+            copied.modified,
+            original
+                .preserved
+                .iter()
+                .chain(&original.modified)
+                .cloned()
+                .collect::<Vec<_>>()
+        );
+    }
+}

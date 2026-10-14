@@ -26,10 +26,12 @@ fn initial_receipt(batch: &CandidateBatch, requested: PrismRequest) -> PrismRece
         phase: PrismPhase::Admission,
         limits: PrismLimits {
             requested,
-            effective: requested,
+            effective: PrismAppliedSettings::default(),
             achieved_error: None,
         },
         classification: None,
+        cancelled_query: None,
+        copied: None,
         input: initial_history(batch),
         diagnostic: None,
         gaps: vec![
@@ -50,6 +52,8 @@ fn initial_history(batch: &CandidateBatch) -> PrismInputHistory {
         input_deleted: batch.input_deleted.clone(),
         unrepresented: batch.unrepresented.clone(),
         report,
+        selected: None,
+        declared_plane: batch.plane,
     }
 }
 fn execute(
@@ -60,53 +64,70 @@ fn execute(
     checkpoint(receipt, progress, PrismPhase::Admission)?;
     admit_request(&receipt.limits.requested).map_err(PrismCompletion::Failed)?;
     checkpoint(receipt, progress, PrismPhase::Selection)?;
-    let selected = select_batch(batch, receipt, progress)?;
+    select_batch(batch, receipt, progress)?;
     checkpoint(receipt, progress, PrismPhase::Copy)?;
-    let (base, parents) = copied_selection(&selected).map_err(PrismCompletion::Failed)?;
-    sweep(base, parents, receipt, progress)
+    retain_copy(receipt)?;
+    sweep(receipt, progress)
 }
 fn select_batch(
     mut batch: CandidateBatch,
     receipt: &mut PrismReceipt,
     progress: &mut dyn PrismProgress,
-) -> Result<RegionCandidate, PrismCompletion> {
-    let classified = classify_progress(&batch, receipt.limits.requested, progress);
+) -> Result<(), PrismCompletion> {
+    receipt.limits.effective.seed = Some(receipt.limits.requested.seed);
+    receipt.limits.effective.roots = Some(receipt.limits.requested.roots);
+    let classified = classify_progress(&batch, receipt, progress);
     receipt.input.unrepresented = std::mem::take(&mut batch.unrepresented);
     if !receipt.input.unrepresented.is_empty() {
         receipt.gaps.push(PrismGap::UnrepresentedInput);
     }
-    let index = classified
-        .map_err(PrismCompletion::Failed)
-        .and_then(|result| retain_classification(result, receipt));
-    let selected = index.map(|index| batch.candidates.remove(index));
+    let index = classified.and_then(|result| retain_classification(result, receipt));
+    let selected = index.map(|index| {
+        receipt.input.selected = Some(batch.candidates.remove(index));
+    });
     retain_rejected(batch, receipt);
     selected
 }
 fn classify_progress(
     batch: &CandidateBatch,
-    request: PrismRequest,
+    receipt: &mut PrismReceipt,
     progress: &mut dyn PrismProgress,
-) -> Result<CandidateClassification, PrismCause> {
+) -> Result<CandidateClassification, PrismCompletion> {
+    let request = receipt.limits.requested;
     let mut failure = None;
+    let mut stopped = false;
     let result = classify_candidates(batch, request.seed, request.roots, || {
-        match progress.checkpoint(PrismPhase::Selection) {
-            Ok(stop) => stop,
-            Err(cause) => {
-                failure = Some(cause);
-                true
-            }
-        }
+        poll_selection(progress, &mut failure, &mut stopped)
     });
-    result.map_err(|query| classification_failure(query, failure))
+    result.map_err(|query| classification_failure(query, failure, stopped, receipt))
 }
 fn classification_failure(
     query: CandidateCause,
     failure: Option<rustycad_tkernel::standard::Failure>,
-) -> PrismCause {
-    match failure {
-        Some(failure) => PrismCause::ClassificationProgress { failure, query },
-        None => PrismCause::Classification(query),
+    stopped: bool,
+    receipt: &mut PrismReceipt,
+) -> PrismCompletion {
+    if let Some(failure) = failure {
+        return PrismCompletion::Failed(PrismCause::ClassificationProgress {
+            failure: Box::new(failure),
+            query: Box::new(query),
+        });
     }
+    if stopped {
+        receipt.cancelled_query = Some(Box::new(query));
+        return PrismCompletion::Cancelled(PrismPhase::Selection);
+    }
+    PrismCompletion::Failed(PrismCause::Classification(Box::new(query)))
+}
+fn retain_copy(receipt: &mut PrismReceipt) -> Result<(), PrismCompletion> {
+    let selected = receipt
+        .input
+        .selected
+        .as_ref()
+        .expect("unique selected candidate retained");
+    let (base, relations) = copied_selection(selected).map_err(PrismCompletion::Failed)?;
+    receipt.copied = Some(PrismCopiedSelection { base, relations });
+    Ok(())
 }
 fn retain_rejected(batch: CandidateBatch, receipt: &mut PrismReceipt) {
     receipt.input.rejected = batch
@@ -133,20 +154,20 @@ fn retain_classification(
     }
 }
 fn sweep(
-    base: rustycad_tkbrep::topods::Shape,
-    parents: Vec<crate::sketch_region::ArrangementRelation>,
     receipt: &mut PrismReceipt,
     progress: &mut dyn PrismProgress,
 ) -> Result<(), PrismCompletion> {
     checkpoint(receipt, progress, PrismPhase::Sweep)?;
+    receipt.limits.effective.extrusion = Some(receipt.limits.requested.extrusion);
+    let copied = receipt
+        .copied
+        .as_ref()
+        .expect("completed deep copy retained");
     // Owned base precedes sweep; copy=false avoids an unobserved second geometry copy.
-    let mut maker =
-        BRepPrimAPIMakePrism::new(&base, receipt.limits.requested.extrusion, false, true)
-            .map_err(|failure| PrismCompletion::Failed(mapped(PrismPhase::Sweep, failure)))?;
+    let mut maker = construct_prism(&copied.base, receipt.limits.requested.extrusion)?;
     retain_body(&mut maker, receipt)?;
     checkpoint(receipt, progress, PrismPhase::History)?;
-    receipt.diagnostic =
-        Some(observe_sweep(&mut maker, &parents).map_err(PrismCompletion::Failed)?);
+    retain_history(&mut maker, receipt)?;
     capture_coverage_gaps(receipt);
     checkpoint(receipt, progress, PrismPhase::Validation)?;
     inspect_output(receipt);
@@ -162,6 +183,8 @@ fn retain_body(
         .clone();
     receipt.diagnostic = Some(PrismDiagnostic {
         body,
+        bindings: Vec::new(),
+        transport_gaps: Vec::new(),
         relations: Vec::new(),
         native_retired: Vec::new(),
         coverage: None,
@@ -183,6 +206,7 @@ fn capture_coverage_gaps(receipt: &mut PrismReceipt) {
         }
     }
 }
+/// Retain ordered validation without success promotion; `inspect_output(&mut receipt)`.
 pub(super) fn inspect_output(receipt: &mut PrismReceipt) {
     let Some(diagnostic) = receipt.diagnostic.as_mut() else {
         return;
@@ -244,4 +268,41 @@ fn failed_stage(
     ]
     .into_iter()
     .find_map(|(status, stage)| (status == StageCoverage::Failed).then_some(stage))
+}
+
+fn construct_prism(
+    base: &rustycad_tkbrep::topods::Shape,
+    extrusion: rustycad_tkmath::gp::Vector3,
+) -> Result<BRepPrimAPIMakePrism, PrismCompletion> {
+    BRepPrimAPIMakePrism::new(base, extrusion, false, true)
+        .map_err(|failure| PrismCompletion::Failed(mapped(PrismPhase::Sweep, failure)))
+}
+fn retain_history(
+    maker: &mut BRepPrimAPIMakePrism,
+    receipt: &mut PrismReceipt,
+) -> Result<(), PrismCompletion> {
+    let parents = &receipt
+        .copied
+        .as_ref()
+        .expect("completed copy retained")
+        .relations;
+    receipt.diagnostic = Some(observe_sweep(maker, parents).map_err(PrismCompletion::Failed)?);
+    Ok(())
+}
+
+fn poll_selection(
+    progress: &mut dyn PrismProgress,
+    failure: &mut Option<rustycad_tkernel::standard::Failure>,
+    stopped: &mut bool,
+) -> bool {
+    match progress.checkpoint(PrismPhase::Selection) {
+        Ok(stop) => {
+            *stopped |= stop;
+            stop
+        }
+        Err(cause) => {
+            *failure = Some(cause);
+            true
+        }
+    }
 }

@@ -5,6 +5,7 @@ use crate::sketch_region::{ArrangementRelation, equal_occurrences};
 use crate::sketch_region_candidates::{RegionCandidate, composed_copy_relation};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPICopy, BRepBuilderAPIMakeShape};
+/// Own selected geometry before sweep; `copied_selection(&candidate)` never proves final validity.
 pub(super) fn copied_selection(
     candidate: &RegionCandidate,
 ) -> Result<(Shape, Vec<ArrangementRelation>), PrismCause> {
@@ -40,6 +41,7 @@ fn copy_relation(
         .oriented(relation.output.orientation());
     Ok(composed_copy_relation(relation, &image))
 }
+/// Preserve the original mapped cause at its phase; `mapped(PrismPhase::Copy, failure)`.
 pub(super) fn mapped(
     phase: PrismPhase,
     failure: rustycad_tkernel::standard::Failure,

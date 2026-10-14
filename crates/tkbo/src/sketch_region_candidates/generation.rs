@@ -113,6 +113,7 @@ fn poll(
     Ok(())
 }
 
+/// Keep original generated ancestry through an actual copy image; `composed_copy_relation(&relation, &image)`.
 pub(crate) fn composed_copy_relation(
     relation: &crate::sketch_region::ArrangementRelation,
     copied: &Shape,

@@ -9,14 +9,7 @@
 #include <TopTools_ShapeMapHasher.hxx>
 #include <TopoDS.hxx>
 #include <iostream>
-static TopoDS_Face Rectangle()
-{
-  BRepBuilderAPI_MakePolygon polygon;
-  polygon.Add(gp_Pnt(0,0,0)); polygon.Add(gp_Pnt(4,0,0));
-  polygon.Add(gp_Pnt(4,3,0)); polygon.Add(gp_Pnt(0,3,0));
-  polygon.Close();
-  return BRepBuilderAPI_MakeFace(polygon.Wire()).Face();
-}
+#include "martensite_prism_fixture.hxx"
 static void CaptureBase(BRepPrimAPI_MakePrism& maker,const TopoDS_Shape& base,int index)
 {
   // Copy the reusable native generated list before another history query can overwrite it.

@@ -88,6 +88,7 @@ fn descendant_parents(
     parents.sort_by_key(|key| key.source);
     Ok(parents)
 }
+/// Deduplicate full member keys in stable traversal order; `append_unique(&mut parents, &incoming)`.
 pub(crate) fn append_unique(
     parents: &mut Vec<OriginalMemberIdentity>,
     candidates: &[OriginalMemberIdentity],

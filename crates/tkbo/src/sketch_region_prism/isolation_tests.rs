@@ -229,7 +229,7 @@ fn mutate_candidate(
 ) {
     set_pole(&edge(source).unwrap(), 8.);
     set_pole(original, 9.);
-    candidate.set_closed(!cap.closed().unwrap());
+    candidate.set_closed(!cap.closed().unwrap()).unwrap();
     change_mesh(original_mesh, 9.);
 }
 fn assert_original_changed_node(original_mesh: &Handle<Triangulation>) {

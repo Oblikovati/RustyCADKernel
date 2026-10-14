@@ -66,11 +66,11 @@ fn exhausted_classifier_keeps_original_typed_query_and_actual_work() {
     let mut options = request([1., 1.]);
     options.roots.max_bisections = 1;
     let result = retain_selected_prism(candidates(&[source]), options, &mut progress(None, None));
-    let PrismCompletion::Failed(PrismCause::Classification(CandidateCause::CapturedOperation(
-        failure,
-    ))) = result.completion
-    else {
-        panic!("expected retained original captured query failure");
+    let PrismCompletion::Failed(PrismCause::Classification(query)) = result.completion else {
+        panic!("expected original query failure");
+    };
+    let CandidateCause::CapturedOperation(failure) = *query else {
+        panic!("expected captured query prefix");
     };
     assert_eq!(failure.retained.work.operation_bisections, 1);
     assert!(matches!(
@@ -87,13 +87,11 @@ fn terminal_receipt_keeps_requested_limits_and_exact_numeric_capture() {
     } = result.classification.unwrap();
     assert_eq!(captured.work.reused_certificates, 1);
     assert_eq!(
-        result.limits.requested.spatial_limit,
-        result.limits.effective.spatial_limit
+        result.limits.effective.roots,
+        Some(result.limits.requested.roots)
     );
-    assert_eq!(
-        result.limits.requested.parameter_limit,
-        result.limits.effective.parameter_limit
-    );
+    assert!(result.limits.effective.spatial_limit.is_none());
+    assert!(result.limits.effective.parameter_limit.is_none());
     assert!(missing.contains(&MissingCertificate::Construction));
     assert!(missing.contains(&MissingCertificate::SelfIntersection));
     assert!(missing.contains(&MissingCertificate::Tolerance));

@@ -12,7 +12,7 @@ use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism;
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPICopy, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
 };
-fn rectangle_face() -> Shape {
+pub(super) fn rectangle_face() -> Shape {
     let mut wire = BRepBuilderAPIMakeWire::new();
     for shape in rectangle(0., 0., 4., 3.) {
         wire.add_edge(&edge(&shape).unwrap()).unwrap();

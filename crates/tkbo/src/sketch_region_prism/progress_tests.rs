@@ -36,7 +36,7 @@ fn actual_solver_progress_failure_keeps_original_failure_and_query_prefix() {
     };
     assert_eq!(failure.exception_type(), "Standard_DomainError");
     assert_eq!(observer.selection_polls, 5);
-    assert!(matches!(query, CandidateCause::CapturedOperation(_)));
+    assert!(matches!(*query, CandidateCause::CapturedOperation(_)));
     assert!(result.diagnostic.is_none());
 }
 #[test]
@@ -65,4 +65,36 @@ fn assert_invalid_limit(result: PrismReceipt, quantity: &str) {
     };
     assert_eq!(actual, quantity);
     assert_eq!(values, vec![-1.]);
+}
+
+struct NamedSolverStop {
+    polls: usize,
+    stop_at: usize,
+}
+impl PrismProgress for NamedSolverStop {
+    fn checkpoint(&mut self, phase: PrismPhase) -> Result<bool, Failure> {
+        if phase == PrismPhase::Selection {
+            self.polls += 1;
+        }
+        Ok(phase == PrismPhase::Selection && self.polls == self.stop_at)
+    }
+}
+#[test]
+fn actual_solver_stop_is_cancelled_with_retained_query_work_not_failed() {
+    let source = crate::closed_analytic_cubic::closed_analytic_cubic(1., false);
+    let mut progress = NamedSolverStop {
+        polls: 0,
+        stop_at: 5,
+    };
+    let result = retain_selected_prism(candidates(&[source]), request([1., 1.]), &mut progress);
+    assert!(matches!(
+        result.completion,
+        PrismCompletion::Cancelled(PrismPhase::Selection)
+    ));
+    assert!(matches!(
+        *result.cancelled_query.unwrap(),
+        CandidateCause::CapturedOperation(_)
+    ));
+    assert_eq!(progress.polls, 5);
+    assert!(result.diagnostic.is_none());
 }
