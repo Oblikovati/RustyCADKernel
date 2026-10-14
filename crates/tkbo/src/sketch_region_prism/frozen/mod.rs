@@ -64,3 +64,5 @@ pub(crate) mod lineage;
 mod traversal;
 #[cfg(test)]
 mod traversal_tests;
+
+pub(crate) mod joined_orientation;
