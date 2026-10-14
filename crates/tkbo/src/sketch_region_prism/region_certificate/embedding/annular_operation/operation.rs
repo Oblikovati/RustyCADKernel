@@ -3,7 +3,7 @@ use super::*;
 
 /// Rebind and compose actual evidence; `inspect_bound_annular_embedding(request,receipt,binding,options,cancel)`.
 /// All success operands are owned; current native source aliases are needed only during this call.
-pub(in super::super) fn inspect_bound_annular_embedding<'a>(
+pub(in crate::sketch_region_prism) fn inspect_bound_annular_embedding<'a>(
     request: &TwoLoopRegionRequest<'a, '_>,
     receipt: &PrismReceipt,
     binding: AnnularPrismBinding,

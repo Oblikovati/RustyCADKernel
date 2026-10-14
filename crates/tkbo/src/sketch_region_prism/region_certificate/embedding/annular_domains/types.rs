@@ -2,12 +2,12 @@
 use super::*;
 
 #[derive(Clone, Debug, PartialEq)]
-pub(in super::super) struct AnnularAuthoredTrim {
+pub(in crate::sketch_region_prism) struct AnnularAuthoredTrim {
     pub identity: AnnularTrimIdentity,
     pub operand: PrismAuthoredTrimUse,
 }
 #[derive(Clone, Debug, PartialEq)]
-pub(in super::super) enum AnnularDomainKind {
+pub(in crate::sketch_region_prism) enum AnnularDomainKind {
     Cap {
         region: u64,
         outer: RegionSourceId,
@@ -24,12 +24,12 @@ pub(in super::super) enum AnnularDomainKind {
     },
 }
 #[derive(Clone, Debug, PartialEq)]
-pub(in super::super) struct AnnularFaceDomain {
+pub(in crate::sketch_region_prism) struct AnnularFaceDomain {
     pub identity: AnnularChartIdentity,
     pub kind: AnnularDomainKind,
     pub trims: Vec<AnnularAuthoredTrim>,
 }
-pub(in super::super) struct AnnularDomains {
+pub(in crate::sketch_region_prism) struct AnnularDomains {
     pub first: AnnularFaceDomain,
     pub last: AnnularFaceDomain,
     pub outer: AnnularFaceDomain,

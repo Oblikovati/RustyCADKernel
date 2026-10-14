@@ -12,7 +12,7 @@ use super::{PrismAuthoredTrimUse, PrismImageRole, PrismTrimRole, trim_incidence}
 use crate::sketch_region::{RegionObservedContext, RegionSourceId};
 pub(super) use capture::capture_annular_domains;
 pub(super) use regularity_sources::bound_regularity_operands;
-pub(super) use types::*;
+pub(in crate::sketch_region_prism) use types::*;
 
 #[cfg(test)]
 mod refusal_tests;

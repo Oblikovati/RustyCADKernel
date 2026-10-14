@@ -44,14 +44,14 @@ fn actual_entry_composes_owned_domains_without_promoting_legacy_body_completion(
         ));
         evidence
     });
-    assert_eq!(evidence.requested, options());
-    assert_eq!(evidence.regularity.boundaries.len(), 2);
-    assert_eq!(evidence.incidences.len(), 10);
-    assert_eq!(evidence.domains.first.trims.len(), 2);
-    assert_eq!(evidence.binding.region().selected_candidate_id(), 301);
+    assert_eq!(evidence.requested(), options());
+    assert_eq!(evidence.regularity().boundaries.len(), 2);
+    assert_eq!(evidence.incidences().len(), 10);
+    assert_eq!(evidence.domains().first.trims.len(), 2);
+    assert_eq!(evidence.binding().region().selected_candidate_id(), 301);
     assert!(
         evidence
-            .binding
+            .binding()
             .signed_jacobian()
             .compare_f64(2.)
             .unwrap()
@@ -82,5 +82,24 @@ fn unsupported_version_refuses_before_cancellation_callback_and_keeps_request() 
                 expected: 2
             }
         ));
+    });
+}
+
+#[test]
+fn callback_free_embedding_rebind_detects_source_change() {
+    with_actual(|request, region, receipt| {
+        let bound = binding(request, region, receipt);
+        let evidence =
+            inspect_bound_annular_embedding(request, receipt, bound, options(), || false)
+                .unwrap_or_else(|_| panic!("actual annular embedding"));
+        assert!(rebind_bound_annular_embedding(request, receipt, &evidence).is_ok());
+        let edge = rustycad_tkbrep::topods::edge(request.sources[0].shape).unwrap();
+        crate::sketch_region_prism::isolation_tests::set_pole(&edge, 5.);
+        let failure = rebind_bound_annular_embedding(request, receipt, &evidence)
+            .err()
+            .unwrap();
+        assert_eq!(failure.phase, AnnularEmbeddingPhase::CurrentBinding);
+        assert_eq!(failure.requested, evidence.requested());
+        assert!(matches!(failure.cause, AnnularEmbeddingCause::Binding(_)));
     });
 }

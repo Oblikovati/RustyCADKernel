@@ -2,19 +2,19 @@
 use super::*;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
-pub(in super::super) struct AnnularEmbeddingOptions {
+pub(in crate::sketch_region_prism) struct AnnularEmbeddingOptions {
     pub version: u32,
     pub regularity: AnnularRegularityOptions,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(in super::super) enum AnnularEmbeddingPhase {
+pub(in crate::sketch_region_prism) enum AnnularEmbeddingPhase {
     Admission,
     CurrentBinding,
     Regularity,
     Incidences,
     Commit,
 }
-pub(in super::super) enum AnnularEmbeddingCause<'a> {
+pub(in crate::sketch_region_prism) enum AnnularEmbeddingCause<'a> {
     Version { actual: u32, expected: u32 },
     Binding(Box<AnnularBindingFailure<'a>>),
     Operands(RegionHypothesisCause),
@@ -22,14 +22,14 @@ pub(in super::super) enum AnnularEmbeddingCause<'a> {
     Coverage(AnnularPairCoverageFailure<AnnularChartIdentity>),
     Cancelled,
 }
-pub(in super::super) struct AnnularEmbeddingFailure<'a> {
+pub(in crate::sketch_region_prism) struct AnnularEmbeddingFailure<'a> {
     pub operation: u64,
     pub selected_candidate: u64,
     pub phase: AnnularEmbeddingPhase,
     pub requested: AnnularEmbeddingOptions,
     pub cause: AnnularEmbeddingCause<'a>,
 }
-pub(in super::super) struct AnnularEmbeddingEvidence {
+pub(in crate::sketch_region_prism) struct AnnularEmbeddingEvidence {
     pub(super) requested: AnnularEmbeddingOptions,
     pub(super) binding: AnnularPrismBinding,
     pub(super) regularity: AnnularRegularityReport,

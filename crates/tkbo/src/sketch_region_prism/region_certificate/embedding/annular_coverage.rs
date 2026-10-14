@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Finite four-domain coverage only; geometric conclusions require the same bound annular proof.
 #[derive(Clone, Debug, PartialEq, Eq)]
-pub(super) enum AnnularPairCoverageFailure<K> {
+pub(in crate::sketch_region_prism) enum AnnularPairCoverageFailure<K> {
     RowCount {
         actual: usize,
         expected: usize,

@@ -5,7 +5,7 @@ use super::*;
 
 impl AnnularEmbeddingFailure<'_> {
     /// Preserve actual query completion; `failure.classification()` never makes an incomplete proof valid.
-    pub(in super::super) fn classification(&self) -> TwoLoopRefusalClass {
+    pub(in crate::sketch_region_prism) fn classification(&self) -> TwoLoopRefusalClass {
         match &self.cause {
             AnnularEmbeddingCause::Binding(failure) => failure.classification(),
             AnnularEmbeddingCause::Regularity(failure) => regularity_class(&failure.cause),

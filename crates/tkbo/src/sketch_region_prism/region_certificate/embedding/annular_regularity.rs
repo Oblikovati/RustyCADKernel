@@ -5,28 +5,28 @@ use crate::sketch_region::RegionSourceId;
 use crate::sketch_region_source_conformance::CapturedSpaceRepresentation;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
-pub(super) struct AnnularRegularityOptions {
+pub(in crate::sketch_region_prism) struct AnnularRegularityOptions {
     pub boundary: BezierRegularityOptions,
     pub total_bisections: u32,
 }
-pub(super) struct AnnularRegularityOperand<'a> {
+pub(in crate::sketch_region_prism) struct AnnularRegularityOperand<'a> {
     pub source: RegionSourceId,
     pub curve_id: u64,
     pub space: &'a CapturedSpaceRepresentation,
 }
 #[derive(Debug)]
-pub(super) struct AnnularBoundaryRegularity {
+pub(in crate::sketch_region_prism) struct AnnularBoundaryRegularity {
     pub source: RegionSourceId,
     pub effective: BezierRegularityOptions,
     pub report: BezierRegularityReport,
 }
 #[derive(Debug)]
-pub(super) struct AnnularRegularityReport {
+pub(in crate::sketch_region_prism) struct AnnularRegularityReport {
     pub requested: AnnularRegularityOptions,
     pub boundaries: [AnnularBoundaryRegularity; 2],
     pub total_bisections: u32,
 }
-pub(super) struct AnnularRegularityFailure {
+pub(in crate::sketch_region_prism) struct AnnularRegularityFailure {
     pub requested: AnnularRegularityOptions,
     pub source: RegionSourceId,
     pub effective: BezierRegularityOptions,

@@ -7,7 +7,7 @@ use super::super::{
 use super::{PrismIncidenceConclusion, PrismTrimRole, annular_domains::*, trim_incidence};
 
 #[derive(Clone, Debug, PartialEq)]
-pub(super) enum AnnularIncidenceConclusion {
+pub(in crate::sketch_region_prism) enum AnnularIncidenceConclusion {
     InjectiveAnnularDomain,
     DisjointCaps,
     DisjointCertifiedBoundaries,
@@ -18,7 +18,7 @@ pub(super) enum AnnularIncidenceConclusion {
     },
 }
 #[derive(Clone, Debug, PartialEq)]
-pub(super) struct AnnularFaceIncidence {
+pub(in crate::sketch_region_prism) struct AnnularFaceIncidence {
     pub first: AnnularChartIdentity,
     pub second: AnnularChartIdentity,
     pub conclusion: AnnularIncidenceConclusion,
