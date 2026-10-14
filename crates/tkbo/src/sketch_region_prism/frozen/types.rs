@@ -13,6 +13,8 @@ use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::predicates::roots::RootIsolationOptions;
 use rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding;
 
+pub(super) type CaptureResult<T> = Result<T, PrismFreezeCause>;
+
 /// Explicit caller names; zero is deliberately invalid. Example: `AuthoredPrismId(703)`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) struct AuthoredPrismId(pub u64);

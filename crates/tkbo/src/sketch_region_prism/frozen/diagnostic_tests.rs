@@ -6,15 +6,7 @@ use crate::sketch_region_validation::outcome::ValidationCause;
 #[test]
 fn nominal_fixture_native_alert_is_exact_dataless_intersection_failure() {
     let (_, receipt) = authored_receipt();
-    let findings = &receipt
-        .diagnostic
-        .as_ref()
-        .unwrap()
-        .coverage
-        .as_ref()
-        .unwrap()
-        .findings;
-    let alerts: Vec<_> = findings
+    let alerts: Vec<_> = native_findings(&receipt)
         .iter()
         .filter_map(|finding| match &finding.cause {
             ValidationCause::AnalyticNativeAlert(alert) => Some(alert),
@@ -28,6 +20,19 @@ fn nominal_fixture_native_alert_is_exact_dataless_intersection_failure() {
         )
         .is_some()
     );
+}
+
+fn native_findings(
+    receipt: &super::super::PrismReceipt,
+) -> &[crate::sketch_region_validation::outcome::ValidationFinding] {
+    &receipt
+        .diagnostic
+        .as_ref()
+        .unwrap()
+        .coverage
+        .as_ref()
+        .unwrap()
+        .findings
 }
 
 #[test]

@@ -16,9 +16,7 @@ pub(crate) struct FrozenGraphIncidence {
     pub(crate) endpoints: Vec<(FrozenPrismKey, FrozenPrismKey, FrozenPrismKey)>,
     pub(crate) coedges: Vec<FrozenCoedgeIncidence>,
 }
-pub(super) fn capture_graph(
-    bound: &BoundProjection<'_>,
-) -> Result<FrozenGraphIncidence, PrismFreezeCause> {
+pub(super) fn capture_graph(bound: &BoundProjection<'_>) -> CaptureResult<FrozenGraphIncidence> {
     let graph = populate_graph(bound)?;
     let names = mapped_nodes(bound, &graph)?;
     audit_graph(bound, &graph, &names)?;
@@ -29,7 +27,7 @@ pub(super) fn capture_graph(
         coedges: directed_coedges(bound, &graph, &names)?,
     })
 }
-fn populate_graph(bound: &BoundProjection<'_>) -> Result<BRepGraph, PrismFreezeCause> {
+fn populate_graph(bound: &BoundProjection<'_>) -> CaptureResult<BRepGraph> {
     let mut graph = BRepGraph::new();
     let options = Options {
         create_auto_product: false,
@@ -53,7 +51,7 @@ fn audit_graph(
     bound: &BoundProjection<'_>,
     graph: &BRepGraph,
     names: &BTreeMap<NodeId, FrozenPrismKey>,
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     let audit = validate::perform_with_mode(graph, validate::Mode::Audit);
     if !audit.issues.is_empty() {
         return Err(PrismFreezeCause::GraphAudit(project_issues(
@@ -65,7 +63,7 @@ fn audit_graph(
     }
     Ok(())
 }
-fn checked_counts(graph: &BRepGraph, named: usize) -> Result<[u32; 7], PrismFreezeCause> {
+fn checked_counts(graph: &BRepGraph, named: usize) -> CaptureResult<[u32; 7]> {
     let counts = graph_counts(graph);
     if named != counts.iter().sum::<u32>() as usize - counts[2] as usize {
         return Err(PrismFreezeCause::Unsupported {
@@ -78,7 +76,7 @@ fn checked_counts(graph: &BRepGraph, named: usize) -> Result<[u32; 7], PrismFree
 fn mapped_nodes(
     bound: &BoundProjection<'_>,
     graph: &BRepGraph,
-) -> Result<BTreeMap<NodeId, FrozenPrismKey>, PrismFreezeCause> {
+) -> CaptureResult<BTreeMap<NodeId, FrozenPrismKey>> {
     let mut names = BTreeMap::new();
     for (context, key) in bound.contexts.iter().zip(&bound.names) {
         let id = graph.shapes().find_node(&context.occurrence);
@@ -106,10 +104,7 @@ fn graph_counts(graph: &BRepGraph) -> [u32; 7] {
         t.solids().nb(),
     ]
 }
-fn lookup(
-    names: &BTreeMap<NodeId, FrozenPrismKey>,
-    id: NodeId,
-) -> Result<FrozenPrismKey, PrismFreezeCause> {
+fn lookup(names: &BTreeMap<NodeId, FrozenPrismKey>, id: NodeId) -> CaptureResult<FrozenPrismKey> {
     names.get(&id).copied().ok_or(PrismFreezeCause::Missing {
         required: "bound graph incidence endpoint",
         actual: 0,
@@ -118,7 +113,7 @@ fn lookup(
 fn edge_endpoints(
     graph: &BRepGraph,
     names: &BTreeMap<NodeId, FrozenPrismKey>,
-) -> Result<Vec<(FrozenPrismKey, FrozenPrismKey, FrozenPrismKey)>, PrismFreezeCause> {
+) -> CaptureResult<Vec<(FrozenPrismKey, FrozenPrismKey, FrozenPrismKey)>> {
     let mut result = (0..graph.topo().edges().nb())
         .map(|index| endpoints_for(graph, names, EdgeId::new(index)))
         .collect::<Result<Vec<_>, _>>()?;
@@ -129,7 +124,7 @@ fn endpoints_for(
     graph: &BRepGraph,
     names: &BTreeMap<NodeId, FrozenPrismKey>,
     edge: EdgeId,
-) -> Result<(FrozenPrismKey, FrozenPrismKey, FrozenPrismKey), PrismFreezeCause> {
+) -> CaptureResult<(FrozenPrismKey, FrozenPrismKey, FrozenPrismKey)> {
     let def = graph.topo().edges().definition(edge);
     let vertices = graph.refs().vertices();
     let start = vertices.entry(def.start_vertex_ref_id).child_vertex_id;
@@ -161,7 +156,7 @@ fn directed_coedges(
     bound: &BoundProjection<'_>,
     graph: &BRepGraph,
     names: &BTreeMap<NodeId, FrozenPrismKey>,
-) -> Result<Vec<FrozenCoedgeIncidence>, PrismFreezeCause> {
+) -> CaptureResult<Vec<FrozenCoedgeIncidence>> {
     let mut result = Vec::new();
     for index in 0..graph.topo().co_edges().nb() {
         result.push(bind_coedge(bound, graph, names, CoEdgeId::new(index))?);
@@ -173,7 +168,7 @@ fn directed_coedges(
 fn check_coedge_multiplicity(
     bound: &BoundProjection<'_>,
     result: &[FrozenCoedgeIncidence],
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     let unique: std::collections::BTreeSet<_> = result.iter().map(|c| &c.occurrence).collect();
     let actual = bound
         .contexts
@@ -196,7 +191,7 @@ fn bind_coedge(
     graph: &BRepGraph,
     names: &BTreeMap<NodeId, FrozenPrismKey>,
     id: CoEdgeId,
-) -> Result<FrozenCoedgeIncidence, PrismFreezeCause> {
+) -> CaptureResult<FrozenCoedgeIncidence> {
     let def = graph.topo().co_edges().definition(id);
     let face = lookup(names, def.face_id.into())?;
     let wire = lookup(names, def.parent_wire_id.into())?;
@@ -214,7 +209,7 @@ fn coedge_occurrence(
     bound: &BoundProjection<'_>,
     keys: [FrozenPrismKey; 3],
     reversed: bool,
-) -> Result<FrozenUseKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenUseKey> {
     let found: Vec<_> = (0..bound.contexts.len())
         .filter(|i| matches_coedge(bound, *i, keys, reversed))
         .collect();

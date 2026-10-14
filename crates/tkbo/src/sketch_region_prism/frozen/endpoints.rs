@@ -20,7 +20,7 @@ pub(crate) struct FrozenEndpointProof {
 pub(super) fn certify_endpoints(
     nodes: &[FrozenPrismNode],
     graph: &FrozenGraphIncidence,
-) -> Result<Vec<FrozenEndpointProof>, PrismFreezeCause> {
+) -> CaptureResult<Vec<FrozenEndpointProof>> {
     let mut result = Vec::new();
     for (edge, first, last) in &graph.endpoints {
         let curve = node(nodes, *edge)?
@@ -28,24 +28,31 @@ pub(super) fn certify_endpoints(
             .as_ref()
             .ok_or(missing("captured endpoint curve"))?;
         for (vertex, parameter) in [(*first, curve.interval[0]), (*last, curve.interval[1])] {
-            let point = node(nodes, vertex)?
-                .point
-                .ok_or(missing("captured endpoint vertex"))?;
-            result.push(FrozenEndpointProof {
-                edge: *edge,
-                vertex,
-                parameter,
-                requested_spatial: 0.,
-                proven_squared_upper: certify_endpoint(curve, parameter, point)?,
-            });
+            result.push(endpoint_proof(nodes, *edge, vertex, parameter, curve)?);
         }
     }
     Ok(result)
 }
-fn node(
+fn endpoint_proof(
     nodes: &[FrozenPrismNode],
-    key: FrozenPrismKey,
-) -> Result<&FrozenPrismNode, PrismFreezeCause> {
+    edge: FrozenPrismKey,
+    vertex: FrozenPrismKey,
+    parameter: f64,
+    curve: &CapturedSpaceRepresentation,
+) -> CaptureResult<FrozenEndpointProof> {
+    let point = node(nodes, vertex)?
+        .point
+        .ok_or(missing("captured endpoint vertex"))?;
+    Ok(FrozenEndpointProof {
+        edge,
+        vertex,
+        parameter,
+        requested_spatial: 0.,
+        proven_squared_upper: certify_endpoint(curve, parameter, point)?,
+    })
+}
+
+fn node(nodes: &[FrozenPrismNode], key: FrozenPrismKey) -> CaptureResult<&FrozenPrismNode> {
     nodes
         .iter()
         .find(|node| node.key == key)
@@ -55,14 +62,8 @@ fn certify_endpoint(
     curve: &CapturedSpaceRepresentation,
     parameter: f64,
     point: [f64; 3],
-) -> Result<DyadicBound, PrismFreezeCause> {
-    let query = TransportedResidualQuery {
-        residual: endpoint_query(curve, point),
-        maps: [
-            MetricParameterMap::Endpoints([parameter, parameter]),
-            MetricParameterMap::Identity,
-        ],
-    };
+) -> CaptureResult<DyadicBound> {
+    let query = transported_endpoint_query(curve, parameter, point);
     let report = certify_transported_residual(query, || false);
     match report.decision.map_err(PrismFreezeCause::Endpoint)? {
         ResidualDecision::Within {
@@ -75,6 +76,20 @@ fn certify_endpoint(
         }),
     }
 }
+fn transported_endpoint_query(
+    curve: &CapturedSpaceRepresentation,
+    parameter: f64,
+    point: [f64; 3],
+) -> TransportedResidualQuery<'_> {
+    TransportedResidualQuery {
+        residual: endpoint_query(curve, point),
+        maps: [
+            MetricParameterMap::Endpoints([parameter, parameter]),
+            MetricParameterMap::Identity,
+        ],
+    }
+}
+
 fn endpoint_query(curve: &CapturedSpaceRepresentation, point: [f64; 3]) -> PlanarResidualQuery<'_> {
     PlanarResidualQuery {
         curve: curve.curve.borrow(),

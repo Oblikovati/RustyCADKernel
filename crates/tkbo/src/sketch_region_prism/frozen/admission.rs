@@ -3,7 +3,7 @@
 use super::super::{PrismCompletion, PrismReceipt};
 use super::{bindings::missing, types::*};
 
-pub(super) fn admit_receipt(receipt: &PrismReceipt) -> Result<(), PrismFreezeCause> {
+pub(super) fn admit_receipt(receipt: &PrismReceipt) -> CaptureResult<()> {
     if !matches!(receipt.completion, PrismCompletion::Incomplete) {
         return Err(unsupported(
             "non-incomplete source completion carries unprojected cause",
@@ -21,7 +21,7 @@ pub(super) fn admit_receipt(receipt: &PrismReceipt) -> Result<(), PrismFreezeCau
     admit_scalar_observations(receipt)?;
     admit_report(receipt)
 }
-fn admit_scalar_observations(receipt: &PrismReceipt) -> Result<(), PrismFreezeCause> {
+fn admit_scalar_observations(receipt: &PrismReceipt) -> CaptureResult<()> {
     if receipt
         .region
         .as_ref()
@@ -39,7 +39,7 @@ fn admit_scalar_observations(receipt: &PrismReceipt) -> Result<(), PrismFreezeCa
     // Successful historical selection/affine observations remain explicitly unbound limitations.
     Ok(())
 }
-fn admit_report(receipt: &PrismReceipt) -> Result<(), PrismFreezeCause> {
+fn admit_report(receipt: &PrismReceipt) -> CaptureResult<()> {
     for gravity in rustycad_tkernel::message::Gravity::ALL {
         if !receipt.input.report.get_alerts(gravity).is_empty() {
             return Err(unsupported("present owner-bearing input Report alert"));

@@ -56,13 +56,7 @@ fn remove_child_progress(
                 && (edit != ContainmentEdit::Reorder || c.occurrence.nb_children() > 1)
         })
         .unwrap();
-    let child = contexts
-        .iter()
-        .find(|c| {
-            c.child_slots.len() == parent.child_slots.len() + 1
-                && c.child_slots.starts_with(&parent.child_slots)
-        })
-        .unwrap();
+    let child = first_child_context(&contexts, parent);
     RemoveNamedChild {
         edit,
         phase,
@@ -71,6 +65,19 @@ fn remove_child_progress(
         mutated: false,
     }
 }
+fn first_child_context<'a>(
+    contexts: &'a [super::super::PrismBodyContext],
+    parent: &super::super::PrismBodyContext,
+) -> &'a super::super::PrismBodyContext {
+    contexts
+        .iter()
+        .find(|c| {
+            c.child_slots.len() == parent.child_slots.len() + 1
+                && c.child_slots.starts_with(&parent.child_slots)
+        })
+        .unwrap()
+}
+
 fn reject_callback_removal(kind: ShapeEnum, phase: FreezePhase, edit: ContainmentEdit) {
     let (source, receipt) = authored_receipt();
     let bindings = authored_bindings(&receipt, &source);
@@ -106,22 +113,11 @@ fn actual_root_children_are_rebound_at_commit() {
 }
 #[test]
 fn present_region_error_is_never_dropped_as_unbound_success() {
+    use {ContainmentEdit::Remove, FreezePhase::Commit, ShapeEnum::Solid};
     let (source, mut receipt) = authored_receipt();
     let bindings = authored_bindings(&receipt, &source);
-    receipt.region = Some(
-        super::super::region_certificate::RegionCertificateInspection {
-            version: 1,
-            decision: Err(
-                super::super::region_certificate::RegionCertificateCause::UnavailableCandidates,
-            ),
-        },
-    );
-    let mut progress = remove_child_progress(
-        &receipt,
-        ShapeEnum::Solid,
-        FreezePhase::Commit,
-        ContainmentEdit::Remove,
-    );
+    reject_region_evidence(&mut receipt);
+    let mut progress = remove_child_progress(&receipt, Solid, Commit, Remove);
     let result = freeze_prism(&receipt, &bindings, &mut progress);
     assert!(!progress.mutated);
     assert!(matches!(
@@ -134,6 +130,17 @@ fn present_region_error_is_never_dropped_as_unbound_success() {
             ..
         })
     ));
+}
+
+fn reject_region_evidence(receipt: &mut super::super::PrismReceipt) {
+    receipt.region = Some(
+        super::super::region_certificate::RegionCertificateInspection {
+            version: 1,
+            decision: Err(
+                super::super::region_certificate::RegionCertificateCause::UnavailableCandidates,
+            ),
+        },
+    );
 }
 
 #[test]

@@ -100,7 +100,7 @@ fn finish_projection(
     nodes: Vec<FrozenPrismNode>,
     faces: Vec<FrozenPrismFace>,
     graph: super::graph::FrozenGraphIncidence,
-) -> Result<FrozenPrismProjection, PrismFreezeCause> {
+) -> CaptureResult<FrozenPrismProjection> {
     Ok(FrozenPrismProjection {
         version: 1,
         capture_policy: super::domain::fixed_policy(),
@@ -116,17 +116,14 @@ fn finish_projection(
         limits: capture_limits(bound.receipt),
     })
 }
-fn capture_uses(bound: &BoundProjection<'_>) -> Result<Vec<FrozenPrismUse>, PrismFreezeCause> {
+fn capture_uses(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenPrismUse>> {
     let mut uses = (0..bound.contexts.len())
         .map(|i| capture_use(bound, i))
         .collect::<Result<Vec<_>, _>>()?;
     uses.sort_by(|a, b| a.key.cmp(&b.key));
     Ok(uses)
 }
-fn capture_use(
-    bound: &BoundProjection<'_>,
-    index: usize,
-) -> Result<FrozenPrismUse, PrismFreezeCause> {
+fn capture_use(bound: &BoundProjection<'_>, index: usize) -> CaptureResult<FrozenPrismUse> {
     let context = &bound.contexts[index];
     Ok(FrozenPrismUse {
         key: bound.use_names[index].clone(),
@@ -167,7 +164,7 @@ fn capture_limits(receipt: &PrismReceipt) -> FrozenPrismLimits {
 fn check_final_capture(
     bound: &BoundProjection<'_>,
     projection: &FrozenPrismProjection,
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     let fresh = bind_projection(bound.receipt, bound.bindings)?;
     check_current_contexts(bound)?;
     check_source_snapshot(&fresh)?;
@@ -181,7 +178,7 @@ fn check_final_capture(
     }
     Ok(())
 }
-fn check_current_contexts(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCause> {
+fn check_current_contexts(bound: &BoundProjection<'_>) -> CaptureResult<()> {
     let fresh = bind_projection(bound.receipt, bound.bindings)?;
     if fresh.contexts.len() != bound.contexts.len()
         || !fresh

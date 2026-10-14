@@ -7,9 +7,7 @@ use super::{
 };
 use crate::sketch_region::OriginalMemberIdentity;
 
-pub(super) fn capture_history(
-    bound: &BoundProjection<'_>,
-) -> Result<FrozenPrismHistory, PrismFreezeCause> {
+pub(super) fn capture_history(bound: &BoundProjection<'_>) -> CaptureResult<FrozenPrismHistory> {
     if !bound.receipt.input.unrepresented.is_empty() {
         return Err(PrismFreezeCause::UnsupportedDiagnostic {
             stage: None,
@@ -33,7 +31,7 @@ pub(super) fn capture_history(
 fn capture_relation(
     bound: &BoundProjection<'_>,
     index: usize,
-) -> Result<FrozenDerivedRelation, PrismFreezeCause> {
+) -> CaptureResult<FrozenDerivedRelation> {
     let actual = &bound.contexts[index].occurrence;
     let rows: Vec<_> = bound
         .diagnostic
@@ -58,7 +56,7 @@ fn capture_relation(
 pub(super) fn original_keys(
     bindings: &PrismPublicationBindings,
     originals: &[OriginalMemberIdentity],
-) -> Result<Vec<FrozenOriginalKey>, PrismFreezeCause> {
+) -> CaptureResult<Vec<FrozenOriginalKey>> {
     let mut result = originals
         .iter()
         .map(|o| original_key(bindings, o))
@@ -70,7 +68,7 @@ pub(super) fn original_keys(
 pub(super) fn occurrence_keys(
     bound: &BoundProjection<'_>,
     shape: &rustycad_tkbrep::topods::Shape,
-) -> Result<Vec<FrozenUseKey>, PrismFreezeCause> {
+) -> CaptureResult<Vec<FrozenUseKey>> {
     let keys: Vec<_> = bound
         .contexts
         .iter()
@@ -86,14 +84,11 @@ pub(super) fn occurrence_keys(
 
 pub(super) fn freeze_placement(
     location: &rustycad_tkmath::toploc::Location,
-) -> Result<rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding<3>, PrismFreezeCause>
-{
+) -> CaptureResult<rustycad_tkmath::predicates::roots::metric_bounds::MetricEmbedding<3>> {
     crate::sketch_region_geometry_capture::captured_placement(location.transformation())
         .map_err(|cause| PrismFreezeCause::Surface(cause.into()))
 }
-fn capture_originals(
-    bound: &BoundProjection<'_>,
-) -> Result<Vec<FrozenOriginalOccurrence>, PrismFreezeCause> {
+fn capture_originals(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenOriginalOccurrence>> {
     let mut result = Vec::new();
     for binding in &bound.bindings.originals {
         result.push(FrozenOriginalOccurrence {
@@ -113,7 +108,7 @@ fn capture_originals(
 
 fn capture_rejected(
     bound: &BoundProjection<'_>,
-) -> Result<Vec<Vec<FrozenRejectedRelation>>, PrismFreezeCause> {
+) -> CaptureResult<Vec<Vec<FrozenRejectedRelation>>> {
     let mut result = Vec::new();
     for candidate in &bound.receipt.input.rejected {
         let mut relations = candidate
@@ -129,7 +124,7 @@ fn capture_rejected(
 fn rejected_relation(
     bound: &BoundProjection<'_>,
     row: &crate::sketch_region::ArrangementRelation,
-) -> Result<FrozenRejectedRelation, PrismFreezeCause> {
+) -> CaptureResult<FrozenRejectedRelation> {
     let parents = [
         original_keys(bound.bindings, &row.preserved)?,
         original_keys(bound.bindings, &row.modified)?,
@@ -146,9 +141,7 @@ fn rejected_relation(
     })
 }
 
-fn capture_retired(
-    bound: &BoundProjection<'_>,
-) -> Result<Vec<FrozenRetiredIntermediate>, PrismFreezeCause> {
+fn capture_retired(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenRetiredIntermediate>> {
     let mut result = Vec::new();
     for row in &bound.diagnostic.native_retired {
         result.push(FrozenRetiredIntermediate {

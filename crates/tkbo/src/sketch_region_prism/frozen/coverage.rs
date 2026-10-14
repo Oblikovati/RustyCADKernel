@@ -86,9 +86,7 @@ pub(crate) enum FrozenAnalyticGap {
     InnerSearchUnobserved,
     PairCompletionUnobserved,
 }
-pub(super) fn capture_coverage(
-    bound: &BoundProjection<'_>,
-) -> Result<FrozenPrismCoverage, PrismFreezeCause> {
+pub(super) fn capture_coverage(bound: &BoundProjection<'_>) -> CaptureResult<FrozenPrismCoverage> {
     let coverage = bound
         .diagnostic
         .coverage
@@ -99,12 +97,23 @@ pub(super) fn capture_coverage(
         .iter()
         .map(|f| freeze_finding(bound, f))
         .collect::<Result<_, _>>()?;
-    let historical_unbound = [
+    Ok(FrozenPrismCoverage {
+        current: [StageCoverage::Incomplete; 4],
+        historical_unbound: historical_stages(coverage),
+        findings,
+        limitations: capture_limitations(bound)?,
+    })
+}
+fn historical_stages(coverage: &OrderedCoverage) -> [StageCoverage; 4] {
+    [
         coverage.topology,
         coverage.geometry,
         coverage.self_intersection,
         coverage.tolerance,
-    ];
+    ]
+}
+
+fn capture_limitations(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenPublicationGap>> {
     let mut limitations = vec![
         FrozenPublicationGap::WholeBodyValidationIncomplete,
         FrozenPublicationGap::HistoricalValidationUnbound,
@@ -116,17 +125,13 @@ pub(super) fn capture_coverage(
     for gap in &bound.receipt.gaps {
         limitations.push(freeze_gap(gap)?);
     }
-    Ok(FrozenPrismCoverage {
-        current: [StageCoverage::Incomplete; 4],
-        historical_unbound,
-        findings,
-        limitations,
-    })
+    Ok(limitations)
 }
+
 fn freeze_finding(
     bound: &BoundProjection<'_>,
     finding: &ValidationFinding,
-) -> Result<FrozenValidationFinding, PrismFreezeCause> {
+) -> CaptureResult<FrozenValidationFinding> {
     Ok(FrozenValidationFinding {
         stage: finding.stage,
         coverage: finding.coverage,
@@ -142,7 +147,7 @@ fn freeze_finding(
 fn freeze_affected(
     bound: &BoundProjection<'_>,
     affected: &AffectedOccurrence,
-) -> Result<FrozenAffectedOccurrence, PrismFreezeCause> {
+) -> CaptureResult<FrozenAffectedOccurrence> {
     let parents = affected
         .original_parents
         .as_ref()
@@ -157,7 +162,7 @@ fn freeze_affected(
         source_parents: affected.source_parents.clone(),
     })
 }
-fn freeze_cause(cause: &ValidationCause) -> Result<FrozenValidationCause, PrismFreezeCause> {
+fn freeze_cause(cause: &ValidationCause) -> CaptureResult<FrozenValidationCause> {
     use FrozenValidationCause as F;
     use ValidationCause as C;
     Ok(match cause {
@@ -171,38 +176,76 @@ fn freeze_cause(cause: &ValidationCause) -> Result<FrozenValidationCause, PrismF
         C::EmptyStatuses => F::EmptyStatuses,
         C::NativeStatuses(s) => F::NativeStatuses(s.clone()),
         C::NativeFailure(f) => F::NativeFailure(f.clone()),
+        _ => freeze_analytic_cause(cause)?,
+    })
+}
+fn freeze_analytic_cause(cause: &ValidationCause) -> CaptureResult<FrozenValidationCause> {
+    use ValidationCause as C;
+    Ok(match cause {
         C::AnalyticGap {
             index,
             kind,
             outer,
             reason,
-        } => F::AnalyticGap {
-            index: *index,
-            kind: *kind,
-            outer: *outer,
-            reason: freeze_analytic(reason),
-        },
+        } => analytic_gap(*index, *kind, *outer, reason),
         C::AnalyticFailure {
             phase,
             index,
             failure,
-        } => F::AnalyticFailure {
-            phase: *phase,
-            index: *index,
-            failure: failure.clone(),
-        },
+        } => analytic_failure(*phase, *index, failure),
+        _ => freeze_analytic_observation(cause)?,
+    })
+}
+fn freeze_analytic_observation(cause: &ValidationCause) -> CaptureResult<FrozenValidationCause> {
+    use FrozenValidationCause as F;
+    use ValidationCause as C;
+    Ok(match cause {
         C::AnalyticInterference {
             first_index,
             second_index,
-        } => F::AnalyticInterference {
-            first_index: *first_index,
-            second_index: *second_index,
-        },
+        } => analytic_interference(*first_index, *second_index),
         C::AnalyticNativeAlert(alert) => {
             F::AnalyticNativeAlert(super::alerts::freeze_alert(alert)?)
         }
+        _ => {
+            return Err(super::admission::unsupported(
+                "expected analytic validation cause",
+            ));
+        }
     })
 }
+
+fn analytic_gap(
+    index: Option<i32>,
+    kind: Option<SurfaceType>,
+    outer: Option<FaceTermination>,
+    reason: &AnalyticGap,
+) -> FrozenValidationCause {
+    FrozenValidationCause::AnalyticGap {
+        index,
+        kind,
+        outer,
+        reason: freeze_analytic(reason),
+    }
+}
+fn analytic_failure(
+    phase: SelfCheckPhase,
+    index: Option<i32>,
+    failure: &Failure,
+) -> FrozenValidationCause {
+    FrozenValidationCause::AnalyticFailure {
+        phase,
+        index,
+        failure: failure.clone(),
+    }
+}
+fn analytic_interference(first_index: i32, second_index: i32) -> FrozenValidationCause {
+    FrozenValidationCause::AnalyticInterference {
+        first_index,
+        second_index,
+    }
+}
+
 fn freeze_analytic(reason: &AnalyticGap) -> FrozenAnalyticGap {
     use AnalyticGap as A;
     use FrozenAnalyticGap as F;
@@ -221,7 +264,7 @@ fn freeze_analytic(reason: &AnalyticGap) -> FrozenAnalyticGap {
         A::PairCompletionUnobserved => F::PairCompletionUnobserved,
     }
 }
-fn freeze_gap(gap: &super::super::PrismGap) -> Result<FrozenPublicationGap, PrismFreezeCause> {
+fn freeze_gap(gap: &super::super::PrismGap) -> CaptureResult<FrozenPublicationGap> {
     use super::super::PrismGap as G;
     match gap {
         G::Candidate(c) => Ok(FrozenPublicationGap::Candidate(*c)),

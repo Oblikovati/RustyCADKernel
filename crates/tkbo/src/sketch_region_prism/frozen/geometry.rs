@@ -17,7 +17,7 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-pub(super) fn check_source_snapshot(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCause> {
+pub(super) fn check_source_snapshot(bound: &BoundProjection<'_>) -> CaptureResult<()> {
     let copied = bound
         .receipt
         .copied
@@ -35,9 +35,7 @@ pub(super) fn check_source_snapshot(bound: &BoundProjection<'_>) -> Result<(), P
     }
     Ok(())
 }
-pub(super) fn capture_faces(
-    bound: &BoundProjection<'_>,
-) -> Result<Vec<FrozenPrismFace>, PrismFreezeCause> {
+pub(super) fn capture_faces(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenPrismFace>> {
     let inspection = retained_inspection(bound)?;
     let mut result = Vec::new();
     for (index, context) in bound.contexts.iter().enumerate() {
@@ -58,7 +56,7 @@ pub(super) fn capture_faces(
 }
 fn retained_inspection<'a>(
     bound: &'a BoundProjection<'_>,
-) -> Result<&'a PrismSurfaceInspection, PrismFreezeCause> {
+) -> CaptureResult<&'a PrismSurfaceInspection> {
     let inspection = bound
         .diagnostic
         .surface_charts
@@ -74,10 +72,7 @@ fn retained_inspection<'a>(
     }
     Ok(inspection)
 }
-fn capture_face(
-    bound: &BoundProjection<'_>,
-    index: usize,
-) -> Result<FrozenPrismFace, PrismFreezeCause> {
+fn capture_face(bound: &BoundProjection<'_>, index: usize) -> CaptureResult<FrozenPrismFace> {
     let chart = fresh_chart(bound, index)?;
     check_retained_chart(bound, index, &chart)?;
     check_chart_domain(&chart)?;
@@ -97,10 +92,7 @@ fn capture_face(
         proof,
     })
 }
-fn fresh_chart(
-    bound: &BoundProjection<'_>,
-    index: usize,
-) -> Result<CapturedSurfaceChart, PrismFreezeCause> {
+fn fresh_chart(bound: &BoundProjection<'_>, index: usize) -> CaptureResult<CapturedSurfaceChart> {
     let sources = &bound
         .receipt
         .copied
@@ -119,7 +111,7 @@ fn fresh_chart(
 fn face_binding<'a>(
     bound: &'a BoundProjection<'_>,
     index: usize,
-) -> Result<&'a super::super::PrismImageBinding, PrismFreezeCause> {
+) -> CaptureResult<&'a super::super::PrismImageBinding> {
     let context = &bound.contexts[index];
     let candidates: Vec<_> = bound
         .diagnostic
@@ -133,7 +125,7 @@ fn check_retained_chart(
     bound: &BoundProjection<'_>,
     index: usize,
     fresh: &CapturedSurfaceChart,
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     let entry = retained_entry(bound, index)?;
     let old = entry
         .captured
@@ -154,7 +146,7 @@ fn check_retained_chart(
 fn retained_entry<'a>(
     bound: &'a BoundProjection<'_>,
     index: usize,
-) -> Result<&'a PrismSurfaceEntry, PrismFreezeCause> {
+) -> CaptureResult<&'a PrismSurfaceEntry> {
     let key = PartitionOccurrenceIdentity::capture(&bound.contexts[index].occurrence);
     let inspection = retained_inspection(bound)?;
     let found: Vec<_> = inspection
@@ -173,7 +165,7 @@ fn retained_entry<'a>(
     }
     Ok(entry)
 }
-fn check_chart_domain(chart: &CapturedSurfaceChart) -> Result<(), PrismFreezeCause> {
+fn check_chart_domain(chart: &CapturedSurfaceChart) -> CaptureResult<()> {
     if let CapturedPrismSurface::Extrusion { basis, .. } = &chart.actual {
         polynomial(basis)?;
     }
@@ -187,7 +179,7 @@ fn capture_trim_values(
     bound: &BoundProjection<'_>,
     face_index: usize,
     trims: Vec<CapturedPrismTrim>,
-) -> Result<Vec<FrozenPrismTrim>, PrismFreezeCause> {
+) -> CaptureResult<Vec<FrozenPrismTrim>> {
     let mut result = Vec::new();
     for trim in trims {
         let occurrence = trim_occurrence(bound, face_index, &trim.output)?;
@@ -208,7 +200,7 @@ fn trim_occurrence(
     bound: &BoundProjection<'_>,
     face_index: usize,
     output: &PartitionOccurrenceIdentity,
-) -> Result<FrozenUseKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenUseKey> {
     let path = &bound.contexts[face_index].child_slots;
     let found: Vec<_> = bound
         .contexts
@@ -222,9 +214,7 @@ fn trim_occurrence(
         .collect();
     only_bound(&found, "explicit unique directed trim occurrence").cloned()
 }
-pub(super) fn capture_nodes(
-    bound: &BoundProjection<'_>,
-) -> Result<Vec<FrozenPrismNode>, PrismFreezeCause> {
+pub(super) fn capture_nodes(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenPrismNode>> {
     let mut nodes = Vec::new();
     for (index, context) in bound.contexts.iter().enumerate() {
         if !nodes
@@ -241,7 +231,7 @@ fn capture_node(
     bound: &BoundProjection<'_>,
     index: usize,
     actual: &rustycad_tkbrep::topods::Shape,
-) -> Result<FrozenPrismNode, PrismFreezeCause> {
+) -> CaptureResult<FrozenPrismNode> {
     let mut node = FrozenPrismNode {
         key: bound.names[index],
         point: None,
@@ -261,7 +251,7 @@ fn capture_node(
 fn capture_vertex(
     node: &mut FrozenPrismNode,
     actual: &rustycad_tkbrep::topods::Shape,
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     let vertex = vertex(actual).map_err(PrismFreezeCause::Native)?;
     let point = BRepTool::pnt(&vertex).map_err(PrismFreezeCause::Native)?;
     node.point = Some([point.x(), point.y(), point.z()]);
@@ -272,7 +262,7 @@ fn capture_vertex(
 fn capture_edge(
     node: &mut FrozenPrismNode,
     actual: &rustycad_tkbrep::topods::Shape,
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     let edge = edge(actual).map_err(PrismFreezeCause::Native)?;
     let curve =
         capture_space_representation(&edge).map_err(|c| PrismFreezeCause::Surface(c.into()))?;
@@ -285,7 +275,7 @@ fn capture_edge(
 fn capture_face_tolerance(
     node: &mut FrozenPrismNode,
     actual: &rustycad_tkbrep::topods::Shape,
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     let face = face(actual).map_err(PrismFreezeCause::Native)?;
     let (mesh, _) = BRepTool::triangulation(&face, rustycad_tkmath::poly::mesh_purpose::NONE)
         .map_err(PrismFreezeCause::Native)?;
@@ -319,7 +309,7 @@ fn same_trim_contexts(first: &CapturedSurfaceChart, second: &CapturedSurfaceChar
         })
 }
 
-fn check_node_scalars(node: &FrozenPrismNode) -> Result<(), PrismFreezeCause> {
+fn check_node_scalars(node: &FrozenPrismNode) -> CaptureResult<()> {
     for actual in node
         .point
         .into_iter()
@@ -327,16 +317,21 @@ fn check_node_scalars(node: &FrozenPrismNode) -> Result<(), PrismFreezeCause> {
         .chain(node.effective_tolerance)
         .chain(node.raw_tolerance)
     {
-        if !actual.is_finite() {
-            return Err(PrismFreezeCause::InvalidScalar {
-                quantity: "finite vertex/tolerance",
-                actual,
-            });
-        }
+        check_finite_scalar(actual)?;
     }
     if let Some(actual) = node.raw_tolerance.filter(|value| *value < 0.) {
         return Err(PrismFreezeCause::InvalidScalar {
             quantity: "nonnegative entity tolerance",
+            actual,
+        });
+    }
+    Ok(())
+}
+
+fn check_finite_scalar(actual: f64) -> CaptureResult<()> {
+    if !actual.is_finite() {
+        return Err(PrismFreezeCause::InvalidScalar {
+            quantity: "finite vertex/tolerance",
             actual,
         });
     }

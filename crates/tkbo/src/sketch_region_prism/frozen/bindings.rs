@@ -15,7 +15,7 @@ pub(super) struct BoundProjection<'a> {
 pub(super) fn bind_projection<'a>(
     receipt: &'a PrismReceipt,
     bindings: &'a PrismPublicationBindings,
-) -> Result<BoundProjection<'a>, PrismFreezeCause> {
+) -> CaptureResult<BoundProjection<'a>> {
     super::domain::check_count(bindings.directed.len())?;
     admit_identifiers(bindings)?;
     let mut bound = unbound_projection(receipt, bindings)?;
@@ -28,7 +28,7 @@ pub(super) fn bind_projection<'a>(
     bound.use_names = bind_uses(&bound)?;
     Ok(bound)
 }
-fn admit_identifiers(bindings: &PrismPublicationBindings) -> Result<(), PrismFreezeCause> {
+fn admit_identifiers(bindings: &PrismPublicationBindings) -> CaptureResult<()> {
     let mut ids = vec![bindings.operation, bindings.selected_region];
     ids.extend(
         bindings
@@ -47,7 +47,7 @@ fn admit_identifiers(bindings: &PrismPublicationBindings) -> Result<(), PrismFre
     }
     Ok(())
 }
-fn check_definition_collisions(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCause> {
+fn check_definition_collisions(bound: &BoundProjection<'_>) -> CaptureResult<()> {
     for (index, key) in bound.names.iter().enumerate() {
         let first = &bound.contexts[index].occurrence;
         for (other, name) in bound.names.iter().enumerate().take(index) {
@@ -61,7 +61,7 @@ fn check_definition_collisions(bound: &BoundProjection<'_>) -> Result<(), PrismF
     }
     Ok(())
 }
-fn bind_uses(bound: &BoundProjection<'_>) -> Result<Vec<FrozenUseKey>, PrismFreezeCause> {
+fn bind_uses(bound: &BoundProjection<'_>) -> CaptureResult<Vec<FrozenUseKey>> {
     let mut names = Vec::new();
     let mut consumed = BTreeSet::new();
     for (index, context) in bound.contexts.iter().enumerate() {
@@ -77,10 +77,7 @@ fn bind_uses(bound: &BoundProjection<'_>) -> Result<Vec<FrozenUseKey>, PrismFree
     check_use_coverage(bound, &names, consumed.len())?;
     Ok(names)
 }
-fn direct_binding(
-    bound: &BoundProjection<'_>,
-    context: &PrismBodyContext,
-) -> Result<usize, PrismFreezeCause> {
+fn direct_binding(bound: &BoundProjection<'_>, context: &PrismBodyContext) -> CaptureResult<usize> {
     let found: Vec<_> = bound
         .bindings
         .directed
@@ -100,7 +97,7 @@ fn ancestry_key(
     names: &[FrozenUseKey],
     index: usize,
     authored: AuthoredPrismId,
-) -> Result<FrozenUseKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenUseKey> {
     let context = &bound.contexts[index];
     let mut key = Vec::new();
     if !context.child_slots.is_empty() {
@@ -121,7 +118,7 @@ pub(super) fn missing(required: &'static str) -> PrismFreezeCause {
     }
 }
 
-fn check_orientations(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCause> {
+fn check_orientations(bound: &BoundProjection<'_>) -> CaptureResult<()> {
     use rustycad_tkg3d::top_abs::Orientation::{Forward, Reversed};
     for context in &bound.contexts {
         let actual = context.occurrence.orientation();
@@ -142,7 +139,7 @@ pub(super) fn identity(required: &'static str, actual: usize) -> PrismFreezeCaus
 fn unbound_projection<'a>(
     receipt: &'a PrismReceipt,
     bindings: &'a PrismPublicationBindings,
-) -> Result<BoundProjection<'a>, PrismFreezeCause> {
+) -> CaptureResult<BoundProjection<'a>> {
     let diagnostic = receipt
         .diagnostic
         .as_ref()
@@ -160,7 +157,7 @@ fn unbound_projection<'a>(
     Ok(bound)
 }
 
-fn check_bound_definitions(bound: &BoundProjection<'_>) -> Result<(), PrismFreezeCause> {
+fn check_bound_definitions(bound: &BoundProjection<'_>) -> CaptureResult<()> {
     check_orientations(bound)?;
     super::source_bindings::check_sources(bound)?;
     super::source_bindings::check_originals(bound)?;
@@ -172,7 +169,7 @@ fn check_use_coverage(
     bound: &BoundProjection<'_>,
     names: &[FrozenUseKey],
     consumed: usize,
-) -> Result<(), PrismFreezeCause> {
+) -> CaptureResult<()> {
     if consumed != bound.bindings.directed.len()
         || names.iter().collect::<BTreeSet<_>>().len() != names.len()
     {
@@ -184,10 +181,7 @@ fn check_use_coverage(
     Ok(())
 }
 
-pub(super) fn only_bound<'a, T>(
-    values: &'a [T],
-    required: &'static str,
-) -> Result<&'a T, PrismFreezeCause> {
+pub(super) fn only_bound<'a, T>(values: &'a [T], required: &'static str) -> CaptureResult<&'a T> {
     match values {
         [value] => Ok(value),
         _ => Err(identity(required, values.len())),

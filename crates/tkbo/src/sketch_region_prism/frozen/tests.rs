@@ -39,6 +39,10 @@ pub(super) fn authored_bindings(
     for row in &copied.relations {
         bind_authored_source(&mut bindings, row, source);
     }
+    bind_authored_directed(&mut bindings, receipt);
+    bindings
+}
+fn bind_authored_directed(bindings: &mut PrismPublicationBindings, receipt: &PrismReceipt) {
     for context in super::super::contexts::body_contexts(&receipt.diagnostic.as_ref().unwrap().body)
         .ok()
         .unwrap()
@@ -49,8 +53,8 @@ pub(super) fn authored_bindings(
             authored_use,
         });
     }
-    bindings
 }
+
 fn bind_authored_source(
     bindings: &mut PrismPublicationBindings,
     row: &crate::sketch_region::ArrangementRelation,
@@ -92,20 +96,10 @@ fn authored_use(context: &PrismBodyContext) -> AuthoredPrismId {
         Shell => 721,
         Face => 722,
         Wire => 710,
-        Edge => {
-            if reverse {
-                713
-            } else {
-                712
-            }
-        }
-        Vertex => {
-            if reverse {
-                715
-            } else {
-                714
-            }
-        }
+        Edge if reverse => 713,
+        Edge => 712,
+        Vertex if reverse => 715,
+        Vertex => 714,
         _ => panic!("unsupported authored fixture use"),
     })
 }

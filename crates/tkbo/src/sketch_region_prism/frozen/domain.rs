@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Versioned bounded capture refuses excess; these fixed limits never clamp source settings.
+use super::types::CaptureResult;
 use super::types::PrismFreezeCause;
 use crate::sketch_region_geometry_capture::CapturedMetricCurve;
 
@@ -18,7 +19,7 @@ pub(super) fn fixed_policy() -> FrozenCapturePolicy {
         exact_endpoint_spatial_limit: 0.,
     }
 }
-pub(super) fn check_count(actual: usize) -> Result<(), PrismFreezeCause> {
+pub(super) fn check_count(actual: usize) -> CaptureResult<()> {
     if actual > MAXIMUM_USES {
         return Err(PrismFreezeCause::LimitExceeded {
             quantity: "directed occurrences",
@@ -28,9 +29,7 @@ pub(super) fn check_count(actual: usize) -> Result<(), PrismFreezeCause> {
     }
     Ok(())
 }
-pub(super) fn polynomial<const D: usize>(
-    curve: &CapturedMetricCurve<D>,
-) -> Result<(), PrismFreezeCause> {
+pub(super) fn polynomial<const D: usize>(curve: &CapturedMetricCurve<D>) -> CaptureResult<()> {
     if let CapturedMetricCurve::Bezier { poles, weights } = curve {
         if let Some(weights) = weights {
             return Err(PrismFreezeCause::RationalWeights {

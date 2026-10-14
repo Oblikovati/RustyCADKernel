@@ -10,7 +10,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 pub(super) fn name_context(
     bound: &BoundProjection<'_>,
     actual: &PrismBodyContext,
-) -> Result<FrozenPrismKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenPrismKey> {
     let kind = actual
         .occurrence
         .shape_type()
@@ -27,10 +27,7 @@ pub(super) fn name_context(
         )),
     }
 }
-fn image_names(
-    bound: &BoundProjection<'_>,
-    actual: &Shape,
-) -> Result<Vec<FrozenPrismKey>, PrismFreezeCause> {
+fn image_names(bound: &BoundProjection<'_>, actual: &Shape) -> CaptureResult<Vec<FrozenPrismKey>> {
     let mut names = Vec::new();
     for image in &bound.diagnostic.bindings {
         if image.context.occurrence.is_same(actual) {
@@ -43,13 +40,13 @@ fn image_names(
 pub(super) fn source_name(
     bindings: &PrismPublicationBindings,
     source: &Shape,
-) -> Result<AuthoredPrismId, PrismFreezeCause> {
+) -> CaptureResult<AuthoredPrismId> {
     source_identity_name(bindings, &PartitionOccurrenceIdentity::capture(source))
 }
 pub(super) fn source_identity_name(
     bindings: &PrismPublicationBindings,
     actual: &PartitionOccurrenceIdentity,
-) -> Result<AuthoredPrismId, PrismFreezeCause> {
+) -> CaptureResult<AuthoredPrismId> {
     let mut names: Vec<_> = bindings
         .sources
         .iter()
@@ -74,7 +71,7 @@ fn make_key(
     source: AuthoredPrismId,
     role: FrozenSweepRole,
     actual: &Shape,
-) -> Result<FrozenPrismKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenPrismKey> {
     Ok(FrozenPrismKey {
         operation: bound.bindings.operation,
         source,
@@ -86,7 +83,7 @@ fn name_container(
     bound: &BoundProjection<'_>,
     actual: &PrismBodyContext,
     kind: ShapeEnum,
-) -> Result<FrozenPrismKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenPrismKey> {
     if kind == ShapeEnum::Wire {
         return side_wire_name(bound, actual);
     }
@@ -106,7 +103,7 @@ fn name_container(
 fn side_wire_name(
     bound: &BoundProjection<'_>,
     actual: &PrismBodyContext,
-) -> Result<FrozenPrismKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenPrismKey> {
     let parent = actual.ancestors.last().ok_or(missing("wire parent face"))?;
     let names = image_names(bound, parent)?;
     let count = bound
@@ -135,7 +132,7 @@ pub(super) fn same_context(first: &PrismBodyContext, second: &PrismBodyContext) 
 pub(super) fn original_key(
     bindings: &PrismPublicationBindings,
     actual: &crate::sketch_region::OriginalMemberIdentity,
-) -> Result<FrozenOriginalKey, PrismFreezeCause> {
+) -> CaptureResult<FrozenOriginalKey> {
     let found: Vec<_> = bindings
         .originals
         .iter()

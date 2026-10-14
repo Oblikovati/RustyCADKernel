@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Preserve stored metadata separately: the compatibility accessor floors invalid/sub-floor values.
+use super::types::CaptureResult;
 use super::types::PrismFreezeCause;
 use rustycad_tkbrep::{
     brep::access::{edge_tshape, face_tshape, vertex_tshape},
@@ -7,7 +8,7 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-pub(super) fn capture_stored_tolerance(actual: &Shape) -> Result<Option<f64>, PrismFreezeCause> {
+pub(super) fn capture_stored_tolerance(actual: &Shape) -> CaptureResult<Option<f64>> {
     let member = "Martensite frozen prism raw tolerance";
     let value = match actual.shape_type().map_err(PrismFreezeCause::Native)? {
         ShapeEnum::Vertex => vertex_tshape(actual, member).map(|v| v.tolerance()),
