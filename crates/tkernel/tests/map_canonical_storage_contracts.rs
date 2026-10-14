@@ -1,4 +1,6 @@
 //! Actual MapNode<K> facade storage and shared owner regressions.
+#[path = "map_canonical_storage_contracts/allocator_policy.rs"]
+mod allocator_policy;
 #[path = "map_canonical_storage_contracts/fixture.rs"]
 mod fixture;
 #[path = "map_canonical_storage_contracts/graph.rs"]
