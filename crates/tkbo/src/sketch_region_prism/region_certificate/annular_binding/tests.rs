@@ -84,3 +84,67 @@ fn source_role_key_does_not_follow_returned_copy_order() {
         );
     });
 }
+
+#[test]
+fn actual_four_charts_retain_twelve_directed_trims_and_native_closure_roles() {
+    with_actual(|request, region, receipt| {
+        let copy =
+            capture::copy_inputs(request, &region, receipt).unwrap_or_else(|_| panic!("copy"));
+        let boundaries =
+            boundaries::capture(&region, &copy, receipt).unwrap_or_else(|_| panic!("boundaries"));
+        let charts = charts::capture(receipt, &copy, &boundaries, &mut || false)
+            .unwrap_or_else(|_| panic!("charts"));
+        assert_eq!(
+            boundaries
+                .iter()
+                .map(|b| (b.source.0, b.wire))
+                .collect::<Vec<_>>(),
+            [(101, 401), (202, 402)]
+        );
+        assert_eq!(charts.len(), 4);
+        assert_eq!(charts.iter().map(|c| c.trims.len()).sum::<usize>(), 12);
+        for boundary in boundaries {
+            assert_native_roles(&boundary);
+        }
+        for side in charts.iter().filter(|c| c.source_boundary.is_some()) {
+            assert_seam_contexts(side);
+        }
+    });
+}
+fn assert_native_roles(boundary: &AnnularBoundaryBinding) {
+    assert_eq!(
+        boundary
+            .endpoints
+            .iter()
+            .map(|e| e.parameter)
+            .collect::<Vec<_>>(),
+        [0., 1.]
+    );
+    assert_eq!(boundary.endpoints.len(), 2);
+    assert_ne!(boundary.endpoints[0].context, boundary.endpoints[1].context);
+    assert_eq!(
+        boundary.endpoints[0].context.occurrence.topology_address,
+        boundary.endpoints[1].context.occurrence.topology_address
+    );
+}
+fn assert_seam_contexts(chart: &AnnularBoundChart) {
+    use super::super::super::surface_charts::PrismTrimRole;
+    let start = chart
+        .trims
+        .iter()
+        .find(|t| t.role == PrismTrimRole::Start)
+        .unwrap();
+    let end = chart
+        .trims
+        .iter()
+        .find(|t| t.role == PrismTrimRole::End)
+        .unwrap();
+    assert_ne!(start.output, end.output);
+    assert_ne!(start.source, end.source);
+    assert_eq!(
+        start.output.occurrence.topology_address,
+        end.output.occurrence.topology_address
+    );
+    assert_eq!(start.output.ancestors, end.output.ancestors);
+    assert_ne!(start.output.child_slots, end.output.child_slots);
+}

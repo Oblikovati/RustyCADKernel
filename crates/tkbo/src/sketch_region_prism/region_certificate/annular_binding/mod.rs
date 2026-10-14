@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! ADR0050: source-keyed correspondence for the actual annular sweep, not body validity.
+mod boundaries;
 mod capture;
+mod charts;
 mod correspondence;
 mod failure;
 #[cfg(test)]
