@@ -20,12 +20,16 @@ mod style;
 mod render_layers;
 pub use render_layers::{RenderLayer, RenderLayerSpan};
 
+#[cfg(test)]
+mod capture_owned_fixture;
 mod driver;
 mod driver_backend;
 mod driver_structure;
 mod driver_text;
 mod driver_view;
 mod view_capture;
+#[cfg(test)]
+mod view_capture_owned_tests;
 mod view_forward;
 mod view_gui_attachment;
 mod view_gui_composition;
