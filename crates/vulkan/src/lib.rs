@@ -20,12 +20,28 @@ mod style;
 mod render_layers;
 pub use render_layers::{RenderLayer, RenderLayerSpan};
 
+mod capture_image_destination;
+#[cfg(test)]
+mod capture_image_destination_fixture;
+#[cfg(test)]
+mod capture_image_destination_tests;
+mod capture_image_error;
+mod capture_image_layout;
+#[cfg(test)]
+mod capture_image_rejection_tests;
+#[cfg(test)]
+mod capture_owned_fixture;
 mod driver;
 mod driver_backend;
 mod driver_structure;
 mod driver_text;
 mod driver_view;
 mod view_capture;
+pub use capture_image_error::{
+    CaptureImageError, CaptureImageFailure, CaptureImageLayout, CaptureImageOperation,
+};
+#[cfg(test)]
+mod view_capture_owned_tests;
 mod view_forward;
 mod view_gui_attachment;
 mod view_gui_composition;

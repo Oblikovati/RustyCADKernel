@@ -1,0 +1,101 @@
+{
+  "project": "Martensite",
+  "base_revision": "171fd9bc0cdda36158609460d5beedcb9336ad5c",
+  "fixture_commit": "276c45f98",
+  "structural_extraction_commit": "059ef50f6",
+  "consumer_gap": "A completed Vulkan FrameCapture previously copied only through a concrete ImagePixMap path. The additive write_image entrypoint reaches registered derived image destinations through the typed ImagePixMapSource mutable builder interface.",
+  "boundary": "Completed CPU capture to mutable image builder. Success means the requested logical pixel rows were copied. It is not a published geometric result or a rendering validation certificate.",
+  "behavior": "The existing dump_capture row-copy loop and conversion outcomes are retained; malformed legacy row-size panic outcomes have not been converted into successful or typed outcomes. The new unpublished API validates before invoking callbacks or that copier. No existing public behavior version or signature changes.",
+  "validation": [
+    "Positive capture dimensions and checked width*height*4; exact RGBA and depth counts even when only one buffer is requested.",
+    "Supported buffer and checked destination row/slice addressability before every destination callback.",
+    "Registered safe borrowed original image base; no experimental constructed-owner or receiver-retirement engine.",
+    "After allocation, format/dimensions/pixel size/stride/slice size/row direction and every logical row span checked under the same write guard used for copying.",
+    "Empty capture is a typed failure, never a completed empty success."
+  ],
+  "failure_contract": [
+    "Operation stage, requested buffer, rejected request or actual storage counts/layout accompany typed failure classes.",
+    "Original ImageSourceError and its nested Failure are retained; missing registration, clear refusal and allocation refusal remain distinguishable in the source chain.",
+    "CopyRefused carries no invented underlying cause; the existing converter exposes only a refusal flag.",
+    "source_type identifies a dynamic type, not a unique or persistent image entity.",
+    "Malformed capture, unsupported kind and unrepresentable request call no destination methods and leave its original bytes untouched.",
+    "Destination callbacks are allowed to mutate their builder before refusal; returned invalid layouts receive no copied pixel rows. No transactional rollback is promised."
+  ],
+  "owned_expected_results": "Hand-authored 2x2 RGBA/channel projections, exact native-endian IEEE-754 depth bits, sentinel padding, both physical/logical row orders; no live OCCT oracle.",
+  "fixture_sha256": {
+    "crates/vulkan/src/capture_owned_fixture.rs": "a9df7c13dcfc9160e702583d3012b81d8710a8bf5f2859c0fdea3b94d4a832ae",
+    "crates/vulkan/src/view_capture_owned_tests.rs": "49b95f0707385e34cdc1aee3f73f43369ef9709bed4b9cf5e884bc6aff152ccc"
+  },
+  "source_sha256": {
+    "crates/vulkan/src/capture_image_copy_tests.rs": "155e37060b63ecd12fe3d066822185a78be93e74acd839c93df6358ba6afce62",
+    "crates/vulkan/src/capture_image_destination.rs": "3a810a8558c977b608ba1d0d0c469a41869c9e1f33a43e380a610d07812c1a49",
+    "crates/vulkan/src/capture_image_destination_fixture.rs": "265caa99b09c22ee397b497b2f9fcec005f08245dfba1fa8f78f142b27801536",
+    "crates/vulkan/src/capture_image_destination_tests.rs": "b52a89859220152a43220d523689c9ae28c2e27e56f71b6cadad3f2dc213ad01",
+    "crates/vulkan/src/capture_image_error.rs": "998ad83af1b4e9462d7b4229bb8a1ba4e390f8d2842e278a75d3818d2666894a",
+    "crates/vulkan/src/capture_image_layout.rs": "a5c1f3901c701825dd254afe2d3a74b3c9584a59ae9952132102835562b1d757",
+    "crates/vulkan/src/capture_image_rejection_tests.rs": "137978ddacbe3ff3301978c0d089fc5ad9467f37b0c30033de030460027323e1",
+    "crates/vulkan/src/lib.rs": "a0b00f4e774cb06bd34350983438d1e4080e2144c41631e21f27dcea7de07c40",
+    "crates/vulkan/src/view_capture.rs": "89a855511e1c08a75119a461298edb143c263f1f903f4934ccab0295f2e896b0"
+  },
+  "checks": [
+    {
+      "command": "CARGO_BUILD_JOBS=2 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 cargo test --locked -p martensite-vulkan --lib capture_image",
+      "passed": 14,
+      "failed": 0,
+      "ignored": 0,
+      "log": "adapter-tests.log.gz"
+    },
+    {
+      "command": "CARGO_BUILD_JOBS=2 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 cargo test --locked -p martensite-vulkan --lib view_capture_owned_tests",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "log": "post-refactor-owned.log.gz"
+    },
+    {
+      "command": "cargo fmt --all --check",
+      "exit": 0,
+      "log": "fmt.log.gz"
+    },
+    {
+      "command": "CARGO_BUILD_JOBS=2 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 cargo clippy --locked -p martensite-vulkan --all-targets -- -D warnings",
+      "exit": 0,
+      "log": "clippy.log.gz"
+    },
+    {
+      "command": "CARGO_BUILD_JOBS=2 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 cargo check --locked -p rustycad-tkv3d -p martensite-vulkan --all-targets",
+      "exit": 0,
+      "log": "consumer-check.log.gz"
+    }
+  ],
+  "source_audit": "New/modified focused module functions are at most 20 lines after formatting; files under 500 lines. Baseline fixture hashes verified unchanged.",
+  "exclusions": [
+    "No GPU execution or GPU lease used.",
+    "No V3d ToPixMap receiver/restore/tiling refactor or full ToPixMap completion claim.",
+    "No live OCCT/native oracle, performance measurements, ThreadSanitizer, or Miri. Send/Sync bounds are compile-time checks of these context types, not new lock-free or concurrency certification.",
+    "Original dump experiment and its unresolved lifetime diagnostics remain preserved separately.",
+    "No driver_view or window/lifecycle edits; GUI branch overlap limited to lib.rs module registration at integration."
+  ],
+  "remaining_dependencies": [
+    "A rendering consumer needs a completed FrameCapture from the existing renderer. This entrypoint does not acquire a view or redraw it.",
+    "Full V3d ToPixMap integration still requires view receiver lifetime and restoration policy; this adapter does not solve or import that engine.",
+    "Root must merge and run integration checks before this worktree task is complete."
+  ],
+  "toolchain": [
+    "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "binary: rustc",
+    "commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4",
+    "commit-date: 2026-09-28",
+    "host: x86_64-unknown-linux-gnu",
+    "release: 1.99.0",
+    "LLVM version: 23.1.1"
+  ],
+  "log_sha256": {
+    "adapter-tests.log.gz": "149ba02a183bf30af31cf16ea0d35a86cd5ce8a7d7eb3c3783838cd7d7de421c",
+    "clippy.log.gz": "a59f5e2586453984b38aab94766ae78e6e0831f8e59c4a89d079e55ec37f4e31",
+    "consumer-check.log.gz": "459f4534dac37d0e5f751a76a545265bb9dcaf9376b88e85d5863112ea464dd8",
+    "fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "post-refactor-owned.log.gz": "3447d8e9c359ff5a443f53b5465fed0be56030e455cb831a3d1da88f836ceb94",
+    "pre-refactor.log.gz": "f90c2fb7012f4336e804db6ef85a415fd96b6e6616601ea825393b449950a598"
+  }
+}

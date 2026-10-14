@@ -1,0 +1,27 @@
+{
+  "base_revision": "171fd9bc0cdda36158609460d5beedcb9336ad5c",
+  "phase": "Owned capture fixtures before production converter refactor or destination adapter.",
+  "command": "CARGO_BUILD_JOBS=2 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 cargo test --locked -p martensite-vulkan --lib view_capture_owned_tests",
+  "exit": 0,
+  "passed": 3,
+  "ignored": 0,
+  "fixture_sha256": {
+    "crates/vulkan/src/capture_owned_fixture.rs": "a9df7c13dcfc9160e702583d3012b81d8710a8bf5f2859c0fdea3b94d4a832ae",
+    "crates/vulkan/src/view_capture_owned_tests.rs": "49b95f0707385e34cdc1aee3f73f43369ef9709bed4b9cf5e884bc6aff152ccc"
+  },
+  "expected_kind": "Independent hand-authored 2x2 color rows, channel projections, IEEE-754 depth encodings, padding sentinels and physical/logical row orientation.",
+  "exclusions": [
+    "No GPU execution",
+    "No live OCCT evidence",
+    "No new image-destination or ToPixMap completion claim"
+  ],
+  "toolchain": [
+    "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "binary: rustc",
+    "commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4",
+    "commit-date: 2026-09-28",
+    "host: x86_64-unknown-linux-gnu",
+    "release: 1.99.0",
+    "LLVM version: 23.1.1"
+  ]
+}
