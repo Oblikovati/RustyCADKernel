@@ -1,0 +1,371 @@
+{
+  "source": "272aa25b46ffd0e04312e706cce2f72e6cdcb252",
+  "commands": [
+    {
+      "name": "platform",
+      "argv": [
+        "bash",
+        "-c",
+        "uname -a; /home/vmiguel/.cargo/bin/rustc +1.99.0 -Vv; /home/vmiguel/.cargo/bin/cargo +1.99.0 -V"
+      ],
+      "seconds": 0.022594690322875977,
+      "status": 0
+    },
+    {
+      "name": "tests",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features"
+      ],
+      "seconds": 184.89237260818481,
+      "status": 0
+    },
+    {
+      "name": "doctests",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "seconds": 1.3552873134613037,
+      "status": 0
+    },
+    {
+      "name": "docs",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "doc",
+        "-p",
+        "rustycad-tkbo",
+        "--no-deps",
+        "--all-features"
+      ],
+      "seconds": 1.3480980396270752,
+      "status": 0
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "seconds": 0.11925196647644043,
+      "status": 0
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "/home/vmiguel/.cargo/bin/cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "seconds": 6.767700910568237,
+      "status": 0
+    },
+    {
+      "name": "body-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::body_view::actual_replay_tests::actual_body_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.56512451171875,
+      "status": 0
+    },
+    {
+      "name": "body-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::body_view::actual_replay_tests::actual_body_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.5631296634674072,
+      "status": 0
+    },
+    {
+      "name": "symbolic-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::body_view::row_replay_tests::symbolic_body_row_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.008956670761108398,
+      "status": 0
+    },
+    {
+      "name": "symbolic-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::body_view::row_replay_tests::symbolic_body_row_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.006534576416015625,
+      "status": 0
+    },
+    {
+      "name": "publication-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::replay_tests::publication_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.6988554000854492,
+      "status": 0
+    },
+    {
+      "name": "publication-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::replay_tests::publication_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.703747034072876,
+      "status": 0
+    },
+    {
+      "name": "map-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::owned_request::names::body_map::tests::semantic_map_replay_probe",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.006551980972290039,
+      "status": 0
+    },
+    {
+      "name": "map-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::owned_request::names::body_map::tests::semantic_map_replay_probe",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.0063953399658203125,
+      "status": 0
+    },
+    {
+      "name": "frozen-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.9185500144958496,
+      "status": 0
+    },
+    {
+      "name": "frozen-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.8731353282928467,
+      "status": 0
+    },
+    {
+      "name": "ordered-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::ordered_validation::replay_tests::ordered_validation_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.21712779998779297,
+      "status": 0
+    },
+    {
+      "name": "ordered-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::ordered_validation::replay_tests::ordered_validation_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.2221393585205078,
+      "status": 0
+    },
+    {
+      "name": "joined-measures-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::joined_measures::tests_replay::joined_measure_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.002798795700073242,
+      "status": 0
+    },
+    {
+      "name": "joined-measures-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.5212907791137695,
+      "status": 0
+    },
+    {
+      "name": "joined-measures-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::frozen::joined_measures::tests::replay_tests::joined_measure_process_replay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.5208873748779297,
+      "status": 0
+    },
+    {
+      "name": "complete-measures-1",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::region_certificate::measurements::tests::complete_tests::replay_tests::complete_prism_measure_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.5073204040527344,
+      "status": 0
+    },
+    {
+      "name": "complete-measures-2",
+      "argv": [
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::region_certificate::measurements::tests::complete_tests::replay_tests::complete_prism_measure_process_receipt",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.4964883327484131,
+      "status": 0
+    },
+    {
+      "name": "cost",
+      "argv": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/tmp/martensite-body-view-evidence/actual-final/cost.time",
+        "/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+        "--exact",
+        "sketch_region_prism::publication::body_view::storage_tests::actual_body_retained_storage_and_projection_latency_observations",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "seconds": 0.576061487197876,
+      "status": 0
+    }
+  ],
+  "replays": [
+    {
+      "name": "body",
+      "bytes": 2260259,
+      "sha256": "6a114275c5c7feacd3342f1d1fe34fb4f03a974a10b707303002fe863297f0fd",
+      "processes": 2
+    },
+    {
+      "name": "symbolic",
+      "bytes": 11672,
+      "sha256": "5467f12ce3ddab08422e0462a8201d638dea184500ebeb920a0ffa7074112e30",
+      "processes": 2
+    },
+    {
+      "name": "publication",
+      "bytes": 2202990,
+      "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107",
+      "processes": 2
+    },
+    {
+      "name": "map",
+      "bytes": 10571,
+      "sha256": "ffbdcd9461a1acb2349d514610a6f24b6cdadd03b460bf9394a65240b88247ff",
+      "processes": 2
+    },
+    {
+      "name": "frozen",
+      "bytes": 89921,
+      "sha256": "88e28942e1fc6ad301a90f5f07624962d842f0262bde1377103cd3470a871fb4",
+      "processes": 2
+    },
+    {
+      "name": "ordered",
+      "bytes": 1394630,
+      "sha256": "af47d670e1d33f0a7cac93d73c92e490e7e5dc28909d2a6a5b78e3dceac9c21f",
+      "processes": 2
+    },
+    {
+      "name": "joined-measures",
+      "bytes": 193495,
+      "sha256": "78bf68fc0feccec38f467abc8108bec7e4b52a1875a7ec6786bf933dcfc15f93",
+      "processes": 2
+    },
+    {
+      "name": "complete-measures",
+      "bytes": 206,
+      "sha256": "a645fe4aebc0ae245fd296b3bd4db5393af331c9eee3516be9ce60ce40a58c13",
+      "processes": 2
+    }
+  ],
+  "tracked_files": 49925,
+  "bookends_equal": true,
+  "harness_correction": "Initial joined-measures selector matched zero tests; retained log, corrected exact paths from --list; remaining probes executed once per independent process.",
+  "scope": {
+    "toolkit": "TKBO",
+    "jobs": 2,
+    "toolchain": "1.99.0",
+    "tests": 1755,
+    "doctests": 35,
+    "body_tests": 36,
+    "public_api_acceptance": false,
+    "tsan_executed": false,
+    "previous_release_benchmark": false
+  }
+}

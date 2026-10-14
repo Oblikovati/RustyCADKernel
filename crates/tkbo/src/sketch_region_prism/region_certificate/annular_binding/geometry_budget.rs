@@ -30,17 +30,7 @@ pub(super) fn inspect(
     for root in [selected.as_ref(), &copied.base, body] {
         root_counts(request, root, &mut counts)?;
     }
-    if let Ok(sources) = copied.chart_sources.as_ref() {
-        require(
-            "bounded retained copied source boundaries",
-            sources.boundaries.len(),
-            2,
-        )?;
-        for boundary in &sources.boundaries {
-            counts.push(captured_count(&boundary.space.curve)?);
-            counts.push(captured_count(&boundary.pcurve)?);
-        }
-    }
+    retained_counts(copied, &mut counts)?;
     admit_two_loop_polynomial_counts(request, &counts, reserved)
         .map_err(|cause| Box::new(AnnularBindingCause::Region(cause)))
 }
@@ -84,25 +74,9 @@ fn surface_count(
         counts.push(0);
         return Ok(());
     }
-    let handle = surface.cast::<GeomSurfaceOfLinearExtrusion>();
-    let extrusion = handle.get().ok_or_else(|| {
-        representation(
-            "plane or stored linear extrusion",
-            surface
-                .get()
-                .map_or("null", |value| value.dynamic_type().name()),
-        )
-    })?;
-    no_alternate(
-        "extrusion surface",
-        extrusion.eval_representation().is_some(),
-    )?;
-    counts.push(admit_count(
-        request,
-        space_count(&extrusion.basis_curve())?,
-    )?);
-    Ok(())
+    extrusion_count(request, &surface, counts)
 }
+
 fn space_count(curve: &Handle<dyn GeomCurve>) -> AnnularCheck<'static, i32> {
     let handle = curve.cast::<GeomBezierCurve>();
     if let Some(curve) = handle.get() {
@@ -198,6 +172,47 @@ fn representation(expected: &'static str, actual: &str) -> Box<AnnularBindingCau
         },
     ))
 }
+
+fn retained_counts(copied: &PrismCopiedSelection, counts: &mut Vec<i32>) -> AnnularCheck<'static> {
+    if let Ok(sources) = copied.chart_sources.as_ref() {
+        require(
+            "bounded retained copied source boundaries",
+            sources.boundaries.len(),
+            2,
+        )?;
+        for boundary in &sources.boundaries {
+            counts.push(captured_count(&boundary.space.curve)?);
+            counts.push(captured_count(&boundary.pcurve)?);
+        }
+    }
+    Ok(())
+}
+
+fn extrusion_count(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    surface: &Handle<dyn rustycad_tkg3d::geom::GeomSurface>,
+    counts: &mut Vec<i32>,
+) -> AnnularCheck<'static> {
+    let handle = surface.cast::<GeomSurfaceOfLinearExtrusion>();
+    let extrusion = handle.get().ok_or_else(|| {
+        representation(
+            "plane or stored linear extrusion",
+            surface
+                .get()
+                .map_or("null", |value| value.dynamic_type().name()),
+        )
+    })?;
+    no_alternate(
+        "extrusion surface",
+        extrusion.eval_representation().is_some(),
+    )?;
+    counts.push(admit_count(
+        request,
+        space_count(&extrusion.basis_curve())?,
+    )?);
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

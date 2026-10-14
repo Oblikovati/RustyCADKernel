@@ -22,20 +22,7 @@ pub(super) fn pair_members(
     )?;
     let mut members = Vec::new();
     for actual in selected {
-        let matches: Vec<_> = copied
-            .iter()
-            .filter(|c| matches_selected_copy_context(observations, actual, c))
-            .collect();
-        require(
-            "unique copied use from all mapped ancestors",
-            matches.len(),
-            1,
-        )?;
-        members.push(AnnularCopiedMember {
-            key: member_key(names, actual)?,
-            selected: snapshot(actual)?,
-            copied: snapshot(matches[0])?,
-        });
+        members.push(pair_member(names, actual, copied, observations)?);
     }
     complete_pairs(&members)?;
     preserve_physical_sharing(&members)?;
@@ -77,18 +64,7 @@ fn member_key(
         });
     }
     let wire = wire_name(names, actual)?;
-    let role = match kind {
-        ShapeEnum::Wire => TwoLoopMemberRole::Wire,
-        ShapeEnum::Edge => TwoLoopMemberRole::Boundary,
-        ShapeEnum::Vertex => endpoint_role(actual)?,
-        _ => {
-            return Err(Box::new(AnnularBindingCause::Count {
-                required: "face/wire/edge/vertex region member",
-                actual: kind as usize,
-                expected: ShapeEnum::Vertex as usize,
-            }));
-        }
-    };
+    let role = member_role(kind, actual)?;
     Ok(TwoLoopMemberKey {
         candidate: names.name,
         wire: Some(wire),
@@ -153,4 +129,42 @@ pub(super) fn preserve_physical_sharing(members: &[AnnularCopiedMember]) -> Annu
         }
     }
     Ok(())
+}
+
+fn pair_member(
+    names: &TwoLoopCandidateBinding,
+    actual: &PrismBodyContext,
+    copied: &[PrismBodyContext],
+    observations: &[PrismCopyObservation],
+) -> AnnularCheck<'static, AnnularCopiedMember> {
+    let matches: Vec<_> = copied
+        .iter()
+        .filter(|c| matches_selected_copy_context(observations, actual, c))
+        .collect();
+    require(
+        "unique copied use from all mapped ancestors",
+        matches.len(),
+        1,
+    )?;
+    Ok(AnnularCopiedMember {
+        key: member_key(names, actual)?,
+        selected: snapshot(actual)?,
+        copied: snapshot(matches[0])?,
+    })
+}
+
+fn member_role(
+    kind: ShapeEnum,
+    actual: &PrismBodyContext,
+) -> AnnularCheck<'static, TwoLoopMemberRole> {
+    match kind {
+        ShapeEnum::Wire => Ok(TwoLoopMemberRole::Wire),
+        ShapeEnum::Edge => Ok(TwoLoopMemberRole::Boundary),
+        ShapeEnum::Vertex => endpoint_role(actual),
+        _ => Err(Box::new(AnnularBindingCause::Count {
+            required: "face/wire/edge/vertex region member",
+            actual: kind as usize,
+            expected: ShapeEnum::Vertex as usize,
+        })),
+    }
 }

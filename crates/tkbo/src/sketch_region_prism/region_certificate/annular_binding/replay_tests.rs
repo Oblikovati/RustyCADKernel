@@ -10,12 +10,18 @@ fn annular_binding_process_replay() {
     let binding = tests::actual_binding();
     let serial = fresh(&binding);
     assert_eq!(serial, binding.replay_bytes());
+    check_threads(&binding, &serial);
+    let encoded: String = serial.iter().map(|b| format!("{b:02x}")).collect();
+    println!("actual-annular-binding-v2:{encoded}");
+}
+
+fn check_threads(binding: &AnnularPrismBinding, serial: &[u8]) {
     std::thread::scope(|scope| {
         let workers: Vec<_> = (0..3)
             .map(|_| {
                 scope.spawn(|| {
                     for _ in 0..4 {
-                        assert_eq!(fresh(&binding), serial);
+                        assert_eq!(fresh(binding), serial);
                     }
                     let independent = tests::actual_binding();
                     assert_eq!(fresh(&independent), serial);
@@ -26,6 +32,4 @@ fn annular_binding_process_replay() {
             worker.join().unwrap();
         }
     });
-    let encoded: String = serial.iter().map(|b| format!("{b:02x}")).collect();
-    println!("actual-annular-binding-v2:{encoded}");
 }

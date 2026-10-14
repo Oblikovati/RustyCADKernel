@@ -21,18 +21,7 @@ pub(super) fn capture_guarded(
     cancelled: &mut impl FnMut() -> bool,
     preflight: &mut impl FnMut() -> AnnularCheck<'static>,
 ) -> AnnularCheck<'static, (Vec<AnnularBoundChart>, Vec<RegionObservedContext>)> {
-    let mut refusal = None;
-    let actual = capture_actual_charts_guarded(receipt, cancelled, admit_faces, &mut || {
-        if let Err(cause) = preflight() {
-            refusal = Some(cause);
-            return Err(PrismBindingFailure::Cancelled);
-        }
-        Ok(())
-    });
-    if let Some(cause) = refusal {
-        return Err(cause);
-    }
-    let actual = actual.map_err(|cause| Box::new(AnnularBindingCause::Chart(Box::new(cause))))?;
+    let actual = capture_native(receipt, cancelled, preflight)?;
     preflight()?;
     let diagnostic = receipt
         .diagnostic
@@ -138,24 +127,9 @@ fn bind_trims(
     )?;
     let mut trims = Vec::new();
     for trim in &chart.captured.trims {
-        let matches: Vec<_> = actual
-            .iter()
-            .filter(|c| c.occurrence == trim.output)
-            .collect();
-        require("unique full directed trim occurrence", matches.len(), 1)?;
-        trims.push(AnnularTrimIdentity {
-            source: source_context(copied, &trim.source)?.clone(),
-            output: (*matches[0]).clone(),
-            role: trim.role,
-        });
+        trims.push(bind_trim(trim, &actual, copied)?);
     }
-    for actual in actual {
-        require(
-            "one retained identity per actual trim",
-            trims.iter().filter(|t| t.output == *actual).count(),
-            1,
-        )?;
-    }
+    complete_trim_uses(&actual, &trims)?;
     Ok(trims)
 }
 fn below(child: &RegionObservedContext, parent: &RegionObservedContext) -> bool {
@@ -168,13 +142,7 @@ fn complete_roles(
     charts: &[AnnularBoundChart],
     boundaries: &[AnnularBoundaryBinding],
 ) -> AnnularCheck<'static> {
-    for role in [PrismImageRole::First, PrismImageRole::Last] {
-        require(
-            "one source-face cap image per role",
-            charts.iter().filter(|c| c.identity.role == role).count(),
-            1,
-        )?;
-    }
+    complete_caps(charts)?;
     for boundary in boundaries {
         require(
             "one generated chart per authored source",
@@ -190,4 +158,65 @@ fn complete_roles(
         charts.iter().map(|c| c.trims.len()).sum(),
         12,
     )
+}
+
+fn capture_native(
+    receipt: &PrismReceipt,
+    cancelled: &mut impl FnMut() -> bool,
+    preflight: &mut impl FnMut() -> AnnularCheck<'static>,
+) -> AnnularCheck<'static, Vec<BoundPrismChart>> {
+    let mut refusal = None;
+    let actual = capture_actual_charts_guarded(receipt, cancelled, admit_faces, &mut || {
+        if let Err(cause) = preflight() {
+            refusal = Some(cause);
+            return Err(PrismBindingFailure::Cancelled);
+        }
+        Ok(())
+    });
+    if let Some(cause) = refusal {
+        return Err(cause);
+    }
+    actual.map_err(|cause| Box::new(AnnularBindingCause::Chart(Box::new(cause))))
+}
+
+fn bind_trim(
+    trim: &super::super::super::surface_charts::CapturedPrismTrim,
+    actual: &[&RegionObservedContext],
+    copied: &AnnularCopyCapture,
+) -> AnnularCheck<'static, AnnularTrimIdentity> {
+    let matches: Vec<_> = actual
+        .iter()
+        .filter(|c| c.occurrence == trim.output)
+        .collect();
+    require("unique full directed trim occurrence", matches.len(), 1)?;
+    Ok(AnnularTrimIdentity {
+        source: source_context(copied, &trim.source)?.clone(),
+        output: (*matches[0]).clone(),
+        role: trim.role,
+    })
+}
+
+fn complete_caps(charts: &[AnnularBoundChart]) -> AnnularCheck<'static> {
+    for role in [PrismImageRole::First, PrismImageRole::Last] {
+        require(
+            "one source-face cap image per role",
+            charts.iter().filter(|c| c.identity.role == role).count(),
+            1,
+        )?;
+    }
+    Ok(())
+}
+
+fn complete_trim_uses(
+    actual: &[&RegionObservedContext],
+    trims: &[AnnularTrimIdentity],
+) -> AnnularCheck<'static> {
+    for actual in actual {
+        require(
+            "one retained identity per actual trim",
+            trims.iter().filter(|t| t.output == **actual).count(),
+            1,
+        )?;
+    }
+    Ok(())
 }

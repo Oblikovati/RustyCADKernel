@@ -20,14 +20,7 @@ pub(super) fn encode(
     encode_joined_block(region.replay_bytes(), &mut bytes);
     encode_exact_prism_limits(&value.limits, &mut bytes);
     encode_joined_text(&value.signed_jacobian.to_string(), &mut bytes);
-    encode_joined_block(
-        &encode_prism_source_geometry(&value.copy.selected),
-        &mut bytes,
-    );
-    encode_joined_block(
-        &encode_prism_source_geometry(&value.copy.copied),
-        &mut bytes,
-    );
+    copied_geometry(&value.copy, &mut bytes);
     copied_members(&value.copy.members, &mut bytes)?;
     boundaries(&value.boundaries, &mut bytes)?;
     charts(&value.charts, &mut bytes)?;
@@ -148,14 +141,9 @@ fn chart_proof(chart: &AnnularBoundChart, bytes: &mut Vec<u8>) -> AnnularCheck<'
     if let Some(height) = chart.chart.proof.side_height {
         numbers([height], bytes);
     }
-    bytes.extend((chart.trims.len() as u64).to_le_bytes());
-    for trim in &chart.trims {
-        context(&trim.source, bytes)?;
-        context(&trim.output, bytes)?;
-        bytes.push(trim.role as u8);
-    }
-    Ok(())
+    trim_contexts(&chart.trims, bytes)
 }
+
 fn contexts(rows: &[RegionObservedContext], bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
     bytes.extend((rows.len() as u64).to_le_bytes());
     for row in rows {
@@ -214,4 +202,19 @@ fn parent_sequence(parents: &[TwoLoopOriginalUse], bytes: &mut Vec<u8>) {
         bytes.extend(parent.source.0.to_le_bytes());
         bytes.push(parent.role as u8);
     }
+}
+
+fn copied_geometry(value: &AnnularCopyCapture, bytes: &mut Vec<u8>) {
+    encode_joined_block(&encode_prism_source_geometry(&value.selected), bytes);
+    encode_joined_block(&encode_prism_source_geometry(&value.copied), bytes);
+}
+
+fn trim_contexts(trims: &[AnnularTrimIdentity], bytes: &mut Vec<u8>) -> AnnularCheck<'static> {
+    bytes.extend((trims.len() as u64).to_le_bytes());
+    for trim in trims {
+        context(&trim.source, bytes)?;
+        context(&trim.output, bytes)?;
+        bytes.push(trim.role as u8);
+    }
+    Ok(())
 }

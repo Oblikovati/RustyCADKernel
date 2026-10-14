@@ -15,24 +15,7 @@ pub(super) fn inspect(
     receipt: &PrismReceipt,
     maximum_retained_units: usize,
 ) -> AnnularCheck<'static, AnnularHierarchyBudget> {
-    let selected = receipt
-        .input
-        .selected
-        .as_ref()
-        .ok_or_else(|| absent("selected hierarchy"))?;
-    let copied = receipt
-        .copied
-        .as_ref()
-        .ok_or_else(|| absent("copied hierarchy"))?;
-    let body = receipt
-        .diagnostic
-        .as_ref()
-        .ok_or_else(|| absent("swept hierarchy"))?;
-    let roots = [
-        root(&selected.face, 3, 9)?,
-        root(&copied.base, 3, 9)?,
-        root(&body.body, 5, 48)?,
-    ];
+    let roots = inspect_roots(receipt)?;
     // Each canonical directed context owns one occurrence plus complete ancestor and child-slot rosters.
     // Reused views of those contexts are not separate logical operands or a byte-allocation measure.
     let retained_units = roots
@@ -82,4 +65,25 @@ fn absent(required: &'static str) -> Box<AnnularBindingCause<'static>> {
         actual: 0,
         expected: 1,
     })
+}
+
+fn inspect_roots(receipt: &PrismReceipt) -> AnnularCheck<'static, [HistoryHierarchyCensus; 3]> {
+    let selected = receipt
+        .input
+        .selected
+        .as_ref()
+        .ok_or_else(|| absent("selected hierarchy"))?;
+    let copied = receipt
+        .copied
+        .as_ref()
+        .ok_or_else(|| absent("copied hierarchy"))?;
+    let body = receipt
+        .diagnostic
+        .as_ref()
+        .ok_or_else(|| absent("swept hierarchy"))?;
+    Ok([
+        root(&selected.face, 3, 9)?,
+        root(&copied.base, 3, 9)?,
+        root(&body.body, 5, 48)?,
+    ])
 }

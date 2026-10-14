@@ -1,0 +1,113 @@
+{
+  "structural_parent": "b83215772234f1458b3f00d09ff63f430ca153fd",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "source_files": 12858,
+  "source_unchanged": true,
+  "focused_tests": 42,
+  "doctests": 35,
+  "clippy": "all-targets/all-features -D warnings passed",
+  "fmt": "passed",
+  "replays": {
+    "publication-v1": {
+      "bytes": 2202990,
+      "sha256": "accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107",
+      "two_processes_equal": true
+    },
+    "publication-v2": {
+      "bytes": 2202990,
+      "sha256": "e68be877959b90ae723b2386ae83db09e0a169149571433d5f3e01fe1be7d878",
+      "two_processes_equal": true
+    },
+    "typed-preparation-v1": {
+      "bytes": 5807,
+      "sha256": "a27a9465306496b6d8fa5c732e80bc39e7a2976aa6a074ae67612bddfad196a8",
+      "two_processes_equal": true,
+      "integrated_baseline_equal": true
+    }
+  },
+  "commands": [
+    [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication-diagnostics/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "--exact",
+      "sketch_region_prism::publication::replay_tests::publication_process_replay",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication-diagnostics/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "--exact",
+      "sketch_region_prism::publication::replay_tests::publication_process_replay",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication-diagnostics/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "--exact",
+      "sketch_region_prism::publication::operation_v2_tests::v2_publication_process_replay",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication-diagnostics/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "--exact",
+      "sketch_region_prism::publication::operation_v2_tests::v2_publication_process_replay",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication-diagnostics/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "--exact",
+      "sketch_region_prism::owned_request::diagnostic_codec_tests::full_typed_refusal_process_receipt",
+      "--test-threads=1"
+    ],
+    [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-publication-diagnostics/target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+      "--exact",
+      "sketch_region_prism::owned_request::diagnostic_codec_tests::full_typed_refusal_process_receipt",
+      "--test-threads=1"
+    ]
+  ],
+  "tsan": "incomplete: prior unchanged-host startup control failure; no repeated attempt",
+  "scope": "Private V2 producer; sealed invocation adapter and full operation acceptance pending",
+  "source_revision": "8d04f089627fd7cc0a23e90ef6d392fb236e45b3",
+  "cargo_commands": [
+    [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--lib",
+      "sketch_region_prism::publication::",
+      "--",
+      "--test-threads=1"
+    ],
+    [
+      "cargo",
+      "clippy",
+      "-p",
+      "rustycad-tkbo",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    [
+      "cargo",
+      "test",
+      "-p",
+      "rustycad-tkbo",
+      "--doc"
+    ],
+    [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ]
+  ],
+  "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "jobs": 2,
+  "archive_sha256": "f4b8abb82ad249906493710cd51ebdd1ba26f4f3610bcf0c2e437725d74404d4"
+}

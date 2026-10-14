@@ -32,7 +32,19 @@ mod tests {
     use super::*;
     #[test]
     fn encoding_preserves_native_and_cancelled_causes_without_reclassification() {
-        let cases = [
+        for (cause, expected) in encoding_cases() {
+            let failure = AnnularEmbeddingFailure {
+                operation: 77,
+                selected_candidate: 301,
+                phase: AnnularEmbeddingPhase::Incidences,
+                requested: super::super::tests::options(),
+                cause: AnnularEmbeddingCause::Encoding(Box::new(cause)),
+            };
+            assert_eq!(failure.classification(), expected);
+        }
+    }
+    fn encoding_cases() -> [(AnnularBindingCause<'static>, TwoLoopRefusalClass); 2] {
+        [
             (
                 AnnularBindingCause::Native(rustycad_tkernel::standard::Failure::with_message(
                     "Standard_Failure",
@@ -44,16 +56,6 @@ mod tests {
                 AnnularBindingCause::Cancelled(AnnularBindingStage::Commit),
                 TwoLoopRefusalClass::Cancelled,
             ),
-        ];
-        for (cause, expected) in cases {
-            let failure = AnnularEmbeddingFailure {
-                operation: 77,
-                selected_candidate: 301,
-                phase: AnnularEmbeddingPhase::Incidences,
-                requested: super::super::tests::options(),
-                cause: AnnularEmbeddingCause::Encoding(Box::new(cause)),
-            };
-            assert_eq!(failure.classification(), expected);
-        }
+        ]
     }
 }

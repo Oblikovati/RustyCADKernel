@@ -23,7 +23,7 @@ pub(super) fn encode(
 }
 fn member_row(bytes: &mut Vec<u8>, row: &SemanticMemberBinding) {
     frozen_member(bytes, row.frozen);
-    semantic_member(bytes, &row.semantic);
+    encode_semantic_member_key(bytes, &row.semantic);
     bytes.push(u8::from(row.output_slot.is_some()));
     if let Some(value) = row.output_slot {
         slot(bytes, value);
@@ -31,9 +31,13 @@ fn member_row(bytes: &mut Vec<u8>, row: &SemanticMemberBinding) {
 }
 fn use_row(bytes: &mut Vec<u8>, row: &SemanticUseBinding) {
     frozen_use(bytes, &row.frozen);
-    word(bytes, row.semantic.0.len() as u64);
-    for step in &row.semantic.0 {
-        semantic_member(bytes, &step.member);
+    encode_semantic_use_key(bytes, &row.semantic);
+}
+/// Encode the complete ancestry without lookup; `encode_semantic_use_key(bytes, key)`.
+pub(crate) fn encode_semantic_use_key(bytes: &mut Vec<u8>, key: &SemanticUseKey) {
+    word(bytes, key.0.len() as u64);
+    for step in &key.0 {
+        encode_semantic_member_key(bytes, &step.member);
         slot(bytes, step.directed_use);
     }
 }
@@ -49,7 +53,8 @@ fn frozen_use(bytes: &mut Vec<u8>, key: &FrozenUseKey) {
         word(bytes, token.0);
     }
 }
-fn semantic_member(bytes: &mut Vec<u8>, key: &SemanticMemberKey) {
+/// Encode caller-qualified source semantics; `encode_semantic_member_key(bytes, key)`.
+pub(crate) fn encode_semantic_member_key(bytes: &mut Vec<u8>, key: &SemanticMemberKey) {
     word(bytes, key.operation.0);
     word(bytes, key.source.0);
     slot(bytes, key.source_member);

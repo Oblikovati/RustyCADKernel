@@ -23,43 +23,11 @@ impl AnnularBindingProgress for RecordedProgress {
 #[test]
 fn every_observed_cancellation_prevents_annular_binding_issuance() {
     tests::with_prepared(|request, receipt| {
-        let mut baseline = RecordedProgress::default();
-        assert!(
-            bind_annular_prism_v2(
-                request,
-                tests::fresh_region(request),
-                receipt,
-                &mut baseline
-            )
-            .is_ok()
-        );
+        let baseline = completed_progress(request, receipt);
         for (index, stage) in baseline.stages.iter().enumerate() {
-            let mut progress = RecordedProgress {
-                stop: Some(index),
-                ..Default::default()
-            };
-            let Err(failure) = bind_annular_prism_v2(
-                request,
-                tests::fresh_region(request),
-                receipt,
-                &mut progress,
-            ) else {
-                panic!("expected cancellation at {index}/{stage:?}");
-            };
-            assert_eq!(failure.classification(), TwoLoopRefusalClass::Cancelled);
-            assert_eq!(failure.stage, *stage);
-            assert_eq!(progress.stages, baseline.stages[..=index]);
+            cancelled_at(request, receipt, &baseline.stages, index, *stage);
         }
-        let mut final_progress = RecordedProgress::default();
-        assert!(
-            bind_annular_prism_v2(
-                request,
-                tests::fresh_region(request),
-                receipt,
-                &mut final_progress
-            )
-            .is_ok()
-        );
+        let final_progress = completed_progress(request, receipt);
         assert_eq!(final_progress.stages, baseline.stages);
     });
 }
@@ -72,23 +40,7 @@ fn callback_failure_keeps_operation_stage_and_original_typed_cause() {
         AnnularBindingStage::Commit,
     ] {
         tests::with_actual(|request, region, receipt| {
-            let mut progress = RecordedProgress {
-                fail: Some(stage),
-                ..Default::default()
-            };
-            let Err(failure) = bind_annular_prism_v2(request, region, receipt, &mut progress)
-            else {
-                panic!("expected callback failure");
-            };
-            assert_eq!(failure.classification(), TwoLoopRefusalClass::Failed);
-            assert_eq!(
-                (failure.operation, failure.selected_candidate, failure.stage),
-                (77, 301, stage)
-            );
-            assert!(matches!(
-                *failure.cause,
-                AnnularBindingCause::Callback { .. }
-            ));
+            assert_callback_failure(request, region, receipt, stage);
         });
     }
 }
@@ -165,20 +117,7 @@ fn all_current_parent_dispositions_are_owned_without_deduplicating_occurrences()
         .iter()
         .find(|row| row.key.wire.is_none())
         .unwrap();
-    let expected: Vec<_> = [101, 202]
-        .into_iter()
-        .flat_map(|source| {
-            [
-                TwoLoopMemberRole::Boundary,
-                TwoLoopMemberRole::NativeStart,
-                TwoLoopMemberRole::NativeEnd,
-            ]
-            .map(|role| TwoLoopOriginalUse {
-                source: RegionSourceId(source),
-                role,
-            })
-        })
-        .collect();
+    let expected = expected_original_parents();
     assert_eq!(face.selected[2], expected);
     assert_eq!(face.copied[2], face.selected[2]);
 }
@@ -231,32 +170,13 @@ fn captured_trim_parent_union_cannot_substitute_equal_count_foreign_parent() {
         let Err(cause) = parents::capture(request, receipt, &copy, 0, &charts) else {
             panic!("expected parent bridge refusal");
         };
-        assert!(matches!(
-            *cause,
-            AnnularBindingCause::Count {
-                required: "captured chart/trim parents equal legacy ordered unique projection",
-                actual: 0,
-                expected: 1
-            }
-        ));
+        assert_parent_bridge_cause(*cause);
     });
 }
 #[test]
 fn legacy_flat_parents_keep_first_seen_order_while_classes_keep_duplicates() {
     tests::with_actual(|request, _, _| {
-        let parents: Vec<_> = request
-            .sources
-            .iter()
-            .map(|source| {
-                let actual = PartitionOccurrenceIdentity::capture(source.shape);
-                crate::sketch_region::OriginalMemberIdentity {
-                    source: source.identity,
-                    topology_address: actual.topology_address,
-                    location: actual.location,
-                    orientation: actual.orientation,
-                }
-            })
-            .collect();
+        let parents = native_original_parents(request);
         let relation = crate::sketch_region::ArrangementRelation {
             output: rustycad_tkbrep::topods::Shape::default(),
             preserved: vec![parents[1].clone(), parents[0].clone(), parents[1].clone()],
@@ -268,22 +188,137 @@ fn legacy_flat_parents_keep_first_seen_order_while_classes_keep_duplicates() {
         let rows: Vec<_> = flat.iter().map(std::slice::from_ref).collect();
         let mapped = map_two_loop_original_parents(request, &rows)
             .unwrap_or_else(|_| panic!("exact authored singleton parents"));
-        assert_eq!(
-            mapped.rows,
-            [
-                vec![TwoLoopOriginalUse {
-                    source: RegionSourceId(202),
-                    role: TwoLoopMemberRole::Boundary
-                }],
-                vec![TwoLoopOriginalUse {
-                    source: RegionSourceId(101),
-                    role: TwoLoopMemberRole::Boundary
-                }]
-            ]
-        );
+        assert_flat_parent_mapping(&mapped);
         assert_eq!(
             relation.preserved.len() + relation.modified.len() + relation.generated.len(),
             6
         );
     });
+}
+
+fn completed_progress(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+) -> RecordedProgress {
+    let mut progress = RecordedProgress::default();
+    assert!(
+        bind_annular_prism_v2(
+            request,
+            tests::fresh_region(request),
+            receipt,
+            &mut progress
+        )
+        .is_ok()
+    );
+    progress
+}
+
+fn cancelled_at(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+    baseline: &[AnnularBindingStage],
+    index: usize,
+    stage: AnnularBindingStage,
+) {
+    let mut progress = RecordedProgress {
+        stop: Some(index),
+        ..Default::default()
+    };
+    let Err(failure) = bind_annular_prism_v2(
+        request,
+        tests::fresh_region(request),
+        receipt,
+        &mut progress,
+    ) else {
+        panic!("expected cancellation at {index}/{stage:?}");
+    };
+    assert_eq!(failure.classification(), TwoLoopRefusalClass::Cancelled);
+    assert_eq!(failure.stage, stage);
+    assert_eq!(progress.stages, baseline[..=index]);
+}
+
+fn assert_callback_failure(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    region: Box<TwoLoopRegionCertificate>,
+    receipt: &PrismReceipt,
+    stage: AnnularBindingStage,
+) {
+    let mut progress = RecordedProgress {
+        fail: Some(stage),
+        ..Default::default()
+    };
+    let Err(failure) = bind_annular_prism_v2(request, region, receipt, &mut progress) else {
+        panic!("expected callback failure");
+    };
+    assert_eq!(failure.classification(), TwoLoopRefusalClass::Failed);
+    assert_eq!(
+        (failure.operation, failure.selected_candidate, failure.stage),
+        (77, 301, stage)
+    );
+    assert!(matches!(
+        *failure.cause,
+        AnnularBindingCause::Callback { .. }
+    ));
+}
+
+fn expected_original_parents() -> Vec<TwoLoopOriginalUse> {
+    [101, 202]
+        .into_iter()
+        .flat_map(|source| {
+            [
+                TwoLoopMemberRole::Boundary,
+                TwoLoopMemberRole::NativeStart,
+                TwoLoopMemberRole::NativeEnd,
+            ]
+            .map(|role| TwoLoopOriginalUse {
+                source: RegionSourceId(source),
+                role,
+            })
+        })
+        .collect()
+}
+
+fn assert_parent_bridge_cause(cause: AnnularBindingCause<'_>) {
+    assert!(matches!(
+        cause,
+        AnnularBindingCause::Count {
+            required: "captured chart/trim parents equal legacy ordered unique projection",
+            actual: 0,
+            expected: 1
+        }
+    ));
+}
+
+fn native_original_parents(
+    request: &TwoLoopRegionRequest<'_, '_>,
+) -> Vec<crate::sketch_region::OriginalMemberIdentity> {
+    request
+        .sources
+        .iter()
+        .map(|source| {
+            let actual = PartitionOccurrenceIdentity::capture(source.shape);
+            crate::sketch_region::OriginalMemberIdentity {
+                source: source.identity,
+                topology_address: actual.topology_address,
+                location: actual.location,
+                orientation: actual.orientation,
+            }
+        })
+        .collect()
+}
+
+fn assert_flat_parent_mapping(mapped: &TwoLoopMappedParents) {
+    assert_eq!(
+        mapped.rows,
+        [
+            vec![TwoLoopOriginalUse {
+                source: RegionSourceId(202),
+                role: TwoLoopMemberRole::Boundary
+            }],
+            vec![TwoLoopOriginalUse {
+                source: RegionSourceId(101),
+                role: TwoLoopMemberRole::Boundary
+            }]
+        ]
+    );
 }
