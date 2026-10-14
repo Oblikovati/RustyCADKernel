@@ -24,9 +24,11 @@ neighboring window occluded part of the requested full client rectangle, so the
 larger crop is not full-frame acceptance evidence. Uncropped desktop captures
 and larger crops were deleted; the retained PNG contains only the test GUI.
 
-The next gate must compare the complete, visible managed-window frame through
-an independently verified compositor oracle on this host, retaining direct
-client capture on Xvfb. It must preserve exact RGBA assertions and the rapid
-three-packet replacement sequence, then rerun the original application command
-test. No additional redraw, arbitrary wait, renderer fallback, tolerance change
-or API completion credit follows from this diagnosis.
+The initial follow-up explored a compositor oracle for the full managed window.
+User decision on 2026-10-14 supersedes that approach: use completed framebuffer
+images on both drivers, as recorded in
+[ADR 0016](../../adr/0016-framebuffer-images-for-rendering-acceptance.md).
+Preserve the rapid three-packet replacement sequence and independent pixel
+assertions, then rerun the application command gate through that capture path.
+No additional redraw, arbitrary wait, renderer fallback or API completion credit
+follows from this diagnosis.
