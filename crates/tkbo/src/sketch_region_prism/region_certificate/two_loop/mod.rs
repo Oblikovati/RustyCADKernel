@@ -79,6 +79,10 @@ mod refusal_tests;
 mod membership_refusal_tests;
 
 pub(crate) use failure_class::TwoLoopRefusalClass;
+#[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use member_types::{
+    TwoLoopMemberKey, TwoLoopMemberParents, TwoLoopMemberRole,
+};
 
 #[cfg(test)]
 mod native_refusal_tests;
