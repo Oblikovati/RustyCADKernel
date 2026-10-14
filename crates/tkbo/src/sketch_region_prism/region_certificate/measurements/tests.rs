@@ -64,9 +64,9 @@ fn scalar_inspection_owns_send_sync_captures() {
 }
 
 #[path = "tests/history.rs"]
-mod history_tests;
+pub(in crate::sketch_region_prism::region_certificate) mod history_tests;
 #[path = "tests/mutation.rs"]
-mod mutation_tests;
+pub(in crate::sketch_region_prism::region_certificate) mod mutation_tests;
 
 fn measurement_attempt(
     bridge: &PairedContactTransaction,

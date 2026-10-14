@@ -46,4 +46,4 @@ fn complete_inspection(
 }
 
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism::region_certificate) mod tests;
