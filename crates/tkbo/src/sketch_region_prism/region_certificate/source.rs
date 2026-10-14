@@ -95,7 +95,7 @@ fn closure_only(census: &BoundaryCensus) -> RegionCheck {
         exact_closure(proof.contact(0).expect("one complete contact")),
     )
 }
-fn exact_closure(
+pub(super) fn exact_closure(
     contact: rustycad_tkmath::predicates::roots::bezier_pair::CertifiedBezierPairContact<'_>,
 ) -> bool {
     let (lower, upper) = contact.parameter.bounds();
