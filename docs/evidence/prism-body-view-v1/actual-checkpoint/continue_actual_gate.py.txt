@@ -1,0 +1,23 @@
+exec(open('/tmp/martensite-body-view-evidence/run_actual_gate.py').read().split('before=manifest();')[0])
+receipt=json.loads((out/'receipt.json').read_text())
+(out/'joined-measures-1.log').rename(out/'joined-measures-wrong-selector.log')
+exe='/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91'
+prefix='sketch_region_prism::'
+probes=[('joined-measures','frozen::joined_measures::tests::replay_tests::joined_measure_process_replay','joined-measures-v1='),('complete-measures','region_certificate::measurements::tests::complete_tests::replay_tests::complete_prism_measure_process_receipt','{"operation":')]
+for name,test,marker in probes:
+    payloads=[]
+    for i in (1,2):
+        label=f'{name}-{i}'
+        run(label,[exe,'--exact',prefix+test,'--nocapture','--test-threads=1'])
+        log=(out/(label+'.log')).read_text();assert '1 passed;' in log,label
+        line=next(line[line.index(marker):] for line in log.splitlines() if marker in line)
+        payload=line.encode() if name=='complete-measures' else bytes.fromhex(line[len(marker):])
+        (out/(label+'.bin')).write_bytes(payload);payloads.append(payload)
+    assert payloads[0]==payloads[1]
+    receipt['replays'].append({'name':name,'bytes':len(payloads[0]),'sha256':hashlib.sha256(payloads[0]).hexdigest(),'processes':2})
+run('cost',['/usr/bin/time','-v','-o',str(out/'cost.time'),exe,'--exact',prefix+'publication::body_view::storage_tests::actual_body_retained_storage_and_projection_latency_observations','--nocapture','--test-threads=1'])
+with gzip.open(out/'tracked-inputs-before.json.gz','rt') as f:before=json.load(f)
+after=manifest();save('tracked-inputs-after.json.gz',after);assert before==after
+receipt['tracked_files']=len(before);receipt['bookends_equal']=True
+receipt['harness_correction']='Initial joined-measures selector matched zero tests; retained log, corrected exact paths from --list; remaining probes executed once per independent process.'
+(out/'receipt.json').write_text(json.dumps(receipt,indent=2));print('ALL CHECKS COMPLETE',flush=True)

@@ -1,0 +1,47 @@
+import os, pathlib, subprocess, hashlib, json, gzip, time, re, ast
+root=pathlib.Path('/home/vmiguel/git/oblikovati-workspace/Martensite-prism-body-view')
+out=pathlib.Path('/tmp/martensite-body-view-evidence/actual-final');out.mkdir(exist_ok=True)
+env=os.environ.copy();env.update(CARGO_BUILD_JOBS='2',CARGO_TARGET_DIR='/tmp/martensite-body-view-target')
+cargo=['/home/vmiguel/.cargo/bin/cargo','+1.99.0']
+receipt={'source':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),'commands':[],'replays':[]}
+def manifest():
+    paths=subprocess.check_output(['git','ls-files','-z'],cwd=root).decode().split('\0')
+    return {p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in paths if p and (root/p).is_file()}
+def save(name,value):
+    with gzip.open(out/name,'wt') as f:json.dump(value,f,sort_keys=True,indent=2)
+def run(name,args,extra=None):
+    settings=env.copy();settings.update(extra or {})
+    start=time.time()
+    with (out/(name+'.log')).open('wb') as log:r=subprocess.run(args,cwd=root,env=settings,stdout=log,stderr=subprocess.STDOUT)
+    row={'name':name,'argv':args,'seconds':time.time()-start,'status':r.returncode};receipt['commands'].append(row)
+    (out/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(row),flush=True)
+    if r.returncode:raise RuntimeError(name)
+before=manifest();save('tracked-inputs-before.json.gz',before)
+run('platform',['bash','-c','uname -a; /home/vmiguel/.cargo/bin/rustc +1.99.0 -Vv; /home/vmiguel/.cargo/bin/cargo +1.99.0 -V'])
+for name,args in [('tests',['test','-p','rustycad-tkbo','--all-targets','--all-features']),('doctests',['test','-p','rustycad-tkbo','--doc','--all-features']),('docs',['doc','-p','rustycad-tkbo','--no-deps','--all-features']),('clippy',['clippy','-p','rustycad-tkbo','--all-targets','--all-features','--','-D','warnings']),('fmt',['fmt','--all','--','--check'])]:
+    run(name,cargo+args,{'RUSTDOCFLAGS':'-D warnings'} if name=='docs' else None)
+exe='/tmp/martensite-body-view-target/debug/deps/rustycad_tkbo-3743221922cb8a91'
+prefix='sketch_region_prism::'
+probes=[('body','publication::body_view::actual_replay_tests::actual_body_process_receipt',None),('symbolic','publication::body_view::row_replay_tests::symbolic_body_row_process_replay','SYMBOLIC_BODY_ROWS='),('publication','publication::replay_tests::publication_process_replay','named-prism-publication-v1='),('map','owned_request::names::body_map::tests::semantic_map_replay_probe','SEMANTIC_MAP_REPLAY='),('frozen','frozen::replay_tests::frozen_prism_owned_bytes_replay_across_threads_and_repeated_operations','frozen-prism-v1:'),('ordered','frozen::ordered_validation::replay_tests::ordered_validation_process_receipt','ordered-validation-v1:'),('joined-measures','frozen::joined_measures::tests_replay::joined_measure_process_replay','joined-measures-v1='),('complete-measures','region_certificate::measurements::tests::complete::replay::complete_prism_measure_process_receipt','{"operation":')]
+expected={'publication':'accba93e30c455d9f888a96c5b70f684a1dbacbbf3afec9076de3544c7a13107','symbolic':'5467f12ce3ddab08422e0462a8201d638dea184500ebeb920a0ffa7074112e30','map':'ffbdcd9461a1acb2349d514610a6f24b6cdadd03b460bf9394a65240b88247ff'}
+for name,test,marker in probes:
+    payloads=[]
+    for i in (1,2):
+        label=f'{name}-{i}';path=out/(label+'.bin')
+        run(label,[exe,'--exact',prefix+test,'--nocapture','--test-threads=1'],{'MARTENSITE_ACTUAL_BODY_RECEIPT':str(path)} if name=='body' else None)
+        log=(out/(label+'.log')).read_text();assert '1 passed;' in log,label
+        if marker:
+            line=next(line[line.index(marker):] for line in log.splitlines() if marker in line)
+            if name=='map':payload=bytes(ast.literal_eval(line[len(marker):]))
+            elif name=='complete-measures':payload=line.encode()
+            else:payload=bytes.fromhex(line[len(marker):])
+            path.write_bytes(payload)
+        payloads.append(path.read_bytes())
+    assert payloads[0]==payloads[1],name
+    digest=hashlib.sha256(payloads[0]).hexdigest()
+    if name in expected:assert digest==expected[name],(name,digest)
+    receipt['replays'].append({'name':name,'bytes':len(payloads[0]),'sha256':digest,'processes':2})
+run('cost',['/usr/bin/time','-v','-o',str(out/'cost.time'),exe,'--exact',prefix+'publication::body_view::storage_tests::actual_body_retained_storage_and_projection_latency_observations','--nocapture','--test-threads=1'])
+after=manifest();save('tracked-inputs-after.json.gz',after);assert before==after
+receipt['tracked_files']=len(before);receipt['bookends_equal']=True
+(out/'receipt.json').write_text(json.dumps(receipt,indent=2));print('ALL CHECKS COMPLETE',flush=True)
