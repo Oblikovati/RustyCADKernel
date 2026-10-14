@@ -34,7 +34,11 @@ fn visit(
 ) -> Result<(), HistoryBoundCause> {
     limits.count("ancestor depth", ancestors.len(), limits.maximum_depth)?;
     check_cycle(root, ancestors)?;
-    limits.count("directed uses", census.directed_uses + 1, limits.maximum_uses)?;
+    limits.count(
+        "directed uses",
+        census.directed_uses + 1,
+        limits.maximum_uses,
+    )?;
     // Admitted limits bound these sums by 16,384 uses times at most 64 ancestors.
     census.directed_uses += 1;
     census.ancestor_elements += ancestors.len();

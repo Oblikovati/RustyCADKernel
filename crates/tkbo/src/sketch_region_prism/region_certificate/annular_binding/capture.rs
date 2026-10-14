@@ -14,15 +14,7 @@ pub(super) fn copy_inputs(
     region: &TwoLoopRegionCertificate,
     receipt: &PrismReceipt,
 ) -> AnnularCheck<'static, AnnularCopyCapture> {
-    let selected = receipt
-        .input
-        .selected
-        .as_ref()
-        .ok_or_else(|| missing("actual selected candidate"))?;
-    let copied = receipt
-        .copied
-        .as_ref()
-        .ok_or_else(|| missing("actual copied base"))?;
+    let (selected, copied) = copy_owners(receipt)?;
     let names = selected_names(request, region)?;
     holds(
         "same certified actual selected face",
@@ -31,9 +23,7 @@ pub(super) fn copy_inputs(
     let first = contexts(&selected.face)?;
     let second = contexts(&copied.base)?;
     let members = correspondence::pair_members(names, &first, &second, &copied.observations)?;
-    let current = current_selected(request, &names.actual)?;
-    current_relations(&current.relations, &selected.relations)?;
-    copy_relations(current, copied)?;
+    current_copy_relations(request, names, selected, copied)?;
     let selected = capture_sources(&selected.face).map_err(snapshot_failure)?;
     let actual_copy = capture_sources(&copied.base).map_err(snapshot_failure)?;
     current_snapshot(&actual_copy, &copied.chart_sources)?;
@@ -144,20 +134,7 @@ fn copy_relations(
         selected.relations.len(),
     )?;
     for observed in &copied.observations {
-        let before = relation(&selected.relations, &observed.selected.output)?;
-        same_parents(before, &observed.selected)?;
-        let after = relation(&copied.relations, &observed.copied_image)?;
-        let expected =
-            crate::sketch_region_candidates::composed_copy_relation(before, &observed.copied_image);
-        same_parents(after, &expected)?;
-        holds(
-            "native copied definition and placement",
-            observed.native_image.is_same(&observed.copied_image),
-        )?;
-        holds(
-            "copied member orientation",
-            observed.selected.output.orientation() == observed.copied_image.orientation(),
-        )?;
+        copy_observation(selected, copied, observed)?;
     }
     Ok(())
 }
@@ -198,24 +175,7 @@ fn compare_sources(
         1,
     )?;
     let proof = candidates[0];
-    require(
-        "all selected certified boundary curves",
-        selected.boundaries.len(),
-        proof.wires.len(),
-    )?;
-    require(
-        "all copied certified boundary curves",
-        copied.boundaries.len(),
-        proof.wires.len(),
-    )?;
-    holds(
-        "selected certified plane",
-        same_support(&proof.support, &selected.support),
-    )?;
-    holds(
-        "copy certified plane",
-        same_support(&proof.support, &copied.support),
-    )?;
+    compare_supports(proof, selected, copied)?;
     for wire in &proof.wires {
         compare_wire(wire, members, selected, copied)?;
     }
@@ -236,29 +196,126 @@ fn compare_wire(
         (selected, &rows[0].selected.occurrence),
         (copied, &rows[0].copied.occurrence),
     ] {
-        let found: Vec<_> = sources
-            .boundaries
-            .iter()
-            .filter(|b| &b.occurrence == identity)
-            .collect();
-        require(
-            "one actual captured boundary for directed copy role",
-            found.len(),
-            1,
-        )?;
-        let boundary = found[0];
-        holds(
-            "full certified copied boundary range",
-            boundary.interval == [0., 1.],
-        )?;
-        holds(
-            "certified copied space coefficients and placement",
-            same_space_representation(&wire.space, &boundary.space),
-        )?;
-        holds(
-            "certified copied pcurve coefficients",
-            same_metric_curve(&wire.pcurve, &boundary.pcurve),
-        )?;
+        compare_boundary(wire, sources, identity)?;
     }
+    Ok(())
+}
+
+fn copy_owners(
+    receipt: &PrismReceipt,
+) -> AnnularCheck<
+    'static,
+    (
+        &crate::sketch_region_candidates::RegionCandidate,
+        &PrismCopiedSelection,
+    ),
+> {
+    let selected = receipt
+        .input
+        .selected
+        .as_ref()
+        .ok_or_else(|| missing("actual selected candidate"))?;
+    let copied = receipt
+        .copied
+        .as_ref()
+        .ok_or_else(|| missing("actual copied base"))?;
+    Ok((selected, copied))
+}
+
+fn copy_observation(
+    selected: &crate::sketch_region_candidates::RegionCandidate,
+    copied: &PrismCopiedSelection,
+    observed: &PrismCopyObservation,
+) -> AnnularCheck<'static> {
+    let before = relation(&selected.relations, &observed.selected.output)?;
+    same_parents(before, &observed.selected)?;
+    let after = relation(&copied.relations, &observed.copied_image)?;
+    let expected =
+        crate::sketch_region_candidates::composed_copy_relation(before, &observed.copied_image);
+    same_parents(after, &expected)?;
+    holds(
+        "native copied definition and placement",
+        observed.native_image.is_same(&observed.copied_image),
+    )?;
+    holds(
+        "copied member orientation",
+        observed.selected.output.orientation() == observed.copied_image.orientation(),
+    )?;
+    Ok(())
+}
+
+fn compare_supports(
+    proof: &TwoLoopCandidateProof,
+    selected: &CapturedPrismSources,
+    copied: &CapturedPrismSources,
+) -> AnnularCheck<'static> {
+    require(
+        "all selected certified boundary curves",
+        selected.boundaries.len(),
+        proof.wires.len(),
+    )?;
+    require(
+        "all copied certified boundary curves",
+        copied.boundaries.len(),
+        proof.wires.len(),
+    )?;
+    holds(
+        "selected certified plane",
+        same_support(&proof.support, &selected.support),
+    )?;
+    holds(
+        "copy certified plane",
+        same_support(&proof.support, &copied.support),
+    )?;
+    Ok(())
+}
+
+fn compare_boundary(
+    wire: &TwoLoopWireProof,
+    sources: &CapturedPrismSources,
+    identity: &PartitionOccurrenceIdentity,
+) -> AnnularCheck<'static> {
+    let found: Vec<_> = sources
+        .boundaries
+        .iter()
+        .filter(|b| &b.occurrence == identity)
+        .collect();
+    require(
+        "one actual captured boundary for directed copy role",
+        found.len(),
+        1,
+    )?;
+    let boundary = found[0];
+    compare_coefficients(wire, boundary)
+}
+
+fn compare_coefficients(
+    wire: &TwoLoopWireProof,
+    boundary: &super::super::super::surface_charts::CapturedSourceBoundary,
+) -> AnnularCheck<'static> {
+    holds(
+        "full certified copied boundary range",
+        boundary.interval == [0., 1.],
+    )?;
+    holds(
+        "certified copied space coefficients and placement",
+        same_space_representation(&wire.space, &boundary.space),
+    )?;
+    holds(
+        "certified copied pcurve coefficients",
+        same_metric_curve(&wire.pcurve, &boundary.pcurve),
+    )?;
+    Ok(())
+}
+
+fn current_copy_relations(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    names: &TwoLoopCandidateBinding,
+    selected: &crate::sketch_region_candidates::RegionCandidate,
+    copied: &PrismCopiedSelection,
+) -> AnnularCheck<'static> {
+    let current = current_selected(request, &names.actual)?;
+    current_relations(&current.relations, &selected.relations)?;
+    copy_relations(current, copied)?;
     Ok(())
 }

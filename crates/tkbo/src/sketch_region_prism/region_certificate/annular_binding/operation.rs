@@ -41,14 +41,10 @@ pub(super) fn capture<'a>(
     receipt: &PrismReceipt,
     progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'a, AnnularPrismOperands> {
-    let hierarchy = bounds::inspect(receipt, request.requested.maximum_retained_units)?;
-    let metadata_units = metadata_budget::inspect(receipt, hierarchy.retained_units, request.requested.maximum_retained_units)?;
-    let reserved = geometry_budget::inspect(request, receipt, metadata_units)?;
+    let (hierarchy, metadata_units, reserved) = capture_budget(request, receipt)?;
     let limits = settings::capture(request, receipt)?;
     selection(request, receipt, progress)?;
-    poll(progress, AnnularBindingStage::Copy, request, receipt)?;
-    let copy = capture::copy_inputs(request, region, receipt)?;
-    let boundaries = boundaries::capture(region, &copy, receipt)?;
+    let (copy, boundaries) = copied_boundaries(request, region, receipt, progress)?;
     let signed_jacobian = settings::jacobian(&copy, &limits)?;
     poll(progress, AnnularBindingStage::Charts, request, receipt)?;
     let (charts, body_contexts) = chart_capture(request, receipt, &copy, &boundaries, progress)?;
@@ -82,16 +78,26 @@ pub(super) fn poll(
     poll_owned(progress, stage)?;
     preflight(request, receipt)
 }
-fn poll_owned(progress: &mut dyn AnnularBindingProgress, stage: AnnularBindingStage) -> AnnularCheck<'static> {
+fn poll_owned(
+    progress: &mut dyn AnnularBindingProgress,
+    stage: AnnularBindingStage,
+) -> AnnularCheck<'static> {
     match progress.checkpoint(stage) {
         Ok(false) => Ok(()),
         Ok(true) => Err(Box::new(AnnularBindingCause::Cancelled(stage))),
         Err(cause) => Err(Box::new(AnnularBindingCause::Callback { stage, cause })),
     }
 }
-pub(super) fn preflight(request: &TwoLoopRegionRequest<'_, '_>, receipt: &PrismReceipt) -> AnnularCheck<'static> {
+pub(super) fn preflight(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+) -> AnnularCheck<'static> {
     let hierarchy = bounds::inspect(receipt, request.requested.maximum_retained_units)?;
-    let reserved = metadata_budget::inspect(receipt, hierarchy.retained_units, request.requested.maximum_retained_units)?;
+    let reserved = metadata_budget::inspect(
+        receipt,
+        hierarchy.retained_units,
+        request.requested.maximum_retained_units,
+    )?;
     geometry_budget::inspect(request, receipt, reserved).map(|_| ())
 }
 fn selection(
@@ -116,9 +122,13 @@ fn chart_capture(
     progress: &mut dyn AnnularBindingProgress,
 ) -> AnnularCheck<'static, (Vec<AnnularBoundChart>, Vec<RegionObservedContext>)> {
     let mut callback = None;
-    let result = charts::capture_guarded(receipt, copy, boundaries, &mut || {
-        stop(progress, AnnularBindingStage::Charts, &mut callback)
-    }, &mut || preflight(request, receipt));
+    let result = charts::capture_guarded(
+        receipt,
+        copy,
+        boundaries,
+        &mut || stop(progress, AnnularBindingStage::Charts, &mut callback),
+        &mut || preflight(request, receipt),
+    );
     finish_callback(result, callback)
 }
 fn stop(
@@ -167,4 +177,30 @@ impl AnnularBindingProgress for ProgressTracker<'_> {
         self.stage = stage;
         self.progress.checkpoint(stage)
     }
+}
+
+fn capture_budget(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    receipt: &PrismReceipt,
+) -> AnnularCheck<'static, (AnnularHierarchyBudget, usize, usize)> {
+    let hierarchy = bounds::inspect(receipt, request.requested.maximum_retained_units)?;
+    let metadata_units = metadata_budget::inspect(
+        receipt,
+        hierarchy.retained_units,
+        request.requested.maximum_retained_units,
+    )?;
+    let reserved = geometry_budget::inspect(request, receipt, metadata_units)?;
+    Ok((hierarchy, metadata_units, reserved))
+}
+
+fn copied_boundaries(
+    request: &TwoLoopRegionRequest<'_, '_>,
+    region: &TwoLoopRegionCertificate,
+    receipt: &PrismReceipt,
+    progress: &mut dyn AnnularBindingProgress,
+) -> AnnularCheck<'static, (AnnularCopyCapture, Vec<AnnularBoundaryBinding>)> {
+    poll(progress, AnnularBindingStage::Copy, request, receipt)?;
+    let copy = capture::copy_inputs(request, region, receipt)?;
+    let boundaries = boundaries::capture(region, &copy, receipt)?;
+    Ok((copy, boundaries))
 }

@@ -31,28 +31,27 @@ pub(super) fn check<'a>(
     Ok(())
 }
 fn same_contexts(old: &AnnularPrismOperands, new: &AnnularPrismOperands) -> AnnularCheck<'static> {
-    holds("same hierarchy budget and exact census", old.hierarchy == new.hierarchy)?;
+    holds(
+        "same hierarchy budget and exact census",
+        old.hierarchy == new.hierarchy,
+    )?;
     holds(
         "same complete original copy and native image parent classes",
-        old.parents.copies == new.parents.copies && old.parents.images == new.parents.images && old.parents.captured == new.parents.captured,
+        old.parents.copies == new.parents.copies
+            && old.parents.images == new.parents.images
+            && old.parents.captured == new.parents.captured,
     )?;
     holds(
         "same complete current body context census",
         old.body_contexts == new.body_contexts,
     )?;
-    require(
-        "same complete copied context census",
-        old.copy.members.len(),
-        new.copy.members.len(),
-    )?;
-    for (first, second) in old.copy.members.iter().zip(&new.copy.members) {
-        holds(
-            "same authored copied context association",
-            first.key == second.key
-                && first.selected == second.selected
-                && first.copied == second.copied,
-        )?;
-    }
+    same_copied_contexts(old, new)?;
+    same_chart_contexts(old, new)
+}
+fn same_chart_contexts(
+    old: &AnnularPrismOperands,
+    new: &AnnularPrismOperands,
+) -> AnnularCheck<'static> {
     require(
         "same complete actual chart universe",
         old.charts.len(),
@@ -66,6 +65,26 @@ fn same_contexts(old: &AnnularPrismOperands, new: &AnnularPrismOperands) -> Annu
         holds(
             "same complete original chart parents",
             first.chart.parents == second.chart.parents,
+        )?;
+    }
+    Ok(())
+}
+
+fn same_copied_contexts(
+    old: &AnnularPrismOperands,
+    new: &AnnularPrismOperands,
+) -> AnnularCheck<'static> {
+    require(
+        "same complete copied context census",
+        old.copy.members.len(),
+        new.copy.members.len(),
+    )?;
+    for (first, second) in old.copy.members.iter().zip(&new.copy.members) {
+        holds(
+            "same authored copied context association",
+            first.key == second.key
+                && first.selected == second.selected
+                && first.copied == second.copied,
         )?;
     }
     Ok(())

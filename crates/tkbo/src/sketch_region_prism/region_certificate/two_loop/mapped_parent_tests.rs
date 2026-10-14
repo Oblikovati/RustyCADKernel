@@ -91,12 +91,18 @@ fn parent_mapper_checks_zero_one_three_sources_before_budget_or_native_query() {
     for count in [0, 1, 3] {
         exercise(|mut request, _| {
             let null = rustycad_tkbrep::topods::Shape::default();
-            let sources: Vec<_> = (0..count).map(|i| crate::sketch_region::ArrangementSource { identity: RegionSourceId(101 + i as u64), shape: &null }).collect();
+            let sources: Vec<_> = (0..count)
+                .map(|i| crate::sketch_region::ArrangementSource {
+                    identity: RegionSourceId(101 + i as u64),
+                    shape: &null,
+                })
+                .collect();
             request.requested.maximum_retained_units = 0;
-            let request = TwoLoopRegionRequest { sources: &sources, ..request };
-            let Err(failure) = map_two_loop_original_parents(&request, &[]) else { panic!("expected source cardinality refusal"); };
-            assert!(matches!(failure.cause, TwoLoopRegionCause::Count { actual, expected: 2, .. } if actual == count));
-            assert_eq!(failure.retained_units, 0);
+            let request = TwoLoopRegionRequest {
+                sources: &sources,
+                ..request
+            };
+            assert_source_count_refusal(&request, count);
         });
     }
 }
@@ -104,11 +110,22 @@ fn parent_mapper_checks_zero_one_three_sources_before_budget_or_native_query() {
 fn original_parent_budget_keeps_prior_reservation_and_original_limit() {
     exercise(|mut request, parent| {
         request.requested.maximum_retained_units = 20;
-        let result = map_two_loop_original_parents_after(&request, &[&[parent.clone()]], 8).unwrap_or_else(|_| panic!("exact 8+6+4+1+1 budget"));
+        let result =
+            map_two_loop_original_parents_after(&request, &[std::slice::from_ref(&parent)], 8)
+                .unwrap_or_else(|_| panic!("exact 8+6+4+1+1 budget"));
         assert_eq!(result.retained_units, 20);
         request.requested.maximum_retained_units = 19;
-        let Err(failure) = map_two_loop_original_parents_after(&request, &[&[parent]], 8) else { panic!("expected cumulative limit"); };
-        assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { requested: 19, measured: 20, .. }));
+        let Err(failure) = map_two_loop_original_parents_after(&request, &[&[parent]], 8) else {
+            panic!("expected cumulative limit");
+        };
+        assert!(matches!(
+            failure.cause,
+            TwoLoopRegionCause::Limit {
+                requested: 19,
+                measured: 20,
+                ..
+            }
+        ));
     });
 }
 #[test]
@@ -116,10 +133,50 @@ fn polynomial_descriptor_admission_retains_original_caps_and_negative_count_caus
     exercise(|mut request, _| {
         request.requested.maximum_poles = 4;
         request.requested.maximum_retained_units = 10;
-        assert_eq!(super::admit_two_loop_polynomial_counts(&request, &[4,0], 4).unwrap_or_else(|_| panic!("exact cumulative geometry cap")),10);
-        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[5], 0) else { panic!("expected pole cap"); };
-        assert!(matches!(failure.cause, TwoLoopRegionCause::Limit { operand: "polynomial poles", requested:4, measured:5 }));
-        let Err(failure) = super::admit_two_loop_polynomial_counts(&request, &[-1], 0) else { panic!("expected negative count"); };
-        assert!(matches!(failure.cause, TwoLoopRegionCause::Scalar { operand: "pole count", actual:-1., .. }));
+        assert_eq!(
+            super::admit_two_loop_polynomial_counts(&request, &[4, 0], 4)
+                .unwrap_or_else(|_| panic!("exact cumulative geometry cap")),
+            10
+        );
+        assert_polynomial_count_refusals(&request);
     });
+}
+
+fn assert_source_count_refusal(request: &TwoLoopRegionRequest<'_, '_>, count: usize) {
+    let Err(failure) = map_two_loop_original_parents(request, &[]) else {
+        panic!("expected source cardinality refusal");
+    };
+    assert!(
+        matches!(failure.cause, TwoLoopRegionCause::Count { actual, expected: 2, .. } if actual == count)
+    );
+    assert_eq!(failure.retained_units, 0);
+}
+
+fn assert_polynomial_count_refusals(request: &TwoLoopRegionRequest<'_, '_>) {
+    let Err(failure) = super::admit_two_loop_polynomial_counts(request, &[5], 0) else {
+        panic!("expected pole cap");
+    };
+    assert!(matches!(
+        failure.cause,
+        TwoLoopRegionCause::Limit {
+            operand: "polynomial poles",
+            requested: 4,
+            measured: 5
+        }
+    ));
+    assert_negative_count_refusal(request);
+}
+
+fn assert_negative_count_refusal(request: &TwoLoopRegionRequest<'_, '_>) {
+    let Err(failure) = super::admit_two_loop_polynomial_counts(request, &[-1], 0) else {
+        panic!("expected negative count");
+    };
+    assert!(matches!(
+        failure.cause,
+        TwoLoopRegionCause::Scalar {
+            operand: "pole count",
+            actual: -1.,
+            ..
+        }
+    ));
 }

@@ -3,7 +3,9 @@
 mod binding;
 mod charts;
 #[allow(unused_imports)]
-pub(in crate::sketch_region_prism) use charts::{capture_actual_charts, capture_actual_charts_guarded};
+pub(in crate::sketch_region_prism) use charts::{
+    capture_actual_charts, capture_actual_charts_guarded,
+};
 mod replay;
 mod types;
 use super::super::surface_charts::*;

@@ -35,9 +35,9 @@ mod progress_tests;
 #[cfg(test)]
 mod test_fixture;
 
-mod resolver;
 #[cfg(test)]
 mod diagnostic_baseline_tests;
+mod resolver;
 
 #[cfg(test)]
 mod diagnostic_access_tests;
