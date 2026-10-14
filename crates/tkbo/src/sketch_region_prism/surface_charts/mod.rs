@@ -13,6 +13,8 @@ mod trim_binding;
 mod trim_capture;
 mod types;
 pub(super) use capture::{capture_bezier_edge, capture_chart};
+#[allow(unused_imports)]
+pub(super) use identity::spatial_identity;
 pub(super) use inspection::retain_surface_charts;
 pub(super) use sources::capture_sources;
 pub(crate) use types::*;

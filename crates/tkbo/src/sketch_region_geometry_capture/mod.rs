@@ -6,3 +6,6 @@ mod placement;
 pub(crate) use cause::CapturedGeometryCause;
 pub(crate) use curves::{CapturedMetricCurve, capture_plane_curve, capture_space_curve};
 pub(crate) use placement::{captured_placement, captured_plane_frame};
+
+mod tolerances;
+pub(crate) use tolerances::capture_raw_entity_tolerance;

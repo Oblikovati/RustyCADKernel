@@ -5,8 +5,10 @@
 //! Evidence/Commit checkpoints surround this bounded coefficient arithmetic; no interior callback
 //! mutates its frozen scalar operands. This is not a claim of general body tolerance validation.
 use super::{bindings::missing, graph::FrozenGraphIncidence, types::*};
-use crate::sketch_region_source_conformance::CapturedSpaceRepresentation;
-use rustycad_tkmath::predicates::roots::{DyadicBound, RootIsolationOptions, metric_bounds::*};
+use crate::sketch_region_source_conformance::{
+    CapturedSpaceRepresentation, certify_captured_endpoint,
+};
+use rustycad_tkmath::predicates::roots::{DyadicBound, metric_bounds::*};
 
 /// Certified bound for exactly captured values, not an ordered whole-body validation pass.
 #[derive(Clone, Debug)]
@@ -65,8 +67,7 @@ fn certify_endpoint(
     parameter: f64,
     point: [f64; 3],
 ) -> CaptureResult<DyadicBound> {
-    let query = transported_endpoint_query(curve, parameter, point);
-    let report = certify_transported_residual(query, || false);
+    let report = certify_captured_endpoint(curve, parameter, point, 0.);
     match report.decision.map_err(PrismFreezeCause::Endpoint)? {
         ResidualDecision::Within {
             proven_squared_upper,
@@ -76,48 +77,5 @@ fn certify_endpoint(
             point,
             decision,
         }),
-    }
-}
-fn transported_endpoint_query(
-    curve: &CapturedSpaceRepresentation,
-    parameter: f64,
-    point: [f64; 3],
-) -> TransportedResidualQuery<'_> {
-    TransportedResidualQuery {
-        residual: endpoint_query(curve, point),
-        maps: [
-            MetricParameterMap::Endpoints([parameter, parameter]),
-            MetricParameterMap::Identity,
-        ],
-    }
-}
-
-fn endpoint_query(curve: &CapturedSpaceRepresentation, point: [f64; 3]) -> PlanarResidualQuery<'_> {
-    PlanarResidualQuery {
-        curve: curve.curve.borrow(),
-        pcurve: constant_origin(),
-        curve_embedding: curve.placement,
-        plane_embedding: MetricEmbedding {
-            linear: [[0.; 2]; 3],
-            origin: point,
-            scale: 1.,
-        },
-        plane_placement: identity_placement(),
-        interval: [0., 1.],
-        spatial_limit: 0.,
-        options: RootIsolationOptions::new(1.),
-    }
-}
-fn constant_origin() -> MetricCurve<'static, 2> {
-    MetricCurve::Line {
-        origin: [0.; 2],
-        direction: [0.; 2],
-    }
-}
-fn identity_placement() -> MetricEmbedding<3> {
-    MetricEmbedding {
-        linear: [[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]],
-        origin: [0.; 3],
-        scale: 1.,
     }
 }

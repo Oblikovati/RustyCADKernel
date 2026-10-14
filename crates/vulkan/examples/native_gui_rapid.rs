@@ -18,8 +18,9 @@ use std::path::PathBuf;
 const EXTENT: [u32; 2] = [1440, 900];
 fn main() {
     let output = capture_directory();
-    let measure = performance_requested(&std::env::args().skip(2).collect::<Vec<_>>());
-    let driver = capture_driver(measure);
+    let arguments = std::env::args().skip(2).collect::<Vec<_>>();
+    let measure = performance_requested(&arguments);
+    let driver = capture_driver(measure, surface_policy(&arguments));
     let native = native_window::NativeWindow::managed(1440, 900);
     let viewer = V3dViewer::new(&driver.cast()).unwrap();
     let view = viewer.create_view().unwrap();
@@ -34,17 +35,28 @@ fn main() {
     assert!(render.capture().is_err(), "removed view retained a capture");
     check_validation(&driver);
 }
-fn capture_driver(measure: bool) -> rustycad_tkernel::standard::Handle<Graphic3dRenderDriver> {
+fn capture_driver(
+    measure: bool,
+    policy: RenderGuiSurfacePolicy,
+) -> rustycad_tkernel::standard::Handle<Graphic3dRenderDriver> {
     let mut options = device_options::validation_options();
     options.validation = !measure;
-    Graphic3dRenderDriver::new(options).unwrap()
+    Graphic3dRenderDriver::with_gui_surface_policy(options, policy).unwrap()
 }
 fn performance_requested(arguments: &[String]) -> bool {
-    match arguments {
-        [] => false,
-        [flag] if flag == "--performance" => true,
-        _ => panic!("arguments={arguments:?}; expected no timing arguments or --performance"),
+    assert!(
+        arguments
+            .iter()
+            .all(|flag| matches!(flag.as_str(), "--performance" | "--checked")),
+        "arguments={arguments:?}; expected --performance and/or --checked"
+    );
+    arguments.iter().any(|flag| flag == "--performance")
+}
+fn surface_policy(arguments: &[String]) -> RenderGuiSurfacePolicy {
+    if arguments.iter().any(|flag| flag == "--checked") {
+        return RenderGuiSurfacePolicy::CheckedV2;
     }
+    RenderGuiSurfacePolicy::LegacyV1
 }
 fn measure_steady_redraw(render: &Graphic3dRenderView, measure: bool) {
     if !measure {
@@ -176,6 +188,15 @@ mod tests {
     #[test]
     fn ordinary_acceptance_never_requests_timing() {
         assert!(!super::performance_requested(&[]));
+        assert!(!super::performance_requested(&["--checked".into()]));
+        assert_eq!(
+            super::surface_policy(&[]),
+            super::RenderGuiSurfacePolicy::LegacyV1
+        );
+        assert_eq!(
+            super::surface_policy(&["--checked".into()]),
+            super::RenderGuiSurfacePolicy::CheckedV2
+        );
         assert!(super::performance_requested(&["--performance".into()]));
         assert!(
             std::panic::catch_unwind(|| super::performance_requested(&["--unknown".into()]))

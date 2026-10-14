@@ -127,7 +127,7 @@ mod rejection_tests;
 #[cfg(test)]
 mod replay_tests;
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism) mod tests;
 
 #[cfg(test)]
 mod point_tests;
@@ -140,3 +140,11 @@ pub(crate) use measurements::{
 };
 #[cfg(test)]
 mod embedding_baseline_tests;
+
+pub(crate) mod embedding;
+
+#[allow(unused_imports)]
+pub(crate) use measurements::{
+    CompletePrismMeasureInspection, CompletePrismMeasureOptions,
+    inspect_complete_prism_measurements,
+};

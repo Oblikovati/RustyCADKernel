@@ -163,6 +163,14 @@ def vulkan_gates(root: Path) -> tuple[VerificationGate, ...]:
             (*xvfb_example("native_gui_acceptance"),
              "--", "target/native-gui-framebuffer/accepted")
         ),
+        GateCommand(
+            (*xvfb_example("native_gui_rapid", screen=(1920, 1080)),
+             "--", "target/native-gui-framebuffer-checked", "--checked")
+        ),
+        GateCommand(("xvfb-run", "-a", "-s", xvfb_screen((1280, 1024)),
+            "cargo", "test", "-p", "martensite-vulkan", "--lib", "--locked", "--",
+            "--exact", "backend::window_gui_native_tests::native_gui_surface_phase_gate",
+            "--ignored", "--test-threads=1")),
     )
     return (
         VerificationGate("vulkan-cold", (cold,)),

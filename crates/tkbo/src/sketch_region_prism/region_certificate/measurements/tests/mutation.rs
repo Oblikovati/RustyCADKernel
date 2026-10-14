@@ -13,7 +13,10 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkmath::gp::Point3;
 
-fn live_face(receipt: &PrismReceipt, role: PrismImageRole) -> Face {
+pub(in crate::sketch_region_prism::region_certificate) fn live_face(
+    receipt: &PrismReceipt,
+    role: PrismImageRole,
+) -> Face {
     let diagnostic = receipt.diagnostic.as_ref().unwrap();
     let binding = diagnostic
         .bindings
@@ -25,7 +28,7 @@ fn live_face(receipt: &PrismReceipt, role: PrismImageRole) -> Face {
         .unwrap();
     face(&binding.context.occurrence).unwrap()
 }
-fn side_basis(receipt: &PrismReceipt) -> Handle<GeomBezierCurve> {
+pub(super) fn side_basis(receipt: &PrismReceipt) -> Handle<GeomBezierCurve> {
     let surface = BRepTool::surface(&live_face(receipt, PrismImageRole::Generated)).unwrap();
     surface
         .cast::<GeomSurfaceOfLinearExtrusion>()
@@ -46,7 +49,11 @@ fn edited_original_copy_and_side_never_reuse_measured_coefficients() {
         assert_encloses(original.measures.first_cap.enclosure(), 2.4);
     }
 }
-fn edit_target(target: usize, shapes: &[Shape], receipt: &PrismReceipt) {
+pub(in crate::sketch_region_prism::region_certificate) fn edit_target(
+    target: usize,
+    shapes: &[Shape],
+    receipt: &PrismReceipt,
+) {
     match target {
         0 => set_pole(&edge(&shapes[0]).unwrap(), 5.),
         1 => set_pole(
@@ -148,7 +155,7 @@ fn success_failure_and_cancellation_leave_supplied_original_and_copy_unchanged()
     measured(&bridge, &shapes, &receipt);
 }
 
-fn assert_target_failure(target: usize, failure: PrismMeasureFailure) {
+pub(super) fn assert_target_failure(target: usize, failure: PrismMeasureFailure) {
     if target == 2 {
         assert!(matches!(
             failure,
