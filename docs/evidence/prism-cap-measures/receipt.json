@@ -1,0 +1,325 @@
+{
+  "operation": "martensite.source-bound-prism-cap-measurements",
+  "behavior_version": 1,
+  "source_revision": "9584ca4388245ed6ac111aec32642c6e797752ff",
+  "frozen_base": "a42ab0646",
+  "upstream_evidence_only_amendment": "42740916a; preserve corrected regularity candidate count 18 during integration",
+  "source_commits": [
+    "9584ca4388245ed6ac111aec32642c6e797752ff Pin missing-binding rejection and document scalar ownership semantics",
+    "faad55f28eceb61ac7bdfa6efbee3ef0685bec6e Bind cap and sweep measures to fresh Jordan source and actual prism charts",
+    "521521cff2df847774b75d1330a5c160752c95b1 refactor(tkbo): allow owned scalar prism payload copies",
+    "81f73374e432f0fb9dade5d63da95c4cd91077c5 refactor(tkbo): expose existing prism chart capture within transaction",
+    "6727cea91919a222c8e20cd133b21dcd78e53eee Certify conditional world-plane measures from exact squared area",
+    "e41695bf77c9e73f67f07b94670abd71caf86e41 Share exact placed support columns without changing Jacobian behavior"
+  ],
+  "dependency_provenance": {
+    "sqrt_original": "19d6c14fd",
+    "sqrt_initial_cherry_pick": "56313554b; dropped as equivalent during rebase onto integrated side main8980e4929",
+    "support_extraction_original": "14b0198db",
+    "chart_access_original": [
+      "6ab9bb8e6",
+      "756793d39"
+    ],
+    "chart_access_rebased": [
+      "f57d069bb",
+      "5afe541f7"
+    ]
+  },
+  "platform": {
+    "uname": "Linux pop-os 7.1.5-76070105-generic #202607241434~1787955023~24.04~38a419f SMP PREEMPT_DYNAMIC Fri A x86_64 x86_64 x86_64 GNU/Linux",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "jobs": 2
+  },
+  "policy": {
+    "behavior_version": 1,
+    "max_degree": 16,
+    "max_curves": 64,
+    "default_absolute_error_limit": 1e-12,
+    "cap_units": "world coordinate squared",
+    "sweep_units": "world coordinate cubed",
+    "requested_effective": "unchanged; no clamp or widening",
+    "domain": "polynomial full native [0,1], explicit occurrence reversal; Some(weights) unsupported"
+  },
+  "oracle_kinds": [
+    "independent exact Green antiderivative I=12/5",
+    "Jacobian QQ augmented Gram determinant S=338",
+    "exact binary64 nearly-unit Gram determinant greater than one",
+    "independently pinned adjacent binary64 bits",
+    "source/history/ownership invariants",
+    "generated degenerates",
+    "unchanged owned Jacobian baseline"
+  ],
+  "checks": [
+    {
+      "label": "plane-focused",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkmath",
+        "--lib",
+        "plane_tests",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 55.68249034881592,
+      "source_unchanged": true
+    },
+    {
+      "label": "composition-focused",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "measurements",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 19.289140224456787,
+      "source_unchanged": true
+    },
+    {
+      "label": "all-targets",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 273.50975823402405,
+      "source_unchanged": true
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--doc",
+        "--all-features",
+        "--locked"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 2.374850273132324,
+      "source_unchanged": true
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 31.436823844909668,
+      "source_unchanged": true
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkmath",
+        "--check"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 1.0131714344024658,
+      "source_unchanged": true
+    },
+    {
+      "label": "extracted-lock",
+      "command": [
+        "cargo",
+        "generate-lockfile",
+        "--manifest-path",
+        "/tmp/martensite-prism-cap-final/extracted/Cargo.toml",
+        "--offline"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.05825328826904297,
+      "source_unchanged": true
+    },
+    {
+      "label": "extracted-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/tmp/martensite-prism-cap-final/extracted/Cargo.toml",
+        "--offline",
+        "--locked",
+        "--lib"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 22.35968780517578,
+      "source_unchanged": true
+    },
+    {
+      "label": "process-first",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "portable_prism_measure_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.2045292854309082,
+      "source_unchanged": true
+    },
+    {
+      "label": "process-second",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--lib",
+        "portable_prism_measure_process_receipt",
+        "--locked",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "exit_code": 0,
+      "elapsed_seconds": 0.17571496963500977,
+      "source_unchanged": true
+    }
+  ],
+  "test_counts": {
+    "extracted-tests": 216,
+    "ordinary-host-tsan": 0,
+    "plane-focused": 20,
+    "process-second": 1,
+    "fmt": 0,
+    "process-first": 1,
+    "extracted-lock": 0,
+    "composition-focused": 28,
+    "all-targets": 4318,
+    "doctests": 88,
+    "clippy": 0
+  },
+  "source_bookends_equal": true,
+  "portable_scalar_process_receipts_equal": true,
+  "thread_stress": {
+    "plane": "8 workers x 32 owned reports",
+    "composition": "8 workers x 4 independent rebuilds vs serial portable receipt"
+  },
+  "audit": {
+    "files": 20,
+    "functions": 145,
+    "function_physical_lines": "4..20",
+    "file_lines": "<500"
+  },
+  "sanitizer": {
+    "status": "incomplete-before-test-output",
+    "details": {
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/tmp/martensite-prism-cap-final/extracted/Cargo.toml",
+        "--offline",
+        "--locked",
+        "-Zbuild-std",
+        "--target",
+        "x86_64-unknown-linux-gnu",
+        "--lib",
+        "plane_tests::failure_tests::independent_threads_return_identical_owned_reports",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-prism-cap-measures",
+      "toolchain": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "environment_changes": {
+        "PATH_prefix": "/home/vmiguel/.rustup/toolchains/nightly-2026-09-25-x86_64-unknown-linux-gnu/bin",
+        "CARGO_BUILD_JOBS": "2",
+        "RUSTFLAGS": "-Zsanitizer=thread",
+        "CARGO_TARGET_DIR": "/tmp/martensite-prism-cap-final/tsan-target"
+      },
+      "host_instrumentation_changes": false,
+      "exit_code": 101,
+      "elapsed_seconds": 24.176717281341553,
+      "source_unchanged": true,
+      "test_output_started": false,
+      "passed": false
+    }
+  },
+  "retained_extraction": {
+    "source_file_count": 145,
+    "corpus": [
+      {
+        "path": "extracted/tests/fixtures/certified_bezier_pairs/native.tsv",
+        "sha256": "e2d0cc3628187c824202047a072c4e58b095e4265ed6a1f7c1208ecd92ed98ec",
+        "source": "crates/tkmath/tests/fixtures/certified_bezier_pairs/native.tsv",
+        "equal_source": true
+      },
+      {
+        "path": "extracted/tests/support/metric_residual_cases.rs",
+        "sha256": "8bb92e6e9041a8332285474bfa48528cb3a2f41ab8db179bc6dd1dc49dce799c",
+        "source": "crates/tkmath/tests/support/metric_residual_cases.rs",
+        "equal_source": true
+      }
+    ],
+    "historical_native_fixture": "unchanged replay only; no OCCT execution or new capture"
+  },
+  "completion": {
+    "conditional_cap_measures": "complete for admitted current binding",
+    "conditional_signed_sweep_measure": "complete for admitted current binding",
+    "side_area": "pending binding",
+    "total_area": "pending composition",
+    "valid_body": "incomplete",
+    "publication": "not provided"
+  },
+  "exclusions": [
+    "ordinary-host sanitizer acceptance incomplete",
+    "no operation achieved-error/body validity/tolerance or self-intersection discharge",
+    "no native OCCT oracle or new native fixtures",
+    "no faceted or sampled acceptance",
+    "no application acceptance",
+    "no previous-release accepted-workload benchmark",
+    "no immutable publication of legacy failure diagnostics",
+    "operation-local pointer identities are not stable document names",
+    "no concurrent writes to legacy shape aliases authorized"
+  ],
+  "earlier_attempts": "retained diagnostic-only, not final frozen acceptance"
+}
