@@ -4,12 +4,18 @@ use super::super::two_loop::{fixture::TwoLoopFixture, fixture_bindings};
 use super::*;
 use rustycad_tkernel::standard::Failure;
 struct ContinueRegion;
+struct ContinueBinding;
+impl AnnularBindingProgress for ContinueBinding {
+    fn checkpoint(&mut self, _: AnnularBindingStage) -> Result<bool, Failure> {
+        Ok(false)
+    }
+}
 impl TwoLoopRegionProgress for ContinueRegion {
     fn checkpoint(&mut self, _: TwoLoopRegionStage) -> Result<bool, Failure> {
         Ok(false)
     }
 }
-fn with_actual<R>(
+pub(in crate::sketch_region_prism) fn with_actual<R>(
     run: impl FnOnce(
         &TwoLoopRegionRequest<'_, '_>,
         Box<TwoLoopRegionCertificate>,
@@ -34,6 +40,12 @@ fn with_actual<R>(
     };
     let mut receipt = super::super::super::annular_construction::retained_annular_sweep(&fixture);
     run(&request, region, &mut receipt)
+}
+pub(in crate::sketch_region_prism) fn actual_binding() -> AnnularPrismBinding {
+    with_actual(|request, region, receipt| {
+        bind_annular_prism_v2(request, region, receipt, &mut ContinueBinding)
+            .unwrap_or_else(|cause| panic!("actual binding: {}", describe_refusal(&cause.cause)))
+    })
 }
 #[test]
 fn actual_copy_has_nine_source_keyed_directed_members_and_two_full_boundaries() {
@@ -92,7 +104,7 @@ fn actual_four_charts_retain_twelve_directed_trims_and_native_closure_roles() {
             capture::copy_inputs(request, &region, receipt).unwrap_or_else(|_| panic!("copy"));
         let boundaries =
             boundaries::capture(&region, &copy, receipt).unwrap_or_else(|_| panic!("boundaries"));
-        let charts = charts::capture(receipt, &copy, &boundaries, &mut || false)
+        let (charts, _) = charts::capture(receipt, &copy, &boundaries, &mut || false)
             .unwrap_or_else(|_| panic!("charts"));
         assert_eq!(
             boundaries
@@ -147,4 +159,41 @@ fn assert_seam_contexts(chart: &AnnularBoundChart) {
     );
     assert_eq!(start.output.ancestors, end.output.ancestors);
     assert_ne!(start.output.child_slots, end.output.child_slots);
+}
+
+#[test]
+fn actual_bound_entry_retains_original_region_limits_and_nonzero_signed_sweep() {
+    with_actual(|request, region, receipt| {
+        let proof = bind_annular_prism_v2(request, region, receipt, &mut ContinueBinding)
+            .unwrap_or_else(|cause| {
+                panic!(
+                    "expected current source/copy/chart binding: {}",
+                    describe_refusal(&cause.cause)
+                )
+            });
+        assert_eq!(proof.region().selected_candidate_id(), 301);
+        assert_eq!(proof.boundaries().len(), 2);
+        assert_eq!(proof.charts().len(), 4);
+        assert!(proof.signed_jacobian().compare_f64(2.).unwrap().is_eq());
+        assert_eq!(proof.limits().extrusion, [0., 0., 2.]);
+        assert!(proof.limits().achieved_error.is_none());
+        assert!(proof.limits().effective_spatial.is_none());
+        assert!(proof.limits().effective_parameter.is_none());
+        assert!(!proof.replay_bytes().is_empty());
+        assert!(rebind_annular_prism_v2(request, receipt, &proof).is_ok());
+        assert!(matches!(receipt.completion, PrismCompletion::Incomplete));
+    });
+}
+fn describe_refusal(cause: &AnnularBindingCause<'_>) -> String {
+    match cause {
+        AnnularBindingCause::Count {
+            required,
+            actual,
+            expected,
+        } => format!("{required}: {actual}, expected {expected}"),
+        AnnularBindingCause::Region(cause) => format!("upstream region: {:?}", cause.cause),
+        AnnularBindingCause::Chart(_) => "current chart/selection binding".into(),
+        AnnularBindingCause::Capture(cause) => format!("capture: {cause:?}"),
+        _ => "other retained typed refusal".into(),
+    }
 }

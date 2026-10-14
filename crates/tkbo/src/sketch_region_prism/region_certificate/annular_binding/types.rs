@@ -19,12 +19,16 @@ pub(super) struct AnnularCopyCapture {
 }
 pub(in crate::sketch_region_prism) struct AnnularPrismBinding {
     pub(super) region: Box<TwoLoopRegionCertificate>,
-    pub(super) copy: AnnularCopyCapture,
-    pub(super) boundaries: Vec<AnnularBoundaryBinding>,
-    pub(super) charts: Vec<AnnularBoundChart>,
-    pub(super) limits: super::super::super::frozen::FrozenPrismLimits,
-    pub(super) signed_jacobian: rustycad_tkmath::predicates::roots::DyadicBound,
+    pub(super) operands: AnnularPrismOperands,
     pub(super) replay: Vec<u8>,
+}
+pub(super) struct AnnularPrismOperands {
+    pub copy: AnnularCopyCapture,
+    pub boundaries: Vec<AnnularBoundaryBinding>,
+    pub charts: Vec<AnnularBoundChart>,
+    pub body_contexts: Vec<RegionObservedContext>,
+    pub limits: super::super::super::frozen::FrozenPrismLimits,
+    pub signed_jacobian: rustycad_tkmath::predicates::roots::DyadicBound,
 }
 pub(in crate::sketch_region_prism) struct AnnularBoundaryBinding {
     pub source: RegionSourceId,
