@@ -44,6 +44,7 @@ pub(crate) enum PrismRefusalPath {
     Source,
     Body,
     Candidate,
+    Frozen,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum PendingPrismRefusalPayload {
@@ -65,6 +66,10 @@ pub(crate) enum PrismRefusalProjectionGap {
     Original {
         source: u64,
         cause: Box<PrismFreezeCause>,
+    },
+    UnprojectedDiagnostic {
+        stage: Option<crate::sketch_region_validation::ValidationStage>,
+        actual: &'static str,
     },
     Pending(PendingPrismRefusalPayload),
 }

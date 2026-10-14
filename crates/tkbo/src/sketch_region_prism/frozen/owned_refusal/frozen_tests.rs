@@ -24,6 +24,7 @@ fn unsupported_frozen_diagnostic_stays_projection_incomplete() {
     ];
     for cause in cases {
         let error = retained(NamedRefusalFixture::new().run(cause, PrismRefusalClass::Failed));
+        assert_unsupported_issue(error.issue());
         assert_eq!(error.into_original().0, PrismRefusalClass::Failed);
     }
 }
@@ -52,4 +53,18 @@ fn nested_frozen_diagnostic_retains_complete_entity_context_and_payload() {
         panic!("expected link")
     };
     assert_eq!(format!("{cause:?}"), before);
+}
+
+fn assert_unsupported_issue(issue: &PrismRefusalProjectionIssue) {
+    assert_eq!(
+        issue.path(),
+        &[PrismRefusalPath::Join, PrismRefusalPath::Frozen]
+    );
+    assert!(matches!(
+        issue.cause(),
+        PrismRefusalProjectionGap::UnprojectedDiagnostic {
+            stage: Some(crate::sketch_region_validation::ValidationStage::SelfIntersection),
+            actual: "unprojectable native alert type/payload",
+        }
+    ));
 }

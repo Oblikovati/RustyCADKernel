@@ -29,7 +29,9 @@ semantic dictionary from ADR0042 is still required for a public envelope.
 ## Supported prefix and explicit gaps
 
 - Every join outer variant is distinguished. Existing frozen capture/link causes
-  remain owned typed evidence, including their nested numerical witnesses.
+  remain owned typed evidence, including their nested numerical witnesses, except
+  `UnsupportedDiagnostic`: direct or recursively entity-wrapped unknown payloads
+  return typed projection-incomplete and retain the complete original failure.
 - Source conformance scalar causes move intact; MissingOriginal resolves to the
   complete authored original key. Census/segment observation numbers are retained
   as observation metadata, not persistent entity identities.

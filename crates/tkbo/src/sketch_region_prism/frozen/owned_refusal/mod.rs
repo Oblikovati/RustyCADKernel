@@ -3,6 +3,7 @@
 mod binding;
 mod candidate;
 mod embedding;
+mod frozen_diagnostic;
 mod identity;
 mod join;
 mod region;

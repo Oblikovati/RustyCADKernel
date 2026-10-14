@@ -105,9 +105,9 @@ fn project_cause(
     match cause {
         L::MissingClosureQuery => Ok(O::MissingClosureQuery),
         L::Version { actual, expected } => Ok(O::Version { actual, expected }),
-        L::IncompleteCapture(value) => Ok(O::IncompleteCapture(value)),
-        L::FailedCapture(value) => Ok(O::FailedCapture(value)),
-        L::Link(value) => Ok(O::Link(value)),
+        L::IncompleteCapture(value) => project_incomplete_capture(*value),
+        L::FailedCapture(value) => project_failed_capture(*value),
+        L::Link(value) => map_join(frozen_diagnostic::project_link(*value), O::Link, L::Link),
         L::Cancelled { freeze_phase } => Ok(O::Cancelled { freeze_phase }),
         L::Stale { representation } => Ok(O::Stale { representation }),
         L::ClosureQuery(value) => project_source(*value, context),
@@ -156,5 +156,27 @@ fn project_embedding(
         result,
         OwnedPrismJoinCause::Embedding,
         PrismProofJoinCause::Embedding,
+    )
+}
+
+fn project_incomplete_capture(
+    value: PrismFreezeFailure,
+) -> ProjectionCheck<OwnedPrismJoinCause, PrismProofJoinCause> {
+    let result = frozen_diagnostic::project_capture(value);
+    map_join(
+        result,
+        OwnedPrismJoinCause::IncompleteCapture,
+        PrismProofJoinCause::IncompleteCapture,
+    )
+}
+
+fn project_failed_capture(
+    value: PrismFreezeFailure,
+) -> ProjectionCheck<OwnedPrismJoinCause, PrismProofJoinCause> {
+    let result = frozen_diagnostic::project_capture(value);
+    map_join(
+        result,
+        OwnedPrismJoinCause::FailedCapture,
+        PrismProofJoinCause::FailedCapture,
     )
 }
