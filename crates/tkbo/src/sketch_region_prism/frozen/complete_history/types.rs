@@ -268,7 +268,7 @@ impl PrismHistoryCause {
             _ => None,
         }
     }
-    pub(super) fn failure_class(&self) -> PrismHistoryFailureClass {
+    pub(in crate::sketch_region_prism) fn failure_class(&self) -> PrismHistoryFailureClass {
         match self {
             Self::AtUse { cause, .. } => cause.failure_class(),
             Self::Native(_) | Self::Geometry(_) => PrismHistoryFailureClass::Failed,

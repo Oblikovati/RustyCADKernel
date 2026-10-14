@@ -86,6 +86,8 @@ mod membership_refusal_tests;
 
 pub(crate) use failure_class::TwoLoopRefusalClass;
 #[allow(unused_imports)]
+pub(in crate::sketch_region_prism) use failure_class::{candidate as classify_region_candidate_cause, surface as classify_region_surface_cause};
+#[allow(unused_imports)]
 pub(in crate::sketch_region_prism) use member_types::{
     TwoLoopMemberKey, TwoLoopMemberParents, TwoLoopMemberRole, TwoLoopOriginalUse,
 };
