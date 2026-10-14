@@ -2,6 +2,14 @@
 //! Borrowed immutable views own all provenance values; selected geometry is historical/unproven.
 use super::*;
 impl PrismLineageInspection {
+    /// Read the explicit operation identity; example: `inspection.operation()`.
+    pub(crate) fn operation(&self) -> AuthoredPrismId {
+        self.operation
+    }
+    /// Borrow both actual context captures; example: `inspection.contexts().len()`.
+    pub(crate) fn contexts(&self) -> &[CopyContextObservation] {
+        &self.contexts
+    }
     /// Borrow member observations with exact parent classes; example: `inspection.members().len()`.
     pub(crate) fn members(&self) -> &[CopyMemberObservation] {
         &self.members

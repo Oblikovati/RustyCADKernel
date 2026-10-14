@@ -61,6 +61,17 @@ pub(super) fn inspected(outcome: PrismLineageOutcome) -> PrismLineageInspection 
     }
 }
 #[test]
+fn borrowed_lineage_views_preserve_explicit_operation_and_context_members() {
+    let (_, receipt, publication, authored) = fixture();
+    let result = inspected(run(&receipt, &publication, &authored));
+    assert_eq!(result.operation(), publication.operation);
+    assert_eq!(result.contexts().len(), 10);
+    for context in result.contexts() {
+        assert_eq!(context.key.0.last().unwrap().0, context.occurrence.member);
+        assert_eq!(context.occurrence.member.operation, result.operation());
+    }
+}
+#[test]
 fn complete_copy_lineage_keeps_retirement_separate_and_body_incomplete() {
     let (_, receipt, publication, authored) = fixture();
     let result = inspected(run(&receipt, &publication, &authored));
