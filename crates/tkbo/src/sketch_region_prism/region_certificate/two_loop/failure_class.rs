@@ -4,7 +4,9 @@ use super::failure::*;
 use crate::sketch_region::{
     ArrangementCause, ArrangementCompletion, PartitionObservation, PartitionReadCause,
 };
-use crate::sketch_region_candidates::CandidateCause;
+use crate::sketch_region_candidates::{
+    CandidateCause, CandidateCopyInspection, CandidateCopyTreeObservation,
+};
 use crate::sketch_region_geometry_capture::CapturedGeometryCause;
 use crate::sketch_region_source_conformance::{SourceBindingFault, SourceConformanceCause};
 use rustycad_tkmath::predicates::roots::{
@@ -50,14 +52,33 @@ fn local(cause: &TwoLoopLocalDiagnostic<'_>) -> TwoLoopRefusalClass {
         TwoLoopLocalDiagnostic::Candidate(cause) => candidate(cause),
         TwoLoopLocalDiagnostic::Source(cause) => source(cause),
         TwoLoopLocalDiagnostic::SourceBinding(faults) => source_faults(faults),
-        TwoLoopLocalDiagnostic::Copy(copy) => {
-            first_class(copy.observation_failures.iter().map(candidate))
+        TwoLoopLocalDiagnostic::Copy(copy) => copied(copy),
+        TwoLoopLocalDiagnostic::Region(cause) | TwoLoopLocalDiagnostic::Partition { cause, .. } => {
+            region(cause)
         }
         TwoLoopLocalDiagnostic::PartitionObservation(PartitionObservation::Incomplete {
             failure,
             ..
         }) if matches!(failure.cause, PartitionReadCause::Native(_)) => Failed,
         _ => Incomplete,
+    }
+}
+fn copied(copy: &CandidateCopyInspection) -> TwoLoopRefusalClass {
+    let class = first_class(copy.observation_failures.iter().map(candidate));
+    if class != TwoLoopRefusalClass::Incomplete {
+        return class;
+    }
+    match copy.copied_tree {
+        CandidateCopyTreeObservation::Incomplete { .. } => TwoLoopRefusalClass::Failed,
+        _ => TwoLoopRefusalClass::Incomplete,
+    }
+}
+fn region(cause: &super::super::RegionCertificateCause) -> TwoLoopRefusalClass {
+    use super::super::RegionCertificateCause;
+    match cause {
+        RegionCertificateCause::Mapped(_) => TwoLoopRefusalClass::Failed,
+        RegionCertificateCause::Capture(cause) => surface(cause),
+        _ => TwoLoopRefusalClass::Incomplete,
     }
 }
 fn arrangement(completion: &ArrangementCompletion) -> TwoLoopRefusalClass {

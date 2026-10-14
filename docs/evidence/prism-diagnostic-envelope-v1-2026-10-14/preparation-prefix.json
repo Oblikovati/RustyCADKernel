@@ -1,0 +1,41 @@
+{
+  "source": "1117e2fcff4c87ebd4749322d1ead0c14d29aceb",
+  "source_files": 12783,
+  "unchanged": true,
+  "host": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "command": "CARGO_BUILD_JOBS=2 cargo test -p rustycad-tkbo --all-features --lib owned_request:: -- --test-threads=1",
+  "tests": 76,
+  "focused_tests": 28,
+  "strict_clippy": "cargo clippy -p rustycad-tkbo --all-targets --all-features -- -D warnings",
+  "process_receipt": {
+    "binary": "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+    "binary_sha256": "834315a79ef526c863b3254677ad11d5f598629bc6c5546ef101da75069978a3",
+    "results": [
+      {
+        "command": [
+          "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "sketch_region_prism::owned_request::diagnostic_runtime_tests::preparation_diagnostic_process_receipt",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "returncode": 0,
+        "sha256": "1b96918b7508fedfb093ff7139da58bfd4a7385096149e8de7051f89dbe00203",
+        "length": 4333
+      },
+      {
+        "command": [
+          "target/debug/deps/rustycad_tkbo-3743221922cb8a91",
+          "sketch_region_prism::owned_request::diagnostic_runtime_tests::preparation_diagnostic_process_receipt",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "returncode": 0,
+        "sha256": "1b96918b7508fedfb093ff7139da58bfd4a7385096149e8de7051f89dbe00203",
+        "length": 4333
+      }
+    ]
+  },
+  "tsan": "incomplete: startup control SIGSEGV before main; actual suite unbuilt/unexecuted",
+  "scope": "development prefix; publication invocation adapter and full source-frozen integration gate pending"
+}

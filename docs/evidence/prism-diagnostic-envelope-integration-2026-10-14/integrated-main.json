@@ -1,0 +1,208 @@
+{
+  "integration_revision": "e398da2900fec87ee4b551cf21792cef904b9169",
+  "candidate_revision": "a34355883",
+  "candidate_base": "ff70563b9",
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "label": "tests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkernel",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-tests.log.gz",
+        "sha256": "d9b09fbf63a584d9b679acff4eefa04c94b340a0771abb747fb757c08b1c6607"
+      },
+      "tests": {
+        "passed": 6805,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "doctests",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--doc",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkernel",
+        "--all-features",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-doctests.log.gz",
+        "sha256": "3a1251c6fad255e5ed4c8575171b57174971d70d951ea30cde661fc6f9e88aae"
+      },
+      "tests": {
+        "passed": 329,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "--all-targets",
+        "-p",
+        "rustycad-tkbo",
+        "-p",
+        "rustycad-tkernel",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-clippy.log.gz",
+        "sha256": "7573487457366f976c54b01e94a258a236bcd497f27dd954291130cc32e036c8"
+      }
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "integrated-fmt.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      }
+    }
+  ],
+  "source_inputs_unchanged": true,
+  "source_bookends": {
+    "path": "integrated-source-bookends.json.gz",
+    "sha256": "382bbc6861edd8aefc030424aeff0806965b6f3cf242f006caa6925ba84d1485"
+  },
+  "candidate_crate_files_match": {
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/context.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/preparation.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/admission.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/admission_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/callback_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/coverage_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/fixtures/admission-v1.bin": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/native.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/native_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/phase_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/phases.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/tags.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/types.rs": true,
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/views.rs": true,
+    "crates/tkbo/src/sketch_region_prism/exact_tolerance/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/exact_tolerance/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_measures/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_measures/replay.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/proof_join/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/frozen/proof_join/replay_options.rs": true,
+    "crates/tkbo/src/sketch_region_prism/mod.rs": false,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_access.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_access_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_baseline_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_codec_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_nested_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_projection_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_runtime_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/fixtures/request-v1.bin": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/mod.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/operand_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/policy.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/policy_tests.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/publication.rs": true,
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/tests.rs": true,
+    "crates/tkernel/src/standard/failure.rs": true,
+    "crates/tkernel/src/standard/failure/provenance.rs": true,
+    "crates/tkernel/src/standard/failure/provenance_baseline_tests.rs": true,
+    "crates/tkernel/src/standard/failure/provenance_tests.rs": true
+  },
+  "candidate_crate_file_status": {
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/context.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/preparation.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/admission.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/admission_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/callback_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/coverage_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/fixtures/admission-v1.bin": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/native.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/native_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/phase_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/phases.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/replay/tags.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/types.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/diagnostic_envelope/views.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/exact_tolerance/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/exact_tolerance/replay.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_measures/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/joined_measures/replay.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/proof_join/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/frozen/proof_join/replay_options.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_access.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_access_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_baseline_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_codec_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_nested_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_projection_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/diagnostic_runtime_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/mod.rs": "M",
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/fixtures/request-v1.bin": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/mod.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/operand_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/policy.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/policy_tests.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/publication.rs": "A",
+    "crates/tkbo/src/sketch_region_prism/owned_request/request_replay/tests.rs": "A",
+    "crates/tkernel/src/standard/failure.rs": "M",
+    "crates/tkernel/src/standard/failure/provenance.rs": "A",
+    "crates/tkernel/src/standard/failure/provenance_baseline_tests.rs": "A",
+    "crates/tkernel/src/standard/failure/provenance_tests.rs": "A"
+  },
+  "approved_union": {
+    "crates/tkbo/src/sketch_region_prism/mod.rs": {
+      "matches_both_parent_intents": true,
+      "expected_sha256": "391d03294df3d08b9e536a2ce7e921f8f1ed3fbb9efa844e8f37cd4af05086df",
+      "prior_main": "dd09d17d3",
+      "resolution": "Preserve cfg(test) annular_construction and unconditional crate-private diagnostic_envelope"
+    }
+  },
+  "environment": {
+    "CARGO_BUILD_JOBS": "2",
+    "toolchain": "1.99.0"
+  },
+  "limitations": [
+    "TSan acceptance remains incomplete; no sanitizer bypass was used.",
+    "No application, release-package, platform-wide or performance acceptance.",
+    "No full API/test parity or complete region/body validity claim."
+  ],
+  "checks_passed": true
+}

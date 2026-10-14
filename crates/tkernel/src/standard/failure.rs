@@ -1,6 +1,7 @@
 //! Owned exception messages with OCCT's printing and shared-copy semantics.
 use std::sync::Arc;
 mod byte_messages;
+mod provenance;
 mod text;
 use text::FailureText;
 mod out_of_memory;
@@ -132,3 +133,9 @@ impl std::fmt::Display for Failure {
     }
 }
 impl std::error::Error for Failure {}
+
+#[cfg(test)]
+mod provenance_baseline_tests;
+
+#[cfg(test)]
+mod provenance_tests;

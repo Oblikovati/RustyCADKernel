@@ -111,7 +111,8 @@ fn closure(value: &JoinedClosureEvidence, bytes: &mut Vec<u8>) {
     encode_frozen_numbers(value.local_point, bytes);
     scalar(&value.certificate, bytes);
 }
-fn cap(value: StoredToleranceCap, bytes: &mut Vec<u8>) {
+/// Reuse unchanged explicit cap tag/value bytes; `encode_stored_tolerance_cap(cap, bytes)`.
+pub(in crate::sketch_region_prism) fn cap(value: StoredToleranceCap, bytes: &mut Vec<u8>) {
     bytes.push(match value {
         StoredToleranceCap::NoLimit => 0,
         StoredToleranceCap::Report(_) => 1,

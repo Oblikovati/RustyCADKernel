@@ -91,3 +91,5 @@ pub(in crate::sketch_region_prism) use failure_class::{candidate as classify_reg
 pub(in crate::sketch_region_prism) use member_types::{
     TwoLoopMemberKey, TwoLoopMemberParents, TwoLoopMemberRole, TwoLoopOriginalUse,
 };
+#[cfg(test)]
+mod native_refusal_tests;
