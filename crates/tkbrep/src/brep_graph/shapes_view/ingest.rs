@@ -8,7 +8,7 @@
 use super::route::shape_without_own_location;
 use super::{AddStatus, Options};
 use crate::brep_graph::{BRepGraph, NodeId, NodeKind, RefId, RefKind};
-use crate::brep_graph_inc::populate::{self, BuildStatus};
+use crate::brep_graph_inc::populate::{self, BuildStatus, PCurveImportBehavior};
 use crate::topods::{Shape, ShapeIterator};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -110,17 +110,34 @@ pub(super) fn append_impl(
     options: &Options,
     flat_roots: &mut Vec<NodeId>,
 ) -> Result<AddStatus, Failure> {
+    append_impl_with_behavior(
+        graph,
+        shape,
+        options,
+        flat_roots,
+        PCurveImportBehavior::default(),
+    )
+}
+
+pub(super) fn append_impl_with_behavior(
+    graph: &mut BRepGraph,
+    shape: &Shape,
+    options: &Options,
+    flat_roots: &mut Vec<NodeId>,
+    behavior: PCurveImportBehavior,
+) -> Result<AddStatus, Failure> {
     let old = CountSnapshot::take(graph);
     let status = if options.flatten {
-        populate::append_flattened(
+        populate::append_flattened_with_behavior(
             graph,
             shape,
             options.parallel,
             flat_roots,
             &options.populate,
+            behavior,
         )?
     } else {
-        populate::append(graph, shape, options.parallel, &options.populate)?
+        populate::append_with_behavior(graph, shape, options.parallel, &options.populate, behavior)?
     };
     graph.inc_storage().clear_current_shapes();
     populate_uids_incremental(graph, &old);

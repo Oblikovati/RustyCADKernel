@@ -1,0 +1,219 @@
+{
+  "all_checks_passed": true,
+  "commands": [
+    {
+      "command": [
+        "rustc",
+        "+1.99.0",
+        "-Vv"
+      ],
+      "elapsed_seconds": 0.012,
+      "exit_code": 0,
+      "log_sha256": "b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+      "name": "toolchain"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbrep",
+        "--all-targets",
+        "--all-features"
+      ],
+      "elapsed_seconds": 15.079,
+      "exit_code": 0,
+      "log_sha256": "f0426ba0d80791fe6b9e3b818d835472dc03395032e7a0483a7b619f4cb5c2a9",
+      "name": "tkbrep-all-targets"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features"
+      ],
+      "elapsed_seconds": 82.166,
+      "exit_code": 0,
+      "log_sha256": "82b4dca5c399e3ec76d34c47095d5d0b4f090376ad39f802ed94550d74a5ce4e",
+      "name": "tkbo-all-targets"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--doc",
+        "--all-features"
+      ],
+      "elapsed_seconds": 3.04,
+      "exit_code": 0,
+      "log_sha256": "d78f08d22395c63609ea1355d8bc7bbb8a45db075f66de5dda5df1d27f677319",
+      "name": "doctests"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "clippy",
+        "-p",
+        "rustycad-tkbrep",
+        "-p",
+        "rustycad-tkbo",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "elapsed_seconds": 11.586,
+      "exit_code": 0,
+      "log_sha256": "b48dd14bb1efe56885375567c1d805aaea272ec7ddcf527510e966b2a2dda8fb",
+      "name": "clippy"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "elapsed_seconds": 6.367,
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "format"
+    },
+    {
+      "command": [
+        "rustfmt",
+        "+1.99.0",
+        "--edition",
+        "2024",
+        "--check",
+        "crates/tkbrep/tests/graph_pcurve_placement.rs"
+      ],
+      "elapsed_seconds": 0.013,
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "test-format"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "-p",
+        "rustycad-tkbrep",
+        "--test",
+        "toolkit",
+        "--no-run",
+        "--message-format=json"
+      ],
+      "elapsed_seconds": 0.059,
+      "exit_code": 0,
+      "log_sha256": "f0f26dd1b8a79fa5cd8e233d652525745eeb2a7c276199fb9709c9f1d236ea60",
+      "name": "binary-discovery"
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-seam-pcurve-import/target/debug/deps/toolkit-c7922262762352ee",
+        "graph_pcurve_placement::contracts::cumulative_v2_owned_process_snapshot",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "elapsed_seconds": 0.006,
+      "exit_code": 0,
+      "log_sha256": "bc714dd56d0b84bd34ec35787512c6dd11b33c06af7efab91aa0ce0783613c42",
+      "name": "process-0"
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-seam-pcurve-import/target/debug/deps/toolkit-c7922262762352ee",
+        "graph_pcurve_placement::contracts::cumulative_v2_owned_process_snapshot",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "elapsed_seconds": 0.004,
+      "exit_code": 0,
+      "log_sha256": "bc714dd56d0b84bd34ec35787512c6dd11b33c06af7efab91aa0ce0783613c42",
+      "name": "process-1"
+    }
+  ],
+  "default_import_behavior": 1,
+  "executed_artifact_hashes_observed_after_run": {
+    "target/debug/deps/rustycad_tkbo-3743221922cb8a91": "86b1d47dc02f2cf38d696a49a2b33307033366aab4d1ef97ce0607b10b2a6ce2",
+    "target/debug/deps/rustycad_tkbrep-217b63c52662a748": "bad2cbb605bc4ee73ecc539f492c909e0f1a73822e8dd28f5b6619303a69ebfd",
+    "target/debug/deps/toolkit-c6bfabaca59a5291": "e1b10b30b3208e86037963a48bd4efc97bfec9488610b20190cc913dde411576",
+    "target/debug/deps/toolkit-c7922262762352ee": "62d86d0ab1275aac54b28aef0d78ce22c9855096bf4e47db858e274510e31aee",
+    "target/debug/examples/rustycad_tkbo_bean_private_probe-c40fcd39c3c7a83b": "6d4e6a0d147d2e3bffb9e37bcaa874786f725f464a43fb22f27bb2eb1048330c",
+    "target/debug/examples/rustycad_tkbo_edge_private_probe-43265cdc6db9d737": "0b48c0257dab1f3e84ccf09a1e1de518e97cf1695e037c91491976cf9e9e067d",
+    "target/debug/examples/rustycad_tkbo_numeric_probe-3b8a9869c37f25f1": "e59332d88704b9c621dd5235c1c0def7302785cf146fe6a35a0adddfede1e0ea",
+    "target/debug/examples/rustycad_tkbrep_numeric_probe-bb999614de4da280": "02eaf397bda6d040482f3dfa5bc2d70a153d82d61aa3b16a241f3418454b144e"
+  },
+  "jobs": 2,
+  "legacy_fixture_sha256": "f54f5bdc7b770cfeb81d2d053650f2393824ec47946892dfdcf0eaf5171ee55a",
+  "legacy_fixture_unchanged": true,
+  "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+  "process_executable": {
+    "path": "target/debug/deps/toolkit-c7922262762352ee",
+    "sha256": "62d86d0ab1275aac54b28aef0d78ce22c9855096bf4e47db858e274510e31aee"
+  },
+  "process_snapshot": "{\"pcurve_import_behavior\":2,\"stored\":true,\"range\":[0,1],\"reversed\":false}",
+  "raw_archive_sha256": "f96bd1aadf0dc491f1f22a2719205df8daaff213d9ff729e8eec012e8721c090",
+  "receipt_finalizer_recovery": {
+    "cause": "The initial parser expected JSON at line start, but libtest emits its test-name prefix on that line. All executed commands already passed.",
+    "method": "Strictly extract exactly one expected JSON payload from each retained output; compare both payload and whole output bytes; rehash all original source inputs unchanged.",
+    "original_all_checks_passed": false,
+    "original_archive_sha256": "6488589385b56fc4de18451cb98555fd36ba7652f2e3301c0a0c860d66d0bdd6",
+    "original_exit_code": 1,
+    "original_receipt_sha256": "e62124bf0e12309305aea901d7124a8a5a37e2427ed5d595553deb51396bea48",
+    "recovery_source_inputs_unchanged": true
+  },
+  "requested_import_behavior": 2,
+  "scope": {
+    "full_api_test_parity": false,
+    "graph_wide_v2_certificate": false,
+    "immutable_graph_publication": false,
+    "live_occt": false,
+    "performance_acceptance": false,
+    "polygon_lookup_changed": false,
+    "tsan_acceptance": "incomplete: unchanged host startup limitation recorded in native-display-lifecycle-v1-2026-10-14/TSAN.md; not executed for this slice"
+  },
+  "source_bookends_equal": true,
+  "source_commit": "7a2b9e388d1432ce00ac8317d867246545365f38",
+  "source_file_count": 15648,
+  "source_manifest_sha256": "1e83cd30c3e0e135a2203de45041326bec15913d5781d37c2c6326f77b9f070a",
+  "test_counts": {
+    "doctests": {
+      "failed": 0,
+      "ignored": 0,
+      "passed": 249,
+      "summaries": 3
+    },
+    "tkbo-all-targets": {
+      "failed": 0,
+      "ignored": 0,
+      "passed": 1112,
+      "summaries": 5
+    },
+    "tkbrep-all-targets": {
+      "failed": 0,
+      "ignored": 0,
+      "passed": 1674,
+      "summaries": 3
+    }
+  },
+  "two_process_bytes_equal": true,
+  "whole_process_output_bytes_equal": true
+}

@@ -167,3 +167,5 @@ pub mod topods_iterator;
 pub mod topods_tshape;
 #[path = "../toptools_behavior.rs"]
 pub mod toptools_behavior;
+#[path = "../graph_pcurve_placement.rs"]
+pub mod graph_pcurve_placement;

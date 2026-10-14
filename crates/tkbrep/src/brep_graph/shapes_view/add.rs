@@ -5,7 +5,8 @@
 //! `Shapes().Add` and `Shapes().ClearCached`: ingestion of a shape as a new root
 //! (optionally wrapped in a product) or under a parent node.
 use super::ingest::{
-    append_impl, bind_source_shape_aliases, detect_topology_root, snapshot_count_for_kind,
+    append_impl, append_impl_with_behavior, bind_source_shape_aliases, detect_topology_root,
+    snapshot_count_for_kind,
 };
 use super::route::{
     ShapeParentRoute, attach_supplement_to_parent, classify_shape_to_parent,
@@ -16,7 +17,7 @@ use crate::brep_graph::{
     BRepGraph, CompSolidId, CompoundId, FaceId, NodeId, NodeKind, OccurrenceId, ProductId, RefId,
     ShellId, SolidId,
 };
-use crate::brep_graph_inc::ParityOrientation;
+use crate::brep_graph_inc::{ParityOrientation, populate::PCurveImportBehavior};
 use crate::topods::Shape;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::toploc::Location;
@@ -60,6 +61,21 @@ fn resolve_topology_root(
     Ok(root)
 }
 
+fn resolve_root_with_alias(
+    graph: &BRepGraph,
+    shape: &Shape,
+    populated: &Shape,
+    roots: &[NodeId],
+    old_count: u32,
+    stored_in_ref: bool,
+) -> Result<NodeId, Failure> {
+    let root = resolve_topology_root(graph, shape, populated, roots, old_count)?;
+    if stored_in_ref && root.is_valid() {
+        bind_source_shape_aliases(graph, shape, populated)?;
+    }
+    Ok(root)
+}
+
 // The shape to populate (without its own location when the reference keeps it) and
 // whether the reference keeps it.
 fn populate_shape_for(
@@ -95,22 +111,60 @@ impl ShapesViewMut<'_> {
         shape: &Shape,
         options: &Options,
     ) -> Result<AddResult, Failure> {
-        let mut result = AddResult::default();
+        self.add_with_options_and_behavior(shape, options, PCurveImportBehavior::default())
+    }
+
+    /// Lookup selection applies to newly extracted definitions; existing definitions are reused unchanged.
+    /// Use a fresh graph and audit for migration; an append status is not graph-wide validation.
+    /// Append using explicit stored-pcurve lookup; `view.add_with_options_and_behavior(&shape, &Options::default(), PCurveImportBehavior::LegacyLocalV1)`.
+    pub fn add_with_options_and_behavior(
+        &mut self,
+        shape: &Shape,
+        options: &Options,
+        behavior: PCurveImportBehavior,
+    ) -> Result<AddResult, Failure> {
         if shape.is_null() {
-            return Ok(result);
+            return Ok(AddResult::default());
         }
+        let mut result = self.import_root(shape, options, behavior)?;
+        self.finish_root_import(shape, options, &mut result)?;
+        Ok(result)
+    }
+
+    fn import_root(
+        &mut self,
+        shape: &Shape,
+        options: &Options,
+        behavior: PCurveImportBehavior,
+    ) -> Result<AddResult, Failure> {
         let old_count = snapshot_count_for_kind(self.graph, shape.shape_type()?);
-        let (populate_shape, stored_in_ref) =
-            populate_shape_for(shape, options, NodeId::default())?;
-        let mut flat_roots = Vec::new();
-        result.status = append_impl(self.graph, &populate_shape, options, &mut flat_roots)?;
-        result.topology_root =
-            resolve_topology_root(self.graph, shape, &populate_shape, &flat_roots, old_count)?;
-        if stored_in_ref && result.topology_root.is_valid() {
-            bind_source_shape_aliases(self.graph, shape, &populate_shape)?;
-        }
+        let (populated, stored_in_ref) = populate_shape_for(shape, options, NodeId::default())?;
+        let mut roots = Vec::new();
+        let status =
+            append_impl_with_behavior(self.graph, &populated, options, &mut roots, behavior)?;
+        let topology_root = resolve_root_with_alias(
+            self.graph,
+            shape,
+            &populated,
+            &roots,
+            old_count,
+            stored_in_ref,
+        )?;
+        Ok(AddResult {
+            status,
+            topology_root,
+            ..AddResult::default()
+        })
+    }
+
+    fn finish_root_import(
+        &mut self,
+        shape: &Shape,
+        options: &Options,
+        result: &mut AddResult,
+    ) -> Result<(), Failure> {
         if options.create_auto_product && result.topology_root.is_valid() {
-            self.wrap_in_auto_product(&mut result, shape.location())?;
+            self.wrap_in_auto_product(result, shape.location())?;
         }
         let has_product = options.create_auto_product && result.product.is_valid();
         if !result.topology_root.is_valid() && !has_product {
@@ -121,7 +175,7 @@ impl ShapesViewMut<'_> {
                 .shapes()
                 .collect_added_nodes(shape, &mut result.added_nodes)?;
         }
-        Ok(result)
+        Ok(())
     }
 
     // The auto product of the root, made a document root, and its first occurrence.
