@@ -1,0 +1,52 @@
+{
+  "revision": "88942748437966f2064cab4beece9b9e92389dcb",
+  "release_guards_unchanged": true,
+  "commands": [
+    {
+      "label": "package-command-001",
+      "arguments": [
+        "cargo",
+        "metadata",
+        "--locked",
+        "--no-deps",
+        "--format-version",
+        "1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.039599044001079164
+    },
+    {
+      "label": "package-command-002",
+      "arguments": [
+        "python3",
+        "tools/toolkit_test_suites.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.14611580900964327
+    },
+    {
+      "label": "package-command-003",
+      "arguments": [
+        "cargo",
+        "package",
+        "--workspace",
+        "--no-verify",
+        "--exclude-lockfile"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.324731450993568
+    },
+    {
+      "label": "package-command-004",
+      "arguments": [
+        "git",
+        "ls-files",
+        "-z",
+        "tools/oracle",
+        "porting/parity.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.008967194997239858
+    }
+  ]
+}
