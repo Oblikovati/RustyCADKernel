@@ -22,13 +22,6 @@ impl RecordedCopyRows {
             .collect()
     }
 }
-fn copy_key(key: &PartitionOccurrenceIdentity) -> PartitionOccurrenceIdentity {
-    PartitionOccurrenceIdentity {
-        topology_address: key.topology_address,
-        location: key.location.clone(),
-        orientation: key.orientation,
-    }
-}
 
 #[test]
 fn every_observed_image_requires_a_physical_copy_row() {
@@ -78,8 +71,8 @@ fn recorded_row(
     image: &PartitionImageObservation,
 ) -> CandidateImageCopyLink {
     CandidateImageCopyLink {
-        original: copy_key(&image.occurrence),
-        copied: copy_key(&image.occurrence),
+        original: image.occurrence.clone(),
+        copied: image.occurrence.clone(),
         preserved: Vec::new(),
         modified: source.parents.clone(),
         generated: Vec::new(),

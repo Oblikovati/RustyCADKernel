@@ -16,8 +16,13 @@ mod span_tests;
 mod spans;
 
 #[cfg(test)]
+mod copy_tests;
+#[cfg(test)]
 mod image_link_tests;
 mod image_links;
 mod integrity;
 #[cfg(test)]
 mod integrity_tests;
+#[cfg(test)]
+mod source_domain_tests;
+mod source_domains;
