@@ -93,6 +93,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_kpart_corner", fl_kpart_corner_case},
  // BRepFilletAPI (tkfillet_probe_api.cxx)
  {"fl_make_fillet", fl_make_fillet_case},
+ {"fl_fillet_surf", fl_fillet_surf_case},
 };
 int main() {
  std::string line;

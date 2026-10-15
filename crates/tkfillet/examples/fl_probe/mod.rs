@@ -12,6 +12,7 @@ pub mod chfi3d;
 pub mod chfi_ds;
 pub mod chfikpart;
 pub mod fillet;
+pub mod fillet_surf;
 pub mod line_builders;
 pub mod rst_rst;
 pub mod surf_rst;

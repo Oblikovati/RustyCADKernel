@@ -50,7 +50,7 @@ fn rounded_box() -> Result<Shape, Failure> {
 }
 
 /// `fl_api_solid`: the solid of the request kind (see the native probe).
-fn api_solid(kind: i32) -> Result<Shape, Failure> {
+pub(super) fn api_solid(kind: i32) -> Result<Shape, Failure> {
     if kind == 1 {
         let mut w = BRepPrimAPIMakeWedge::with_limits(10., 10., 10., [5., 5., 5., 5.])?;
         return Ok(w.shape()?.clone());

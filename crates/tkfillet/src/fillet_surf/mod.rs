@@ -1,9 +1,16 @@
 // Rust translation of FilletSurf_StatusType.hxx, FilletSurf_StatusDone.hxx and
 // FilletSurf_ErrorTypeStatus.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! FilletSurf: the fillet surfaces of a contour without building the solid. The
-//! statuses are ported; `FilletSurf_Builder` and `FilletSurf_InternalBuilder` derive
-//! from the ChFi3d fillet builder and wait for TKBool (docs/tkfillet-progress.md).
+//! FilletSurf: the fillet surfaces of a contour without building the solid
+//! ([`FilletSurfBuilder`]), computed by a ChFi3d fillet builder that only walks the
+//! contour ([`FilletSurfInternalBuilder`]).
+mod builder;
+mod internal_add;
+mod internal_builder;
+mod internal_ops;
+
+pub use builder::FilletSurfBuilder;
+pub use internal_builder::FilletSurfInternalBuilder;
 
 /// Where the ends of a fillet surface lie (`FilletSurf_StatusType`);
 /// `StatusType::NoExtremityOnEdge as i32 == 2`.

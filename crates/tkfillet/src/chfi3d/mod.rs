@@ -1,7 +1,7 @@
 //! ChFi3d: the 3d fillet and chamfer builders (`ChFi3d_Builder`, `ChFi3d_FilBuilder`,
 //! `ChFi3d_ChBuilder`), their helpers, and the face-connection geometry shared by fillet
 //! construction and offset analysis (docs/tkfillet-progress.md).
-mod builder;
+pub(crate) mod builder;
 mod builder0;
 mod ch_builder;
 mod fil_builder;

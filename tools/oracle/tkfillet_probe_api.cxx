@@ -1,12 +1,16 @@
-// BRepFilletAPI probes of tools/oracle/tkfillet_probe.cxx (the 3d fillets and chamfers
-// through ChFi3d_FilBuilder and ChFi3d_ChBuilder); the Rust twin is
-// crates/tkfillet/examples/fl_probe/api.rs.
+// BRepFilletAPI and FilletSurf probes of tools/oracle/tkfillet_probe.cxx (the 3d fillets
+// and chamfers through ChFi3d_FilBuilder and ChFi3d_ChBuilder, and the fillet surfaces of
+// FilletSurf_Builder); the Rust twins are crates/tkfillet/examples/fl_probe/api.rs and
+// fillet_surf.rs.
 #include <BRep_Tool.hxx>
 #include <BRepAlgoAPI_Cut.hxx>
 #include <BRepAlgoAPI_Fuse.hxx>
 #include <BRepCheck_Analyzer.hxx>
 #include <BRepFilletAPI_MakeChamfer.hxx>
 #include <BRepFilletAPI_MakeFillet.hxx>
+#include <FilletSurf_Builder.hxx>
+#include <Geom_Surface.hxx>
+#include <Geom_TrimmedCurve.hxx>
 #include <BRepGProp.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
 #include <BRepPrimAPI_MakeCylinder.hxx>
@@ -84,5 +88,39 @@ void fl_make_fillet_case(std::istream& in){
     const TopoDS_Face& f=TopoDS::Face(ef.FindFromKey(e).First());
     if(method==2)api.Add(d1,e);else if(method==3)api.Add(d1,d2,e,f);else api.AddDA(d1,d2,e,f);}
    api.Build();fl_api_result(api);
+  });
+ ga_end();}
+
+// `fl_fillet_surf solid e1 e2 e3 r simulate`: FilletSurf_Builder on the edges e1, e2 and
+// e3 of the map of the edges of the solid (0 for none) with the radius r, computed or
+// simulated: the statuses, the number of surfaces and, per surface, its tolerance and
+// the ranges of its curves on the faces (the number of sections and the first one when
+// simulated), then the parameters and statuses of the ends.
+void fl_fillet_surf_case(std::istream& in){
+ GaReader r{in};int kind=r.integer();int ie[3]={r.integer(),r.integer(),r.integer()};double rad=r.real();bool simul=r.flag();
+ GA_TRY(
+  TopoDS_Shape s=fl_api_solid(kind);
+  NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher> em;
+  TopExp::MapShapes(s,TopAbs_EDGE,em);
+  NCollection_List<TopoDS_Shape> E;
+  for(int k=0;k<3;k++)if(ie[k]>0&&ie[k]<=em.Extent())E.Append(em(ie[k]));
+  FilletSurf_Builder b(s,E,rad);
+  if(simul)b.Simulate();else b.Perform();
+  ga_int(b.IsDone());ga_int(b.StatusError());
+  if(b.IsDone()!=FilletSurf_IsNotOk){
+   int n=b.NbSurface();ga_int(n);
+   for(int i=1;i<=n;i++){
+    if(simul){
+     int ns=b.NbSection(i);ga_int(ns);
+     occ::handle<Geom_TrimmedCurve> c=b.Section(i,1);ga_real(c->FirstParameter());ga_real(c->LastParameter());
+    }else{
+     ga_real(b.TolApp3d(i));
+     ga_real(b.CurveOnFace1(i)->FirstParameter());ga_real(b.CurveOnFace1(i)->LastParameter());
+     ga_real(b.PCurveOnFace2(i)->FirstParameter());ga_real(b.PCurve2OnFillet(i)->LastParameter());
+     double u1,u2,v1,v2;b.SurfaceFillet(i)->Bounds(u1,u2,v1,v2);ga_real(u1);ga_real(u2);ga_real(v1);ga_real(v2);
+    }
+   }
+   ga_real(b.FirstParameter());ga_real(b.LastParameter());
+   ga_int(b.StartSectionStatus());ga_int(b.EndSectionStatus());
   });
  ga_end();}

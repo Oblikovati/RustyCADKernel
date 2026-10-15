@@ -31,6 +31,8 @@ pub mod connection;
 pub mod el_spine;
 #[path = "../fil_builder.rs"]
 pub mod fil_builder;
+#[path = "../fillet_surf.rs"]
+pub mod fillet_surf;
 #[path = "../orientation.rs"]
 pub mod orientation;
 #[path = "../tangency.rs"]

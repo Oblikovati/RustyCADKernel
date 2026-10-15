@@ -4,7 +4,8 @@ use std::io::{self, BufRead};
 mod fl_probe;
 use fl_probe::{
     api, app_func, blend_func, brep_blend, builder0, builder0_solve, builder0_topo, chamfer,
-    chfi_ds, chfi2d, chfi3d, chfikpart, fillet, line_builders, rst_rst, surf_rst, walking,
+    chfi_ds, chfi2d, chfi3d, chfikpart, fillet, fillet_surf, line_builders, rst_rst, surf_rst,
+    walking,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -71,6 +72,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_kpart_corner", chfikpart::corner_case),
     // BRepFilletAPI (fl_probe/api.rs)
     ("fl_make_fillet", api::make_fillet_case),
+    ("fl_fillet_surf", fillet_surf::fillet_surf_case),
 ];
 
 fn main() {
