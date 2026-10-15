@@ -13,6 +13,8 @@
 #include <PrsDim_AngleDimension.hxx>
 #include <Prs3d_DimensionAspect.hxx>
 #include <Aspect_NeutralWindow.hxx>
+#include <Geom_Line.hxx>
+#include <Geom_SurfaceOfRevolution.hxx>
 
 static TopoDS_Edge v3pd_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
   return BRepBuilderAPI_MakeEdge(gp_Pnt(x1, y1, z1), gp_Pnt(x2, y2, z2)).Edge();
@@ -79,8 +81,34 @@ static occ::handle<PrsDim_Dimension> v3pd_diameter(int variant) {
     default: return new PrsDim_DiameterDimension(v3pd_circle_edge(0.0, 2 * M_PI), gp_Pln(gp_Pnt(1, 2, 0), gp::DX()));
   }
 }
+static TopoDS_Face v3pd_cone(double radius) {
+  return BRepBuilderAPI_MakeFace(gp_Cone(gp_Ax3(gp_Pnt(0, 0, 0), gp::DZ()), M_PI / 6, radius), 0.0, 2 * M_PI, 0.0, 4.0).Face();
+}
+static TopoDS_Face v3pd_revolution() {
+  occ::handle<Geom_Surface> s = new Geom_SurfaceOfRevolution(new Geom_Line(gp_Pnt(2, 0, 0), gp_Dir(1, 0, 1)), gp::OZ());
+  return BRepBuilderAPI_MakeFace(s, 0.0, 2 * M_PI, 0.0, 3.0, 1.0e-7).Face();
+}
+static occ::handle<PrsDim_Dimension> v3pd_angle(int variant) {
+  switch (variant) {
+    case 0: return new PrsDim_AngleDimension(gp_Pnt(10, 0, 0), gp_Pnt(0, 0, 0), gp_Pnt(5, 5, 0));
+    case 1: return new PrsDim_AngleDimension(gp_Pnt(10, 0, 0), gp_Pnt(0, 0, 0), gp_Pnt(-10, 0, 0));
+    case 2: return new PrsDim_AngleDimension(gp_Pnt(0, 0, 0), gp_Pnt(0, 0, 0), gp_Pnt(5, 5, 0));
+    case 3: return new PrsDim_AngleDimension(BRepBuilderAPI_MakeVertex(gp_Pnt(0, 5, 0)).Vertex(),
+      BRepBuilderAPI_MakeVertex(gp_Pnt(0, 0, 0)).Vertex(), BRepBuilderAPI_MakeVertex(gp_Pnt(3, 0, 4)).Vertex());
+    case 4: return new PrsDim_AngleDimension(v3pd_edge(2, 0, 0, 10, 0, 0), v3pd_edge(0, 3, 0, 0, 10, 0));
+    case 5: return new PrsDim_AngleDimension(v3pd_edge(0, 0, 0, 10, 0, 0), v3pd_edge(10, 5, 0, 0, 5, 0));
+    case 6: return new PrsDim_AngleDimension(v3pd_edge(0, 0, 0, 10, 0, 0), v3pd_edge(0, 0, 0, 10, 0, 0));
+    case 7: return new PrsDim_AngleDimension(v3pd_face(0.0, 4.0), BRepBuilderAPI_MakeFace(gp_Pln(gp::ZOX()), 0.0, 4.0, 0.0, 4.0).Face());
+    case 8: return new PrsDim_AngleDimension(v3pd_face(0.0, 4.0), BRepBuilderAPI_MakeFace(gp_Pln(gp::ZOX()), 0.0, 4.0, 0.0, 4.0).Face(), gp_Pnt(1, 3, 0));
+    case 9: return new PrsDim_AngleDimension(v3pd_cone(2.0));
+    case 10: return new PrsDim_AngleDimension(v3pd_revolution());
+    case 11: return new PrsDim_AngleDimension(v3pd_cylinder(), v3pd_cone(1.0));
+    default: return new PrsDim_AngleDimension(v3pd_circle_edge(0.0, 2.0), v3pd_edge(0, 0, 0, 10, 0, 0));
+  }
+}
 static occ::handle<PrsDim_Dimension> v3pd_make(int kind, int variant) {
   switch (kind) {
+    case 3: return v3pd_angle(variant);
     case 1: return v3pd_radius(variant);
     case 2: return v3pd_diameter(variant);
     default: return v3pd_length(variant);
@@ -129,7 +157,7 @@ void v3_prsdim(std::istream& input) {
       case 0: d->SetFlyout(a / 10.0); break;
       case 1: d->SetCustomValue(double(a)); break;
       case 2: d->SetComputedValue(); break;
-      case 3: d->SetTextPosition(gp_Pnt(a, b, c)); break;
+      case 3: GA_TRY(d->SetTextPosition(gp_Pnt(a, b, c))) break;
       case 4: aspect->SetTextHorizontalPosition(Prs3d_DimensionTextHorizontalPosition(a)); d->SetDimensionAspect(aspect); break;
       case 5: aspect->SetTextVerticalPosition(Prs3d_DimensionTextVerticalPosition(a)); d->SetDimensionAspect(aspect); break;
       case 6: aspect->SetArrowOrientation(Prs3d_DimensionArrowOrientation(a)); d->SetDimensionAspect(aspect); break;
@@ -148,6 +176,10 @@ void v3_prsdim(std::istream& input) {
           ga_int(d->Presentations().Size()); ga_int((int)trace.events.size()); for (double e : trace.events) ga_real(e); })
         trace.events.clear(); GA_TRY(v3pd_selection(d)) break; }
       case 17: aspect->SetExtensionSize(a / 10.0); aspect->SetArrowTailSize(b / 10.0); d->SetDimensionAspect(aspect); break;
+      case 19: { occ::handle<PrsDim_AngleDimension> g = occ::down_cast<PrsDim_AngleDimension>(d);
+        if (!g.IsNull()) g->SetType(PrsDim_TypeOfAngle(a)); break; }
+      case 20: { occ::handle<PrsDim_AngleDimension> g = occ::down_cast<PrsDim_AngleDimension>(d);
+        if (!g.IsNull()) g->SetArrowsVisibility(PrsDim_TypeOfAngleArrowVisibility(a)); break; }
       case 18: aspect->ArrowAspect()->SetLength(a / 10.0); aspect->ArrowAspect()->SetZoomable(b != 0); d->SetDimensionAspect(aspect); break;
     }
     v3pd_state(d);

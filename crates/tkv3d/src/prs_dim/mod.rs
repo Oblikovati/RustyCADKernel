@@ -30,6 +30,13 @@ mod length_dimension;
 mod length_dimension_init;
 pub use length_dimension::{PrsDimLengthDimension, PrsDimLengthDimensionFields};
 
+mod angle_dimension;
+mod angle_dimension_draw;
+mod angle_dimension_init;
+mod angle_dimension_layout;
+pub use angle_dimension::{PrsDimAngleDimension, PrsDimAngleDimensionFields};
+pub use angle_dimension_layout::PrsDimAngleAdjust;
+
 mod diameter_dimension;
 mod radius_dimension;
 pub use diameter_dimension::PrsDimDiameterDimension;

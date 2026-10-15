@@ -5,7 +5,10 @@ use super::sensitive_display::display_driver::SensitiveDisplayDriver;
 use rustycad_tkbrep::topods::{Edge, Face, Shape};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::AsciiString;
-use rustycad_tkmath::gp::{self, Axis2, Axis3, Circle3, Cylinder3, Direction3, Plane3, Point3};
+use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomSurface, GeomSurfaceOfRevolution};
+use rustycad_tkmath::gp::{
+    self, Axis2, Axis3, Circle3, Cone3, Cylinder3, Direction3, Line3, Plane3, Point3,
+};
 use rustycad_tkservice::aspect::AspectNeutralWindow;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeWire;
 use rustycad_tktopalgo::brep_builder_api::{
@@ -184,8 +187,85 @@ fn diameter(variant: i32) -> Result<Handle<dyn PrsDimDimensionSource>, Failure> 
     Ok(d.into_cast())
 }
 
+fn cone(radius: f64) -> Face {
+    let cone = Cone3::new(
+        Axis3::from_normal(gp::origin(), gp::dz()).unwrap(),
+        PI / 6.0,
+        radius,
+    )
+    .unwrap();
+    BRepBuilderAPIMakeFace::from_cone_bounds(cone, (0.0, 2.0 * PI, 0.0, 4.0))
+        .unwrap()
+        .face()
+        .unwrap()
+}
+fn revolution() -> Face {
+    let line = Line3::new(
+        Point3::new(2.0, 0.0, 0.0),
+        Direction3::new(1.0, 0.0, 1.0).unwrap(),
+    );
+    let curve: Handle<dyn GeomCurve> = Handle::new(GeomLine::from_lin(line)).cast();
+    let surface: Handle<dyn GeomSurface> =
+        Handle::new(GeomSurfaceOfRevolution::new(&curve, gp::oz()).unwrap()).cast();
+    BRepBuilderAPIMakeFace::from_surface_bounds(&surface, (0.0, 2.0 * PI, 0.0, 3.0), 1.0e-7)
+        .unwrap()
+        .face()
+        .unwrap()
+}
+fn zox_face() -> Face {
+    BRepBuilderAPIMakeFace::from_plane_bounds(
+        Plane3::from_position(Axis3::from_axis2(gp::zox())),
+        (0.0, 4.0, 0.0, 4.0),
+    )
+    .unwrap()
+    .face()
+    .unwrap()
+}
+
+fn angle(variant: i32) -> Result<Handle<dyn PrsDimDimensionSource>, Failure> {
+    let as_edge = |s: Shape| rustycad_tkbrep::topods::edge(&s).unwrap();
+    let as_vertex = |s: Shape| rustycad_tkbrep::topods::vertex(&s).unwrap();
+    let p = Point3::new;
+    let d = match variant {
+        0 => PrsDimAngleDimension::from_points(&p(10., 0., 0.), &p(0., 0., 0.), &p(5., 5., 0.))?,
+        1 => PrsDimAngleDimension::from_points(&p(10., 0., 0.), &p(0., 0., 0.), &p(-10., 0., 0.))?,
+        2 => PrsDimAngleDimension::from_points(&p(0., 0., 0.), &p(0., 0., 0.), &p(5., 5., 0.))?,
+        3 => PrsDimAngleDimension::from_vertices(
+            &as_vertex(vertex(0., 5., 0.)),
+            &as_vertex(vertex(0., 0., 0.)),
+            &as_vertex(vertex(3., 0., 4.)),
+        )?,
+        4 => PrsDimAngleDimension::from_edges(
+            &as_edge(edge([2., 0., 0.], [10., 0., 0.])),
+            &as_edge(edge([0., 3., 0.], [0., 10., 0.])),
+        )?,
+        5 => PrsDimAngleDimension::from_edges(
+            &as_edge(edge([0., 0., 0.], [10., 0., 0.])),
+            &as_edge(edge([10., 5., 0.], [0., 5., 0.])),
+        )?,
+        6 => PrsDimAngleDimension::from_edges(
+            &as_edge(edge([0., 0., 0.], [10., 0., 0.])),
+            &as_edge(edge([0., 0., 0.], [10., 0., 0.])),
+        )?,
+        7 => PrsDimAngleDimension::from_faces(&face(0.0, 4.0), &zox_face())?,
+        8 => PrsDimAngleDimension::from_faces_point(&face(0.0, 4.0), &zox_face(), &p(1., 3., 0.))?,
+        9 => PrsDimAngleDimension::from_cone(&cone(2.0))?,
+        10 => PrsDimAngleDimension::from_cone(&revolution())?,
+        11 => {
+            let cylinder = rustycad_tkbrep::topods::face(&cylinder()).unwrap();
+            PrsDimAngleDimension::from_faces(&cylinder, &cone(1.0))?
+        }
+        _ => PrsDimAngleDimension::from_edges(
+            &circle_edge(0.0, 2.0),
+            &as_edge(edge([0., 0., 0.], [10., 0., 0.])),
+        )?,
+    };
+    Ok(d.into_cast())
+}
+
 fn make(kind: i32, variant: i32) -> Result<Handle<dyn PrsDimDimensionSource>, Failure> {
     match kind {
+        3 => angle(variant),
         1 => radius(variant),
         2 => diameter(variant),
         _ => length(variant),
@@ -281,7 +361,12 @@ pub fn prs_dim_case(values: &[f64]) {
             0 => d.set_flyout(f64::from(a) / 10.0),
             1 => d.set_custom_value(f64::from(a)),
             2 => d.set_computed_value(),
-            3 => d.set_text_position(&Point3::new(f64::from(a), f64::from(b), f64::from(c))),
+            3 => attempt(|| {
+                rustycad_tkernel::standard::catch_native_failure(|| {
+                    d.set_text_position(&Point3::new(f64::from(a), f64::from(b), f64::from(c)));
+                    Ok(())
+                })
+            }),
             4 => {
                 aspect.set_text_horizontal_position(horizontal(a));
                 d.set_dimension_aspect(&aspect);
@@ -348,6 +433,16 @@ pub fn prs_dim_case(values: &[f64]) {
                 aspect.set_arrow_tail_size(f64::from(b) / 10.0);
                 d.set_dimension_aspect(&aspect);
             }
+            19 => {
+                if let Some(g) = d.clone().into_cast::<PrsDimAngleDimension>().get() {
+                    g.set_type(angle_type(a));
+                }
+            }
+            20 => {
+                if let Some(g) = d.clone().into_cast::<PrsDimAngleDimension>().get() {
+                    g.set_arrows_visibility(arrows(a));
+                }
+            }
             _ => {
                 let arrow = aspect.arrow_aspect();
                 arrow.set_length(f64::from(a) / 10.0);
@@ -375,4 +470,11 @@ fn orientation(value: i32) -> Prs3dDimensionArrowOrientation {
 fn special(value: i32) -> PrsDimDisplaySpecialSymbol {
     use PrsDimDisplaySpecialSymbol as S;
     [S::No, S::Before, S::After][value as usize]
+}
+fn angle_type(value: i32) -> PrsDimTypeOfAngle {
+    [PrsDimTypeOfAngle::Interior, PrsDimTypeOfAngle::Exterior][value as usize]
+}
+fn arrows(value: i32) -> PrsDimTypeOfAngleArrowVisibility {
+    use PrsDimTypeOfAngleArrowVisibility as A;
+    [A::Both, A::First, A::Second, A::None][value as usize]
 }

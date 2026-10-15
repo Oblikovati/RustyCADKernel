@@ -86,3 +86,49 @@ fn length_dimension_measures_points_and_parallel_edges() {
     assert_eq!(edges.get_value(), 5.0);
     assert_eq!(edges.get_geometry_type(), PrsDimGeometryType::Edges as i32);
 }
+
+#[test]
+fn angle_dimension_measures_points_edges_and_cones() {
+    let p = Point3::new;
+    let angle = PrsDimAngleDimension::from_points(&p(10., 0., 0.), &gp::origin(), &p(5., 5., 0.)).unwrap();
+    assert!(angle.is_valid());
+    assert!((angle.get_value() - PI / 4.0).abs() < 1e-12);
+    assert_eq!(angle.get_flyout(), 15.0);
+    assert_eq!(angle.special_symbol(), 0x00B0);
+    assert_eq!(angle.kind_of_dimension(), PrsDimKindOfDimension::PlaneAngle);
+    assert!(angle.is_arrow_visible(PrsDimTypeOfAngleArrowVisibility::First));
+    angle.set_arrows_visibility(PrsDimTypeOfAngleArrowVisibility::Second);
+    assert!(!angle.is_arrow_visible(PrsDimTypeOfAngleArrowVisibility::First));
+    // The middle of the arc between the attach points.
+    let middle = angle.get_center_on_arc(&p(1., 0., 0.), &p(0., 1., 0.), &gp::origin()).unwrap();
+    assert!(middle.distance(&p(0.5f64.sqrt(), 0.5f64.sqrt(), 0.)) < 1e-12);
+    // A straight angle keeps the default plane; coincident ends raise.
+    let straight =
+        PrsDimAngleDimension::from_points(&p(10., 0., 0.), &gp::origin(), &p(-10., 0., 0.)).unwrap();
+    assert!((straight.get_value() - PI).abs() < 1e-12);
+    assert!(PrsDimAngleDimension::from_points(&gp::origin(), &gp::origin(), &p(5., 5., 0.)).is_err());
+    let edges = PrsDimAngleDimension::from_edges(
+        &segment(p(2., 0., 0.), p(10., 0., 0.)),
+        &segment(p(0., 3., 0.), p(0., 10., 0.)),
+    )
+    .unwrap();
+    assert_eq!(edges.center_point(), gp::origin());
+    assert_eq!(edges.first_point(), p(10., 0., 0.));
+    assert!((edges.get_value() - PI / 2.0).abs() < 1e-12);
+    let same = segment(gp::origin(), p(10., 0., 0.));
+    assert!(!PrsDimAngleDimension::from_edges(&same, &same).unwrap().is_valid());
+    // Off the working plane the text position raises a program error.
+    let off = rustycad_tkernel::standard::catch_native_failure(|| {
+        angle.set_text_position(&p(1., 1., 5.));
+        Ok(())
+    });
+    assert!(off.is_err());
+    // A cone measures its apex angle.
+    let cone = rustycad_tkmath::gp::Cone3::new(Axis3::from_normal(gp::origin(), gp::dz()).unwrap(), PI / 6.0, 2.0).unwrap();
+    let face = rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeFace::from_cone_bounds(cone, (0.0, 2.0 * PI, 0.0, 4.0))
+        .unwrap()
+        .face()
+        .unwrap();
+    let apex = PrsDimAngleDimension::from_cone(&face).unwrap();
+    assert!((apex.get_value() - PI / 3.0).abs() < 1e-12);
+}
