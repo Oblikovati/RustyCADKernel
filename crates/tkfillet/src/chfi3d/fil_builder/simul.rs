@@ -9,10 +9,8 @@ use crate::blend_func::{ConstRad, ConstRadInv, EvolRad, EvolRadInv};
 use crate::brep_blend::BRepBlendLineHandle;
 use crate::chfi_ds::{CircSection, ElSpine, SpineHandle, SurfDataHandle, lock};
 use crate::chfi3d::builder::{ComputeCall, SurfCall, SurfOut};
-use crate::chfi3d::fil_common_point;
-use rustycad_tkbrep::topods::{Edge, Face};
-use rustycad_tkernel::ncollection::{Array1, HArray1};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkbrep::topods::Edge;
+use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
 use rustycad_tkgeomalgo::law::LawFunction;
@@ -24,22 +22,6 @@ use rustycad_tkmath::gp::{Circle3, Point2};
 pub(super) struct SimulSections {
     pub sections: Vec<CircSection>,
     pub pf: [Point2; 4],
-}
-
-/// The sections as a shared array (`NCollection_HArray1<ChFiDS_CircSection>`, 1-based),
-/// seen as the simulation object of a surface data.
-pub(super) fn sections_transient(
-    sections: Vec<CircSection>,
-) -> Result<Handle<StandardTransient>, Failure> {
-    if sections.is_empty() {
-        return Ok(Handle::default());
-    }
-    let range = |e| Failure::with_message("Standard_RangeError", &format!("{e:?}"));
-    let mut a = Array1::with_bounds(1, sections.len() as i32).map_err(range)?;
-    for (i, s) in (1..).zip(sections) {
-        a.set_value(i, s).map_err(range)?;
-    }
-    Ok(Handle::new(HArray1::from_owned(a)).cast())
 }
 
 /// `MaxRad(fsp, E)`: the radius of the edge when constant, else the largest radius of the
@@ -185,7 +167,7 @@ impl ChFi3dFilBuilder {
             }
             _ => Vec::new(),
         };
-        lock(sd).set_simul(&sections_transient(sections)?);
+        lock(sd).set_simul(&crate::chfi3d::builder::sections_transient(sections)?);
         Ok(())
     }
 
@@ -202,7 +184,7 @@ impl ChFi3dFilBuilder {
         let radius = super::constant_radius(call.spine, MSG)?;
         let (max_step, locfleche) = simul_params(call.guide, call.spine)?;
         let pfirst = out.first;
-        self.extend_ends_to_spine(call.spine, out)?;
+        self.base.extend_ends_to_spine(call.spine, out)?;
         let s1: Handle<dyn Adaptor3dSurface> = call.s1.clone().cast();
         let s2: Handle<dyn Adaptor3dSurface> = call.s2.clone().cast();
         let guide: Handle<dyn Adaptor3dCurve> = call.guide.clone().cast();
@@ -256,29 +238,12 @@ impl ChFi3dFilBuilder {
         self.store_simulation(data, secs, &lin, [1, 2])?;
         let reverse = !call.walk.forward || call.walk.inside;
         if out.intf != 0 && reverse {
-            out.intf = self.obstacle_at_end(data, call, true)?;
+            out.intf = self.base.obstacle_at_end(data, call, true, out.intf)?;
         }
         if out.intl != 0 {
-            out.intl = self.obstacle_at_end(data, call, false)?;
+            out.intl = self.base.obstacle_at_end(data, call, false, out.intl)?;
         }
         Ok(true)
-    }
-
-    /// `if (intf) First = fsp->FirstParameter(1); if (intl) Last = ...`: the ends of a
-    /// walking meeting obstacles taken at the ends of the spine.
-    pub(super) fn extend_ends_to_spine(
-        &self,
-        spine: &SpineHandle,
-        out: &mut SurfOut,
-    ) -> Result<(), Failure> {
-        let g = lock(spine);
-        if out.intf != 0 {
-            out.first = g.first_parameter_of(1)?;
-        }
-        if out.intl != 0 {
-            out.last = g.last_parameter_of(g.nb_edges())?;
-        }
-        Ok(())
     }
 
     /// The sections and the 2d points stored in the surface data, and the common points
@@ -291,91 +256,13 @@ impl ChFi3dFilBuilder {
         lin: &BRepBlendLineHandle,
         sides: [i32; 2],
     ) -> Result<(), Failure> {
-        let simul = sections_transient(secs.sections)?;
+        let simul = crate::chfi3d::builder::sections_transient(secs.sections)?;
         {
             let mut d = lock(data);
             d.set_simul(&simul);
             d.set_2d_points(secs.pf);
         }
-        self.store_line_ends(data, lin, sides)
-    }
-
-    /// The common points of the ends of the line: its first surface on the side
-    /// `sides[0]` of the data, its second on `sides[1]` (`ChFi3d_FilCommonPoint`).
-    pub(super) fn store_line_ends(
-        &self,
-        data: &SurfDataHandle,
-        lin: &BRepBlendLineHandle,
-        sides: [i32; 2],
-    ) -> Result<(), Failure> {
-        let l = lock(lin);
-        let mut d = lock(data);
-        let tol = self.base.tolapp3d;
-        fil_common_point(
-            l.start_point_on_first(),
-            l.transition_on_s1()?,
-            true,
-            d.change_vertex(true, sides[0]),
-            tol,
-        )?;
-        fil_common_point(
-            l.end_point_on_first(),
-            l.transition_on_s1()?,
-            false,
-            d.change_vertex(false, sides[0]),
-            tol,
-        )?;
-        fil_common_point(
-            l.start_point_on_second(),
-            l.transition_on_s2()?,
-            true,
-            d.change_vertex(true, sides[1]),
-            tol,
-        )?;
-        fil_common_point(
-            l.end_point_on_second(),
-            l.transition_on_s2()?,
-            false,
-            d.change_vertex(false, sides[1]),
-            tol,
-        )
-    }
-
-    /// Whether an end of the simulation stays an obstacle: false when a face continues
-    /// the contour at the common point on an arc of the first, else of the second face
-    /// (`intf = !SearchFace(...)`).
-    fn obstacle_at_end(
-        &self,
-        data: &SurfDataHandle,
-        call: &SurfCall<'_>,
-        first: bool,
-    ) -> Result<i32, Failure> {
-        let (cp1, cp2) = {
-            let d = lock(data);
-            (d.vertex(first, 1).clone(), d.vertex(first, 2).clone())
-        };
-        let mut result = 1;
-        let mut ok = false;
-        if cp1.is_on_arc() {
-            let mut bid = Face::default();
-            result = i32::from(!self.base.search_face(
-                Some(call.spine),
-                &cp1,
-                &call.s1.face(),
-                &mut bid,
-            )?);
-            ok = result != 0;
-        }
-        if cp2.is_on_arc() && !ok {
-            let mut bid = Face::default();
-            result = i32::from(!self.base.search_face(
-                Some(call.spine),
-                &cp2,
-                &call.s2.face(),
-                &mut bid,
-            )?);
-        }
-        Ok(result)
+        self.base.store_line_ends(data, lin, sides)
     }
 }
 

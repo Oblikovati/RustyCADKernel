@@ -46,6 +46,7 @@ mod one_corner_write;
 mod pending_corners;
 mod seq_edit;
 mod set_of_surf;
+mod simul_ends;
 mod spkp;
 mod spkp_fill;
 mod spkp_place;
@@ -61,6 +62,7 @@ pub(crate) use compute::spine_of;
 pub(crate) use data_complete::LineFunction;
 pub(crate) use data_compute::ComputeCall;
 pub(crate) use data_rst::{RstSide, RstWalk};
+pub(crate) use simul_ends::sections_transient;
 pub(crate) use two_corner_inter::two_stripes_at;
 
 use crate::brep_blend::WalkingDomain;

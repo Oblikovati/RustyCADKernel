@@ -214,9 +214,9 @@ impl ChFi3dFilBuilder {
             self.simul_with_rst_rst(parts, call, &w, out)?
         };
         *decroch = dec;
-        let simul = super::simul::sections_transient(sections)?;
+        let simul = crate::chfi3d::builder::sections_transient(sections)?;
         lock(data).set_simul(&simul);
-        self.store_line_ends(data, &lin, [1, 2])
+        self.base.store_line_ends(data, &lin, [1, 2])
     }
 
     /// The restriction-restriction simulation with the functions `parts`.

@@ -126,7 +126,8 @@ impl ChFi3dBuilder {
             let temp = wi.max(usma);
             GeomAdaptorCurve::with_range(&ctg, fi_arc_sma.first_parameter(), temp)?
         });
-        let same_surf = lock(&sma.fd).surf() == lock(&big.fd).surf();
+        let sma_surf = lock(&sma.fd).surf();
+        let same_surf = sma_surf == lock(&big.fd).surf();
         if same_surf {
             reduce_surfaces(usma, ubig, &sma_hs, &big_hs)?;
             reduce_curve(usma, ubig, &hctg)?;
@@ -172,10 +173,8 @@ impl ChFi3dBuilder {
             .get()
             .ok_or_else(|| Failure::new("TwoCorner: null curve"))?;
         let (wfirst, wlast) = (c.first_parameter(), c.last_parameter());
-        let tolpco = lock(&sma.fd)
-            .vertex(sma.isfirst, sma.ifaco)
-            .tolerance()
-            .max(lock(&big.fd).vertex(big.isfirst, big.ifaco).tolerance());
+        let tolsma = lock(&sma.fd).vertex(sma.isfirst, sma.ifaco).tolerance();
+        let tolpco = tolsma.max(lock(&big.fd).vertex(big.isfirst, big.ifaco).tolerance());
         let tolpmil = lock(&sma.fd).vertex(sma.isfirst, sma.ifaarc()).tolerance();
         let icurv = self.ds.add_curve(
             &mut rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurve::new(

@@ -101,3 +101,22 @@ fn constant_fillets_on_all_cube_edges_give_the_rounded_cube() {
     let check = BRepCheckAnalyzer::new(&result, true, false, false).unwrap();
     assert!(check.is_valid().unwrap());
 }
+
+#[test]
+fn a_symmetric_chamfer_on_a_cube_edge_removes_the_right_prism() {
+    // The chamfer of distance d cuts a right isosceles prism of section d^2 / 2 and
+    // replaces two strips of width d by a plane of width d sqrt(2).
+    let (side, d) = (10., 2.);
+    let solid = cube(side);
+    let mut b = rustycad_tkfillet::chfi3d::ChFi3dChBuilder::new(&solid, 1.0e-2).unwrap();
+    b.add_with_dist(d, &first_edge(&solid)).unwrap();
+    b.compute().unwrap();
+    assert!(b.builder_base().is_done());
+    let result = b.builder_base().shape().unwrap();
+    let expected_volume = side.powi(3) - d * d / 2. * side;
+    let expected_area = 6. * side * side - 2. * d * side - d * d + d * 2f64.sqrt() * side;
+    let (v, a) = (volume(&result), area(&result));
+    assert!((v - expected_volume).abs() < 1.0e-6 * expected_volume, "volume {v} expected {expected_volume}");
+    assert!((a - expected_area).abs() < 1.0e-6 * expected_area, "area {a} expected {expected_area}");
+    assert!(BRepCheckAnalyzer::new(&result, true, false, false).unwrap().is_valid().unwrap());
+}

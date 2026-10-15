@@ -69,7 +69,7 @@ impl ChFi3dFilBuilder {
         let radius = constant_radius(call.spine, NOT_FILLET)?;
         let or = call.s1.face().orientation();
         let pfirst = out.first;
-        self.extend_ends_to_spine(call.spine, out)?;
+        self.base.extend_ends_to_spine(call.spine, out)?;
         let s1: Handle<dyn Adaptor3dSurface> = call.s1.clone().cast();
         let s2: Handle<dyn Adaptor3dSurface> = call.s2.clone().cast();
         let guide: Handle<dyn Adaptor3dCurve> = call.guide.clone().cast();

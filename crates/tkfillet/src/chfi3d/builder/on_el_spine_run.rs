@@ -110,7 +110,11 @@ impl dyn ChFi3dBuilderOps + '_ {
         }
         let (mut bidf, mut bidl) = (wf, wl);
         if !periodic_spine {
-            let total = lock(&spine).last_parameter_of(lock(&spine).nb_edges())?;
+            // One lock: a second one in the argument would wait for the first (deadlock).
+            let total = {
+                let sp = lock(&spine);
+                sp.last_parameter_of(sp.nb_edges())?
+            };
             bidf = wf.max(0.);
             bidl = wl.min(total);
             if bidl - bidf < 0.01 * total {

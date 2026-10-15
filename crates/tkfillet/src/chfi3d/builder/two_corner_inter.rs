@@ -264,7 +264,9 @@ impl ChFi3dBuilder {
             surf_point(&e2.fd, e2.ifaarc(), ua2)?,
         );
         let parfin = [uv1.x(), uv1.y(), uv2.x(), uv2.y()];
-        if lock(&e1.fd).surf() == lock(&e2.fd).surf() {
+        // One lock at a time: both ends may be on the same surface data.
+        let surf1 = lock(&e1.fd).surf();
+        if surf1 == lock(&e2.fd).surf() {
             reduce_surfaces(u1, u2, hs1, hs2)?;
         }
         let (g1, g2): (Handle<dyn Adaptor3dSurface>, Handle<dyn Adaptor3dSurface>) =
