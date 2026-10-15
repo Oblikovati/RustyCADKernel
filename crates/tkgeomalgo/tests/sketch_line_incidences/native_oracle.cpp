@@ -1,13 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-only
-// OCCT 8.0.0 Geom2dAPI_InterCurveCurve replay of native-cases.csv and
-// native-curve-cases.csv (tolerance 1e-9). A source field with a ':' is a curve
-// spec like the targets; otherwise it holds the two points of an infinite line.
+// OCCT 8.0.0 Geom2dAPI_InterCurveCurve replay of native-cases.csv,
+// native-curve-cases.csv and native-offset-cases.csv (tolerance 1e-9). A source
+// field with a ':' is a curve spec like the targets; otherwise it holds the two
+// points of an infinite line. Offsets (ADR 0080) wrap the untrimmed basis in a
+// Geom2d_OffsetCurve and trim it like the basis; their arcs keep their travel sense.
 // Native points are rounded solver output, not certified roots; see README.md.
 #include <Geom2dAPI_InterCurveCurve.hxx>
 #include <Geom2d_BSplineCurve.hxx>
 #include <Geom2d_Circle.hxx>
 #include <Geom2d_Ellipse.hxx>
 #include <Geom2d_Line.hxx>
+#include <Geom2d_OffsetCurve.hxx>
 #include <Geom2d_TrimmedCurve.hxx>
 #include <NCollection_Array1.hxx>
 #include <cmath>
@@ -63,8 +66,48 @@ static Handle(Geom2d_Curve) spline(const std::vector<std::string> &fields) {
   for (std::size_t i = 0; i < knots.size(); ++i) { knotArray(i + 1) = knots[i]; multiplicityArray(i + 1) = multiplicities[i]; }
   return new Geom2d_BSplineCurve(poles, knotArray, multiplicityArray, degree);
 }
+static Handle(Geom2d_Curve) target(const std::string &spec);
+// A circle arc that travels in its sector sense (clockwise arcs on an indirect frame).
+static Handle(Geom2d_Curve) directedCircle(const std::vector<std::string> &fields) {
+  const std::vector<std::string> raw = split(fields[1], ',');
+  const bool ccw = raw.size() == 3 || raw[7] == "1";
+  const gp_Ax2d axis(gp_Pnt2d(bits(raw[0]), bits(raw[1])), gp_Dir2d(1, 0));
+  Handle(Geom2d_Circle) base = new Geom2d_Circle(axis, bits(raw[2]), ccw);
+  if (raw.size() == 3) return base;
+  const double turn = ccw ? 1.0 : -1.0;
+  double first = turn * std::atan2(bits(raw[4]), bits(raw[3])), last = turn * std::atan2(bits(raw[6]), bits(raw[5]));
+  if (last <= first) last += 2 * M_PI;
+  return new Geom2d_TrimmedCurve(base, first, last);
+}
+// offset:<distance>:<basis spec>: the offset of the untrimmed basis, trimmed like it.
+static Handle(Geom2d_Curve) offsetCurve(const std::string &spec) {
+  const std::size_t split_at = spec.find(':', 7);
+  const double distance = bits(spec.substr(7, split_at - 7));
+  const std::string basisSpec = spec.substr(split_at + 1);
+  Handle(Geom2d_Curve) basis = basisSpec.rfind("circle:", 0) == 0 ? directedCircle(split(basisSpec, ':')) : target(basisSpec);
+  Handle(Geom2d_TrimmedCurve) trimmed = Handle(Geom2d_TrimmedCurve)::DownCast(basis);
+  if (trimmed.IsNull()) return new Geom2d_OffsetCurve(basis, distance);
+  Handle(Geom2d_OffsetCurve) whole = new Geom2d_OffsetCurve(trimmed->BasisCurve(), distance);
+  return new Geom2d_TrimmedCurve(whole, trimmed->FirstParameter(), trimmed->LastParameter());
+}
+// periodic:degree:poles:knots:multiplicities:bounds, a periodic B-spline (trimmed to its bounds).
+static Handle(Geom2d_Curve) periodic(const std::vector<std::string> &fields) {
+  const int degree = std::stoi(fields[1]);
+  const auto coordinates = numbers(fields[2]), knots = numbers(fields[3]), bounds = numbers(fields[5]);
+  const auto counts = split(fields[4], ',');
+  NCollection_Array1<gp_Pnt2d> poles(1, static_cast<int>(coordinates.size() / 2));
+  for (int i = 0; i < poles.Length(); ++i) poles(i + 1) = gp_Pnt2d(coordinates[2 * i], coordinates[2 * i + 1]);
+  NCollection_Array1<double> knotArray(1, static_cast<int>(knots.size()));
+  NCollection_Array1<int> multiplicityArray(1, static_cast<int>(knots.size()));
+  for (std::size_t i = 0; i < knots.size(); ++i) { knotArray(i + 1) = knots[i]; multiplicityArray(i + 1) = std::stoi(counts[i]); }
+  Handle(Geom2d_BSplineCurve) curve = new Geom2d_BSplineCurve(poles, knotArray, multiplicityArray, degree, true);
+  if (bounds[0] == knots.front() && bounds[1] == knots.back()) return curve;
+  return new Geom2d_TrimmedCurve(curve, bounds[0], bounds[1]);
+}
 static Handle(Geom2d_Curve) target(const std::string &spec) {
+  if (spec.rfind("offset:", 0) == 0) return offsetCurve(spec);
   const auto fields = split(spec, ':');
+  if (fields[0] == "periodic") return periodic(fields);
   if (fields[0] == "circle") return circle(fields);
   if (fields[0] == "spline") return spline(fields);
   const auto values = numbers(fields[1]);
