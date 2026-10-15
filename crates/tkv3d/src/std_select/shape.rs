@@ -96,6 +96,28 @@ impl PrsMgrPresentableObject for StdSelectShape {
     ) -> Result<(), Failure> {
         std_select_shape_compute(self, prs, mode)
     }
+    fn dump_json(
+        &self,
+        stream: &mut rustycad_tkernel::standard::dump::DumpStream,
+        depth: i32,
+    ) -> std::io::Result<()> {
+        std_select_shape_dump_json(self, stream, depth)
+    }
+}
+/// The native `StdSelect_Shape::DumpJson` body: the presentable parent, then the shape.
+/// Example: `std_select_shape_dump_json(&*object, &mut stream, -1)?`.
+pub fn std_select_shape_dump_json<S: StdSelectShapeSource + ?Sized>(
+    source: &S,
+    stream: &mut rustycad_tkernel::standard::dump::DumpStream,
+    depth: i32,
+) -> std::io::Result<()> {
+    use rustycad_tkservice::json_dump::{base_class, class_begin, field_dumped};
+    class_begin(stream, "StdSelect_Shape")?;
+    base_class(stream, depth, &|s, d| {
+        prs_mgr_presentable_dump_json(source, s, d)
+    })?;
+    let shape = source.shape_ref().clone_shape();
+    field_dumped(stream, depth, "&mysh", &|s, d| shape.dump_json(s, d))
 }
 /// Execute native highlight shape mode policy using current geometry; `std_select_shape_compute(source,&prs,0)?`.
 pub fn std_select_shape_compute<S: StdSelectShapeSource + ?Sized>(

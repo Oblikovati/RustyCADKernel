@@ -75,23 +75,19 @@ fn textured_concrete_null_compute_accepts_modes_without_fake_geometry() {
 }
 
 #[test]
-fn textured_concrete_open_parent_families_return_typed_failures() {
+fn textured_concrete_null_shape_selection_is_empty() {
+    // The inherited AIS_Shape::ComputeSelection returns at once for a null shape.
     let object = AisTexturedShape::new(&Shape::default());
     let selection = object.clone().cast::<dyn SelectMgrSelectableObject>();
-    let failure = selection
-        .compute_selection(&Handle::default(), 4)
-        .unwrap_err();
-    assert!(failure.to_string().contains("selection mode 4"));
-    assert_eq!(failure.exception_type(), "Standard_NotImplemented");
+    selection.compute_selection(&Handle::default(), 4).unwrap();
 }
 
 #[test]
-fn textured_concrete_open_hlr_returns_typed_failure() {
+fn textured_concrete_null_shape_hlr_draws_nothing() {
+    // The inherited AIS_Shape::computeHlrPresentation returns at once for a null shape.
     let object = AisTexturedShape::new(&Shape::default());
     let presentable = object.cast::<dyn PrsMgrPresentableObject>();
-    let failure = presentable
+    presentable
         .compute_hlr(&Handle::default(), &Handle::default(), &Handle::default())
-        .unwrap_err();
-    assert!(failure.to_string().contains("inherited HLR"));
-    assert_eq!(failure.exception_type(), "Standard_NotImplemented");
+        .unwrap();
 }

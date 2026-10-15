@@ -1,7 +1,10 @@
 //! Integer rounding preserves the pinned x87 sqrtl result without a C dependency.
 use super::{Float, LongDouble, X87DoubleExtended};
 impl LongDouble {
-    pub(crate) fn sqrt(self) -> Self {
+    /// glibc `sqrtl`: the correctly rounded x87 square root (NaN below zero); TKV3d's font
+    /// regularizer also computes its quadratic roots in `long double`.
+    /// Example: `LongDouble::new(4.0).sqrt().narrow() == 2.0`.
+    pub fn sqrt(self) -> Self {
         if self.0.is_zero() || self.0.is_nan() {
             return self;
         }

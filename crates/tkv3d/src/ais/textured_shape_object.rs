@@ -1,4 +1,4 @@
-//! Martensite concrete AIS_TexturedShape; parent selection and HLR remain explicit gaps.
+//! Martensite concrete AIS_TexturedShape, with the inherited AIS_Shape selection and HLR.
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
 use rustycad_tkbrep::topods::Shape;
@@ -131,13 +131,12 @@ impl PrsMgrPresentableObject for AisTexturedShape {
     }
     fn compute_hlr(
         &self,
-        _: &Handle<Graphic3dCamera>,
-        _: &Handle<rustycad_tkmath::toploc::Datum3>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        projector: &Handle<Graphic3dCamera>,
+        trsf: &Handle<rustycad_tkmath::toploc::Datum3>,
+        prs: &Handle<dyn Graphic3dStructureSource>,
     ) -> Result<(), Failure> {
-        Err(exceptions::not_implemented(
-            "AIS_TexturedShape inherited HLR requested; expected the still-unported AIS_Shape HLR family",
-        ))
+        // AIS_TexturedShape inherits the AIS_Shape hidden line presentation.
+        super::ais_shape_compute_hlr(self, projector, trsf, prs)
     }
 }
 impl SelectMgrSelectableObject for AisTexturedShape {
@@ -147,11 +146,10 @@ impl SelectMgrSelectableObject for AisTexturedShape {
     }
     fn compute_selection(
         &self,
-        _: &dyn HandleReference<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        Err(exceptions::not_implemented(&format!(
-            "AIS_TexturedShape inherited selection mode {mode}; expected the still-unported AIS_Shape selection family"
-        )))
+        // AIS_TexturedShape inherits the AIS_Shape selection.
+        super::ais_shape_compute_selection(self, selection, mode)
     }
 }

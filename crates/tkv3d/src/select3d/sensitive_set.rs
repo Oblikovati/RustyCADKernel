@@ -105,6 +105,19 @@ impl Select3DSensitiveSetBase {
             .as_ref()
             .map_or(0, |b| b.builder_transient().leaf_node_size())
     }
+    /// `SetSensitiveSet`: binds the set to the locked content for one call.
+    /// Example: `base.with_primitive_set(&*set, |content| content.size())`.
+    pub fn with_primitive_set<S: Select3DSensitiveSet + ?Sized, R>(
+        &self,
+        set: &S,
+        f: impl FnOnce(&mut Select3DBvhPrimitiveSet<'_, S>) -> R,
+    ) -> R {
+        let mut content = self.lock_content();
+        f(&mut Select3DBvhPrimitiveSet {
+            set,
+            content: &mut content,
+        })
+    }
     /// Whether the tree must be built (`ToBuildBVH`); `base.is_dirty()`.
     pub fn is_dirty(&self) -> bool {
         self.lock_content().object_transient().is_dirty
@@ -183,13 +196,33 @@ rustycad_tkernel::impl_transient_interface!(
     dyn Select3DSensitiveEntity
 );
 
-/// The sensitive set seen as the BVH primitive set of its content.
-pub(super) struct SetPrimitives<'a, S: Select3DSensitiveSet + ?Sized> {
+/// `Select3D_SensitiveSet::BvhPrimitiveSet` (protected): the sensitive set seen as the BVH
+/// primitive set of its content, bound for one borrow of the locked content.
+/// Example: `base.with_primitive_set(&*set, |content| content.size())`.
+pub struct Select3DBvhPrimitiveSet<'a, S: Select3DSensitiveSet + ?Sized> {
     pub(super) set: &'a S,
     pub(super) content: &'a mut BvhPrimitiveSet<BvhVec3d>,
 }
 
-impl<S: Select3DSensitiveSet + ?Sized> BvhSet<BvhVec3d> for SetPrimitives<'_, S> {
+/// The previous private name of the adapter.
+pub(super) type SetPrimitives<'a, S> = Select3DBvhPrimitiveSet<'a, S>;
+
+impl<'a, S: Select3DSensitiveSet + ?Sized> Select3DBvhPrimitiveSet<'a, S> {
+    /// `mySensitiveSet`: the bound set; `content.sensitive_set().size()`.
+    pub fn sensitive_set(&self) -> &'a S {
+        self.set
+    }
+    /// `GetBVH`: the tree, built first when dirty; `content.get_bvh()?`.
+    pub fn get_bvh(&mut self) -> Result<rustycad_tkmath::bvh::BvhTreeHandle<BvhVec3d>, Failure> {
+        self.bvh_handle()
+    }
+    /// `DumpJson`: dumps nothing natively; `content.dump_json(&mut stream, -1)?`.
+    pub fn dump_json(&self, _stream: &mut DumpStream, _depth: i32) -> io::Result<()> {
+        Ok(())
+    }
+}
+
+impl<S: Select3DSensitiveSet + ?Sized> BvhSet<BvhVec3d> for Select3DBvhPrimitiveSet<'_, S> {
     fn size(&self) -> i32 {
         self.set.size()
     }
@@ -208,7 +241,9 @@ impl<S: Select3DSensitiveSet + ?Sized> BvhSet<BvhVec3d> for SetPrimitives<'_, S>
     }
 }
 
-impl<S: Select3DSensitiveSet + ?Sized> BvhPrimitiveSetAccess<BvhVec3d> for SetPrimitives<'_, S> {
+impl<S: Select3DSensitiveSet + ?Sized> BvhPrimitiveSetAccess<BvhVec3d>
+    for Select3DBvhPrimitiveSet<'_, S>
+{
     fn primitive_set(&self) -> &BvhPrimitiveSet<BvhVec3d> {
         self.content
     }

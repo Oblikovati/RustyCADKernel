@@ -93,9 +93,11 @@ pub(super) fn refresh_shape_aspect_ownership<S: AisShapeSource + ?Sized>(
         object.synchronize_aspects();
         return;
     }
-    replace_shape_own_aspects(object);
+    ais_shape_replace_with_new_own_aspects(object);
 }
-fn replace_shape_own_aspects<S: AisShapeSource + ?Sized>(object: &S) {
+/// `AIS_Shape::replaceWithNewOwnAspects` (protected): the presentation aspects of the linked
+/// drawer replaced by the own ones that differ; `ais_shape_replace_with_new_own_aspects(&shape)`.
+pub fn ais_shape_replace_with_new_own_aspects<S: AisShapeSource + ?Sized>(object: &S) {
     let drawer = object.attributes();
     let linked = drawer.link();
     let mut replacements = Graphic3dAspectsReplaceMap::default();

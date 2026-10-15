@@ -47,11 +47,13 @@ pub use sensitive_point::Select3DSensitivePoint;
 pub use sensitive_poly::{Select3DPolyData, Select3DSensitivePoly, Select3DSensitivePolyCore};
 pub use sensitive_segment::Select3DSensitiveSegment;
 pub use sensitive_set::{
-    Select3DBvhBuilder3d, Select3DSensitiveSet, Select3DSensitiveSetBase,
+    Select3DBvhBuilder3d, Select3DBvhPrimitiveSet, Select3DSensitiveSet, Select3DSensitiveSetBase,
     select3d_default_bvh_builder, select3d_set_bounding_box, select3d_set_build_bvh,
     select3d_set_center_of_geometry, select3d_set_default_bvh_builder, select3d_set_dump_json,
 };
-pub use sensitive_set_traversal::select3d_set_matches;
+pub use sensitive_set_traversal::{
+    select3d_set_clear, select3d_set_matches, select3d_set_process_elements,
+};
 pub use sensitive_sphere::Select3DSensitiveSphere;
 pub use sensitive_triangle::{Select3DSensitiveTriangle, Select3DTypeOfSensitivity};
 pub use sensitive_triangulation::Select3DSensitiveTriangulation;

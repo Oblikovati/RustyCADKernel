@@ -408,3 +408,37 @@ fn pop_traversal_node(stack: &mut Vec<NodeInStack>) -> TraversalStep {
 #[cfg(test)]
 #[path = "sensitive_set_traversal_tests.rs"]
 mod tests;
+
+/// `Select3D_SensitiveSet::processElements` (protected): the inclusion or overlap test of the
+/// elements `first..=last`, keeping the nearest overlap in the pick result; false when an
+/// inclusion fails. Counts the matches in `matches_nb`.
+/// Example: `select3d_set_process_elements(&*set, &manager, 0, 3, false, false, &mut pick, &mut count)?`.
+#[allow(clippy::too_many_arguments)]
+pub fn select3d_set_process_elements<S: Select3DSensitiveSet + ?Sized>(
+    set: &S,
+    manager: &dyn SelectBasicsSelectingVolumeManager,
+    first_elem: i32,
+    last_elem: i32,
+    is_full_inside: bool,
+    to_check_all_inside: bool,
+    pick_result: &mut SelectBasicsPickResult,
+    matches_nb: &mut i32,
+) -> Result<bool, Failure> {
+    let range = ElementRange {
+        first: first_elem,
+        last: last_elem,
+        is_full_inside,
+    };
+    process_elements(
+        set,
+        manager,
+        &range,
+        to_check_all_inside,
+        pick_result,
+        matches_nb,
+    )
+}
+
+/// `Select3D_SensitiveSet::Clear`: does nothing natively (the owner is kept).
+/// Example: `select3d_set_clear(&*set)`.
+pub fn select3d_set_clear<S: Select3DSensitiveSet + ?Sized>(_set: &S) {}

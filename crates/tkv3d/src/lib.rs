@@ -23,8 +23,14 @@ pub mod select_mgr;
 pub mod std_select;
 pub mod v3d;
 
+/// Glyph outline regularization and glyph/text topology builders.
+pub mod brep_font;
+
 /// Standard curve presentation algorithms.
 pub mod std_prs;
 
 /// Dimension and datum presentation algorithms.
 pub mod dsg_prs;
+
+/// Dimension and relation interactive objects.
+pub mod prs_dim;

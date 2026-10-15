@@ -16,7 +16,7 @@ impl AisViewController {
     /// Scale wheel input by the native factor 15; `controller.update_mouse_scroll(&delta)`.
     pub fn update_mouse_scroll(&mut self, delta: &AspectScrollDelta) -> bool {
         let mut scaled = *delta;
-        scaled.delta *= 15.0;
+        scaled.delta *= f64::from(super::view_controller_fields::SCROLL_ZOOM_RATIO);
         self.update_zoom(&scaled)
     }
     /// Queue a touch Z rotation only when allowed; `controller.update_z_rotation(0.25)`.

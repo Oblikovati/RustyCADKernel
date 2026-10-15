@@ -66,6 +66,33 @@ impl SelectMgrEntityOwnerSource for StdSelectBRepOwner {
             &child.cast(),
         )
     }
+    fn dump_json(
+        &self,
+        stream: &mut rustycad_tkernel::standard::dump::DumpStream,
+        depth: i32,
+    ) -> std::io::Result<()> {
+        std_select_brep_owner_dump_json(self, stream, depth)
+    }
+}
+/// The native `StdSelect_BRepOwner::DumpJson` body: the shape, the highlight presentation
+/// and the highlight mode (the owner parent is not dumped natively).
+/// Example: `std_select_brep_owner_dump_json(&*owner, &mut stream, -1)?`.
+pub fn std_select_brep_owner_dump_json<S: StdSelectBRepOwnerSource + ?Sized>(
+    owner: &S,
+    stream: &mut rustycad_tkernel::standard::dump::DumpStream,
+    depth: i32,
+) -> std::io::Result<()> {
+    use rustycad_tkservice::json_dump::{class_begin, field_dumped, field_integer};
+    class_begin(stream, "StdSelect_BRepOwner")?;
+    let shape = owner.shape_ref().clone_shape();
+    field_dumped(stream, depth, "&myShape", &|s, d| shape.dump_json(s, d))?;
+    let child = owner.brep_owner_base().presentation.read().clone();
+    if let Some(child) = child.get() {
+        field_dumped(stream, depth, "myPrsSh.get()", &|s, d| {
+            child.dump_json(s, d)
+        })?;
+    }
+    field_integer(stream, "myCurMode", owner.hilight_mode())
 }
 pub(super) fn brep_owner_effective_mode<S: StdSelectBRepOwnerSource + ?Sized>(
     owner: &S,

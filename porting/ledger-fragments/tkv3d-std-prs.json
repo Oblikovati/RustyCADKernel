@@ -1,0 +1,770 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "StdPrs_ShapeTool::GetFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "0c45d738827df61977195687267d73be0b5f838f60e4b45fa16535d7a8d02ce3",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::get_face",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::FillTriangles",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "0d72243dfdef11835590a5989dd410c6741d7280197998d5a721916c8d43487a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::fill_triangles",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ToolTriangulatedShape::Tessellate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolTriangulatedShape.hxx",
+      "cpp_declaration_id": "0d88dcda02e1ecc72a4d32ff55bef64a93a2f21ac239b00c37984b79540b12b0",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolTriangulatedShape::tessellate",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::AddUIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "11e0965ac483e3a0467be6f57ea779257fbaa7585962e294fd19352c8489c906",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::add_u_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::FaceBound",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "1f355b269e6040e26a08820a44586263529ef30d6ef80fbefe82d52417cbba10",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::face_bound",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::AddVIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "22f900c87b0d9048fbb0c3cb56c5eb1278bb3b514a9652d1120db4e16dde317a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::add_v_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFShape::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFShape.hxx",
+      "cpp_declaration_id": "26d266937a4002c6fd2ba55bdffc895b666a742e1090e6c0d1dd1b1fb6522107",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfShape::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::MatchVIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "27f575497d788ce92c4dac1c9b36846d4bb16530ffb2c6da5230382abff25765",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::match_v_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::NextFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "2a3d9a38ef4d5ad3f2f4b95fd8f325f91a7ce9487360fc0b4e0cb89e6f62e46f",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::next_face",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::MoreVertex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "2b88988b1d34d146cc7f77ade0765ce74bde143d63b2cc34f97b4da1ef8e8dac",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::more_vertex",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::StdPrs_ShapeTool",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "333c6b77c68ed23ef13d94b2d905986a61b490bea7a732d934a2c78d1ceb09e2",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::new",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFPoleSurface::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFPoleSurface.hxx",
+      "cpp_declaration_id": "363ca9734745bdd3a35d0f50f4b9faf6a4378fde22d3cb2a87cdd8c199f216df",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfPoleSurface::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::IsPlanarFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "36694b444262665f8e285ab6113cd7a64e12a08726a1b588c52ae47bd5e6c5c8",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::is_planar_current_face",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_Volume_Closed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Volume.hxx",
+      "cpp_declaration_id": "3a06933aa4b5abc6c810de807f8846e19be703c5133813d297dd5aefdd4a977b",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsVolume::Closed",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "3b852233906d0bbd2f0f89f829b1bf8dcf2da7f7a75f3c9348bedeed66d1bc5c",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_Volume_Opened",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Volume.hxx",
+      "cpp_declaration_id": "432652017c28c7eaa762c97e214ff05a7fd7758cfcb99bdb35b55126a6180feb",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsVolume::Opened",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::ExploreSolids",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "44bea200f959614df5a17dd714b31f6d31a8bf7ccd9f9550f68ece6f27803ee4",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::explore_solids",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::Hidden",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "4739558b66d0e52f5e9c57b8f52e8a3d8a1c4535999a38e29432824c3e9ab43b",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::hidden",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::NextHidden",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "49970523c74ceb164854552599d72aae3e1ef57a8102ffd9f983bb79a120899e",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::next_hidden",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_Volume_Autodetection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Volume.hxx",
+      "cpp_declaration_id": "49b408ba69c114fb7b35ac03d3341a3dac2813c4b56d9e8e5eac8351a5de37d6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsVolume::Autodetection",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ToolTriangulatedShape::IsTessellated",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolTriangulatedShape.hxx",
+      "cpp_declaration_id": "4ee2c3eac2b7c0bef7f2fbc78f9869f1738a42ca131d9241b52d2af085347de7",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolTriangulatedShape::is_tessellated",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::FillTriangles",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "5116207d5d5ef919245cfc6f0f1e7adacd9b91abda9cff41f4a8441112fa2f43",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::fill_triangles_with_texels",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::GetVertex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "52531cfeb7850258bcf6fbd9cd91254c222f2f81b74532403c469110edef5fae",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::get_vertex",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::FillFaceBoundaries",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "534b6ae206b98573acc6517b7abd6cecdf3e594e80dcf18212c7125429620e81",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::fill_face_boundaries_with_continuity",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::FacesOfEdge",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "54615e1059cfb94719b7214ed378b6e07ea3c9f393c1c358f25636e67940c3db",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::faces_of_edge",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::AddUIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "54b367410a5e2fa40ba13cc59c6f1a0a358cfc3a30b376627262b0dcc7495606",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::add_u_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::Neighbours",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "54efce437e148f8f91001b6b6633b391e59d808ba1c8eb85da9b0ec015c82be9",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::neighbours",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::MoreCurve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "587c0a5df42c747e76c6e4f370d47c9f2f531286c4ff3a1571f6068dcd1e2e49",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::more_curve",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::NextVertex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "5b66bfbedc33fc22aec7e0ca6d334f35c271f906321af3e0b5296c6d0d868dd6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::next_vertex",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::AddWireframeForFacesWithoutTriangles",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "5d44f1df12b5f2371ab952a82bec8d0d5ad038ebade49f4d70aca63e45f8fe08",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::add_wireframe_for_faces_without_triangles",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::MoreVisible",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "62320ceb47352d7934443dda683560aee66ed537ea9e02d6cb0eb16d0a9216c9",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::more_visible",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ToolTriangulatedShape::ClearOnOwnDeflectionChange",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolTriangulatedShape.hxx",
+      "cpp_declaration_id": "635dc00f62aa5e53267d983c676a138332e9c2d3a8fcff6a608315cf7723ae7a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolTriangulatedShape::clear_on_own_deflection_change",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFShape::AddVertexes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFShape.hxx",
+      "cpp_declaration_id": "638d7513de1342d324c7fdf1b1ffefcc3033019c9c6b86ff723e3a95c7bba8f4",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfShape::add_vertexes",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::AddWireframeForFreeElements",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "66e21e14662a663461ac1c9eef9d0399010cda42ced3cdf14f7f9abb8e0b56e7",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::add_wireframe_for_free_elements",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::Match",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "6e23b51e8a1c95b0a5eee0fc38a1ec13661a2406fdb2302327ffa0dcf118d0ed",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::match_isos",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "6efb01e5f91e0a5c6561b9e3e55623a29c7fe8f60962b78c4a7315312533aec6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::add_with_texels",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedSurface::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedSurface.hxx",
+      "cpp_declaration_id": "7277cc3c2da073c564375cef887ae8c63c5ed9c95373cced52a27057e209d6de",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedSurface::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_PoleCurve::Match",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_PoleCurve.hxx",
+      "cpp_declaration_id": "73341ef0dd2853dfc0b56db214df03a109ec55a906936995ff581bef7bfa4679",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsPoleCurve::match_point",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::IsPlanarFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "75901bf8ef47f1465bc47d1752858b813cfc09486eba18043e8885712b728f0e",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::is_planar_face",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "79c797c8d4e3d35688458332e00aa37d71916be920b95d70d8fb2ec102f3e137",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::InitVertex",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "803d141fdd6c37bf91f75f0fe662da9c84c9ef2f31f3e32ee70019131e0ed01c",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::init_vertex",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::HasSurface",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "8601d513d3c3f2be1d3db57e5a26d2125ac70f96d8693d9876298a2bbace1c94",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::has_surface",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFShape::AddEdgesOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFShape.hxx",
+      "cpp_declaration_id": "886f634d6a0fa5a557968ae516a79bb95fec413a971ce2de95a99c773ef96428",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfShape::add_edges_on_triangulation",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::HasCurve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "8c0a93bf12906c2121404314f6bd1da521b687ba48538c0458d414b0fd5dc399",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::has_curve",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ToolTriangulatedShape::IsClosed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolTriangulatedShape.hxx",
+      "cpp_declaration_id": "8cab952584e910d8d218908028f289d179d28d93edd37c061b30145fe42e8bd5",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolTriangulatedShape::is_closed",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::CurveBound",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "914c54422c18310e6244efdd4057814463e674962b70f2070bb5889d09a37a43",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::curve_bound",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::NextCurve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "9337fb91bce2e1f26fa418edb72eefc1115f298e4ef8e6a11b4fd649d2ee9c55",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::next_curve",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ToolVertex::Coord",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolVertex.hxx",
+      "cpp_declaration_id": "954fa576c1682fcc51c600e1715f507e7fe0055a23aad946e3696ffd6f054cd1",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolVertex::coord",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::Polygon3D",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "988faf91d577584b3b72ceeaa952e81135404504be15ad69a3c13275e0bab701",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::polygon_3d",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::InitFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "9c61b7376ee0be0b300bf75db5e3195d30fed45f7eab4a34130701307d1a5437",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::init_face",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_BndBox",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_BndBox.hxx",
+      "cpp_declaration_id": "a114a2202c510c0f10b6bef6369a9c491114243b7f1f0d682a35dd4443f07f6a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsBndBox",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRShapeI::ComputeHLR",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRShapeI.hxx",
+      "cpp_declaration_id": "a1714babc1bcf34b7309c843925cca45797859925528914122d736ab1a2075da",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrShapeI::compute_hlr",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_Volume",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Volume.hxx",
+      "cpp_declaration_id": "a1d80b54687acd11ed6078bf5da79e9be68d0b7c82bd515dcedb3e9a0f359499",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsVolume",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::InitHidden",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "a69a6070e0fce20deef0cf2f290d0338abc3e6cd365ad0e1de566fece21d3603",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::init_hidden",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFShape::AddEdgesOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFShape.hxx",
+      "cpp_declaration_id": "a7320a5909b044214810f3e8f1a3863dd4e07df348912e57af6d4d8cf8619d3c",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfShape::append_edges_on_triangulation",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ToolTriangulatedShape::GetDeflection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolTriangulatedShape.hxx",
+      "cpp_declaration_id": "a9c48abb3ff287bcc7d872c5e398b5fd5efc98975162296f4c3513d4aceae1f6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolTriangulatedShape::get_deflection",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::CurrentTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "ab5070d9b4aba2cd405ca7d58724c69e22aec2ede103d94d63bb24566c402e88",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::current_triangulation",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::MoreHidden",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "ac31ee78b13d61824cd21e78a3e2d5d43dd5fcc568fdddde85b7cedac5fc488f",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::more_hidden",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::Visible",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "acf156cf1cf1bccb539b3f381089c4882eacfb5d5a7bf6249c71be0144dd6bf6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::visible",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::AddVIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "aeef5d01ad9a3fd1d70c5ec02c13e3b9222eb3aa41cbce601678bcf81ed3f99a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::add_v_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::GetCurve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "af46295fa2bf90c5892b28c518abc0ad2792395109123e4d89a7c6176569d7d6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::get_curve",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::InitCurve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "af9d75fa3b4cc83c7dfedadd58f84dbed1b3ae60e455c56811325671951bb7e5",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::init_curve",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRPolyShape::ComputeHLR",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRPolyShape.hxx",
+      "cpp_declaration_id": "b1414730cc3fe0d2824dfb043e649caf5781bb44db747c20df067bfaa7c0accf",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrPolyShape::<rustycad_tkv3d::std_prs::StdPrsHlrShapeI>::compute_hlr",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFShape::AddAllEdges",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFShape.hxx",
+      "cpp_declaration_id": "b560ab0f402b056c7d566db03300aaef6c5dcb0a65f2d09842c70c2fdee4c89a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfShape::add_all_edges",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_PoleCurve::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_PoleCurve.hxx",
+      "cpp_declaration_id": "b709711c21b92f3a5df2c57ce28952de323c94760a18569b1a490baa77067213",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsPoleCurve::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFSurface::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFSurface.hxx",
+      "cpp_declaration_id": "b8aa525cbf1b0542246083f429f0786b1fe6f896c1f347d5dc8b61cf13e0f1e2",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfSurface::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::MoreFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "bb1fb6c3e4d79ec8ab0bf54c1b6393f99c3ef6d978208527b04dc6f0cc02a3d5",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::more_face",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::InitVisible",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "be8a1c5d2e4afa2777b3b5dc997ab0e91b3e52aebfb8fc1099866eecff06faba",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::init_visible",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "c01a6e4f1b3e94b833f0e47a37c2f7d491d2ad814f739553a4d1ea14f1f41f9f",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::add_isos",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::MatchUIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "c7c25248311cdd0799bda9e0a2a718559932b798088fe8a3563ed454509a8abc",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::match_u_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::MatchVIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "c88e0edf674e52fbec8d4d936d682307edc9ab4f6aa3ff509f007583e91e2091",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::match_v_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::Match",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "d3c9a53867f315f0a7c8ddcd7f9f0e808ae06b94d96e19003ee76ec1d4c95bfa",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::match_isos",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::NextVisible",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "d99a29fded771ab4f4b571bb8bee68fdcfe5d58906da3befcafa41a105b1ad2b",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::next_visible",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionSurface::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionSurface.hxx",
+      "cpp_declaration_id": "de5bceea7d1ce209736eee451b90a6730fa6a38cfc414fc9882bb0309c0b9f8c",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionSurface::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::MatchUIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "dea338c553e538bedc32e605fd19d3f6078efb8f1f13685567364022366ed4bd",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::match_u_iso",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::NbEdges",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "e083adeaf8bc660f2a4bf4ef3fe987f8960c3242d1b1ca5259eb2a7fb7ab7a69",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::nb_edges",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShapeTool::PolygonOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShapeTool.hxx",
+      "cpp_declaration_id": "e0cfb49f371d220f28162deaf5fe0ef21f0f13e9ea1601ac7d6ab2d45e396db5",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShapeTool::polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ShadedShape::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ShadedShape.hxx",
+      "cpp_declaration_id": "ea4b4aeb56e880a96e443e4459b3f80d1b3393eee3349b7daa637d45e406348a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsShadedShape::add",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::Match",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "ee145e05e0ca0cc3c4428954cbc0e866f8fe274e39a72ac1131b3607afe4dd2d",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::match_isos",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_PoleCurve::Pick",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_PoleCurve.hxx",
+      "cpp_declaration_id": "eee96c57c1872b752770d74961cc827717f45737182d43c8f6ebdeccb544a1ba",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsPoleCurve::pick",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRShape::ComputeHLR",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRShape.hxx",
+      "cpp_declaration_id": "ef6df61578e38b3e9c638d76e0fe3ddafb1755abaf7423289782231a2a8b9bec",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrShape::<rustycad_tkv3d::std_prs::StdPrsHlrShapeI>::compute_hlr",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFRestrictedFace::Match",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFRestrictedFace.hxx",
+      "cpp_declaration_id": "f92916455cef9270aae57d568ae52b883bfb8f0f4c4f0133999e3bf80780c6f2",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfRestrictedFace::match_isos",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_ToolTriangulatedShape::IsTriangulated",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolTriangulatedShape.hxx",
+      "cpp_declaration_id": "fdb3150776abcdd7917b9187aa18842abe1ce152158ecbe24c5f8904c9af9166",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolTriangulatedShape::is_triangulated",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_HLRToolShape::StdPrs_HLRToolShape",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_HLRToolShape.hxx",
+      "cpp_declaration_id": "fe1d560bd7b414e82ce3632b35fa5b773f8861f96a2edb24addb13829e6b0e82",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsHlrToolShape::new",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    },
+    {
+      "upstream_id": "StdPrs_WFDeflectionRestrictedFace::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_WFDeflectionRestrictedFace.hxx",
+      "cpp_declaration_id": "ff89272637d440f8c4f399afef5ec8c2339008870390d1d2bf82df28b4b3bbef",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsWfDeflectionRestrictedFace::add_isos",
+      "status": "implemented",
+      "notes": "StdPrs mapping (docs/v3d-design.md section 5): the static presentation builders are unit structs whose overloads are named functions writing into a Graphic3d structure, output arguments are returned values, StdPrs_HLRShapeI is a trait over the native subclasses; compared bit for bit with native OCCT by the TKV3d numeric probes (v3_stdprs_face and the earlier StdPrs families)."
+    }
+  ]
+}

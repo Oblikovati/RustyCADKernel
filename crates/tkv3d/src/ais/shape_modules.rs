@@ -1,5 +1,10 @@
 // Shape-family registrations stay in the AIS namespace; leaf and parent interfaces share native RTTI.
 mod shape;
+mod shape_object;
+pub use shape_object::{
+    AisShape, AisShapeParameters, ais_shape_compute, ais_shape_compute_hlr,
+    ais_shape_compute_hlr_presentation, ais_shape_dump_json, ais_shape_selection_mode,
+};
 mod textured_shape;
 mod textured_shape_file_ref;
 mod textured_shape_mapping;
@@ -24,7 +29,9 @@ pub use textured_shape_factory::{
 mod shape_appearance;
 mod shape_unset_appearance;
 mod shape_unset_shading;
-pub use shape_appearance::{ais_shape_set_color, ais_shape_set_material};
+pub use shape_appearance::{
+    ais_shape_replace_with_new_own_aspects, ais_shape_set_color, ais_shape_set_material,
+};
 pub use shape_unset_appearance::ais_shape_unset_color;
 pub use shape_unset_shading::ais_shape_unset_material;
 

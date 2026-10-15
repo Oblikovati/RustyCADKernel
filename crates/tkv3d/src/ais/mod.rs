@@ -1,5 +1,7 @@
 //! The AIS package: interactive objects and the interactive context.
+mod animation_axis_rotation;
 mod animation_object;
+pub use animation_axis_rotation::AisAnimationAxisRotation;
 mod base_animation_object;
 mod object_animation_transform;
 pub use animation_object::AisAnimationObject;
@@ -18,6 +20,12 @@ pub use animation::{
     AisAnimationState, AisAnimationTimer,
 };
 pub use animation_members::{AisAnimationChildren, AisAnimationMembers};
+mod filters;
+pub use filters::{
+    AisAttributeFilter, AisBadEdgeFilter, AisC0RegularityFilter, AisDisplayMode, AisDisplayStatus,
+    AisExclusionFilter, AisGraphicTool, AisSelectionModesConcurrency, AisSignatureFilter,
+    AisTypeFilter, AisTypeOfAttribute,
+};
 mod selection_scheme;
 
 pub use selection_scheme::AisSelectionScheme;
@@ -41,13 +49,26 @@ pub use interactive_context::{AisInteractiveContext, AisInteractiveContextFields
 pub use interactive_enums::{AisDragAction, AisKindOfInteractive};
 pub use interactive_object::{
     AisInteractiveObject, AisInteractiveObjectBase, AisInteractiveObjectFields,
+    ais_interactive_object_set_context,
 };
 mod context_members;
 pub use context_members::AisContextHandle;
 mod context_selector_reference;
 pub use context_selector_reference::AisMainSelectorRef;
 
+mod media_player;
+mod triangulation;
+pub use media_player::{AisMediaPlayer, AisMediaPlayerFields};
+pub use triangulation::AisTriangulation;
+mod connected_interactive;
+pub use connected_interactive::{
+    AisConnectedInteractive, AisConnectedInteractiveFields, AisMultipleConnectedInteractive,
+    AisMultipleConnectedInteractiveFields,
+};
+mod context_attributes;
+mod context_defaults;
 mod context_updates;
+pub use context_defaults::AisEntityOwners;
 mod interactive_object_members;
 pub use interactive_object_members::{
     AisApplicationOwner, AisInteractiveObjectMembers, ais_interactive_object_dump_json,
@@ -217,6 +238,32 @@ mod view_controller_selection;
 mod view_controller_transfer;
 mod view_controller_zoom;
 pub use view_controller::AisViewController;
+mod manipulator;
+pub use manipulator::{
+    AisManipulator, AisManipulatorBehaviorOnTransform, AisManipulatorFields,
+    AisManipulatorOptionsForAttach, AisManipulatorSkin,
+};
+mod manipulator_attach;
+pub use manipulator_attach::AisManipulatorObjects;
+mod manipulator_axis;
+pub use manipulator_axis::AisManipulatorAxis;
+mod manipulator_owner;
+pub use manipulator_owner::{AisManipulatorMode, AisManipulatorOwner};
+mod manipulator_presentation;
+mod manipulator_quadrics;
+pub use manipulator_quadrics::{
+    AisManipulatorCube, AisManipulatorDisk, AisManipulatorQuadric, AisManipulatorSector,
+    AisManipulatorSphere,
+};
+mod manipulator_recompute;
+mod manipulator_sensitive;
+pub use manipulator_sensitive::AisManipulatorSensCircle;
+mod manipulator_transform;
+mod view_controller_dispatch_state;
+pub use view_controller_dispatch_state::AisViewControllerHooks;
+mod view_controller_events;
+mod view_controller_fields;
+mod view_controller_xr;
 
 mod view_controller_clicks;
 mod view_controller_gravity;
@@ -240,6 +287,7 @@ mod view_controller_space_mouse;
 mod view_controller_window_listener;
 
 mod light_source;
+mod light_source_fields;
 mod light_source_properties;
 mod light_source_transforms;
 pub use light_source::{AisLightSourceBase, AisLightSourceSource};

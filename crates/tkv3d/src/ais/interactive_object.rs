@@ -55,20 +55,7 @@ pub trait AisInteractiveObject: SelectMgrSelectableObject {
     /// Assign before linking the drawer; clearing retains the existing link.
     /// Example: `object.set_context(&context)`.
     fn set_context(&self, context: &Handle<AisInteractiveContext>) {
-        let previous = self
-            .interactive_base()
-            .fields
-            .read()
-            .context
-            .object_address();
-        if previous == context.object_address() {
-            return;
-        }
-        self.interactive_base().fields.write().context = context.downgrade();
-        if let Some(context) = context.get() {
-            self.attributes()
-                .link_to(&context.fields.read().default_drawer);
-        }
+        ais_interactive_object_set_context(self, context);
     }
     /// Default objects decline all drag actions; `object.process_dragging(&ctx,&view,&owner,from,to,AisDragAction::Start)`.
     fn process_dragging(
@@ -89,3 +76,27 @@ rustycad_tkernel::impl_transient_interface!(
     "AIS_InteractiveObject",
     dyn SelectMgrSelectableObject
 );
+
+/// The native `AIS_InteractiveObject::SetContext` body, for the overrides that extend it:
+/// the context (unchanged when it is the same), then the drawer linked to its default drawer.
+/// Example: `ais_interactive_object_set_context(&*object, &context)`.
+pub fn ais_interactive_object_set_context<O: AisInteractiveObject + ?Sized>(
+    object: &O,
+    context: &Handle<AisInteractiveContext>,
+) {
+    let previous = object
+        .interactive_base()
+        .fields
+        .read()
+        .context
+        .object_address();
+    if previous == context.object_address() {
+        return;
+    }
+    object.interactive_base().fields.write().context = context.downgrade();
+    if let Some(context) = context.get() {
+        object
+            .attributes()
+            .link_to(&context.fields.read().default_drawer);
+    }
+}

@@ -76,7 +76,52 @@
 #include "tkv3d_probe_animation_object.cxx"
 #include "tkv3d_probe_ais_trihedron.cxx"
 #include "tkv3d_probe_ais_rubber_band.cxx"
+#include "tkv3d_probe_brep_font.cxx"
+#include "tkv3d_probe_dsg_prs.cxx"
+#include "tkv3d_probe_std_select_filters.cxx"
+#include "tkv3d_probe_std_prs_faces.cxx"
+#include "tkv3d_probe_ais_attribute_filters.cxx"
+#include "tkv3d_probe_ais_shape.cxx"
+#include "tkv3d_probe_ais_context_attributes.cxx"
+#include "tkv3d_probe_ais_connected.cxx"
+#include "tkv3d_probe_ais_triangulation.cxx"
+#include "tkv3d_probe_ais_media_player.cxx"
+#include "tkv3d_probe_ais_view_controller.cxx"
+#include "tkv3d_probe_ais_manipulator.cxx"
+#include "tkv3d_probe_prs_dim.cxx"
+#include "tkv3d_probe_prs_rel.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ // BRepFont regularization and builders (tkv3d_probe_brep_font.cxx)
+ {"v3_brepfont_regularize", v3_brepfont_regularize},
+ {"v3_brepfont_curve", v3_brepfont_curve},
+ {"v3_brepfont_glyph", v3_brepfont_glyph},
+ {"v3_brepfont_text", v3_brepfont_text},
+ // DsgPrs presentations (tkv3d_probe_dsg_prs.cxx)
+ {"v3_dsgprs", v3_dsgprs},
+ // StdSelect owner filters (tkv3d_probe_std_select_filters.cxx)
+ {"v3_stdsel_filter", v3_stdsel_filter},
+ // StdPrs face and surface presentations (tkv3d_probe_std_prs_faces.cxx)
+ {"v3_stdprs_face", v3_stdprs_face},
+ // AIS filters and graphic tool (tkv3d_probe_ais_attribute_filters.cxx)
+ {"v3_ais_attr_filter", v3_ais_attr_filter},
+ // AIS_Shape (tkv3d_probe_ais_shape.cxx)
+ {"v3_ais_shape", v3_ais_shape},
+ // AIS_InteractiveContext attribute members (tkv3d_probe_ais_context_attributes.cxx)
+ {"v3_ais_ctx_attr", v3_ais_ctx_attr},
+ // AIS connected objects (tkv3d_probe_ais_connected.cxx)
+ {"v3_ais_connected", v3_ais_connected},
+ // AIS_Triangulation (tkv3d_probe_ais_triangulation.cxx)
+ {"v3_ais_triangulation", v3_ais_triangulation},
+ // AIS_MediaPlayer (tkv3d_probe_ais_media_player.cxx)
+ {"v3_ais_media_player", v3_ais_media_player},
+ // AIS_ViewController dispatch (tkv3d_probe_ais_view_controller.cxx)
+ {"v3_ais_view_controller", v3_ais_view_controller},
+ // AIS_Manipulator (tkv3d_probe_ais_manipulator.cxx)
+ {"v3_ais_manipulator", v3_ais_manipulator},
+ // PrsDim dimensions (tkv3d_probe_prs_dim.cxx)
+ {"v3_prsdim", v3_prsdim},
+ // PrsDim relations (tkv3d_probe_prs_rel.cxx)
+ {"v3_prsrel", v3_prsrel},
  {"v3_ais_rubber_band", v3_ais_rubber_band},
  {"v3_ais_trihedron", v3_ais_trihedron},
  {"v3_ais_point_cloud", v3_ais_point_cloud},
@@ -84,6 +129,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_point_cloud_owner", v3_point_cloud_owner},
  {"v3_animation_object", v3_animation_object},
  {"v3_base_animation_object", v3_base_animation_object},
+ {"v3_animation_axis_rotation", v3_animation_axis_rotation},
  {"v3_context_location", v3_context_location},
  {"v3_ais_animation_edits", v3_ais_animation_edits},
  {"v3_animation_camera", v3_animation_camera},

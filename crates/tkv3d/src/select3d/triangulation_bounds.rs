@@ -9,7 +9,8 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Point3;
 impl Select3DSensitiveTriangulation {
     /// `computeBoundingBox` (protected): the cached box of the triangulation, or the box of its nodes.
-    pub(super) fn compute_bounding_box(&self) {
+    /// Example: `sens.compute_bounding_box()`.
+    pub fn compute_bounding_box(&self) {
         let bounds = self
             .triangul
             .get()
@@ -18,7 +19,8 @@ impl Select3DSensitiveTriangulation {
     }
 
     /// `applyTransformation` (protected): the box of the eight corners at the initial location.
-    pub(super) fn apply_transformation(&self) -> Select3DBndBox3d {
+    /// Example: `sens.apply_transformation()`.
+    pub fn apply_transformation(&self) -> Select3DBndBox3d {
         let local = self.state.read().bnd_box;
         if !self.has_init_location() {
             return local;

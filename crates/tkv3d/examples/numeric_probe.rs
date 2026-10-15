@@ -12,6 +12,61 @@ type ProbeCase = fn(&[f64]);
 /// The dispatch table of tools/oracle/tkv3d_probe.cxx (`probe_cases`); each package adds its
 /// operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
+    // BRepFont regularization and builders (v3_probe/brep_font.rs)
+    (
+        "v3_brepfont_regularize",
+        v3_probe::brep_font::regularize_case,
+    ),
+    ("v3_brepfont_curve", v3_probe::brep_font::curve_case),
+    ("v3_brepfont_glyph", v3_probe::brep_font::glyph_case),
+    ("v3_brepfont_text", v3_probe::brep_font::text_case),
+    // DsgPrs presentations (v3_probe/dsg_prs.rs)
+    ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
+    // PrsDim dimensions (v3_probe/prs_dim.rs)
+    ("v3_prsdim", v3_probe::prs_dim::prs_dim_case),
+    // PrsDim relations (v3_probe/prs_rel.rs)
+    ("v3_prsrel", v3_probe::prs_rel::prs_rel_case),
+    // AIS_Manipulator (v3_probe/ais_manipulator.rs)
+    (
+        "v3_ais_manipulator",
+        v3_probe::ais_manipulator::manipulator_case,
+    ),
+    // AIS_ViewController dispatch (v3_probe/ais_view_controller.rs)
+    (
+        "v3_ais_view_controller",
+        v3_probe::ais_view_controller::view_controller_case,
+    ),
+    // AIS_MediaPlayer (v3_probe/ais_media_player.rs)
+    (
+        "v3_ais_media_player",
+        v3_probe::ais_media_player::media_player_case,
+    ),
+    // AIS_Triangulation (v3_probe/ais_triangulation.rs)
+    (
+        "v3_ais_triangulation",
+        v3_probe::ais_triangulation::triangulation_case,
+    ),
+    // AIS connected objects (v3_probe/ais_connected.rs)
+    ("v3_ais_connected", v3_probe::ais_connected::connected_case),
+    // AIS_InteractiveContext attribute members (v3_probe/ais_context_attributes.rs)
+    (
+        "v3_ais_ctx_attr",
+        v3_probe::ais_context_attributes::context_attributes_case,
+    ),
+    // AIS_Shape (v3_probe/ais_shape.rs)
+    ("v3_ais_shape", v3_probe::ais_shape::ais_shape_case),
+    // AIS filters and graphic tool (v3_probe/ais_attribute_filters.rs)
+    (
+        "v3_ais_attr_filter",
+        v3_probe::ais_attribute_filters::attribute_filter_case,
+    ),
+    // StdPrs face and surface presentations (v3_probe/std_prs_faces.rs)
+    ("v3_stdprs_face", v3_probe::std_prs_faces::std_prs_face_case),
+    // StdSelect owner filters (v3_probe/std_select_filters.rs)
+    (
+        "v3_stdsel_filter",
+        v3_probe::std_select_filters::filter_case,
+    ),
     (
         "v3_ais_rubber_band",
         v3_probe::ais_rubber_band::rubber_band_case,
@@ -42,6 +97,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     (
         "v3_base_animation_object",
         v3_probe::animation_object::base_case,
+    ),
+    (
+        "v3_animation_axis_rotation",
+        v3_probe::animation_object::axis_rotation_case,
     ),
     (
         "v3_context_location",

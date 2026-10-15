@@ -1,5 +1,19 @@
 //! The TKV3d probe operations, one module per C++ probe file under tools/oracle.
+pub mod ais_attribute_filters;
+pub mod ais_connected;
+pub mod ais_context_attributes;
+pub mod ais_manipulator;
+pub mod ais_media_player;
+pub mod ais_shape;
+pub mod ais_triangulation;
+pub mod ais_view_controller;
+pub mod brep_font;
+pub mod dsg_prs;
 pub mod prs3d;
+pub mod prs_dim;
+pub mod prs_rel;
+pub mod std_prs_faces;
+pub mod std_select_filters;
 pub mod v3d;
 
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit

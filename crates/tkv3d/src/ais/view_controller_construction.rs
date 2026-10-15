@@ -1,6 +1,7 @@
 //! Fallible ownership construction preserves native presentation initialization failures.
 use super::view_controller_camera_action_state::ViewControllerCameraActionState;
 use super::view_controller_clicks::ViewControllerClickDispatch;
+use super::view_controller_dispatch_state::{ViewControllerDispatchState, ViewControllerXrState};
 use super::view_controller_input_state::{ViewControllerClickState, ViewControllerNavigationState};
 use super::view_controller_mouse_state::ViewControllerMouseDispatch;
 use super::view_controller_parameters::ViewControllerParameters;
@@ -15,6 +16,7 @@ struct ControllerOwnedParts {
     touches: ViewControllerTouchDispatch,
     input: AspectWindowInputListenerBase,
     actions: ViewControllerCameraActionState,
+    dispatch: ViewControllerDispatchState,
 }
 impl ControllerOwnedParts {
     fn new(timer: Timer) -> Result<Self, Failure> {
@@ -22,11 +24,13 @@ impl ControllerOwnedParts {
         let touches = ViewControllerTouchDispatch::with_timer(timer.clone());
         let input = AspectWindowInputListenerBase::with_timer(timer);
         let actions = ViewControllerCameraActionState::new()?;
+        let dispatch = ViewControllerDispatchState::new()?;
         Ok(Self {
             clicks,
             touches,
             input,
             actions,
+            dispatch,
         })
     }
 }
@@ -57,6 +61,8 @@ impl AisViewController {
             click_dispatch: ViewControllerClickDispatch::new(),
             touch_dispatch: parts.touches,
             mouse_dispatch: ViewControllerMouseDispatch::default(),
+            dispatch: parts.dispatch,
+            xr: ViewControllerXrState::default(),
         }
     }
 }

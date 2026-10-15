@@ -60,8 +60,15 @@ pub trait AisShapeSource: AisInteractiveObject {
     /// Embedded parent state; `object.shape_base().fields.read().shape`.
     fn shape_base(&self) -> &AisShapeBase;
 }
-rustycad_tkernel::impl_transient_interface!(
-    dyn AisShapeSource,
-    "AIS_Shape",
-    dyn AisInteractiveObject
-);
+impl rustycad_tkernel::standard::RuntimeTyped for dyn AisShapeSource {
+    const TYPE_NAME: &'static str =
+        <super::AisShape as rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME;
+    fn static_type() -> &'static rustycad_tkernel::standard::RuntimeType {
+        // The inheritance seam shares the one genuine AIS_Shape class descriptor.
+        <super::AisShape as rustycad_tkernel::standard::RuntimeTyped>::static_type()
+    }
+    fn project_from(object: &dyn rustycad_tkernel::standard::Transient) -> Option<&Self> {
+        // Registered casters project the actual subclass base without allocating a facade.
+        rustycad_tkernel::standard::project_interface::<Self>(object)
+    }
+}

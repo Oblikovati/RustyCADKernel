@@ -256,3 +256,15 @@ impl Select3DSensitiveSet for Select3DInteriorSensitivePointSet {
         manager.dist_to_geometry_center(&self.cog)
     }
 }
+
+/// The protected fields of `Select3D_InteriorSensitivePointSet`, read only.
+impl Select3DInteriorSensitivePointSet {
+    /// `myPlanarPolygons`: the planar parts; `set.planar_polygons().len()`.
+    pub fn planar_polygons(&self) -> &[Handle<Select3DSensitivePoly>] {
+        &self.planar_polygons
+    }
+    /// `myPolygonsIdxs`: the BVH order of the parts; `set.polygons_idxs()`.
+    pub fn polygons_idxs(&self) -> Vec<i32> {
+        self.state.read().polygons_idxs.clone()
+    }
+}
