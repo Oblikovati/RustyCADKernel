@@ -3,8 +3,8 @@
     "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "a0aaaca628fd7e3f6aa9a78808ab077025b3d6b7fda3f15fc885e3786ef6accd",
-    "rust": "318d0651a1c4e76f175fdcbf22a90e926f95b4e04fec68b6081abaf080cfdb78"
+    "parity": "6474a2a6df12b9af281e99fc4a4d3dcc536427d7264f8b63d21058635f415bdb",
+    "rust": "edbd308f7e645179e8506e62707e27ccef09e6768f9c815edac1a05a6d6178ef"
   },
   "schema_version": 1,
   "toolkits": {
@@ -36,9 +36,9 @@
         "done_percent": 94.9
       },
       "gtests": {
-        "mapped": 288,
+        "mapped": 295,
         "not_applicable": 2,
-        "unmapped": 9
+        "unmapped": 2
       },
       "ledger_defects": {},
       "open_boilerplate_by_category": {
@@ -271,46 +271,48 @@
     "TKBool": {
       "api": {
         "by_status": {
-          "claimed_unverified": 0,
+          "claimed_unverified": 81,
           "excluded": 12,
           "partial": 33,
-          "unclaimed": 1419,
-          "upstream_unimplemented": 0,
-          "verified": 1240
+          "unclaimed": 380,
+          "upstream_unimplemented": 1,
+          "verified": 2197
         },
         "declarations": 2704,
-        "done": 1252,
-        "done_percent": 46.3
+        "done": 2210,
+        "done_percent": 81.7
       },
       "boilerplate": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 783,
+          "excluded": 786,
           "partial": 3,
-          "unclaimed": 39,
+          "unclaimed": 27,
           "upstream_unimplemented": 0,
-          "verified": 57
+          "verified": 66
         },
         "declarations": 882,
-        "done": 840,
-        "done_percent": 95.2
+        "done": 852,
+        "done_percent": 96.6
       },
       "gtests": {
-        "mapped": 3,
+        "mapped": 17,
         "not_applicable": 0,
-        "unmapped": 14
+        "unmapped": 0
       },
-      "ledger_defects": {},
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 81,
+        "rows_without_cpp_match": 2
+      },
       "open_boilerplate_by_category": {
-        "rtti-macro": 27,
+        "rtti-macro": 15,
         "special-member": 12
       },
       "open_gap_by_category": {
         "enum-constant": 14,
-        "field": 84,
-        "member": 1212,
-        "protected-member": 31,
-        "record": 78
+        "field": 81,
+        "member": 328,
+        "record": 38
       },
       "scope": "port",
       "scope_reason": ""
@@ -1000,16 +1002,16 @@
     "TKFillet": {
       "api": {
         "by_status": {
-          "claimed_unverified": 0,
+          "claimed_unverified": 52,
           "excluded": 58,
           "partial": 2,
-          "unclaimed": 348,
+          "unclaimed": 3,
           "upstream_unimplemented": 0,
-          "verified": 1565
+          "verified": 1858
         },
         "declarations": 1973,
-        "done": 1623,
-        "done_percent": 82.3
+        "done": 1916,
+        "done_percent": 97.1
       },
       "boilerplate": {
         "by_status": {
@@ -1025,19 +1027,21 @@
         "done_percent": 99.5
       },
       "gtests": {
-        "mapped": 2,
+        "mapped": 21,
         "not_applicable": 0,
-        "unmapped": 19
+        "unmapped": 0
       },
-      "ledger_defects": {},
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 52
+      },
       "open_boilerplate_by_category": {
         "special-member": 2
       },
       "open_gap_by_category": {
         "field": 23,
-        "member": 248,
-        "protected-member": 68,
-        "record": 9
+        "member": 9,
+        "protected-member": 20,
+        "record": 3
       },
       "scope": "port",
       "scope_reason": ""
@@ -1403,16 +1407,16 @@
     "TKMeshVS": {
       "api": {
         "by_status": {
-          "claimed_unverified": 0,
-          "excluded": 1,
-          "partial": 1,
-          "unclaimed": 281,
+          "claimed_unverified": 13,
+          "excluded": 2,
+          "partial": 0,
+          "unclaimed": 31,
           "upstream_unimplemented": 0,
-          "verified": 139
+          "verified": 376
         },
         "declarations": 422,
-        "done": 140,
-        "done_percent": 33.2
+        "done": 378,
+        "done_percent": 89.6
       },
       "boilerplate": {
         "by_status": {
@@ -1432,18 +1436,18 @@
         "not_applicable": 0,
         "unmapped": 0
       },
-      "ledger_defects": {},
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 13
+      },
       "open_boilerplate_by_category": {
         "alloc-macro": 6,
         "rtti-macro": 78,
         "special-member": 3
       },
       "open_gap_by_category": {
-        "alias": 2,
-        "field": 16,
-        "member": 217,
-        "protected-member": 12,
-        "record": 34
+        "alias": 3,
+        "member": 4,
+        "record": 37
       },
       "scope": "port",
       "scope_reason": ""
@@ -1451,45 +1455,45 @@
     "TKOffset": {
       "api": {
         "by_status": {
-          "claimed_unverified": 0,
+          "claimed_unverified": 1,
           "excluded": 0,
-          "partial": 57,
-          "unclaimed": 375,
+          "partial": 0,
+          "unclaimed": 9,
           "upstream_unimplemented": 1,
-          "verified": 69
+          "verified": 491
         },
         "declarations": 502,
-        "done": 70,
-        "done_percent": 13.9
+        "done": 492,
+        "done_percent": 98.0
       },
       "boilerplate": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 151,
+          "excluded": 153,
           "partial": 0,
-          "unclaimed": 8,
+          "unclaimed": 0,
           "upstream_unimplemented": 0,
-          "verified": 3
+          "verified": 9
         },
         "declarations": 162,
-        "done": 154,
-        "done_percent": 95.1
+        "done": 162,
+        "done_percent": 100.0
       },
       "gtests": {
-        "mapped": 0,
+        "mapped": 35,
         "not_applicable": 0,
-        "unmapped": 35
+        "unmapped": 0
       },
-      "ledger_defects": {},
-      "open_boilerplate_by_category": {
-        "rtti-macro": 8
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 1
       },
+      "open_boilerplate_by_category": {},
       "open_gap_by_category": {
-        "enum-constant": 13,
+        "enum-constant": 3,
         "field": 3,
-        "member": 332,
+        "member": 1,
         "protected-member": 1,
-        "record": 26
+        "record": 2
       },
       "scope": "port",
       "scope_reason": ""
@@ -2069,47 +2073,49 @@
     "TKV3d": {
       "api": {
         "by_status": {
-          "claimed_unverified": 0,
+          "claimed_unverified": 17,
           "excluded": 187,
-          "partial": 40,
-          "unclaimed": 1897,
-          "upstream_unimplemented": 0,
-          "verified": 3048
+          "partial": 34,
+          "unclaimed": 1121,
+          "upstream_unimplemented": 1,
+          "verified": 3812
         },
         "declarations": 5172,
-        "done": 3235,
-        "done_percent": 62.5
+        "done": 4000,
+        "done_percent": 77.3
       },
       "boilerplate": {
         "by_status": {
-          "claimed_unverified": 0,
-          "excluded": 410,
-          "partial": 39,
-          "unclaimed": 212,
+          "claimed_unverified": 4,
+          "excluded": 450,
+          "partial": 51,
+          "unclaimed": 40,
           "upstream_unimplemented": 0,
-          "verified": 262
+          "verified": 378
         },
         "declarations": 923,
-        "done": 672,
-        "done_percent": 72.8
+        "done": 828,
+        "done_percent": 89.7
       },
       "gtests": {
-        "mapped": 1,
+        "mapped": 73,
         "not_applicable": 0,
-        "unmapped": 72
+        "unmapped": 0
       },
-      "ledger_defects": {},
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 21
+      },
       "open_boilerplate_by_category": {
-        "rtti-macro": 191,
+        "rtti-macro": 23,
         "special-member": 21
       },
       "open_gap_by_category": {
-        "alias": 21,
-        "enum-constant": 162,
-        "field": 311,
-        "member": 1110,
-        "protected-member": 129,
-        "record": 164
+        "alias": 14,
+        "enum-constant": 106,
+        "field": 250,
+        "member": 574,
+        "protected-member": 109,
+        "record": 85
       },
       "scope": "port",
       "scope_reason": ""
@@ -2989,12 +2995,12 @@
     },
     "port": {
       "api_declarations": 76041,
-      "api_done": 53746,
-      "api_open": 21888,
-      "api_partial": 407,
-      "gtests_mapped": 7969,
+      "api_done": 56422,
+      "api_open": 19276,
+      "api_partial": 343,
+      "gtests_mapped": 8116,
       "gtests_not_applicable": 2,
-      "gtests_unmapped": 480,
+      "gtests_unmapped": 333,
       "toolkits": 56
     },
     "replaced": {
