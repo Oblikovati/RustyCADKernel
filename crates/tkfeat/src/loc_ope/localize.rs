@@ -104,6 +104,7 @@ pub(crate) fn loc_before(spt: &[PntFace], from: f64, tol: f64, out: Localized<'_
 
 /// `LocAfter(Spt, FromInd, Tol, ...)`: the first franc point after the index
 /// `from_ind` (from the first point when `from_ind < 1`).
+#[allow(clippy::neg_cmp_op_on_partial_ord)] // the native loop breaks on `>=`/`<=`: a NaN parameter keeps walking
 pub(crate) fn loc_after_index(
     spt: &[PntFace],
     from_ind: i32,
@@ -127,6 +128,7 @@ pub(crate) fn loc_after_index(
 
 /// `LocalizeBefore(FromInd, ...)` of LocOpe_CurveShapeIntersector: the last franc point
 /// before the index `from_ind` (from the last point when `from_ind` is past the end).
+#[allow(clippy::neg_cmp_op_on_partial_ord)] // the native loop breaks on `>=`/`<=`: a NaN parameter keeps walking
 pub(crate) fn loc_before_index(
     spt: &[PntFace],
     from_ind: i32,

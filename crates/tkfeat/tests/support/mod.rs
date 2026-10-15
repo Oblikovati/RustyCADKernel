@@ -105,3 +105,17 @@ pub fn assert_close(a: f64, b: f64, rel: f64) {
         "{a} differs from {b} by more than {rel} relative"
     );
 }
+
+/// The planar face of the rectangle `[x0, x1] x [y0, y1]` at height `z`, normal +Z.
+pub fn rect_face(x0: f64, y0: f64, x1: f64, y1: f64, z: f64) -> Face {
+    use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakePolygon};
+    let mut poly = BRepBuilderAPIMakePolygon::new();
+    for (x, y) in [(x0, y0), (x1, y0), (x1, y1), (x0, y1)] {
+        poly.add_point(Point3::new(x, y, z)).unwrap();
+    }
+    poly.close().unwrap();
+    BRepBuilderAPIMakeFace::from_wire(&poly.wire().unwrap(), true)
+        .unwrap()
+        .face()
+        .unwrap()
+}

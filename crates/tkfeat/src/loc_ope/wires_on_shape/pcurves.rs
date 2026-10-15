@@ -31,6 +31,9 @@ use rustycad_tktopalgo::brep_lib;
 /// The face bounds `(Umin, Umax, Vmin, Vmax)`.
 type UvBounds = (f64, f64, f64, f64);
 
+/// The forward and reversed p-curves of a seam edge.
+type SeamPCurves = (Handle<dyn Geom2dCurve>, Handle<dyn Geom2dCurve>);
+
 /// Whether the basis of the (unlocated) surface of `fac` is a plane, a rectangular
 /// trimmed surface standing for its basis.
 fn is_planar(fac: &Face) -> Result<bool, Failure> {
@@ -324,10 +327,7 @@ fn same_orientation(efrom: &Edge, eto: &Edge, fac: &Face) -> Result<bool, Failur
 
 /// The two p-curves of `efrom` on the seam face `fac`: those it has (one standing for
 /// the missing other), or the projection of its 3D curve on the basis surface.
-fn seam_pcurves(
-    efrom: &Edge,
-    fac: &Face,
-) -> Result<(Handle<dyn Geom2dCurve>, Handle<dyn Geom2dCurve>), Failure> {
+fn seam_pcurves(efrom: &Edge, fac: &Face) -> Result<SeamPCurves, Failure> {
     let (c2dff, _) = oriented_pcurve(efrom, Orientation::Forward, fac)?;
     let (c2dfr, _) = oriented_pcurve(efrom, Orientation::Reversed, fac)?;
     if c2dff.is_null() && c2dfr.is_null() {
