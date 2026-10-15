@@ -42,6 +42,9 @@ compile time.
 
 ## Limits
 
-The enumeration renumbers when the structure changes. When the shared
-operation-result types of ADRs 0068-0075 are published, this enumeration should be
-the one they use. If they define their own, the two must be merged.
+The enumeration renumbers when the structure changes. The unmerged `extrude`
+`OperationResult` (branch `worktree-agent-a7079cb6ed3b8e56a`, ADR 0068) indexes its
+solid with the same rule (`topexp::map_shapes_of_type` in insertion order). So
+`ResultEntity::Face(i)` there and `FaceIndex(i)` here name the same face of that
+solid. When both are on main, one implementation should serve both, with a test
+that pins the agreement.
