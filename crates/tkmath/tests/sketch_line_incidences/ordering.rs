@@ -89,5 +89,8 @@ fn order_is_identical_for_reordered_targets_up_to_member_indices() {
             .map(|contact| contact.target_id())
             .collect()
     };
-    assert_eq!(ids(&certify(line, &first)), ids(&certify(line, &second)));
+    assert_eq!(
+        ids(&certify(line.clone(), &first)),
+        ids(&certify(line, &second))
+    );
 }

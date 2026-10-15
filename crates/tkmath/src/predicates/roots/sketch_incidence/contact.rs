@@ -1,18 +1,25 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Shared completion of one isolated contact: line position and world construction.
+//! Shared completion of one isolated contact: source position and world construction.
+use super::super::certificate_arithmetic::{RatioInterval, world::WorldEnvelope};
 use super::algebraic::IsolatedRoot;
 use super::budget::Work;
+use super::construction::WorldLimit;
 use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
-use super::report::{SketchContactTransition, SketchLineContact, SketchLinePosition};
-use super::source_line::SourceLine;
+use super::place::SourcePlace;
+use super::report::{
+    SketchContactTransition, SketchLineContact, SketchLinePosition, TargetParameter,
+};
+use super::source_frame::SourceFrame;
+use super::spans::HomogeneousPoint;
 
-/// Target-specific certified facts before line classification and construction.
+/// Pair-specific certified facts before the source position is classified.
 pub(super) struct ContactDraft {
-    pub line_root: IsolatedRoot,
-    pub target_root: Option<IsolatedRoot>,
+    pub place: SourcePlace,
+    pub target_parameter: Option<TargetParameter>,
     pub target_position: SketchLinePosition,
     pub transition: SketchContactTransition,
     pub multiplicity: [Option<usize>; 2],
+    pub envelope: WorldEnvelope,
 }
 /// Owner of the contact being completed.
 #[derive(Clone, Copy)]
@@ -23,24 +30,36 @@ pub(super) struct TargetKey {
 pub(super) fn finish(
     mut draft: ContactDraft,
     owner: TargetKey,
-    source: &SourceLine,
+    source: &SourceFrame,
     work: &mut Work<'_>,
 ) -> Result<SketchLineContact, Cause> {
     work.enter(SketchIncidenceStage::Classification);
-    let line_position = source.position(&mut draft.line_root, work)?;
-    work.enter(SketchIncidenceStage::Construction);
-    let envelope = source.construct(&mut draft.line_root, work)?;
+    source.normalize(&mut draft.place, work)?;
+    let source_position = source.position(&mut draft.place, work)?;
     Ok(SketchLineContact {
         target_index: owner.index,
         target_id: owner.id,
-        line_root: draft.line_root,
-        target_root: draft.target_root,
-        line_position,
+        place: draft.place,
+        target_parameter: draft.target_parameter,
+        source_position,
         target_position: draft.target_position,
         transition: draft.transition,
         multiplicity: draft.multiplicity,
-        point: envelope.point,
-        world_bounds: envelope.bounds,
-        achieved_world_error: envelope.achieved_error,
+        point: draft.envelope.point,
+        world_bounds: draft.envelope.bounds,
+        achieved_world_error: draft.envelope.achieved_error,
+    })
+}
+/// Narrow the contact root until the point `(x, y) / w` meets the requested error.
+pub(super) fn construct_point(
+    point: &HomogeneousPoint,
+    contact: &mut IsolatedRoot,
+    work: &mut Work<'_>,
+) -> Result<WorldEnvelope, Cause> {
+    work.enter(SketchIncidenceStage::Construction);
+    let limit = WorldLimit::new(work.world_error());
+    limit.construct(contact, work, &|root: &IsolatedRoot| {
+        let [lower, upper] = root.ratio_bounds();
+        point.enclose(&RatioInterval { lower, upper })
     })
 }

@@ -116,7 +116,7 @@ fn collinear_span_is_an_overlap_without_boundary_contacts() {
     assert_eq!(incidences.overlaps().len(), 1);
     assert_eq!(incidences.overlaps()[0].target_range(), Some([1., 2.]));
     assert_eq!(
-        incidences.overlaps()[0].line_range_bounds(),
+        incidences.overlaps()[0].source_parameter_range_bounds(),
         Some([[0.25, 0.25], [0.5, 0.5]])
     );
 }

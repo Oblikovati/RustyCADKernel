@@ -7,7 +7,7 @@ use super::budget::Work;
 use super::equation::{cauchy_bounds, isolate};
 use super::input::{SketchIncidenceOptions, SketchIncidenceSpline};
 use super::rational_polynomial::{RationalPolynomial, ratio};
-use super::resultant::line_parameter_equation;
+use super::resultant::image_equation;
 use super::spans::spline_spans;
 use num_bigint::{BigInt, Sign};
 use std::cmp::Ordering;
@@ -39,7 +39,7 @@ fn resultant_vanishes_exactly_at_the_line_parameters_of_each_root() {
     let normal = polynomial(&[-2., 0., 2.]);
     let along = polynomial(&[0., 2.]);
     let weight = polynomial(&[1.]);
-    let equation = line_parameter_equation(&normal, &along, &weight, &ratio(4.)).unwrap();
+    let equation = image_equation(&normal, &along, &weight.scale(&ratio(4.))).unwrap();
     assert_eq!(equation.degree(), Some(2));
     for root in [-0.5, 0.5] {
         assert_eq!(equation.evaluate(&ratio(root)), ratio(0.));
@@ -49,11 +49,10 @@ fn resultant_vanishes_exactly_at_the_line_parameters_of_each_root() {
 #[test]
 fn constant_longitudinal_projection_gives_its_exact_parameter() {
     // A vertical piece x = 1 seen from the line x-axis through (0,0)-(4,0): t = 1/4.
-    let equation = line_parameter_equation(
+    let equation = image_equation(
         &polynomial(&[1., 3.]),
         &polynomial(&[4.]),
-        &polynomial(&[1.]),
-        &ratio(16.),
+        &polynomial(&[16.]),
     )
     .unwrap();
     assert_eq!(equation.evaluate(&ratio(0.25)), ratio(0.));
@@ -103,10 +102,10 @@ fn cox_de_boor_span_pieces_match_independent_de_boor_points() {
         for step in 0..=4 {
             let u = ratio(lower)
                 .add(&ratio(upper - lower).multiply(&ExactRatio::new(step.into(), 4.into())));
-            assert_eq!(piece.w.evaluate(&u), ratio(1.));
+            assert_eq!(piece.point.w.evaluate(&u), ratio(1.));
             let expected = de_boor(&spline, span, &u);
             assert_eq!(
-                [piece.x.evaluate(&u), piece.y.evaluate(&u)],
+                [piece.point.x.evaluate(&u), piece.point.y.evaluate(&u)],
                 expected,
                 "span {span} step {step}"
             );
@@ -172,4 +171,33 @@ fn nearby_distinct_roots_are_separated_by_refinement() {
         Ordering::Less
     );
     assert_eq!(sign_at_ratio(&integers(&[-2, 0, 1]), &rational), Sign::Plus);
+}
+fn constant_rows(rows: &[&[f64]]) -> super::bivariate::Bivariate {
+    super::bivariate::Bivariate(
+        rows.iter()
+            .map(|row| RationalPolynomial(row.iter().copied().map(ratio).collect()))
+            .collect(),
+    )
+}
+#[test]
+fn first_subresultant_recovers_the_single_common_root() {
+    // (u - 1)(u - 2) and (u - 1)(u - 5) share u = 1; their first subresultant is -3u + 3.
+    let first = constant_rows(&[&[2.], &[-3.], &[1.]]);
+    let second = constant_rows(&[&[5.], &[-6.], &[1.]]);
+    let row = super::bivariate::fibre_row(&first, [2, 2], &second).unwrap();
+    assert_eq!(row.alpha.evaluate(&ratio(7.)), ratio(-3.));
+    assert_eq!(row.beta.evaluate(&ratio(7.)), ratio(3.));
+    let resultant = super::bivariate::resultant(&first, [2, 2], &second);
+    assert_eq!(resultant.degree(), None);
+}
+#[test]
+fn bivariate_resultant_vanishes_at_the_shared_coefficient_value() {
+    // f = u - s and g = u^2 - 4 share a root exactly when s = 2 or s = -2.
+    let first = super::bivariate::Bivariate(vec![polynomial(&[0., -1.]), polynomial(&[1.])]);
+    let second = constant_rows(&[&[-4.], &[0.], &[1.]]);
+    let resultant = super::bivariate::resultant(&first, [1, 2], &second);
+    for root in [2., -2.] {
+        assert_eq!(resultant.evaluate(&ratio(root)), ratio(0.));
+    }
+    assert_ne!(resultant.evaluate(&ratio(1.)), ratio(0.));
 }

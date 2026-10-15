@@ -1,58 +1,77 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! A span lying on the source support line, with exact end parameters.
+//! A target span lying on the source support line, with exact end parameters.
 use super::budget::Work;
 use super::contact::TargetKey;
 use super::equation::isolate;
 use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
-use super::parametric::{SpanEquations, dyadic};
-use super::rational_polynomial::ratio;
+use super::implicit::LineImplicit;
+use super::pieces::dyadic;
+use super::place::{KeyValue, SourcePlace};
+use super::rational_polynomial::{RationalPolynomial, ratio};
 use super::report::SketchLineOverlap;
-use super::source_line::{SourceLine, ratio_position};
+use super::source_frame::{SourceFrame, ratio_position};
 use super::spans::ParametricSpan;
 use std::cmp::Ordering;
 
+/// Coincident target span of a line source; other sources do not certify overlaps.
 pub(super) fn span_overlap(
     span: &ParametricSpan,
-    equations: &SpanEquations,
-    source: &SourceLine,
+    source: &SourceFrame,
     owner: TargetKey,
     work: &mut Work<'_>,
 ) -> Result<SketchLineOverlap, Cause> {
-    let Some(range) = span.range else {
-        return Ok(unbounded(equations, owner));
+    let SourceFrame::Line(line) = source else {
+        return Err(Cause::UncertifiedOverlap { range: span.range });
     };
-    require_monotone(range, equations, work)?;
+    let along = line.implicit.along(&span.point);
+    let Some(range) = span.range else {
+        return Ok(unbounded(&along, owner));
+    };
+    require_monotone(range, &along, &span.point.w, work)?;
     work.enter(SketchIncidenceStage::Classification);
-    let ends = range.map(|value| equations.line_parameter_at(&ratio(value), source));
+    let ends = range.map(|value| line_parameter(&line.implicit, span, &along, value));
     Ok(SketchLineOverlap {
         target_index: owner.index,
         target_id: owner.id,
         target_range: Some(range),
-        line_positions: Some([ratio_position(&ends[0]), ratio_position(&ends[1])]),
+        source_positions: Some(ends.clone().map(|end| ratio_position(&end, [0., 1.]))),
         opposite: ends[1] < ends[0],
-        line_range: Some(ends),
+        source_range: Some(ends.map(|end| SourcePlace::Parameter(KeyValue::Ratio(end)))),
     })
 }
+fn line_parameter(
+    line: &LineImplicit,
+    span: &ParametricSpan,
+    along: &RationalPolynomial,
+    value: f64,
+) -> super::super::certificate_arithmetic::ExactRatio {
+    let parameter = ratio(value);
+    let denominator = span
+        .point
+        .w
+        .evaluate(&parameter)
+        .multiply(&line.squared_length());
+    along.evaluate(&parameter).divide(&denominator)
+}
 // The whole unbounded target line lies on the support; its direction gives orientation.
-fn unbounded(equations: &SpanEquations, owner: TargetKey) -> SketchLineOverlap {
+fn unbounded(along: &RationalPolynomial, owner: TargetKey) -> SketchLineOverlap {
     SketchLineOverlap {
         target_index: owner.index,
         target_id: owner.id,
         target_range: None,
-        line_range: None,
-        line_positions: None,
-        opposite: equations.along.coefficient(1).sign() == Ordering::Less,
+        source_range: None,
+        source_positions: None,
+        opposite: along.coefficient(1).sign() == Ordering::Less,
     }
 }
 /// `L/W` must be strictly monotone, so the span maps one-to-one onto a line interval.
 fn require_monotone(
     range: [f64; 2],
-    equations: &SpanEquations,
+    along: &RationalPolynomial,
+    weight: &RationalPolynomial,
     work: &mut Work<'_>,
 ) -> Result<(), Cause> {
     let refused = Cause::NonMonotoneOverlap { range };
-    let along = &equations.along;
-    let weight = &equations.weight;
     let numerator = along
         .derivative()
         .multiply(weight)

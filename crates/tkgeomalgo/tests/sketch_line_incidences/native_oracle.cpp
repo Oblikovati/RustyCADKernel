@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
-// OCCT 8.0.0 Geom2dAPI_InterCurveCurve replay of native-cases.csv (tolerance 1e-9).
+// OCCT 8.0.0 Geom2dAPI_InterCurveCurve replay of native-cases.csv and
+// native-curve-cases.csv (tolerance 1e-9). A source field with a ':' is a curve
+// spec like the targets; otherwise it holds the two points of an infinite line.
 // Native points are rounded solver output, not certified roots; see README.md.
 #include <Geom2dAPI_InterCurveCurve.hxx>
 #include <Geom2d_BSplineCurve.hxx>
@@ -68,27 +70,45 @@ static Handle(Geom2d_Curve) target(const std::string &spec) {
   const auto values = numbers(fields[1]);
   if (fields[0] == "ellipse")
     return new Geom2d_Ellipse(gp_Ax22d(gp_Pnt2d(values[0], values[1]), gp_Dir2d(values[2], values[3])), values[4], values[5]);
+  if (fields[0] == "line") {
+    const gp_Pnt2d start(values[0], values[1]), end(values[2], values[3]);
+    return new Geom2d_Line(start, gp_Dir2d(gp_Vec2d(start, end)));
+  }
   if (fields[0] == "segment") {
     const gp_Pnt2d start(values[0], values[1]), end(values[2], values[3]);
     Handle(Geom2d_Line) line = new Geom2d_Line(start, gp_Dir2d(gp_Vec2d(start, end)));
     return new Geom2d_TrimmedCurve(line, 0, start.Distance(end));
   }
-  throw std::runtime_error("target kind " + fields[0] + ": expected circle, ellipse, segment or spline");
+  throw std::runtime_error("curve kind " + fields[0] + ": expected circle, ellipse, line, segment or spline");
 }
 int main(int argc, char **argv) {
   if (argc != 2) throw std::runtime_error("argument count " + std::to_string(argc) + ": expected corpus path");
   std::ifstream corpus(argv[1]); std::string row;
   if (!corpus) throw std::runtime_error("path " + std::string(argv[1]) + ": expected readable corpus");
   while (std::getline(corpus, row)) {
-    const auto fields = split(row, ';'); const auto source = numbers(fields[2]);
-    const gp_Pnt2d start(source[0], source[1]), end(source[2], source[3]);
-    Handle(Geom2d_Line) line = new Geom2d_Line(start, gp_Dir2d(gp_Vec2d(start, end)));
-    Geom2dAPI_InterCurveCurve native(line, target(fields[3]), 1e-9);
+    const auto fields = split(row, ';');
+    Handle(Geom2d_Curve) source;
+    if (fields[2].find(':') != std::string::npos) {
+      source = target(fields[2]);
+    } else {
+      const auto points = numbers(fields[2]);
+      const gp_Pnt2d start(points[0], points[1]), end(points[2], points[3]);
+      source = new Geom2d_Line(start, gp_Dir2d(gp_Vec2d(start, end)));
+    }
+    Geom2dAPI_InterCurveCurve native(source, target(fields[3]), 1e-9);
     std::cout << fields[0] << ';' << native.NbPoints() << ';';
     for (int i = 1; i <= native.NbPoints(); ++i) {
       const gp_Pnt2d point = native.Point(i);
       std::cout << (i > 1 ? "|" : "") << hex(point.X()) << ',' << hex(point.Y());
     }
-    std::cout << ';' << native.NbSegments() << '\n';
+    std::cout << ';' << native.NbSegments();
+    // Coincidence zones (none in the line corpus) report their two end points.
+    for (int i = 1; i <= native.NbSegments(); ++i) {
+      Handle(Geom2d_Curve) first, second;
+      native.Segment(i, first, second);
+      const gp_Pnt2d start = first->Value(first->FirstParameter()), end = first->Value(first->LastParameter());
+      std::cout << (i > 1 ? '|' : ';') << hex(start.X()) << ',' << hex(start.Y()) << ',' << hex(end.X()) << ',' << hex(end.Y());
+    }
+    std::cout << '\n';
   }
 }

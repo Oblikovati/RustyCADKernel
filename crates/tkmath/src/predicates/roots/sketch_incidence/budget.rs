@@ -7,6 +7,7 @@ use super::input::SketchIncidenceOptions;
 pub(super) struct Work<'a> {
     used: u32,
     limit: u32,
+    world_error: f64,
     isolation: RootIsolationOptions,
     stage: SketchIncidenceStage,
     cancelled: &'a mut dyn FnMut() -> bool,
@@ -16,6 +17,7 @@ impl<'a> Work<'a> {
         Self {
             used: 0,
             limit: options.max_refinements,
+            world_error: options.max_world_error,
             isolation: RootIsolationOptions {
                 version: 1,
                 // Isolation receives an explicit whole-interval width; refinement
@@ -61,6 +63,10 @@ impl<'a> Work<'a> {
     }
     pub fn isolation(&self) -> RootIsolationOptions {
         self.isolation
+    }
+    /// Caller world error limit, never widened.
+    pub fn world_error(&self) -> f64 {
+        self.world_error
     }
     pub fn max_degree(&self) -> u16 {
         self.isolation.max_degree

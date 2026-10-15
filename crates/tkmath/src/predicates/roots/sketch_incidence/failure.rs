@@ -58,6 +58,19 @@ pub enum SketchIncidenceCause {
         /// Supplied end direction.
         end: [f64; 2],
     },
+    /// Angle bounds are not finite, not increasing, larger than 64 in magnitude, or
+    /// span at least one full turn.
+    AngleBounds {
+        /// Supplied bounds.
+        bounds: [f64; 2],
+    },
+    /// An ellipse's angle frame axis is not parallel to its major axis.
+    AngleAxis {
+        /// Supplied frame axis.
+        axis: [f64; 2],
+        /// The ellipse's major axis.
+        major_axis: [f64; 2],
+    },
     /// Spline counts do not describe one B-spline.
     SplineShape {
         /// Supplied degree.
@@ -102,8 +115,34 @@ pub enum SketchIncidenceCause {
         /// Target parameter range of the span.
         range: [f64; 2],
     },
-    /// The line-parameter resultant vanished identically (a base point).
+    /// An image or elimination resultant vanished identically (a base point).
     DegenerateResultant,
+    /// A piece lies on the other curve; version 1 certifies only line-source overlaps.
+    UncertifiedOverlap {
+        /// Parameter range of the coincident piece; None for an unbounded line.
+        range: Option<[f64; 2]>,
+    },
+    /// Two conics meet tangentially on both half turns of one line through the
+    /// source center; version 1 certifies only transversal points there.
+    ExceptionalTangency,
+    /// A spline-pair fibre is not one certified target point (several target
+    /// points, a straight span of degree two or more, or a stationary span).
+    ExceptionalFiber {
+        /// Source span range of the root.
+        range: Option<[f64; 2]>,
+    },
+    /// A contact at a target interior knot is tangential to a piece, or the source
+    /// is stationary or cusped there.
+    KnotTangency,
+    /// A line source must be bounded: its two points are its ends.
+    UnboundedSource,
+    /// The requested domain is not defined for this source representation.
+    SourceDomain {
+        /// Name of the source representation, e.g. `"spline"`.
+        source: &'static str,
+        /// The refused domain.
+        domain: super::input::SketchLineDomain,
+    },
     /// An exact invariant failed; reported rather than repaired.
     Invariant(&'static str),
 }

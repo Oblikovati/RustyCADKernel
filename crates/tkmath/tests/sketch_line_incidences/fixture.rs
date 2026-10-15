@@ -5,9 +5,15 @@ use rustycad_tkmath::predicates::roots::sketch_incidence::*;
 pub const ERROR: f64 = 1e-12;
 
 pub fn source(points: [[f64; 2]; 2], domain: SketchLineDomain) -> SketchIncidenceSource {
+    SketchIncidenceSource::line(1, points, domain)
+}
+pub fn curve_source(
+    curve: SketchIncidenceCurve,
+    domain: SketchLineDomain,
+) -> SketchIncidenceSource {
     SketchIncidenceSource {
         id: 1,
-        points,
+        curve,
         domain,
     }
 }
@@ -36,7 +42,7 @@ pub fn arc(
     SketchIncidenceCurve::Circle {
         center,
         radius,
-        sector: Some(sector),
+        sector: Some(sector.into()),
     }
 }
 pub fn ellipse(center: [f64; 2], major_axis: [f64; 2], radii: [f64; 2]) -> SketchIncidenceCurve {
@@ -127,7 +133,7 @@ pub fn summary(
 ) {
     (
         contact.target_id(),
-        contact.line_position(),
+        contact.source_position(),
         contact.target_position(),
         contact.transition(),
         contact.multiplicity(),

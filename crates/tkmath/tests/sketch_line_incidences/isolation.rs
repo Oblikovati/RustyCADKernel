@@ -16,7 +16,7 @@ fn mixed_targets() -> Vec<SketchIncidenceTarget> {
                 center: [0.5, 0.2],
                 major_axis: [2., 1.],
                 radii: [1.5, 0.5],
-                sector: Some(sector),
+                sector: Some(sector.into()),
             },
         ),
         target(

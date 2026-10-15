@@ -54,10 +54,14 @@ pub(super) fn side_signs(polynomial: &IntegerPolynomial, bracket: &RootBracket) 
     // Nonexact bracket ends are not roots and enclose no other root.
     [polynomial.sign_at(lower), polynomial.sign_at(upper)]
 }
-/// Transition from one-sided signs; a missing side is a bounded target end.
-pub(super) fn transition(sides: [Option<Sign>; 2]) -> Result<SketchContactTransition, Cause> {
+/// Transition from one-sided signs; a missing side is the end of the curve that
+/// carries the equation (`missing` names which end that is).
+pub(super) fn transition(
+    sides: [Option<Sign>; 2],
+    missing: SketchContactTransition,
+) -> Result<SketchContactTransition, Cause> {
     match sides {
-        [None, _] | [_, None] => Ok(SketchContactTransition::TargetEnd),
+        [None, _] | [_, None] => Ok(missing),
         [Some(Sign::NoSign), _] | [_, Some(Sign::NoSign)] => Err(Cause::Invariant(
             "contact side sign vanished outside an overlap",
         )),

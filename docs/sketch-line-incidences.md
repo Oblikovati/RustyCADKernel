@@ -19,10 +19,11 @@ are certified for every admitted target.
 | Ellipse, elliptical sector | Certified | Any nonzero major-axis vector; sector by rays |
 | Control/fit B-spline | Certified | Open, closed (wrapped knots), handled triple knots |
 | Rational B-spline | Certified | Strictly positive weights only |
+| Arc or ellipse with angle bounds | Certified (ADR 0067) | Exact real angles; only a zero bound is an exact end |
+| Circle, arc, ellipse, spline source | Certified (ADR 0067) | Against every target above; see ADR 0067 |
 | Offset spline or curve | Open | Not admitted; needs its own exact equation |
 | Native periodic knot vector | Open | Supply the unwrapped flat knots |
-| Arc or ellipse with angle bounds | Open | Supply rays, e.g. authored end minus center |
-| Non-line source curve | Open | Trimming arcs or splines needs curve/curve certification |
+| Spline-source extension | Open | No application rule; support domain refused by name |
 
 The application's arcs come from authored center and end points, so their rays
 are exact. Its `elclib` arc span in radians is not an exact sector description.
@@ -90,3 +91,19 @@ application must still adopt the operation through its atomic endpoint ownership
 validate the final solved edit, and pass undo/reload and native tests. A seed
 point can move during recompute; the final endpoint's incidence must be certified
 against the solved geometry. The open pairs above remain blocked.
+
+## Curve sources and angle bounds (ADR 0067)
+
+[ADR 0067](adr/0067-certified-sketch-curve-incidences.md) extends the operation
+to circle, ellipse, ray- and angle-bounded arc and spline sources against every
+admitted target, with cyclic trims of closed sources, arc extension through the
+full conic, parameter picks for splines and exact angle-bounded arcs. Evidence:
+closed-form tests (`curve_sources`, `curve_selection`, `conic_pairs`,
+`spline_pairs`, `angle_arcs`), 244 generated cases against `oracle_curves.py`
+(see the [oracle README](../crates/tkmath/tests/sketch_line_incidences/README.md)),
+76 native OCCT 8.0.0 cases and the mapped intersector (see the
+[native README](../crates/tkgeomalgo/tests/sketch_line_incidences/README.md)), and
+`curve_isolation` for eight-thread equality, input ownership and a process digest.
+Named incomplete results: `UncertifiedOverlap`, `ExceptionalFiber`,
+`KnotTangency`, `ExceptionalTangency`. No owner release or application intake is
+claimed.

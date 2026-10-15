@@ -21,7 +21,7 @@ fn crossing_segments_meet_at_exact_parameters_on_both_lines() {
         (9, Interior, Interior, Crossing, [Some(1), Some(1)])
     );
     assert_eq!(contacts[0].target_parameter_bounds(), Some([0.5, 0.5]));
-    assert_eq!(contacts[0].line_parameter_bounds(), [0.25, 0.25]);
+    assert_eq!(contacts[0].source_parameter_bounds(), Some([0.25, 0.25]));
 }
 #[test]
 fn target_endpoint_on_the_line_is_a_one_sided_contact() {
@@ -45,7 +45,7 @@ fn non_dyadic_line_parameter_constructs_the_exact_point_within_its_bound() {
     );
     let contacts = ordered(&report);
     assert_point(contacts[0], [1., 0.]);
-    let [lower, upper] = contacts[0].line_parameter_bounds();
+    let [lower, upper] = contacts[0].source_parameter_bounds().unwrap();
     assert!(lower < upper && lower <= 1. / 3. && 1. / 3. <= upper);
 }
 #[test]
@@ -66,10 +66,13 @@ fn bounded_target_short_of_the_line_has_no_contact_but_its_support_does() {
 fn segment_domain_retains_but_does_not_order_support_contacts() {
     let beyond = [target(9, segment([3., -1.], [3., 1.]))];
     let support = certify(source([[0., 0.], [1., 0.]], SUPPORT), &beyond);
-    assert_eq!(ordered(&support)[0].line_position(), AfterEnd);
+    assert_eq!(ordered(&support)[0].source_position(), AfterEnd);
     let bounded = certify(source([[0., 0.], [1., 0.]], SEGMENT), &beyond);
     assert!(bounded.ordered().is_empty());
-    assert_eq!(bounded.targets()[0].contacts()[0].line_position(), AfterEnd);
+    assert_eq!(
+        bounded.targets()[0].contacts()[0].source_position(),
+        AfterEnd
+    );
 }
 #[test]
 fn parallel_distinct_lines_complete_empty() {
@@ -90,17 +93,17 @@ fn collinear_segments_report_an_exact_oriented_overlap() {
     assert!(report.targets()[0].contacts().is_empty());
     assert_eq!(overlap.target_range(), Some([0., 1.]));
     assert_eq!(
-        overlap.line_range_bounds(),
+        overlap.source_parameter_range_bounds(),
         Some([[0.25, 0.25], [0.75, 0.75]])
     );
-    assert_eq!(overlap.line_positions(), Some([Interior, Interior]));
+    assert_eq!(overlap.source_positions(), Some([Interior, Interior]));
     assert!(!overlap.opposite());
     let report = certify(
         source([[0., 0.], [4., 0.]], SEGMENT),
         &[target(9, segment([5., 0.], [-1., 0.]))],
     );
     let overlap = &report.targets()[0].overlaps()[0];
-    assert_eq!(overlap.line_positions(), Some([AfterEnd, BeforeStart]));
+    assert_eq!(overlap.source_positions(), Some([AfterEnd, BeforeStart]));
     assert!(overlap.opposite());
 }
 #[test]
@@ -111,6 +114,6 @@ fn collinear_unbounded_line_overlaps_everywhere() {
     );
     let overlap = &report.targets()[0].overlaps()[0];
     assert_eq!(overlap.target_range(), None);
-    assert_eq!(overlap.line_range_bounds(), None);
+    assert_eq!(overlap.source_parameter_range_bounds(), None);
     assert!(overlap.opposite());
 }

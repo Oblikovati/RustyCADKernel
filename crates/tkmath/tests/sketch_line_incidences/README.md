@@ -37,3 +37,33 @@ cargo test --locked -p rustycad-tkmath --test toolkit sketch_line_incidences
 
 The analytic tests in the sibling modules use hand-derived closed forms. Native
 OCCT comparisons live with the TKGeomAlgo integration tests. See ADR 0060.
+
+## Conic and spline sources
+
+`oracle_curves.py` generates 244 near-degenerate cases with seed 6100 for
+sources other than a line (ADR 0067). It uses different eliminations from the
+kernel: conic sources against lines and splines substitute the target piece into
+the conic; conic pairs eliminate `y` (or `x`) between the Cartesian equations
+instead of using the sweep chart; spline sources substitute their de Boor
+interpolated spans into the target's implicit equation; spline pairs implicitize
+the target span with a symbolic Sylvester determinant. Roots are isolated with
+exact Fraction Sturm sequences, multiple roots are refined on their square-free
+part, and every sign, position, transition and multiplicity is exact. Only the
+sweep order of distinct contacts on a conic source and the coordinate brackets
+use 2^-300 refinements; the generator refuses any order decided within 1e-200.
+
+Families: circles tangent to lines within ±2 ulps at scales 1e-6 to 1e6, an
+exact dyadic tangency, arc end rays perturbed by one ulp, Pythagorean segment ends
+within ±2 ulps of a circle source, externally and internally tangent circle pairs
+within ±2 ulps (exact at zero steps), near-tangent rotated circle pairs, ellipse
+sources near tangency to circles, circle sources touching a cubic spline's top,
+cubic spline sources near tangency to lines, circles through spline knot points,
+a polyline source through a circle arc's end ray, and parabola pairs within a
+few ulps of tangency at scales 2^-20 to 2^20; angle-bounded arcs whose bound lies a few ulps from a
+contact angle, as targets of a polyline and as circle and ellipse sources.
+
+```sh
+python3 crates/tkmath/tests/sketch_line_incidences/oracle_curves.py > /tmp/curves.csv
+cmp /tmp/curves.csv crates/tkmath/tests/sketch_line_incidences/oracle-curves.csv
+cargo test --locked -p rustycad-tkmath --test toolkit sketch_line_incidences::generated_curves
+```

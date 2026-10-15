@@ -1,41 +1,47 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Line-parameter equation of a parametric target: `R(T) = Res_u(N(u), L(u) - m T W(u))`.
+//! Image equations of a rational map at the roots of a contact equation:
+//! `R(T) = Res_v(N(v), P(v) - T Q(v))`.
 //!
-//! At every real root `u*` of `N`, `t* = L(u*) / (m W(u*))` is a root of `R`, so all
-//! contacts on the source line become roots of integer polynomials in one variable
-//! and can be ordered and tested for equality exactly. `R` has degree at most
-//! `deg N` in `T`; it is recovered exactly by Lagrange interpolation of Sylvester
-//! determinants at `T = 0..=deg N`, with formal (not reduced) degrees in `u`.
+//! At every real root `v*` of `N` with `Q(v*) != 0`, `T* = P(v*) / Q(v*)` is a root
+//! of `R`, so a source key, a target parameter or a fibre coordinate becomes the
+//! root of one integer polynomial and can be ordered and tested for equality
+//! exactly. `R` has degree at most `deg N` in `T`; it is recovered exactly by
+//! Lagrange interpolation of Sylvester determinants at `T = 0..=deg N`, with
+//! formal (not reduced) degrees in `v`.
 use super::super::certificate_arithmetic::ExactRatio;
-use super::rational_polynomial::{RationalPolynomial, ratio, zero};
-use std::cmp::Ordering;
+use super::rational_polynomial::{RationalPolynomial, common_denominator, ratio, zero};
+use num_bigint::{BigInt, Sign};
 
 /// Exact `R(T)`; None when it vanishes identically (a common complex base point).
-pub(super) fn line_parameter_equation(
-    normal: &RationalPolynomial,
-    along: &RationalPolynomial,
-    weight: &RationalPolynomial,
-    squared_length: &ExactRatio,
+pub(super) fn image_equation(
+    contact: &RationalPolynomial,
+    numerator: &RationalPolynomial,
+    denominator: &RationalPolynomial,
 ) -> Option<RationalPolynomial> {
-    let degree = normal.degree()?;
-    let formal = along
+    // Positive common denominators change neither the roots of `N` nor `P/Q`, and
+    // keep every sampled Sylvester determinant integral.
+    let contact = &contact.scale(&common_denominator(&[contact]));
+    let shared = common_denominator(&[numerator, denominator]);
+    let (numerator, denominator) = (&numerator.scale(&shared), &denominator.scale(&shared));
+    let degree = contact.degree()?;
+    let formal = numerator
         .degree()
         .unwrap_or(0)
-        .max(weight.degree().unwrap_or(0));
+        .max(denominator.degree().unwrap_or(0));
     let samples: Vec<ExactRatio> = (0..=degree)
         .map(|point| {
-            let shift = weight.scale(&squared_length.multiply(&integer(point)));
-            let difference = along.add(&shift.scale(&ratio(-1.)));
-            sylvester_determinant(normal, degree, &difference, formal)
+            let shift = denominator.scale(&integer(point));
+            let difference = numerator.add(&shift.scale(&ratio(-1.)));
+            sylvester_determinant(contact, degree, &difference, formal)
         })
         .collect();
     let interpolated = interpolate(&samples);
     interpolated.degree().map(|_| interpolated)
 }
-fn integer(value: usize) -> ExactRatio {
+pub(super) fn integer(value: usize) -> ExactRatio {
     ExactRatio::new(value.into(), 1.into())
 }
-fn sylvester_determinant(
+pub(super) fn sylvester_determinant(
     first: &RationalPolynomial,
     first_degree: usize,
     second: &RationalPolynomial,
@@ -58,38 +64,75 @@ fn fill_rows(rows: &mut [Vec<ExactRatio>], polynomial: &RationalPolynomial, degr
         }
     }
 }
-fn determinant(mut matrix: Vec<Vec<ExactRatio>>) -> ExactRatio {
-    let mut product = ratio(1.);
-    for column in 0..matrix.len() {
-        let Some(pivot) =
-            (column..matrix.len()).find(|&row| matrix[row][column].sign() != Ordering::Equal)
+/// Exact determinant: rows are scaled to integers, then eliminated fraction-free
+/// (Bareiss), whose every division is exact.
+pub(super) fn determinant(matrix: Vec<Vec<ExactRatio>>) -> ExactRatio {
+    if matrix.is_empty() {
+        return ratio(1.);
+    }
+    let mut scale = BigInt::from(1);
+    let mut rows: Vec<Vec<BigInt>> = matrix
+        .iter()
+        .map(|row| {
+            let common = row.iter().fold(BigInt::from(1), |lcm, value| {
+                let divisor = gcd(value.denominator().clone(), lcm.clone());
+                lcm / divisor * value.denominator()
+            });
+            scale *= &common;
+            row.iter()
+                .map(|value| value.numerator() * (&common / value.denominator()))
+                .collect()
+        })
+        .collect();
+    let determinant = bareiss(&mut rows);
+    ExactRatio::new(determinant, scale)
+}
+fn bareiss(rows: &mut [Vec<BigInt>]) -> BigInt {
+    let size = rows.len();
+    let mut previous = BigInt::from(1);
+    let mut negated = false;
+    for column in 0..size {
+        let Some(pivot) = (column..size).find(|&row| rows[row][column].sign() != Sign::NoSign)
         else {
-            return zero();
+            return BigInt::from(0);
         };
         if pivot != column {
-            matrix.swap(pivot, column);
-            product = product.negated();
+            rows.swap(pivot, column);
+            negated = !negated;
         }
-        product = product.multiply(&matrix[column][column]);
-        eliminate_below(&mut matrix, column);
+        eliminate_fraction_free(rows, column, &previous);
+        previous = rows[column][column].clone();
     }
-    product
+    let last = rows[size - 1][size - 1].clone();
+    if negated { -last } else { last }
 }
-fn eliminate_below(matrix: &mut [Vec<ExactRatio>], column: usize) {
-    let (upper, lower) = matrix.split_at_mut(column + 1);
+fn gcd(mut left: BigInt, mut right: BigInt) -> BigInt {
+    while right.sign() != Sign::NoSign {
+        let remainder = &left % &right;
+        left = right;
+        right = remainder;
+    }
+    if left.sign() == Sign::Minus {
+        -left
+    } else {
+        left
+    }
+}
+// `a[i][j] = (a[i][j] a[k][k] - a[i][k] a[k][j]) / previous pivot`, exactly.
+fn eliminate_fraction_free(rows: &mut [Vec<BigInt>], column: usize, previous: &BigInt) {
+    let (upper, lower) = rows.split_at_mut(column + 1);
     let pivot_row = &upper[column];
     for row in lower {
-        let factor = row[column].divide(&pivot_row[column]);
-        if factor.sign() == Ordering::Equal {
-            continue;
+        let factor = row[column].clone();
+        for index in column + 1..row.len() {
+            row[index] =
+                (&row[index] * &pivot_row[column] - &factor * &pivot_row[index]) / previous;
         }
-        for index in column..row.len() {
-            row[index] = row[index].subtract(&factor.multiply(&pivot_row[index]));
-        }
+        row[column] = BigInt::from(0);
     }
 }
 /// Exact Lagrange interpolation through `(k, samples[k])`.
-fn interpolate(samples: &[ExactRatio]) -> RationalPolynomial {
+pub(super) fn interpolate(samples: &[ExactRatio]) -> RationalPolynomial {
     let mut total = RationalPolynomial(vec![zero()]);
     for (node, value) in samples.iter().enumerate() {
         let mut basis = RationalPolynomial::constant(value.clone());

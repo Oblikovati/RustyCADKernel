@@ -49,7 +49,7 @@ fn parse_target(id: u64, spec: &str) -> SketchIncidenceTarget {
             SketchIncidenceCurve::Circle {
                 center: [numbers[0], numbers[1]],
                 radius: numbers[2],
-                sector,
+                sector: sector.map(Into::into),
             }
         }
         "ellipse" => {
@@ -93,7 +93,7 @@ fn parse_contact(text: &str) -> OracleContact {
 fn check_contact(case: &str, actual: &SketchLineContact, expected: &OracleContact, limit: f64) {
     assert_eq!(actual.target_index(), expected.target, "case {case}");
     assert_eq!(actual.multiplicity(), expected.multiplicity, "case {case}");
-    assert_eq!(actual.line_position(), expected.line, "case {case}");
+    assert_eq!(actual.source_position(), expected.line, "case {case}");
     assert_eq!(
         actual.target_position(),
         expected.target_position,
