@@ -101,26 +101,34 @@ FilletSurf.
 | ChFi2d | `fl_chfi2d_fillet`, `fl_chfi2d_chamfer`, `fl_chfi2d_builder` |
 | ChFi3d | `fl_hatching_domains` (`ChFi3d_ComputeHatchingDomains`), `fl_concave_side` (`ChFi3d::ConcaveSide` on every edge of box, prism, cylinder, cone, sphere, torus and revolved solids), `fl_search_sing` (`ChFi3d_SearchSing` and its `math_FunctionRoot`) |
 | ChFi3d_Builder_0 | `fl_b0_scalars`, `fl_bound_srf`, `fl_bound_fac`, `fl_enlarge_box`, `fl_b0_faces`, `fl_b0_spines`, `fl_inter_plane_edge`, `fl_b0_pcurves`, `fl_reparam_pcurv`, `fl_project_pcurv`, `fl_b0_bounds`, `fl_compute_arete`, `fl_fil_common_point`, `fl_b0_stripes`, `fl_b0_tols`, `fl_int_cs`, `fl_computes_int_pc`, `fl_b0_inter2d`, `fl_b0_topology`, `fl_b0_smooth`, `fl_compute_curves`, `fl_int_traces`, `fl_el_spine` |
-| ChFiKPart | `fl_kpart_fcts`, `fl_corner_spine` |
+| ChFiKPart | `fl_kpart_fcts`, `fl_corner_spine`, `fl_kpart_make` (every `ChFiKPart_MakeFillet`, `ChFiKPart_MakeChamfer` and `ChFiKPart_MakeChAsym` overload with every orientation), `fl_kpart_corner` (the three `ChFiKPart_ComputeData::ComputeCorner`) |
 | BRepFilletAPI | `fl_chfi2d_builder` (`BRepFilletAPI_MakeFillet2d` on the edited face) |
 
 The GTests of `ChFi3d_Hatching_Test.cxx` are translated in
 `crates/tkfillet/tests/chfi3d_hatching.rs`.
 
-## Blocked on TKBool
+## Data structure
 
-The particular cases of ChFiKPart (`ChFiKPart_ComputeData` and the `ChFiKPart_Make*`
-functions), the ChFi3d builders (`ChFi3d_Builder`, `ChFi3d_FilBuilder`,
-`ChFi3d_ChBuilder`, the `ChFi3d_Builder_*` member files and the free functions that
-take the data structure: `ChFi3d_FilDS`, `ChFi3d_StripeEdgeInter`, `ChFi3d_IsInFront`,
-`ChFi3d_SearchFD`, `ChFi3d_BoundSurf`, `ChFi3d_SolidIndex`, `ChFi3d_IndexPointInDS`,
-`ChFi3d_FilPointInDS`, `ChFi3d_FilVertexInDS`, `ChFi3d_FilCurveInDS`,
-`ChFi3d_ExtrSpineCarac`, `ChFi3d_SetPointTolerance` and the data-structure overload of
-`ChFi3d_EnlargeBox`), `BRepFilletAPI_MakeFillet`, `BRepFilletAPI_MakeChamfer`,
-`FilletSurf_Builder` and `FilletSurf_InternalBuilder` write their surfaces and curves
-into `TopOpeBRepDS_DataStructure` and rebuild the solid with
-`TopOpeBRepBuild_HBuilder`. These TKBool classes are not ported yet (the `tkbool` scope
-ports them), so these classes wait for them. Their GTests
+ChFiKPart (`ChFiKPart_ComputeData` and every `ChFiKPart_Make*` function) and the free
+functions of `ChFi3d_Builder_0` that take the data structure (`ChFi3d_FilDS`,
+`ChFi3d_StripeEdgeInter`, `ChFi3d_IsInFront`, `ChFi3d_SearchFD`, `ChFi3d_BoundSurf`,
+`ChFi3d_SolidIndex`, `ChFi3d_IndexPointInDS`, `ChFi3d_FilPointInDS`,
+`ChFi3d_FilVertexInDS`, `ChFi3d_FilCurveInDS`, `ChFi3d_ExtrSpineCarac`,
+`ChFi3d_SetPointTolerance` and the data-structure overload of `ChFi3d_EnlargeBox`) write
+into the ported `TopOpeBRepDS_DataStructure`, borrowed by the functions. The overloads
+of ChFiKPart are named after the surfaces and the spine (`make_fillet_pln_pln`,
+`make_chamfer_pln_cyl_line`, `make_ch_asym_pln_con`, ...).
+`ChFiKPart_Sphere` keeps the native NaN path: when the circle through the three points
+is wider than the sphere the centre is NaN and the sphere is still written (the
+comparisons are negated as the native ones). `ChFi3d_FilDS` is checked through the
+fillet builders.
+
+## Remaining
+
+The ChFi3d builders (`ChFi3d_Builder`, `ChFi3d_FilBuilder`, `ChFi3d_ChBuilder` and the
+`ChFi3d_Builder_*` member files), `BRepFilletAPI_MakeFillet`,
+`BRepFilletAPI_MakeChamfer`, `FilletSurf_Builder` and `FilletSurf_InternalBuilder`
+rebuild the solid with `TopOpeBRepBuild_HBuilder` and are not ported yet. Their GTests
 (`BRepFilletAPI_MakeFillet_Test.cxx`, `BRepFilletAPI_MakeChamfer_Test.cxx`) and the
 `BFuseSimpleTest.BlendBoxWithCylinder*` GTests of TKBO are `pending_dependency` rows in
 `porting/parity.json`.

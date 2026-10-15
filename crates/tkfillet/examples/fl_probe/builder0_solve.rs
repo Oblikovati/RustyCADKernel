@@ -35,7 +35,7 @@ use rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex;
 use std::sync::{Arc, Mutex};
 
 /// `fl_common_point`.
-fn common_point(cp: &CommonPoint) -> Result<(), Failure> {
+pub(super) fn common_point(cp: &CommonPoint) -> Result<(), Failure> {
     pnt(cp.point());
     flag(cp.has_vector());
     if cp.has_vector() {

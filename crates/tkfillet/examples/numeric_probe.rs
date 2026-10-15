@@ -67,6 +67,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // ChFiKPart (fl_probe/chfikpart.rs)
     ("fl_kpart_fcts", chfikpart::fcts_case),
     ("fl_corner_spine", chfikpart::corner_spine_case),
+    ("fl_kpart_make", chfikpart::make_case),
+    ("fl_kpart_corner", chfikpart::corner_case),
 ];
 
 fn main() {

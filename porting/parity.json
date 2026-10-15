@@ -613185,6 +613185,270 @@
       "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildEdgeBuilder::next_vertex",
       "status": "implemented",
       "notes": "Translated from TopOpeBRepBuild_EdgeBuilder.cxx; unit tests in crates/tkbool/tests/top_ope_brep_build_parts.rs."
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChamfer(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, ChFiDS_ChamfMode, const gp_Pln &, const gp_Cylinder &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Circ &, double, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChPlnCyl.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_chamfer_pln_cyl_circle",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_SetPointTolerance(TopOpeBRepDS_DataStructure &, const Bnd_Box &, int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::set_point_tolerance",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; unit tests in crates/tkfillet/tests/builder0_ds.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_ExtrSpineCarac(const TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_Stripe> &, int, double, int, int, gp_Pnt &, gp_Vec &, double &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::extr_spine_carac",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; exercised through the fillet builders (the TKFillet GTests)"
+    },
+    {
+      "upstream_id": "ChFi3d_FilPointInDS(TopAbs_Orientation, int, int, double, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::fil_point_in_ds",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; unit tests in crates/tkfillet/tests/builder0_ds.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_ComputeData::ComputeCorner(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Pnt2d &, const gp_Pnt2d &, const gp_Pnt2d &, const gp_Pnt2d &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::ChFiKPartComputeData::compute_corner_torus",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChAsym(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Cone &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Circ &, double, TopAbs_Orientation, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChAsymPlnCon.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_ch_asym_pln_con",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_IsInFront(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_Stripe> &, const occ::handle<ChFiDS_Stripe> &, int, int, int, int, double &, double &, TopoDS_Face &, bool &, int &, int &, bool &, const TopoDS_Vertex &, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::is_in_front",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; exercised through the fillet builders (the TKFillet GTests)"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeFillet(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Cylinder &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, const gp_Circ &, double, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_FilPlnCyl.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_fillet_pln_cyl_circle",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChAsym(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Cylinder &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Circ &, double, TopAbs_Orientation, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChAsymPlnCyl.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_ch_asym_pln_cyl_circle",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_IndexPointInDS(const ChFiDS_CommonPoint &, TopOpeBRepDS_DataStructure &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::index_point_in_ds",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; unit tests in crates/tkfillet/tests/builder0_ds.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeFillet(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Cone &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, const gp_Circ &, double, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_FilPlnCon.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_fillet_pln_con",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_BoundSurf(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const int &, const int &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::bound_surf",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; exercised through the fillet builders (the TKFillet GTests)"
+    },
+    {
+      "upstream_id": "ChFi3d_FilVertexInDS(TopAbs_Orientation, int, int, double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::fil_vertex_in_ds",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; unit tests in crates/tkfillet/tests/builder0_ds.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChamfer(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, ChFiDS_ChamfMode, const gp_Pln &, const gp_Pln &, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Lin &, double, TopAbs_Orientation)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChPlnPln.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_chamfer_pln_pln",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChamfer(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, ChFiDS_ChamfMode, const gp_Pln &, const gp_Cylinder &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Lin &, double, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChPlnCyl.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_chamfer_pln_cyl_line",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_FilCurveInDS(int, int, const occ::handle<Geom2d_Curve> &, TopAbs_Orientation)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::fil_curve_in_ds",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; unit tests in crates/tkfillet/tests/builder0_ds.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_ComputeData::ComputeCorner(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, double, const gp_Pnt2d &, const gp_Pnt2d &, const gp_Pnt2d &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::ChFiKPartComputeData::compute_corner_sphere",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeFillet(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Pln &, TopAbs_Orientation, TopAbs_Orientation, double, const gp_Lin &, double, TopAbs_Orientation)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_FilPlnPln.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_fillet_pln_pln",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChAsym(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Cylinder &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Lin &, double, TopAbs_Orientation, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChAsymPlnCyl.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_ch_asym_pln_cyl_line",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_IndexSurfaceInDS(const occ::handle<Geom_Surface> &, TopOpeBRepDS_DataStructure &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_Fcts.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::index_surface_in_ds",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_FilDS(int, const occ::handle<ChFiDS_Stripe> &, TopOpeBRepDS_DataStructure &, NCollection_List<ChFiDS_Regul> &, double, double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::fil_ds",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; exercised through the fillet builders (the TKFillet GTests)"
+    },
+    {
+      "upstream_id": "ChFiKPart_IndexCurveInDS(const occ::handle<Geom_Curve> &, TopOpeBRepDS_DataStructure &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_Fcts.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::index_curve_in_ds",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_EnlargeBox(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_Stripe> &, const occ::handle<ChFiDS_SurfData> &, Bnd_Box &, Bnd_Box &, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::enlarge_box_ds",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; exercised through the fillet builders (the TKFillet GTests)"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChAsym(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Pln &, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Lin &, double, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChAsymPlnPln.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_ch_asym_pln_pln",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeFillet(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Cylinder &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, const gp_Lin &, double, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_FilPlnCyl.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_fillet_pln_cyl_line",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_Sphere(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, double, const gp_Pnt2d &, const gp_Pnt2d &, const gp_Pnt2d &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_Sphere.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::sphere",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_StripeEdgeInter(const occ::handle<ChFiDS_Stripe> &, const occ::handle<ChFiDS_Stripe> &, TopOpeBRepDS_DataStructure &, double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::stripe_edge_inter",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; exercised through the fillet builders (the TKFillet GTests)"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeChamfer(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, ChFiDS_ChamfMode, const gp_Pln &, const gp_Cone &, double, double, TopAbs_Orientation, TopAbs_Orientation, double, double, const gp_Circ &, double, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_ChPlnCon.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_chamfer_pln_con",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_MakeRotule(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const gp_Pln &, const gp_Pln &, const gp_Pln &, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, double, TopAbs_Orientation)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_Rotule.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::make_rotule",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFiKPart_ComputeData::ComputeCorner(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_SurfData> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, TopAbs_Orientation, double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::ChFiKPartComputeData::compute_corner_rotule",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_SolidIndex(const occ::handle<ChFiDS_Spine> &, TopOpeBRepDS_DataStructure &, ChFiDS_Map &, ChFiDS_Map &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::solid_index",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; unit tests in crates/tkfillet/tests/builder0_ds.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_SearchFD(TopOpeBRepDS_DataStructure &, const occ::handle<ChFiDS_Stripe> &, const occ::handle<ChFiDS_Stripe> &, int, int, int &, int &, double &, double &, int, int, TopoDS_Face &, bool &, int &, int &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::search_fd",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the data-structure functions of ChFi3d_Builder_0 take the TopOpeBRepDS_DataStructure borrowed, output references become returned values and native exceptions become Failure values; exercised through the fillet builders (the TKFillet GTests)"
+    },
+    {
+      "upstream_id": "ChFiKPart_ComputeData::Compute(TopOpeBRepDS_DataStructure &, occ::handle<ChFiDS_SurfData> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, TopAbs_Orientation, const occ::handle<ChFiDS_Spine> &, int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::ChFiKPartComputeData::compute",
+      "status": "implemented",
+      "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
     }
   ],
   "tests": [
