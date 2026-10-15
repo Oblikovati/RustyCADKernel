@@ -49,6 +49,13 @@ pub enum PairOperationFailure {
     Graph(super::graph_enclosure::GraphEnvelopeFailure),
     /// Offending nonfinite or nonpositive world error request.
     WorldRequest(f64),
+    /// ADR 0067: both sources share one carrier and overlap on this first-parameter range.
+    CarrierOverlap {
+        /// Outward binary64 bounds of the exact overlapping first-source parameters.
+        first_range: [f64; 2],
+    },
+    /// ADR 0067: a common-carrier source interval is reversed or maps to one point.
+    CarrierDegenerate,
 }
 
 impl PairOperationFailure {

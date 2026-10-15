@@ -8,6 +8,8 @@ pub enum BezierPairSignStage {
     Evaluated(super::BezierPairEffectiveSigns),
     /// An exact constant excludes all roots; graph predicates were unnecessary.
     SkippedConstantExclusion,
+    /// ADR 0067: both sources share one carrier; exact parameter arcs replaced graph signs.
+    SkippedCommonCarrier,
 }
 /// Borrowed exact total-degree-zero coordinate equation proving empty intersection.
 pub struct BezierPairConstantExclusion<'a> {

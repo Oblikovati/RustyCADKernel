@@ -44,7 +44,16 @@ impl<'a> BezierPairCertificate<'a> {
             PairProofEvidence::ConstantExcluded(proof) => {
                 Some(super::public_constant_certificate::BezierPairConstantExclusion::new(proof))
             }
-            PairProofEvidence::Graph(_) => None,
+            PairProofEvidence::Graph(_) | PairProofEvidence::CommonCarrier(_) => None,
+        }
+    }
+    /// Borrow ADR 0067 common-carrier evidence. Example: `proof.common_carrier().unwrap().kind()`.
+    pub fn common_carrier(&self) -> Option<super::public_carrier::BezierPairCommonCarrier<'a>> {
+        match &self.proof.evidence {
+            PairProofEvidence::CommonCarrier(evidence) => Some(
+                super::public_carrier::BezierPairCommonCarrier::new(evidence),
+            ),
+            _ => None,
         }
     }
     /// Read whether generated graph-sign admission ran. Example: `proof.sign_stage()`.
@@ -55,6 +64,9 @@ impl<'a> BezierPairCertificate<'a> {
             }
             PairProofEvidence::ConstantExcluded(_) => {
                 super::public_constant_certificate::BezierPairSignStage::SkippedConstantExclusion
+            }
+            PairProofEvidence::CommonCarrier(_) => {
+                super::public_constant_certificate::BezierPairSignStage::SkippedCommonCarrier
             }
         }
     }

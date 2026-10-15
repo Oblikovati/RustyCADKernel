@@ -30,6 +30,8 @@ pub(super) struct PairOperationProof {
 pub(super) enum PairProofEvidence {
     Graph(Box<GraphProofEvidence>),
     ConstantExcluded(ConstantEquationExclusion),
+    /// ADR 0067: version-2 distinct pairs on one proper conic or line.
+    CommonCarrier(Box<super::carrier::CommonCarrierEvidence>),
 }
 pub(super) struct GraphProofEvidence {
     pub projection: LinearFiberProjection,
@@ -41,7 +43,7 @@ impl PairOperationProof {
     pub fn graph(&self) -> Option<&GraphProofEvidence> {
         match &self.evidence {
             PairProofEvidence::Graph(graph) => Some(graph),
-            PairProofEvidence::ConstantExcluded(_) => None,
+            PairProofEvidence::ConstantExcluded(_) | PairProofEvidence::CommonCarrier(_) => None,
         }
     }
 }
@@ -69,31 +71,37 @@ pub(super) fn compute_accounted(
 ) -> AccountedPairOutcome {
     compute_with_signs(
         sources,
-        self_domain,
+        (self_domain, false),
         options,
         PairSignOptions::derived(),
         requested_error,
         cancelled,
     )
 }
+/// `domain` is `(self_domain, common_carrier)`; the carrier route is policy version 2 only.
 pub(super) fn compute_with_signs(
     sources: [OwnedBezierSource; 2],
-    self_domain: bool,
+    domain: (bool, bool),
     options: RootIsolationOptions,
     signs: PairSignOptions,
     requested_error: f64,
     cancelled: &mut impl FnMut() -> bool,
 ) -> AccountedPairOutcome {
     let budget = super::work_budget::PairWorkBudget::new(options.max_bisections);
-    let completion = execute(
-        sources,
-        self_domain,
-        options,
-        requested_error,
-        signs,
-        &budget,
-        cancelled,
-    );
+    let (self_domain, carrier) = domain;
+    let completion = if carrier && !self_domain {
+        execute_with_carrier(sources, options, requested_error, signs, &budget, cancelled)
+    } else {
+        execute(
+            sources,
+            self_domain,
+            options,
+            requested_error,
+            signs,
+            &budget,
+            cancelled,
+        )
+    };
     accounted_outcome(completion, budget.receipt())
 }
 fn accounted_outcome(
@@ -117,6 +125,30 @@ fn execute(
         sources,
         prepared,
         (self_domain, options, requested_error),
+        budget,
+        cancelled,
+    )
+}
+/// ADR 0067: try the exact common-carrier route before the generic projection.
+fn execute_with_carrier(
+    sources: [OwnedBezierSource; 2],
+    options: RootIsolationOptions,
+    requested_error: f64,
+    signs: PairSignOptions,
+    budget: &super::work_budget::PairWorkBudget,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<PairOperationProof, PairOperationFailure> {
+    validate_world_request(requested_error)?;
+    let carrier = super::carrier::certify(&sources, options, requested_error, budget, cancelled)?;
+    if let Some(proof) = carrier {
+        return Ok(proof);
+    }
+    execute(
+        sources,
+        false,
+        options,
+        requested_error,
+        signs,
         budget,
         cancelled,
     )
