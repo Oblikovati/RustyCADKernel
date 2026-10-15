@@ -11,6 +11,11 @@ from tkoffset_corpus_brepoffset_tool import BOX, CONE, CYLINDER, LYING_CYLINDER,
 SOLIDS = [BOX, TILTED_BOX, CYLINDER, LYING_CYLINDER, CONE, SPHERE, TORUS]
 # The prism of a slot (two planes tangent to two half cylinders), kind 6 of ot_primitive.
 SLOT = '6 2 1 3 0 0 0 0 0 1'
+# The prisms of an L polygon (kind 7, arms 1.6 wide) and of a U polygon (kind 8, a gap 1
+# wide between its arms) of ot_primitive: the planar non-convex solids of the complete
+# intersection mode, whose inward (L) and outward (U) offsets invert faces.
+L_PRISM = '7 4 4 2 0 0 0 0 0 1'
+U_PRISM = '8 5 4 2 0 0 0 0 0 1'
 
 
 def append_make_offset_requests(requests: list[str]) -> None:
@@ -25,6 +30,20 @@ def append_make_offset_requests(requests: list[str]) -> None:
                 requests.append(f'om_offset {prim} -2 -1 {off} {join} 0 0 0 0')
                 requests.append(f'om_offset {prim} -3 -1 {off} {join} 0 0 0 0')
                 requests.append(f'om_offset {prim} -2 -1 {off} {join} 0 1 0 0')
+    # The complete intersection mode (intersection join with the inter flag) of planar
+    # solids: the splits of BRepOffset_MakeOffset_1 (BuildSplitsOfExtendedFaces for the
+    # offset shapes, BuildSplitsOfTrimmedFaces for the walls of the thick solids); the
+    # large inward offsets invert faces and make the invalid splits rebuilt.
+    for prim in (BOX, TILTED_BOX):
+        for off in (0.5, -0.25, -0.9, -1.2):
+            for removed in (-1, 0, 4):
+                requests.append(f'om_offset {prim} -1 {removed} {off} 1 1 0 0 0')
+            requests.append(f'om_offset {prim} -1 -1 {off} 1 1 0 1 0')
+    for prim, offsets in ((L_PRISM, (0.5, -0.5, -0.9)), (U_PRISM, (0.3, 0.6, -0.3, -0.6))):
+        for off in offsets:
+            for removed in (-1, 1):
+                requests.append(f'om_offset {prim} -1 {removed} {off} 1 1 0 0 0')
+            requests.append(f'om_offset {prim} -1 -1 {off} 1 1 0 1 0')
     # Per-face offsets: on the slot prism the tangent edges between faces of different
     # offsets get the artificial faces of BRepOffset_Analyse::TreatTangentFaces. At most
     # one distinct face offset value per request: UpdateFaceOffset spreads each value

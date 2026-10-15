@@ -7,6 +7,7 @@
 //! splits of planar solids.
 use super::BRepOffsetMakeOffset;
 use super::statics::{EdgesOrigins, remove_shapes};
+use crate::brep_offset::build_offset_faces::BuildOffsetFaces;
 use crate::brep_offset::inter3d::ShapeShapeMap;
 use rustycad_tkbool::brep_algo::{BRepAlgoAsDes, BRepAlgoImage};
 use rustycad_tkbrep::topexp::{self, Explorer};
@@ -15,17 +16,6 @@ use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
-
-/// The failure of the complete intersection of planar solids, whose splitting
-/// (BRepOffset_MakeOffset_1.cxx) is not ported yet.
-fn complete_intersection_not_ported(member: &str) -> Failure {
-    Failure::with_message(
-        "Standard_NotImplemented",
-        &format!(
-            "BRepOffset_MakeOffset::{member} (BRepOffset_MakeOffset_1.cxx, the complete intersection of planar shapes) is not ported yet"
-        ),
-    )
-}
 
 impl BRepOffsetMakeOffset {
     /// `RemoveInternalEdges()`: the INTERNAL edges of a single face removed from their
@@ -69,35 +59,41 @@ impl BRepOffsetMakeOffset {
     }
 
     /// `BuildSplitsOfExtendedFaces(theLF, theAnalyse, theAsDes, theEdgesOrigins,
-    /// theFacesOrigins, theETrimEInf, theImage, Range)`: not ported yet
-    /// (Standard_NotImplemented).
+    /// theFacesOrigins, theETrimEInf, theImage, Range)`: the splits of the extended offset
+    /// faces, with the invalid splits rebuilt (BRepOffset_BuildOffsetFaces).
     #[allow(clippy::too_many_arguments)]
     pub(super) fn build_splits_of_extended_faces(
         &mut self,
-        _the_lf: &List<rustycad_tkbrep::topods::Shape>,
-        _the_as_des: &BRepAlgoAsDes,
-        _the_edges_origins: &mut EdgesOrigins,
-        _the_faces_origins: &mut ShapeShapeMap,
-        _the_e_trim_e_inf: &mut ShapeShapeMap,
-        _the_image: &mut BRepAlgoImage,
-        _the_range: &ProgressRange,
+        the_lf: &List<rustycad_tkbrep::topods::Shape>,
+        the_as_des: &BRepAlgoAsDes,
+        the_edges_origins: &mut EdgesOrigins,
+        the_faces_origins: &mut ShapeShapeMap,
+        the_e_trim_e_inf: &mut ShapeShapeMap,
+        the_image: &mut BRepAlgoImage,
+        the_range: &ProgressRange,
     ) -> Result<(), Failure> {
-        Err(complete_intersection_not_ported(
-            "BuildSplitsOfExtendedFaces",
-        ))
+        let mut bf_tool = BuildOffsetFaces::new(the_image);
+        bf_tool.set_faces(the_lf);
+        bf_tool.set_as_des_info(the_as_des);
+        bf_tool.set_analysis(&self.my_analyse);
+        bf_tool.set_edges_origins(the_edges_origins);
+        bf_tool.set_faces_origins(the_faces_origins);
+        bf_tool.set_inf_edges(the_e_trim_e_inf);
+        bf_tool.build_splits_of_extended_faces(the_range)
     }
 
-    /// `BuildSplitsOfTrimmedFaces(theLF, theAsDes, theImage, Range)`: not ported yet
-    /// (Standard_NotImplemented).
+    /// `BuildSplitsOfTrimmedFaces(theLF, theAsDes, theImage, Range)`: the splits of the
+    /// trimmed offset faces (BRepOffset_BuildOffsetFaces).
     pub(super) fn build_splits_of_trimmed_faces(
         &mut self,
-        _the_lf: &List<rustycad_tkbrep::topods::Shape>,
-        _the_as_des: &BRepAlgoAsDes,
-        _the_image: &mut BRepAlgoImage,
-        _the_range: &ProgressRange,
+        the_lf: &List<rustycad_tkbrep::topods::Shape>,
+        the_as_des: &BRepAlgoAsDes,
+        the_image: &mut BRepAlgoImage,
+        the_range: &ProgressRange,
     ) -> Result<(), Failure> {
-        Err(complete_intersection_not_ported(
-            "BuildSplitsOfTrimmedFaces",
-        ))
+        let mut bf_tool = BuildOffsetFaces::new(the_image);
+        bf_tool.set_faces(the_lf);
+        bf_tool.set_as_des_info(the_as_des);
+        bf_tool.build_splits_of_trimmed_faces(the_range)
     }
 }

@@ -11,6 +11,8 @@ pub mod brep_offset_api_thru_sections;
 pub mod classification;
 #[path = "../collapse_singularities.rs"]
 pub mod collapse_singularities;
+#[path = "../complete_intersection.rs"]
+pub mod complete_intersection;
 #[path = "../draft_angle.rs"]
 pub mod draft_angle;
 #[path = "../interval.rs"]

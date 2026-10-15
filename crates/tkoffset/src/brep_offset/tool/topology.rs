@@ -245,13 +245,8 @@ fn correct_offset_face(
     as_des: &BRepAlgoAsDes,
     offset: f64,
 ) -> Result<(), Failure> {
+    // (ChangeDescendant of an unbound face is the static empty list: nothing to correct)
     let loe: Vec<Shape> = as_des.descendant(of.as_ref()).collect();
-    if !as_des.has_descendant(of.as_ref()) {
-        return Err(Failure::with_message(
-            "Standard_NoSuchObject",
-            "BRepAlgo_AsDes::ChangeDescendant: unbound offset face",
-        ));
-    }
     if !loe.iter().any(|oe| new_edges.contains(oe)) {
         return Ok(());
     }

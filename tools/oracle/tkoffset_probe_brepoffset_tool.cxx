@@ -4,7 +4,8 @@
 // a x b x c, 1 a cylinder of radius a and height b, 2 a cone of radii a, b and height c,
 // 3 a sphere of radius a at the origin, 4 a torus of radii a, b, 5 a torus of radii a, b
 // swept by the angle c, 6 the prism of height c of a slot of half length a and radius b
-// (two segments and two half circles); placed on the frame of the origin and normal) by
+// (two segments and two half circles), 7 and 8 the prisms of height c of an L and of a U
+// polygon of width a and depth b; placed on the frame of the origin and normal) by
 // their index in the explorer order; shapes print through
 // pr_shape (tkprim_probe_shape.cxx).
 #include <BRepOffset_Tool.hxx>
@@ -17,6 +18,7 @@
 #include <BRepLib_MakeEdge.hxx>
 #include <BRepLib_MakeFace.hxx>
 #include <BRepLib_MakeWire.hxx>
+#include <BRepLib_MakePolygon.hxx>
 #include <GC_MakeArcOfCircle.hxx>
 #include <BRep_Builder.hxx>
 #include <TopoDS_Shell.hxx>
@@ -39,6 +41,14 @@ static TopoDS_Shape ot_primitive(GaReader& r){
   w.Add(BRepLib_MakeEdge(p3,p4).Edge());
   w.Add(BRepLib_MakeEdge(occ::handle<Geom_Curve>(GC_MakeArcOfCircle(p4,at(-a-b,0.),p1).Value())).Edge());
   return BRepPrimAPI_MakePrism(BRepLib_MakeFace(w.Wire(),true).Face(),gp_Vec(n)*c).Shape();}
+ if(kind==7||kind==8){
+  // the prism of height c of an L (7) or U (8) polygon of width a and depth b
+  gp_Vec x(ax.XDirection()),y(ax.YDirection());
+  auto at=[&](double u,double v){return o.Translated(u*a*x+v*b*y);};
+  std::vector<std::pair<double,double>> l7{{0,0},{1,0},{1,0.4},{0.4,0.4},{0.4,1},{0,1}};
+  std::vector<std::pair<double,double>> l8{{0,0},{1,0},{1,1},{0.6,1},{0.6,0.3},{0.4,0.3},{0.4,1},{0,1}};
+  BRepLib_MakePolygon poly;for(auto& uv:(kind==7?l7:l8))poly.Add(at(uv.first,uv.second));poly.Close();
+  return BRepPrimAPI_MakePrism(BRepLib_MakeFace(poly.Wire(),true).Face(),gp_Vec(n)*c).Shape();}
  return BRepPrimAPI_MakeTorus(ax,a,b).Shape();}
 // The sub-shape of a type at an explorer index.
 static TopoDS_Shape ot_sub(const TopoDS_Shape& s,TopAbs_ShapeEnum kind,int index){

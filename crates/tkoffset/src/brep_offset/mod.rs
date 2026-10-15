@@ -27,6 +27,7 @@ pub use tool::{BRepOffsetTool, EdgeNeighbours, EnlargeFaceOptions, ShapeImages, 
 
 pub use crate::brep_offset_api::BRepOffsetAPIMakeOffsetShape;
 pub use collapse_singularities::collapse_singularities;
+mod build_offset_faces;
 mod maker;
 pub use maker::{BRepOffsetMakeOffset, MakeOffsetOptions};
 pub use simple_offset::BRepOffsetSimpleOffset;
