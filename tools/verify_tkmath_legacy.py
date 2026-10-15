@@ -4,12 +4,11 @@
 from __future__ import annotations
 
 import argparse
-from test_target_selection import cargo_case_command, original_case_names
+from test_target_selection import cargo_case_command, original_case_names, passed_case_names
 from dataclasses import dataclass
 import json
 import os
 from pathlib import Path
-import re
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
@@ -143,7 +142,7 @@ def run_rust_target(
 ) -> set[tuple[str, str, str]]:
     """Collect one test binary's passing identities; e.g. `run_rust_target(package, target, pairs, env, out)`."""
     result = rust_target_output(package, target, env, output)
-    names = original_case_names(set(re.findall(r"^test (\S+) \.\.\. ok$", result, re.M)), target)
+    names = original_case_names(passed_case_names(result), target)
     return validate_rust_target(package, target, names, expected)
 
 
