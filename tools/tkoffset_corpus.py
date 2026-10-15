@@ -17,3 +17,6 @@ def append_tkoffset_requests(requests: list[str]) -> None:
     __import__('tkoffset_corpus_brepoffsetapi_make_pipe_shell').append_pipe_shell_requests(requests)
     # BRepOffsetAPI_ThruSections (tkoffset_corpus_brepoffsetapi_thru_sections.py)
     __import__('tkoffset_corpus_brepoffsetapi_thru_sections').append_thru_sections_requests(requests)
+    # BRepOffsetAPI_MakePipe, MakeEvolved, MakeDraft, MakeFilling, NormalProjection and
+    # FindContigousEdges (tkoffset_corpus_brepoffsetapi_wrappers.py)
+    __import__('tkoffset_corpus_brepoffsetapi_wrappers').append_wrapper_requests(requests)

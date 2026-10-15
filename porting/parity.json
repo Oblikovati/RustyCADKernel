@@ -626038,6 +626038,590 @@
       "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::get_status",
       "status": "implemented",
       "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::BRepOffsetAPI_MakePipe(const TopoDS_Wire&,const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::BRepOffsetAPI_MakePipe(const TopoDS_Wire&,const TopoDS_Shape&,GeomFill_Trihedron,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::with_mode",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::Pipe() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::pipe",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::FirstShape()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep>::first_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::LastShape()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep>::last_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::Generated(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::generated_by",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipe::ErrorOnSurface() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakePipe.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipe::error_on_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakePipe.cxx over BRepFill_Pipe (built at construction, not done for a single-shape result; Generated(SSpine, SProfile) the face of a profile edge or the edge of a profile vertex); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe: the two-argument constructor and each trihedron on five spines, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeEvolved::BRepOffsetAPI_MakeEvolved()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeEvolved.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeEvolved::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeEvolved.cxx over BRepFill_Evolved and BRepFill_AdvancedEvolved (Standard_TypeMismatch for a spine that is neither a wire nor a face, the BRepFill::Axe frame, no result for a profile off the spine when required, the uninitialized volume flag of the default constructor taken as false; the defaulted arguments are EvolvedOptions); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_evolved: classic and volume, axe placement, joins; the classic shapes through the address-independent evolved digest, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeEvolved::BRepOffsetAPI_MakeEvolved(const TopoDS_Shape&,const TopoDS_Wire&,GeomAbs_JoinType,bool,bool,bool,double,bool,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeEvolved.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeEvolved::with_spine",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeEvolved.cxx over BRepFill_Evolved and BRepFill_AdvancedEvolved (Standard_TypeMismatch for a spine that is neither a wire nor a face, the BRepFill::Axe frame, no result for a profile off the spine when required, the uninitialized volume flag of the default constructor taken as false; the defaulted arguments are EvolvedOptions); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_evolved: classic and volume, axe placement, joins; the classic shapes through the address-independent evolved digest, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeEvolved::Evolved() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeEvolved.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeEvolved::evolved",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeEvolved.cxx over BRepFill_Evolved and BRepFill_AdvancedEvolved (Standard_TypeMismatch for a spine that is neither a wire nor a face, the BRepFill::Axe frame, no result for a profile off the spine when required, the uninitialized volume flag of the default constructor taken as false; the defaulted arguments are EvolvedOptions); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_evolved: classic and volume, axe placement, joins; the classic shapes through the address-independent evolved digest, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeEvolved::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeEvolved.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeEvolved::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeEvolved.cxx over BRepFill_Evolved and BRepFill_AdvancedEvolved (Standard_TypeMismatch for a spine that is neither a wire nor a face, the BRepFill::Axe frame, no result for a profile off the spine when required, the uninitialized volume flag of the default constructor taken as false; the defaulted arguments are EvolvedOptions); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_evolved: classic and volume, axe placement, joins; the classic shapes through the address-independent evolved digest, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeEvolved::GeneratedShapes(const TopoDS_Shape&,const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeEvolved.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeEvolved::generated_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeEvolved.cxx over BRepFill_Evolved and BRepFill_AdvancedEvolved (Standard_TypeMismatch for a spine that is neither a wire nor a face, the BRepFill::Axe frame, no result for a profile off the spine when required, the uninitialized volume flag of the default constructor taken as false; the defaulted arguments are EvolvedOptions); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_evolved: classic and volume, axe placement, joins; the classic shapes through the address-independent evolved digest, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeEvolved::Top() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeEvolved.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeEvolved::top",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeEvolved.cxx over BRepFill_Evolved and BRepFill_AdvancedEvolved (Standard_TypeMismatch for a spine that is neither a wire nor a face, the BRepFill::Axe frame, no result for a profile off the spine when required, the uninitialized volume flag of the default constructor taken as false; the defaulted arguments are EvolvedOptions); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_evolved: classic and volume, axe placement, joins; the classic shapes through the address-independent evolved digest, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeEvolved::Bottom() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeEvolved.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeEvolved::bottom",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeEvolved.cxx over BRepFill_Evolved and BRepFill_AdvancedEvolved (Standard_TypeMismatch for a spine that is neither a wire nor a face, the BRepFill::Axe frame, no result for a profile off the spine when required, the uninitialized volume flag of the default constructor taken as false; the defaulted arguments are EvolvedOptions); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_evolved: classic and volume, axe placement, joins; the classic shapes through the address-independent evolved digest, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::BRepOffsetAPI_MakeDraft(const TopoDS_Shape&,const gp_Dir&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::SetOptions(BRepBuilderAPI_TransitionMode,double,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::set_options",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::SetDraft(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::set_draft",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::Perform(double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::perform_length",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::Perform(const occ::handle<Geom_Surface>&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::perform_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::Perform(const TopoDS_Shape&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::perform_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::Shell() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::shell",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeDraft::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeDraft.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeDraft::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeDraft.cxx over BRepFill_Draft (not done at construction, done by a successful Perform, SetOptions mapping every style but the round corner to the right one); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft: wire, face, shell and open polyline, each style, every limit, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::BRepOffsetAPI_MakeFilling(int,int,int,bool,double,double,double,double,int,int)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::SetConstrParam(double,double,double,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::set_constr_param",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::SetResolParam(int,int,int,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::set_resol_param",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::SetApproxParam(int,int)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::set_approx_param",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::LoadInitSurface(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::load_init_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::Add(const TopoDS_Edge&,GeomAbs_Shape,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::add_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::Add(const TopoDS_Edge&,const TopoDS_Face&,GeomAbs_Shape,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::add_edge_on_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::Add(const TopoDS_Face&,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::add_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::Add(const gp_Pnt&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::add_point",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::Add(double,double,const TopoDS_Face&,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::add_point_on_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::IsDone() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::G0Error() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::g0_error",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::G1Error() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::g1_error",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::G2Error() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::g2_error",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::G0Error(int)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::g0_error_of",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::G1Error(int)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::g1_error_of",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeFilling::G2Error(int)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeFilling.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeFilling::g2_error_of",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeFilling.cxx over BRepFill_Filling (IsDone is the filling flag while the command flag is never set, so Shape() raises StdFail_NotDone when it must build, as natively; the defaulted constructor arguments are FillingParameters); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_filling: the bf_filling records, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::BRepOffsetAPI_NormalProjection()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::BRepOffsetAPI_NormalProjection(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::with_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Init(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::init",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Add(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::add",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::SetParams(double,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::set_params",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::SetMaxDistance(double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::set_max_distance",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::SetLimit(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::set_limit",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Compute3d(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::compute3d",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::IsDone() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Projection() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::projection",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Couple(const TopoDS_Edge&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::couple",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::Ancestor(const TopoDS_Edge&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::ancestor",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_NormalProjection::BuildWire(NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_NormalProjection.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPINormalProjection::build_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_NormalProjection.cxx over BRepAlgo_NormalProjection (IsDone is the projector flag, Build sets the command flag); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_normal_projection: four edges on a square and a cube, distance, 3d and limit settings, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::BRepOffsetAPI_FindContigousEdges(double,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::Init(double,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::init",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::Add(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::add",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::Perform()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::NbContigousEdges() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::nb_contigous_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::ContigousEdge(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::contigous_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::ContigousEdgeCouple(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::contigous_edge_couple",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::SectionToBoundary(const TopoDS_Edge&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::section_to_boundary",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::NbDegeneratedShapes() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::nb_degenerated_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::DegeneratedShape(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::degenerated_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::IsDegenerated(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::is_degenerated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::IsModified(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::is_modified",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::Modified(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::modified",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::Dump() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIFindContigousEdges::dump",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_FindContigousEdges.cxx over BRepBuilderAPI_Sewing initialised to analyse and cut without sewing, with the native index and NoSuchObject checks; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_contigous: two, three and six cube faces at two tolerances, over the shapes of the corpus of the wrapped TKBool algorithm)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_FindContigousEdges::NbEdges() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_FindContigousEdges.hxx",
+      "rust_item": "",
+      "status": "upstream_unimplemented",
+      "notes": "Declared in BRepOffsetAPI_FindContigousEdges.hxx, defined nowhere upstream (the .cxx has no body)."
     }
   ],
   "tests": [

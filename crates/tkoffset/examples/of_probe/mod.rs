@@ -2,6 +2,7 @@
 pub mod make_offset;
 pub mod make_pipe_shell;
 pub mod thru_sections;
+pub mod wrappers;
 
 // The reader and bit printers of the TKGeomAlgo probe, the shape digest of the TKTopAlgo
 // probe and the face frames of the TKPrim probe, shared so that every toolkit prints the
@@ -19,6 +20,11 @@ pub mod print;
 #[allow(dead_code)]
 #[path = "../../../tkprim/examples/pr_probe/shape.rs"]
 pub mod shape;
+// The address-independent digest of BRepFill_Evolved results (TKBool probe,
+// tools/oracle/tkbool_probe_evolved_digest.cxx natively).
+#[allow(dead_code)]
+#[path = "../../../tkbool/examples/bl_probe/evolved_digest.rs"]
+pub mod evolved_digest;
 
 // The face and shape program readers of the TKTopAlgo probe (tktopalgo_probe_face.cxx and
 // tktopalgo_probe_shapes.cxx natively), which build the spines.
