@@ -4,14 +4,14 @@
 
 //! The center lines of the blend: the offsets of the faces and the tubes on the edges
 //! by the radius, intersected and unwound.
-use super::statics::{add, is_in_face, is_on_restriction, live};
 use super::BiTgteBlend;
-use crate::brep_offset::{CoincidentVertices, EdgeIntersections};
+use super::statics::{add, is_in_face, is_on_restriction, live};
 use crate::brep_offset::BRepOffsetInter3d;
 use crate::brep_offset::{
-    BRepOffsetInter2d, BRepOffsetMakeLoops, BRepOffsetOffset, BRepOffsetStatus, BRepOffsetTool, CreatedShapes,
-    EnlargeFaceOptions, PipeOptions,
+    BRepOffsetInter2d, BRepOffsetMakeLoops, BRepOffsetOffset, BRepOffsetStatus, BRepOffsetTool,
+    CreatedShapes, EnlargeFaceOptions, PipeOptions,
 };
+use crate::brep_offset::{CoincidentVertices, EdgeIntersections};
 use rustycad_tkbool::brep_algo::BRepAlgoImage;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topexp::{self, Explorer};
@@ -49,7 +49,10 @@ impl BiTgteBlend {
         sew.perform(&ProgressRange::default())?;
         let mut sewed_shape = sew.sewed_shape().clone();
         if sewed_shape.is_null() {
-            return Err(Failure::with_message("Standard_Failure", "Sewing aux fraises"));
+            return Err(Failure::with_message(
+                "Standard_Failure",
+                "Sewing aux fraises",
+            ));
         }
 
         // Check if the sewing modified the orientation.
@@ -74,7 +77,12 @@ impl BiTgteBlend {
             brep_lib::same_parameter_edge(&sec, BRepTool::edge_tolerance(&sec)?)?;
         }
 
-        topexp::map_shapes_and_ancestors(&sewed_shape, ShapeEnum::Edge, ShapeEnum::Face, &mut self.my_ancestors)?;
+        topexp::map_shapes_and_ancestors(
+            &sewed_shape,
+            ShapeEnum::Edge,
+            ShapeEnum::Face,
+            &mut self.my_ancestors,
+        )?;
 
         // Extend myFaces with the faces of the sewed shape.
         for f in Explorer::new(&self.my_shape, ShapeEnum::Face, ShapeEnum::Shape)? {
@@ -120,7 +128,13 @@ impl BiTgteBlend {
 
         // Finally construct curves 3d from edges to be transferred
         // since the partition is provided ( A Priori);
-        brep_lib::build_curves3d(&self.my_result, precision::confusion(), Continuity::C1, 14, 0)?;
+        brep_lib::build_curves3d(
+            &self.my_result,
+            precision::confusion(),
+            Continuity::C1,
+            14,
+            0,
+        )?;
 
         self.my_done = true;
         Ok(())
@@ -147,7 +161,11 @@ impl BiTgteBlend {
         // -----------------------
         // init of the intersector
         // -----------------------
-        let side = if self.my_radius < 0. { State::Out } else { State::In };
+        let side = if self.my_radius < 0. {
+            State::Out
+        } else {
+            State::In
+        };
         let mut inter = BRepOffsetInter3d::new(&self.my_as_des, side, self.my_tol);
 
         let mut map_s_box = BoxMap::default();
@@ -179,7 +197,12 @@ impl BiTgteBlend {
                         continue;
                     }
 
-                    let l: Vec<Shape> = self.my_ancestors.find_from_key(&e)?.iter().cloned().collect();
+                    let l: Vec<Shape> = self
+                        .my_ancestors
+                        .find_from_key(&e)?
+                        .iter()
+                        .cloned()
+                        .collect();
                     if l.len() == 1 {
                         // So this is a free border onwhich the ball should roll.
                         self.my_faces.add(e.clone().into_shape());
@@ -213,10 +236,26 @@ impl BiTgteBlend {
                         let f = topods::face(&as_)?;
                         if touched_by_cork.contains(&f) {
                             let mut big_f = Face::default();
-                            BRepOffsetTool::en_large_face(&f, &mut big_f, EnlargeFaceOptions::with_change_geom(true))?;
-                            of1.init_face_created(&big_f, self.my_radius, &edge_tgt, true, JoinType::Arc)?;
+                            BRepOffsetTool::en_large_face(
+                                &f,
+                                &mut big_f,
+                                EnlargeFaceOptions::with_change_geom(true),
+                            )?;
+                            of1.init_face_created(
+                                &big_f,
+                                self.my_radius,
+                                &edge_tgt,
+                                true,
+                                JoinType::Arc,
+                            )?;
                         } else {
-                            of1.init_face_created(&f, self.my_radius, &edge_tgt, true, JoinType::Arc)?;
+                            of1.init_face_created(
+                                &f,
+                                self.my_radius,
+                                &edge_tgt,
+                                true,
+                                JoinType::Arc,
+                            )?;
                         }
                     } else {
                         // So this is a Free Border edge on which the ball rolls.
@@ -228,7 +267,11 @@ impl BiTgteBlend {
                     // ------------------------------------
                     let mut let_ = Vec::new();
                     if as_.shape_type()? == ShapeEnum::Face {
-                        self.my_analyse.edges_on_face(&topods::face(&as_)?, TypeOfConcavity::Tangential, &mut let_)?;
+                        self.my_analyse.edges_on_face(
+                            &topods::face(&as_)?,
+                            TypeOfConcavity::Tangential,
+                            &mut let_,
+                        )?;
                     }
 
                     for cur_s in &let_ {
@@ -242,7 +285,11 @@ impl BiTgteBlend {
                         let (ov1, ov2) = topexp::vertices(&ote, false);
                         let mut le = Vec::new();
                         if !edge_tgt.is_bound(&v1) {
-                            self.my_analyse.edges_on_vertex(&v1, TypeOfConcavity::Tangential, &mut le)?;
+                            self.my_analyse.edges_on_vertex(
+                                &v1,
+                                TypeOfConcavity::Tangential,
+                                &mut le,
+                            )?;
                             let la = self.my_analyse.ancestors(&v1)?;
                             if le.len() == la.len() {
                                 edge_tgt.bind(v1.clone().into_shape(), ov1.into_shape());
@@ -250,7 +297,11 @@ impl BiTgteBlend {
                         }
                         if !edge_tgt.is_bound(&v2) {
                             le.clear();
-                            self.my_analyse.edges_on_vertex(&v2, TypeOfConcavity::Tangential, &mut le)?;
+                            self.my_analyse.edges_on_vertex(
+                                &v2,
+                                TypeOfConcavity::Tangential,
+                                &mut le,
+                            )?;
                             let la = self.my_analyse.ancestors(&v2)?;
                             if le.len() == la.len() {
                                 edge_tgt.bind(v2.clone().into_shape(), ov2.into_shape());
@@ -259,7 +310,9 @@ impl BiTgteBlend {
                     }
                     // end of map created tangent
 
-                    if of1.status() == BRepOffsetStatus::Reversed || of1.status() == BRepOffsetStatus::Degenerated {
+                    if of1.status() == BRepOffsetStatus::Reversed
+                        || of1.status() == BRepOffsetStatus::Degenerated
+                    {
                         continue;
                     }
 
@@ -292,7 +345,11 @@ impl BiTgteBlend {
             //--------------------------------------------------------
             // Construction of tubes on edge.
             //--------------------------------------------------------
-            let ot = if self.my_radius < 0. { TypeOfConcavity::Concave } else { TypeOfConcavity::Convex };
+            let ot = if self.my_radius < 0. {
+                TypeOfConcavity::Concave
+            } else {
+                TypeOfConcavity::Convex
+            };
 
             let mut map = IndexedDataMapOfShapeListOfShape::default();
             topexp::map_shapes_and_ancestors(&co, ShapeEnum::Edge, ShapeEnum::Face, &mut map)?;
@@ -357,7 +414,11 @@ impl BiTgteBlend {
 
         // Proceed with MakeLoops
         let mut a_dmvv = CoincidentVertices::default();
-        let ot = if self.my_radius < 0. { TypeOfConcavity::Convex } else { TypeOfConcavity::Concave };
+        let ot = if self.my_radius < 0. {
+            TypeOfConcavity::Convex
+        } else {
+            TypeOfConcavity::Concave
+        };
 
         let as_des = self.my_as_des.clone();
         let as_des_ref = live(&as_des, "AsDes")?;
@@ -379,7 +440,11 @@ impl BiTgteBlend {
 
             if cur_s.shape_type()? == ShapeEnum::Face {
                 let cur_f = topods::face(&cur_s)?;
-                for cur_e in Explorer::new(&cur_f.oriented(Orientation::Forward), ShapeEnum::Edge, ShapeEnum::Shape)? {
+                for cur_e in Explorer::new(
+                    &cur_f.oriented(Orientation::Forward),
+                    ShapeEnum::Edge,
+                    ShapeEnum::Shape,
+                )? {
                     // --------------------------------------------------------------
                     // set in myAsDes the edges generated by limitations of the
                     // initial square if the type is correct (The edges that will
@@ -441,7 +506,11 @@ impl BiTgteBlend {
             // --------------------------------------------------------------
             // set in myAsDes the edge restrictions of the square
             // --------------------------------------------------------------
-            for cur_oe in Explorer::new(&cur_of.oriented(Orientation::Forward), ShapeEnum::Edge, ShapeEnum::Shape)? {
+            for cur_oe in Explorer::new(
+                &cur_of.oriented(Orientation::Forward),
+                ShapeEnum::Edge,
+                ShapeEnum::Shape,
+            )? {
                 as_des_ref.add_shared(&cur_of, &cur_oe);
             }
 
@@ -464,7 +533,13 @@ impl BiTgteBlend {
         // unwinding
         // ------------
         let mut make_loops = BRepOffsetMakeLoops::new();
-        make_loops.build(&lof, as_des_ref, &mut self.my_image_offset, &mut an_empty_image, &ProgressRange::default())?;
+        make_loops.build(
+            &lof,
+            as_des_ref,
+            &mut self.my_image_offset,
+            &mut an_empty_image,
+            &ProgressRange::default(),
+        )?;
 
         // ------------------------------------------------------------
         // It is possible to unwind edges at least one ancestor which of
@@ -497,9 +572,9 @@ impl BiTgteBlend {
 
     /// The offset of a shape (Standard_NoSuchObject when it has none).
     pub(super) fn offset(&self, s: &Shape) -> Result<&BRepOffsetOffset, Failure> {
-        self.my_map_sf
-            .seek(s)
-            .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find"))
+        self.my_map_sf.seek(s).ok_or_else(|| {
+            Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find")
+        })
     }
 
     /// The edge generated at the vertex by the tube on a tangent edge of `E` already
@@ -530,26 +605,29 @@ impl BiTgteBlend {
     ) -> Result<bool, Failure> {
         let mut jen_rajoute = false;
 
-        let box1 = map_s_box
-            .seek(face)
-            .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find"))?;
+        let box1 = map_s_box.seek(face).ok_or_else(|| {
+            Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find")
+        })?;
 
         // -----------------------------------------------
         // intersection with all already created faces.
         // -----------------------------------------------
         let init_shape1 = of1.initial_shape();
-        let f1_sur_bord_libre =
-            init_shape1.shape_type()? == ShapeEnum::Edge && self.my_stop_faces.contains(init_shape1);
+        let f1_sur_bord_libre = init_shape1.shape_type()? == ShapeEnum::Edge
+            && self.my_stop_faces.contains(init_shape1);
 
         let mut done = MapOfShape::default();
-        let others: Vec<(Shape, BRepOffsetOffset)> =
-            self.my_map_sf.items().map(|(k, v)| (k.clone(), v.clone())).collect();
+        let others: Vec<(Shape, BRepOffsetOffset)> = self
+            .my_map_sf
+            .items()
+            .map(|(k, v)| (k.clone(), v.clone()))
+            .collect();
         for (it_key, of2) in &others {
             let f2 = of2.face().clone();
 
-            let box2 = map_s_box
-                .seek(&f2)
-                .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find"))?;
+            let box2 = map_s_box.seek(&f2).ok_or_else(|| {
+                Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find")
+            })?;
             if box1.is_out_box(box2) {
                 continue;
             }
@@ -560,8 +638,8 @@ impl BiTgteBlend {
 
             // 2 tubes created on free border are not intersected.
             let init_shape2 = of2.initial_shape();
-            let f2_sur_bord_libre =
-                init_shape2.shape_type()? == ShapeEnum::Edge && self.my_stop_faces.contains(init_shape2);
+            let f2_sur_bord_libre = init_shape2.shape_type()? == ShapeEnum::Edge
+                && self.my_stop_faces.contains(init_shape2);
 
             if f1_sur_bord_libre && f2_sur_bord_libre {
                 continue;
@@ -586,7 +664,8 @@ impl BiTgteBlend {
             // ------------------------------------------
             let mut l_int = List::default();
             done.clear(true);
-            let common = live(&self.my_as_des, "AsDes")?.has_common_descendant(face, &f2, &mut l_int);
+            let common =
+                live(&self.my_as_des, "AsDes")?.has_common_descendant(face, &f2, &mut l_int);
             if common {
                 for cur_e in l_int.iter() {
                     let cur_e = topods::edge(cur_e)?;
@@ -599,11 +678,25 @@ impl BiTgteBlend {
                         let (is_on_r1, e1) = is_on_restriction(&v, &cur_e, face)?;
                         let (is_on_r2, e2) = is_on_restriction(&v, &cur_e, &topods::face(&f2)?)?;
                         if is_on_r1 && !self.my_stop_faces.contains(init) {
-                            add(&e1, &mut self.my_edges, init, of1, &self.my_analyse, is_on_r1 && is_on_r2)?;
+                            add(
+                                &e1,
+                                &mut self.my_edges,
+                                init,
+                                of1,
+                                &self.my_analyse,
+                                is_on_r1 && is_on_r2,
+                            )?;
                             jen_rajoute = true;
                         }
                         if is_on_r2 && !self.my_stop_faces.contains(it_key) {
-                            add(&e2, &mut self.my_edges, it_key, of2, &self.my_analyse, is_on_r1 && is_on_r2)?;
+                            add(
+                                &e2,
+                                &mut self.my_edges,
+                                it_key,
+                                of2,
+                                &self.my_analyse,
+                                is_on_r1 && is_on_r2,
+                            )?;
                             jen_rajoute = true;
                         }
                     }

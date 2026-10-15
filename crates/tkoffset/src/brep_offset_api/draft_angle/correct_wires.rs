@@ -38,9 +38,13 @@ fn found<'a, V>(map: &'a DataMap<Shape, V, ShapeMapHasher>, key: &Shape) -> Resu
 }
 
 /// The value bound to a key, to write: Standard_NoSuchObject when it is not bound.
-fn found_mut<'a, V>(map: &'a mut DataMap<Shape, V, ShapeMapHasher>, key: &Shape) -> Result<&'a mut V, Failure> {
-    map.change_seek(key)
-        .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::ChangeFind"))
+fn found_mut<'a, V>(
+    map: &'a mut DataMap<Shape, V, ShapeMapHasher>,
+    key: &Shape,
+) -> Result<&'a mut V, Failure> {
+    map.change_seek(key).ok_or_else(|| {
+        Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::ChangeFind")
+    })
 }
 
 /// The keys of a data map in its iteration order.
@@ -49,7 +53,12 @@ fn keys<V>(map: &DataMap<Shape, V, ShapeMapHasher>) -> Vec<Shape> {
 }
 
 /// The edge of an empty copy with the range, FORWARD.
-fn empty_copy_ranged(builder: &BRepBuilder, an_edge: &Edge, first: f64, last: f64) -> Result<Edge, Failure> {
+fn empty_copy_ranged(
+    builder: &BRepBuilder,
+    an_edge: &Edge,
+    first: f64,
+    last: f64,
+) -> Result<Edge, Failure> {
     let new_e = topods::edge(&an_edge.empty_copied()?)?;
     builder.range(&new_e, first, last, false)?;
     Ok(new_e)
@@ -73,7 +82,10 @@ impl BRepOffsetAPIDraftAngle {
                     emap.add(e);
                 }
                 for cur_edge in emap.iter() {
-                    if brep_tools::is_really_closed(&topods::edge(cur_edge)?, &topods::face(&cur_face)?)? {
+                    if brep_tools::is_really_closed(
+                        &topods::edge(cur_edge)?,
+                        &topods::face(&cur_face)?,
+                    )? {
                         eseq.push(cur_edge.clone());
                         wseq.push(cur_wire.clone());
                         fseq.push(cur_face.clone());
@@ -100,8 +112,12 @@ impl BRepOffsetAPIDraftAngle {
 
             // Prepare 2D adaptors for intersection.
             // The seam edge has two 2D curve, thus we have to create 2 adaptors
-            let a_bac2d1 = BRepAdaptorCurve2d::with_edge_on_face(&topods::edge(&cur_edge)?, &a_face)?;
-            let a_bac2d1r = BRepAdaptorCurve2d::with_edge_on_face(&topods::edge(&cur_edge.reversed())?, &a_face)?;
+            let a_bac2d1 =
+                BRepAdaptorCurve2d::with_edge_on_face(&topods::edge(&cur_edge)?, &a_face)?;
+            let a_bac2d1r = BRepAdaptorCurve2d::with_edge_on_face(
+                &topods::edge(&cur_edge.reversed())?,
+                &a_face,
+            )?;
             // Get surface of the face to get 3D intersection point
             let (a_surf, _) = BRepTool::surface_with_location(&a_face)?;
             // Get the tolerance of the current edge to compare intersection points
@@ -119,8 +135,12 @@ impl BRepOffsetAPIDraftAngle {
                     // Prepare 2D adaptor for intersection
                     let a_bac2d2 = BRepAdaptorCurve2d::with_edge_on_face(&an_edge, &a_face)?;
                     // Perform intersection
-                    let mut a_g_inter =
-                        GInter::between(a_bac2d1.geom2d_adaptor(), a_bac2d2.geom2d_adaptor(), tol_inter, tol_inter)?;
+                    let mut a_g_inter = GInter::between(
+                        a_bac2d1.geom2d_adaptor(),
+                        a_bac2d2.geom2d_adaptor(),
+                        tol_inter,
+                        tol_inter,
+                    )?;
                     if !a_g_inter.is_done() || a_g_inter.is_empty()? {
                         // If first intersection is empty try intersection with reversed edge
                         a_g_inter = GInter::between(
@@ -238,7 +258,12 @@ impl BRepOffsetAPIDraftAngle {
             let mut seam_edge = topods::edge(at(&seams, 1)?)?;
             // Find the face (the native search result is not used further)
             if (par - first_par).abs() <= precision::confusion() {
-                bb.update_vertex_on_edge(&vfirst, *at(&pseams, 1)?, &seam_edge, BRepTool::vertex_tolerance(&vfirst)?)?;
+                bb.update_vertex_on_edge(
+                    &vfirst,
+                    *at(&pseams, 1)?,
+                    &seam_edge,
+                    BRepTool::vertex_tolerance(&vfirst)?,
+                )?;
                 found_mut(&mut ep_map, &seam_edge)?.push(*at(&pseams, 1)?);
                 found_mut(&mut ev_map, &seam_edge)?.push(vfirst.clone().into_shape());
                 found_mut(&mut ew_map, &seam_edge)?.push(at(&non_seam_wires, i)?.clone());
@@ -256,7 +281,12 @@ impl BRepOffsetAPIDraftAngle {
                 if j == pars.len() && (par - last_par).abs() <= precision::confusion() {
                     new_v = vlast.clone();
                     if firstind == 2 && j == 2 {
-                        bb.update_vertex_on_edge(&vlast, *at(&pseams, j)?, &seam_edge, BRepTool::vertex_tolerance(&vlast)?)?;
+                        bb.update_vertex_on_edge(
+                            &vlast,
+                            *at(&pseams, j)?,
+                            &seam_edge,
+                            BRepTool::vertex_tolerance(&vlast)?,
+                        )?;
                         found_mut(&mut ep_map, &seam_edge)?.push(*at(&pseams, j)?);
                         found_mut(&mut ev_map, &seam_edge)?.push(vlast.clone().into_shape());
                         found_mut(&mut ew_map, &seam_edge)?.push(at(&non_seam_wires, i)?.clone());
@@ -268,7 +298,12 @@ impl BRepOffsetAPIDraftAngle {
                     new_v = BRepLibMakeVertex::new(point)?.vertex()?;
                     bb.update_vertex_on_edge(&new_v, par, &new_e, 10. * precision::confusion())?;
                 }
-                bb.update_vertex_on_edge(&new_v, *at(&pseams, j)?, &seam_edge, 10. * precision::confusion())?;
+                bb.update_vertex_on_edge(
+                    &new_v,
+                    *at(&pseams, j)?,
+                    &seam_edge,
+                    10. * precision::confusion(),
+                )?;
                 new_e.set_orientation(Orientation::Forward);
                 bb.add(&mut new_e, &prev_v.oriented(Orientation::Forward))?;
                 bb.add(&mut new_e, &new_v.oriented(Orientation::Reversed))?;
@@ -372,10 +407,22 @@ impl BRepOffsetAPIDraftAngle {
                 new_e.set_orientation(Orientation::Forward);
                 if firstind == 1 {
                     bb.add(&mut new_e, &vfirst.oriented(Orientation::Forward))?;
-                    bb.add(&mut new_e, &topods::vertex(&at(&seq_ver, 1)?.oriented(Orientation::Reversed))?.into_shape())?;
+                    bb.add(
+                        &mut new_e,
+                        &topods::vertex(&at(&seq_ver, 1)?.oriented(Orientation::Reversed))?
+                            .into_shape(),
+                    )?;
                 } else {
-                    bb.add(&mut new_e, &topods::vertex(&at(&seq_ver, 1)?.oriented(Orientation::Forward))?.into_shape())?;
-                    bb.add(&mut new_e, &topods::vertex(&at(&seq_ver, 2)?.oriented(Orientation::Reversed))?.into_shape())?;
+                    bb.add(
+                        &mut new_e,
+                        &topods::vertex(&at(&seq_ver, 1)?.oriented(Orientation::Forward))?
+                            .into_shape(),
+                    )?;
+                    bb.add(
+                        &mut new_e,
+                        &topods::vertex(&at(&seq_ver, 2)?.oriented(Orientation::Reversed))?
+                            .into_shape(),
+                    )?;
                 }
                 new_edges.push(new_e.into_shape());
 
@@ -394,8 +441,16 @@ impl BRepOffsetAPIDraftAngle {
                         j += 1;
                     }
                     new_e.set_orientation(Orientation::Forward);
-                    bb.add(&mut new_e, &topods::vertex(&at(&seq_ver, j)?.oriented(Orientation::Forward))?.into_shape())?;
-                    bb.add(&mut new_e, &topods::vertex(&at(&seq_ver, j + 1)?.oriented(Orientation::Reversed))?.into_shape())?;
+                    bb.add(
+                        &mut new_e,
+                        &topods::vertex(&at(&seq_ver, j)?.oriented(Orientation::Forward))?
+                            .into_shape(),
+                    )?;
+                    bb.add(
+                        &mut new_e,
+                        &topods::vertex(&at(&seq_ver, j + 1)?.oriented(Orientation::Reversed))?
+                            .into_shape(),
+                    )?;
                     new_edges.push(new_e.into_shape());
                     i += 2;
                 }
@@ -408,7 +463,11 @@ impl BRepOffsetAPIDraftAngle {
             }
             let mut new_e = empty_copy_ranged(&bb, &an_edge, fpar, lpar)?;
             new_e.set_orientation(Orientation::Forward);
-            bb.add(&mut new_e, &topods::vertex(&at(&seq_ver, seq_ver.len())?.oriented(Orientation::Forward))?.into_shape())?;
+            bb.add(
+                &mut new_e,
+                &topods::vertex(&at(&seq_ver, seq_ver.len())?.oriented(Orientation::Forward))?
+                    .into_shape(),
+            )?;
             bb.add(&mut new_e, &vlast.oriented(Orientation::Reversed))?;
             new_edges.push(new_e.into_shape());
 
@@ -454,18 +513,16 @@ impl BRepOffsetAPIDraftAngle {
         // Reconstruction of wires
         for (key, wires) in ww_map.items() {
             let the_copy = a_sub.copy(key)?;
-            let mut cur_wire = the_copy
-                .first()
-                .cloned()
-                .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_List::First"))?;
+            let mut cur_wire = the_copy.first().cloned().ok_or_else(|| {
+                Failure::with_message("Standard_NoSuchObject", "NCollection_List::First")
+            })?;
             cur_wire.tshape().set_free(true);
             for a_wire in wires {
                 let mut cur_face = found(&wf_map, a_wire)?.clone();
                 let the_copy = a_sub.copy(a_wire)?;
-                let a_wire = the_copy
-                    .first()
-                    .cloned()
-                    .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_List::First"))?;
+                let a_wire = the_copy.first().cloned().ok_or_else(|| {
+                    Failure::with_message("Standard_NoSuchObject", "NCollection_List::First")
+                })?;
                 // Adjusting period
                 let face = topods::face(&cur_face)?;
                 let (the_surf, l) = BRepTool::surface_with_location(&face)?;
@@ -473,7 +530,8 @@ impl BRepOffsetAPIDraftAngle {
                     let an_edge = topods::edge(&an_edge)?;
                     let (pfirst, plast) = BRepTool::uv_points_on_face(&an_edge, &face)?;
                     let bc2d = BRepAdaptorCurve2d::with_edge_on_face(&an_edge, &face)?;
-                    let pmid = bc2d.value((bc2d.first_parameter()? + bc2d.last_parameter()?) / 2.)?;
+                    let pmid =
+                        bc2d.value((bc2d.first_parameter()? + bc2d.last_parameter()?) / 2.)?;
                     let mut offset = Vector2::default();
                     let mut translate = false;
                     if pfirst.x() - 2. * PI > precision::confusion()
@@ -500,7 +558,12 @@ impl BRepOffsetAPIDraftAngle {
                                     let pc: Handle<dyn Geom2dCurve> = g.pcurve()?;
                                     let pc: Handle<dyn Geom2dCurve> = pc
                                         .get()
-                                        .ok_or_else(|| Failure::with_message("Standard_NullObject", "BRep_GCurve::PCurve"))?
+                                        .ok_or_else(|| {
+                                            Failure::with_message(
+                                                "Standard_NullObject",
+                                                "BRep_GCurve::PCurve",
+                                            )
+                                        })?
                                         .translated(offset)?
                                         .cast();
                                     g.set_pcurve(&pc)?;
@@ -535,5 +598,10 @@ impl BRepOffsetAPIDraftAngle {
 fn live_surface(
     s: &Handle<dyn rustycad_tkg3d::geom::GeomSurface>,
 ) -> Result<&dyn rustycad_tkg3d::geom::GeomSurface, Failure> {
-    s.get().ok_or_else(|| Failure::with_message("Standard_NullObject", "BRepOffsetAPI_DraftAngle: null surface"))
+    s.get().ok_or_else(|| {
+        Failure::with_message(
+            "Standard_NullObject",
+            "BRepOffsetAPI_DraftAngle: null surface",
+        )
+    })
 }

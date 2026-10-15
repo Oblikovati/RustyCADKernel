@@ -3,8 +3,11 @@
 
 //! The blend surfaces: the tubes along the cut center lines and the spheres at the
 //! vertices where three tubes meet.
-use super::statics::{find_created_edge, find_vertex, k_part_curve3d, live, make_curve, make_degenerated_edge, orientation};
 use super::BiTgteBlend;
+use super::statics::{
+    find_created_edge, find_vertex, k_part_curve3d, live, make_curve, make_degenerated_edge,
+    orientation,
+};
 use crate::bi_tgte::BiTgteCurveOnEdge;
 use crate::brep_offset::{BRepOffsetAnalyse, BRepOffsetOffset, PipeOptions};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
@@ -45,7 +48,9 @@ fn support(or: &Shape) -> Result<Option<Support>, Failure> {
             s.is_edge = true;
             s.edge = topods::edge(or)?;
             let c = BRepTool::curve_with_location(&s.edge)?;
-            s.curve = live(&c.curve, "curve")?.transformed(c.location.transformation())?.cast();
+            s.curve = live(&c.curve, "curve")?
+                .transformed(c.location.transformation())?
+                .cast();
         }
         ShapeEnum::Face => {
             s.face = topods::face(or)?;
@@ -106,7 +111,8 @@ fn edge_on_support(
         let p2 = surface.value(p2d.x(), p2d.y())?;
         vf_on_e = find_vertex(p1, map_on_v1f, tol)?;
         vl_on_e = find_vertex(p2, map_on_v1l, tol)?;
-        let mke = BRepLibMakeEdge::from_pcurve_vertices_params(pc, &s.surface, &vf_on_e, &vl_on_e, f, l)?;
+        let mke =
+            BRepLibMakeEdge::from_pcurve_vertices_params(pc, &s.surface, &vf_on_e, &vl_on_e, f, l)?;
         // The native code reports "Edge Not Done" on the standard output, then the
         // edge raises StdFail_NotDone.
         e = mke.edge()?;
@@ -285,7 +291,8 @@ impl BiTgteBlend {
                     let mut l2 = List::default();
                     l2.append(e2.clone().into_shape());
                     by_support.bind(or2.clone(), l2);
-                    self.my_created.bind(cur_cut_e.clone().into_shape(), by_support);
+                    self.my_created
+                        .bind(cur_cut_e.clone().into_shape(), by_support);
                 }
 
                 // ----------------------------------------------------------
@@ -318,7 +325,8 @@ impl BiTgteBlend {
                     },
                 )?;
                 let tuyo = an_offset.face().clone();
-                self.my_map_sf.bind(cur_cut_e.clone().into_shape(), an_offset);
+                self.my_map_sf
+                    .bind(cur_cut_e.clone().into_shape(), an_offset);
                 self.my_centers.add(cur_cut_e.clone().into_shape());
                 b.add(&mut co, &cur_cut_e)?;
 
@@ -327,8 +335,12 @@ impl BiTgteBlend {
                 if self.my_build_shape {
                     // method based ONLY on the construction of fillet:
                     // the first edge of the tube is exactly on Shape1.
-                    let tuyo_edges: Vec<Shape> =
-                        rustycad_tkbrep::topexp::Explorer::new(&tuyo, ShapeEnum::Edge, ShapeEnum::Shape)?.collect();
+                    let tuyo_edges: Vec<Shape> = rustycad_tkbrep::topexp::Explorer::new(
+                        &tuyo,
+                        ShapeEnum::Edge,
+                        ShapeEnum::Shape,
+                    )?
+                    .collect();
                     if s1.is_edge {
                         // Update CutEdges.
                         let e_on_f1 = topods::edge(tuyo_edges.first().ok_or_else(no_edge)?)?;
@@ -383,7 +395,12 @@ impl BiTgteBlend {
 
     /// The vertices of the edge of a tube on a support edge put on the support edge
     /// (INTERNAL, at their projections) and recorded in `myCutEdges`.
-    fn cut_support_edge(&mut self, e_on_f: &Edge, gc: &Handle<dyn GeomCurve>, or: &Shape) -> Result<(), Failure> {
+    fn cut_support_edge(
+        &mut self,
+        e_on_f: &Edge,
+        gc: &Handle<dyn GeomCurve>,
+        or: &Shape,
+    ) -> Result<(), Failure> {
         let b = BRepBuilder::default();
         let (v1, v2) = topexp::vertices(e_on_f, false);
         let mut projector = ProjectPointOnCurve::new();
@@ -397,16 +414,25 @@ impl BiTgteBlend {
         let u2 = projector.lower_distance_parameter()?;
 
         let or_e = topods::edge(or)?;
-        b.update_vertex_on_edge(&topods::vertex(&v1.oriented(Orientation::Internal))?, u1, &or_e, self.my_tol)?;
-        b.update_vertex_on_edge(&topods::vertex(&v2.oriented(Orientation::Internal))?, u2, &or_e, self.my_tol)?;
+        b.update_vertex_on_edge(
+            &topods::vertex(&v1.oriented(Orientation::Internal))?,
+            u1,
+            &or_e,
+            self.my_tol,
+        )?;
+        b.update_vertex_on_edge(
+            &topods::vertex(&v2.oriented(Orientation::Internal))?,
+            u2,
+            &or_e,
+            self.my_tol,
+        )?;
 
         if !self.my_cut_edges.is_bound(or) {
             self.my_cut_edges.bind(or.clone(), List::default());
         }
-        let l = self
-            .my_cut_edges
-            .change_seek(or)
-            .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::ChangeFind"))?;
+        let l = self.my_cut_edges.change_seek(or).ok_or_else(|| {
+            Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::ChangeFind")
+        })?;
         l.append(v1.into_shape());
         l.append(v2.into_shape());
         Ok(())

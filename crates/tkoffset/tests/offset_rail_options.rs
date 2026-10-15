@@ -7,7 +7,7 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::{geom_abs::Shape as Continuity, gp::Point3};
-use rustycad_tkoffset::brep_offset::{PipeOptions, BRepOffsetOffset, BRepOffsetStatus};
+use rustycad_tkoffset::brep_offset::{BRepOffsetOffset, BRepOffsetStatus, PipeOptions};
 use rustycad_tktopalgo::{
     brep_check::BRepCheckAnalyzer, brep_gprop::BRepGProp, brep_lib::BRepLibMakeEdge,
 };
@@ -39,7 +39,15 @@ fn assert_native_option_result(
     let (polynomial, tolerance, continuity, poles, degree, area) = config;
     let (path, rail1, rail2) = bezier_rails()?;
     let offset = BRepOffsetOffset::from_edges(
-        &path, &rail1, &rail2, 0.5, PipeOptions { polynomial, tol: tolerance, conti: continuity },
+        &path,
+        &rail1,
+        &rail2,
+        0.5,
+        PipeOptions {
+            polynomial,
+            tol: tolerance,
+            conti: continuity,
+        },
     )?;
     assert_option_face(&offset, &rail1, &rail2, (poles, degree), area)
 }

@@ -1,8 +1,8 @@
 //! BiTgte_Blend probe operations, the Rust twin of tools/oracle/tkoffset_probe_bitgte.cxx
 //! (the records are documented there).
 use super::common::{Reader, end, flag, int};
-use super::maker::{digest, round6};
 use super::make_offset::failed;
+use super::maker::{digest, round6};
 use super::tool::{primitive, sub};
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorSurface;
@@ -26,7 +26,11 @@ fn shape_of(r: &mut Reader<'_>) -> Result<Shape, Failure> {
         return primitive(r);
     }
     let s1: Handle<dyn GeomSurface> = Handle::new(GeomCylindricalSurface::new(
-        Axis3::new(Point3::new(0., 360., 0.), Direction3::new(0., 0., 1.)?, Direction3::new(0., 1., 0.)?)?,
+        Axis3::new(
+            Point3::new(0., 360., 0.),
+            Direction3::new(0., 0., 1.)?,
+            Direction3::new(0., 1., 0.)?,
+        )?,
         160.,
     )?)
     .cast();
@@ -35,7 +39,9 @@ fn shape_of(r: &mut Reader<'_>) -> Result<Shape, Failure> {
         80.,
     )?)
     .cast();
-    let f1 = BRepLibMakeFace::from_surface_bounds(&s1, (0., 2. * PI, -113.2000012, 113.2000012), 1e-7)?.face()?;
+    let f1 =
+        BRepLibMakeFace::from_surface_bounds(&s1, (0., 2. * PI, -113.2000012, 113.2000012), 1e-7)?
+            .face()?;
     let f2 = BRepLibMakeFace::from_surface_bounds(&s2, (0., 2. * PI, 168.4, 600.), 1e-7)?.face()?;
     let b = BRepBuilder::default();
     let mut c = Compound::default();

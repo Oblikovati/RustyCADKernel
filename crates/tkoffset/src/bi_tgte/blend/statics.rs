@@ -4,8 +4,8 @@
 //! The helpers of the rolling-ball blend: restriction tests, the 3d curves of the
 //! iso p-curves, the curves on the edges, the vertex lookups and the degenerated edges.
 use crate::bi_tgte::BiTgteCurveOnEdge;
-use crate::brep_offset::{BRepOffsetAnalyse, BRepOffsetOffset};
 use crate::brep_offset::OffsetFaces;
+use crate::brep_offset::{BRepOffsetAnalyse, BRepOffsetOffset};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topexp::{self, Explorer};
 use rustycad_tkbrep::topods::{self, Edge, Face, Shape, Vertex};
@@ -17,7 +17,9 @@ use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
-use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCircle, GeomCurve, GeomLine, GeomSurface, GeomTrimmedCurve};
+use rustycad_tkg3d::geom::{
+    GeomBSplineCurve, GeomCircle, GeomCurve, GeomLine, GeomSurface, GeomTrimmedCurve,
+};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkgeomalgo::geom_api::to_3d;
@@ -39,14 +41,18 @@ pub(super) fn live<'a, T: ?Sized + rustycad_tkernel::standard::RuntimeTyped>(
     handle: &'a Handle<T>,
     what: &str,
 ) -> Result<&'a T, Failure> {
-    handle
-        .get()
-        .ok_or_else(|| Failure::with_message("Standard_NullObject", &format!("BiTgte_Blend: null {what}")))
+    handle.get().ok_or_else(|| {
+        Failure::with_message("Standard_NullObject", &format!("BiTgte_Blend: null {what}"))
+    })
 }
 
 /// `IsOnRestriction(V, CurE, F, E)`: the edge of the face whose p-curve passes within
 /// the vertex tolerance of the vertex of `CurE` (the last tested edge otherwise).
-pub(super) fn is_on_restriction(v: &Vertex, cur_e: &Edge, f: &Face) -> Result<(bool, Edge), Failure> {
+pub(super) fn is_on_restriction(
+    v: &Vertex,
+    cur_e: &Edge,
+    f: &Face,
+) -> Result<(bool, Edge), Failure> {
     // find if Vertex V of CurE is on a restriction of F.
     // if yes, store this restriction in E.
     let cur_c = BRepTool::curve_on_face(cur_e, f)?;
@@ -117,7 +123,11 @@ pub(super) fn is_in_face(e: &Edge, f: &Face) -> Result<bool, Failure> {
 }
 
 /// The circle rotated about the axis of the frame by `angle`.
-fn rotated_circle(ci: rustycad_tkmath::gp::Circle3, axis: rustycad_tkmath::gp::Axis3, angle: f64) -> Result<rustycad_tkmath::gp::Circle3, Failure> {
+fn rotated_circle(
+    ci: rustycad_tkmath::gp::Circle3,
+    axis: rustycad_tkmath::gp::Axis3,
+    angle: f64,
+) -> Result<rustycad_tkmath::gp::Circle3, Failure> {
     let d_rev = axis.x_direction().crossed(axis.y_direction())?;
     let axe_rev = Axis1::new(axis.location(), d_rev);
     ci.rotated(axe_rev, angle)
@@ -144,7 +154,8 @@ pub(super) fn k_part_curve3d(
     let dx2d = Direction2::new(1., 0.)?;
     let dy2d = Direction2::new(0., 1.)?;
 
-    let update = |c3d: Handle<dyn GeomCurve>| the_builder.update_edge_located_curve(edge, &c3d, &loc, tol);
+    let update =
+        |c3d: Handle<dyn GeomCurve>| the_builder.update_edge_located_curve(edge, &c3d, &loc, tol);
 
     if s_ty != SurfaceType::Plane {
         // if plane buildcurve3d manage KPart
@@ -174,13 +185,19 @@ pub(super) fn k_part_curve3d(
                     SurfaceType::Cone => {
                         let cone = s.cone()?;
                         let axis = cone.position();
-                        let ci = elslib::cone_v_iso(axis, cone.ref_radius(), cone.semi_angle(), p.y());
+                        let ci =
+                            elslib::cone_v_iso(axis, cone.ref_radius(), cone.semi_angle(), p.y());
                         Some(rotated_circle(ci, axis, p.x())?)
                     }
                     SurfaceType::Torus => {
                         let tore = s.torus()?;
                         let axis = tore.position();
-                        let ci = elslib::torus_v_iso(axis, tore.major_radius(), tore.minor_radius(), p.y());
+                        let ci = elslib::torus_v_iso(
+                            axis,
+                            tore.major_radius(),
+                            tore.minor_radius(),
+                            p.y(),
+                        );
                         Some(rotated_circle(ci, axis, p.x())?)
                     }
                     _ => None,
@@ -229,7 +246,12 @@ pub(super) fn k_part_curve3d(
                     }
                     SurfaceType::Cone => {
                         let cone = s.cone()?;
-                        let mut l = elslib::cone_u_iso(cone.position(), cone.ref_radius(), cone.semi_angle(), p.x());
+                        let mut l = elslib::cone_u_iso(
+                            cone.position(),
+                            cone.ref_radius(),
+                            cone.semi_angle(),
+                            p.x(),
+                        );
                         let tr = Vector3::from(l.direction()) * p.y();
                         l.translate(tr);
                         let line = GeomLine::from_lin(l);
@@ -291,7 +313,12 @@ impl Function for MakeCurveFunction<'_> {
         }
     }
 
-    fn d1(&self, _t: f64, _vec2d: &mut Array1<'_, Vector2>, _vec: &mut Array1<'_, Vector3>) -> bool {
+    fn d1(
+        &self,
+        _t: f64,
+        _vec2d: &mut Array1<'_, Vector2>,
+        _vec: &mut Array1<'_, Vector3>,
+    ) -> bool {
         false
     }
 }
@@ -307,7 +334,14 @@ impl MakeCurveFunction<'_> {
 pub(super) fn make_curve(hc: &BiTgteCurveOnEdge) -> Result<Handle<dyn GeomCurve>, Failure> {
     let c: Handle<dyn GeomCurve> = if hc.get_type()? == CurveType::Circle {
         let circle: Handle<dyn GeomCurve> = Handle::new(GeomCircle::from_circ(hc.circle()?)).cast();
-        Handle::new(GeomTrimmedCurve::new(&circle, hc.first_parameter()?, hc.last_parameter()?, true, true)?).cast()
+        Handle::new(GeomTrimmedCurve::new(
+            &circle,
+            hc.first_parameter()?,
+            hc.last_parameter()?,
+            true,
+            true,
+        )?)
+        .cast()
     } else {
         // the approximation is done
         let mut base = FunctionBase::new();
@@ -356,15 +390,26 @@ pub(super) fn make_curve(hc: &BiTgteCurveOnEdge) -> Result<Handle<dyn GeomCurve>
 
         bsplclib::reparametrize(hc.first_parameter()?, hc.last_parameter()?, &mut new_knots)?;
 
-        Handle::new(GeomBSplineCurve::new(&new_poles, &new_knots, &new_mults, conv.degree(), false)?).cast()
+        Handle::new(GeomBSplineCurve::new(
+            &new_poles,
+            &new_knots,
+            &new_mults,
+            conv.degree(),
+            false,
+        )?)
+        .cast()
     };
     Ok(c)
 }
 
 /// An array with the bounds (Standard_RangeError on bad bounds).
 fn array<T: Clone + Default>(lower: i32, upper: i32) -> Result<Array1<'static, T>, Failure> {
-    Array1::with_bounds(lower, upper)
-        .map_err(|e| Failure::with_message("Standard_RangeError", &format!("BiTgte_Blend: NCollection_Array1 {e:?}")))
+    Array1::with_bounds(lower, upper).map_err(|e| {
+        Failure::with_message(
+            "Standard_RangeError",
+            &format!("BiTgte_Blend: NCollection_Array1 {e:?}"),
+        )
+    })
 }
 
 /// `FindVertex(P, Map, Tol)`: a vertex of the edges of the map at the point (within its
@@ -400,7 +445,10 @@ pub(super) fn find_vertex(p: Point3, map: &MapOfShape, tol: f64) -> Result<Verte
 
 /// `MakeDegeneratedEdge(CC, VfOnE)`: the edge of the untrimmed curve closed on the
 /// vertex (a new one at the start of the curve when null), on the range of `CC`.
-pub(super) fn make_degenerated_edge(cc: &Handle<dyn GeomCurve>, vf_on_e: &Vertex) -> Result<Edge, Failure> {
+pub(super) fn make_degenerated_edge(
+    cc: &Handle<dyn GeomCurve>,
+    vf_on_e: &Vertex,
+) -> Result<Edge, Failure> {
     let b = BRepBuilder::default();
     let tol = precision::confusion();
     // kill trimmed curves

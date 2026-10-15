@@ -55,7 +55,10 @@ fn assert_volume(solid: &Shape, exact: f64) -> Result<(), Failure> {
     let error = BRepGProp::volume_properties_eps(solid, &mut props, 1.0e-9, false, false)?;
     let volume = props.mass();
     let bound = (error.abs() + 1.0e-9) * volume.abs();
-    assert!((volume - exact).abs() <= bound, "volume {volume}, exact {exact}, bound {bound}");
+    assert!(
+        (volume - exact).abs() <= bound,
+        "volume {volume}, exact {exact}, bound {bound}"
+    );
     Ok(())
 }
 

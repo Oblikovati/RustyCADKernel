@@ -17,8 +17,12 @@ use rustycad_tktopalgo::brep_gprop::BRepGProp;
 
 /// The box of a size and its first face.
 fn box_and_first_face(size: f64) -> Result<(Shape, Shape), Failure> {
-    let a_box = BRepPrimAPIMakeBox::from_sizes(size, size, size)?.shape()?.clone();
-    let face = Explorer::new(&a_box, ShapeEnum::Face, ShapeEnum::Shape)?.current().clone();
+    let a_box = BRepPrimAPIMakeBox::from_sizes(size, size, size)?
+        .shape()?
+        .clone();
+    let face = Explorer::new(&a_box, ShapeEnum::Face, ShapeEnum::Shape)?
+        .current()
+        .clone();
     Ok((a_box, face))
 }
 
@@ -35,7 +39,14 @@ fn hollow_box_of_twenty() -> Result<(Shape, BRepOffsetAPIMakeThickSolid), Failur
     let mut faces_to_remove = List::default();
     faces_to_remove.append(face);
     let mut maker = BRepOffsetAPIMakeThickSolid::new();
-    maker.make_thick_solid_by_join(&a_box, &faces_to_remove, -1.0, precision::confusion(), MakeOffsetOptions::default(), &ProgressRange::default())?;
+    maker.make_thick_solid_by_join(
+        &a_box,
+        &faces_to_remove,
+        -1.0,
+        precision::confusion(),
+        MakeOffsetOptions::default(),
+        &ProgressRange::default(),
+    )?;
     maker.build(&ProgressRange::default())?;
     Ok((a_box, maker))
 }

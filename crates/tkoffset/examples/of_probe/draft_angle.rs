@@ -66,7 +66,10 @@ pub fn draft_angle_case(values: &[f64]) {
     if draft.is_done() {
         attempt(|| draft.shape().and_then(shape));
     }
-    for f in Explorer::new(&prim, ShapeEnum::Face, ShapeEnum::Shape).map(|e| e.collect::<Vec<_>>()).unwrap_or_default() {
+    for f in Explorer::new(&prim, ShapeEnum::Face, ShapeEnum::Shape)
+        .map(|e| e.collect::<Vec<_>>())
+        .unwrap_or_default()
+    {
         attempt(|| draft.generated(&f).map(|l| int(l.len() as i32)));
         attempt(|| draft.modified(&f).map(|l| int(l.len() as i32)));
     }

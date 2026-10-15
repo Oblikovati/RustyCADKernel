@@ -16,8 +16,9 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::geom::{
-    GeomCircle, GeomConic, GeomCurve, GeomCylindricalSurface, GeomElementarySurface, GeomLine, GeomPlane,
-    GeomRectangularTrimmedSurface, GeomSurface, GeomSurfaceOfLinearExtrusion, GeomSweptSurface,
+    GeomCircle, GeomConic, GeomCurve, GeomCylindricalSurface, GeomElementarySurface, GeomLine,
+    GeomPlane, GeomRectangularTrimmedSurface, GeomSurface, GeomSurfaceOfLinearExtrusion,
+    GeomSweptSurface,
 };
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurfaceOfLinearExtrusion};
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -31,18 +32,33 @@ use std::f64::consts::PI;
 /// at the identity).
 pub(super) fn located_surface(face: &Face) -> Result<Handle<dyn GeomSurface>, Failure> {
     let (s, lo) = BRepTool::surface_with_location(face)?;
-    Ok(live(&s, "surface")?.transformed(lo.transformation())?.cast())
+    Ok(live(&s, "surface")?
+        .transformed(lo.transformation())?
+        .cast())
 }
 
 /// The transformed copy of the 3d curve of an edge.
 pub(super) fn located_curve(edge: &Edge) -> Result<Handle<dyn GeomCurve>, Failure> {
     let c = BRepTool::curve_with_location(edge)?;
-    Ok(live(&c.curve, "curve")?.transformed(c.location.transformation())?.cast())
+    Ok(live(&c.curve, "curve")?
+        .transformed(c.location.transformation())?
+        .cast())
 }
 
 /// The trimmed copy of a surface in `[0, umax] x [vmin, vmax]`.
-pub(super) fn trimmed(s: &Handle<dyn GeomSurface>, umax: f64, vmin: f64, vmax: f64) -> Result<Handle<dyn GeomSurface>, Failure> {
-    Ok(Handle::new(GeomRectangularTrimmedSurface::new(s, (0., umax), (vmin, vmax), (true, true))?).cast())
+pub(super) fn trimmed(
+    s: &Handle<dyn GeomSurface>,
+    umax: f64,
+    vmin: f64,
+    vmax: f64,
+) -> Result<Handle<dyn GeomSurface>, Failure> {
+    Ok(Handle::new(GeomRectangularTrimmedSurface::new(
+        s,
+        (0., umax),
+        (vmin, vmax),
+        (true, true),
+    )?)
+    .cast())
 }
 
 impl DraftState {
@@ -73,11 +89,14 @@ impl DraftState {
             {
                 let mut cir: Circle3;
                 if surface.is_instance_name("Geom_CylindricalSurface") {
-                    let cyl = live(&s.clone().cast::<GeomCylindricalSurface>(), "cylinder")?.cylinder()?;
+                    let cyl = live(&s.clone().cast::<GeomCylindricalSurface>(), "cylinder")?
+                        .cylinder()?;
                     let axcyl = cyl.axis();
                     cir = elslib::cylinder_v_iso(cyl.position(), cyl.radius(), 0.);
                     let vv = Vector3::between(cyl.location(), neutral_plane.location());
-                    cir.translate(Vector3::from(axcyl.direction()) * vv.dot(Vector3::from(axcyl.direction())));
+                    cir.translate(
+                        Vector3::from(axcyl.direction()) * vv.dot(Vector3::from(axcyl.direction())),
+                    );
                 } else {
                     let extrusion = s.clone().cast::<GeomSurfaceOfLinearExtrusion>();
                     let extrusion = live(&extrusion, "extrusion")?;
@@ -102,7 +121,8 @@ impl DraftState {
                     }
 
                     let axis: Axis3 = neutral_plane.position();
-                    let l = Vector3::between(cir.location(), axis.location()).dot(Vector3::from(axis.direction()));
+                    let l = Vector3::between(cir.location(), axis.location())
+                        .dot(Vector3::from(axis.direction()));
                     let cos = the_dirextr.dot(axis.direction());
                     let vv = Vector3::from(the_dirextr) * (l / cos);
                     cir.translate(vv);
@@ -126,14 +146,20 @@ impl DraftState {
             let is_cylinder = typs.is_instance_name("Geom_CylindricalSurface");
             if is_cylinder || typs.is_instance_name("Geom_ConicalSurface") {
                 let (_umin, _umax, mut vmin, mut vmax) = brep_tools::uv_bounds(f)?;
-                if !precision::is_negative_infinite(vmin) && !precision::is_positive_infinite(vmax) {
+                if !precision::is_negative_infinite(vmin) && !precision::is_positive_infinite(vmax)
+                {
                     let deltav = 10. * (vmax - vmin);
                     if is_cylinder {
                         vmin -= deltav;
                         vmax += deltav;
                     } else {
-                        let co = live(&new_s.clone().cast::<rustycad_tkg3d::geom::GeomConicalSurface>(), "cone")?
-                            .cone()?;
+                        let co = live(
+                            &new_s
+                                .clone()
+                                .cast::<rustycad_tkg3d::geom::GeomConicalSurface>(),
+                            "cone",
+                        )?
+                        .cone()?;
                         let vapex = -co.ref_radius() / co.semi_angle().sin();
                         if vmin < vapex {
                             // vmax should not exceed Vapex
@@ -227,8 +253,13 @@ impl DraftState {
                             }
                             Some(line) => {
                                 let lin = line.lin();
-                                let ilipl =
-                                    IntConicQuad::line_plane(lin, *neutral_plane, precision::angular(), 0., 0.)?;
+                                let ilipl = IntConicQuad::line_plane(
+                                    lin,
+                                    *neutral_plane,
+                                    precision::angular(),
+                                    0.,
+                                    0.,
+                                )?;
                                 if ilipl.is_done() && ilipl.nb_points()? != 0 {
                                     e_inf.tangent(ilipl.point(1)?);
                                 } else {
@@ -292,7 +323,10 @@ impl DraftState {
             for e in Explorer::new(&fc, ShapeEnum::Edge, ShapeEnum::Shape)? {
                 let e = topods::edge(&e)?;
                 if !self.my_e_map.contains(&e) {
-                    self.my_e_map.add(e.clone().into_shape(), DraftEdgeInfo::with_new_geometry(true));
+                    self.my_e_map.add(
+                        e.clone().into_shape(),
+                        DraftEdgeInfo::with_new_geometry(true),
+                    );
                 }
                 self.my_e_map.change_from_key(&e)?.add(&fc)?;
 
@@ -300,7 +334,8 @@ impl DraftState {
                 for v in Explorer::new(&e, ShapeEnum::Vertex, ShapeEnum::Shape)? {
                     let v = topods::vertex(&v)?;
                     if !self.my_v_map.contains(&v) {
-                        self.my_v_map.add(v.clone().into_shape(), DraftVertexInfo::new());
+                        self.my_v_map
+                            .add(v.clone().into_shape(), DraftVertexInfo::new());
                     }
                     let vinf = self.my_v_map.change_from_key(&v)?;
                     vinf.add(&e);
@@ -325,7 +360,10 @@ impl DraftState {
                 }
                 if found {
                     if !self.my_e_map.contains(&e) {
-                        self.my_e_map.add(e.clone().into_shape(), DraftEdgeInfo::with_new_geometry(false));
+                        self.my_e_map.add(
+                            e.clone().into_shape(),
+                            DraftEdgeInfo::with_new_geometry(false),
+                        );
                     }
                     let vinf = self.my_v_map.change_from_key(&vt)?;
                     vinf.add(&e);
@@ -337,7 +375,8 @@ impl DraftState {
         // Set faces containing modified edges
         for i in 1..=self.my_e_map.extent() {
             let ed = self.my_e_map.find_key(i)?.clone();
-            let ancestors: Vec<Shape> = self.my_ef_map.find_from_key(&ed)?.iter().cloned().collect();
+            let ancestors: Vec<Shape> =
+                self.my_ef_map.find_from_key(&ed)?.iter().cloned().collect();
             for it in &ancestors {
                 let f = topods::face(it)?;
                 if !self.my_f_map.contains(&f) {
@@ -346,9 +385,13 @@ impl DraftState {
                         live(&s, "surface")?.transformed(l.transformation())?.cast();
 
                     let typs = live(&s, "surface")?;
-                    if typs.is_instance_name("Geom_CylindricalSurface") || typs.is_instance_name("Geom_ConicalSurface") {
+                    if typs.is_instance_name("Geom_CylindricalSurface")
+                        || typs.is_instance_name("Geom_ConicalSurface")
+                    {
                         let (_umin, _umax, mut vmin, mut vmax) = brep_tools::uv_bounds(&f)?;
-                        if !precision::is_negative_infinite(vmin) && !precision::is_positive_infinite(vmax) {
+                        if !precision::is_negative_infinite(vmin)
+                            && !precision::is_positive_infinite(vmax)
+                        {
                             let deltav = 10. * (vmax - vmin);
                             vmin -= deltav;
                             vmax += deltav;
@@ -356,7 +399,10 @@ impl DraftState {
                         }
                     }
 
-                    self.my_f_map.add(f.clone().into_shape(), DraftFaceInfo::with_surface(&new_s, false));
+                    self.my_f_map.add(
+                        f.clone().into_shape(),
+                        DraftFaceInfo::with_surface(&new_s, false),
+                    );
                 }
                 self.my_e_map.change_from_index(i)?.add(&f)?;
             }
@@ -384,15 +430,28 @@ impl DraftState {
                         );
                         s2 = Handle::new(GeomPlane::new(the_pl)).cast();
                     } else if curve.is_instance_name("Geom_Line") {
-                        let axis: Axis1 = if s1_surface.is_instance_name("Geom_RectangularTrimmedSurface") {
-                            let basis =
-                                live(&s1.clone().cast::<GeomRectangularTrimmedSurface>(), "surface")?.basis_surface();
-                            live(&basis.cast::<dyn GeomElementarySurface>(), "elementary surface")?.axis()
-                        } else {
-                            live(&s1.clone().cast::<dyn GeomElementarySurface>(), "elementary surface")?.axis()
-                        };
+                        let axis: Axis1 =
+                            if s1_surface.is_instance_name("Geom_RectangularTrimmedSurface") {
+                                let basis = live(
+                                    &s1.clone().cast::<GeomRectangularTrimmedSurface>(),
+                                    "surface",
+                                )?
+                                .basis_surface();
+                                live(
+                                    &basis.cast::<dyn GeomElementarySurface>(),
+                                    "elementary surface",
+                                )?
+                                .axis()
+                            } else {
+                                live(
+                                    &s1.clone().cast::<dyn GeomElementarySurface>(),
+                                    "elementary surface",
+                                )?
+                                .axis()
+                            };
                         let they = Vector3::between(axis.location(), curve.value(0.)?);
-                        let axz = Direction3::from_vector(Vector3::from(axis.direction()).crossed(they))?;
+                        let axz =
+                            Direction3::from_vector(Vector3::from(axis.direction()).crossed(they))?;
                         s2 = Handle::new(GeomPlane::new(Axis3::new(
                             axis.location(),
                             axz,
@@ -422,7 +481,8 @@ impl DraftState {
                                 if !edg.is_same(&ek) {
                                     let ei = self.my_e_map.find_from_key(&edg)?;
                                     if !ei.first_face().is_same(&first_face)
-                                        && (ei.second_face().is_null() || !ei.second_face().is_same(&first_face))
+                                        && (ei.second_face().is_null()
+                                            || !ei.second_face().is_same(&first_face))
                                     {
                                         break;
                                     }
@@ -434,21 +494,39 @@ impl DraftState {
                                 c2 = untrimmed_curve(&c2)?;
                                 let (h_cur, direc): (Handle<dyn GeomCurve>, Direction3) =
                                     if curve.is_instance_name("Geom_Line") {
-                                        (c2.clone(), live(&c.clone().cast::<GeomLine>(), "line")?.lin().direction())
+                                        (
+                                            c2.clone(),
+                                            live(&c.clone().cast::<GeomLine>(), "line")?
+                                                .lin()
+                                                .direction(),
+                                        )
                                     } else if live(&c2, "curve")?.is_instance_name("Geom_Line") {
-                                        (c.clone(), live(&c2.clone().cast::<GeomLine>(), "line")?.lin().direction())
+                                        (
+                                            c.clone(),
+                                            live(&c2.clone().cast::<GeomLine>(), "line")?
+                                                .lin()
+                                                .direction(),
+                                        )
                                     } else {
                                         self.bad_shape = ek.clone().into_shape();
                                         self.err_stat = DraftErrorStatus::EdgeRecomputation;
                                         break; // leave from while
                                     };
-                                let h_cur_adaptor = Handle::new(GeomAdaptorCurve::with_curve(&h_cur)?);
-                                let sle = GeomAdaptorSurfaceOfLinearExtrusion::with_curve_and_direction(&h_cur_adaptor.clone().cast(), direc);
+                                let h_cur_adaptor =
+                                    Handle::new(GeomAdaptorCurve::with_curve(&h_cur)?);
+                                let sle =
+                                    GeomAdaptorSurfaceOfLinearExtrusion::with_curve_and_direction(
+                                        &h_cur_adaptor.clone().cast(),
+                                        direc,
+                                    );
                                 s2 = match sle.get_type()? {
-                                    SurfaceType::Plane => Handle::new(GeomPlane::from_pln(sle.plane()?)).cast(),
-                                    SurfaceType::Cylinder => {
-                                        Handle::new(GeomCylindricalSurface::from_cylinder(sle.cylinder()?)).cast()
+                                    SurfaceType::Plane => {
+                                        Handle::new(GeomPlane::from_pln(sle.plane()?)).cast()
                                     }
+                                    SurfaceType::Cylinder => Handle::new(
+                                        GeomCylindricalSurface::from_cylinder(sle.cylinder()?),
+                                    )
+                                    .cast(),
                                     _ => Handle::new(GeomSurfaceOfLinearExtrusion::new(
                                         &live(&h_cur_adaptor, "adaptor")?.curve(),
                                         direc,
@@ -467,9 +545,16 @@ impl DraftState {
 
                 if self.bad_shape.is_null() {
                     let mut the_new_face = Face::default();
-                    BRepBuilder::default().make_face_on_surface(&mut the_new_face, &s2, precision::confusion())?;
+                    BRepBuilder::default().make_face_on_surface(
+                        &mut the_new_face,
+                        &s2,
+                        precision::confusion(),
+                    )?;
                     self.my_e_map.change_from_index(i)?.add(&the_new_face)?;
-                    self.my_f_map.add(the_new_face.into_shape(), DraftFaceInfo::with_surface(&s2, false));
+                    self.my_f_map.add(
+                        the_new_face.into_shape(),
+                        DraftFaceInfo::with_surface(&s2, false),
+                    );
                 } else {
                     break; // leave from for
                 }

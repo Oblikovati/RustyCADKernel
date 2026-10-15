@@ -143,7 +143,11 @@ fn tangent_of_edge(a_shape: &Shape, on_first: bool) -> Result<Vector3, Failure> 
     let an_or = an_edge.orientation();
     let (a_curve, fpar, lpar) = BRepTool::curve(&an_edge)?;
     let the_par = if on_first {
-        if an_or == Orientation::Forward { fpar } else { lpar }
+        if an_or == Orientation::Forward {
+            fpar
+        } else {
+            lpar
+        }
     } else if an_or == Orientation::Forward {
         lpar
     } else {
@@ -162,8 +166,11 @@ fn is_valid_edge(the_edge: &Edge, the_face: &Face) -> Result<bool, Failure> {
     let (v1, v2) = topexp::vertices(the_edge, false);
     let tol = precision::confusion();
     for an_edge in topexp::Explorer::new(the_face.as_ref(), ShapeEnum::Edge, ShapeEnum::Shape)? {
-        let dist_mini =
-            BRepExtremaDistShapeShape::with_shapes(the_edge.as_ref(), &an_edge, Default::default())?;
+        let dist_mini = BRepExtremaDistShapeShape::with_shapes(
+            the_edge.as_ref(),
+            &an_edge,
+            Default::default(),
+        )?;
         if dist_mini.value()? <= tol {
             for i in 1..=dist_mini.nb_solution() {
                 let the_type = dist_mini.support_type_shape2(i)?;
@@ -210,7 +217,10 @@ fn get_unified_wire(
 }
 
 /// The 2d line through two points (GC_MakeLine2d), as a curve.
-fn line_2d(p1: rustycad_tkmath::gp::Point2, p2: rustycad_tkmath::gp::Point2) -> Result<Handle<dyn Geom2dCurve>, Failure> {
+fn line_2d(
+    p1: rustycad_tkmath::gp::Point2,
+    p2: rustycad_tkmath::gp::Point2,
+) -> Result<Handle<dyn Geom2dCurve>, Failure> {
     Ok(MakeLine2d::from_points(p1, p2)?.value()?.cast())
 }
 
@@ -224,7 +234,8 @@ fn edge_on_face(
 ) -> Result<Edge, Failure> {
     let the_surf = BRepTool::surface(the_face)?;
     let new_edge =
-        BRepLibMakeEdge::from_pcurve_vertices_params(the_line, &the_surf, v1, v2, 0., len)?.edge()?;
+        BRepLibMakeEdge::from_pcurve_vertices_params(the_line, &the_surf, v1, v2, 0., len)?
+            .edge()?;
     brep_lib::build_curve3d(&new_edge, 1.0e-5, Continuity::C1, 14, 0)?;
     Ok(new_edge)
 }
@@ -348,8 +359,18 @@ impl BRepOffsetAPIMiddlePath {
 
         let mut ve_map = IndexedDataMapOfShapeListOfShape::default();
         let mut ef_map = IndexedDataMapOfShapeListOfShape::default();
-        topexp::map_shapes_and_ancestors(&self.my_initial_shape, ShapeEnum::Vertex, ShapeEnum::Edge, &mut ve_map)?;
-        topexp::map_shapes_and_ancestors(&self.my_initial_shape, ShapeEnum::Edge, ShapeEnum::Face, &mut ef_map)?;
+        topexp::map_shapes_and_ancestors(
+            &self.my_initial_shape,
+            ShapeEnum::Vertex,
+            ShapeEnum::Edge,
+            &mut ve_map,
+        )?;
+        topexp::map_shapes_and_ancestors(
+            &self.my_initial_shape,
+            ShapeEnum::Edge,
+            ShapeEnum::Face,
+            &mut ef_map,
+        )?;
 
         let mut cur_vertices = MapOfShape::default();
 
@@ -390,7 +411,10 @@ impl BRepOffsetAPIMiddlePath {
                     (the_edge, the_vertex)
                 } else {
                     // last segment of path was punctual
-                    (topods::edge(at(path, length(path) - 1)?)?, topods::vertex(&the_shape)?)
+                    (
+                        topods::edge(at(path, length(path) - 1)?)?,
+                        topods::vertex(&the_shape)?,
+                    )
                 };
 
                 if end_vertices.contains(the_vertex.as_ref()) {
@@ -419,9 +443,13 @@ impl BRepOffsetAPIMiddlePath {
                     if next_edge_candidates.extent() > 1 {
                         path.push(the_vertex.clone().into_shape()); // punctual segment of path
                     } else {
-                        let an_edge = topods::edge(next_edge_candidates.iter().next().ok_or_else(
-                            || Failure::with_message("Standard_NoSuchObject", "NCollection_Map::Iterator::Key"),
-                        )?)?;
+                        let an_edge =
+                            topods::edge(next_edge_candidates.iter().next().ok_or_else(|| {
+                                Failure::with_message(
+                                    "Standard_NoSuchObject",
+                                    "NCollection_Map::Iterator::Key",
+                                )
+                            })?)?;
                         path.push(an_edge.clone().into_shape());
                         let next_vertex = topexp::last_vertex(&an_edge, true);
                         next_vertices.push(next_vertex.clone().into_shape());
@@ -475,12 +503,20 @@ impl BRepOffsetAPIMiddlePath {
                     let s1 = at(at(&self.my_paths, j - 1)?, i)?.clone();
                     if s1.shape_type()? == ShapeEnum::Edge {
                         let fver = topexp::first_vertex(&topods::edge(&s1)?, true);
-                        insert_before(at_mut(&mut self.my_paths, j - 1)?, i, fver.clone().into_shape())?;
+                        insert_before(
+                            at_mut(&mut self.my_paths, j - 1)?,
+                            i,
+                            fver.clone().into_shape(),
+                        )?;
                     }
                     let s2 = at(at(&self.my_paths, jj(j))?, i)?.clone();
                     if s2.shape_type()? == ShapeEnum::Edge {
                         let fver = topexp::first_vertex(&topods::edge(&s2)?, true);
-                        insert_before(at_mut(&mut self.my_paths, jj(j))?, i, fver.clone().into_shape())?;
+                        insert_before(
+                            at_mut(&mut self.my_paths, jj(j))?,
+                            i,
+                            fver.clone().into_shape(),
+                        )?;
                     }
                     to_insert_vertex = false;
                 }
@@ -497,7 +533,11 @@ impl BRepOffsetAPIMiddlePath {
                 }
                 let e12 = topods::edge(at(at(&sections_edges, i)?, j - 1)?)?;
                 // Find the face on which (E1 or E2) and E12 lie
-                let e1_or_e2 = if e1.is_null() { e2.clone().into_shape() } else { e1.clone().into_shape() };
+                let e1_or_e2 = if e1.is_null() {
+                    e2.clone().into_shape()
+                } else {
+                    e1.clone().into_shape()
+                };
                 if e1_or_e2.is_null() {
                     // both E1 and E2 are vertices =>
                     // => proper edge is the edge of previous section between them
@@ -534,7 +574,11 @@ impl BRepOffsetAPIMiddlePath {
                 {
                     let le = ve_map.find_from_key(prev_vertex.as_ref())?;
                     let mut edges_of_the_face = IndexedMapOfShape::default();
-                    topexp::map_shapes_of_type(the_face.as_ref(), ShapeEnum::Edge, &mut edges_of_the_face)?;
+                    topexp::map_shapes_of_type(
+                        the_face.as_ref(),
+                        ShapeEnum::Edge,
+                        &mut edges_of_the_face,
+                    )?;
                     for item in le.iter() {
                         let an_edge = topods::edge(item)?;
                         let (v1, v2) = topexp::vertices(&an_edge, false);
@@ -581,13 +625,22 @@ impl BRepOffsetAPIMiddlePath {
                         }
                         let pc1 = BRepTool::curve_on_face(&e1, &the_face)?;
                         let pc2 = BRepTool::curve_on_face(&e2, &the_face)?;
-                        let last_par1 = if e1.orientation() == Orientation::Forward { pc1.last } else { pc1.first };
-                        let last_par2 = if e2.orientation() == Orientation::Forward { pc2.last } else { pc2.first };
+                        let last_par1 = if e1.orientation() == Orientation::Forward {
+                            pc1.last
+                        } else {
+                            pc1.first
+                        };
+                        let last_par2 = if e2.orientation() == Orientation::Forward {
+                            pc2.last
+                        } else {
+                            pc2.first
+                        };
                         let first_pnt2d = live(&pc1.pcurve, "pcurve")?.value(last_par1)?;
                         let last_pnt2d = live(&pc2.pcurve, "pcurve")?.value(last_par2)?;
                         let the_line = line_2d(first_pnt2d, last_pnt2d)?;
                         let len_ne = first_pnt2d.distance(last_pnt2d);
-                        let new_edge = edge_on_face(&the_line, &the_face, &prev_vertex, &cur_vertex, len_ne)?;
+                        let new_edge =
+                            edge_on_face(&the_line, &the_face, &prev_vertex, &cur_vertex, len_ne)?;
                         *at_mut(&mut edge_seq, j - 1)? = new_edge.clone().into_shape();
                         ef_map.add(new_edge.clone().into_shape(), list_one_face);
                     } else {
@@ -611,15 +664,18 @@ impl BRepOffsetAPIMiddlePath {
                         let last_pnt2d = pcurve2.value(last_par2)?;
                         let the_line = line_2d(first_pnt2d, last_pnt2d)?;
                         let len_ne = first_pnt2d.distance(last_pnt2d);
-                        let new_edge = edge_on_face(&the_line, &the_face, &prev_vertex, &cur_vertex, len_ne)?;
+                        let new_edge =
+                            edge_on_face(&the_line, &the_face, &prev_vertex, &cur_vertex, len_ne)?;
                         let prev_first_pnt2d = pcurve1.value(first_par1)?;
                         let prev_last_pnt2d = pcurve2.value(first_par2)?;
                         let line1 = line_2d(prev_first_pnt2d, last_pnt2d)?;
                         let line2 = line_2d(first_pnt2d, prev_last_pnt2d)?;
                         let len_ne1 = prev_first_pnt2d.distance(last_pnt2d);
-                        let new_edge1 = edge_on_face(&line1, &the_face, &prev_prev_ver, &cur_vertex, len_ne1)?;
+                        let new_edge1 =
+                            edge_on_face(&line1, &the_face, &prev_prev_ver, &cur_vertex, len_ne1)?;
                         let len_ne2 = first_pnt2d.distance(prev_last_pnt2d);
-                        let new_edge2 = edge_on_face(&line2, &the_face, &prev_vertex, &prev_cur_ver, len_ne2)?;
+                        let new_edge2 =
+                            edge_on_face(&line2, &the_face, &prev_vertex, &prev_cur_ver, len_ne2)?;
                         let good_ne = is_valid_edge(&new_edge, &the_face)?;
                         let good_ne1 = is_valid_edge(&new_edge1, &the_face)?;
 
@@ -653,7 +709,11 @@ impl BRepOffsetAPIMiddlePath {
                             for k in 1..=j - 1 {
                                 let a_last_edge = topods::edge(at(at(&self.my_paths, k)?, i)?)?;
                                 let vertex_as_edge = topexp::first_vertex(&a_last_edge, true);
-                                insert_before(at_mut(&mut self.my_paths, k)?, i, vertex_as_edge.clone().into_shape())?;
+                                insert_before(
+                                    at_mut(&mut self.my_paths, k)?,
+                                    i,
+                                    vertex_as_edge.clone().into_shape(),
+                                )?;
                             }
                             j = 1; // start from beginning
                         } else if choose_edge == 2 {
@@ -713,7 +773,8 @@ impl BRepOffsetAPIMiddlePath {
             centers.push(properties.centre_of_mass());
         }
 
-        let mut mid_edges: Vec<Shape> = vec![Shape::default(); usize::try_from(nb_sec_faces - 1).unwrap_or(0)];
+        let mut mid_edges: Vec<Shape> =
+            vec![Shape::default(); usize::try_from(nb_sec_faces - 1).unwrap_or(0)];
         let lin_tol = 1.0e-5;
         let ang_tol = 1.0e-7;
         for i in 1..nb_sec_faces {
@@ -734,7 +795,10 @@ impl BRepOffsetAPIMiddlePath {
             }
             if type_of_mid_edge == CurveType::Line {
                 *at_mut(&mut mid_edges, i)? =
-                    BRepLibMakeEdge::from_points(*at(&centers, i)?, *at(&centers, i + 1)?)?.edge()?.clone().into_shape();
+                    BRepLibMakeEdge::from_points(*at(&centers, i)?, *at(&centers, i + 1)?)?
+                        .edge()?
+                        .clone()
+                        .into_shape();
             } else if type_of_mid_edge == CurveType::Circle {
                 *at_mut(&mut mid_edges, i)? = self.mid_arc(i, &centers, lin_tol, ang_tol)?;
             }
@@ -752,9 +816,12 @@ impl BRepOffsetAPIMiddlePath {
                     j += 1;
                 }
                 // from i to j-1 all edges are null
-                let mut the_points: Array1<'static, Point3> = Array1::with_bounds(1, j - i + 1).map_err(array_failure)?;
-                let mut the_tangents: Array1<'static, Vector3> = Array1::with_bounds(1, j - i + 1).map_err(array_failure)?;
-                let mut the_flags: Array1<'static, bool> = Array1::with_bounds(1, j - i + 1).map_err(array_failure)?;
+                let mut the_points: Array1<'static, Point3> =
+                    Array1::with_bounds(1, j - i + 1).map_err(array_failure)?;
+                let mut the_tangents: Array1<'static, Vector3> =
+                    Array1::with_bounds(1, j - i + 1).map_err(array_failure)?;
+                let mut the_flags: Array1<'static, bool> =
+                    Array1::with_bounds(1, j - i + 1).map_err(array_failure)?;
                 for k in i..=j {
                     the_points[k - i + 1] = *at(&centers, k)?;
                 }
@@ -785,7 +852,8 @@ impl BRepOffsetAPIMiddlePath {
                         a_tangent.normalize()?;
                         pnt_seq.push(Point3::from(*a_tangent.xyz()));
                     }
-                    let mut pnt_array: Array1<'static, Point3> = Array1::with_bounds(1, length(&pnt_seq)).map_err(array_failure)?;
+                    let mut pnt_array: Array1<'static, Point3> =
+                        Array1::with_bounds(1, length(&pnt_seq)).map_err(array_failure)?;
                     for (ip, p) in (1..).zip(pnt_seq.iter()) {
                         pnt_array[ip] = *p;
                     }
@@ -796,13 +864,24 @@ impl BRepOffsetAPIMiddlePath {
                     the_flags[f] = true;
                 }
 
-                let mut interpol = Interpolate::new(&Handle::new(HArray1::from_owned(the_points)), false, lin_tol)?;
-                interpol.load(&the_tangents, &Handle::new(HArray1::from_owned(the_flags)), true)?;
+                let mut interpol = Interpolate::new(
+                    &Handle::new(HArray1::from_owned(the_points)),
+                    false,
+                    lin_tol,
+                )?;
+                interpol.load(
+                    &the_tangents,
+                    &Handle::new(HArray1::from_owned(the_flags)),
+                    true,
+                )?;
                 interpol.perform()?;
                 // The native code reports "Interpolation failed" on the standard output and
                 // then raises StdFail_NotDone from Curve().
                 let inter_curve: Handle<dyn GeomCurve> = interpol.curve()?.cast();
-                *at_mut(&mut mid_edges, i)? = BRepLibMakeEdge::from_curve(&inter_curve)?.edge()?.clone().into_shape();
+                *at_mut(&mut mid_edges, i)? = BRepLibMakeEdge::from_curve(&inter_curve)?
+                    .edge()?
+                    .clone()
+                    .into_shape();
                 i = j;
             }
             i += 1;
@@ -849,7 +928,11 @@ impl BRepOffsetAPIMiddlePath {
                 the_dir1 = Direction3::from_vector(Vector3::between(a_circ.location(), pnt1))?;
                 the_dir2 = Direction3::from_vector(Vector3::between(a_circ.location(), pnt2))?;
                 the_angle = lpar - fpar;
-                let the_param = if an_edge.orientation() == Orientation::Forward { fpar } else { lpar };
+                let the_param = if an_edge.orientation() == Orientation::Forward {
+                    fpar
+                } else {
+                    lpar
+                };
                 the_tangent = curve.d1(the_param)?.1;
                 if an_edge.orientation() == Orientation::Reversed {
                     the_tangent.reverse();
@@ -857,7 +940,9 @@ impl BRepOffsetAPIMiddlePath {
             } else {
                 let an_axis = a_circ.axis();
                 let a_lin = rustycad_tkmath::gp::Line3::from(an_axis);
-                if !a_lin.contains(the_axis.location(), lin_tol) || !an_axis.is_parallel(the_axis, ang_tol) {
+                if !a_lin.contains(the_axis.location(), lin_tol)
+                    || !an_axis.is_parallel(the_axis, ang_tol)
+                {
                     similar_arcs = false;
                     break;
                 }

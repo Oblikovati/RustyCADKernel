@@ -3,8 +3,8 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The parameters of the new vertices on the new edge curves.
-use super::{EdgeMap, FaceMap, live};
 use super::add::located_curve;
+use super::{EdgeMap, FaceMap, live};
 use crate::draft::info::{DraftEdgeInfo, DraftVertexInfo};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::Vertex;
@@ -12,13 +12,17 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
-use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dBoundedCurve, Geom2dTrimmedCurve};
+use rustycad_tkg2d::geom2d::{
+    Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dBoundedCurve, Geom2dTrimmedCurve,
+};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dCurveOnSurface, Adaptor3dSurface};
-use rustycad_tkg3d::geom::{GeomCircle, GeomCurve, GeomEllipse, GeomHyperbola, GeomLine, GeomParabola, GeomSurface};
+use rustycad_tkg3d::geom::{
+    GeomCircle, GeomCurve, GeomEllipse, GeomHyperbola, GeomLine, GeomParabola, GeomSurface,
+};
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
-use rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve;
 use rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf;
+use rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve;
 use rustycad_tkgeombase::approx::{CurveOnSurface, CurveOnSurfaceOptions};
 use rustycad_tkgeombase::extrema::{ExtAlgo, ExtPC};
 use rustycad_tkgeombase::geom_proj_lib;
@@ -50,19 +54,31 @@ pub(super) fn parameter(c: &Handle<dyn GeomCurve>, p: Point3) -> Result<(f64, i3
     if ctyp.is_instance_name("Geom_Line") {
         param = elclib::parameter(&live(&cbase.clone().cast::<GeomLine>(), "line")?.lin(), p)?;
     } else if ctyp.is_instance_name("Geom_Circle") {
-        param = elclib::parameter(&live(&cbase.clone().cast::<GeomCircle>(), "circle")?.circ()?, p)?;
+        param = elclib::parameter(
+            &live(&cbase.clone().cast::<GeomCircle>(), "circle")?.circ()?,
+            p,
+        )?;
         if (2. * PI - param).abs() <= epsilon_two_pi() {
             param = 0.;
         }
     } else if ctyp.is_instance_name("Geom_Ellipse") {
-        param = elclib::parameter(&live(&cbase.clone().cast::<GeomEllipse>(), "ellipse")?.elips()?, p)?;
+        param = elclib::parameter(
+            &live(&cbase.clone().cast::<GeomEllipse>(), "ellipse")?.elips()?,
+            p,
+        )?;
         if (2. * PI - param).abs() <= epsilon_two_pi() {
             param = 0.;
         }
     } else if ctyp.is_instance_name("Geom_Parabola") {
-        param = elclib::parameter(&live(&cbase.clone().cast::<GeomParabola>(), "parabola")?.parab()?, p)?;
+        param = elclib::parameter(
+            &live(&cbase.clone().cast::<GeomParabola>(), "parabola")?.parab()?,
+            p,
+        )?;
     } else if ctyp.is_instance_name("Geom_Hyperbola") {
-        param = elclib::parameter(&live(&cbase.clone().cast::<GeomHyperbola>(), "hyperbola")?.hypr()?, p)?;
+        param = elclib::parameter(
+            &live(&cbase.clone().cast::<GeomHyperbola>(), "hyperbola")?.hypr()?,
+            p,
+        )?;
     } else {
         let the_curve = GeomAdaptorCurve::with_curve(c)?;
         let my_ext_pc = ExtPC::with_curve(p, &the_curve, 1.0e-10)?;
@@ -166,7 +182,8 @@ pub(super) fn smart_parameter(
     let p2d = Point2::new(u, v);
     let projector2d = ProjectPointOnCurve::with_curve(p2d, &new_c2d)?;
     if projector2d.nb_points() == 0 || projector2d.lower_distance()? > tol {
-        let mut bcurve: Handle<Geom2dBSplineCurve> = if !live(&new_c2d, "pcurve")?.is_instance_name("Geom2d_BSplineCurve")
+        let mut bcurve: Handle<Geom2dBSplineCurve> = if !live(&new_c2d, "pcurve")?
+            .is_instance_name("Geom2d_BSplineCurve")
         {
             geom2d_convert::curve_to_bspline_curve(&new_c2d, ParameterisationType::TgtThetaOver2)?
         } else {
@@ -183,18 +200,25 @@ pub(super) fn smart_parameter(
             pnt_array[1] = curve.pole(curve.nb_poles())?;
             pnt_array[2] = p2d;
         }
-        let patch: Handle<dyn Geom2dBoundedCurve> = Handle::new(Geom2dBezierCurve::new(&pnt_array)?).cast();
-        let mut concat = CompCurveToBSplineCurve::with_curve(&bounded_2d(&bcurve), ParameterisationType::QuasiAngular)?;
+        let patch: Handle<dyn Geom2dBoundedCurve> =
+            Handle::new(Geom2dBezierCurve::new(&pnt_array)?).cast();
+        let mut concat = CompCurveToBSplineCurve::with_curve(
+            &bounded_2d(&bcurve),
+            ParameterisationType::QuasiAngular,
+        )?;
         concat.add(&patch, tol, after)?;
         bcurve = concat.bspline_curve();
         new_c2d = bcurve.cast();
     }
     *einf.change_first_pc() = new_c2d.clone();
-    let hcur: Handle<dyn Adaptor2dCurve2d> = Handle::new(Geom2dAdaptorCurve::with_curve(&new_c2d)?).cast();
-    let hsur: Handle<dyn Adaptor3dSurface> = Handle::new(GeomAdaptorSurface::with_surface(s1)?).cast();
+    let hcur: Handle<dyn Adaptor2dCurve2d> =
+        Handle::new(Geom2dAdaptorCurve::with_curve(&new_c2d)?).cast();
+    let hsur: Handle<dyn Adaptor3dSurface> =
+        Handle::new(GeomAdaptorSurface::with_surface(s1)?).cast();
     let cons = Adaptor3dCurveOnSurface::with_curve(&hcur, &hsur)?;
     let hcons: Handle<dyn Adaptor3dCurve> = Handle::new(cons).cast();
-    let hsur2: Handle<dyn Adaptor3dSurface> = Handle::new(GeomAdaptorSurface::with_surface(s2)?).cast();
+    let hsur2: Handle<dyn Adaptor3dSurface> =
+        Handle::new(GeomAdaptorSurface::with_surface(s2)?).cast();
     let h_projector = HCompProjectedCurve::with_tolerances(&hsur2, &hcons, tol, tol)?;
     let (udeb, ufin) = h_projector.bounds(1)?;
     let max_seg = 20 + h_projector.nb_intervals(Continuity::C3)?;
@@ -287,7 +311,13 @@ pub(super) fn choose(
     let vtx_pnt = BRepTool::pnt(vtx)?;
     let prm = {
         let einf = the_e_map.change_from_key(&eref)?;
-        smart_or_plain(the_f_map, einf, &c, BRepTool::edge_tolerance(&eref)?, vtx_pnt)?
+        smart_or_plain(
+            the_f_map,
+            einf,
+            &c,
+            BRepTool::edge_tolerance(&eref)?,
+            vtx_pnt,
+        )?
     };
     let (_, tgref): (Point3, Vector3) = live(&c, "curve")?.d1(prm)?;
 
@@ -298,10 +328,17 @@ pub(super) fn choose(
         if !edg.is_same(&eref) {
             let einfo = the_e_map.change_from_key(&edg)?;
             if !einfo.second_face().is_null()
-                && BRepTool::continuity_on_faces(&edg, einfo.first_face(), einfo.second_face())? <= Continuity::C0
+                && BRepTool::continuity_on_faces(&edg, einfo.first_face(), einfo.second_face())?
+                    <= Continuity::C0
             {
                 c = located_curve(&edg)?;
-                let prm = smart_or_plain(the_f_map, einfo, &c, BRepTool::edge_tolerance(&edg)?, vtx_pnt)?;
+                let prm = smart_or_plain(
+                    the_f_map,
+                    einfo,
+                    &c,
+                    BRepTool::edge_tolerance(&edg)?,
+                    vtx_pnt,
+                )?;
                 let (_, tg): (Point3, Vector3) = live(&c, "curve")?.d1(prm)?;
                 if tg.cross_magnitude(tgref) > precision::confusion() {
                     break;
@@ -318,7 +355,9 @@ pub(super) fn choose(
     let einf2 = the_e_map.find_from_key(&e2)?;
     let einf = the_e_map.find_from_key(&eref)?;
     let other = if !einf.second_face().is_null() {
-        if einf2.first_face().is_same(einf.first_face()) || einf2.first_face().is_same(einf.second_face()) {
+        if einf2.first_face().is_same(einf.first_face())
+            || einf2.first_face().is_same(einf.second_face())
+        {
             einf2.second_face()
         } else {
             einf2.first_face()

@@ -41,7 +41,12 @@ fn find_rotation(
     angle: f64,
     neutral_plane: &Plane3,
 ) -> Result<Option<(Axis1, f64)>, Failure> {
-    let i2pl = QuadQuadGeo::planes(*pl, *neutral_plane, precision::angular(), precision::confusion())?;
+    let i2pl = QuadQuadGeo::planes(
+        *pl,
+        *neutral_plane,
+        precision::angular(),
+        precision::confusion(),
+    )?;
 
     if i2pl.is_done() && i2pl.type_inter()? == ResultType::Line {
         let li = i2pl.line(1)?;
@@ -53,7 +58,9 @@ fn find_rotation(
             let mut b = direction.dot(ny);
             let mut c = direction.dot(pl.axis().direction());
             let direct = pl.direct()?;
-            if (direct && oris == Orientation::Reversed) || (!direct && oris == Orientation::Forward) {
+            if (direct && oris == Orientation::Reversed)
+                || (!direct && oris == Orientation::Forward)
+            {
                 b = -b;
                 c = -c;
             }
@@ -77,7 +84,11 @@ fn find_rotation(
 }
 
 /// The rotated copy of a surface (`S->Rotated(Axe, Theta)`).
-fn rotated_surface(s: &Handle<dyn GeomSurface>, axe: Axis1, theta: f64) -> Result<Handle<dyn GeomSurface>, Failure> {
+fn rotated_surface(
+    s: &Handle<dyn GeomSurface>,
+    axe: Axis1,
+    theta: f64,
+) -> Result<Handle<dyn GeomSurface>, Failure> {
     Ok(live(s, "surface")?.rotated(axe, theta)?.cast())
 }
 
@@ -108,7 +119,8 @@ pub(super) fn new_surface(
         if testdir.abs() <= 1. - precision::angular() {
             return Ok(new_s);
         }
-        let cy: Cylinder3 = live(&s.clone().cast::<GeomCylindricalSurface>(), "cylinder")?.cylinder()?;
+        let cy: Cylinder3 =
+            live(&s.clone().cast::<GeomCylindricalSurface>(), "cylinder")?.cylinder()?;
         testdir = direction.dot(cy.axis().direction());
         if testdir.abs() <= 1. - precision::angular() {
             return Ok(new_s);
@@ -137,7 +149,9 @@ pub(super) fn new_surface(
             // Pb : Where is the material???
             let mut alpha = angle;
             let direct = axcone.direct()?;
-            if (direct && oris == Orientation::Reversed) || (!direct && oris == Orientation::Forward) {
+            if (direct && oris == Orientation::Reversed)
+                || (!direct && oris == Orientation::Forward)
+            {
                 alpha = -alpha;
             }
 
@@ -170,7 +184,12 @@ pub(super) fn new_surface(
             return Ok(new_s);
         }
 
-        let i2s = QuadQuadGeo::plane_cone(*neutral_plane, co1, precision::angular(), precision::confusion())?;
+        let i2s = QuadQuadGeo::plane_cone(
+            *neutral_plane,
+            co1,
+            precision::angular(),
+            precision::confusion(),
+        )?;
         if !i2s.is_done() || i2s.type_inter()? != ResultType::Circle {
             return Ok(new_s);
         }
@@ -251,7 +270,12 @@ pub(super) fn new_curve(
         norm = Direction3::from_vector(d1u.crossed(d1v))?;
     } else if surface.is_instance_name("Geom_ConicalSurface") {
         let co = live(&s.clone().cast::<GeomConicalSurface>(), "cone")?.cone()?;
-        let (u, v) = elslib::cone_parameters(co.position(), co.ref_radius(), co.semi_angle(), lin.location());
+        let (u, v) = elslib::cone_parameters(
+            co.position(),
+            co.ref_radius(),
+            co.semi_angle(),
+            lin.location(),
+        );
         let (_, d1u, d1v) = elslib::cone_d1(u, v, co.position(), co.ref_radius(), co.semi_angle());
         norm = Direction3::from_vector(d1u.crossed(d1v))?;
     }
@@ -262,7 +286,8 @@ pub(super) fn new_curve(
             norm.reverse();
         }
         let axrot = Axis1::new(ilipl.point(1)?, norm.crossed(direction)?);
-        let mut lires = Line3::from(Axis1::new(ilipl.point(1)?, direction)).rotated(axrot, angle)?;
+        let mut lires =
+            Line3::from(Axis1::new(ilipl.point(1)?, direction)).rotated(axrot, angle)?;
         if lires.direction().dot(lin.direction()) < 0. {
             lires.reverse();
         }

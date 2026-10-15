@@ -7,7 +7,8 @@ use rustycad_tkbrep::{
 use rustycad_tkg3d::{adaptor3d::Adaptor3dSurface, top_abs::ShapeEnum};
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::geom_abs::{JoinType, SurfaceType};
-use rustycad_tkoffset::brep_offset::{MakeOffsetOptions, BRepOffsetError, BRepOffsetMakeOffset, BRepOffsetMode,
+use rustycad_tkoffset::brep_offset::{
+    BRepOffsetError, BRepOffsetMakeOffset, BRepOffsetMode, MakeOffsetOptions,
 };
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder;
 use rustycad_tktopalgo::{
@@ -48,7 +49,19 @@ fn cylindrical_side_with_both_caps_builds_two_native_toroidal_joins()
 
 fn maker_for_offset(input: &Shape, offset: f64) -> BRepOffsetMakeOffset {
     let mut maker = BRepOffsetMakeOffset::new();
-    maker.initialize(input, offset, 1.0e-7, MakeOffsetOptions { mode: BRepOffsetMode::Skin, intersection: false, self_inter: false, join: JoinType::Arc, thickening: false, remove_int_edges: false });
+    maker.initialize(
+        input,
+        offset,
+        1.0e-7,
+        MakeOffsetOptions {
+            mode: BRepOffsetMode::Skin,
+            intersection: false,
+            self_inter: false,
+            join: JoinType::Arc,
+            thickening: false,
+            remove_int_edges: false,
+        },
+    );
     maker
 }
 
@@ -98,7 +111,11 @@ fn assert_generated_connectors(
             }
             tested.push(candidate.clone());
             assert!(!maker.offset_edges_from_shapes().has_image(&candidate));
-            let generated = maker.generated(&candidate)?.iter().cloned().collect::<Vec<_>>();
+            let generated = maker
+                .generated(&candidate)?
+                .iter()
+                .cloned()
+                .collect::<Vec<_>>();
             assert_eq!(generated.len(), 1);
             assert_eq!(generated[0].shape_type()?, ShapeEnum::Face);
         }
@@ -145,4 +162,3 @@ fn cylinder_closed_shell() -> Result<(Shape, Vec<Face>), rustycad_tkernel::stand
 fn count(shape: &Shape, kind: ShapeEnum) -> Result<usize, rustycad_tkernel::standard::Failure> {
     Ok(Explorer::new(shape, kind, ShapeEnum::Shape)?.count())
 }
-

@@ -319,7 +319,10 @@ impl DraftVertexInfo {
     pub fn parameter(&mut self, e: &Edge) -> Result<f64, Failure> {
         match self.seek(e) {
             Some(i) => Ok(self.my_params[i]),
-            None => Err(Failure::with_message("Standard_DomainError", "Draft_VertexInfo::Parameter")),
+            None => Err(Failure::with_message(
+                "Standard_DomainError",
+                "Draft_VertexInfo::Parameter",
+            )),
         }
     }
 

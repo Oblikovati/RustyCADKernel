@@ -7,9 +7,9 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{GeomCurve, GeomPlane, GeomSurface};
 use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkgeomalgo::law::{LawFunction, LawLinear};
 use rustycad_tkgeombase::gc::MakeArcOfCircle;
 use rustycad_tkgeombase::gprop::GProps;
-use rustycad_tkgeomalgo::law::{LawFunction, LawLinear};
 use rustycad_tkmath::gp::{Axis1, Axis2, Circle3, Direction3, Plane3, Point3, Transform3, Vector3};
 use rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipeShell;
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep;
@@ -34,8 +34,13 @@ fn circle_wire(circle: Circle3) -> Result<Wire, Failure> {
 }
 
 /// A linear scaling law over the curve range from 1 to `end_value`.
-fn linear_law(curve: &Handle<dyn GeomCurve>, end_value: f64) -> Result<Handle<dyn LawFunction>, Failure> {
-    let c = curve.get().ok_or_else(|| Failure::with_message("Standard_NullObject", "null spine"))?;
+fn linear_law(
+    curve: &Handle<dyn GeomCurve>,
+    end_value: f64,
+) -> Result<Handle<dyn LawFunction>, Failure> {
+    let c = curve
+        .get()
+        .ok_or_else(|| Failure::with_message("Standard_NullObject", "null spine"))?;
     let law = Handle::new(LawLinear::new());
     law.get()
         .ok_or_else(|| Failure::with_message("Standard_NullObject", "null law"))?
@@ -90,7 +95,10 @@ fn build_bent_tube(
     }
     let a_radius_l = the_dia1 / 2.0;
     let a_radius_r = the_dia2 / 2.0;
-    let an_origin = Axis2::new(Point3::new(5000.0, -300.0, 1000.0), Direction3::new(0.0, -1.0, -1.0)?)?;
+    let an_origin = Axis2::new(
+        Point3::new(5000.0, -300.0, 1000.0),
+        Direction3::new(0.0, -1.0, -1.0)?,
+    )?;
     let a_circ1_plane = Plane3::new(an_origin.location(), an_origin.direction())?;
     let a_face_circle = Circle3::new(an_origin, a_radius_l)?;
     let an_out_face_circle = Circle3::new(an_origin, a_radius_l + the_wall_thickness)?;
@@ -99,12 +107,18 @@ fn build_bent_tube(
         .translated(Vector3::from(an_origin.x_direction().xyz()) * the_major_radius);
     let a_circ_axis = Axis1::new(a_circ_center, an_origin.y_direction());
     let a_circ2_plane = a_circ1_plane.rotated(a_circ_axis, a_bend_angle)?;
-    let a_spine_axis = Axis2::with_x_direction(a_circ_center, an_origin.y_direction(), -an_origin.x_direction())?;
+    let a_spine_axis = Axis2::with_x_direction(
+        a_circ_center,
+        an_origin.y_direction(),
+        -an_origin.x_direction(),
+    )?;
     let a_spine_circle = Circle3::new(a_spine_axis, the_major_radius)?;
     let a_wire1 = circle_wire(a_face_circle)?;
     let an_out_wire = circle_wire(an_out_face_circle)?;
     let a_spine_curve: Handle<dyn GeomCurve> =
-        MakeArcOfCircle::from_parameters(a_spine_circle, 0.0, a_bend_angle, true)?.value()?.cast();
+        MakeArcOfCircle::from_parameters(a_spine_circle, 0.0, a_bend_angle, true)?
+            .value()?
+            .cast();
     let a_law1 = linear_law(&a_spine_curve, a_radius_r / a_radius_l)?;
     let a_law2 = linear_law(
         &a_spine_curve,
@@ -122,11 +136,21 @@ fn build_bent_tube(
         return Ok(None);
     };
     // Build opening face at start of bend (annular ring)
-    let Some(a_face1) = ring_face(a_circ1_plane, &a_mk_pipe2.first_shape()?, &a_mk_pipe1.first_shape()?)? else {
+    let Some(a_face1) = ring_face(
+        a_circ1_plane,
+        &a_mk_pipe2.first_shape()?,
+        &a_mk_pipe1.first_shape()?,
+    )?
+    else {
         return Ok(None);
     };
     // Build opening face at end of bend (annular ring)
-    let Some(a_face2) = ring_face(a_circ2_plane, &a_mk_pipe2.last_shape()?, &a_mk_pipe1.last_shape()?)? else {
+    let Some(a_face2) = ring_face(
+        a_circ2_plane,
+        &a_mk_pipe2.last_shape()?,
+        &a_mk_pipe1.last_shape()?,
+    )?
+    else {
         return Ok(None);
     };
     // Assemble tube shell from inner pipe face, outer pipe face, and two annular ring faces
@@ -170,8 +194,14 @@ fn bug332_bent_tube_with_scaling_law() -> Result<(), Failure> {
     let built = build_bent_tube(a_wall_thickness, a_dia1, a_dia2, a_major_radius, a_length)?;
     let (a_wall_solid, a_gas_solid) = built.expect("buildBentTube construction failed");
     // Validate both solids
-    assert!(BRepCheckAnalyzer::new(a_wall_solid.as_ref(), true, false, false)?.is_valid()?, "wallSolid is not valid");
-    assert!(BRepCheckAnalyzer::new(&a_gas_solid, true, false, false)?.is_valid()?, "gasSolid is not valid");
+    assert!(
+        BRepCheckAnalyzer::new(a_wall_solid.as_ref(), true, false, false)?.is_valid()?,
+        "wallSolid is not valid"
+    );
+    assert!(
+        BRepCheckAnalyzer::new(&a_gas_solid, true, false, false)?.is_valid()?,
+        "gasSolid is not valid"
+    );
     // Collect all wire lengths in wallSolid
     let mut a_wire_lengths = Vec::new();
     let mut an_exp = Explorer::new(a_wall_solid.as_ref(), ShapeEnum::Wire, ShapeEnum::Shape)?;
@@ -187,10 +217,19 @@ fn bug332_bent_tube_with_scaling_law() -> Result<(), Failure> {
     let a_exp_len2 = a_pi * (a_dia1 + 2.0 * a_wall_thickness);
     let a_exp_len4 = a_pi * (a_dia2 + 2.0 * a_wall_thickness);
     let a_tol = 0.001;
-    assert!(count_matching(&a_wire_lengths, a_exp_len1, a_tol) >= 1, "No wire found with circumference pi*dia1 = {a_exp_len1}");
+    assert!(
+        count_matching(&a_wire_lengths, a_exp_len1, a_tol) >= 1,
+        "No wire found with circumference pi*dia1 = {a_exp_len1}"
+    );
     // aExpLen2 and aExpLen3 are identical (dia2/2 == dia1/2 + wall), so expect at least 2 matches
-    assert!(count_matching(&a_wire_lengths, a_exp_len2, a_tol) >= 2, "Expected 2 wires with circumference pi*50 = {a_exp_len2}");
-    assert!(count_matching(&a_wire_lengths, a_exp_len4, a_tol) >= 1, "No wire found with circumference pi*(dia2+2*wall) = {a_exp_len4}");
+    assert!(
+        count_matching(&a_wire_lengths, a_exp_len2, a_tol) >= 2,
+        "Expected 2 wires with circumference pi*50 = {a_exp_len2}"
+    );
+    assert!(
+        count_matching(&a_wire_lengths, a_exp_len4, a_tol) >= 1,
+        "No wire found with circumference pi*(dia2+2*wall) = {a_exp_len4}"
+    );
     Ok(())
 }
 
@@ -207,7 +246,10 @@ fn transformed_wire(wire: &Wire, trsf: Transform3) -> Result<Wire, Failure> {
 // both kernels throw Standard_OutOfRange from Build (the first skip).
 #[test]
 fn bug24909_2_closed_circular_spine() -> Result<(), Failure> {
-    let a_circle = Circle3::new(Axis2::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 0.0, 1.0)?)?, 40.0)?;
+    let a_circle = Circle3::new(
+        Axis2::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 0.0, 1.0)?)?,
+        40.0,
+    )?;
     let a_base_wire = circle_wire(a_circle)?;
     let mut a_rotate = Transform3::default();
     a_rotate.set_rotation(

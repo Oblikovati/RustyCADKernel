@@ -20,15 +20,16 @@ use rustycad_tkernel::ncollection::{IndexedDataMap, List};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkg2d::geom2d::Geom2dCurve;
-use rustycad_tkg3d::geom::{
-    GeomCurve, GeomRectangularTrimmedSurface, GeomSurface, GeomSurfaceOfLinearExtrusion, GeomTrimmedCurve,
-};
 use rustycad_tkg3d::geom::GeomSweptSurface;
+use rustycad_tkg3d::geom::{
+    GeomCurve, GeomRectangularTrimmedSurface, GeomSurface, GeomSurfaceOfLinearExtrusion,
+    GeomTrimmedCurve,
+};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::geom_proj_lib;
 use rustycad_tkmath::geom_abs::Shape as Continuity;
-use rustycad_tkmath::gp::{Direction3, Plane3, Point3, Vector2};
 use rustycad_tkmath::gp::Point2;
+use rustycad_tkmath::gp::{Direction3, Plane3, Point3, Vector2};
 use std::f64::consts::PI;
 
 /// The face records of the draft, by face.
@@ -59,9 +60,12 @@ pub(super) fn live<'a, T: ?Sized + rustycad_tkernel::standard::RuntimeTyped>(
     handle: &'a Handle<T>,
     what: &str,
 ) -> Result<&'a T, Failure> {
-    handle
-        .get()
-        .ok_or_else(|| Failure::with_message("Standard_NullObject", &format!("Draft_Modification: null {what}")))
+    handle.get().ok_or_else(|| {
+        Failure::with_message(
+            "Standard_NullObject",
+            &format!("Draft_Modification: null {what}"),
+        )
+    })
 }
 
 /// Standard_DomainError of a query before a successful `Perform`.
@@ -70,9 +74,15 @@ fn not_done_domain() -> Failure {
 }
 
 /// The basis of a rectangular trimmed surface (`DynamicType() ==`), else the surface.
-pub(super) fn untrimmed_surface(s: &Handle<dyn GeomSurface>) -> Result<Handle<dyn GeomSurface>, Failure> {
+pub(super) fn untrimmed_surface(
+    s: &Handle<dyn GeomSurface>,
+) -> Result<Handle<dyn GeomSurface>, Failure> {
     if live(s, "surface")?.is_instance_name("Geom_RectangularTrimmedSurface") {
-        return Ok(live(&s.clone().cast::<GeomRectangularTrimmedSurface>(), "surface")?.basis_surface());
+        return Ok(live(
+            &s.clone().cast::<GeomRectangularTrimmedSurface>(),
+            "surface",
+        )?
+        .basis_surface());
     }
     Ok(s.clone())
 }
@@ -124,7 +134,12 @@ impl DraftModification {
             ..DraftState::default()
         };
         if !s.is_null() {
-            topexp::map_shapes_and_ancestors(s, ShapeEnum::Edge, ShapeEnum::Face, &mut state.my_ef_map)?;
+            topexp::map_shapes_and_ancestors(
+                s,
+                ShapeEnum::Edge,
+                ShapeEnum::Face,
+                &mut state.my_ef_map,
+            )?;
         }
         Ok(Self {
             parent: StandardTransient::default(),
@@ -145,7 +160,12 @@ impl DraftModification {
         state.clear();
         if !s.is_null() {
             let shape = state.my_shape.clone();
-            topexp::map_shapes_and_ancestors(&shape, ShapeEnum::Edge, ShapeEnum::Face, &mut state.my_ef_map)?;
+            topexp::map_shapes_and_ancestors(
+                &shape,
+                ShapeEnum::Edge,
+                ShapeEnum::Face,
+                &mut state.my_ef_map,
+            )?;
         }
         Ok(())
     }
@@ -164,7 +184,10 @@ impl DraftModification {
     ) -> Result<bool, Failure> {
         let mut state = self.state.write();
         if !state.bad_shape.is_null() {
-            return Err(Failure::with_message("Standard_ConstructionError", "Draft_Modification::Add"));
+            return Err(Failure::with_message(
+                "Standard_ConstructionError",
+                "Draft_Modification::Add",
+            ));
         }
         if state.my_comp {
             state.clear();
@@ -207,16 +230,27 @@ impl DraftModification {
     pub fn connected_faces(&self, f: &Face) -> Result<List<Shape>, Failure> {
         let mut state = self.state.write();
         if !state.my_f_map.contains(f) {
-            return Err(Failure::with_message("Standard_NoSuchObject", "Draft_Modification::ConnectedFaces"));
+            return Err(Failure::with_message(
+                "Standard_NoSuchObject",
+                "Draft_Modification::ConnectedFaces",
+            ));
         }
         if !state.is_done() {
-            return Err(Failure::with_message("StdFail_NotDone", "Draft_Modification::ConnectedFaces"));
+            return Err(Failure::with_message(
+                "StdFail_NotDone",
+                "Draft_Modification::ConnectedFaces",
+            ));
         }
         state.conne_f.clear();
         state.cur_face = state.my_f_map.find_from_key(f)?.root_face().clone();
         for i in 1..=state.my_f_map.extent() {
             let the_f = state.my_f_map.find_key(i)?.clone();
-            if state.my_f_map.find_from_key(&the_f)?.root_face().is_same(&state.cur_face) {
+            if state
+                .my_f_map
+                .find_from_key(&the_f)?
+                .root_face()
+                .is_same(&state.cur_face)
+            {
                 state.conne_f.append(the_f);
             }
         }
@@ -228,7 +262,10 @@ impl DraftModification {
     pub fn modified_faces(&self) -> Result<List<Shape>, Failure> {
         let mut state = self.state.write();
         if !state.bad_shape.is_null() {
-            return Err(Failure::with_message("StdFail_NotDone", "Draft_Modification::ModifiedFaces"));
+            return Err(Failure::with_message(
+                "StdFail_NotDone",
+                "Draft_Modification::ModifiedFaces",
+            ));
         }
         state.conne_f.clear();
         for i in 1..=state.my_f_map.extent() {
@@ -261,14 +298,22 @@ impl DraftState {
     /// `Remove(F)`.
     fn remove(&mut self, f: &Face) -> Result<(), Failure> {
         if !self.my_f_map.contains(f) || self.my_comp {
-            return Err(Failure::with_message("Standard_NoSuchObject", "Draft_Modification::Remove"));
+            return Err(Failure::with_message(
+                "Standard_NoSuchObject",
+                "Draft_Modification::Remove",
+            ));
         }
 
         self.conne_f.clear();
         self.cur_face = self.my_f_map.find_from_key(f)?.root_face().clone();
         for i in 1..=self.my_f_map.extent() {
             let the_f = self.my_f_map.find_key(i)?.clone();
-            if self.my_f_map.find_from_key(&the_f)?.root_face().is_same(&self.cur_face) {
+            if self
+                .my_f_map
+                .find_from_key(&the_f)?
+                .root_face()
+                .is_same(&self.cur_face)
+            {
                 if the_f.is_same(&self.bad_shape) {
                     self.bad_shape.nullify();
                 }
@@ -282,7 +327,12 @@ impl DraftState {
         self.conne_f.clear();
         for i in 1..=self.my_e_map.extent() {
             let the_e = self.my_e_map.find_key(i)?.clone();
-            if self.my_e_map.find_from_key(&the_e)?.root_face().is_same(&self.cur_face) {
+            if self
+                .my_e_map
+                .find_from_key(&the_e)?
+                .root_face()
+                .is_same(&self.cur_face)
+            {
                 self.conne_f.append(the_e);
             }
         }
@@ -294,7 +344,11 @@ impl DraftState {
 
     /// `NewParameter(V, E, P, Tol)`: the new parameter and tolerance of the vertex on the
     /// edge, `None` for a vertex not modified.
-    pub(super) fn new_parameter(&mut self, v: &Vertex, e: &Edge) -> Result<Option<(f64, f64)>, Failure> {
+    pub(super) fn new_parameter(
+        &mut self,
+        v: &Vertex,
+        e: &Edge,
+    ) -> Result<Option<(f64, f64)>, Failure> {
         if !self.is_done() {
             return Err(not_done_domain());
         }
@@ -384,7 +438,12 @@ impl BRepToolsModification for DraftModification {
     }
 
     /// `NewPoint(V, P, Tol)`: the new point of a modified vertex.
-    fn new_point(&self, vertex: &Vertex, point: &mut Point3, tolerance: &mut f64) -> Result<bool, Failure> {
+    fn new_point(
+        &self,
+        vertex: &Vertex,
+        point: &mut Point3,
+        tolerance: &mut f64,
+    ) -> Result<bool, Failure> {
         let state = self.state.read();
         if !state.is_done() {
             return Err(not_done_domain());
@@ -444,17 +503,26 @@ impl BRepToolsModification for DraftModification {
             lp = tc.last_parameter();
             let tc: Handle<dyn GeomCurve> = Handle::new(tc).cast();
             BRepBuilder::default().range(new_edge, fp, lp, false)?;
-            (*curve, *tolerance) = geom_proj_lib::curve2d_range_tolerance(&tc, (fp, lp), &sb, *tolerance)?;
+            (*curve, *tolerance) =
+                geom_proj_lib::curve2d_range_tolerance(&tc, (fp, lp), &sb, *tolerance)?;
         }
 
         if live(&sb, "surface")?.is_instance_name("Geom_RectangularTrimmedSurface") {
-            sb = live(&sb.clone().cast::<GeomRectangularTrimmedSurface>(), "surface")?.basis_surface();
+            sb = live(
+                &sb.clone().cast::<GeomRectangularTrimmedSurface>(),
+                "surface",
+            )?
+            .basis_surface();
         }
         let surface = live(&sb, "surface")?;
 
         let mut je_recadre = false;
         if surface.is_instance_name("Geom_SurfaceOfLinearExtrusion") {
-            let a_c = live(&sb.clone().cast::<GeomSurfaceOfLinearExtrusion>(), "surface")?.basis_curve();
+            let a_c = live(
+                &sb.clone().cast::<GeomSurfaceOfLinearExtrusion>(),
+                "surface",
+            )?
+            .basis_curve();
             if live(&a_c, "curve")?.is_instance_name("Geom_Circle") {
                 je_recadre = true;
             }
@@ -468,7 +536,8 @@ impl BRepToolsModification for DraftModification {
         if je_recadre {
             let vectra = Vector2::new(2. * PI, 0.);
             let a_c2de = BRepTool::curve_on_face(edge, face)?;
-            let pf: Point2 = live(&a_c2de.pcurve, "pcurve")?.value(0.5 * (a_c2de.first + a_c2de.last))?;
+            let pf: Point2 =
+                live(&a_c2de.pcurve, "pcurve")?.value(0.5 * (a_c2de.first + a_c2de.last))?;
             let pcurve = live(curve, "pcurve")?;
             let new_pf: Point2 = pcurve.value(0.5 * (fp + lp))?;
             let a_d2 = new_pf.square_distance(pf);
@@ -487,7 +556,8 @@ impl BRepToolsModification for DraftModification {
         }
 
         let a_c3d = BRepTool::curve(new_edge)?;
-        *tolerance = brep_tools::eval_and_update_tol(new_edge, &a_c3d.0, curve, &sb, a_c3d.1, a_c3d.2)?;
+        *tolerance =
+            brep_tools::eval_and_update_tol(new_edge, &a_c3d.0, curve, &sb, a_c3d.1, a_c3d.2)?;
         Ok(true)
     }
 

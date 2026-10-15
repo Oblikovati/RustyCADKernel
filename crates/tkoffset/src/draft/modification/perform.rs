@@ -16,13 +16,13 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{
-    GeomBSplineCurve, GeomBoundedCurve, GeomCircle, GeomCurve, GeomCylindricalSurface, GeomLine, GeomPlane,
-    GeomSurface, GeomSurfaceOfLinearExtrusion, GeomSweptSurface,
+    GeomBSplineCurve, GeomBoundedCurve, GeomCircle, GeomCurve, GeomCylindricalSurface, GeomLine,
+    GeomPlane, GeomSurface, GeomSurfaceOfLinearExtrusion, GeomSweptSurface,
 };
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkg3d::top_abs::Orientation;
-use rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf;
 use rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve;
+use rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf;
 use rustycad_tkgeomalgo::geom_int::{GeomIntIntSS, GeomIntIntSSApprox};
 use rustycad_tkgeomalgo::int_curve_surface::HInter;
 use rustycad_tkgeombase::extrema::{ExtAlgo, ExtCS, ExtPC};
@@ -49,7 +49,10 @@ impl DraftState {
     /// `Perform()`.
     pub(super) fn perform(&mut self) -> Result<(), Failure> {
         if !self.bad_shape.is_null() {
-            return Err(Failure::with_message("Standard_ConstructionError", "Draft_Modification::Perform"));
+            return Err(Failure::with_message(
+                "Standard_ConstructionError",
+                "Draft_Modification::Perform",
+            ));
         }
 
         if !self.my_comp {
@@ -107,7 +110,8 @@ impl DraftState {
                 };
                 let pp1 = p1.pln();
                 let pp2 = p2.pln();
-                let i2p = QuadQuadGeo::planes(pp1, pp2, precision::angular(), precision::confusion())?;
+                let i2p =
+                    QuadQuadGeo::planes(pp1, pp2, precision::angular(), precision::confusion())?;
                 if !i2p.is_done() || i2p.type_inter()? != ResultType::Line {
                     self.fail(DraftErrorStatus::FaceRecomputation, fk.into_shape());
                     return Ok(false);
@@ -122,12 +126,19 @@ impl DraftState {
                 let mut dir_ref = Direction3::default();
                 let rs = live(&ref_surf, "surface")?;
                 if rs.is_instance_name("Geom_CylindricalSurface") {
-                    let axe_ref = live(&ref_surf.clone().cast::<GeomCylindricalSurface>(), "cylinder")?
-                        .cylinder()?
-                        .position();
+                    let axe_ref = live(
+                        &ref_surf.clone().cast::<GeomCylindricalSurface>(),
+                        "cylinder",
+                    )?
+                    .cylinder()?
+                    .position();
                     dir_ref = axe_ref.direction();
                 } else if rs.is_instance_name("Geom_SurfaceOfLinearExtrusion") {
-                    dir_ref = live(&ref_surf.clone().cast::<GeomSurfaceOfLinearExtrusion>(), "extrusion")?.direction();
+                    dir_ref = live(
+                        &ref_surf.clone().cast::<GeomSurfaceOfLinearExtrusion>(),
+                        "extrusion",
+                    )?
+                    .direction();
                 }
 
                 if extrdir.dot(dir_ref) < 0. {
@@ -141,7 +152,8 @@ impl DraftState {
                     Handle::new(GeomSurfaceOfLinearExtrusion::new(&ccir, extrdir)?).cast();
 
                 let (_umin, _umax, mut vmin, mut vmax) = brep_tools::uv_bounds(&fk)?;
-                if !precision::is_negative_infinite(vmin) && !precision::is_positive_infinite(vmax) {
+                if !precision::is_negative_infinite(vmin) && !precision::is_positive_infinite(vmax)
+                {
                     let deltav = 2. * (vmax - vmin);
                     vmin -= deltav;
                     vmax += deltav;
@@ -183,7 +195,8 @@ impl DraftState {
                         None => return Ok(false),
                     }
                 };
-                *self.my_e_map.change_from_index(ii)?.change_geometry() = super::down_cast_basis(&new_c);
+                *self.my_e_map.change_from_index(ii)?.change_geometry() =
+                    super::down_cast_basis(&new_c);
             } else if !new_geometry {
                 // set existing curve 3D
                 c = super::down_cast_basis(&c);
@@ -209,7 +222,11 @@ impl DraftState {
         };
 
         let mut s1 = self.my_f_map.find_from_key(&first_face)?.geometry().clone();
-        let mut s2 = self.my_f_map.find_from_key(&second_face)?.geometry().clone();
+        let mut s2 = self
+            .my_f_map
+            .find_from_key(&second_face)?
+            .geometry()
+            .clone();
 
         let mut detrompeur = 0;
 
@@ -258,14 +275,18 @@ impl DraftState {
 
         let mut pc1 = true; // KPart on S1
         let (ls1, ls2) = (live(&s1, "surface")?, live(&s2, "surface")?);
-        if ls1.is_instance_name("Geom_SurfaceOfLinearExtrusion") && ls2.is_instance_name("Geom_Plane") {
+        if ls1.is_instance_name("Geom_SurfaceOfLinearExtrusion")
+            && ls2.is_instance_name("Geom_Plane")
+        {
             k_part = true;
             axis = live(&as_plane(&s2), "plane")?.pln().position();
             let extrusion = s1.clone().cast::<GeomSurfaceOfLinearExtrusion>();
             let extrusion = live(&extrusion, "extrusion")?;
             the_new_curve = extrusion.basis_curve();
             the_dir_extr = extrusion.direction();
-        } else if ls2.is_instance_name("Geom_SurfaceOfLinearExtrusion") && ls1.is_instance_name("Geom_Plane") {
+        } else if ls2.is_instance_name("Geom_SurfaceOfLinearExtrusion")
+            && ls1.is_instance_name("Geom_Plane")
+        {
             k_part = true;
             pc1 = false;
             axis = live(&as_plane(&s1), "plane")?.pln().position();
@@ -290,7 +311,8 @@ impl DraftState {
         if k_part {
             // direct calculation of NewC
             let circ = live(&a_circ, "circle")?.circ()?;
-            let a_local_real = Vector3::between(circ.location(), axis.location()).dot(Vector3::from(axis.direction()));
+            let a_local_real = Vector3::between(circ.location(), axis.location())
+                .dot(Vector3::from(axis.direction()));
             let cos = the_dir_extr.dot(axis.direction());
             let vv = Vector3::from(the_dir_extr) * (a_local_real / cos);
             new_c = live(&the_new_curve, "curve")?.translated(vv)?.cast();
@@ -309,7 +331,11 @@ impl DraftState {
             }
         } else {
             s1 = self.my_f_map.find_from_key(&first_face)?.geometry().clone();
-            s2 = self.my_f_map.find_from_key(&second_face)?.geometry().clone();
+            s2 = self
+                .my_f_map
+                .find_from_key(&second_face)?
+                .geometry()
+                .clone();
 
             // PCurves are not calculated immediately for 2 reasons:
             // 1 - If ProjLib should make an Approx, it is stupid to approximate the
@@ -327,7 +353,10 @@ impl DraftState {
             )?;
 
             if !i2s.is_done() || i2s.nb_lines() <= 0 {
-                self.fail(DraftErrorStatus::EdgeRecomputation, the_edge.clone().into_shape());
+                self.fail(
+                    DraftErrorStatus::EdgeRecomputation,
+                    the_edge.clone().into_shape(),
+                );
                 return Ok(None);
             }
 
@@ -377,7 +406,8 @@ impl DraftState {
                                 }
                                 if detrompeur != 0 && detrompeur != 4 {
                                     let (mut ul, mut vl, mut uf, mut vf) = (0., 0., 0., 0.);
-                                    let (mut ufprim, mut ulprim, mut vfprim, mut vlprim) = (0., 0., 0., 0.);
+                                    let (mut ufprim, mut ulprim, mut vfprim, mut vlprim) =
+                                        (0., 0., 0., 0.);
 
                                     let ts = live(&the_surf, "surface")?;
                                     if ts.is_instance_name("Geom_Plane") {
@@ -385,17 +415,36 @@ impl DraftState {
                                         let pl = live(&as_plane(&s2), "plane")?.pln();
                                         (ul, vl) = elslib::plane_parameters(pl.position(), plv);
                                         (uf, vf) = elslib::plane_parameters(pl.position(), pfv);
-                                        (ulprim, vlprim) = elslib::plane_parameters(pl.position(), plvprim);
-                                        (ufprim, vfprim) = elslib::plane_parameters(pl.position(), pfvprim);
-                                    } else if ts.is_instance_name("Geom_CylindricalSurface") {
-                                        let cy = live(&s2.clone().cast::<GeomCylindricalSurface>(), "cylinder")?
-                                            .cylinder()?;
-                                        (ul, vl) = elslib::cylinder_parameters(cy.position(), cy.radius(), plv);
-                                        (uf, vf) = elslib::cylinder_parameters(cy.position(), cy.radius(), pfv);
                                         (ulprim, vlprim) =
-                                            elslib::cylinder_parameters(cy.position(), cy.radius(), plvprim);
+                                            elslib::plane_parameters(pl.position(), plvprim);
                                         (ufprim, vfprim) =
-                                            elslib::cylinder_parameters(cy.position(), cy.radius(), pfvprim);
+                                            elslib::plane_parameters(pl.position(), pfvprim);
+                                    } else if ts.is_instance_name("Geom_CylindricalSurface") {
+                                        let cy = live(
+                                            &s2.clone().cast::<GeomCylindricalSurface>(),
+                                            "cylinder",
+                                        )?
+                                        .cylinder()?;
+                                        (ul, vl) = elslib::cylinder_parameters(
+                                            cy.position(),
+                                            cy.radius(),
+                                            plv,
+                                        );
+                                        (uf, vf) = elslib::cylinder_parameters(
+                                            cy.position(),
+                                            cy.radius(),
+                                            pfv,
+                                        );
+                                        (ulprim, vlprim) = elslib::cylinder_parameters(
+                                            cy.position(),
+                                            cy.radius(),
+                                            plvprim,
+                                        );
+                                        (ufprim, vfprim) = elslib::cylinder_parameters(
+                                            cy.position(),
+                                            cy.radius(),
+                                            pfvprim,
+                                        );
                                     } else {
                                         detrompeur = 4;
                                     }
@@ -442,7 +491,10 @@ impl DraftState {
                     }
                 }
                 if imin == 0 {
-                    self.fail(DraftErrorStatus::EdgeRecomputation, the_edge.clone().into_shape());
+                    self.fail(
+                        DraftErrorStatus::EdgeRecomputation,
+                        the_edge.clone().into_shape(),
+                    );
                     return Ok(None);
                 }
 
@@ -475,21 +527,36 @@ impl DraftState {
                 // Find the first curve to glue
                 let mut candidates: Vec<Handle<dyn GeomCurve>> = Vec::new();
                 let ls1 = live(&s1, "surface")?;
-                if ls1.is_instance_name("Geom_CylindricalSurface") || ls1.is_instance_name("Geom_ConicalSurface") {
+                if ls1.is_instance_name("Geom_CylindricalSurface")
+                    || ls1.is_instance_name("Geom_ConicalSurface")
+                {
                     for i in 1..=i2s.nb_lines() {
                         let a_curve = i2s.line(i)?;
                         let ac = live(&a_curve, "curve")?;
                         let mut pnt = ac.value(ac.first_parameter())?;
-                        let mut projector =
-                            ProjectPointOnSurf::with_tolerance(pnt, &s1, precision::confusion(), ExtAlgo::Grad)?;
+                        let mut projector = ProjectPointOnSurf::with_tolerance(
+                            pnt,
+                            &s1,
+                            precision::confusion(),
+                            ExtAlgo::Grad,
+                        )?;
                         let (mut u, _) = projector.lower_distance_parameters()?;
-                        if u.abs() <= precision::confusion() || (u - 2. * PI).abs() <= precision::confusion() {
+                        if u.abs() <= precision::confusion()
+                            || (u - 2. * PI).abs() <= precision::confusion()
+                        {
                             candidates.push(a_curve);
                         } else {
                             pnt = ac.value(ac.last_parameter())?;
-                            projector.init_tolerance(pnt, &s1, precision::confusion(), ExtAlgo::Grad)?;
+                            projector.init_tolerance(
+                                pnt,
+                                &s1,
+                                precision::confusion(),
+                                ExtAlgo::Grad,
+                            )?;
                             (u, _) = projector.lower_distance_parameters()?;
-                            if u.abs() <= precision::confusion() || (u - 2. * PI).abs() <= precision::confusion() {
+                            if u.abs() <= precision::confusion()
+                                || (u - 2. * PI).abs() <= precision::confusion()
+                            {
                                 ac.reverse()?;
                                 candidates.push(a_curve);
                             }
@@ -520,10 +587,9 @@ impl DraftState {
                         }
                     }
                 } else {
-                    first_curve = candidates
-                        .first()
-                        .cloned()
-                        .ok_or_else(|| Failure::with_message("Standard_OutOfRange", "NCollection_Sequence::Value"))?;
+                    first_curve = candidates.first().cloned().ok_or_else(|| {
+                        Failure::with_message("Standard_OutOfRange", "NCollection_Sequence::Value")
+                    })?;
                 }
 
                 // Glueing
@@ -567,8 +633,10 @@ impl DraftState {
                 let bounded = |c: &Handle<dyn GeomCurve>| -> Handle<dyn GeomBoundedCurve> {
                     c.clone().cast::<GeomBSplineCurve>().cast()
                 };
-                let mut concat =
-                    CompCurveToBSplineCurve::with_curve(&bounded(&first_curve), ParameterisationType::TgtThetaOver2)?;
+                let mut concat = CompCurveToBSplineCurve::with_curve(
+                    &bounded(&first_curve),
+                    ParameterisationType::TgtThetaOver2,
+                )?;
                 for glued in &to_glue {
                     concat.add(&bounded(glued), precision::confusion(), true, true, 0)?;
                 }
@@ -621,7 +689,10 @@ impl DraftState {
         let mut a_local_s1 = self.my_f_map.find_from_key(&f1)?.geometry().clone();
         let mut a_local_s2 = self.my_f_map.find_from_key(&f2)?.geometry().clone();
         if a_local_s1.is_null() || a_local_s2.is_null() {
-            self.fail(DraftErrorStatus::EdgeRecomputation, the_edge.clone().into_shape());
+            self.fail(
+                DraftErrorStatus::EdgeRecomputation,
+                the_edge.clone().into_shape(),
+            );
             return Ok(None);
         }
         a_local_s1 = untrimmed_surface(&a_local_s1)?;
@@ -631,38 +702,64 @@ impl DraftState {
         let mut dirextr = Direction3::default();
         let einf = self.my_e_map.change_from_index(ii)?;
         let (ls1, ls2) = (live(&a_local_s1, "surface")?, live(&a_local_s2, "surface")?);
-        let circle_pcurve = |s: &Handle<dyn GeomSurface>| -> Result<Option<Handle<dyn Geom2dCurve>>, Failure> {
-            let sel = live(&s.clone().cast::<GeomSurfaceOfLinearExtrusion>(), "extrusion")?.basis_curve();
-            match sel.cast::<GeomCircle>().get() {
-                Some(gcir) => {
-                    let u = elclib::parameter(&gcir.circ()?, ptfixe)?;
-                    Ok(Some(
-                        Handle::new(Geom2dLine::from_point(Point2::new(u, 0.), Direction2::new(0., 1.)?)).cast(),
-                    ))
+        let circle_pcurve =
+            |s: &Handle<dyn GeomSurface>| -> Result<Option<Handle<dyn Geom2dCurve>>, Failure> {
+                let sel = live(
+                    &s.clone().cast::<GeomSurfaceOfLinearExtrusion>(),
+                    "extrusion",
+                )?
+                .basis_curve();
+                match sel.cast::<GeomCircle>().get() {
+                    Some(gcir) => {
+                        let u = elclib::parameter(&gcir.circ()?, ptfixe)?;
+                        Ok(Some(
+                            Handle::new(Geom2dLine::from_point(
+                                Point2::new(u, 0.),
+                                Direction2::new(0., 1.)?,
+                            ))
+                            .cast(),
+                        ))
+                    }
+                    None => Ok(None),
                 }
-                None => Ok(None),
-            }
-        };
+            };
         if ls1.is_instance_name("Geom_CylindricalSurface") {
-            let cyl = live(&a_local_s1.clone().cast::<GeomCylindricalSurface>(), "cylinder")?.cylinder()?;
+            let cyl = live(
+                &a_local_s1.clone().cast::<GeomCylindricalSurface>(),
+                "cylinder",
+            )?
+            .cylinder()?;
             dirextr = cyl.axis().direction();
         } else if ls1.is_instance_name("Geom_SurfaceOfLinearExtrusion") {
-            dirextr = live(&a_local_s1.clone().cast::<GeomSurfaceOfLinearExtrusion>(), "extrusion")?.direction();
+            dirextr = live(
+                &a_local_s1.clone().cast::<GeomSurfaceOfLinearExtrusion>(),
+                "extrusion",
+            )?
+            .direction();
             // Here it is possible to calculate PCurve.
             if let Some(pc1) = circle_pcurve(&a_local_s1)? {
                 *einf.change_first_pc() = pc1;
             }
         } else if ls2.is_instance_name("Geom_CylindricalSurface") {
-            let cyl = live(&a_local_s2.clone().cast::<GeomCylindricalSurface>(), "cylinder")?.cylinder()?;
+            let cyl = live(
+                &a_local_s2.clone().cast::<GeomCylindricalSurface>(),
+                "cylinder",
+            )?
+            .cylinder()?;
             dirextr = cyl.axis().direction();
         } else if ls2.is_instance_name("Geom_SurfaceOfLinearExtrusion") {
-            dirextr = live(&a_local_s2.clone().cast::<GeomSurfaceOfLinearExtrusion>(), "extrusion")?.direction();
+            dirextr = live(
+                &a_local_s2.clone().cast::<GeomSurfaceOfLinearExtrusion>(),
+                "extrusion",
+            )?
+            .direction();
             // Here it is possible to calculate PCurve.
             if let Some(pc2) = circle_pcurve(&a_local_s2)? {
                 *einf.change_second_pc() = pc2;
             }
         }
-        let new_c: Handle<dyn GeomCurve> = Handle::new(GeomLine::from_point(ptfixe, dirextr)).cast();
+        let new_c: Handle<dyn GeomCurve> =
+            Handle::new(GeomLine::from_point(ptfixe, dirextr)).cast();
 
         let (_, d1fv) = live(c, "curve")?.d1(0.)?;
         let (_, newd1) = live(&new_c, "curve")?.d1(0.)?;
@@ -686,12 +783,22 @@ impl DraftState {
         for ii in 1..=self.my_v_map.extent() {
             let tvv = topods::vertex(self.my_v_map.find_key(ii)?)?;
             let chosen = {
-                let DraftState { my_f_map, my_e_map, my_v_map, .. } = self;
+                let DraftState {
+                    my_f_map,
+                    my_e_map,
+                    my_v_map,
+                    ..
+                } = self;
                 choose(my_f_map, my_e_map, &tvv, my_v_map.change_from_index(ii)?)?
             };
             let Some((ac, as_surface)) = chosen else {
                 // no concerted edge => alignment of two consecutive edges.
-                let DraftState { my_f_map, my_e_map, my_v_map, .. } = self;
+                let DraftState {
+                    my_f_map,
+                    my_e_map,
+                    my_v_map,
+                    ..
+                } = self;
                 let vinf = my_v_map.change_from_index(ii)?;
                 let mut pvt = Point3::default();
                 *vinf.change_geometry() = pvt;
@@ -699,7 +806,10 @@ impl DraftState {
                 if vinf.more_edge() {
                     let edg1 = vinf.edge()?;
                     let vtori = BRepTool::pnt(&tvv)?;
-                    let projector = ProjectPointOnCurve::with_curve(vtori, my_e_map.find_from_key(&edg1)?.geometry())?; // patch
+                    let projector = ProjectPointOnCurve::with_curve(
+                        vtori,
+                        my_e_map.find_from_key(&edg1)?.geometry(),
+                    )?; // patch
                     pvt = projector.nearest_point()?;
 
                     let dion = pvt.square_distance(&vtori);
@@ -707,20 +817,33 @@ impl DraftState {
                     if vinf.more_edge() {
                         let edg2 = vinf.edge()?;
                         let einf2 = my_e_map.change_from_key(&edg2)?;
-                        let opvt = live(einf2.geometry(), "edge geometry")?.value(vinf.parameter(&edg2)?)?;
+                        let opvt = live(einf2.geometry(), "edge geometry")?
+                            .value(vinf.parameter(&edg2)?)?;
 
                         if opvt.square_distance(&vtori) < dion {
                             pvt = opvt;
                         }
                         let geometry = einf2.geometry().clone();
-                        let param = smart_or_plain(my_f_map, einf2, &geometry, BRepTool::edge_tolerance(&edg2)?, pvt)?;
+                        let param = smart_or_plain(
+                            my_f_map,
+                            einf2,
+                            &geometry,
+                            BRepTool::edge_tolerance(&edg2)?,
+                            pvt,
+                        )?;
                         *vinf.change_parameter(&edg2)? = param;
                     }
 
                     *vinf.change_geometry() = pvt;
                     let einf1 = my_e_map.change_from_key(&edg1)?;
                     let geometry = einf1.geometry().clone();
-                    let param = smart_or_plain(my_f_map, einf1, &geometry, BRepTool::edge_tolerance(&edg1)?, pvt)?;
+                    let param = smart_or_plain(
+                        my_f_map,
+                        einf1,
+                        &geometry,
+                        BRepTool::edge_tolerance(&edg1)?,
+                        pvt,
+                    )?;
                     *vinf.change_parameter(&edg1)? = param;
                     continue;
                 }
@@ -744,7 +867,12 @@ impl DraftState {
 
             let nbsol = myintcs.nb_points()?;
             let pvt: Point3 = if nbsol <= 0 {
-                let extr = ExtCS::with_curve(live(&ac, "adaptor")?, live(&as_adaptor, "adaptor")?, precision::p_confusion(), precision::p_confusion())?;
+                let extr = ExtCS::with_curve(
+                    live(&ac, "adaptor")?,
+                    live(&as_adaptor, "adaptor")?,
+                    precision::p_confusion(),
+                    precision::p_confusion(),
+                )?;
 
                 if !extr.is_done() || extr.nb_ext()? == 0 {
                     self.fail(DraftErrorStatus::VertexRecomputation, tvv.into_shape());
@@ -775,7 +903,12 @@ impl DraftState {
                 myintcs.point(iref)?.pnt()
             };
 
-            let DraftState { my_f_map, my_e_map, my_v_map, .. } = self;
+            let DraftState {
+                my_f_map,
+                my_e_map,
+                my_v_map,
+                ..
+            } = self;
             let vinf = my_v_map.change_from_index(ii)?;
             *vinf.change_geometry() = pvt;
 
@@ -787,10 +920,22 @@ impl DraftState {
                 let geometry = einf.geometry().clone();
                 let (param, done) = parameter(&geometry, pvt)?;
                 if done != 0 {
-                    let s1 = my_f_map.find_from_key(einf.first_face())?.geometry().clone();
-                    let s2 = my_f_map.find_from_key(einf.second_face())?.geometry().clone();
-                    *vinf.change_parameter(&edg)? =
-                        super::params::smart_parameter(einf, BRepTool::edge_tolerance(&edg)?, pvt, done, &s1, &s2)?;
+                    let s1 = my_f_map
+                        .find_from_key(einf.first_face())?
+                        .geometry()
+                        .clone();
+                    let s2 = my_f_map
+                        .find_from_key(einf.second_face())?
+                        .geometry()
+                        .clone();
+                    *vinf.change_parameter(&edg)? = super::params::smart_parameter(
+                        einf,
+                        BRepTool::edge_tolerance(&edg)?,
+                        pvt,
+                        done,
+                        &s1,
+                        &s2,
+                    )?;
                 } else {
                     if (initpar - param).abs() > precision::p_confusion() {
                         let a_c = BRepTool::curve_with_location(&edg)?;
@@ -847,11 +992,16 @@ impl DraftState {
 
                     let a_cos_f = a_dir_nf.dot(a_dir_of);
                     let a_cos_l = a_dir_nl.dot(a_dir_ol);
-                    let a_cos_max = if a_cos_f.abs() > a_cos_l.abs() { a_cos_f } else { a_cos_l };
+                    let a_cos_max = if a_cos_f.abs() > a_cos_l.abs() {
+                        a_cos_f
+                    } else {
+                        a_cos_l
+                    };
 
                     if a_cos_max < 0.0 {
                         ic.reverse()?;
-                        *self.my_e_map.change_from_key(&edg)?.change_geometry() = an_int_curv.clone();
+                        *self.my_e_map.change_from_key(&edg)?.change_geometry() =
+                            an_int_curv.clone();
                         let (a_par, an_err) = parameter(&an_int_curv, a_pf)?;
                         if an_err == 0 {
                             *self.my_v_map.change_from_key(&vf)?.change_parameter(&edg)? = a_par;

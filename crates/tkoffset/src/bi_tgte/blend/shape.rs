@@ -3,8 +3,8 @@
 
 //! The blended shape: the untouched faces, the tubes and the faces of the shape
 //! rebuilt on their unwound offsets, sewn together.
-use super::statics::live;
 use super::BiTgteBlend;
+use super::statics::live;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools;
 use rustycad_tkbrep::topexp::{self, Explorer};
@@ -20,7 +20,10 @@ use rustycad_tktopalgo::brep_lib;
 impl BiTgteBlend {
     /// The single shape bound to `(S, F)` in `myCreated`.
     fn created_on(&self, s: &Shape, f: &Shape) -> Option<Shape> {
-        self.my_created.seek(s).and_then(|m| m.seek(f)).and_then(|l| l.first().cloned())
+        self.my_created
+            .seek(s)
+            .and_then(|m| m.seek(f))
+            .and_then(|l| l.first().cloned())
     }
 
     /// Binds `[image]` to `(S, F)` in `myCreated`, the map of `S` reset to empty when
@@ -81,7 +84,9 @@ impl BiTgteBlend {
                     .image(&cur_oe)
                     .first()
                     .cloned()
-                    .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_List::First"))?;
+                    .ok_or_else(|| {
+                        Failure::with_message("Standard_NoSuchObject", "NCollection_List::First")
+                    })?;
                 if im_e.is_same(&cur_oe) {
                     self.bind_created(&cur_oe, &cur_f, cur_e.clone(), true);
                 }
@@ -148,7 +153,12 @@ impl BiTgteBlend {
     /// The face of the shape rebuilt on the boundary of its unwound offset: the edges
     /// are the created ones, or new edges with the p-curves of the unwound face (and new
     /// vertices on the surface of the face), shared through `myCreated`.
-    fn rebuilt_face(&mut self, cur_f: &Face, debouc_face: &Face, b: &BRepBuilder) -> Result<Face, Failure> {
+    fn rebuilt_face(
+        &mut self,
+        cur_f: &Face,
+        debouc_face: &Face,
+        b: &BRepBuilder,
+    ) -> Result<Face, Failure> {
         let (s, l) = BRepTool::surface_with_location(cur_f)?;
         let surface = live(&s, "surface")?;
 
@@ -166,7 +176,8 @@ impl BiTgteBlend {
                 let (ov1, ov2) = topexp::vertices(&topods::edge(&oe)?, false);
                 for (v, ov) in [(&v1, ov1), (&v2, ov2)] {
                     if !self.my_created.is_bound(v) {
-                        self.my_created.bind(v.clone().into_shape(), DataMap::default());
+                        self.my_created
+                            .bind(v.clone().into_shape(), DataMap::default());
                     }
                     if self.created_on(v, cur_f).is_none()
                         && !self.my_created.seek(v).is_some_and(|m| m.is_bound(cur_f))
@@ -182,7 +193,11 @@ impl BiTgteBlend {
             let mut ow = Wire::default();
             b.make_wire(&mut ow);
 
-            for e in Explorer::new(&w.oriented(Orientation::Forward), ShapeEnum::Edge, ShapeEnum::Shape)? {
+            for e in Explorer::new(
+                &w.oriented(Orientation::Forward),
+                ShapeEnum::Edge,
+                ShapeEnum::Shape,
+            )? {
                 let e = topods::edge(&e)?;
                 let c2d = BRepTool::curve_on_face(&e, &face)?;
                 let (f, l2) = (c2d.first, c2d.last);
@@ -192,9 +207,19 @@ impl BiTgteBlend {
                     oe = topods::edge(cut)?;
                     let c2d_1 = BRepTool::curve_on_face(&topods::edge(&e.reversed())?, &face)?;
                     if e.orientation() == Orientation::Forward {
-                        b.update_edge_pcurves_on_face(&oe, (&c2d.pcurve, &c2d_1.pcurve), &new_f, BRepTool::edge_tolerance(&e)?)?;
+                        b.update_edge_pcurves_on_face(
+                            &oe,
+                            (&c2d.pcurve, &c2d_1.pcurve),
+                            &new_f,
+                            BRepTool::edge_tolerance(&e)?,
+                        )?;
                     } else {
-                        b.update_edge_pcurves_on_face(&oe, (&c2d_1.pcurve, &c2d.pcurve), &new_f, BRepTool::edge_tolerance(&e)?)?;
+                        b.update_edge_pcurves_on_face(
+                            &oe,
+                            (&c2d_1.pcurve, &c2d.pcurve),
+                            &new_f,
+                            BRepTool::edge_tolerance(&e)?,
+                        )?;
                     }
                     b.range(&oe, c2d_1.first, c2d_1.last, false)?;
                 } else {
@@ -214,8 +239,11 @@ impl BiTgteBlend {
                             }
                             let mut ov = Vertex::default();
                             b.make_vertex(&mut ov);
-                            let p2d = live(&c2d.pcurve, "pcurve")?.value(BRepTool::parameter_on_face(v, &e, &face)?)?;
-                            let p = surface.value(p2d.x(), p2d.y())?.transformed(l.transformation());
+                            let p2d = live(&c2d.pcurve, "pcurve")?
+                                .value(BRepTool::parameter_on_face(v, &e, &face)?)?;
+                            let p = surface
+                                .value(p2d.x(), p2d.y())?
+                                .transformed(l.transformation());
                             b.update_vertex_point(&ov, p, BRepTool::vertex_tolerance(v)?)?;
                             this.bind_created(v, cur_f, ov.clone().into_shape(), true);
                             Ok(ov)
@@ -225,7 +253,12 @@ impl BiTgteBlend {
                         b.add(&mut oe, &ov1.oriented(v1.orientation()))?;
                         b.add(&mut oe, &ov2.oriented(v2.orientation()))?;
                     }
-                    b.update_edge_pcurve_on_face(&oe, &c2d.pcurve, &new_f, BRepTool::edge_tolerance(&e)?)?;
+                    b.update_edge_pcurve_on_face(
+                        &oe,
+                        &c2d.pcurve,
+                        &new_f,
+                        BRepTool::edge_tolerance(&e)?,
+                    )?;
                     b.range(&oe, f, l2, false)?;
                     map_ss.bind(e.clone().into_shape(), oe.clone().into_shape());
                 }

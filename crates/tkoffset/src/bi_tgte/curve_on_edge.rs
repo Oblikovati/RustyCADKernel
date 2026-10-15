@@ -11,7 +11,8 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::geom::{
-    GeomBSplineCurve, GeomBezierCurve, GeomCurve, GeomCurveD1, GeomCurveD2, GeomCurveD3, GeomTrimmedCurve,
+    GeomBSplineCurve, GeomBezierCurve, GeomCurve, GeomCurveD1, GeomCurveD2, GeomCurveD3,
+    GeomTrimmedCurve,
 };
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
 use rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve;
@@ -125,7 +126,10 @@ impl BiTgteCurveOnEdge {
     fn con_f(&self) -> Result<Handle<dyn GeomCurve>, Failure> {
         let c = self.state.read().my_con_f.clone();
         if c.is_null() {
-            return Err(Failure::with_message("Standard_NullObject", "BiTgte_CurveOnEdge: no curve"));
+            return Err(Failure::with_message(
+                "Standard_NullObject",
+                "BiTgte_CurveOnEdge: no curve",
+            ));
         }
         Ok(c)
     }
@@ -160,7 +164,12 @@ impl Adaptor3dCurve for BiTgteCurveOnEdge {
         Err(not_implemented())
     }
 
-    fn trim(&self, _first: f64, _last: f64, _tolerance: f64) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
+    fn trim(
+        &self,
+        _first: f64,
+        _last: f64,
+        _tolerance: f64,
+    ) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
         Err(not_implemented())
     }
 
@@ -184,7 +193,9 @@ impl Adaptor3dCurve for BiTgteCurveOnEdge {
         };
         let a_p = con_f
             .get()
-            .ok_or_else(|| Failure::with_message("Standard_NullObject", "BiTgte_CurveOnEdge: no curve"))?
+            .ok_or_else(|| {
+                Failure::with_message("Standard_NullObject", "BiTgte_CurveOnEdge: no curve")
+            })?
             .value(u)?;
         let mut a_projector = ProjectPointOnCurve::new();
         a_projector.init(a_p, &curv)?;
@@ -223,7 +234,10 @@ impl Adaptor3dCurve for BiTgteCurveOnEdge {
     fn circle(&self) -> Result<Circle3, Failure> {
         let s = self.state.read();
         if s.my_type != CurveType::Circle {
-            return Err(Failure::with_message("Standard_NoSuchObject", "BiTgte_CurveOnEdge::Circle"));
+            return Err(Failure::with_message(
+                "Standard_NoSuchObject",
+                "BiTgte_CurveOnEdge::Circle",
+            ));
         }
         Ok(s.my_circ)
     }

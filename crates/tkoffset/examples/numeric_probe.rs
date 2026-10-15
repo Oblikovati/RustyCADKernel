@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod of_probe;
 use of_probe::{
-    analyse, bitgte, draft_angle, inter3d, make_offset, make_pipe_shell, maker, middle_path, offset, thru_sections, tool,
-    wrappers,
+    analyse, bitgte, draft_angle, inter3d, make_offset, make_pipe_shell, maker, middle_path,
+    offset, thru_sections, tool, wrappers,
 };
 
 /// One probe operation over the numeric fields of a request.

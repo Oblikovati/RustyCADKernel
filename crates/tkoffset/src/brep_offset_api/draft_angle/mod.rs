@@ -69,7 +69,10 @@ impl BRepOffsetAPIDraftAngle {
     /// dereference natively).
     fn modification(&self) -> Result<&DraftModification, Failure> {
         self.draft.get().ok_or_else(|| {
-            Failure::with_message("Standard_NullObject", "BRepOffsetAPI_DraftAngle: no modification")
+            Failure::with_message(
+                "Standard_NullObject",
+                "BRepOffsetAPI_DraftAngle: no modification",
+            )
         })
     }
 
@@ -178,7 +181,8 @@ impl BRepOffsetAPIDraftAngle {
     /// Whether the modification gives the face a new surface.
     fn has_new_surface(&self, s: &Shape) -> Result<bool, Failure> {
         let mut result = NewSurface::default();
-        self.modification()?.new_surface(&topods::face(s)?, &mut result)
+        self.modification()?
+            .new_surface(&topods::face(s)?, &mut result)
     }
 
     /// `CorrectVertexTol()`: the vertices of the new edges get the edge tolerance (the
@@ -187,7 +191,11 @@ impl BRepOffsetAPIDraftAngle {
         let mut an_init_vertices = MapOfShape::default();
         let mut an_init_edges = MapOfShape::default();
         let mut a_new_edges = MapOfShape::default();
-        for e in Explorer::new(&self.modify.my_initial_shape, ShapeEnum::Edge, ShapeEnum::Shape)? {
+        for e in Explorer::new(
+            &self.modify.my_initial_shape,
+            ShapeEnum::Edge,
+            ShapeEnum::Shape,
+        )? {
             for v in ShapeIterator::new(&e, true, true) {
                 an_init_vertices.add(v);
             }
@@ -213,15 +221,23 @@ impl BRepOffsetAPIDraftAngle {
                 let a_vtx = topods::vertex(&a_vtx)?;
                 if an_init_vertices.contains(&a_vtx) {
                     if let Some(replacement) = self.my_vtx_to_replace.seek(&a_vtx) {
-                        a_bb.update_vertex_tolerance(&topods::vertex(replacement)?, an_e_tol + epsilon(an_e_tol))?;
+                        a_bb.update_vertex_tolerance(
+                            &topods::vertex(replacement)?,
+                            an_e_tol + epsilon(an_e_tol),
+                        )?;
                     } else {
                         let a_v_tol = BRepTool::vertex_tolerance(&a_vtx)?;
                         if a_v_tol < an_e_tol {
                             let mut a_new_vtx = Vertex::default();
                             let a_v_pnt = BRepTool::pnt(&a_vtx)?;
-                            a_bb.make_vertex_at(&mut a_new_vtx, a_v_pnt, an_e_tol + epsilon(an_e_tol))?;
+                            a_bb.make_vertex_at(
+                                &mut a_new_vtx,
+                                a_v_pnt,
+                                an_e_tol + epsilon(an_e_tol),
+                            )?;
                             a_new_vtx.set_orientation(a_vtx.orientation());
-                            self.my_vtx_to_replace.bind(a_vtx.into_shape(), a_new_vtx.into_shape());
+                            self.my_vtx_to_replace
+                                .bind(a_vtx.into_shape(), a_new_vtx.into_shape());
                         }
                     }
                 } else {
@@ -298,7 +314,11 @@ impl BRepBuilderAPIMakeShape for BRepOffsetAPIDraftAngle {
             };
             self.modify.my_generated.append(image);
             if self.modify.my_generated.len() == 1
-                && self.modify.my_generated.first().is_some_and(|f| f.is_same(s))
+                && self
+                    .modify
+                    .my_generated
+                    .first()
+                    .is_some_and(|f| f.is_same(s))
             {
                 self.modify.my_generated.clear();
             }

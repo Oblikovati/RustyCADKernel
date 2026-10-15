@@ -9,14 +9,16 @@ mod statics;
 mod surfaces;
 
 use super::BiTgteContactType;
-use crate::brep_offset::OffsetFaces;
 use crate::brep_offset::BRepOffsetAnalyse;
+use crate::brep_offset::OffsetFaces;
 use rustycad_tkbool::brep_algo::{BRepAlgoAsDes, BRepAlgoImage};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_tools::Quilt;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Edge, Face, Shape};
-use rustycad_tkbrep::toptools::{IndexedDataMapOfShapeListOfShape, IndexedMapOfShape, MapOfShape, ShapeMapHasher};
+use rustycad_tkbrep::toptools::{
+    IndexedDataMapOfShapeListOfShape, IndexedMapOfShape, MapOfShape, ShapeMapHasher,
+};
 use rustycad_tkernel::ncollection::{DataMap, List};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::Geom2dCurve;
@@ -24,7 +26,8 @@ use rustycad_tkg3d::geom::{GeomCurve, GeomSurface, GeomTrimmedCurve};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
 /// The edges created on the original shapes for each cut center line (`myCreated`).
-pub(super) type CreatedMap = DataMap<Shape, DataMap<Shape, List<Shape>, ShapeMapHasher>, ShapeMapHasher>;
+pub(super) type CreatedMap =
+    DataMap<Shape, DataMap<Shape, List<Shape>, ShapeMapHasher>, ShapeMapHasher>;
 
 /// `BiTgte_Blend`: the blend of radius `Radius` rolling along the edges and between
 /// the faces given, with tubes on the edges and spheres at the vertices of three
@@ -168,7 +171,12 @@ impl BiTgteBlend {
             .ok()
             .filter(|i| *i >= 1)
             .map(|i| self.my_centers.find_key(i).cloned())
-            .unwrap_or_else(|| Err(Failure::with_message("Standard_OutOfRange", "NCollection_IndexedMap::FindKey")))
+            .unwrap_or_else(|| {
+                Err(Failure::with_message(
+                    "Standard_OutOfRange",
+                    "NCollection_IndexedMap::FindKey",
+                ))
+            })
     }
 
     /// `Surface(Index)`; `blend.surface(1)?`.
@@ -193,10 +201,13 @@ impl BiTgteBlend {
     }
 
     /// The offset of a center line (Standard_NoSuchObject when it is not one).
-    fn offset_of(&self, center_line: &Shape) -> Result<&crate::brep_offset::BRepOffsetOffset, Failure> {
-        self.my_map_sf
-            .seek(center_line)
-            .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find"))
+    fn offset_of(
+        &self,
+        center_line: &Shape,
+    ) -> Result<&crate::brep_offset::BRepOffsetOffset, Failure> {
+        self.my_map_sf.seek(center_line).ok_or_else(|| {
+            Failure::with_message("Standard_NoSuchObject", "NCollection_DataMap::Find")
+        })
     }
 
     /// `Surface(CenterLine)`: the surface of the blend face;
@@ -210,7 +221,10 @@ impl BiTgteBlend {
     pub fn face_of(&self, center_line: &Shape) -> Result<Face, Failure> {
         match self.my_map_sf.seek(center_line) {
             Some(of) => Ok(of.face().clone()),
-            None => Err(Failure::with_message("Standard_DomainError", "BiTgte_Blend::Face")),
+            None => Err(Failure::with_message(
+                "Standard_DomainError",
+                "BiTgte_Blend::Face",
+            )),
         }
     }
 
@@ -240,7 +254,9 @@ impl BiTgteBlend {
 
     /// The ascendants of a center line in the AsDes.
     fn ascendants(&self, s: &Shape) -> Vec<Shape> {
-        self.my_as_des.get().map_or_else(Vec::new, |a| a.ascendant(s).collect())
+        self.my_as_des
+            .get()
+            .map_or_else(Vec::new, |a| a.ascendant(s).collect())
     }
 
     /// `SupportShape1(Index)`: the shape whose offset is the first face of the center
@@ -272,7 +288,9 @@ impl BiTgteBlend {
         // the first edge of the tube is exactly the edge on Shape1.
         let e = Explorer::new(&f, ShapeEnum::Edge, ShapeEnum::Shape)?
             .nth(rank)
-            .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "TopExp_Explorer::Current"))?;
+            .ok_or_else(|| {
+                Failure::with_message("Standard_NoSuchObject", "TopExp_Explorer::Current")
+            })?;
         let e = topods::edge(&e)?;
         let mut c: Handle<dyn GeomCurve> = Handle::default();
         if !BRepTool::degenerated(&e)? {
@@ -341,14 +359,16 @@ impl BiTgteBlend {
         self.my_nb_branches = 0;
         let mut tmp_map = IndexedMapOfShape::default();
 
-        self.my_nb_branches = Explorer::new(&shells, ShapeEnum::Shell, ShapeEnum::Shape)?.count() as i32;
+        self.my_nb_branches =
+            Explorer::new(&shells, ShapeEnum::Shell, ShapeEnum::Shape)?.count() as i32;
 
         self.my_indices = vec![0; self.my_nb_branches as usize + 1];
 
         self.my_indices[0] = 0;
         let mut count = 0;
 
-        for (index, cur_s) in (2..).zip(Explorer::new(&shells, ShapeEnum::Shell, ShapeEnum::Shape)?) {
+        for (index, cur_s) in (2..).zip(Explorer::new(&shells, ShapeEnum::Shell, ShapeEnum::Shape)?)
+        {
             // CurS = the current Shell.
             for cur_f in Explorer::new(&cur_s, ShapeEnum::Face, ShapeEnum::Shape)? {
                 // CurF = the current face of the current Shell.
@@ -380,7 +400,9 @@ impl BiTgteBlend {
             usize::try_from(i - 1)
                 .ok()
                 .and_then(|k| self.my_indices.get(k).copied())
-                .ok_or_else(|| Failure::with_message("Standard_OutOfRange", "NCollection_Array1::Value"))
+                .ok_or_else(|| {
+                    Failure::with_message("Standard_OutOfRange", "NCollection_Array1::Value")
+                })
         };
         Ok((at(index)? + 1, at(index + 1)?))
     }

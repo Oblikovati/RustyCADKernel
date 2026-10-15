@@ -41,7 +41,9 @@ fn ball_inside_a_box_gives_the_closed_form_fillet() -> Result<(), Failure> {
     blend.perform(false)?;
     assert!(blend.is_done());
     assert_eq!(blend.nb_surfaces(), 20);
-    let mut areas: Vec<f64> = (1..=20).map(|i| area(&blend.face(i).unwrap().into_shape())).collect::<Result<_, _>>()?;
+    let mut areas: Vec<f64> = (1..=20)
+        .map(|i| area(&blend.face(i).unwrap().into_shape()))
+        .collect::<Result<_, _>>()?;
     areas.sort_by(f64::total_cmp);
     let octant = PI * r * r / 2.;
     let mut expected = vec![octant; 8];
@@ -62,7 +64,11 @@ fn ball_inside_a_box_gives_the_closed_form_fillet() -> Result<(), Failure> {
 #[test]
 fn occ29861_blend_of_two_cylinders() -> Result<(), Failure> {
     let s1: Handle<dyn GeomSurface> = Handle::new(GeomCylindricalSurface::new(
-        Axis3::new(Point3::new(0., 360., 0.), Direction3::new(0., 0., 1.)?, Direction3::new(0., 1., 0.)?)?,
+        Axis3::new(
+            Point3::new(0., 360., 0.),
+            Direction3::new(0., 0., 1.)?,
+            Direction3::new(0., 1., 0.)?,
+        )?,
         160.,
     )?)
     .cast();
@@ -71,7 +77,9 @@ fn occ29861_blend_of_two_cylinders() -> Result<(), Failure> {
         80.,
     )?)
     .cast();
-    let f1 = BRepLibMakeFace::from_surface_bounds(&s1, (0., 2. * PI, -113.2000012, 113.2000012), 1e-7)?.face()?;
+    let f1 =
+        BRepLibMakeFace::from_surface_bounds(&s1, (0., 2. * PI, -113.2000012, 113.2000012), 1e-7)?
+            .face()?;
     let f2 = BRepLibMakeFace::from_surface_bounds(&s2, (0., 2. * PI, 168.4, 600.), 1e-7)?.face()?;
     let b = BRepBuilder::default();
     let mut c = Compound::default();

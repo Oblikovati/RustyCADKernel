@@ -29,7 +29,9 @@ fn length(s: &Shape) -> Result<f64, Failure> {
 
 #[test]
 fn box_middle_path_joins_the_centroids_of_the_opposite_faces() -> Result<(), Failure> {
-    let a_box = BRepPrimAPIMakeBox::from_sizes(2.0, 3.0, 4.0)?.shape()?.clone();
+    let a_box = BRepPrimAPIMakeBox::from_sizes(2.0, 3.0, 4.0)?
+        .shape()?
+        .clone();
     let f = faces(&a_box)?;
     // Faces 0 and 1 are x = 0 and x = 2.
     let mut path = BRepOffsetAPIMiddlePath::new(&a_box, &f[0], &f[1])?;
@@ -42,7 +44,8 @@ fn box_middle_path_joins_the_centroids_of_the_opposite_faces() -> Result<(), Fai
     let expected = [Point3::new(0.0, 1.5, 2.0), Point3::new(2.0, 1.5, 2.0)];
     let close = |a: Point3, b: Point3| a.distance(&b) < 1.0e-12;
     assert!(
-        (close(p1, expected[0]) && close(p2, expected[1])) || (close(p1, expected[1]) && close(p2, expected[0])),
+        (close(p1, expected[0]) && close(p2, expected[1]))
+            || (close(p1, expected[1]) && close(p2, expected[0])),
         "{p1:?} {p2:?}"
     );
     assert!((length(&wire)? - 2.0).abs() < 1.0e-12);
@@ -53,7 +56,9 @@ fn box_middle_path_joins_the_centroids_of_the_opposite_faces() -> Result<(), Fai
 fn partial_torus_middle_path_is_the_arc_of_the_main_radius() -> Result<(), Failure> {
     let (main, minor, angle) = (3.0, 1.0, 1.5);
     let frame = Axis2::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 0.0, 1.0)?)?;
-    let torus = BRepPrimAPIMakeTorus::with_axes_angle(frame, main, minor, angle)?.shape()?.clone();
+    let torus = BRepPrimAPIMakeTorus::with_axes_angle(frame, main, minor, angle)?
+        .shape()?
+        .clone();
     let f = faces(&torus)?;
     let mut path = BRepOffsetAPIMiddlePath::new(&torus, &f[1], &f[2])?;
     let wire = path.shape()?.clone();
@@ -62,6 +67,10 @@ fn partial_torus_middle_path_is_the_arc_of_the_main_radius() -> Result<(), Failu
     let (curve, _, _) = BRepTool::curve(&topods::edge(&e[0])?)?;
     assert!(curve.get().expect("3d curve").is_kind_name("Geom_Circle"));
     // The centroid of each disk cap is on the circle of the main radius.
-    assert!((length(&wire)? - main * angle).abs() < 1.0e-9, "length {}", length(&wire)?);
+    assert!(
+        (length(&wire)? - main * angle).abs() < 1.0e-9,
+        "length {}",
+        length(&wire)?
+    );
     Ok(())
 }
