@@ -219,7 +219,7 @@ impl BRepFeatMakeLinearForm {
     /// `Propagate(SliList, fac, Firstpnt, Lastpnt, falseside)`: the faces crossed by the
     /// profile `fac` from the first face of `sli_list`; `falseside` turns false when
     /// the profile misses the first face; returns whether the rib can slide.
-    pub(super) fn propagate(
+    pub fn propagate(
         &mut self,
         sli_list: &mut List<Shape>,
         fac: &Face,

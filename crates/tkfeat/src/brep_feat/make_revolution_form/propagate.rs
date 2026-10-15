@@ -131,7 +131,7 @@ impl BRepFeatMakeRevolutionForm {
     /// `Propagate(SliList, fac, Firstpnt, Lastpnt, falseside)`: see the module;
     /// `falseside` turns false when the profile misses the first face or the walk turns
     /// back; returns whether the rib can slide.
-    pub(super) fn propagate(
+    pub fn propagate(
         &mut self,
         sli_list: &mut List<Shape>,
         fac: &Face,
