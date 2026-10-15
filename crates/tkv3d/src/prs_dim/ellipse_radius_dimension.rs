@@ -234,8 +234,9 @@ rustycad_tkernel::impl_transient_interface!(
     dyn PrsDimRelationSource
 );
 
-/// The shape and text of a new ellipse radius (`PrsDim_EllipseRadiusDimension(shape, text)`).
-pub(super) fn init_ellipse_radius<R: PrsDimRelationSource + ?Sized>(
+/// The shape and text of a new ellipse radius (the protected constructor
+/// `PrsDim_EllipseRadiusDimension(shape, text)`); `init_ellipse_radius(&*radius, &edge, &text)`.
+pub fn init_ellipse_radius<R: PrsDimRelationSource + ?Sized>(
     relation: &R,
     shape: &Shape,
     text: &rustycad_tkernel::tcollection::ExtendedString,

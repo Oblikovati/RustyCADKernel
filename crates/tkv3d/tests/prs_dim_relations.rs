@@ -156,3 +156,16 @@ fn fix_relation_finds_the_connected_edges_of_a_wire() {
             .is_none()
     );
 }
+
+#[test]
+fn ellipse_radius_constructor_body_sets_the_shape_and_text() {
+    let p = Point3::new;
+    let measured = segment(p(0., 0., 0.), p(1., 0., 0.));
+    let radius = PrsDimMaxRadiusDimension::new(&measured, 4.0, &ExtendedString::new("r"));
+    let other = segment(p(0., 1., 0.), p(1., 1., 0.));
+    init_ellipse_radius(&*radius, &other, &ExtendedString::new("R2"));
+    assert!(radius.first_shape().is_same(&other));
+    assert_eq!(radius.text(), ExtendedString::new("R2"));
+    // The other constructor state (value, arrow) is left to the concrete constructor.
+    assert_eq!(radius.value(), 4.0);
+}

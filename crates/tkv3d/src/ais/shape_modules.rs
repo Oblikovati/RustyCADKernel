@@ -31,6 +31,7 @@ mod shape_unset_appearance;
 mod shape_unset_shading;
 pub use shape_appearance::{
     ais_shape_replace_with_new_own_aspects, ais_shape_set_color, ais_shape_set_material,
+    set_shape_drawer_color, set_shape_drawer_material,
 };
 pub use shape_unset_appearance::ais_shape_unset_color;
 pub use shape_unset_shading::ais_shape_unset_material;
@@ -44,10 +45,12 @@ pub use textured_shape_appearance::{
 };
 
 mod shape_transparency;
-pub use shape_transparency::{ais_shape_set_transparency, ais_shape_unset_transparency};
+pub use shape_transparency::{
+    ais_shape_set_transparency, ais_shape_unset_transparency, set_shape_drawer_transparency,
+};
 
 mod shape_width;
-pub use shape_width::{ais_shape_set_width, ais_shape_unset_width};
+pub use shape_width::{ais_shape_set_width, ais_shape_unset_width, set_shape_drawer_width};
 
 mod shape_bounds;
 mod textured_shape_compute;

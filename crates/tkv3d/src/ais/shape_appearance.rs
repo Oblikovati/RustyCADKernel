@@ -23,7 +23,9 @@ pub fn ais_shape_set_color<S: AisShapeSource + ?Sized>(
     object.recompute_computed();
     Ok(())
 }
-pub(super) fn set_shape_drawer_color<S: AisShapeSource + ?Sized>(
+/// `AIS_Shape::setColor` (protected): the color on every aspect of a drawer, true when a new
+/// own aspect was created; `set_shape_drawer_color(&shape, &drawer, color)?`.
+pub fn set_shape_drawer_color<S: AisShapeSource + ?Sized>(
     object: &S,
     drawer: &Handle<Prs3dDrawer>,
     color: Color,
@@ -65,7 +67,9 @@ pub fn ais_shape_set_material<S: AisShapeSource + ?Sized>(
     refresh_shape_aspect_ownership(object, recompute);
     Ok(())
 }
-pub(super) fn set_shape_drawer_material<S: AisShapeSource + ?Sized>(
+/// `AIS_Shape::setMaterial` (protected): the material of the drawer shading aspect, keeping
+/// its color and transparency as asked; `set_shape_drawer_material(&shape, &drawer, &material, (true, false))?`.
+pub fn set_shape_drawer_material<S: AisShapeSource + ?Sized>(
     object: &S,
     drawer: &Handle<Prs3dDrawer>,
     material: &Graphic3dMaterialAspect,

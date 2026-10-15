@@ -62,3 +62,25 @@ fn shape_selection_of_an_edge() {
     assert_eq!(ais_shape_selection_mode(ShapeEnum::Face), 4);
     assert_eq!(ais_shape_selection_type(2), ShapeEnum::Edge);
 }
+
+#[test]
+fn protected_drawer_helpers_apply_to_the_given_drawer() {
+    use rustycad_tkernel::quantity::{Color, NamedColor};
+    use rustycad_tkservice::graphic3d::{
+        Graphic3dAspectsLineMembers as _, Graphic3dAspectsMembers as _,
+    };
+    use rustycad_tkv3d::ais::{
+        set_shape_drawer_color, set_shape_drawer_transparency, set_shape_drawer_width,
+    };
+    let object = AisShape::new(&edge());
+    let drawer = object.attributes();
+    // The first width call creates the own line aspects (a recompute), the second reuses them.
+    assert!(set_shape_drawer_width(&drawer, 3.0).unwrap());
+    assert!(!set_shape_drawer_width(&drawer, 4.0).unwrap());
+    assert_eq!(drawer.wire_aspect().aspect().line_width(), 4.0);
+    let red = Color::named(NamedColor::RED);
+    set_shape_drawer_color(&*object, &drawer, red).unwrap();
+    assert_eq!(drawer.shading_aspect().aspect().interior_color(), red);
+    set_shape_drawer_transparency(&*object, &drawer, 0.5).unwrap();
+    assert!(drawer.has_own_shading_aspect());
+}

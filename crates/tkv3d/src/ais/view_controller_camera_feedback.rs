@@ -6,7 +6,6 @@ use rustycad_tkernel::{
     ncollection::Vec2,
     standard::{Failure, Handle},
 };
-use rustycad_tkservice::aspect::AspectWindowInputListenerMembers;
 pub(super) struct CameraActionFeedback {
     pub(super) has_echo: bool,
     pub(super) has_shader_echo: bool,

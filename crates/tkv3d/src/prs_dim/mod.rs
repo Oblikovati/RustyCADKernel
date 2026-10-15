@@ -67,7 +67,9 @@ pub use midpoint_relation::{PrsDimMidPointFields, PrsDimMidPointRelation};
 mod symmetric_relation;
 mod symmetric_selection;
 mod tangent_relation;
-pub use ellipse_radius_dimension::{PrsDimEllipseRadiusDimension, PrsDimEllipseRadiusFields};
+pub use ellipse_radius_dimension::{
+    PrsDimEllipseRadiusDimension, PrsDimEllipseRadiusFields, init_ellipse_radius,
+};
 pub use max_min_radius_dimension::{PrsDimMaxRadiusDimension, PrsDimMinRadiusDimension};
 pub use offset_dimension::{PrsDimOffsetDimension, PrsDimOffsetFields};
 pub use symmetric_relation::{PrsDimSymmetricFields, PrsDimSymmetricRelation};

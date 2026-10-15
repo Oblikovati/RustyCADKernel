@@ -61,7 +61,9 @@ fn restore_shape_linked_widths<S: AisShapeSource + ?Sized>(object: &S) -> Result
     Ok(())
 }
 
-pub(super) fn set_shape_drawer_width(
+/// `AIS_Shape::setWidth` (protected): the width of the drawer line aspects, true when new own
+/// line aspects were created; `set_shape_drawer_width(&drawer, 2.0)?`.
+pub fn set_shape_drawer_width(
     drawer: &Handle<crate::prs3d::Prs3dDrawer>,
     width: f64,
 ) -> Result<bool, Failure> {
