@@ -2,3 +2,4 @@
 pub mod brep_offset;
 pub mod brep_offset_api;
 pub mod draft;
+pub mod bi_tgte;

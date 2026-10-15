@@ -19,7 +19,7 @@ use rustycad_tkoffset::brep_offset::{
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
 
 /// A value rounded to 1e-6.
-fn round6(v: f64) -> i64 {
+pub(super) fn round6(v: f64) -> i64 {
     (v * 1e6).round() as i64
 }
 
@@ -31,7 +31,7 @@ fn mapped(s: &Shape, t: ShapeEnum) -> Result<IndexedMapOfShape, Failure> {
 }
 
 /// The order-independent digest of a result.
-fn digest(s: &Shape) -> Result<(), Failure> {
+pub(super) fn digest(s: &Shape) -> Result<(), Failure> {
     flag(s.is_null());
     if s.is_null() {
         return Ok(());

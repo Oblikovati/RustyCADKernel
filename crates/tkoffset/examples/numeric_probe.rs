@@ -3,7 +3,7 @@
 use std::io::{self, BufRead};
 mod of_probe;
 use of_probe::{
-    analyse, draft_angle, inter3d, make_offset, make_pipe_shell, maker, middle_path, offset, thru_sections, tool,
+    analyse, bitgte, draft_angle, inter3d, make_offset, make_pipe_shell, maker, middle_path, offset, thru_sections, tool,
     wrappers,
 };
 
@@ -43,6 +43,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("om_offset", maker::offset_case),
     ("om_simple", maker::simple_case),
     ("om_face_offsets", maker::face_offsets_case),
+    // BiTgte_Blend (of_probe/bitgte.rs)
+    ("obt_blend", bitgte::blend_case),
     // BRepOffsetAPI_MiddlePath (of_probe/middle_path.rs)
     ("oa_middle", middle_path::middle_case),
     ("oa_middle_prim", middle_path::middle_prim_case),

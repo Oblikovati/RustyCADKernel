@@ -627690,6 +627690,541 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::type_of",
       "status": "implemented",
       "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes). Standard_NoSuchObject for an edge that is not analysed."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::BiTgte_Blend()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::new",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). The radius, tolerance and flags uninitialized natively start at 0 and false."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::BiTgte_Blend(const TopoDS_Shape&,double,double,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::with_shape",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). tests/bitgte.rs checks the closed-form fillet of the ball inside a box and the counts and area of the OCC29861 DRAW test."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::CenterLines(NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::center_lines",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). The list is returned."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Clear()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::clear",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). The faces, edges, center lines and offsets are kept, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::ComputeCenters()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::compute_centers",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::ContactType(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::contact_type",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). A face-face contact is FaceEdge, as natively; a cut center line without ascendants raises Standard_NoSuchObject as natively."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::CurveOnShape1(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::curve_on_shape1",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::CurveOnShape2(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::curve_on_shape2",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Face(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::face_of",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Face(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::face",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::IndicesOfBranche(int,int&,int&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::indices_of_branche",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). The range is returned as (From, To)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Init(const TopoDS_Shape&,double,double,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::init",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::IsDone() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::is_done",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::NbBranches()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::nb_branches",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). tests/bitgte.rs checks the closed-form fillet of the ball inside a box and the counts and area of the OCC29861 DRAW test."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::NbSurfaces() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::nb_surfaces",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::PCurve1OnFillet(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::pcurve1_on_fillet",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). A null curve, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::PCurve2OnFillet(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::pcurve2_on_fillet",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). A null curve, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::PCurveOnFace1(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::pcurve_on_face1",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). A null curve, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::PCurveOnFace2(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::pcurve_on_face2",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). A null curve, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Perform(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::perform",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). tests/bitgte.rs checks the closed-form fillet of the ball inside a box and the counts and area of the OCC29861 DRAW test. The 2d intersections of the tubes and the intersections of each new offset follow the Rust map order (the shape addresses natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::SetEdge(const TopoDS_Edge&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::set_edge",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::SetFaces(const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::set_faces",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). tests/bitgte.rs checks the closed-form fillet of the ball inside a box and the counts and area of the OCC29861 DRAW test."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::SetStoppingFace(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::set_stopping_face",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Shape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::shape",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::SupportShape1(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::support_shape1",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::SupportShape2(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::support_shape2",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Surface(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::surface_of",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_Blend::Surface(int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_Blend.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteBlend::surface",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_Blend.cxx (crates/tkoffset/src/bi_tgte/blend/); compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::BSpline() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::bspline",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Bezier() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::bezier",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::BiTgte_CurveOnEdge()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::new",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::BiTgte_CurveOnEdge(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::with_edges",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Circle() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::circle",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Standard_NoSuchObject for another type."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Continuity() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::continuity",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Degree() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::degree",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Ellipse() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::ellipse",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::EvalD0(double) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d0",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::EvalD1(double) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d1",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::EvalD2(double) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d2",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::EvalD3(double) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d3",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::EvalDN(double,int) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_dn",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::FirstParameter() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::first_parameter",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::GetType() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::get_type",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Hyperbola() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::hyperbola",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Init(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::init",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::intervals",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::IsClosed() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_closed",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::IsPeriodic() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_periodic",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::IsRational() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_rational",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::LastParameter() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::last_parameter",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Line() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::line",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::nb_intervals",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::NbKnots() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::nb_knots",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::NbPoles() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::nb_poles",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Parabola() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::parabola",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Period() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::period",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Resolution(double) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::resolution",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::ShallowCopy() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::shallow_copy",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively)."
+    },
+    {
+      "upstream_id": "BiTgte_CurveOnEdge::Trim(double,double,double) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_CurveOnEdge.hxx",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteCurveOnEdge::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::trim",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_CurveOnEdge.cxx (crates/tkoffset/src/bi_tgte/curve_on_edge.rs); exercised through BiTgte_Blend (the tube edges of the edge supports), compared with OCCT by tools/verify_tkoffset_numeric.py (obt_blend: the rolling ball along edges of a box, between two adjacent box faces inward and outward, along the circular edge of a cylinder, with stop faces, and between the cylindrical faces of OCC29861, with and without the blended shape; sorted records of the blend surfaces, the branches and the order-independent digest of the result, as the order of the center lines follows hashed maps natively). Raises Standard_NotImplemented, as natively."
+    },
+    {
+      "upstream_id": "BiTgte_ContactType",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_ContactType.hxx",
+      "source_sha256": "1ba9e2719ad4a75c5248902d02d9dd3a63145bd69443e7144289f08170e2dd05",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteContactType",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_ContactType.hxx (crates/tkoffset/src/bi_tgte/mod.rs) with the native discriminants (repr i32 in declaration order); the contact types are compared with OCCT through obt_blend."
+    },
+    {
+      "upstream_id": "BiTgte_FaceFace",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_ContactType.hxx",
+      "source_sha256": "1ba9e2719ad4a75c5248902d02d9dd3a63145bd69443e7144289f08170e2dd05",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteContactType::FaceFace",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_ContactType.hxx (crates/tkoffset/src/bi_tgte/mod.rs) with the native discriminants (repr i32 in declaration order); the contact types are compared with OCCT through obt_blend."
+    },
+    {
+      "upstream_id": "BiTgte_FaceEdge",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_ContactType.hxx",
+      "source_sha256": "1ba9e2719ad4a75c5248902d02d9dd3a63145bd69443e7144289f08170e2dd05",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteContactType::FaceEdge",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_ContactType.hxx (crates/tkoffset/src/bi_tgte/mod.rs) with the native discriminants (repr i32 in declaration order); the contact types are compared with OCCT through obt_blend."
+    },
+    {
+      "upstream_id": "BiTgte_FaceVertex",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_ContactType.hxx",
+      "source_sha256": "1ba9e2719ad4a75c5248902d02d9dd3a63145bd69443e7144289f08170e2dd05",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteContactType::FaceVertex",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_ContactType.hxx (crates/tkoffset/src/bi_tgte/mod.rs) with the native discriminants (repr i32 in declaration order); the contact types are compared with OCCT through obt_blend."
+    },
+    {
+      "upstream_id": "BiTgte_EdgeEdge",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_ContactType.hxx",
+      "source_sha256": "1ba9e2719ad4a75c5248902d02d9dd3a63145bd69443e7144289f08170e2dd05",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteContactType::EdgeEdge",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_ContactType.hxx (crates/tkoffset/src/bi_tgte/mod.rs) with the native discriminants (repr i32 in declaration order); the contact types are compared with OCCT through obt_blend."
+    },
+    {
+      "upstream_id": "BiTgte_EdgeVertex",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_ContactType.hxx",
+      "source_sha256": "1ba9e2719ad4a75c5248902d02d9dd3a63145bd69443e7144289f08170e2dd05",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteContactType::EdgeVertex",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_ContactType.hxx (crates/tkoffset/src/bi_tgte/mod.rs) with the native discriminants (repr i32 in declaration order); the contact types are compared with OCCT through obt_blend."
+    },
+    {
+      "upstream_id": "BiTgte_VertexVertex",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BiTgte/BiTgte_ContactType.hxx",
+      "source_sha256": "1ba9e2719ad4a75c5248902d02d9dd3a63145bd69443e7144289f08170e2dd05",
+      "rust_item": "rustycad_tkoffset::bi_tgte::BiTgteContactType::VertexVertex",
+      "status": "implemented",
+      "notes": "Translated from BiTgte_ContactType.hxx (crates/tkoffset/src/bi_tgte/mod.rs) with the native discriminants (repr i32 in declaration order); the contact types are compared with OCCT through obt_blend."
     }
   ],
   "tests": [

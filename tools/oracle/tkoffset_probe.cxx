@@ -46,6 +46,7 @@
 #include "tkoffset_probe_brepoffset_offset.cxx"
 #include "tkoffset_probe_brepoffset_inter3d.cxx"
 #include "tkoffset_probe_brepoffset_make_offset.cxx"
+#include "tkoffset_probe_bitgte.cxx"
 #include "tkoffset_probe_brepoffsetapi_middle_path.cxx"
 #include "tkoffset_probe_brepoffsetapi_draft_angle.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
@@ -79,6 +80,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"om_offset", of_om_offset_case},
  {"om_simple", of_om_simple_case},
  {"om_face_offsets", of_om_face_offsets_case},
+ // BiTgte_Blend (tkoffset_probe_bitgte.cxx)
+ {"obt_blend", of_obt_blend_case},
  // BRepOffsetAPI_MiddlePath (tkoffset_probe_brepoffsetapi_middle_path.cxx)
  {"oa_middle", of_oa_middle_case},
  {"oa_middle_prim", of_oa_middle_prim_case},

@@ -34,3 +34,5 @@ def append_tkoffset_requests(requests: list[str]) -> None:
     __import__('tkoffset_corpus_brepoffsetapi_draft_angle').append_draft_angle_requests(requests)
     # BRepOffset_Analyse (tkoffset_corpus_brepoffset_analyse.py)
     __import__('tkoffset_corpus_brepoffset_analyse').append_analyse_requests(requests)
+    # BiTgte_Blend (tkoffset_corpus_bitgte.py)
+    __import__('tkoffset_corpus_bitgte').append_bitgte_requests(requests)
