@@ -19,6 +19,8 @@ pub mod legacy_brep_offset_api_make_pipe_shell;
 pub mod legacy_brep_offset_api_make_thick_solid;
 #[path = "../legacy_brep_offset_make_offset.rs"]
 pub mod legacy_brep_offset_make_offset;
+#[path = "../legacy_brep_offset_make_offset_thick_solid.rs"]
+pub mod legacy_brep_offset_make_offset_thick_solid;
 #[path = "../occ28131_modification.rs"]
 pub mod occ28131_modification;
 #[path = "../occ28131_offset_face.rs"]
