@@ -8,6 +8,7 @@ use fixture::*;
 
 mod conic_pairs;
 mod conics;
+mod curve_isolation;
 mod curve_selection;
 mod curve_sources;
 mod failures;

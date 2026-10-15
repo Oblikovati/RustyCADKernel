@@ -31,7 +31,8 @@ pub fn parse_case(row: &str) -> CorpusCase {
         target: parse_target(fields[3]),
     }
 }
-fn parse_target(spec: &str) -> SketchIncidenceCurve {
+/// Curve spec shared by targets and curve sources.
+pub fn parse_target(spec: &str) -> SketchIncidenceCurve {
     let (kind, rest) = spec.split_once(':').unwrap();
     match kind {
         "circle" => parse_circle(rest),
@@ -44,11 +45,11 @@ fn parse_target(spec: &str) -> SketchIncidenceCurve {
                 sector: None,
             }
         }
-        "segment" => {
+        "segment" | "line" => {
             let v = values(rest);
             SketchIncidenceCurve::Line {
                 points: [[v[0], v[1]], [v[2], v[3]]],
-                bounded: true,
+                bounded: kind == "segment",
             }
         }
         "spline" => parse_spline(rest),
@@ -98,7 +99,11 @@ pub fn mapped_line(points: [[f64; 2]; 2]) -> Curve {
 /// Mapped Geom2d representation; arcs use native angle bounds, as an application would.
 pub fn mapped_target(curve: &SketchIncidenceCurve) -> Curve {
     match curve {
-        SketchIncidenceCurve::Line { points, .. } => mapped_segment(*points),
+        SketchIncidenceCurve::Line {
+            points,
+            bounded: true,
+        } => mapped_segment(*points),
+        SketchIncidenceCurve::Line { points, .. } => mapped_line(*points),
         SketchIncidenceCurve::Circle {
             center,
             radius,

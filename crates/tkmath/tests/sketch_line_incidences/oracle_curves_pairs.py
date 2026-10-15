@@ -8,6 +8,8 @@ from fractions import Fraction as F
 from oracle_curves_exact import (Conic, WIDTH, add, cauchy, coordinates, line_compose, merge,
                                  mul, piece_roots, point_at, position, refine, scale,
                                  sector_position, side_signs, sign_at, transition, trim)
+from oracle_angles import TINY, frame_angle, sweep_offset
+from oracle_curves_exact import AngleSector, decimal
 from oracle_exact import evaluate, multiplicity, roots_in, sign
 
 
@@ -21,8 +23,12 @@ class ConicSource:
 
     def __init__(self, conic, axis):
         self.conic = conic
+        self.angles = isinstance(conic.sector, AngleSector)
         if conic.sector is None:
             self.reference, self.ccw, self.end = tuple(map(F, axis)), True, None
+        elif self.angles:
+            sector = conic.sector
+            self.reference, self.ccw, self.end = tuple(map(F, sector.axis)), sector.ccw, None
         else:
             start, end, ccw = conic.sector
             self.reference, self.ccw, self.end = tuple(map(F, start)), ccw, tuple(map(F, end))
@@ -50,12 +56,24 @@ class ConicSource:
         return 'A' if found is None else found
 
     def key(self, chart, point):
-        """Sweep order key: chart, then the oriented direction (compared by cross products)."""
+        """Sweep order key: chart, then the oriented direction (compared by cross products).
+
+        Angle-bounded arcs order by the sweep offset from their start angle instead.
+        """
         direction = (point[0] - self.conic.center[0], point[1] - self.conic.center[1])
+        if self.angles:
+            sector = self.conic.sector
+            exact = tuple(decimal(value) for value in direction)
+            angle = frame_angle(exact, sector.axis, sector.ccw, sector.radii)
+            return ('offset', sweep_offset(angle, sector.bounds[0]), self.ccw)
         return (chart, direction, self.ccw)
 
 
 def sweep_less(first, second):
+    if first[0] == 'offset':
+        if abs(first[1] - second[1]) < TINY:
+            raise ValueError('unresolved sweep order')
+        return first[1] < second[1]
     if first[0] != second[0]:
         return first[0] < second[0]
     if first[0] in (0, 2):

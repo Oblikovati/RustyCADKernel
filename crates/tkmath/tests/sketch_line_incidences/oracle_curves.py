@@ -3,6 +3,8 @@
 
 Rows: id;kind;domain;source;targets;contacts. Numbers are binary64 bit patterns.
 Curves use circle:cx,cy,r[,sx,sy,ex,ey,ccw], ellipse:cx,cy,ax,ay,ra,rb,
+circlearc:cx,cy,r,ax,ay,t0,t1,ccw and ellipsearc:cx,cy,mx,my,ra,rb,ax,ay,t0,t1,ccw
+(parameter-angle bounds in the frame of axis a),
 segment:x0,y0,x1,y1, line:x0,y0,x1,y1 (unbounded) and
 spline:degree:poles:knots:bounds. Contacts list every certified contact in exact
 source order as target,left,right,source,target,transition,xlo,xhi,ylo,yhi with
@@ -16,7 +18,7 @@ import math
 import random
 import sys
 from fractions import Fraction as F
-from oracle_curves_exact import Conic, line_implicit, line_pieces, spline_pieces
+from oracle_curves_exact import AngleSector, Conic, line_implicit, line_pieces, spline_pieces
 from oracle_curves_pairs import (ConicSource, conic_classifier, conic_conic, conic_parametric,
                                  line_classifier, spline_implicit, spline_spline, sweep_less)
 from oracle_curves_exact import line_compose
@@ -43,6 +45,16 @@ def circle_spec(center, radius, sector=None):
         start, end, ccw = sector
         spec += ',' + numbers([start[0], start[1], end[0], end[1]]) + ',' + ('1' if ccw else '0')
     return spec
+
+
+def circle_arc_spec(center, radius, axis, bounds, ccw):
+    return 'circlearc:' + numbers([center[0], center[1], radius, axis[0], axis[1], bounds[0],
+                                   bounds[1]]) + (',1' if ccw else ',0')
+
+
+def ellipse_arc_spec(center, major, radii, axis, bounds, ccw):
+    return 'ellipsearc:' + numbers([center[0], center[1], major[0], major[1], radii[0], radii[1],
+                                    axis[0], axis[1], bounds[0], bounds[1]]) + (',1' if ccw else ',0')
 
 
 def ellipse_spec(center, axis, radii):
@@ -347,12 +359,51 @@ def spline_pairs(generator, cases):
                       [target]))
 
 
+def spline_source_angle_arc(generator, cases):
+    # y = x/4 meets circles about the origin along (4, 1): angle atan(1/4), never a
+    # binary64 value, so end angles a few ulps away fall strictly inside or outside.
+    poles = [(-2.0, -0.5), (2.0, 0.5)]
+    knots = [0., 0., 1., 1.]
+    pieces = spline_pieces(1, poles, knots, (0.0, 1.0))
+    for radius in (0.75, 1.25, 1.75):
+        for steps in range(-2, 3):
+            end = shift(math.atan(0.25), steps)
+            sector = AngleSector((1.0, 0.0), True, (0.0, end), (radius, radius))
+            target = ('conic', Conic.circle((0.0, 0.0), radius, sector))
+            cases.append(('spline_source_angle_arc', 'segment', spline_spec(1, poles, knots, (0., 1.)),
+                          ('spline', pieces, (0.0, 1.0)),
+                          [circle_arc_spec((0.0, 0.0), radius, (1.0, 0.0), (0.0, end), True)],
+                          [target]))
+
+
+def angle_arc_source(generator, cases):
+    # x = 0.8 meets the unit circle (and x = 1.6 the ellipse x^2/4 + y^2 = 1) at
+    # parameter angles +-atan(3/4); start angles a few ulps from -atan(3/4).
+    for steps in range(-2, 3):
+        start = shift(-math.atan(0.75), steps)
+        bounds = (start, 1.0)
+        sector = AngleSector((1.0, 0.0), True, bounds, (1.0, 1.0))
+        source = ('conic', ConicSource(Conic.circle((0.0, 0.0), 1.0, sector), (1.0, 0.0)))
+        target = ('line', (0.8, -2.0), (0.8, 2.0), True)
+        cases.append(('angle_arc_source', 'support',
+                      circle_arc_spec((0.0, 0.0), 1.0, (1.0, 0.0), bounds, True), source,
+                      [line_spec((0.8, -2.0), (0.8, 2.0), True)], [target]))
+        sector = AngleSector((1.0, 0.0), True, bounds, (2.0, 1.0))
+        conic = Conic.ellipse((0.0, 0.0), (1.0, 0.0), (2.0, 1.0), sector)
+        source = ('conic', ConicSource(conic, (1.0, 0.0)))
+        target = ('line', (1.6, -2.0), (1.6, 2.0), True)
+        cases.append(('angle_ellipse_source', 'support',
+                      ellipse_arc_spec((0.0, 0.0), (1.0, 0.0), (2.0, 1.0), (1.0, 0.0), bounds, True),
+                      source, [line_spec((1.6, -2.0), (1.6, 2.0), True)], [target]))
+
+
 def main():
     generator = random.Random(SEED)
     cases = []
     for family in (circle_line_tangent, arc_end_ray, segment_end_on_circle, circle_pairs,
                    ellipse_source, circle_source_spline, spline_source_line,
-                   spline_source_circle_knot, spline_source_arc, spline_pairs):
+                   spline_source_circle_knot, spline_source_arc, spline_pairs,
+                   spline_source_angle_arc, angle_arc_source):
         family(generator, cases)
     for case, (kind, domain, source_spec, source, specs, targets) in enumerate(cases):
         emit(case, kind, domain, source_spec, source, specs, targets)

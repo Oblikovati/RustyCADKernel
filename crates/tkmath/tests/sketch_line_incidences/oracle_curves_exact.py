@@ -15,6 +15,7 @@ from fractions import Fraction as F
 from oracle_exact import (bracket, derivative, evaluate, gcd, multiplicity, roots_in, sign,
                           trim)
 from oracle_exact import refine as refine_simple
+from oracle_angles import frame_angle, in_bounds
 from oracle_spline import span_polynomials
 
 WIDTH = F(1, 2 ** 300)
@@ -234,9 +235,48 @@ def position(root, lower, upper):
 
 
 # ---------- exact conic sector membership ----------
+class AngleSector:
+    """Parameter-angle bounds of a conic frame (axis, sense, radii)."""
+
+    def __init__(self, axis, ccw, bounds, radii):
+        self.axis, self.ccw, self.bounds, self.radii = axis, ccw, bounds, radii
+
+
+def direction_at(conic, root, x, y, w):
+    """Decimal contact direction from the center at a 2^-300 refinement."""
+    low, high = refine(root['equation'], root['interval'], WIDTH)
+    value = low if low == high else (low + high) / 2
+    weight = evaluate(w, value)
+    return tuple(decimal(evaluate(poly, value) / weight - conic.center[axis])
+                 for axis, poly in enumerate((x, y)))
+
+
+def on_axis_ray(conic, root, x, y, w, axis):
+    qx = add(x, scale(w, -conic.center[0]))
+    qy = add(y, scale(w, -conic.center[1]))
+    across = add(scale(qy, F(axis[0])), scale(qx, -F(axis[1])))
+    along = add(scale(qx, F(axis[0])), scale(qy, F(axis[1])))
+    return (sign_at(root['equation'], root['interval'], across) == 0
+            and sign_at(root['equation'], root['interval'], along) > 0)
+
+
+def angle_position(conic, root, x, y, w):
+    """S/E only at an exact zero bound on the axis ray; otherwise decided numerically."""
+    sector = conic.sector
+    if on_axis_ray(conic, root, x, y, w, sector.axis):
+        for index, label in ((0, 'S'), (1, 'E')):
+            if sector.bounds[index] == 0:
+                return label
+    direction = direction_at(conic, root, x, y, w)
+    angle = frame_angle(direction, sector.axis, sector.ccw, sector.radii)
+    return in_bounds(angle, sector.bounds)
+
+
 def sector_position(conic, root, x, y, w):
     if conic.sector is None:
         return 'I'
+    if isinstance(conic.sector, AngleSector):
+        return angle_position(conic, root, x, y, w)
     start, end, ccw = conic.sector
     qx = add(x, scale(w, -conic.center[0]))
     qy = add(y, scale(w, -conic.center[1]))
