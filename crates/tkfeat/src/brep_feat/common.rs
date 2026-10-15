@@ -76,7 +76,18 @@ impl Form {
     /// with (or cut by) `tool`, or the tool alone for a just feature; the history follows
     /// the Boolean operation.
     pub(crate) fn finish_by_boolean(&mut self, tool: &Shape) -> Result<(), Failure> {
-        if self.fuse && !self.just_feat {
+        self.finish_with(tool, true)
+    }
+
+    /// The end of a feature without reconstruction whose fusion ignores the just-feature
+    /// flag when `just_feat_alone` is false (`myFuse == 1` alone natively in the drafted
+    /// prism and the revolution).
+    pub(crate) fn finish_with(
+        &mut self,
+        tool: &Shape,
+        just_feat_alone: bool,
+    ) -> Result<(), Failure> {
+        if self.fuse && !(just_feat_alone && self.just_feat) {
             let f = BRepAlgoAPIFuse::from_shapes(&self.sbase, tool)?;
             self.base.my_shape = f.shape().clone();
             let shape = self.base.my_shape.clone();
@@ -109,9 +120,15 @@ impl Form {
 
     /// The history of the basis faces reset to themselves (the end of `Init`).
     pub(crate) fn reset_history(&mut self) -> Result<(), Failure> {
-        self.base.my_shape.nullify();
         self.new_edges.clear();
         self.tgt_edges.clear();
+        self.reset_map()
+    }
+
+    /// The result, the end shapes and the history reset, the edge lists kept (the `Init`
+    /// of the drafted prism).
+    pub(crate) fn reset_map(&mut self) -> Result<(), Failure> {
+        self.base.my_shape.nullify();
         self.map.clear(false);
         self.f_shape.nullify();
         self.l_shape.nullify();

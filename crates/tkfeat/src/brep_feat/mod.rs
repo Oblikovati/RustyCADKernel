@@ -4,10 +4,12 @@
 mod builder;
 mod common;
 mod form;
+mod make_dprism;
 mod make_prism;
 mod package;
 pub use builder::BRepFeatBuilder;
 pub use form::{DescendantMap, Form, FormFeature};
+pub use make_dprism::BRepFeatMakeDPrism;
 pub use make_prism::BRepFeatMakePrism;
 pub use package::{
     ParametricMinMax, PerfSelection, Status, StatusError, barycenter, face_until, is_inside,
