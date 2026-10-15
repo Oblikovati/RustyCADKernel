@@ -65,7 +65,10 @@ fn native_locations() -> Vec<Vec<Location>> {
             if let Some(zones) = fields.get(4) {
                 found.extend(zones.split('|').map(zone));
             }
-            assert_eq!(found.len() - fields[1].parse::<usize>().unwrap(), fields[3].parse::<usize>().unwrap());
+            assert_eq!(
+                found.len() - fields[1].parse::<usize>().unwrap(),
+                fields[3].parse::<usize>().unwrap()
+            );
             found
         })
         .collect()

@@ -12,7 +12,7 @@ use super::contact::{ContactDraft, TargetKey, construct_point, finish};
 use super::equation::transition;
 use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
 use super::implicit::{ConicImplicit, LineImplicit};
-use super::input::SketchConicSector;
+
 use super::pieces::{MergedRoots, PieceRoot, piece_roots};
 use super::place::{KeyValue, SourcePlace};
 use super::rational_parameter::RationalParameter;
@@ -20,7 +20,7 @@ use super::rational_polynomial::RationalPolynomial;
 use super::report::{
     SketchContactTransition, SketchLineContact, SketchLinePosition, TargetParameter,
 };
-use super::sector::{ContactDirection, sector_position};
+use super::sector::{ArcBounds, ContactDirection, sector_position};
 use super::source_frame::SourceFrame;
 use super::spans::ParametricSpan;
 
@@ -32,7 +32,7 @@ pub(super) enum ImplicitTarget<'a> {
     },
     Conic {
         implicit: ConicImplicit,
-        sector: Option<&'a SketchConicSector>,
+        sector: Option<ArcBounds<'a>>,
     },
 }
 /// Target facts of one contact; None when the contact lies outside a bounded target.
@@ -132,7 +132,7 @@ impl ContactRequest<'_> {
                             root: contact,
                             relative,
                         };
-                        sector_position(&mut direction, sector, work)?
+                        sector_position(&mut direction, *sector, work)?
                     }
                 };
                 Ok(position.map(|position| TargetFacts {

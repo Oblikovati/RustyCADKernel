@@ -54,13 +54,19 @@ fn curve(curve: &SketchIncidenceCurve) -> Admission {
             center,
             radius,
             sector,
-        } => conic(*center, &[*radius], [1., 0.], sector.as_ref()),
+        } => conic(*center, &[*radius], [1., 0.], sector.as_ref(), None),
         SketchIncidenceCurve::Ellipse {
             center,
             major_axis,
             radii,
             sector,
-        } => conic(*center, radii, *major_axis, sector.as_ref()),
+        } => conic(
+            *center,
+            radii,
+            *major_axis,
+            sector.as_ref(),
+            Some(*major_axis),
+        ),
         SketchIncidenceCurve::Spline(spline) => super::spline_admission::spline(spline),
     }
 }
@@ -96,7 +102,7 @@ fn distinct_points(field: &'static str, points: [[f64; 2]; 2]) -> Admission {
     }
     Ok(())
 }
-fn nonzero(field: &'static str, vector: [f64; 2]) -> Admission {
+pub(super) fn nonzero(field: &'static str, vector: [f64; 2]) -> Admission {
     finite(field, &vector)?;
     if vector[0] == 0. && vector[1] == 0. {
         return Err(Cause::Degenerate { field });
@@ -107,12 +113,19 @@ fn conic(
     center: [f64; 2],
     radii: &[f64],
     axis: [f64; 2],
-    sector: Option<&SketchConicSector>,
+    sector: Option<&SketchConicBounds>,
+    major_axis: Option<[f64; 2]>,
 ) -> Admission {
     finite("conic.center", &center)?;
     nonzero("conic.major_axis", axis)?;
     positive("conic.radii", radii)?;
-    sector.map_or(Ok(()), conic_sector)
+    match sector {
+        None => Ok(()),
+        Some(SketchConicBounds::Rays(sector)) => conic_sector(sector),
+        Some(SketchConicBounds::Angles(angles)) => {
+            super::angle_admission::angles(angles, major_axis)
+        }
+    }
 }
 fn conic_sector(sector: &SketchConicSector) -> Admission {
     nonzero("sector.start", sector.start)?;

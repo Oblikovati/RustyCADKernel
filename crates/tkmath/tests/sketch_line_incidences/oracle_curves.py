@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-"""Generate near-degenerate conic- and spline-source incidence cases (ADR 0061).
+"""Generate near-degenerate conic- and spline-source incidence cases (ADR 0066).
 
 Rows: id;kind;domain;source;targets;contacts. Numbers are binary64 bit patterns.
 Curves use circle:cx,cy,r[,sx,sy,ex,ey,ccw], ellipse:cx,cy,ax,ay,ra,rb,

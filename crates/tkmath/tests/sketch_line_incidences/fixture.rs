@@ -42,7 +42,7 @@ pub fn arc(
     SketchIncidenceCurve::Circle {
         center,
         radius,
-        sector: Some(sector),
+        sector: Some(sector.into()),
     }
 }
 pub fn ellipse(center: [f64; 2], major_axis: [f64; 2], radii: [f64; 2]) -> SketchIncidenceCurve {

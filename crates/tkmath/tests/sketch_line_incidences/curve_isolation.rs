@@ -76,7 +76,7 @@ fn curve_source_report_retains_its_inputs_after_the_caller_mutates_them() {
 }
 #[test]
 fn print_curve_report_digest_for_process_comparison() {
-    // Compared across two separate test processes in the ADR 0061 receipt.
+    // Compared across two separate test processes in the ADR 0066 receipt.
     let text: String = sources()
         .into_iter()
         .map(|source| digest(&certify(source, &mixed_targets())))

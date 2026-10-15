@@ -67,7 +67,7 @@ fn parse_circle(rest: &str) -> SketchIncidenceCurve {
     SketchIncidenceCurve::Circle {
         center: [v[0], v[1]],
         radius: v[2],
-        sector,
+        sector: sector.map(Into::into),
     }
 }
 fn parse_spline(rest: &str) -> SketchIncidenceCurve {
@@ -126,11 +126,13 @@ fn mapped_segment(points: [[f64; 2]; 2]) -> Curve {
     let line = mapped_line(points);
     Handle::new(Geom2dTrimmedCurve::new(&line, 0., length, true, false).unwrap()).cast()
 }
-fn mapped_circle(center: [f64; 2], radius: f64, sector: Option<&SketchConicSector>) -> Curve {
+fn mapped_circle(center: [f64; 2], radius: f64, sector: Option<&SketchConicBounds>) -> Curve {
     let axis = Axis2d::new(point(center), direction([1., 0.]));
     let circle: Curve = Handle::new(Geom2dCircle::from_axis(axis, radius, true).unwrap()).cast();
-    let Some(sector) = sector else {
-        return circle;
+    let sector = match sector {
+        None => return circle,
+        Some(SketchConicBounds::Angles(angles)) => return angle_circle(center, radius, angles),
+        Some(SketchConicBounds::Rays(sector)) => sector,
     };
     let angle = |value: [f64; 2]| value[1].atan2(value[0]);
     let (mut first, mut last) = (angle(sector.start), angle(sector.end));
@@ -140,6 +142,14 @@ fn mapped_circle(center: [f64; 2], radius: f64, sector: Option<&SketchConicSecto
     if last <= first {
         last += std::f64::consts::TAU;
     }
+    Handle::new(Geom2dTrimmedCurve::new(&circle, first, last, true, false).unwrap()).cast()
+}
+// The same frame angles as the certified arc: OCCT trims a circle in its own frame.
+fn angle_circle(center: [f64; 2], radius: f64, angles: &SketchConicAngles) -> Curve {
+    let axis = Axis2d::new(point(center), direction(angles.axis));
+    let circle: Curve =
+        Handle::new(Geom2dCircle::from_axis(axis, radius, angles.counterclockwise).unwrap()).cast();
+    let [first, last] = angles.bounds;
     Handle::new(Geom2dTrimmedCurve::new(&circle, first, last, true, false).unwrap()).cast()
 }
 fn mapped_spline(spline: &SketchIncidenceSpline) -> Curve {

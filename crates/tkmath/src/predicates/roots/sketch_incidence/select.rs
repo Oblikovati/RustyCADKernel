@@ -119,11 +119,11 @@ impl SketchLineIncidenceReport {
         mut cancelled: impl FnMut() -> bool,
     ) -> Result<Option<usize>, SketchSelectionError> {
         self.require_domain(SketchLineDomain::Support)?;
-        let frame = SourceFrame::new(&self.source.curve);
+        let mut work = Work::new(self.options, &mut cancelled);
+        let frame = SourceFrame::new(&self.source.curve, &mut work)?;
         if frame.closed() {
             return Err(refused(SketchSelectionRefusal::ClosedSource));
         }
-        let mut work = Work::new(self.options, &mut cancelled);
         let candidate = self.nearest_beyond(end, &frame);
         let ends = frame.ends();
         for overlap in self.overlaps() {
@@ -156,9 +156,9 @@ impl SketchLineIncidenceReport {
         mut cancelled: impl FnMut() -> bool,
     ) -> Result<SketchTrimSelection, SketchSelectionError> {
         self.require_domain(SketchLineDomain::Segment)?;
-        let frame = SourceFrame::new(&self.source.curve);
-        let mut place = pick::pick_place(&frame, pick)?;
         let mut work = Work::new(self.options, &mut cancelled);
+        let frame = SourceFrame::new(&self.source.curve, &mut work)?;
+        let mut place = pick::pick_place(&frame, pick, &mut work)?;
         let closed = frame.closed();
         if !closed {
             pick::require_inside(&frame, &mut place, pick, &mut work)?;

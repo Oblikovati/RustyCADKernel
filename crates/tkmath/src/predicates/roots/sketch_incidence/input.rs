@@ -49,7 +49,43 @@ pub struct SketchConicSector {
     /// True for counterclockwise travel from `start` to `end`.
     pub counterclockwise: bool,
 }
-/// One admitted target representation. Offsets and periodic native knot vectors are not admitted.
+/// Angular sector of a conic given by parameter angles in radians.
+///
+/// The frame places angle `t` at `C + ra cos(t) a + rb sin(t) n`, with `a` the
+/// unit `axis` and `n` its left normal (right normal when clockwise); a circle has
+/// `ra = rb`. The binary64 bounds are exact real angles: a contact is never exactly
+/// on a nonzero bound (its direction is algebraic, `tan(t)` is transcendental), so
+/// only a bound of exactly `0` can report `AtStart` or `AtEnd`. Prefer rays for
+/// authored arcs: an angle rounded from authored points is not their direction.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct SketchConicAngles {
+    /// Frame axis; for an ellipse, parallel to its major axis (either direction).
+    pub axis: [f64; 2],
+    /// True when angles increase counterclockwise.
+    pub counterclockwise: bool,
+    /// Start and end angles: `start < end`, `end - start` below one full turn,
+    /// magnitudes at most 64.
+    pub bounds: [f64; 2],
+}
+/// Bounds of a conic arc: boundary rays, or parameter angles.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum SketchConicBounds {
+    /// Exact boundary directions (preferred for authored arcs).
+    Rays(SketchConicSector),
+    /// Parameter angles in a conic frame, e.g. an application's radian span.
+    Angles(SketchConicAngles),
+}
+impl From<SketchConicSector> for SketchConicBounds {
+    fn from(sector: SketchConicSector) -> Self {
+        Self::Rays(sector)
+    }
+}
+impl From<SketchConicAngles> for SketchConicBounds {
+    fn from(angles: SketchConicAngles) -> Self {
+        Self::Angles(angles)
+    }
+}
+/// One admitted curve representation, as a source or a target.
 #[derive(Clone, Debug, PartialEq)]
 pub enum SketchIncidenceCurve {
     /// Line through two distinct points: the closed segment, or the whole line when unbounded.
@@ -66,7 +102,7 @@ pub enum SketchIncidenceCurve {
         /// Strictly positive radius.
         radius: f64,
         /// None for the full periodic curve.
-        sector: Option<SketchConicSector>,
+        sector: Option<SketchConicBounds>,
     },
     /// Ellipse, or an elliptical arc when a sector is supplied.
     Ellipse {
@@ -77,7 +113,7 @@ pub enum SketchIncidenceCurve {
         /// Strictly positive radii along the major axis and its left normal.
         radii: [f64; 2],
         /// None for the full periodic curve.
-        sector: Option<SketchConicSector>,
+        sector: Option<SketchConicBounds>,
     },
     /// Non-periodic B-spline with flat knots, as built by the owned sketch constructor.
     Spline(SketchIncidenceSpline),

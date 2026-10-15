@@ -34,6 +34,7 @@ pub(super) fn finish(
     work: &mut Work<'_>,
 ) -> Result<SketchLineContact, Cause> {
     work.enter(SketchIncidenceStage::Classification);
+    source.normalize(&mut draft.place, work)?;
     let source_position = source.position(&mut draft.place, work)?;
     Ok(SketchLineContact {
         target_index: owner.index,

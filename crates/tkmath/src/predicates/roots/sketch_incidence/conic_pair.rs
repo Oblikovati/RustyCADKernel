@@ -20,20 +20,21 @@ use super::budget::Work;
 use super::conic_chart::Chart;
 use super::conic_concentric;
 use super::conic_point::ChartContact;
+use super::conic_source::ConicSource;
 use super::contact::TargetKey;
 use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
 use super::implicit::ConicImplicit;
-use super::input::SketchConicSector;
 use super::place::SketchSweepChart;
 use super::report::{SketchLineContact, SketchLineOverlap};
-use super::source_frame::{ConicSource, SourceFrame};
+use super::sector::ArcBounds;
+use super::source_frame::SourceFrame;
 use std::cmp::Ordering;
 
 /// One conic target against a conic source.
 pub(super) struct ConicPair<'a> {
     pub source: &'a ConicSource,
     pub target: &'a ConicImplicit,
-    pub sector: Option<&'a SketchConicSector>,
+    pub sector: Option<ArcBounds<'a>>,
     pub owner: TargetKey,
 }
 pub(super) fn incidences(

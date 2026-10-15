@@ -10,12 +10,15 @@
 //! sectors, transitions, overlaps and order are exact; world points carry a
 //! certified error bound. Any unresolved step is a named failure.
 mod algebraic;
+mod angle;
+mod angle_admission;
 mod bivariate;
 mod budget;
 mod conic_chart;
 mod conic_concentric;
 mod conic_pair;
 mod conic_point;
+mod conic_source;
 mod construction;
 mod contact;
 mod equation;
@@ -50,8 +53,9 @@ pub use failure::{
     SketchIncidenceCause, SketchIncidenceCompletion, SketchIncidenceFailure, SketchIncidenceStage,
 };
 pub use input::{
-    SketchConicSector, SketchIncidenceCurve, SketchIncidenceOptions, SketchIncidenceSource,
-    SketchIncidenceSpline, SketchIncidenceTarget, SketchLineDomain,
+    SketchConicAngles, SketchConicBounds, SketchConicSector, SketchIncidenceCurve,
+    SketchIncidenceOptions, SketchIncidenceSource, SketchIncidenceSpline, SketchIncidenceTarget,
+    SketchLineDomain,
 };
 pub use place::SketchSweepChart;
 pub use report::{
@@ -95,8 +99,9 @@ pub fn certify_sketch_line_incidences(
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<SketchLineIncidenceReport, SketchIncidenceFailure> {
     admit(&source, targets, options)?;
-    let frame = SourceFrame::new(&source.curve);
     let mut work = Work::new(options, &mut cancelled);
+    let frame = SourceFrame::new(&source.curve, &mut work)
+        .map_err(|cause| SketchIncidenceFailure::new(work.stage(), cause))?;
     let results = all_targets(targets, &frame, &mut work)?;
     work.enter(SketchIncidenceStage::Ordering);
     let ordered = order::order_contacts(&results, source.domain, &mut work)
@@ -212,25 +217,33 @@ fn spline_target(
     spline_pair::incidences(&pair, frame, work)
 }
 fn conic_target(curve: &SketchIncidenceCurve) -> ImplicitTarget<'_> {
-    match curve {
+    let (implicit, radii, sector) = match curve {
         SketchIncidenceCurve::Circle {
             center,
             radius,
             sector,
-        } => ImplicitTarget::Conic {
-            implicit: ConicImplicit::circle(*center, *radius),
-            sector: sector.as_ref(),
-        },
+        } => (
+            ConicImplicit::circle(*center, *radius),
+            [*radius; 2],
+            sector,
+        ),
         SketchIncidenceCurve::Ellipse {
             center,
             major_axis,
             radii,
             sector,
-        } => ImplicitTarget::Conic {
-            implicit: ConicImplicit::ellipse(*center, *major_axis, *radii),
-            sector: sector.as_ref(),
-        },
+        } => (
+            ConicImplicit::ellipse(*center, *major_axis, *radii),
+            *radii,
+            sector,
+        ),
         other => unreachable!("curve {other:?}; expected a circle or ellipse"),
+    };
+    ImplicitTarget::Conic {
+        implicit,
+        sector: sector
+            .as_ref()
+            .map(|bounds| sector::ArcBounds { bounds, radii }),
     }
 }
 // Line and conic sources substitute line and spline targets into their own equation.

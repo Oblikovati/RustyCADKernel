@@ -68,7 +68,7 @@ impl SweepFrame {
         let chart = chart(across.sign(), along.sign());
         let cotangent = (across.sign() != Ordering::Equal)
             .then(|| KeyValue::Ratio(along.negated().divide(&across)));
-        SourcePlace::Sweep { chart, cotangent }
+        SourcePlace::sweep(chart, cotangent)
     }
     /// Placer for a contact point `(x, y) / w` with `w > 0` at every contact.
     pub fn placer(
@@ -118,13 +118,10 @@ impl PointPlacer {
                 if across_sign != Ordering::Equal {
                     let cotangent = Some(KeyValue::Root(key.map_root(contact, work)?));
                     let chart = chart(across_sign, Ordering::Equal);
-                    return Ok(SourcePlace::Sweep { chart, cotangent });
+                    return Ok(SourcePlace::sweep(chart, cotangent));
                 }
                 let along_sign = ordering(sign_at_root(contact, along, work)?);
-                Ok(SourcePlace::Sweep {
-                    chart: chart(Ordering::Equal, along_sign),
-                    cotangent: None,
-                })
+                Ok(SourcePlace::sweep(chart(Ordering::Equal, along_sign), None))
             }
         }
     }

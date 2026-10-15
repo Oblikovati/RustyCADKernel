@@ -38,7 +38,7 @@ cargo test --locked -p rustycad-tkgeomalgo --test toolkit sketch_line_incidences
 ## Conic and spline sources
 
 `native_curve_cases.py` writes `native-curve-cases.csv`: 76 ordinary-range cases
-with a bounded curve source (ADR 0063): a full circle, a counterclockwise and a
+with a bounded curve source (ADR 0066): a full circle, a counterclockwise and a
 clockwise ray arc, and a rotated ellipse, each against three lines, two circles, a
 ray arc, an ellipse and two Go spline recipes; and every Go fit and control recipe
 as a source against a segment, a circle, an arc, an ellipse and another recipe

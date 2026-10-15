@@ -39,6 +39,7 @@ fn parse_curve(spec: &str) -> SketchIncidenceCurve {
     let (kind, rest) = spec.split_once(':').unwrap();
     match kind {
         "circle" => parse_circle(rest),
+        "circlearc" | "ellipsearc" => parse_angle_arc(kind, rest),
         "ellipse" => {
             let v = values(rest);
             ellipse([v[0], v[1]], [v[2], v[3]], [v[4], v[5]])
@@ -62,6 +63,33 @@ fn parse_curve(spec: &str) -> SketchIncidenceCurve {
             )
         }
         other => panic!("curve kind {other}; expected circle, ellipse, segment, line or spline"),
+    }
+}
+// circlearc:cx,cy,r,ax,ay,t0,t1,ccw or ellipsearc:cx,cy,mx,my,ra,rb,ax,ay,t0,t1,ccw.
+fn parse_angle_arc(kind: &str, rest: &str) -> SketchIncidenceCurve {
+    let fields: Vec<&str> = rest.split(',').collect();
+    let v: Vec<f64> = fields[..fields.len() - 1]
+        .iter()
+        .map(|field| bits(field))
+        .collect();
+    let counterclockwise = fields[fields.len() - 1] == "1";
+    let angles = |offset: usize| SketchConicAngles {
+        axis: [v[offset], v[offset + 1]],
+        counterclockwise,
+        bounds: [v[offset + 2], v[offset + 3]],
+    };
+    if kind == "circlearc" {
+        return SketchIncidenceCurve::Circle {
+            center: [v[0], v[1]],
+            radius: v[2],
+            sector: Some(angles(3).into()),
+        };
+    }
+    SketchIncidenceCurve::Ellipse {
+        center: [v[0], v[1]],
+        major_axis: [v[2], v[3]],
+        radii: [v[4], v[5]],
+        sector: Some(angles(6).into()),
     }
 }
 fn parse_circle(rest: &str) -> SketchIncidenceCurve {
@@ -185,7 +213,7 @@ fn check_row(row: &str) {
 #[test]
 fn generated_curve_source_cases_match_the_exact_oracle() {
     let rows: Vec<&str> = include_str!("oracle-curves.csv").lines().collect();
-    assert_eq!(rows.len(), 219);
+    assert_eq!(rows.len(), 244);
     for row in rows {
         check_row(row);
     }

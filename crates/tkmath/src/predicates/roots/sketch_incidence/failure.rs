@@ -58,6 +58,19 @@ pub enum SketchIncidenceCause {
         /// Supplied end direction.
         end: [f64; 2],
     },
+    /// Angle bounds are not finite, not increasing, larger than 64 in magnitude, or
+    /// span at least one full turn.
+    AngleBounds {
+        /// Supplied bounds.
+        bounds: [f64; 2],
+    },
+    /// An ellipse's angle frame axis is not parallel to its major axis.
+    AngleAxis {
+        /// Supplied frame axis.
+        axis: [f64; 2],
+        /// The ellipse's major axis.
+        major_axis: [f64; 2],
+    },
     /// Spline counts do not describe one B-spline.
     SplineShape {
         /// Supplied degree.

@@ -44,6 +44,9 @@ pub enum SketchContactTransition {
 /// half turn. Example: `contact.source_sweep().map(|sweep| sweep.chart)`.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct SketchSweepPlace {
+    /// True on an angle-bounded arc when the place precedes the start angle in its
+    /// frame, so it follows every other place in sweep order from the start.
+    pub wrapped: bool,
     /// Chart of the contact direction.
     pub chart: SketchSweepChart,
     /// Outward bounds of the exact cotangent key inside the open half turns.
@@ -92,7 +95,12 @@ impl SketchLineContact {
     /// Sweep place on a conic source; None for line and spline sources.
     pub fn source_sweep(&self) -> Option<SketchSweepPlace> {
         match &self.place {
-            SourcePlace::Sweep { chart, cotangent } => Some(SketchSweepPlace {
+            SourcePlace::Sweep {
+                turn,
+                chart,
+                cotangent,
+            } => Some(SketchSweepPlace {
+                wrapped: *turn,
                 chart: *chart,
                 cotangent_bounds: cotangent.as_ref().map(KeyValue::outward),
             }),

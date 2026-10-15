@@ -11,6 +11,7 @@ use std::cmp::Ordering;
 pub(super) fn pick_place(
     frame: &SourceFrame,
     pick: SketchTrimPick,
+    work: &mut Work<'_>,
 ) -> Result<SourcePlace, SketchSelectionError> {
     let outside = refused(SketchSelectionRefusal::PickOutsideSegment { pick });
     match (frame, pick) {
@@ -29,7 +30,9 @@ pub(super) fn pick_place(
             {
                 return Err(outside);
             }
-            Ok(conic.frame.exact_place(&direction))
+            let mut place = conic.frame.exact_place(&direction);
+            frame.normalize(&mut place, work)?;
+            Ok(place)
         }
         (SourceFrame::Spline(spline), SketchTrimPick::Parameter(value)) => {
             let [lower, upper] = spline.bounds;

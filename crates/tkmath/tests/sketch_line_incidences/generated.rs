@@ -49,7 +49,7 @@ fn parse_target(id: u64, spec: &str) -> SketchIncidenceTarget {
             SketchIncidenceCurve::Circle {
                 center: [numbers[0], numbers[1]],
                 radius: numbers[2],
-                sector,
+                sector: sector.map(Into::into),
             }
         }
         "ellipse" => {

@@ -106,10 +106,7 @@ impl Chart {
             let shared = sign_at_root(&mut root.contact, &equations.shared(), work)?;
             // lambda = -E / (2 Q_S B) and Q_S > 0, so its sign is -sign(E) sign(B).
             let chart = half_turn(shared * bilinear == Sign::Minus);
-            let place = SourcePlace::Sweep {
-                chart,
-                cotangent: Some(KeyValue::Root(root.contact.clone())),
-            };
+            let place = SourcePlace::sweep(chart, Some(KeyValue::Root(root.contact.clone())));
             found.push(ChartContact::regular(root, point.clone(), place));
         }
         Ok(found)
@@ -123,9 +120,8 @@ impl Chart {
     ) -> Result<Vec<ChartContact>, Cause> {
         let [constant, slope] = [0, 1].map(|power| equations.bilinear.coefficient(power));
         let key = constant.negated().divide(&slope);
-        let places = [true, false].map(|positive| SourcePlace::Sweep {
-            chart: half_turn(positive),
-            cotangent: Some(KeyValue::Ratio(key.clone())),
+        let places = [true, false].map(|positive| {
+            SourcePlace::sweep(half_turn(positive), Some(KeyValue::Ratio(key.clone())))
         });
         quadratic_contacts(pair, &self.direction_at(&key), places, None, work)
     }
@@ -160,10 +156,7 @@ fn on_reference_line(positive_along_reference: bool) -> SourcePlace {
         true => SketchSweepChart::Reference,
         false => SketchSweepChart::Opposite,
     };
-    SourcePlace::Sweep {
-        chart,
-        cotangent: None,
-    }
+    SourcePlace::sweep(chart, None)
 }
 // The root `K' = 0` of a resultant that vanishes there, with its exact sides.
 pub(super) fn exact_zero_root(
