@@ -28,7 +28,7 @@ const LOCATION_ID: Guid = guid_from_text("efd212ef-6dfd-11d4-b9c8-0060b0ee281b")
 /// use rustycad_tkxcaf::xcaf_doc::XCAFDocLocation;
 /// let data = TdfData::new();
 /// let location = XCAFDocLocation::set(&data.root(), &Location::default())?;
-/// assert!(location.get().is_identity());
+/// assert!(location.get().is_some_and(|l| l.get().is_identity()));
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 #[derive(Default)]
@@ -116,7 +116,7 @@ struct LengthUnitFields {
 /// use rustycad_tkxcaf::xcaf_doc::XCAFDocLengthUnit;
 /// let data = TdfData::new();
 /// let unit = XCAFDocLengthUnit::set_value(&data.root(), 0.001)?;
-/// assert_eq!(unit.get_unit_name().to_string(), "mm");
+/// assert_eq!(unit.get().unwrap().get_unit_name().as_bytes(), b"mm");
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 pub struct XCAFDocLengthUnit {

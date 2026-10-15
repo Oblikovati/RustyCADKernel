@@ -9,6 +9,7 @@
 //!
 //! The design rules are in `docs/xcaf-design.md`.
 mod json;
+pub mod xcaf_app;
 pub mod xcaf_dim_tol_objects;
 pub mod xcaf_doc;
 pub mod xcaf_note_objects;

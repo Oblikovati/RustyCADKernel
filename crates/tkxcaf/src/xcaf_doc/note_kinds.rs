@@ -29,10 +29,13 @@ const NOTE_BIN_DATA_ID: Guid = guid_from_text("E9055501-F0FC-4864-BE4B-284FDA7DD
 /// `XCAFDoc_NoteComment`: a note with a text comment.
 ///
 /// ```
+/// use rustycad_tkernel::tcollection::ExtendedString;
 /// use rustycad_tklcaf::tdf::TdfData;
 /// use rustycad_tkxcaf::xcaf_doc::{XCAFDocNoteComment, XCAFDocNoteMembers};
 /// let data = TdfData::new();
-/// let note = XCAFDocNoteComment::set(&data.root(), &"me".into(), &"now".into(), &"hi".into())?;
+/// let text = ExtendedString::from_utf8;
+/// let note = XCAFDocNoteComment::set(&data.root(), &text("me"), &text("now"), &text("hi"))?;
+/// let note = note.get().unwrap();
 /// assert_eq!(note.comment().to_utf8(), "hi");
 /// assert_eq!(note.user_name().to_utf8(), "me");
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
