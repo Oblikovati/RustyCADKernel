@@ -10,20 +10,25 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 use rustycad_tkv3d::ais::{
-    AisInteractiveContext, AisInteractiveObject, AisKindOfInteractive, AisSelectionModesConcurrency,
-    AisShape, AisTypeFilter,
+    AisInteractiveContext, AisInteractiveObject, AisKindOfInteractive,
+    AisSelectionModesConcurrency, AisShape, AisTypeFilter,
 };
 use rustycad_tkv3d::select_mgr::{SelectMgrFilter, SelectMgrFilterType};
 use rustycad_tkv3d::v3d::V3dViewer;
 
-fn scene() -> (Handle<V3dViewer>, Handle<AisInteractiveContext>, Handle<dyn AisInteractiveObject>) {
+fn scene() -> (
+    Handle<V3dViewer>,
+    Handle<AisInteractiveContext>,
+    Handle<dyn AisInteractiveObject>,
+) {
     let (driver, _trace) = display::SensitiveDisplayDriver::new_handle(0);
     let viewer = V3dViewer::new(&driver).unwrap();
     let context = AisInteractiveContext::new(&viewer).unwrap();
-    let edge = BRepBuilderAPIMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(1., 0., 0.))
-        .unwrap()
-        .edge()
-        .unwrap();
+    let edge =
+        BRepBuilderAPIMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(1., 0., 0.))
+            .unwrap()
+            .edge()
+            .unwrap();
     let object: Handle<dyn AisInteractiveObject> = AisShape::new(&Shape::from(edge)).into_cast();
     context.display(&object, false).unwrap();
     (viewer, context, object)
@@ -43,7 +48,13 @@ fn selection_modes_follow_the_concurrency_policy() {
     context.activate(&object, 2, false).unwrap();
     assert_eq!(modes(&context, &object), vec![2]);
     context
-        .set_selection_mode_active(&object, 1, true, AisSelectionModesConcurrency::Multiple, false)
+        .set_selection_mode_active(
+            &object,
+            1,
+            true,
+            AisSelectionModesConcurrency::Multiple,
+            false,
+        )
         .unwrap();
     assert_eq!(modes(&context, &object), vec![2, 1]);
     context.deactivate_mode(&object, 2).unwrap();

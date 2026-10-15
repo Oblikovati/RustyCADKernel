@@ -1,14 +1,18 @@
 //! Translation of OCCT's GTests/StdPrs_BRepFont_Test.cxx at 3d097a0. Font-dependent
 //! cases skip, as natively, when FreeType and usable fonts are unavailable.
-use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 use rustycad_tkbrep::topexp::Explorer;
+use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 use rustycad_tkernel::ncollection::String8;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkservice::font::{FontFontAspect, FontStrictLevel};
-use rustycad_tkservice::graphic3d::{Graphic3dHorizontalTextAlignment as Hta, Graphic3dVerticalTextAlignment as Vta};
+use rustycad_tkservice::graphic3d::{
+    Graphic3dHorizontalTextAlignment as Hta, Graphic3dVerticalTextAlignment as Vta,
+};
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
-use rustycad_tkv3d::std_prs::{StdPrsBRepFont, StdPrsBRepFontCache, StdPrsBRepFontGlyphOptions, StdPrsBRepFontTextOptions};
+use rustycad_tkv3d::std_prs::{
+    StdPrsBRepFont, StdPrsBRepFontCache, StdPrsBRepFontGlyphOptions, StdPrsBRepFontTextOptions,
+};
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
 
@@ -19,7 +23,12 @@ fn text(value: &str) -> String8 {
 }
 
 fn create_font() -> Handle<StdPrsBRepFont> {
-    StdPrsBRepFont::find_and_create(&FALLBACK_REQUEST.into(), FontFontAspect::Regular, 12.0, FontStrictLevel::Any)
+    StdPrsBRepFont::find_and_create(
+        &FALLBACK_REQUEST.into(),
+        FontFontAspect::Regular,
+        12.0,
+        FontStrictLevel::Any,
+    )
 }
 
 fn count_sub_shapes(shape: &Shape, kind: ShapeEnum) -> usize {
@@ -33,7 +42,10 @@ fn count_sub_shapes(shape: &Shape, kind: ShapeEnum) -> usize {
 }
 
 fn is_valid(shape: &Shape) -> bool {
-    BRepCheckAnalyzer::new(shape, true, false, false).unwrap().is_valid().unwrap()
+    BRepCheckAnalyzer::new(shape, true, false, false)
+        .unwrap()
+        .is_valid()
+        .unwrap()
 }
 
 fn skip() {
@@ -69,12 +81,20 @@ fn glyph_options_concatenate_contours_per_call() {
     };
     let default_shape = font.render_glyph(B);
     assert!(!default_shape.is_null());
-    let options = StdPrsBRepFontGlyphOptions { to_concatenate_contours: true };
+    let options = StdPrsBRepFontGlyphOptions {
+        to_concatenate_contours: true,
+    };
     let composite = font.render_glyph_with(B, &options);
     assert!(!composite.is_null());
     assert!(is_valid(&composite));
-    assert!(count_sub_shapes(&composite, ShapeEnum::Edge) < count_sub_shapes(&default_shape, ShapeEnum::Edge));
-    assert_eq!(count_sub_shapes(&default_shape, ShapeEnum::Face), count_sub_shapes(&composite, ShapeEnum::Face));
+    assert!(
+        count_sub_shapes(&composite, ShapeEnum::Edge)
+            < count_sub_shapes(&default_shape, ShapeEnum::Edge)
+    );
+    assert_eq!(
+        count_sub_shapes(&default_shape, ShapeEnum::Face),
+        count_sub_shapes(&composite, ShapeEnum::Face)
+    );
 }
 
 #[test]
@@ -88,7 +108,9 @@ fn render_glyph_returns_independent_topology() {
     let second_default = font.render_glyph(B);
     assert!(!second_default.is_null());
     assert!(!default_shape.is_same(&second_default));
-    let options = StdPrsBRepFontGlyphOptions { to_concatenate_contours: true };
+    let options = StdPrsBRepFontGlyphOptions {
+        to_concatenate_contours: true,
+    };
     let composite = font.render_glyph_with(B, &options);
     assert!(!composite.is_null());
     let second_composite = font.render_glyph_with(B, &options);
@@ -150,7 +172,9 @@ fn text_plan_stores_bounds_and_regions() {
     let Some(font) = font.get() else {
         return skip();
     };
-    let plan = font.plan_text(&text("ABBA"), Hta::Center, Vta::Center).unwrap();
+    let plan = font
+        .plan_text(&text("ABBA"), Hta::Center, Vta::Center)
+        .unwrap();
     assert_eq!(2, plan.nb_regions());
     assert_eq!(4, plan.items().len());
     assert!(plan.width() > 0.0);
@@ -164,12 +188,21 @@ fn text_plan_stores_bounds_and_regions() {
 
 #[test]
 fn right_aligned_multiline_text_builds_shape() {
-    let font = StdPrsBRepFont::find_and_create(&"Times-Roman".into(), FontFontAspect::Regular, 50.0, FontStrictLevel::Any);
+    let font = StdPrsBRepFont::find_and_create(
+        &"Times-Roman".into(),
+        FontFontAspect::Regular,
+        50.0,
+        FontStrictLevel::Any,
+    );
     let Some(font) = font.get() else {
         return skip();
     };
     let plan = font
-        .plan_text(&text("Top-Right\nFirst line\nLion The Second\n3rd"), Hta::Right, Vta::Top)
+        .plan_text(
+            &text("Top-Right\nFirst line\nLion The Second\n3rd"),
+            Hta::Right,
+            Vta::Top,
+        )
         .unwrap();
     assert!(plan.nb_regions() > 0);
     assert!(!plan.items().is_empty());
@@ -252,13 +285,25 @@ fn cache_distinguishes_font_parameters() {
     let (glyph, same_glyph) = (font_ref.render_glyph(A), same_ref.render_glyph(A));
     assert!(!glyph.is_null() && !same_glyph.is_null());
     assert!(!glyph.is_partner(&same_glyph));
-    let plan = font_ref.plan_text(&text("A"), Hta::Left, Vta::Bottom).unwrap();
-    let same_plan = same_ref.plan_text(&text("A"), Hta::Left, Vta::Bottom).unwrap();
+    let plan = font_ref
+        .plan_text(&text("A"), Hta::Left, Vta::Bottom)
+        .unwrap();
+    let same_plan = same_ref
+        .plan_text(&text("A"), Hta::Left, Vta::Bottom)
+        .unwrap();
     assert_eq!(1, plan.nb_regions());
     assert_eq!(1, same_plan.nb_regions());
-    assert!(Arc::ptr_eq(plan.region_handle(0), same_plan.region_handle(0)));
+    assert!(Arc::ptr_eq(
+        plan.region_handle(0),
+        same_plan.region_handle(0)
+    ));
     let next_size = f64::from_bits(12.0f64.to_bits() + 1);
-    let next_font = cache.find_font(&name, FontFontAspect::Regular, next_size, FontStrictLevel::Any);
+    let next_font = cache.find_font(
+        &name,
+        FontFontAspect::Regular,
+        next_size,
+        FontStrictLevel::Any,
+    );
     assert!(!next_font.is_null());
     assert_ne!(font, next_font);
     assert_eq!(2, cache.size());
@@ -266,8 +311,14 @@ fn cache_distinguishes_font_parameters() {
     let cached = cache.find_font(&name, FontFontAspect::Regular, 12.0, FontStrictLevel::Any);
     assert!(!cached.is_null());
     assert_ne!(font, cached);
-    let cached_plan = cached.get().unwrap().plan_text(&text("AB"), Hta::Left, Vta::Bottom).unwrap();
-    let changed_plan = font_ref.plan_text(&text("AB"), Hta::Left, Vta::Bottom).unwrap();
+    let cached_plan = cached
+        .get()
+        .unwrap()
+        .plan_text(&text("AB"), Hta::Left, Vta::Bottom)
+        .unwrap();
+    let changed_plan = font_ref
+        .plan_text(&text("AB"), Hta::Left, Vta::Bottom)
+        .unwrap();
     assert!(cached_plan.width() < changed_plan.width());
     assert_eq!(2, cache.size());
 }
@@ -276,7 +327,9 @@ fn cache_distinguishes_font_parameters() {
 fn caches_are_independent_and_respect_capacity() {
     let (first_cache, second_cache) = (StdPrsBRepFontCache::new(2), StdPrsBRepFontCache::new(2));
     let name = FALLBACK_REQUEST.into();
-    let find = |cache: &StdPrsBRepFontCache, size: f64| cache.find_font(&name, FontFontAspect::Regular, size, FontStrictLevel::Any);
+    let find = |cache: &StdPrsBRepFontCache, size: f64| {
+        cache.find_font(&name, FontFontAspect::Regular, size, FontStrictLevel::Any)
+    };
     let first = find(&first_cache, 12.0);
     if first.is_null() {
         return skip();

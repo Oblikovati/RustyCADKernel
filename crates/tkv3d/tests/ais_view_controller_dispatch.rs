@@ -55,7 +55,11 @@ impl PrsMgrPresentableObject for Draggable {
         _: i32,
     ) -> Result<(), Failure> {
         let point = Handle::new(GeomCartesianPoint::new(0., 0., 0.));
-        StdPrsPoint::add(&prs.observe().clone_handle(), &point.cast(), &self.attributes())
+        StdPrsPoint::add(
+            &prs.observe().clone_handle(),
+            &point.cast(),
+            &self.attributes(),
+        )
     }
 }
 impl SelectMgrSelectableObject for Draggable {
@@ -70,8 +74,11 @@ impl SelectMgrSelectableObject for Draggable {
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 5);
         selection.observe().add(
-            &Handle::new(Select3DSensitivePoint::new(&owner.cast(), Point3::new(0., 0., 0.)))
-                .cast(),
+            &Handle::new(Select3DSensitivePoint::new(
+                &owner.cast(),
+                Point3::new(0., 0., 0.),
+            ))
+            .cast(),
         )
     }
 }
@@ -100,7 +107,8 @@ fn scene() -> Scene {
         let point = AisPoint::new(&Handle::new(GeomCartesianPoint::new(x, 0., 0.)).cast()).unwrap();
         ctx.display(&point.into_cast(), false).unwrap();
     }
-    view.set_proj_orientation(V3dTypeOfOrientation::ZUP_TOP, false).unwrap();
+    view.set_proj_orientation(V3dTypeOfOrientation::ZUP_TOP, false)
+        .unwrap();
     view.fit_all(0.1, false).unwrap();
     Scene { ctx, view, object }
 }
@@ -125,16 +133,32 @@ fn dragging_starts_on_the_detected_object_and_moves_until_stopped() {
     ui.dragging.to_move = true;
     ui.dragging.point_to = Vec2::new(px + 5, py);
     c.flush_view_events(&s.ctx, &s.view, true).unwrap();
-    c.change_input_buffer(AisViewInputBufferType::Ui).dragging.to_stop = true;
+    c.change_input_buffer(AisViewInputBufferType::Ui)
+        .dragging
+        .to_stop = true;
     c.flush_view_events(&s.ctx, &s.view, true).unwrap();
     assert!(c.drag_object().is_null() && c.drag_owner().is_null());
-    let actions: Vec<AisDragAction> = s.object.actions.lock().unwrap().iter().map(|a| a.0).collect();
+    let actions: Vec<AisDragAction> = s
+        .object
+        .actions
+        .lock()
+        .unwrap()
+        .iter()
+        .map(|a| a.0)
+        .collect();
     assert_eq!(
         actions,
-        [AisDragAction::Start, AisDragAction::Update, AisDragAction::Stop]
+        [
+            AisDragAction::Start,
+            AisDragAction::Update,
+            AisDragAction::Stop
+        ]
     );
     let moves = s.object.actions.lock().unwrap();
-    assert_eq!((moves[1].1, moves[1].2), (Vec2::new(px, py), Vec2::new(px + 5, py)));
+    assert_eq!(
+        (moves[1].1, moves[1].2),
+        (Vec2::new(px, py), Vec2::new(px + 5, py))
+    );
 }
 
 #[test]
@@ -171,7 +195,11 @@ impl AisViewControllerHooks for Hooks {
         _: &Handle<dyn V3dViewSource>,
     ) -> Result<(), Failure> {
         // The controller stays usable from the callback.
-        let pending = controller.input_buffer(AisViewInputBufferType::Gl).selection.points.len();
+        let pending = controller
+            .input_buffer(AisViewInputBufferType::Gl)
+            .selection
+            .points
+            .len();
         self.0.lock().unwrap().push(format!("selection {pending}"));
         Ok(())
     }
@@ -222,14 +250,28 @@ fn protected_state_starts_with_the_native_constructor_values() {
     );
     assert_eq!(c.touch_zoom_ratio(), 0.13);
     assert_eq!(c.touch_click_threshold_px(), 3.0);
-    assert_eq!(c.touch_z_rotation_threshold(), (2.0 * std::f64::consts::PI / 180.0) as f32);
+    assert_eq!(
+        c.touch_z_rotation_threshold(),
+        (2.0 * std::f64::consts::PI / 180.0) as f32
+    );
     assert_eq!((c.mouse_single_button(), c.mouse_click_counter()), (-1, 0));
-    assert!(c.update_start_point_pan() && c.update_start_point_rot() && c.update_start_point_z_rot());
+    assert!(
+        c.update_start_point_pan() && c.update_start_point_rot() && c.update_start_point_z_rot()
+    );
     assert!(!c.has_thrust() && !c.has_hlr_on_before_rotation());
     assert_eq!(c.nb_touches_last(), 0);
-    assert_eq!(c.anchor_point_prs1().z_layer(), rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOP);
-    assert_eq!(c.anchor_point_prs2().z_layer(), rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOPMOST);
-    assert_eq!(c.rubber_band().z_layer(), rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOP_OSD);
+    assert_eq!(
+        c.anchor_point_prs1().z_layer(),
+        rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOP
+    );
+    assert_eq!(
+        c.anchor_point_prs2().z_layer(),
+        rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOPMOST
+    );
+    assert_eq!(
+        c.rubber_band().z_layer(),
+        rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOP_OSD
+    );
 }
 
 #[test]
@@ -243,5 +285,7 @@ fn inactive_xr_handlers_keep_the_default_state() {
     assert!(c.xr_prs_devices()[0].is_null());
     assert_eq!(c.xr_turn_angle(), std::f64::consts::FRAC_PI_4);
     let left = rustycad_tkservice::aspect::AspectXRTrackedDeviceRole::LeftHand;
-    assert!(rustycad_tkernel::precision::is_infinite(c.xr_last_pick_depth(left)));
+    assert!(rustycad_tkernel::precision::is_infinite(
+        c.xr_last_pick_depth(left)
+    ));
 }

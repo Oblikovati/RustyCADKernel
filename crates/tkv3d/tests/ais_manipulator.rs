@@ -34,14 +34,19 @@ fn construction_matches_the_native_defaults() {
 #[test]
 fn parts_reject_axis_indexes_outside_the_three_axes() {
     let m = AisManipulator::new().unwrap();
-    let failure = m.set_part(3, AisManipulatorMode::Rotation, false).unwrap_err();
+    let failure = m
+        .set_part(3, AisManipulatorMode::Rotation, false)
+        .unwrap_err();
     assert_eq!(failure.exception_type(), "Standard_ProgramError");
     m.set_part(1, AisManipulatorMode::Rotation, false).unwrap();
     assert!(!m.fields.read().axes[1].has_rotation());
     m.set_part_all(AisManipulatorMode::Scaling, false);
     assert!(m.fields.read().axes.iter().all(|a| !a.has_scaling()));
     // An unattached manipulator has no objects: a null dereference natively.
-    assert_eq!(m.object().unwrap_err().exception_type(), "Standard_NullObject");
+    assert_eq!(
+        m.object().unwrap_err().exception_type(),
+        "Standard_NullObject"
+    );
 }
 
 #[test]
@@ -57,10 +62,12 @@ fn attached_translation_moves_the_object_and_the_manipulator() {
             .unwrap()
             .into_cast();
     ctx.display(&object, false).unwrap();
-    view.set_proj_orientation(V3dTypeOfOrientation::ZUP_TOP, false).unwrap();
+    view.set_proj_orientation(V3dTypeOfOrientation::ZUP_TOP, false)
+        .unwrap();
     view.fit_all(0.1, false).unwrap();
     let m = AisManipulator::new().unwrap();
-    m.attach(&object, &AisManipulatorOptionsForAttach::default()).unwrap();
+    m.attach(&object, &AisManipulatorOptionsForAttach::default())
+        .unwrap();
     assert!(m.is_attached());
     assert_eq!(m.position().location(), Point3::new(10.0, 20.0, 0.0));
     let pers = m.transform_persistence();
@@ -74,7 +81,10 @@ fn attached_translation_moves_the_object_and_the_manipulator() {
     let trsf = m.transform_at(px + 20, py, &view).unwrap();
     let moved = trsf.translation_part();
     assert!(moved.x() > 0.0 && moved.y().abs() < 1e-9);
-    assert_eq!(object.local_transformation().translation_part().x(), moved.x());
+    assert_eq!(
+        object.local_transformation().translation_part().x(),
+        moved.x()
+    );
     assert!((m.position().location().x() - (10.0 + moved.x())).abs() < 1e-9);
     m.stop_transform(false).unwrap();
     assert_eq!(object.local_transformation().translation_part().x(), 0.0);

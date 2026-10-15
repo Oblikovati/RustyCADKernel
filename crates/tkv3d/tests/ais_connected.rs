@@ -11,10 +11,11 @@ use rustycad_tkv3d::ais::{
 use rustycad_tkv3d::prs_mgr::{PrsMgrPresentableObjectMembers, PrsMgrTypeOfPresentation3d};
 
 fn edge() -> Handle<dyn AisInteractiveObject> {
-    let edge = BRepBuilderAPIMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(1., 0., 0.))
-        .unwrap()
-        .edge()
-        .unwrap();
+    let edge =
+        BRepBuilderAPIMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(1., 0., 0.))
+            .unwrap()
+            .edge()
+            .unwrap();
     AisShape::new(&Shape::from(edge)).into_cast()
 }
 
@@ -31,9 +32,13 @@ fn connected_instances_share_the_reference() {
     // An instance of an instance refers to the original object.
     let second = AisConnectedInteractive::new(PrsMgrTypeOfPresentation3d::AllView);
     second.connect(&first.clone().into_cast()).unwrap();
-    assert_eq!(second.connected_to().object_address(), reference.object_address());
+    assert_eq!(
+        second.connected_to().object_address(),
+        reference.object_address()
+    );
     // An assembly has no own presentations and cannot be connected.
-    let assembly: Handle<dyn AisInteractiveObject> = AisMultipleConnectedInteractive::new().into_cast();
+    let assembly: Handle<dyn AisInteractiveObject> =
+        AisMultipleConnectedInteractive::new().into_cast();
     let third = AisConnectedInteractive::new(PrsMgrTypeOfPresentation3d::AllView);
     let failure = third.connect(&assembly).unwrap_err();
     assert_eq!(failure.exception_type(), "Standard_ProgramError");

@@ -90,7 +90,10 @@ pub fn gui_fault_fixture(
     *backend.target.write() = scene.view.downgrade();
     *backend.window.write() = scene.window.clone();
     if with_gui {
-        scene.view.attach_gui_layer([64, 64], empty_gui_packet()).unwrap();
+        scene
+            .view
+            .attach_gui_layer([64, 64], empty_gui_packet())
+            .unwrap();
     }
     (scene, backend)
 }

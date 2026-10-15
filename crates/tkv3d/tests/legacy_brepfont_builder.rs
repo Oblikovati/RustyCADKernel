@@ -6,14 +6,16 @@ use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_graph::{BRepGraph, CompoundId};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Shape, ShapeIterator};
+use rustycad_tkernel::standard::RuntimeTyped;
 use rustycad_tkg3d::geom::GeomBSplineCurve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
-use rustycad_tkernel::standard::RuntimeTyped;
 use rustycad_tkmath::gp::{self, Axis3, Point3, Xy};
-use rustycad_tkservice::font::{FontFTFont, FontFTFontParams, FontFontMgr, FontGlyphOutline};
-use rustycad_tkservice::font::{FontGlyphOutlineContour as Contour, FontGlyphOutlineFillRule as FillRule};
 use rustycad_tkservice::font::FontGlyphOutlineSegment as Segment;
+use rustycad_tkservice::font::{FontFTFont, FontFTFontParams, FontFontMgr, FontGlyphOutline};
+use rustycad_tkservice::font::{
+    FontGlyphOutlineContour as Contour, FontGlyphOutlineFillRule as FillRule,
+};
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
 use rustycad_tkv3d::brep_font::{
@@ -23,7 +25,11 @@ use rustycad_tkv3d::brep_font::{
 };
 use std::sync::Arc;
 
-fn append_closed_contour(points: &[(f64, f64)], segments: &mut Vec<Segment>, contours: &mut Vec<Contour>) {
+fn append_closed_contour(
+    points: &[(f64, f64)],
+    segments: &mut Vec<Segment>,
+    contours: &mut Vec<Contour>,
+) {
     let first = segments.len() as u32;
     for index in 0..points.len() {
         let (a, b) = (points[index], points[(index + 1) % points.len()]);
@@ -33,7 +39,8 @@ fn append_closed_contour(points: &[(f64, f64)], segments: &mut Vec<Segment>, con
 }
 
 fn regularize(outline: &FontGlyphOutline, tolerance: f64) -> Option<BRepFontPlanarRegion> {
-    let mut result = BRepFontRegularizer.build_with(outline, &BRepFontRegularizerOptions { tolerance });
+    let mut result =
+        BRepFontRegularizer.build_with(outline, &BRepFontRegularizerOptions { tolerance });
     result.change_planar_region().take()
 }
 
@@ -42,7 +49,14 @@ fn polygons_region(polygons: &[&[(f64, f64)]], overlaps: bool) -> Option<BRepFon
     for polygon in polygons {
         append_closed_contour(polygon, &mut segments, &mut contours);
     }
-    let outline = FontGlyphOutline::create(1000.0, FillRule::NonZero, overlaps, false, segments, contours);
+    let outline = FontGlyphOutline::create(
+        1000.0,
+        FillRule::NonZero,
+        overlaps,
+        false,
+        segments,
+        contours,
+    );
     regularize(&outline, 1.0e-7)
 }
 
@@ -76,7 +90,14 @@ fn create_single_stroke_region() -> Option<BRepFontPlanarRegion> {
         Segment::line(p(0.0, 0.0), p(10.0, 0.0)),
         Segment::quadratic(p(10.0, 0.0), p(15.0, 5.0), p(20.0, 0.0)),
     ];
-    let outline = FontGlyphOutline::create(1000.0, FillRule::NonZero, false, true, segments, vec![Contour::new(0, 2)]);
+    let outline = FontGlyphOutline::create(
+        1000.0,
+        FillRule::NonZero,
+        false,
+        true,
+        segments,
+        vec![Contour::new(0, 2)],
+    );
     regularize(&outline, 1.0e-7)
 }
 
@@ -101,11 +122,18 @@ fn count(shape: &Shape, kind: ShapeEnum) -> usize {
 }
 
 fn is_valid(shape: &Shape) -> bool {
-    BRepCheckAnalyzer::new(shape, true, false, false).unwrap().is_valid().unwrap()
+    BRepCheckAnalyzer::new(shape, true, false, false)
+        .unwrap()
+        .is_valid()
+        .unwrap()
 }
 
 fn options(size: f64, concatenate: bool) -> BRepFontBuilderGlyphOptions {
-    BRepFontBuilderGlyphOptions { size, tolerance: 1.0e-7, to_concatenate_contours: concatenate }
+    BRepFontBuilderGlyphOptions {
+        size,
+        tolerance: 1.0e-7,
+        to_concatenate_contours: concatenate,
+    }
 }
 
 #[test]
@@ -119,7 +147,8 @@ fn builds_face() {
 #[test]
 fn concatenates_contour_into_one_bspline_edge() {
     let region = create_triangle().unwrap();
-    let default_shape = BRepFontBuilder::build_glyph(&region, &BRepFontBuilderGlyphOptions::default());
+    let default_shape =
+        BRepFontBuilder::build_glyph(&region, &BRepFontBuilderGlyphOptions::default());
     assert!(!default_shape.is_null());
     assert_eq!(3, count(&default_shape, ShapeEnum::Edge));
     let shape = BRepFontBuilder::build_glyph(&region, &options(10.0, true));
@@ -236,7 +265,8 @@ fn graph_rejects_non_finite_options_without_changing_graph() {
 fn graph_single_stroke_adds_wire_without_face() {
     let region = create_single_stroke_region().unwrap();
     let mut graph = BRepGraph::new();
-    let root = BRepFontBuilder::add_glyph(&mut graph, &region, &BRepFontBuilderGlyphOptions::default());
+    let root =
+        BRepFontBuilder::add_glyph(&mut graph, &region, &BRepFontBuilderGlyphOptions::default());
     assert!(root.is_valid());
     assert_eq!(2, graph.topo().edges().nb_active());
     assert_eq!(1, graph.topo().wires().nb_active());
@@ -247,7 +277,8 @@ fn graph_single_stroke_adds_wire_without_face() {
 fn graph_adds_marked_overlap_as_separate_faces() {
     let region = create_overlapping_region().unwrap();
     let mut graph = BRepGraph::new();
-    let root = BRepFontBuilder::add_glyph(&mut graph, &region, &BRepFontBuilderGlyphOptions::default());
+    let root =
+        BRepFontBuilder::add_glyph(&mut graph, &region, &BRepFontBuilderGlyphOptions::default());
     assert!(root.is_valid());
     assert_eq!(2, graph.topo().faces().nb_active());
 }
@@ -267,13 +298,23 @@ fn graph_rejects_finite_coordinate_overflow() {
 /// `createRepeatedGlyphPlan`: two placements of the embedded fallback font's 'I'.
 fn create_repeated_glyph_plan() -> Option<BRepFontBuilderTextPlan> {
     let font = FontFTFont::default();
-    let params = FontFTFontParams { point_size: 72, resolution: 4800, ..FontFTFontParams::default() };
-    if !font.init_from(&FontFontMgr::embed_fallback_font(), &"Embedded fallback".into(), &params, 0) {
+    let params = FontFTFontParams {
+        point_size: 72,
+        resolution: 4800,
+        ..FontFTFontParams::default()
+    };
+    if !font.init_from(
+        &FontFontMgr::embed_fallback_font(),
+        &"Embedded fallback".into(),
+        &params,
+        0,
+    ) {
         return None;
     }
     let glyph = font.resolve_glyph('I' as u32)?;
     let outline = font.load_glyph_outline(&glyph)?;
-    let mut result = BRepFontRegularizer.build_with(&outline, &BRepFontRegularizerOptions { tolerance: 0.01 });
+    let mut result =
+        BRepFontRegularizer.build_with(&outline, &BRepFontRegularizerOptions { tolerance: 0.01 });
     if !result.is_done() {
         return None;
     }
@@ -282,11 +323,25 @@ fn create_repeated_glyph_plan() -> Option<BRepFontBuilderTextPlan> {
         BRepFontBuilderTextPlanItem::new(0, Xy::new(0.0, 0.0)),
         BRepFontBuilderTextPlanItem::new(0, Xy::new(20.0, 0.0)),
     ];
-    BRepFontBuilder::create_text_plan(12.0, 1.0e-7, Xy::new(0.0, 0.0), Xy::new(32.0, 12.0), vec![region], items)
+    BRepFontBuilder::create_text_plan(
+        12.0,
+        1.0e-7,
+        Xy::new(0.0, 0.0),
+        Xy::new(32.0, 12.0),
+        vec![region],
+        items,
+    )
 }
 
 fn create_empty_plan() -> Option<BRepFontBuilderTextPlan> {
-    BRepFontBuilder::create_text_plan(12.0, 1.0e-7, Xy::new(0.0, 0.0), Xy::new(0.0, 0.0), Vec::new(), Vec::new())
+    BRepFontBuilder::create_text_plan(
+        12.0,
+        1.0e-7,
+        Xy::new(0.0, 0.0),
+        Xy::new(0.0, 0.0),
+        Vec::new(),
+        Vec::new(),
+    )
 }
 
 #[test]
@@ -300,7 +355,14 @@ fn text_empty_text_does_not_create_topology() {
 
 #[test]
 fn text_invalid_text_plan_options_are_rejected() {
-    let plan = BRepFontBuilder::create_text_plan(0.0, 1.0e-7, Xy::new(0.0, 0.0), Xy::new(0.0, 0.0), Vec::new(), Vec::new());
+    let plan = BRepFontBuilder::create_text_plan(
+        0.0,
+        1.0e-7,
+        Xy::new(0.0, 0.0),
+        Xy::new(0.0, 0.0),
+        Vec::new(),
+        Vec::new(),
+    );
     assert!(plan.is_none());
 }
 
@@ -311,7 +373,9 @@ fn text_non_finite_pen_is_rejected_without_changing_graph() {
         return;
     };
     let mut text_options = BRepFontBuilderTextOptions::default();
-    text_options.pen.set_location(Point3::new(f64::INFINITY, 0.0, 0.0));
+    text_options
+        .pen
+        .set_location(Point3::new(f64::INFINITY, 0.0, 0.0));
     assert!(BRepFontBuilder::build_text_with(&plan, &text_options).is_null());
     let mut graph = BRepGraph::new();
     assert!(!BRepFontBuilder::add_text_with(&mut graph, &plan, &text_options).is_valid());
@@ -349,10 +413,18 @@ fn text_prebuilt_glyph_shapes_are_placed_without_rebuilding() {
         eprintln!("SKIPPED: FreeType or the embedded fallback glyph is unavailable");
         return;
     };
-    let glyph_options = BRepFontBuilderGlyphOptions { size: plan.size(), tolerance: plan.tolerance(), to_concatenate_contours: false };
+    let glyph_options = BRepFontBuilderGlyphOptions {
+        size: plan.size(),
+        tolerance: plan.tolerance(),
+        to_concatenate_contours: false,
+    };
     let glyphs = vec![BRepFontBuilder::build_glyph(plan.region(0), &glyph_options)];
     assert!(!glyphs[0].is_null());
-    let text = BRepFontBuilder::build_text_from_glyphs(&plan, &glyphs, &BRepFontBuilderTextOptions::default());
+    let text = BRepFontBuilder::build_text_from_glyphs(
+        &plan,
+        &glyphs,
+        &BRepFontBuilderTextOptions::default(),
+    );
     assert!(!text.is_null());
     let mut iterator = ShapeIterator::new(&text, true, true);
     assert!(iterator.more());
@@ -374,11 +446,27 @@ fn text_repeated_glyph_shares_one_graph_definition() {
     let root = BRepFontBuilder::add_text(&mut graph, &plan);
     assert!(root.is_valid());
     assert_eq!(2, graph.topo().compounds().nb_active());
-    let references = graph.refs().children().ids_of(CompoundId::from_node_id(root)).to_vec();
+    let references = graph
+        .refs()
+        .children()
+        .ids_of(CompoundId::from_node_id(root))
+        .to_vec();
     assert_eq!(2, references.len());
     let first_definition = graph.refs().generic().child_node(references[0].into());
     let last_definition = graph.refs().generic().child_node(references[1].into());
     assert_eq!(first_definition, last_definition);
-    assert!(graph.refs().generic().local_location(references[0].into()).is_identity());
-    assert!(!graph.refs().generic().local_location(references[1].into()).is_identity());
+    assert!(
+        graph
+            .refs()
+            .generic()
+            .local_location(references[0].into())
+            .is_identity()
+    );
+    assert!(
+        !graph
+            .refs()
+            .generic()
+            .local_location(references[1].into())
+            .is_identity()
+    );
 }

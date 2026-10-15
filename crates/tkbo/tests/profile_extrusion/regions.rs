@@ -24,7 +24,10 @@ fn assert_area(region: &PlanarRegion, expected: f64) {
     assert!(area.encloses(expected), "{area:?} vs {expected}");
     assert!(area.error < 1e-12, "{area:?}");
     let integrated = integrated_area(region);
-    assert!((integrated - expected).abs() < 1e-8, "{integrated} vs {expected}");
+    assert!(
+        (integrated - expected).abs() < 1e-8,
+        "{integrated} vs {expected}"
+    );
 }
 
 /// Every caller curve maps to exactly one edge; that edge bounds exactly the listed regions.
@@ -35,7 +38,10 @@ fn assert_complete_mapping(profile: &SketchProfile, set: &PlanarRegionSet) {
     for entry in set.curve_edges() {
         assert!(!entry.regions.is_empty(), "{:?}", entry.curve);
         for region in set.regions() {
-            let uses = region.edges().iter().filter(|(curve, _)| *curve == entry.curve);
+            let uses = region
+                .edges()
+                .iter()
+                .filter(|(curve, _)| *curve == entry.curve);
             let expected = usize::from(entry.regions.contains(&region.id()));
             assert_eq!(uses.clone().count(), expected);
             assert!(uses.into_iter().all(|(_, edge)| edge.is_same(&entry.edge)));
@@ -59,7 +65,9 @@ fn rectangle_is_one_region_with_four_mapped_edges() {
 
 #[test]
 fn clockwise_rectangle_is_oriented_counterclockwise_in_its_face() {
-    let profile = SketchFixture::new().rectangle(0, [2., 3.], [0., 0.]).build();
+    let profile = SketchFixture::new()
+        .rectangle(0, [2., 3.], [0., 0.])
+        .build();
     let set = built(&profile);
     assert_area(&set.regions()[0], 6.0);
 }
@@ -131,7 +139,10 @@ fn building_twice_is_identical_and_leaves_the_input_unchanged() {
     let (first, second) = (built(&profile), built(&profile));
     assert_eq!(profile, copy);
     for (a, b) in first.regions().iter().zip(second.regions()) {
-        assert_eq!((a.id(), a.outer(), a.holes()), (b.id(), b.outer(), b.holes()));
+        assert_eq!(
+            (a.id(), a.outer(), a.holes()),
+            (b.id(), b.outer(), b.holes())
+        );
         assert_eq!(a.area(), b.area());
     }
 }

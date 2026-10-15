@@ -20,16 +20,28 @@ fn open_profile_names_the_dangling_vertex() {
     assert_eq!(decline.operation, OperationKind::BuildPlanarRegions);
     assert_eq!(decline.stage, OperationStage::Loops);
     assert_eq!(decline.class(), DeclineClass::InvalidGeometry);
-    let open = DeclineCause::OpenProfile { vertex: ProfileVertexId(0), uses: 1 };
+    let open = DeclineCause::OpenProfile {
+        vertex: ProfileVertexId(0),
+        uses: 1,
+    };
     assert_eq!(decline.cause, open);
 }
 
 #[test]
 fn branching_profile_is_declined() {
     let mut fixture = SketchFixture::new();
-    fixture.rectangle(0, [0., 0.], [1., 1.]).vertex(9, [2., 0.]).line(30, 1, 9);
+    fixture
+        .rectangle(0, [0., 0.], [1., 1.])
+        .vertex(9, [2., 0.])
+        .line(30, 1, 9);
     let decline = declined(&fixture.build(), resolution());
-    assert!(matches!(decline.cause, DeclineCause::BranchingProfile { uses: 3, .. }), "{decline}");
+    assert!(
+        matches!(
+            decline.cause,
+            DeclineCause::BranchingProfile { uses: 3, .. }
+        ),
+        "{decline}"
+    );
 }
 
 #[test]
@@ -60,7 +72,10 @@ fn crossing_circles_are_self_intersecting() {
         .circle(2, [1., 0.], 1.)
         .build();
     let decline = declined(&profile, resolution());
-    assert!(matches!(decline.cause, DeclineCause::SelfIntersecting { .. }), "{decline}");
+    assert!(
+        matches!(decline.cause, DeclineCause::SelfIntersecting { .. }),
+        "{decline}"
+    );
 }
 
 #[test]
@@ -96,10 +111,16 @@ fn unsupported_and_invalid_inputs_are_named() {
     let decline = declined(&ellipse.build(), resolution());
     assert_eq!(decline.class(), DeclineClass::Unsupported);
     let empty = SketchFixture::new().build();
-    assert_eq!(declined(&empty, resolution()).cause, DeclineCause::EmptyProfile);
+    assert_eq!(
+        declined(&empty, resolution()).cause,
+        DeclineCause::EmptyProfile
+    );
     let mut bad = resolution();
     bad.sew = f64::NAN;
-    assert!(matches!(declined(&rectangle(), bad).cause, DeclineCause::InvalidResolution { field: "sew", .. }));
+    assert!(matches!(
+        declined(&rectangle(), bad).cause,
+        DeclineCause::InvalidResolution { field: "sew", .. }
+    ));
 }
 
 #[test]
@@ -111,5 +132,8 @@ fn arc_whose_ends_disagree_on_the_radius_is_declined() {
         .line(2, 1, 0)
         .build();
     let decline = declined(&profile, resolution());
-    assert!(matches!(decline.cause, DeclineCause::ArcRadiusMismatch { .. }), "{decline}");
+    assert!(
+        matches!(decline.cause, DeclineCause::ArcRadiusMismatch { .. }),
+        "{decline}"
+    );
 }

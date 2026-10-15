@@ -58,7 +58,11 @@ impl DispatchFixture {
         assert!(!box_shape.is_null());
         let faces = faces_of(&box_shape);
         assert_eq!(faces.len(), 6);
-        Self { box_shape, faces, default_drawer: Handle::new(Prs3dDrawer::new()) }
+        Self {
+            box_shape,
+            faces,
+            default_drawer: Handle::new(Prs3dDrawer::new()),
+        }
     }
 
     fn drawer(&self) -> Handle<AisColoredDrawer> {
@@ -66,12 +70,26 @@ impl DispatchFixture {
     }
 
     /// Dispatches the shell child of the box as natively (parent type solid, not closed).
-    fn dispatch_shell(&self, styles: &AisShapeDrawerMap, opened: &AisColoredOpenedCompounds, closed: &AisColoredDrawerCompounds) -> bool {
+    fn dispatch_shell(
+        &self,
+        styles: &AisShapeDrawerMap,
+        opened: &AisColoredOpenedCompounds,
+        closed: &AisColoredDrawerCompounds,
+    ) -> bool {
         let mut iterator = ShapeIterator::new(&self.box_shape, true, true);
         while iterator.more() {
             let child = iterator.value().unwrap().clone();
             if child.shape_type().unwrap() == ShapeEnum::Shell {
-                return ais_colored_shape_dispatch_colors(&Handle::default(), &child, styles, ShapeEnum::Solid, false, opened, closed).unwrap();
+                return ais_colored_shape_dispatch_colors(
+                    &Handle::default(),
+                    &child,
+                    styles,
+                    ShapeEnum::Solid,
+                    false,
+                    opened,
+                    closed,
+                )
+                .unwrap();
             }
             iterator.next();
         }
@@ -147,7 +165,16 @@ fn compound_partial_override() {
     custom.set_own_color(Color::named(NamedColor::BLUE));
     styles.bind(&fixture.faces[0], &custom).unwrap();
     let (opened, closed) = (opened_maps(), AisColoredDrawerCompounds::default());
-    let overridden = ais_colored_shape_dispatch_colors(&Handle::default(), &compound, &styles, ShapeEnum::Compound, false, &opened, &closed).unwrap();
+    let overridden = ais_colored_shape_dispatch_colors(
+        &Handle::default(),
+        &compound,
+        &styles,
+        ShapeEnum::Compound,
+        false,
+        &opened,
+        &closed,
+    )
+    .unwrap();
     assert!(overridden);
     assert_eq!(count_dispatched_shapes(&opened[FACE]), 12);
 }

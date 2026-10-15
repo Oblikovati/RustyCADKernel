@@ -1,7 +1,9 @@
 //! Translation of OCCT's GTests/BRepFont_Regularizer_Test.cxx at 3d097a0.
 use rustycad_tkmath::gp::Xy;
 use rustycad_tkservice::font::{FontGlyphOutline, FontGlyphOutlineContour as Contour};
-use rustycad_tkservice::font::{FontGlyphOutlineFillRule as FillRule, FontGlyphOutlineSegment as Segment};
+use rustycad_tkservice::font::{
+    FontGlyphOutlineFillRule as FillRule, FontGlyphOutlineSegment as Segment,
+};
 use rustycad_tkv3d::brep_font::{
     BRepFontPlanarRegion, BRepFontRegularizer, BRepFontRegularizerOptions,
     BRepFontRegularizerResult, BRepFontRegularizerStatus as Status,
@@ -73,7 +75,8 @@ const SQUARE_20: &[(f64, f64)] = &[(0.0, 0.0), (20.0, 0.0), (20.0, 20.0), (0.0, 
 
 #[test]
 fn closed_rectangle_builds_one_region() {
-    let (segments, contours) = contours_of(&[&[(0.0, 0.0), (20.0, 0.0), (20.0, 10.0), (0.0, 10.0)]]);
+    let (segments, contours) =
+        contours_of(&[&[(0.0, 0.0), (20.0, 0.0), (20.0, 10.0), (0.0, 10.0)]]);
     let result = build(&outline(segments, contours));
     assert_eq!(Status::Success, result.status_value());
     let region = region(&result);
@@ -104,8 +107,10 @@ fn thin_concave_contour_finds_interior_scanline_point() {
 
 #[test]
 fn nested_contour_builds_hole() {
-    let (segments, contours) =
-        contours_of(&[SQUARE_20, &[(5.0, 5.0), (5.0, 15.0), (15.0, 15.0), (15.0, 5.0)]]);
+    let (segments, contours) = contours_of(&[
+        SQUARE_20,
+        &[(5.0, 5.0), (5.0, 15.0), (15.0, 15.0), (15.0, 5.0)],
+    ]);
     let result = build(&outline(segments, contours));
     assert_eq!(Status::Success, result.status_value());
     let region = region(&result);
@@ -117,8 +122,10 @@ fn nested_contour_builds_hole() {
 
 #[test]
 fn non_zero_fill_drops_same_winding_nested_contour() {
-    let (segments, contours) =
-        contours_of(&[SQUARE_20, &[(5.0, 5.0), (15.0, 5.0), (15.0, 15.0), (5.0, 15.0)]]);
+    let (segments, contours) = contours_of(&[
+        SQUARE_20,
+        &[(5.0, 5.0), (15.0, 5.0), (15.0, 15.0), (5.0, 15.0)],
+    ]);
     let result = build(&outline(segments, contours));
     assert_eq!(Status::Success, result.status_value());
     let region = region(&result);
@@ -130,9 +137,17 @@ fn non_zero_fill_drops_same_winding_nested_contour() {
 
 #[test]
 fn even_odd_fill_keeps_same_winding_nested_contour_as_hole() {
-    let (segments, contours) =
-        contours_of(&[SQUARE_20, &[(5.0, 5.0), (15.0, 5.0), (15.0, 15.0), (5.0, 15.0)]]);
-    let result = build(&outline_with(segments, contours, false, FillRule::EvenOdd, false));
+    let (segments, contours) = contours_of(&[
+        SQUARE_20,
+        &[(5.0, 5.0), (15.0, 5.0), (15.0, 15.0), (5.0, 15.0)],
+    ]);
+    let result = build(&outline_with(
+        segments,
+        contours,
+        false,
+        FillRule::EvenOdd,
+        false,
+    ));
     assert_eq!(Status::Success, result.status_value());
     let region = region(&result);
     assert_eq!(2, region.loops().len());
@@ -244,7 +259,13 @@ fn quadratic_tangency_with_line_is_intersection() {
 #[test]
 fn marked_self_intersecting_contour_is_reported() {
     let (segments, contours) = contours_of(&[&[(0.0, 0.0), (10.0, 10.0), (2.0, 8.0), (10.0, 0.0)]]);
-    let result = build(&outline_with(segments, contours, true, FillRule::NonZero, false));
+    let result = build(&outline_with(
+        segments,
+        contours,
+        true,
+        FillRule::NonZero,
+        false,
+    ));
     assert_eq!(Status::SelfIntersectingContour, result.status_value());
     assert!(!result.is_done());
     assert!(result.planar_region().is_none());
@@ -252,8 +273,15 @@ fn marked_self_intersecting_contour_is_reported() {
 
 #[test]
 fn overlap_metadata_without_intersection_builds_normally() {
-    let (segments, contours) = contours_of(&[&[(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)]]);
-    let result = build(&outline_with(segments, contours, true, FillRule::NonZero, false));
+    let (segments, contours) =
+        contours_of(&[&[(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)]]);
+    let result = build(&outline_with(
+        segments,
+        contours,
+        true,
+        FillRule::NonZero,
+        false,
+    ));
     assert_eq!(Status::Success, result.status_value());
     assert!(result.planar_region().is_some());
 }
@@ -264,7 +292,13 @@ fn marked_inter_loop_overlap_builds_separate_regions() {
         &[(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)],
         &[(8.0, 2.0), (12.0, 2.0), (12.0, 8.0), (8.0, 8.0)],
     ]);
-    let result = build(&outline_with(segments, contours, true, FillRule::NonZero, false));
+    let result = build(&outline_with(
+        segments,
+        contours,
+        true,
+        FillRule::NonZero,
+        false,
+    ));
     assert_eq!(Status::Success, result.status_value());
     assert_eq!(2, region(&result).regions().len());
 }
@@ -287,7 +321,13 @@ fn single_stroke_accepts_open_contour() {
         Segment::line(p(0.0, 0.0), p(10.0, 0.0)),
         Segment::quadratic(p(10.0, 0.0), p(15.0, 5.0), p(20.0, 0.0)),
     ];
-    let outline = outline_with(segments, vec![Contour::new(0, 2)], false, FillRule::NonZero, true);
+    let outline = outline_with(
+        segments,
+        vec![Contour::new(0, 2)],
+        false,
+        FillRule::NonZero,
+        true,
+    );
     let result = build(&outline);
     assert_eq!(Status::Success, result.status_value());
     let region = region(&result);
@@ -416,13 +456,7 @@ fn invalid_tolerance_and_units_are_rejected() {
         Status::InvalidOutline,
         build_with_tolerance(&triangle, 0.0).status_value()
     );
-    let zero_units = FontGlyphOutline::create(
-        0.0,
-        FillRule::NonZero,
-        false,
-        false,
-        Vec::new(),
-        Vec::new(),
-    );
+    let zero_units =
+        FontGlyphOutline::create(0.0, FillRule::NonZero, false, false, Vec::new(), Vec::new());
     assert_eq!(Status::InvalidOutline, build(&zero_units).status_value());
 }

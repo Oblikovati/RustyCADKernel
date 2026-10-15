@@ -2,10 +2,10 @@
 //! solid builder, the operation tables, the path of a wire and the 2d correction of
 //! a face.
 use rustycad_tkbool::top_ope_brep_build::{
-    MapOfShapeVertexInfo, MapOfTrans2dInfo, TopOpeBRepBuildCorrectFace2d, TopOpeBRepBuildEdgeBuilder,
-    TopOpeBRepBuildGIter, TopOpeBRepBuildGTool, TopOpeBRepBuildPave, TopOpeBRepBuildPaveClassifier,
-    TopOpeBRepBuildPaveSet, TopOpeBRepBuildShapeSet, TopOpeBRepBuildShellFaceSet,
-    TopOpeBRepBuildSolidBuilder, TopOpeBRepBuildTools2d,
+    MapOfShapeVertexInfo, MapOfTrans2dInfo, TopOpeBRepBuildCorrectFace2d,
+    TopOpeBRepBuildEdgeBuilder, TopOpeBRepBuildGIter, TopOpeBRepBuildGTool, TopOpeBRepBuildPave,
+    TopOpeBRepBuildPaveClassifier, TopOpeBRepBuildPaveSet, TopOpeBRepBuildShapeSet,
+    TopOpeBRepBuildShellFaceSet, TopOpeBRepBuildSolidBuilder, TopOpeBRepBuildTools2d,
 };
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::{self, Explorer};
@@ -40,9 +40,12 @@ fn pave(v: &Shape, o: Orientation, p: f64) -> Handle<TopOpeBRepBuildPave> {
 
 #[test]
 fn edge_builder_splits_an_edge_at_an_inner_pave() -> Result<(), Failure> {
-    let e = BRepLibMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(10., 0., 0.))?.edge()?;
+    let e =
+        BRepLibMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(10., 0., 0.))?.edge()?;
     let (v1, v2) = topexp::vertices(&e, false);
-    let vm = BRepLibMakeVertex::new(Point3::new(4., 0., 0.))?.vertex()?.into_shape();
+    let vm = BRepLibMakeVertex::new(Point3::new(4., 0., 0.))?
+        .vertex()?
+        .into_shape();
     let mut ps = TopOpeBRepBuildPaveSet::new(e.as_ref())?;
     ps.append(&pave(v1.as_ref(), Orientation::Forward, 0.));
     ps.append(&pave(&vm, Orientation::Reversed, 4.));
@@ -69,7 +72,8 @@ fn edge_builder_splits_an_edge_at_an_inner_pave() -> Result<(), Failure> {
 
 #[test]
 fn pave_set_detects_equal_parameters() -> Result<(), Failure> {
-    let e = BRepLibMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(1., 0., 0.))?.edge()?;
+    let e =
+        BRepLibMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(1., 0., 0.))?.edge()?;
     let (v1, _) = topexp::vertices(&e, false);
     let mut ps = TopOpeBRepBuildPaveSet::new(e.as_ref())?;
     ps.append(&pave(v1.as_ref(), Orientation::Forward, 0.5));
@@ -116,7 +120,10 @@ fn gtool_tables_keep_the_parts_of_each_operation() -> Result<(), Failure> {
     assert!(cut.value(State::In, State::On)? && cut.value(State::On, State::Out)?);
     let com = TopOpeBRepBuildGTool::g_com_unsh(ShapeEnum::Solid, ShapeEnum::Solid);
     let permuted = com.copy_permuted();
-    assert_eq!(permuted.value(State::In, State::On)?, com.value(State::On, State::In)?);
+    assert_eq!(
+        permuted.value(State::In, State::On)?,
+        com.value(State::On, State::In)?
+    );
     let mut it = TopOpeBRepBuildGIter::with_gtopo(&fus);
     let mut kept = Vec::new();
     while it.more() {
@@ -150,22 +157,36 @@ fn tools2d_path_walks_every_edge_of_a_wire() -> Result<(), Failure> {
 #[test]
 fn correct_face2d_skips_a_plane_and_keeps_a_connected_cylinder() -> Result<(), Failure> {
     let mut map = MapOfTrans2dInfo::default();
-    let plane_face = topods::face(&subs(&BRepPrimAPIMakeBox::from_sizes(1., 1., 1.)?.shape()?.clone(), ShapeEnum::Face)?[0])?;
-    let mut cf = TopOpeBRepBuildCorrectFace2d::with_face(&plane_face, &IndexedMap::default(), &mut map);
+    let plane_face = topods::face(
+        &subs(
+            &BRepPrimAPIMakeBox::from_sizes(1., 1., 1.)?.shape()?.clone(),
+            ShapeEnum::Face,
+        )?[0],
+    )?;
+    let mut cf =
+        TopOpeBRepBuildCorrectFace2d::with_face(&plane_face, &IndexedMap::default(), &mut map);
     cf.perform()?;
     assert!(cf.is_done());
     assert_eq!(cf.error_status(), 4);
     let cyl = BRepPrimAPIMakeCylinder::new(1., 2.).shape()?.clone();
     let lateral = subs(&cyl, ShapeEnum::Face)?
         .into_iter()
-        .find(|f| topods::face(f).is_ok_and(|f| BRepTool::surface(&f).is_ok_and(|s| s.get().is_some_and(|s| s.is_u_periodic()))))
+        .find(|f| {
+            topods::face(f).is_ok_and(|f| {
+                BRepTool::surface(&f).is_ok_and(|s| s.get().is_some_and(|s| s.is_u_periodic()))
+            })
+        })
         .ok_or_else(|| Failure::new("no lateral face"))?;
     let lateral = topods::face(&lateral)?;
     let mut map = MapOfTrans2dInfo::default();
-    let mut cf = TopOpeBRepBuildCorrectFace2d::with_face(&lateral, &IndexedMap::default(), &mut map);
+    let mut cf =
+        TopOpeBRepBuildCorrectFace2d::with_face(&lateral, &IndexedMap::default(), &mut map);
     cf.perform()?;
     assert!(cf.is_done());
     assert_eq!(cf.error_status(), 0);
-    assert_eq!(subs(cf.corrected_face().as_ref(), ShapeEnum::Edge)?.len(), 4);
+    assert_eq!(
+        subs(cf.corrected_face().as_ref(), ShapeEnum::Edge)?.len(),
+        4
+    );
     Ok(())
 }

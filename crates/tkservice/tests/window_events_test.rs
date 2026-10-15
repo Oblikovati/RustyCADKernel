@@ -217,7 +217,9 @@ fn destroyed_window_event(parent: u64, destroyed: u64) -> XwXEvent {
 #[cfg(target_os = "linux")]
 #[test]
 fn delivered_destroy_matches_target_and_notifies_close_once() {
-    let Ok(display) = AspectDisplayConnection::new() else { return; };
+    let Ok(display) = AspectDisplayConnection::new() else {
+        return;
+    };
     let display = Handle::new(display);
     let owner = XwWindow::create(&display, "destroy event", 0, 0, 16, 16).unwrap();
     let window = XwWindow::wrap(&display, owner.native_handle(), 0).unwrap();
@@ -226,9 +228,20 @@ fn delivered_destroy_matches_target_and_notifies_close_once() {
     let mut foreign = destroyed_window_event(original, original + 1);
     assert!(!window.process_message(&mut listener, &mut foreign).unwrap());
     let mut destroyed = destroyed_window_event(original + 1, original);
-    assert!(window.process_message(&mut listener, &mut destroyed).unwrap());
-    assert!(window.process_message(&mut listener, &mut destroyed).unwrap());
+    assert!(
+        window
+            .process_message(&mut listener, &mut destroyed)
+            .unwrap()
+    );
+    assert!(
+        window
+            .process_message(&mut listener, &mut destroyed)
+            .unwrap()
+    );
     assert_eq!(listener.events, ["close"]);
-    assert_eq!(window.native_window_closure().unwrap().original_handle, original);
+    assert_eq!(
+        window.native_window_closure().unwrap().original_handle,
+        original
+    );
     assert_eq!(window.native_handle(), 0);
 }

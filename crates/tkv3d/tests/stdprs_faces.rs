@@ -25,7 +25,12 @@ mod display;
 
 fn axes() -> Axis3 {
     let z = Direction3::new(0., 0., 1.).unwrap();
-    Axis3::new(Point3::new(0., 0., 0.), z, Direction3::new(1., 0., 0.).unwrap()).unwrap()
+    Axis3::new(
+        Point3::new(0., 0., 0.),
+        z,
+        Direction3::new(1., 0., 0.).unwrap(),
+    )
+    .unwrap()
 }
 
 fn plane_face() -> Face {
@@ -90,26 +95,55 @@ fn restricted_face_isolines_follow_the_iso_numbers() -> Result<(), Failure> {
     StdPrsWfRestrictedFace::add_isos(&prs, &face, true, true, 2, 3, &drawer, &mut curves)?;
     assert_eq!(curves.extent(), 5);
     let mut curves = StdPrsIsolinePolylines::default();
-    StdPrsWfDeflectionRestrictedFace::add_isos(&prs, &face, true, false, 0.01, 4, 3, &drawer, &mut curves)?;
+    StdPrsWfDeflectionRestrictedFace::add_isos(
+        &prs,
+        &face,
+        true,
+        false,
+        0.01,
+        4,
+        3,
+        &drawer,
+        &mut curves,
+    )?;
     assert_eq!(curves.extent(), 4);
     // The U isos of the plane are x = const lines across y in [0, 1].
     let on_iso = Point3::new(2. * (0.998 / 3. + 0.001), 0.5, 0.);
     drawer.u_iso_aspect().set_number(2);
-    assert!(StdPrsWfRestrictedFace::match_u_iso(&on_iso, 0.01, &face, &drawer)?);
-    assert!(!StdPrsWfRestrictedFace::match_u_iso(&Point3::new(9., 9., 9.), 0.01, &face, &drawer)?);
+    assert!(StdPrsWfRestrictedFace::match_u_iso(
+        &on_iso, 0.01, &face, &drawer
+    )?);
+    assert!(!StdPrsWfRestrictedFace::match_u_iso(
+        &Point3::new(9., 9., 9.),
+        0.01,
+        &face,
+        &drawer
+    )?);
     Ok(())
 }
 
 #[test]
 fn pole_curve_picks_the_nearest_pole() -> Result<(), Failure> {
-    let mut poles = [Point3::new(0., 0., 0.), Point3::new(1., 1., 0.), Point3::new(2., 0., 0.)];
+    let mut poles = [
+        Point3::new(0., 0., 0.),
+        Point3::new(1., 1., 0.),
+        Point3::new(2., 0., 0.),
+    ];
     let curve: Handle<dyn GeomCurve> =
         Handle::new(GeomBezierCurve::new(&Array1::from_slice(&mut poles))?).into_cast();
     let adaptor = GeomAdaptorCurve::with_curve(&curve)?;
     let drawer = drawer();
-    assert_eq!(StdPrsPoleCurve::pick(1.1, 0.9, 0., 0.5, &adaptor, &drawer)?, 2);
-    assert_eq!(StdPrsPoleCurve::pick(5., 5., 5., 0.5, &adaptor, &drawer)?, 0);
-    assert!(StdPrsPoleCurve::match_point(2., 0.1, 0., 0.2, &adaptor, &drawer)?);
+    assert_eq!(
+        StdPrsPoleCurve::pick(1.1, 0.9, 0., 0.5, &adaptor, &drawer)?,
+        2
+    );
+    assert_eq!(
+        StdPrsPoleCurve::pick(5., 5., 5., 0.5, &adaptor, &drawer)?,
+        0
+    );
+    assert!(StdPrsPoleCurve::match_point(
+        2., 0.1, 0., 0.2, &adaptor, &drawer
+    )?);
     Ok(())
 }
 

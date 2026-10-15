@@ -29,7 +29,10 @@ fn brep_owner_dump_matches_native_text() {
         "\"className\": \"StdSelect_BRepOwner\", \"Shape\": {\"className\": \"TopoDS_Shape\", \
          \"Orient\": 3}, \"CurMode\": 3"
     );
-    assert_eq!(owner_dump(0), "\"className\": \"StdSelect_BRepOwner\", \"CurMode\": 3");
+    assert_eq!(
+        owner_dump(0),
+        "\"className\": \"StdSelect_BRepOwner\", \"CurMode\": 3"
+    );
 }
 
 #[test]

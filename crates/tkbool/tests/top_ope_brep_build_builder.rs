@@ -5,7 +5,9 @@ use rustycad_tkbool::top_ope_brep_build::{
     DataMapOfShapeState, TopOpeBRepBuildBuilder, TopOpeBRepBuildBuilder1, TopOpeBRepBuildFuseFace,
     TopOpeBRepBuildHBuilder, TopOpeBRepBuildShellToSolid, TopOpeBRepBuildTools,
 };
-use rustycad_tkbool::top_ope_brep_ds::{MapOfShapeWithState, TopOpeBRepDSBuildTool, TopOpeBRepDSHDataStructure};
+use rustycad_tkbool::top_ope_brep_ds::{
+    MapOfShapeWithState, TopOpeBRepDSBuildTool, TopOpeBRepDSHDataStructure,
+};
 use rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::{self, Explorer};
@@ -25,7 +27,11 @@ fn subs(s: &Shape, t: ShapeEnum) -> Result<Vec<Shape>, Failure> {
 
 /// The box [x, x + 2] x [0, 2] x [0, 2].
 fn cube(x: f64) -> Result<Shape, Failure> {
-    Ok(BRepPrimAPIMakeBox::at_point(Point3::new(x, 0., 0.), 2., 2., 2.)?.shape()?.clone())
+    Ok(
+        BRepPrimAPIMakeBox::at_point(Point3::new(x, 0., 0.), 2., 2., 2.)?
+            .shape()?
+            .clone(),
+    )
 }
 
 #[test]
@@ -36,13 +42,19 @@ fn tools_normal_and_tangent_of_a_box_face_edge() -> Result<(), Failure> {
     let n = TopOpeBRepBuildTools::get_normal_to_face_on_edge(&f, &e)?;
     assert!(n.magnitude() > 0.);
     let nn = TopOpeBRepBuildTools::get_normal_in_nearest_point(&f, &e)?;
-    assert!(n.crossed(nn).magnitude() < 1e-12, "a plane has one normal direction");
+    assert!(
+        n.crossed(nn).magnitude() < 1e-12,
+        "a plane has one normal direction"
+    );
     let (ok, t) = TopOpeBRepBuildTools::get_tangent_to_edge(&e)?;
     assert!(ok && t.dot(n).abs() < 1e-12);
     let (rev, t2) = TopOpeBRepBuildTools::get_tangent_to_edge_edge(&f, &e, &e)?;
     assert!(!rev);
     assert!(t2.crossed(t).magnitude() < 1e-12);
-    assert!(TopOpeBRepBuildTools::is_deg_edges_the_same(e.as_ref(), e.as_ref())?);
+    assert!(TopOpeBRepBuildTools::is_deg_edges_the_same(
+        e.as_ref(),
+        e.as_ref()
+    )?);
     assert!(TopOpeBRepBuildTools::check_face_closed2d(&f)?);
     Ok(())
 }
@@ -75,9 +87,18 @@ fn tools_state_through_vertex_and_propagation() -> Result<(), Failure> {
     let mut sc = TopOpeBRepToolShapeClassifier::new();
     sc.set_reference(&b)?;
     let mut m = MapOfShapeWithState::default();
-    let st = TopOpeBRepBuildTools::find_state_through_vertex(&shell, &mut sc, &mut m, &MapOfShape::default())?;
+    let st = TopOpeBRepBuildTools::find_state_through_vertex(
+        &shell,
+        &mut sc,
+        &mut m,
+        &MapOfShape::default(),
+    )?;
     assert_eq!(st, State::Out);
-    assert_eq!(m.extent(), 1 + 6 + 6 + 12, "the shell, its faces, wires and edges");
+    assert_eq!(
+        m.extent(),
+        1 + 6 + 6 + 12,
+        "the shell, its faces, wires and edges"
+    );
     let faces: Vec<Shape> = subs(&shell, ShapeEnum::Face)?;
     let mut spl = DataMapOfShapeState::default();
     spl.bind(faces[0].clone(), State::In);
@@ -86,9 +107,21 @@ fn tools_state_through_vertex_and_propagation() -> Result<(), Failure> {
         rest.add(f.clone());
     }
     let mut m2 = MapOfShapeWithState::default();
-    TopOpeBRepBuildTools::propagate_state(&spl, &rest, ShapeEnum::Edge, ShapeEnum::Face, &mut sc, &mut m2, &MapOfShape::default())?;
+    TopOpeBRepBuildTools::propagate_state(
+        &spl,
+        &rest,
+        ShapeEnum::Edge,
+        ShapeEnum::Face,
+        &mut sc,
+        &mut m2,
+        &MapOfShape::default(),
+    )?;
     for f in &faces[1..] {
-        assert_eq!(m2.find_from_key(f)?.state(), State::In, "spread through the shared edges");
+        assert_eq!(
+            m2.find_from_key(f)?.state(),
+            State::In,
+            "spread through the shared edges"
+        );
     }
     TopOpeBRepBuildTools::propagate_state_for_wires(&rest, &mut m2)?;
     let w = subs(&faces[1], ShapeEnum::Wire)?[0].clone();
@@ -115,10 +148,22 @@ fn builder1_reaches_its_members_through_the_builder() -> Result<(), Failure> {
     let mut b1 = TopOpeBRepBuildBuilder1::new(&TopOpeBRepDSBuildTool::new());
     b1.perform_shapes(&hds, &a, &b)?;
     let mut solid = subs(&a, ShapeEnum::Solid)?[0].clone();
-    assert_eq!(b1.correct_result2d(&mut solid)?, 0, "no edge corrected in 2d");
+    assert_eq!(
+        b1.correct_result2d(&mut solid)?,
+        0,
+        "no edge corrected in 2d"
+    );
     let plain = TopOpeBRepBuildBuilder::new(&TopOpeBRepDSBuildTool::new());
     let mut s = a.clone();
-    let err = plain.orientate_edge_on_face(&mut s, &a, &a, &rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildGTool::g_fus_same(ShapeEnum::Face, ShapeEnum::Face));
+    let err = plain.orientate_edge_on_face(
+        &mut s,
+        &a,
+        &a,
+        &rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildGTool::g_fus_same(
+            ShapeEnum::Face,
+            ShapeEnum::Face,
+        ),
+    );
     assert!(err.is_err(), "a Builder1 member on a plain builder");
     Ok(())
 }
@@ -132,7 +177,11 @@ fn hbuilder_section_iteration_on_an_empty_section() -> Result<(), Failure> {
     assert_eq!(hb.is_k_part(), 0);
     hb.init_section(3)?;
     assert!(!hb.more_section());
-    assert_eq!(hb.current_section().map_err(|e| e.exception_type().to_string()), Err("Standard_ProgramError".to_string()));
+    assert_eq!(
+        hb.current_section()
+            .map_err(|e| e.exception_type().to_string()),
+        Err("Standard_ProgramError".to_string())
+    );
     let e = subs(&a, ShapeEnum::Edge)?[0].clone();
     assert_eq!(hb.get_ds_edge_from_sect_edge(&e, 1)?, 0);
     assert_eq!(hb.get_ds_curve_from_sect_edge(&e)?, 0);
@@ -154,7 +203,10 @@ fn shell_to_solid_makes_the_solid_of_a_box_shell() -> Result<(), Failure> {
     let so = topods::solid(&subs(&a, ShapeEnum::Solid)?[0])?;
     sts.make_solids(&so, &mut lso)?;
     assert_eq!(lso.len(), 1);
-    assert_eq!(subs(lso.first().expect("one solid"), ShapeEnum::Face)?.len(), 6);
+    assert_eq!(
+        subs(lso.first().expect("one solid"), ShapeEnum::Face)?.len(),
+        6
+    );
     Ok(())
 }
 

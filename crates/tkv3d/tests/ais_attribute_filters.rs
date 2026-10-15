@@ -10,7 +10,9 @@ use rustycad_tkv3d::ais::{
     AisSignatureFilter, AisTypeFilter, AisTypeOfAttribute,
 };
 use rustycad_tkv3d::prs3d::Prs3dDrawer;
-use rustycad_tkv3d::select_mgr::{SelectMgrEntityOwner, SelectMgrEntityOwnerSource, SelectMgrFilter};
+use rustycad_tkv3d::select_mgr::{
+    SelectMgrEntityOwner, SelectMgrEntityOwnerSource, SelectMgrFilter,
+};
 
 /// The owner of a point; the owner keeps a weak reference, so the point is returned too.
 fn point_owner() -> (Handle<AisPoint>, Handle<dyn SelectMgrEntityOwnerSource>) {
@@ -25,7 +27,10 @@ fn exclusion_filter_stores_kinds_and_signatures() {
     assert!(filter.is_stored(AisKindOfInteractive::Datum));
     assert!(!filter.add(AisKindOfInteractive::Datum));
     assert!(filter.add_signature(AisKindOfInteractive::Datum, 4));
-    assert_eq!(filter.list_of_signature(AisKindOfInteractive::Datum), vec![1, 4]);
+    assert_eq!(
+        filter.list_of_signature(AisKindOfInteractive::Datum),
+        vec![1, 4]
+    );
     assert!(filter.add(AisKindOfInteractive::Shape));
     assert_eq!(filter.list_of_stored_types(), vec![1, 2]);
     // A point is a datum of signature 1: excluded.
@@ -40,10 +45,26 @@ fn exclusion_filter_stores_kinds_and_signatures() {
 #[test]
 fn type_signature_and_attribute_filters_read_the_object() {
     let (_point, owner) = point_owner();
-    assert!(AisTypeFilter::new(AisKindOfInteractive::Datum).is_ok(&owner).unwrap());
-    assert!(!AisTypeFilter::new(AisKindOfInteractive::Shape).is_ok(&owner).unwrap());
-    assert!(AisSignatureFilter::new(AisKindOfInteractive::Datum, 1).is_ok(&owner).unwrap());
-    assert!(!AisSignatureFilter::new(AisKindOfInteractive::Datum, 2).is_ok(&owner).unwrap());
+    assert!(
+        AisTypeFilter::new(AisKindOfInteractive::Datum)
+            .is_ok(&owner)
+            .unwrap()
+    );
+    assert!(
+        !AisTypeFilter::new(AisKindOfInteractive::Shape)
+            .is_ok(&owner)
+            .unwrap()
+    );
+    assert!(
+        AisSignatureFilter::new(AisKindOfInteractive::Datum, 1)
+            .is_ok(&owner)
+            .unwrap()
+    );
+    assert!(
+        !AisSignatureFilter::new(AisKindOfInteractive::Datum, 2)
+            .is_ok(&owner)
+            .unwrap()
+    );
     // Without own color, the color criterion does not apply.
     let filter = AisAttributeFilter::with_color(NamedColor::RED);
     assert!(filter.has_color() && !filter.has_width());
@@ -56,7 +77,8 @@ fn type_signature_and_attribute_filters_read_the_object() {
 fn graphic_tool_reads_the_default_drawer_aspects() {
     let drawer = Handle::new(Prs3dDrawer::new());
     drawer.setup_own_defaults().unwrap();
-    let (_, width, kind) = AisGraphicTool::get_line_att(&drawer, AisTypeOfAttribute::Hidden).unwrap();
+    let (_, width, kind) =
+        AisGraphicTool::get_line_att(&drawer, AisTypeOfAttribute::Hidden).unwrap();
     assert_eq!(width, 1.);
     assert_eq!(kind, AspectTypeOfLine::Dash);
     assert_eq!(

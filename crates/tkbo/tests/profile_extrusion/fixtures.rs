@@ -81,7 +81,9 @@ impl SketchFixture {
 
 /// A 2 x 3 rectangle on the world XY plane.
 pub fn rectangle() -> SketchProfile {
-    SketchFixture::new().rectangle(0, [0., 0.], [2., 3.]).build()
+    SketchFixture::new()
+        .rectangle(0, [0., 0.], [2., 3.])
+        .build()
 }
 
 /// One circle of radius 1.5 centred at (1, -2).

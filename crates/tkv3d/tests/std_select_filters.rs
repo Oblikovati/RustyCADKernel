@@ -7,7 +7,9 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkprim::brep_prim_api::{
     BRepPrimAPIMakeBox, BRepPrimAPIMakeCylinder, BRepPrimAPIMakeOneAxis,
 };
-use rustycad_tkv3d::select_mgr::{SelectMgrEntityOwner, SelectMgrEntityOwnerSource, SelectMgrFilter};
+use rustycad_tkv3d::select_mgr::{
+    SelectMgrEntityOwner, SelectMgrEntityOwnerSource, SelectMgrFilter,
+};
 use rustycad_tkv3d::std_select::{
     StdSelectBRepOwner, StdSelectEdgeFilter, StdSelectFaceFilter, StdSelectShapeTypeFilter,
     StdSelectTypeOfEdge, StdSelectTypeOfFace,
@@ -32,7 +34,9 @@ fn cylinder() -> Result<Shape, Failure> {
 }
 
 fn box_shape() -> Result<Shape, Failure> {
-    Ok(Shape::from(BRepPrimAPIMakeBox::from_sizes(1.0, 2.0, 3.0)?.solid()?))
+    Ok(Shape::from(
+        BRepPrimAPIMakeBox::from_sizes(1.0, 2.0, 3.0)?.solid()?,
+    ))
 }
 
 fn accepted(filter: &dyn SelectMgrFilter, shapes: &[Shape]) -> Result<usize, Failure> {
@@ -97,7 +101,11 @@ fn filters_refuse_owners_that_are_not_brep_owners() -> Result<(), Failure> {
     // A null shape is refused by the shape type filter (HasShape) and fails in the others.
     let null = owner(&Shape::default());
     assert!(!StdSelectShapeTypeFilter::new(ShapeEnum::Face).is_ok(&null)?);
-    assert!(StdSelectFaceFilter::new(StdSelectTypeOfFace::AnyFace).is_ok(&null).is_err());
+    assert!(
+        StdSelectFaceFilter::new(StdSelectTypeOfFace::AnyFace)
+            .is_ok(&null)
+            .is_err()
+    );
     Ok(())
 }
 
@@ -106,7 +114,10 @@ fn shape_type_filter_matches_the_shape_type() -> Result<(), Failure> {
     let solid = box_shape()?;
     let filter = StdSelectShapeTypeFilter::new(ShapeEnum::Vertex);
     assert_eq!(filter.type_(), ShapeEnum::Vertex);
-    assert_eq!(accepted(&filter, &sub_shapes(&solid, ShapeEnum::Vertex)?)?, 48);
+    assert_eq!(
+        accepted(&filter, &sub_shapes(&solid, ShapeEnum::Vertex)?)?,
+        48
+    );
     assert_eq!(accepted(&filter, &sub_shapes(&solid, ShapeEnum::Edge)?)?, 0);
     assert!(!filter.is_ok(&owner(&solid))?);
     assert!(filter.acts_on(ShapeEnum::Vertex));
