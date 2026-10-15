@@ -81,7 +81,7 @@ impl TrimRegion<'_> {
         let [start, end] = self.frame.ends();
         let from = self.before.clone().unwrap_or(start);
         let to = self.after.clone().unwrap_or(end);
-        if let SourceFrame::Conic(_) = self.frame {
+        if self.frame.conic().is_some() {
             let Some([first, last]) = &overlap.source_range else {
                 return Ok(true);
             };
@@ -105,7 +105,7 @@ impl TrimRegion<'_> {
 impl ExtensionCheck<'_> {
     /// True when the overlap lies in the added part, at or before the candidate.
     pub fn blocked(&self, overlap: &SketchLineOverlap, work: &mut Work<'_>) -> Result<bool, Cause> {
-        if let SourceFrame::Conic(_) = self.frame {
+        if self.frame.conic().is_some() {
             return self.blocked_on_conic(overlap, work);
         }
         let Some([lower, upper]) = sorted_range(overlap, work)? else {

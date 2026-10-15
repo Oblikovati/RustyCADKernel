@@ -4,6 +4,24 @@ use super::super::certificate_arithmetic::{ExactRatio, RatioInterval};
 use super::super::{RootIsolationError, polynomial::IntegerPolynomial};
 use num_bigint::{BigInt, Sign};
 
+/// Commutative ring operations shared by rational polynomials and quadratic surds,
+/// so one implicit composition serves both (ADR 0080).
+pub(super) trait Ring: Clone {
+    fn add(&self, other: &Self) -> Self;
+    fn multiply(&self, other: &Self) -> Self;
+    fn scale(&self, factor: &ExactRatio) -> Self;
+}
+impl Ring for RationalPolynomial {
+    fn add(&self, other: &Self) -> Self {
+        RationalPolynomial::add(self, other)
+    }
+    fn multiply(&self, other: &Self) -> Self {
+        RationalPolynomial::multiply(self, other)
+    }
+    fn scale(&self, factor: &ExactRatio) -> Self {
+        RationalPolynomial::scale(self, factor)
+    }
+}
 /// Ascending exact coefficients; trailing zeros are allowed and ignored by conversion.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(super) struct RationalPolynomial(pub Vec<ExactRatio>);
@@ -19,6 +37,16 @@ impl RationalPolynomial {
     }
     pub fn linear(constant: ExactRatio, slope: ExactRatio) -> Self {
         Self(vec![constant, slope])
+    }
+    /// The same polynomial with integer coefficients as exact rationals.
+    pub fn from_integer(polynomial: &IntegerPolynomial) -> Self {
+        Self(
+            polynomial
+                .0
+                .iter()
+                .map(|value| ExactRatio::new(value.clone(), BigInt::from(1)))
+                .collect(),
+        )
     }
     pub fn add(&self, other: &Self) -> Self {
         let length = self.0.len().max(other.0.len());

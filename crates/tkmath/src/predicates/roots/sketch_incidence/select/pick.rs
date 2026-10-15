@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact source place of a trim pick.
 use super::super::budget::Work;
+use super::super::conic_source::ConicSource;
 use super::super::place::{KeyValue, SourcePlace, compare_places};
 use super::super::rational_polynomial::ratio;
 use super::super::source_frame::SourceFrame;
@@ -15,27 +16,20 @@ pub(super) fn pick_place(
 ) -> Result<SourcePlace, SketchSelectionError> {
     let outside = refused(SketchSelectionRefusal::PickOutsideSegment { pick });
     match (frame, pick) {
-        (SourceFrame::Line(line), SketchTrimPick::Point(point)) => {
+        (SourceFrame::Line(_) | SourceFrame::OffsetLine(_), SketchTrimPick::Point(point)) => {
             finite(point).ok_or(outside)?;
-            let parameter = line.implicit.projected_parameter(point);
+            let line = frame.placing_line().expect("a line frame");
+            let parameter = line.projected_parameter(point);
             Ok(SourcePlace::Parameter(KeyValue::Ratio(parameter)))
         }
         (SourceFrame::Conic(conic), SketchTrimPick::Point(point)) => {
             finite(point).ok_or(outside.clone())?;
-            let direction: [_; 2] =
-                std::array::from_fn(|axis| ratio(point[axis]).subtract(&conic.frame.center[axis]));
-            if direction
-                .iter()
-                .all(|value| value.sign() == Ordering::Equal)
-            {
-                return Err(outside);
-            }
-            let mut place = conic.frame.exact_place(&direction);
-            frame.normalize(&mut place, work)?;
-            Ok(place)
+            central_place(frame, conic, point, work)?.ok_or(outside)
         }
-        (SourceFrame::Spline(spline), SketchTrimPick::Parameter(value)) => {
-            let [lower, upper] = spline.bounds;
+        (SourceFrame::Spline(_) | SourceFrame::Offset(_), SketchTrimPick::Parameter(value))
+            if frame.conic().is_none() =>
+        {
+            let [lower, upper] = frame.parameter_range().expect("a spline-like frame");
             if !(lower..=upper).contains(&value) {
                 return Err(outside);
             }
@@ -43,6 +37,25 @@ pub(super) fn pick_place(
         }
         _ => Err(refused(SketchSelectionRefusal::PickKind { pick })),
     }
+}
+// The pick's direction from the conic center; None at the center itself.
+fn central_place(
+    frame: &SourceFrame,
+    conic: &ConicSource,
+    point: [f64; 2],
+    work: &mut Work<'_>,
+) -> Result<Option<SourcePlace>, SketchSelectionError> {
+    let direction: [_; 2] =
+        std::array::from_fn(|axis| ratio(point[axis]).subtract(&conic.frame.center[axis]));
+    if direction
+        .iter()
+        .all(|value| value.sign() == Ordering::Equal)
+    {
+        return Ok(None);
+    }
+    let mut place = conic.frame.exact_place(&direction);
+    frame.normalize(&mut place, work)?;
+    Ok(Some(place))
 }
 fn finite(point: [f64; 2]) -> Option<()> {
     point.iter().all(|value| value.is_finite()).then_some(())

@@ -10,17 +10,19 @@ use super::super::DyadicBound;
 use super::super::certificate_arithmetic::ExactRatio;
 use super::algebraic::IsolatedRoot;
 use super::budget::Work;
-use super::canonical::{canonical, kind_name};
+use super::canonical::canonical;
 use super::conic_source::ConicSource;
 use super::failure::SketchIncidenceCause as Cause;
 use super::implicit::LineImplicit;
-use super::input::{SketchIncidenceCurve, SketchIncidenceSpline};
+use super::implicit_curve::ImplicitCurve;
+use super::input::{SketchIncidenceCurve, SketchIncidenceOffset, SketchIncidenceSpline};
+use super::offset_frame::{OffsetBase, OffsetLineSource, OffsetSource};
 use super::offset_geometry::circle_radius;
+use super::pieces::PieceRoot;
 use super::place::{KeyValue, SourcePlace};
-use super::rational_polynomial::{RationalPolynomial, ratio};
+use super::rational_polynomial::ratio;
 use super::report::SketchLinePosition;
-use super::root_map::{MappedEquation, RationalMap};
-use super::spans::{HomogeneousPoint, ParametricSpan, line_span, spline_spans};
+use super::spans::{ParametricSpan, line_span, spline_spans};
 use super::sweep::PointPlacer;
 use std::cmp::Ordering;
 
@@ -38,6 +40,8 @@ pub(super) enum SourceFrame {
     Line(Box<LineSource>),
     Spline(SplineSource),
     Conic(Box<ConicSource>),
+    OffsetLine(Box<OffsetLineSource>),
+    Offset(Box<OffsetSource>),
 }
 impl SourceFrame {
     /// Exact frame of an admitted source curve; angle bounds are placed with work.
@@ -50,19 +54,47 @@ impl SourceFrame {
             })),
             SketchIncidenceCurve::Spline(spline) => Self::Spline(SplineSource::new(spline)),
             SketchIncidenceCurve::Offset(offset) if circle_radius(offset).is_none() => {
-                return Err(Cause::OffsetPair {
-                    source: kind_name(curve.as_ref()),
-                    target: "any",
-                });
+                Self::offset(offset, work)?
             }
             conic => Self::Conic(Box::new(ConicSource::new(conic, work)?)),
         })
     }
+    fn offset(offset: &SketchIncidenceOffset, work: &mut Work<'_>) -> Result<Self, Cause> {
+        Ok(match offset.basis.as_ref() {
+            SketchIncidenceCurve::Line { points, .. } => {
+                Self::OffsetLine(Box::new(OffsetLineSource::new(*points, offset.distance)))
+            }
+            _ => Self::Offset(Box::new(OffsetSource::new(offset, work)?)),
+        })
+    }
+    /// The conic whose sweep places this source: a conic, or an ellipse offset's basis.
+    pub fn conic(&self) -> Option<&ConicSource> {
+        match self {
+            Self::Conic(conic) => Some(conic),
+            Self::Offset(offset) => match &offset.base {
+                OffsetBase::Conic(conic) => Some(conic),
+                OffsetBase::Spline { .. } => None,
+            },
+            _ => None,
+        }
+    }
+    /// Parameter range of a parameter-placed source.
+    pub fn parameter_range(&self) -> Option<[f64; 2]> {
+        match self {
+            Self::Line(_) | Self::OffsetLine(_) => Some([0., 1.]),
+            Self::Spline(spline) => Some(spline.bounds),
+            Self::Offset(offset) => match offset.base {
+                OffsetBase::Spline { bounds, .. } => Some(bounds),
+                OffsetBase::Conic(_) => None,
+            },
+            Self::Conic(_) => None,
+        }
+    }
     /// Normalize a sweep place of an angle-bounded arc (no effect elsewhere).
     pub fn normalize(&self, place: &mut SourcePlace, work: &mut Work<'_>) -> Result<(), Cause> {
-        match self {
-            Self::Conic(conic) => conic.normalize(place, work),
-            _ => Ok(()),
+        match self.conic() {
+            Some(conic) => conic.normalize(place, work),
+            None => Ok(()),
         }
     }
     /// Exact position of a place relative to the source ends.
@@ -71,12 +103,11 @@ impl SourceFrame {
         place: &mut SourcePlace,
         work: &mut Work<'_>,
     ) -> Result<SketchLinePosition, Cause> {
-        match (self, place) {
-            (Self::Line(_), SourcePlace::Parameter(value)) => value_position(value, [0., 1.], work),
-            (Self::Spline(spline), SourcePlace::Parameter(value)) => {
-                value_position(value, spline.bounds, work)
-            }
-            (Self::Conic(conic), place) => conic.position(place, work),
+        if let Some(conic) = self.conic() {
+            return conic.position(place, work);
+        }
+        match (self.parameter_range(), place) {
+            (Some(range), SourcePlace::Parameter(value)) => value_position(value, range, work),
             _ => Err(Cause::Invariant("place kind differs from its source")),
         }
     }
@@ -86,51 +117,58 @@ impl SourceFrame {
             Self::Line(_) => "line",
             Self::Spline(_) => "spline",
             Self::Conic(_) => "conic",
+            Self::OffsetLine(_) => "offset line",
+            Self::Offset(_) if self.conic().is_some() => "offset ellipse",
+            Self::Offset(_) => "offset spline",
         }
     }
-    /// True for a full conic or a spline whose ends are the same exact point.
+    /// True for a full conic (or its offset), or a spline (or spline offset) whose
+    /// ends are the same exact point.
     pub fn closed(&self) -> bool {
+        if let Some(conic) = self.conic() {
+            return conic.end.is_none();
+        }
         match self {
-            Self::Line(_) => false,
             Self::Spline(spline) => spline.closed,
-            Self::Conic(conic) => conic.end.is_none(),
+            Self::Offset(offset) => matches!(offset.base, OffsetBase::Spline { closed: true, .. }),
+            _ => false,
         }
     }
     /// Exact places of the source start and end.
     pub fn ends(&self) -> [SourcePlace; 2] {
         let parameter = |value: f64| SourcePlace::Parameter(KeyValue::Ratio(ratio(value)));
-        match self {
-            Self::Line(_) => [parameter(0.), parameter(1.)],
-            Self::Spline(spline) => spline.bounds.map(parameter),
-            Self::Conic(conic) => [
+        match (self.conic(), self.parameter_range()) {
+            (Some(conic), _) => [
                 conic.start.clone(),
                 conic.end.clone().unwrap_or_else(|| conic.start.clone()),
             ],
+            (None, range) => range.unwrap_or([0., 1.]).map(parameter),
         }
     }
-    /// Placer of target points given by polynomials of the target parameter.
-    pub fn placer(
-        &self,
-        point: &HomogeneousPoint,
-        contact: &RationalPolynomial,
-        work: &mut Work<'_>,
-    ) -> Result<PointPlacer, Cause> {
+    /// The implicit equation of a line, conic or line offset source.
+    pub fn implicit_curve(&self) -> Option<ImplicitCurve> {
         match self {
-            Self::Line(line) => {
-                let map = RationalMap {
-                    numerator: line.implicit.along(point),
-                    denominator: point.w.scale(&line.implicit.squared_length()),
-                };
-                Ok(PointPlacer::Parameter(MappedEquation::new(
-                    contact, map, work,
-                )?))
-            }
-            Self::Conic(conic) => {
-                let relative = point.relative(&conic.frame.center);
-                conic.frame.placer(&relative, contact, work)
-            }
-            Self::Spline(_) => Err(Cause::Invariant("a spline source has no implicit placer")),
+            Self::Line(line) => Some(ImplicitCurve::Line(line.implicit.clone())),
+            Self::Conic(conic) => Some(ImplicitCurve::Conic(conic.implicit.clone())),
+            Self::OffsetLine(line) => Some(ImplicitCurve::OffsetLine(line.implicit.clone())),
+            _ => None,
         }
+    }
+    /// Basis placer of a source piece (ellipse offsets); None for parameter places.
+    pub fn piece_placer(
+        &self,
+        piece: usize,
+        root: Option<&PieceRoot>,
+        work: &mut Work<'_>,
+    ) -> Result<Option<PointPlacer>, Cause> {
+        match self {
+            Self::Offset(offset) => offset.piece_placer(piece, root.map(|r| &r.contact), work),
+            _ => Ok(None),
+        }
+    }
+    /// True when the source pieces close into a cycle (an ellipse offset's charts).
+    pub fn cyclic_pieces(&self) -> bool {
+        matches!(self, Self::Offset(_)) && self.conic().is_some()
     }
 }
 /// Exact position of a key value relative to two increasing binary64 values.

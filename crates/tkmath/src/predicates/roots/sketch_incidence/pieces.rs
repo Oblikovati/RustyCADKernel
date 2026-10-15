@@ -49,7 +49,7 @@ pub(super) fn dyadic(value: f64) -> DyadicBound {
     DyadicBound::from_f64(value).expect("admitted finite parameter")
 }
 // A root exactly at a piece end has no side within this piece.
-fn open_sides(contact: &IsolatedRoot, range: Option<[f64; 2]>) -> [bool; 2] {
+pub(super) fn open_sides(contact: &IsolatedRoot, range: Option<[f64; 2]>) -> [bool; 2] {
     let ends = range.map(|range| range.map(dyadic));
     let at = |index: usize| {
         ends.as_ref()
@@ -81,6 +81,18 @@ impl MergedRoots {
             }
         }
         self.previous_overlap = false;
+    }
+    /// Around a closed chain of pieces (an ellipse offset's two charts), a root at
+    /// the last piece end is the root at the first piece start.
+    pub fn close_cycle(&mut self) {
+        let count = self.roots.len();
+        let wraps = count >= 2
+            && self.roots[0].sides[0].is_none()
+            && self.roots[count - 1].sides[1].is_none();
+        if let Some(last) = wraps.then(|| self.roots.pop()).flatten() {
+            self.roots[0].sides[0] = last.sides[0];
+            self.roots[0].multiplicity[0] = last.multiplicity[0];
+        }
     }
     // An overlap boundary is not an isolated contact.
     pub fn add_overlap(&mut self) {

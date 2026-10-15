@@ -29,9 +29,11 @@ pub enum SketchLineEnd {
 }
 /// The trim pick: a point projected onto the source, or an exact source parameter.
 ///
-/// Lines project points orthogonally; conics project them centrally (the curve
-/// point in the direction of the pick from the center, as the application does).
-/// Splines take an exact parameter, since no point projection rule is defined.
+/// Lines (and line offsets) project points orthogonally; conics (and circle
+/// offsets) project them centrally (the curve point in the direction of the pick
+/// from the center, as the application does). Splines and spline offsets take an
+/// exact parameter, since no point projection rule is defined; an ellipse offset
+/// has neither rule and refuses picks (`PickKind`).
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum SketchTrimPick {
     /// A world point; admitted for line and conic sources.
@@ -204,9 +206,9 @@ impl SketchLineIncidenceReport {
                 .source_position
         };
         let mut groups = 0..self.ordered.len();
-        let before_start = match frame {
-            SourceFrame::Conic(_) => SketchLinePosition::AfterEnd,
-            _ => SketchLinePosition::BeforeStart,
+        let before_start = match frame.conic() {
+            Some(_) => SketchLinePosition::AfterEnd,
+            None => SketchLinePosition::BeforeStart,
         };
         match end {
             SketchLineEnd::End => {
@@ -258,7 +260,9 @@ impl SketchLineIncidenceReport {
     fn distinct_points(&self, frame: &SourceFrame) -> usize {
         let groups = self.ordered.len();
         let position = |group: usize| self.contact(self.ordered[group].members[0]).source_position;
-        let seam_twice = matches!(frame, SourceFrame::Spline(_))
+        let spline_like = matches!(frame, SourceFrame::Spline(_) | SourceFrame::Offset(_));
+        let seam_twice = spline_like
+            && frame.conic().is_none()
             && groups >= 2
             && position(0) == SketchLinePosition::AtStart
             && position(groups - 1) == SketchLinePosition::AtEnd;

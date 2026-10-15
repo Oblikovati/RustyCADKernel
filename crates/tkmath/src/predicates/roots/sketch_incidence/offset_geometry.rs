@@ -9,7 +9,7 @@ use super::super::certificate_arithmetic::ExactRatio;
 use super::input::{SketchConicBounds, SketchIncidenceCurve, SketchIncidenceOffset};
 use super::rational_polynomial::{RationalPolynomial, ratio};
 use super::spans::HomogeneousPoint;
-use std::cmp::Ordering;
+use super::surd_square::ratio_sqrt;
 
 /// True when a conic with these bounds travels counterclockwise (a full conic does).
 pub(super) fn counterclockwise(bounds: Option<&SketchConicBounds>) -> bool {
@@ -40,17 +40,7 @@ pub(super) fn circle_radius(offset: &SketchIncidenceOffset) -> Option<ExactRatio
 /// Exact `|axis|` when it is rational; example: `rational_length([3., 4.])` is 5.
 pub(super) fn rational_length(axis: [f64; 2]) -> Option<ExactRatio> {
     let [x, y] = axis.map(ratio);
-    let squared = x.multiply(&x).add(&y.multiply(&y));
-    if squared.sign() == Ordering::Less {
-        return None;
-    }
-    let root = |value: &num_bigint::BigInt| {
-        let candidate = value.sqrt();
-        (&candidate * &candidate == *value).then_some(candidate)
-    };
-    let numerator = root(squared.numerator())?;
-    let denominator = root(squared.denominator())?;
-    Some(ExactRatio::new(numerator, denominator))
+    ratio_sqrt(&x.multiply(&x).add(&y.multiply(&y)))
 }
 /// `V = (x' w - x w', y' w - y w')`: the tangent `C' = V / w^2`, same direction.
 pub(super) fn tangent(point: &HomogeneousPoint) -> [RationalPolynomial; 2] {
