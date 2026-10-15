@@ -18,6 +18,7 @@
 #include <PrsDim_FixRelation.hxx>
 #include <PrsDim_SymmetricRelation.hxx>
 #include <PrsDim_MidPointRelation.hxx>
+#include <PrsDim_EqualDistanceRelation.hxx>
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -207,8 +208,22 @@ static occ::handle<PrsDim_Relation> v3pr_midpoint(int variant) {
     default: return new PrsDim_MidPointRelation(v3pr_edge(0, 0, 0, 1, 0, 0), v3pr_vertex(3, 1, 0), v3pr_vertex(-3, -1, 0), v3pr_plane());
   }
 }
+static occ::handle<PrsDim_Relation> v3pr_equal_distance(int variant) {
+  const TopoDS_Edge l0 = v3pr_edge(0, 0, 0, 10, 0, 0), l3 = v3pr_edge(0, 3, 0, 10, 3, 0);
+  const TopoDS_Edge l6 = v3pr_edge(0, 6, 0, 10, 6, 0), l9 = v3pr_edge(0, 9, 0, 10, 9, 0);
+  switch (variant) {
+    case 0: return new PrsDim_EqualDistanceRelation(l0, l3, l6, l9, v3pr_plane());
+    case 1: return new PrsDim_EqualDistanceRelation(v3pr_vertex(0, 0, 0), v3pr_vertex(4, 0, 0), v3pr_vertex(0, 5, 0), v3pr_vertex(0, 9, 0), v3pr_plane());
+    case 2: return new PrsDim_EqualDistanceRelation(l0, v3pr_vertex(5, 3, 0), v3pr_vertex(2, 6, 0), l9, v3pr_plane());
+    case 3: return new PrsDim_EqualDistanceRelation(v3pr_arc(0, 0, 3, 0, M_PI / 2), v3pr_arc(0, 0, 5, 0, M_PI / 2), v3pr_vertex(0, 7, 0), v3pr_vertex(0, 9, 0), v3pr_plane());
+    case 4: return new PrsDim_EqualDistanceRelation(v3pr_arc(0, 0, 3, 0, M_PI / 2), v3pr_vertex(0, 0, 0), v3pr_vertex(8, 0, 0), v3pr_arc(0, 0, 4, 1, 2), v3pr_plane());
+    case 5: return new PrsDim_EqualDistanceRelation(l0, v3pr_edge(0, 3, 2, 10, 3, 2), v3pr_vertex(2, 6, 3), v3pr_vertex(2, 9, 0), v3pr_plane());
+    default: return new PrsDim_EqualDistanceRelation(v3pr_vertex(1, 1, 0), v3pr_vertex(1, 1, 0), BRepBuilderAPI_MakeEdge(gp_Lin(gp_Pnt(0, 4, 0), gp::DX())).Edge(), l9, v3pr_plane());
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 13: return v3pr_equal_distance(variant);
     case 12: return v3pr_midpoint(variant);
     case 11: return v3pr_symmetric(variant);
     case 10: return v3pr_fix(variant);

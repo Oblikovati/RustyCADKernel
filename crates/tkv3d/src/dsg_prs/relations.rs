@@ -499,11 +499,41 @@ impl DsgPrsEqualDistancePresentation {
         position: &Point3,
         side: DsgPrsArrowSide,
     ) -> Result<(Point3, Point3), Failure> {
+        let mut extremes = (Point3::default(), Point3::default());
+        Self::add_interval_into(
+            prs,
+            drawer,
+            point1,
+            point2,
+            direction,
+            position,
+            side,
+            &mut extremes,
+        )?;
+        Ok(extremes)
+    }
+
+    /// `AddInterval` with the native output arguments: the two extreme points are written
+    /// before the arrows, so they are kept when the arrow direction raises.
+    /// Example: `DsgPrsEqualDistancePresentation::add_interval_into(&prs, &drawer, &a, &b, &d, &p, side, &mut ends)?`.
+    #[allow(clippy::too_many_arguments)] // The native static member's argument list.
+    pub fn add_interval_into(
+        prs: &DsgPrsPresentation,
+        drawer: &Handle<Prs3dDrawer>,
+        point1: &Point3,
+        point2: &Point3,
+        direction: &Direction3,
+        position: &Point3,
+        side: DsgPrsArrowSide,
+        extremes: &mut (Point3, Point3),
+    ) -> Result<(), Failure> {
         let aspect = dimension_aspect(drawer)?;
         let la = aspect_ref(&aspect)?;
         let group = current_line_group(prs, la)?;
         let proj1 = project_on_line(&Line3::new(*point1, *direction), position)?;
+        extremes.0 = proj1;
         let proj2 = project_on_line(&Line3::new(*point2, *direction), position)?;
+        extremes.1 = proj2;
         add_array(&group, &polyline(&[*point1, proj1, proj2, *point2])?);
         let dir = Direction3::from_xyz(proj2.xyz() - proj1.xyz())?;
         let ends = DsgPrsSymbolEnds {
@@ -512,8 +542,7 @@ impl DsgPrsEqualDistancePresentation {
             first_direction: dir.reversed(),
             last_direction: dir,
         };
-        dsg_prs_compute_symbol(prs, &aspect, &ends, side, true)?;
-        Ok((proj1, proj2))
+        dsg_prs_compute_symbol(prs, &aspect, &ends, side, true)
     }
 
     /// `AddIntervalBetweenTwoArcs`: the segment joining two arc ends and both arcs.

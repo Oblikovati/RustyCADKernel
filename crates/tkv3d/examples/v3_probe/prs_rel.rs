@@ -553,8 +553,52 @@ fn midpoint(variant: i32) -> Result<Relation, Failure> {
     Ok(PrsDimMidPointRelation::new(&t, &a, &b, &xoy())?.into_cast())
 }
 
+fn equal_distance(variant: i32) -> Relation {
+    let line = |y: f64| edge([0., y, 0.], [10., y, 0.]);
+    let arc_shape = |r: f64, a: f64, b: f64| -> Shape { arc(0., 0., r, a, b).into() };
+    let (a, b, c, d) = match variant {
+        0 => (line(0.), line(3.), line(6.), line(9.)),
+        1 => (
+            vertex(0., 0., 0.),
+            vertex(4., 0., 0.),
+            vertex(0., 5., 0.),
+            vertex(0., 9., 0.),
+        ),
+        2 => (line(0.), vertex(5., 3., 0.), vertex(2., 6., 0.), line(9.)),
+        3 => (
+            arc_shape(3., 0., PI / 2.0),
+            arc_shape(5., 0., PI / 2.0),
+            vertex(0., 7., 0.),
+            vertex(0., 9., 0.),
+        ),
+        4 => (
+            arc_shape(3., 0., PI / 2.0),
+            vertex(0., 0., 0.),
+            vertex(8., 0., 0.),
+            arc_shape(4., 1., 2.),
+        ),
+        5 => (
+            line(0.),
+            edge([0., 3., 2.], [10., 3., 2.]),
+            vertex(2., 6., 3.),
+            vertex(2., 9., 0.),
+        ),
+        _ => {
+            let infinite: Shape =
+                BRepBuilderAPIMakeEdge::from_lin(Line3::new(Point3::new(0.0, 4.0, 0.0), gp::dx()))
+                    .unwrap()
+                    .edge()
+                    .unwrap()
+                    .into();
+            (vertex(1., 1., 0.), vertex(1., 1., 0.), infinite, line(9.))
+        }
+    };
+    PrsDimEqualDistanceRelation::new(&a, &b, &c, &d, &xoy()).into_cast()
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        13 => equal_distance(variant),
         12 => midpoint(variant)?,
         11 => symmetric(variant)?,
         10 => fix(variant),
