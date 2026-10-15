@@ -10,6 +10,10 @@
 #include <PrsDim_ConcentricRelation.hxx>
 #include <PrsDim_PerpendicularRelation.hxx>
 #include <PrsDim_ParallelRelation.hxx>
+#include <PrsDim_MaxRadiusDimension.hxx>
+#include <PrsDim_MinRadiusDimension.hxx>
+#include <Geom_Ellipse.hxx>
+#include <Geom_SurfaceOfLinearExtrusion.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
   return BRepBuilderAPI_MakeEdge(gp_Pnt(x1, y1, z1), gp_Pnt(x2, y2, z2)).Edge();
@@ -93,8 +97,33 @@ static occ::handle<PrsDim_Relation> v3pr_parallel(int variant) {
     default: return new PrsDim_ParallelRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(12, 0, 0, 20, 0, 0), v3pr_plane());
   }
 }
+static gp_Elips v3pr_elips() { return gp_Elips(gp_Ax2(gp_Pnt(1, 2, 0), gp::DZ(), gp::DX()), 5.0, 3.0); }
+static TopoDS_Shape v3pr_ellipse_shape(int index) {
+  switch (index) {
+    case 0: return BRepBuilderAPI_MakeEdge(v3pr_elips()).Edge();
+    case 1: return BRepBuilderAPI_MakeEdge(v3pr_elips(), 0.5, 2.5).Edge();
+    case 2: return BRepBuilderAPI_MakeFace(BRepBuilderAPI_MakeWire(BRepBuilderAPI_MakeEdge(v3pr_elips()).Edge()).Wire()).Face();
+    default: {
+      occ::handle<Geom_Surface> s = new Geom_SurfaceOfLinearExtrusion(new Geom_Ellipse(v3pr_elips()), gp::DZ());
+      return BRepBuilderAPI_MakeFace(s, 0.0, 2 * M_PI, 0.0, 4.0, 1.0e-7).Face();
+    }
+  }
+}
+template <class T> static occ::handle<PrsDim_Relation> v3pr_radius(int variant, double value) {
+  switch (variant) {
+    case 0: return new T(v3pr_ellipse_shape(0), value, v3pr_text(1));
+    case 1: return new T(v3pr_ellipse_shape(1), value, v3pr_text(1));
+    case 2: return new T(v3pr_ellipse_shape(1), value, v3pr_text(2), gp_Pnt(2, 9, 0), DsgPrs_AS_BOTHAR, 2.0);
+    case 3: return new T(v3pr_ellipse_shape(2), value, v3pr_text(1));
+    case 4: return new T(v3pr_ellipse_shape(3), value, v3pr_text(1));
+    case 5: return new T(v3pr_ellipse_shape(0), value, v3pr_text(0), gp_Pnt(0, 9, 0), DsgPrs_AS_FIRSTAR, 1.5);
+    default: return new T(v3pr_ellipse_shape(0), 7.0 - value, v3pr_text(1));
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 6: return v3pr_radius<PrsDim_MaxRadiusDimension>(variant, 5.0);
+    case 7: return v3pr_radius<PrsDim_MinRadiusDimension>(variant, 3.0);
     case 4: return v3pr_perpendicular(variant);
     case 5: return v3pr_parallel(variant);
     case 2: return v3pr_equal_radius(variant);

@@ -44,7 +44,11 @@ pub use radius_dimension::{PrsDimCircularFields, PrsDimRadiusDimension};
 
 mod chamf_dimension;
 mod concentric_relation;
+mod ellipse_radius_dimension;
 mod equal_radius_relation;
+mod max_min_radius_dimension;
+pub use ellipse_radius_dimension::{PrsDimEllipseRadiusDimension, PrsDimEllipseRadiusFields};
+pub use max_min_radius_dimension::{PrsDimMaxRadiusDimension, PrsDimMinRadiusDimension};
 mod parallel_relation;
 mod perpendicular_relation;
 pub use concentric_relation::{PrsDimConcentricFields, PrsDimConcentricRelation};

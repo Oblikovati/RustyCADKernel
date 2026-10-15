@@ -6,13 +6,16 @@ use rustycad_tkbrep::topods::{Edge, Face, Shape};
 use rustycad_tkernel::quantity::{Color, NamedColor};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::ExtendedString;
-use rustycad_tkg3d::geom::GeomPlane;
+use rustycad_tkg3d::geom::{
+    GeomCurve, GeomEllipse, GeomPlane, GeomSurface, GeomSurfaceOfLinearExtrusion,
+};
 use rustycad_tkmath::gp::{
     self, Axis2, Axis3, Circle3, Cylinder3, Ellipse3, Line3, Plane3, Point3,
 };
 use rustycad_tkservice::aspect::AspectNeutralWindow;
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeVertex,
+    BRepBuilderAPIMakeWire,
 };
 use rustycad_tkv3d::ais::*;
 use rustycad_tkv3d::dsg_prs::DsgPrsArrowSide;
@@ -265,8 +268,86 @@ fn parallel(variant: i32) -> Relation {
     r.into_cast()
 }
 
+fn elips() -> Ellipse3 {
+    Ellipse3::new(
+        Axis2::with_x_direction(Point3::new(1.0, 2.0, 0.0), gp::dz(), gp::dx()).unwrap(),
+        5.0,
+        3.0,
+    )
+    .unwrap()
+}
+fn ellipse_shape(index: i32) -> Shape {
+    let full = || {
+        BRepBuilderAPIMakeEdge::from_elips(elips())
+            .unwrap()
+            .edge()
+            .unwrap()
+    };
+    match index {
+        0 => full().into(),
+        1 => BRepBuilderAPIMakeEdge::from_elips_params(elips(), 0.5, 2.5)
+            .unwrap()
+            .edge()
+            .unwrap()
+            .into(),
+        2 => {
+            let wire = BRepBuilderAPIMakeWire::from_edge(&full())
+                .unwrap()
+                .wire()
+                .unwrap();
+            BRepBuilderAPIMakeFace::from_wire(&wire, false)
+                .unwrap()
+                .face()
+                .unwrap()
+                .into()
+        }
+        _ => {
+            let curve: Handle<dyn GeomCurve> = Handle::new(GeomEllipse::from_elips(elips())).cast();
+            let surface: Handle<dyn GeomSurface> =
+                Handle::new(GeomSurfaceOfLinearExtrusion::new(&curve, gp::dz()).unwrap()).cast();
+            BRepBuilderAPIMakeFace::from_surface_bounds(&surface, (0.0, 2.0 * PI, 0.0, 4.0), 1.0e-7)
+                .unwrap()
+                .face()
+                .unwrap()
+                .into()
+        }
+    }
+}
+macro_rules! radius_case {
+    ($type:ty, $variant:expr, $value:expr) => {{
+        let p = Point3::new;
+        let r = match $variant {
+            0 => <$type>::new(&ellipse_shape(0), $value, &text(1)),
+            1 => <$type>::new(&ellipse_shape(1), $value, &text(1)),
+            2 => <$type>::with_position(
+                &ellipse_shape(1),
+                $value,
+                &text(2),
+                &p(2., 9., 0.),
+                side(3),
+                2.0,
+            ),
+            3 => <$type>::new(&ellipse_shape(2), $value, &text(1)),
+            4 => <$type>::new(&ellipse_shape(3), $value, &text(1)),
+            5 => <$type>::with_position(
+                &ellipse_shape(0),
+                $value,
+                &text(0),
+                &p(0., 9., 0.),
+                side(1),
+                1.5,
+            ),
+            _ => <$type>::new(&ellipse_shape(0), 7.0 - $value, &text(1)),
+        };
+        let r: Relation = r.into_cast();
+        r
+    }};
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        6 => radius_case!(PrsDimMaxRadiusDimension, variant, 5.0),
+        7 => radius_case!(PrsDimMinRadiusDimension, variant, 3.0),
         4 => perpendicular(variant),
         5 => parallel(variant),
         2 => equal_radius(variant),
