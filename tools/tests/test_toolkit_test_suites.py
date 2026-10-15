@@ -30,7 +30,7 @@ EXPECTED_COVERAGE_ARGV = (
     "--profile",
     "ci",
     "-E",
-    "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)",
+    "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance) & not test(=sketch_region_prism::owned_request::complete::cancellation_tests::every_complete_checkpoint_cancel_and_native_failure_is_terminal_and_reusable)",
     "--lcov",
     "--output-path",
     "target/lcov.info",
@@ -278,7 +278,7 @@ class ToolkitWorkflowTests(unittest.TestCase):
             0
         ]
         selector = (
-            "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)"
+            "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance) & not test(=sketch_region_prism::owned_request::complete::cancellation_tests::every_complete_checkpoint_cancel_and_native_failure_is_terminal_and_reusable)"
         )
         argv = coverage_gate().commands[0].argv
         self.assertEqual(coverage.count("--gate coverage"), 1)

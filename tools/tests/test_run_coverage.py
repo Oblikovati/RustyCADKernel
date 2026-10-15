@@ -113,7 +113,7 @@ class CoverageRunnerTests(unittest.TestCase):
         )
         self.assertEqual(
             COVERAGE_EXCLUSION,
-            "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)",
+            "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance) & not test(=sketch_region_prism::owned_request::complete::cancellation_tests::every_complete_checkpoint_cancel_and_native_failure_is_terminal_and_reusable)",
         )
 
     def test_environment_options_preserve_selection_context_and_failure_exit(

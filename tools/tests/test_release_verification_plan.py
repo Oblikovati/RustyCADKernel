@@ -88,7 +88,7 @@ class VerificationPlanTests(unittest.TestCase):
         self.assertEqual(argv[argv.index("--profile") + 1], "ci")
         self.assertEqual(
             argv[argv.index("-E") + 1],
-            "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)",
+            "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance) & not test(=sketch_region_prism::owned_request::complete::cancellation_tests::every_complete_checkpoint_cancel_and_native_failure_is_terminal_and_reusable)",
         )
         self.assertEqual(argv[-3:], ("--lcov", "--output-path", "target/lcov.info"))
 

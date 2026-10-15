@@ -104,7 +104,7 @@ COVERAGE_ARGV = (
     "--profile",
     "ci",
     "-E",
-    "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)",
+    "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance) & not test(=sketch_region_prism::owned_request::complete::cancellation_tests::every_complete_checkpoint_cancel_and_native_failure_is_terminal_and_reusable)",
     "--lcov",
     "--output-path",
     "target/lcov.info",
@@ -112,7 +112,12 @@ COVERAGE_ARGV = (
 
 
 def coverage_gate() -> VerificationGate:
-    """Keep the original dense replay exclusion; e.g. coverage_gate().commands[0].argv."""
+    """Keep the dense replay exclusions; e.g. coverage_gate().commands[0].argv.
+
+    The excluded tests stay in the uninstrumented `cargo test-all` gate; the
+    owned complete-operation test re-runs the operation once per checkpoint and
+    exceeds the coverage limit on hosted runners.
+    """
     command = GateCommand(COVERAGE_ARGV)
     return VerificationGate("coverage", (command,))
 

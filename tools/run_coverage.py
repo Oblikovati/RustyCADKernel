@@ -18,7 +18,7 @@ from coverage_profile_policy import coverage_profile_environment
 from coverage_profile_observation import observe_compiler_profile
 
 COVERAGE_EXCLUSION = (
-    "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)"
+    "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance) & not test(=sketch_region_prism::owned_request::complete::cancellation_tests::every_complete_checkpoint_cancel_and_native_failure_is_terminal_and_reusable)"
 )
 
 
