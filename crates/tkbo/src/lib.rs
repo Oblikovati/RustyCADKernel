@@ -7,6 +7,7 @@ pub mod bop_ds;
 pub mod bop_tools;
 pub mod brep_algo_api;
 pub mod int_tools;
+pub mod profile_extrusion;
 
 #[allow(dead_code)] // Owned snapshots serve private ADR0014 stages until operation acceptance.
 mod sketch_region_geometry_capture;
