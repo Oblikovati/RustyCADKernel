@@ -19,7 +19,7 @@ use rustycad_tktobj::tobj::{
     TObjObjectRefTag, TObjObjectState, TObjObjectStateFlags, TObjOcafObjectIterator, TObjPartition,
     TObjPersistence, TObjTypeFlags,
 };
-use std::sync::{Arc, Once};
+use std::sync::{Arc, Mutex, MutexGuard, Once, PoisonError};
 
 /// Minimal concrete subclass of `TObj_Model` (abstract because of `NewEmpty`).
 pub struct TObjTestModel {
@@ -142,18 +142,32 @@ pub fn find_test_object(model: &Handle<dyn TObjModel>, name: &str) -> Handle<TOb
     model.find_object(&name, &dictionary).unwrap().cast()
 }
 
+/// GoogleTest runs the cases of a binary one after the other; the TObj statics
+/// (`TObj_Assistant`, the application) are process-wide, so the fixtures serialize.
+static SERIAL: Mutex<()> = Mutex::new(());
+
+/// Holds the process-wide TObj statics for one test.
+pub fn serial() -> MutexGuard<'static, ()> {
+    SERIAL.lock().unwrap_or_else(PoisonError::into_inner)
+}
+
 /// The `TObj_ModelTest` fixture: a model loaded empty, closed on tear-down.
 pub struct ModelFixture {
     /// `myModel`.
     pub my_model: Handle<TObjTestModel>,
+    _serial: MutexGuard<'static, ()>,
 }
 impl ModelFixture {
     /// `SetUp`: `Load` with an empty file name creates a new empty model.
     pub fn set_up() -> Self {
+        let serial = serial();
         register_test_object_persistence();
         let my_model = TObjTestModel::new();
         assert!(my_model.load(&ExtendedString::default()).unwrap());
-        Self { my_model }
+        Self {
+            my_model,
+            _serial: serial,
+        }
     }
 }
 impl Drop for ModelFixture {
@@ -164,7 +178,8 @@ impl Drop for ModelFixture {
     }
 }
 
-fn h_name(text: &str) -> Handle<HExtendedString> {
+/// A new `TCollection_HExtendedString`.
+pub fn h_name(text: &str) -> Handle<HExtendedString> {
     Handle::new(HExtendedString::from(ExtendedString::new(text)))
 }
 

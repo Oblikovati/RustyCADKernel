@@ -94,7 +94,7 @@ impl TObjTNameContainer {
         Ok(())
     }
     /// `Get`: a copy of the map (natively a reference to it).
-    pub fn get(&self) -> TObjNameMap {
+    pub fn get_map(&self) -> TObjNameMap {
         let mut copy = TObjNameMap::with_hasher(HExtendedStringHasher, 1);
         copy.assign(&self.map.read());
         copy
@@ -115,7 +115,7 @@ impl TdfAttribute for TObjTNameContainer {
     }
     fn restore(&self, with: &Handle<dyn TdfAttribute>) -> Result<(), Failure> {
         let other = cast_attribute::<TObjTNameContainer>(with, "TObj_TNameContainer::Restore")?;
-        let map = TObjTNameContainer::get(&other);
+        let map = other.get_map();
         self.map.write().assign(&map);
         Ok(())
     }
@@ -128,6 +128,6 @@ impl TdfAttribute for TObjTNameContainer {
         _relocation_table: &Handle<TdfRelocationTable>,
     ) -> Result<(), Failure> {
         let target = cast_attribute::<TObjTNameContainer>(into, "TObj_TNameContainer::Paste")?;
-        target.set_map(&self.get())
+        target.set_map(&self.get_map())
     }
 }
