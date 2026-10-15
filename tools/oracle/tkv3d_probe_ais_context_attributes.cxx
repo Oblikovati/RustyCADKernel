@@ -30,6 +30,8 @@ static void v3_ctx_attr_state(const occ::handle<AIS_InteractiveContext>& ctx,con
     ga_flag(ctx->IsSelected(o));ga_flag(o->HasMaterial());ga_int(o->CurrentFacingModel());
     occ::handle<NCollection_Shared<NCollection_IndexedMap<occ::handle<SelectMgr_EntityOwner>>>> owners;ctx->EntityOwners(owners,o,-1);ga_int(owners.IsNull()?-1:owners->Extent());
     TCollection_ExtendedString status;ctx->Status(o,status);ga_int(status.Length());
+    const occ::handle<Prs3d_Drawer>& a=o->Attributes();ga_flag(a->HasOwnDeviationCoefficient());ga_real(a->DeviationCoefficient());
+    ga_flag(a->HasOwnDeviationAngle());ga_real(a->DeviationAngle());ga_flag(a->IsoOnTriangulation());
   }
   ga_int(ctx->Filters().Extent());ga_int(ctx->FilterType());ga_int(ctx->PixelTolerance());ga_real(ctx->TrihedronSize());
   double x,y;ga_flag(ctx->PlaneSize(x,y));ga_real(x);ga_real(y);ga_flag(ctx->DrawHiddenLine());ga_int(ctx->DisplayMode());
@@ -85,6 +87,9 @@ static void v3_ctx_attr_op(const occ::handle<AIS_InteractiveContext>& ctx,const 
     case 45:{occ::handle<Prs3d_LineAspect> l=new Prs3d_LineAspect(Quantity_NOC_ORANGE,Aspect_TOL_DOT,2.);ctx->SetHiddenLineAspect(l);break;}
     case 46:ctx->ClearSelected(true);break;
     case 47:ctx->Redisplay(AIS_KindOfInteractive(arg),0,true);break;
+    case 48:ctx->SetDeviationCoefficient(o,arg/1000.,arg%2==0);break;
+    case 49:ctx->SetDeviationAngle(o,arg/100.,arg%2==0);break;
+    case 50:ctx->IsoOnTriangulation(arg!=0,o);break;
   }
 }
 void v3_ais_ctx_attr(std::istream& input){

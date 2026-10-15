@@ -84,3 +84,32 @@ fn filters_and_default_drawer_members() {
     context.enable_draw_hidden_line();
     assert!(context.draw_hidden_line());
 }
+
+#[test]
+fn per_object_deviation_and_isolines_reach_the_shape() {
+    use rustycad_tkv3d::ais::{AisShapeParameters, AisShapeSource};
+    use rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers;
+    let (_viewer, context, object) = scene();
+    let shape = object.clone().cast::<dyn AisShapeSource>();
+    context
+        .set_object_deviation_coefficient(&object, 0.02, false)
+        .unwrap();
+    assert_eq!(shape.own_deviation_coefficient().1, 0.02);
+    assert!(shape.own_deviation_coefficient().0);
+    context
+        .set_object_deviation_angle(&object, 0.3, true)
+        .unwrap();
+    assert!(shape.own_deviation_angle().0);
+    assert_eq!(shape.own_deviation_angle().1, 0.3);
+    context.set_object_iso_on_triangulation(true, &object);
+    assert!(object.attributes().iso_on_triangulation());
+    // A null object is ignored by all three, as natively.
+    let null = Handle::<dyn AisInteractiveObject>::default();
+    context
+        .set_object_deviation_coefficient(&null, 0.5, false)
+        .unwrap();
+    context
+        .set_object_deviation_angle(&null, 0.5, false)
+        .unwrap();
+    context.set_object_iso_on_triangulation(true, &null);
+}

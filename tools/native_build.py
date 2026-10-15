@@ -107,12 +107,15 @@ EXPRESS_LINKED_TOOLKITS: tuple[str, ...] = ('TKExpress', 'TKernel')
 EXPRESS_CLOSURE_TARGETS: list[str] = [*EXPRESS_TOOLKITS, 'gtest_main']
 # The TKV3d oracle closure (TKV3d suites and numeric oracle) lives in its own build tree too:
 # TKV3d sits on TKService (FreeType, fontconfig, Xlib) and on the modeling toolkits of its
-# EXTERNLIB. The shared all-modules build can be reused instead.
-V3D_TOOLKITS: tuple[str, ...] = ('TKV3d',)
-# The TKV3d closure's shared libraries in link order, dependants first (its EXTERNLIB).
+# EXTERNLIB. TKPrim is here because the unchanged AIS_ColoredShape_Test suite builds its
+# shapes with BRepPrimAPI_MakeBox (outside TKV3d's EXTERNLIB). The shared all-modules build
+# can be reused instead.
+V3D_TOOLKITS: tuple[str, ...] = ('TKV3d', 'TKPrim')
+# The TKV3d closure's shared libraries in link order, dependants first (its EXTERNLIB, with
+# TKPrim for the GTests).
 V3D_LINKED_TOOLKITS: tuple[str, ...] = ('TKV3d', 'TKService', 'TKHLR', 'TKMesh', 'TKShHealing',
-                                        'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
-                                        'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
+                                        'TKPrim', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep',
+                                        'TKGeomBase', 'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
 V3D_CLOSURE_TARGETS: list[str] = [*V3D_TOOLKITS, 'gtest_main']
 # The TKMeshVS oracle closure (numeric oracle; the toolkit has no GTest suite at the pinned
 # revision) adds TKMeshVS to the TKV3d tree. The shared all-modules build can be reused instead.

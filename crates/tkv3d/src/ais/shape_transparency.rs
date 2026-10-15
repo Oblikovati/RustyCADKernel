@@ -48,7 +48,9 @@ fn retain_shape_transparency_aspect<S: AisShapeSource + ?Sized>(object: &S) -> b
     object.has_color() || object.has_material() || textured
 }
 
-pub(super) fn set_shape_drawer_transparency<S: AisShapeSource + ?Sized>(
+/// `AIS_Shape::setTransparency` (protected): the transparency of the drawer shading aspect;
+/// `set_shape_drawer_transparency(&shape, &drawer, 0.5)?`.
+pub fn set_shape_drawer_transparency<S: AisShapeSource + ?Sized>(
     object: &S,
     drawer: &Handle<crate::prs3d::Prs3dDrawer>,
     value: f64,

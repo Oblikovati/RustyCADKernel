@@ -741,7 +741,9 @@ fn required(
     })
 }
 
-fn required_shape(object: &Handle<dyn AisShapeSource>) -> Result<&dyn AisShapeSource, Failure> {
+pub(super) fn required_shape(
+    object: &Handle<dyn AisShapeSource>,
+) -> Result<&dyn AisShapeSource, Failure> {
     object.get().ok_or_else(|| {
         Failure::with_message(
             "Standard_NullObject",

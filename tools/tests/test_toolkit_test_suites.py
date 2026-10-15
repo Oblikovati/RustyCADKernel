@@ -9,6 +9,7 @@ from test_target_selection import (
     compiled_case_target,
     original_case_names,
     package_manifests,
+    passed_case_names,
 )
 from toolkit_test_suites import (
     INDEX_SIZE,
@@ -246,6 +247,23 @@ class ToolkitSuiteTests(unittest.TestCase):
                 ("custom-package", "fatal"): {"fatal_case"},
             },
         )
+
+
+class LibtestResultTests(unittest.TestCase):
+    def test_a_case_that_prints_before_its_status_still_passes(self):
+        # Font_FontMgr warnings print straight to stdout between the name and the status
+        # (the TKV3d StdPrs_BRepFont GTests); failed and ignored cases never pass.
+        log = (
+            "running 4 tests\n"
+            "test fonts::glyph ... Font_FontMgr, warning: unable to find font\n"
+            "ok\n"
+            "test fonts::plain ... ok\n"
+            "test fonts::broken ... FAILED\n"
+            "test fonts::skipped ... ignored\n"
+            "\n"
+            "test result: FAILED. 2 passed; 1 failed; 1 ignored\n"
+        )
+        self.assertEqual(passed_case_names(log), {"fonts::glyph", "fonts::plain"})
 
 
 class ToolkitWorkflowTests(unittest.TestCase):

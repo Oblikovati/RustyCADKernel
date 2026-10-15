@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build unchanged mapped OCCT test sources and verify their Rust translations on Linux."""
 import argparse
-from test_target_selection import cargo_case_command, original_case_names
+from test_target_selection import cargo_case_command, original_case_names, passed_case_names
 import hashlib
 import json
 import os
@@ -51,7 +51,7 @@ def run_rust_mappings(expected: set[tuple[str, str, str]], env: dict[str, str], 
     for package, target in sorted({(package, target) for package, target, _ in expected}):
         log = output / f"rust-{package}-{target}.log"
         result = run(cargo_case_command(ROOT, package, target, ["--test-threads=1"]), log, env=env)
-        passed = {(package, target, name) for name in original_case_names(set(re.findall(r"^test (\S+) \.\.\. ok$", result, re.M)), target)}
+        passed = {(package, target, name) for name in original_case_names(passed_case_names(result), target)}
         wanted = {case for case in expected if case[:2] == (package, target)}
         if passed != wanted:
             raise RuntimeError(f"Rust tests missing, skipped or unmapped in {package}/{target}")

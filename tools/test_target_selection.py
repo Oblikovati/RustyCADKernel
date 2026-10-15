@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
+import re
 import tomllib
 
 from toolkit_test_suites import suite_sources
@@ -44,6 +45,19 @@ def cargo_case_command(root: Path, package: str, target: str, flags: list[str]) 
         filtering += [argument for name in sorted(namespaces) if name != target and name.endswith(target)
                       for argument in ['--skip', f'{name}::']]
     return ['cargo', 'test', '--locked', '-p', package, '--test', compiled, '--', *filtering, *flags]
+
+
+# One libtest case: its name, then everything printed until the next case, a blank line or the
+# end. A case that writes straight to stdout (OCCT message printers, e.g. Font_FontMgr
+# warnings) splits `test name ... ok` across lines, so the status is the chunk's last word.
+TEST_CASE_LINE = re.compile(r'^test (\S+) \.\.\. (.*?)(?=^test |^\s*$|\Z)', re.M | re.S)
+
+
+def passed_case_names(log: str) -> set[str]:
+    """Names of the cases libtest reports ok, even when a case printed between its name and
+    its status; passed_case_names('test a ... warn\\nok\\n') == {'a'}."""
+    return {match.group(1) for match in TEST_CASE_LINE.finditer(log)
+            if match.group(2).rstrip().endswith('ok')}
 
 
 def original_case_names(names: set[str], target: str) -> set[str]:

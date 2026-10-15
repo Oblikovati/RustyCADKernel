@@ -150,3 +150,21 @@ fn check_navigation_mode(c: &mut AisViewController, index: usize, mode: AisNavig
     c.set_navigation_mode(mode);
     assert_event(c, &format!("navigation-repeat-{index}"), -1);
 }
+#[test]
+fn controller_reexported_listener_mouse_members_track_the_buttons() {
+    let mut c = AisViewController::new().unwrap();
+    assert!(!c.has_touch_points());
+    assert_eq!(c.pressed_mouse_buttons(), ASPECT_VKEY_MOUSE_NONE);
+    let initial = c.last_mouse_position();
+    let left = ASPECT_VKEY_MOUSE_LEFT_BUTTON;
+    c.press_mouse_button(Vec2::new(5, 7), left, ASPECT_VKEY_FLAGS_SHIFT, false)
+        .unwrap();
+    assert_eq!(c.pressed_mouse_buttons(), left);
+    assert_eq!(c.last_mouse_flags(), ASPECT_VKEY_FLAGS_SHIFT);
+    // The native UpdateMouseButtons override keeps the last position (UpdateMousePosition owns it).
+    assert_eq!(c.last_mouse_position(), initial);
+    c.release_mouse_button(Vec2::new(6, 8), left, 0, false)
+        .unwrap();
+    assert_eq!(c.pressed_mouse_buttons(), ASPECT_VKEY_MOUSE_NONE);
+    assert_eq!(c.last_mouse_flags(), 0);
+}

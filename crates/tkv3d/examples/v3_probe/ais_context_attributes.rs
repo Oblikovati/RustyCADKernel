@@ -78,6 +78,12 @@ fn state(ctx: &AisInteractiveContext, objects: &[Handle<dyn AisInteractiveObject
         ctx.entity_owners(&mut owners, o, -1);
         int(owners.extent() as i32);
         int(ctx.status(o).length());
+        let a = o.attributes();
+        flag(a.has_own_deviation_coefficient());
+        real(a.deviation_coefficient());
+        flag(a.has_own_deviation_angle());
+        real(a.deviation_angle());
+        flag(a.iso_on_triangulation());
     }
     int(ctx.filters().len() as i32);
     int(ctx.filter_type() as i32);
@@ -187,6 +193,9 @@ fn operation(
         }
         46 => ctx.clear_selected(true)?,
         47 => ctx.redisplay_kind(KINDS[arg.clamp(0, 6) as usize], 0, true)?,
+        48 => ctx.set_object_deviation_coefficient(o, f64::from(arg) / 1000., arg % 2 == 0)?,
+        49 => ctx.set_object_deviation_angle(o, f64::from(arg) / 100., arg % 2 == 0)?,
+        50 => ctx.set_object_iso_on_triangulation(arg != 0, o),
         _ => {}
     }
     Ok(())
