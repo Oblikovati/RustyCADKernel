@@ -2,7 +2,7 @@
 //! `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod of_probe;
-use of_probe::{make_offset, make_pipe_shell};
+use of_probe::{make_offset, make_pipe_shell, thru_sections};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -10,9 +10,11 @@ type ProbeCase = fn(&[f64]);
 /// The dispatch table of tools/oracle/tkoffset_probe.cxx (`probe_cases`); each package
 /// adds its operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
-    // BRepOffsetAPI (of_probe/make_offset.rs, of_probe/make_pipe_shell.rs)
+    // BRepOffsetAPI (of_probe/make_offset.rs, of_probe/make_pipe_shell.rs,
+    // of_probe/thru_sections.rs)
     ("oa_make_offset", make_offset::make_offset_case),
     ("oa_pipe_shell", make_pipe_shell::pipe_shell_case),
+    ("oa_thru_sections", thru_sections::thru_sections_case),
 ];
 
 fn main() {

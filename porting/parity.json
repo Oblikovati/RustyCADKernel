@@ -625846,6 +625846,198 @@
       "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakePipeShell::spine",
       "status": "implemented",
       "notes": "Translated from BRepOffsetAPI_MakePipeShell.cxx over BRepFill_PipeShell (constructor defaults SetTolerance(1e-4, 1e-4, 1e-2) and the transformed transition with angles 1e-2 and 6, the GeomFill status mapping, MakeSolid raising StdFail_NotDone before a successful Build); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_pipe_shell: defaults and each transition on five spines, every location mode, two sections, vertex placement, empty and not-done makers); both BRepOffsetAPI_MakePipeShell_Test.cxx GTests pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::BRepOffsetAPI_ThruSections(bool,bool,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::Init(bool,bool,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::init",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::AddWire(const TopoDS_Wire&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::add_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::AddVertex(const TopoDS_Vertex&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::add_vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::CheckCompatibility(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::check_compatibility",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::SetSmoothing(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::set_smoothing",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::SetParType(Approx_ParametrizationType)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::set_par_type",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::SetContinuity(GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::set_continuity",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::SetCriteriumWeight(double,double,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::set_criterium_weight",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::SetMaxDegree(int)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::set_max_degree",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::ParType() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::par_type",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::Continuity() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::continuity",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::MaxDegree() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::max_degree",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::UseSmoothing() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::use_smoothing",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::CriteriumWeight(double&,double&,double&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::criterium_weight",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::FirstShape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::first_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::LastShape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::last_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::GeneratedFace(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::generated_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::SetMutableInput(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::set_mutable_input",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::Wires() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::wires",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::IsMutableInput() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::is_mutable_input",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections::GetStatus() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_ThruSections.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIThruSections::get_status",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_ThruSections.cxx (Build, CreateRuled, CreateSmoothed, TotalSurf, EdgeToBSpline, PerformPlan, IsSameOriented, MakeSolid and the Generated history) with the native quirks: Init sets the degree 6 against the constructor 8, a failed shell construction leaves the Done status with IsDone false, the section array raises Standard_OutOfRange past nbSects*nbEdges cells; compared with OCCT by tools/verify_tkoffset_numeric.py (oa_thru_sections: 130 lofts of the CompatibleWires families and the GTest shapes, shells and solids, ruled and smoothed, vertex apexes, every setting, Generated and GeneratedFace of every shape); closed-form volumes in crates/tkoffset/tests/brep_offset_api_thru_sections.rs."
     }
   ],
   "tests": [
@@ -740528,8 +740720,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740542,8 +740733,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740556,8 +740746,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740570,8 +740759,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740584,8 +740772,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740598,8 +740785,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740612,8 +740798,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740626,8 +740811,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740640,8 +740824,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740654,8 +740837,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740668,8 +740850,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740682,8 +740863,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740735,8 +740915,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740749,8 +740928,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740763,8 +740941,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"
@@ -740777,8 +740954,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
       "status": "pending_dependency",
       "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid",
-        "BRepOffsetAPI_ThruSections"
+        "BRepOffsetAPI_MakeThickSolid"
       ],
       "profiles": [
         "linux-gcc-c-locale"

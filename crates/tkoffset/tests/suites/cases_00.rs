@@ -3,6 +3,8 @@
 pub mod analyse;
 #[path = "../brep_offset_api.rs"]
 pub mod brep_offset_api;
+#[path = "../brep_offset_api_thru_sections.rs"]
+pub mod brep_offset_api_thru_sections;
 #[path = "../classification.rs"]
 pub mod classification;
 #[path = "../collapse_singularities.rs"]

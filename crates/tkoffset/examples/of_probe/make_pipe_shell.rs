@@ -18,7 +18,7 @@ use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep;
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeShape, BRepBuilderAPITransitionMode};
 
 /// `of_list`: the indices of a list in the result map (-1 for a null shape).
-fn list(map: &IndexedMapOfShape, l: &List<Shape>) {
+pub fn list(map: &IndexedMapOfShape, l: &List<Shape>) {
     int(l.len() as i32);
     for s in l.iter() {
         int(if s.is_null() {
