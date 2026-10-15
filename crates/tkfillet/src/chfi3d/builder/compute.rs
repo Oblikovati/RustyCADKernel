@@ -412,7 +412,9 @@ impl dyn ChFi3dBuilderOps + '_ {
         }
         let map_ind_so = self.base_mut().solids_and_shells()?;
         if self.base().done {
-            self.fill_ds(&stripes)?;
+            // The corners added their contours to the list: they are written too.
+            let all = self.base().my_list_stripe.clone();
+            self.fill_ds(&all)?;
             if self.base().done {
                 self.base_mut().rebuild(&map_ind_so)?;
                 if !self.base().hasresult {

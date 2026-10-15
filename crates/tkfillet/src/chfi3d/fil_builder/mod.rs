@@ -15,7 +15,12 @@ mod simul;
 mod simul_rst;
 mod split;
 mod three_corner;
+mod three_corner_fill;
+mod three_corner_write;
 mod two_corner;
+mod two_corner_diff;
+mod two_corner_fill;
+mod two_corner_write;
 
 use super::builder::{ChFi3dBuilder, ChFi3dBuilderOps, RstCall, SurfCall, SurfOut};
 use super::fillet_shape::FilletShape;
