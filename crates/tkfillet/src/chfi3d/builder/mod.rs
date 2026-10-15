@@ -23,20 +23,10 @@ mod call_perform;
 mod compute;
 mod compute_vertex;
 mod corner_tools;
-// Called by ChFi3d_FilBuilder and ChFi3d_ChBuilder, whose port is pending.
-#[allow(dead_code)]
 mod data_complete;
-// Called by ChFi3d_FilBuilder and ChFi3d_ChBuilder, whose port is pending.
-#[allow(dead_code)]
 mod data_compute;
-// Called by ChFi3d_FilBuilder and ChFi3d_ChBuilder, whose port is pending.
-#[allow(dead_code)]
 mod data_compute_ends;
-// Called by ChFi3d_FilBuilder and ChFi3d_ChBuilder, whose port is pending.
-#[allow(dead_code)]
 mod data_rst;
-// Called by ChFi3d_FilBuilder and ChFi3d_ChBuilder, whose port is pending.
-#[allow(dead_code)]
 mod data_store;
 mod element;
 mod element_extend;
@@ -63,8 +53,15 @@ mod start_obstacle;
 mod start_obstacle_end;
 mod start_sol;
 mod trunc;
+mod two_corner_inter;
+mod two_corner_inter_big;
 
 pub use args::{BlendSide, RstCall, RstRef, SurfCall, SurfOut, WalkSettings};
+pub(crate) use compute::spine_of;
+pub(crate) use data_complete::LineFunction;
+pub(crate) use data_compute::ComputeCall;
+pub(crate) use data_rst::{RstSide, RstWalk};
+pub(crate) use two_corner_inter::{CornerEnd, two_stripes_at};
 
 use crate::brep_blend::WalkingDomain;
 use crate::chfi_ds::ElSpine;

@@ -3,10 +3,12 @@
 //! docs/tkfillet-progress.md).
 mod builder;
 mod builder0;
+mod fil_builder;
 pub use builder::{
     BlendSide, ChFi3dBuilder, ChFi3dBuilderOps, RstCall, RstRef, SurfCall, SurfOut, WalkSettings,
 };
 pub use builder0::*;
+pub use fil_builder::ChFi3dFilBuilder;
 mod concave_side;
 mod fillet_shape;
 pub use fillet_shape::FilletShape;

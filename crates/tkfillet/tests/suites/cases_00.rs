@@ -25,6 +25,8 @@ pub mod concavity;
 pub mod connection;
 #[path = "../el_spine.rs"]
 pub mod el_spine;
+#[path = "../fil_builder.rs"]
+pub mod fil_builder;
 #[path = "../orientation.rs"]
 pub mod orientation;
 #[path = "../tangency.rs"]
