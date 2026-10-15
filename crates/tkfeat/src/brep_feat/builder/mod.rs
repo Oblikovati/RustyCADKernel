@@ -75,6 +75,18 @@ impl BRepFeatBuilder {
         self.bop.add_tool(the_tool);
     }
 
+    /// `AddTool(theShape)` (`BOPAlgo_ToolsProvider`): one more tool;
+    /// `builder.add_tool(&tool)`.
+    pub fn add_tool(&mut self, the_shape: &Shape) {
+        self.bop.add_tool(the_shape);
+    }
+
+    /// The arguments of the Boolean operation (`myArguments`, the basis first);
+    /// `builder.arguments()`.
+    pub fn arguments(&self) -> &List<Shape> {
+        self.bop.arguments()
+    }
+
     /// `SetOperation(theFuse)`: FUSE when `the_fuse` is not 0, else CUT;
     /// `builder.set_operation(1)`.
     pub fn set_operation(&mut self, the_fuse: i32) {

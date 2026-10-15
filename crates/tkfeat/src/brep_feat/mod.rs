@@ -3,6 +3,7 @@
 //! splitting of shapes.
 mod builder;
 mod common;
+mod cylindrical_hole;
 mod form;
 mod gluer;
 mod make_dprism;
@@ -12,6 +13,7 @@ mod make_revol;
 mod package;
 mod split_shape;
 pub use builder::BRepFeatBuilder;
+pub use cylindrical_hole::BRepFeatMakeCylindricalHole;
 pub use form::{DescendantMap, Form, FormFeature};
 pub use gluer::BRepFeatGluer;
 pub use make_dprism::BRepFeatMakeDPrism;
