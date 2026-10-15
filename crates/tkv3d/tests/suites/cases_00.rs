@@ -135,6 +135,8 @@ pub mod legacy_stdprs_brep_font;
 pub mod plane_presentations;
 #[path = "../prs3d_drawer_test.rs"]
 pub mod prs3d_drawer_test;
+#[path = "../prs_dim.rs"]
+pub mod prs_dim;
 #[path = "../prs_mgr_test.rs"]
 pub mod prs_mgr_test;
 #[path = "../rectangular_frustum.rs"]

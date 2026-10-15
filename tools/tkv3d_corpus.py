@@ -70,5 +70,6 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     __import__('tkv3d_corpus_ais_media_player').append_ais_media_player_requests(requests)
     __import__('tkv3d_corpus_ais_view_controller').append_ais_view_controller_requests(requests)
     __import__('tkv3d_corpus_ais_manipulator').append_ais_manipulator_requests(requests)
+    __import__('tkv3d_corpus_prs_dim').append_prs_dim_requests(requests)
     __import__('tkv3d_corpus_viewer_selector_state').append_viewer_selector_state_requests(requests)
     __import__('tkv3d_corpus_selection_manager').append_selection_manager_requests(requests)

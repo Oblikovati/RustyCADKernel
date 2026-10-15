@@ -88,6 +88,7 @@
 #include "tkv3d_probe_ais_media_player.cxx"
 #include "tkv3d_probe_ais_view_controller.cxx"
 #include "tkv3d_probe_ais_manipulator.cxx"
+#include "tkv3d_probe_prs_dim.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFont regularization and builders (tkv3d_probe_brep_font.cxx)
  {"v3_brepfont_regularize", v3_brepfont_regularize},
@@ -116,6 +117,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_ais_view_controller", v3_ais_view_controller},
  // AIS_Manipulator (tkv3d_probe_ais_manipulator.cxx)
  {"v3_ais_manipulator", v3_ais_manipulator},
+ // PrsDim dimensions (tkv3d_probe_prs_dim.cxx)
+ {"v3_prsdim", v3_prsdim},
  {"v3_ais_rubber_band", v3_ais_rubber_band},
  {"v3_ais_trihedron", v3_ais_trihedron},
  {"v3_ais_point_cloud", v3_ais_point_cloud},

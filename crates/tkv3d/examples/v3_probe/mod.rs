@@ -10,6 +10,7 @@ pub mod ais_view_controller;
 pub mod brep_font;
 pub mod dsg_prs;
 pub mod prs3d;
+pub mod prs_dim;
 pub mod std_prs_faces;
 pub mod std_select_filters;
 pub mod v3d;

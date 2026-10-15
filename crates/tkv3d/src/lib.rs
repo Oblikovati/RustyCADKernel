@@ -31,3 +31,6 @@ pub mod std_prs;
 
 /// Dimension and datum presentation algorithms.
 pub mod dsg_prs;
+
+/// Dimension and relation interactive objects.
+pub mod prs_dim;
