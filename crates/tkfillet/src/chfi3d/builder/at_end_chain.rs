@@ -185,8 +185,12 @@ impl ChFi3dBuilder {
             } else {
                 ae.edges[nb - 1].clone()
             };
-            ae.faces[nb - 1] = cherche_face(vf, &e, (&ae.f1, &ae.f2, &ae.f3))?;
-            let (mut en, mut v) = (Edge::default(), Vertex::default());
+            // Face[nb - 1] (F3 here) and Edge[nb] stay as they are when the searches
+            // find nothing, as natively.
+            let mut fnb = ae.f3.clone();
+            cherche_face(vf, &e, (&ae.f1, &ae.f2, &ae.f3), &mut fnb)?;
+            ae.faces[nb - 1] = fnb;
+            let (mut en, mut v) = (ae.edges[nb].clone(), Vertex::default());
             cherche_edge(&ae.vtx, &ae.tabedg, &ae.faces[nb - 1], &mut en, &mut v)?;
             ae.edges[nb] = en;
             ae.tabedg[nb] = ae.edges[nb].clone().into();

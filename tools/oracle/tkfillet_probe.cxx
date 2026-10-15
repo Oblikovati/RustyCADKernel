@@ -32,6 +32,7 @@
 #include "tkfillet_probe_chfi3d.cxx"
 #include "tkfillet_probe_builder0.cxx"
 #include "tkfillet_probe_chfikpart.cxx"
+#include "tkfillet_probe_api.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ChFiDS (tkfillet_probe_chfids.cxx)
  {"fl_spine", fl_spine_case},
@@ -90,6 +91,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_corner_spine", fl_corner_spine_case},
  {"fl_kpart_make", fl_kpart_make_case},
  {"fl_kpart_corner", fl_kpart_corner_case},
+ // BRepFilletAPI (tkfillet_probe_api.cxx)
+ {"fl_make_fillet", fl_make_fillet_case},
 };
 int main() {
  std::string line;

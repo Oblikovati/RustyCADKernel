@@ -98,7 +98,8 @@ impl ChFi3dBuilder {
             ));
         };
         (oc.arcprol, oc.oarcprolv) = (arcprol, ov);
-        let fopbis = cherche_face(self.my_vf_map.find_from_key(vtx.as_ref())?, &oc.arcprol, (&oc.fad, &fv, &fv))?;
+        let mut fopbis = Face::default();
+        cherche_face(self.my_vf_map.find_from_key(vtx.as_ref())?, &oc.arcprol, (&oc.fad, &fv, &fv), &mut fopbis)?;
         oc.fop.set_orientation(Orientation::Forward);
         if let Some(o) = edge_orientation(&fopbis, &oc.arcprol)? {
             oc.oarcprolop = o;

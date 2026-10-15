@@ -1,4 +1,5 @@
 //! The TKFillet probe operations, one module per C++ probe file under tools/oracle.
+pub mod api;
 pub mod app_func;
 pub mod blend_func;
 pub mod brep_blend;

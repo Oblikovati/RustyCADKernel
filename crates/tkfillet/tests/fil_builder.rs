@@ -120,3 +120,29 @@ fn a_symmetric_chamfer_on_a_cube_edge_removes_the_right_prism() {
     assert!((a - expected_area).abs() < 1.0e-6 * expected_area, "area {a} expected {expected_area}");
     assert!(BRepCheckAnalyzer::new(&result, true, false, false).unwrap().is_valid().unwrap());
 }
+
+#[test]
+fn a_fillet_on_an_edge_to_a_four_edge_apex_matches_the_pinned_kernel() {
+    // A lateral edge of a pyramid ends at an apex with four edges: the end of the fillet
+    // is cut by the two other faces (PerformIntersectionAtEnd); the volume and area are
+    // those of the pinned kernel (tools/oracle/tkfillet_probe_api.cxx, solid 1, edge 2).
+    use rustycad_tkbrep::topexp;
+    use rustycad_tkbrep::toptools::IndexedMapOfShape;
+    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge;
+    let mut w = BRepPrimAPIMakeWedge::with_limits(10., 10., 10., [5., 5., 5., 5.]).unwrap();
+    let solid = w.shape().unwrap().clone();
+    let mut edges = IndexedMapOfShape::default();
+    topexp::map_shapes_of_type(&solid, ShapeEnum::Edge, &mut edges).unwrap();
+    let edge = topods::edge(edges.find_key(2).unwrap()).unwrap();
+    let mut b = ChFi3dFilBuilder::new(&solid, FilletShape::Rational, 1.0e-2).unwrap();
+    b.add_with_radius(0.5, &edge).unwrap();
+    b.compute().unwrap();
+    assert!(b.builder_base().is_done());
+    let result = b.builder_base().shape().unwrap();
+    let (v, a) = (volume(&result), area(&result));
+    let native_v = f64::from_bits(4644564690667318038);
+    let native_a = f64::from_bits(4644370541254930459);
+    assert!((v - native_v).abs() <= 1.0e-12 * native_v, "volume {v} native {native_v}");
+    assert!((a - native_a).abs() <= 1.0e-12 * native_a, "area {a} native {native_a}");
+    assert!(BRepCheckAnalyzer::new(&result, true, false, false).unwrap().is_valid().unwrap());
+}
