@@ -6,14 +6,16 @@ use super::budget::Work;
 use super::construction::WorldLimit;
 use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
 use super::place::SourcePlace;
-use super::report::{SketchContactTransition, SketchLineContact, SketchLinePosition};
+use super::report::{
+    SketchContactTransition, SketchLineContact, SketchLinePosition, TargetParameter,
+};
 use super::source_frame::SourceFrame;
 use super::spans::HomogeneousPoint;
 
 /// Pair-specific certified facts before the source position is classified.
 pub(super) struct ContactDraft {
     pub place: SourcePlace,
-    pub target_root: Option<IsolatedRoot>,
+    pub target_parameter: Option<TargetParameter>,
     pub target_position: SketchLinePosition,
     pub transition: SketchContactTransition,
     pub multiplicity: [Option<usize>; 2],
@@ -37,7 +39,7 @@ pub(super) fn finish(
         target_index: owner.index,
         target_id: owner.id,
         place: draft.place,
-        target_root: draft.target_root,
+        target_parameter: draft.target_parameter,
         source_position,
         target_position: draft.target_position,
         transition: draft.transition,

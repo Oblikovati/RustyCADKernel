@@ -14,6 +14,7 @@ use super::pieces::{MergedRoots, PieceRoot, piece_roots};
 use super::rational_polynomial::RationalPolynomial;
 use super::report::{
     SketchContactTransition, SketchLineContact, SketchLineOverlap, SketchLinePosition,
+    TargetParameter,
 };
 use super::source_frame::{SourceFrame, root_position};
 use super::spans::ParametricSpan;
@@ -103,7 +104,7 @@ fn contact(
     let envelope = construct_point(&span.point, &mut root.contact, work)?;
     let draft = ContactDraft {
         place,
-        target_root: Some(root.contact),
+        target_parameter: Some(TargetParameter::Root(root.contact)),
         target_position,
         transition: transition(root.sides, SketchContactTransition::TargetEnd)?,
         multiplicity: root.multiplicity,

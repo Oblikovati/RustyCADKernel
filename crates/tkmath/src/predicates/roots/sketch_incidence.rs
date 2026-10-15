@@ -28,6 +28,7 @@ mod overlap;
 mod parametric_target;
 mod pieces;
 mod place;
+mod rational_parameter;
 mod rational_polynomial;
 mod report;
 mod resultant;

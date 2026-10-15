@@ -10,6 +10,7 @@
 //! `alpha(s*) = 0` (several target points, or a straight span of degree two or
 //! more) is a named incomplete result. Contacts at a target interior knot are
 //! classified by the exact cyclic order of the four half tangents there.
+use super::super::certificate_arithmetic::RatioInterval;
 use super::algebraic::IsolatedRoot;
 use super::bivariate::{Bivariate, FibreRow, fibre_row, resultant};
 use super::budget::Work;
@@ -18,11 +19,13 @@ use super::equation::transition;
 use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
 use super::pieces::{MergedRoots, PieceRoot, piece_roots};
 use super::place::{KeyValue, SourcePlace};
+use super::rational_parameter::RationalParameter;
 use super::rational_polynomial::{RationalPolynomial, ratio};
-use super::report::{SketchContactTransition, SketchLineContact, SketchLinePosition};
-use super::root_map::{MappedEquation, RationalMap};
+use super::report::{
+    SketchContactTransition, SketchLineContact, SketchLinePosition, TargetParameter,
+};
 use super::root_sign::sign_at_root;
-use super::source_frame::{SourceFrame, SplineSource, root_position};
+use super::source_frame::{SourceFrame, SplineSource};
 use super::spans::{HomogeneousPoint, ParametricSpan};
 use super::spline_corner::{Corner, corner_transition};
 use num_bigint::Sign;
@@ -40,7 +43,6 @@ struct SpanSystem {
     row: Option<FibreRow>,
     leading: [RationalPolynomial; 2],
     range: Option<[f64; 2]>,
-    image: Option<MappedEquation>,
 }
 pub(super) fn incidences(
     pair: &SplinePair<'_>,
@@ -70,15 +72,22 @@ impl TargetSpan<'_> {
         for (index, piece) in self.pair.source.pieces.iter().enumerate() {
             work.enter(SketchIncidenceStage::Equation);
             work.check()?;
+            if separated(piece, self.span) {
+                merged.add_roots(Vec::new());
+                systems.push(None);
+                continue;
+            }
             let system = SpanSystem::new(piece, &self.span.point)?;
             let roots = piece_roots(&system.resultant, piece.range, index, work)?
                 .ok_or(Cause::UncertifiedOverlap { range: piece.range })?;
             merged.add_roots(roots);
-            systems.push(system);
+            systems.push(Some(system));
         }
         let mut contacts = Vec::new();
         for root in merged.roots {
-            let system = &mut systems[root.piece];
+            let system = systems[root.piece]
+                .as_ref()
+                .expect("roots come from computed spans");
             if let Some(contact) = self.contact(root, system, frame, work)? {
                 contacts.push(contact);
             }
@@ -88,18 +97,18 @@ impl TargetSpan<'_> {
     fn contact(
         &self,
         mut root: PieceRoot,
-        system: &mut SpanSystem,
+        system: &SpanSystem,
         frame: &SourceFrame,
         work: &mut Work<'_>,
     ) -> Result<Option<SketchLineContact>, Cause> {
         work.enter(SketchIncidenceStage::Classification);
-        let mut parameter = system.fibre(&mut root.contact, work)?;
+        let parameter = system.fibre(&mut root.contact, work)?;
         let range = self.span.range.expect("spline spans are bounded");
-        let local = root_position(&mut parameter, range, work)?;
+        let local = parameter.position(&mut root.contact, range, work)?;
         if !local.within_closed() || self.duplicate_knot(local, range) {
             return Ok(None);
         }
-        let position = root_position(&mut parameter, self.pair.bounds, work)?;
+        let position = parameter.position(&mut root.contact, self.pair.bounds, work)?;
         let at_knot =
             position == SketchLinePosition::Interior && local == SketchLinePosition::AtEnd;
         let (transition, multiplicity) = match position {
@@ -112,9 +121,10 @@ impl TargetSpan<'_> {
         };
         let piece = &self.pair.source.pieces[root.piece];
         let envelope = construct_point(&piece.point, &mut root.contact, work)?;
+        let bounds = parameter.bounds(&root.contact);
         let draft = ContactDraft {
             place: SourcePlace::Parameter(KeyValue::Root(root.contact)),
-            target_root: Some(parameter),
+            target_parameter: bounds.map(TargetParameter::Bounds),
             target_position: position,
             transition,
             multiplicity,
@@ -146,8 +156,10 @@ impl TargetSpan<'_> {
 }
 impl SpanSystem {
     fn new(source: &ParametricSpan, target: &HomogeneousPoint) -> Result<Self, Cause> {
-        let first = coordinate_equation(&source.point, target, Axis::X);
-        let second = coordinate_equation(&source.point, target, Axis::Y);
+        // Integer coefficients keep every sampled determinant integral.
+        let (source_point, target) = (source.point.integral(), target.integral());
+        let first = coordinate_equation(&source_point, &target, Axis::X);
+        let second = coordinate_equation(&source_point, &target, Axis::Y);
         let degrees = [first.degree(), second.degree()];
         // A target span with constant coordinates is one point, not a curve.
         if degrees.iter().all(|degree| *degree == Some(0)) {
@@ -161,15 +173,14 @@ impl SpanSystem {
             row: fibre_row(&first, degrees, &second),
             leading: [first.leading(degrees[0]), second.leading(degrees[1])],
             range: source.range,
-            image: None,
         })
     }
     /// The single certified target parameter of a root, or a named exceptional fibre.
     fn fibre(
-        &mut self,
+        &self,
         contact: &mut IsolatedRoot,
         work: &mut Work<'_>,
-    ) -> Result<IsolatedRoot, Cause> {
+    ) -> Result<RationalParameter, Cause> {
         let exceptional = Cause::ExceptionalFiber { range: self.range };
         let Some(row) = &self.row else {
             return Err(exceptional);
@@ -180,16 +191,21 @@ impl SpanSystem {
         if alpha == Sign::NoSign || (first == Sign::NoSign && second == Sign::NoSign) {
             return Err(exceptional);
         }
-        if self.image.is_none() {
-            let map = RationalMap {
-                numerator: row.beta.scale(&ratio(-1.)),
-                denominator: row.alpha.clone(),
-            };
-            self.image = Some(MappedEquation::new(&self.resultant, map, work)?);
-        }
-        let image = self.image.as_ref().expect("image built above");
-        image.map_root(contact, work)
+        Ok(RationalParameter {
+            numerator: row.beta.scale(&ratio(-1.)),
+            denominator: row.alpha.clone(),
+        })
     }
+}
+// A certified exclusion: spans in disjoint closed boxes share no point.
+fn separated(first: &ParametricSpan, second: &ParametricSpan) -> bool {
+    let (Some(one), Some(other)) = (span_box(first), span_box(second)) else {
+        return false;
+    };
+    (0..2).any(|axis| one[axis].upper < other[axis].lower || other[axis].upper < one[axis].lower)
+}
+fn span_box(span: &ParametricSpan) -> Option<[RatioInterval; 2]> {
+    span.point.hull_box(span.range?)
 }
 #[derive(Clone, Copy)]
 enum Axis {

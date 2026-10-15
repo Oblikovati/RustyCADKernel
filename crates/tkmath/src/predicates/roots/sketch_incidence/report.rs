@@ -49,13 +49,20 @@ pub struct SketchSweepPlace {
     /// Outward bounds of the exact cotangent key inside the open half turns.
     pub cotangent_bounds: Option<[f64; 2]>,
 }
+/// Exact target parameter of a contact: an isolated root, or certified outward
+/// bounds of a rational function of the contact root.
+#[derive(Clone, Debug, PartialEq)]
+pub(super) enum TargetParameter {
+    Root(IsolatedRoot),
+    Bounds([f64; 2]),
+}
 /// One certified isolated incidence between the source support line and one target.
 #[derive(Clone, Debug, PartialEq)]
 pub struct SketchLineContact {
     pub(super) target_index: usize,
     pub(super) target_id: u64,
     pub(super) place: SourcePlace,
-    pub(super) target_root: Option<IsolatedRoot>,
+    pub(super) target_parameter: Option<TargetParameter>,
     pub(super) source_position: SketchLinePosition,
     pub(super) target_position: SketchLinePosition,
     pub(super) transition: SketchContactTransition,
@@ -95,9 +102,12 @@ impl SketchLineContact {
     /// Outward bounds of the exact target parameter, for line and spline targets.
     /// Conic targets are classified by exact sector signs and carry no angle.
     pub fn target_parameter_bounds(&self) -> Option<[f64; 2]> {
-        self.target_root
+        self.target_parameter
             .as_ref()
-            .map(|root| KeyValue::Root(root.clone()).outward())
+            .map(|parameter| match parameter {
+                TargetParameter::Root(root) => KeyValue::Root(root.clone()).outward(),
+                TargetParameter::Bounds(bounds) => *bounds,
+            })
     }
     /// Exact position on the source relative to its ends: `t = 0` and `t = 1` of a
     /// line, the bounds of a spline, the sector rays of an arc (outside is `AfterEnd`,

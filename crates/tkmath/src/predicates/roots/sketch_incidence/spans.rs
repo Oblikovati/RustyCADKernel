@@ -5,7 +5,7 @@
 //! so each span polynomial is the native curve's piece, not an approximation.
 use super::super::certificate_arithmetic::{ExactRatio, RatioInterval};
 use super::input::SketchIncidenceSpline;
-use super::rational_polynomial::{RationalPolynomial, ratio, zero};
+use super::rational_polynomial::{RationalPolynomial, common_denominator, ratio, zero};
 
 /// Homogeneous point `(x, y) / w` as polynomials of one contact variable.
 #[derive(Clone, Debug)]
@@ -28,6 +28,53 @@ impl HomogeneousPoint {
             |polynomial: &RationalPolynomial| polynomial.enclose(parameter).multiply(&reciprocal);
         Some([coordinate(&self.x), coordinate(&self.y)])
     }
+    /// The same point with integer coefficients: all three scaled by one positive
+    /// common denominator, so `(x, y) / w` and the sign of `w` are unchanged.
+    pub fn integral(&self) -> Self {
+        let scale = common_denominator(&[&self.x, &self.y, &self.w]);
+        Self {
+            x: self.x.scale(&scale),
+            y: self.y.scale(&scale),
+            w: self.w.scale(&scale),
+        }
+    }
+    /// Bounding box of the control points over `[a, b]`: a span with positive
+    /// Bernstein weights lies in their convex hull. None when a weight is not positive.
+    pub fn hull_box(&self, range: [f64; 2]) -> Option<[RatioInterval; 2]> {
+        let degree = [&self.x, &self.y, &self.w]
+            .iter()
+            .map(|polynomial| polynomial.0.len())
+            .max()
+            .unwrap_or(1)
+            .max(1)
+            - 1;
+        let weights = bernstein(&self.w, range, degree);
+        if weights
+            .iter()
+            .any(|weight| weight.sign() != std::cmp::Ordering::Greater)
+        {
+            return None;
+        }
+        let axis = |coordinate: &RationalPolynomial| {
+            let values: Vec<ExactRatio> = bernstein(coordinate, range, degree)
+                .iter()
+                .zip(&weights)
+                .map(|(value, weight)| value.divide(weight))
+                .collect();
+            let lower = values
+                .iter()
+                .min()
+                .cloned()
+                .expect("a nonempty control polygon");
+            let upper = values
+                .iter()
+                .max()
+                .cloned()
+                .expect("a nonempty control polygon");
+            RatioInterval { lower, upper }
+        };
+        Some([axis(&self.x), axis(&self.y)])
+    }
     /// Coordinates relative to `origin`, still homogeneous: `(x - ox w, y - oy w)`.
     pub fn relative(&self, origin: &[ExactRatio; 2]) -> [RationalPolynomial; 2] {
         [
@@ -35,6 +82,41 @@ impl HomogeneousPoint {
             self.y.add(&self.w.scale(&origin[1].negated())),
         ]
     }
+}
+/// Bernstein coefficients on `[a, b]` at a common degree (elevated as needed).
+fn bernstein(polynomial: &RationalPolynomial, [a, b]: [f64; 2], degree: usize) -> Vec<ExactRatio> {
+    let local = shift(polynomial, &ratio(a), &ratio(b).subtract(&ratio(a)));
+    let binomial = |n: usize, k: usize| -> ExactRatio {
+        let value = (0..k).fold(1u128, |total, index| {
+            total * (n - index) as u128 / (index + 1) as u128
+        });
+        ExactRatio::new(value.into(), 1.into())
+    };
+    (0..=degree)
+        .map(|k| {
+            (0..=k).fold(zero(), |total, j| {
+                let weight = binomial(k, j).divide(&binomial(degree, j));
+                total.add(&local.coefficient(j).multiply(&weight))
+            })
+        })
+        .collect()
+}
+// `p(a + h t)` by Horner composition.
+fn shift(
+    polynomial: &RationalPolynomial,
+    origin: &ExactRatio,
+    width: &ExactRatio,
+) -> RationalPolynomial {
+    let linear = RationalPolynomial::linear(origin.clone(), width.clone());
+    polynomial
+        .0
+        .iter()
+        .rev()
+        .fold(RationalPolynomial(Vec::new()), |total, coefficient| {
+            total
+                .multiply(&linear)
+                .add(&RationalPolynomial::constant(coefficient.clone()))
+        })
 }
 /// Target line `P0 + u (P1 - P0)`, on `[0,1]` or unbounded.
 pub(super) fn line_span(points: [[f64; 2]; 2], bounded: bool) -> ParametricSpan {

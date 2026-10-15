@@ -96,6 +96,16 @@ impl RationalPolynomial {
         IntegerPolynomial::from_integers(integers, limit).map(Some)
     }
 }
+/// Positive least common multiple of every coefficient denominator.
+pub(super) fn common_denominator(polynomials: &[&RationalPolynomial]) -> ExactRatio {
+    let common = polynomials
+        .iter()
+        .flat_map(|polynomial| polynomial.0.iter())
+        .fold(BigInt::from(1), |lcm, value| {
+            least_common_multiple(lcm, value.denominator())
+        });
+    ExactRatio::new(common, BigInt::from(1))
+}
 fn least_common_multiple(left: BigInt, right: &BigInt) -> BigInt {
     let divisor = greatest_common_divisor(left.clone(), right.clone());
     left / divisor * right

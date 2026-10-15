@@ -102,7 +102,7 @@ impl ChartContact {
         }
         let draft = ContactDraft {
             place: self.place,
-            target_root: None,
+            target_parameter: None,
             target_position: position,
             transition,
             multiplicity: self.multiplicity,

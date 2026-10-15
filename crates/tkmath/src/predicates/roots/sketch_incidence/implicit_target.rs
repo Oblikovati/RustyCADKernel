@@ -3,8 +3,8 @@
 //!
 //! The target equation composed with each source piece gives an exact polynomial in
 //! the source parameter, which is itself the source place. Roots are merged at
-//! source knots. A line target places each contact by the image equation of its
-//! own parameter; a conic sector is tested by exact ray signs. Sides are taken
+//! source knots. A line target positions each contact by exact signs of its own
+//! rational parameter; a conic sector is tested by exact ray signs. Sides are taken
 //! along the source, so the transition is the target side change along it.
 use super::algebraic::IsolatedRoot;
 use super::budget::Work;
@@ -15,11 +15,13 @@ use super::implicit::{ConicImplicit, LineImplicit};
 use super::input::SketchConicSector;
 use super::pieces::{MergedRoots, PieceRoot, piece_roots};
 use super::place::{KeyValue, SourcePlace};
+use super::rational_parameter::RationalParameter;
 use super::rational_polynomial::RationalPolynomial;
-use super::report::{SketchContactTransition, SketchLineContact, SketchLinePosition};
-use super::root_map::{MappedEquation, RationalMap};
+use super::report::{
+    SketchContactTransition, SketchLineContact, SketchLinePosition, TargetParameter,
+};
 use super::sector::{ContactDirection, sector_position};
-use super::source_frame::{SourceFrame, root_position};
+use super::source_frame::SourceFrame;
 use super::spans::ParametricSpan;
 
 /// A target with an exact implicit equation.
@@ -36,7 +38,7 @@ pub(super) enum ImplicitTarget<'a> {
 /// Target facts of one contact; None when the contact lies outside a bounded target.
 struct TargetFacts {
     position: SketchLinePosition,
-    root: Option<IsolatedRoot>,
+    parameter: Option<RationalParameter>,
 }
 pub(super) fn incidences(
     pieces: &[ParametricSpan],
@@ -46,7 +48,6 @@ pub(super) fn incidences(
     work: &mut Work<'_>,
 ) -> Result<Vec<SketchLineContact>, Cause> {
     let mut merged = MergedRoots::default();
-    let mut equations = Vec::with_capacity(pieces.len());
     for (index, piece) in pieces.iter().enumerate() {
         work.enter(SketchIncidenceStage::Equation);
         work.check()?;
@@ -54,14 +55,12 @@ pub(super) fn incidences(
         let roots = piece_roots(&equation, piece.range, index, work)?
             .ok_or(Cause::UncertifiedOverlap { range: piece.range })?;
         merged.add_roots(roots);
-        equations.push(equation);
     }
     let mut contacts = Vec::new();
     for root in merged.roots {
         let piece = &pieces[root.piece];
         let request = ContactRequest {
             piece,
-            equation: &equations[root.piece],
             target,
             owner,
         };
@@ -81,7 +80,6 @@ impl ImplicitTarget<'_> {
 }
 struct ContactRequest<'a> {
     piece: &'a ParametricSpan,
-    equation: &'a RationalPolynomial,
     target: &'a ImplicitTarget<'a>,
     owner: TargetKey,
 }
@@ -102,9 +100,13 @@ impl ContactRequest<'_> {
             SketchContactTransition::TargetEnd
         };
         let envelope = construct_point(&self.piece.point, &mut root.contact, work)?;
+        let parameter = facts
+            .parameter
+            .as_ref()
+            .and_then(|parameter| parameter.bounds(&root.contact));
         let draft = ContactDraft {
             place: SourcePlace::Parameter(KeyValue::Root(root.contact)),
-            target_root: facts.root,
+            target_parameter: parameter.map(TargetParameter::Bounds),
             target_position: facts.position,
             transition,
             multiplicity: root.multiplicity,
@@ -135,12 +137,12 @@ impl ContactRequest<'_> {
                 };
                 Ok(position.map(|position| TargetFacts {
                     position,
-                    root: None,
+                    parameter: None,
                 }))
             }
         }
     }
-    // The target parameter `u = d.(p - A) / |d|^2` is placed by its image equation.
+    // The target parameter `u = d.(p - A) / |d|^2` is positioned by exact signs.
     fn line_facts(
         &self,
         implicit: &LineImplicit,
@@ -148,19 +150,17 @@ impl ContactRequest<'_> {
         contact: &mut IsolatedRoot,
         work: &mut Work<'_>,
     ) -> Result<Option<TargetFacts>, Cause> {
-        let map = RationalMap {
+        let parameter = RationalParameter {
             numerator: implicit.along(&self.piece.point),
             denominator: self.piece.point.w.scale(&implicit.squared_length()),
         };
-        let mut parameter =
-            MappedEquation::new(self.equation, map, work)?.map_root(contact, work)?;
         let position = match bounded {
-            true => root_position(&mut parameter, [0., 1.], work)?,
+            true => parameter.position(contact, [0., 1.], work)?,
             false => SketchLinePosition::Interior,
         };
         let facts = TargetFacts {
             position,
-            root: Some(parameter),
+            parameter: Some(parameter),
         };
         Ok(facts.position.within_closed().then_some(facts))
     }
