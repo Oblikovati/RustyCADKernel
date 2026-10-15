@@ -8,6 +8,8 @@
 #include <Geom_Plane.hxx>
 #include <PrsDim_EqualRadiusRelation.hxx>
 #include <PrsDim_ConcentricRelation.hxx>
+#include <PrsDim_PerpendicularRelation.hxx>
+#include <PrsDim_ParallelRelation.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
   return BRepBuilderAPI_MakeEdge(gp_Pnt(x1, y1, z1), gp_Pnt(x2, y2, z2)).Edge();
@@ -63,8 +65,38 @@ static occ::handle<PrsDim_Relation> v3pr_concentric(int variant) {
     default: return new PrsDim_ConcentricRelation(v3pr_vertex(1, 2, 3), v3pr_vertex(1, 0, 0), v3pr_plane());
   }
 }
+static TopoDS_Edge v3pr_ellipse() {
+  return BRepBuilderAPI_MakeEdge(gp_Elips(gp_Ax2(gp_Pnt(0, 4, 0), gp::DZ(), gp::DX()), 5.0, 3.0)).Edge();
+}
+static TopoDS_Edge v3pr_infinite(double y) {
+  return BRepBuilderAPI_MakeEdge(gp_Lin(gp_Pnt(0, y, 0), gp::DX())).Edge();
+}
+static occ::handle<PrsDim_Relation> v3pr_perpendicular(int variant) {
+  switch (variant) {
+    case 0: return new PrsDim_PerpendicularRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(3, -2, 0, 3, 8, 0), v3pr_plane());
+    case 1: return new PrsDim_PerpendicularRelation(v3pr_edge(0, 0, 0, 5, 0, 0), v3pr_edge(8, 1, 0, 8, 9, 0), v3pr_plane());
+    case 2: return new PrsDim_PerpendicularRelation(v3pr_ellipse(), v3pr_edge(2, -3, 0, 2, 12, 0), v3pr_plane());
+    case 3: return new PrsDim_PerpendicularRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(3, -2, 3, 3, 8, 3), v3pr_plane());
+    case 4: return new PrsDim_PerpendicularRelation(v3pr_square(0, 4), v3pr_square(1, 4), v3pr_plane());
+    case 5: return new PrsDim_PerpendicularRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(3, -2, 0, 3, 8, 0));
+    default: return new PrsDim_PerpendicularRelation(v3pr_infinite(1), v3pr_edge(3, -2, 0, 3, 8, 0), v3pr_plane());
+  }
+}
+static occ::handle<PrsDim_Relation> v3pr_parallel(int variant) {
+  switch (variant) {
+    case 0: return new PrsDim_ParallelRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(2, 5, 0, 12, 5, 0), v3pr_plane());
+    case 1: return new PrsDim_ParallelRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(2, 5, 0, 12, 5, 0), v3pr_plane(), gp_Pnt(5, 9, 0), DsgPrs_AS_BOTHPT, 2.0);
+    case 2: return new PrsDim_ParallelRelation(v3pr_ellipse(), v3pr_edge(-6, -3, 0, 7, -3, 0), v3pr_plane());
+    case 3: return new PrsDim_ParallelRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(2, 5, 3, 12, 5, 3), v3pr_plane());
+    case 4: return new PrsDim_ParallelRelation(v3pr_infinite(-2), v3pr_edge(2, 5, 0, 12, 5, 0), v3pr_plane());
+    case 5: return new PrsDim_ParallelRelation(v3pr_square(0, 4), v3pr_square(1, 4), v3pr_plane());
+    default: return new PrsDim_ParallelRelation(v3pr_edge(0, 0, 0, 10, 0, 0), v3pr_edge(12, 0, 0, 20, 0, 0), v3pr_plane());
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 4: return v3pr_perpendicular(variant);
+    case 5: return v3pr_parallel(variant);
     case 2: return v3pr_equal_radius(variant);
     case 3: return v3pr_concentric(variant);
     case 1: return v3pr_chamf3d(variant);

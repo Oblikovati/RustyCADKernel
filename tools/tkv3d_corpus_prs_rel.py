@@ -9,7 +9,7 @@ from __future__ import annotations
 
 SHOW = (16, 0, 0, 0)
 # Kind: number of constructions.
-KINDS = {0: 4, 1: 4, 2: 3, 3: 7}
+KINDS = {0: 4, 1: 4, 2: 3, 3: 7, 4: 7, 5: 7}
 EDITS = [
     [SHOW],
     [SHOW, (0, 12, -5, 3), SHOW, (8, 1, 0, 0), SHOW],

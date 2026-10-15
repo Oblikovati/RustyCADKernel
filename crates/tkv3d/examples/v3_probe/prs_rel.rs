@@ -7,7 +7,9 @@ use rustycad_tkernel::quantity::{Color, NamedColor};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::ExtendedString;
 use rustycad_tkg3d::geom::GeomPlane;
-use rustycad_tkmath::gp::{self, Axis2, Axis3, Circle3, Cylinder3, Plane3, Point3};
+use rustycad_tkmath::gp::{
+    self, Axis2, Axis3, Circle3, Cylinder3, Ellipse3, Line3, Plane3, Point3,
+};
 use rustycad_tkservice::aspect::AspectNeutralWindow;
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeVertex,
@@ -185,8 +187,88 @@ fn concentric(variant: i32) -> Result<Relation, Failure> {
     Ok(r.into_cast())
 }
 
+fn ellipse() -> Shape {
+    let ellipse = Ellipse3::new(
+        Axis2::with_x_direction(Point3::new(0.0, 4.0, 0.0), gp::dz(), gp::dx()).unwrap(),
+        5.0,
+        3.0,
+    )
+    .unwrap();
+    BRepBuilderAPIMakeEdge::from_elips(ellipse)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into()
+}
+fn infinite(y: f64) -> Shape {
+    BRepBuilderAPIMakeEdge::from_lin(Line3::new(Point3::new(0.0, y, 0.0), gp::dx()))
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into()
+}
+fn perpendicular(variant: i32) -> Relation {
+    let r = match variant {
+        0 => PrsDimPerpendicularRelation::new(
+            &edge([0., 0., 0.], [10., 0., 0.]),
+            &edge([3., -2., 0.], [3., 8., 0.]),
+            Some(&xoy()),
+        ),
+        1 => PrsDimPerpendicularRelation::new(
+            &edge([0., 0., 0.], [5., 0., 0.]),
+            &edge([8., 1., 0.], [8., 9., 0.]),
+            Some(&xoy()),
+        ),
+        2 => PrsDimPerpendicularRelation::new(
+            &ellipse(),
+            &edge([2., -3., 0.], [2., 12., 0.]),
+            Some(&xoy()),
+        ),
+        3 => PrsDimPerpendicularRelation::new(
+            &edge([0., 0., 0.], [10., 0., 0.]),
+            &edge([3., -2., 3.], [3., 8., 3.]),
+            Some(&xoy()),
+        ),
+        4 => PrsDimPerpendicularRelation::new(&square(0.0, 4.0), &square(1.0, 4.0), Some(&xoy())),
+        5 => PrsDimPerpendicularRelation::new(
+            &edge([0., 0., 0.], [10., 0., 0.]),
+            &edge([3., -2., 0.], [3., 8., 0.]),
+            None,
+        ),
+        _ => PrsDimPerpendicularRelation::new(
+            &infinite(1.0),
+            &edge([3., -2., 0.], [3., 8., 0.]),
+            Some(&xoy()),
+        ),
+    };
+    r.into_cast()
+}
+fn parallel(variant: i32) -> Relation {
+    let e0 = || edge([0., 0., 0.], [10., 0., 0.]);
+    let e1 = || edge([2., 5., 0.], [12., 5., 0.]);
+    let r = match variant {
+        0 => PrsDimParallelRelation::new(&e0(), &e1(), &xoy()),
+        1 => PrsDimParallelRelation::with_position(
+            &e0(),
+            &e1(),
+            &xoy(),
+            &Point3::new(5., 9., 0.),
+            side(6),
+            2.0,
+        ),
+        2 => PrsDimParallelRelation::new(&ellipse(), &edge([-6., -3., 0.], [7., -3., 0.]), &xoy()),
+        3 => PrsDimParallelRelation::new(&e0(), &edge([2., 5., 3.], [12., 5., 3.]), &xoy()),
+        4 => PrsDimParallelRelation::new(&infinite(-2.0), &e1(), &xoy()),
+        5 => PrsDimParallelRelation::new(&square(0.0, 4.0), &square(1.0, 4.0), &xoy()),
+        _ => PrsDimParallelRelation::new(&e0(), &edge([12., 0., 0.], [20., 0., 0.]), &xoy()),
+    };
+    r.into_cast()
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        4 => perpendicular(variant),
+        5 => parallel(variant),
         2 => equal_radius(variant),
         3 => concentric(variant)?,
         1 => chamf3d(variant),
