@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Certified area of every selected face from its own certified loops (ADR 0066/0068).
+//! Certified area of every selected face from its own certified loops (ADR 0066 parts A and C).
 use super::binding::SegmentBinding;
 use super::types::*;
 use rustycad_tkmath::predicates::roots::metric_bounds::{

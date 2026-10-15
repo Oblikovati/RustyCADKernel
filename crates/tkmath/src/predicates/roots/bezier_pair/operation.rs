@@ -30,7 +30,7 @@ pub(super) struct PairOperationProof {
 pub(super) enum PairProofEvidence {
     Graph(Box<GraphProofEvidence>),
     ConstantExcluded(ConstantEquationExclusion),
-    /// ADR 0067: version-2 distinct pairs on one proper conic or line.
+    /// ADR 0066 part B: version-2 distinct pairs on one proper conic or line.
     CommonCarrier(Box<super::carrier::CommonCarrierEvidence>),
 }
 pub(super) struct GraphProofEvidence {
@@ -129,7 +129,7 @@ fn execute(
         cancelled,
     )
 }
-/// ADR 0067: try the exact common-carrier route before the generic projection.
+/// ADR 0066 part B: try the exact common-carrier route before the generic projection.
 fn execute_with_carrier(
     sources: [OwnedBezierSource; 2],
     options: RootIsolationOptions,

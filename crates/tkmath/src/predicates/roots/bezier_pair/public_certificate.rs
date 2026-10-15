@@ -47,7 +47,8 @@ impl<'a> BezierPairCertificate<'a> {
             PairProofEvidence::Graph(_) | PairProofEvidence::CommonCarrier(_) => None,
         }
     }
-    /// Borrow ADR 0067 common-carrier evidence. Example: `proof.common_carrier().unwrap().kind()`.
+    /// Borrow ADR 0066 part B common-carrier evidence.
+    /// Example: `proof.common_carrier().unwrap().kind()`.
     pub fn common_carrier(&self) -> Option<super::public_carrier::BezierPairCommonCarrier<'a>> {
         match &self.proof.evidence {
             PairProofEvidence::CommonCarrier(evidence) => Some(

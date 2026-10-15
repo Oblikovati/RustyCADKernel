@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068: general loop region proof for planar profiles of polynomial and
+//! ADR 0066 part C: general loop region proof for planar profiles of polynomial and
 //! positive-weight rational Bézier edges, in any number of nested or side-by-side loops.
 //! It consumes the shared contact transaction (census, partition, contacts) and solves
 //! no new intersection query; it publishes no body, history or names.

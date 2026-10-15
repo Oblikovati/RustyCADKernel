@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! One occurrence's half Green integral: exact for constant denominators, otherwise an
-//! adaptive bisection of ADR 0066 subinterval enclosures until the width share is met.
+//! adaptive bisection of ADR 0066 part A subinterval enclosures until the width share is met.
 use super::super::super::{certificate_arithmetic::ExactRatio, error::poll};
 use super::super::polynomial_integrals::arithmetic::{
     green_numerator, integrate_unit, native_plane,

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068 owned profile inputs: edges, authored loops of directed uses and regions.
+//! ADR 0066 part C owned profile inputs: edges, authored loops of directed uses and regions.
 use super::*;
 
 /// One owned planar Bézier edge; polynomial or positive-weight rational.

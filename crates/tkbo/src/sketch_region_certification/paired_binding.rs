@@ -44,7 +44,7 @@ pub(crate) fn domain_certificate<'a>(
         .flatten()
 }
 fn paired_policy_current(census: &BoundaryCensus, paired: &PairedCensusEvidence) -> bool {
-    // The retained request records its own version; version 2 adds ADR 0067 carriers.
+    // The retained request records its own version; version 2 adds ADR 0066 part B carriers.
     (1..=2).contains(&paired.requested.version)
         && paired.requested.signs == BezierPairSignOptions::derived()
         && paired.requested.roots == census.requested.roots

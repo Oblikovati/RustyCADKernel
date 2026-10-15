@@ -14,7 +14,7 @@ pub(crate) fn enumerate_source_bound_census(
 ) -> Result<BoundaryCensus, CensusCause> {
     enumerate_with_pair_version(inputs, (policy, source_policy), 1, cancelled)
 }
-/// ADR 0067: the same census with pair policy version 2, whose distinct pairs on one
+/// ADR 0066 part B: the same census with pair policy version 2, whose distinct pairs on one
 /// proper conic or line complete by the exact common-carrier route.
 /// Example: `enumerate_carrier_census(inputs, policy, source_policy, || false)`.
 pub(crate) fn enumerate_carrier_census(

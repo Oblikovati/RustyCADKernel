@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068 owned profile preparation: any number of polynomial or rational edges in
+//! ADR 0066 part C owned profile preparation: any number of polynomial or rational edges in
 //! authored loops, through the shared general stages, then the general loop region proof.
 mod admission;
 mod construction;

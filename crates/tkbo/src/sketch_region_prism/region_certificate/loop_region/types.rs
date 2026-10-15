@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068 request, certificate and refusal types of the general loop region proof.
+//! ADR 0066 part C request, certificate and refusal types of the general loop region proof.
 use crate::sketch_region::{ArrangementSource, RegionSourceId};
 use crate::sketch_region_contact_transport::PairedContactTransaction;
 use rustycad_tkmath::predicates::roots::metric_bounds::{
@@ -15,7 +15,7 @@ use rustycad_tkmath::predicates::roots::{
 pub(crate) struct LoopRegionOptions {
     pub version: u32,
     pub winding: RootIsolationOptions,
-    /// Certified face-area policy (ADR 0066/0068); the cap is in chart area units.
+    /// Certified face-area policy (ADR 0066 parts A and C); the cap is in chart area units.
     pub area: RationalIntegralOptions,
 }
 /// One directed use of an arrangement source; `reversed` is relative to native `[0,1]`.
@@ -153,7 +153,7 @@ pub(crate) struct LoopRegionCertificate {
     pub loops: Vec<LoopProof>,
     pub joins: Vec<JoinProof>,
     pub regions: Vec<RegionProof>,
-    /// Pair domains certified by the ADR 0067 common-carrier route.
+    /// Pair domains certified by the ADR 0066 part B common-carrier route.
     pub carrier_pairs: usize,
     /// Pair domains certified in total (all distinct pairs and all self domains).
     pub pair_domains: usize,

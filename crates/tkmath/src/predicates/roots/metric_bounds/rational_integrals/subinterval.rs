@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0066 Taylor-model enclosure of `1/2 * integral_a^b P/Q dt` with `Q > 0`.
+//! ADR 0066 part A Taylor-model enclosure of `1/2 * integral_a^b P/Q dt` with `Q > 0`.
 //!
 //! On the dyadic span `[j, j+1] / 2^l` put `K = 2^(l+1)` and `t = (2j + 1 + v) / K`.
 //! Then `P/Q = K^(m-n) p/q` with the integer polynomials `p = K^n P(t)`, `q = K^m Q(t)`

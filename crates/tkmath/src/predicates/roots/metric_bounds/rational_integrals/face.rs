@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068: certified area of a face bounded by one outer loop and its direct holes.
+//! ADR 0066 part C: certified area of a face bounded by one outer loop and its direct holes.
 //! For a Jordan loop the Green integral is its orientation times its enclosed area, so a
 //! certified integral that excludes zero gives both; the face area is the outer area
 //! minus the hole areas. The Jordan, disjointness and nesting facts are hypotheses

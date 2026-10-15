@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Exact projective-arc intersection for ADR 0067 common-carrier certificates.
+//! Exact projective-arc intersection for ADR 0066 part B common-carrier certificates.
 //! The second source's interval maps to the arc from its start preimage to its end
 //! preimage through its midpoint preimage. Meeting the first interval in one point is a
 //! contact; a positive-length meet is an overlap and refuses.

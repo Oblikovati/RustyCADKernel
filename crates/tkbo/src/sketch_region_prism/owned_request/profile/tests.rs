@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068 corpus fixtures: exact rational circles and polygons as owned profiles.
+//! ADR 0066 part C corpus fixtures: exact rational circles and polygons as owned profiles.
 use super::*;
 use crate::sketch_region_prism::region_certificate::loop_region::*;
 use rustycad_tkernel::standard::Failure;

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Read-only ADR 0067 common-carrier evidence of a completed pair report.
+//! Read-only ADR 0066 part B common-carrier evidence of a completed pair report.
 use super::carrier::{BezierPairCarrierKind, CommonCarrierEvidence, ProjectiveParameter};
 
 /// Exact first-source parameter, in lowest terms, or the point at infinity.

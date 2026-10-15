@@ -36,7 +36,7 @@ impl Default for RationalIntegralOptions {
 pub enum RationalIntegralEvidence {
     /// Every curve had a constant denominator: exact rational value, outward rounding only.
     ExactRational,
-    /// At least one curve used the certified Taylor-model enclosure of ADR 0066.
+    /// At least one curve used the certified Taylor-model enclosure of ADR 0066 part A.
     ErrorBoundedIntegration,
 }
 

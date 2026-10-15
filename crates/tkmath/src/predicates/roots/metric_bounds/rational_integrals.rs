@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0066: certified Green and sweep integrals for positive-weight rational boundaries.
+//! ADR 0066 part A: certified Green and sweep integrals for positive-weight rational boundaries.
 //! Polynomial and equal-weight curves stay exact; other curves are enclosed by exact
 //! Taylor models with certified Bernstein remainders. No quadrature estimate is used.
 mod curve;

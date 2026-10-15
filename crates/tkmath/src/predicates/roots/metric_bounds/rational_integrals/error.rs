@@ -50,7 +50,7 @@ pub enum RationalIntegralFailure {
         /// Downward-rounded parameter length of `[0,1]` already certified within its share.
         certified_length: f64,
     },
-    /// ADR 0068: a face loop's certified integral does not exclude zero.
+    /// ADR 0066 part C: a face loop's certified integral does not exclude zero.
     IndeterminateOrientation {
         /// Flattened index of the loop's first curve (outer first, then holes).
         first_curve: usize,

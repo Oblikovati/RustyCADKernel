@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Owned profile preparation through the existing general stages: capture, the ADR 0067
+//! Owned profile preparation through the existing general stages: capture, the ADR 0066 part B
 //! carrier census, partition, candidate copies and contact transport.
 use super::super::classification::{
     arrangement_class, callback_class, candidate_class, preparation_class,

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068 corpus: circles, annuli, polygons with holes, side-by-side and nested
+//! ADR 0066 part C corpus: circles, annuli, polygons with holes, side-by-side and nested
 //! loops through one general pipeline and one region proof.
 use super::*;
 use std::f64::consts::PI;

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0067: two arcs of one proper conic or one line meet exactly where their
+//! ADR 0066 part B: two arcs of one proper conic or one line meet exactly where their
 //! parameter arcs meet on the projective line; no resultant is formed.
 //!
 //! Homogeneous power coefficients `Q(t) = sum_k V_k t^k` with `V_k` in Z^3 classify a

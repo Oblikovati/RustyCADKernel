@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0067: arcs of one exact rational circle, and collinear segments, meet only at
+//! ADR 0066 part B: arcs of one exact rational circle, and collinear segments, meet only at
 //! their certified joins under policy version 2; version 1 keeps its refusals.
 use super::super::RootIsolationOptions;
 use super::*;

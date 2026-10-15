@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! ADR 0068 refusals: typed admission causes, crossing and touching loops, seeds on
+//! ADR 0066 part C refusals: typed admission causes, crossing and touching loops, seeds on
 //! boundaries or outside every loop, duplicate selections and cancellation.
 use super::*;
 
@@ -167,7 +167,7 @@ fn unsupported_region_version_refuses() {
 }
 #[test]
 fn single_edge_full_circle_is_improper_and_refuses_by_its_pair() {
-    // ADR 0067: a closed one-edge rational circle is a 2:1 map; its self census refuses.
+    // ADR 0066 part B: a closed one-edge rational circle is a 2:1 map; its self census refuses.
     let mut profile = Profile::default();
     let poles = [
         [-1., 0.],

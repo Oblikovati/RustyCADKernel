@@ -80,7 +80,7 @@ impl CapturedBezierPair {
         policy: PairQueryPolicy,
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<AccountedPairOutcome, PairQueryPreparationFailure> {
-        // Version 2 (ADR 0067) adds the exact common-carrier route; version 1 is unchanged.
+        // Version 2 (ADR 0066 part B) adds the exact common-carrier route; version 1 is unchanged.
         if !(1..=2).contains(&policy.version) {
             return Err(PairQueryPreparationFailure::Version(policy.version));
         }
