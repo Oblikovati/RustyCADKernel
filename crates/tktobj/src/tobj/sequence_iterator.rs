@@ -39,6 +39,18 @@ impl TObjSequenceIterator {
             objects: objects.clone(),
         }
     }
+    /// `myIndex` (protected): the 1-based current index.
+    pub fn index(&self) -> usize {
+        *self.index.read()
+    }
+    /// `myType` (protected): the type of the iterated objects, `None` for any.
+    pub fn kind(&self) -> Option<&'static RuntimeType> {
+        self.kind
+    }
+    /// `myObjects` (protected): the shared sequence.
+    pub fn objects(&self) -> Handle<TObjBackReferences> {
+        self.objects.clone()
+    }
     /// The object at the current index; null past the end or on a null entry.
     fn current(&self) -> Handle<dyn TObjObject> {
         let index = *self.index.read();

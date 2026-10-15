@@ -3,6 +3,8 @@
 pub mod tobj_attributes;
 #[path = "../tobj_clone.rs"]
 pub mod tobj_clone;
+#[path = "../tobj_iterators.rs"]
+pub mod tobj_iterators;
 #[path = "../tobj_model.rs"]
 pub mod tobj_model;
 #[path = "../tobj_model_io.rs"]

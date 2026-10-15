@@ -34,6 +34,10 @@ impl TObjReferenceIterator {
         iterator.make_step()?;
         Ok(iterator)
     }
+    /// `myType` (protected): the type of the referred objects, `None` for any.
+    pub fn kind(&self) -> Option<&'static RuntimeType> {
+        self.kind
+    }
 }
 
 impl TObjObjectIterator for TObjReferenceIterator {

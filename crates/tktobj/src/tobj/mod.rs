@@ -56,7 +56,7 @@ pub use partition::{
     TObjPartition, TObjPartitionBase, TObjPartitionDataTag, TObjStandardPartition,
     partition_copy_data, partition_set_name,
 };
-pub use persistence::{TObjPersistence, TObjPersistenceFactory};
+pub use persistence::{TObjPersistence, TObjPersistenceFactory, TObjPersistenceMap};
 pub use reference_iterator::TObjReferenceIterator;
 pub use sequence_iterator::TObjSequenceIterator;
 pub use t_int_sparse_array::TObjTIntSparseArray;

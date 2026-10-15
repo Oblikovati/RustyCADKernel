@@ -38,6 +38,14 @@ impl TObjOcafObjectIterator {
         iterator.make_step()?;
         Ok(iterator)
     }
+    /// `myType` (protected): the type of the iterated objects, `None` for any.
+    pub fn kind(&self) -> Option<&'static RuntimeType> {
+        self.kind
+    }
+    /// `myAllSubChildren` (protected): the walk does not stop at the first object level.
+    pub fn all_sub_children(&self) -> bool {
+        self.all_sub_children
+    }
 }
 
 impl TObjObjectIterator for TObjOcafObjectIterator {

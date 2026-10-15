@@ -49,6 +49,9 @@ fn map_of_types() -> MutexGuard<'static, TypeMap> {
     MAP_OF_TYPES.lock().unwrap_or_else(PoisonError::into_inner)
 }
 
+/// The registry map type of `getMapOfTypes`: the tools by type name.
+pub type TObjPersistenceMap = TypeMap;
+
 /// `TObj_Persistence`: a registration of one type; the constructor registers the tool
 /// and `Drop` (the native destructor) unregisters the type name.
 pub struct TObjPersistence {
@@ -78,6 +81,11 @@ impl TObjPersistence {
     /// `myPersistence_` members of `IMPLEMENT_TOBJOCAF_PERSISTENCE`.
     pub fn register_static(type_name: &str, tool: Arc<dyn TObjPersistenceFactory>) {
         map_of_types().bind(AsciiString::new(type_name), tool);
+    }
+    /// `getMapOfTypes` (protected): the locked registry map; the guard must be dropped
+    /// before a tool is called.
+    pub fn map_of_types() -> MutexGuard<'static, TObjPersistenceMap> {
+        map_of_types()
     }
     /// `CreateNewObject(theType, theLabel)`: an object of the registered type, null when
     /// the type is not registered.

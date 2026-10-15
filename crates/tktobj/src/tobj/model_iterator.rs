@@ -32,6 +32,14 @@ impl TObjModelIterator {
         }
         Ok(iterator)
     }
+    /// `myObject` (protected): the current object.
+    pub fn object(&self) -> Handle<dyn TObjObject> {
+        self.object.read().clone()
+    }
+    /// `myIterSeq` (protected): the stack of child iterators, innermost last.
+    pub fn iterators(&self) -> Vec<Handle<dyn TObjObjectIterator>> {
+        self.iterators.read().clone()
+    }
     /// `addIterator(theObj)` (protected): pushes the iterator on the object's children.
     pub fn add_iterator(&self, object: &Handle<dyn TObjObject>) -> Result<(), Failure> {
         let children =
