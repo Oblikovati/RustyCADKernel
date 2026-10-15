@@ -1,0 +1,35 @@
+[package]
+autotests = false
+name = "rustycad-tkfeat"
+description = "OCCT TKFeat toolkit: local operations and form features (LocOpe, BRepFeat)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+rustycad-tkernel = { path = "../tkernel", version = "0.2.8" }
+rustycad-tkmath = { path = "../tkmath", version = "0.2.8" }
+rustycad-tkg2d = { path = "../tkg2d", version = "0.2.8" }
+rustycad-tkg3d = { path = "../tkg3d", version = "0.2.8" }
+rustycad-tkbrep = { path = "../tkbrep", version = "0.2.8" }
+rustycad-tkgeombase = { path = "../tkgeombase", version = "0.2.8" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.2.8" }
+rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.8" }
+rustycad-tkprim = { path = "../tkprim", version = "0.2.8" }
+rustycad-tkshhealing = { path = "../tkshhealing", version = "0.2.8" }
+rustycad-tkbo = { path = "../tkbo", version = "0.2.8" }
+rustycad-tkbool = { path = "../tkbool", version = "0.2.8" }
+
+[[example]]
+name = "rustycad-tkfeat-numeric-probe"
+path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

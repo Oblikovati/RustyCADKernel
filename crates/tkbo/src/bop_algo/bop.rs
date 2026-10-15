@@ -86,11 +86,7 @@ impl BOPAlgoBOP {
     /// Intersects the arguments and the tools with an own pave filler, then builds the
     /// result (`Perform`); `bop.perform();`.
     pub fn perform(&mut self) {
-        let mut shapes: List<Shape> = self.provider.builder.arguments.clone();
-        for tool in self.provider.tools().iter() {
-            shapes.append(tool.clone());
-        }
-        perform_on(self, shapes);
+        Self::perform_hooks(self);
     }
 
     /// Builds the result from the results of `filler` (`PerformWithFiller`).
@@ -99,38 +95,95 @@ impl BOPAlgoBOP {
         perform_with(self, filler);
     }
 
-    /// The pipeline of the Boolean operation (`PerformInternal1`): the General Fuse stages,
-    /// then the result shape, the history and the post treatment.
-    fn run(&mut self, filler: &mut BOPAlgoPaveFiller) -> Result<(), Failure> {
-        adopt_filler(&mut self.provider.builder, filler);
-        self.check_operation_data(filler)?;
-        if self.builder().options().has_errors() {
-            return Ok(());
+    /// Intersects the arguments and the tools of the algorithm `hooks` (a Boolean
+    /// operation or an algorithm derived from it) with an own pave filler, then runs its
+    /// pipeline (`Perform` with the virtual members of `hooks`);
+    /// `BOPAlgoBOP::perform_hooks(&mut algo)`.
+    pub fn perform_hooks<H: BopHooks>(hooks: &mut H) {
+        let bop = hooks.boolean();
+        let mut shapes: List<Shape> = bop.provider.builder.arguments.clone();
+        for tool in bop.provider.tools().iter() {
+            shapes.append(tool.clone());
         }
-        self.provider.builder.prepare();
-        let Some(structure) = filler.data_structure_mut() else {
-            return Err(no_structure());
-        };
-        if self.has_empty_shape_warning() && self.treat_empty_shape()? {
-            return self.provider.builder.prepare_history(structure);
-        }
-        if !fill_images_with_results(self, structure)? {
-            return Ok(());
-        }
-        self.build_shape(structure)?;
-        if self.builder().options().has_errors() {
-            return Ok(());
-        }
-        let builder = &mut self.provider.builder;
-        builder.prepare_history(structure)?;
-        if builder.options().has_errors() {
-            return Ok(());
-        }
-        builder.post_treat(structure)
+        perform_on(hooks, shapes);
+    }
+
+    /// The operation dimensions of the arguments and the tools (`myDims`), set by the
+    /// check of the operation data; `bop.dims()`.
+    pub fn dims(&self) -> [i32; 2] {
+        self.dims
     }
 
     fn builder(&self) -> &BOPAlgoBuilder {
         &self.provider.builder
+    }
+}
+
+/// The virtual members of `BOPAlgo_BOP` that an algorithm derived from it
+/// (BRepFeat_Builder) overrides, on top of those of the General Fuse.
+pub trait BopHooks: BuilderHooks {
+    /// The Boolean operation state; `hooks.boolean().operation()`.
+    fn boolean(&mut self) -> &mut BOPAlgoBOP;
+
+    /// Whether an argument solid is open, so that the result is built from the face
+    /// splits (`CheckArgsForOpenSolid`).
+    fn check_args_for_open_solid(&mut self, structure: &DataStructure) -> Result<bool, Failure> {
+        self.boolean().check_open_solid_arguments(structure)
+    }
+}
+
+/// The pipeline of the Boolean operation (`PerformInternal1`) of the algorithm `hooks`:
+/// the check, its `Prepare`, the General Fuse stages, the result shape, the history and
+/// the post treatment; `perform_bop_internal1(&mut algo, &mut filler)?`.
+pub fn perform_bop_internal1<H: BopHooks>(
+    hooks: &mut H,
+    filler: &mut BOPAlgoPaveFiller,
+) -> Result<(), Failure> {
+    adopt_filler(&mut hooks.boolean().provider.builder, filler);
+    hooks.boolean().check_operation_data(filler)?;
+    if hooks.boolean().builder().options().has_errors() {
+        return Ok(());
+    }
+    hooks.prepare()?;
+    if hooks.boolean().builder().options().has_errors() {
+        return Ok(());
+    }
+    let Some(structure) = filler.data_structure_mut() else {
+        return Err(no_structure());
+    };
+    let bop = hooks.boolean();
+    if bop.has_empty_shape_warning() && bop.treat_empty_shape()? {
+        return bop.provider.builder.prepare_history(structure);
+    }
+    if !fill_images_with_results(hooks, structure)? {
+        return Ok(());
+    }
+    build_bop_shape(hooks, structure)?;
+    let builder = &mut hooks.boolean().provider.builder;
+    if builder.options().has_errors() {
+        return Ok(());
+    }
+    builder.prepare_history(structure)?;
+    if builder.options().has_errors() {
+        return Ok(());
+    }
+    builder.post_treat(structure)
+}
+
+/// Builds the result of the algorithm `hooks` (`BuildShape`), its
+/// `CheckArgsForOpenSolid` deciding for solids; `build_bop_shape(&mut algo, &ds)?`.
+pub fn build_bop_shape<H: BopHooks>(
+    hooks: &mut H,
+    structure: &DataStructure,
+) -> Result<(), Failure> {
+    let open_solids =
+        hooks.boolean().dims == [3, 3] && hooks.check_args_for_open_solid(structure)?;
+    hooks.boolean().build_shape(structure, open_solids)
+}
+
+impl BopHooks for BOPAlgoBOP {
+    fn boolean(&mut self) -> &mut BOPAlgoBOP {
+        self
     }
 }
 
@@ -144,6 +197,6 @@ impl BuilderHooks for BOPAlgoBOP {
     }
 
     fn perform_internal1(&mut self, filler: &mut BOPAlgoPaveFiller) -> Result<(), Failure> {
-        self.run(filler)
+        perform_bop_internal1(self, filler)
     }
 }

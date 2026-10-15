@@ -159,8 +159,8 @@ impl BOPAlgoBOP {
     }
 
     /// Adds the images of the DS arguments of `kind` (or the arguments) once each
-    /// (`BuildResult`).
-    pub(super) fn build_result_of_arguments(
+    /// (`BuildResult`); `bop.build_result_of_arguments(ShapeEnum::Solid, &ds)?`.
+    pub fn build_result_of_arguments(
         &mut self,
         kind: ShapeEnum,
         structure: &DataStructure,

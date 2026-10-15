@@ -150,6 +150,15 @@ VCAF_CLOSURE_TARGETS: list[str] = [*VCAF_TOOLKITS, 'gtest_main']
 XCAF_TOOLKITS: tuple[str, ...] = ('TKXCAF',)
 XCAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKXCAF', *VCAF_LINKED_TOOLKITS)
 XCAF_CLOSURE_TARGETS: list[str] = [*XCAF_TOOLKITS, 'gtest_main']
+# The TKFeat oracle closure (numeric oracle; the toolkit has no GTest suite at the pinned
+# revision) builds TKFeat over the modeling toolkits of its EXTERNLIB in its own tree, so the
+# geometry closure keeps its flags. The shared modeling build can be reused instead.
+FEAT_TOOLKITS: tuple[str, ...] = ('TKFeat',)
+# The TKFeat closure's shared libraries in link order, dependants first.
+FEAT_LINKED_TOOLKITS: tuple[str, ...] = ('TKFeat', 'TKBool', 'TKBO', 'TKPrim', 'TKShHealing',
+                                         'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
+                                         'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
+FEAT_CLOSURE_TARGETS: list[str] = [*FEAT_TOOLKITS, 'gtest_main']
 
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:

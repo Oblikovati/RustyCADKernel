@@ -3,7 +3,7 @@
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
        TKPrim, TKHelix, TKShHealing, TKBO, TKBool, TKFillet, TKOffset, TKCDF, TKLCAF, TKCAF, TKDE,
-       TKXSBase, TKService, TKExpress, TKV3d, TKMeshVS, TKTObj, TKVCAF, TKXCAF)
+       TKXSBase, TKService, TKExpress, TKV3d, TKMeshVS, TKTObj, TKVCAF, TKXCAF, TKFeat)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -33,6 +33,7 @@ from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS
                           MESHVS_TOOLKITS, TOBJ_CLOSURE_TARGETS, TOBJ_LINKED_TOOLKITS,
                           TOBJ_TOOLKITS, VCAF_CLOSURE_TARGETS, VCAF_LINKED_TOOLKITS,
                           VCAF_TOOLKITS, XCAF_CLOSURE_TARGETS, XCAF_LINKED_TOOLKITS, XCAF_TOOLKITS,
+                          FEAT_CLOSURE_TARGETS, FEAT_LINKED_TOOLKITS, FEAT_TOOLKITS,
                           closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
@@ -68,6 +69,7 @@ NUMERIC_VERIFIERS = {
     'TKBool': ('tools/verify_tkbool_numeric.py', 'target/oracle-tkbool/numeric'),
     'TKV3d': ('tools/verify_tkv3d_numeric.py', 'target/oracle-tkv3d/numeric'),
     'TKMeshVS': ('tools/verify_tkmeshvs_numeric.py', 'target/oracle-tkmeshvs/numeric'),
+    'TKFeat': ('tools/verify_tkfeat_numeric.py', 'target/oracle-tkfeat/numeric'),
 }
 
 
@@ -107,6 +109,8 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     # TKVCAF joins the TKCAF OCAF toolkits to the TKV3d closure; TKXCAF adds itself on top.
     'TKVCAF': (VCAF_TOOLKITS, VCAF_CLOSURE_TARGETS, 'target/occt-vcaf-full'),
     'TKXCAF': (XCAF_TOOLKITS, XCAF_CLOSURE_TARGETS, 'target/occt-xcaf-full'),
+    # TKFeat has no GTest suite at 3d097a0; its numeric oracle links the modeling toolkits.
+    'TKFeat': (FEAT_TOOLKITS, FEAT_CLOSURE_TARGETS, 'target/occt-feat-full'),
 }
 
 
@@ -116,6 +120,7 @@ OWN_CLOSURE_PROFILES: dict[str, tuple[str, ...]] = {
     'TKExpress': EXPRESS_LINKED_TOOLKITS,
     'TKV3d': V3D_LINKED_TOOLKITS,
     'TKMeshVS': MESHVS_LINKED_TOOLKITS,
+    'TKFeat': FEAT_LINKED_TOOLKITS,
 }
 
 
