@@ -7,6 +7,14 @@ pub mod drawer;
 pub mod flags;
 #[path = "../invariants.rs"]
 pub mod invariants;
+#[path = "../mesh_builders.rs"]
+pub mod mesh_builders;
+#[path = "../mesh_data_sources.rs"]
+pub mod mesh_data_sources;
+#[path = "../mesh_fixture.rs"]
+pub mod mesh_fixture;
+#[path = "../mesh_selection.rs"]
+pub mod mesh_selection;
 #[path = "../metadata_reference.rs"]
 pub mod metadata_reference;
 #[path = "../node_pairs.rs"]
