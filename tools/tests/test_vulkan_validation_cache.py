@@ -5,6 +5,7 @@ import io
 from pathlib import Path
 import subprocess
 from tempfile import TemporaryDirectory
+import tomllib
 import unittest
 from unittest.mock import patch
 
@@ -13,7 +14,7 @@ from vulkan_validation_cache import (
 )
 from with_vulkan_validation import (
     NativeValidationCacheIO, command_environment, export_github_environment,
-    main, require_noble_platform, validation_arguments,
+    WORKSPACE_VALIDATION_CACHE, main, require_noble_platform, shell_exit_status, validation_arguments,
 )
 
 
@@ -153,6 +154,27 @@ class ValidationCacheTests(unittest.TestCase):
                 self.assertEqual(main(["--github-env", str(output)]), 0)
                 self.assertEqual(output.read_text(), "VK_LAYER_PATH=/verified/layers\nLD_LIBRARY_PATH=/verified/lib\n")
         self.assertEqual(command.calls, [["child", "argument"]])
+
+    def test_signalled_child_reports_shell_status_instead_of_a_wrapped_negative_code(self) -> None:
+        self.assertEqual(shell_exit_status(-11), 139)
+        self.assertEqual(shell_exit_status(101), 101)
+        self.assertEqual(shell_exit_status(0), 0)
+
+
+class CargoRunnerPinTests(unittest.TestCase):
+    """Plain `cargo test` must select the pinned layer from every package working directory."""
+
+    def test_default_cache_is_rooted_at_the_workspace_not_the_child_directory(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        self.assertEqual(WORKSPACE_VALIDATION_CACHE, root / "target" / "vulkan-validation")
+        self.assertEqual(validation_arguments(["--", "child"]).cache, WORKSPACE_VALIDATION_CACHE)
+
+    def test_linux_cargo_runner_is_the_executable_validation_wrapper(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        configuration = tomllib.loads((root / ".cargo/config.toml").read_text())
+        runner = configuration["target"]["x86_64-unknown-linux-gnu"]["runner"]
+        self.assertEqual(runner, ["tools/with_vulkan_validation.py", "--"])
+        self.assertTrue((root / runner[0]).stat().st_mode & 0o111, f"{runner[0]!r}; expected executable")
 
 
 if __name__ == "__main__":
