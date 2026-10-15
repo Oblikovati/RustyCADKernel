@@ -2,19 +2,24 @@
 //! General planar regions and extrusion (ADR 0068): the public seam a feature evaluator uses
 //! to turn a solved sketch into validated faces and an extruded solid with complete history.
 //!
-//! - [`build_planar_regions`] converts solved lines, arcs and circles into every bounded
-//!   planar face (outer loop and holes), with a complete curve to edge mapping.
+//! - [`build_planar_regions`] converts solved lines, circular and elliptic arcs, circles,
+//!   ellipses and clamped B-splines (ADR 0083) into every bounded face of the curve graph
+//!   (ADR 0084): nested, touching or sharing edges, each with its outer loop and holes and
+//!   a complete curve to edge mapping.
 //! - [`extrude`] sweeps one region along a vector into an [`OperationResult`]: the solid,
 //!   its complete source to result history, findings, validation and achieved tolerance.
 //!
 //! Every operation is non-destructive and either succeeds completely or returns a typed
 //! [`OperationDecline`]; no partial result exists.
 mod admission;
+mod admit_curves;
 mod admitted;
 mod bezier;
 mod build_regions;
+mod carriers;
 
 mod decline;
+mod ellipse;
 mod extrude;
 mod loop_geometry;
 mod loops;
@@ -26,12 +31,15 @@ mod proof_pieces;
 mod region_area;
 mod regions;
 mod resolution;
-mod seeds;
+mod solid_validation;
+mod spline;
 mod sweep_history;
 mod sweep_images;
 mod topology;
 mod validation;
 
+pub use crate::body_check::ValidationReport;
+pub use crate::measured::{Evidence, IntegrationMethod, Measured, MeasuredPoint};
 pub use build_regions::build_planar_regions;
 pub use decline::{
     DeclineCause, DeclineClass, OperationDecline, OperationKind, OperationStage,
@@ -43,4 +51,4 @@ pub use operation_result::*;
 pub use profile::*;
 pub use regions::*;
 pub use resolution::*;
-pub use validation::{Finding, SelfIntersectionEvidence, StageStatus, ValidationReport};
+pub use validation::{Finding, RegionValidation, SelfIntersectionEvidence, StageStatus};

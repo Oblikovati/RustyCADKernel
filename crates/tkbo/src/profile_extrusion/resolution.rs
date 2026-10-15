@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Explicit tolerance input and measured output (ADR 0068). Spatial, angular and display
-//! tolerances are distinct; the cap on the achieved tolerance has no implicit default.
+//! Explicit tolerance input and achieved tolerance output (ADR 0068). Spatial, angular and
+//! display tolerances are distinct; the cap on the achieved tolerance has no implicit
+//! default. Measures use the shared `crate::measured::Measured` (ADR 0081).
 
 /// Limit on the achieved B-rep tolerance of a result.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -92,38 +93,6 @@ impl Resolution {
             Some(offending) => Err(offending),
             None => Ok(()),
         }
-    }
-}
-
-/// How a reported number is known.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum MeasureKind {
-    /// The true value lies within `value +- error`.
-    CertifiedBound,
-    /// A closed-form binary64 evaluation with a rounding-error estimate; the estimate is
-    /// not a proven enclosure (elementary functions carry no certified ulp bound).
-    ClosedForm,
-    /// An estimate without a guaranteed bound.
-    SampledEstimate,
-    /// Not measured.
-    Unknown,
-}
-
-/// A measured quantity with its error and evidence kind.
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Measure {
-    /// Representative value.
-    pub value: f64,
-    /// Error of `value`; meaning given by `kind`.
-    pub error: f64,
-    /// Evidence kind.
-    pub kind: MeasureKind,
-}
-
-impl Measure {
-    /// Whether `value` lies in the enclosure; `measure.encloses(4.0)`.
-    pub fn encloses(&self, value: f64) -> bool {
-        (self.value - value).abs() <= self.error
     }
 }
 

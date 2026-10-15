@@ -1,42 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Owned property results: plain values, no live shape, `Send + Sync`.
+//! Owned property results: plain values, no live shape, `Send + Sync`. Scalars and points
+//! are the shared `rustycad_tkbo::measured` values (ADR 0081), as in `modeling`.
 use crate::topology::{EdgeIndex, FaceIndex};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::geom_abs::SurfaceType;
 
-/// How a value was integrated, from strongest to weakest evidence.
-/// Combining results keeps the weakest method (`max` of the ordering).
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub enum IntegrationMethod {
-    /// Exact antiderivatives; the bound covers floating-point rounding only.
-    ClosedForm,
-    /// Adaptive Gauss-Kronrod over the trims; the bound is the rule's error estimate
-    /// plus rounding, not a proven enclosure.
-    AdaptiveQuadrature,
-    /// The ported `BRepGProp` fixed-order Gauss integration, used only for faces whose trims
-    /// do not close in the parameter plane. It reports no error: the bound is infinite.
-    /// (Its adaptive variant is not used: natively and in the port it reports a relative
-    /// error of 7.4e-17 for an elliptic prism whose volume it misses by 4e-7.)
-    NativeUnbounded,
-}
-
-/// A scalar and its absolute error bound under the stated [`IntegrationMethod`].
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Measured {
-    /// The computed value.
-    pub value: f64,
-    /// Absolute bound on `|true value - value|` under the method's error model.
-    pub error_bound: f64,
-}
-
-/// A point and the bound on its Euclidean distance to the true point.
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct MeasuredPoint {
-    /// World coordinates.
-    pub point: [f64; 3],
-    /// Bound on the Euclidean error of `point`.
-    pub error_bound: f64,
-}
+pub use rustycad_tkbo::measured::{Evidence, IntegrationMethod, Measured, MeasuredPoint};
 
 /// Whether a loop bounds material on its left (outer) or cuts a hole (inner).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]

@@ -63,6 +63,7 @@ impl Moments {
         Measured {
             value: self.value[index] * factor,
             error_bound: self.error[index] * factor.abs(),
+            method: self.method,
         }
     }
 
@@ -100,7 +101,11 @@ impl Moments {
         } else {
             f64::INFINITY
         };
-        MeasuredPoint { point, error_bound }
+        MeasuredPoint {
+            point,
+            error_bound,
+            method: self.method,
+        }
     }
 }
 

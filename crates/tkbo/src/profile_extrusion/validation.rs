@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Ordered validation through the shared ADR 0014 stages (topology, geometry,
-//! self-intersection), then the tolerance stage against the caller cap.
+//! Ordered validation of published shapes. Region faces run the shared ADR 0014 stages
+//! (topology, geometry, self-intersection), then the tolerance stage against the caller cap.
+//! Extruded solids run the public `body_check::validate_body` (ADR 0072, ADR 0082), so an
+//! `OperationResult` carries the same `ValidationReport` an application gets for any body.
 use super::decline::{
     DeclineCause, Decliner, OperationDecline, OperationStage as Stage, ValidationStageKind,
 };
@@ -41,9 +43,10 @@ pub enum SelfIntersectionEvidence {
     AffineSweepOfCertifiedRegion,
 }
 
-/// Ordered validation coverage of a published shape; every stage passed on success.
+/// Ordered validation coverage of a published region face; every stage passed on success.
+/// (Solids report the public `body_check::ValidationReport`, ADR 0082.)
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct ValidationReport {
+pub struct RegionValidation {
     /// Native topology checks.
     pub topology: StageStatus,
     /// Native geometry checks.
@@ -70,7 +73,7 @@ pub enum Finding {
 
 /// A shape that passed every ordered stage, with its measured tolerance and findings.
 pub(crate) struct CheckedShape {
-    pub validation: ValidationReport,
+    pub validation: RegionValidation,
     pub achieved: AchievedTolerance,
     pub findings: Vec<Finding>,
 }
@@ -97,7 +100,7 @@ pub(crate) fn check_publication(
 }
 
 /// Largest stored tolerances of `shape`; `achieved_tolerance(&shape)?`.
-fn achieved_tolerance(shape: &Shape) -> Result<AchievedTolerance, Failure> {
+pub(crate) fn achieved_tolerance(shape: &Shape) -> Result<AchievedTolerance, Failure> {
     Ok(AchievedTolerance {
         vertex: BRepTool::max_tolerance(shape, ShapeEnum::Vertex)?,
         edge: BRepTool::max_tolerance(shape, ShapeEnum::Edge)?,
@@ -105,24 +108,20 @@ fn achieved_tolerance(shape: &Shape) -> Result<AchievedTolerance, Failure> {
     })
 }
 
-/// Run the shared ordered stages. Topology and geometry must pass; a native
-/// self-intersection interference declines, and `evidence` certifies the stage otherwise.
+/// Run the shared ordered stages on a region face. Topology and geometry must pass; a
+/// native self-intersection interference declines, and `evidence` certifies the stage.
 fn ordered_validation(
     shape: &Shape,
     evidence: SelfIntersectionEvidence,
-) -> Result<ValidationReport, DeclineCause> {
-    let kind = match evidence {
-        SelfIntersectionEvidence::RegionContactCertificate => BodyKind::PlanarRegion,
-        SelfIntersectionEvidence::AffineSweepOfCertifiedRegion => BodyKind::Solid,
-    };
-    let coverage = validate_owned_candidate(shape, kind, &[]);
+) -> Result<RegionValidation, DeclineCause> {
+    let coverage = validate_owned_candidate(shape, BodyKind::PlanarRegion, &[]);
     if let Some(stage) = first_unpassed(&coverage) {
         return Err(DeclineCause::ValidationFailed {
             stage,
             findings: findings(&coverage),
         });
     }
-    Ok(ValidationReport {
+    Ok(RegionValidation {
         topology: StageStatus::Passed,
         geometry: StageStatus::Passed,
         self_intersection: StageStatus::Passed,
@@ -165,21 +164,27 @@ fn findings(coverage: &OrderedCoverage) -> Vec<String> {
 
 /// The tolerance stage: refuse over a `Refuse` cap, record a finding over a `Report` cap.
 fn tolerance_stage(checked: &mut CheckedShape, cap: ToleranceCap) -> Result<(), DeclineCause> {
-    let achieved = checked.achieved.max();
-    match cap {
-        ToleranceCap::Refuse(limit) if !checked.achieved.within(cap) => {
-            return Err(DeclineCause::ToleranceOverBudget {
-                achieved,
-                cap: limit,
-            });
-        }
-        ToleranceCap::Report(limit) if !checked.achieved.within(cap) => {
-            checked
-                .findings
-                .push(Finding::ToleranceAboveReportLimit { achieved, limit });
-        }
-        _ => {}
-    }
+    checked.findings = cap_findings(checked.achieved, cap)?;
     checked.validation.tolerance = StageStatus::Passed;
     Ok(())
+}
+
+/// `Refuse` over the cap declines; `Report` over the cap is one finding; else none.
+pub(crate) fn cap_findings(
+    achieved: AchievedTolerance,
+    cap: ToleranceCap,
+) -> Result<Vec<Finding>, DeclineCause> {
+    let largest = achieved.max();
+    match cap {
+        _ if achieved.within(cap) => Ok(Vec::new()),
+        ToleranceCap::Refuse(limit) => Err(DeclineCause::ToleranceOverBudget {
+            achieved: largest,
+            cap: limit,
+        }),
+        ToleranceCap::Report(limit) => Ok(vec![Finding::ToleranceAboveReportLimit {
+            achieved: largest,
+            limit,
+        }]),
+        ToleranceCap::NoLimit => Ok(Vec::new()),
+    }
 }

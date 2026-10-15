@@ -16,18 +16,27 @@ use std::collections::BTreeMap;
 
 const STAGE: LoopRegionStage = LoopRegionStage::Joins;
 /// Expected endpoint parameters per census domain `(low, high)` position pair.
-type Expected = BTreeMap<(usize, usize), Vec<[u8; 2]>>;
+pub(super) type Expected = BTreeMap<(usize, usize), Vec<[u8; 2]>>;
 
 /// Certified joins and pair-domain counts `(joins, carrier pairs, domains)`.
 pub(super) fn certify(
     request: &LoopRegionRequest<'_, '_>,
     binding: &SegmentBinding<'_>,
 ) -> LoopRegionCheck<(Vec<JoinProof>, usize, usize)> {
-    let census = &request.bridge.census;
+    let expected = expected_joins(request, binding);
+    certify_contacts(&request.bridge.census, binding, expected)
+}
+/// Every certified contact of the complete pair matrix must be one of `expected` (exact
+/// native endpoints), and every expected contact must be certified; shared by the loop
+/// proof (authored joins) and the plane graph proof (vertex incidences, ADR 0084).
+pub(super) fn certify_contacts(
+    census: &BoundaryCensus,
+    binding: &SegmentBinding<'_>,
+    mut expected: Expected,
+) -> LoopRegionCheck<(Vec<JoinProof>, usize, usize)> {
     domain_count(census, binding.sources.len())?;
     first_unavailable(census, binding)?;
     current_matrix(census)?;
-    let mut expected = expected_joins(request, binding);
     let mut joins = Vec::new();
     let mut carriers = 0;
     for domain in &census.domains {
@@ -101,7 +110,7 @@ fn source(binding: &SegmentBinding<'_>, position: usize) -> LoopRegionCheck<Regi
         },
     })
 }
-fn key(first: usize, second: usize) -> (usize, usize) {
+pub(super) fn key(first: usize, second: usize) -> (usize, usize) {
     (first.min(second), first.max(second))
 }
 /// Swap expected parameter pairs when the domain lists the higher position first.

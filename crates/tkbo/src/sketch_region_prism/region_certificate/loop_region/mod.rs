@@ -4,6 +4,7 @@
 //! It consumes the shared contact transaction (census, partition, contacts) and solves
 //! no new intersection query; it publishes no body, history or names.
 mod binding;
+pub(crate) mod graph;
 mod joins;
 mod measure;
 mod nesting;

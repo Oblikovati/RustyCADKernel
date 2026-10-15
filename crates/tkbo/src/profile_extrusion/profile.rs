@@ -30,9 +30,9 @@ pub enum ArcSense {
 
 /// One solved sketch curve in plane coordinates.
 ///
-/// Lines, circular arcs and full circles are admitted. Ellipses and splines are named
-/// declines (`DeclineCause::UnsupportedCurve`) until their published carrier and history
-/// are certified (ADR 0068 "Limits").
+/// Lines, circular and elliptic arcs, full circles and ellipses, and clamped polynomial or
+/// rational B-splines are admitted (ADR 0083). A spline above degree 16 or with unclamped
+/// ends is a named decline (`DeclineCause::UnsupportedCurve`).
 #[derive(Clone, Debug, PartialEq)]
 pub enum ProfileCurve {
     /// Straight segment between two vertices.
@@ -67,18 +67,39 @@ pub enum ProfileCurve {
         /// Radius in model units.
         radius: f64,
     },
-    /// A full ellipse; currently declined.
+    /// A full ellipse: one closed loop with no authored vertex. Its seam (native parameter
+    /// 0) is the end of the major semi-axis.
     Ellipse {
         /// Caller identity.
         id: ProfileCurveId,
         /// Center in plane coordinates.
         center: [f64; 2],
-        /// Major semi-axis vector in plane coordinates.
+        /// Major semi-axis vector in plane coordinates (its length is the major radius).
         major_axis: [f64; 2],
-        /// Minor radius in model units.
+        /// Minor radius in model units; at most the major radius.
         minor_radius: f64,
     },
-    /// A spline through caller poles; currently declined.
+    /// Elliptic arc from `start` to `end`; both ends must lie on the ellipse within the sew
+    /// tolerance.
+    EllipticArc {
+        /// Caller identity.
+        id: ProfileCurveId,
+        /// First vertex.
+        start: ProfileVertexId,
+        /// Last vertex.
+        end: ProfileVertexId,
+        /// Center in plane coordinates.
+        center: [f64; 2],
+        /// Major semi-axis vector in plane coordinates (its length is the major radius).
+        major_axis: [f64; 2],
+        /// Minor radius in model units; at most the major radius.
+        minor_radius: f64,
+        /// Traversal sense from `start` to `end`.
+        sense: ArcSense,
+    },
+    /// A clamped polynomial or rational B-spline from `start` to `end` (equal ids give a
+    /// closed spline). Its first and last poles must lie within the sew tolerance of the
+    /// vertices; the published curve ends exactly at them.
     Spline {
         /// Caller identity.
         id: ProfileCurveId,
@@ -86,8 +107,15 @@ pub enum ProfileCurve {
         start: ProfileVertexId,
         /// Last vertex.
         end: ProfileVertexId,
-        /// Control poles in plane coordinates.
+        /// Polynomial degree, 1 through 16.
+        degree: u32,
+        /// Control poles in plane coordinates; at least `degree + 1`.
         poles: Vec<[f64; 2]>,
+        /// One positive weight per pole for a rational spline, `None` for a polynomial one.
+        weights: Option<Vec<f64>>,
+        /// Flat nondecreasing knot vector of `poles.len() + degree + 1` values whose first and
+        /// last `degree + 1` values are equal (clamped).
+        knots: Vec<f64>,
     },
 }
 
@@ -99,6 +127,7 @@ impl ProfileCurve {
             | Self::Arc { id, .. }
             | Self::Circle { id, .. }
             | Self::Ellipse { id, .. }
+            | Self::EllipticArc { id, .. }
             | Self::Spline { id, .. } => *id,
         }
     }
@@ -108,6 +137,7 @@ impl ProfileCurve {
         match self {
             Self::Line { start, end, .. }
             | Self::Arc { start, end, .. }
+            | Self::EllipticArc { start, end, .. }
             | Self::Spline { start, end, .. } => Some([*start, *end]),
             Self::Circle { .. } | Self::Ellipse { .. } => None,
         }

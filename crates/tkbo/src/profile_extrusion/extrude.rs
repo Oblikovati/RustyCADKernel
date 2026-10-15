@@ -7,9 +7,11 @@ use super::decline::{
 use super::operation_result::OperationResult;
 use super::plane_math::{dot3, norm3};
 use super::regions::PlanarRegion;
-use super::resolution::{Measure, Resolution};
+use super::resolution::Resolution;
+use super::solid_validation::{CheckedSolid, check_solid};
 use super::sweep_history::{IndexedSweep, sweep_history};
-use super::validation::*;
+use super::validation::SelfIntersectionEvidence;
+use crate::measured::Measured;
 use rustycad_tkbrep::topods::{self, Shape, Solid};
 
 use rustycad_tkmath::gp::Vector3;
@@ -58,8 +60,7 @@ pub fn extrude(
     let (mut maker, solid) = sweep(region, direction)?;
     let indexed =
         sweep_history(&mut maker, &solid, region).map_err(|c| DECLINE.at(Stage::History, c))?;
-    let evidence = SelfIntersectionEvidence::AffineSweepOfCertifiedRegion;
-    let checked = check_publication(&solid, evidence, resolution.cap, DECLINE)?;
+    let checked = check_solid(&solid, resolution, DECLINE)?;
     let volume = prism_volume(region.area(), height);
     Ok(published(solid, indexed, checked, volume, resolution))
 }
@@ -68,8 +69,8 @@ pub fn extrude(
 fn published(
     solid: Solid,
     indexed: IndexedSweep,
-    checked: CheckedShape,
-    volume: Measure,
+    checked: CheckedSolid,
+    volume: Measured,
     resolution: Resolution,
 ) -> OperationResult {
     OperationResult {
@@ -79,6 +80,7 @@ fn published(
         vertices: indexed.vertices,
         history: indexed.history,
         validation: checked.validation,
+        self_intersection: SelfIntersectionEvidence::AffineSweepOfCertifiedRegion,
         findings: checked.findings,
         achieved: checked.achieved,
         volume,
@@ -125,13 +127,7 @@ fn sweep(
 }
 
 /// Volume of a prism: base area times height, exact for an affine sweep; the error
-/// propagates the area error and one rounding of the product.
-fn prism_volume(area: Measure, height: f64) -> Measure {
-    let value = area.value * height.abs();
-    let error = area.error * height.abs() + 2.0 * f64::EPSILON * value.abs();
-    Measure {
-        value,
-        error,
-        kind: area.kind,
-    }
+/// propagates the area error and one rounding of the product, and keeps the area's method.
+fn prism_volume(area: Measured, height: f64) -> Measured {
+    area.scaled(height.abs())
 }

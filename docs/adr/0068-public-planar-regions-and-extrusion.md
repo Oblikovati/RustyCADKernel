@@ -139,6 +139,13 @@ points and the facade.
 
 ## Limits
 
+Follow-ups (2026-10-15): ADR 0081 replaces `Measure`/`MeasureKind` with the shared
+`Measured` (`ClosedForm` arc areas are now `RepresentationEnclosure`); ADR 0082 makes
+`OperationResult::validation()` the public `validate_body` report; ADR 0083 admits
+ellipses, elliptic arcs and clamped B-splines; ADR 0084 replaces the loop proof with the
+plane graph proof, admitting shared edges and loops touching at a vertex. The items below
+describe the state at this ADR.
+
 - Loops must be disjoint (no shared edges between adjacent selected faces, no touching
   loops): the ADR 0066 proof refuses them. Tangent contacts between different carriers are
   refused as incomplete.

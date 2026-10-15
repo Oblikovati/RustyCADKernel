@@ -7,6 +7,7 @@ use rustycad_tkmath::predicates::roots::RootIsolationOptions;
 use rustycad_tkmath::predicates::roots::metric_bounds::RationalIntegralOptions;
 
 mod corpus_tests;
+mod graph_tests;
 mod refusal_tests;
 
 const LIMIT: f64 = 1e-8;

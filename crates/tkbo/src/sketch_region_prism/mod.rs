@@ -51,9 +51,12 @@ mod copy_retention_tests;
 
 mod owned_request;
 pub(crate) use owned_request::profile::{
-    ProfileProofInput, ProfileProofRefusal, ProofEdge, certify_profile,
+    ProfileGraphInput, ProfileProofRefusal, ProofEdge, certify_profile_graph,
 };
-pub(crate) use region_certificate::loop_region::{LoopRegionCertificate, RegionProof};
+pub(crate) use region_certificate::loop_region::graph::{GraphFaceProof, GraphRegionCertificate};
+pub(crate) use region_certificate::loop_region::{
+    AuthoredLoopUse, LoopRegionCertificate, RegionProof,
+};
 mod publication;
 #[cfg(test)]
 mod sweep_query_tests;

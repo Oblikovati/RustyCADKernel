@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Admission: every caller value is checked before any geometry is constructed.
+use super::admit_curves::*;
 use super::admitted::*;
 use super::decline::{DeclineCause, DeclineCause as Cause};
 use super::plane_math::*;
@@ -119,13 +120,65 @@ fn admit_curve(
         ProfileCurve::Circle { id, center, radius } => {
             admit_circle(*id, *center, *radius, resolution)
         }
-        ProfileCurve::Ellipse { id, .. } => unsupported(*id, "ellipse"),
-        ProfileCurve::Spline { id, .. } => unsupported(*id, "spline"),
+        ProfileCurve::Ellipse {
+            id,
+            center,
+            major_axis,
+            minor_radius,
+        } => admit_ellipse(
+            &ellipse_input(*id, *center, *major_axis, *minor_radius),
+            resolution,
+        ),
+        ProfileCurve::EllipticArc {
+            id,
+            start,
+            end,
+            center,
+            major_axis,
+            minor_radius,
+            sense,
+        } => {
+            let input = ellipse_input(*id, *center, *major_axis, *minor_radius);
+            let ends = [(*start, point(start)), (*end, point(end))];
+            admit_elliptic_arc(&input, ends, *sense, resolution)
+        }
+        ProfileCurve::Spline {
+            id,
+            start,
+            end,
+            degree,
+            poles,
+            weights,
+            knots,
+        } => {
+            let input = SplineInput {
+                id: *id,
+                degree: *degree,
+                poles,
+                weights: weights.as_deref(),
+                knots,
+            };
+            admit_spline(
+                &input,
+                [(*start, point(start)), (*end, point(end))],
+                resolution,
+            )
+        }
     }
 }
 
-fn unsupported(curve: ProfileCurveId, kind: &'static str) -> Admit<AdmittedCurve> {
-    Err(Cause::UnsupportedCurve { curve, kind })
+fn ellipse_input(
+    id: ProfileCurveId,
+    center: [f64; 2],
+    major_axis: [f64; 2],
+    minor_radius: f64,
+) -> EllipseInput {
+    EllipseInput {
+        id,
+        center,
+        major_axis,
+        minor_radius,
+    }
 }
 
 fn admit_line(

@@ -3,6 +3,7 @@
 //! existing certified multi-occurrence Bézier wire classification.
 use super::binding::SegmentBinding;
 use super::types::*;
+use rustycad_tkmath::predicates::roots::RootIsolationOptions;
 use rustycad_tkmath::predicates::roots::bezier_line::{
     BezierWireLocation, BezierWireQuery, BezierWireSegment, classify_bezier_wire,
 };
@@ -10,6 +11,17 @@ use rustycad_tkmath::predicates::roots::bezier_line::{
 /// Classify `point` against `authored`; the wire endpoints must close exactly.
 pub(super) fn locate(
     request: &LoopRegionRequest<'_, '_>,
+    binding: &SegmentBinding<'_>,
+    authored: &AuthoredLoop,
+    point: [f64; 2],
+    cancelled: &mut impl FnMut() -> bool,
+) -> LoopRegionCheck<BezierWireLocation> {
+    let options = request.options.winding;
+    locate_with(options, binding, authored, point, cancelled)
+}
+/// `locate` under explicit root isolation options (shared with ADR 0084).
+pub(super) fn locate_with(
+    options: RootIsolationOptions,
     binding: &SegmentBinding<'_>,
     authored: &AuthoredLoop,
     point: [f64; 2],
@@ -32,7 +44,7 @@ pub(super) fn locate(
     let query = BezierWireQuery {
         segments: &segments,
         line: [point, [point[0] + 1., point[1]]],
-        options: request.options.winding,
+        options,
     };
     // Nested numerical stages report cancellation inside their own causes; the observed
     // caller stop is the authoritative classification.
