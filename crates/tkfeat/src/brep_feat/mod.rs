@@ -13,6 +13,7 @@ mod make_prism;
 mod make_revol;
 mod make_revolution_form;
 mod package;
+mod package_faces;
 mod rib_slot;
 mod split_shape;
 pub use builder::BRepFeatBuilder;
@@ -26,8 +27,9 @@ pub use make_prism::BRepFeatMakePrism;
 pub use make_revol::BRepFeatMakeRevol;
 pub use make_revolution_form::BRepFeatMakeRevolutionForm;
 pub use package::{
-    ParametricMinMax, PerfSelection, Status, StatusError, barycenter, face_until, is_inside,
-    parametric_barycenter, parametric_min_max, print, sample_edges, status_error_message, tool,
+    ParametricMinMax, PerfSelection, Status, StatusError, barycenter, parametric_barycenter,
+    parametric_min_max, print, sample_edges, status_error_message,
 };
+pub use package_faces::{face_until, is_inside, tool};
 pub use rib_slot::{Extremes, ProfileInput, RibSlot, choice_of_faces, int_par};
 pub use split_shape::BRepFeatSplitShape;
