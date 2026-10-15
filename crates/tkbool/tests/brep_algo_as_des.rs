@@ -51,7 +51,11 @@ fn shared_handle_mutators_match_the_exclusive_ones() -> Result<(), Failure> {
     });
     assert_eq!(edited, 2);
     assert!(associations.with_change_descendant(&d, |list| list.is_none()));
-    assert!(associations.descendant(&a).all(|s| s.orientation() == Orientation::Reversed));
+    assert!(
+        associations
+            .descendant(&a)
+            .all(|s| s.orientation() == Orientation::Reversed)
+    );
     associations.replace_shared(&a, &e);
     assert!(!associations.has_descendant(&a));
     assert_eq!(associations.descendant(&e).count(), 2);
