@@ -38,25 +38,16 @@ pub(crate) fn admit_resolution(resolution: &Resolution) -> Admit<()> {
 
 /// Orthonormal frame; the x direction must be orthogonal to the normal within `angular`.
 pub(crate) fn admit_frame(plane: &ProfilePlane, angular: f64) -> Admit<WorldFrame> {
+    let invalid = |reason| Cause::InvalidPlane { reason };
     if !plane.origin.iter().all(|c| c.is_finite()) {
-        return Err(Cause::InvalidPlane {
-            reason: "nonfinite origin",
-        });
+        return Err(invalid("nonfinite origin"));
     }
-    let normal = unit3(plane.normal).ok_or(Cause::InvalidPlane {
-        reason: "zero normal",
-    })?;
-    let x = unit3(plane.x_direction).ok_or(Cause::InvalidPlane {
-        reason: "zero x direction",
-    })?;
+    let normal = unit3(plane.normal).ok_or(invalid("zero normal"))?;
+    let x = unit3(plane.x_direction).ok_or(invalid("zero x direction"))?;
     if dot3(x, normal).abs() > angular.sin() {
-        return Err(Cause::InvalidPlane {
-            reason: "x direction not orthogonal to normal",
-        });
+        return Err(invalid("x direction not orthogonal to normal"));
     }
-    let y = unit3(cross3(normal, x)).ok_or(Cause::InvalidPlane {
-        reason: "degenerate frame",
-    })?;
+    let y = unit3(cross3(normal, x)).ok_or(invalid("degenerate frame"))?;
     Ok(WorldFrame {
         origin: plane.origin,
         x: cross3(y, normal),
@@ -122,20 +113,8 @@ fn admit_curve(
         ProfileCurve::Line { id, start, end } => {
             admit_line(*id, [*start, *end], [point(start), point(end)], resolution)
         }
-        ProfileCurve::Arc {
-            id,
-            start,
-            end,
-            center,
-            sense,
-        } => {
-            let arc = ArcInput {
-                id: *id,
-                ends: [*start, *end],
-                center: *center,
-                sense: *sense,
-            };
-            admit_arc(arc, [point(start), point(end)], resolution)
+        ProfileCurve::Arc { start, end, .. } => {
+            admit_arc(arc_input(curve), [point(start), point(end)], resolution)
         }
         ProfileCurve::Circle { id, center, radius } => {
             admit_circle(*id, *center, *radius, resolution)
@@ -173,22 +152,69 @@ struct ArcInput {
     sense: ArcSense,
 }
 
+fn arc_input(curve: &ProfileCurve) -> ArcInput {
+    let ProfileCurve::Arc {
+        id,
+        start,
+        end,
+        center,
+        sense,
+    } = curve
+    else {
+        unreachable!("arc_input receives arcs only")
+    };
+    ArcInput {
+        id: *id,
+        ends: [*start, *end],
+        center: *center,
+        sense: *sense,
+    }
+}
+
 fn admit_arc(
     arc: ArcInput,
     points: [[f64; 2]; 2],
     resolution: &Resolution,
 ) -> Admit<AdmittedCurve> {
+    let radii = equal_radii(&arc, points, resolution.sew)?;
+    require_arc_extent(&arc, points, radii, resolution)?;
+    let carrier = CircleCarrier {
+        center: arc.center,
+        radius: 0.5 * (radii[0] + radii[1]),
+    };
+    let (id, ends, sense) = (arc.id, arc.ends, arc.sense);
+    Ok(AdmittedCurve::Arc {
+        id,
+        ends,
+        carrier,
+        sense,
+    })
+}
+
+/// Both arc ends at one distance from a finite center, within the sew tolerance.
+fn equal_radii(arc: &ArcInput, points: [[f64; 2]; 2], sew: f64) -> Admit<[f64; 2]> {
     if !arc.center.iter().all(|c| c.is_finite()) {
         return Err(Cause::NonFiniteCurve { curve: arc.id });
     }
     let radii = points.map(|point| length2(sub2(point, arc.center)));
-    if (radii[0] - radii[1]).abs() > resolution.sew {
+    if (radii[0] - radii[1]).abs() > sew {
         return Err(Cause::ArcRadiusMismatch {
             curve: arc.id,
             radii,
-            sew: resolution.sew,
+            sew,
         });
     }
+    Ok(radii)
+}
+
+/// An arc must join two distinct vertices, be longer than the weld tolerance and sweep
+/// more than the angular tolerance.
+fn require_arc_extent(
+    arc: &ArcInput,
+    points: [[f64; 2]; 2],
+    radii: [f64; 2],
+    resolution: &Resolution,
+) -> Admit<()> {
     let [a0, a1] = points.map(|point| polar_angle(arc.center, point));
     let sweep = signed_sweep(a0, a1, arc.sense).abs();
     let size = radii[0].min(radii[1]) * sweep.min(1.0);
@@ -199,16 +225,7 @@ fn admit_arc(
             weld: resolution.weld,
         });
     }
-    let carrier = CircleCarrier {
-        center: arc.center,
-        radius: 0.5 * (radii[0] + radii[1]),
-    };
-    Ok(AdmittedCurve::Arc {
-        id: arc.id,
-        ends: arc.ends,
-        carrier,
-        sense: arc.sense,
-    })
+    Ok(())
 }
 
 fn admit_circle(

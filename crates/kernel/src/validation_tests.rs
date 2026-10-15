@@ -5,6 +5,7 @@ use crate::invalid_shapes::{
     flipped_face, non_manifold, open_sheet, open_shell, over_tolerance_edge, over_tolerance_vertex,
     overlapping_boxes,
 };
+use crate::modeling::{DisplayTolerance, Resolution, ToleranceCap};
 use crate::test_shapes::{annulus_prism, box_solid, cone, cylinder, sphere, torus};
 use crate::topology::BodyTopology;
 use crate::validation::{
@@ -12,7 +13,6 @@ use crate::validation::{
     ValidationStage, body_entity, validate_body,
 };
 use StageVerdict::{Failed, NotRun, Passed};
-use rustycad_tkbo::profile_extrusion::{DisplayTolerance, Resolution, ToleranceCap};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkg3d::top_abs::ShapeEnum;

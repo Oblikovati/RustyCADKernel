@@ -108,7 +108,8 @@ fn two_disjoint_rectangles_are_two_regions() {
     assert_area(&set.regions()[1], 2.0);
     assert_complete_mapping(&profile, &set);
     assert_eq!(set.certificate().loops, 2);
-    assert_eq!(set.certificate().contact_pairs, 8 * 7 / 2);
+    // Eight line pieces: all distinct pairs plus every self domain.
+    assert_eq!(set.certificate().pair_domains, 8 * 9 / 2);
 }
 
 #[test]
@@ -133,4 +134,26 @@ fn building_twice_is_identical_and_leaves_the_input_unchanged() {
         assert_eq!((a.id(), a.outer(), a.holes()), (b.id(), b.outer(), b.holes()));
         assert_eq!(a.area(), b.area());
     }
+}
+
+#[test]
+fn circular_segment_with_a_general_arc_has_the_closed_form_area() {
+    let root3 = 3f64.sqrt();
+    let profile = SketchFixture::new()
+        .vertex(0, [root3, 1.])
+        .vertex(1, [-root3, 1.])
+        .arc(1, [0, 1], [0., 0.], ArcSense::CounterClockwise)
+        .line(2, 1, 0)
+        .build();
+    let set = built(&profile);
+    let theta = 2.0 * PI / 3.0;
+    let region = &set.regions()[0];
+    assert_area(region, 2.0 * (theta - theta.sin()));
+    assert_eq!(region.area().kind, MeasureKind::ClosedForm);
+}
+
+#[test]
+fn line_only_regions_carry_a_certified_area_bound() {
+    let set = built(&rectangle());
+    assert_eq!(set.regions()[0].area().kind, MeasureKind::CertifiedBound);
 }

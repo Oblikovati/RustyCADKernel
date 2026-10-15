@@ -86,8 +86,11 @@ impl PlanarRegion {
 /// Certified evidence counts of a region set.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct RegionCertificate {
-    /// Distinct curve pairs whose contacts were certified.
-    pub contact_pairs: usize,
+    /// Pair and self domains of Bézier pieces certified by the loop region proof.
+    pub pair_domains: usize,
+    /// Of those, the pairs certified by the common-carrier route (pieces of one circle or
+    /// one line).
+    pub carrier_pairs: usize,
     /// Closed loops whose nesting was certified.
     pub loops: usize,
 }

@@ -13,19 +13,22 @@ mod admission;
 mod admitted;
 mod bezier;
 mod build_regions;
-mod contacts;
+
 mod decline;
 mod extrude;
 mod loop_geometry;
 mod loops;
-mod nesting;
 mod operation_result;
 mod plane_math;
 mod profile;
+mod proof;
+mod proof_pieces;
+mod region_area;
 mod regions;
 mod resolution;
 mod seeds;
 mod sweep_history;
+mod sweep_images;
 mod topology;
 mod validation;
 
