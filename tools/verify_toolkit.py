@@ -3,7 +3,7 @@
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
        TKPrim, TKHelix, TKShHealing, TKBO, TKBool, TKFillet, TKCDF, TKLCAF, TKCAF, TKDE, TKXSBase,
-       TKService, TKExpress, TKV3d, TKMeshVS)
+       TKService, TKExpress, TKV3d, TKMeshVS, TKTObj)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -30,7 +30,8 @@ from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS
                           VISUALIZATION_CLOSURE_TARGETS, VISUALIZATION_LINKED_TOOLKITS,
                           VISUALIZATION_TOOLKITS, V3D_CLOSURE_TARGETS, V3D_LINKED_TOOLKITS,
                           V3D_TOOLKITS, MESHVS_CLOSURE_TARGETS, MESHVS_LINKED_TOOLKITS,
-                          MESHVS_TOOLKITS, closure_flags, locked_cmake)
+                          MESHVS_TOOLKITS, TOBJ_CLOSURE_TARGETS, TOBJ_LINKED_TOOLKITS,
+                          TOBJ_TOOLKITS, closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
@@ -75,6 +76,8 @@ PROFILES_WITHOUT_NUMERIC: dict[str, tuple[str, ...]] = {
     # TKDE holds no numeric algorithm; its suite links every DE format toolkit.
     'TKDE': DE_LINKED_TOOLKITS,
     'TKXSBase': EXCHANGE_LINKED_TOOLKITS,
+    # TKTObj holds no numeric algorithm; its suite links the BinTObj format toolkit.
+    'TKTObj': TOBJ_LINKED_TOOLKITS,
 }
 
 # The native closure tree each profile with its own closure builds when no prebuilt one is
@@ -83,6 +86,7 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     'TKCDF': (OCAF_TOOLKITS, OCAF_CLOSURE_TARGETS, 'target/occt-ocaf-full'),
     'TKLCAF': (OCAF_TOOLKITS, OCAF_CLOSURE_TARGETS, 'target/occt-ocaf-full'),
     'TKCAF': (CAF_TOOLKITS, CAF_CLOSURE_TARGETS, 'target/occt-caf-full'),
+    'TKTObj': (TOBJ_TOOLKITS, TOBJ_CLOSURE_TARGETS, 'target/occt-tobj-full'),
     'TKDE': (DE_TOOLKITS, DE_CLOSURE_TARGETS, 'target/occt-de-full'),
     'TKXSBase': (EXCHANGE_TOOLKITS, EXCHANGE_CLOSURE_TARGETS, 'target/occt-exchange-full'),
     # TKService needs FreeType, fontconfig and Xlib, which the other closures must not require.

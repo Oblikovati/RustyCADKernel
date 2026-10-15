@@ -70,6 +70,17 @@ CAF_TOOLKITS: tuple[str, ...] = (*OCAF_TOOLKITS, 'TKDCAF', 'TKFillet', 'TKBool')
 CAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKDCAF', 'TKFillet', 'TKBool', *OCAF_LINKED_TOOLKITS)
 CAF_CLOSURE_TARGETS: list[str] = [*CAF_TOOLKITS, 'gtest_main']
 
+# The TKTObj closure: the unchanged TObj_Model_Test registers the BinTObj format
+# (BinTObjDrivers::DefineFormat) for its two stream cases, so TKBinTObj is built with it,
+# although the Rust port leaves that native format out of scope. It lives in its own tree,
+# so the other closures keep their flags.
+TOBJ_TOOLKITS: tuple[str, ...] = ('TKBinTObj',)
+# The TKTObj closure's shared libraries in link order, dependants first (the EXTERNLIB of
+# TKBinTObj, TKBinL and TKTObj).
+TOBJ_LINKED_TOOLKITS: tuple[str, ...] = ('TKBinTObj', 'TKBinL', 'TKTObj', 'TKLCAF', 'TKCDF',
+                                         'TKMath', 'TKernel')
+TOBJ_CLOSURE_TARGETS: list[str] = [*TOBJ_TOOLKITS, 'gtest_main']
+
 # The TKDE closure: the unchanged DE_Wrapper_Configuration_Test binds the configuration node of
 # every exchange format, so it links the DE format toolkits (TKDECascade holds DEBREP and DEXCAF).
 # It lives in its own tree too, so the other closures keep their flags.
