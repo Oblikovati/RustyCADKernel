@@ -28,6 +28,27 @@ fn native_wire_orientation_graph_cases_match() {
         assert_eq!(actual, row[3..], "{line}");
     }
 }
+/// The native fence of OrientEdgesOnWire is an NCollection_Map<TopoDS_Shape> with the
+/// default hasher (TopoDS_Shape::IsEqual), so a wire holding one edge in both orientations,
+/// as a seam does, keeps both occurrences: FORWARD first, then REVERSED through vertex 0.
+#[test]
+fn both_orientations_of_one_edge_stay_in_the_wire() {
+    let vertices: Vec<Vertex> = (0..2).map(|index| make_vertex(index as f64)).collect();
+    let edge = make_edge(0, 0, 0, &vertices);
+    let mut reversed = edge.clone();
+    reversed.set_orientation(Orientation::Reversed);
+    let mut wire = Wire::default();
+    let builder = BRepBuilder::default();
+    builder.make_wire(&mut wire);
+    builder.add(&mut wire, &edge).unwrap();
+    builder.add(&mut wire, &reversed).unwrap();
+    let mut wire = wire.into_shape();
+    let original = wire.clone();
+    orient_edges_on_wire(&mut wire).unwrap();
+    let edges = [edge];
+    // Not the same wire, FORWARD, two children: edge 0 FORWARD then edge 0 REVERSED.
+    assert_eq!(observe(&wire, &original, &edges), vec![0, 0, 2, 0, 0, 0, 1]);
+}
 fn observe(wire: &Shape, original: &Shape, edges: &[Edge]) -> Vec<usize> {
     let children: Vec<Shape> = ShapeIterator::new(wire, false, true).collect();
     let mut actual = vec![
