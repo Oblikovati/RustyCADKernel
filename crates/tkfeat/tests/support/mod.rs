@@ -34,7 +34,7 @@ pub fn sub_shapes(s: &Shape, kind: ShapeEnum) -> Vec<Shape> {
 /// The number of distinct sub-shapes of type `kind`.
 pub fn count(s: &Shape, kind: ShapeEnum) -> usize {
     let mut map = rustycad_tkbrep::toptools::IndexedMapOfShape::default();
-    rustycad_tkbrep::topexp::map_shapes_of_type(s, kind, &mut map);
+    rustycad_tkbrep::topexp::map_shapes_of_type(s, kind, &mut map).unwrap();
     map.extent()
 }
 
