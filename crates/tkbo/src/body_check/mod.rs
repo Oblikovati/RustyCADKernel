@@ -105,7 +105,10 @@ fn unindexable(shape: &Shape, failure: &Failure, budget: Option<f64>) -> Validat
     let mut ledger = Ledger::new();
     ledger.record_failure(
         ValidationStage::Topology,
-        TopologyRef { kind, index: Some(0) },
+        TopologyRef {
+            kind,
+            index: Some(0),
+        },
         failure,
     );
     ledger.finish(Vec::new(), budget)
