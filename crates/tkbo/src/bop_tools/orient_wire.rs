@@ -2,13 +2,15 @@ use rustycad_tkbrep::{
     brep::BRepBuilder,
     topexp,
     topods::{Edge, Shape, ShapeIterator, Vertex, Wire},
-    toptools::{IndexedDataMapOfShapeListOfShape, MapOfShape},
+    toptools::IndexedDataMapOfShapeListOfShape,
 };
-use rustycad_tkernel::standard::Failure;
+use rustycad_tkernel::{ncollection::Map, standard::Failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 struct WireOrienter {
     adjacent: IndexedDataMapOfShapeListOfShape,
-    visited: MapOfShape,
+    // Native fence is NCollection_Map<TopoDS_Shape> with the default hasher, which compares
+    // with TopoDS_Shape::IsEqual: the two orientations of one edge are distinct entries.
+    visited: Map<Shape>,
     result: Wire,
 }
 /// Rebuild wire adjacency chains with consistent endpoint directions; `orient_edges_on_wire(&mut wire)?`.
@@ -22,7 +24,7 @@ pub fn orient_edges_on_wire(wire: &mut Shape) -> Result<(), Failure> {
     BRepBuilder::default().make_wire(&mut result);
     let mut orienter = WireOrienter {
         adjacent,
-        visited: MapOfShape::default(),
+        visited: Map::new(1),
         result,
     };
     for shape in ShapeIterator::new(wire, true, true) {

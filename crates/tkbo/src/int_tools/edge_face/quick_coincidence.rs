@@ -67,10 +67,11 @@ fn sample_parameters(range: Range, segments: i32) -> (f64, f64) {
     (first, (last - first) / segments as f64)
 }
 
+/// `RealToInt((aNbSeg + 1) * 0.25)` and `(... * 0.75)`: RealToInt truncates toward zero.
 fn sample_thresholds(segments: i32) -> (i32, i32) {
     (
-        ((segments + 1) as f64 * 0.25).round() as i32,
-        ((segments + 1) as f64 * 0.75).round() as i32,
+        ((segments + 1) as f64 * 0.25) as i32,
+        ((segments + 1) as f64 * 0.75) as i32,
     )
 }
 

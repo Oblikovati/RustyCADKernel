@@ -81,12 +81,28 @@ impl DrawOStream {
 
     /// `operator<<(double)`: `%.{precision}g`, or `%.{precision}e` when scientific.
     pub fn put_real(&mut self, value: f64) -> &mut Self {
-        let text = if self.scientific {
-            format_scientific(value, self.precision)
-        } else {
-            format_general(value, self.precision)
-        };
+        let text = self.real_text()(value);
         self.pad_and_push(text)
+    }
+
+    /// The text `operator<<(double)` gives on this stream in its current state, for writers
+    /// that format their own numbers (the Poly writers).
+    ///
+    /// ```
+    /// use rustycad_tkdraw::draw::DrawOStream;
+    /// let mut stream = DrawOStream::new();
+    /// stream.set_scientific(true).set_precision(2);
+    /// assert_eq!(stream.real_text()(1.5), "1.50e+00");
+    /// ```
+    pub fn real_text(&self) -> Box<dyn Fn(f64) -> String> {
+        let (scientific, precision) = (self.scientific, self.precision);
+        Box::new(move |value| {
+            if scientific {
+                format_scientific(value, precision)
+            } else {
+                format_general(value, precision)
+            }
+        })
     }
 
     /// Lets `write` print on this stream through the TKernel `std::ostream` model (the
@@ -117,8 +133,8 @@ impl DrawOStream {
     }
 
     /// Lets `write` print raw bytes on this stream (the Poly writers take a
-    /// [`std::io::Write`]; they format numbers on their own); what it wrote is
-    /// appended, also when it fails.
+    /// [`std::io::Write`] and the number text of [`DrawOStream::real_text`]); what it
+    /// wrote is appended, also when it fails.
     ///
     /// ```
     /// use rustycad_tkdraw::draw::DrawOStream;

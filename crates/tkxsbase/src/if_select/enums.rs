@@ -128,4 +128,41 @@ mod tests {
         assert_eq!(IFSelectPrintFail::FailAndWarn as i32, 1);
         assert_eq!(IFSelectEditValue::EditDynamic as i32, 5);
     }
+
+    /// Every enumerator keeps its native IFSelect_*.hxx order and value.
+    #[test]
+    fn every_enumerator_keeps_native_value() {
+        use IFSelectEditValue as E;
+        let edit = [
+            E::Optional,
+            E::Editable,
+            E::EditProtected,
+            E::EditComputed,
+            E::EditRead,
+            E::EditDynamic,
+        ];
+        assert!(edit.iter().enumerate().all(|(i, v)| *v as i32 == i as i32));
+        use IFSelectReturnStatus as R;
+        let ret = [R::RetVoid, R::RetDone, R::RetError, R::RetFail, R::RetStop];
+        assert!(ret.iter().enumerate().all(|(i, v)| *v as i32 == i as i32));
+        use IFSelectRemainMode as M;
+        let remain = [
+            M::RemainForget,
+            M::RemainCompute,
+            M::RemainDisplay,
+            M::RemainUndo,
+        ];
+        assert!(
+            remain
+                .iter()
+                .enumerate()
+                .all(|(i, v)| *v as i32 == i as i32)
+        );
+        let fail = [IFSelectPrintFail::FailOnly, IFSelectPrintFail::FailAndWarn];
+        assert!(fail.iter().enumerate().all(|(i, v)| *v as i32 == i as i32));
+        for value in 0..9 {
+            let mode = IFSelectPrintCount::from_i32(value).expect("native PrintCount value");
+            assert_eq!(mode as i32, value);
+        }
+    }
 }

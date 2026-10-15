@@ -10,8 +10,11 @@ from pathlib import Path
 
 from api_crosswalk import cpp_candidates, cpp_indexes, header_owners
 from normalize_rustdoc_inventory import make_reachable_inventory
+from tkernel_d1_review import kept_partial_rows, review_outcome
 
 ROOT = Path(__file__).resolve().parents[2]
+# Rows the 2026-10-15 D1 review kept partial (class-A gaps).
+D1_KEPT = kept_partial_rows(ROOT)
 COPY_TYPE = "const NCollection_DataMap<TheKeyType, TheItemType, Hasher> &"
 MOVE_TYPE = "NCollection_DataMap<TheKeyType, TheItemType, Hasher> &&"
 PREFIX = "rustycad_tkernel::ncollection::DataMap::"
@@ -58,7 +61,7 @@ class DataMapAssignmentBindingsTest(unittest.TestCase):
             self.assertEqual(
                 row["rust_items"], [PREFIX + method, PREFIX + "assign_self"]
             )
-            self.assertEqual(row["status"], "partial")
+            self.assertEqual(review_outcome(row, D1_KEPT), "implemented")
 
     def test_compiled_assignment_adapters_are_public_and_source_bound(self) -> None:
         capture = ROOT / "porting/runtime-evidence/datamap-assignment-rustdoc.json.gz"

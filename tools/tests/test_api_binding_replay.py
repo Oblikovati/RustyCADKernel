@@ -160,6 +160,27 @@ class ExactBindingReplayTest(unittest.TestCase):
             verify_binding_ledger([self.record], [self.proposed, self.proposed])
         self.assertEqual(self.proposed["status"], "partial")
 
+    def test_d1_reviewed_successor_row_is_accepted(self) -> None:
+        reviewed = dict(self.proposed)
+        reviewed["status"] = "implemented"
+        reviewed["notes"] = self.proposed["notes"] + " D1 review 2026-10-15 (plan): class B5."
+        verify_binding_ledger([self.record], [reviewed])
+        excluded = dict(self.proposed, status="excluded")
+        excluded["notes"] = (
+            "Excluded (plan D1 class B6, user decision 2026-10-07): protected. Former partial note: "
+            + self.proposed["notes"]
+        )
+        verify_binding_ledger([self.record], [excluded])
+
+    def test_reviewed_row_that_drops_the_old_note_or_changes_a_field_is_rejected(self) -> None:
+        reviewed = dict(self.proposed, status="implemented", notes="D1 review 2026-10-15")
+        with self.assertRaisesRegex(ValueError, "ledger .*expected"):
+            verify_binding_ledger([self.record], [reviewed])
+        moved = dict(self.proposed, status="implemented", rust_item="rustycad_tkernel::Other")
+        moved["notes"] = self.proposed["notes"] + " D1 review 2026-10-15 (plan)."
+        with self.assertRaisesRegex(ValueError, "ledger .*expected"):
+            verify_binding_ledger([self.record], [moved])
+
 
 if __name__ == "__main__":
     unittest.main()

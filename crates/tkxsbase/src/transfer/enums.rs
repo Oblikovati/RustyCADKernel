@@ -65,4 +65,26 @@ mod tests {
             "Transfer_TransferDeadLoop"
         );
     }
+
+    /// Every enumerator keeps its native Transfer_Status*.hxx order and value.
+    #[test]
+    fn every_enumerator_keeps_native_value() {
+        use TransferStatusExec as X;
+        let exec = [
+            X::StatusInitial,
+            X::StatusRun,
+            X::StatusDone,
+            X::StatusError,
+            X::StatusLoop,
+        ];
+        assert!(exec.iter().enumerate().all(|(i, v)| *v as i32 == i as i32));
+        use TransferStatusResult as R;
+        let result = [R::StatusVoid, R::StatusDefined, R::StatusUsed];
+        assert!(
+            result
+                .iter()
+                .enumerate()
+                .all(|(i, v)| *v as i32 == i as i32)
+        );
+    }
 }

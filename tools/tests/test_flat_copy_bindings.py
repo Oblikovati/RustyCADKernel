@@ -9,8 +9,11 @@ from pathlib import Path
 
 from api_crosswalk import cpp_candidates, cpp_indexes, header_owners
 from api_inventory.inputs import JSONValue
+from tkernel_d1_review import kept_partial_rows, review_outcome
 
 ROOT = Path(__file__).resolve().parents[2]
+# Rows the 2026-10-15 D1 review kept partial (class-A gaps).
+D1_KEPT = kept_partial_rows(ROOT)
 
 
 class FlatCopyBindingsTest(unittest.TestCase):
@@ -141,7 +144,9 @@ class FlatCopyBindingsTest(unittest.TestCase):
             self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
             key = "rust_items" if "rust_items" in binding else "rust_item"
             self.assertEqual(self.rows[selector][key], binding[key])
-            self.assertEqual(self.rows[selector]["status"], "partial")
+            # The generic limits these audits record are D1 classes B2/B3/B5 or C++-only;
+            # the 2026-10-15 D1 review made the rows implemented and kept the limits in notes.
+            self.assertEqual(review_outcome(self.rows[selector], D1_KEPT), "implemented")
 
     def test_twelve_vector_storage_selectors_keep_pointer_alias_limits(self) -> None:
         audit = json.loads(

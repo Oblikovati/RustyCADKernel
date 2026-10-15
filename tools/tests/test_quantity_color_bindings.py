@@ -8,8 +8,11 @@ import unittest
 from pathlib import Path
 
 from api_crosswalk import cpp_candidates, cpp_indexes, header_owners
+from tkernel_d1_review import kept_partial_rows, review_outcome
 
 ROOT = Path(__file__).resolve().parents[2]
+# Rows the 2026-10-15 D1 review kept partial (class-A gaps).
+D1_KEPT = kept_partial_rows(ROOT)
 
 
 class QuantityColorBindingsTest(unittest.TestCase):
@@ -35,7 +38,12 @@ class QuantityColorBindingsTest(unittest.TestCase):
             self.assertEqual(status, "unique", selector)
             self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
             self.assertEqual(self.rows[selector]["rust_items"], binding["rust_items"])
-            self.assertEqual(self.rows[selector]["status"], binding["status"])
+            row = self.rows[selector]
+            if binding["status"] == "partial":
+                # The D1 review (tkernel_d1_review) may have closed a partial binding.
+                self.assertIn(review_outcome(row, D1_KEPT), ("implemented", "partial"))
+            else:
+                self.assertEqual(row["status"], binding["status"])
 
     def test_rgb_accessor_is_a_borrowed_public_method(self) -> None:
         selector = "Quantity_Color::Rgb() const noexcept"
@@ -43,7 +51,7 @@ class QuantityColorBindingsTest(unittest.TestCase):
             self.rows[selector]["rust_item"],
             "rustycad_tkernel::quantity::Color::rgb_ref",
         )
-        self.assertEqual(self.rows[selector]["status"], "partial")
+        self.assertEqual(review_outcome(self.rows[selector], D1_KEPT), "implemented")
 
 
 if __name__ == "__main__":

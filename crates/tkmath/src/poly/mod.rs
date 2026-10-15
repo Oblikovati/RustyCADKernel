@@ -27,8 +27,9 @@ pub use coherent::{
 };
 pub use connect::Connect;
 pub use io::{
-    dump_polygon2d, dump_polygon3d, dump_triangulation, read_polygon2d, read_polygon3d,
-    read_triangulation, write_polygon2d, write_polygon3d, write_triangulation,
+    RealText, dump_polygon2d, dump_polygon3d, dump_triangulation, read_polygon2d, read_polygon3d,
+    read_triangulation, write_polygon2d, write_polygon2d_with, write_polygon3d,
+    write_polygon3d_with, write_triangulation, write_triangulation_with,
 };
 pub use merge_nodes::MergeNodesTool;
 pub use mesh_purpose::MeshPurpose;
