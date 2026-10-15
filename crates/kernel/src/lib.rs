@@ -9,6 +9,7 @@
 
 pub use rustycad_tkernel as foundation;
 
+pub mod pick;
 pub mod presentation;
 pub mod query_error;
 pub mod topology;
