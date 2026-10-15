@@ -156,7 +156,7 @@ fn install_viewer(
 ) -> Result<Handle<TPrsStdAISViewer>, Failure> {
     let viewer = Handle::new(TPrsStdAISViewer::new());
     viewer.set_interactive_context(context);
-    root.add_attribute(&viewer.clone().cast(), true)?;
+    root.add_attribute(&viewer.clone().cast(), false)?;
     set_presentations_below(root)?;
     Ok(viewer)
 }
