@@ -58,10 +58,14 @@ def command_environment(
     return paths.environment(inherited)
 
 
+# Cargo's test runner starts children in each package directory; keep one cache at the workspace root.
+WORKSPACE_VALIDATION_CACHE = Path(__file__).resolve().parents[1] / "target" / "vulkan-validation"
+
+
 def validation_arguments(argv: list[str] | None) -> argparse.Namespace:
     """Parse wrapper and child arguments; e.g. `validation_arguments(['--', 'cargo', 'test-all'])`."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--cache", type=Path, default=Path("target/vulkan-validation"))
+    parser.add_argument("--cache", type=Path, default=WORKSPACE_VALIDATION_CACHE)
     parser.add_argument("--github-env", type=Path)
     parser.add_argument("command", nargs=argparse.REMAINDER)
     args = parser.parse_args(argv)
@@ -87,7 +91,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.github_env:
         export_github_environment(args.github_env, environment)
         return 0
-    return subprocess.run(args.command, env=environment).returncode
+    return shell_exit_status(subprocess.run(args.command, env=environment).returncode)
+
+
+def shell_exit_status(returncode: int) -> int:
+    """Report a signalled child like a shell so crashes stay visible; e.g. `shell_exit_status(-11) == 139`."""
+    return 128 - returncode if returncode < 0 else returncode
 
 
 if __name__ == "__main__":
