@@ -626622,6 +626622,150 @@
       "rust_item": "",
       "status": "upstream_unimplemented",
       "notes": "Declared in BRepOffsetAPI_FindContigousEdges.hxx, defined nowhere upstream (the .cxx has no body)."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::EdgeVertices(const TopoDS_Edge&,TopoDS_Vertex&,TopoDS_Vertex&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::edge_vertices",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); the vertices are returned as a pair. Not yet driven by its own probe request: it runs under BRepOffset_MakeOffset, whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::OrientSection(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&,TopAbs_Orientation&,TopAbs_Orientation&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::orient_section",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_queries on common edges, and through every ot_inter3d section) on faces of boxes, cylinders, cones, spheres and tori and their enlargements. The orientations are returned as a pair."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::FindCommonShapes(const TopoDS_Face&,const TopoDS_Face&,NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::find_common_shapes_of_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_queries) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::FindCommonShapes(const TopoDS_Shape&,const TopoDS_Shape&,TopAbs_ShapeEnum,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::find_common_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_queries, and the reference edge of ot_inter3d) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::Inter3D(const TopoDS_Face&,const TopoDS_Face&,NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&,TopAbs_State,const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::inter3d",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_inter3d op 0, both sides, with and without reference edge) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::TryProject(const TopoDS_Face&,const TopoDS_Face&,const NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&,TopAbs_State,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::try_project",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); edges without a 3d curve after BuildCurve3d are skipped as natively. Not yet driven by its own probe request: it runs under BRepOffset_MakeOffset, whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::PipeInter(const TopoDS_Face&,const TopoDS_Face&,NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&,TopAbs_State)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::pipe_inter",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_inter3d op 1) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::Inter2d(const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Edge&,NCollection_List<TopoDS_Shape>&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::inter2d",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_inter2d on every edge pair, two tolerances) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::InterOrExtent(const TopoDS_Face&,const TopoDS_Face&,NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&,TopAbs_State)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::inter_or_extent",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_inter3d op 2) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::CheckBounds(const TopoDS_Face&,const BRepOffset_Analyse&,bool&,bool&,bool&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::check_bounds",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); the three flags are returned as a tuple. Not yet driven by its own probe request: it runs under BRepOffset_MakeOffset, whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::EnLargeFace(const TopoDS_Face&,TopoDS_Face&,bool,bool,bool,bool,bool,int,double,double,double,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::en_large_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_enlarge with every option and mode, the face printed after the p-curve update) on faces of boxes, cylinders, cones, spheres and tori and their enlargements. The defaulted arguments are EnlargeFaceOptions (with_change_geom gives the native defaults)."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::ExtentFace(const TopoDS_Face&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,TopAbs_State,double,TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::extent_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); the maps are ShapeImages. Not yet driven by its own probe request: it runs under BRepOffset_MakeOffset, whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::BuildNeighbour(const TopoDS_Wire&,const TopoDS_Face&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::build_neighbour",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); the maps are EdgeNeighbours. Not yet driven by its own probe request: it runs under BRepOffset_MakeOffset, whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::MapVertexEdges(const TopoDS_Shape&,NCollection_DataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::map_vertex_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); the map is VertexEdges. Not yet driven by its own probe request: it runs under BRepOffset_MakeOffset, whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::Deboucle3D(const TopoDS_Shape&,const NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::deboucle_3d",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_deboucle on closed and open shells) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::CorrectOrientation(const TopoDS_Shape&,const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,const occ::handle<BRepAlgo_AsDes>&,BRepAlgo_Image&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::correct_orientation",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); an offset face missing from the AsDes raises Standard_NoSuchObject as ChangeDescendant does. Not yet driven by its own probe request: it runs under BRepOffset_MakeOffset, whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::Gabarit(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::gabarit",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_queries on every edge curve) on faces of boxes, cylinders, cones, spheres and tori and their enlargements."
+    },
+    {
+      "upstream_id": "BRepOffset_Tool::CheckPlanesNormals(const TopoDS_Face&,const TopoDS_Face&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Tool.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::check_planes_normals",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_queries at the default 1e-8) on faces of boxes, cylinders, cones, spheres and tori and their enlargements. The defaulted tolerance is explicit."
     }
   ],
   "tests": [

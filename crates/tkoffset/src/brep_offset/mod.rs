@@ -32,6 +32,8 @@ mod simple_offset_wall;
 mod sphere_join;
 mod surface;
 mod surface_analytic;
+mod tool;
+pub use tool::{BRepOffsetTool, EdgeNeighbours, EnlargeFaceOptions, ShapeImages, VertexEdges};
 
 pub use crate::brep_offset_api::BRepOffsetAPIMakeOffsetShape;
 pub use collapse_singularities::collapse_singularities;

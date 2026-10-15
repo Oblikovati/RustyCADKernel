@@ -20,3 +20,5 @@ def append_tkoffset_requests(requests: list[str]) -> None:
     # BRepOffsetAPI_MakePipe, MakeEvolved, MakeDraft, MakeFilling, NormalProjection and
     # FindContigousEdges (tkoffset_corpus_brepoffsetapi_wrappers.py)
     __import__('tkoffset_corpus_brepoffsetapi_wrappers').append_wrapper_requests(requests)
+    # BRepOffset_Tool (tkoffset_corpus_brepoffset_tool.py)
+    __import__('tkoffset_corpus_brepoffset_tool').append_tool_requests(requests)

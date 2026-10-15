@@ -2,6 +2,7 @@
 pub mod make_offset;
 pub mod make_pipe_shell;
 pub mod thru_sections;
+pub mod tool;
 pub mod wrappers;
 
 // The reader and bit printers of the TKGeomAlgo probe, the shape digest of the TKTopAlgo
