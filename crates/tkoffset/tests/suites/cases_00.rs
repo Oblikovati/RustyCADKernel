@@ -63,5 +63,7 @@ pub mod standard_offset_adjacent_planes;
 pub mod standard_offset_check_input;
 #[path = "../standard_offset_sphere_boundaries.rs"]
 pub mod standard_offset_sphere_boundaries;
+#[path = "../thick_solid_closed_form.rs"]
+pub mod thick_solid_closed_form;
 #[path = "../vertex_arc_join.rs"]
 pub mod vertex_arc_join;

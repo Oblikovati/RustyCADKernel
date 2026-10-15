@@ -67,18 +67,6 @@ fn hollow_box_volume() -> Result<(), Failure> {
     Ok(())
 }
 
-/// Independent check: the inward offset of the box keeps sharp inner corners (the
-/// concave edges are intersected), so the cavity is the box 18 x 18 x 19 and the wall
-/// volume is 20^3 - 18 * 18 * 19 = 1844.
-#[test]
-fn hollow_box_wall_volume_is_the_closed_form() -> Result<(), Failure> {
-    let (_, mut maker) = hollow_box_of_twenty()?;
-    let result = maker.shape()?.clone();
-    let wall = volume(&result)?;
-    assert!((wall - 1844.0).abs() < 1.0e-6 * 1844.0, "wall volume {wall}");
-    Ok(())
-}
-
 #[test]
 fn make_thick_solid_by_simple() -> Result<(), Failure> {
     let (_, face) = box_and_first_face(10.0)?;
