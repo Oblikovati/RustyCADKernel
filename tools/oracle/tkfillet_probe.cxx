@@ -88,6 +88,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ChFiKPart (tkfillet_probe_chfikpart.cxx)
  {"fl_kpart_fcts", fl_kpart_fcts_case},
  {"fl_corner_spine", fl_corner_spine_case},
+ {"fl_kpart_make", fl_kpart_make_case},
+ {"fl_kpart_corner", fl_kpart_corner_case},
 };
 int main() {
  std::string line;

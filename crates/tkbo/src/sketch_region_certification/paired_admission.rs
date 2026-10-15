@@ -10,11 +10,33 @@ pub(crate) fn enumerate_source_bound_census(
     inputs: BoundaryInputs,
     policy: CensusPolicy,
     source_policy: SourceConformancePolicy,
+    cancelled: impl FnMut() -> bool,
+) -> Result<BoundaryCensus, CensusCause> {
+    enumerate_with_pair_version(inputs, (policy, source_policy), 1, cancelled)
+}
+/// ADR 0066 part B: the same census with pair policy version 2, whose distinct pairs on one
+/// proper conic or line complete by the exact common-carrier route.
+/// Example: `enumerate_carrier_census(inputs, policy, source_policy, || false)`.
+pub(crate) fn enumerate_carrier_census(
+    inputs: BoundaryInputs,
+    policy: CensusPolicy,
+    source_policy: SourceConformancePolicy,
+    cancelled: impl FnMut() -> bool,
+) -> Result<BoundaryCensus, CensusCause> {
+    enumerate_with_pair_version(inputs, (policy, source_policy), 2, cancelled)
+}
+fn enumerate_with_pair_version(
+    inputs: BoundaryInputs,
+    policies: (CensusPolicy, SourceConformancePolicy),
+    pair_version: u32,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<BoundaryCensus, CensusCause> {
+    let (policy, source_policy) = policies;
     census::validate_policy(policy).map_err(CensusCause::Policy)?;
     let mut retained = census::empty_census(inputs, policy);
-    retained.paired = Some(capture_pair_evidence(&retained));
+    let mut evidence = capture_pair_evidence(&retained);
+    evidence.requested.version = pair_version;
+    retained.paired = Some(evidence);
     if admit_source_binding(&mut retained, source_policy, &mut cancelled) {
         return Err(CensusCause::SourceCancelled {
             completed: Box::new(retained),

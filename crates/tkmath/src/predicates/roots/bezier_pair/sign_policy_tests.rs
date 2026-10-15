@@ -12,7 +12,14 @@ fn curved_sources() -> [OwnedBezierSource; 2] {
 fn run_signs(signs: PairSignOptions, primary_limit: u16) -> AccountedPairOutcome {
     let mut options = RootIsolationOptions::new(1e-9);
     options.max_degree = primary_limit;
-    compute_with_signs(curved_sources(), false, options, signs, 1e-6, &mut || false)
+    compute_with_signs(
+        curved_sources(),
+        (false, false),
+        options,
+        signs,
+        1e-6,
+        &mut || false,
+    )
 }
 #[test]
 fn derived_sign_receipt_retains_version_effective_bound_and_primary_policy() {
@@ -82,7 +89,7 @@ fn low_root_high_domain(signs: PairSignOptions) -> AccountedPairOutcome {
     options.max_degree = 1;
     compute_with_signs(
         low_root_high_domain_sources(),
-        false,
+        (false, false),
         options,
         signs,
         1e-6,

@@ -10,6 +10,11 @@ mod bounds;
 mod curves;
 mod curves_geomint;
 mod curves_walk;
+mod ds_fil;
+mod ds_fil_ends;
+mod ds_fil_first;
+mod ds_inter;
+mod ds_tools;
 mod elspine;
 mod elspine_ends;
 mod faces;
@@ -31,6 +36,13 @@ pub use bounds::{
     in_period,
 };
 pub use curves::{IntersectionCurves, compute_curves};
+pub use ds_fil::fil_ds;
+pub use ds_inter::{SearchFd, bound_surf, search_fd, stripe_edge_inter};
+pub use ds_tools::{
+    InFront, ds_geometry, enlarge_box_ds, extr_spine_carac, fil_curve_in_ds, fil_point_in_ds,
+    fil_vertex_in_ds, index_point_in_ds, is_in_front, set_point_tolerance, solid_index,
+    surf_data_at,
+};
 pub use elspine::perform_el_spine;
 pub use faces::{conexfaces, edge_state, evalconti, kparticular};
 pub use pcurves::{

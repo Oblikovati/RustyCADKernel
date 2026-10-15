@@ -46,7 +46,13 @@ impl BRepLibFuseEdges {
         let mut found = BRepTool::curve_on_surface_by_index(old_edge, index)?;
         while found.pcurve.is_some() {
             if let Some(face) = face_on(faces, &found.surface)?
-                && !update_one(old_edge, new_edge, &face, index, chain, &mut rebuilt)?
+                && !update_one(
+                    old_edge,
+                    new_edge,
+                    (&face, index),
+                    chain,
+                    (&mut rebuilt, self.my_top_ope_brep_tool),
+                )?
             {
                 return Ok(false);
             }
@@ -84,10 +90,9 @@ fn face_on(
 fn update_one(
     old_edge: &Edge,
     new_edge: &Edge,
-    face: &Face,
-    index: i32,
+    (face, index): (&Face, i32),
     chain: &List<Shape>,
-    rebuilt: &mut bool,
+    (rebuilt, top_ope_brep_tool): (&mut bool, bool),
 ) -> Result<bool, Failure> {
     let builder = BRepBuilder::default();
     let (ef, el) = BRepTool::range(new_edge)?;
@@ -133,7 +138,8 @@ fn update_one(
     // the pcurve to be samerange we must adapt the parameter of the edge. In general
     // cases cf=ef and cl=el expect for periodic curve if the new edge is going over
     // the value 0.
-    if !*rebuilt {
+    // The TopOpeBRepTool variant moves the range in every case.
+    if !*rebuilt || top_ope_brep_tool {
         let (cf, cl) = (found.first, found.last);
         let (first, last) = if old_edge.orientation() == Orientation::Reversed {
             (cl - el + ef, cl)

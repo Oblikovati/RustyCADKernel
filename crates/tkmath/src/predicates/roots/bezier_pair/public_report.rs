@@ -12,7 +12,7 @@ pub struct BezierPairReport {
 /// The original typed cause or unsupported outer query policy.
 #[derive(Debug)]
 pub enum BezierPairFailure<'a> {
-    /// Rejected policy version; expected version 1.
+    /// Rejected policy version; expected version 1 or 2 (ADR 0066 part B).
     PolicyVersion(u32),
     /// Source, exact algebra, domain, construction, cancellation or exhaustion cause.
     Operation(&'a BezierPairOperationFailure),
