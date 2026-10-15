@@ -38,7 +38,10 @@ class V3dVerifierTableTests(unittest.TestCase):
         self.assertEqual(V3D_LINKED_TOOLKITS[:2], ('TKV3d', 'TKService'))
 
     def test_the_v3d_closure_has_its_own_tree(self):
-        self.assertEqual(V3D_TOOLKITS, ('TKV3d',))
+        # TKPrim builds the boxes of the unchanged AIS_ColoredShape_Test suite.
+        self.assertEqual(V3D_TOOLKITS, ('TKV3d', 'TKPrim'))
+        self.assertIn('TKPrim', V3D_LINKED_TOOLKITS)
+        self.assertLess(V3D_LINKED_TOOLKITS.index('TKPrim'), V3D_LINKED_TOOLKITS.index('TKTopAlgo'))
         self.assertIn('gtest_main', V3D_CLOSURE_TARGETS)
         self.assertEqual(PROFILE_CLOSURES['TKV3d'][2], 'target/occt-v3d-full')
 
