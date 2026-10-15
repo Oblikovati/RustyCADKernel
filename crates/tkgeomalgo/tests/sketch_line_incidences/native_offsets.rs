@@ -89,8 +89,8 @@ fn certified_offset_contacts_match_every_native_occt_point() {
 #[test]
 fn certified_offset_contacts_match_the_mapped_rust_intersector() {
     for case in corpus() {
-        let mapped = InterCurveCurve::between(&mapped(&case.source), &mapped(&case.target), 1e-9)
-            .unwrap();
+        let mapped =
+            InterCurveCurve::between(&mapped(&case.source), &mapped(&case.target), 1e-9).unwrap();
         assert_eq!(mapped.nb_segments(), 0, "{}", label(&case));
         let found: Vec<Location> = (1..=mapped.nb_points())
             .map(|index| {

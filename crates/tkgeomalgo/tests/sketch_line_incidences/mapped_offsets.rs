@@ -46,8 +46,15 @@ fn untrimmed_basis(basis: &SketchIncidenceCurve) -> (Curve, Option<[f64; 2]>) {
     }
 }
 // A clockwise arc lies on a clockwise (indirect) circle, so its offset side is kept.
-fn directed_arc(center: [f64; 2], radius: f64, sector: &SketchConicSector) -> (Curve, Option<[f64; 2]>) {
-    let axis = Axis2d::new(Point2::new(center[0], center[1]), Direction2::new(1., 0.).unwrap());
+fn directed_arc(
+    center: [f64; 2],
+    radius: f64,
+    sector: &SketchConicSector,
+) -> (Curve, Option<[f64; 2]>) {
+    let axis = Axis2d::new(
+        Point2::new(center[0], center[1]),
+        Direction2::new(1., 0.).unwrap(),
+    );
     let ccw = sector.counterclockwise;
     let circle: Curve = Handle::new(Geom2dCircle::from_axis(axis, radius, ccw).unwrap()).cast();
     let turn = if ccw { 1. } else { -1. };
@@ -62,7 +69,11 @@ fn trimmed(curve: &Curve, first: f64, last: f64) -> Curve {
     Handle::new(Geom2dTrimmedCurve::new(curve, first, last, true, false).unwrap()).cast()
 }
 fn mapped_periodic(spline: &SketchPeriodicSpline) -> Curve {
-    let poles: Vec<Point2> = spline.poles.iter().map(|p| Point2::new(p[0], p[1])).collect();
+    let poles: Vec<Point2> = spline
+        .poles
+        .iter()
+        .map(|p| Point2::new(p[0], p[1]))
+        .collect();
     let multiplicities: Vec<i32> = spline.multiplicities.iter().map(|&m| m as i32).collect();
     let curve: Curve = Handle::new(
         Geom2dBSplineCurve::new(
