@@ -134,14 +134,6 @@ fn free_form_lateral_surface_uses_nested_quadrature() {
         "{volume:?} vs {exact}"
     );
     assert!(volume.error_bound < 1e-9);
-    let (area, exact) = (
-        properties.area,
-        2.0 * PI * a * b + h * ellipse_perimeter(a, b),
-    );
-    assert!(
-        (area.value - exact).abs() <= area.error_bound,
-        "{area:?} vs {exact}"
-    );
     let centroid = properties.centroid;
     for (axis, expected) in [0.0, 0.0, h / 2.0].into_iter().enumerate() {
         assert!(
@@ -173,6 +165,17 @@ fn ellipse_perimeter_oracle_matches_the_circle_and_a_known_value() {
     let h = (1.0_f64 / 3.0).powi(2);
     let ramanujan = PI * 3.0 * (1.0 + 3.0 * h / (10.0 + (4.0 - 3.0 * h).sqrt()));
     assert!((ellipse_perimeter(2.0, 1.0) - ramanujan).abs() < 1e-6);
+}
+
+#[test]
+fn free_form_area_matches_the_elliptic_integral() {
+    let (a, b, h) = (2.0, 1.0, 3.0);
+    let area = body_properties(&elliptic_prism(a, b, h)).unwrap().area;
+    let exact = 2.0 * PI * a * b + h * ellipse_perimeter(a, b);
+    assert!(
+        (area.value - exact).abs() <= area.error_bound,
+        "{area:?} vs {exact}"
+    );
 }
 
 #[test]

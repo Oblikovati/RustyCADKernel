@@ -2,6 +2,7 @@
 //! OCCT TKBO foundations. The implemented IntTools types are exported by [`int_tools`].
 //! Boolean options, alerts, progress callbacks and the API base are available.
 //! Concrete Boolean builders and the full intersection pipeline remain incomplete.
+pub mod body_check;
 pub mod bop_algo;
 pub mod bop_ds;
 pub mod bop_tools;
