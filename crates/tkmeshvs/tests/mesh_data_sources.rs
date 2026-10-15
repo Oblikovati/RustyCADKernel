@@ -94,7 +94,10 @@ fn prism_and_pyramid_topologies_follow_the_native_orientation() {
 fn cached_topologies_are_shared_handles() {
     let source = UnitSquareSource::default();
     let first = source.get_prism_topology(5);
-    assert_eq!(first.object_address(), source.get_prism_topology(5).object_address());
+    assert_eq!(
+        first.object_address(),
+        source.get_prism_topology(5).object_address()
+    );
     assert!(source.get_pyramid_topology(1).is_null());
 }
 
@@ -123,7 +126,10 @@ fn deformed_element_needs_every_node_vector() {
     let mut coords = Array1::<f64>::with_bounds(1, 30).unwrap();
     let (mut nb, mut kind) = (0, MESHVS_ET_NONE);
     assert!(d.get_geom(13, true, &mut coords, &mut nb, &mut kind));
-    assert_eq!((nb, kind, coords[3], coords[6]), (2, MESHVS_ET_LINK, 1.0, 1.0));
+    assert_eq!(
+        (nb, kind, coords[3], coords[6]),
+        (2, MESHVS_ET_LINK, 1.0, 1.0)
+    );
     assert!(!d.get_geom(11, true, &mut coords, &mut nb, &mut kind));
 }
 

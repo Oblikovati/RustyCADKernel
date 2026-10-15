@@ -7,3 +7,10 @@ retries = 0
 
 [profile.ci.junit]
 path = "junit.xml"
+
+# Exhaustive checkpoint-cancellation tests replay every callback of the owned
+# sketch-region operations; under coverage instrumentation on a loaded host they
+# exceed five minutes. They keep every assertion and only get a longer limit.
+[[profile.default.overrides]]
+filter = "package(rustycad-tkbo) & test(/::every_/)"
+slow-timeout = { period = "60s", terminate-after = 20 }

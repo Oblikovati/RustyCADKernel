@@ -57,7 +57,14 @@ fn write(coords: &mut Array1<'_, f64>, ids: &[i32]) -> bool {
 }
 
 impl MeshVSDataSource for UnitSquareSource {
-    fn get_geom(&self, id: i32, is_element: bool, coords: &mut Array1<'_, f64>, nb_nodes: &mut i32, kind: &mut MeshVSEntityType) -> bool {
+    fn get_geom(
+        &self,
+        id: i32,
+        is_element: bool,
+        coords: &mut Array1<'_, f64>,
+        nb_nodes: &mut i32,
+        kind: &mut MeshVSEntityType,
+    ) -> bool {
         if !is_element {
             if !(1..=8).contains(&id) {
                 return false;
@@ -89,7 +96,12 @@ impl MeshVSDataSource for UnitSquareSource {
     fn get_addr(&self, id: i32, _: bool) -> usize {
         id as usize
     }
-    fn get_nodes_by_element(&self, id: i32, node_ids: &mut Array1<'_, i32>, nb_nodes: &mut i32) -> bool {
+    fn get_nodes_by_element(
+        &self,
+        id: i32,
+        node_ids: &mut Array1<'_, i32>,
+        nb_nodes: &mut i32,
+    ) -> bool {
         let Some((_, nodes)) = element(id) else {
             return false;
         };
