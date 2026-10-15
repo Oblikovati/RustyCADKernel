@@ -3,8 +3,9 @@
 // The faces and edges come from primitives (`kind a b c ox oy oz nx ny nz`: kind 0 a box
 // a x b x c, 1 a cylinder of radius a and height b, 2 a cone of radii a, b and height c,
 // 3 a sphere of radius a at the origin, 4 a torus of radii a, b, 5 a torus of radii a, b
-// swept by the angle c; placed on the frame of
-// the origin and normal) by their index in the explorer order; shapes print through
+// swept by the angle c, 6 the prism of height c of a slot of half length a and radius b
+// (two segments and two half circles); placed on the frame of the origin and normal) by
+// their index in the explorer order; shapes print through
 // pr_shape (tkprim_probe_shape.cxx).
 #include <BRepOffset_Tool.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
@@ -12,6 +13,11 @@
 #include <BRepPrimAPI_MakeCylinder.hxx>
 #include <BRepPrimAPI_MakeSphere.hxx>
 #include <BRepPrimAPI_MakeTorus.hxx>
+#include <BRepPrimAPI_MakePrism.hxx>
+#include <BRepLib_MakeEdge.hxx>
+#include <BRepLib_MakeFace.hxx>
+#include <BRepLib_MakeWire.hxx>
+#include <GC_MakeArcOfCircle.hxx>
 #include <BRep_Builder.hxx>
 #include <TopoDS_Shell.hxx>
 // The primitive of a request.
@@ -23,6 +29,16 @@ static TopoDS_Shape ot_primitive(GaReader& r){
  if(kind==2)return BRepPrimAPI_MakeCone(ax,a,b,c).Shape();
  if(kind==3)return BRepPrimAPI_MakeSphere(a).Shape();
  if(kind==5)return BRepPrimAPI_MakeTorus(ax,a,b,c).Shape();
+ if(kind==6){
+  gp_Vec x(ax.XDirection()),y(ax.YDirection());
+  auto at=[&](double u,double v){return o.Translated(u*x+v*y);};
+  gp_Pnt p1=at(-a,-b),p2=at(a,-b),p3=at(a,b),p4=at(-a,b);
+  BRepLib_MakeWire w;
+  w.Add(BRepLib_MakeEdge(p1,p2).Edge());
+  w.Add(BRepLib_MakeEdge(occ::handle<Geom_Curve>(GC_MakeArcOfCircle(p2,at(a+b,0.),p3).Value())).Edge());
+  w.Add(BRepLib_MakeEdge(p3,p4).Edge());
+  w.Add(BRepLib_MakeEdge(occ::handle<Geom_Curve>(GC_MakeArcOfCircle(p4,at(-a-b,0.),p1).Value())).Edge());
+  return BRepPrimAPI_MakePrism(BRepLib_MakeFace(w.Wire(),true).Face(),gp_Vec(n)*c).Shape();}
  return BRepPrimAPI_MakeTorus(ax,a,b).Shape();}
 // The sub-shape of a type at an explorer index.
 static TopoDS_Shape ot_sub(const TopoDS_Shape& s,TopAbs_ShapeEnum kind,int index){

@@ -626967,6 +626967,643 @@
       "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMiddlePath::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
       "status": "implemented",
       "notes": "Translated from BRepOffsetAPI_MiddlePath.cxx (crates/tkoffset/src/brep_offset_api/middle_path.rs); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_middle, oa_middle_prim: the pipes of square and circle profiles along polyline, arc, B-spline and closed spines, solid pipes between their faces and outer wires, boxes, a cylinder, a cone and partial tori between their caps; linear, circular and interpolated middle edges and the native exceptions); tests/middle_path.rs checks the box and torus paths in closed form."
+    },
+    {
+      "upstream_id": "Draft_Modification::Add(const TopoDS_Face&,const gp_Dir&,double,const gp_Pln&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::add",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The members take &self: the modification is shared through a handle and keeps its state behind a lock."
+    },
+    {
+      "upstream_id": "Draft_Modification::Clear()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::clear",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge to face ancestor map is cleared too and not rebuilt, as natively (an Add after a Perform then raises Standard_NoSuchObject)."
+    },
+    {
+      "upstream_id": "Draft_Modification::ConnectedFaces(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::connected_faces",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). Returns a copy of the list."
+    },
+    {
+      "upstream_id": "Draft_Modification::Continuity(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::<rustycad_tkbrep::brep_tools::BRepToolsModification>::continuity",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::Draft_Modification(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::new",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The error status, uninitialized natively before Clear, starts at NoError."
+    },
+    {
+      "upstream_id": "Draft_Modification::Error() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::error",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::Init(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::init",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::IsDone() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::is_done",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::ModifiedFaces()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::modified_faces",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). Returns a copy of the list."
+    },
+    {
+      "upstream_id": "Draft_Modification::NewCurve(const TopoDS_Edge&,occ::handle<Geom_Curve>&,TopLoc_Location&,double&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::NewCurve2d(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve2d",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). A stored p-curve moved by a period is moved in place, as natively."
+    },
+    {
+      "upstream_id": "Draft_Modification::NewParameter(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_parameter",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::NewPoint(const TopoDS_Vertex&,gp_Pnt&,double&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_point",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_surface",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::Perform()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::perform",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_Modification::ProblematicShape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::problematic_shape",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). Returns a copy of the shape."
+    },
+    {
+      "upstream_id": "Draft_Modification::Remove(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_Modification.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftModification::remove",
+      "status": "implemented",
+      "notes": "Translated from Draft_Modification.cxx and Draft_Modification_1.cxx (crates/tkoffset/src/draft/modification/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::Add(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::add",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::ChangeFirstPC()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::change_first_pc",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::ChangeGeometry()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::change_geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::ChangeSecondPC()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::change_second_pc",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::Draft_EdgeInfo()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::new",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::Draft_EdgeInfo(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::with_new_geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::FirstFace() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::first_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::FirstPC() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::first_pc",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::Geometry() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::IsTangent(gp_Pnt&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::is_tangent",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The point is returned with the flag."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::NewGeometry() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::new_geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::RootFace() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::root_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::RootFace(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::set_root_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::SecondFace() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::second_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::SecondPC() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::second_pc",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::SetNewGeometry(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::set_new_geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::Tangent(const gp_Pnt&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::tangent",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::Tolerance() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::tolerance",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_EdgeInfo::Tolerance(double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_EdgeInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftEdgeInfo::set_tolerance",
+      "status": "implemented",
+      "notes": "Translated from Draft_EdgeInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::Add(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::add",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::ChangeCurve()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::change_curve",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::ChangeGeometry()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::change_geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::Curve() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::curve",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::Draft_FaceInfo()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::new",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::Draft_FaceInfo(const occ::handle<Geom_Surface>&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::with_surface",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::FirstFace() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::first_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::Geometry() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::NewGeometry() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::new_geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::RootFace() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::root_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::RootFace(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::set_root_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_FaceInfo::SecondFace() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_FaceInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftFaceInfo::second_face",
+      "status": "implemented",
+      "notes": "Translated from Draft_FaceInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::Add(const TopoDS_Edge&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::add",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::ChangeGeometry()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::change_geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::ChangeParameter(const TopoDS_Edge&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::change_parameter",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::Draft_VertexInfo()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::new",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::Edge() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::edge",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively. Standard_NoSuchObject past the end."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::Geometry() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::geometry",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::InitEdgeIterator()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::init_edge_iterator",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::MoreEdge() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::more_edge",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::NextEdge()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::next_edge",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "Draft_VertexInfo::Parameter(const TopoDS_Edge&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_VertexInfo.hxx",
+      "rust_item": "rustycad_tkoffset::draft::DraftVertexInfo::parameter",
+      "status": "implemented",
+      "notes": "Translated from Draft_VertexInfo.cxx (crates/tkoffset/src/draft/info.rs); exercised through Draft_Modification, compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The edge iterator is an index, moved by Add, Parameter and ChangeParameter as natively."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Add(const TopoDS_Face&,const gp_Dir&,double,const gp_Pln&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::add",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). tests/draft_angle.rs checks the drafted box and cylinder volumes in closed form."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::AddDone() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::add_done",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::BRepOffsetAPI_DraftAngle()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::BRepOffsetAPI_DraftAngle(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::with_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). tests/draft_angle.rs checks the drafted box and cylinder volumes in closed form."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). tests/draft_angle.rs checks the drafted box and cylinder volumes in closed form."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Clear()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::clear",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::ConnectedFaces(const TopoDS_Face&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::connected_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::CorrectWires()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::correct_wires",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes). The faces whose inner wires cross a seam are not in the corpus; the map iterations follow the Rust maps (address order natively)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Init(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::init",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Modified(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::modified",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::ModifiedFaces() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::modified_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::ModifiedShape(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::modified_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::ProblematicShape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::problematic_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Remove(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::remove",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_DraftAngle::Status() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_DraftAngle.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIDraftAngle::status",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_DraftAngle.cxx (crates/tkoffset/src/brep_offset_api/draft_angle/); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_draft_angle: the lateral faces of boxes drafted one, two and four at a time about the bottom, middle and top planes both ways, a tilted box, cylinders into cones, a cone, a slot prism whose tangent planes and half cylinders spread the draft or are postponed, and the failures: parallel faces, a cylinder across its axis, a sphere, a second Add, a removal and a negligible angle; the resulting shapes, statuses, problematic shapes and history sizes)."
+    },
+    {
+      "upstream_id": "Draft_ErrorStatus",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_ErrorStatus.hxx",
+      "source_sha256": "9fa8ec79c4a03633823c9471d0ef8b54362140b36e7c3c63a7e9033590a05120",
+      "rust_item": "rustycad_tkoffset::draft::DraftErrorStatus",
+      "status": "implemented",
+      "notes": "Translated from Draft_ErrorStatus.hxx (crates/tkoffset/src/draft/info.rs) with the native discriminants (repr i32 in declaration order); the statuses are compared with OCCT through oa_draft_angle (tools/verify_tkoffset_numeric.py)."
+    },
+    {
+      "upstream_id": "Draft_NoError",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_ErrorStatus.hxx",
+      "source_sha256": "9fa8ec79c4a03633823c9471d0ef8b54362140b36e7c3c63a7e9033590a05120",
+      "rust_item": "rustycad_tkoffset::draft::DraftErrorStatus::NoError",
+      "status": "implemented",
+      "notes": "Translated from Draft_ErrorStatus.hxx (crates/tkoffset/src/draft/info.rs) with the native discriminants (repr i32 in declaration order); the statuses are compared with OCCT through oa_draft_angle (tools/verify_tkoffset_numeric.py)."
+    },
+    {
+      "upstream_id": "Draft_FaceRecomputation",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_ErrorStatus.hxx",
+      "source_sha256": "9fa8ec79c4a03633823c9471d0ef8b54362140b36e7c3c63a7e9033590a05120",
+      "rust_item": "rustycad_tkoffset::draft::DraftErrorStatus::FaceRecomputation",
+      "status": "implemented",
+      "notes": "Translated from Draft_ErrorStatus.hxx (crates/tkoffset/src/draft/info.rs) with the native discriminants (repr i32 in declaration order); the statuses are compared with OCCT through oa_draft_angle (tools/verify_tkoffset_numeric.py)."
+    },
+    {
+      "upstream_id": "Draft_EdgeRecomputation",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_ErrorStatus.hxx",
+      "source_sha256": "9fa8ec79c4a03633823c9471d0ef8b54362140b36e7c3c63a7e9033590a05120",
+      "rust_item": "rustycad_tkoffset::draft::DraftErrorStatus::EdgeRecomputation",
+      "status": "implemented",
+      "notes": "Translated from Draft_ErrorStatus.hxx (crates/tkoffset/src/draft/info.rs) with the native discriminants (repr i32 in declaration order); the statuses are compared with OCCT through oa_draft_angle (tools/verify_tkoffset_numeric.py)."
+    },
+    {
+      "upstream_id": "Draft_VertexRecomputation",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/Draft/Draft_ErrorStatus.hxx",
+      "source_sha256": "9fa8ec79c4a03633823c9471d0ef8b54362140b36e7c3c63a7e9033590a05120",
+      "rust_item": "rustycad_tkoffset::draft::DraftErrorStatus::VertexRecomputation",
+      "status": "implemented",
+      "notes": "Translated from Draft_ErrorStatus.hxx (crates/tkoffset/src/draft/info.rs) with the native discriminants (repr i32 in declaration order); the statuses are compared with OCCT through oa_draft_angle (tools/verify_tkoffset_numeric.py)."
     }
   ],
   "tests": [

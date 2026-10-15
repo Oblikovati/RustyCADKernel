@@ -9,11 +9,15 @@ use rustycad_tkbrep::toptools::MapOfShape;
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum, State};
-use rustycad_tkmath::gp::Axis2;
+use rustycad_tkernel::standard::Handle;
+use rustycad_tkg3d::geom::GeomCurve;
+use rustycad_tkgeombase::gc::MakeArcOfCircle;
+use rustycad_tkmath::gp::{Axis2, Direction3, Point3, Vector3};
+use rustycad_tktopalgo::brep_lib::{BRepLibMakeEdge, BRepLibMakeFace, BRepLibMakeWire};
 use rustycad_tkoffset::brep_offset::{BRepOffsetTool, EnlargeFaceOptions};
 use rustycad_tkprim::brep_prim_api::{
     BRepPrimAPIMakeBox, BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder, BRepPrimAPIMakeSphere,
-    BRepPrimAPIMakeTorus,
+    BRepPrimAPIMakePrism, BRepPrimAPIMakeTorus,
 };
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
@@ -35,9 +39,31 @@ pub(super) fn primitive(r: &mut Reader) -> Result<Shape, Failure> {
         5 => BRepPrimAPIMakeTorus::with_axes_angle(ax, a, b, c)?
             .shape()?
             .clone(),
+        6 => slot(ax, o, n, (a, b, c))?,
         _ => BRepPrimAPIMakeTorus::with_axes(ax, a, b)?.shape()?.clone(),
     };
     Ok(s)
+}
+
+/// The prism of height `c` of the slot of half length `a` and radius `b` (kind 6 of
+/// `ot_primitive`).
+fn slot(ax: Axis2, o: Point3, n: Direction3, (a, b, c): (f64, f64, f64)) -> Result<Shape, Failure> {
+    let (x, y) = (Vector3::from(ax.x_direction()), Vector3::from(ax.y_direction()));
+    let at = |u: f64, v: f64| o.translated(x * u + y * v);
+    let (p1, p2, p3, p4) = (at(-a, -b), at(a, -b), at(a, b), at(-a, b));
+    let arc = |s: Point3, m: Point3, e: Point3| -> Result<Edge, Failure> {
+        let curve: Handle<dyn GeomCurve> = MakeArcOfCircle::through_points(s, m, e)?.value()?.cast();
+        BRepLibMakeEdge::from_curve(&curve)?.edge()
+    };
+    let mut w = BRepLibMakeWire::new();
+    w.add_edge(&BRepLibMakeEdge::from_points(p1, p2)?.edge()?)?;
+    w.add_edge(&arc(p2, at(a + b, 0.), p3)?)?;
+    w.add_edge(&BRepLibMakeEdge::from_points(p3, p4)?.edge()?)?;
+    w.add_edge(&arc(p4, at(-a - b, 0.), p1)?)?;
+    let face = BRepLibMakeFace::from_wire(&w.wire()?, true)?.face()?;
+    Ok(BRepPrimAPIMakePrism::new(&face, Vector3::from(n) * c, false, true)?
+        .shape()?
+        .clone())
 }
 
 /// The sub-shape of a type at an explorer index (`ot_sub`), null past the end.

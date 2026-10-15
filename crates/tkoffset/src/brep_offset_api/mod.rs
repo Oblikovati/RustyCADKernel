@@ -1,5 +1,6 @@
 //! OCCT `BRepOffsetAPI`: the builder-API entry points of the offset, sweep and loft
 //! algorithms.
+mod draft_angle;
 mod find_contigous_edges;
 mod make_draft;
 mod make_evolved;
@@ -13,6 +14,7 @@ mod middle_path;
 mod normal_projection;
 mod thru_sections;
 
+pub use draft_angle::BRepOffsetAPIDraftAngle;
 pub use find_contigous_edges::BRepOffsetAPIFindContigousEdges;
 pub use make_draft::BRepOffsetAPIMakeDraft;
 pub use make_evolved::{BRepOffsetAPIMakeEvolved, EvolvedOptions};

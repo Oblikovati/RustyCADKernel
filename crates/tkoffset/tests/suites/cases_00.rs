@@ -9,6 +9,8 @@ pub mod brep_offset_api_thru_sections;
 pub mod classification;
 #[path = "../collapse_singularities.rs"]
 pub mod collapse_singularities;
+#[path = "../draft_angle.rs"]
+pub mod draft_angle;
 #[path = "../interval.rs"]
 pub mod interval;
 #[path = "../legacy_brep_builder_api_sewing.rs"]

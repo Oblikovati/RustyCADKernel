@@ -30,3 +30,5 @@ def append_tkoffset_requests(requests: list[str]) -> None:
     __import__('tkoffset_corpus_brepoffset_make_offset').append_make_offset_requests(requests)
     # BRepOffsetAPI_MiddlePath (tkoffset_corpus_brepoffsetapi_middle_path.py)
     __import__('tkoffset_corpus_brepoffsetapi_middle_path').append_middle_path_requests(requests)
+    # BRepOffsetAPI_DraftAngle and Draft (tkoffset_corpus_brepoffsetapi_draft_angle.py)
+    __import__('tkoffset_corpus_brepoffsetapi_draft_angle').append_draft_angle_requests(requests)
