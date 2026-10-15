@@ -14,3 +14,10 @@ path = "junit.xml"
 [[profile.default.overrides]]
 filter = "package(rustycad-tkbo) & test(/::every_/)"
 slow-timeout = { period = "60s", terminate-after = 20 }
+
+# The native offset-incidence corpora isolate every contact of the Go fit-spline
+# offsets exactly; under coverage instrumentation on hosted runners they exceed
+# five minutes. They keep every assertion and only get a longer limit.
+[[profile.default.overrides]]
+filter = "package(rustycad-tkgeomalgo) & test(/sketch_line_incidences::native_offsets::/)"
+slow-timeout = { period = "60s", terminate-after = 20 }
