@@ -5,7 +5,9 @@ Status: implemented on a worktree branch (2026-10-15); public in `rustycad-kerne
 ## Decision
 
 `rustycad_kernel::properties::{body_properties, face_properties}` measure any owned
-B-rep shape from its own data. Results are owned values (`Send + Sync`, no live shape):
+B-rep shape from its own data: `body_properties(&shape)` and
+`face_properties(&BodyTopology, FaceIndex)`, which names the face and every loop edge by
+the stable ADR 0076 indices (`FaceProperties::face`, `LoopSummary::edges`). Results are owned values (`Send + Sync`, no live shape):
 every scalar is a `Measured { value, error_bound }`, every point a `MeasuredPoint`, and
 each result names its weakest `IntegrationMethod`.
 
@@ -44,7 +46,7 @@ edges) cannot use Green's theorem; it falls back to the ported fixed-order
 whole body containing it.
 
 Face results also give the surface kind, the face orientation and one `LoopSummary`
-per wire: edge uses, signed parameter area (closed form for line and circle trims) and
+per wire: its edge uses as `EdgeIndex` values (a seam once per side), signed parameter area (closed form for line and circle trims) and
 the outer/inner role from its sign.
 
 ## Native quirk kept out

@@ -2,12 +2,15 @@
 //! Per-face integration: analytic surface, closed trims, Green's theorem per trim.
 use super::accumulate::{AREA, AREA_MOMENT, Moments};
 use super::boundary::{TrimUse, closes, face_loops, sub_shapes};
-use super::measured::{FaceProperties, LoopRole, LoopSummary};
+use super::measured::{
+    FaceProperties, IntegrationMethod, LoopRole, LoopSummary, Measured, MeasuredPoint,
+};
 use super::native::native_face_area;
 use super::planar::planar_field;
 use super::revolution::Frame;
 use super::surface::face_integrand;
 use super::trim_integral::{FaceIntegrand, integrate_trim};
+use crate::topology::{BodyTopology, FaceIndex};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorSurface;
 use rustycad_tkbrep::topods::{self, Face, Shape};
@@ -15,29 +18,56 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-/// Area, centroid, surface kind and loops of one face, from its B-rep data.
+/// Area, centroid, surface kind and loops of the face at `index` of an enumerated body
+/// (ADR 0076 indices; loops list their edges by `EdgeIndex`), from its B-rep data.
 ///
 /// Planes, cylinders, cones, spheres and tori trimmed by lines and circles in their
 /// parameter plane integrate in closed form; see [`IntegrationMethod`] for the others.
 ///
 /// ```
 /// use rustycad_kernel::properties::{face_properties, IntegrationMethod};
-/// use rustycad_tkbrep::topexp::Explorer;
-/// use rustycad_tkbrep::topods;
-/// use rustycad_tkg3d::top_abs::ShapeEnum;
+/// use rustycad_kernel::topology::{BodyTopology, FaceIndex};
 /// use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 /// use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 ///
 /// let mut maker = BRepPrimAPIMakeBox::from_sizes(2.0, 3.0, 4.0).unwrap();
-/// let solid = maker.shape().unwrap().clone();
-/// let explorer = Explorer::new(&solid, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
-/// let face = topods::face(explorer.current()).unwrap();
-/// let properties = face_properties(&face).unwrap();
+/// let topology = BodyTopology::enumerate(maker.shape().unwrap()).unwrap();
+/// let properties = face_properties(&topology, FaceIndex(0)).unwrap();
 /// assert_eq!(properties.method, IntegrationMethod::ClosedForm);
 /// assert!((properties.area.value - 12.0).abs() <= properties.area.error_bound);
-/// assert_eq!(properties.loops.len(), 1);
+/// assert_eq!(properties.loops[0].edges.len(), 4);
 /// ```
-pub fn face_properties(face: &Face) -> Result<FaceProperties, Failure> {
+pub fn face_properties(
+    topology: &BodyTopology,
+    index: FaceIndex,
+) -> Result<FaceProperties, Failure> {
+    let face = topology
+        .face(index)
+        .ok_or_else(|| unknown_face(index, topology))?;
+    let (area, centroid, method) = face_measures(&face)?;
+    let surface = BRepAdaptorSurface::with_face(&face, false)?;
+    Ok(FaceProperties {
+        face: index,
+        surface: surface.get_type()?,
+        orientation: face.orientation(),
+        area,
+        centroid,
+        loops: loop_summaries(&face_loops(&face)?, topology)?,
+        method,
+    })
+}
+
+fn unknown_face(index: FaceIndex, topology: &BodyTopology) -> Failure {
+    let count = topology.face_count();
+    let message = format!(
+        "face index {} is not in the body; expected 0..{count}",
+        index.0
+    );
+    Failure::with_type("Standard_OutOfRange", &message, "")
+}
+
+/// Area, area centroid and method of `face`, natively when no Green path exists.
+fn face_measures(face: &Face) -> Result<(Measured, MeasuredPoint, IntegrationMethod), Failure> {
     let reference = vertex_mean(face)?;
     let (area, centroid, method) = match face_moments(face, reference)? {
         Some(moments) => (
@@ -47,15 +77,7 @@ pub fn face_properties(face: &Face) -> Result<FaceProperties, Failure> {
         ),
         None => native_face_area(face)?,
     };
-    let surface = BRepAdaptorSurface::with_face(face, false)?;
-    Ok(FaceProperties {
-        surface: surface.get_type()?,
-        orientation: face.orientation(),
-        area,
-        centroid,
-        loops: loop_summaries(&face_loops(face)?)?,
-        method,
-    })
+    Ok((area, centroid, method))
 }
 
 /// The eight integrals of `face` about `reference`; None when a wire does not close in the
@@ -88,12 +110,22 @@ fn all_close(loops: &[Vec<TrimUse>]) -> Result<bool, Failure> {
     Ok(true)
 }
 
-fn loop_summaries(loops: &[Vec<TrimUse>]) -> Result<Vec<LoopSummary>, Failure> {
+fn loop_summaries(
+    loops: &[Vec<TrimUse>],
+    topology: &BodyTopology,
+) -> Result<Vec<LoopSummary>, Failure> {
     let unit = FaceIntegrand::Planar(planar_field(&parameter_plane()));
-    loops.iter().map(|uses| loop_summary(&unit, uses)).collect()
+    loops
+        .iter()
+        .map(|uses| loop_summary(&unit, uses, topology))
+        .collect()
 }
 
-fn loop_summary(unit: &FaceIntegrand, uses: &[TrimUse]) -> Result<LoopSummary, Failure> {
+fn loop_summary(
+    unit: &FaceIntegrand,
+    uses: &[TrimUse],
+    topology: &BodyTopology,
+) -> Result<LoopSummary, Failure> {
     let mut moments = Moments::default();
     for trim in uses {
         moments.add(&integrate_trim(unit, trim)?, 1.0);
@@ -103,9 +135,12 @@ fn loop_summary(unit: &FaceIntegrand, uses: &[TrimUse]) -> Result<LoopSummary, F
         true => LoopRole::Outer,
         false => LoopRole::Inner,
     };
-    let edge_uses = uses.len();
+    let edges = uses
+        .iter()
+        .filter_map(|trim| topology.edge_index(&trim.edge))
+        .collect();
     Ok(LoopSummary {
-        edge_uses,
+        edges,
         parameter_area,
         role,
     })

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Owned property results: plain values, no live shape, `Send + Sync`.
+use crate::topology::{EdgeIndex, FaceIndex};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::geom_abs::SurfaceType;
 
@@ -47,10 +48,11 @@ pub enum LoopRole {
 }
 
 /// One wire of a face, measured in the face's forward parameter plane.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct LoopSummary {
-    /// Number of edge uses, seams counted on each side, degenerate edges included.
-    pub edge_uses: usize,
+    /// The bounding edge uses in wire exploration order, by stable body index: a seam
+    /// appears once per side, degenerate edges are included, internal edges are not.
+    pub edges: Vec<EdgeIndex>,
     /// Signed area enclosed in the `(u, v)` plane (Green's theorem over the p-curves).
     pub parameter_area: Measured,
     /// Outer or inner, from the sign of `parameter_area`.
@@ -60,6 +62,8 @@ pub struct LoopSummary {
 /// Area, centroid and trim structure of one face.
 #[derive(Clone, Debug, PartialEq)]
 pub struct FaceProperties {
+    /// The face's stable body index.
+    pub face: FaceIndex,
     /// The analytic kind of the underlying surface.
     pub surface: SurfaceType,
     /// The face's orientation in its parent (material side of the surface normal).

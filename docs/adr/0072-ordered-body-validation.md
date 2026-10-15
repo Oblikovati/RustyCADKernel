@@ -33,9 +33,11 @@ unattempted faces) stays an inconclusive finding. `BRepCheck_Analyzer` creates n
 result for compounds and comp-solids (`case TopAbs_COMPSOLID: case TopAbs_COMPOUND:
 break;`), so their missing checker is not a gap.
 
-Findings name topology by kind and 1-based `TopExp::MapShapes(root, kind)` index
+Findings name topology by kind and zero-based `TopExp::MapShapes(root, kind)` index
 (`TopologyRef`, resolvable against the root), so the report is plain owned data
-(`Send + Sync`) with no live shape. The tolerance budget is the cap of the shared
+(`Send + Sync`) with no live shape. This is the order of the kernel's `BodyTopology`
+(ADR 0076); `rustycad_kernel::validation::body_entity` turns a name into a `FaceIndex`,
+`EdgeIndex` or `VertexIndex` (tkbo cannot depend on the facade that defines them). The tolerance budget is the cap of the shared
 `profile_extrusion::Resolution` (ADR 0068, other branch); `NoLimit` checks no budget.
 
 ## Verification

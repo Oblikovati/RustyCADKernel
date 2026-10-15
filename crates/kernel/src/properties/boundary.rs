@@ -32,6 +32,8 @@ pub(crate) enum TrimShape {
 
 /// One oriented use of an edge's p-curve.
 pub(crate) struct TrimUse {
+    /// The edge, oriented as used by the forward face.
+    pub(crate) edge: Shape,
     pub(crate) shape: TrimShape,
     pub(crate) curve: Geom2dAdaptorCurve,
     pub(crate) first: f64,
@@ -107,6 +109,7 @@ fn trim_use(edge: &Shape, face: &Face) -> Result<Option<TrimUse>, Failure> {
     }
     let curve = Geom2dAdaptorCurve::with_curve(&pcurve.pcurve)?;
     Ok(Some(TrimUse {
+        edge: edge.clone(),
         shape: classify(&curve)?,
         curve,
         first: pcurve.first,

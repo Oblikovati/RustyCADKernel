@@ -2,17 +2,27 @@
 //! Face-level oracles: surface kind, area, area centroid, loops and orientation.
 use super::{FaceProperties, IntegrationMethod, LoopRole, face_properties};
 use crate::test_shapes::{
-    annulus_prism, assert_point_within, assert_within, cone, cylinder, elliptic_prism, faces,
+    annulus_prism, assert_point_within, assert_within, box_solid, cone, cylinder, elliptic_prism,
     sphere, torus,
 };
+use crate::topology::{BodyTopology, FaceIndex};
+use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::Shape;
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::geom_abs::SurfaceType;
 use std::f64::consts::PI;
 
+/// Every face of `shape` by stable index.
+fn all_faces(shape: &Shape) -> Vec<FaceProperties> {
+    let topology = BodyTopology::enumerate(shape).unwrap();
+    let indices = (0..topology.face_count() as u32).map(FaceIndex);
+    indices
+        .map(|index| face_properties(&topology, index).unwrap())
+        .collect()
+}
+
 fn of_kind(shape: &Shape, kind: SurfaceType) -> Vec<FaceProperties> {
-    let all = faces(shape)
-        .into_iter()
-        .map(|face| face_properties(&face).unwrap());
+    let all = all_faces(shape).into_iter();
     all.filter(|properties| properties.surface == kind)
         .collect()
 }
@@ -31,7 +41,13 @@ fn cylinder_lateral_and_caps() {
     assert_eq!(lateral.method, IntegrationMethod::ClosedForm);
     assert_eq!(lateral.loops.len(), 1);
     // The seam is used twice: four edge uses close the [0, 2pi] x [0, h] rectangle.
-    assert_eq!(lateral.loops[0].edge_uses, 4);
+    let edges = &lateral.loops[0].edges;
+    assert_eq!(edges.len(), 4);
+    assert_eq!(
+        edges.iter().filter(|edge| **edge == edges[1]).count(),
+        2,
+        "{edges:?}"
+    );
     let domain = lateral.loops[0].parameter_area;
     assert_within(
         domain.value,
@@ -89,12 +105,32 @@ fn elliptic_trims_and_free_form_surface_use_adaptive_quadrature() {
     let exact = PI * a * b;
     assert!((cap.area.value - exact).abs() <= cap.area.error_bound);
     assert!(cap.area.error_bound < 1e-10);
-    let lateral = faces(&shape)
-        .into_iter()
-        .map(|face| face_properties(&face).unwrap());
+    let lateral = all_faces(&shape).into_iter();
     let free_form: Vec<FaceProperties> = lateral
         .filter(|face| face.surface != SurfaceType::Plane)
         .collect();
     assert_eq!(free_form[0].method, IntegrationMethod::AdaptiveQuadrature);
     assert!(free_form[0].area.error_bound < 1e-9);
+}
+
+#[test]
+fn faces_and_loop_edges_carry_body_indices() {
+    let shape = box_solid(1.0, 2.0, 3.0);
+    let topology = BodyTopology::enumerate(&shape).unwrap();
+    for index in (0..6).map(FaceIndex) {
+        let properties = face_properties(&topology, index).unwrap();
+        assert_eq!(properties.face, index);
+        let face = topology.face(index).unwrap();
+        let mut explorer = Explorer::new(&face, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
+        for edge in &properties.loops[0].edges {
+            assert!(topology.edge(*edge).unwrap().is_same(explorer.current()));
+            explorer.next().unwrap();
+        }
+    }
+    let unknown = face_properties(&topology, FaceIndex(6)).unwrap_err();
+    assert!(
+        unknown.message().contains("face index 6"),
+        "{}",
+        unknown.message()
+    );
 }
