@@ -76,9 +76,11 @@ def source_disabled_rows(
                 )
             disabled[identity] = case
             continue
-        if row.get("status") != "translated" or is_source_disabled_name(identity):
+        # An upstream_skipped row is a translated case whose native run ends in an approved
+        # GTEST_SKIP (tools/toolkit_native_skips.py).
+        if row.get("status") not in ("translated", "upstream_skipped") or is_source_disabled_name(identity):
             raise ValueError(
-                f'{identity!r} status={row.get("status")!r}; expected translated active or upstream_disabled'
+                f'{identity!r} status={row.get("status")!r}; expected translated active, upstream_skipped or upstream_disabled'
             )
     return disabled
 
