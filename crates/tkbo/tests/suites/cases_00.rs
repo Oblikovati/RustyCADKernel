@@ -209,6 +209,8 @@ pub mod orient_wire;
 pub mod pair_selector;
 #[path = "../periodic_pcurve.rs"]
 pub mod periodic_pcurve;
+#[path = "../profile_extrusion/main.rs"]
+pub mod profile_extrusion;
 #[path = "../shape_set.rs"]
 pub mod shape_set;
 #[path = "../shape_upgrade_unify_same_domain_bo_legacy.rs"]
