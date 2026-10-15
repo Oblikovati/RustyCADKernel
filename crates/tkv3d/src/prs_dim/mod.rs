@@ -42,6 +42,15 @@ mod radius_dimension;
 pub use diameter_dimension::PrsDimDiameterDimension;
 pub use radius_dimension::{PrsDimCircularFields, PrsDimRadiusDimension};
 
+mod chamf_dimension;
+mod relation;
+mod relation_support;
+pub use chamf_dimension::{PrsDimChamf2dDimension, PrsDimChamf3dDimension, PrsDimChamfFields};
+pub use relation::{
+    PrsDimRelationBase, PrsDimRelationFields, PrsDimRelationMembers, PrsDimRelationSource,
+    prs_dim_relation_set_color, prs_dim_relation_unset_color,
+};
+
 mod tool_edges;
 mod tool_faces;
 mod tool_geometry;

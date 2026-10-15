@@ -24,6 +24,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
     // PrsDim dimensions (v3_probe/prs_dim.rs)
     ("v3_prsdim", v3_probe::prs_dim::prs_dim_case),
+    // PrsDim relations (v3_probe/prs_rel.rs)
+    ("v3_prsrel", v3_probe::prs_rel::prs_rel_case),
     // AIS_Manipulator (v3_probe/ais_manipulator.rs)
     (
         "v3_ais_manipulator",

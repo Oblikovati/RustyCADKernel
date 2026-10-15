@@ -132,3 +132,34 @@ fn angle_dimension_measures_points_edges_and_cones() {
     let apex = PrsDimAngleDimension::from_cone(&face).unwrap();
     assert!((apex.get_value() - PI / 3.0).abs() < 1e-12);
 }
+
+#[test]
+fn chamfer_relations_keep_the_native_state() {
+    use rustycad_tkernel::tcollection::ExtendedString;
+    use rustycad_tkv3d::dsg_prs::DsgPrsArrowSide;
+    let plane = rustycad_tkernel::standard::Handle::new(rustycad_tkg3d::geom::GeomPlane::from_pln(
+        Plane3::from_position(Axis3::from_axis2(gp::xoy())),
+    ));
+    let edge: rustycad_tkbrep::topods::Shape = segment(gp::origin(), Point3::new(6.0, 8.0, 0.0)).into();
+    let text = ExtendedString::from_utf8("C2");
+    let chamfer = PrsDimChamf2dDimension::new(&edge, &plane, 10.0, &text);
+    assert_eq!(chamfer.value(), 10.0);
+    assert_eq!(chamfer.arrow_size(), 0.1);
+    assert!(chamfer.automatic_position());
+    assert_eq!(chamfer.symbol_prs(), DsgPrsArrowSide::LastAr);
+    assert_eq!(chamfer.kind_of_dimension(), PrsDimKindOfDimension::Length);
+    assert!(chamfer.is_movable());
+    let placed = PrsDimChamf2dDimension::with_position(
+        &edge,
+        &plane,
+        10.0,
+        &text,
+        &Point3::new(20.0, 1.0, 0.0),
+        DsgPrsArrowSide::BothAr,
+        3.0,
+    );
+    assert!(!placed.automatic_position());
+    assert_eq!(placed.arrow_size(), 3.0);
+    placed.set_position(&Point3::new(1.0, 2.0, 3.0));
+    assert_eq!(placed.position(), Point3::new(1.0, 2.0, 3.0));
+}
