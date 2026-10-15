@@ -1,6 +1,7 @@
 // BRepFilletAPI probes of tools/oracle/tkfillet_probe.cxx (the 3d fillets and chamfers
 // through ChFi3d_FilBuilder and ChFi3d_ChBuilder); the Rust twin is
 // crates/tkfillet/examples/fl_probe/api.rs.
+#include <BRep_Tool.hxx>
 #include <BRepAlgoAPI_Cut.hxx>
 #include <BRepAlgoAPI_Fuse.hxx>
 #include <BRepCheck_Analyzer.hxx>
@@ -20,9 +21,19 @@
 // the apex (5, 5), and the box 10 10 5 with 2 a boss (the cylinder of radius 2 and
 // height 3 on its top face at (5, 5)), 3 a pocket (the box 4 4 3 at (3, 3, 3) cut off),
 // 4 a notch (the box 10 10 7 at (5, 5, -1) cut off) and 5 a step (the box 5 10 3 at
-// (0, 0, 5) fused).
+// (0, 0, 5) fused), 6 the cylinder of radius 5 and height 10, 7 the box 10 10 10 with
+// its vertical edge at (10, 10) filleted with radius 3.
 TopoDS_Shape fl_api_box(double x,double y,double z,double dx,double dy,double dz){
  return BRepPrimAPI_MakeBox(gp_Pnt(x,y,z),dx,dy,dz).Shape();}
+// The box 10 10 10 with its vertical edge at (10, 10) filleted with radius 3.
+TopoDS_Shape fl_api_rounded_box(){
+ TopoDS_Shape b=fl_api_box(0.,0.,0.,10.,10.,10.);
+ BRepFilletAPI_MakeFillet f(b);
+ for(TopExp_Explorer ex(b,TopAbs_EDGE);ex.More();ex.Next()){
+  const TopoDS_Edge& e=TopoDS::Edge(ex.Current());
+  gp_Pnt a=BRep_Tool::Pnt(TopExp::FirstVertex(e)),c=BRep_Tool::Pnt(TopExp::LastVertex(e));
+  if(a.X()==10.&&a.Y()==10.&&c.X()==10.&&c.Y()==10.){f.Add(3.,e);break;}}
+ return f.Shape();}
 TopoDS_Shape fl_api_solid(int kind){
  if(kind==1)return BRepPrimAPI_MakeWedge(10.,10.,10.,5.,5.,5.,5.).Shape();
  TopoDS_Shape base=fl_api_box(0.,0.,0.,10.,10.,5.);
@@ -32,6 +43,8 @@ TopoDS_Shape fl_api_solid(int kind){
  if(kind==3)return BRepAlgoAPI_Cut(base,fl_api_box(3.,3.,3.,4.,4.,3.)).Shape();
  if(kind==4)return BRepAlgoAPI_Cut(base,fl_api_box(5.,5.,-1.,10.,10.,7.)).Shape();
  if(kind==5)return BRepAlgoAPI_Fuse(base,fl_api_box(0.,0.,5.,5.,10.,3.)).Shape();
+ if(kind==6)return BRepPrimAPI_MakeCylinder(5.,10.).Shape();
+ if(kind==7)return fl_api_rounded_box();
  return fl_api_box(0.,0.,0.,20.,20.,20.);}
 
 // The result of an algorithm: done, the faulty contours and vertices, and when done the

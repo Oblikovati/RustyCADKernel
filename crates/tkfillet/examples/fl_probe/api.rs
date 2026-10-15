@@ -2,6 +2,7 @@
 //! tools/oracle/tkfillet_probe_api.cxx.
 use super::common::{Reader, attempt, end, flag, int, real};
 use rustycad_tkbo::brep_algo_api::{BRepAlgoAPICut, BRepAlgoAPIFuse};
+use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::{self, Explorer};
 use rustycad_tkbrep::topods::{self, Edge, Shape};
 use rustycad_tkbrep::toptools::IndexedDataMapOfShapeListOfShape;
@@ -28,6 +29,26 @@ fn api_box(x: f64, y: f64, z: f64, dx: f64, dy: f64, dz: f64) -> Result<Shape, F
     )
 }
 
+/// `fl_api_rounded_box`: the box 10 10 10 with its vertical edge at (10, 10) filleted
+/// with radius 3.
+fn rounded_box() -> Result<Shape, Failure> {
+    let b = api_box(0., 0., 0., 10., 10., 10.)?;
+    let mut f = BRepFilletAPIMakeFillet::new(&b, FilletShape::Rational)?;
+    let mut ex = Explorer::new(&b, ShapeEnum::Edge, ShapeEnum::Shape)?;
+    while ex.more() {
+        let e = topods::edge(ex.current())?;
+        let a = BRepTool::pnt(&topexp::first_vertex(&e, false))?;
+        let c = BRepTool::pnt(&topexp::last_vertex(&e, false))?;
+        if a.x() == 10. && a.y() == 10. && c.x() == 10. && c.y() == 10. {
+            f.add_with_radius(3., &e)?;
+            break;
+        }
+        ex.next()?;
+    }
+    f.build(&ProgressRange::default())?;
+    Ok(f.shape()?.clone())
+}
+
 /// `fl_api_solid`: the solid of the request kind (see the native probe).
 fn api_solid(kind: i32) -> Result<Shape, Failure> {
     if kind == 1 {
@@ -52,6 +73,8 @@ fn api_solid(kind: i32) -> Result<Shape, Failure> {
         5 => BRepAlgoAPIFuse::from_shapes(&base, &api_box(0., 0., 5., 5., 10., 3.)?)?
             .shape()
             .clone(),
+        6 => BRepPrimAPIMakeCylinder::new(5., 10.).shape()?.clone(),
+        7 => rounded_box()?,
         _ => api_box(0., 0., 0., 20., 20., 20.)?,
     })
 }
