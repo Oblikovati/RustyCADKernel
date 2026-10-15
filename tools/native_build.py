@@ -135,6 +135,21 @@ MESHVS_TOOLKITS: tuple[str, ...] = ('TKMeshVS',)
 # top of the TKV3d closure).
 MESHVS_LINKED_TOOLKITS: tuple[str, ...] = ('TKMeshVS', *V3D_LINKED_TOOLKITS)
 MESHVS_CLOSURE_TARGETS: list[str] = [*MESHVS_TOOLKITS, 'gtest_main']
+# The TKVCAF oracle closure (TPrsStd presentation attributes) joins the OCAF toolkits of TKCAF
+# to the TKV3d visualization closure. The shared all-modules build can be reused instead.
+VCAF_TOOLKITS: tuple[str, ...] = ('TKVCAF',)
+# The TKVCAF closure's shared libraries in link order, dependants first (its EXTERNLIB and
+# theirs: TKCAF sits on TKBO, which sits on TKPrim).
+VCAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKVCAF', 'TKCAF', 'TKV3d', 'TKService', 'TKHLR', 'TKMesh',
+                                         'TKBO', 'TKPrim', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo',
+                                         'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d', 'TKLCAF', 'TKCDF',
+                                         'TKMath', 'TKernel')
+VCAF_CLOSURE_TARGETS: list[str] = [*VCAF_TOOLKITS, 'gtest_main']
+# The TKXCAF oracle closure (the XDE document tools) adds TKXCAF to the TKVCAF closure; its
+# GTests build boxes with TKPrim, which the TKVCAF closure links already.
+XCAF_TOOLKITS: tuple[str, ...] = ('TKXCAF',)
+XCAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKXCAF', *VCAF_LINKED_TOOLKITS)
+XCAF_CLOSURE_TARGETS: list[str] = [*XCAF_TOOLKITS, 'gtest_main']
 
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:

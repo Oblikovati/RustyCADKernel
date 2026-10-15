@@ -114,6 +114,48 @@ impl Graphic3dNameOfMaterial {
     pub const NOM_DEFAULT: Self = Self::Default;
     /// Obsolete alias `Graphic3d_NOM_UserDefined` of [`Self::UserDefined`].
     pub const NOM_USER_DEFINED: Self = Self::UserDefined;
+    /// Every enumerator in value order (`ALL[i] as i32 == i`).
+    pub const ALL: [Self; 26] = [
+        Self::Brass,
+        Self::Bronze,
+        Self::Copper,
+        Self::Gold,
+        Self::Pewter,
+        Self::Plastered,
+        Self::Plastified,
+        Self::Silver,
+        Self::Steel,
+        Self::Stone,
+        Self::ShinyPlastified,
+        Self::Satin,
+        Self::Metalized,
+        Self::Ionized,
+        Self::Chrome,
+        Self::Aluminum,
+        Self::Obsidian,
+        Self::Neon,
+        Self::Jade,
+        Self::Charcoal,
+        Self::Water,
+        Self::Glass,
+        Self::Diamond,
+        Self::Transparent,
+        Self::Default,
+        Self::UserDefined,
+    ];
+    /// The enumerator of a value, as the native cast `(Graphic3d_NameOfMaterial)value`
+    /// where the value is valid; `None` outside 0..=25.
+    ///
+    /// ```
+    /// use rustycad_tkservice::graphic3d::Graphic3dNameOfMaterial;
+    /// assert_eq!(Graphic3dNameOfMaterial::from_i32(18), Some(Graphic3dNameOfMaterial::Jade));
+    /// assert_eq!(Graphic3dNameOfMaterial::from_i32(26), None);
+    /// ```
+    pub fn from_i32(value: i32) -> Option<Self> {
+        usize::try_from(value)
+            .ok()
+            .and_then(|index| Self::ALL.get(index).copied())
+    }
 }
 
 /// Types of materials specifies if a material can change color.

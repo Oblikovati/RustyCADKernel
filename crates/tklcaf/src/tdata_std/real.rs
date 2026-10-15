@@ -3,7 +3,9 @@
 
 //! `TDataStd_Real`: a real value attribute with a user ID and a (deprecated) dimension.
 use super::TDataStd;
-use super::support::{cast_attribute, find_or_add, reset_user_id, set_backed_up, set_user_id};
+use super::support::{
+    backup_as_dynamic, cast_attribute, find_or_add, reset_user_id, set_backed_up, set_user_id,
+};
 use crate::guid_from_text;
 use crate::json::dump_attribute_json_base;
 use crate::tdf::{
@@ -91,9 +93,16 @@ impl TDataStdReal {
         crate::live(&attribute, "TDataStd_Real::Set")?.set_value(value)?;
         Ok(attribute)
     }
-    /// `Set(V)`: backed up when it changes (OCC2932; `==` on doubles, as natively).
+    /// `Set(V)`: backed up when it changes (OCC2932; `==` on doubles, as natively). The
+    /// backup goes through the attribute's own handle, so that a derived attribute
+    /// (`XCAFDoc_Area`, `XCAFDoc_Volume`) backs up as itself (the virtual `BackupCopy`).
     pub fn set_value(&self, value: f64) -> Result<(), Failure> {
-        set_backed_up(self, &self.value, &value)
+        if *self.value.read() == value {
+            return Ok(());
+        }
+        backup_as_dynamic(self)?;
+        *self.value.write() = value;
+        Ok(())
     }
     /// `Get`; `TDataStdReal::get(&attribute)`.
     pub fn get(&self) -> f64 {

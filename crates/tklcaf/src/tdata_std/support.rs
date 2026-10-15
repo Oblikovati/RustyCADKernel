@@ -73,6 +73,16 @@ pub fn set_backed_up<A: TdfAttribute + ?Sized, V: PartialEq + Clone>(
     Ok(())
 }
 
+/// `Backup()` through the attribute's own handle, so that the virtual `BackupCopy` is the
+/// most derived one when a native class derives from this attribute; an attribute without
+/// handle has no label and backs up nothing. Example: `backup_as_dynamic(&attribute)?`.
+pub fn backup_as_dynamic<A: TdfAttribute + ?Sized>(attribute: &A) -> Result<(), Failure> {
+    match attribute.attribute_base().this() {
+        Ok(this) => live(&this, "TDF_Attribute::Backup")?.backup(),
+        Err(_) => attribute.backup(),
+    }
+}
+
 /// The `this` pointer of a native `Dump` (`anOS << this`).
 pub fn address_of<T>(value: &T) -> String {
     format!("{:p}", std::ptr::from_ref(value))

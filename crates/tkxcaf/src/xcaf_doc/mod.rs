@@ -1,0 +1,92 @@
+//! The XCAFDoc package: the attributes and tools of an XDE document (shapes, assemblies,
+//! colors, layers, materials, GD&T, notes, views, clipping planes and their properties).
+mod assembly_graph;
+mod assembly_item;
+mod assembly_iterator;
+mod attribute_info;
+mod clipping_plane_tool;
+mod color;
+mod color_tool;
+mod color_tool_instances;
+mod datum;
+mod dim_tol_links;
+mod dim_tol_tool;
+mod dimension;
+mod document_tool;
+mod editor;
+mod editor_metadata;
+mod editor_rescale;
+mod editor_rescale_gdt;
+mod editor_tree;
+mod generic_empty_tool;
+mod geom_tolerance;
+mod graph_links;
+mod graph_node;
+mod layer_tool;
+mod location;
+mod material;
+mod material_tool;
+mod measures;
+mod note;
+mod note_kinds;
+mod notes_links;
+mod notes_tool;
+mod object_storage;
+mod package;
+mod registration;
+mod shape_map_tool;
+mod shape_tool;
+mod shape_tool_add;
+mod shape_tool_dump;
+mod shape_tool_expand;
+mod shape_tool_search;
+mod shape_tool_shuo;
+mod support;
+mod tool_support;
+mod view;
+mod view_tool;
+mod vis_material;
+mod vis_material_aspect;
+mod vis_material_defs;
+mod vis_material_tool;
+
+pub use assembly_graph::{
+    XCAFDocAssemblyGraph, XCAFDocAssemblyGraphAdjacencyMap, XCAFDocAssemblyGraphIterator,
+    XCAFDocAssemblyGraphNodeType,
+};
+pub use assembly_item::{XCAFDocAssemblyItemId, XCAFDocAssemblyItemRef};
+pub use assembly_iterator::XCAFDocAssemblyIterator;
+pub use clipping_plane_tool::{XCAFDocClippingPlane, XCAFDocClippingPlaneTool};
+pub use color::XCAFDocColor;
+pub use color_tool::XCAFDocColorTool;
+pub use datum::XCAFDocDatum;
+pub use dim_tol_tool::{XCAFDocDatumNames, XCAFDocDimTolTool, XCAFDocDimTolValues};
+pub use dimension::XCAFDocDimension;
+pub use document_tool::XCAFDocDocumentTool;
+pub use editor::{XCAFDocEditor, XCAFDocLabelMap};
+pub use editor_metadata::{XCAFDocCloneFlags, XCAFDocVisMaterialMap};
+pub use editor_tree::XCAFDocLabelSet;
+pub use geom_tolerance::XCAFDocGeomTolerance;
+pub use graph_node::XCAFDocGraphNode;
+pub use layer_tool::XCAFDocLayerTool;
+pub use location::{XCAFDocLengthUnit, XCAFDocLocation};
+pub use material::{XCAFDocDimTol, XCAFDocMaterial, XCAFDocMaterialFields};
+pub use material_tool::XCAFDocMaterialTool;
+pub use measures::{XCAFDocArea, XCAFDocCentroid, XCAFDocVolume};
+pub use note::{
+    XCAFDocNote, XCAFDocNoteFields, XCAFDocNoteMembers, xcaf_doc_note_dump,
+    xcaf_doc_note_dump_json, xcaf_doc_note_get, xcaf_doc_note_is_mine, xcaf_doc_note_paste,
+    xcaf_doc_note_restore,
+};
+pub use note_kinds::{XCAFDocNoteBalloon, XCAFDocNoteBinData, XCAFDocNoteComment};
+pub use notes_tool::XCAFDocNotesTool;
+pub use package::{XCAFDoc, XCAFDocColorType};
+pub use registration::register_derived_attributes;
+pub use shape_map_tool::XCAFDocShapeMapTool;
+pub use shape_tool::{ShapeToolCaches, XCAFDocShapeTool};
+pub(crate) use support::child_labels as child_labels_of_tool;
+pub use view::XCAFDocView;
+pub use view_tool::{XCAFDocViewLinks, XCAFDocViewTool};
+pub use vis_material::XCAFDocVisMaterial;
+pub use vis_material_defs::{XCAFDocVisMaterialCommon, XCAFDocVisMaterialPbr};
+pub use vis_material_tool::XCAFDocVisMaterialTool;
