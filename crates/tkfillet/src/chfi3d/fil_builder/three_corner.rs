@@ -27,14 +27,15 @@ pub(super) fn nb_surf_data(st: &StripeHandle) -> i32 {
 
 /// `SearchFD(DStr, cd1, cd2, sens1, sens2, i1, i2, p1, p2, ind1, ind2, face, sameside,
 /// jf1, jf2)`: the surface data of the two contours in front of each other on a common
-/// face, searched from their ends at the vertex inwards; `(i1, i2)` and what
-/// `ChFi3d_IsInFront` found, None when there are none.
+/// face, searched from their ends at the vertex inwards; `(i1, i2)` (None when there
+/// are none) and what `ChFi3d_IsInFront` last wrote, which the native outputs keep even
+/// when the search fails.
 fn search_fd(
     dstr: &TopOpeBRepDSDataStructure,
     (cd1, cd2): (&StripeHandle, &StripeHandle),
     (sens1, sens2): (i32, i32),
     (ind1, ind2): (i32, i32),
-) -> Result<Option<(i32, i32, InFront)>, Failure> {
+) -> Result<(Option<(i32, i32)>, InFront), Failure> {
     let (id1, id2) = (ind1, ind2);
     let (mut if1, mut if2) = (ind1, ind2);
     let (l1, l2) = (nb_surf_data(cd1), nb_surf_data(cd2));
@@ -56,7 +57,7 @@ fn search_fd(
         let mut i = id1;
         while i * sens1 <= if1 * sens1 && !fini2 {
             if try_pair(i, if2, &mut res)? {
-                return Ok(Some((i, if2, res)));
+                return Ok((Some((i, if2)), res));
             }
             i += sens1;
         }
@@ -70,7 +71,7 @@ fn search_fd(
         let mut i = id2;
         while i * sens2 <= if2 * sens2 && !fini1 {
             if try_pair(if1, i, &mut res)? {
-                return Ok(Some((if1, i, res)));
+                return Ok((Some((if1, i)), res));
             }
             i += sens2;
         }
@@ -82,7 +83,7 @@ fn search_fd(
             }
         }
         if fini1 && fini2 {
-            return Ok(None);
+            return Ok((None, res));
         }
     }
 }
@@ -245,23 +246,25 @@ impl ChFi3dFilBuilder {
         a: usize,
         b: usize,
     ) -> Result<bool, Failure> {
-        let found = search_fd(
+        let (found, res) = search_fd(
             &self.base.ds,
             (&tc.cd[a], &tc.cd[b]),
             (tc.sens[a], tc.sens[b]),
             (tc.index[a], tc.index[b]),
         )?;
-        let Some((ia, ib, res)) = found else {
-            return Ok(false);
-        };
-        tc.i[a][b] = ia;
-        tc.i[b][a] = ib;
+        // The outputs of ChFi3d_IsInFront are kept even when the search fails, as
+        // natively (the face of a failed pair may become the face of the pivot).
         tc.p[a][b] = res.p.0;
         tc.p[b][a] = res.p.1;
         tc.face[k] = res.face;
         tc.sameside[k] = res.sameside;
         tc.jf[a][b] = res.jf.0;
         tc.jf[b][a] = res.jf.1;
+        let Some((ia, ib)) = found else {
+            return Ok(false);
+        };
+        tc.i[a][b] = ia;
+        tc.i[b][a] = ib;
         Ok(true)
     }
 

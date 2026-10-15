@@ -233,3 +233,41 @@ fn chamfers_on_all_edges_of_a_pyramid_close_the_apex_with_a_plate() {
         (4644397605036952622, 4643853278911463474),
     );
 }
+
+#[test]
+fn evolving_fillets_on_all_edges_of_a_notched_box_match_the_pinned_kernel() {
+    // The box 10 10 5 without its corner box from (5, 5): three contours meet at the
+    // corners of the notch, where the face of the pivot comes from a failed search of
+    // the fillets in front of each other (solid 4, every edge, radii 0.3 to 0.6).
+    use rustycad_tkbo::brep_algo_api::BRepAlgoAPICut;
+    use rustycad_tkbrep::topexp;
+    use rustycad_tkbrep::toptools::IndexedMapOfShape;
+    use rustycad_tkernel::message::ProgressRange;
+    use rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet;
+    use rustycad_tkmath::gp::Point3;
+    let bx = |c: (f64, f64, f64), s: (f64, f64, f64)| {
+        BRepPrimAPIMakeBox::at_point(Point3::new(c.0, c.1, c.2), s.0, s.1, s.2)
+            .unwrap()
+            .shape()
+            .unwrap()
+            .clone()
+    };
+    let notch = BRepAlgoAPICut::from_shapes(
+        &bx((0., 0., 0.), (10., 10., 5.)),
+        &bx((5., 5., -1.), (10., 10., 7.)),
+    )
+    .unwrap()
+    .shape()
+    .clone();
+    let mut edges = IndexedMapOfShape::default();
+    topexp::map_shapes_of_type(&notch, ShapeEnum::Edge, &mut edges).unwrap();
+    let mut api = BRepFilletAPIMakeFillet::new(&notch, FilletShape::Rational).unwrap();
+    for i in 1..=edges.extent() {
+        api.add_with_radii(0.3, 0.6, &topods::edge(edges.find_key(i).unwrap()).unwrap())
+            .unwrap();
+    }
+    api.build(&ProgressRange::default()).unwrap();
+    assert!(api.is_done());
+    let result = api.shape().unwrap().clone();
+    assert_native(&result, (4645227081203009814, 4644486768787156139));
+}
