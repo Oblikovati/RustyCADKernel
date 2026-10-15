@@ -629746,6 +629746,1023 @@
       "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::perform_more_three_corner",
       "status": "implemented",
       "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; pinned source translation called by ChFi3dFilBuilder and ChFi3dChBuilder and exercised by the TKFillet and TKBO GTests and the fl_make_fillet native probe (bit-identical results)"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::AddSelectionMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::add_selection_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "f9751bad3f423f0b81b2848709b50463a6493f989cf34bed4cad2ea6a43f2a64"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::AfterAddition",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::after_addition",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "e47bbe9adf67c68962dad245588ba66857ac71cc25847235d3d93ec257939c86"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::AfterResume",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::after_resume",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "63c7aeeab018541dcb6e1044cbac8b4d8ab0692856ef4b2d50e827bcb8426877"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::AfterUndo",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::after_undo",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "59cc791222e30a54226f7272e09e2cf85485e3acbbc6d60ff0d578227eff0d79"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::BackupCopy",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::backup_copy",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "c03ec5196b574ab0d104d267673bdafaf3f1d105610817a2c9f8c4882bd652ae"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::BeforeForget",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::before_forget",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "3c6df3486eb87d35be70525f16b5c03ea0adaff1c23d1a3d218cdd0f83910700"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::BeforeRemoval",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::before_removal",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "629df21137d76e70d60528e54acc856e36b4368a021bc75bfaee9b7d1e6cea6d"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::BeforeUndo",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::before_undo",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "7f38e902efcf13772c1f816f82b527cf9b5b6a8971cd6f1abeea7ca8701f5e98"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Color",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::color",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "2fc32da31988c28ed8f70f3b773a6251143c9f8ae63c64f6835f5c61296c33b8"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Display",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::display",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "494987ed3c4437392e0b3d57bd187f3450ee45615889096ea01c9b48ec09e0d3"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::DumpJson",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::dump_json",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "6beba80991361ca6f6f374a6328c7c3b569728afaaff20f68f943181ac279aa4"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Erase",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::erase",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "6dc21c9017cb031264b02660a234badded87c3a80f2101f2dc3ec1cbeb11402a"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::GetAIS",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::get_ais",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "a20500bc3470c76e5339fd9488cff4922fa15d45333064ae839e4a5d65bed329"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::GetDriverGUID",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::get_driver_guid",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "786b14376eab49630a74a2870c5b918c225608b4aa0ded5eeb5078b0b069864f"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::GetID",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::get_id",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "d50e8d9bfee1a74d213e7e14fa0c626acbd885c5f3e7135042232107a1659af5"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::GetNbSelectionModes",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::get_nb_selection_modes",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "75745bfd3b9d0b51297bd6259dc05f0b45d75a2f68d6fb6991a1280b442c780c"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::HasOwnColor",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::has_own_color",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "6de2e4dec807cf9f9cbae5a4970828cecc7bade48d896f9bfdc885216ddfc3c0"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::HasOwnMaterial",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::has_own_material",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "a0c8cb3191932672f7c343a86bfe8419435c51e0937da6d9c6b44b360c5e9b98"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::HasOwnMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::has_own_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "4ff601c78c160343fbd2e92e60f0de37fb60a5a81e33d49001726832b939826f"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::HasOwnSelectionMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::has_own_selection_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "40bc49e70f0080041e8e89e10a47c81a4cb5153ae1fcdf71072d5a4e17d32ee0"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::HasOwnTransparency",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::has_own_transparency",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "23b604d6a13f208b19a1e66a69f8f3281c3e0064f50ef26bb4c2713292c51aa4"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::HasOwnWidth",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::has_own_width",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "de126f36dc0a7cc6b95320b8f20033bf7da7269b05a62cb2ca02f29e1b4fa889"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::ID",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::id",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "0c7888f8b46e093740424bba14401c9c652b79e67b1af3e95ebe7c7d814221bd"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::IsDisplayed",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::is_displayed",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "2a5caf733271ef742f7ed83b086a38309db56a3cc911aff79bc97d78bfb9f650"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Material",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::material",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "5c6ec4467e1a7941e0b3ecd71d17ed2fc6d2f4b9000fa0d7b154ebed9bc99c82"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Mode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "7e33d64b79764affb88b2d4c3b02c99d1fdb556a5afc5630c10614f32dab1b6a"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::NewEmpty",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::new_empty",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "0016a683443a2b4f845a8d501083bfb2d79cf3ac78075718711d7b3c11962cad"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Paste",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::paste",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "a8f8db416013d191730311f65e8f5adf64815cb7c8d41a5e64c2ee61c8fbd9d0"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Restore",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tklcaf::tdf::TdfAttribute>::restore",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "307ddcbdfc73c2c9751525c66621b59ea53ebe9b4b66f74395143bad4df18d64"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SelectionMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::selection_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "034f9e0fe5237b4c80d80658ec9ec88fc43d0723c6005192c445390536452467"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Set(const occ::handle<TDF_Attribute> &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_from_master",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "7d1df2476007b833a3659f4869d8d86b9a5811210f8fb403a689d8b7a1934b9f"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Set(const TDF_Label &,const Standard_GUID &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "974b6e49e64cba1588edfd83344249baa232b865decdced333e423202961c5b4"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetColor",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_color",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "aca8037fbdb5e6824624d0eddefdad8bfa09f868d29b1f799ec64dc809ec4d06"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetDisplayed",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_displayed",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "0cb01af2caaf2603b4e9e542a7572c0ad2bfd68ca9321455c35767ef62743b10"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetDriverGUID",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_driver_guid",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "39aaa919f5afcc7ed76ea9c22e5b943acecf39f239af59b6801adb17d578ec2e"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetMaterial",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_material",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "298dcb4c3501bf2b0eaeb60b987360144ccbac99493de5ba7cb9343fcb3eb431"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "62b5eae48b1965d389f28beb53a45233f86dd603260bbb8c5487fce58bccaefa"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetSelectionMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_selection_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "7efdfd942d0766fbcc52b6d8a76cf293a6d28a5dd1ce6c0fb305f257b2268a75"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetTransparency",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_transparency",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "4e6c279823ef2b4d71707523958b1a2009f7066982747fb963d92e1977d798ef"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::SetWidth",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::set_width",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "6f98d0149402e96cd615148cc07d193e354475320fe12e58d337ccadbff6510b"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::TPrsStd_AISPresentation",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "24d27f57d309b4b4787a9f5017cab70614bba932189e4a11f19429f724df8ae4"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Transparency",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::transparency",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "3c31b9049d5e7486eda30103c6124f0d4c2e9b6cab9e9965688f42f6839c6a15"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Unset",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::unset",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "65d067d6b4187182e85ef7298440ac38e8c1b882ffbf64e66ba899c6d2eb5cb3"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::UnsetColor",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::unset_color",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "7e93cfc15583e4afffbfb7cdcc340b16688ac73cd6b571accb70a51985bcfd77"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::UnsetMaterial",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::unset_material",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "b2d5ec7620e31bbed9dceb29a33e4ddf3c51349a5b5e2a0faa58936eace711ee"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::UnsetMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::unset_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "97facff18d0cfbc8de309f22bd2920dbfb44b4ef43771f0c2036df21f8a0c76f"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::UnsetSelectionMode",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::unset_selection_mode",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "20640f0379e42530b8df2ad95981b256646f8097614acbb5c6121ff5dce7cf2a"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::UnsetTransparency",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::unset_transparency",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "5a103215d713d8163dabd86da2af9f3be281e2a9fad353a64ed0636af81cfd27"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::UnsetWidth",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::unset_width",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "8734de61789d0d7ff7b5ff8bc52100ed9af786cf93397089103bb01c5fe6fc16"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "232e35bad0e44e4fbb8ee3d310213ef4cb8019dc7b5b13f04297e6dc8b240fae"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::Width",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::width",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "e612e5b408a7b5611259545d0ffd4bfa0618038a80dd55cccbcda34260834312"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::getData",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::get_data",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The settings live in the label's TDataXtd_Presentation; the native quirks are kept (SetMaterial tests HasOwnMode, SetWidth does not build a missing object, AISErase on a detached label does nothing).",
+      "cpp_declaration_id": "95ec0391fdff97be5a7314977805695cf3e2da15978dd608085a26b269145275"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::DumpJson",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tklcaf::tdf::TdfAttribute>::dump_json",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "df56f7a4ba85525b1ad30e0c84b4f6566ae8587ac752ac1af837087ceeb049f7"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Find(const TDF_Label &,occ::handle<V3d_Viewer> &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::find_viewer",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "7ad880501d7747f18ccb2a3efa7fe3a598310151dddaa53601ff629e1de09881"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Find(const TDF_Label &,occ::handle<AIS_InteractiveContext> &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::find_context",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "b7429f6fc9030ad23e7c6b658c04df30bce9cf282d2f7d8a5b9e8992d02bd1da"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Find(const TDF_Label &,occ::handle<TPrsStd_AISViewer> &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::find",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "f32dbb0aa93725b304061e5e54331a1c78170a50f6b53cfb1ef8641c330ef05c"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::GetID",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::get_id",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "d70e57db3db986b7625881d635a48f78f74f40e4040aeacb1a949a35e959ccb1"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::GetInteractiveContext",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::get_interactive_context",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "80bf1c739f9dc03e416d9c80170257d82a1b72eb49c70f398917ca6b22ea92e0"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Has",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::has",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "a0d9fa6f150fbefd4025c417da2e2198d1581f95e633734d0cee785bec3e7fea"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::ID",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tklcaf::tdf::TdfAttribute>::id",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "5a63baf6f031a73d896f8b6540d90f62d2714fac16d95d10d006e28d06acd827"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::New(const TDF_Label &,const occ::handle<AIS_InteractiveContext> &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::new_with_context",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "5c47ad0c4cabd9ac5e282a8de7cf6ae0105e5df35f8dc652d5ca3cafc09cc466"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::New(const TDF_Label &,const occ::handle<V3d_Viewer> &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::new_with_viewer",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "6501f0a1047ac3835a16c518e10a35090ed8e72f18a07308f2fdf7881e26daf7"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::NewEmpty",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tklcaf::tdf::TdfAttribute>::new_empty",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "3178edf5cbae844071ce8b037994284d7cef5acf2af7840a15de4590ffd4eaac"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Paste",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tklcaf::tdf::TdfAttribute>::paste",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "cf243b3683b843ce8875b800f2f183047378af25563bc552a727a970683c1b2c"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Restore",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tklcaf::tdf::TdfAttribute>::restore",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "044247bd1ccc4c28349c6c96becc9324578688b72d7f456e50aaf4d200c3d0d3"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::SetInteractiveContext",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::set_interactive_context",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "cac13174ff5b3f9c82efae7f7b095a9e292b1bdbf672f4dde75b8e44a96fb13b"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::TPrsStd_AISViewer",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "65db1e1e9b654956f69552e35add7a870d49177d4b006b8201cae59a7077a4e5"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Update()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "26d076d7aa37199de55d4ef69bc7286d83688d9608468154031462fe80f0acc0"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::Update(const TDF_Label &)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::update_label",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "83a3b65327dc094427027df8587f9fcb4c8e6c9bdc844d559183ff9cee8511d4"
+    },
+    {
+      "upstream_id": "TPrsStd_AxisDriver::TPrsStd_AxisDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AxisDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "c066e234739245db8cb4fd3b629b0b78b2c42e0306250c26ad142f2641c8fab5"
+    },
+    {
+      "upstream_id": "TPrsStd_AxisDriver::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AxisDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver::<rustycad_tkvcaf::tprs_std::TPrsStdDriver>::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "4171e776e49b02c09c7ff255a654d326b3f6f9ad95a80894829d61f334e06ae9"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintDriver::TPrsStd_ConstraintDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "d0d24ba2e14a12c98e9ee0fa3949236cd39c61bd1cbd099d70ab4ea7b89eaf2e"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintDriver::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver::<rustycad_tkvcaf::tprs_std::TPrsStdDriver>::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "b7c015e9e8cded4c9a953fc5a2bb10df4f0e3c28ec6f4f36ea96a7e95ef16039"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeAngle",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_angle",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "b4cc11c59a5bcc3368928d57a289f504865b2ea8efe6d25d6951fa99d67328e5"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeAngleForOneFace",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_angle_for_one_face",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "d8b29a6fe4aca52a46e774ff4cf8c9ef8f833353836beb11b94ab613028f1fe4"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeCoincident",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_coincident",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "a955d78748bc8eb3779c68752512451c25ed047a7cccd898425ee39d75896e1d"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeConcentric",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_concentric",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "67de4843d84db9fe9cef18dc453c94b33723285a04b04ecf3f8c1601c4a581cc"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeDiameter",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_diameter",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "2f78faade9b7f400a07500bae6e48a592d15788142c71a496db8e2e70b377cbf"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeDistance",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_distance",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "25e9bf0d050880674837e5fcfaa487faa84fc1829fb1c380c9484fd5b60d1c0e"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeEqualDistance",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_equal_distance",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "3a66981582dff710acf29584f31ff0345427d5448273f396da2b72430258ad09"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeEqualRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_equal_radius",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "36eda0690511870273d12b3073dad17283d6438f68ea1b2c130ff5731657780d"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeFix",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_fix",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "4e21a2c89d27ebe095b1e349694c4097f02d202226f1d952dc0435e5bff46e59"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeMaxRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_max_radius",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "5532715d6e39aaf54b2bfc093d04dd44a7339e4b5683366ef43f2514ed7f08d4"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeMidPoint",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_mid_point",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "25f4160c720e03862ff1e67a157b1fe9b4749a1ca7ce2c509d55dbc2124ebad9"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeMinRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_min_radius",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "fd5f4fdf9b6146833d3fca921b662dc2beb87975d3908777f17f5ef0170021d0"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeOffset",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_offset",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "6da6e09a71563c51a020e1f239b48633e8dcd73a7834ccce5aa1ccb62b03ebe8"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeOthers",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_others",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "c085297eda41a48fa92d8c0ef91cb40f579441427ee5829e9fb28b96a180aabe"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeParallel",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_parallel",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "0e251a2b603a79cb99f8ee2fe009658cce70cf3b28a1aec52bc93399c30e556f"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputePerpendicular",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_perpendicular",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "661972538b2b6ca71da2332635c7df8174f7a96f3bfcf2cc5746c1c80898de55"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputePlacement",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_placement",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "973f06f7cfab36b62b66ab2fdf5b526f96865914e969cfcc1dcd1707c6c8293c"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_radius",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "742f609aa4caf2ef7bac8745003b978a360a210969f68fe41bbe0ac5cd4c6af3"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeRound",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_round",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "2d1cc6d11f39b4dc0c42d7ffa36c1d965bac3df0e810d2e62f6f5c19c0cc3804"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeSymmetry",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_symmetry",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "48cdc994ecc0110c21b1b691d5c3569792bbac062d3a52484d145516b5602ab7"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeTangent",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_tangent",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "dd80e3af57d4e7da528e01a48e09a92e9a0db089211d841f25c1a14ccc5b9b21"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeTextAndValue",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::compute_text_and_value",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "8c2f45d41669e89dffaf03ed54e362d3df17aa0ec45588df8e4b2cb24dc28c4d"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::UpdateOnlyValue",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools::update_only_value",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The value-returning ComputeX start from a null object as natively; the deprecated in/out overloads are excluded (ADR 0002), so the update branches they alone reach are not ported. %g text through Standard_CString sprintf; UnitsAPI is the process-wide prs_dim_units_api.",
+      "cpp_declaration_id": "9aee8373d6244894973ff262c8a617654dc10d1ae0ac1539d5145f1e0decea94"
+    },
+    {
+      "upstream_id": "TPrsStd_Driver::TPrsStd_Driver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_Driver.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardTransient::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The protected constructor only constructs the Standard_Transient base that each driver struct embeds.",
+      "cpp_declaration_id": "1436c17b5cbafb0591e22c0da44d19b7f57de7d273a5b9151714866ab22f3767"
+    },
+    {
+      "upstream_id": "TPrsStd_Driver::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_Driver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriver::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors. The protected constructor only constructs the Standard_Transient base that each driver struct embeds.",
+      "cpp_declaration_id": "9218d11216dc76712f9e50d03ab33becc097f530b7c2bed36dd238d15853db88"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::AddDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::add_driver",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "ecce190711a82355f429f13f74bbfed3e278d8d38c5a4bb5004819ef47d72949"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::Clear",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::clear",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "6b1c52ff0274f2ad64b9853d84bb20fd07c8de59cfd623811c1f637269d3deab"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::FindDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::find_driver",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "b70f32b3974a0cb00a10846a3dd9f0871ca7aaa81f03016ca187dc8d25a35d45"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::Get",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::get",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "b5bbce955745a8ea6d42db68b9193afc8916079ee83596ca3389ba485713ed3d"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::InitStandardDrivers",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::init_standard_drivers",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "fab3d8e3c86bf32ff5b9da845617c35195fb0ad6c91131d725f9198dc8478c51"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::RemoveDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::remove_driver",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "c2c6a98727408f55ed72c6156050ad03e5c0a4941a688f844746092399098260"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::TPrsStd_DriverTable",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "1ad77abe9eafef0816d4cf42f221df437edc56bb464abfa8a7e512538098a21a"
+    },
+    {
+      "upstream_id": "TPrsStd_GeometryDriver::TPrsStd_GeometryDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_GeometryDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "17aed3116c8f22f6e8b83a71ea0b1d96d6f89aec44b5a9fbd22aa62bd34871fb"
+    },
+    {
+      "upstream_id": "TPrsStd_GeometryDriver::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_GeometryDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver::<rustycad_tkvcaf::tprs_std::TPrsStdDriver>::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "1e27383cf0b18604b902442ab616835e31f8f46bcc33bb23fcf6741ec15f2eb8"
+    },
+    {
+      "upstream_id": "TPrsStd_NamedShapeDriver::TPrsStd_NamedShapeDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_NamedShapeDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "3e5d408274ff66033d9448bfacb6993503361d85f545e7a35663bc8f2898693b"
+    },
+    {
+      "upstream_id": "TPrsStd_NamedShapeDriver::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_NamedShapeDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver::<rustycad_tkvcaf::tprs_std::TPrsStdDriver>::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "9c8d4dada14cd51c41dbc170db29765cbf846ae6b2c47d938f1c09f9da3b437f"
+    },
+    {
+      "upstream_id": "TPrsStd_PlaneDriver::TPrsStd_PlaneDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PlaneDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "4601226517fa75818bf5b29a67296eec5cff84d1e49aae1d011a6b5bc83e8704"
+    },
+    {
+      "upstream_id": "TPrsStd_PlaneDriver::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PlaneDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver::<rustycad_tkvcaf::tprs_std::TPrsStdDriver>::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "82628c5bfbf3a54e8d9a5c8a57d48341698d4ac7d3308bd296bc5fb076cc3040"
+    },
+    {
+      "upstream_id": "TPrsStd_PointDriver::TPrsStd_PointDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PointDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPointDriver::new",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "ae470e1647f5523370a300580a8c08469a73980d6a04e9b7d4ee7ec81eb587a2"
+    },
+    {
+      "upstream_id": "TPrsStd_PointDriver::Update",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PointDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPointDriver::<rustycad_tkvcaf::tprs_std::TPrsStdDriver>::update",
+      "status": "implemented",
+      "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
+      "cpp_declaration_id": "1442f75d2b9a7fd5439f14f3025ab4afa409f6e32f0286185e54c04f69539b22"
     }
   ],
   "tests": [
@@ -744290,6 +745307,20 @@
       "rust_target": "legacy_brep_algo_api_section",
       "rust_test": "modalg_bug_23932_section_between_trimmed_cylinders2",
       "rust_source": "crates/tkbool/tests/legacy_brep_algo_api_section.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentationTest.CafBug_60910_ModeState",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/GTests/TPrsStd_AISPresentation_Test.cxx",
+      "source_sha256": "cb0a1168115bea3438f520abf4d5946329cd6c80d918cb5ad69d112e8529cb75",
+      "rust_package": "rustycad-tkvcaf",
+      "rust_target": "tprsstd_ais_presentation",
+      "rust_test": "TPrsStd_AISPresentationTest__CafBug_60910_ModeState",
+      "rust_source": "crates/tkvcaf/tests/tprsstd_ais_presentation.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

@@ -1,15 +1,16 @@
-"""The TKCDF, TKLCAF and TKCAF verifier wiring: profiles without numeric oracle, the native
+"""The TKCDF, TKLCAF, TKCAF, TKVCAF and TKXCAF verifier wiring: profiles without numeric oracle, the native
 libraries they link, their own closure tree."""
 import unittest
 from native_build import (ADDITIONAL_TOOLKITS, CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS,
                           LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
-                          closure_flags)
+                          V3D_LINKED_TOOLKITS, VCAF_CLOSURE_TARGETS, VCAF_LINKED_TOOLKITS,
+                          XCAF_CLOSURE_TARGETS, XCAF_LINKED_TOOLKITS, closure_flags)
 from verify_toolkit import NUMERIC_VERIFIERS, PROFILE_CLOSURES, PROFILES_WITHOUT_NUMERIC, linked_toolkits
 
 
 class OcafVerifierProfileTests(unittest.TestCase):
     def test_ocaf_profiles_have_no_numeric_oracle(self):
-        for toolkit in ('TKCDF', 'TKLCAF', 'TKCAF'):
+        for toolkit in ('TKCDF', 'TKLCAF', 'TKCAF', 'TKVCAF', 'TKXCAF'):
             self.assertIn(toolkit, PROFILES_WITHOUT_NUMERIC)
             self.assertNotIn(toolkit, NUMERIC_VERIFIERS)
 
@@ -54,6 +55,26 @@ class OcafVerifierProfileTests(unittest.TestCase):
         self.assertNotEqual(tree, PROFILE_CLOSURES['TKLCAF'][2])
         self.assertEqual(set(OCAF_TOOLKITS) - set(CAF_TOOLKITS), set())
         self.assertEqual(set(CAF_TOOLKITS) - set(CAF_LINKED_TOOLKITS), set())
+
+    def test_tkvcaf_links_the_ocaf_and_visualization_closures(self):
+        linked = linked_toolkits('TKVCAF')
+        self.assertEqual(linked, VCAF_LINKED_TOOLKITS)
+        # TPrsStd sits on TKCAF (TDataXtd) and TKV3d (AIS); every TKV3d dependency is linked.
+        self.assertEqual(set(V3D_LINKED_TOOLKITS) - set(linked), set())
+        self.assertLess(linked.index('TKVCAF'), linked.index('TKCAF'))
+        self.assertLess(linked.index('TKCAF'), linked.index('TKBO'))
+        self.assertLess(linked.index('TKLCAF'), linked.index('TKCDF'))
+        self.assertEqual(linked[-1], 'TKernel')
+
+    def test_tkxcaf_adds_itself_to_the_tkvcaf_closure(self):
+        self.assertEqual(linked_toolkits('TKXCAF'), ('TKXCAF', *VCAF_LINKED_TOOLKITS))
+        self.assertIn('TKPrim', XCAF_LINKED_TOOLKITS)
+
+    def test_visualization_ocaf_profiles_build_their_own_trees(self):
+        self.assertEqual(PROFILE_CLOSURES['TKVCAF'][1], VCAF_CLOSURE_TARGETS)
+        self.assertEqual(PROFILE_CLOSURES['TKXCAF'][1], XCAF_CLOSURE_TARGETS)
+        trees = {PROFILE_CLOSURES[name][2] for name in ('TKCAF', 'TKV3d', 'TKVCAF', 'TKXCAF')}
+        self.assertEqual(len(trees), 4)
 
 
 if __name__ == '__main__':
