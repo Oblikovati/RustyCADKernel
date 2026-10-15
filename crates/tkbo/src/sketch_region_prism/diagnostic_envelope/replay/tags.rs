@@ -35,5 +35,6 @@ pub(super) fn owner(value: RetainedPreparationStage) -> u8 {
         RetainedPreparationStage::Partition => 3,
         RetainedPreparationStage::ContactTransport => 4,
         RetainedPreparationStage::Prism => 5,
+        RetainedPreparationStage::RegionIdentities => 6,
     }
 }

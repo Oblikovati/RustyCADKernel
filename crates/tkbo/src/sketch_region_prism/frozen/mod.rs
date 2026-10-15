@@ -89,10 +89,12 @@ pub(in crate::sketch_region_prism) mod publication_read_snapshot;
 pub(in crate::sketch_region_prism) use capture::capture_limits as capture_prism_limits;
 
 #[cfg(test)]
-mod annular_fixture;
+pub(in crate::sketch_region_prism) mod annular_fixture;
 pub(in crate::sketch_region_prism) mod annular_join;
 pub(in crate::sketch_region_prism) mod annular_orientation;
 
 pub(in crate::sketch_region_prism) mod annular_measures;
+pub(in crate::sketch_region_prism) mod annular_volume;
+pub(in crate::sketch_region_prism) use identities::same_definition as same_occurrence_definition;
 
-mod annular_history;
+pub(in crate::sketch_region_prism) mod annular_history;

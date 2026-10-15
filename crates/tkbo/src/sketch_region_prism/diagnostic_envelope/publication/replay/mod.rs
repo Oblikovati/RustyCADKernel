@@ -8,6 +8,10 @@ use crate::sketch_region_prism::{
     frozen::proof_join::{encode_joined_block, encode_joined_text},
 };
 pub(super) use join::join_bytes;
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) use tags::freeze as freeze_tag;
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) use tags::{
+    class as publication_class_tag, history as history_phase_tag, pending as pending_tag,
+};
 impl OwnedPrismPublicationDiagnostic {
     /// Replay supported evidence and exact coverage; `diagnostic.replay_bytes()` excludes retained local owners.
     pub(crate) fn replay_bytes(&self) -> Vec<u8> {
@@ -37,6 +41,11 @@ fn cause(value: &OwnedPublicationDiagnosticCause, bytes: &mut Vec<u8>) {
             bytes.push(1);
             stage(value, bytes);
         }
+        other => history_cause(other, bytes),
+    }
+}
+fn history_cause(value: &OwnedPublicationDiagnosticCause, bytes: &mut Vec<u8>) {
+    match value {
         OwnedPublicationDiagnosticCause::HistoryCancelled { operation, phase } => {
             bytes.push(2);
             bytes.extend(operation.0.to_le_bytes());
@@ -45,6 +54,11 @@ fn cause(value: &OwnedPublicationDiagnosticCause, bytes: &mut Vec<u8>) {
         OwnedPublicationDiagnosticCause::Unprojected(value) => {
             bytes.extend([3, tags::pending(*value)])
         }
+        OwnedPublicationDiagnosticCause::History(value) => {
+            bytes.push(4);
+            encode_joined_block(value.encoded(), bytes);
+        }
+        _ => unreachable!("version and stage causes are encoded by the caller"),
     }
 }
 fn stage(value: &OwnedPublicationStageDiagnostic, bytes: &mut Vec<u8>) {
@@ -95,7 +109,7 @@ fn callback_v2(
         stage(value, bytes);
     }
 }
-fn callback(value: &OwnedPublicationCallback, bytes: &mut Vec<u8>) {
+pub(super) fn callback(value: &OwnedPublicationCallback, bytes: &mut Vec<u8>) {
     bytes.push(shared::publication_phase_tag(value.checkpoint.phase));
     bytes.extend((value.checkpoint.ordinal as u64).to_le_bytes());
     shared::append_callback_cause(&value.cause, bytes);

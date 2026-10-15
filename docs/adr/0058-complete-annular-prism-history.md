@@ -1,9 +1,44 @@
 # ADR 0058: Bounded complete annular prism history
 
-Status: structural prerequisites implemented; **complete annular history remains
-UNIMPLEMENTED** at the requested wrap-up. The approved private V2 interface below
-is a deferred design, not an available issuer or acceptance claim. V1 remains
-selected by its original entry and preserves exact historical bytes.
+Status: private V2 issuer implemented on a worktree branch (2026-10-15, see
+"V2 issuer" below); main integration and the root gate remain the coordinator's.
+V1 remains selected by its original entry; its types gained only one additive
+legacy cause variant (`AnnularJoin`) and wider helper visibility.
+
+## V2 issuer (2026-10-15)
+
+`frozen::annular_history::inspect_annular_prism_history` (plus
+`inspect_bound_…`, `rebind_…`, `reproject_…`) consumes the same
+`TwoLoopRegionRequest`, `PrismReceipt`, publication/copy bindings, explicit
+`AnnularHistoryBindings` scopes and the sealed `AnnularFrozenDomain`.
+
+- Scopes: `Original(source)`/`InputCopy(source)` per authored source,
+  `Partition`, `CandidateCopy`, `Selected(name)`/`Rejected(name)` per authored
+  candidate, `SweepBase`. The explicit roster must be exactly both InputCopy
+  scopes, Partition, CandidateCopy and every rejected candidate; duplicates,
+  extras, stage mislabels and member names reused across scopes refuse.
+- Partition queries are resolved per source through that source's own initial
+  copier image; partition relation parents are derived from each original's
+  actual continuation (root container: generated from all originals), never by
+  shape kind. Empty Modified/Generated and false Deleted answers are retained.
+- Every candidate binds its sealed disposition, authored wire roles, actual
+  generated area (ordinal re-checked) and its receipt; rejected receipts bind
+  one-to-one. Each copied use traces into the annulus and exactly one rejected
+  domain whose wire has the same authored source.
+- Sweep answers reuse the exhaustive V1 projection; captured flat parents bind
+  the same full source/output/role native row, keep captured order and equal
+  the native class union. Six original continuations reach both caps; the two
+  copied annulus wire retirements are recorded separately; deletion is empty
+  only after all continuations.
+- Admission charges authored scopes, native operands and live-root censuses
+  before projection; terminal callback precedes the shared join rebind and a
+  callback-free full-byte reprojection. Join refusals keep their carrier in
+  `AnnularHistoryFailure::join`.
+
+Evidence: 28 `annular_history` tests (operation, adversarial, native refusal,
+ten-geometry variant corpus incl. stored/traversed reversal, reflection,
+negative sweep and reordered request rows with identical replay, two-thread
+equality). This history still grants no body validity.
 
 The proposed inspection would consume the same retained two-loop request, actual sweep
 receipt, authored publication/copy/intermediate bindings and sealed named annular

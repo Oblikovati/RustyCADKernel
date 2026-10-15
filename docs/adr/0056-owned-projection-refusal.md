@@ -70,3 +70,19 @@ Compile-time Send/Sync and ordinary host thread tests cover the owned values.
 ThreadSanitizer remains incomplete due the separately retained unchanged-host
 startup failure; this slice does not repeat or bypass it. No live OCCT, GPU,
 performance, application acceptance or complete release gate is claimed.
+
+## Follow-up: publication history findings (2026-10-15)
+
+An attributed publication `History` refusal whose `PrismHistoryFailure` carries
+no operation-local owner (`local_diagnostic` is `None`) and whose cause lies in
+the bounded explicit-tag codec (`AtUse`, `Count`, `Missing`, `Changed`,
+`ParentsMismatch`, `Bounds`, `ContextRead`, `Native`, `LineageCancelled`,
+`UnsupportedDiagnostic`) is now moved whole into
+`OwnedPublicationDiagnosticCause::History`: the actual finding plus its
+`Martensite.PublicationHistoryDiagnostic/v1` bytes (outer replay tag 4). No
+original is retained because nothing remains in it. Legacy, lineage, frozen and
+geometry history families, and any finding with a local owner, keep the former
+`Unprojected(History)` gap with the exact original Box. The existing actual
+history-version refusal test was changed accordingly: it now asserts the owned
+finding instead of the gap. Resolution, preparation, partial transactions and
+the annular publication causes remain open.

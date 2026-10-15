@@ -39,14 +39,16 @@ class VectorExtremaBindingsTest(unittest.TestCase):
     def test_all_six_selectors_resolve_to_the_pinned_declarations(self) -> None:
         self.assert_exact_bindings(self.audit["bindings"], 6, "implemented")
 
-    def test_all_twelve_returning_assignments_keep_partial_limits(self) -> None:
-        self.assert_exact_bindings(self.assignment_audit["bindings"], 12, "partial")
+    # The three groups below were partial for generic C++ element hooks, constexpr and aliased
+    # operands only; the 2026-10-15 D1 review (tkernel_d1_review) made them implemented.
+    def test_all_twelve_returning_assignments_resolve_after_d1_review(self) -> None:
+        self.assert_exact_bindings(self.assignment_audit["bindings"], 12, "implemented")
 
-    def test_scalar_returns_and_float_specializations_keep_partial_limits(self) -> None:
-        self.assert_exact_bindings(self.scalar_audit["bindings"], 10, "partial")
+    def test_scalar_returns_and_float_specializations_resolve_after_d1_review(self) -> None:
+        self.assert_exact_bindings(self.scalar_audit["bindings"], 10, "implemented")
 
-    def test_product_formulas_keep_generic_and_constexpr_limits(self) -> None:
-        self.assert_exact_bindings(self.products_audit["bindings"], 5, "partial")
+    def test_product_formulas_resolve_after_d1_review(self) -> None:
+        self.assert_exact_bindings(self.products_audit["bindings"], 5, "implemented")
 
     def assert_exact_bindings(
         self, bindings: list[dict[str, str]], count: int, mapping_status: str

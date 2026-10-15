@@ -60,7 +60,7 @@ pub(super) fn source_identity_name(
         _ => Err(identity("one explicit authored source member", names.len())),
     }
 }
-pub(super) fn same_definition(
+pub(in crate::sketch_region_prism) fn same_definition(
     first: &PartitionOccurrenceIdentity,
     second: &PartitionOccurrenceIdentity,
 ) -> bool {

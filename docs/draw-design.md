@@ -73,19 +73,28 @@ and stop indicator of `Draw_ProgressIndicator`, the `cpulimit` limit and watchdo
 - `Draw_Viewer` with no window system is the batch viewer: every method returns at once,
   as each C++ method starts with `if (Draw_Batch) return`.
 
-The native backend is a later step and is not in this crate yet. It will implement the
-two traits with Xlib on Linux through the X11 wrapper of `rustycad-tkservice`
-(`xw::xlib`, `x11-dl`, see `docs/visualization-design.md` of the tkservice port):
-`Aspect_DisplayConnection` gives the `Display*`, windows are X11 windows drawn with
-`XDrawSegments`/`XDrawString` in a GC per palette color (and an off-screen pixmap for
-`-v` virtual windows), events come from the display connection registered as a Tcl file
-handler, and the Tk main window comes from `rustycad-tcl` (`TkApp`). DRAW's views are
-2D line drawings, so they do not need the Vulkan driver; the 3D viewer commands of
-TKViewerTest will use the Vulkan 1.3 driver of the visualization port. Until the
-backend exists, `Init_Appli` cannot open a display: `drawexe` without `-b` reports
-"Cannot open display (this build has no DRAW window backend). Interpret commands in
-batch mode." and continues in batch mode, which is the C++ behavior when the display
+The native backend is a later step and is not in this crate yet. Decision (2026-10-15,
+following the user's direction that the DRAW window draws through the Vulkan driver
+instead of X11): the backend implements the two traits on the Vulkan 1.3 driver of
+`crates/vulkan` (`docs/vulkan-renderer.md`, `docs/vulkan-window-presentation.md`), not with
+Xlib drawing. `Aspect_DisplayConnection` still gives the native window and its events,
+which the display connection delivers as a Tcl file handler, and the Tk main window
+comes from `rustycad-tcl` (`TkApp`); `DrawSegments` and `DrawString` become line and
+text draws of the driver in the palette color and raster mode of the window, and the
+`-v` virtual windows render to the driver's offscreen target instead of a pixmap.
+Until the backend exists, `Init_Appli` cannot open a display: `drawexe` without `-b`
+reports "Cannot open display (this build has no DRAW window backend). Interpret commands
+in batch mode." and continues in batch mode, which is the C++ behavior when the display
 connection fails.
+
+The `Draw_Window` members that only the backend has stay open in the API ledger until it
+lands: `Init_Appli`, `Run_Appli` and `Destroy_Appli` (the display and event loop),
+`Destroy`, `SetUseBuffer`/`GetUseBuffer`/`InitBuffer` (the off-screen buffer of a window),
+the before-terminate callbacks (`AddCallbackBeforeTerminate`,
+`RemoveCallbackBeforeTerminate`, `FCallbackBeforeTerminate`, run when the event loop ends)
+and the protected `init`. The members the viewer already calls are partial rows on
+`DrawWindow`/`DrawWindowSystem` with the batch behavior; the pure virtual `WExpose`
+hook is `DrawViewer::expose_view`, which the backend will call on an expose event.
 
 ## 4. Plugins
 

@@ -6,8 +6,11 @@ import unittest
 from pathlib import Path
 
 from api_crosswalk import cpp_candidates, cpp_indexes
+from tkernel_d1_review import kept_partial_rows, review_outcome
 
 ROOT = Path(__file__).resolve().parents[2]
+# Rows the 2026-10-15 D1 review kept partial (class-A gaps).
+D1_KEPT = kept_partial_rows(ROOT)
 # 8e1b5c7a corrected typed ListCursor claims to exact raw BaseList iterator bodies.
 ROWS = (
     (
@@ -118,6 +121,6 @@ class VectorComparisonSelectorTest(unittest.TestCase):
     def test_base_list_comparison_bindings_remain_partial(self) -> None:
         for selector, _compiler_id, rust_item in ROWS[:2]:
             row = self.parity_rows[selector]
-            self.assertEqual(row["status"], "partial")
+            self.assertEqual(review_outcome(row, D1_KEPT), "implemented")
             self.assertEqual(row["rust_items"], [rust_item])
             self.assertEqual(row["rust_kind"], "function")

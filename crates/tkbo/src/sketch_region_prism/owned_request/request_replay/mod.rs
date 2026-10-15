@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Full pre-admission operands; refused NaN payloads and source multiplicity remain evidence.
+mod annular;
 mod policy;
 mod publication;
 use super::{names::SemanticSelectionIntent, request::*};
 use crate::sketch_region_prism::frozen::encode_frozen_numbers as numbers;
+pub(in crate::sketch_region_prism) use annular::{
+    encode_annular_publication_options, encode_owned_annular_request,
+};
 pub(crate) use publication::encode_publication_request_options;
 /// Encode every original input and limit; `encode_owned_prism_request(&request)` performs no admission.
 pub(crate) fn encode_owned_prism_request(request: &OwnedPolynomialPrismRequest) -> Vec<u8> {

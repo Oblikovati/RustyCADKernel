@@ -38,7 +38,7 @@ impl AnnularIntersectionCertificate {
         bytes
     }
 }
-fn topology(proof: &AnnularTopologyCertificate) -> Vec<u8> {
+pub(super) fn topology(proof: &AnnularTopologyCertificate) -> Vec<u8> {
     let mut bytes = Vec::new();
     encode_joined_text("Martensite.AnnularTopology/v2", &mut bytes);
     encode_joined_block(proof.source_bytes(), &mut bytes);
@@ -50,7 +50,7 @@ fn topology(proof: &AnnularTopologyCertificate) -> Vec<u8> {
     bytes.extend([0, 0]); // ExactCombinatorial; numerical error NotApplicable.
     bytes
 }
-fn trace(trace: &OrderedPrismStageTrace, bytes: &mut Vec<u8>) {
+pub(super) fn trace(trace: &OrderedPrismStageTrace, bytes: &mut Vec<u8>) {
     for stage in OrderedPrismStage::ALL {
         bytes.push(match trace.status(stage) {
             OrderedPrismStageStatus::Blocked => 0,

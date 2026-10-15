@@ -3,7 +3,7 @@ use super::super::{annular_fixture::*, topology::*};
 use super::*;
 use rustycad_tkernel::standard::Failure;
 
-pub(super) struct JoinProgress<F>(pub F);
+pub(in crate::sketch_region_prism::frozen) struct JoinProgress<F>(pub F);
 impl<F: FnMut(AnnularFrozenPhase) -> Result<bool, Failure> + Send> AnnularFrozenProgress
     for JoinProgress<F>
 {
@@ -17,7 +17,7 @@ impl TopologyProgress for ContinueTopology {
         Ok(false)
     }
 }
-pub(super) fn with_named<T>(
+pub(in crate::sketch_region_prism::frozen) fn with_named<T>(
     run: impl FnOnce(
         &TwoLoopRegionRequest<'_, '_>,
         &mut PrismReceipt,
@@ -153,7 +153,7 @@ fn name_budget_and_version_admission_precede_external_callbacks() {
     }
 }
 
-pub(super) fn inspect_default<'r>(
+pub(in crate::sketch_region_prism::frozen) fn inspect_default<'r>(
     request: &TwoLoopRegionRequest<'r, '_>,
     receipt: &PrismReceipt,
     names: &PrismPublicationBindings,

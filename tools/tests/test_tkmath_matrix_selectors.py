@@ -66,4 +66,9 @@ class MatrixSelectorInventoryTest(unittest.TestCase):
             status, candidates = cpp_candidates(selector, "TKernel", self.by_name)
             self.assertEqual(status, "unique", selector)
             self.assertEqual([row["id"] for row in candidates], [compiler_id])
-            self.assertEqual(parity_rows[selector]["status"], "partial")
+            row = parity_rows[selector]
+            # Map borrows the caller array as the whole matrix (Mat3/Mat4::map_ref and
+            # map_ref_mut), so the rows are implemented since the 2026-10-15 review.
+            self.assertEqual(row["status"], "implemented")
+            mutable = "const" not in selector
+            self.assertTrue(row["rust_item"].endswith("::map_ref_mut" if mutable else "::map_ref"))

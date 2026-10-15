@@ -8,13 +8,35 @@ pub(in crate::sketch_region_prism) fn project_invoked_publication_refusal<'a>(
     let context = OwnedPrismDiagnosticContext::from_invocation(&packet);
     let mut gaps = admission::gaps(&packet);
     let bindings = packet.bindings();
-    let original = packet.into_failure();
+    let original = match history::take(packet.into_failure(), gaps.is_empty()) {
+        Ok((header, history)) => return owned_history(context, header, history),
+        Err(original) => original,
+    };
     let cause = projection::outer(&original, bindings, &mut gaps);
     let diagnostic = diagnostic(context, &original, cause, gaps);
     let original = (!diagnostic.gaps.is_empty()).then_some(original);
     InvokedPublicationRefusalProjection {
         diagnostic,
         original,
+    }
+}
+/// A moved complete history finding needs no retained original.
+fn owned_history<'a>(
+    context: OwnedPrismDiagnosticContext,
+    header: history::HistoryHeader,
+    history: OwnedPublicationHistory,
+) -> InvokedPublicationRefusalProjection<'a> {
+    let diagnostic = Box::new(OwnedPrismPublicationDiagnostic {
+        context,
+        operation: header.operation,
+        phase: header.phase,
+        class: header.class,
+        cause: OwnedPublicationDiagnosticCause::History(Box::new(history)),
+        gaps: Vec::new(),
+    });
+    InvokedPublicationRefusalProjection {
+        diagnostic,
+        original: None,
     }
 }
 fn diagnostic(

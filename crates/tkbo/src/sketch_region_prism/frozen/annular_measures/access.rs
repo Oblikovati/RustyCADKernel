@@ -17,6 +17,10 @@ impl AnnularPrismMeasures {
     pub(in crate::sketch_region_prism) fn signed_sweep(&self) -> &CertifiedPolynomialMeasure {
         &self.signed_sweep
     }
+    /// Read the certified material normalization of both sweep boundaries; `report.boundaries()`.
+    pub(in crate::sketch_region_prism) fn boundaries(&self) -> &[AnnularBoundaryDirection; 2] {
+        &self.boundaries
+    }
     /// Borrow the exact four-component sum; `report.total_area().components()`.
     pub(in crate::sketch_region_prism) fn total_area(&self) -> &CertifiedEnclosureSum {
         &self.total

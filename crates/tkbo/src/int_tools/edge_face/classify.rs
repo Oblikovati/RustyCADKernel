@@ -1,6 +1,6 @@
 use super::EdgeFace;
 use super::touch::check_touch;
-use crate::int_tools::Range;
+use crate::int_tools::{Range, Tools};
 use rustycad_tkernel::{ncollection::Sequence, standard::Failure};
 use rustycad_tkg3d::{adaptor3d::Adaptor3dCurve, top_abs::ShapeEnum};
 
@@ -11,9 +11,11 @@ pub(super) fn append_projectable_ranges(
     let curve = edge_face.curve.get().expect("initialized edge-face curve");
     let context = edge_face.context.get().expect("edge-face context");
     for range in ranges.iter() {
-        let middle = (range.first() + range.last()) * 0.5;
+        // IsProjectable(IntTools_Tools::IntermediatePoint(First, Last)): the 0.43213918 point,
+        // not the middle of the range.
+        let sample = Tools::intermediate_point(range.first(), range.last());
         if !context.is_valid_point_for_face(
-            curve.value(middle)?,
+            curve.value(sample)?,
             &edge_face.face,
             edge_face.criteria,
         )? {
@@ -26,6 +28,10 @@ pub(super) fn append_projectable_ranges(
     }
     Ok(())
 }
+
+#[cfg(test)]
+#[path = "projectable_tests.rs"]
+mod projectable_tests;
 
 pub(super) fn classify_common_parts(edge_face: &mut EdgeFace) -> Result<(), Failure> {
     let curve = edge_face

@@ -8,6 +8,7 @@ mod source;
 mod stage_error;
 mod stages;
 
+pub(in crate::sketch_region_prism) mod annular;
 mod failure;
 mod history;
 mod operation;

@@ -4,6 +4,7 @@ mod access;
 mod adapters;
 mod checks;
 mod error;
+mod failure_codec;
 mod operation;
 mod progress;
 mod replay;
@@ -22,6 +23,7 @@ use crate::sketch_region_prism::{
     region_certificate::embedding::*,
 };
 pub(in crate::sketch_region_prism) use error::*;
+pub(in crate::sketch_region_prism) use failure_codec::annular_validation_failure_bytes;
 pub(in crate::sketch_region_prism) use operation::validate_annular_prism;
 pub(in crate::sketch_region_prism) use progress::*;
 pub(in crate::sketch_region_prism) use types::*;

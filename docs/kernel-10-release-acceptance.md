@@ -331,3 +331,61 @@ The user requested finishing the current batch and a handoff. Broader work is
 paused; [the handoff](handoff-kernel-10-2026-10-14.json) records exact revisions,
 remaining work and preserved older worktrees. No follow-on porting task, PR, push
 or release was performed during this wrap-up.
+
+### Annular history, publication and owned preparation supplement (2026-10-15)
+
+A worktree branch (not yet integrated or root-gated) adds, on top of `6f158ea74`:
+
+- ADR0058 V2 complete annular history issuer: six original directed uses
+  continued through source-specific copies and native partition queries,
+  continuation-derived partition parents, all three authored candidates with
+  sealed dispositions, captured flat parents bound to native sweep rows, two
+  separate intermediate wire retirements, certified-empty original deletion.
+- ADR0061 named annular publication: one join, ordered validation, V2 history
+  and four-face measures bound to one source; terminal callback before the
+  callback-free source rebind and history reprojection. Closed-form cap areas
+  (9/5) and sweep magnitude (18/5) lie inside the certified enclosures.
+- ADR0062 owned annular preparation from owned coefficients through the shared
+  census/partition/copy/contact/prism pipelines; it publishes end to end.
+- ADR0056 follow-up: complete publication history findings are owned.
+
+Still open: physical-volume certification and semantic naming for the
+annulus, owned projection of annular publication/preparation causes and of
+resolution/preparation/partial-transaction families, a public owned outcome,
+general analytic profiles beyond two nested closed polynomial loops,
+persistent split identity, consumer edit/undo/reopen/display, sanitizer and
+owner release/package/performance gates. Nothing here closes Kernel #10.
+
+### Annular refusals, volume, names and one-call operation supplement (2026-10-15)
+
+A worktree branch on top of `58e06355f` (not yet integrated or root-gated) adds:
+
+- ADR0062 follow-up: owned annular preparation refusal. Admission, role and
+  stage causes keep typed operands; the full request is encoded by
+  `Martensite.OwnedAnnularPrismRequest/v1`. Retained partial transactions and
+  nested census/contact/region-prism/stage-completion families stay explicit
+  gaps, so post-construction refusals are not yet complete.
+- ADR0061 follow-up: owned annular publication refusal. Version, binding,
+  history cancellation, all callback stops, moved validation and measure child
+  failures (scalar causes with every partial certificate), history findings
+  without local owners and owned-operand join causes are complete. Borrowed
+  join families and nested numerical validation/measure failures stay explicit
+  gaps with the original retained.
+- ADR0063: annular physical volume from the certified material-normalized sweep
+  and the exact Jacobian sign of the same join; closed form 18/5 for every
+  orientation variant, both signs exercised, unchanged certified error.
+- ADR0064: production semantic names for the annulus (role-derived tokens plus a
+  caller dictionary) replacing test fixtures on the production path.
+- ADR0065: `run_owned_annular_prism` one-call owned outcome (crate-private):
+  caller-named faces with certified areas, volume, validation coverage, history
+  counts and receipts, or a typed refusal with stage, class, stop and gaps.
+
+Still open: owned projection of resolution (single-boundary resolver), region,
+binding, naming and embedding refusals, retained partial transactions,
+legacy/lineage/frozen/geometry history families and nested numerical families;
+a public (crate-exported) facade, withheld while ADR0014's private gating
+stands; a portable annular body view; general analytic profiles (circles and
+other rational curves need certified rational integration and a rational
+region proof; more than two loops and several regions need an N-loop region
+proof; naming that survives splits); consumer edit/undo/redo/save/reopen/
+display; ThreadSanitizer; owner release/package/performance gates.

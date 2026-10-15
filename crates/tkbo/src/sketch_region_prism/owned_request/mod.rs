@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Private owned request preparation; no operation completion authority.
+pub(in crate::sketch_region_prism) mod annular;
 pub(super) mod names;
 
 mod admission;

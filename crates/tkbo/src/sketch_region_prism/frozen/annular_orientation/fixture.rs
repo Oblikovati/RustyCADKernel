@@ -45,13 +45,20 @@ pub(in crate::sketch_region_prism) fn with_source_order<R>(
         material_seed: [0.25, 0.25],
         requested: fixture_bindings::options(),
     };
-    let mut sweep = crate::sketch_region_prism::tests::request([0.25, 0.25]);
-    sweep.extrusion = Vector3::new(0., 0., if variant.negative_sweep { -2. } else { 2. });
-    let receipt = retained_annular_sweep_with_request(&fixture, sweep);
+    let receipt = variant_receipt(&fixture, variant);
     let joined = join(&request, &receipt);
     run(&joined, &fixture)
 }
-fn ordered_sources(
+/// Retain the variant's actual annular sweep; `variant_receipt(&fixture, variant)`.
+pub(in crate::sketch_region_prism) fn variant_receipt(
+    fixture: &TwoLoopFixture,
+    variant: Variant,
+) -> crate::sketch_region_prism::PrismReceipt {
+    let mut sweep = crate::sketch_region_prism::tests::request([0.25, 0.25]);
+    sweep.extrusion = Vector3::new(0., 0., if variant.negative_sweep { -2. } else { 2. });
+    retained_annular_sweep_with_request(fixture, sweep)
+}
+pub(in crate::sketch_region_prism) fn ordered_sources(
     fixture: &TwoLoopFixture,
     reversed: bool,
 ) -> [crate::sketch_region::ArrangementSource<'_>; 2] {
@@ -61,7 +68,7 @@ fn ordered_sources(
     }
     sources
 }
-fn source_fixture(variant: Variant) -> TwoLoopFixture {
+pub(in crate::sketch_region_prism) fn source_fixture(variant: Variant) -> TwoLoopFixture {
     let outer = source(1., [0., 0.], 0, variant);
     let inner = source(0.5, [0.5, 0.5], 1, variant);
     TwoLoopFixture::for_edges_on_plane(outer, inner, plane(variant.reflected))
@@ -122,7 +129,7 @@ fn join(
         )
     })
 }
-fn embedding_options() -> AnnularEmbeddingOptions {
+pub(in crate::sketch_region_prism) fn embedding_options() -> AnnularEmbeddingOptions {
     AnnularEmbeddingOptions {
         version: 2,
         regularity: AnnularRegularityOptions {
@@ -132,7 +139,7 @@ fn embedding_options() -> AnnularEmbeddingOptions {
     }
 }
 
-struct ContinueJoin;
+pub(in crate::sketch_region_prism) struct ContinueJoin;
 impl AnnularFrozenProgress for ContinueJoin {
     fn checkpoint(
         &mut self,
@@ -142,7 +149,7 @@ impl AnnularFrozenProgress for ContinueJoin {
     }
 }
 
-fn current_binding(
+pub(in crate::sketch_region_prism) fn current_binding(
     request: &TwoLoopRegionRequest<'_, '_>,
     receipt: &crate::sketch_region_prism::PrismReceipt,
 ) -> AnnularPrismBinding {
@@ -160,7 +167,7 @@ fn current_binding(
         },
     )
 }
-fn join_options() -> AnnularFrozenOptions {
+pub(in crate::sketch_region_prism) fn join_options() -> AnnularFrozenOptions {
     AnnularFrozenOptions {
         version: 2,
         maximum_name_units: 1024,

@@ -17,13 +17,15 @@ BYTE_BINDINGS = (
         "Standard_OutOfMemory::Standard_OutOfMemory(const char* const)",
         "fa68bfd8d5e7473ba997452a2bdc683175e4d320fbe21734c9e6d08c1410ef59",
         "rustycad_tkernel::standard::exceptions::out_of_memory_bytes",
-        "partial",
+        # Implemented since the 2026-10-15 D1 review (B3 only).
+        "implemented",
     ),
     (
         "Standard_OutOfMemory::SetMessageString(const char* const)",
         "a8a461b6141372aeab77344619d3c685fb1a12d56317b4bef706a88be6c8f527",
         "rustycad_tkernel::standard::Failure::set_message_bytes",
-        "partial",
+        # Implemented since the 2026-10-15 D1 review (B3 only).
+        "implemented",
     ),
     (
         "Standard_Failure::Standard_Failure(const char*)",
@@ -47,13 +49,15 @@ BYTE_BINDINGS = (
         "Standard_Failure::Print(Standard_OStream&) const",
         "5674c27025f511e5def0959207dfe252931588a1f190941d53e0228fc1b3fb13",
         "rustycad_tkernel::standard::Failure::print_to",
-        "partial",
+        # Implemented since the 2026-10-15 D1 review (C++ ostream state only).
+        "implemented",
     ),
     (
         "operator<<(Standard_OStream&,const Standard_Failure&)",
         "42056e82762cb2000cab50f68c286f3e36062dc56cefcd92448a25c787e8ce78",
         "rustycad_tkernel::standard::Failure::insert_into",
-        "partial",
+        # Implemented since the 2026-10-15 D1 review (C++ ostream state only).
+        "implemented",
     ),
 )
 

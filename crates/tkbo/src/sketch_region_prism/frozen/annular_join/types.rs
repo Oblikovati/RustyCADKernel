@@ -14,7 +14,7 @@ pub(in crate::sketch_region_prism) struct AnnularNameCensus {
     pub measured_units: usize,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(in crate::sketch_region_prism) enum AnnularFrozenPhase {
+pub(crate) enum AnnularFrozenPhase {
     Admission,
     CurrentBinding,
     Capture,

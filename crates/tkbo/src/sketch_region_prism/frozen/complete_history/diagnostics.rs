@@ -25,6 +25,11 @@ pub(crate) enum HistoricalLegacyCause {
     Arrangement {
         variant: HistoryArrangementVariant,
     },
+    /// ADR0058: the shared annular join rebind refused; its full carrier stays operation-local.
+    AnnularJoin {
+        phase: super::super::annular_join::AnnularFrozenPhase,
+        class: crate::sketch_region_prism::region_certificate::two_loop::TwoLoopRefusalClass,
+    },
 }
 #[derive(Debug)]
 pub(crate) enum HistoryJoinVariant {
@@ -295,8 +300,21 @@ pub(super) fn legacy_failed(cause: &HistoricalLegacyCause) -> bool {
         } | HistoricalLegacyCause::Join {
             variant: HistoryJoinVariant::FailedCapture { .. },
             ..
+        } | HistoricalLegacyCause::AnnularJoin {
+            class: crate::sketch_region_prism::region_certificate::two_loop::TwoLoopRefusalClass::Failed,
+            ..
         }
     )
+}
+/// Owned finding for an annular join refusal; the caller keeps the full carrier locally.
+/// Example: `annular_join_cause(&failure)` beside the borrowed `AnnularFrozenFailure`.
+pub(in crate::sketch_region_prism::frozen) fn annular_join_cause(
+    failure: &super::super::annular_join::AnnularFrozenFailure<'_>,
+) -> PrismHistoryCause {
+    PrismHistoryCause::Legacy(Box::new(HistoricalLegacyCause::AnnularJoin {
+        phase: failure.phase,
+        class: failure.classification(),
+    }))
 }
 
 fn partition_diagnostic(

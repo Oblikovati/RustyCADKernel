@@ -49,7 +49,9 @@ fn physical_vertices(rows: &[RegionObservedContext]) -> usize {
     }
     vertices.len()
 }
-pub(super) fn forward_reversed(actual: Orientation) -> HistoryCheck<bool> {
+pub(in crate::sketch_region_prism::frozen) fn forward_reversed(
+    actual: Orientation,
+) -> HistoryCheck<bool> {
     match actual {
         Orientation::Forward => Ok(false),
         Orientation::Reversed => Ok(true),

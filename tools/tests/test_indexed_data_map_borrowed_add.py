@@ -7,8 +7,11 @@ import unittest
 from pathlib import Path
 
 from normalize_rustdoc_inventory import make_reachable_inventory
+from tkernel_d1_review import kept_partial_rows, review_outcome
 
 ROOT = Path(__file__).resolve().parents[2]
+# Rows the 2026-10-15 D1 review kept partial (class-A gaps).
+D1_KEPT = kept_partial_rows(ROOT)
 SELECTOR = "NCollection_IndexedDataMap::Add(const TheKeyType&,const TheItemType&)"
 RUST_TARGET = "rustycad_tkernel::ncollection::IndexedDataMap::add_ref"
 CPP_INVENTORY = ROOT / "porting/api-inventory/occt-declarations.jsonl.gz"
@@ -42,7 +45,7 @@ class IndexedDataMapBorrowedAddMappingTests(unittest.TestCase):
         rows = [row for row in parity["api"] if row.get("upstream_id") == SELECTOR]
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["rust_item"], RUST_TARGET)
-        self.assertEqual(rows[0]["status"], "partial")
+        self.assertEqual(review_outcome(rows[0], D1_KEPT), "implemented")
 
     def test_rustdoc_capture_resolves_public_path_once(self) -> None:
         with gzip.open(RUSTDOC_CAPTURE, "rt", encoding="utf-8") as source:

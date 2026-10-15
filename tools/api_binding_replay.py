@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from api_crosswalk import cpp_candidates, row_rust_candidates
 from api_inventory.inputs import JSONObject, text_field
 from api_rust_kind import RustCrateIndex
+from tkernel_d1_review import supersedes
 
 
 def binding_object(row: JSONObject, field: str) -> JSONObject:
@@ -95,7 +96,8 @@ class BindingReplay:
 
 
 def verify_binding_ledger(records: list[JSONObject], ledger: list[JSONObject]) -> None:
-    """Require each exact partial row once; e.g. `verify_binding_ledger(proof, api)`."""
+    """Require each exact partial row once, or its D1-reviewed successor (tkernel_d1_review);
+    e.g. `verify_binding_ledger(proof, api)`."""
     for record in records:
         proposed = binding_object(record, "proposed_row")
         matches = [
@@ -103,4 +105,6 @@ def verify_binding_ledger(records: list[JSONObject], ledger: list[JSONObject]) -
             for row in ledger
             if row.get("upstream_id") == proposed.get("upstream_id")
         ]
+        if len(matches) == 1 and supersedes(matches[0], proposed):
+            continue
         binding_equal(matches, [proposed], f"ledger {proposed.get('upstream_id')}")
