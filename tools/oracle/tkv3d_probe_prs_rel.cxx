@@ -16,6 +16,7 @@
 #include <PrsDim_OffsetDimension.hxx>
 #include <PrsDim_TangentRelation.hxx>
 #include <PrsDim_FixRelation.hxx>
+#include <PrsDim_SymmetricRelation.hxx>
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -175,8 +176,23 @@ static occ::handle<PrsDim_Relation> v3pr_fix(int variant) {
     default: return new PrsDim_FixRelation(v3pr_square(0, 4), v3pr_plane());
   }
 }
+static occ::handle<PrsDim_Relation> v3pr_symmetric(int variant) {
+  const TopoDS_Edge axis = v3pr_edge(0, -10, 0, 0, 10, 0);
+  switch (variant) {
+    case 0: return new PrsDim_SymmetricRelation(axis, v3pr_edge(2, 0, 0, 5, 4, 0), v3pr_edge(-2, 0, 0, -5, 4, 0), v3pr_plane());
+    case 1: return new PrsDim_SymmetricRelation(axis, v3pr_edge(3, 0, 0, 0, 6, 0), v3pr_edge(-3, 0, 0, 0, 6, 0), v3pr_plane());
+    case 2: return new PrsDim_SymmetricRelation(axis, v3pr_arc(4, 0, 1, 0, M_PI), v3pr_arc(-4, 0, 1, 0, M_PI), v3pr_plane());
+    case 3: return new PrsDim_SymmetricRelation(axis, v3pr_vertex(3, 2, 0), v3pr_vertex(-3, 2, 0), v3pr_plane());
+    case 4: return new PrsDim_SymmetricRelation(axis, v3pr_vertex(3, 2, 0), v3pr_vertex(-3, 2, 5), v3pr_plane());
+    case 5: return new PrsDim_SymmetricRelation(axis, v3pr_vertex(3, 2, 0), v3pr_vertex(3, 2, 0), v3pr_plane());
+    case 6: return new PrsDim_SymmetricRelation(axis, v3pr_edge(2, 0, 0, 5, 4, 0), v3pr_edge(-2, 0, 2, -5, 4, 2), v3pr_plane());
+    case 7: return new PrsDim_SymmetricRelation(axis, BRepBuilderAPI_MakeEdge(gp_Lin(gp_Pnt(2, 0, 0), gp::DY())).Edge(), v3pr_edge(-2, -3, 0, -2, 3, 0), v3pr_plane());
+    default: return new PrsDim_SymmetricRelation(axis, v3pr_square(0, 4), v3pr_square(1, 4), v3pr_plane());
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 11: return v3pr_symmetric(variant);
     case 10: return v3pr_fix(variant);
     case 8: return v3pr_offset(variant);
     case 9: return v3pr_tangent(variant);

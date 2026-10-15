@@ -461,8 +461,43 @@ fn fix(variant: i32) -> Relation {
     r.into_cast()
 }
 
+fn symmetric(variant: i32) -> Result<Relation, Failure> {
+    let axis = edge([0., -10., 0.], [0., 10., 0.]);
+    let arc_shape = |x: f64| -> Shape { arc(x, 0., 1., 0., PI).into() };
+    let (a, b) = match variant {
+        0 => (
+            edge([2., 0., 0.], [5., 4., 0.]),
+            edge([-2., 0., 0.], [-5., 4., 0.]),
+        ),
+        1 => (
+            edge([3., 0., 0.], [0., 6., 0.]),
+            edge([-3., 0., 0.], [0., 6., 0.]),
+        ),
+        2 => (arc_shape(4.0), arc_shape(-4.0)),
+        3 => (vertex(3., 2., 0.), vertex(-3., 2., 0.)),
+        4 => (vertex(3., 2., 0.), vertex(-3., 2., 5.)),
+        5 => (vertex(3., 2., 0.), vertex(3., 2., 0.)),
+        6 => (
+            edge([2., 0., 0.], [5., 4., 0.]),
+            edge([-2., 0., 2.], [-5., 4., 2.]),
+        ),
+        7 => {
+            let line: Shape =
+                BRepBuilderAPIMakeEdge::from_lin(Line3::new(Point3::new(2.0, 0.0, 0.0), gp::dy()))
+                    .unwrap()
+                    .edge()
+                    .unwrap()
+                    .into();
+            (line, edge([-2., -3., 0.], [-2., 3., 0.]))
+        }
+        _ => (square(0.0, 4.0), square(1.0, 4.0)),
+    };
+    Ok(PrsDimSymmetricRelation::new(&axis, &a, &b, &xoy())?.into_cast())
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        11 => symmetric(variant)?,
         10 => fix(variant),
         8 => offset(variant),
         9 => tangent(variant),
