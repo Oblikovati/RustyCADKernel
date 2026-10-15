@@ -11,6 +11,10 @@ pub mod collapse_singularities;
 pub mod conical_apex_grouping;
 #[path = "../interval.rs"]
 pub mod interval;
+#[path = "../legacy_brep_builder_api_sewing.rs"]
+pub mod legacy_brep_builder_api_sewing;
+#[path = "../legacy_brep_offset_make_offset.rs"]
+pub mod legacy_brep_offset_make_offset;
 #[path = "../make_offset_thick_solid.rs"]
 pub mod make_offset_thick_solid;
 #[path = "../occ28131_modification.rs"]

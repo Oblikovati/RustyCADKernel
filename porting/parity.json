@@ -625518,6 +625518,94 @@
       "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::has_result",
       "status": "implemented",
       "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::BRepOffsetAPI_MakeOffset()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::BRepOffsetAPI_MakeOffset(const TopoDS_Face&,GeomAbs_JoinType,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::from_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::Init(const TopoDS_Face&,GeomAbs_JoinType,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::init_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::BRepOffsetAPI_MakeOffset(const TopoDS_Wire&,GeomAbs_JoinType,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::from_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::Init(GeomAbs_JoinType,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::init",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::SetApprox(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::set_approx",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::AddWire(const TopoDS_Wire&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::add_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::Perform(double,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffset::ConvertFace(const TopoDS_Face&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset::convert_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffset.cxx with the native operation order (BuildDomains reverses the stored wires in place, a second Perform reuses the domains of its side without reversal, a failed Perform keeps no shape while a Perform with no done domain keeps the previous shape); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_make_offset: 99 requests, faces and wires, both joins and sides, approximation, open wires, collapse boundaries); the five planar wire GTests of BRepOffset_MakeOffset_Test.cxx pass."
     }
   ],
   "tests": [
@@ -740040,6 +740128,487 @@
       "profiles": [
         "linux-gcc-c-locale"
       ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_SewingTest.SewTwoFaces",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepBuilderAPI_Sewing_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_builder_api_sewing",
+      "rust_test": "sew_two_faces",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_builder_api_sewing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "b708911e627b969be6cd163dfb2ee371b058ce55bb4f9a2498a77e8d4aca122e"
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_SewingTest.NbFreeEdges",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepBuilderAPI_Sewing_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_builder_api_sewing",
+      "rust_test": "nb_free_edges",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_builder_api_sewing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "b708911e627b969be6cd163dfb2ee371b058ce55bb4f9a2498a77e8d4aca122e"
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_SewingTest.NbDegeneratedShapes",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepBuilderAPI_Sewing_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_builder_api_sewing",
+      "rust_test": "nb_degenerated_shapes",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_builder_api_sewing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "b708911e627b969be6cd163dfb2ee371b058ce55bb4f9a2498a77e8d4aca122e"
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_SewingTest.SetTolerance",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepBuilderAPI_Sewing_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_builder_api_sewing",
+      "rust_test": "set_tolerance",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_builder_api_sewing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "b708911e627b969be6cd163dfb2ee371b058ce55bb4f9a2498a77e8d4aca122e"
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_SewingTest.SewAllBoxFaces",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepBuilderAPI_Sewing_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_builder_api_sewing",
+      "rust_test": "sew_all_box_faces",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_builder_api_sewing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "b708911e627b969be6cd163dfb2ee371b058ce55bb4f9a2498a77e8d4aca122e"
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.HollowBox",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "0dca64be58f8e45a376f85b29ebb3622a8aa77d246e0b5fbc6a826ca04dd4bef"
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.HollowBoxVolume",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "0dca64be58f8e45a376f85b29ebb3622a8aa77d246e0b5fbc6a826ca04dd4bef"
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.MakeThickSolidBySimple",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "0dca64be58f8e45a376f85b29ebb3622a8aa77d246e0b5fbc6a826ca04dd4bef"
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.ThickSolidLargerVolume",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "0dca64be58f8e45a376f85b29ebb3622a8aa77d246e0b5fbc6a826ca04dd4bef"
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipeShellTest.Bug332_BentTubeWithScalingLaw",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakePipeShell_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakePipeShell"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "a514159ae30c4a0bd7ce0d41e363abaa8481995359cce846ea573cf2743b669b"
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakePipeShellTest.Bug24909_2_ClosedCircularSpine",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakePipeShell_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakePipeShell"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "a514159ae30c4a0bd7ce0d41e363abaa8481995359cce846ea573cf2743b669b"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangleLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangleLoft_IntersectionMode",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_SimpleBox_Baseline",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToEllipseLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToHexagonLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToSquareLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_EllipseToRectangleLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_ThreeSectionLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangleLoft_Ruled",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangleLoft_SmallOffset",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangleLoft_LargeOffset",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangleLoft_NegativeOffset",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_Cylinder_Baseline",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_Sphere_Baseline",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_FusedBoxCylinder",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangle_ThinLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToRectangle_TallLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToTriangleLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.ThickSolid_CircleToOctagonLoft",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_MakeThickSolid",
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.NegativeTaperOffsetOnSmallCircularWire",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_make_offset",
+      "rust_test": "negative_taper_offset_on_small_circular_wire",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_make_offset.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.NegativeTaperOffsetAboveSmallCircleBoundary",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_make_offset",
+      "rust_test": "negative_taper_offset_above_small_circle_boundary",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_make_offset.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.NegativeTaperOffsetBelowSmallCircleBoundary",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_make_offset",
+      "rust_test": "negative_taper_offset_below_small_circle_boundary",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_make_offset.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.PositiveOffsetOnSmallCircularWire",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_make_offset",
+      "rust_test": "positive_offset_on_small_circular_wire",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_make_offset.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffsetTest.CollapsedCircularWireOffsetIsNotDone",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffset_MakeOffset_Test.cxx",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_make_offset",
+      "rust_test": "collapsed_circular_wire_offset_is_not_done",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_make_offset.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "source_sha256": "38c712552b9edc16406975cd9c73b58712966a144b7021dba60d9f5045e85ca9"
     }
   ]
 }
