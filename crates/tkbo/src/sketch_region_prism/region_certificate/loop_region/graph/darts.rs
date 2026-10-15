@@ -126,27 +126,33 @@ pub(super) fn rotation(
         }
     }
     for (vertex, darts) in rotation.iter_mut() {
-        let legs = darts
-            .iter()
-            .map(|dart| leg(binding, *dart, *vertex))
-            .collect::<LoopRegionCheck<Vec<_>>>()?;
-        if legs
-            .iter()
-            .any(|l| l[0].map(f64::to_bits) != legs[0][0].map(f64::to_bits))
-        {
-            refuse(STAGE, LoopRegionCause::VertexChart { vertex: *vertex })?;
-        }
-        let mut order: Vec<usize> = (0..darts.len()).collect();
-        order.sort_by(|a, b| compare_legs(legs[*a], legs[*b]));
-        let tied = order
-            .windows(2)
-            .any(|pair| compare_legs(legs[pair[0]], legs[pair[1]]) == Ordering::Equal);
-        if tied && darts.len() > 2 {
-            refuse(STAGE, LoopRegionCause::TangentBranches { vertex: *vertex })?;
-        }
-        *darts = order.into_iter().map(|index| darts[index]).collect();
+        *darts = sorted_around(binding, *vertex, darts)?;
     }
     Ok(rotation)
+}
+
+/// The darts of one vertex in exact counterclockwise order; ties refuse at degree three
+/// or more, and darts starting at different chart points refuse.
+fn sorted_around(
+    binding: &SegmentBinding<'_>,
+    vertex: u64,
+    darts: &[Dart],
+) -> LoopRegionCheck<Vec<Dart>> {
+    let legs = darts
+        .iter()
+        .map(|dart| leg(binding, *dart, vertex))
+        .collect::<LoopRegionCheck<Vec<_>>>()?;
+    let start = legs[0][0].map(f64::to_bits);
+    if legs.iter().any(|l| l[0].map(f64::to_bits) != start) {
+        refuse(STAGE, LoopRegionCause::VertexChart { vertex })?;
+    }
+    let mut order: Vec<usize> = (0..darts.len()).collect();
+    order.sort_by(|a, b| compare_legs(legs[*a], legs[*b]));
+    let tie = |pair: &[usize]| compare_legs(legs[pair[0]], legs[pair[1]]) == Ordering::Equal;
+    if darts.len() > 2 && order.windows(2).any(tie) {
+        refuse(STAGE, LoopRegionCause::TangentBranches { vertex })?;
+    }
+    Ok(order.into_iter().map(|index| darts[index]).collect())
 }
 
 /// The dart's start point and its first control distinct from it, which gives the exact

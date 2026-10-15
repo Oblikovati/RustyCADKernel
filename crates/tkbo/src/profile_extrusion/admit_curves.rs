@@ -124,13 +124,7 @@ pub(crate) fn admit_spline(
     require_degree(input)?;
     require_poles(input)?;
     require_knots(input)?;
-    let mut poles = input.poles.to_vec();
-    let last = poles.len() - 1;
-    for ((vertex, point), index) in ends.into_iter().zip([0, last]) {
-        let distance = length2(sub2(point, poles[index]));
-        require_on_curve(input.id, vertex, distance, resolution.sew)?;
-        poles[index] = point;
-    }
+    let poles = sewn_poles(input, ends, resolution.sew)?;
     let size: f64 = poles.windows(2).map(|w| length2(sub2(w[1], w[0]))).sum();
     if size < resolution.weld {
         let (curve, weld) = (input.id, resolution.weld);
@@ -144,6 +138,22 @@ pub(crate) fn admit_spline(
     };
     let (id, ends) = (input.id, ends.map(|(vertex, _)| vertex));
     Ok(AdmittedCurve::Spline { id, ends, spline })
+}
+
+/// The poles with the end poles moved onto the vertices, each within `sew`.
+fn sewn_poles(
+    input: &SplineInput<'_>,
+    ends: [(ProfileVertexId, [f64; 2]); 2],
+    sew: f64,
+) -> Admit<Vec<[f64; 2]>> {
+    let mut poles = input.poles.to_vec();
+    let last = poles.len() - 1;
+    for ((vertex, point), index) in ends.into_iter().zip([0, last]) {
+        let distance = length2(sub2(point, poles[index]));
+        require_on_curve(input.id, vertex, distance, sew)?;
+        poles[index] = point;
+    }
+    Ok(poles)
 }
 
 fn invalid(curve: ProfileCurveId, reason: &'static str) -> Admit<()> {

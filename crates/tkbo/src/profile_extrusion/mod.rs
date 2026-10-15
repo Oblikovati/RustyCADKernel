@@ -2,8 +2,10 @@
 //! General planar regions and extrusion (ADR 0068): the public seam a feature evaluator uses
 //! to turn a solved sketch into validated faces and an extruded solid with complete history.
 //!
-//! - [`build_planar_regions`] converts solved lines, arcs and circles into every bounded
-//!   planar face (outer loop and holes), with a complete curve to edge mapping.
+//! - [`build_planar_regions`] converts solved lines, circular and elliptic arcs, circles,
+//!   ellipses and clamped B-splines (ADR 0083) into every bounded face of the curve graph
+//!   (ADR 0084): nested, touching or sharing edges, each with its outer loop and holes and
+//!   a complete curve to edge mapping.
 //! - [`extrude`] sweeps one region along a vector into an [`OperationResult`]: the solid,
 //!   its complete source to result history, findings, validation and achieved tolerance.
 //!

@@ -40,18 +40,13 @@ pub(crate) fn inspect_plane_graph(
     let expected = darts::incidence_contacts(request, &binding)?;
     let (joins, carrier_pairs, pair_domains) =
         certify_contacts(&request.bridge.census, &binding, expected)?;
-    poll(&mut cancelled, LoopRegionStage::Faces)?;
-    let rotation = darts::rotation(request, &binding)?;
-    let orbits = darts::orbits(request, &rotation);
-    let graph = components::components(request, orbits);
-    let signs = orientation::signs(request, &binding, &graph, &mut cancelled)?;
-    let faces = components::classify(request, &graph, &signs)?;
+    let (graph, faces) = graph_faces(request, &binding, &mut cancelled)?;
     poll(&mut cancelled, LoopRegionStage::Nesting)?;
-    let nested = components::nesting(request, &binding, &graph, &faces, &mut cancelled)?;
+    let components = components::nesting(request, &binding, &graph, &faces, &mut cancelled)?;
     poll(&mut cancelled, LoopRegionStage::Regions)?;
     let mut certificate = GraphRegionCertificate {
         faces: Vec::with_capacity(faces.bounded.len()),
-        components: nested,
+        components,
         contacts: joins.len(),
         carrier_pairs,
         pair_domains,
@@ -61,6 +56,20 @@ pub(crate) fn inspect_plane_graph(
         certificate.faces.push(proof);
     }
     Ok(certificate)
+}
+
+/// Steps 2-3: rotation, orbits, components, certified orbit signs and the face split.
+fn graph_faces(
+    request: &GraphRegionRequest<'_, '_>,
+    binding: &super::binding::SegmentBinding<'_>,
+    cancelled: &mut impl FnMut() -> bool,
+) -> LoopRegionCheck<(components::Graph, components::Faces)> {
+    poll(cancelled, LoopRegionStage::Faces)?;
+    let rotation = darts::rotation(request, binding)?;
+    let graph = components::components(request, darts::orbits(request, &rotation));
+    let signs = orientation::signs(request, binding, &graph, cancelled)?;
+    let faces = components::classify(request, &graph, &signs)?;
+    Ok((graph, faces))
 }
 
 fn face_proof(
