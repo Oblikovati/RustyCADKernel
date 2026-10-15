@@ -43,6 +43,10 @@ pub use diameter_dimension::PrsDimDiameterDimension;
 pub use radius_dimension::{PrsDimCircularFields, PrsDimRadiusDimension};
 
 mod chamf_dimension;
+mod concentric_relation;
+mod equal_radius_relation;
+pub use concentric_relation::{PrsDimConcentricFields, PrsDimConcentricRelation};
+pub use equal_radius_relation::{PrsDimEqualRadiusFields, PrsDimEqualRadiusRelation};
 mod relation;
 mod relation_support;
 pub use chamf_dimension::{PrsDimChamf2dDimension, PrsDimChamf3dDimension, PrsDimChamfFields};

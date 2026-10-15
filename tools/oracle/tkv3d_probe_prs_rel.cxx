@@ -6,6 +6,8 @@
 #include <PrsDim_Chamf2dDimension.hxx>
 #include <PrsDim_Chamf3dDimension.hxx>
 #include <Geom_Plane.hxx>
+#include <PrsDim_EqualRadiusRelation.hxx>
+#include <PrsDim_ConcentricRelation.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
   return BRepBuilderAPI_MakeEdge(gp_Pnt(x1, y1, z1), gp_Pnt(x2, y2, z2)).Edge();
@@ -37,8 +39,34 @@ static occ::handle<PrsDim_Relation> v3pr_chamf3d(int variant) {
     default: return new PrsDim_Chamf3dDimension(v3pr_cylinder(), 10.0, v3pr_text(0), gp_Pnt(9, 9, 9), DsgPrs_AS_NONE, 12.0);
   }
 }
+static TopoDS_Edge v3pr_arc(double x, double z, double radius, double first, double last) {
+  return BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(x, 0, z), gp::DZ()), radius), first, last).Edge();
+}
+static TopoDS_Vertex v3pr_vertex(double x, double y, double z) {
+  return BRepBuilderAPI_MakeVertex(gp_Pnt(x, y, z)).Vertex();
+}
+static occ::handle<PrsDim_Relation> v3pr_equal_radius(int variant) {
+  switch (variant) {
+    case 0: return new PrsDim_EqualRadiusRelation(v3pr_arc(0, 0, 3, 0, M_PI / 2), v3pr_arc(10, 0, 3, 0, M_PI), v3pr_plane());
+    case 1: return new PrsDim_EqualRadiusRelation(v3pr_arc(0, 0, 3, 0, M_PI / 2), v3pr_arc(10, 2, 3, 1, 4), v3pr_plane());
+    default: return new PrsDim_EqualRadiusRelation(v3pr_arc(0, 0, 4, 0, 2 * M_PI), v3pr_arc(-9, 0, 4, 0, 2 * M_PI), v3pr_plane());
+  }
+}
+static occ::handle<PrsDim_Relation> v3pr_concentric(int variant) {
+  switch (variant) {
+    case 0: return new PrsDim_ConcentricRelation(v3pr_arc(1, 0, 3, 0, M_PI), v3pr_arc(1, 0, 5, 1, 3), v3pr_plane());
+    case 1: return new PrsDim_ConcentricRelation(v3pr_arc(1, 0, 3, 0, M_PI), v3pr_vertex(1, 0, 0), v3pr_plane());
+    case 2: return new PrsDim_ConcentricRelation(v3pr_vertex(1, 0, 0), v3pr_arc(1, 0, 90, 0, 2 * M_PI), v3pr_plane());
+    case 3: return new PrsDim_ConcentricRelation(v3pr_vertex(1, 0, 0), v3pr_vertex(1, 0, 0), v3pr_plane());
+    case 4: return new PrsDim_ConcentricRelation(v3pr_arc(1, 0, 3, 0, M_PI), v3pr_arc(1, 4, 5, 1, 3), v3pr_plane());
+    case 5: return new PrsDim_ConcentricRelation(v3pr_arc(1, 0, 3, 0, M_PI), v3pr_vertex(1, 0, 6), v3pr_plane());
+    default: return new PrsDim_ConcentricRelation(v3pr_vertex(1, 2, 3), v3pr_vertex(1, 0, 0), v3pr_plane());
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 2: return v3pr_equal_radius(variant);
+    case 3: return v3pr_concentric(variant);
     case 1: return v3pr_chamf3d(variant);
     default: return v3pr_chamf2d(variant);
   }

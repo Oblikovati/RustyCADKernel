@@ -121,3 +121,52 @@ macro_rules! prs_dim_relation_impls {
     };
 }
 pub(crate) use prs_dim_relation_impls;
+
+/// A concrete relation: the struct (transient, `base: PrsDimRelationBase` and `fields` of a
+/// state type), its RTTI, the interactive traits, `PrsDimRelationSource` with the optional
+/// `KindOfDimension` and `IsMovable` overrides, and `alloc` binding a new handle.
+macro_rules! prs_dim_relation_class {
+    ($type:ident, $native:literal, $fields:ty, $doc:literal
+        $(, kind = $kind:expr)? $(, movable = $movable:expr)?) => {
+        #[doc = $doc]
+        pub struct $type {
+            transient: rustycad_tkernel::standard::StandardTransient,
+            pub(super) base: $crate::prs_dim::PrsDimRelationBase,
+            /// The class fields.
+            pub fields: rustycad_tkernel::standard::SharedState<$fields>,
+        }
+        rustycad_tkernel::impl_transient!($type, $native, dyn $crate::prs_dim::PrsDimRelationSource, transient,
+            interfaces: [dyn $crate::prs_dim::PrsDimRelationSource, dyn $crate::ais::AisInteractiveObject, dyn $crate::select_mgr::SelectMgrSelectableObject, dyn $crate::prs_mgr::PrsMgrPresentableObject]);
+        super::dimension_impls::prs_dim_relation_impls!($type);
+        impl $crate::prs_dim::PrsDimRelationSource for $type {
+            fn relation_base(&self) -> &$crate::prs_dim::PrsDimRelationBase {
+                &self.base
+            }
+            $(
+                fn kind_of_dimension(&self) -> $crate::prs_dim::PrsDimKindOfDimension {
+                    $kind
+                }
+            )?
+            $(
+                fn is_movable(&self) -> bool {
+                    $movable
+                }
+            )?
+        }
+        impl $type {
+            /// A bound handle on the default relation state and the given fields.
+            fn alloc(fields: $fields) -> rustycad_tkernel::standard::Handle<Self> {
+                let relation = rustycad_tkernel::standard::Handle::new(Self {
+                    transient: rustycad_tkernel::standard::StandardTransient::default(),
+                    base: $crate::prs_dim::PrsDimRelationBase::new(
+                        $crate::prs_mgr::PrsMgrTypeOfPresentation3d::AllView,
+                    ),
+                    fields: rustycad_tkernel::standard::SharedState::new(fields),
+                });
+                $crate::prs_mgr::prs_mgr_presentable_bind(&relation.cast());
+                relation
+            }
+        }
+    };
+}
+pub(crate) use prs_dim_relation_class;

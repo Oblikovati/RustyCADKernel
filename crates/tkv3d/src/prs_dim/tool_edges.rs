@@ -183,13 +183,15 @@ impl PrsDim {
     }
 
     /// `ComputeGeometry(edge1, edge2, extIndex, ..., extCurve, ..., plane)`: the curves of
-    /// two edges on a plane, with the original curve of the one off the plane.
+    /// two edges on a plane, with the original curve of the one off the plane. `None` for a
+    /// null plane (the outputs untouched), else the native result with the outputs as the
+    /// native code leaves them (the extension index is set even when it fails).
     /// Example: `PrsDim::compute_two_edges_ext(&e1, &e2, &plane)?`.
     pub fn compute_two_edges_ext(
         first: &Edge,
         second: &Edge,
         plane: &Handle<GeomPlane>,
-    ) -> Result<Option<PrsDimTwoEdges>, Failure> {
+    ) -> Result<Option<(bool, PrsDimTwoEdges)>, Failure> {
         if plane.is_null() {
             return Ok(None);
         }
@@ -199,11 +201,11 @@ impl PrsDim {
         let mut curve2 = untrimmed(adaptor_curve(&adaptor2)?);
         let (first1, last1) = (adaptor1.first_parameter()?, adaptor1.last_parameter()?);
         let (first2, last2) = (adaptor2.first_parameter()?, adaptor2.last_parameter()?);
+        let mut result = PrsDimTwoEdges::default();
         if curve1.is_null() || curve2.is_null() {
-            return Ok(None);
+            return Ok(Some((false, result)));
         }
         let (saved1, saved2) = (curve1.clone(), curve2.clone());
-        let mut result = PrsDimTwoEdges::default();
         let on_plane1 =
             Self::compute_geom_curve(&mut curve1, first1, last1, &mut result.first_ends, plane)?;
         let on_plane2 =
@@ -250,8 +252,8 @@ impl PrsDim {
                 result.ext_index = 2;
                 result.ext_curve = saved2;
             }
-            (false, false) => return Ok(None),
+            (false, false) => return Ok(Some((false, result))),
         }
-        Ok(Some(result))
+        Ok(Some((true, result)))
     }
 }

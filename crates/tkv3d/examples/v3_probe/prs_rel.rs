@@ -7,9 +7,11 @@ use rustycad_tkernel::quantity::{Color, NamedColor};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::ExtendedString;
 use rustycad_tkg3d::geom::GeomPlane;
-use rustycad_tkmath::gp::{self, Axis3, Cylinder3, Plane3, Point3};
+use rustycad_tkmath::gp::{self, Axis2, Axis3, Circle3, Cylinder3, Plane3, Point3};
 use rustycad_tkservice::aspect::AspectNeutralWindow;
-use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
+use rustycad_tktopalgo::brep_builder_api::{
+    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeVertex,
+};
 use rustycad_tkv3d::ais::*;
 use rustycad_tkv3d::dsg_prs::DsgPrsArrowSide;
 use rustycad_tkv3d::prs_dim::*;
@@ -127,8 +129,66 @@ fn chamf3d(variant: i32) -> Relation {
     }
 }
 
+pub(super) fn arc(x: f64, z: f64, radius: f64, first: f64, last: f64) -> Edge {
+    let circle = Circle3::new(
+        Axis2::new(Point3::new(x, 0.0, z), gp::dz()).unwrap(),
+        radius,
+    )
+    .unwrap();
+    BRepBuilderAPIMakeEdge::from_circ_params(circle, first, last)
+        .unwrap()
+        .edge()
+        .unwrap()
+}
+pub(super) fn vertex(x: f64, y: f64, z: f64) -> Shape {
+    BRepBuilderAPIMakeVertex::new(Point3::new(x, y, z))
+        .unwrap()
+        .vertex()
+        .unwrap()
+        .into()
+}
+fn equal_radius(variant: i32) -> Relation {
+    let r = match variant {
+        0 => PrsDimEqualRadiusRelation::new(
+            &arc(0., 0., 3., 0., PI / 2.0),
+            &arc(10., 0., 3., 0., PI),
+            &xoy(),
+        ),
+        1 => PrsDimEqualRadiusRelation::new(
+            &arc(0., 0., 3., 0., PI / 2.0),
+            &arc(10., 2., 3., 1., 4.),
+            &xoy(),
+        ),
+        _ => PrsDimEqualRadiusRelation::new(
+            &arc(0., 0., 4., 0., 2.0 * PI),
+            &arc(-9., 0., 4., 0., 2.0 * PI),
+            &xoy(),
+        ),
+    };
+    r.into_cast()
+}
+fn concentric(variant: i32) -> Result<Relation, Failure> {
+    let e = |x: f64, z: f64, r: f64, a: f64, b: f64| -> Shape { arc(x, z, r, a, b).into() };
+    let r = match variant {
+        0 => PrsDimConcentricRelation::new(&e(1., 0., 3., 0., PI), &e(1., 0., 5., 1., 3.), &xoy())?,
+        1 => PrsDimConcentricRelation::new(&e(1., 0., 3., 0., PI), &vertex(1., 0., 0.), &xoy())?,
+        2 => PrsDimConcentricRelation::new(
+            &vertex(1., 0., 0.),
+            &e(1., 0., 90., 0., 2.0 * PI),
+            &xoy(),
+        )?,
+        3 => PrsDimConcentricRelation::new(&vertex(1., 0., 0.), &vertex(1., 0., 0.), &xoy())?,
+        4 => PrsDimConcentricRelation::new(&e(1., 0., 3., 0., PI), &e(1., 4., 5., 1., 3.), &xoy())?,
+        5 => PrsDimConcentricRelation::new(&e(1., 0., 3., 0., PI), &vertex(1., 0., 6.), &xoy())?,
+        _ => PrsDimConcentricRelation::new(&vertex(1., 2., 3.), &vertex(1., 0., 0.), &xoy())?,
+    };
+    Ok(r.into_cast())
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        2 => equal_radius(variant),
+        3 => concentric(variant)?,
         1 => chamf3d(variant),
         _ => chamf2d(variant),
     })
