@@ -112,6 +112,15 @@ pub enum SketchIncidenceCause {
     /// Two conics meet tangentially on both half turns of one line through the
     /// source center; version 1 certifies only transversal points there.
     ExceptionalTangency,
+    /// A spline-pair fibre is not one certified target point (several target
+    /// points, a straight span of degree two or more, or a stationary span).
+    ExceptionalFiber {
+        /// Source span range of the root.
+        range: Option<[f64; 2]>,
+    },
+    /// A contact at a target interior knot is tangential to a piece, or the source
+    /// is stationary or cusped there.
+    KnotTangency,
     /// A line source must be bounded: its two points are its ends.
     UnboundedSource,
     /// The requested domain is not defined for this source representation.

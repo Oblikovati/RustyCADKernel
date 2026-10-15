@@ -10,6 +10,7 @@
 //! sectors, transitions, overlaps and order are exact; world points carry a
 //! certified error bound. Any unresolved step is a named failure.
 mod algebraic;
+mod bivariate;
 mod budget;
 mod conic_chart;
 mod conic_concentric;
@@ -37,6 +38,8 @@ mod select;
 mod source_frame;
 mod spans;
 mod spline_admission;
+mod spline_corner;
+mod spline_pair;
 mod sweep;
 #[cfg(test)]
 mod tests;
@@ -184,11 +187,28 @@ fn parametric_source(
         SketchIncidenceCurve::Circle { .. } | SketchIncidenceCurve::Ellipse { .. } => {
             conic_target(&target.curve)
         }
-        SketchIncidenceCurve::Spline(_) => {
-            return Err(Cause::Invariant("spline pairs are not yet routed"));
-        }
+        SketchIncidenceCurve::Spline(spline) => return spline_target(spline, owner, frame, work),
     };
     implicit_target::incidences(pieces, &implicit, owner, frame, work)
+}
+// Spline sources meet spline targets through span-pair elimination.
+fn spline_target(
+    spline: &SketchIncidenceSpline,
+    owner: TargetKey,
+    frame: &SourceFrame,
+    work: &mut Work<'_>,
+) -> Result<Vec<SketchLineContact>, Cause> {
+    let SourceFrame::Spline(source) = frame else {
+        return Err(Cause::Invariant("spline pair without a spline source"));
+    };
+    let spans = spans::spline_spans(spline);
+    let pair = spline_pair::SplinePair {
+        source,
+        spans: &spans,
+        bounds: spline.bounds,
+        owner,
+    };
+    spline_pair::incidences(&pair, frame, work)
 }
 fn conic_target(curve: &SketchIncidenceCurve) -> ImplicitTarget<'_> {
     match curve {

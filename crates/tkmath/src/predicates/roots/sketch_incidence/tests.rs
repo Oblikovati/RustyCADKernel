@@ -172,3 +172,32 @@ fn nearby_distinct_roots_are_separated_by_refinement() {
     );
     assert_eq!(sign_at_ratio(&integers(&[-2, 0, 1]), &rational), Sign::Plus);
 }
+fn constant_rows(rows: &[&[f64]]) -> super::bivariate::Bivariate {
+    super::bivariate::Bivariate(
+        rows.iter()
+            .map(|row| RationalPolynomial(row.iter().copied().map(ratio).collect()))
+            .collect(),
+    )
+}
+#[test]
+fn first_subresultant_recovers_the_single_common_root() {
+    // (u - 1)(u - 2) and (u - 1)(u - 5) share u = 1; their first subresultant is -3u + 3.
+    let first = constant_rows(&[&[2.], &[-3.], &[1.]]);
+    let second = constant_rows(&[&[5.], &[-6.], &[1.]]);
+    let row = super::bivariate::fibre_row(&first, [2, 2], &second).unwrap();
+    assert_eq!(row.alpha.evaluate(&ratio(7.)), ratio(-3.));
+    assert_eq!(row.beta.evaluate(&ratio(7.)), ratio(3.));
+    let resultant = super::bivariate::resultant(&first, [2, 2], &second);
+    assert_eq!(resultant.degree(), None);
+}
+#[test]
+fn bivariate_resultant_vanishes_at_the_shared_coefficient_value() {
+    // f = u - s and g = u^2 - 4 share a root exactly when s = 2 or s = -2.
+    let first = super::bivariate::Bivariate(vec![polynomial(&[0., -1.]), polynomial(&[1.])]);
+    let second = constant_rows(&[&[-4.], &[0.], &[1.]]);
+    let resultant = super::bivariate::resultant(&first, [1, 2], &second);
+    for root in [2., -2.] {
+        assert_eq!(resultant.evaluate(&ratio(root)), ratio(0.));
+    }
+    assert_ne!(resultant.evaluate(&ratio(1.)), ratio(0.));
+}

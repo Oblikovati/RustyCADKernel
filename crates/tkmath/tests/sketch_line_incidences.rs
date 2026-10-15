@@ -16,6 +16,7 @@ mod isolation;
 mod lines;
 mod ordering;
 mod selection;
+mod spline_pairs;
 mod splines;
 
 #[test]
