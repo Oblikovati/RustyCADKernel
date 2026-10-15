@@ -118,6 +118,13 @@ pub use polynomial_integrals::{
     certify_polynomial_plane_measure, certify_polynomial_sweep_integral,
 };
 
+mod rational_integrals;
+pub use rational_integrals::{
+    CertifiedRationalMeasure, RATIONAL_TAYLOR_ORDER, RationalIntegralError,
+    RationalIntegralEvidence, RationalIntegralFailure, RationalIntegralOptions,
+    certify_rational_boundary_integral, certify_rational_sweep_integral,
+};
+
 mod polynomial_side;
 pub use polynomial_side::{
     CertifiedPolynomialSideIntegral, PolynomialSideError, PolynomialSideEvidence,

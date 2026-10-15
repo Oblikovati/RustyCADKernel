@@ -2,7 +2,7 @@
 //! Version 1 conditional measures for supplied full-range polynomial boundaries.
 //! Exact metric coefficients and arithmetic are shared with residual certification;
 //! no Gauss error estimate is reclassified and no geometric validity is inferred.
-mod arithmetic;
+pub(super) mod arithmetic;
 mod error;
 mod plane;
 mod types;
