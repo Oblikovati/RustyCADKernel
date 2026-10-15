@@ -11,6 +11,8 @@ pub mod brep_feat_pipe_glue_split;
 pub mod brep_feat_prism;
 #[path = "../brep_feat_revol.rs"]
 pub mod brep_feat_revol;
+#[path = "../brep_feat_revolution_form.rs"]
+pub mod brep_feat_revolution_form;
 #[path = "../loc_ope_split_glue.rs"]
 pub mod loc_ope_split_glue;
 #[path = "../loc_ope_sweeps.rs"]

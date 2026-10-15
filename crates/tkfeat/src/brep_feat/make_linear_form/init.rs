@@ -8,35 +8,23 @@
 //! base; else the profile face closed on the bounding box).
 use super::{BRepFeatMakeLinearForm, nulldir};
 use crate::brep_feat::StatusError;
-use crate::brep_feat::rib_slot::{Extremes, ProfileInput};
-use rustycad_tkbo::brep_algo_api::BRepAlgoAPICommon;
-use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
-use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{self, Face, Shape, Shell, Wire};
+use crate::brep_feat::rib_slot::{
+    Extremes, ProfileInput, SlidingBase, max_vertex_tolerance, shell_of,
+};
+use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::topods::{self, Face, Shape, Wire};
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{
     GeomCylindricalSurface, GeomGeometry, GeomPlane, GeomRectangularTrimmedSurface,
 };
-use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
-use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPITransform;
 use rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF;
-use rustycad_tktopalgo::brep_lib::{BRepLibMakeEdge, BRepLibMakeFace};
+use rustycad_tktopalgo::brep_lib::BRepLibMakeEdge;
 use std::f64::consts::PI;
-
-/// The largest tolerance of the vertices of `s`, at least `tol`.
-fn max_vertex_tolerance(s: &Shape, mut tol: f64) -> Result<f64, Failure> {
-    for v in Explorer::new(s, ShapeEnum::Vertex, ShapeEnum::Shape)? {
-        let t = BRepTool::vertex_tolerance(&topods::vertex(&v)?)?;
-        if t > tol {
-            tol = t;
-        }
-    }
-    Ok(tol)
-}
 
 /// Whether the segment from `p` along `d` touches the face once, within its tolerance.
 fn touches(p: Point3, d: Vector3, face: &Face) -> Result<bool, Failure> {
@@ -107,29 +95,6 @@ impl BRepFeatMakeLinearForm {
         Ok(true)
     }
 
-    /// The face of the bounding box of the basis in the plane of the rib.
-    fn bound_face(&mut self) -> Result<Face, Failure> {
-        let (bnd, first_corner, last_corner) =
-            self.rib.height_max(&self.rib.sbase, &Shape::default())?;
-        self.bnd = bnd;
-        let bnd_box = BRepPrimAPIMakeBox::from_points(first_corner, last_corner)?.solid()?;
-        let pln = self.plane()?.pln();
-        let b = 6. * self.bnd;
-        let plane_face = BRepLibMakeFace::from_plane_bounds(pln, (-b, b, -b, b))?.face()?;
-        let plane_s = BRepAlgoAPICommon::from_shapes(&bnd_box, &plane_face)?;
-        let www = topods::wire(
-            Explorer::new(plane_s.shape(), ShapeEnum::Wire, ShapeEnum::Shape)?.current(),
-        )?;
-        BRepLibMakeFace::from_plane_wire(pln, &www, true)?.face()
-    }
-
-    /// The plane of the rib (Standard_NullObject when null).
-    pub(super) fn plane(&self) -> Result<&GeomPlane, Failure> {
-        self.pln
-            .get()
-            .ok_or_else(|| crate::errors::null_object("BRepFeat_MakeLinearForm", "null plane"))
-    }
-
     /// Whether the rib slides: its first face a plane or a cylinder, and the segments
     /// along the directions from both end points touching the extreme faces.
     fn sliding_allowed(&self, modify: bool, x: &Extremes) -> Result<bool, Failure> {
@@ -178,7 +143,8 @@ impl BRepFeatMakeLinearForm {
         if !self.centre(direc, direc1)? {
             return Ok(());
         }
-        let bnd_face = self.bound_face()?;
+        let (bnd, bnd_face) = self.rib.bound_face(&self.pln)?;
+        self.bnd = bnd;
         // ---Find support faces of the rib
         let mut x = Extremes::default();
         if !self.rib.extreme_faces(false, self.bnd, &self.pln, &mut x)? {
@@ -234,26 +200,21 @@ impl BRepFeatMakeLinearForm {
                 return Ok(());
             }
         }
-        let w = self.sliding_base(&mut sliding, x)?;
+        let mut sb = SlidingBase {
+            rib: &mut self.rib,
+            tol: self.tol,
+            list_of_edges: &mut self.list_of_edges,
+            slface: &mut self.slface,
+            revol: false,
+        };
+        let w = sb.sliding_base(&mut sliding, x)?;
         if sliding {
-            let b = BRepBuilder::default();
-            let mut f = Face::default();
-            b.make_face_on_surface(&mut f, &self.pln.clone().cast(), self.tol)?;
-            w.set_closed(BRepTool::is_closed(&w)?)?;
-            b.add(&mut f, &w)?;
-            self.rib.skface = f.clone();
-            self.rib.pbase = f;
-            self.rib.s_until.nullify();
+            self.rib.sliding_face(&self.pln, &w, self.tol)?;
         } else if !self.no_sliding(input, &mut concavite, x, sli_list)? {
             return Ok(());
         }
         self.rib.sliding = sliding;
-        for f in Explorer::new(&self.rib.sbase, ShapeEnum::Face, ShapeEnum::Shape)? {
-            let mut thelist = List::default();
-            thelist.append(f.clone());
-            self.rib.map.bind(f, thelist);
-        }
-        Ok(())
+        self.rib.bind_basis_faces()
     }
 
     /// The profile face of a rib not sliding, and the shell of the faces it crosses as
@@ -286,15 +247,7 @@ impl BRepFeatMakeLinearForm {
             return Ok(false);
         }
         self.slface.clear(false);
-        let b = BRepBuilder::default();
-        let mut shell = Shell::default();
-        b.make_shell(&mut shell);
-        let mut comp = shell.into_shape();
-        for f in sli_list.iter() {
-            b.add(&mut comp, f)?;
-        }
-        comp.set_closed(BRepTool::is_closed(&comp)?)?;
-        self.rib.s_until = comp;
+        self.rib.s_until = shell_of(sli_list)?;
         self.rib.skface = prof.clone();
         self.rib.pbase = prof;
         Ok(true)

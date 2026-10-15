@@ -13,7 +13,7 @@ use rustycad_tkg3d::geom::GeomPlane;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Direction3, Plane3, Point3, Vector3};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakePolygon, BRepBuilderAPIMakeShape};
-use support::{assert_close, count, is_valid, make_box, volume};
+use support::{assert_close, is_valid, make_box, sub_shapes, volume};
 
 fn form(mode: i32, slide: bool, back: bool) -> BRepFeatMakeLinearForm {
     let sbase = make_box((0., 0., 0.), (10., 10., 10.));
@@ -53,7 +53,8 @@ fn result(f: &mut BRepFeatMakeLinearForm, nf: usize) -> f64 {
     assert_eq!(f.rib().current_status_error(), StatusError::Ok);
     let s: Shape = f.shape().unwrap().clone();
     assert!(is_valid(&s));
-    assert_eq!(count(&s, ShapeEnum::Face), nf);
+    // the faces as the explorer meets them, as counted natively
+    assert_eq!(sub_shapes(&s, ShapeEnum::Face).len(), nf);
     volume(&s)
 }
 

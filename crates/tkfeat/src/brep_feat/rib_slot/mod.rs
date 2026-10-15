@@ -4,6 +4,7 @@
 //! `BRepFeat_RibSlot`: the base of the ribs and slots (linear and revolution forms): the
 //! profile built from a wire sketched on the basis, its extreme faces, the gluing or the
 //! Boolean operation of the form, and the history of the faces.
+mod bound;
 mod extreme;
 mod extreme_multi;
 mod geometry;
@@ -11,10 +12,13 @@ mod no_sliding;
 mod no_sliding_edges;
 mod perform;
 mod sliding;
+mod sliding_base;
 
+pub(crate) use bound::{max_vertex_tolerance, shell_of};
 pub use extreme::Extremes;
 pub use geometry::{choice_of_faces, int_par};
 pub use sliding::ProfileInput;
+pub(crate) use sliding_base::SlidingBase;
 
 use super::{DescendantMap, PerfSelection, StatusError};
 use crate::loc_ope::Gluer;

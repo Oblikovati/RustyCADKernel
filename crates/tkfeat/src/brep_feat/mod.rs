@@ -11,6 +11,7 @@ mod make_linear_form;
 mod make_pipe;
 mod make_prism;
 mod make_revol;
+mod make_revolution_form;
 mod package;
 mod rib_slot;
 mod split_shape;
@@ -23,6 +24,7 @@ pub use make_linear_form::BRepFeatMakeLinearForm;
 pub use make_pipe::BRepFeatMakePipe;
 pub use make_prism::BRepFeatMakePrism;
 pub use make_revol::BRepFeatMakeRevol;
+pub use make_revolution_form::BRepFeatMakeRevolutionForm;
 pub use package::{
     ParametricMinMax, PerfSelection, Status, StatusError, barycenter, face_until, is_inside,
     parametric_barycenter, parametric_min_max, print, sample_edges, status_error_message, tool,

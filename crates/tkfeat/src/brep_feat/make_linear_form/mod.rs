@@ -5,8 +5,9 @@
 //! a direction (and back along a second one), sliding on the faces of the basis when
 //! they allow it.
 mod init;
-mod init_base;
 mod propagate;
+
+pub(crate) use propagate::{next_face, section_edges};
 
 use super::common::maj_map_swept;
 use super::rib_slot::{RibSlot, impl_rib_make_shape};

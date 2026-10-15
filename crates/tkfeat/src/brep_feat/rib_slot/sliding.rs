@@ -53,7 +53,7 @@ pub struct ProfileInput {
 
 impl ProfileInput {
     /// The plane (Standard_NullObject when null).
-    pub(super) fn plane(&self) -> Result<&GeomPlane, Failure> {
+    pub(crate) fn plane(&self) -> Result<&GeomPlane, Failure> {
         self.pln
             .get()
             .ok_or_else(|| null_object("BRepFeat_RibSlot", "null plane"))

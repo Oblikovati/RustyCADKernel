@@ -1,12 +1,15 @@
-// Rust translation of the sliding base of BRepFeat_MakeLinearForm::Init of
-// ModelingAlgorithms/TKFeat/BRepFeat/BRepFeat_MakeLinearForm.cxx at
+// Rust translation of the sliding base of BRepFeat_MakeLinearForm::Init and
+// BRepFeat_MakeRevolutionForm::Init of ModelingAlgorithms/TKFeat/BRepFeat/
+// BRepFeat_MakeLinearForm.cxx and BRepFeat_MakeRevolutionForm.cxx at
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The base of a sliding rib: the edges of the wire from the first point to the last
 //! one, then the section edges of the sliding faces chained back from the last point to
 //! the first one; the sliding faces are re-bound to the edges of the base they carry.
-use super::BRepFeatMakeLinearForm;
-use crate::brep_feat::rib_slot::{Extremes, int_par};
+//! The two forms differ natively: the revolution form takes the first edge on its
+//! untrimmed curve, keeps the vertex tolerances and walks the section edges again from
+//! the start without removing the ones taken.
+use super::{Extremes, RibSlot, int_par};
 use crate::errors::no_such_object;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::WireExplorer;
@@ -55,11 +58,15 @@ fn vertex(p: rustycad_tkmath::gp::Point3) -> Result<Vertex, Failure> {
     BRepLibMakeVertex::new(p)?.vertex()
 }
 
-impl BRepFeatMakeLinearForm {
+impl SlidingBase<'_> {
     /// The first edge of the wire, from the first point (to the last one when it is
     /// the only edge).
     fn base_first_edge(&mut self, e: &Edge, x: &Extremes, base: &mut Base) -> Result<(), Failure> {
-        let mut cc = trimmed(e)?;
+        let mut cc = if self.revol {
+            BRepTool::curve(e)?.0
+        } else {
+            trimmed(e)?
+        };
         let r = &self.rib;
         let pt = if !x.first_edge.is_same(&x.last_edge) {
             BRepTool::pnt(&topexp::last_vertex(e, true))?
@@ -69,7 +76,7 @@ impl BRepFeatMakeLinearForm {
             if fpar > lpar {
                 cc = cc
                     .get()
-                    .ok_or_else(|| no_such_object("BRepFeat_MakeLinearForm", "null curve"))?
+                    .ok_or_else(|| no_such_object("BRepFeat_RibSlot sliding base", "null curve"))?
                     .reversed()?;
             }
             r.last_pnt
@@ -151,6 +158,16 @@ impl BRepFeatMakeLinearForm {
     }
 }
 
+/// The sliding base of a linear (`revol` false) or revolution form: the rib data, the
+/// tolerance, the section edges and the sliding faces of the form.
+pub(crate) struct SlidingBase<'a> {
+    pub(crate) rib: &'a mut RibSlot,
+    pub(crate) tol: f64,
+    pub(crate) list_of_edges: &'a mut List<Shape>,
+    pub(crate) slface: &'a mut DataMap<Shape, List<Shape>, ShapeMapHasher>,
+    pub(crate) revol: bool,
+}
+
 /// The walk back along the section edges: the edges taken, the last point reached, and
 /// the edge count after them.
 struct Back {
@@ -159,7 +176,7 @@ struct Back {
     new_list: Vec<Shape>,
 }
 
-impl BRepFeatMakeLinearForm {
+impl SlidingBase<'_> {
     /// The section edge `edg` when it starts (or ends) at the last point reached: added
     /// to the base, closed on the first vertex when it reaches the first point. Returns
     /// whether it was taken and whether it closes the base.
@@ -197,13 +214,15 @@ impl BRepFeatMakeLinearForm {
         let cc: Handle<dyn GeomCurve> = Handle::new(cc).cast();
         let c = cc
             .get()
-            .ok_or_else(|| no_such_object("BRepFeat_MakeLinearForm", "null curve"))?;
+            .ok_or_else(|| no_such_object("BRepFeat_RibSlot sliding base", "null curve"))?;
         let eeee = if !first_ok {
             if base.the_previous_edge.is_null() {
                 BRepLibMakeEdge::from_curve_params(&cc, fpar, lpar)?.edge()?
             } else {
                 let v1 = topexp::last_vertex(&base.the_previous_edge, true);
-                base.b.update_vertex_tolerance(&v1, dist)?;
+                if !self.revol {
+                    base.b.update_vertex_tolerance(&v1, dist)?;
+                }
                 BRepLibMakeEdge::from_curve_vertices(&cc, &v1, &vertex(c.value(lpar)?)?)?.edge()?
             }
         } else {
@@ -232,20 +251,22 @@ impl BRepFeatMakeLinearForm {
             // natively the iterator past the end is dereferenced
             let edg = topods::edge(list.get(it).ok_or_else(|| {
                 no_such_object(
-                    "BRepFeat_MakeLinearForm::Init",
+                    "BRepFeat_RibSlot sliding base",
                     "the section edges do not chain",
                 )
             })?)?;
             let (taken, closes) = self.back_edge(&edg, base, back)?;
             first_ok = closes;
             if taken {
-                list.remove(it);
+                if !self.revol {
+                    list.remove(it);
+                }
                 it = 0;
             } else {
                 it += 1;
             }
         }
-        self.list_of_edges = list.into_iter().collect();
+        *self.list_of_edges = list.into_iter().collect();
         Ok(true)
     }
 
@@ -275,13 +296,13 @@ impl BRepFeatMakeLinearForm {
                 }
             }
         }
-        self.slface = slid_map;
+        *self.slface = slid_map;
         Ok(())
     }
 
     /// The base of a sliding rib (the wire stays empty otherwise); `sliding` turns false
     /// when the section edges do not chain.
-    pub(super) fn sliding_base(
+    pub(crate) fn sliding_base(
         &mut self,
         sliding: &mut bool,
         x: &Extremes,
