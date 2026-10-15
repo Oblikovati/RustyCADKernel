@@ -135,7 +135,9 @@ fn every_proof_stage_cancels_and_reuse_is_clean() {
     // Every early checkpoint, then a deterministic stride through the numerical stages
     // (thousands of winding and area polls) and the final one.
     let stride = (polls / 64).max(1);
-    let stops = (0..polls.min(64)).chain((64..polls).step_by(stride)).chain([polls - 1]);
+    let stops = (0..polls.min(64))
+        .chain((64..polls).step_by(stride))
+        .chain([polls - 1]);
     for stop in stops {
         let mut seen = 0;
         let failure = prepared
