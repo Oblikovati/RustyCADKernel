@@ -1,8 +1,5 @@
 // Rust translation of TopOpeBRepDS_InterferenceTool.hxx/.cxx at
 // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
-// Copyright (c) 1993-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-// LGPL-2.1 with the OCCT exception; see licenses/.
 use super::{
     TopOpeBRepDSConfig, TopOpeBRepDSCurvePointInterference, TopOpeBRepDSEdgeVertexInterference,
     TopOpeBRepDSFaceEdgeInterference, TopOpeBRepDSInterference, TopOpeBRepDSKind,

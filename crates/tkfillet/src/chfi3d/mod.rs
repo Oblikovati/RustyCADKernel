@@ -1,7 +1,11 @@
 //! Face-connection geometry shared by fillet construction and offset analysis, and the
 //! ChFi3d helpers of the 3d fillet builders (the builders wait for TKBool, see
 //! docs/tkfillet-progress.md).
+mod builder;
 mod builder0;
+pub use builder::{
+    BlendSide, ChFi3dBuilder, ChFi3dBuilderOps, RstCall, RstRef, SurfCall, SurfOut, WalkSettings,
+};
 pub use builder0::*;
 mod concave_side;
 mod fillet_shape;

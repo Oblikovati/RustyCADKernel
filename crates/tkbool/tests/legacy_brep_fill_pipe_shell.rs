@@ -1,6 +1,4 @@
 //! Exact translations of BRepFill_PipeShell_Test.cxx at OCCT 3d097a0.
-// Copyright (c) 2026 OPEN CASCADE SAS
-// LGPL-2.1 with OCCT exception; see licenses/.
 #[path = "brep_fill_pipe_shell/support.rs"]
 mod support;
 use rustycad_tkbool::brep_fill::{BRepFillPipeShell, TransitionStyle};

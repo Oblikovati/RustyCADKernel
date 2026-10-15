@@ -198,6 +198,14 @@ impl Hatching {
         Ok(&self.my_domains[slot])
     }
 
+    /// The domain `index` to change in place: the `const_cast` of `Domain(Index)` used
+    /// by `ChFi3d_Builder::SplitKPart`; Standard_OutOfRange outside [1, NbDomains];
+    /// `hatching.change_domain(1)?.set_first_infinite()`.
+    pub fn change_domain(&mut self, index: i32) -> Result<&mut Domain, Failure> {
+        let slot = sequence_slot(self.my_domains.len(), index, "Geom2dHatch_Hatching::Domain")?;
+        Ok(&mut self.my_domains[slot])
+    }
+
     /// RemDomain(Index): Standard_OutOfRange outside [1, NbDomains];
     /// `hatching.rem_domain(1)?`.
     pub fn rem_domain(&mut self, index: i32) -> Result<(), Failure> {
@@ -236,5 +244,25 @@ impl Hatching {
 fn merge_element_points(known: &mut PointOnHatching, point: &PointOnHatching, confusion: f64) {
     for element_point in point.element_points() {
         known.add_point(element_point, confusion);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn change_domain_edits_in_place_and_checks_range() {
+        let mut hatching = Hatching::new(Geom2dAdaptorCurve::default());
+        hatching.add_domain(Domain::bounded(
+            &PointOnHatching::new(),
+            &PointOnHatching::new(),
+        ));
+        assert!(hatching.domain(1).unwrap().has_first_point());
+        hatching.change_domain(1).unwrap().set_first_infinite();
+        assert!(!hatching.domain(1).unwrap().has_first_point());
+        assert!(hatching.domain(1).unwrap().has_second_point());
+        assert!(hatching.change_domain(0).is_err());
+        assert!(hatching.change_domain(2).is_err());
     }
 }

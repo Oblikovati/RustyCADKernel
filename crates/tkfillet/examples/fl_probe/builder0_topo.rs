@@ -204,7 +204,7 @@ pub fn smooth_case(values: &[f64]) {
 }
 
 /// `fl_curve3d`.
-fn curve3d(c: &Handle<dyn GeomCurve>) {
+pub(super) fn curve3d(c: &Handle<dyn GeomCurve>) {
     flag(c.is_null());
     let Some(curve) = c.get() else {
         return;
