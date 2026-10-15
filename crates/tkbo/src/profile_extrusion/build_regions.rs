@@ -176,7 +176,7 @@ impl RegionContext<'_> {
 }
 
 /// One entry per caller curve: its edge and the regions it bounds (two for a curve shared
-/// by adjacent regions, none for a bridge outside every region).
+/// by adjacent regions).
 fn curve_edges(
     profile: &AdmittedProfile,
     topology: &ProfileTopology,

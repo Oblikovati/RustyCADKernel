@@ -4,4 +4,5 @@ mod curves;
 mod declines;
 mod extrusion;
 mod fixtures;
+mod graph;
 mod regions;

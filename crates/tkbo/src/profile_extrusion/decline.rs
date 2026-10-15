@@ -175,6 +175,12 @@ pub enum DeclineCause {
         /// Curve ends at it.
         uses: usize,
     },
+    /// The curve is a bridge: removing it disconnects its ends, so it bounds no face on
+    /// either side (for example a line joining two separate loops) (ADR 0084).
+    BridgeCurve {
+        /// The bridge.
+        curve: ProfileCurveId,
+    },
     /// Two or more curves leave a vertex of three or more curve ends in the same direction,
     /// so the order of the faces around it is undecided (ADR 0084).
     TangentBranches {
@@ -242,9 +248,10 @@ impl DeclineCause {
     pub fn class(&self) -> DeclineClass {
         use DeclineCause::*;
         match self {
-            UnsupportedCurve { .. } | TangentBranches { .. } | PinchedRegion { .. } => {
-                DeclineClass::Unsupported
-            }
+            UnsupportedCurve { .. }
+            | TangentBranches { .. }
+            | PinchedRegion { .. }
+            | BridgeCurve { .. } => DeclineClass::Unsupported,
             SelfIntersecting { .. } | OpenProfile { .. } | BranchingProfile { .. } => {
                 DeclineClass::InvalidGeometry
             }

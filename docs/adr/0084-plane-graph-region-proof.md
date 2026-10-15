@@ -61,9 +61,11 @@ admitted (`BranchingProfile` is no longer produced). Every bounded face is one r
   traversal of the face), each loop starting at its earliest caller curve; regions are
   ordered by the caller index of their outer loop's first curve, forward use first;
 - `curve_edges()` maps a curve shared by two regions to both (the edge is used forward by
-  one face and reversed by the other), and a bridge curve outside every region to none;
+  one face and reversed by the other);
 - new named declines, class `Unsupported`: `TangentBranches { vertex }` and
-  `PinchedRegion { vertex, hole }`, with the caller vertex.
+  `PinchedRegion { vertex, hole }` with the caller vertex, and `BridgeCurve { curve }` at
+  the `Loops` stage for a curve whose removal disconnects its ends (it bounds no face on
+  either side, and the shared native partition stage refuses such arrangements).
 
 `RegionCertificate` gains `components`; `loops` counts bounded faces. For the previous
 corpus (disjoint and nested loops) the regions, loops, areas and evidence counts are
@@ -79,12 +81,24 @@ circle in the left half of the split rectangle is a hole of that face only (`1 -
 its own disc (`pi/16`); a triangle touching its enclosing square from inside is
 `PinchedFace` at the touching vertex; the figure eight inside a square is `PinchedHole`; a
 line and a tangent quarter arc leaving one vertex vertically are `TangentBranches`; replay
-is identical; cancellation is observed at every stage. The 30 seam tests and the 17 ADR
-0066 part C tests pass unchanged.
+is identical; cancellation is observed at every stage. The 30 previous seam tests and the
+17 ADR 0066 part C tests pass unchanged (the old branching decline test now expects the
+dangling vertex's `OpenProfile`).
+
+Public seam (`profile_extrusion::graph`, 8 tests): a 3 x 2 rectangle split by the line
+`x = 1` gives regions of area 2 and 4 (closed form and adaptive native face integration),
+the chord's single native edge bounds both (opposite uses) and every other curve one; each
+region extrudes to a valid six-face box with the chord's side face in its history; a figure
+eight of two triangles touching at a vertex is two unit regions that extrude to valid
+solids; a triangle touching its enclosing square from inside is
+`PinchedRegion { vertex: 0, hole: false }`; a line and a tangent half circle leaving one
+vertex upward is `TangentBranches`; a bridge between two squares is `BridgeCurve`; a circle
+in the right half of the split rectangle is a clockwise hole of that half only (area
+`4 - pi/4`, valid prism); results are equal across threads.
 
 ## Limits
 
-Tangent branches at a vertex of degree three or more, pinched faces and pinched holes are
-refused. Orbits and faces are bounded by the integral limits (64 curves, degree 16 per
+Tangent branches at a vertex of degree three or more, pinched faces and pinched holes, and
+bridge curves are refused. Orbits and faces are bounded by the integral limits (64 curves, degree 16 per
 piece). The rotation uses chart controls: a vertex whose darts start at different chart
 points is refused rather than merged.

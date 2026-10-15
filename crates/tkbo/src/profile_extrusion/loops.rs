@@ -49,6 +49,46 @@ pub(crate) fn require_closed(profile: &AdmittedProfile) -> Result<(), DeclineCau
     }
     match uses.into_iter().find(|(_, count)| *count < 2) {
         Some((vertex, uses)) => Err(DeclineCause::OpenProfile { vertex, uses }),
-        None => Ok(()),
+        None => require_no_bridge(profile),
     }
+}
+
+/// A curve whose removal disconnects its ends bounds no face on either side (a bridge
+/// between loops); the region pipeline does not admit it (ADR 0084).
+fn require_no_bridge(profile: &AdmittedProfile) -> Result<(), DeclineCause> {
+    let edges: Vec<(ProfileCurveId, [ProfileVertexId; 2])> = profile
+        .curves
+        .iter()
+        .filter_map(|curve| Some((curve.id(), curve.ends()?)))
+        .collect();
+    for (skip, (curve, [start, end])) in edges.iter().enumerate() {
+        if start != end && !connected(&edges, skip, *start, *end) {
+            return Err(DeclineCause::BridgeCurve { curve: *curve });
+        }
+    }
+    Ok(())
+}
+
+/// Whether `to` is reachable from `from` without the edge at index `skip`.
+fn connected(
+    edges: &[(ProfileCurveId, [ProfileVertexId; 2])],
+    skip: usize,
+    from: ProfileVertexId,
+    to: ProfileVertexId,
+) -> bool {
+    let mut reached = std::collections::BTreeSet::from([from]);
+    let mut frontier = vec![from];
+    while let Some(vertex) = frontier.pop() {
+        let around = edges
+            .iter()
+            .enumerate()
+            .filter(|(i, (_, ends))| *i != skip && ends.contains(&vertex));
+        for (_, (_, ends)) in around {
+            let other = if ends[0] == vertex { ends[1] } else { ends[0] };
+            if reached.insert(other) {
+                frontier.push(other);
+            }
+        }
+    }
+    reached.contains(&to)
 }
