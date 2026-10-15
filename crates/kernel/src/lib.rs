@@ -4,3 +4,8 @@
 //! acceptance requires all upstream tests and API mappings to pass.
 
 pub use rustycad_tkernel as foundation;
+
+pub mod properties;
+
+#[cfg(test)]
+mod test_shapes;
