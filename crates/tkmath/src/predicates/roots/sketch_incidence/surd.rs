@@ -18,7 +18,7 @@ use std::cmp::Ordering;
 use std::sync::Arc;
 
 /// `rational + radical * sqrt(radicand)`; every surd of one piece shares its radicand.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub(super) struct Surd {
     pub rational: RationalPolynomial,
     pub radical: RationalPolynomial,
@@ -65,12 +65,12 @@ impl Surd {
         root: &mut IsolatedRoot,
         work: &mut Work<'_>,
     ) -> Result<Sign, Cause> {
-        let rational = sign_at_root(root, &self.rational, work)?;
-        let radical = sign_at_root(root, &self.radical, work)?;
+        let rational = part_sign(root, &self.rational, work)?;
+        let radical = part_sign(root, &self.radical, work)?;
         if radical == Sign::NoSign || rational == Sign::NoSign || rational == radical {
             return Ok(combine(rational, radical, || Sign::NoSign));
         }
-        Ok(rational * sign_at_root(root, &self.norm(), work)?)
+        Ok(rational * part_sign(root, &self.norm(), work)?)
     }
     /// Outward enclosure over a parameter interval, with `sqrt(G)` to `bits` bits.
     pub fn enclose(&self, parameter: &RatioInterval, bits: u32) -> RatioInterval {
@@ -78,6 +78,44 @@ impl Surd {
         let radical = self.radical.enclose(parameter).multiply(&root);
         self.rational.enclose(parameter).add(&radical)
     }
+}
+/// Bisections of a probe bracket tried before the exact common-factor test.
+const SIGN_PROBES: u32 = 24;
+// Exact sign of one part at the root. The root's own equation vanishes there; a
+// nonzero value is usually separated by a few probe bisections (on a copy, so the
+// bracket is unchanged), which avoids a large gcd; otherwise the exact test runs.
+fn part_sign(
+    root: &mut IsolatedRoot,
+    polynomial: &RationalPolynomial,
+    work: &mut Work<'_>,
+) -> Result<Sign, Cause> {
+    if is_root_equation(root, polynomial) {
+        return Ok(Sign::NoSign);
+    }
+    let mut probe = root.clone();
+    for _ in 0..SIGN_PROBES {
+        let [lower, upper] = probe.ratio_bounds();
+        let value = polynomial.enclose(&RatioInterval { lower, upper });
+        if value.lower.sign() == Ordering::Greater {
+            return Ok(Sign::Plus);
+        }
+        if value.upper.sign() == Ordering::Less {
+            return Ok(Sign::Minus);
+        }
+        if probe.exact().is_some() {
+            break;
+        }
+        probe.bisect(work)?;
+    }
+    sign_at_root(root, polynomial, work)
+}
+// True when the polynomial is a positive or negative multiple of the root's equation.
+fn is_root_equation(root: &IsolatedRoot, polynomial: &RationalPolynomial) -> bool {
+    let Ok(Some(integer)) = polynomial.to_integer(u16::MAX) else {
+        return false;
+    };
+    let own = &root.equation.polynomial.0;
+    integer.0 == *own || integer.0.iter().map(|c| -c).eq(own.iter().cloned())
 }
 // Signs of `a + b s` with `s > 0`: one zero part or equal signs decide alone.
 fn combine(rational: Sign, radical: Sign, norm: impl FnOnce() -> Sign) -> Sign {

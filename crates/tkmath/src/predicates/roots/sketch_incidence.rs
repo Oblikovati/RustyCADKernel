@@ -57,6 +57,7 @@ mod spline_admission;
 mod spline_corner;
 mod spline_pair;
 mod surd;
+mod surd_key;
 mod surd_map;
 mod surd_roots;
 mod surd_square;

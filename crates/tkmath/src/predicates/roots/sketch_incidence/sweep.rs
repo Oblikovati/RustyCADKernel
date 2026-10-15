@@ -15,7 +15,8 @@ use super::place::{KeyValue, SketchSweepChart, SourcePlace};
 use super::rational_polynomial::{RationalPolynomial, Ring, ratio};
 use super::root_map::{MappedEquation, RationalMap};
 use super::surd::Surd;
-use super::surd_map::{MappedSurd, SurdMap};
+use super::surd_key::SurdKey;
+use super::surd_map::SurdMap;
 use num_bigint::Sign;
 use std::cmp::Ordering;
 
@@ -30,18 +31,17 @@ pub(super) struct SweepFrame {
 /// offset contact points (ADR 0080).
 pub(super) enum KeyMap {
     Rational(MappedEquation),
-    Surd(MappedSurd),
+    Surd(SurdMap),
 }
 impl KeyMap {
-    /// Certified key root of an isolated contact root.
-    pub fn map_root(
-        &self,
-        contact: &mut IsolatedRoot,
-        work: &mut Work<'_>,
-    ) -> Result<IsolatedRoot, Cause> {
+    /// The certified key of an isolated contact root (a lazy surd key for offsets).
+    pub fn key(&self, contact: &mut IsolatedRoot, work: &mut Work<'_>) -> Result<KeyValue, Cause> {
         match self {
-            Self::Rational(map) => map.map_root(contact, work),
-            Self::Surd(map) => map.map_root(contact, work),
+            Self::Rational(map) => Ok(KeyValue::Root(map.map_root(contact, work)?)),
+            Self::Surd(map) => {
+                let key = SurdKey::new(contact.clone(), map.clone());
+                Ok(KeyValue::Surd(Box::new(key)))
+            }
         }
     }
 }
@@ -109,20 +109,19 @@ impl SweepFrame {
             key,
         })
     }
-    /// Placer for an offset contact point with surd relative coordinates.
-    pub fn surd_placer(
-        &self,
-        relative: &[Surd; 2],
-        contact: &RationalPolynomial,
-        work: &mut Work<'_>,
-    ) -> Result<PointPlacer, Cause> {
+    /// Placer for an offset contact point with surd relative coordinates; its
+    /// cotangent key is compared lazily (no image equation up front).
+    pub fn surd_placer(&self, relative: &[Surd; 2]) -> PointPlacer {
         let [across, along] = self.across_along(relative);
         let map = SurdMap {
             numerator: along.scale(&ratio(-1.)),
             denominator: across.clone(),
         };
-        let key = KeyMap::Surd(MappedSurd::new(contact, map, work)?);
-        Ok(PointPlacer::Sweep { across, along, key })
+        PointPlacer::Sweep {
+            across,
+            along,
+            key: KeyMap::Surd(map),
+        }
     }
 }
 /// Chart from the exact signs of `across` and `along`.
@@ -149,13 +148,11 @@ impl PointPlacer {
         work: &mut Work<'_>,
     ) -> Result<SourcePlace, Cause> {
         match self {
-            Self::Parameter(map) => Ok(SourcePlace::Parameter(KeyValue::Root(
-                map.map_root(contact, work)?,
-            ))),
+            Self::Parameter(map) => Ok(SourcePlace::Parameter(map.key(contact, work)?)),
             Self::Sweep { across, along, key } => {
                 let across_sign = ordering(across.sign_at_root(contact, work)?);
                 if across_sign != Ordering::Equal {
-                    let cotangent = Some(KeyValue::Root(key.map_root(contact, work)?));
+                    let cotangent = Some(key.key(contact, work)?);
                     let chart = chart(across_sign, Ordering::Equal);
                     return Ok(SourcePlace::sweep(chart, cotangent));
                 }

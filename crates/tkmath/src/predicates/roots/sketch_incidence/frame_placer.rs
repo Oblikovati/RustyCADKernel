@@ -13,7 +13,7 @@ use super::root_map::{MappedEquation, RationalMap};
 use super::source_frame::SourceFrame;
 use super::spans::HomogeneousPoint;
 use super::surd::Surd;
-use super::surd_map::{MappedSurd, SurdMap};
+use super::surd_map::SurdMap;
 use super::sweep::{KeyMap, PointPlacer};
 
 impl SourceFrame {
@@ -51,24 +51,18 @@ impl SourceFrame {
         }
     }
     /// Placer of offset target points given by surds of the target parameter.
-    pub fn surd_placer(
-        &self,
-        point: &HomogeneousPoint<Surd>,
-        contact: &RationalPolynomial,
-        work: &mut Work<'_>,
-    ) -> Result<PointPlacer, Cause> {
+    pub fn surd_placer(&self, point: &HomogeneousPoint<Surd>) -> Result<PointPlacer, Cause> {
         if let Some(line) = self.placing_line() {
             let map = SurdMap {
                 numerator: line.along(point),
                 denominator: Ring::scale(&point.w, &line.squared_length()),
             };
-            let key = MappedSurd::new(contact, map, work)?;
-            return Ok(PointPlacer::Parameter(KeyMap::Surd(key)));
+            return Ok(PointPlacer::Parameter(KeyMap::Surd(map)));
         }
         match self {
             Self::Conic(conic) => {
                 let relative = point.relative(&conic.frame.center);
-                conic.frame.surd_placer(&relative, contact, work)
+                Ok(conic.frame.surd_placer(&relative))
             }
             _ => Err(Cause::Invariant(
                 "a parametric source has no implicit placer",

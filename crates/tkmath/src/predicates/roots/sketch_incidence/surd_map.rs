@@ -20,7 +20,7 @@ use num_bigint::{BigInt, Sign};
 use std::sync::Arc;
 
 /// The surd ratio `numerator / denominator` of the contact variable.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub(super) struct SurdMap {
     pub numerator: Surd,
     pub denominator: Surd,

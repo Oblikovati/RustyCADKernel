@@ -80,10 +80,11 @@ impl Coordinate for Surd {
     fn place_on(
         point: &HomogeneousPoint<Self>,
         source: &SourceFrame,
-        contact: &RationalPolynomial,
-        work: &mut Work<'_>,
+        _contact: &RationalPolynomial,
+        _work: &mut Work<'_>,
     ) -> Result<PointPlacer, Cause> {
-        source.surd_placer(point, contact, work)
+        // Surd keys are compared lazily; no image equation is built here.
+        source.surd_placer(point)
     }
     // A straight offset piece on a line is parallel to it, so its offset normal is
     // orthogonal to the line and the basis piece (the radical parts) has the same

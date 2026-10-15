@@ -180,6 +180,18 @@ pub(super) fn value_position(
     match value {
         KeyValue::Root(root) => root_position(root, range, work),
         KeyValue::Ratio(value) => Ok(ratio_position(value, range)),
+        KeyValue::Surd(key) => {
+            let [start, end] = range.map(ratio);
+            Ok(match key.compare_ratio(&start, work)? {
+                Ordering::Less => SketchLinePosition::BeforeStart,
+                Ordering::Equal => SketchLinePosition::AtStart,
+                Ordering::Greater => match key.compare_ratio(&end, work)? {
+                    Ordering::Less => SketchLinePosition::Interior,
+                    Ordering::Equal => SketchLinePosition::AtEnd,
+                    Ordering::Greater => SketchLinePosition::AfterEnd,
+                },
+            })
+        }
         KeyValue::Angle(_) => Err(Cause::Invariant("a parameter place holds an angle")),
     }
 }
