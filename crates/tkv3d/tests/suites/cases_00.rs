@@ -47,6 +47,8 @@ pub mod ais_light_presentation;
 pub mod ais_light_selection;
 #[path = "../ais_line.rs"]
 pub mod ais_line;
+#[path = "../ais_manipulator.rs"]
+pub mod ais_manipulator;
 #[path = "../ais_plane.rs"]
 pub mod ais_plane;
 #[path = "../ais_plane_trihedron.rs"]

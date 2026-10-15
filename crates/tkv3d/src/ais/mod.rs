@@ -238,6 +238,27 @@ mod view_controller_selection;
 mod view_controller_transfer;
 mod view_controller_zoom;
 pub use view_controller::AisViewController;
+mod manipulator;
+pub use manipulator::{
+    AisManipulator, AisManipulatorBehaviorOnTransform, AisManipulatorFields,
+    AisManipulatorOptionsForAttach, AisManipulatorSkin,
+};
+mod manipulator_attach;
+pub use manipulator_attach::AisManipulatorObjects;
+mod manipulator_axis;
+pub use manipulator_axis::AisManipulatorAxis;
+mod manipulator_owner;
+pub use manipulator_owner::{AisManipulatorMode, AisManipulatorOwner};
+mod manipulator_presentation;
+mod manipulator_quadrics;
+pub use manipulator_quadrics::{
+    AisManipulatorCube, AisManipulatorDisk, AisManipulatorQuadric, AisManipulatorSector,
+    AisManipulatorSphere,
+};
+mod manipulator_recompute;
+mod manipulator_sensitive;
+pub use manipulator_sensitive::AisManipulatorSensCircle;
+mod manipulator_transform;
 mod view_controller_dispatch_state;
 pub use view_controller_dispatch_state::AisViewControllerHooks;
 mod view_controller_events;
