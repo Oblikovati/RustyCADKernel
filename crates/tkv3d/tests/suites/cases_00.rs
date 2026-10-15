@@ -137,6 +137,8 @@ pub mod plane_presentations;
 pub mod prs3d_drawer_test;
 #[path = "../prs_dim.rs"]
 pub mod prs_dim;
+#[path = "../prs_dim_relations.rs"]
+pub mod prs_dim_relations;
 #[path = "../prs_mgr_test.rs"]
 pub mod prs_mgr_test;
 #[path = "../rectangular_frustum.rs"]
