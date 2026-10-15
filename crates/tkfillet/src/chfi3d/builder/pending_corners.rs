@@ -16,20 +16,6 @@ fn pending(name: &str) -> Failure {
 }
 
 impl ChFi3dBuilder {
-    /// `PerformMoreSurfdata(Index)`: pending, always fails.
-    ///
-    /// ```ignore
-    /// assert!(builder.perform_more_surfdata(1).is_err());
-    /// ```
-    pub(crate) fn perform_more_surfdata(&mut self, _index: i32) -> Result<(), Failure> {
-        Err(pending("PerformMoreSurfdata"))
-    }
-
-    /// `IntersectMoreCorner(Index)`: pending, always fails.
-    pub(crate) fn intersect_more_corner(&mut self, _index: i32) -> Result<(), Failure> {
-        Err(pending("IntersectMoreCorner"))
-    }
-
     /// `PerformMoreThreeCorner(Index, nconges)`: pending, always fails.
     pub(crate) fn perform_more_three_corner(
         &mut self,
@@ -54,13 +40,7 @@ mod tests {
             .unwrap()
             .clone();
         let mut b = ChFi3dBuilder::new(&solid, 1.0e-2).unwrap();
-        let results = [
-            b.perform_more_surfdata(1),
-            b.intersect_more_corner(1),
-            b.perform_more_three_corner(1, 3),
-        ];
-        for r in results {
-            assert_eq!(r.unwrap_err().exception_type(), "Standard_NotImplemented");
-        }
+        let r = b.perform_more_three_corner(1, 3);
+        assert_eq!(r.unwrap_err().exception_type(), "Standard_NotImplemented");
     }
 }

@@ -139,7 +139,7 @@ impl ChFi3dBuilder {
     }
 
     /// The first and second edges at the vertex lying on the face.
-    fn edges_on_face(&self, vtx: &Vertex, fv: &Face) -> Result<(Edge, Edge), Failure> {
+    pub(super) fn edges_on_face(&self, vtx: &Vertex, fv: &Face) -> Result<(Edge, Edge), Failure> {
         let list = self.my_ve_map.find_from_key(vtx.as_ref())?;
         let mut arc1 = Edge::default();
         for s in list.iter() {
