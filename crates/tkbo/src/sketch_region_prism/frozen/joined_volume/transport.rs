@@ -22,7 +22,7 @@ pub(super) fn interpret(
         measures: measures.replay_bytes(),
     })
 }
-pub(super) fn transport_scalar(
+pub(in crate::sketch_region_prism) fn transport_scalar(
     source: &CertifiedPolynomialMeasure,
     sign: i8,
 ) -> Result<([f64; 2], f64), JoinedPrismVolumeCause> {
