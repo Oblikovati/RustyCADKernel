@@ -199,3 +199,21 @@ fn over_budget_solid_is_refused_and_report_cap_records_a_finding() {
     let result = extrude(&region, [0., 0., 1.], &strict).unwrap();
     assert!(matches!(result.findings(), [Finding::ToleranceAboveReportLimit { limit, .. }] if *limit == 1e-9));
 }
+
+#[test]
+fn results_are_equal_across_threads() {
+    let profile = slot();
+    let local = extruded(&profile, 0, [0., 0., 1.]);
+    let threads: Vec<_> = (0..2)
+        .map(|_| {
+            let profile = profile.clone();
+            std::thread::spawn(move || extruded(&profile, 0, [0., 0., 1.]))
+        })
+        .collect();
+    for thread in threads {
+        let remote = thread.join().unwrap();
+        assert_eq!(remote.history(), local.history());
+        assert_eq!(remote.volume(), local.volume());
+        assert_eq!(remote.achieved_tolerance(), local.achieved_tolerance());
+    }
+}
