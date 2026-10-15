@@ -285,9 +285,9 @@ impl ChFi3dFilBuilder {
             )?;
             (qv[jj], qr[jj]) = (v, r);
         }
-        for ii in 0..3 {
+        for (ii, &v) in qv.iter().enumerate() {
             let (jj, kk) = ((ii + 1) % 3, (ii + 2) % 3);
-            if toric_corner(&tc.face[ii], qr[jj], qr[kk], qv[ii])? {
+            if toric_corner(&tc.face[ii], qr[jj], qr[kk], v)? {
                 tc.c1toric = true;
                 (tc.pivot, tc.deb, tc.fin) = (ii, jj, kk);
                 return Ok(());

@@ -112,7 +112,7 @@ impl ChFi3dChBuilder {
     /// in the first surface data; false when the walking fails (a recovery is possible).
     pub(super) fn perform_surf_impl(
         &mut self,
-        seq: &mut Vec<SurfDataHandle>,
+        seq: &mut [SurfDataHandle],
         call: &SurfCall<'_>,
         out: &mut SurfOut,
     ) -> Result<bool, Failure> {

@@ -19,12 +19,18 @@ use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 fn the_fillet_interferences_carry_their_kinds() {
     let i = b0::fil_point_in_ds(Orientation::Forward, 2, 3, 0.5, false);
     let (gk, g, sk, s) = i.get().unwrap().gkgsks();
-    assert_eq!((gk, g, sk, s), (TopOpeBRepDSKind::Point, 3, TopOpeBRepDSKind::Curve, 2));
+    assert_eq!(
+        (gk, g, sk, s),
+        (TopOpeBRepDSKind::Point, 3, TopOpeBRepDSKind::Curve, 2)
+    );
     let v = b0::fil_vertex_in_ds(Orientation::Reversed, 4, 1, 0.0);
     assert_eq!(v.get().unwrap().geometry_type(), TopOpeBRepDSKind::Vertex);
     let c = b0::fil_curve_in_ds(5, 6, &Handle::default(), Orientation::Forward);
     let (gk, g, sk, s) = c.get().unwrap().gkgsks();
-    assert_eq!((gk, g, sk, s), (TopOpeBRepDSKind::Curve, 5, TopOpeBRepDSKind::Surface, 6));
+    assert_eq!(
+        (gk, g, sk, s),
+        (TopOpeBRepDSKind::Curve, 5, TopOpeBRepDSKind::Surface, 6)
+    );
 }
 
 #[test]
@@ -47,8 +53,15 @@ fn a_common_point_off_a_vertex_becomes_a_point() {
 fn the_geometry_of_an_index_is_a_face_or_a_surface() {
     let mut ds = TopOpeBRepDSDataStructure::new();
     assert!(b0::ds_geometry(&ds, 0).unwrap().is_null());
-    let solid: Shape = BRepPrimAPIMakeBox::from_sizes(1., 1., 1.).unwrap().shape().unwrap().clone();
-    let face = Explorer::new(&solid, ShapeEnum::Face, ShapeEnum::Shape).unwrap().current().clone();
+    let solid: Shape = BRepPrimAPIMakeBox::from_sizes(1., 1., 1.)
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone();
+    let face = Explorer::new(&solid, ShapeEnum::Face, ShapeEnum::Shape)
+        .unwrap()
+        .current()
+        .clone();
     let iface = ds.add_shape(&face);
     let s = b0::ds_geometry(&ds, iface).unwrap();
     assert_eq!(s.get().unwrap().get_type().unwrap(), SurfaceType::Plane);
@@ -63,7 +76,10 @@ fn the_surface_data_of_a_stripe_by_index() {
     let st = shared(Stripe::new());
     let sd = shared(SurfData::new());
     *lock(&st).change_set_of_surf_data() = Some(shared(vec![sd.clone()]));
-    assert!(std::sync::Arc::ptr_eq(&b0::surf_data_at(&st, 1).unwrap(), &sd));
+    assert!(std::sync::Arc::ptr_eq(
+        &b0::surf_data_at(&st, 1).unwrap(),
+        &sd
+    ));
     assert!(b0::surf_data_at(&st, 2).is_err());
 }
 

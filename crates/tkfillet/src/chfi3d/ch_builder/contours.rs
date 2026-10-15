@@ -49,6 +49,9 @@ fn face_not_common(what: &str) -> Failure {
     Failure::with_message("Standard_DomainError", what)
 }
 
+/// The faces of a contour at its ends, around its first edge, and that edge.
+type FacesAlong = ((Face, Face), (Face, Face), Edge);
+
 impl ChFi3dChBuilder {
     /// The chamfer spine of the contour `ic` (Standard_ConstructionError when it is not
     /// one), edited by `f`.
@@ -172,12 +175,7 @@ impl ChFi3dChBuilder {
 
     /// The faces of the first edge of the contour, and of its first edge having the
     /// face `f` (`f` first); Standard_DomainError when no edge has it.
-    fn faces_along(
-        &self,
-        ic: i32,
-        f: &Face,
-        what: &str,
-    ) -> Result<((Face, Face), (Face, Face), Edge), Failure> {
+    fn faces_along(&self, ic: i32, f: &Face, what: &str) -> Result<FacesAlong, Failure> {
         let sp = self.spine_of(ic)?;
         let g = lock(&sp);
         let mut first = (Face::default(), Face::default());

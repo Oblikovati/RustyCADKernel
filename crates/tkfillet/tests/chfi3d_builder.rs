@@ -8,7 +8,11 @@ use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
 fn unit_box() -> Shape {
-    BRepPrimAPIMakeBox::from_sizes(1., 1., 1.).unwrap().shape().unwrap().clone()
+    BRepPrimAPIMakeBox::from_sizes(1., 1., 1.)
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone()
 }
 
 #[test]
@@ -29,7 +33,12 @@ fn a_new_builder_has_no_contour_and_no_result() {
 fn contour_queries_out_of_range_are_neutral() {
     let solid = unit_box();
     let b = ChFi3dBuilder::new(&solid, 1.0e-2).unwrap();
-    let edge = topods::edge(Explorer::new(&solid, ShapeEnum::Edge, ShapeEnum::Shape).unwrap().current()).unwrap();
+    let edge = topods::edge(
+        Explorer::new(&solid, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .current(),
+    )
+    .unwrap();
     assert_eq!(b.contains(&edge).unwrap(), 0);
     assert_eq!(b.length(1).unwrap(), -1.0);
     assert!(b.value(1).is_err());

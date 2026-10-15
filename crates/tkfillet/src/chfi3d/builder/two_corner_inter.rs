@@ -85,13 +85,14 @@ pub(super) fn surf_point(fd: &SurfDataHandle, on_s: i32, u: f64) -> Result<Point
         .value(u)
 }
 
+/// Two contours at a vertex: the stripes, their surface data at the vertex and their
+/// senses.
+pub(crate) type TwoStripes = ([StripeHandle; 2], [i32; 2], [i32; 2]);
+
 /// The two contours meeting at the `index`-th vertex: the stripes, the indices of their
 /// surface data at the vertex and their senses (the second end of a closed contour when
 /// both are the same stripe).
-pub(crate) fn two_stripes_at(
-    list: &[StripeHandle],
-    vtx: &Vertex,
-) -> Result<([StripeHandle; 2], [i32; 2], [i32; 2]), Failure> {
+pub(crate) fn two_stripes_at(list: &[StripeHandle], vtx: &Vertex) -> Result<TwoStripes, Failure> {
     let (st1, st2) = match list {
         [a, b, ..] => (a.clone(), b.clone()),
         _ => return Err(Failure::out_of_range("TwoCorner: less than two contours")),

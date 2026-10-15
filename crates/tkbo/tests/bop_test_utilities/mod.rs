@@ -313,7 +313,9 @@ pub fn CreateBlend(shape: &Shape, edge_index: usize, radius: f64) -> Shape {
     maker.set_params(1e-2, 1.0e-4, 1.0e-5, 1.0e-4, 1.0e-5, 1.0e-3);
     maker.set_continuity(Continuity::C1, 1.0e-2);
     maker.add_with_radius(radius, &target).unwrap();
-    maker.build(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
+    maker
+        .build(&rustycad_tkernel::message::ProgressRange::default())
+        .unwrap();
     if !maker.is_done() {
         return Shape::default();
     }

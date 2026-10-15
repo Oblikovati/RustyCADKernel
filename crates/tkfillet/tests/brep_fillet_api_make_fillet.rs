@@ -59,7 +59,8 @@ fn IsValid(s: &Shape) -> bool {
 }
 
 fn Build(f: &mut BRepFilletAPIMakeFillet) {
-    f.build(&ProgressRange::default()).expect("Fillet build must not crash");
+    f.build(&ProgressRange::default())
+        .expect("Fillet build must not crash");
 }
 
 fn SurfaceArea(s: &Shape) -> f64 {
@@ -76,7 +77,10 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_FilletToOpposingEdge_SucceedsWithoutC
     let mut aFillet = BRepFilletAPIMakeFillet::new(&aBox, FilletShape::Rational).unwrap();
     aFillet.add_with_radius(aSize, &anEdge).unwrap();
     Build(&mut aFillet);
-    assert!(aFillet.is_done(), "Fillet radius equal to box size should succeed (issue #1177)");
+    assert!(
+        aFillet.is_done(),
+        "Fillet radius equal to box size should succeed (issue #1177)"
+    );
     let aResult = aFillet.shape().unwrap().clone();
     assert!(!aResult.is_null());
     assert!(IsValid(&aResult));
@@ -93,18 +97,34 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_HistoryReferencesResultTopology() {
     assert!(aFillet.is_done());
     let mut aResultShapes = IndexedMapOfShape::default();
     topexp::map_shapes(aFillet.shape().unwrap(), &mut aResultShapes, true, true);
-    let aGenerated: Vec<Shape> = aFillet.generated(anEdge.as_ref()).unwrap().iter().cloned().collect();
+    let aGenerated: Vec<Shape> = aFillet
+        .generated(anEdge.as_ref())
+        .unwrap()
+        .iter()
+        .cloned()
+        .collect();
     assert!(!aGenerated.is_empty());
     for s in &aGenerated {
-        assert!(aResultShapes.contains(s), "Generated() returned topology absent from the result");
+        assert!(
+            aResultShapes.contains(s),
+            "Generated() returned topology absent from the result"
+        );
     }
     let mut hasModified = false;
     let mut aFaceExp = Explorer::new(&aBox, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
     while aFaceExp.more() {
-        let aModified: Vec<Shape> = aFillet.modified(aFaceExp.current()).unwrap().iter().cloned().collect();
+        let aModified: Vec<Shape> = aFillet
+            .modified(aFaceExp.current())
+            .unwrap()
+            .iter()
+            .cloned()
+            .collect();
         hasModified = hasModified || !aModified.is_empty();
         for s in &aModified {
-            assert!(aResultShapes.contains(s), "Modified() returned topology absent from the result");
+            assert!(
+                aResultShapes.contains(s),
+                "Modified() returned topology absent from the result"
+            );
         }
         aFaceExp.next().unwrap();
     }
@@ -116,7 +136,10 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_OpposingFilletsMeet_SucceedsWithoutCr
     let aSize = 10.0;
     let aRadius = 0.5 * aSize;
     let aBox = MakeBox(aSize, aSize, aSize);
-    let aFace = Explorer::new(&aBox, ShapeEnum::Face, ShapeEnum::Shape).unwrap().current().clone();
+    let aFace = Explorer::new(&aBox, ShapeEnum::Face, ShapeEnum::Shape)
+        .unwrap()
+        .current()
+        .clone();
     let aFaceEdges = Edges(&aFace);
     assert!(aFaceEdges.len() >= 4, "Box face must have at least 4 edges");
     let anEdgeLow = aFaceEdges[0].clone();
@@ -125,7 +148,10 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_OpposingFilletsMeet_SucceedsWithoutCr
     aFillet.add_with_radius(aRadius, &anEdgeLow).unwrap();
     aFillet.add_with_radius(aRadius, &anEdgeHigh).unwrap();
     Build(&mut aFillet);
-    assert!(aFillet.is_done(), "Opposing fillets that should meet must succeed (issues #1177, FreeCAD #5561)");
+    assert!(
+        aFillet.is_done(),
+        "Opposing fillets that should meet must succeed (issues #1177, FreeCAD #5561)"
+    );
     let aResult = aFillet.shape().unwrap().clone();
     assert!(!aResult.is_null());
     assert!(IsValid(&aResult));
@@ -137,7 +163,8 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_ConcaveFilletsMeet_SucceedsWithoutCra
     let aTool = MakeBox(10.0, 10.0, 12.0);
     let mut aTranslation = Transform3::default();
     aTranslation.set_translation(Vector3::new(5.0, 5.0, -1.0));
-    let mut aTransform = BRepBuilderAPITransform::with_shape(&aTool, aTranslation, false, false).unwrap();
+    let mut aTransform =
+        BRepBuilderAPITransform::with_shape(&aTool, aTranslation, false, false).unwrap();
     let aTool = aTransform.shape().unwrap().clone();
     let aCut = BRepAlgoAPICut::from_shapes(&aBox, &aTool).unwrap();
     assert!(aCut.is_done());
@@ -148,13 +175,14 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_ConcaveFilletsMeet_SucceedsWithoutCra
     let c = precision::confusion();
     let mut anEdges = Vec::new();
     for i in 1..=anEdgeMap.extent() {
-        let anEdge = topods::edge(anEdgeMap.find_key(i as usize).unwrap()).unwrap();
+        let anEdge = topods::edge(anEdgeMap.find_key(i).unwrap()).unwrap();
         let (v1, v2) = topexp::vertices(&anEdge, false);
         let (p1, p2) = (BRepTool::pnt(&v1).unwrap(), BRepTool::pnt(&v2).unwrap());
         if (p1.x() - p2.x()).abs() > c || (p1.y() - p2.y()).abs() > c {
             continue;
         }
-        let reported = ((p1.x() - 5.0).abs() <= c && ((p1.y() - 5.0).abs() <= c || (p1.y() - 10.0).abs() <= c))
+        let reported = ((p1.x() - 5.0).abs() <= c
+            && ((p1.y() - 5.0).abs() <= c || (p1.y() - 10.0).abs() <= c))
             || ((p1.x() - 10.0).abs() <= c && (p1.y() - 5.0).abs() <= c);
         if reported {
             anEdges.push(anEdge);
@@ -180,7 +208,10 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_FilletAllEdgesFlatBox_SucceedsWithout
         aFillet.add_with_radius(5.0, &e).unwrap();
     }
     Build(&mut aFillet);
-    assert!(aFillet.is_done(), "Filleting all edges of a 50x50x10 slab with r=5 should succeed (issue #1177)");
+    assert!(
+        aFillet.is_done(),
+        "Filleting all edges of a 50x50x10 slab with r=5 should succeed (issue #1177)"
+    );
     let aResult = aFillet.shape().unwrap().clone();
     assert!(!aResult.is_null());
     let anAnalyzer = BRepCheckAnalyzer::new(&aResult, true, false, true).unwrap();
@@ -188,7 +219,8 @@ fn BRepFilletAPI_MakeFilletTest__Issue1177_FilletAllEdgesFlatBox_SucceedsWithout
     let mut aMaxTolerance: f64 = 0.0;
     let mut ex = Explorer::new(&aResult, ShapeEnum::Vertex, ShapeEnum::Shape).unwrap();
     while ex.more() {
-        aMaxTolerance = aMaxTolerance.max(BRepTool::vertex_tolerance(&topods::vertex(ex.current()).unwrap()).unwrap());
+        aMaxTolerance = aMaxTolerance
+            .max(BRepTool::vertex_tolerance(&topods::vertex(ex.current()).unwrap()).unwrap());
         ex.next().unwrap();
     }
     for e in Edges(&aResult) {
@@ -255,7 +287,10 @@ fn BRepFilletAPI_MakeFilletTest__FilletVariableRadius() {
 #[test]
 fn BRepFilletAPI_MakeFilletTest__OCC570_MixedVariableConstantRadius() {
     let aBox = MakeBox(100., 100., 100.);
-    let aWire = Explorer::new(&aBox, ShapeEnum::Wire, ShapeEnum::Shape).unwrap().current().clone();
+    let aWire = Explorer::new(&aBox, ShapeEnum::Wire, ShapeEnum::Shape)
+        .unwrap()
+        .current()
+        .clone();
     let e = Edges(&aWire);
     assert!(e.len() >= 4);
     let aVarRadius = [
@@ -275,17 +310,37 @@ fn BRepFilletAPI_MakeFilletTest__OCC570_MixedVariableConstantRadius() {
     let aResult = aFillet.shape().unwrap().clone();
     assert!(IsValid(&aResult), "Result shape should be valid");
     let area = SurfaceArea(&aResult);
-    assert!((area - 58500.).abs() <= 58500. * 0.01, "Surface area should be approximately 58500: {area}");
+    assert!(
+        (area - 58500.).abs() <= 58500. * 0.01,
+        "Surface area should be approximately 58500: {area}"
+    );
 }
 
 #[test]
 fn BRepFilletAPI_MakeFilletTest__Bug828_FilletOnComplexPrism() {
     let p = |x: f64, y: f64| Point3::new(x, y, 0.0);
-    let arc = |a: Point3, b: Point3, c: Point3| MakeArcOfCircle::through_points(a, b, c).unwrap().value().unwrap();
+    let arc = |a: Point3, b: Point3, c: Point3| {
+        MakeArcOfCircle::through_points(a, b, c)
+            .unwrap()
+            .value()
+            .unwrap()
+    };
     let seg = |a: Point3, b: Point3| MakeSegment::from_points(a, b).unwrap().value().unwrap();
-    let (p11, p12, p13) = (p(-27.598139, -7.0408573), p(-28.483755, -17.487625), p(-19.555504, -22.983587));
-    let (p21, p22, p23) = (p(12.125083, -22.983587), p(21.1572, -17.27554), p(19.878168, -6.6677585));
-    let (p31, p32, p33) = (p(3.265825, 13.724955), p(-4.7233953, 17.406338), p(-12.529893, 13.351856));
+    let (p11, p12, p13) = (
+        p(-27.598139, -7.0408573),
+        p(-28.483755, -17.487625),
+        p(-19.555504, -22.983587),
+    );
+    let (p21, p22, p23) = (
+        p(12.125083, -22.983587),
+        p(21.1572, -17.27554),
+        p(19.878168, -6.6677585),
+    );
+    let (p31, p32, p33) = (
+        p(3.265825, 13.724955),
+        p(-4.7233953, 17.406338),
+        p(-12.529893, 13.351856),
+    );
     let curves = [
         arc(p11, p12, p13).cast(),
         seg(p13, p21).cast(),
@@ -296,14 +351,22 @@ fn BRepFilletAPI_MakeFilletTest__Bug828_FilletOnComplexPrism() {
     ];
     let mut aWireMaker = BRepBuilderAPIMakeWire::new();
     for c in &curves {
-        let e = BRepBuilderAPIMakeEdge::from_curve(c).unwrap().edge().unwrap();
+        let e = BRepBuilderAPIMakeEdge::from_curve(c)
+            .unwrap()
+            .edge()
+            .unwrap();
         aWireMaker.add_edge(&e).unwrap();
     }
     assert!(aWireMaker.is_done());
     let aWire = aWireMaker.wire().unwrap();
-    let aFace = BRepBuilderAPIMakeFace::from_wire(&aWire, false).unwrap().face().unwrap();
+    let aFace = BRepBuilderAPIMakeFace::from_wire(&aWire, false)
+        .unwrap()
+        .face()
+        .unwrap();
     let aSlabThick = 111.0;
-    let mut aSlab = BRepPrimAPIMakePrism::new(aFace.as_ref(), Vector3::new(0., 0., aSlabThick), true, true).unwrap();
+    let mut aSlab =
+        BRepPrimAPIMakePrism::new(aFace.as_ref(), Vector3::new(0., 0., aSlabThick), true, true)
+            .unwrap();
     let aSlabShape = aSlab.shape().unwrap().clone();
     assert!(IsValid(&aSlabShape), "Prism shape should be valid");
     let anEdges = Edges(&aSlabShape);
@@ -314,7 +377,8 @@ fn BRepFilletAPI_MakeFilletTest__Bug828_FilletOnComplexPrism() {
     let (mut aBestArea, mut aBestDelta, mut best) = (0.0, 1.0e100, (0, 0));
     'outer: for i1 in 0..anEdges.len() {
         for i2 in i1 + 1..anEdges.len() {
-            let Ok(mut aFillet) = BRepFilletAPIMakeFillet::new(&aSlabShape, FilletShape::Rational) else {
+            let Ok(mut aFillet) = BRepFilletAPIMakeFillet::new(&aSlabShape, FilletShape::Rational)
+            else {
                 continue;
             };
             aFillet.set_params(1.0e-2, 1.0e-4, 1.0e-5, 1.0e-4, 1.0e-5, 1.0e-3);
@@ -361,7 +425,9 @@ fn occ1077BoolBl(aShapeCut: &Shape, sections: &[Shape], theRadius: f64) -> Shape
         aFill.set_params(aTa, aTesp, aT2d, aT3d, aT2d, aFl);
         aFill.set_continuity(GeomAbsShape::C1, aTappAngl);
         for s in sections {
-            aFill.add_with_radius(theRadius, &topods::edge(s).unwrap()).unwrap();
+            aFill
+                .add_with_radius(theRadius, &topods::edge(s).unwrap())
+                .unwrap();
         }
         aFill.build(&ProgressRange::default()).unwrap();
         if aFill.is_done() {
@@ -383,15 +449,38 @@ fn occ1077CutBlend(theShapeToCut: &Shape, theTool: &Shape, theRadius: f64) -> Sh
 
 #[test]
 fn BRepFilletAPI_MakeFilletTest__OCC1077_BooleanCutFillet() {
-    let aBox = BRepPrimAPIMakeBox::at_point(Point3::new(-5., -5., -5.), 10., 10., 10.).unwrap().shape().unwrap().clone();
-    let aSphere = BRepPrimAPIMakeSphere::new(7.).unwrap().shape().unwrap().clone();
-    let aCommon = BRepAlgoAPICommon::from_shapes(&aBox, &aSphere).unwrap().shape().clone();
+    let aBox = BRepPrimAPIMakeBox::at_point(Point3::new(-5., -5., -5.), 10., 10., 10.)
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone();
+    let aSphere = BRepPrimAPIMakeSphere::new(7.)
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone();
+    let aCommon = BRepAlgoAPICommon::from_shapes(&aBox, &aSphere)
+        .unwrap()
+        .shape()
+        .clone();
     let cyl = |p: Point3, d: Direction3| {
-        BRepPrimAPIMakeCylinder::with_axes(Axis2::new(p, d).unwrap(), 3., 20.).shape().unwrap().clone()
+        BRepPrimAPIMakeCylinder::with_axes(Axis2::new(p, d).unwrap(), 3., 20.)
+            .shape()
+            .unwrap()
+            .clone()
     };
-    let aCyl1 = cyl(Point3::new(0., 0., -10.), Direction3::new(0., 0., 1.).unwrap());
-    let aCyl2 = cyl(Point3::new(-10., 0., 0.), Direction3::new(1., 0., 0.).unwrap());
-    let aCyl3 = cyl(Point3::new(0., -10., 0.), Direction3::new(0., 1., 0.).unwrap());
+    let aCyl1 = cyl(
+        Point3::new(0., 0., -10.),
+        Direction3::new(0., 0., 1.).unwrap(),
+    );
+    let aCyl2 = cyl(
+        Point3::new(-10., 0., 0.),
+        Direction3::new(1., 0., 0.).unwrap(),
+    );
+    let aCyl3 = cyl(
+        Point3::new(0., -10., 0.),
+        Direction3::new(0., 1., 0.).unwrap(),
+    );
     let fix = |s: &Shape| {
         let f = ShapeFixShape::new(s.clone());
         f.perform().unwrap();
@@ -403,7 +492,10 @@ fn BRepFilletAPI_MakeFilletTest__OCC1077_BooleanCutFillet() {
     assert!(!aResult.is_null(), "Result shape must not be null");
     assert!(IsValid(&aResult), "Result shape must be valid");
     let area = SurfaceArea(&aResult);
-    assert!((area - 587.181).abs() <= 587.181 * 0.001, "Surface area mismatch: {area}");
+    assert!(
+        (area - 587.181).abs() <= 587.181 * 0.001,
+        "Surface area mismatch: {area}"
+    );
 }
 
 fn RingFace(pts: [(f64, f64, f64); 4]) -> Shape {
@@ -411,21 +503,49 @@ fn RingFace(pts: [(f64, f64, f64); 4]) -> Shape {
     for (x, y, z) in pts {
         w.add_point(Point3::new(x, y, z)).unwrap();
     }
-    w.add_point(Point3::new(pts[0].0, pts[0].1, pts[0].2)).unwrap();
-    BRepBuilderAPIMakeFace::from_wire(&w.wire().unwrap(), false).unwrap().face().unwrap().into()
+    w.add_point(Point3::new(pts[0].0, pts[0].1, pts[0].2))
+        .unwrap();
+    BRepBuilderAPIMakeFace::from_wire(&w.wire().unwrap(), false)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into()
 }
 
 fn Revolve(face: &Shape, angle: f64) -> Shape {
-    let axis = Axis1::new(Point3::new(0., 0., 0.), Direction3::new(0., 0., 1.).unwrap());
-    BRepPrimAPIMakeRevol::new(face, axis, angle, false).unwrap().shape().unwrap().clone()
+    let axis = Axis1::new(
+        Point3::new(0., 0., 0.),
+        Direction3::new(0., 0., 1.).unwrap(),
+    );
+    BRepPrimAPIMakeRevol::new(face, axis, angle, false)
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone()
 }
 
 #[test]
 fn BRepFilletAPI_MakeFilletTest__OCC426_RevolveFuseUnifyFillet() {
-    let aRs1 = Revolve(&RingFace([(10., 0., 0.), (20., 0., 0.), (20., 0., 10.), (10., 0., 10.)]), 2.0 * PI);
-    let (f1, f2) = (7.0710678118654752440, 14.1421356237309504880);
-    let aRs2 = Revolve(&RingFace([(f1, f1, 10.), (f2, f2, 10.), (f2, f2, 20.), (f1, f1, 20.)]), 270.0 * PI / 180.0);
-    let aRs3 = Revolve(&RingFace([(10., 0., 20.), (20., 0., 20.), (20., 0., 30.), (10., 0., 30.)]), 2.0 * PI);
+    let aRs1 = Revolve(
+        &RingFace([(10., 0., 0.), (20., 0., 0.), (20., 0., 10.), (10., 0., 10.)]),
+        2.0 * PI,
+    );
+    // The native literals 7.0710678118654752440 and 14.1421356237309504880, rounded to the
+    // same doubles.
+    let (f1, f2) = (7.071_067_811_865_475_5, 14.142_135_623_730_951);
+    let aRs2 = Revolve(
+        &RingFace([(f1, f1, 10.), (f2, f2, 10.), (f2, f2, 20.), (f1, f1, 20.)]),
+        270.0 * PI / 180.0,
+    );
+    let aRs3 = Revolve(
+        &RingFace([
+            (10., 0., 20.),
+            (20., 0., 20.),
+            (20., 0., 30.),
+            (10., 0., 30.),
+        ]),
+        2.0 * PI,
+    );
     assert!(IsValid(&aRs1), "rs1 must be valid");
     assert!(IsValid(&aRs2), "rs2 must be valid");
     assert!(IsValid(&aRs3), "rs3 must be valid");
@@ -441,10 +561,16 @@ fn BRepFilletAPI_MakeFilletTest__OCC426_RevolveFuseUnifyFillet() {
     anUnify.build().unwrap();
     let aFuseUnif = anUnify.shape();
     let mut anEdgeMap = IndexedDataMapOfShapeListOfShape::default();
-    topexp::map_shapes_and_ancestors(&aFuseUnif, ShapeEnum::Edge, ShapeEnum::Solid, &mut anEdgeMap).unwrap();
+    topexp::map_shapes_and_ancestors(
+        &aFuseUnif,
+        ShapeEnum::Edge,
+        ShapeEnum::Solid,
+        &mut anEdgeMap,
+    )
+    .unwrap();
     let mut aBlend = BRepFilletAPIMakeFillet::new(&aFuseUnif, FilletShape::Rational).unwrap();
     for i in 1..=anEdgeMap.extent() {
-        let anEdge = topods::edge(anEdgeMap.find_key(i as usize).unwrap()).unwrap();
+        let anEdge = topods::edge(anEdgeMap.find_key(i).unwrap()).unwrap();
         if !anEdge.is_null() {
             aBlend.add_with_radius(1.0, &anEdge).unwrap();
         }
@@ -458,5 +584,8 @@ fn BRepFilletAPI_MakeFilletTest__OCC426_RevolveFuseUnifyFillet() {
     assert!(!aResult.is_null(), "Result shape must not be null");
     assert!(IsValid(&aResult), "Result shape must be valid");
     let area = SurfaceArea(&aResult);
-    assert!((area - 7507.61).abs() <= 7507.61 * 0.001, "Surface area mismatch: {area}");
+    assert!(
+        (area - 7507.61).abs() <= 7507.61 * 0.001,
+        "Surface area mismatch: {area}"
+    );
 }

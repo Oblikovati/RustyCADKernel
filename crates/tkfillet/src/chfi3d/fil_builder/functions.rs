@@ -267,13 +267,14 @@ fn rst_rst_adaptors(
     ))
 }
 
-/// The references `(Sref1, PCref1, Sref2, PCref2)` of the sides.
-fn rst_rst_refs(
-    sides: &RstRstSides<'_>,
-) -> (
+/// The reference surfaces and pcurves of the two sides.
+type RstRefs = (
     [Handle<dyn Adaptor3dSurface>; 2],
     [Handle<dyn Adaptor2dCurve2d>; 2],
-) {
+);
+
+/// The references `(Sref1, PCref1, Sref2, PCref2)` of the sides.
+fn rst_rst_refs(sides: &RstRstSides<'_>) -> RstRefs {
     (
         [
             general_surface(sides.side1.rst.sref),

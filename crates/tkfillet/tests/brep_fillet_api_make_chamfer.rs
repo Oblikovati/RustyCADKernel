@@ -15,7 +15,11 @@ use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
 
 fn MakeBox(dx: f64, dy: f64, dz: f64) -> Shape {
-    BRepPrimAPIMakeBox::from_sizes(dx, dy, dz).unwrap().shape().unwrap().clone()
+    BRepPrimAPIMakeBox::from_sizes(dx, dy, dz)
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone()
 }
 
 fn Edges(s: &Shape) -> Vec<Edge> {
@@ -29,7 +33,10 @@ fn Edges(s: &Shape) -> Vec<Edge> {
 }
 
 fn IsValid(s: &Shape) -> bool {
-    BRepCheckAnalyzer::new(s, true, false, false).unwrap().is_valid().unwrap()
+    BRepCheckAnalyzer::new(s, true, false, false)
+        .unwrap()
+        .is_valid()
+        .unwrap()
 }
 
 fn FaceCount(s: &Shape) -> usize {
@@ -57,9 +64,17 @@ fn BRepFilletAPI_MakeChamferTest__SymmetricChamfer() {
 fn BRepFilletAPI_MakeChamferTest__AsymmetricChamfer() {
     let aBox = MakeBox(20.0, 20.0, 20.0);
     let mut anEdgeFaceMap = IndexedDataMapOfShapeListOfShape::default();
-    topexp::map_shapes_and_ancestors(&aBox, ShapeEnum::Edge, ShapeEnum::Face, &mut anEdgeFaceMap).unwrap();
+    topexp::map_shapes_and_ancestors(&aBox, ShapeEnum::Edge, ShapeEnum::Face, &mut anEdgeFaceMap)
+        .unwrap();
     let anEdge = Edges(&aBox).remove(0);
-    let aFace = topods::face(anEdgeFaceMap.find_from_key(anEdge.as_ref()).unwrap().first().unwrap()).unwrap();
+    let aFace = topods::face(
+        anEdgeFaceMap
+            .find_from_key(anEdge.as_ref())
+            .unwrap()
+            .first()
+            .unwrap(),
+    )
+    .unwrap();
     let mut aChamfer = BRepFilletAPIMakeChamfer::new(&aBox).unwrap();
     aChamfer.add_with_dists(1.0, 3.0, &anEdge, &aFace).unwrap();
     let aResult = aChamfer.shape().unwrap().clone();
@@ -74,15 +89,26 @@ fn BRepFilletAPI_MakeChamferTest__Issue1177_ChamferAllEdgesFlatBox_SucceedsWitho
     for e in Edges(&aBox) {
         aChamfer.add_with_dist(5.0, &e).unwrap();
     }
-    aChamfer.build(&ProgressRange::default()).expect("Chamfer build must not crash");
-    assert!(aChamfer.is_done(), "Chamfering all edges of a 50x50x10 slab with d=5 should succeed (issue #1177)");
+    aChamfer
+        .build(&ProgressRange::default())
+        .expect("Chamfer build must not crash");
+    assert!(
+        aChamfer.is_done(),
+        "Chamfering all edges of a 50x50x10 slab with d=5 should succeed (issue #1177)"
+    );
     let aResult = aChamfer.shape().unwrap().clone();
     assert!(!aResult.is_null());
-    assert!(BRepCheckAnalyzer::new(&aResult, true, false, true).unwrap().is_valid().unwrap());
+    assert!(
+        BRepCheckAnalyzer::new(&aResult, true, false, true)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
     let mut aMaxTolerance: f64 = 0.0;
     let mut ex = Explorer::new(&aResult, ShapeEnum::Vertex, ShapeEnum::Shape).unwrap();
     while ex.more() {
-        aMaxTolerance = aMaxTolerance.max(BRepTool::vertex_tolerance(&topods::vertex(ex.current()).unwrap()).unwrap());
+        aMaxTolerance = aMaxTolerance
+            .max(BRepTool::vertex_tolerance(&topods::vertex(ex.current()).unwrap()).unwrap());
         ex.next().unwrap();
     }
     for e in Edges(&aResult) {
@@ -108,28 +134,54 @@ fn BRepFilletAPI_MakeChamferTest__ChamferMoreFaces() {
 #[test]
 fn BRepFilletAPI_MakeChamferTest__ChamferAfterBooleanFusion() {
     let aBox = MakeBox(10.0, 10.0, 10.0);
-    let anAxis = Axis2::new(Point3::new(5.0, 0.0, 5.0), Direction3::new(0.0, 1.0, 0.0).unwrap()).unwrap();
-    let aCyl = BRepPrimAPIMakeCylinder::with_axes(anAxis, 3.0, 10.0).shape().unwrap().clone();
+    let anAxis = Axis2::new(
+        Point3::new(5.0, 0.0, 5.0),
+        Direction3::new(0.0, 1.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aCyl = BRepPrimAPIMakeCylinder::with_axes(anAxis, 3.0, 10.0)
+        .shape()
+        .unwrap()
+        .clone();
     let aFuse = BRepAlgoAPIFuse::from_shapes(&aBox, &aCyl).unwrap();
     assert!(aFuse.is_done());
     let aFused = aFuse.shape().clone();
     let mut aVtxFaceMap = IndexedDataMapOfShapeListOfShape::default();
-    topexp::map_shapes_and_ancestors(&aFused, ShapeEnum::Vertex, ShapeEnum::Face, &mut aVtxFaceMap).unwrap();
+    topexp::map_shapes_and_ancestors(
+        &aFused,
+        ShapeEnum::Vertex,
+        ShapeEnum::Face,
+        &mut aVtxFaceMap,
+    )
+    .unwrap();
     let mut anEdgeFaceMap = IndexedDataMapOfShapeListOfShape::default();
-    topexp::map_shapes_and_ancestors(&aFused, ShapeEnum::Edge, ShapeEnum::Face, &mut anEdgeFaceMap).unwrap();
+    topexp::map_shapes_and_ancestors(
+        &aFused,
+        ShapeEnum::Edge,
+        ShapeEnum::Face,
+        &mut anEdgeFaceMap,
+    )
+    .unwrap();
     let mut aChamfer = BRepFilletAPIMakeChamfer::new(&aFused).unwrap();
     let mut anEdgeCount = 0;
     for anEdge in Edges(&aFused) {
         if anEdgeCount >= 4 {
             break;
         }
-        if !anEdgeFaceMap.contains(anEdge.as_ref()) || anEdgeFaceMap.find_from_key(anEdge.as_ref()).unwrap().is_empty() {
+        if !anEdgeFaceMap.contains(anEdge.as_ref())
+            || anEdgeFaceMap
+                .find_from_key(anEdge.as_ref())
+                .unwrap()
+                .is_empty()
+        {
             continue;
         }
         let mut hasComplexVertex = false;
         let mut vx = Explorer::new(anEdge.as_ref(), ShapeEnum::Vertex, ShapeEnum::Shape).unwrap();
         while vx.more() {
-            if aVtxFaceMap.contains(vx.current()) && aVtxFaceMap.find_from_key(vx.current()).unwrap().len() >= 3 {
+            if aVtxFaceMap.contains(vx.current())
+                && aVtxFaceMap.find_from_key(vx.current()).unwrap().len() >= 3
+            {
                 hasComplexVertex = true;
                 break;
             }
@@ -138,7 +190,14 @@ fn BRepFilletAPI_MakeChamferTest__ChamferAfterBooleanFusion() {
         if !hasComplexVertex {
             continue;
         }
-        let aFace = topods::face(anEdgeFaceMap.find_from_key(anEdge.as_ref()).unwrap().first().unwrap()).unwrap();
+        let aFace = topods::face(
+            anEdgeFaceMap
+                .find_from_key(anEdge.as_ref())
+                .unwrap()
+                .first()
+                .unwrap(),
+        )
+        .unwrap();
         aChamfer.add_with_dists(0.5, 0.5, &anEdge, &aFace).unwrap();
         anEdgeCount += 1;
     }
@@ -176,7 +235,14 @@ fn BRepFilletAPI_MakeChamferTest__SequentialChamferNoCrash() {
                 aSuccessCount += 1;
             }
             Ok(()) => break,
-            Err(e) if matches!(e.exception_type(), "Standard_ConstructionError" | "StdFail_NotDone") => break,
+            Err(e)
+                if matches!(
+                    e.exception_type(),
+                    "Standard_ConstructionError" | "StdFail_NotDone"
+                ) =>
+            {
+                break;
+            }
             Err(e) => panic!("unexpected exception {e:?}"),
         }
     }

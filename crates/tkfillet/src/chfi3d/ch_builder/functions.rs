@@ -99,6 +99,8 @@ pub(super) fn offset_guide(
 
 /// What a walking needs from a chamfer function: the walking function and its inverse,
 /// both on the same surfaces and guide.
+// One value per walking, kept on the stack as the native functions are.
+#[allow(clippy::large_enum_variant)]
 pub(super) enum ChamferFunctions {
     Classic(Chamfer, ChamfInv),
     Throat(ConstThroat, ConstThroatInv),
