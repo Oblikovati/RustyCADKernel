@@ -153,7 +153,7 @@ impl ProjectionContext<'_> {
         OwnedPublicationStageCause::Unprojected(payload)
     }
 }
-fn callback(value: &PublicationCallbackStop) -> OwnedPublicationCallback {
+pub(super) fn callback(value: &PublicationCallbackStop) -> OwnedPublicationCallback {
     let cause = match &value.cause {
         PublicationCallbackCause::Cancelled => OwnedDiagnosticCallbackCause::Cancelled,
         PublicationCallbackCause::Failed(value) => {

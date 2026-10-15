@@ -21,7 +21,7 @@ pub(crate) fn encode_publication_request_options(options: PrismPublicationOption
     measures(options.measures, &mut bytes);
     bytes
 }
-fn history(options: PrismHistoryOptions, bytes: &mut Vec<u8>) {
+pub(super) fn history(options: PrismHistoryOptions, bytes: &mut Vec<u8>) {
     bytes.extend(options.version.to_le_bytes());
     word(options.limits.maximum_depth as u64, bytes);
     word(options.limits.maximum_uses as u64, bytes);

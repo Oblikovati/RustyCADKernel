@@ -3,7 +3,10 @@
 //! requested limit; refused NaN payloads keep their bits and nothing is admitted here.
 use super::super::annular::{OwnedAnnularPolicy, OwnedAnnularPrismRequest};
 use super::*;
+use crate::sketch_region_prism::exact_tolerance::encode_stored_tolerance_cap;
+use crate::sketch_region_prism::frozen::annular_measures::encode_annular_measure_options;
 use crate::sketch_region_prism::frozen::proof_join::encode_joined_root_options as roots;
+use crate::sketch_region_prism::publication::annular::AnnularPublicationOptions;
 use crate::sketch_region_prism::region_certificate::two_loop::{
     TwoLoopRegionBehavior, TwoLoopRegionOptions,
 };
@@ -50,6 +53,21 @@ fn region(options: TwoLoopRegionOptions, bytes: &mut Vec<u8>) {
     roots(options.winding, bytes);
     word(options.maximum_retained_units as u64, bytes);
     word(options.maximum_poles as u64, bytes);
+}
+
+/// Encode every annular publication child policy; `encode_annular_publication_options(options)`.
+pub(in crate::sketch_region_prism) fn encode_annular_publication_options(
+    options: AnnularPublicationOptions,
+) -> Vec<u8> {
+    let mut bytes = b"Martensite.AnnularPublicationOptions/v1\0".to_vec();
+    bytes.extend(options.version.to_le_bytes());
+    bytes.extend(options.join.version.to_le_bytes());
+    word(options.join.maximum_name_units as u64, &mut bytes);
+    bytes.extend(options.validation.version.to_le_bytes());
+    encode_stored_tolerance_cap(options.validation.stored_cap, &mut bytes);
+    super::publication::history(options.history, &mut bytes);
+    encode_annular_measure_options(options.measures, &mut bytes);
+    bytes
 }
 
 #[cfg(test)]
