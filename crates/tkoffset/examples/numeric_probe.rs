@@ -3,7 +3,7 @@
 use std::io::{self, BufRead};
 mod of_probe;
 use of_probe::{
-    inter3d, make_offset, make_pipe_shell, maker, offset, thru_sections, tool, wrappers,
+    inter3d, make_offset, make_pipe_shell, maker, middle_path, offset, thru_sections, tool, wrappers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -39,6 +39,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // BRepOffset_MakeOffset (of_probe/maker.rs)
     ("om_offset", maker::offset_case),
     ("om_simple", maker::simple_case),
+    // BRepOffsetAPI_MiddlePath (of_probe/middle_path.rs)
+    ("oa_middle", middle_path::middle_case),
+    ("oa_middle_prim", middle_path::middle_prim_case),
 ];
 
 fn main() {

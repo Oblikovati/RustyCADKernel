@@ -9,6 +9,7 @@ mod make_offset_domains;
 mod make_offset_shape;
 mod make_pipe;
 mod make_pipe_shell;
+mod middle_path;
 mod normal_projection;
 mod thru_sections;
 
@@ -20,5 +21,6 @@ pub use make_offset::BRepOffsetAPIMakeOffset;
 pub use make_offset_shape::{BRepOffsetAPIMakeOffsetShape, BRepOffsetAPIMakeThickSolid};
 pub use make_pipe::BRepOffsetAPIMakePipe;
 pub use make_pipe_shell::BRepOffsetAPIMakePipeShell;
+pub use middle_path::BRepOffsetAPIMiddlePath;
 pub use normal_projection::BRepOffsetAPINormalProjection;
 pub use thru_sections::BRepOffsetAPIThruSections;

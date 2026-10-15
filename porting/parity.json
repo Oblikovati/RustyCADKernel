@@ -626951,6 +626951,22 @@
       "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeThickSolid::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::modified",
       "status": "implemented",
       "notes": "Translated from BRepOffsetAPI_MakeThickSolid.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs; the native subclass of BRepOffsetAPI_MakeOffsetShape is a wrapper around it); compared with OCCT through om_offset and om_simple; the GTests of BRepOffsetAPI_MakeThickSolid_Test.cxx pass, with the closed-form wall volume 1844 of the hollowed box of side 20."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MiddlePath::BRepOffsetAPI_MiddlePath(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MiddlePath.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMiddlePath::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MiddlePath.cxx (crates/tkoffset/src/brep_offset_api/middle_path.rs); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_middle, oa_middle_prim: the pipes of square and circle profiles along polyline, arc, B-spline and closed spines, solid pipes between their faces and outer wires, boxes, a cylinder, a cone and partial tori between their caps; linear, circular and interpolated middle edges and the native exceptions); tests/middle_path.rs checks the box and torus paths in closed form. The native \"Interpolation failed\" line on the standard output is not printed; the StdFail_NotDone of Curve() that follows it is returned."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MiddlePath::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MiddlePath.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMiddlePath::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MiddlePath.cxx (crates/tkoffset/src/brep_offset_api/middle_path.rs); compared with OCCT by tools/verify_tkoffset_numeric.py (oa_middle, oa_middle_prim: the pipes of square and circle profiles along polyline, arc, B-spline and closed spines, solid pipes between their faces and outer wires, boxes, a cylinder, a cone and partial tori between their caps; linear, circular and interpolated middle edges and the native exceptions); tests/middle_path.rs checks the box and torus paths in closed form."
     }
   ],
   "tests": [

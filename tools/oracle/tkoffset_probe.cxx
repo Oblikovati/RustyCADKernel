@@ -45,6 +45,7 @@
 #include "tkoffset_probe_brepoffset_offset.cxx"
 #include "tkoffset_probe_brepoffset_inter3d.cxx"
 #include "tkoffset_probe_brepoffset_make_offset.cxx"
+#include "tkoffset_probe_brepoffsetapi_middle_path.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepOffsetAPI (tkoffset_probe_brepoffsetapi_make_offset.cxx,
  // tkoffset_probe_brepoffsetapi_make_pipe_shell.cxx, tkoffset_probe_brepoffsetapi_thru_sections.cxx)
@@ -73,6 +74,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepOffset_MakeOffset (tkoffset_probe_brepoffset_make_offset.cxx)
  {"om_offset", of_om_offset_case},
  {"om_simple", of_om_simple_case},
+ // BRepOffsetAPI_MiddlePath (tkoffset_probe_brepoffsetapi_middle_path.cxx)
+ {"oa_middle", of_oa_middle_case},
+ {"oa_middle_prim", of_oa_middle_prim_case},
 };
 int main() {
  std::string line;

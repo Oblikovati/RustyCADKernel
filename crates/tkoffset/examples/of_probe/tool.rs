@@ -32,13 +32,16 @@ pub(super) fn primitive(r: &mut Reader) -> Result<Shape, Failure> {
             .shape()?
             .clone(),
         3 => BRepPrimAPIMakeSphere::new(a)?.shape()?.clone(),
+        5 => BRepPrimAPIMakeTorus::with_axes_angle(ax, a, b, c)?
+            .shape()?
+            .clone(),
         _ => BRepPrimAPIMakeTorus::with_axes(ax, a, b)?.shape()?.clone(),
     };
     Ok(s)
 }
 
 /// The sub-shape of a type at an explorer index (`ot_sub`), null past the end.
-fn sub(s: &Shape, kind: ShapeEnum, index: i32) -> Result<Shape, Failure> {
+pub(super) fn sub(s: &Shape, kind: ShapeEnum, index: i32) -> Result<Shape, Failure> {
     let found = Explorer::new(s, kind, ShapeEnum::Shape)?.nth(index.max(0) as usize);
     Ok(if index < 0 { None } else { found }.unwrap_or_default())
 }

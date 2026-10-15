@@ -2,7 +2,8 @@
 //
 // The faces and edges come from primitives (`kind a b c ox oy oz nx ny nz`: kind 0 a box
 // a x b x c, 1 a cylinder of radius a and height b, 2 a cone of radii a, b and height c,
-// 3 a sphere of radius a at the origin, 4 a torus of radii a, b; placed on the frame of
+// 3 a sphere of radius a at the origin, 4 a torus of radii a, b, 5 a torus of radii a, b
+// swept by the angle c; placed on the frame of
 // the origin and normal) by their index in the explorer order; shapes print through
 // pr_shape (tkprim_probe_shape.cxx).
 #include <BRepOffset_Tool.hxx>
@@ -21,6 +22,7 @@ static TopoDS_Shape ot_primitive(GaReader& r){
  if(kind==1)return BRepPrimAPI_MakeCylinder(ax,a,b).Shape();
  if(kind==2)return BRepPrimAPI_MakeCone(ax,a,b,c).Shape();
  if(kind==3)return BRepPrimAPI_MakeSphere(a).Shape();
+ if(kind==5)return BRepPrimAPI_MakeTorus(ax,a,b,c).Shape();
  return BRepPrimAPI_MakeTorus(ax,a,b).Shape();}
 // The sub-shape of a type at an explorer index.
 static TopoDS_Shape ot_sub(const TopoDS_Shape& s,TopAbs_ShapeEnum kind,int index){

@@ -3,6 +3,7 @@ pub mod inter3d;
 pub mod make_offset;
 pub mod make_pipe_shell;
 pub mod maker;
+pub mod middle_path;
 pub mod offset;
 pub mod thru_sections;
 pub mod tool;
