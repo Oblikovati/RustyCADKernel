@@ -67,3 +67,32 @@ python3 crates/tkmath/tests/sketch_line_incidences/oracle_curves.py > /tmp/curve
 cmp /tmp/curves.csv crates/tkmath/tests/sketch_line_incidences/oracle-curves.csv
 cargo test --locked -p rustycad-tkmath --test toolkit sketch_line_incidences::generated_curves
 ```
+
+## Periodic splines and offsets
+
+`oracle_offsets.py` generates 211 near-degenerate cases with seed 8080 (ADR 0080).
+An offset point is `C + d N` with `N = (V_y, -V_x) / sqrt(G)`; the oracle composes
+curve equations as `a + b sqrt(G)` with its own Fraction polynomial algebra
+(`oracle_offsets_exact.py`), isolates the norm `a^2 - b^2 G` on its square-free
+part, keeps a norm root only when `a` and `b` vanish together or have opposite
+exact signs, splits multiplicities through `gcd(a, b)` (the kernel uses derivative
+orders), and takes sides from exact surd signs at rational points. Keys and
+coordinates are 320-digit Decimal values at a 2^-300 refinement; the generator
+refuses orders within 1e-200. Ellipses use their own tangent-half-angle charts;
+periodic splines are unwrapped by periodic indexing, `base[j mod N] + period *
+floor(j / N)`, independently of `BSplCLib::KnotSequence`.
+
+Families: lines within +-2 ulps of the top of an axis-aligned and a (3, 4) ellipse
+offset at scales 2^-10 to 2^10; lines near the sampled top of cubic spline offsets
+(including the crossing of a self-intersecting offset); circles about the origin
+within +-2 ulps of tangency to line offsets with directions (1, 2), (2, -1) and
+the Pythagorean (3, 4); a line offset source near tangency to circles and to an
+ellipse offset; spline and ellipse offset sources near tangency to lines and
+lines through the ellipse axes; full-circle and clockwise-arc offsets; periodic
+cubic sources and targets near their tops.
+
+```sh
+python3 crates/tkmath/tests/sketch_line_incidences/oracle_offsets.py > /tmp/offsets.csv
+cmp /tmp/offsets.csv crates/tkmath/tests/sketch_line_incidences/oracle-offsets.csv
+cargo test --locked -p rustycad-tkmath --test toolkit sketch_line_incidences::generated_offsets
+```
