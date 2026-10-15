@@ -6,17 +6,31 @@ use super::{operation_tests::*, *};
 fn every_complete_checkpoint_cancel_and_native_failure_is_terminal_and_reusable() {
     let (accepted, baseline) = accepted();
     let request = accepted.request();
-    for point in &baseline.points {
-        for failed in [false, true] {
-            terminal_prefix(request, &baseline.points, point.ordinal, failed);
+    // Prefixes are independent full runs: spread them over threads, still every checkpoint.
+    let workers = std::thread::available_parallelism().map_or(4, |count| count.get());
+    let chunk = baseline.points.len().div_ceil(workers).max(1);
+    std::thread::scope(|scope| {
+        for points in baseline.points.chunks(chunk) {
+            scope.spawn(|| every_prefix(request, &baseline.points, points));
         }
-    }
+    });
     let mut progress = CompleteObserver::default();
     with_owned_prism_operation(request.clone(), &mut progress, |result| {
         let repeated = result.unwrap_or_else(|_| panic!("fresh reuse required"));
         assert_eq!(repeated.replay_bytes(), accepted.replay_bytes());
     });
     println!("SCOPED_COMPLETE_CHECKPOINTS={}", baseline.points.len());
+}
+fn every_prefix(
+    request: &OwnedPolynomialPrismRequest,
+    baseline: &[CompletePrismCheckpoint],
+    points: &[CompletePrismCheckpoint],
+) {
+    for point in points {
+        for failed in [false, true] {
+            terminal_prefix(request, baseline, point.ordinal, failed);
+        }
+    }
 }
 fn terminal_prefix(
     request: &OwnedPolynomialPrismRequest,
