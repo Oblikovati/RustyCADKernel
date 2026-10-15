@@ -22,6 +22,7 @@ fn pick(body: &Shape, origin: [f64; 3], direction: [f64; 3]) -> PickResult {
 fn assert_distances(fixture: &Fixture, origin: [f64; 3], direction: [f64; 3], expected: &[f64]) {
     let result = pick(&fixture.body, origin, direction);
     let distances: Vec<f64> = result.hits.iter().map(|hit| hit.distance).collect();
+    assert_eq!(result.nearest(), result.hits.first());
     assert_eq!(
         distances.len(),
         expected.len(),

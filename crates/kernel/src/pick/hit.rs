@@ -65,4 +65,5 @@ impl PickResult {
 const _: fn() = || {
     fn require_send_sync<T: Send + Sync>() {}
     require_send_sync::<PickResult>();
+    require_send_sync::<super::ray::PickRay>();
 };

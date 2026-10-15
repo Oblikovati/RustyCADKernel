@@ -52,6 +52,7 @@ pub struct PresentationMesh {
 const _: fn() = || {
     fn require_send_sync<T: Send + Sync>() {}
     require_send_sync::<PresentationMesh>();
+    require_send_sync::<DisplayOptions>();
 };
 
 impl PresentationMesh {

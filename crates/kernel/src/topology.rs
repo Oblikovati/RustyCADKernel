@@ -117,6 +117,7 @@ const _: fn() = || {
     fn require_send_sync<T: Send + Sync>() {}
     require_send_sync::<BodyTopology>();
     require_send_sync::<FaceIndex>();
+    require_send_sync::<crate::query_error::BodyQueryError>();
 };
 
 /// Enumerates `body` on behalf of `operation`, so its failures name that query.
