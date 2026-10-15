@@ -80,12 +80,13 @@ impl CapturedBezierPair {
         policy: PairQueryPolicy,
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<AccountedPairOutcome, PairQueryPreparationFailure> {
-        if policy.version != 1 {
+        // Version 2 (ADR 0066 part B) adds the exact common-carrier route; version 1 is unchanged.
+        if !(1..=2).contains(&policy.version) {
             return Err(PairQueryPreparationFailure::Version(policy.version));
         }
         Ok(operation::compute_with_signs(
             self.sources.clone(),
-            self.is_self(),
+            (self.is_self(), policy.version == 2),
             policy.roots,
             policy.signs,
             policy.requested_world_error,
