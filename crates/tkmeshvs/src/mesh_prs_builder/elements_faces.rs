@@ -3,7 +3,7 @@
 //! (overlap control), else every edge, and the triangles of the solid modes.
 use super::elements::{Element, ElementPass};
 use super::primitives::node_xyz;
-use super::solid::add_face_solid_prs;
+use super::solid::{MeshVSFaceSolidOptions, meshvs_mesh_prs_add_face_solid_prs};
 use super::{MeshVSMeshPrsBuilder, MeshVSMeshPrsBuilderSource};
 use crate::node_pairs::{MeshVSNodePair, MeshVSSymmetricPairHasher, MeshVSTwoNodes};
 use rustycad_tkernel::ncollection::Map;
@@ -43,7 +43,21 @@ pub(super) fn add_face<B: MeshVSMeshPrsBuilderSource + ?Sized>(
     }
     if (s.is_shading || s.is_shrink) && !s.has_select {
         let triangles = pass.arrays.face_triangles.get().expect("face triangles");
-        add_face_solid_prs(builder, element, triangles, s)?;
+        let options = MeshVSFaceSolidOptions {
+            is_shaded: s.is_reflect,
+            is_shrinked: s.is_shrink || s.has_select,
+            shrink_coef: s.shrink_coef,
+            is_smooth_shading: s.is_smooth,
+        };
+        meshvs_mesh_prs_add_face_solid_prs(
+            builder,
+            element.key,
+            element.coords,
+            element.nb_nodes,
+            s.max_nodes,
+            triangles,
+            options,
+        )?;
     }
     Ok(())
 }

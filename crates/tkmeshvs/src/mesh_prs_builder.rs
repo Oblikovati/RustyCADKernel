@@ -17,6 +17,7 @@ pub use elements::meshvs_mesh_prs_build_elements;
 pub use hilight::meshvs_mesh_prs_build_hilight_prs;
 pub use nodes::meshvs_mesh_prs_build_nodes;
 pub(crate) use primitives::{fan_index, node_xyz, volume_edge_map};
+pub use solid::{MeshVSFaceSolidOptions, meshvs_mesh_prs_add_face_solid_prs};
 
 use crate::data_source::{MeshVSDataSource, MeshVSPackedMap};
 use crate::flags::{MESHVS_DMF_HILIGHT_PRS, MESHVS_DMF_OCC_MASK};

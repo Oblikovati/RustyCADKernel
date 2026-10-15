@@ -28,6 +28,7 @@ pub use highlight::{
 };
 pub use members::MeshVSMeshMembers;
 pub use selection::meshvs_mesh_compute_selection;
+pub use visibility::scan_faces_for_shared_nodes;
 
 use crate::data_source::MeshVSDataSource;
 use crate::drawer::MeshVSDrawerSource;
