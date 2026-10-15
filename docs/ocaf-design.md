@@ -1,4 +1,4 @@
-# OCAF design notes (TKCDF, TKLCAF, TKCAF)
+# OCAF design notes (TKCDF, TKLCAF, TKCAF, TKVCAF)
 
 This note fixes how the OCAF toolkits map to Rust: TKCDF (`crates/tkcdf`,
 `rustycad-tkcdf`: packages CDM, PCDM, CDF, LDOM) and TKLCAF (`crates/tklcaf`,
@@ -310,3 +310,31 @@ explicit `new`/`delete`.
 `TDocStdStandardApplication` (`new` returns its bound handle). Its `ResourcesName` is
 `Standard`. Its `DumpJson` is an inherent method: the native one hides the non-virtual
 `TDocStd_Application::DumpJson`, and it dumps that one as its base class.
+
+## 13. TPrsStd: the presentation attributes (TKVCAF)
+
+TKVCAF (`crates/tkvcaf`, `rustycad-tkvcaf`) joins OCAF to the AIS of TKV3d.
+
+- **Attributes.** `TPrsStd_AISViewer` (root attribute holding the `AIS_InteractiveContext`)
+  and `TPrsStd_AISPresentation` (the interactive object of a label) are `TdfAttribute`
+  structs; the context and the object (`myAIS`) live in a `SharedState`, which no member
+  holds while it calls the context, a driver or the data. The settings of a presentation
+  (color, material, transparency, width, modes) live in the label's `TDataXtd_Presentation`;
+  `getData` is `get_data` and a label without data is `Standard_NoMoreObject`. The
+  presentation sets itself as the owner of its object through its self handle (section 2).
+- **Drivers.** `TPrsStd_Driver` is the trait `TPrsStdDriver` (`update(label, &mut ais)`);
+  the six standard drivers are stateless structs. `TPrsStd_DriverTable::Get` is a
+  process-wide `OnceLock` handle filled with the standard drivers, as the native static.
+  Drivers that natively build an `AIS_Axis` or an `AIS_Line` take the process-wide
+  `UnitsAPI` of TKV3d (`prs_dim_units_api`).
+- **Native quirks kept.** `SetMaterial` tests `HasOwnMode` (not `HasOwnMaterial`) before
+  its early return; `SetWidth` does not build a missing object; `AISErase` on a detached
+  label does nothing; `TPrsStd_ConstraintDriver` places a dimension (not a
+  `PrsDim_Relation`) at a `TDataXtd_Position` through a null pointer natively, which is a
+  `Standard_NullObject` error here.
+- **Constraint tools.** Every value-returning `ComputeX` starts from a null object, as
+  natively. The deprecated in/out overloads are excluded (ADR 0002), so the branches of
+  `computeXImpl` that run only on an existing object are not ported. `ComputeTextAndValue`
+  formats `%g` with the `Standard_CString` `sprintf` and converts through the current
+  units; `ComputeRound` returns null when `PrsDim_RadiusDimension` fails (the native
+  `OCC_CATCH_SIGNALS` block); the other exceptions propagate as `Failure` errors.

@@ -28,3 +28,10 @@ where an implicit partner exists, or refused by name (`OffsetPair`,
 `OffsetBasis`, `OffsetRadius`, `OffsetEllipseAxis`, `OffsetContinuity`,
 `OffsetSingular`, `PeriodicKnotShift`, `PeriodicShape`). Spline-source
 extension stays refused until the application defines a rule.
+
+## New toolkit: TKVCAF (OCAF presentation attributes)
+
+`rustycad-tkvcaf` ports `TPrsStd`: the `TPrsStd_AISViewer` and
+`TPrsStd_AISPresentation` attributes, the presentation drivers and their table, and the
+constraint presentations of `TPrsStd_ConstraintTools`. `Graphic3dNameOfMaterial::from_i32`
+is new in `rustycad-tkservice`.
