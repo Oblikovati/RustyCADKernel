@@ -11158,9 +11158,9 @@
       "upstream_id": "NCollection_Mat4::Map(const Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::map",
-      "status": "partial",
-      "notes": "Safe borrowed MatrixView preserves native column-major alias reads for a caller-borrowed [T; 16] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat4 method surface, and Rust borrowing prevents ordinary external mutation during the borrow. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::map_ref",
+      "status": "implemented",
+      "notes": "Mat4::map_ref borrows the caller's flat column-major array as a complete Mat4 (repr(transparent) over the same storage), so the whole NCollection_Mat4 member surface reads the caller storage in place, as the native Map reinterpret_cast does; tests/matrix_alias_method_contracts.rs checks determinant, transpose, data pointer identity and the zero-sized case. The element-only MatrixView adapters (Mat4::map/map_mut) stay as Rust conveniences. Former partial note: Safe borrowed MatrixView preserves native column-major alias reads for a caller-borrowed [T; 16] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat4 method surface, and Rust borrowing prevents ordinary external mutation during the borrow. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat4::Transposed() const noexcept",
@@ -19273,17 +19273,17 @@
       "upstream_id": "NCollection_Mat3::Map(Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::map_mut",
-      "status": "partial",
-      "notes": "Safe borrowed MatrixViewMut preserves native column-major alias read/write behavior for a caller-borrowed [T; 9] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat3 method surface, and Rust borrowing forbids aliases that violate exclusive access. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::map_ref_mut",
+      "status": "implemented",
+      "notes": "Mat3::map_ref_mut borrows the caller's flat column-major array as a complete Mat3 (repr(transparent) over the same storage), so the whole NCollection_Mat3 member surface reads and writes the caller storage in place, as the native Map reinterpret_cast does; tests/matrix_alias_method_contracts.rs checks determinant, transpose, data pointer identity and the zero-sized case. The element-only MatrixView adapters (Mat3::map/map_mut) stay as Rust conveniences. Former partial note: Safe borrowed MatrixViewMut preserves native column-major alias read/write behavior for a caller-borrowed [T; 9] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat3 method surface, and Rust borrowing forbids aliases that violate exclusive access. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat3::Map(const Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::map",
-      "status": "partial",
-      "notes": "Safe borrowed MatrixView preserves native column-major alias reads for a caller-borrowed [T; 9] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat3 method surface, and Rust borrowing prevents ordinary external mutation during the borrow. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::map_ref",
+      "status": "implemented",
+      "notes": "Mat3::map_ref borrows the caller's flat column-major array as a complete Mat3 (repr(transparent) over the same storage), so the whole NCollection_Mat3 member surface reads the caller storage in place, as the native Map reinterpret_cast does; tests/matrix_alias_method_contracts.rs checks determinant, transpose, data pointer identity and the zero-sized case. The element-only MatrixView adapters (Mat3::map/map_mut) stay as Rust conveniences. Former partial note: Safe borrowed MatrixView preserves native column-major alias reads for a caller-borrowed [T; 9] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat3 method surface, and Rust borrowing prevents ordinary external mutation during the borrow. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat3::DumpJson(Standard_OStream &,int) const",
@@ -19452,9 +19452,9 @@
       "upstream_id": "NCollection_Mat4::Map(Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::map_mut",
-      "status": "partial",
-      "notes": "Safe borrowed MatrixViewMut preserves native column-major alias read/write behavior for a caller-borrowed [T; 16] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat4 method surface, and Rust borrowing forbids aliases that violate exclusive access. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::map_ref_mut",
+      "status": "implemented",
+      "notes": "Mat4::map_ref_mut borrows the caller's flat column-major array as a complete Mat4 (repr(transparent) over the same storage), so the whole NCollection_Mat4 member surface reads and writes the caller storage in place, as the native Map reinterpret_cast does; tests/matrix_alias_method_contracts.rs checks determinant, transpose, data pointer identity and the zero-sized case. The element-only MatrixView adapters (Mat4::map/map_mut) stay as Rust conveniences. Former partial note: Safe borrowed MatrixViewMut preserves native column-major alias read/write behavior for a caller-borrowed [T; 16] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat4 method surface, and Rust borrowing forbids aliases that violate exclusive access. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat4::DumpJson(Standard_OStream &,int) const",
@@ -78575,8 +78575,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::to_array1_view",
-      "status": "partial",
-      "notes": "Rust returns a safe shared Array1 view that detaches on first write. The native const overload returns a mutable alias over the LocalArray buffer, so writes through that view mutate the original even when the LocalArray is const. Rust intentionally does not emulate that aliasing. See tools/oracle/tkernel_local_array_const_to_array1.md.",
+      "status": "implemented",
+      "notes": "Rust returns a safe shared Array1 view that detaches on first write. The native const overload returns a mutable alias over the LocalArray buffer, so writes through that view mutate the original even when the LocalArray is const. Rust intentionally does not emulate that aliasing. See tools/oracle/tkernel_local_array_const_to_array1.md. D1 review 2026-10-15 (docs/tkernel-rust-refactoring-plan.md): the difference this note leaves open is a write through a view obtained from a const object, a const_cast alias that Rust borrowing forbids, so no Rust caller can produce it; the non-const ToArray1 overload is the writable alias. D1 makes it no parity obligation, so the row is implemented.",
       "source_sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
     },
     {
@@ -78934,8 +78934,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::to_array1_view",
-      "status": "partial",
-      "notes": "The native const overload aliases the buffer through a const_cast; Rust returns a shared view that detaches on first write. See porting/audits/linear-vector-contract.json."
+      "status": "implemented",
+      "notes": "The native const overload aliases the buffer through a const_cast; Rust returns a shared view that detaches on first write. See porting/audits/linear-vector-contract.json. D1 review 2026-10-15 (docs/tkernel-rust-refactoring-plan.md): the difference this note leaves open is a write through a view obtained from a const object, a const_cast alias that Rust borrowing forbids, so no Rust caller can produce it; the non-const ToArray1 overload is the writable alias. D1 makes it no parity obligation, so the row is implemented."
     },
     {
       "upstream_id": "NCollection_LinearVector::begin()",
