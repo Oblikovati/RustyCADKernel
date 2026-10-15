@@ -6,8 +6,8 @@
 //! fillets and the faces.
 use super::ChFi3dBuilder;
 use super::more_surfdata::{MoreSurfdata, TOL3D, ends, sd_at};
-use crate::chfi3d::{fil_curve_in_ds, fil_point_in_ds, index_point_in_ds};
 use crate::chfi_ds::lock;
+use crate::chfi3d::{fil_curve_in_ds, fil_point_in_ds, index_point_in_ds};
 use rustycad_tkbool::top_ope_brep_ds::{
     TopOpeBRepDSCurve, TopOpeBRepDSKind, TopOpeBRepDSPoint, TopOpeBRepDSSolidSurfaceInterference,
     TopOpeBRepDSTransition,
@@ -39,24 +39,54 @@ fn not_chained(a: &Handle<dyn GeomCurve>, b: &Handle<dyn GeomCurve>) -> Result<b
 impl ChFi3dBuilder {
     /// The curve added with its ends: index of the curve.
     fn add_hole_curve(&mut self, h: &HoleCurve<'_>) -> Result<i32, Failure> {
-        let ic = self.ds.add_curve(&mut TopOpeBRepDSCurve::new(h.c, h.tol, false));
-        let g = h.c.get().ok_or_else(|| Failure::new("PerformMoreSurfdata: null curve"))?;
+        let ic = self
+            .ds
+            .add_curve(&mut TopOpeBRepDSCurve::new(h.c, h.tol, false));
+        let g =
+            h.c.get()
+                .ok_or_else(|| Failure::new("PerformMoreSurfdata: null curve"))?;
         let li = self.ds.change_curve_interferences(ic);
-        li.append(fil_point_in_ds(Orientation::Forward, ic, h.points.0, g.first_parameter(), false));
-        li.append(fil_point_in_ds(Orientation::Reversed, ic, h.points.1, g.last_parameter(), false));
+        li.append(fil_point_in_ds(
+            Orientation::Forward,
+            ic,
+            h.points.0,
+            g.first_parameter(),
+            false,
+        ));
+        li.append(fil_point_in_ds(
+            Orientation::Reversed,
+            ic,
+            h.points.1,
+            g.last_parameter(),
+            false,
+        ));
         Ok(ic)
     }
 
     /// The curve `ic` put on the fillet surface `isurf`.
-    fn put_on_surface(&mut self, ic: i32, isurf: i32, pc: &Handle<dyn Geom2dCurve>, or: Orientation) {
+    fn put_on_surface(
+        &mut self,
+        ic: i32,
+        isurf: i32,
+        pc: &Handle<dyn Geom2dCurve>,
+        or: Orientation,
+    ) {
         let interf = fil_curve_in_ds(ic, isurf, pc, or);
         self.ds.change_surface_interferences(isurf).append(interf);
     }
 
     /// The curve `ic` put on the face of index `ishape`.
-    fn put_on_face(&mut self, ic: i32, ishape: i32, pc: &Handle<dyn Geom2dCurve>, or: Orientation) -> Result<(), Failure> {
+    fn put_on_face(
+        &mut self,
+        ic: i32,
+        ishape: i32,
+        pc: &Handle<dyn Geom2dCurve>,
+        or: Orientation,
+    ) -> Result<(), Failure> {
         let interf = fil_curve_in_ds(ic, ishape, pc, or);
-        self.ds.change_shape_interferences_index(ishape)?.append(interf);
+        self.ds
+            .change_shape_interferences_index(ishape)?
+            .append(interf);
         Ok(())
     }
 
@@ -68,7 +98,11 @@ impl ChFi3dBuilder {
         let side_prev = if ms.is2nd_cp1_on_arc { 1 } else { 2 };
         let (fi_prev, ind_shape, or_sd2) = {
             let g = lock(&sd_prev);
-            (g.interference(side_prev).clone(), g.index(side_prev), g.orientation())
+            (
+                g.interference(side_prev).clone(),
+                g.index(side_prev),
+                g.orientation(),
+            )
         };
         if ind_shape <= 0 {
             return Ok(());
@@ -81,7 +115,10 @@ impl ChFi3dBuilder {
             let g = lock(&sd);
             (g.surf(), g.orientation())
         };
-        let ind_cp1_on_arc = self.ds.add_point(&TopOpeBRepDSPoint::new(ms.cp1_on_arc.point(), ms.cp1_on_arc.tolerance()));
+        let ind_cp1_on_arc = self.ds.add_point(&TopOpeBRepDSPoint::new(
+            ms.cp1_on_arc.point(),
+            ms.cp1_on_arc.tolerance(),
+        ));
         let arc1 = ms.cp1_on_arc.arc()?.clone();
         let ind_arc1 = self.ds.add_shape(arc1.as_ref());
         let ind_sol = lock(&ms.stripe).solid_index();
@@ -92,7 +129,9 @@ impl ChFi3dBuilder {
             ms.cp1_on_arc.parameter_on_arc()?,
             false,
         );
-        self.ds.change_shape_interferences(arc1.as_ref()).append(interfp);
+        self.ds
+            .change_shape_interferences(arc1.as_ref())
+            .append(interfp);
         let ssi = TopOpeBRepDSSolidSurfaceInterference::new(
             &TopOpeBRepDSTransition::from_orientation(or_sd1),
             TopOpeBRepDSKind::Solid,
@@ -100,7 +139,9 @@ impl ChFi3dBuilder {
             TopOpeBRepDSKind::Surface,
             ind_surf1,
         );
-        self.ds.change_shape_interferences_index(ind_sol)?.append(Handle::new(ssi).cast());
+        self.ds
+            .change_shape_interferences_index(ind_sol)?
+            .append(Handle::new(ssi).cast());
         let mut ind = ms.ind;
         lock(&ms.seq).remove((ind - 1) as usize);
         if !ms.isfirst {
@@ -115,7 +156,9 @@ impl ChFi3dBuilder {
         };
         let face_shape = topods::face(self.ds.shape(ind_shape, true))?;
         let stemp2 = BRepTool::surface(&face_shape)?;
-        let s2 = stemp2.get().ok_or_else(|| Failure::new("PerformMoreSurfdata: null surface"))?;
+        let s2 = stemp2
+            .get()
+            .ok_or_else(|| Failure::new("PerformMoreSurfdata: null surface"))?;
         let pof = fi.pcurve_on_face().clone();
         let uv = pof.value(fi.last_parameter())?;
         let point2 = s2.value(uv.x(), uv.y())?;
@@ -128,13 +171,25 @@ impl ChFi3dBuilder {
         if let Some((pext, cint2)) = &ms.second {
             ind_point = self.ds.add_point(&TopOpeBRepDSPoint::new(*pext, cint2.tol));
             let (e1, e2) = ends(&cint2.c)?;
-            let points = if e1.distance(pext) <= TOL3D { (ind_point, ind_cp2_on_arc) } else { (ind_cp2_on_arc, ind_point) };
-            let ic = self.add_hole_curve(&HoleCurve { c: &cint2.c, tol: cint2.tol, points })?;
+            let points = if e1.distance(pext) <= TOL3D {
+                (ind_point, ind_cp2_on_arc)
+            } else {
+                (ind_cp2_on_arc, ind_point)
+            };
+            let ic = self.add_hole_curve(&HoleCurve {
+                c: &cint2.c,
+                tol: cint2.tol,
+                points,
+            })?;
             if e1.distance(&point2) > TOL3D && e2.distance(&point1) > TOL3D {
                 or_surf = reverse(or_surf);
             }
             self.put_on_surface(ic, cur_surf, &cint2.pc2, or_surf);
-            let or_face = if ms.face.orientation() == or_sd2 { reverse(or_surf) } else { or_surf };
+            let or_face = if ms.face.orientation() == or_sd2 {
+                reverse(or_surf)
+            } else {
+                or_surf
+            };
             self.put_on_face(ic, ind_a_face, &cint2.pc1, or_face)?;
         }
         let (e1, e2) = ends(&ms.tr_cracc)?;
@@ -150,14 +205,23 @@ impl ChFi3dBuilder {
         if to_reverse {
             or_surf = reverse(or_surf);
         }
-        let ic = self.add_hole_curve(&HoleCurve { c: &ms.tr_cracc, tol: ms.cracc.tolreached, points })?;
+        let ic = self.add_hole_curve(&HoleCurve {
+            c: &ms.tr_cracc,
+            tol: ms.cracc.tolreached,
+            points,
+        })?;
         self.put_on_surface(ic, cur_surf, &pc_cracc_s, or_surf);
         lock(&ms.stripe).in_ds(ms.isfirst, 1);
         if or_sd1 == or_sd2 {
             or_surf = reverse(or_surf);
         }
         self.put_on_surface(ic, ind_surf1, &ms.cracc.pcurv, or_surf);
-        self.write_cint1_and_line(&ms, (ind_cp1_on_arc, ind_point, ind_cp2_not_on_arc), (ind_surf1, ind_a_face, or_sd1), or_surf)
+        self.write_cint1_and_line(
+            &ms,
+            (ind_cp1_on_arc, ind_point, ind_cp2_not_on_arc),
+            (ind_surf1, ind_a_face, or_sd1),
+            or_surf,
+        )
     }
 
     /// The indices of the points on the arc and off it, set on the contour.
@@ -168,7 +232,10 @@ impl ChFi3dBuilder {
         let mut s = lock(&ms.stripe);
         s.set_index_point(i_on, ms.isfirst, s_on);
         s.set_index_point(i_off, ms.isfirst, s_off);
-        Ok((s.index_point(ms.isfirst, s_on), s.index_point(ms.isfirst, s_off)))
+        Ok((
+            s.index_point(ms.isfirst, s_on),
+            s.index_point(ms.isfirst, s_off),
+        ))
     }
 
     /// The intersection of the face with the last fillet and its line on the neighbour.
@@ -180,19 +247,39 @@ impl ChFi3dBuilder {
         mut or_surf: Orientation,
     ) -> Result<(), Failure> {
         let (e1, _) = ends(&ms.cint1.c)?;
-        let points = if e1.distance(&ms.cp1_on_arc.point()) <= TOL3D { (ind_cp1_on_arc, ind_point) } else { (ind_point, ind_cp1_on_arc) };
+        let points = if e1.distance(&ms.cp1_on_arc.point()) <= TOL3D {
+            (ind_cp1_on_arc, ind_point)
+        } else {
+            (ind_point, ind_cp1_on_arc)
+        };
         if not_chained(&ms.cint1.c, &ms.tr_cracc)? {
             or_surf = reverse(or_surf);
         }
-        let ic = self.add_hole_curve(&HoleCurve { c: &ms.cint1.c, tol: ms.cint1.tol, points })?;
+        let ic = self.add_hole_curve(&HoleCurve {
+            c: &ms.cint1.c,
+            tol: ms.cint1.tol,
+            points,
+        })?;
         self.put_on_surface(ic, ind_surf1, &ms.cint1.pc2, or_surf);
-        let or_face = if ms.face.orientation() == or_sd1 { reverse(or_surf) } else { or_surf };
+        let or_face = if ms.face.orientation() == or_sd1 {
+            reverse(or_surf)
+        } else {
+            or_surf
+        };
         self.put_on_face(ic, ind_a_face, &ms.cint1.pc1, or_face)?;
         let ind_line = ms.fi_line.line_index();
         let cline = self.ds.curve(ind_line).curve().clone();
-        let g = cline.get().ok_or_else(|| Failure::new("PerformMoreSurfdata: null line"))?;
-        let tr_cline: Handle<dyn GeomCurve> =
-            Handle::new(GeomTrimmedCurve::new(&cline, g.first_parameter(), g.last_parameter(), true, true)?).cast();
+        let g = cline
+            .get()
+            .ok_or_else(|| Failure::new("PerformMoreSurfdata: null line"))?;
+        let tr_cline: Handle<dyn GeomCurve> = Handle::new(GeomTrimmedCurve::new(
+            &cline,
+            g.first_parameter(),
+            g.last_parameter(),
+            true,
+            true,
+        )?)
+        .cast();
         let tolerance = self.ds.curve(ind_line).tolerance();
         let (l1, _): (Point3, Point3) = ends(&tr_cline)?;
         let points = if l1.distance(&ms.cp1_on_arc.point()) < TOL3D {
@@ -203,10 +290,18 @@ impl ChFi3dBuilder {
         if not_chained(&tr_cline, &ms.cint1.c)? {
             or_surf = reverse(or_surf);
         }
-        let ic = self.add_hole_curve(&HoleCurve { c: &tr_cline, tol: tolerance, points })?;
+        let ic = self.add_hole_curve(&HoleCurve {
+            c: &tr_cline,
+            tol: tolerance,
+            points,
+        })?;
         self.put_on_surface(ic, ind_surf1, ms.fi_line.pcurve_on_surf(), or_surf);
         let ind_shape = self.ds.add_shape(ms.neighbor.as_ref());
-        let or_face = if ms.neighbor.orientation() == or_sd1 { reverse(or_surf) } else { or_surf };
+        let or_face = if ms.neighbor.orientation() == or_sd1 {
+            reverse(or_surf)
+        } else {
+            or_surf
+        };
         self.put_on_face(ic, ind_shape, ms.fi_line.pcurve_on_face(), or_face)?;
         Ok(())
     }

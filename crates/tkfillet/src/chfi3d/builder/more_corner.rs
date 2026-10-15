@@ -22,7 +22,11 @@ use rustycad_tkmath::gp::Point2;
 
 /// The edge at the vertex other than `arcpiv` on the face `fv`, with its orientation in
 /// the face (the first in the order of the edges at the vertex).
-fn edge_to_prolong(ve: &rustycad_tkernel::ncollection::List<rustycad_tkbrep::topods::Shape>, arcpiv: &Edge, fv: &Face) -> Result<Option<(Edge, Orientation)>, Failure> {
+fn edge_to_prolong(
+    ve: &rustycad_tkernel::ncollection::List<rustycad_tkbrep::topods::Shape>,
+    arcpiv: &Edge,
+    fv: &Face,
+) -> Result<Option<(Edge, Orientation)>, Failure> {
     for s in ve.iter() {
         if arcpiv.is_same(s) {
             continue;
@@ -51,10 +55,17 @@ impl ChFi3dBuilder {
     /// The sides of the corner: the side on the pivot (the arc through the vertex), the
     /// faces, the face at the end and the edge to prolong; the face at the end extended;
     /// the pivot and the face beyond the edge to prolong.
-    fn more_corner_faces(&mut self, oc: &mut OneCorner, vtx: &Vertex) -> Result<(Edge, Face), Failure> {
+    fn more_corner_faces(
+        &mut self,
+        oc: &mut OneCorner,
+        vtx: &Vertex,
+    ) -> Result<(Edge, Face), Failure> {
         let (cv1, cv2) = {
             let g = lock(&oc.fd);
-            (g.vertex(oc.isfirst, 1).clone(), g.vertex(oc.isfirst, 2).clone())
+            (
+                g.vertex(oc.isfirst, 1).clone(),
+                g.vertex(oc.isfirst, 2).clone(),
+            )
         };
         if !cv1.is_on_arc() && !cv2.is_on_arc() {
             return Err(Failure::new("Corner intersmore : no point on arc"));
@@ -86,7 +97,10 @@ impl ChFi3dBuilder {
             self.face_beyond(&arcpiv, &oc.fad, &mut fv)?;
         }
         if fv.is_null() {
-            return Err(Failure::with_message("StdFail_NotDone", "OneCorner : face at end is not found"));
+            return Err(Failure::with_message(
+                "StdFail_NotDone",
+                "OneCorner : face at end is not found",
+            ));
         }
         fv.set_orientation(Orientation::Forward);
         oc.fad.set_orientation(Orientation::Forward);
@@ -99,7 +113,12 @@ impl ChFi3dBuilder {
         };
         (oc.arcprol, oc.oarcprolv) = (arcprol, ov);
         let mut fopbis = Face::default();
-        cherche_face(self.my_vf_map.find_from_key(vtx.as_ref())?, &oc.arcprol, (&oc.fad, &fv, &fv), &mut fopbis)?;
+        cherche_face(
+            self.my_vf_map.find_from_key(vtx.as_ref())?,
+            &oc.arcprol,
+            (&oc.fad, &fv, &fv),
+            &mut fopbis,
+        )?;
         oc.fop.set_orientation(Orientation::Forward);
         if let Some(o) = edge_orientation(&fopbis, &oc.arcprol)? {
             oc.oarcprolop = o;
@@ -133,13 +152,21 @@ impl ChFi3dBuilder {
     /// along the arc; whether the first succeeded.
     fn more_corner_update(&mut self, oc: &mut OneCorner, vtx: &Vertex) -> Result<bool, Failure> {
         let surf = self.ds.surface(lock(&oc.fd).surf()).surface().clone();
-        let hgs: Handle<dyn Adaptor3dSurface> = Handle::new(GeomAdaptorSurface::with_surface(&surf)?).cast();
+        let hgs: Handle<dyn Adaptor3dSurface> =
+            Handle::new(GeomAdaptorSurface::with_surface(&surf)?).cast();
         let hbs: Handle<dyn Adaptor3dSurface> = oc.hbs.clone().cast();
         let mut wop = lock(&oc.fd).interference(oc.ifad).parameter(oc.isfirst);
-        let c3df = self.ds.curve(lock(&oc.fd).interference(oc.ifop).line_index()).curve().clone();
+        let c3df = self
+            .ds
+            .curve(lock(&oc.fd).interference(oc.ifop).line_index())
+            .curve()
+            .clone();
         let inters = {
             let mut g = lock(&oc.fd);
-            let (mut fi, mut cp) = (g.interference(oc.ifop).clone(), g.vertex(oc.isfirst, oc.ifop).clone());
+            let (mut fi, mut cp) = (
+                g.interference(oc.ifop).clone(),
+                g.vertex(oc.isfirst, oc.ifop).clone(),
+            );
             let r = inters_update_on_same(
                 &hgs,
                 &hbs,
@@ -176,7 +203,11 @@ impl ChFi3dBuilder {
         let (fd, isfirst) = self.corner_surf_data(&stripe, &vtx)?;
         let arcspine = {
             let sp = lock(&spine);
-            if isfirst { sp.edges(1)?.clone() } else { sp.edges(sp.nb_edges())?.clone() }
+            if isfirst {
+                sp.edges(1)?.clone()
+            } else {
+                sp.edges(sp.nb_edges())?.clone()
+            }
         };
         let fop = topods::face(self.ds.shape(lock(&fd).index(2), true))?;
         let mut oc = OneCorner {
@@ -199,7 +230,10 @@ impl ChFi3dBuilder {
         };
         let (arcpiv, fopbis) = self.more_corner_faces(&mut oc, &vtx)?;
         if !self.more_corner_update(&mut oc, &vtx)? {
-            return Err(Failure::with_message("Standard_NotImplemented", "OneCorner : cap not written"));
+            return Err(Failure::with_message(
+                "Standard_NotImplemented",
+                "OneCorner : cap not written",
+            ));
         }
         let mut cork = self.cork_curve(&oc)?;
         self.write_more_corner(&oc, &vtx, (&arcpiv, &fopbis), &mut cork)

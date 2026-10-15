@@ -87,7 +87,7 @@ pub(super) fn coupe_par_plan(
         (pdeb, pfin),
         (tol3d, tol2d),
         // The native default wholeCurv = true.
-            true,
+        true,
         &mut out,
     )? {
         return Ok(None);

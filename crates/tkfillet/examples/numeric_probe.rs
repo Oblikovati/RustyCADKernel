@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod fl_probe;
 use fl_probe::{
-    api, app_func, blend_func, brep_blend, builder0, builder0_solve, builder0_topo, chamfer, chfi_ds,
-    chfi2d, chfi3d, chfikpart, fillet, line_builders, rst_rst, surf_rst, walking,
+    api, app_func, blend_func, brep_blend, builder0, builder0_solve, builder0_topo, chamfer,
+    chfi_ds, chfi2d, chfi3d, chfikpart, fillet, line_builders, rst_rst, surf_rst, walking,
 };
 
 /// One probe operation over the numeric fields of a request.

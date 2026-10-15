@@ -14,7 +14,7 @@ NEDGES = {0: 12, 1: 8, 2: 18, 3: 24, 4: 18, 5: 24}
 METHODS = ((0, 0.5, 0), (2, 0.5, 0), (1, 0.3, 0.6), (3, 0.4, 0.7), (4, 0.5, 0.6))
 # Every edge at once still differs from the pinned kernel on these solids and methods
 # (see docs/tkfillet-progress.md); they are kept out until then.
-PENDING_ALL_EDGES = {(1, 0), (1, 2), (1, 1), (1, 3), (1, 4), (3, 1), (4, 1), (5, 0), (5, 1)}
+PENDING_ALL_EDGES = {(3, 1), (4, 1)}
 
 
 def append_api_requests(requests: list[str]) -> None:

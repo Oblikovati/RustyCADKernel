@@ -5,8 +5,8 @@
 //! last one is removed and the hole closed by the intersections of the face with the
 //! two fillets and the cut of the last fillet.
 use super::ChFi3dBuilder;
-use crate::chfi3d::{Arete, compute_arete, eval_tol_reached, index_of_surf_data};
 use crate::chfi_ds::{CommonPoint, FaceInterference, StripeHandle, SurfDataHandle, lock};
+use crate::chfi3d::{Arete, compute_arete, eval_tol_reached, index_of_surf_data};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{Face, Vertex};
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -14,8 +14,8 @@ use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{GeomCurve, GeomSurface, GeomTrimmedCurve};
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
-use rustycad_tkgeombase::extrema::ExtPC;
 use rustycad_tkgeomalgo::geom_int::{GeomIntIntSS, GeomIntIntSSApprox};
+use rustycad_tkgeombase::extrema::ExtPC;
 use rustycad_tkmath::gp::Point3;
 
 /// The tolerance of the comparisons of `PerformMoreSurfdata`.
@@ -46,12 +46,23 @@ fn cut_ending_at(
     p: Point3,
 ) -> Result<Option<SurfCut>, Failure> {
     let mut inter = GeomIntIntSS::new();
-    inter.perform(s1, s2, 1.0e-7, GeomIntIntSSApprox { approx: true, approx_s1: true, approx_s2: true })?;
+    inter.perform(
+        s1,
+        s2,
+        1.0e-7,
+        GeomIntIntSSApprox {
+            approx: true,
+            approx_s1: true,
+            approx_s2: true,
+        },
+    )?;
     if !inter.is_done() {
         return Ok(None);
     }
-    let h1: Handle<dyn Adaptor3dSurface> = Handle::new(GeomAdaptorSurface::with_surface(s1)?).cast();
-    let h2: Handle<dyn Adaptor3dSurface> = Handle::new(GeomAdaptorSurface::with_surface(s2)?).cast();
+    let h1: Handle<dyn Adaptor3dSurface> =
+        Handle::new(GeomAdaptorSurface::with_surface(s1)?).cast();
+    let h2: Handle<dyn Adaptor3dSurface> =
+        Handle::new(GeomAdaptorSurface::with_surface(s2)?).cast();
     for i in 1..=inter.nb_lines() {
         let (c, pc1, pc2) = (inter.line(i)?, inter.line_on_s1(i)?, inter.line_on_s2(i)?);
         let tol = eval_tol_reached((&h1, &pc1), (&h2, &pc2), &c)?;
@@ -85,7 +96,10 @@ pub(super) struct MoreSurfdata {
 }
 
 /// The surface data `i` of the sequence.
-pub(super) fn sd_at(seq: &crate::chfi_ds::SurfDataSequenceHandle, i: i32) -> Result<SurfDataHandle, Failure> {
+pub(super) fn sd_at(
+    seq: &crate::chfi_ds::SurfDataSequenceHandle,
+    i: i32,
+) -> Result<SurfDataHandle, Failure> {
     lock(seq)
         .get((i - 1) as usize)
         .cloned()
@@ -107,7 +121,11 @@ impl ChFi3dBuilder {
     }
 
     /// The corner analysed: None when the native routine returns early.
-    fn more_surfdata_analysis(&self, stripe: &StripeHandle, vtx: &Vertex) -> Result<Option<MoreSurfdata>, Failure> {
+    fn more_surfdata_analysis(
+        &self,
+        stripe: &StripeHandle,
+        vtx: &Vertex,
+    ) -> Result<Option<MoreSurfdata>, Failure> {
         let seq = lock(stripe)
             .set_of_surf_data()
             .cloned()
@@ -148,16 +166,29 @@ impl ChFi3dBuilder {
             return Ok(None);
         }
         let sd = sd_at(&seq, ind)?;
-        let ind_surface = if is1st_cp1_on_arc { lock(&sd).index_of_s1() } else { lock(&sd).index_of_s2() };
+        let ind_surface = if is1st_cp1_on_arc {
+            lock(&sd).index_of_s1()
+        } else {
+            lock(&sd).index_of_s2()
+        };
         let neighbor = rustycad_tkbrep::topods::face(self.my_ds_shape(ind_surface))?;
         let cracc = self.end_arete(&sd, isfirst)?;
-        let fi_line = lock(&sd).interference(if is1st_cp1_on_arc { 1 } else { 2 }).clone();
+        let fi_line = lock(&sd)
+            .interference(if is1st_cp1_on_arc { 1 } else { 2 })
+            .clone();
         let surf = self.ds.surface(lock(&sd).surf()).surface().clone();
         let Some(cint1) = cut_ending_at(&surf_prev, &surf, cp1_on_arc.point())? else {
             return Ok(None);
         };
         let pext = Self::free_end(&cint1.c, (&cp1_on_arc, &cp2_on_arc))?;
-        let Some((second, tr_cracc)) = self.second_section(&seq, ind_prev, (&surf_prev, &cracc), pext, (&cp2_on_arc, &cp2_not_on_arc))? else {
+        let Some((second, tr_cracc)) = self.second_section(
+            &seq,
+            ind_prev,
+            (&surf_prev, &cracc),
+            pext,
+            (&cp2_on_arc, &cp2_not_on_arc),
+        )?
+        else {
             return Ok(None);
         };
         Ok(Some(MoreSurfdata {
@@ -193,19 +224,39 @@ impl ChFi3dBuilder {
             let g = lock(sd);
             let at = |on_s: i32| -> Result<rustycad_tkmath::gp::Point2, Failure> {
                 let fi = g.interference(on_s);
-                let u = if last { fi.last_parameter() } else { fi.first_parameter() };
+                let u = if last {
+                    fi.last_parameter()
+                } else {
+                    fi.first_parameter()
+                };
                 fi.pcurve_on_surf().value(u)
             };
-            (g.vertex(!last, 1).clone(), g.vertex(!last, 2).clone(), at(1)?, at(2)?, g.surf())
+            (
+                g.vertex(!last, 1).clone(),
+                g.vertex(!last, 2).clone(),
+                at(1)?,
+                at(2)?,
+                g.surf(),
+            )
         };
         let surf = self.ds.surface(isurf).surface().clone();
         let mut arete = Arete::default();
-        compute_arete((&p1, pp1), (&p2, pp2), &surf, &mut arete, (TOL3D, self.tol2d), 0)?;
+        compute_arete(
+            (&p1, pp1),
+            (&p2, pp2),
+            &surf,
+            &mut arete,
+            (TOL3D, self.tol2d),
+            0,
+        )?;
         Ok(arete)
     }
 
     /// The end of the intersection away from the two points on the arcs, if any.
-    fn free_end(c: &Handle<dyn GeomCurve>, (cp1, cp2): (&CommonPoint, &CommonPoint)) -> Result<Option<Point3>, Failure> {
+    fn free_end(
+        c: &Handle<dyn GeomCurve>,
+        (cp1, cp2): (&CommonPoint, &CommonPoint),
+    ) -> Result<Option<Point3>, Failure> {
         let (e1, e2) = ends(c)?;
         let away = |p: Point3| p.distance(&cp2.point()) > TOL3D && p.distance(&cp1.point()) > TOL3D;
         if away(e1) {
@@ -250,14 +301,29 @@ impl ChFi3dBuilder {
             }
         }
         let Some(apar) = par else {
-            let tr: Handle<dyn GeomCurve> =
-                Handle::new(GeomTrimmedCurve::new(&cracc.c3d, c.first_parameter(), c.last_parameter(), true, true)?).cast();
+            let tr: Handle<dyn GeomCurve> = Handle::new(GeomTrimmedCurve::new(
+                &cracc.c3d,
+                c.first_parameter(),
+                c.last_parameter(),
+                true,
+                true,
+            )?)
+            .cast();
             return Ok(Some((None, tr)));
         };
         let (e1, _) = ends(&cracc.c3d)?;
-        let apar1 = if e1.distance(&cp2_not_on_arc.point()) <= TOL3D { c.first_parameter() } else { c.last_parameter() };
-        let (lo, hi) = if apar1 < apar { (apar1, apar) } else { (apar, apar1) };
-        let tr: Handle<dyn GeomCurve> = Handle::new(GeomTrimmedCurve::new(&cracc.c3d, lo, hi, true, true)?).cast();
+        let apar1 = if e1.distance(&cp2_not_on_arc.point()) <= TOL3D {
+            c.first_parameter()
+        } else {
+            c.last_parameter()
+        };
+        let (lo, hi) = if apar1 < apar {
+            (apar1, apar)
+        } else {
+            (apar, apar1)
+        };
+        let tr: Handle<dyn GeomCurve> =
+            Handle::new(GeomTrimmedCurve::new(&cracc.c3d, lo, hi, true, true)?).cast();
         let sd_prev = sd_at(seq, ind_prev)?;
         let surf = self.ds.surface(lock(&sd_prev).surf()).surface().clone();
         let Some(cint2) = cut_ending_at(surf_prev, &surf, cp2_on_arc.point())? else {
@@ -267,4 +333,3 @@ impl ChFi3dBuilder {
         Ok(Some((Some((pext, cint2)), tr)))
     }
 }
-

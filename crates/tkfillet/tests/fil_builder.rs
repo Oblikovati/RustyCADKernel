@@ -21,7 +21,12 @@ fn cube(side: f64) -> Shape {
 }
 
 fn first_edge(s: &Shape) -> topods::Edge {
-    topods::edge(Explorer::new(s, ShapeEnum::Edge, ShapeEnum::Shape).unwrap().current()).unwrap()
+    topods::edge(
+        Explorer::new(s, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .current(),
+    )
+    .unwrap()
 }
 
 fn volume(s: &Shape) -> f64 {
@@ -48,11 +53,18 @@ fn a_constant_fillet_on_a_cube_edge_has_the_quarter_cylinder_volume_and_area() {
     let result = b.builder_base().shape().unwrap();
     let lost = (r * r - PI * r * r / 4.) * side;
     let expected_volume = side.powi(3) - lost;
-    let expected_area = 6. * side * side - 2. * r * side - 2. * (r * r - PI * r * r / 4.) + PI * r / 2. * side;
+    let expected_area =
+        6. * side * side - 2. * r * side - 2. * (r * r - PI * r * r / 4.) + PI * r / 2. * side;
     let v = volume(&result);
     let a = area(&result);
-    assert!((v - expected_volume).abs() < 1.0e-3 * expected_volume, "volume {v} expected {expected_volume}");
-    assert!((a - expected_area).abs() < 1.0e-3 * expected_area, "area {a} expected {expected_area}");
+    assert!(
+        (v - expected_volume).abs() < 1.0e-3 * expected_volume,
+        "volume {v} expected {expected_volume}"
+    );
+    assert!(
+        (a - expected_area).abs() < 1.0e-3 * expected_area,
+        "area {a} expected {expected_area}"
+    );
     let check = BRepCheckAnalyzer::new(&result, true, false, false).unwrap();
     assert!(check.is_valid().unwrap());
 }
@@ -96,8 +108,14 @@ fn constant_fillets_on_all_cube_edges_give_the_rounded_cube() {
     }
     // Six planes, twelve quarter cylinders, eight sphere octants.
     assert_eq!(nb_faces, 26);
-    assert!((v - expected_volume).abs() < 1.0e-3 * expected_volume, "volume {v} expected {expected_volume}");
-    assert!((s - expected_area).abs() < 1.0e-3 * expected_area, "area {s} expected {expected_area}");
+    assert!(
+        (v - expected_volume).abs() < 1.0e-3 * expected_volume,
+        "volume {v} expected {expected_volume}"
+    );
+    assert!(
+        (s - expected_area).abs() < 1.0e-3 * expected_area,
+        "area {s} expected {expected_area}"
+    );
     let check = BRepCheckAnalyzer::new(&result, true, false, false).unwrap();
     assert!(check.is_valid().unwrap());
 }
@@ -116,9 +134,20 @@ fn a_symmetric_chamfer_on_a_cube_edge_removes_the_right_prism() {
     let expected_volume = side.powi(3) - d * d / 2. * side;
     let expected_area = 6. * side * side - 2. * d * side - d * d + d * 2f64.sqrt() * side;
     let (v, a) = (volume(&result), area(&result));
-    assert!((v - expected_volume).abs() < 1.0e-6 * expected_volume, "volume {v} expected {expected_volume}");
-    assert!((a - expected_area).abs() < 1.0e-6 * expected_area, "area {a} expected {expected_area}");
-    assert!(BRepCheckAnalyzer::new(&result, true, false, false).unwrap().is_valid().unwrap());
+    assert!(
+        (v - expected_volume).abs() < 1.0e-6 * expected_volume,
+        "volume {v} expected {expected_volume}"
+    );
+    assert!(
+        (a - expected_area).abs() < 1.0e-6 * expected_area,
+        "area {a} expected {expected_area}"
+    );
+    assert!(
+        BRepCheckAnalyzer::new(&result, true, false, false)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
 }
 
 #[test]
@@ -126,6 +155,19 @@ fn a_fillet_on_an_edge_to_a_four_edge_apex_matches_the_pinned_kernel() {
     // A lateral edge of a pyramid ends at an apex with four edges: the end of the fillet
     // is cut by the two other faces (PerformIntersectionAtEnd); the volume and area are
     // those of the pinned kernel (tools/oracle/tkfillet_probe_api.cxx, solid 1, edge 2).
+    let (solid, edges) = pyramid();
+    let mut b = ChFi3dFilBuilder::new(&solid, FilletShape::Rational, 1.0e-2).unwrap();
+    b.add_with_radius(0.5, &edges[1]).unwrap();
+    b.compute().unwrap();
+    assert!(b.builder_base().is_done());
+    assert_native(
+        &b.builder_base().shape().unwrap(),
+        (4644564690667318038, 4644370541254930459),
+    );
+}
+
+/// The pyramid of a wedge 10 10 10 to its apex (5, 5) and its edges in map order.
+fn pyramid() -> (Shape, Vec<topods::Edge>) {
     use rustycad_tkbrep::topexp;
     use rustycad_tkbrep::toptools::IndexedMapOfShape;
     use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge;
@@ -133,16 +175,61 @@ fn a_fillet_on_an_edge_to_a_four_edge_apex_matches_the_pinned_kernel() {
     let solid = w.shape().unwrap().clone();
     let mut edges = IndexedMapOfShape::default();
     topexp::map_shapes_of_type(&solid, ShapeEnum::Edge, &mut edges).unwrap();
-    let edge = topods::edge(edges.find_key(2).unwrap()).unwrap();
+    let edges = (1..=edges.extent())
+        .map(|i| topods::edge(edges.find_key(i).unwrap()).unwrap())
+        .collect();
+    (solid, edges)
+}
+
+/// The volume and area of the result agree with the pinned kernel (bits of the
+/// tools/oracle/tkfillet_probe_api.cxx output), and it is valid.
+fn assert_native(result: &Shape, (volume_bits, area_bits): (u64, u64)) {
+    let (v, a) = (volume(result), area(result));
+    let (native_v, native_a) = (f64::from_bits(volume_bits), f64::from_bits(area_bits));
+    assert!(
+        (v - native_v).abs() <= 1.0e-12 * native_v,
+        "volume {v} native {native_v}"
+    );
+    assert!(
+        (a - native_a).abs() <= 1.0e-12 * native_a,
+        "area {a} native {native_a}"
+    );
+    assert!(
+        BRepCheckAnalyzer::new(result, true, false, false)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
+}
+
+#[test]
+fn fillets_on_all_edges_of_a_pyramid_close_the_apex_with_a_plate() {
+    // The apex has four contours: PerformMoreThreeCorner fills it with a GeomPlate
+    // surface (solid 1, every edge, radius 0.5 in the probe).
+    let (solid, edges) = pyramid();
     let mut b = ChFi3dFilBuilder::new(&solid, FilletShape::Rational, 1.0e-2).unwrap();
-    b.add_with_radius(0.5, &edge).unwrap();
+    for e in &edges {
+        b.add_with_radius(0.5, e).unwrap();
+    }
     b.compute().unwrap();
     assert!(b.builder_base().is_done());
-    let result = b.builder_base().shape().unwrap();
-    let (v, a) = (volume(&result), area(&result));
-    let native_v = f64::from_bits(4644564690667318038);
-    let native_a = f64::from_bits(4644370541254930459);
-    assert!((v - native_v).abs() <= 1.0e-12 * native_v, "volume {v} native {native_v}");
-    assert!((a - native_a).abs() <= 1.0e-12 * native_a, "area {a} native {native_a}");
-    assert!(BRepCheckAnalyzer::new(&result, true, false, false).unwrap().is_valid().unwrap());
+    assert_native(
+        &b.builder_base().shape().unwrap(),
+        (4644443709931953106, 4643857443247635572),
+    );
+}
+
+#[test]
+fn chamfers_on_all_edges_of_a_pyramid_close_the_apex_with_a_plate() {
+    let (solid, edges) = pyramid();
+    let mut b = rustycad_tkfillet::chfi3d::ChFi3dChBuilder::new(&solid, 1.0e-2).unwrap();
+    for e in &edges {
+        b.add_with_dist(0.5, e).unwrap();
+    }
+    b.compute().unwrap();
+    assert!(b.builder_base().is_done());
+    assert_native(
+        &b.builder_base().shape().unwrap(),
+        (4644397605036952622, 4643853278911463474),
+    );
 }

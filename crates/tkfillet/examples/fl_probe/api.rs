@@ -21,7 +21,11 @@ use rustycad_tktopalgo::brep_gprop::BRepGProp;
 
 /// `fl_api_box`: the box of the corner (x, y, z) and the sizes.
 fn api_box(x: f64, y: f64, z: f64, dx: f64, dy: f64, dz: f64) -> Result<Shape, Failure> {
-    Ok(BRepPrimAPIMakeBox::at_point(Point3::new(x, y, z), dx, dy, dz)?.shape()?.clone())
+    Ok(
+        BRepPrimAPIMakeBox::at_point(Point3::new(x, y, z), dx, dy, dz)?
+            .shape()?
+            .clone(),
+    )
 }
 
 /// `fl_api_solid`: the solid of the request kind (see the native probe).
@@ -34,12 +38,20 @@ fn api_solid(kind: i32) -> Result<Shape, Failure> {
     Ok(match kind {
         2 => {
             let axes = Axis2::new(Point3::new(5., 5., 5.), gp::dz())?;
-            let cyl = BRepPrimAPIMakeCylinder::with_axes(axes, 2., 3.).shape()?.clone();
+            let cyl = BRepPrimAPIMakeCylinder::with_axes(axes, 2., 3.)
+                .shape()?
+                .clone();
             BRepAlgoAPIFuse::from_shapes(&base, &cyl)?.shape().clone()
         }
-        3 => BRepAlgoAPICut::from_shapes(&base, &api_box(3., 3., 3., 4., 4., 3.)?)?.shape().clone(),
-        4 => BRepAlgoAPICut::from_shapes(&base, &api_box(5., 5., -1., 10., 10., 7.)?)?.shape().clone(),
-        5 => BRepAlgoAPIFuse::from_shapes(&base, &api_box(0., 0., 5., 5., 10., 3.)?)?.shape().clone(),
+        3 => BRepAlgoAPICut::from_shapes(&base, &api_box(3., 3., 3., 4., 4., 3.)?)?
+            .shape()
+            .clone(),
+        4 => BRepAlgoAPICut::from_shapes(&base, &api_box(5., 5., -1., 10., 10., 7.)?)?
+            .shape()
+            .clone(),
+        5 => BRepAlgoAPIFuse::from_shapes(&base, &api_box(0., 0., 5., 5., 10., 3.)?)?
+            .shape()
+            .clone(),
         _ => api_box(0., 0., 0., 20., 20., 20.)?,
     })
 }
@@ -96,11 +108,21 @@ fn fillet(s: &Shape, edges: &[Edge], method: i32, d1: f64, d2: f64) -> Result<()
 }
 
 /// The chamfer methods 2, 3 and 4 of `fl_make_fillet`, on the first face of each edge.
-fn chamfer(s: &Shape, ef: &IndexedDataMapOfShapeListOfShape, edges: &[Edge], method: i32, d1: f64, d2: f64) -> Result<(), Failure> {
+fn chamfer(
+    s: &Shape,
+    ef: &IndexedDataMapOfShapeListOfShape,
+    edges: &[Edge],
+    method: i32,
+    d1: f64,
+    d2: f64,
+) -> Result<(), Failure> {
     let mut api = BRepFilletAPIMakeChamfer::new(s)?;
     for e in edges {
         let first = ef.find_from_key(&e.clone().into_shape())?.first().cloned();
-        let f = topods::face(&first.ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "edge without face"))?)?;
+        let f =
+            topods::face(&first.ok_or_else(|| {
+                Failure::with_message("Standard_NoSuchObject", "edge without face")
+            })?)?;
         match method {
             2 => api.add_with_dist(d1, e)?,
             3 => api.add_with_dists(d1, d2, e, &f)?,

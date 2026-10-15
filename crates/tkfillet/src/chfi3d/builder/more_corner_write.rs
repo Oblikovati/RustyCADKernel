@@ -7,12 +7,12 @@
 use super::ChFi3dBuilder;
 use super::corner_tools::recale;
 use super::one_corner::{Cork, OneCorner, edge_orientation, pcurve_of, value_2d};
+use crate::chfi_ds::lock;
 use crate::chfi3d::{
     IntersectionCurves, boite, bound_fac, compute_curves, enlarge_box_ds, enlarge_box_edge,
     enlarge_box_pcurve, fil_curve_in_ds, fil_point_in_ds, fil_vertex_in_ds, index_point_in_ds,
     set_point_tolerance,
 };
-use crate::chfi_ds::lock;
 use rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurve;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::Explorer;
@@ -25,7 +25,11 @@ use rustycad_tkmath::bnd::BoundingBox3;
 /// The orientation of the vertex in the forward edge (the first occurrence), `default`
 /// when absent.
 fn vertex_in_edge(e: &Edge, v: &Vertex, default: Orientation) -> Result<Orientation, Failure> {
-    let mut ex = Explorer::new(&e.oriented(Orientation::Forward), ShapeEnum::Vertex, ShapeEnum::Shape)?;
+    let mut ex = Explorer::new(
+        &e.oriented(Orientation::Forward),
+        ShapeEnum::Vertex,
+        ShapeEnum::Shape,
+    )?;
     while ex.more() {
         if v.is_same(ex.current()) {
             return Ok(ex.current().orientation());
@@ -47,7 +51,10 @@ impl ChFi3dBuilder {
         let ishape = self.ds.add_shape(oc.fv.as_ref());
         let (cv1, cv2) = {
             let g = lock(&oc.fd);
-            (g.vertex(oc.isfirst, 1).clone(), g.vertex(oc.isfirst, 2).clone())
+            (
+                g.vertex(oc.isfirst, 1).clone(),
+                g.vertex(oc.isfirst, 2).clone(),
+            )
         };
         let et = if oc.ifad == 1 {
             match edge_orientation(&oc.fv, cv1.arc()?)? {
@@ -68,9 +75,15 @@ impl ChFi3dBuilder {
             s.set_index_point(i2, oc.isfirst, 2);
         }
         if !cork.intcouture {
-            let icurve = self.ds.add_curve(&mut TopOpeBRepDSCurve::new(&cork.cc, cork.tolreached, false));
+            let icurve = self.ds.add_curve(&mut TopOpeBRepDSCurve::new(
+                &cork.cc,
+                cork.tolreached,
+                false,
+            ));
             let interfc = fil_curve_in_ds(icurve, ishape, &cork.pc, et);
-            self.ds.change_shape_interferences_index(ishape)?.append(interfc);
+            self.ds
+                .change_shape_interferences_index(ishape)?
+                .append(interfc);
             let mut s = lock(&oc.stripe);
             *s.change_pcurve(oc.isfirst) = cork.ps.clone();
             s.set_curve(icurve, oc.isfirst);
@@ -82,11 +95,22 @@ impl ChFi3dBuilder {
         let hbs: Handle<dyn Adaptor3dSurface> = oc.hbs.clone().cast();
         enlarge_box_pcurve(&hbs, &cork.pc, (cork.udeb, cork.ufin), &mut box1, &mut box2)?;
         self.write_continuation(oc, vtx, (arcpiv, fopbis), ishape)?;
-        enlarge_box_ds(&self.ds, Some(&oc.stripe), &oc.fd, (&mut box1, &mut box2), oc.isfirst)?;
+        enlarge_box_ds(
+            &self.ds,
+            Some(&oc.stripe),
+            &oc.fd,
+            (&mut box1, &mut box2),
+            oc.isfirst,
+        )?;
         for (cv, b) in [(&cv1, &mut box1), (&cv2, &mut box2)] {
             if cv.is_on_arc() {
                 let arc = cv.arc()?;
-                enlarge_box_edge(arc, self.my_ef_map.find_from_key(arc.as_ref())?, cv.parameter_on_arc()?, b)?;
+                enlarge_box_edge(
+                    arc,
+                    self.my_ef_map.find_from_key(arc.as_ref())?,
+                    cv.parameter_on_arc()?,
+                    b,
+                )?;
             }
         }
         let (ip1, ip2) = {
@@ -117,7 +141,9 @@ impl ChFi3dBuilder {
         let ovtx = reverse(vertex_in_edge(&oc.arcspine, vtx, Orientation::Forward)?);
         let par_vtx = BRepTool::parameter(vtx, &oc.arcspine)?;
         let interfv = fil_vertex_in_ds(ovtx, iarcspine, ivtx, par_vtx);
-        self.ds.change_shape_interferences_index(iarcspine)?.append(interfv);
+        self.ds
+            .change_shape_interferences_index(iarcspine)?
+            .append(interfv);
         let mut arcprolbis = Edge::default();
         for s in self.my_ve_map.find_from_key(vtx.as_ref())?.iter() {
             if !(oc.arcprol.is_same(s) || oc.arcspine.is_same(s) || arcpiv.is_same(s)) {
@@ -139,27 +165,47 @@ impl ChFi3dBuilder {
             edge_orientation(&oc.fop, &arcprolbis)?.unwrap_or(Orientation::Forward)
         };
         let zob = self.continuation_curve(oc, vtx, &arcprolbis)?;
-        let c = zob.c3d.get().ok_or_else(|| Failure::new("IntersectMoreCorner: null curve"))?;
+        let c = zob
+            .c3d
+            .get()
+            .ok_or_else(|| Failure::new("IntersectMoreCorner: null curve"))?;
         let (udeb, ufin) = (c.first_parameter(), c.last_parameter());
-        let izob = self.ds.add_curve(&mut TopOpeBRepDSCurve::new(&zob.c3d, zob.tolreached, false));
+        let izob = self
+            .ds
+            .add_curve(&mut TopOpeBRepDSCurve::new(&zob.c3d, zob.tolreached, false));
         let et = reverse(compose(ovtx, oc.oarcprolv));
         let iop = self.ds.add_shape(oc.fop.as_ref());
         let interfv = fil_curve_in_ds(izob, ishape, &zob.pc2, et);
-        self.ds.change_shape_interferences_index(ishape)?.append(interfv);
+        self.ds
+            .change_shape_interferences_index(ishape)?
+            .append(interfv);
         let et = reverse(compose(ovtx2, oarcprolbis));
         let interfop = fil_curve_in_ds(izob, iop, &zob.pc1, et);
-        self.ds.change_shape_interferences_index(iop)?.append(interfop);
+        self.ds
+            .change_shape_interferences_index(iop)?
+            .append(interfop);
         let icc = lock(&oc.stripe).index_point(oc.isfirst, oc.ifop);
         let li = self.ds.change_curve_interferences(izob);
         li.append(fil_vertex_in_ds(Orientation::Forward, izob, ivtx, udeb));
-        li.append(fil_point_in_ds(Orientation::Reversed, izob, icc, ufin, false));
+        li.append(fil_point_in_ds(
+            Orientation::Reversed,
+            izob,
+            icc,
+            ufin,
+            false,
+        ));
         Ok(())
     }
 
     /// The intersection of the opposite face with the face at the end from the vertex
     /// (along the continuation edge on the opposite face, the prolonged edge on the face
     /// at the end) to the end of the fillet.
-    fn continuation_curve(&mut self, oc: &OneCorner, vtx: &Vertex, arcprolbis: &Edge) -> Result<IntersectionCurves, Failure> {
+    fn continuation_curve(
+        &mut self,
+        oc: &OneCorner,
+        vtx: &Vertex,
+        arcprolbis: &Edge,
+    ) -> Result<IntersectionCurves, Failure> {
         let par_vtx = BRepTool::parameter(vtx, arcprolbis)?;
         let pop1 = value_2d(&pcurve_of(arcprolbis, &oc.fop)?, par_vtx)?;
         let pop2 = {
@@ -178,7 +224,13 @@ impl ChFi3dBuilder {
         let (hbop, hbs): (Handle<dyn Adaptor3dSurface>, Handle<dyn Adaptor3dSurface>) =
             (oc.hbop.clone().cast(), oc.hbs.clone().cast());
         let mut out = IntersectionCurves::default();
-        if !compute_curves((&hbop, &hbs), (pardeb, parfin), (self.tolapp3d, self.tol2d), true, &mut out)? {
+        if !compute_curves(
+            (&hbop, &hbs),
+            (pardeb, parfin),
+            (self.tolapp3d, self.tol2d),
+            true,
+            &mut out,
+        )? {
             return Err(Failure::new("OneCorner : echec calcul intersection"));
         }
         Ok(out)
