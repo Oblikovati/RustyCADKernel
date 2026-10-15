@@ -1,0 +1,21 @@
+[package]
+autotests = false
+name = "rustycad-tktobj"
+description = "OCCT TKTObj toolkit: the TObj object model over OCAF (models, objects, partitions, references and their attributes)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel", version = "0.2.8" }
+rustycad-tkmath = { path = "../tkmath", version = "0.2.8" }
+rustycad-tkcdf = { path = "../tkcdf", version = "0.2.8" }
+rustycad-tklcaf = { path = "../tklcaf", version = "0.2.8" }
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"
