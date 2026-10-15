@@ -238,6 +238,10 @@ mod view_controller_selection;
 mod view_controller_transfer;
 mod view_controller_zoom;
 pub use view_controller::AisViewController;
+mod view_controller_dispatch_state;
+pub use view_controller_dispatch_state::AisViewControllerHooks;
+mod view_controller_events;
+mod view_controller_xr;
 
 mod view_controller_clicks;
 mod view_controller_gravity;

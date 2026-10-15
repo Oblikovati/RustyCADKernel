@@ -5,6 +5,7 @@ pub mod ais_context_attributes;
 pub mod ais_media_player;
 pub mod ais_shape;
 pub mod ais_triangulation;
+pub mod ais_view_controller;
 pub mod brep_font;
 pub mod dsg_prs;
 pub mod prs3d;

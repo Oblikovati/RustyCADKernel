@@ -73,6 +73,8 @@ pub mod ais_text_label;
 pub mod ais_trihedron;
 #[path = "../ais_trihedron_subclass.rs"]
 pub mod ais_trihedron_subclass;
+#[path = "../ais_view_controller_dispatch.rs"]
+pub mod ais_view_controller_dispatch;
 #[path = "../ais_view_controller_events.rs"]
 pub mod ais_view_controller_events;
 #[path = "../ais_view_controller_parameters.rs"]

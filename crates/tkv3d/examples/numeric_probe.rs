@@ -22,6 +22,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_brepfont_text", v3_probe::brep_font::text_case),
     // DsgPrs presentations (v3_probe/dsg_prs.rs)
     ("v3_dsgprs", v3_probe::dsg_prs::dsg_prs_case),
+    // AIS_ViewController dispatch (v3_probe/ais_view_controller.rs)
+    (
+        "v3_ais_view_controller",
+        v3_probe::ais_view_controller::view_controller_case,
+    ),
     // AIS_MediaPlayer (v3_probe/ais_media_player.rs)
     (
         "v3_ais_media_player",

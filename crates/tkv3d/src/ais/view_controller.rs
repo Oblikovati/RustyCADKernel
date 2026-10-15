@@ -1,6 +1,7 @@
-//! Martensite AIS view-controller input state; rendering dispatch is still being ported.
+//! `AIS_ViewController`: the queued input state of the 3D view controller.
 use super::view_controller_camera_action_state::ViewControllerCameraActionState;
 use super::view_controller_clicks::ViewControllerClickDispatch;
+use super::view_controller_dispatch_state::{ViewControllerDispatchState, ViewControllerXrState};
 use super::view_controller_input_state::{ViewControllerClickState, ViewControllerNavigationState};
 use super::view_controller_mouse_state::ViewControllerMouseDispatch;
 use super::view_controller_parameters::ViewControllerParameters;
@@ -11,7 +12,6 @@ use rustycad_tkernel::ncollection::Vec2;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::aspect::AspectWindowInputListenerBase;
 /// Queues native viewer gestures; `AisViewController::new()?.update_z_rotation(0.1)`.
-/// Full camera/redraw dispatch and XR remain unported; window input and picking are available.
 pub struct AisViewController {
     pub(super) ui_input: AisViewInputBuffer,
     pub(super) render_input: AisViewInputBuffer,
@@ -27,6 +27,8 @@ pub struct AisViewController {
     pub(super) click_dispatch: ViewControllerClickDispatch,
     pub(super) touch_dispatch: ViewControllerTouchDispatch,
     pub(super) mouse_dispatch: ViewControllerMouseDispatch,
+    pub(super) dispatch: ViewControllerDispatchState,
+    pub(super) xr: ViewControllerXrState,
 }
 impl AisViewController {
     /// Borrow the UI or rendering queue; `controller.input_buffer(AisViewInputBufferType::Ui)`.
