@@ -176,6 +176,61 @@ pub fn offset_case(values: &[f64]) {
     })());
 }
 
+/// `om_face_offsets prim removed offset join inter n (face offset)...`.
+pub fn face_offsets_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    finish((|| {
+        let p = primitive(&mut r)?;
+        let removed = r.integer();
+        let off = r.real();
+        let join = if r.flag() {
+            JoinType::Intersection
+        } else {
+            JoinType::Arc
+        };
+        let intersection = r.flag();
+        let mut m = BRepOffsetMakeOffset::new();
+        let options = MakeOffsetOptions {
+            mode: BRepOffsetMode::Skin,
+            intersection,
+            self_inter: false,
+            join,
+            thickening: false,
+            remove_int_edges: false,
+        };
+        m.initialize(&p, off, 1e-7, options);
+        let face_of = |index: i32| -> Result<topods::Face, Failure> {
+            topods::face(
+                &Explorer::new(&p, ShapeEnum::Face, ShapeEnum::Shape)?
+                    .nth(index as usize)
+                    .unwrap_or_default(),
+            )
+        };
+        for _ in 0..r.integer() {
+            let f = face_of(r.integer())?;
+            m.set_offset_on_face(&f, r.real());
+        }
+        let range = ProgressRange::default();
+        if removed >= 0 {
+            m.add_face(&face_of(removed)?);
+            m.make_thick_solid(&range)?;
+        } else {
+            m.make_offset_shape(&range)?;
+        }
+        int(m.error() as i32);
+        flag(m.is_done());
+        digest(&m.shape().clone())?;
+        for t in [ShapeEnum::Face, ShapeEnum::Edge, ShapeEnum::Vertex] {
+            for s in Explorer::new(&p, t, ShapeEnum::Shape)? {
+                attempt(|| m.generated(&s).and_then(list));
+                attempt(|| m.modified(&s).and_then(list));
+                attempt(|| m.is_deleted(&s).map(flag));
+            }
+        }
+        Ok(())
+    })());
+}
+
 /// `om_simple`.
 pub fn simple_case(values: &[f64]) {
     let mut r = Reader::new(values);

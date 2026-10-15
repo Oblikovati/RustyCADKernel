@@ -3,12 +3,14 @@ the records are documented there).
 
 The primitives of tkoffset_corpus_brepoffset_tool.py: the offset shapes of the solids and
 of single faces both ways with arc and intersection joins, the thick solids with a face
-removed, the thickened faces.
+removed, the thickened faces, and per-face offsets on boxes, a cylinder and a slot prism.
 """
 from __future__ import annotations
 from tkoffset_corpus_brepoffset_tool import BOX, CONE, CYLINDER, LYING_CYLINDER, SPHERE, TILTED_BOX, TORUS
 
 SOLIDS = [BOX, TILTED_BOX, CYLINDER, LYING_CYLINDER, CONE, SPHERE, TORUS]
+# The prism of a slot (two planes tangent to two half cylinders), kind 6 of ot_primitive.
+SLOT = '6 2 1 3 0 0 0 0 0 1'
 
 
 def append_make_offset_requests(requests: list[str]) -> None:
@@ -23,6 +25,20 @@ def append_make_offset_requests(requests: list[str]) -> None:
                 requests.append(f'om_offset {prim} -2 -1 {off} {join} 0 0 0 0')
                 requests.append(f'om_offset {prim} -3 -1 {off} {join} 0 0 0 0')
                 requests.append(f'om_offset {prim} -2 -1 {off} {join} 0 1 0 0')
+    # Per-face offsets: on the slot prism the tangent edges between faces of different
+    # offsets get the artificial faces of BRepOffset_Analyse::TreatTangentFaces. At most
+    # one distinct face offset value per request: UpdateFaceOffset spreads each value
+    # through the connected faces in the iteration order of a hashed map (the shape
+    # addresses natively), so two different values make the result address-dependent.
+    for prim, removed, off, faces in (
+            (SLOT, -1, 0.3, [(0, 0.5)]), (SLOT, -1, 0.3, [(0, 0.5), (2, 0.5)]),
+            (SLOT, -1, 0.3, [(1, 0.5)]), (SLOT, -1, -0.2, [(0, -0.4)]), (SLOT, 5, -0.2, [(0, -0.4)]),
+            (SLOT, 4, 0.25, [(1, 0.4), (3, 0.4)]),
+            (BOX, -1, 0.5, [(0, 1.0)]), (BOX, -1, 0.5, [(0, 1.0), (1, 1.0)]), (BOX, 5, -0.25, [(0, -0.5)]),
+            (CYLINDER, -1, 0.5, [(1, 1.0)]), (CYLINDER, -1, 0.5, [(0, 0.25)])):
+        for join in (0, 1):
+            body = ' '.join(f'{f} {v}' for f, v in faces)
+            requests.append(f'om_face_offsets {prim} {removed} {off} {join} 0 {len(faces)} {body}')
     for prim in SOLIDS:
         for sub in (0, 1, -2, -3):
             for off in (2.0, -0.25):

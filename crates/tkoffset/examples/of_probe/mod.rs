@@ -1,4 +1,5 @@
 //! The TKOffset probe operations, one module per C++ probe file under tools/oracle.
+pub mod analyse;
 pub mod draft_angle;
 pub mod inter3d;
 pub mod make_offset;

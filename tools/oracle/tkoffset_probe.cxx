@@ -42,6 +42,7 @@
 #include "tkoffset_probe_brepoffsetapi_thru_sections.cxx"
 #include "tkoffset_probe_brepoffsetapi_wrappers.cxx"
 #include "tkoffset_probe_brepoffset_tool.cxx"
+#include "tkoffset_probe_brepoffset_analyse.cxx"
 #include "tkoffset_probe_brepoffset_offset.cxx"
 #include "tkoffset_probe_brepoffset_inter3d.cxx"
 #include "tkoffset_probe_brepoffset_make_offset.cxx"
@@ -66,6 +67,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ot_inter2d", of_ot_inter2d_case},
  {"ot_queries", of_ot_queries_case},
  {"ot_deboucle", of_ot_deboucle_case},
+ // BRepOffset_Analyse (tkoffset_probe_brepoffset_analyse.cxx)
+ {"oan_analyse", of_oan_analyse_case},
  // BRepOffset_Offset (tkoffset_probe_brepoffset_offset.cxx)
  {"oo_faces", of_oo_faces_case},
  {"oo_pipes", of_oo_pipes_case},
@@ -75,6 +78,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepOffset_MakeOffset (tkoffset_probe_brepoffset_make_offset.cxx)
  {"om_offset", of_om_offset_case},
  {"om_simple", of_om_simple_case},
+ {"om_face_offsets", of_om_face_offsets_case},
  // BRepOffsetAPI_MiddlePath (tkoffset_probe_brepoffsetapi_middle_path.cxx)
  {"oa_middle", of_oa_middle_case},
  {"oa_middle_prim", of_oa_middle_prim_case},

@@ -3,7 +3,7 @@
 use std::io::{self, BufRead};
 mod of_probe;
 use of_probe::{
-    draft_angle, inter3d, make_offset, make_pipe_shell, maker, middle_path, offset, thru_sections, tool,
+    analyse, draft_angle, inter3d, make_offset, make_pipe_shell, maker, middle_path, offset, thru_sections, tool,
     wrappers,
 };
 
@@ -31,6 +31,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ot_inter2d", tool::inter2d_case),
     ("ot_queries", tool::queries_case),
     ("ot_deboucle", tool::deboucle_case),
+    // BRepOffset_Analyse (of_probe/analyse.rs)
+    ("oan_analyse", analyse::analyse_case),
     // BRepOffset_Offset (of_probe/offset.rs)
     ("oo_faces", offset::faces_case),
     ("oo_pipes", offset::pipes_case),
@@ -40,6 +42,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // BRepOffset_MakeOffset (of_probe/maker.rs)
     ("om_offset", maker::offset_case),
     ("om_simple", maker::simple_case),
+    ("om_face_offsets", maker::face_offsets_case),
     // BRepOffsetAPI_MiddlePath (of_probe/middle_path.rs)
     ("oa_middle", middle_path::middle_case),
     ("oa_middle_prim", middle_path::middle_prim_case),

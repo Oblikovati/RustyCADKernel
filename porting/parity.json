@@ -338304,8 +338304,8 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
       "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval",
-      "status": "partial",
-      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Interval.cxx; compared with OCCT through the analyses of oan_analyse (the intervals of every edge). The default constructor leaves the fields uninitialized natively; reading them is an error in Rust."
     },
     {
       "upstream_id": "BRepOffset_Interval::BRepOffset_Interval()",
@@ -338313,8 +338313,8 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
       "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::default",
-      "status": "partial",
-      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Interval.cxx; the native fields are uninitialized (undefined reads), the Rust reads of the unset fields return Standard_ConstructionError."
     },
     {
       "upstream_id": "BRepOffset_Interval::BRepOffset_Interval(const double, const double, const ChFiDS_TypeOfConcavity)",
@@ -341867,89 +341867,8 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse",
-      "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::Perform(const TopoDS_Shape &, const double, const Message_ProgressRange &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::perform",
-      "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::Type(const TopoDS_Edge &) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::type_of",
-      "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::Ancestors(const TopoDS_Shape &) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::ancestors",
-      "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::TangentEdges(const TopoDS_Edge &, const TopoDS_Vertex &, NCollection_List<TopoDS_Shape> &) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::tangent_edges",
-      "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::Descendants(const TopoDS_Shape &, const bool) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::descendants",
-      "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::Generated(const TopoDS_Shape &) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::generated",
-      "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::EdgeReplacement(const TopoDS_Face &, const TopoDS_Edge &) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::edge_replacement",
-      "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape> &, const ChFiDS_TypeOfConcavity) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode",
-      "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape> &, const ChFiDS_TypeOfConcavity, const ChFiDS_TypeOfConcavity) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode_two_types",
-      "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
     },
     {
       "upstream_id": "BOPTools_ConnexityBlock",
@@ -342064,7 +341983,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::clear",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::IsDone() const",
@@ -342072,7 +341991,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_done",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Shape() const",
@@ -342080,7 +341999,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::shape",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::InitShape() const",
@@ -342088,7 +342007,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::init_shape",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Error() const",
@@ -342096,7 +342015,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::error",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetJoinType() const",
@@ -342104,7 +342023,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::get_join_type",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::ClosingFaces() const",
@@ -342112,7 +342031,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::closing_faces",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetBadShape() const",
@@ -342120,7 +342039,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::get_bad_shape",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BOPTools_AlgoTools2D::AdjustPCurveOnSurf(const BRepAdaptor_Surface &, const double, const double, const occ::handle<Geom2d_Curve> &, occ::handle<Geom2d_Curve> &)",
@@ -342490,15 +342409,6 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_near_edge",
       "status": "implemented",
       "notes": "Native oriented face/seam and cached hatching fixtures; tools/oracle/tkbo_point_in_face.md. Broader nonmanifold/located/exceptional topology remains unproven; no legacy completion claim. Reviewed line by line against the C++ (2026-10-15): BOPTools_AlgoTools3D.cxx OrientEdgeOnFace (closed-edge single occurrence rule) and PointNearEdge(edge, face) (FORWARD face, oriented edge, range midpoint). The Rust body is faithful; the remaining open items named above are input families the existing native fixtures do not sample, not missing behaviour, so the row is implemented. Native undefined behaviour (null sets, invalid indices) becomes a Failure as plan D3 requires; allocator parameters are D1 class B3."
-    },
-    {
-      "upstream_id": "BRepOffset_Analyse::SetFaceOffsetMap(const NCollection_DataMap<TopoDS_Shape, double, TopTools_ShapeMapHasher> &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
-      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::set_face_offset_map",
-      "status": "partial",
-      "notes": "Copied native per-face offsets; 20 configurations and repeat/Clear lifecycle compare tangent-face insertion/history/classification counts. More complex side-face ancestry, curved/location/exception cases remain; tools/oracle/tkoffset_analyse_tangent.md. No legacy completion claim."
     },
     {
       "upstream_id": "BRepOffset_Analyse::operator delete(void*) noexcept",
@@ -344768,7 +344678,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::get_analyse",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::operator delete(void*) noexcept",
@@ -626718,7 +626628,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::add_face",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::AllowLinearization(bool)",
@@ -626726,7 +626636,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::allow_linearization",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::BRepOffset_MakeOffset(const TopoDS_Shape&,double,double,BRepOffset_Mode,bool,bool,GeomAbs_JoinType,bool,bool,const Message_ProgressRange&)",
@@ -626734,7 +626644,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::with_shape",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The defaulted arguments are MakeOffsetOptions (Default gives the native defaults). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The defaulted arguments are MakeOffsetOptions (Default gives the native defaults). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::CheckInputData(const Message_ProgressRange&)",
@@ -626742,7 +626652,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::check_input_data",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The NullOffset, NotConnectedShell, C0 and bad-normal checks are also covered by tests/standard_offset_check_input.rs."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The NullOffset, NotConnectedShell, C0 and bad-normal checks are also covered by tests/standard_offset_check_input.rs."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Generated(const TopoDS_Shape&)",
@@ -626750,7 +626660,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::generated",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The vertex and edge cases fall through to the face case as natively."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The vertex and edge cases fall through to the face case as natively."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Initialize(const TopoDS_Shape&,double,double,BRepOffset_Mode,bool,bool,GeomAbs_JoinType,bool,bool)",
@@ -626758,7 +626668,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::initialize",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The defaulted arguments are MakeOffsetOptions (Default gives the native defaults)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The defaulted arguments are MakeOffsetOptions (Default gives the native defaults)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::IsDeleted(const TopoDS_Shape&)",
@@ -626766,7 +626676,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_deleted",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::MakeOffsetShape(const Message_ProgressRange&)",
@@ -626774,7 +626684,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_offset_shape",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::MakeThickSolid(const Message_ProgressRange&)",
@@ -626782,7 +626692,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_thick_solid",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Modified(const TopoDS_Shape&)",
@@ -626790,7 +626700,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::modified",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::OffsetEdgesFromShapes() const",
@@ -626798,7 +626708,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_edges_from_shapes",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::OffsetFacesFromShapes() const",
@@ -626806,7 +626716,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_faces_from_shapes",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::SetOffsetOnFace(const TopoDS_Face&,double)",
@@ -626814,7 +626724,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::set_offset_on_face",
       "status": "implemented",
-      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces, and om_face_offsets: per-face offsets on boxes, a cylinder and a slot prism with the artificial faces of tangent edges; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). UpdateFaceOffset spreads each value to the connected faces in the order of a hashed map (the shape addresses natively, the Rust map order here), so only requests with one distinct face offset value are compared."
     },
     {
       "upstream_id": "BRepOffset_MakeLoops::BRepOffset_MakeLoops()",
@@ -627604,6 +627514,182 @@
       "rust_item": "rustycad_tkoffset::draft::DraftErrorStatus::VertexRecomputation",
       "status": "implemented",
       "notes": "Translated from Draft_ErrorStatus.hxx (crates/tkoffset/src/draft/info.rs) with the native discriminants (repr i32 in declaration order); the statuses are compared with OCCT through oa_draft_angle (tools/verify_tkoffset_numeric.py)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::AddFaces(const TopoDS_Face&,TopoDS_Compound&,NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&,ChFiDS_TypeOfConcavity) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::add_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes). Exercised through Explode and MakeOffset::UpdateFaceOffset."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::AddFaces(const TopoDS_Face&,TopoDS_Compound&,NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&,ChFiDS_TypeOfConcavity,ChFiDS_TypeOfConcavity) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::add_faces_two_types",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes). Exercised through Explode and MakeOffset::UpdateFaceOffset."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Ancestors(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::ancestors",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::BRepOffset_Analyse()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::BRepOffset_Analyse(const TopoDS_Shape&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::with_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Clear()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::clear",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Descendants(const TopoDS_Shape&,bool) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::descendants",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes). The descendants are rebuilt after every Perform, so the update flag (a lazy rebuild natively) gives the same lists."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::EdgeReplacement(const TopoDS_Face&,const TopoDS_Edge&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::edge_replacement",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Edges(const TopoDS_Face&,ChFiDS_TypeOfConcavity,NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::edges_on_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Edges(const TopoDS_Vertex&,ChFiDS_TypeOfConcavity,NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::edges_on_vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape>&,ChFiDS_TypeOfConcavity) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape>&,ChFiDS_TypeOfConcavity,ChFiDS_TypeOfConcavity) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode_two_types",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Generated(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::HasAncestor(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::has_ancestor",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::HasGenerated(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::has_generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::IsDone() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::NewFaces() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::new_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Perform(const TopoDS_Shape&,double,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes). The edge types of a previous Perform are kept, as natively (only Clear resets them)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::SetFaceOffsetMap(const NCollection_DataMap<TopoDS_Shape,double,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::set_face_offset_map",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::SetOffsetValue(double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::set_offset_value",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::TangentEdges(const TopoDS_Edge&,const TopoDS_Vertex&,NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::tangent_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes)."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Type(const TopoDS_Edge&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::type_of",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Analyse.cxx (crates/tkoffset/src/brep_offset/analyse/); compared with OCCT by tools/verify_tkoffset_numeric.py (oan_analyse: boxes, cylinders, a cone, a sphere, a torus and a slot prism of tangent planes and half cylinders, uniform and per-face offsets building the artificial faces of TreatTangentFaces: the intervals, ancestors, generated shapes, descendants, edge replacements, Explode with each type and pair of types, Edges of vertices and faces, TangentEdges and the Has* queries; om_face_offsets: MakeOffset with per-face offsets on the same shapes). Standard_NoSuchObject for an edge that is not analysed."
     }
   ],
   "tests": [

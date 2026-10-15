@@ -75,3 +75,23 @@ void of_om_simple_case(std::istream& input){
   ga_int(m.GetError());ga_flag(m.IsDone());if(m.IsDone())om_digest(m.GetResultShape());}
  catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
  ga_end();}
+// `om_face_offsets prim removed offset join inter n (face offset)...`: the offset of the
+// primitive in Skin mode with SetOffsetOnFace for the listed faces (explorer indices),
+// MakeThickSolid with the face `removed` removed (MakeOffsetShape for -1); prints as
+// om_offset.
+void of_om_face_offsets_case(std::istream& input){
+ GaReader r{input};
+ try{
+  TopoDS_Shape p=ot_primitive(r);int removed=r.integer();double off=r.real();
+  GeomAbs_JoinType join=r.flag()?GeomAbs_Intersection:GeomAbs_Arc;bool inter=r.flag();
+  BRepOffset_MakeOffset m;m.Initialize(p,off,1e-7,BRepOffset_Skin,inter,false,join,false,false);
+  int n=r.integer();
+  for(int i=0;i<n;i++){TopoDS_Face f=TopoDS::Face(ot_sub(p,TopAbs_FACE,r.integer()));double v=r.real();m.SetOffsetOnFace(f,v);}
+  if(removed>=0){m.AddFace(TopoDS::Face(ot_sub(p,TopAbs_FACE,removed)));m.MakeThickSolid();}
+  else m.MakeOffsetShape();
+  ga_int(m.Error());ga_flag(m.IsDone());om_digest(m.Shape());
+  for(TopAbs_ShapeEnum t:{TopAbs_FACE,TopAbs_EDGE,TopAbs_VERTEX})
+   for(TopExp_Explorer ex(p,t);ex.More();ex.Next()){
+    GA_TRY(om_list(m.Generated(ex.Current())))GA_TRY(om_list(m.Modified(ex.Current())))GA_TRY(ga_flag(m.IsDeleted(ex.Current())))}}
+ catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
+ ga_end();}
