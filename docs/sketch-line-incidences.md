@@ -21,8 +21,11 @@ are certified for every admitted target.
 | Rational B-spline | Certified | Strictly positive weights only |
 | Arc or ellipse with angle bounds | Certified (ADR 0067) | Exact real angles; only a zero bound is an exact end |
 | Circle, arc, ellipse, spline source | Certified (ADR 0067) | Against every target above; see ADR 0067 |
-| Offset spline or curve | Open | Not admitted; needs its own exact equation |
-| Native periodic knot vector | Open | Supply the unwrapped flat knots |
+| Native periodic knot vector | Certified (ADR 0080) | Unwrapped exactly by `BSplCLib::KnotSequence` |
+| Circle or arc offset | Certified (ADR 0080) | The concentric circle of exact radius `r +- d` |
+| Line offset | Certified (ADR 0080) | Against every admitted curve, as source and target |
+| Ellipse or spline offset | Certified (ADR 0080) | Against lines, conics and line offsets; other pairs `OffsetPair` |
+| Ellipse with an irrational axis length, offset | Open | Refused by name (`OffsetEllipseAxis`) |
 | Spline-source extension | Open | No application rule; support domain refused by name |
 
 The application's arcs come from authored center and end points, so their rays
@@ -107,3 +110,32 @@ closed-form tests (`curve_sources`, `curve_selection`, `conic_pairs`,
 Named incomplete results: `UncertifiedOverlap`, `ExceptionalFiber`,
 `KnotTangency`, `ExceptionalTangency`. No owner release or application intake is
 claimed.
+
+## Periodic splines and offset curves (ADR 0080)
+
+[ADR 0080](adr/0080-certified-periodic-and-offset-incidences.md) admits native
+periodic B-splines (unwrapped exactly by the ported `BSplCLib::KnotSequence`; an
+inexact period shift is `PeriodicKnotShift`) and `Geom2d_OffsetCurve` offsets of
+lines, circles, arcs, ellipses with a rational axis length and C1 regular splines.
+Offset equations are squared to their norm and spurious roots are rejected by
+exact signs; line offsets also serve as squared implicit curves with a branch
+filter. Evidence: closed-form tests (`periodic_splines`, `offset_circles`,
+`offset_lines`, `offset_curves`, `offset_failures`, `offset_isolation`), 211
+generated cases against `oracle_offsets.py` (see the
+[oracle README](../crates/tkmath/tests/sketch_line_incidences/README.md)), and 108
+native OCCT 8.0.0 offset and periodic cases with the mapped Rust intersector (see
+the [native README](../crates/tkgeomalgo/tests/sketch_line_incidences/README.md)).
+Named refusals: `PeriodicShape`, `PeriodicKnotShift`, `OffsetBasis`,
+`OffsetRadius`, `OffsetEllipseAxis`, `OffsetContinuity`, `OffsetSingular`,
+`OffsetPair`; ellipse offset sources refuse trim picks (`PickKind`). Spline-source
+extension stays refused. No owner release or application intake is claimed.
+
+Local checks for ADR 0080 on 2026-10-15 (Rust 1.99.0, locked dependencies):
+`cargo test --locked -p rustycad-tkmath --all-features` passed 294 unit, 3,094
+integration and 56 documentation tests; the TKGeomAlgo incidence tests passed 9
+of 9 (including 108 native and 108 mapped offset cases); clippy for both crates
+with warnings denied passed; `tools/verify_toolkit.py TKMath` and `TKGeomAlgo`
+passed (2,023 and 213 native and Rust runtime cases). Two separate processes
+printed identical offset report text (64,588 bytes, SHA-256
+`24b0dfceace8bd28ca4d21081d00d61eb953fb79470de20bc5487ee9999ed29a` of the
+report line).

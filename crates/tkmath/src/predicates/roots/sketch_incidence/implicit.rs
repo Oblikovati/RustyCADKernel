@@ -8,7 +8,7 @@
 //! `w` gives the exact contact polynomial of a piece; the sign of a composed conic
 //! is the sign of `F` because the even power of `w` is positive.
 use super::super::certificate_arithmetic::ExactRatio;
-use super::rational_polynomial::{RationalPolynomial, ratio};
+use super::rational_polynomial::{Ring, ratio};
 use super::spans::HomogeneousPoint;
 
 /// Symmetric quadratic form `xx qx^2 + 2 xy qx qy + yy qy^2`.
@@ -32,8 +32,8 @@ pub(super) struct LineImplicit {
     pub direction: [ExactRatio; 2],
 }
 impl QuadraticForm {
-    /// The form applied to polynomial coordinates.
-    pub fn compose(&self, vector: &[RationalPolynomial; 2]) -> RationalPolynomial {
+    /// The form applied to polynomial (or surd) coordinates.
+    pub fn compose<T: Ring>(&self, vector: &[T; 2]) -> T {
         let [x, y] = vector;
         let cross = x.multiply(y).scale(&self.xy);
         x.multiply(x)
@@ -61,7 +61,10 @@ impl QuadraticForm {
 impl ConicImplicit {
     /// Circle of the given center and positive radius.
     pub fn circle(center: [f64; 2], radius: f64) -> Self {
-        let radius = ratio(radius);
+        Self::circle_exact(center, ratio(radius))
+    }
+    /// Circle with an exact rational radius, e.g. a circle offset `r + d`.
+    pub fn circle_exact(center: [f64; 2], radius: ExactRatio) -> Self {
         Self {
             center: center.map(ratio),
             form: QuadraticForm {
@@ -90,7 +93,7 @@ impl ConicImplicit {
         }
     }
     /// `w^2 F((x, y) / w)`, exact in the piece variable.
-    pub fn compose(&self, point: &HomogeneousPoint) -> RationalPolynomial {
+    pub fn compose<T: Ring>(&self, point: &HomogeneousPoint<T>) -> T {
         let relative = point.relative(&self.center);
         let constant = point.w.multiply(&point.w).scale(&self.constant.negated());
         self.form.compose(&relative).add(&constant)
@@ -104,13 +107,13 @@ impl LineImplicit {
         Self { origin, direction }
     }
     /// `w det(d, (x, y)/w - A)`, exact in the piece variable.
-    pub fn compose(&self, point: &HomogeneousPoint) -> RationalPolynomial {
+    pub fn compose<T: Ring>(&self, point: &HomogeneousPoint<T>) -> T {
         let [x, y] = point.relative(&self.origin);
         let [dx, dy] = &self.direction;
         y.scale(dx).add(&x.scale(&dy.negated()))
     }
     /// `w d.((x, y)/w - A)`, the unnormalized longitudinal coordinate.
-    pub fn along(&self, point: &HomogeneousPoint) -> RationalPolynomial {
+    pub fn along<T: Ring>(&self, point: &HomogeneousPoint<T>) -> T {
         let [x, y] = point.relative(&self.origin);
         let [dx, dy] = &self.direction;
         x.scale(dx).add(&y.scale(dy))

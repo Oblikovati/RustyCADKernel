@@ -53,8 +53,33 @@ pub fn parse_target(spec: &str) -> SketchIncidenceCurve {
             }
         }
         "spline" => parse_spline(rest),
+        "offset" => {
+            let (distance, basis) = rest.split_once(':').unwrap();
+            SketchIncidenceCurve::Offset(SketchIncidenceOffset {
+                basis: Box::new(parse_target(basis)),
+                distance: bits(distance),
+            })
+        }
+        "periodic" => parse_periodic(rest),
         other => panic!("target kind {other}; expected circle, ellipse, segment or spline"),
     }
+}
+// periodic:degree:poles:knots:multiplicities:bounds (ADR 0080).
+fn parse_periodic(rest: &str) -> SketchIncidenceCurve {
+    let fields: Vec<&str> = rest.split(':').collect();
+    let poles = values(fields[1])
+        .chunks(2)
+        .map(|pair| [pair[0], pair[1]])
+        .collect();
+    let bounds = values(fields[4]);
+    SketchIncidenceCurve::PeriodicSpline(SketchPeriodicSpline {
+        degree: fields[0].parse().unwrap(),
+        poles,
+        weights: None,
+        knots: values(fields[2]),
+        multiplicities: fields[3].split(',').map(|m| m.parse().unwrap()).collect(),
+        bounds: [bounds[0], bounds[1]],
+    })
 }
 fn parse_circle(rest: &str) -> SketchIncidenceCurve {
     let fields: Vec<&str> = rest.split(',').collect();
@@ -119,6 +144,9 @@ pub fn mapped_target(curve: &SketchIncidenceCurve) -> Curve {
             Handle::new(Geom2dEllipse::new(frame, radii[0], radii[1]).unwrap()).cast()
         }
         SketchIncidenceCurve::Spline(spline) => mapped_spline(spline),
+        SketchIncidenceCurve::PeriodicSpline(_) | SketchIncidenceCurve::Offset(_) => {
+            super::mapped_offsets::mapped_extension(curve)
+        }
     }
 }
 fn mapped_segment(points: [[f64; 2]; 2]) -> Curve {

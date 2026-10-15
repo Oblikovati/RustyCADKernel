@@ -3,5 +3,7 @@
 //! Rust intersector and splines built by the owned sketch constructor.
 mod corpus;
 mod native;
+mod mapped_offsets;
 mod native_curves;
+mod native_offsets;
 mod owned_splines;

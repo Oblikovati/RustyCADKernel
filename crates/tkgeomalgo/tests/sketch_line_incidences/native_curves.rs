@@ -16,9 +16,9 @@ struct CurveCase {
     target: SketchIncidenceCurve,
 }
 /// A native intersection location: a point, or the middle of a tiny coincidence zone.
-struct Location {
-    point: [f64; 2],
-    radius: f64,
+pub struct Location {
+    pub point: [f64; 2],
+    pub radius: f64,
 }
 fn corpus() -> Vec<CurveCase> {
     include_str!("native-curve-cases.csv")
@@ -88,29 +88,24 @@ fn certify_case(case: &CurveCase) -> SketchLineIncidenceReport {
     })
     .unwrap_or_else(|failure| panic!("case {} ({}): {failure}", case.id, case.kind))
 }
-/// Each native location lies near a distinct in-domain certified contact; counts agree.
 fn assert_covers(case: &CurveCase, report: &SketchLineIncidenceReport, found: &[Location]) {
+    assert_covers_contacts(&format!("case {} ({})", case.id, case.kind), report, found);
+}
+/// Each native location lies near a distinct in-domain certified contact; counts agree.
+pub fn assert_covers_contacts(case: &str, report: &SketchLineIncidenceReport, found: &[Location]) {
     let contacts: Vec<&SketchLineContact> = report
         .ordered()
         .iter()
         .flat_map(|group| group.members().iter().map(|member| report.contact(*member)))
         .collect();
-    assert_eq!(
-        contacts.len(),
-        found.len(),
-        "case {} ({}): {contacts:?}",
-        case.id,
-        case.kind
-    );
+    assert_eq!(contacts.len(), found.len(), "{case}: {contacts:?}");
     let mut used = vec![false; contacts.len()];
     for location in found {
         let (index, distance) = nearest(&contacts, location.point, &used);
         let slack = contacts[index].achieved_world_error() + location.radius + NATIVE_SLACK;
         assert!(
             distance <= slack,
-            "case {} ({}): {:?} is {distance} from {:?}",
-            case.id,
-            case.kind,
+            "{case}: {:?} is {distance} from {:?}",
             location.point,
             contacts[index]
         );

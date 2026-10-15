@@ -13,23 +13,24 @@ use super::source_frame::{SourceFrame, ratio_position};
 use super::spans::ParametricSpan;
 use std::cmp::Ordering;
 
-/// Coincident target span of a line source; other sources do not certify overlaps.
+/// Coincident target span of a line (or line offset) source; other sources do not
+/// certify overlaps. A line offset shares its basis line parameter (ADR 0080).
 pub(super) fn span_overlap(
     span: &ParametricSpan,
     source: &SourceFrame,
     owner: TargetKey,
     work: &mut Work<'_>,
 ) -> Result<SketchLineOverlap, Cause> {
-    let SourceFrame::Line(line) = source else {
+    let Some(line) = source.placing_line() else {
         return Err(Cause::UncertifiedOverlap { range: span.range });
     };
-    let along = line.implicit.along(&span.point);
+    let along = line.along(&span.point);
     let Some(range) = span.range else {
         return Ok(unbounded(&along, owner));
     };
     require_monotone(range, &along, &span.point.w, work)?;
     work.enter(SketchIncidenceStage::Classification);
-    let ends = range.map(|value| line_parameter(&line.implicit, span, &along, value));
+    let ends = range.map(|value| line_parameter(line, span, &along, value));
     Ok(SketchLineOverlap {
         target_index: owner.index,
         target_id: owner.id,

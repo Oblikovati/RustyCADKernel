@@ -94,6 +94,61 @@ pub enum SketchIncidenceCause {
         /// Admitted domain `[knots[degree], knots[poles]]`.
         domain: [f64; 2],
     },
+    /// Periodic spline counts or multiplicities do not describe one periodic
+    /// B-spline (`BSplCLib::NbPoles` gives the expected pole count).
+    PeriodicShape {
+        /// Supplied degree.
+        degree: usize,
+        /// Supplied pole count.
+        poles: usize,
+        /// Native pole count of the multiplicities; None when they are invalid.
+        expected_poles: Option<usize>,
+        /// Supplied multiplicities.
+        multiplicities: Vec<usize>,
+        /// Supplied weight count, if any.
+        weights: Option<usize>,
+    },
+    /// A periodic knot shifted by the period is not exact in binary64, so the
+    /// flat knots would not describe the periodic curve.
+    PeriodicKnotShift {
+        /// Zero-based index of the inexact flat knot.
+        index: usize,
+        /// Its binary64 value.
+        value: f64,
+    },
+    /// An offset basis is itself an offset; supply the combined distance instead.
+    OffsetBasis,
+    /// A circle offset reaches or passes its center (`r + d <= 0` along the
+    /// outward normal of the travel sense).
+    OffsetRadius {
+        /// Basis radius.
+        radius: f64,
+        /// Supplied offset distance.
+        distance: f64,
+    },
+    /// An ellipse offset needs a major axis of rational length (e.g. axis-aligned).
+    OffsetEllipseAxis {
+        /// Supplied major axis.
+        major_axis: [f64; 2],
+    },
+    /// A spline offset basis is only C0 at this flat knot inside its bounds.
+    OffsetContinuity {
+        /// First flat index of the repeated knot.
+        index: usize,
+    },
+    /// A spline offset basis has a vanishing derivative on this span range.
+    OffsetSingular {
+        /// Parameter range of the span.
+        range: [f64; 2],
+    },
+    /// Version 1 certifies an offset only against lines, conics and line offsets
+    /// on the other side (an implicit partner); this pair has no certified equation.
+    OffsetPair {
+        /// Source representation, e.g. `"offset spline"`.
+        source: &'static str,
+        /// Target representation.
+        target: &'static str,
+    },
     /// Original root isolation, degree or work failure.
     Root(RootIsolationError),
     /// Caller cancellation.

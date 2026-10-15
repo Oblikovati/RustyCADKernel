@@ -68,3 +68,37 @@ cmp /tmp/native-curve-cases.csv crates/tkgeomalgo/tests/sketch_line_incidences/n
 cmp /tmp/incidences-occt-curves.csv crates/tkgeomalgo/tests/sketch_line_incidences/occt-curves-8.0.0.csv
 cargo test --locked -p rustycad-tkgeomalgo --test toolkit sketch_line_incidences::native_curves
 ```
+
+## Periodic splines and offsets
+
+`native_offset_cases.py` writes `native-offset-cases.csv`: 108 ordinary-range cases
+(ADR 0080). A segment, a circle and a (3, 4) ellipse source meet offsets of two
+segments, a circle, a counterclockwise and a clockwise arc, an axis-aligned and a
+(3, 4) ellipse and Go fit recipes (the segment every recipe at distances 0.125 and
+-0.1; the conics the three open recipes at 0.125, since a conic against a closed
+recipe's offset gives a degree-20 norm with 2,700-bit coefficients that takes about
+15 s per span to isolate in a debug build); offset
+sources (segment, circle, both arcs, both ellipses, three fit recipes) meet lines,
+a circle, an ellipse, an arc and a segment offset; a native periodic cubic meets
+lines and conics as a source and a target. `native_oracle.cpp` builds an offset as
+`Geom2d_OffsetCurve` of the untrimmed basis trimmed like the basis, with clockwise
+arcs on a clockwise circle so that the offset side follows the travel direction,
+and a periodic spec as a periodic `Geom2d_BSplineCurve`. The offset of an
+unbounded line is left out: OCCT 8.0.0 refuses its infinite domain in the
+intersector ("Domaine sur courbe incorrect"). A source coincident with its target
+is left out too: the kernel names it `UncertifiedOverlap`.
+
+The Rust test certifies each case on the segment domain with a 1e-12 world error
+limit: counts agree, and every native point lies within the certified error plus
+1e-8 of a distinct contact. No native coincidence zone occurs. The same check runs
+against the mapped Rust `InterCurveCurve` on the same mapped curves.
+
+```sh
+python3 crates/tkgeomalgo/tests/sketch_line_incidences/native_offset_cases.py \
+  > /tmp/native-offset-cases.csv
+cmp /tmp/native-offset-cases.csv crates/tkgeomalgo/tests/sketch_line_incidences/native-offset-cases.csv
+/tmp/incidence-oracle crates/tkgeomalgo/tests/sketch_line_incidences/native-offset-cases.csv \
+  > /tmp/incidences-occt-offsets.csv
+cmp /tmp/incidences-occt-offsets.csv crates/tkgeomalgo/tests/sketch_line_incidences/occt-offsets-8.0.0.csv
+cargo test --locked -p rustycad-tkgeomalgo --test toolkit sketch_line_incidences::native_offsets
+```

@@ -72,10 +72,10 @@ point. Spans must be below one full turn (certified against pi), magnitudes at m
 
 ## Open representations
 
-Native periodic knot vectors (still supplied as unwrapped flat knots), offset
-curves, spline-source extension (no application rule), overlaps other than
-line-source and conic-conic ones, and the exceptional cases named below remain
-open. A future extension needs its own exact equation, evidence and behavior
+Native periodic knot vectors and offset curves are admitted by
+[ADR 0080](0080-certified-periodic-and-offset-incidences.md). Spline-source
+extension (no application rule), overlaps other than line-source and conic-conic
+ones, and the exceptional cases named below remain open. A future extension needs its own exact equation, evidence and behavior
 version.
 
 ## Named incomplete results

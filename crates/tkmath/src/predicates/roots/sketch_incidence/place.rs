@@ -15,14 +15,17 @@ use super::angle::FrameAngle;
 use super::budget::Work;
 use super::failure::SketchIncidenceCause as Cause;
 use super::report::outward_ratio;
+use super::surd_key::SurdKey;
 use std::cmp::Ordering;
 
-/// An exact key value: a certified root, a rational number, or a frame angle's key.
+/// An exact key value: a certified root, a rational number, a frame angle's key,
+/// or a surd ratio at an offset contact (ADR 0080).
 #[derive(Clone, Debug, PartialEq)]
 pub(super) enum KeyValue {
     Root(IsolatedRoot),
     Ratio(ExactRatio),
     Angle(Box<AngleKey>),
+    Surd(Box<SurdKey>),
 }
 /// The cotangent key of a frame angle's direction in a sweep frame.
 #[derive(Clone, Debug, PartialEq)]
@@ -109,6 +112,7 @@ impl KeyValue {
             }
             Self::Ratio(value) => Some(RatioInterval::point(value.clone())),
             Self::Angle(key) => key.interval(),
+            Self::Surd(key) => key.enclosure(),
         }
     }
     fn refine(&mut self, work: &mut Work<'_>) -> Result<(), Cause> {
@@ -119,7 +123,15 @@ impl KeyValue {
                 key.angle.refine();
                 Ok(())
             }
+            Self::Surd(key) => key.refine(work),
         }
+    }
+    // Replace a surd key by its image root, so ties are decided by common factors.
+    fn resolve_image(&mut self, work: &mut Work<'_>) -> Result<(), Cause> {
+        if let Self::Surd(key) = self {
+            *self = Self::Root(key.image(work)?);
+        }
+        Ok(())
     }
 }
 /// Exact order of two key values of possibly different equations.
@@ -135,13 +147,36 @@ pub(super) fn compare_values(
             Ok(right.compare_ratio(left, work)?.reverse())
         }
         (KeyValue::Ratio(left), KeyValue::Ratio(right)) => Ok((*left).cmp(right)),
+        (KeyValue::Surd(left), KeyValue::Ratio(right)) => left.compare_ratio(right, work),
+        (KeyValue::Ratio(left), KeyValue::Surd(right)) => {
+            Ok(right.compare_ratio(left, work)?.reverse())
+        }
         (KeyValue::Angle(left), KeyValue::Angle(right))
             if left.angle.same_direction(&right.angle) =>
         {
             Ok(Ordering::Equal)
         }
+        (KeyValue::Surd(_), _) | (_, KeyValue::Surd(_)) => surd_order(first, second, work),
         _ => separate(first, second, work),
     }
+}
+/// Refinements tried before a surd key builds its image equation.
+const SURD_SEPARATIONS: u32 = 256;
+// Distinct values separate by refinement; an algebraic tie needs both image roots.
+fn surd_order(
+    first: &mut KeyValue,
+    second: &mut KeyValue,
+    work: &mut Work<'_>,
+) -> Result<Ordering, Cause> {
+    if let Some(order) = separate_within(first, second, SURD_SEPARATIONS, work)? {
+        return Ok(order);
+    }
+    if matches!(first, KeyValue::Angle(_)) || matches!(second, KeyValue::Angle(_)) {
+        return separate(first, second, work);
+    }
+    first.resolve_image(work)?;
+    second.resolve_image(work)?;
+    compare_values(first, second, work)
 }
 // An angle key never equals an algebraic key or another angle's key unless they
 // name the same direction (checked above), so refinement always separates them.
@@ -151,27 +186,46 @@ fn separate(
     work: &mut Work<'_>,
 ) -> Result<Ordering, Cause> {
     loop {
+        if let Some(order) = separate_within(first, second, 1, work)? {
+            return Ok(order);
+        }
+    }
+}
+// At most `rounds` refinements; None while the enclosures still overlap.
+fn separate_within(
+    first: &mut KeyValue,
+    second: &mut KeyValue,
+    rounds: u32,
+    work: &mut Work<'_>,
+) -> Result<Option<Ordering>, Cause> {
+    for _ in 0..rounds {
         work.charge()?;
         if let (Some(left), Some(right)) = (first.enclosure(), second.enclosure()) {
             if left.upper < right.lower {
-                return Ok(Ordering::Less);
+                return Ok(Some(Ordering::Less));
             }
             if right.upper < left.lower {
-                return Ok(Ordering::Greater);
+                return Ok(Some(Ordering::Greater));
             }
         }
         // Scheduling only: refine the wider enclosure (a rational never refines).
-        if spread(first) >= spread(second) {
+        if wider(first, second) {
             first.refine(work)?;
         } else {
             second.refine(work)?;
         }
     }
+    Ok(None)
 }
-fn spread(value: &KeyValue) -> f64 {
-    match value.enclosure() {
-        Some(interval) => outward_ratio(&interval.upper)[1] - outward_ratio(&interval.lower)[0],
-        None => f64::INFINITY,
+// Exact enclosure widths: binary64 spreads stall once both are one ulp wide, and a
+// value that cannot be enclosed yet is the wider (ADR 0080).
+fn wider(first: &KeyValue, second: &KeyValue) -> bool {
+    match (first.enclosure(), second.enclosure()) {
+        (Some(left), Some(right)) => {
+            left.upper.subtract(&left.lower) >= right.upper.subtract(&right.lower)
+        }
+        (None, _) => true,
+        (Some(_), None) => false,
     }
 }
 /// Exact order of two places of the same source.

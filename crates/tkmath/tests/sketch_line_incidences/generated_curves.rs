@@ -34,8 +34,8 @@ fn transition(code: &str) -> SketchContactTransition {
 fn side(field: &str) -> Option<usize> {
     (field != "-").then(|| field.parse().unwrap())
 }
-/// Curve spec: circle, ellipse, segment, line (unbounded) or spline.
-fn parse_curve(spec: &str) -> SketchIncidenceCurve {
+/// Curve spec: circle, ellipse, segment, line (unbounded), spline, offset or periodic.
+pub(super) fn parse_curve(spec: &str) -> SketchIncidenceCurve {
     let (kind, rest) = spec.split_once(':').unwrap();
     match kind {
         "circle" => parse_circle(rest),
@@ -62,8 +62,29 @@ fn parse_curve(spec: &str) -> SketchIncidenceCurve {
                 [bounds[0], bounds[1]],
             )
         }
+        "offset" => {
+            let (distance, basis) = rest.split_once(':').unwrap();
+            SketchIncidenceCurve::Offset(SketchIncidenceOffset {
+                basis: Box::new(parse_curve(basis)),
+                distance: bits(distance),
+            })
+        }
+        "periodic" => parse_periodic(rest),
         other => panic!("curve kind {other}; expected circle, ellipse, segment, line or spline"),
     }
+}
+// periodic:degree:poles:knots:multiplicities:bounds, multiplicities as decimal integers.
+fn parse_periodic(rest: &str) -> SketchIncidenceCurve {
+    let fields: Vec<&str> = rest.split(':').collect();
+    let bounds = values(fields[4]);
+    SketchIncidenceCurve::PeriodicSpline(SketchPeriodicSpline {
+        degree: fields[0].parse().unwrap(),
+        poles: pairs(&values(fields[1])),
+        weights: None,
+        knots: values(fields[2]),
+        multiplicities: fields[3].split(',').map(|m| m.parse().unwrap()).collect(),
+        bounds: [bounds[0], bounds[1]],
+    })
 }
 // circlearc:cx,cy,r,ax,ay,t0,t1,ccw or ellipsearc:cx,cy,mx,my,ra,rb,ax,ay,t0,t1,ccw.
 fn parse_angle_arc(kind: &str, rest: &str) -> SketchIncidenceCurve {
@@ -160,26 +181,29 @@ fn domain(code: &str) -> SketchLineDomain {
     }
 }
 fn magnitude(curves: &[&SketchIncidenceCurve]) -> f64 {
-    let scale = |curve: &&SketchIncidenceCurve| match curve {
+    curves.iter().map(|curve| scale(curve)).fold(1f64, f64::max)
+}
+fn scale(curve: &SketchIncidenceCurve) -> f64 {
+    match curve {
         SketchIncidenceCurve::Circle { center, radius, .. } => {
             center[0].abs().max(center[1].abs()).max(*radius)
         }
         SketchIncidenceCurve::Ellipse { center, radii, .. } => {
             center[0].abs().max(center[1].abs()).max(radii[0])
         }
-        SketchIncidenceCurve::Line { points, .. } => points
-            .iter()
-            .flatten()
-            .fold(0f64, |size, value| size.max(value.abs())),
-        SketchIncidenceCurve::Spline(spline) => spline
-            .poles
-            .iter()
-            .flatten()
-            .fold(0f64, |size, value| size.max(value.abs())),
-    };
-    curves.iter().map(scale).fold(1f64, f64::max)
+        SketchIncidenceCurve::Line { points, .. } => largest(points),
+        SketchIncidenceCurve::Spline(spline) => largest(&spline.poles),
+        SketchIncidenceCurve::PeriodicSpline(spline) => largest(&spline.poles),
+        SketchIncidenceCurve::Offset(offset) => scale(&offset.basis) + offset.distance.abs(),
+    }
 }
-fn check_row(row: &str) {
+fn largest(poles: &[[f64; 2]]) -> f64 {
+    poles
+        .iter()
+        .flatten()
+        .fold(0f64, |size, value| size.max(value.abs()))
+}
+pub(super) fn check_row(row: &str) {
     let fields: Vec<&str> = row.split(';').collect();
     let case = fields[0];
     let source_curve = parse_curve(fields[3]);

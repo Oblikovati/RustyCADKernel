@@ -11,11 +11,11 @@ use super::algebraic::IsolatedRoot;
 use super::angle::{AngleFrame, FrameAngle};
 use super::angle_admission::compare_half_turn;
 use super::budget::Work;
+use super::coordinate::{Coordinate, precision};
 use super::failure::SketchIncidenceCause as Cause;
 use super::input::{SketchConicBounds, SketchConicSector};
 use super::rational_polynomial::{RationalPolynomial, ratio};
 use super::report::SketchLinePosition;
-use super::root_sign::sign_at_root;
 use crate::predicates::{OrientationSign, orient2d};
 use num_bigint::Sign;
 use std::cmp::Ordering;
@@ -37,12 +37,13 @@ enum Turn {
     Reflex,
     Half,
 }
-/// The contact direction `q = (x - cx w, y - cy w)` (scaled by `w > 0`) at a root.
-pub(super) struct ContactDirection<'a> {
+/// The contact direction `q = (x - cx w, y - cy w)` (scaled by `w > 0`) at a root;
+/// its coordinates are polynomials or, for offsets, surds (ADR 0080).
+pub(super) struct ContactDirection<'a, T = RationalPolynomial> {
     pub root: &'a mut IsolatedRoot,
-    pub relative: [RationalPolynomial; 2],
+    pub relative: [T; 2],
 }
-impl ContactDirection<'_> {
+impl<T: Coordinate> ContactDirection<'_, T> {
     fn exact_cross(
         &mut self,
         vector: &[ExactRatio; 2],
@@ -95,7 +96,11 @@ impl ContactDirection<'_> {
             work.charge()?;
             let [lower, upper] = self.root.ratio_bounds();
             let parameter = RatioInterval { lower, upper };
-            let q = self.relative.clone().map(|value| value.enclose(&parameter));
+            let bits = precision(self.root);
+            let q = self
+                .relative
+                .clone()
+                .map(|value| value.enclose_at(&parameter, bits));
             let v = angle.direction();
             let negated = v[1].multiply(&q[0]);
             let value = v[0].multiply(&q[1]).add(&RatioInterval {
@@ -118,20 +123,20 @@ impl ContactDirection<'_> {
         }
     }
 }
-fn sign(
+fn sign<T: Coordinate>(
     root: &mut IsolatedRoot,
-    polynomial: &RationalPolynomial,
+    value: &T,
     work: &mut Work<'_>,
 ) -> Result<Ordering, Cause> {
-    Ok(match sign_at_root(root, polynomial, work)? {
+    Ok(match value.sign_at(root, work)? {
         Sign::Minus => Ordering::Less,
         Sign::NoSign => Ordering::Equal,
         Sign::Plus => Ordering::Greater,
     })
 }
 /// Exact sector position, or None outside the sector.
-pub(super) fn sector_position(
-    direction: &mut ContactDirection<'_>,
+pub(super) fn sector_position<T: Coordinate>(
+    direction: &mut ContactDirection<'_, T>,
     arc: ArcBounds<'_>,
     work: &mut Work<'_>,
 ) -> Result<Option<SketchLinePosition>, Cause> {
@@ -197,8 +202,8 @@ fn rays(sector: &SketchConicSector) -> (Boundary, Boundary, bool, Turn) {
     )
 }
 // On the boundary itself, not on its opposite through the center.
-fn on_boundary(
-    direction: &mut ContactDirection<'_>,
+fn on_boundary<T: Coordinate>(
+    direction: &mut ContactDirection<'_, T>,
     boundary: &Boundary,
     cross: Ordering,
     work: &mut Work<'_>,

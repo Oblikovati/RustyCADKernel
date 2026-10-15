@@ -83,11 +83,12 @@ refinements and world error; none is widened. Reports own their inputs, are
 ## Excluded representations (open)
 
 [ADR 0067](0067-certified-sketch-curve-incidences.md) admits conic and spline
-sources and angle-bounded arcs; the remaining exclusions below stay open.
+sources and angle-bounded arcs; [ADR 0080](0080-certified-periodic-and-offset-incidences.md)
+admits offset curves and native periodic knot vectors. The remaining exclusions
+below stay open.
 
-Offset curves (the application's offset splines), native periodic B-spline knot
-vectors, rational splines with nonpositive weights, Bézier inputs with zero
-denominators, are not admitted. Callers must
+Rational splines with nonpositive weights and Bézier inputs with zero
+denominators are not admitted. Callers must
 not route them through this operation. A future extension needs its own exact
 equation, evidence and behavior version.
 

@@ -4,6 +4,7 @@ use super::super::certificate_arithmetic::{RatioInterval, world::WorldEnvelope};
 use super::algebraic::IsolatedRoot;
 use super::budget::Work;
 use super::construction::WorldLimit;
+use super::coordinate::{Coordinate, precision};
 use super::failure::{SketchIncidenceCause as Cause, SketchIncidenceStage};
 use super::place::SourcePlace;
 use super::report::{
@@ -51,8 +52,8 @@ pub(super) fn finish(
     })
 }
 /// Narrow the contact root until the point `(x, y) / w` meets the requested error.
-pub(super) fn construct_point(
-    point: &HomogeneousPoint,
+pub(super) fn construct_point<T: Coordinate>(
+    point: &HomogeneousPoint<T>,
     contact: &mut IsolatedRoot,
     work: &mut Work<'_>,
 ) -> Result<WorldEnvelope, Cause> {
@@ -60,6 +61,6 @@ pub(super) fn construct_point(
     let limit = WorldLimit::new(work.world_error());
     limit.construct(contact, work, &|root: &IsolatedRoot| {
         let [lower, upper] = root.ratio_bounds();
-        point.enclose(&RatioInterval { lower, upper })
+        point.enclose(&RatioInterval { lower, upper }, precision(root))
     })
 }
