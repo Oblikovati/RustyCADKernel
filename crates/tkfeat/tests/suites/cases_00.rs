@@ -3,6 +3,8 @@
 pub mod brep_feat_dprism;
 #[path = "../brep_feat_hole.rs"]
 pub mod brep_feat_hole;
+#[path = "../brep_feat_linear_form.rs"]
+pub mod brep_feat_linear_form;
 #[path = "../brep_feat_pipe_glue_split.rs"]
 pub mod brep_feat_pipe_glue_split;
 #[path = "../brep_feat_prism.rs"]

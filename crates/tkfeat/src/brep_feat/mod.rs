@@ -7,16 +7,19 @@ mod cylindrical_hole;
 mod form;
 mod gluer;
 mod make_dprism;
+mod make_linear_form;
 mod make_pipe;
 mod make_prism;
 mod make_revol;
 mod package;
+mod rib_slot;
 mod split_shape;
 pub use builder::BRepFeatBuilder;
 pub use cylindrical_hole::BRepFeatMakeCylindricalHole;
 pub use form::{DescendantMap, Form, FormFeature};
 pub use gluer::BRepFeatGluer;
 pub use make_dprism::BRepFeatMakeDPrism;
+pub use make_linear_form::BRepFeatMakeLinearForm;
 pub use make_pipe::BRepFeatMakePipe;
 pub use make_prism::BRepFeatMakePrism;
 pub use make_revol::BRepFeatMakeRevol;
@@ -24,4 +27,5 @@ pub use package::{
     ParametricMinMax, PerfSelection, Status, StatusError, barycenter, face_until, is_inside,
     parametric_barycenter, parametric_min_max, print, sample_edges, status_error_message, tool,
 };
+pub use rib_slot::{Extremes, ProfileInput, RibSlot, choice_of_faces, int_par};
 pub use split_shape::BRepFeatSplitShape;
