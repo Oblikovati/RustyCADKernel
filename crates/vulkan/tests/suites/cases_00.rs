@@ -113,6 +113,8 @@ pub mod unlit_face_color_baseline;
 pub mod unlit_face_color_gpu;
 #[path = "../unlit_face_color_retained.rs"]
 pub mod unlit_face_color_retained;
+#[path = "../validation_layer_dependency.rs"]
+pub mod validation_layer_dependency;
 #[path = "../view_culling.rs"]
 pub mod view_culling;
 #[path = "../viewer_integration.rs"]
