@@ -288,6 +288,38 @@ pub fn CreateNurbsAndRegularBoxWith(
     )
 }
 
+/// Create a blend (fillet) on specified edge of a shape (like the DRAW `blend` command):
+/// the `edge_index`-th edge of the explorer, the DRAW defaults; a null shape when the
+/// fillet fails, the shape itself when there is no such edge.
+pub fn CreateBlend(shape: &Shape, edge_index: usize, radius: f64) -> Shape {
+    use rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet;
+    use rustycad_tkfillet::chfi3d::FilletShape;
+    use rustycad_tkmath::geom_abs::Shape as Continuity;
+    let mut explorer = Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
+    let mut current = 1;
+    let mut target: Option<Edge> = None;
+    while explorer.more() {
+        if current == edge_index {
+            target = Some(rustycad_tkbrep::topods::edge(explorer.current()).unwrap());
+            break;
+        }
+        current += 1;
+        explorer.next().unwrap();
+    }
+    let Some(target) = target else {
+        return shape.clone();
+    };
+    let mut maker = BRepFilletAPIMakeFillet::new(shape, FilletShape::Rational).unwrap();
+    maker.set_params(1e-2, 1.0e-4, 1.0e-5, 1.0e-4, 1.0e-5, 1.0e-3);
+    maker.set_continuity(Continuity::C1, 1.0e-2);
+    maker.add_with_radius(radius, &target).unwrap();
+    maker.build(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
+    if !maker.is_done() {
+        return Shape::default();
+    }
+    maker.shape().unwrap().clone()
+}
+
 /// Create a cylinder on a specified plane (like TCL pcylinder command).
 pub fn CreateCylinderOnPlane(plane: &Plane3, radius: f64, height: f64) -> Shape {
     let axes = plane.position().ax2().unwrap();

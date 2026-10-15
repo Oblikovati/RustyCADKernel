@@ -1,5 +1,4 @@
 //! Direct translation of src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_Fuse_Test.cxx (3d097a0).
-//! Tests that need BRepFilletAPI_MakeFillet (BOPTest_Utilities::CreateBlend) wait for that class.
 #![allow(non_snake_case)]
 
 #[path = "bop_test_utilities/mod.rs"]

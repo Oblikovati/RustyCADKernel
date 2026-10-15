@@ -1,4 +1,5 @@
-//! BRepAlgoAPI_Fuse_Test cases LargePrismWithOblongPrismRightSideY2_J4 .. OCC277_FuseAndCommonOfOverlappingBoxes.
+//! BRepAlgoAPI_Fuse_Test cases LargePrismWithOblongPrismRightSideY2_J4 .. OCC277_FuseAndCommonOfOverlappingBoxes,
+//! with the blended boxes K3 .. K9.
 #![allow(non_snake_case)]
 
 use super::*;
@@ -208,6 +209,181 @@ fn BFuseSimpleTest__BlendBoxWithCylinder_K2() {
 
     let aResult = PerformFuse(&aBox, &aCylinder);
     ValidateResult(&aResult, 360686.0, -1.0, false);
+}
+
+// Test bfuse_simple/K3: Blend box with cylinder (-X direction)
+#[test]
+fn BFuseSimpleTest__BlendBoxWithCylinderNegX_K3() {
+    // Create box: box bx1 300 300 100
+    let aBox = CreateBox(Point3::new(0.0, 0.0, 0.0), 300.0, 300.0, 100.0);
+
+    // Create blend: explode bx1 e, blend bl1 bx1 100 bx1_1
+    let aBlendedBox = CreateBlend(&aBox, 1, 100.0);
+    assert!(!aBlendedBox.is_null(), "Blend operation failed");
+
+    // Create plane and cylinder: plane pl1 100 100 100 0 0 1 -1 0 0, pcylinder pc pl1 100 50
+    let anAx3 = Axis3::new(
+        Point3::new(100.0, 100.0, 100.0),
+        Direction3::new(0.0, 0.0, 1.0).unwrap(),
+        Direction3::new(-1.0, 0.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aPlane = Plane3::from_position(anAx3);
+    let aCylinder = CreateCylinderOnPlane(&aPlane, 100.0, 50.0);
+    assert!(!aCylinder.is_null(), "Cylinder creation failed");
+
+    let aResult = PerformFuse(&aBlendedBox, &aCylinder);
+    ValidateResult(&aResult, 322832.0, -1.0, false);
+}
+
+// Test bfuse_simple/K4: Blend box with cylinder (Y direction)
+#[test]
+fn BFuseSimpleTest__BlendBoxWithCylinderY_K4() {
+    // Create box: box bx1 300 300 100
+    let aBox = CreateBox(Point3::new(0.0, 0.0, 0.0), 300.0, 300.0, 100.0);
+
+    // Create blend: explode bx1 e, blend bl1 bx1 100 bx1_1
+    let aBlendedBox = CreateBlend(&aBox, 1, 100.0);
+    assert!(!aBlendedBox.is_null(), "Blend operation failed");
+
+    // Create plane and cylinder: plane pl1 100 100 100 0 0 1 0 1 0, pcylinder pc pl1 100 50
+    let anAx3 = Axis3::new(
+        Point3::new(100.0, 100.0, 100.0),
+        Direction3::new(0.0, 0.0, 1.0).unwrap(),
+        Direction3::new(0.0, 1.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aPlane = Plane3::from_position(anAx3);
+    let aCylinder = CreateCylinderOnPlane(&aPlane, 100.0, 50.0);
+    assert!(!aCylinder.is_null(), "Cylinder creation failed");
+
+    let aResult = PerformFuse(&aBlendedBox, &aCylinder);
+    ValidateResult(&aResult, 322832.0, -1.0, false);
+}
+
+// Test bfuse_simple/K5: Blend box with cylinder (-Y direction)
+#[test]
+fn BFuseSimpleTest__BlendBoxWithCylinderNegY_K5() {
+    // Create box: box bx1 300 300 100
+    let aBox = CreateBox(Point3::new(0.0, 0.0, 0.0), 300.0, 300.0, 100.0);
+
+    // Create blend: explode bx1 e, blend bl1 bx1 100 bx1_1
+    let aBlendedBox = CreateBlend(&aBox, 1, 100.0);
+    assert!(!aBlendedBox.is_null(), "Blend operation failed");
+
+    // Create plane and cylinder: plane pl1 100 100 100 0 0 1 0 -1 0, pcylinder pc pl1 100 50
+    let anAx3 = Axis3::new(
+        Point3::new(100.0, 100.0, 100.0),
+        Direction3::new(0.0, 0.0, 1.0).unwrap(),
+        Direction3::new(0.0, -1.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aPlane = Plane3::from_position(anAx3);
+    let aCylinder = CreateCylinderOnPlane(&aPlane, 100.0, 50.0);
+    assert!(!aCylinder.is_null(), "Cylinder creation failed");
+
+    let aResult = PerformFuse(&aBlendedBox, &aCylinder);
+    ValidateResult(&aResult, 322832.0, -1.0, false);
+}
+
+// Test bfuse_simple/K6: Blend box with cylinder (bottom, X direction)
+#[test]
+fn BFuseSimpleTest__BlendBoxWithCylinderBottomX_K6() {
+    // Create box: box bx1 300 300 100
+    let aBox = CreateBox(Point3::new(0.0, 0.0, 0.0), 300.0, 300.0, 100.0);
+
+    // Create blend: explode bx1 e, blend bl1 bx1 100 bx1_1
+    let aBlendedBox = CreateBlend(&aBox, 1, 100.0);
+    assert!(!aBlendedBox.is_null(), "Blend operation failed");
+
+    // Create plane and cylinder: plane pl1 100 100 0 0 0 -1 1 0 0, pcylinder pc pl1 100 50
+    let anAx3 = Axis3::new(
+        Point3::new(100.0, 100.0, 0.0),
+        Direction3::new(0.0, 0.0, -1.0).unwrap(),
+        Direction3::new(1.0, 0.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aPlane = Plane3::from_position(anAx3);
+    let aCylinder = CreateCylinderOnPlane(&aPlane, 100.0, 50.0);
+    assert!(!aCylinder.is_null(), "Cylinder creation failed");
+
+    let aResult = PerformFuse(&aBlendedBox, &aCylinder);
+    ValidateResult(&aResult, 322832.0, -1.0, false);
+}
+
+// Test bfuse_simple/K7: Blend box with cylinder (bottom, -X direction)
+#[test]
+fn BFuseSimpleTest__BlendBoxWithCylinderBottomNegX_K7() {
+    // Create box: box bx1 300 300 100
+    let aBox = CreateBox(Point3::new(0.0, 0.0, 0.0), 300.0, 300.0, 100.0);
+
+    // Create blend: explode bx1 e, blend bl1 bx1 100 bx1_1
+    let aBlendedBox = CreateBlend(&aBox, 1, 100.0);
+    assert!(!aBlendedBox.is_null(), "Blend operation failed");
+
+    // Create plane and cylinder: plane pl1 100 100 0 0 0 -1 -1 0 0, pcylinder pc pl1 100 50
+    let anAx3 = Axis3::new(
+        Point3::new(100.0, 100.0, 0.0),
+        Direction3::new(0.0, 0.0, -1.0).unwrap(),
+        Direction3::new(-1.0, 0.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aPlane = Plane3::from_position(anAx3);
+    let aCylinder = CreateCylinderOnPlane(&aPlane, 100.0, 50.0);
+    assert!(!aCylinder.is_null(), "Cylinder creation failed");
+
+    let aResult = PerformFuse(&aBlendedBox, &aCylinder);
+    ValidateResult(&aResult, 322832.0, -1.0, false);
+}
+
+// Test bfuse_simple/K8: Blend box with cylinder (bottom, Y direction)
+#[test]
+fn BFuseSimpleTest__BlendBoxWithCylinderBottomY_K8() {
+    // Create box: box bx1 300 300 100
+    let aBox = CreateBox(Point3::new(0.0, 0.0, 0.0), 300.0, 300.0, 100.0);
+
+    // Create blend: explode bx1 e, blend bl1 bx1 100 bx1_1
+    let aBlendedBox = CreateBlend(&aBox, 1, 100.0);
+    assert!(!aBlendedBox.is_null(), "Blend operation failed");
+
+    // Create plane and cylinder: plane pl1 100 100 0 0 0 -1 0 1 0, pcylinder pc pl1 100 50
+    let anAx3 = Axis3::new(
+        Point3::new(100.0, 100.0, 0.0),
+        Direction3::new(0.0, 0.0, -1.0).unwrap(),
+        Direction3::new(0.0, 1.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aPlane = Plane3::from_position(anAx3);
+    let aCylinder = CreateCylinderOnPlane(&aPlane, 100.0, 50.0);
+    assert!(!aCylinder.is_null(), "Cylinder creation failed");
+
+    let aResult = PerformFuse(&aBlendedBox, &aCylinder);
+    ValidateResult(&aResult, 322832.0, -1.0, false);
+}
+
+// Test bfuse_simple/K9: Blend box with cylinder (bottom, -Y direction)
+#[test]
+fn BFuseSimpleTest__BlendBoxWithCylinderBottomNegY_K9() {
+    // Create box: box bx1 300 300 100
+    let aBox = CreateBox(Point3::new(0.0, 0.0, 0.0), 300.0, 300.0, 100.0);
+
+    // Create blend: explode bx1 e, blend bl1 bx1 100 bx1_1
+    let aBlendedBox = CreateBlend(&aBox, 1, 100.0);
+    assert!(!aBlendedBox.is_null(), "Blend operation failed");
+
+    // Create plane and cylinder: plane pl1 100 100 0 0 0 -1 0 -1 0, pcylinder pc pl1 100 50
+    let anAx3 = Axis3::new(
+        Point3::new(100.0, 100.0, 0.0),
+        Direction3::new(0.0, 0.0, -1.0).unwrap(),
+        Direction3::new(0.0, -1.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let aPlane = Plane3::from_position(anAx3);
+    let aCylinder = CreateCylinderOnPlane(&aPlane, 100.0, 50.0);
+    assert!(!aCylinder.is_null(), "Cylinder creation failed");
+
+    let aResult = PerformFuse(&aBlendedBox, &aCylinder);
+    ValidateResult(&aResult, 322832.0, -1.0, false);
 }
 
 #[test]
