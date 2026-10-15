@@ -4,7 +4,7 @@
 //! The note links of `XCAFDoc_NotesTool`: the notes of an item, the annotation of items,
 //! attributes and subshapes, the removal of annotations and the deletion of notes.
 use super::graph_links::{father_labels, node_of};
-use super::note::{XCAFDocNote, XCAFDocNoteMembers};
+use super::note::{XCAFDocNoteMembers, xcaf_doc_note_get, xcaf_doc_note_is_mine};
 use super::notes_tool::{Annotated, XCAFDocNotesTool, labeled_item};
 use super::support::{child_labels, find, live};
 use super::{XCAFDoc, XCAFDocAssemblyItemId, XCAFDocAssemblyItemRef, XCAFDocGraphNode};
@@ -95,7 +95,7 @@ impl XCAFDocNotesTool {
         item: &XCAFDocAssemblyItemId,
         kind: Annotated,
     ) -> Result<Handle<XCAFDocAssemblyItemRef>, Failure> {
-        if !<dyn XCAFDocNote>::is_mine(note)? {
+        if !xcaf_doc_note_is_mine(note)? {
             return Ok(Handle::default());
         }
         let mut annotated = self.find_annotated(item, kind)?;
@@ -187,7 +187,7 @@ impl XCAFDocNotesTool {
         kind: Annotated,
         delete_orphan: bool,
     ) -> Result<bool, Failure> {
-        let attribute = <dyn XCAFDocNote>::get(note)?;
+        let attribute = xcaf_doc_note_get(note)?;
         let Some(note_attribute) = attribute.get() else {
             return Ok(false);
         };
@@ -287,7 +287,7 @@ impl XCAFDocNotesTool {
         while child_node.nb_fathers() > 0 {
             let father = child_node.get_father(1)?;
             let father_label = live(&father, "XCAFDoc_NotesTool::RemoveAllNotes")?.label();
-            let note = <dyn XCAFDocNote>::get(&father_label)?;
+            let note = xcaf_doc_note_get(&father_label)?;
             let Some(note) = note.get() else {
                 return Err(Failure::with_message(
                     "Standard_ProgramError",
@@ -352,7 +352,7 @@ impl XCAFDocNotesTool {
     /// `DeleteNote(theNoteLabel)`: unlinks the note from its items (forgetting the items left
     /// without notes) and forgets every attribute of the note label.
     pub fn delete_note(&self, note: &TdfLabel) -> Result<bool, Failure> {
-        if !<dyn XCAFDocNote>::is_mine(note)? {
+        if !xcaf_doc_note_is_mine(note)? {
             return Ok(false);
         }
         let father = node_of(note, &XCAFDoc::note_ref_guid())?;
@@ -384,7 +384,7 @@ impl XCAFDocNotesTool {
     /// `GetOrphanNotes(theNoteLabels)`: appends the notes without annotated items.
     pub fn get_orphan_notes(&self, notes: &mut Vec<TdfLabel>) -> Result<(), Failure> {
         for label in child_labels(&self.get_notes_label()?)? {
-            let note = <dyn XCAFDocNote>::get(&label)?;
+            let note = xcaf_doc_note_get(&label)?;
             if note.get().map(|n| n.is_orphan()).transpose()? == Some(true) {
                 notes.push(label);
             }
@@ -401,7 +401,7 @@ impl XCAFDocNotesTool {
     pub fn delete_orphan_notes(&self) -> Result<i32, Failure> {
         let mut count = 0;
         for label in child_labels(&self.get_notes_label()?)? {
-            let note = <dyn XCAFDocNote>::get(&label)?;
+            let note = xcaf_doc_note_get(&label)?;
             if note.get().map(|n| n.is_orphan()).transpose()? == Some(true)
                 && self.delete_note(&label)?
             {

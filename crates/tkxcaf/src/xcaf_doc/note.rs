@@ -51,23 +51,22 @@ pub trait XCAFDocNote: TdfAttribute {
 }
 rustycad_tkernel::impl_transient_interface!(dyn XCAFDocNote, "XCAFDoc_Note", dyn TdfAttribute);
 
-impl dyn XCAFDocNote {
-    /// `IsMine(theLabel)`: the label holds a note.
-    pub fn is_mine(label: &TdfLabel) -> Result<bool, Failure> {
-        Ok(!Self::get(label)?.is_null())
-    }
-    /// `Get(theLabel)`: the first note attribute of the label, or null.
-    pub fn get(label: &TdfLabel) -> Result<Handle<dyn XCAFDocNote>, Failure> {
-        let mut iterator = TdfAttributeIterator::new(label, true)?;
-        while iterator.more() {
-            let note = iterator.value().cast::<dyn XCAFDocNote>();
-            if !note.is_null() {
-                return Ok(note);
-            }
-            iterator.next();
+/// `XCAFDoc_Note::IsMine(theLabel)`: the label holds a note.
+pub fn xcaf_doc_note_is_mine(label: &TdfLabel) -> Result<bool, Failure> {
+    Ok(!xcaf_doc_note_get(label)?.is_null())
+}
+
+/// `XCAFDoc_Note::Get(theLabel)`: the first note attribute of the label, or null.
+pub fn xcaf_doc_note_get(label: &TdfLabel) -> Result<Handle<dyn XCAFDocNote>, Failure> {
+    let mut iterator = TdfAttributeIterator::new(label, true)?;
+    while iterator.more() {
+        let note = iterator.value().cast::<dyn XCAFDocNote>();
+        if !note.is_null() {
+            return Ok(note);
         }
-        Ok(Handle::default())
+        iterator.next();
     }
+    Ok(Handle::default())
 }
 
 /// The non-virtual members of `XCAFDoc_Note`.

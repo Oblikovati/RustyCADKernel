@@ -6,7 +6,7 @@
 //! `XCAFDoc_AssemblyItemRef`), linked by graph nodes of `NoteRefGUID` (the note the father).
 use super::color_tool::entry_text;
 use super::generic_empty_tool::generic_empty_attribute;
-use super::note::XCAFDocNote;
+use super::note::{XCAFDocNote, xcaf_doc_note_is_mine};
 use super::support::{child_labels, child_labels_with, find, find_or_add};
 use super::{
     XCAFDocAssemblyItemId, XCAFDocAssemblyItemRef, XCAFDocNoteBalloon, XCAFDocNoteBinData,
@@ -86,7 +86,7 @@ impl XCAFDocNotesTool {
     /// `GetNotes(theNoteLabels)`: appends the note labels.
     pub fn get_notes(&self, notes: &mut Vec<TdfLabel>) -> Result<(), Failure> {
         for label in child_labels(&self.get_notes_label()?)? {
-            if <dyn XCAFDocNote>::is_mine(&label)? {
+            if xcaf_doc_note_is_mine(&label)? {
                 notes.push(label);
             }
         }

@@ -51,7 +51,8 @@ mod vis_material_defs;
 mod vis_material_tool;
 
 pub use assembly_graph::{
-    XCAFDocAssemblyGraph, XCAFDocAssemblyGraphAdjacencyMap, XCAFDocAssemblyGraphNodeType,
+    XCAFDocAssemblyGraph, XCAFDocAssemblyGraphAdjacencyMap, XCAFDocAssemblyGraphIterator,
+    XCAFDocAssemblyGraphNodeType,
 };
 pub use assembly_item::{XCAFDocAssemblyItemId, XCAFDocAssemblyItemRef};
 pub use assembly_iterator::XCAFDocAssemblyIterator;
@@ -74,7 +75,8 @@ pub use material_tool::XCAFDocMaterialTool;
 pub use measures::{XCAFDocArea, XCAFDocCentroid, XCAFDocVolume};
 pub use note::{
     XCAFDocNote, XCAFDocNoteFields, XCAFDocNoteMembers, xcaf_doc_note_dump,
-    xcaf_doc_note_dump_json, xcaf_doc_note_paste, xcaf_doc_note_restore,
+    xcaf_doc_note_dump_json, xcaf_doc_note_get, xcaf_doc_note_is_mine, xcaf_doc_note_paste,
+    xcaf_doc_note_restore,
 };
 pub use note_kinds::{XCAFDocNoteBalloon, XCAFDocNoteBinData, XCAFDocNoteComment};
 pub use notes_tool::XCAFDocNotesTool;

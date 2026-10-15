@@ -5,11 +5,12 @@
 //! `XCAFDoc_Editor::RescaleGeometry`: the parts, sub-shapes, validation properties and
 //! occurrence locations of an assembly scaled by a factor, then its GD&T and notes.
 use super::color_tool::entry_text;
+use super::note::xcaf_doc_note_get;
 use super::support::find;
 use super::{
     XCAFDocArea, XCAFDocAssemblyGraph, XCAFDocAssemblyGraphNodeType, XCAFDocCentroid, XCAFDocDatum,
-    XCAFDocDocumentTool, XCAFDocEditor, XCAFDocLocation, XCAFDocNote, XCAFDocNoteMembers,
-    XCAFDocShapeTool, XCAFDocVolume,
+    XCAFDocDocumentTool, XCAFDocEditor, XCAFDocLocation, XCAFDocNoteMembers, XCAFDocShapeTool,
+    XCAFDocVolume,
 };
 use rustycad_tkernel::message::Message;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -178,7 +179,7 @@ fn rescale_notes(label: &TdfLabel, factor: f64) -> Result<(), Failure> {
     let mut labels = Vec::new();
     notes.get_notes(&mut labels)?;
     for note_label in labels {
-        let note = <dyn XCAFDocNote>::get(&note_label)?;
+        let note = xcaf_doc_note_get(&note_label)?;
         let Some(note) = note.get() else {
             continue;
         };

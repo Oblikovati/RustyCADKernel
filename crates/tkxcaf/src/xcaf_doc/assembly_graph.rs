@@ -162,18 +162,64 @@ impl XCAFDocAssemblyGraph {
         mut filter: impl FnMut(&Self, i32) -> bool,
         mut function: impl FnMut(&Self, i32) -> bool,
     ) -> Result<(), Failure> {
-        if start < 1 {
+        let mut iterator = XCAFDocAssemblyGraphIterator::new(self, start)?;
+        while iterator.more() {
+            let node = iterator.current();
+            if filter(self, node) && !function(self, node) {
+                break;
+            }
+            iterator.next();
+        }
+        Ok(())
+    }
+}
+
+/// `XCAFDoc_AssemblyGraph::Iterator`: the node IDs of a graph from a start node.
+///
+/// ```
+/// use rustycad_tklcaf::tdoc_std::{TDocStdApplication, TDocStdDocument, TDocStdStandardApplication};
+/// use rustycad_tkernel::{standard::Handle, tcollection::ExtendedString};
+/// use rustycad_tkxcaf::xcaf_doc::{XCAFDocAssemblyGraph, XCAFDocAssemblyGraphIterator, XCAFDocDocumentTool};
+/// let application = TDocStdStandardApplication::new();
+/// let mut document: Handle<TDocStdDocument> = Handle::default();
+/// application.new_tdoc_std_document(&ExtendedString::from_utf8("BinXCAF"), &mut document)?;
+/// XCAFDocDocumentTool::set(&document.main()?, true)?;
+/// let graph = XCAFDocAssemblyGraph::new(&document)?;
+/// assert!(!XCAFDocAssemblyGraphIterator::new(graph.get().unwrap(), 1)?.more());
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
+/// ```
+pub struct XCAFDocAssemblyGraphIterator<'a> {
+    graph: &'a XCAFDocAssemblyGraph,
+    current: i32,
+}
+
+impl<'a> XCAFDocAssemblyGraphIterator<'a> {
+    /// `Iterator(theGraph, theNode)`: from a 1-based node (`Standard_NullObject` below 1;
+    /// the native default start is 1).
+    pub fn new(graph: &'a XCAFDocAssemblyGraph, node: i32) -> Result<Self, Failure> {
+        if node < 1 {
             return Err(Failure::with_message(
                 "Standard_NullObject",
                 "Node ID must be positive one-based integer!",
             ));
         }
-        for node in start..=self.nb_nodes() {
-            if filter(self, node) && !function(self, node) {
-                break;
-            }
-        }
-        Ok(())
+        Ok(Self {
+            graph,
+            current: node,
+        })
+    }
+    /// `More`: the current ID is a node of the graph.
+    pub fn more(&self) -> bool {
+        self.current <= self.graph.nb_nodes()
+    }
+    /// `Current`.
+    pub fn current(&self) -> i32 {
+        self.current
+    }
+    /// `Next`.
+    #[allow(clippy::should_implement_trait)] // OCCT's More/Next protocol.
+    pub fn next(&mut self) {
+        self.current += 1;
     }
 }
 
