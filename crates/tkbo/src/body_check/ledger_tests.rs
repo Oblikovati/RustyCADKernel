@@ -15,7 +15,7 @@ use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 fn finding(severity: Severity) -> Finding {
     let subject = TopologyRef {
         kind: ShapeEnum::Edge,
-        index: 3,
+        index: Some(3),
     };
     Finding {
         severity,
@@ -69,7 +69,7 @@ fn names_resolve_back_to_the_same_sub_shape() {
         names.name(&solid),
         TopologyRef {
             kind: ShapeEnum::Solid,
-            index: 1
+            index: Some(0)
         }
     );
 }

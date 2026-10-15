@@ -1,9 +1,13 @@
 //! Only this private boundary uses Ash or Vulkan handles.
 mod runtime;
 mod validation;
+mod validation_layer;
 use crate::{FrameCapture, RenderBackend, RenderError, RenderFrame};
 pub use runtime::VulkanOptions;
 use runtime::VulkanRuntime;
+pub use validation_layer::{
+    VERIFIED_VALIDATION_LAYER, ValidationLayerVersion, active_validation_layer,
+};
 /// Vulkan 1.3 offscreen renderer; `VulkanRenderer::new(VulkanOptions::default())?`.
 pub struct VulkanRenderer {
     runtime: std::sync::Arc<VulkanRuntime>,

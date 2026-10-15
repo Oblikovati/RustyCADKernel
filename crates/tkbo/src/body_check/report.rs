@@ -52,14 +52,17 @@ pub enum Severity {
     Inconclusive,
 }
 
-/// A sub-shape of the validated root: its kind and 1-based index in the order of
-/// `TopExp::MapShapes(root, kind)` (orientation-independent, deterministic).
+/// A sub-shape of the validated root: its kind and zero-based index in the order of
+/// `TopExp::MapShapes(root, kind)` (orientation-independent, deterministic). For faces,
+/// edges and vertices this is the stable index of `rustycad_kernel::topology::BodyTopology`
+/// (ADR 0076); the kernel facade converts it to `FaceIndex`, `EdgeIndex`, `VertexIndex`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct TopologyRef {
     /// Shape kind (vertex, edge, face, ...).
     pub kind: ShapeEnum,
-    /// 1-based index among the root's sub-shapes of that kind; 0 when not found in the root.
-    pub index: usize,
+    /// Zero-based index among the root's sub-shapes of that kind; None when the shape is
+    /// not a sub-shape of the root.
+    pub index: Option<u32>,
 }
 
 impl TopologyRef {
@@ -67,7 +70,7 @@ impl TopologyRef {
     pub fn resolve(&self, root: &Shape) -> Option<Shape> {
         let mut map = IndexedMapOfShape::default();
         map_shapes_of_type(root, self.kind, &mut map).ok()?;
-        map.find_key(self.index).ok().cloned()
+        map.find_key(self.index? as usize + 1).ok().cloned()
     }
 }
 

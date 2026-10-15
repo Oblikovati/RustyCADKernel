@@ -605,11 +605,19 @@ coverage while strict captures and other legacy capabilities remain open.
 
 ## Linux validation dependency
 
-Run the Linux x86_64 toolkit checks with the checksum-pinned validation layer:
+On Linux x86_64, `.cargo/config.toml` makes `tools/with_vulkan_validation.py` the
+Cargo runner, so every test, example and `cargo run` child uses the checksum-pinned
+validation layer regardless of the installed package:
 
 ```sh
-python3 tools/with_vulkan_validation.py -- cargo test-all --no-fail-fast
+cargo test-all --no-fail-fast
+cargo test -p martensite-vulkan --test toolkit
 ```
+
+The wrapper also remains callable directly (`python3 tools/with_vulkan_validation.py -- <command>`)
+and keeps one cache in the workspace `target/vulkan-validation`, whatever the child's working
+directory. The toolkit test `validation_layer_dependency` fails with the offending version when a
+binary runs outside the runner on a layer older than the pinned 1.4.313.
 
 The wrapper downloads only the 5.7 MB Ubuntu 24.04-compatible validation-layer
 package into `target/vulkan-validation`, verifies the archive, library and
@@ -626,3 +634,28 @@ all 6,511 four-toolkit tests. Disabling dynamic library unloading still crashed.
 This package comparison supports changing the test dependency; it does not
 justify disabling validation or serializing renderer behavior. The exact package
 and extracted-file digests are pinned in `tools/vulkan_validation_cache.py`.
+
+The 2026-10-15 diagnosis of the toolkit target settled both 1.3.275 symptoms:
+
+- **False MSAA depth-resolve hazard.** `oit_transparency::actual_same_view_sampling_*`
+  and `actual_colored_glyph_*` failed deterministically with
+  `SYNC-HAZARD-READ-AFTER-WRITE` (MessageID `0xe4d96472`) at `vkCmdEndRendering`.
+  Command tracing showed that the prior write was the `CLEAR` depth load operation of the *same*
+  dynamic-rendering instance: barrier, `vkCmdBeginRendering`, draws, `vkCmdEndRendering`.
+  No barrier can be recorded inside that instance. The Vulkan specification orders resolve
+  operations after rendering automatically. They execute in `COLOR_ATTACHMENT_OUTPUT` with
+  color-attachment accesses, even for depth/stencil. Layer 1.3.275 validates dynamic-rendering
+  resolves with `kResolveOrder = SyncOrdering::kColorAttachment`
+  (`layers/sync/sync_commandbuffer.h`). That ordering omits the depth load's fragment-test
+  stages. Layer 1.4.313 uses `kDepthStencilResolveOrder = SyncOrdering::kRaster`, with the
+  comment that depth accesses participate in resolve ordering. The render-pass path of 1.3.275
+  already used raster ordering. The renderer synchronisation is unchanged, and nothing is
+  suppressed.
+- **SIGSEGV.** With the system layer, the parallel toolkit binary crashed in 5 of 73 lavapipe
+  runs and 4 of 40 AMD runs. The 30 serial lavapipe runs did not crash. A `SIGSEGV` stack
+  printer placed every faulting PC inside `libVkLayer_khronos_validation.so` 1.3.275, or at a
+  null dispatch pointer. The crashes came from unrelated entry points on different test threads
+  (`vkCmdDraw` in depth-peeling back compositing, `vkCreateDescriptorSetLayout` during renderer
+  creation, and others). Under the runner, the pinned layer passed 40 of 40 parallel runs on
+  each device without a crash or validation error.
+

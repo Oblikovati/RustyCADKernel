@@ -6,8 +6,10 @@ use crate::invalid_shapes::{
     overlapping_boxes,
 };
 use crate::test_shapes::{annulus_prism, box_solid, cone, cylinder, sphere, torus};
+use crate::topology::BodyTopology;
 use crate::validation::{
-    Finding, FindingKind, Severity, StageVerdict, ValidationReport, ValidationStage, validate_body,
+    BodyEntity, Finding, FindingKind, Severity, StageVerdict, TopologyRef, ValidationReport,
+    ValidationStage, body_entity, validate_body,
 };
 use StageVerdict::{Failed, NotRun, Passed};
 use rustycad_tkbo::profile_extrusion::{DisplayTolerance, Resolution, ToleranceCap};
@@ -49,13 +51,25 @@ fn edges_of(face: &Shape) -> Vec<Shape> {
     edges
 }
 
+/// The edge a finding names, through its stable `BodyTopology` index.
+fn edge_named(root: &Shape, name: TopologyRef) -> Shape {
+    let Some(BodyEntity::Edge(index)) = body_entity(name) else {
+        panic!("expected an edge name, got {name:?}");
+    };
+    BodyTopology::enumerate(root)
+        .unwrap()
+        .edge(index)
+        .unwrap()
+        .into_shape()
+}
+
 /// Asserts the four topology defects of `kind` each name an edge of `face`.
 fn assert_edges_named(root: &Shape, face: &Shape, findings: &[Finding], kind: &FindingKind) {
     assert_eq!(findings.len(), 4, "{findings:?}");
     let edges = edges_of(face);
     for finding in findings {
         assert_eq!(&finding.kind, kind);
-        let named = finding.subject.resolve(root).unwrap();
+        let named = edge_named(root, finding.subject);
         assert!(edges.iter().any(|edge| edge.is_same(&named)), "{finding:?}");
     }
 }
@@ -170,7 +184,12 @@ fn over_tolerance_vertex_fails_the_tolerance_stage_only() {
         budget: 1e-3,
     };
     assert_eq!(found[0].kind, kind);
-    assert!(found[0].subject.resolve(&solid).unwrap().is_same(&vertex));
+    let topology = BodyTopology::enumerate(&solid).unwrap();
+    let index = topology.vertex_index(&vertex).unwrap();
+    assert_eq!(
+        body_entity(found[0].subject),
+        Some(BodyEntity::Vertex(index))
+    );
 }
 
 #[test]
@@ -182,7 +201,7 @@ fn edge_above_its_vertices_breaks_tolerance_nesting() {
     assert_eq!(found.len(), 2, "{found:?}");
     for finding in &found {
         assert!(matches!(finding.kind, FindingKind::ToleranceOrder { inner, .. } if inner == 1e-4));
-        assert!(finding.subject.resolve(&solid).unwrap().is_same(&edge));
+        assert!(edge_named(&solid, finding.subject).is_same(&edge));
         assert_eq!(finding.context.unwrap().kind, ShapeEnum::Vertex);
     }
 }

@@ -35,14 +35,12 @@ impl TopologyNames {
         Ok(Self { maps })
     }
 
-    /// The name of `shape` (any orientation); index 0 when it is not under the root.
+    /// The name of `shape` (any orientation); no index when it is not under the root.
     pub(super) fn name(&self, shape: &Shape) -> TopologyRef {
         let kind = shape.shape_type().unwrap_or(ShapeEnum::Shape);
-        let index = self
-            .maps
-            .iter()
-            .find(|(mapped, _)| *mapped == kind)
-            .map_or(0, |(_, map)| map.find_index(shape));
+        let mapped = self.maps.iter().find(|(mapped, _)| *mapped == kind);
+        let position = mapped.map_or(0, |(_, map)| map.find_index(shape));
+        let index = (position > 0).then(|| (position - 1) as u32);
         TopologyRef { kind, index }
     }
 
