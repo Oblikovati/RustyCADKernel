@@ -49,7 +49,13 @@ mod equal_radius_relation;
 mod fix_relation;
 mod max_min_radius_dimension;
 pub use fix_relation::{PrsDimFixFields, PrsDimFixRelation};
+mod midpoint_points;
+mod midpoint_relation;
 mod offset_dimension;
+pub use midpoint_points::{
+    PrsDimMidPointAttach, points_on_conic, points_on_line, points_on_segment,
+};
+pub use midpoint_relation::{PrsDimMidPointFields, PrsDimMidPointRelation};
 mod symmetric_relation;
 mod symmetric_selection;
 mod tangent_relation;

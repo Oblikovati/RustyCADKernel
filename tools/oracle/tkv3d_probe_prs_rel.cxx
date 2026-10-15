@@ -17,6 +17,7 @@
 #include <PrsDim_TangentRelation.hxx>
 #include <PrsDim_FixRelation.hxx>
 #include <PrsDim_SymmetricRelation.hxx>
+#include <PrsDim_MidPointRelation.hxx>
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -190,8 +191,25 @@ static occ::handle<PrsDim_Relation> v3pr_symmetric(int variant) {
     default: return new PrsDim_SymmetricRelation(axis, v3pr_square(0, 4), v3pr_square(1, 4), v3pr_plane());
   }
 }
+static occ::handle<PrsDim_Relation> v3pr_midpoint(int variant) {
+  const TopoDS_Vertex tool = v3pr_vertex(0, 0, 0);
+  switch (variant) {
+    case 0: return new PrsDim_MidPointRelation(tool, v3pr_vertex(3, 1, 0), v3pr_vertex(-3, -1, 0), v3pr_plane());
+    case 1: return new PrsDim_MidPointRelation(tool, v3pr_edge(2, -3, 0, 2, 3, 0), v3pr_edge(-2, -3, 0, -2, 3, 0), v3pr_plane());
+    case 2: return new PrsDim_MidPointRelation(tool, v3pr_edge(2, 4, 0, 2, 8, 0), v3pr_edge(-2, -8, 0, -2, -4, 0), v3pr_plane());
+    case 3: return new PrsDim_MidPointRelation(tool, BRepBuilderAPI_MakeEdge(gp_Lin(gp_Pnt(2, 0, 0), gp::DY())).Edge(),
+      BRepBuilderAPI_MakeEdge(gp_Lin(gp_Pnt(-2, 0, 0), gp::DY())).Edge(), v3pr_plane());
+    case 4: return new PrsDim_MidPointRelation(tool, v3pr_arc(5, 0, 3, 2.0, 4.5), v3pr_arc(-5, 0, 3, 5.5, 7.0), v3pr_plane());
+    case 5: return new PrsDim_MidPointRelation(tool, v3pr_arc(5, 0, 3, 0, 2 * M_PI), v3pr_arc(-5, 0, 3, 0, 2 * M_PI), v3pr_plane());
+    case 6: return new PrsDim_MidPointRelation(tool, v3pr_ellipse_at(4), BRepBuilderAPI_MakeEdge(gp_Elips(gp_Ax2(gp_Pnt(0, -4, 0), gp::DZ(), gp::DX()), 5.0, 3.0), 0.5, 2.5).Edge(), v3pr_plane());
+    case 7: return new PrsDim_MidPointRelation(v3pr_vertex(0, 0, 3), v3pr_vertex(3, 1, 0), v3pr_vertex(-3, -1, 0), v3pr_plane());
+    case 8: return new PrsDim_MidPointRelation(tool, v3pr_edge(2, -3, 2, 2, 3, 2), v3pr_vertex(-3, -1, 4), v3pr_plane());
+    default: return new PrsDim_MidPointRelation(v3pr_edge(0, 0, 0, 1, 0, 0), v3pr_vertex(3, 1, 0), v3pr_vertex(-3, -1, 0), v3pr_plane());
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 12: return v3pr_midpoint(variant);
     case 11: return v3pr_symmetric(variant);
     case 10: return v3pr_fix(variant);
     case 8: return v3pr_offset(variant);

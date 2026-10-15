@@ -495,8 +495,67 @@ fn symmetric(variant: i32) -> Result<Relation, Failure> {
     Ok(PrsDimSymmetricRelation::new(&axis, &a, &b, &xoy())?.into_cast())
 }
 
+fn midpoint(variant: i32) -> Result<Relation, Failure> {
+    let tool = vertex(0., 0., 0.);
+    let infinite_y = |x: f64| -> Shape {
+        BRepBuilderAPIMakeEdge::from_lin(Line3::new(Point3::new(x, 0.0, 0.0), gp::dy()))
+            .unwrap()
+            .edge()
+            .unwrap()
+            .into()
+    };
+    let arc_shape = |x: f64, a: f64, b: f64| -> Shape { arc(x, 0., 3., a, b).into() };
+    let (t, a, b) = match variant {
+        0 => (tool, vertex(3., 1., 0.), vertex(-3., -1., 0.)),
+        1 => (
+            tool,
+            edge([2., -3., 0.], [2., 3., 0.]),
+            edge([-2., -3., 0.], [-2., 3., 0.]),
+        ),
+        2 => (
+            tool,
+            edge([2., 4., 0.], [2., 8., 0.]),
+            edge([-2., -8., 0.], [-2., -4., 0.]),
+        ),
+        3 => (tool, infinite_y(2.0), infinite_y(-2.0)),
+        4 => (tool, arc_shape(5., 2.0, 4.5), arc_shape(-5., 5.5, 7.0)),
+        5 => (
+            tool,
+            arc_shape(5., 0.0, 2.0 * PI),
+            arc_shape(-5., 0.0, 2.0 * PI),
+        ),
+        6 => {
+            let ellipse = Ellipse3::new(
+                Axis2::with_x_direction(Point3::new(0.0, -4.0, 0.0), gp::dz(), gp::dx()).unwrap(),
+                5.0,
+                3.0,
+            )
+            .unwrap();
+            let part: Shape = BRepBuilderAPIMakeEdge::from_elips_params(ellipse, 0.5, 2.5)
+                .unwrap()
+                .edge()
+                .unwrap()
+                .into();
+            (tool, ellipse_at(4.0), part)
+        }
+        7 => (vertex(0., 0., 3.), vertex(3., 1., 0.), vertex(-3., -1., 0.)),
+        8 => (
+            tool,
+            edge([2., -3., 2.], [2., 3., 2.]),
+            vertex(-3., -1., 4.),
+        ),
+        _ => (
+            edge([0., 0., 0.], [1., 0., 0.]),
+            vertex(3., 1., 0.),
+            vertex(-3., -1., 0.),
+        ),
+    };
+    Ok(PrsDimMidPointRelation::new(&t, &a, &b, &xoy())?.into_cast())
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        12 => midpoint(variant)?,
         11 => symmetric(variant)?,
         10 => fix(variant),
         8 => offset(variant),
