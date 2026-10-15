@@ -110,9 +110,7 @@ fn sources<'a>(
     }
     Ok(result)
 }
-fn native_start<'a>(
-    endpoints: &[AnnularNativeEndpoint],
-) -> NameCheck<'a, &AnnularNativeEndpoint> {
+fn native_start<'a>(endpoints: &[AnnularNativeEndpoint]) -> NameCheck<'a, &AnnularNativeEndpoint> {
     let found: Vec<_> = endpoints.iter().filter(|e| e.parameter == 0.).collect();
     count("one native start endpoint at parameter 0", found.len(), 1)?;
     Ok(found[0])

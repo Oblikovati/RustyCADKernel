@@ -231,9 +231,7 @@ fn partition<'a, 'r>(
     };
     Ok(partition)
 }
-fn copied_rows<'a>(
-    observed: &RegionCopyContextObservation,
-) -> NameCheck<'a, &RegionCopyContexts> {
+fn copied_rows<'a>(observed: &RegionCopyContextObservation) -> NameCheck<'a, &RegionCopyContexts> {
     retained_copy_contexts(observed, PrismHistoryStage::InputCopy)
         .map_err(AnnularNameCause::History)
 }

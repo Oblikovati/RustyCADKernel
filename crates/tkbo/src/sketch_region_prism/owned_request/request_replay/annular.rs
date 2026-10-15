@@ -7,6 +7,7 @@ use crate::sketch_region_prism::exact_tolerance::encode_stored_tolerance_cap;
 use crate::sketch_region_prism::frozen::annular_measures::encode_annular_measure_options;
 use crate::sketch_region_prism::frozen::proof_join::encode_joined_root_options as roots;
 use crate::sketch_region_prism::publication::annular::AnnularPublicationOptions;
+use crate::sketch_region_prism::region_certificate::embedding::AnnularEmbeddingOptions;
 use crate::sketch_region_prism::region_certificate::two_loop::{
     TwoLoopRegionBehavior, TwoLoopRegionOptions,
 };
@@ -45,6 +46,17 @@ fn policy(policy: OwnedAnnularPolicy, bytes: &mut Vec<u8>) {
     roots(policy.classification_roots, bytes);
     numbers([policy.spatial_limit, policy.parameter_limit], bytes);
     region(policy.region, bytes);
+    embedding(policy.embedding, bytes);
+    bytes.extend(encode_annular_publication_options(policy.publication));
+    bytes.extend(policy.volume_version.to_le_bytes());
+}
+fn embedding(options: AnnularEmbeddingOptions, bytes: &mut Vec<u8>) {
+    bytes.extend(options.version.to_le_bytes());
+    let boundary = options.regularity.boundary;
+    bytes.extend(boundary.version.to_le_bytes());
+    bytes.extend(boundary.max_stored_degree.to_le_bytes());
+    roots(boundary.roots, bytes);
+    bytes.extend(options.regularity.total_bisections.to_le_bytes());
 }
 fn region(options: TwoLoopRegionOptions, bytes: &mut Vec<u8>) {
     // Explicit behavior tag: a later behavior must add its own tag, never reuse this one.

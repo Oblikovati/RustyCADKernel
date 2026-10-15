@@ -38,6 +38,12 @@ pub(in crate::sketch_region_prism) struct OwnedAnnularPolicy {
     pub spatial_limit: f64,
     pub parameter_limit: f64,
     pub region: TwoLoopRegionOptions,
+    /// Embedding regularity policy for the one-call operation (ADR0065).
+    pub embedding: AnnularEmbeddingOptions,
+    /// Every publication child policy for the one-call operation (ADR0065).
+    pub publication: AnnularPublicationOptions,
+    /// Requested physical-volume behavior version (ADR0063).
+    pub volume_version: u32,
 }
 /// Bounded V1 annular request; the outer and inner roles are explicit, never request order.
 #[derive(Clone)]

@@ -60,6 +60,10 @@ fn policy() -> OwnedAnnularPolicy {
         spatial_limit: limit,
         parameter_limit: limit,
         region: fixture_bindings::options(),
+        embedding:
+            crate::sketch_region_prism::frozen::annular_orientation::fixture::embedding_options(),
+        publication: options(),
+        volume_version: 1,
     }
 }
 fn names() -> AnnularRegionNames {

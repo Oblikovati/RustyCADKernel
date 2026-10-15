@@ -3,6 +3,7 @@
 mod access;
 mod admission;
 pub(in crate::sketch_region_prism) mod names;
+pub(in crate::sketch_region_prism) mod operation;
 mod pipeline;
 mod request;
 mod retained;
@@ -27,6 +28,8 @@ use crate::sketch_region_certification::{BoundaryCensus, CensusPolicy};
 use crate::sketch_region_contact_transport::{ContactTransportPolicy, PairedContactTransaction};
 use crate::sketch_region_partition_bindings::PartitionBoundOutputs;
 use crate::sketch_region_prism::PrismReceipt;
+use crate::sketch_region_prism::publication::annular::AnnularPublicationOptions;
+use crate::sketch_region_prism::region_certificate::embedding::AnnularEmbeddingOptions;
 use crate::sketch_region_prism::region_certificate::two_loop::{
     TwoLoopCandidateBinding, TwoLoopRegionIdentities, TwoLoopRegionOptions, TwoLoopRegionRequest,
     TwoLoopWireBinding,

@@ -30,7 +30,7 @@ fn prefix_matches_independent_little_endian_literal() {
 }
 #[test]
 fn every_role_name_point_and_identity_is_bound() {
-    let edits: [fn(&mut OwnedAnnularPrismRequest); 14] = [
+    let edits: [fn(&mut OwnedAnnularPrismRequest); 17] = [
         |r| r.version = 2,
         |r| r.operation.0 += 1,
         |r| r.inner.source.0 += 1,
@@ -45,6 +45,9 @@ fn every_role_name_point_and_identity_is_bound() {
         |r| std::mem::swap(&mut r.outer, &mut r.inner),
         |r| r.policy.spatial_limit = 2e-8,
         |r| r.policy.region.maximum_poles += 1,
+        |r| r.policy.embedding.regularity.total_bisections += 1,
+        |r| r.policy.publication.measures.version = 3,
+        |r| r.policy.volume_version = 2,
     ];
     for edit in edits {
         changed(edit);
