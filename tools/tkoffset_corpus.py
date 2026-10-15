@@ -24,3 +24,5 @@ def append_tkoffset_requests(requests: list[str]) -> None:
     __import__('tkoffset_corpus_brepoffset_tool').append_tool_requests(requests)
     # BRepOffset_Offset (tkoffset_corpus_brepoffset_offset.py)
     __import__('tkoffset_corpus_brepoffset_offset').append_offset_requests(requests)
+    # BRepOffset_Inter3d (tkoffset_corpus_brepoffset_inter3d.py)
+    __import__('tkoffset_corpus_brepoffset_inter3d').append_inter3d_requests(requests)

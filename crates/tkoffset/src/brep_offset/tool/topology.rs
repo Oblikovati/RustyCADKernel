@@ -115,11 +115,11 @@ impl BRepOffsetTool {
 
     /// `CorrectOrientation(SI, NewEdges, AsDes, InitOffset, Offset)`: for a positive
     /// offset, reverses the new edges of each offset face whose p-curve lies outside
-    /// its initial face; `BRepOffsetTool::correct_orientation(&si, &new_edges, &mut as_des, &init_offset, 2.)?`.
+    /// its initial face; `BRepOffsetTool::correct_orientation(&si, &new_edges, &as_des, &init_offset, 2.)?`.
     pub fn correct_orientation(
         si: &Shape,
         new_edges: &IndexedMapOfShape,
-        as_des: &mut BRepAlgoAsDes,
+        as_des: &BRepAlgoAsDes,
         init_offset: &BRepAlgoImage,
         offset: f64,
     ) -> Result<(), Failure> {
@@ -242,7 +242,7 @@ fn correct_offset_face(
     fi: &Face,
     of: &Face,
     new_edges: &IndexedMapOfShape,
-    as_des: &mut BRepAlgoAsDes,
+    as_des: &BRepAlgoAsDes,
     offset: f64,
 ) -> Result<(), Failure> {
     let loe: Vec<Shape> = as_des.descendant(of.as_ref()).collect();
@@ -267,13 +267,15 @@ fn correct_offset_face(
         }
         reversed.push(reverse);
     }
-    if let Some(list) = as_des.change_descendant(of.as_ref()) {
-        for (oe, reverse) in list.iter_mut().zip(reversed) {
-            if reverse {
-                oe.reverse();
+    as_des.with_change_descendant(of.as_ref(), |list| {
+        if let Some(list) = list {
+            for (oe, reverse) in list.iter_mut().zip(reversed) {
+                if reverse {
+                    oe.reverse();
+                }
             }
         }
-    }
+    });
     Ok(())
 }
 

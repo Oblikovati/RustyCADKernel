@@ -142,6 +142,51 @@ impl BRepAlgoAsDes {
             .unwrap_or_else(std::sync::PoisonError::into_inner)
             .remove(shape)
     }
+    /// Removes every relation through a shared native handle; `handle.clear_shared()`.
+    pub fn clear_shared(&self) {
+        let mut relations = self
+            .relations
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        relations.up.clear(true);
+        relations.down.clear(true);
+    }
+    /// Adds each descendant in input order through a shared native handle;
+    /// `handle.add_many_shared(&face, &edges)`.
+    pub fn add_many_shared(&self, source: &Shape, descendants: &List<Shape>) {
+        for descendant in descendants.iter() {
+            self.add_shared(source, descendant);
+        }
+    }
+    /// Edits the descendant list of a shape (`None` when unbound) through a shared native
+    /// handle; `handle.with_change_descendant(&face, |edges| edges.map(|l| l.len()))`.
+    pub fn with_change_descendant<R>(
+        &self,
+        shape: &Shape,
+        edit: impl FnOnce(Option<&mut List<Shape>>) -> R,
+    ) -> R {
+        let mut relations = self
+            .relations
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        edit(relations.down.change_seek(shape))
+    }
+    /// Replaces an associated shape in both directions through a shared native handle;
+    /// `handle.replace_shared(&old, &new)`.
+    pub fn replace_shared(&self, old: &Shape, new: &Shape) {
+        self.relations
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+            .replace(old, new);
+    }
+    /// Removes a non-ancestor leaf through a shared native handle;
+    /// `handle.remove_shared(&edge)?`.
+    pub fn remove_shared(&self, shape: &Shape) -> Result<(), Failure> {
+        self.relations
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+            .remove(shape)
+    }
     /// Lists descendants common to both shapes and reports whether any were found.
     /// Example: `let found = associations.has_common_descendant(&face1, &face2, &mut common);`.
     pub fn has_common_descendant(

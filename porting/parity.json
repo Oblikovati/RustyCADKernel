@@ -345905,64 +345905,25 @@
       "upstream_id": "BRepOffset_Inter3d::AsDes() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
-      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::as_des",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
-    },
-    {
-      "upstream_id": "BRepOffset_Inter3d::BRepOffset_Inter3d(const occ::handle<BRepAlgo_AsDes> &, const TopAbs_State, const double)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
-      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::new",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
-    },
-    {
-      "upstream_id": "BRepOffset_Inter3d::FaceInter(const TopoDS_Face &, const TopoDS_Face &, const BRepAlgo_Image &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
-      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::face_inter",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
-    },
-    {
-      "upstream_id": "BRepOffset_Inter3d::IsDone(const TopoDS_Face &, const TopoDS_Face &) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
-      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::is_done",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::as_des_handle",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); the shared handle."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::NewEdges()",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
-      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::new_edges",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
-    },
-    {
-      "upstream_id": "BRepOffset_Inter3d::SetDone(const TopoDS_Face &, const TopoDS_Face &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
-      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::set_done",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: the new-edge count, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::TouchedFaces()",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
-      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::touched_faces",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: the touched count, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
     },
     {
       "upstream_id": "BRepOffset_Inter2d::operator delete(void*) noexcept",
@@ -626756,6 +626717,78 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::generated",
       "status": "implemented",
       "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces edge images, oo_pipes and oo_tubes vertex connectors) on boxes, cylinders, cones, spheres and tori."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::BRepOffset_Inter3d(const occ::handle<BRepAlgo_AsDes>&,TopAbs_State,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: every operation, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts). The AsDes is shared through its handle (BRepAlgoAsDes gained shared-handle mutators)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::CompletInt(const NCollection_List<TopoDS_Shape>&,const BRepAlgo_Image&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::complet_int",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: op 1, the face pairs of the box-tree selection, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::FaceInter(const TopoDS_Face&,const TopoDS_Face&,const BRepAlgo_Image&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::face_inter",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: op 1 through CompletInt, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::ConnexIntByArc(const NCollection_List<TopoDS_Shape>&,const TopoDS_Shape&,const BRepOffset_Analyse&,const BRepAlgo_Image&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::connex_int_by_arc",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); not yet driven by its own probe request: it runs under BRepOffset_MakeOffset (arc joins), whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::ConnexIntByInt(const TopoDS_Shape&,const NCollection_DataMap<TopoDS_Shape,BRepOffset_Offset,TopTools_ShapeMapHasher>&,const BRepOffset_Analyse&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_List<TopoDS_Shape>&,const Message_ProgressRange&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::connex_int_by_int",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: ops 0 and 2, planar and not, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::ContextIntByInt(const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,bool,const NCollection_DataMap<TopoDS_Shape,BRepOffset_Offset,TopTools_ShapeMapHasher>&,const BRepOffset_Analyse&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_List<TopoDS_Shape>&,const Message_ProgressRange&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::context_int_by_int",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: op 2, the first face as context, kept or extended, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::ContextIntByArc(const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,bool,const BRepOffset_Analyse&,const BRepAlgo_Image&,BRepAlgo_Image&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::context_int_by_arc",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); not yet driven by its own probe request: it runs under BRepOffset_MakeOffset (arc joins), whose comparisons cover it once that class is ported."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::SetDone(const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::set_done",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: every operation, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::IsDone(const TopoDS_Face&,const TopoDS_Face&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: every operation, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
     }
   ],
   "tests": [

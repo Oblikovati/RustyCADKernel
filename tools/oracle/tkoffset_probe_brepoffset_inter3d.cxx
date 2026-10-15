@@ -1,0 +1,44 @@
+// BRepOffset_Inter3d probe operations; the Rust twin is crates/tkoffset/examples/of_probe/inter3d.rs.
+// The primitives are those of tkoffset_probe_brepoffset_tool.cxx (ot_primitive).
+#include <BRepAlgo_AsDes.hxx>
+#include <BRepAlgo_Image.hxx>
+#include <BRepOffset_Analyse.hxx>
+#include <BRepOffset_Inter3d.hxx>
+// The descendants of a shape in the AsDes: their number and digests.
+static void oi_descendants(const occ::handle<BRepAlgo_AsDes>& asDes,const TopoDS_Shape& s){
+ const NCollection_List<TopoDS_Shape>& l=asDes->Descendant(s);ga_int(l.Extent());
+ for(const TopoDS_Shape& d:l){ga_int(d.Orientation());pr_shape(d);}}
+// `oi_inter prim offset angle op planar`: the analyse of the primitive (offset value
+// set), the offset of each face, then op 0 ConnexIntByInt (planar or not), op 1
+// CompletInt of the offset faces, op 2 ConnexIntByInt then ContextIntByInt with the
+// first face as context (extended when `planar`); for each face its enlarged face and
+// the descendants of the enlarged and offset faces, the Build compound of each edge and
+// vertex, the failed shapes and the new and touched counts.
+void of_oi_inter_case(std::istream& input){
+ GaReader r{input};
+ try{
+  TopoDS_Shape p=ot_primitive(r);double off=r.real(),angle=r.real();int op=r.integer();bool planar=r.flag();
+  BRepOffset_Analyse a;a.SetOffsetValue(off);a.Perform(p,angle);
+  NCollection_DataMap<TopoDS_Shape,BRepOffset_Offset,TopTools_ShapeMapHasher> mapSF;
+  BRepAlgo_Image image;NCollection_List<TopoDS_Shape> offsetFaces;
+  for(TopExp_Explorer ef(p,TopAbs_FACE);ef.More();ef.Next()){
+   BRepOffset_Offset o(TopoDS::Face(ef.Current()),off,true,GeomAbs_Intersection);mapSF.Bind(ef.Current(),o);
+   image.Bind(ef.Current(),o.Face());offsetFaces.Append(o.Face());}
+  occ::handle<BRepAlgo_AsDes> asDes=new BRepAlgo_AsDes();
+  BRepOffset_Inter3d inter(asDes,off>0?TopAbs_OUT:TopAbs_IN,1e-7);
+  NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher> mes,build;NCollection_List<TopoDS_Shape> failed;
+  if(op==1)inter.CompletInt(offsetFaces,image,Message_ProgressRange());
+  else inter.ConnexIntByInt(p,mapSF,a,mes,build,failed,Message_ProgressRange(),planar);
+  if(op==2){
+   NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher> ctx;TopExp_Explorer ef(p,TopAbs_FACE);ctx.Add(ef.Current());
+   inter.ContextIntByInt(ctx,planar,mapSF,a,mes,build,failed,Message_ProgressRange(),false);}
+  for(TopExp_Explorer ef(p,TopAbs_FACE);ef.More();ef.Next()){
+   const TopoDS_Shape& of=mapSF(ef.Current()).Face();const TopoDS_Shape* nf=mes.Seek(of);
+   ga_flag(nf!=nullptr);if(nf){pr_shape(*nf);oi_descendants(asDes,*nf);}
+   oi_descendants(asDes,of);oi_descendants(asDes,ef.Current());}
+  NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher> ve;TopExp::MapShapes(p,TopAbs_EDGE,ve);TopExp::MapShapes(p,TopAbs_VERTEX,ve);
+  for(int i=1;i<=ve.Extent();i++){const TopoDS_Shape* b=build.Seek(ve(i));ga_flag(b!=nullptr);if(b)pr_shape(*b);}
+  ga_int(failed.Extent());for(const TopoDS_Shape& s:failed)ga_int(ve.FindIndex(s));
+  ga_int(inter.NewEdges().Extent());ga_int(inter.TouchedFaces().Extent());}
+ catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
+ ga_end();}

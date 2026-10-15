@@ -35,6 +35,34 @@ fn replace_merges_into_existing_destination_without_losing_links() -> Result<(),
     Ok(())
 }
 
+#[test]
+fn shared_handle_mutators_match_the_exclusive_ones() -> Result<(), Failure> {
+    let [a, b, c, d, e] = vertices()?;
+    let shared = rustycad_tkernel::standard::Handle::new(BRepAlgoAsDes::new());
+    let associations = shared.get().expect("live AsDes");
+    let mut many = List::default();
+    many.append(b.clone());
+    many.append(c.clone());
+    associations.add_many_shared(&a, &many);
+    let edited = associations.with_change_descendant(&a, |list| {
+        let list = list.expect("bound descendants");
+        list.iter_mut().for_each(|s| s.reverse());
+        list.len()
+    });
+    assert_eq!(edited, 2);
+    assert!(associations.with_change_descendant(&d, |list| list.is_none()));
+    assert!(associations.descendant(&a).all(|s| s.orientation() == Orientation::Reversed));
+    associations.replace_shared(&a, &e);
+    assert!(!associations.has_descendant(&a));
+    assert_eq!(associations.descendant(&e).count(), 2);
+    associations.remove_shared(&b)?;
+    assert_eq!(associations.descendant(&e).count(), 1);
+    assert!(associations.remove_shared(&e).is_err());
+    associations.clear_shared();
+    assert!(!associations.has_descendant(&e) && !associations.has_ascendant(&c));
+    Ok(())
+}
+
 fn add_repeated_descendants(associations: &mut BRepAlgoAsDes, a: &Shape, b: &Shape, c: &Shape) {
     associations.add(a, &b.oriented(Orientation::Reversed));
     associations.add(c, b);
