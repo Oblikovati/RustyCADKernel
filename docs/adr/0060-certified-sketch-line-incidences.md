@@ -82,7 +82,7 @@ refinements and world error; none is widened. Reports own their inputs, are
 
 ## Excluded representations (open)
 
-[ADR 0066](0066-certified-sketch-curve-incidences.md) admits conic and spline
+[ADR 0067](0067-certified-sketch-curve-incidences.md) admits conic and spline
 sources and angle-bounded arcs; the remaining exclusions below stay open.
 
 Offset curves (the application's offset splines), native periodic B-spline knot

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Arcs bounded by parameter angles (ADR 0066): exact frame angles, never an
+//! Arcs bounded by parameter angles (ADR 0067): exact frame angles, never an
 //! algebraic contact on a nonzero bound, wrapped sweep order on sources.
 use super::*;
 use SketchLinePosition::{AfterEnd, AtStart, Interior};

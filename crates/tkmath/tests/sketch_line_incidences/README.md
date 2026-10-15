@@ -41,7 +41,7 @@ OCCT comparisons live with the TKGeomAlgo integration tests. See ADR 0060.
 ## Conic and spline sources
 
 `oracle_curves.py` generates 244 near-degenerate cases with seed 6100 for
-sources other than a line (ADR 0066). It uses different eliminations from the
+sources other than a line (ADR 0067). It uses different eliminations from the
 kernel: conic sources against lines and splines substitute the target piece into
 the conic; conic pairs eliminate `y` (or `x`) between the Cartesian equations
 instead of using the sweep chart; spline sources substitute their de Boor

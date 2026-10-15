@@ -19,8 +19,8 @@ are certified for every admitted target.
 | Ellipse, elliptical sector | Certified | Any nonzero major-axis vector; sector by rays |
 | Control/fit B-spline | Certified | Open, closed (wrapped knots), handled triple knots |
 | Rational B-spline | Certified | Strictly positive weights only |
-| Arc or ellipse with angle bounds | Certified (ADR 0066) | Exact real angles; only a zero bound is an exact end |
-| Circle, arc, ellipse, spline source | Certified (ADR 0066) | Against every target above; see ADR 0066 |
+| Arc or ellipse with angle bounds | Certified (ADR 0067) | Exact real angles; only a zero bound is an exact end |
+| Circle, arc, ellipse, spline source | Certified (ADR 0067) | Against every target above; see ADR 0067 |
 | Offset spline or curve | Open | Not admitted; needs its own exact equation |
 | Native periodic knot vector | Open | Supply the unwrapped flat knots |
 | Spline-source extension | Open | No application rule; support domain refused by name |
@@ -92,9 +92,9 @@ validate the final solved edit, and pass undo/reload and native tests. A seed
 point can move during recompute; the final endpoint's incidence must be certified
 against the solved geometry. The open pairs above remain blocked.
 
-## Curve sources and angle bounds (ADR 0066)
+## Curve sources and angle bounds (ADR 0067)
 
-[ADR 0066](adr/0066-certified-sketch-curve-incidences.md) extends the operation
+[ADR 0067](adr/0067-certified-sketch-curve-incidences.md) extends the operation
 to circle, ellipse, ray- and angle-bounded arc and spline sources against every
 admitted target, with cyclic trims of closed sources, arc extension through the
 full conic, parameter picks for splines and exact angle-bounded arcs. Evidence:
