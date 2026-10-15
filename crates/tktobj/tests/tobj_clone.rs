@@ -11,7 +11,8 @@ use rustycad_tkernel::{
 use rustycad_tklcaf::tdf::TdfRelocationTable;
 use rustycad_tktobj::tobj::{
     TObjHiddenPartition, TObjModel, TObjModelState, TObjObject, TObjObjectIterator,
-    TObjObjectState, TObjObjectStateFlags, TObjPartition, TObjPersistence, TObjTypeFlags,
+    TObjObjectState, TObjObjectStateFlags, TObjPartition, TObjPersistence, TObjStandardPartition,
+    TObjTypeFlags,
 };
 
 /// The ASCII names of the objects an iterator visits, in order.
@@ -109,7 +110,7 @@ fn a_hidden_sub_partition_is_named_and_not_visible() {
             .unwrap()
     });
     assert!(again == hidden);
-    assert!(<dyn TObjPartition>::get_partition(&hidden.cast()).unwrap() == fixture.my_partition);
+    assert!(TObjStandardPartition::get_partition(&hidden.cast()).unwrap() == fixture.my_partition);
 }
 
 #[test]

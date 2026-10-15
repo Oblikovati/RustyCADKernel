@@ -3,6 +3,7 @@
 
 //! The native bodies of the `TObj_Model` members that find objects by name and set up a
 //! new or loaded model.
+use super::TObjObjectBase;
 use super::{TObjLabelIterator, TObjModel, TObjModelState, TObjObject, TObjTNameContainer};
 use rustycad_tkernel::{
     standard::{Failure, Handle},
@@ -20,7 +21,7 @@ pub(crate) fn find_object<M: TObjModel + ?Sized>(
     if model.is_registered_name(name, &dictionary)? {
         let label =
             rustycad_tkcdf::live(&dictionary, "TObj_Model::FindObject")?.find_label(name)?;
-        <dyn TObjObject>::get_obj(&label, &mut result, false)?;
+        TObjObjectBase::get_obj(&label, &mut result, false)?;
     }
     Ok(result)
 }

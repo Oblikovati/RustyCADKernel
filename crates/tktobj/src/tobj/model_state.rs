@@ -3,6 +3,8 @@
 
 //! The non-virtual members of `TObj_Model`: messenger, document, transactions, names,
 //! partitions and the format version.
+use super::TObjModelBase;
+use super::TObjStandardPartition;
 use super::{
     TObjHiddenPartition, TObjModel, TObjModelDataTag, TObjObject, TObjObjectState, TObjPartition,
     TObjTModel, TObjTNameContainer, TObjTObject,
@@ -209,7 +211,7 @@ pub trait TObjModelState: TObjModel {
         if hidden {
             return Ok(TObjHiddenPartition::new(label)?.cast());
         }
-        <dyn TObjPartition>::create(label, true)
+        TObjStandardPartition::create(label, true)
     }
     /// `getPartition(theLabel, theIndex, theName, theHidden)` (protected): the partition on
     /// the child of that index, created and named when new.
@@ -263,7 +265,7 @@ pub trait TObjModelState: TObjModel {
 }
 impl<T: TObjModel + ?Sized> TObjModelState for T {}
 
-impl dyn TObjModel {
+impl TObjModelBase {
     /// `GetDocumentModel(theLabel)` (static): the model of the document holding the label,
     /// null for a null label or without model.
     pub fn get_document_model(label: &TdfLabel) -> Result<Handle<dyn TObjModel>, Failure> {
@@ -291,7 +293,7 @@ impl dyn TObjModel {
     }
     /// `SetNewName(theObject)` (static): a new name from the object's partition.
     pub fn set_new_name(object: &Handle<dyn TObjObject>) -> Result<(), Failure> {
-        let partition = <dyn TObjPartition>::get_partition(object)?;
+        let partition = TObjStandardPartition::get_partition(object)?;
         let Some(partition) = partition.get() else {
             return Ok(());
         };

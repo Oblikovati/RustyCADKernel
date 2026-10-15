@@ -2,7 +2,8 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `TObj_OcafObjectIterator`: the TObj objects on the sub-labels of a label.
-use super::{TObjLabelIterator, TObjLabelIteratorBase, TObjObject, TObjObjectIterator};
+use super::TObjObjectBase;
+use super::{TObjLabelIterator, TObjLabelIteratorBase, TObjObjectIterator};
 use rustycad_tkernel::{
     impl_transient,
     standard::{Failure, Handle, RuntimeType, StandardTransient},
@@ -63,7 +64,7 @@ impl TObjLabelIterator for TObjOcafObjectIterator {
         while children.more() && self.base.node().is_null() {
             let label = children.value();
             let mut object = Handle::default();
-            if !<dyn TObjObject>::get_obj(&label, &mut object, false)? {
+            if !TObjObjectBase::get_obj(&label, &mut object, false)? {
                 children.next();
                 continue;
             }

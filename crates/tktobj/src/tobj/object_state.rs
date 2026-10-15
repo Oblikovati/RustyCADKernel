@@ -3,6 +3,7 @@
 
 //! The non-virtual public members of `TObj_Object`: labels, names, flags, the father
 //! object and the static `GetObj`/`Detach`.
+use super::TObjObjectBase;
 use super::{TObjDeletingMode, TObjObject, TObjObjectData, TObjObjectDataTag, TObjTObject};
 use rustycad_tkernel::{
     standard::{Failure, Handle, RuntimeType},
@@ -76,7 +77,7 @@ pub trait TObjObjectState: TObjObject {
             return Ok(father);
         }
         let mut son_label = self.get_label();
-        while <dyn TObjObject>::get_obj(&son_label.father(), &mut father, true)? {
+        while TObjObjectBase::get_obj(&son_label.father(), &mut father, true)? {
             if kind.is_none_or(|kind| father.is_kind(kind)) {
                 break;
             }
@@ -112,7 +113,7 @@ pub trait TObjObjectState: TObjObject {
 }
 impl<T: TObjObject + ?Sized> TObjObjectState for T {}
 
-impl dyn TObjObject {
+impl TObjObjectBase {
     /// `GetObj(theLabel, theResult, isSuper)` (static): the live object of the label, or
     /// (with `is_super`) of its nearest ancestor; false when none.
     pub fn get_obj(

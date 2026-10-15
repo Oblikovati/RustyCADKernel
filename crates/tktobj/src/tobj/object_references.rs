@@ -3,6 +3,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The native bodies of the `TObj_Object` members that read and rewrite references.
+use super::TObjObjectBase;
 use super::{TObjLabelIterator, TObjObject, TObjObjectState, TObjTReference};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tklcaf::tdf::{TdfChildIdIterator, TdfLabel, TdfTool};
@@ -105,7 +106,7 @@ pub(crate) fn object_relocate_references<T: TObjObject + ?Sized>(
         let mut new_label = TdfLabel::default();
         TdfTool::relocate_label(&label, from_root, to_root, &mut new_label, false)?;
         let mut new_object = Handle::default();
-        if new_label.is_null() || !<dyn TObjObject>::get_obj(&new_label, &mut new_object, false)? {
+        if new_label.is_null() || !TObjObjectBase::get_obj(&new_label, &mut new_object, false)? {
             return Ok(false);
         }
         if update_back_references {

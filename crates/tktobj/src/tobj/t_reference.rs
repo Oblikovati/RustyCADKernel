@@ -3,6 +3,7 @@
 
 //! `TObj_TReference`: the OCAF attribute of a reference from one TObj object (the
 //! master) to another; each reference registers a back reference in the referred object.
+use super::TObjObjectBase;
 use super::{TObjObject, TObjObjectState, TObjTObject};
 use rustycad_tkernel::{
     impl_transient,
@@ -232,7 +233,7 @@ impl TdfAttribute for TObjTReference {
 /// nothing is set when it is missing.
 fn paste_into(target: &TObjTReference, referred: &Handle<dyn TObjObject>) -> Result<(), Failure> {
     let mut master = Handle::default();
-    <dyn TObjObject>::get_obj(&target.label(), &mut master, true)?;
+    TObjObjectBase::get_obj(&target.label(), &mut master, true)?;
     let master_label = master
         .get()
         .map(|master| master.get_label())

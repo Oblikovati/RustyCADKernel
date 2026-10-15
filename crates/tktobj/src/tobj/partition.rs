@@ -92,7 +92,7 @@ pub trait TObjPartition: TObjObject {
 }
 impl_transient_interface!(dyn TObjPartition, "TObj_Partition", dyn TObjObject);
 
-impl dyn TObjPartition {
+impl TObjStandardPartition {
     /// `Create(theLabel, theSetName)` (static): a new partition on the label, with the
     /// last index 0.
     pub fn create(label: &TdfLabel, set_name: bool) -> Result<Handle<dyn TObjPartition>, Failure> {
@@ -111,7 +111,7 @@ impl dyn TObjPartition {
         let mut label = object.get_label().father();
         while !label.is_null() {
             let mut found = Handle::default();
-            if <dyn TObjObject>::get_obj(&label, &mut found, true)? {
+            if TObjObjectBase::get_obj(&label, &mut found, true)? {
                 let partition: Handle<dyn TObjPartition> = found.cast();
                 if !partition.is_null() {
                     return Ok(partition);
@@ -179,7 +179,7 @@ macro_rules! tobj_partition_object_members {
     };
 }
 
-/// `TObj_Partition` itself; `<dyn TObjPartition>::create(&label, true)`.
+/// `TObj_Partition` itself; `TObjStandardPartition::create(&label, true)`.
 pub struct TObjStandardPartition {
     transient: StandardTransient,
     object: TObjObjectBase,

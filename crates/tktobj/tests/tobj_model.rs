@@ -231,7 +231,7 @@ fn TObj_ModelTest__GetApplication_ReturnsNonNull() {
 fn TObj_ModelTest__GetDocumentModel_FromLabel_ReturnsSameModel() {
     let fixture = ModelFixture::set_up();
     let label = fixture.my_model.get_label();
-    let found = <dyn TObjModel>::get_document_model(&label).unwrap();
+    let found = TObjModelBase::get_document_model(&label).unwrap();
     assert!(!found.is_null());
     assert!(found == fixture.my_model);
 }
@@ -508,7 +508,7 @@ fn TObj_ObjectTest__GetObj_StaticLookup() {
     let object = fixture.command(|| fixture.create_object());
     let label = object.get_label();
     let mut found = Handle::default();
-    assert!(<dyn TObjObject>::get_obj(&label, &mut found, false).unwrap());
+    assert!(TObjObjectBase::get_obj(&label, &mut found, false).unwrap());
     assert!(!found.is_null());
     assert!(found == object);
 }

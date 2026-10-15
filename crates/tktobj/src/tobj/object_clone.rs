@@ -3,6 +3,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The native bodies of the `TObj_Object` cloning members.
+use super::TObjObjectBase;
 use super::{
     TObjAssistant, TObjModel, TObjObject, TObjObjectState, TObjOcafObjectIterator, TObjPersistence,
     TObjTModel, TObjTObject,
@@ -180,7 +181,7 @@ pub(crate) fn object_copy_references<T: TObjObject + ?Sized>(
             continue;
         }
         let mut destination = Handle::default();
-        if !<dyn TObjObject>::get_obj(&destination_label, &mut destination, false)? {
+        if !TObjObjectBase::get_obj(&destination_label, &mut destination, false)? {
             continue;
         }
         let same_type = destination

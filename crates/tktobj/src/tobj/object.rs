@@ -4,6 +4,7 @@
 //! `TObj_Object`: the base of the transient objects of an OCAF-based model. Its virtual
 //! members are the trait [`TObjObject`]; its non-virtual members are the extension traits
 //! [`super::TObjObjectState`] and [`super::TObjObjectData`] (tobj-design.md section 3).
+use super::TObjModelBase;
 use super::object_children::object_children;
 use super::object_detach::{
     object_can_detach, object_detach, object_remove_back_reference, object_remove_back_references,
@@ -124,7 +125,7 @@ impl TObjObjectBase {
         target.object_base().bind_self(object);
         super::TObjTObject::set(&target.get_label(), object)?;
         if set_name {
-            <dyn TObjModel>::set_new_name(object)?;
+            TObjModelBase::set_new_name(object)?;
         }
         Ok(())
     }
@@ -281,7 +282,7 @@ pub trait TObjObject: Transient {
             return Ok(false);
         }
         let mut found = Handle::default();
-        <dyn TObjObject>::get_obj(&label, &mut found, false)
+        TObjObjectBase::get_obj(&label, &mut found, false)
     }
     /// `Clone(theTargetLabel, theRelocTable)`: copies the object, its data and children.
     fn clone_object(
