@@ -4,7 +4,8 @@ This note fixes how the OCAF toolkits map to Rust: TKCDF (`crates/tkcdf`,
 `rustycad-tkcdf`: packages CDM, PCDM, CDF, LDOM) and TKLCAF (`crates/tklcaf`,
 `rustycad-tklcaf`: packages TDF, TDataStd, TFunction, TDocStd), which depend only on
 TKernel, and TKCAF (`crates/tkcaf`, `rustycad-tkcaf`: packages TNaming, TDataXtd, AppStd),
-which adds the modeling toolkits (sections 10 and 11). The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
+which adds the modeling toolkits (sections 10 and 11). TKTObj (`crates/tktobj`), the TObj
+object model over TKLCAF, has its own note: [tobj-design.md](tobj-design.md). The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
 trait, `Handle<dyn Trait>`, `SharedState`, exceptions as `Failure`) apply; this note covers
 what they do not. Code comments and ledger notes cite it as "ocaf-design.md section N".
 

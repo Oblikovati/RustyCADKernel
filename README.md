@@ -73,6 +73,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tkcdf` | TKCDF OCAF document and application framework (CDM, PCDM interfaces, CDF), in progress |
 | `crates/tklcaf` | TKLCAF OCAF data framework (TDF labels and transactions, TDataStd attributes, TFunction, TDocStd documents), in progress |
 | `crates/tkcaf` | TKCAF topological naming (TNaming named shapes, names, selections), extended attributes (TDataXtd) and AppStd, in progress |
+| `crates/tktobj` | TKTObj object model over OCAF (TObj models, objects, partitions, references, iterators and their attributes); the native TObj file formats are out of scope |
 | `crates/tkde` | TKDE data exchange framework (DE_Wrapper format registry, configuration nodes and contexts, providers), in progress |
 | `crates/tkxsbase` | TKXSBase data exchange foundation (MoniTool, Interface models and checks, Transfer processes, IFSelect selections, XSControl work sessions), in progress |
 | `crates/tcl` | Project-owned thin binding to the Tcl/Tk 8.6 C API used by DRAW (hand-written declarations checked against the system headers, safe wrapper) |
