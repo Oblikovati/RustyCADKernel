@@ -24,7 +24,7 @@ fn edge_tube_initializer_matches_native_positive_and_negative_modes() -> Result<
 
 fn assert_tube(path: &Edge, radius: f64, orientation: Orientation) -> Result<(), Failure> {
     let mut offset = BRepOffsetOffset::new();
-    offset.init_edge_tube(path, radius)?;
+    offset.init_edge(path, radius)?;
     let face = offset.face();
     let shape = face.clone().into_shape();
     assert_eq!(offset.status(), BRepOffsetStatus::Good);

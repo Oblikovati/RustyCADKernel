@@ -14,13 +14,8 @@ mod make_offset_build_spheres;
 mod make_offset_check;
 mod make_offset_history;
 mod make_offset_thick_solid;
+mod offset;
 mod offset_face;
-mod offset_rails;
-mod offset_rails_adaptors;
-mod offset_rails_closed;
-mod offset_rails_geometry;
-mod offset_rails_iso;
-mod offset_tube;
 mod simple_offset;
 mod simple_offset_angle;
 mod simple_offset_edge;
@@ -29,9 +24,9 @@ mod simple_offset_maker;
 mod simple_offset_vertex;
 mod simple_offset_vertex_map;
 mod simple_offset_wall;
-mod sphere_join;
 mod surface;
 mod surface_analytic;
+pub use offset::{BRepOffsetOffset, CreatedShapes, PipeOptions};
 mod tool;
 pub use tool::{BRepOffsetTool, EdgeNeighbours, EnlargeFaceOptions, ShapeImages, VertexEdges};
 
@@ -52,8 +47,6 @@ pub use simple_offset_vertex_map::{OffsetVertexData, build_simple_offset_vertice
 pub use surface::{BRepOffsetStatus, surface};
 
 pub use offset_face::BRepOffsetOffsetFace;
-pub use offset_rails::BRepOffsetOffset;
 pub use simple_offset_wall::build_simple_offset_wall;
-pub use sphere_join::build_vertex_arc_join;
 mod analyse;
 pub use analyse::BRepOffsetAnalyse;

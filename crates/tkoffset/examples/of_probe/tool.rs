@@ -18,15 +18,19 @@ use rustycad_tkprim::brep_prim_api::{
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
 /// The primitive of a request (`ot_primitive`).
-fn primitive(r: &mut Reader) -> Result<Shape, Failure> {
+pub(super) fn primitive(r: &mut Reader) -> Result<Shape, Failure> {
     let kind = r.integer();
     let (a, b, c) = (r.real(), r.real(), r.real());
     let (o, n) = (r.pnt(), r.dir());
     let ax = Axis2::new(o, n)?;
     let s = match kind {
         0 => BRepPrimAPIMakeBox::with_axes(ax, a, b, c).shape()?.clone(),
-        1 => BRepPrimAPIMakeCylinder::with_axes(ax, a, b).shape()?.clone(),
-        2 => BRepPrimAPIMakeCone::with_axes(ax, a, b, c)?.shape()?.clone(),
+        1 => BRepPrimAPIMakeCylinder::with_axes(ax, a, b)
+            .shape()?
+            .clone(),
+        2 => BRepPrimAPIMakeCone::with_axes(ax, a, b, c)?
+            .shape()?
+            .clone(),
         3 => BRepPrimAPIMakeSphere::new(a)?.shape()?.clone(),
         _ => BRepPrimAPIMakeTorus::with_axes(ax, a, b)?.shape()?.clone(),
     };
@@ -65,7 +69,7 @@ fn sections(l1: &List<Shape>, l2: &List<Shape>) -> Result<(), Failure> {
 }
 
 /// Prints the exception type of a failed request body, then ends the record.
-fn finish(result: Result<(), Failure>) {
+pub(super) fn finish(result: Result<(), Failure>) {
     if let Err(error) = result {
         print!("{} ", error.exception_type());
     }

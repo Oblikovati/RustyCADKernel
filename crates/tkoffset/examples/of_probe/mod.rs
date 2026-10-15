@@ -1,6 +1,7 @@
 //! The TKOffset probe operations, one module per C++ probe file under tools/oracle.
 pub mod make_offset;
 pub mod make_pipe_shell;
+pub mod offset;
 pub mod thru_sections;
 pub mod tool;
 pub mod wrappers;

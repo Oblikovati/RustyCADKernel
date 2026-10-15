@@ -22,3 +22,5 @@ def append_tkoffset_requests(requests: list[str]) -> None:
     __import__('tkoffset_corpus_brepoffsetapi_wrappers').append_wrapper_requests(requests)
     # BRepOffset_Tool (tkoffset_corpus_brepoffset_tool.py)
     __import__('tkoffset_corpus_brepoffset_tool').append_tool_requests(requests)
+    # BRepOffset_Offset (tkoffset_corpus_brepoffset_offset.py)
+    __import__('tkoffset_corpus_brepoffset_offset').append_offset_requests(requests)

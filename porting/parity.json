@@ -338440,15 +338440,6 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Vertex &, const NCollection_List<TopoDS_Shape> &, const double, const bool, const double, const GeomAbs_Shape)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::build_vertex_arc_join",
-      "status": "partial",
-      "notes": "Default spherical vertex-join geometry exposed as a face-building helper, with positive/negative native frame/topology/orientation/validity/mass evidence. Full BRepOffset_Offset object state/history, polynomial parameters and wider geometric domains remain unported/unproven. Does not map or close StandardOffset OCC28131."
-    },
-    {
       "upstream_id": "BRepOffset_Mode",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Mode.hxx",
@@ -338629,52 +338620,20 @@
       "notes": "Pinned source translation. Native fixtures cover 192 connection classifications and 5440 side-propagation cases. DefineConnectType still needs curved/located/seam/spline correction native coverage. NextSide excludes the C++ abs(INT_MIN) undefined case from its equivalence claim. No fillet toolkit or legacy completion claim."
     },
     {
-      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Face &, const double, const bool, const GeomAbs_JoinType)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::from_face",
-      "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial."
-    },
-    {
       "upstream_id": "BRepOffset_Offset::Face() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::face",
-      "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven.",
-      "rust_items": [
-        "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::face",
-        "rustycad_tkoffset::brep_offset::BRepOffsetOffset::face"
-      ]
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces: every face offset both ways at three distances, each join, with and without the shared Created images; status, face digest and edge images) on boxes, cylinders, cones, spheres and tori."
     },
     {
       "upstream_id": "BRepOffset_Offset::Status() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::status",
-      "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven.",
-      "rust_items": [
-        "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::status",
-        "rustycad_tkoffset::brep_offset::BRepOffsetOffset::status"
-      ]
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::Generated(const TopoDS_Shape &) const",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
-      "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Subsequent endpoint-edge, pcurve-only, located, degenerated and closed-rail fixtures extend partial coverage; see tkoffset_offset_rails_located and tkoffset_offset_rails_options oracle fixtures. The box corner fixture preserves shared edge identity and opposite orientation across pipe/sphere faces (tools/oracle/tkoffset_sphere_connector_curves.md). Arbitrary combinations and complete offset variants remain unproven.",
-      "rust_items": [
-        "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
-        "rustycad_tkoffset::brep_offset::BRepOffsetOffset::generated"
-      ]
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::status",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces: every face offset both ways at three distances, each join, with and without the shared Created images; status, face digest and edge images) on boxes, cylinders, cones, spheres and tori."
     },
     {
       "upstream_id": "TopOpeBRepTool_TOOL::minDUV(const TopoDS_Face &)",
@@ -343750,37 +343709,9 @@
       "upstream_id": "BRepOffset_Offset::BRepOffset_Offset()",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::new",
-      "status": "partial",
-      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Edge &, const double, const bool, const double, const GeomAbs_Shape)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edges",
-      "status": "partial",
-      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Edge &, const double, const bool, const double, const GeomAbs_Shape)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_edges",
-      "status": "partial",
-      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::InitialShape()",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.lxx",
-      "source_sha256": "93aeef12258a9df7099180cd06131258c365e9ba3a231313306c0819e633e5a2",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::initial_shape",
-      "status": "partial",
-      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); the native default constructor leaves the status uninitialized, Good here."
     },
     {
       "upstream_id": "BOPTools_AlgoTools::OrientFacesOnShell(TopoDS_Shape &)",
@@ -343799,24 +343730,6 @@
       "rust_item": "rustycad_tkbo::bop_tools::is_block_in_on_face",
       "status": "implemented",
       "notes": "Source translation and 90 native observations including final cached projector state; tools/oracle/tkbo_block_face.md. Supplemental fixtures, not complete API/legacy parity. Reviewed line by line against the C++ (2026-10-15): BOPTools_AlgoTools::IsBlockInOnFace (0.0075 shrink, end samples, middle sample with tolerance check). The Rust body is faithful; the remaining open items named above are input families the existing native fixtures do not sample, not missing behaviour, so the row is implemented. Native undefined behaviour (null sets, invalid indices) becomes a Failure as plan D3 requires; allocator parameters are D1 class B3."
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Face &, const double, const bool, const GeomAbs_JoinType)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_face",
-      "status": "partial",
-      "notes": "Default OffsetOutside=true / Arc face constructor facade over existing source-derived face image. Native planar state/topology/validity/history fixture: tools/oracle/tkoffset_offset_face_mode.md. Nondefault options and full API/legacy parity remain unproven."
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Vertex &, const NCollection_List<TopoDS_Shape> &, const double, const bool, const double, const GeomAbs_Shape)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_vertex",
-      "status": "partial",
-      "notes": "Default non-polynomial vertex constructor facade over source-derived spherical join; positive/negative native geometry and facade state/null-history checks in tools/oracle/tkoffset_vertex_arc_join.md. Nondefault Tol/Conti, polynomial mode and full API/legacy parity remain unproven."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformVV(const Message_ProgressRange &)",
@@ -343844,15 +343757,6 @@
       "rust_item": "rustycad_tkbo::bop_tools::correct_shape_tolerances",
       "status": "partial",
       "notes": "Source pass-order/avoidance translation, 48 native tolerance observations including one/two passes and both requested scheduling flags. Rust currently executes serially. tools/oracle/tkbo_shape_tolerances.md; general topology/concurrency and full legacy parity remain unproven."
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge &, const double)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edge_tube",
-      "status": "partial",
-      "notes": "Identity-located 3D free-boundary tube initializer: positive/negative native state, area, topology, orientation and Generated fixture in tools/oracle/tkoffset_offset_edge_tube.md. General curve/location/pcurve-only and exceptional history paths remain unproven; no complete API/legacy claim."
     },
     {
       "upstream_id": "BOPTools_AlgoTools::CorrectPointOnCurve(const TopoDS_Shape &, const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &, const double, const bool)",
@@ -344057,24 +343961,6 @@
       "notes": "Class record: ported as a type, rustycad_tkbo::int_tools::Range (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "0828a96afdd2d12a4abade8c3c60cb37d428502bb41a243ea64619a4b3799e67",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Edge &, const double, const TopoDS_Edge &, const TopoDS_Edge &, const bool, const double, const GeomAbs_Shape)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edges_with_connectors",
-      "status": "partial",
-      "notes": "Supplied rail connectors including reversed, unmatched, first-vertex-only native-invalid and unmatched located inputs; tools/oracle/tkoffset_offset_rails_with_connectors.md and related connector fixtures. Nondefault options, located/pcurve-only rail inputs and full legacy/API parity unproven."
-    },
-    {
-      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Edge &, const double, const TopoDS_Edge &, const TopoDS_Edge &, const bool, const double, const GeomAbs_Shape)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
-      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_edges_with_connectors",
-      "status": "partial",
-      "notes": "Supplied rail connectors including reversed, unmatched, first-vertex-only native-invalid and unmatched located inputs; tools/oracle/tkoffset_offset_rails_with_connectors.md and related connector fixtures. Nondefault options, located/pcurve-only rail inputs and full legacy/API parity unproven."
     },
     {
       "upstream_id": "BRepOffset_Offset::operator delete(void*) noexcept",
@@ -626766,6 +626652,110 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetTool::check_planes_normals",
       "status": "implemented",
       "notes": "Translated from BRepOffset_Tool.cxx (crates/tkoffset/src/brep_offset/tool/); compared with OCCT by tools/verify_tkoffset_numeric.py (ot_queries at the default 1e-8) on faces of boxes, cylinders, cones, spheres and tori and their enlargements. The defaulted tolerance is explicit."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Face&,double,bool,GeomAbs_JoinType)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces: every face offset both ways at three distances, each join, with and without the shared Created images; status, face digest and edge images) on boxes, cylinders, cones, spheres and tori."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Face&,double,const NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,bool,GeomAbs_JoinType)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_face_created",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces: every face offset both ways at three distances, each join, with and without the shared Created images; status, face digest and edge images) on boxes, cylinders, cones, spheres and tori."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&,double,bool,double,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_pipes: the pipe of every edge between the images of its two offset faces, exact and polynomial at several tolerances and continuities, and again with the generated connectors given back) on boxes, cylinders, cones, spheres and tori. The defaulted Polynomial, Tol and Conti are PipeOptions (Default gives the native defaults)."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&,double,const TopoDS_Edge&,const TopoDS_Edge&,bool,double,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_edges_with_connectors",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_pipes: the pipe of every edge between the images of its two offset faces, exact and polynomial at several tolerances and continuities, and again with the generated connectors given back) on boxes, cylinders, cones, spheres and tori. The defaulted Polynomial, Tol and Conti are PipeOptions (Default gives the native defaults)."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Vertex&,const NCollection_List<TopoDS_Shape>&,double,bool,double,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_pipes: the sphere of each box corner from the pipe connectors, exact and polynomial) on boxes, cylinders, cones, spheres and tori. The defaulted arguments are PipeOptions."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Face&,double,bool,GeomAbs_JoinType)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces: every face offset both ways at three distances, each join, with and without the shared Created images; status, face digest and edge images) on boxes, cylinders, cones, spheres and tori."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Face&,double,const NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,bool,GeomAbs_JoinType)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_face_created",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces: every face offset both ways at three distances, each join, with and without the shared Created images; status, face digest and edge images) on boxes, cylinders, cones, spheres and tori."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&,double,bool,double,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_pipes: the pipe of every edge between the images of its two offset faces, exact and polynomial at several tolerances and continuities, and again with the generated connectors given back) on boxes, cylinders, cones, spheres and tori. The defaulted Polynomial, Tol and Conti are PipeOptions (Default gives the native defaults)."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&,double,const TopoDS_Edge&,const TopoDS_Edge&,bool,double,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edges_with_connectors",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_pipes: the pipe of every edge between the images of its two offset faces, exact and polynomial at several tolerances and continuities, and again with the generated connectors given back) on boxes, cylinders, cones, spheres and tori. The defaulted Polynomial, Tol and Conti are PipeOptions (Default gives the native defaults)."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Vertex&,const NCollection_List<TopoDS_Shape>&,double,bool,double,GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_pipes: the sphere of each box corner from the pipe connectors, exact and polynomial) on boxes, cylinders, cones, spheres and tori. The defaulted arguments are PipeOptions."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_tubes: the tube of every edge, both signs) on boxes, cylinders, cones, spheres and tori. The status is kept, as natively."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::InitialShape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::initial_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/)."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Generated(const TopoDS_Shape&) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Offset.cxx (crates/tkoffset/src/brep_offset/offset/); compared with OCCT by tools/verify_tkoffset_numeric.py (oo_faces edge images, oo_pipes and oo_tubes vertex connectors) on boxes, cylinders, cones, spheres and tori."
     }
   ],
   "tests": [

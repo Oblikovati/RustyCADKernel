@@ -2,7 +2,7 @@
 //! `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod of_probe;
-use of_probe::{make_offset, make_pipe_shell, thru_sections, tool, wrappers};
+use of_probe::{make_offset, make_pipe_shell, offset, thru_sections, tool, wrappers};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -28,6 +28,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ot_inter2d", tool::inter2d_case),
     ("ot_queries", tool::queries_case),
     ("ot_deboucle", tool::deboucle_case),
+    // BRepOffset_Offset (of_probe/offset.rs)
+    ("oo_faces", offset::faces_case),
+    ("oo_pipes", offset::pipes_case),
+    ("oo_tubes", offset::tubes_case),
 ];
 
 fn main() {

@@ -3,7 +3,7 @@ use rustycad_tkbrep::{brep::BRepTool, topexp::Explorer, topods::Face};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
-use rustycad_tkmath::gp::Plane3;
+use rustycad_tkmath::{geom_abs::JoinType, gp::Plane3};
 use rustycad_tkoffset::brep_offset::{BRepOffsetOffset, BRepOffsetStatus};
 use rustycad_tktopalgo::{
     brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape},
@@ -17,7 +17,7 @@ fn bounded_plane_uses_the_native_default_face_mode()
     let mut maker =
         BRepBuilderAPIMakeFace::from_plane_bounds(Plane3::default(), (0.0, 1.0, 0.0, 2.0))?;
     let source = Face::unchecked(maker.shape()?.clone());
-    let offset = BRepOffsetOffset::from_face(&source, 0.5)?;
+    let offset = BRepOffsetOffset::from_face(&source, 0.5, true, JoinType::Arc)?;
     let image = offset.face();
     let image_shape = image.clone().into_shape();
     assert_eq!(offset.status(), BRepOffsetStatus::Good);

@@ -60,7 +60,12 @@ fn append_vertex_sphere(
         return Ok(());
     }
     let connectors = connector_edges(vertex, &edges, joins)?;
-    let image = BRepOffsetOffset::from_vertex(vertex, &connectors, offset)?;
+    let mut l_edge = rustycad_tkernel::ncollection::List::default();
+    for connector in &connectors {
+        l_edge.append(connector.clone().into_shape());
+    }
+    let image =
+        BRepOffsetOffset::from_vertex(vertex, &l_edge, offset, super::PipeOptions::default())?;
     result.push(SphericalVertexJoin {
         source_vertex: vertex.clone(),
         face: image.face().clone(),

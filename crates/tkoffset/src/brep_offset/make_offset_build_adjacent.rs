@@ -8,7 +8,6 @@ use rustycad_tkbrep::{
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkfillet::chfi_ds::TypeOfConcavity;
 use rustycad_tkg3d::{adaptor3d::Adaptor3dSurface, top_abs::ShapeEnum};
-use rustycad_tkmath::geom_abs::Shape as Continuity;
 
 pub(super) struct SharedSupportJoin {
     pub(super) source_edge: Edge,
@@ -162,7 +161,7 @@ fn offset_patch(
     let rail1 = image_edge(faces, images, order.first(), edge)?;
     let rail2 = image_edge(faces, images, order.last(), edge)?;
     let offset_image =
-        BRepOffsetOffset::from_edges(edge, &rail1, &rail2, offset, false, 1.0e-4, Continuity::C1)?;
+        BRepOffsetOffset::from_edges(edge, &rail1, &rail2, offset, super::PipeOptions::default())?;
     let endpoint_connectors = endpoint_connectors(&offset_image, edge)?;
     Ok((offset_image.face().clone(), endpoint_connectors))
 }

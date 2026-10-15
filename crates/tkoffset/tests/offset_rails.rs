@@ -8,11 +8,10 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::{
-    geom_abs::Shape as Continuity,
     gp::{Axis2, Axis3, Circle3, Direction2, Direction3, Point2, Point3, Transform3, Vector3},
     toploc::Location,
 };
-use rustycad_tkoffset::brep_offset::{BRepOffsetOffset, BRepOffsetStatus};
+use rustycad_tkoffset::brep_offset::{PipeOptions, BRepOffsetOffset, BRepOffsetStatus};
 use rustycad_tktopalgo::{
     brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeVertex},
     brep_check::BRepCheckAnalyzer,
@@ -35,7 +34,7 @@ fn straight_path_and_two_3d_rails_build_the_native_face()
     let rail1 = edge((1.0, 0.0, 0.0), (1.0, 0.0, 10.0))?;
     let rail2 = edge((0.0, 1.0, 0.0), (0.0, 1.0, 10.0))?;
     let offset =
-        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, PipeOptions::default())?;
     let face = offset.face();
     assert_eq!(offset.status(), BRepOffsetStatus::Good);
     assert!(offset.initial_shape().is_same(&path.clone().into_shape()));
@@ -63,7 +62,7 @@ fn pcurve_only_rails_follow_the_native_adaptor_branch()
     assert!(BRepTool::curve_with_location(&rail1)?.curve.is_null());
     assert!(BRepTool::first_curve_on_surface(&rail1)?.pcurve.is_some());
     let offset =
-        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, PipeOptions::default())?;
     let face_shape = offset.face().clone().into_shape();
     assert_eq!(offset.status(), BRepOffsetStatus::Good);
     assert_eq!(count(&face_shape, ShapeEnum::Edge), 4);
@@ -88,7 +87,7 @@ fn nonidentity_edge_locations_are_applied_before_pipe_construction()
     let rail1 = located_edge((1.0, 0.0, 0.0), (1.0, 0.0, 5.0), &location)?;
     let rail2 = located_edge((0.0, 1.0, 0.0), (0.0, 1.0, 5.0), &location)?;
     let offset =
-        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, PipeOptions::default())?;
     let face_shape = offset.face().clone().into_shape();
     assert_eq!(count(&face_shape, ShapeEnum::Edge), 4);
     assert_eq!(count_curves(&face_shape)?, 4);
@@ -106,7 +105,7 @@ fn generated_endpoint_images_are_connector_edges() -> Result<(), rustycad_tkerne
     let rail1 = edge((1.0, 0.0, 0.0), (1.0, 0.0, 10.0))?;
     let rail2 = edge((0.0, 1.0, 0.0), (0.0, 1.0, 10.0))?;
     let offset =
-        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, PipeOptions::default())?;
     let (first, last) = rustycad_tkbrep::topexp::vertices(&path, false);
     let first_image = offset.generated(&first.into_shape());
     let last_image = offset.generated(&last.into_shape());
@@ -138,9 +137,7 @@ fn supplied_endpoint_edges_are_reused_and_populated()
         0.5,
         &first,
         &last,
-        false,
-        1.0e-4,
-        Continuity::C1,
+        PipeOptions::default(),
     )?;
     let (path_start, path_end) = rustycad_tkbrep::topexp::vertices(&path, false);
     assert!(
@@ -188,9 +185,7 @@ fn unmatched_supplied_endpoint_is_replaced_without_mutating_it()
         0.5,
         &unmatched,
         &last,
-        false,
-        1.0e-4,
-        Continuity::C1,
+        PipeOptions::default(),
     )?;
     let (path_start, path_end) = rustycad_tkbrep::topexp::vertices(&path, false);
     let first_image = offset.generated(&path_start.into_shape());
@@ -231,9 +226,7 @@ fn nonidentity_unmatched_supplied_endpoint_is_ignored()
         0.5,
         &unmatched,
         &last,
-        false,
-        1.0e-4,
-        Continuity::C1,
+        PipeOptions::default(),
     )?;
     let (path_start, path_end) = rustycad_tkbrep::topexp::vertices(&path, false);
     let first_image = offset.generated(&path_start.into_shape());
@@ -270,9 +263,7 @@ fn partially_matching_supplied_endpoint_is_reused_as_native_does()
         0.5,
         &malformed_first,
         &last,
-        false,
-        1.0e-4,
-        Continuity::C1,
+        PipeOptions::default(),
     )?;
     let (path_start, _) = rustycad_tkbrep::topexp::vertices(&path, false);
     let image = offset.generated(&path_start.into_shape());
@@ -297,7 +288,7 @@ fn closed_circle_path_matches_native_single_connector_topology()
     let rail1 = edge((2.0, 0.0, 0.0), (2.0, 0.0, 1.0))?;
     let rail2 = edge((3.0, 0.0, 0.0), (3.0, 0.0, 1.0))?;
     let offset =
-        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, PipeOptions::default())?;
     let face = offset.face();
     let face_shape = face.clone().into_shape();
     assert_eq!(count(&face_shape, ShapeEnum::Edge), 4);
@@ -322,7 +313,7 @@ fn sub_confusion_circle_rail_is_marked_degenerated()
     let rail1 = BRepBuilderAPIMakeEdge::from_circ(Circle3::new(axis, 0.5e-7)?)?.edge()?;
     let rail2 = BRepBuilderAPIMakeEdge::from_circ(Circle3::new(axis, 1.0)?)?.edge()?;
     let offset =
-        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, PipeOptions::default())?;
     let face_shape = offset.face().clone().into_shape();
     assert_eq!(count(&face_shape, ShapeEnum::Edge), 4);
     assert_eq!(count_curves(&face_shape)?, 1);
