@@ -11,7 +11,8 @@ use rustycad_tkernel::standard::Failure;
 use std::io::Write;
 
 /// Formats one real as `operator<<(double)` does on the caller's `std::ostream`, whose
-/// precision and float field the native writers inherit; [`general`] is the default.
+/// precision and float field the native writers inherit; the default is the
+/// stream `%g` style with precision 6.
 /// `write_polygon3d_with(&polygon, &mut out, true, &|value| format!("{value:.3e}"))?`.
 pub type RealText<'a> = &'a dyn Fn(f64) -> String;
 

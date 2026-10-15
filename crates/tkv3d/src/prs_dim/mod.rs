@@ -1,6 +1,6 @@
 //! Martensite port of OCCT PrsDim (3d097a0): dimension and relation interactive objects.
 //!
-//! The package class [`PrsDim`] holds the geometry extraction helpers (native output
+//! The package class [`PrsDim`](crate::prs_dim::PrsDim) holds the geometry extraction helpers (native output
 //! arguments are returned values). The abstract `PrsDim_Dimension` and `PrsDim_Relation`
 //! are traits over embedded base state, as `AIS_InteractiveObject`.
 mod enums;

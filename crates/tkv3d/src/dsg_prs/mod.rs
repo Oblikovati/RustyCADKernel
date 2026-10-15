@@ -2,7 +2,7 @@
 //!
 //! Each `DsgPrs_*Presentation` class is a unit struct whose static `Add` overloads are named
 //! after what distinguishes them (`add`, `add_with_arrow`, `add_arc`...). The package class
-//! [`DsgPrs`] holds the shared layout computations; native output arguments become returned
+//! [`DsgPrs`](crate::dsg_prs::DsgPrs) holds the shared layout computations; native output arguments become returned
 //! values or `&mut` structs. A null presentation, drawer or aspect (a native null
 //! dereference) is a `Standard_NullObject` failure.
 mod xyz_axis;
