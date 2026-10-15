@@ -119,3 +119,17 @@ pub fn rect_face(x0: f64, y0: f64, x1: f64, y1: f64, z: f64) -> Face {
         .face()
         .unwrap()
 }
+
+/// The planar face bounded by the closed polygon through `points`.
+pub fn polygon_face(points: &[(f64, f64, f64)]) -> Face {
+    use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakePolygon};
+    let mut poly = BRepBuilderAPIMakePolygon::new();
+    for p in points {
+        poly.add_point(Point3::new(p.0, p.1, p.2)).unwrap();
+    }
+    poly.close().unwrap();
+    BRepBuilderAPIMakeFace::from_wire(&poly.wire().unwrap(), true)
+        .unwrap()
+        .face()
+        .unwrap()
+}

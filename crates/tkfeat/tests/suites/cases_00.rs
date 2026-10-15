@@ -3,6 +3,8 @@
 pub mod brep_feat_dprism;
 #[path = "../brep_feat_prism.rs"]
 pub mod brep_feat_prism;
+#[path = "../brep_feat_revol.rs"]
+pub mod brep_feat_revol;
 #[path = "../loc_ope_split_glue.rs"]
 pub mod loc_ope_split_glue;
 #[path = "../loc_ope_sweeps.rs"]

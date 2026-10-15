@@ -4,12 +4,12 @@
 
 //! The prism helpers: the history of the prism, the length bound of the long prisms,
 //! the side of a limiting shape along the prism and its test line.
-use crate::brep_feat::common::sample_barycentre;
+use crate::brep_feat::common::{maj_map_swept, sample_barycentre};
 use crate::brep_feat::{DescendantMap, parametric_barycenter};
 use crate::loc_ope::{CSIntersector, Prism};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Face, Shape};
-use rustycad_tkernel::ncollection::{List, Sequence};
+use rustycad_tkernel::ncollection::Sequence;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{GeomCurve, GeomLine};
@@ -17,18 +17,6 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Axis1, Direction3};
 use rustycad_tktopalgo::brep_bnd_lib::BRepBndLib;
-
-/// Maps the first or last shape of the prism: its first wire to its faces.
-fn map_end(end: &Shape, the_map: &mut DescendantMap, end_shape: &mut Shape) -> Result<(), Failure> {
-    let Some(wire) = Iterator::next(&mut Explorer::new(end, ShapeEnum::Wire, ShapeEnum::Shape)?)
-    else {
-        return Ok(());
-    };
-    *end_shape = wire.clone();
-    let faces: List<Shape> = Explorer::new(end, ShapeEnum::Face, ShapeEnum::Shape)?.collect();
-    the_map.bind(wire, faces);
-    Ok(())
-}
 
 /// `MajMap(theB, theP, myMap, myFShape, myLShape)`: the first and last wires of the
 /// prism mapped to their faces, and each edge of the base not mapped yet to the faces it
@@ -40,15 +28,15 @@ pub(super) fn maj_map(
     the_f_shape: &mut Shape,
     the_l_shape: &mut Shape,
 ) -> Result<(), Failure> {
-    map_end(the_p.first_shape(), the_map, the_f_shape)?;
-    map_end(the_p.last_shape(), the_map, the_l_shape)?;
-    for e in Explorer::new(the_b, ShapeEnum::Edge, ShapeEnum::Shape)? {
-        if !the_map.is_bound(&e) {
-            let swept = the_p.shapes(&e)?.clone();
-            the_map.bind(e, swept);
-        }
-    }
-    Ok(())
+    let ends = (the_p.first_shape(), the_p.last_shape());
+    maj_map_swept(
+        the_b,
+        ends,
+        |e| Ok(the_p.shapes(e)?.clone()),
+        the_map,
+        the_f_shape,
+        the_l_shape,
+    )
 }
 
 /// Whether a limiting shape has an edge without vertex (an infinite face of

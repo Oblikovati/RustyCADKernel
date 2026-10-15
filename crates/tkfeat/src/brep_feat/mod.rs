@@ -6,11 +6,13 @@ mod common;
 mod form;
 mod make_dprism;
 mod make_prism;
+mod make_revol;
 mod package;
 pub use builder::BRepFeatBuilder;
 pub use form::{DescendantMap, Form, FormFeature};
 pub use make_dprism::BRepFeatMakeDPrism;
 pub use make_prism::BRepFeatMakePrism;
+pub use make_revol::BRepFeatMakeRevol;
 pub use package::{
     ParametricMinMax, PerfSelection, Status, StatusError, barycenter, face_until, is_inside,
     parametric_barycenter, parametric_min_max, print, sample_edges, status_error_message, tool,

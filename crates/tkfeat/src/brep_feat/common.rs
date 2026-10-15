@@ -157,3 +157,74 @@ impl Form {
         }
     }
 }
+
+/// Maps the first wire of an end shape of a sweep to the faces of that end shape.
+fn map_end(
+    end: &Shape,
+    the_map: &mut super::DescendantMap,
+    end_shape: &mut Shape,
+) -> Result<(), Failure> {
+    let Some(wire) = Iterator::next(&mut Explorer::new(end, ShapeEnum::Wire, ShapeEnum::Shape)?)
+    else {
+        return Ok(());
+    };
+    *end_shape = wire.clone();
+    let faces: rustycad_tkernel::ncollection::List<Shape> =
+        Explorer::new(end, ShapeEnum::Face, ShapeEnum::Shape)?.collect();
+    the_map.bind(wire, faces);
+    Ok(())
+}
+
+/// The static `MajMap(theB, theP, myMap, myFShape, myLShape)` of the swept features: the
+/// first and last wires of the sweep mapped to their faces, and each edge of the base not
+/// mapped yet to the faces it sweeps (`shapes`).
+pub(crate) fn maj_map_swept(
+    the_b: &Shape,
+    ends: (&Shape, &Shape),
+    shapes: impl Fn(&Shape) -> Result<rustycad_tkernel::ncollection::List<Shape>, Failure>,
+    the_map: &mut super::DescendantMap,
+    the_f_shape: &mut Shape,
+    the_l_shape: &mut Shape,
+) -> Result<(), Failure> {
+    map_end(ends.0, the_map, the_f_shape)?;
+    map_end(ends.1, the_map, the_l_shape)?;
+    for e in Explorer::new(the_b, ShapeEnum::Edge, ShapeEnum::Shape)? {
+        if !the_map.is_bound(&e) {
+            let swept = shapes(&e)?;
+            the_map.bind(e, swept);
+        }
+    }
+    Ok(())
+}
+
+/// try to detect the faces of gluing in case if the top of the sweep is tangent to the
+/// initial shape (natively without effect: the face found is not kept, the tests only
+/// evaluated).
+pub(crate) fn detect_top_face(
+    f: &Form,
+    has_slface: bool,
+    pbase: &Shape,
+    vrai: &Shape,
+) -> Result<(), Failure> {
+    if f.skface.is_null() && !has_slface {
+        return Ok(());
+    }
+    let mut fface = Face::default();
+    if f.l_shape.shape_type()? == ShapeEnum::Wire {
+        'faces: for ex1 in Explorer::new(vrai, ShapeEnum::Face, ShapeEnum::Shape)? {
+            for ex2 in Explorer::new(&ex1, ShapeEnum::Wire, ShapeEnum::Shape)? {
+                if ex2.is_same(&f.l_shape) {
+                    fface = rustycad_tkbrep::topods::face(&ex1)?;
+                    break 'faces;
+                }
+            }
+        }
+    }
+    for exp in Explorer::new(&f.sbase, ShapeEnum::Face, ShapeEnum::Shape)? {
+        let ff = rustycad_tkbrep::topods::face(&exp)?;
+        if to_fuse(&ff, &fface)? && !fface.is_same(pbase) && super::is_inside(&ff, &fface)? {
+            break;
+        }
+    }
+    Ok(())
+}

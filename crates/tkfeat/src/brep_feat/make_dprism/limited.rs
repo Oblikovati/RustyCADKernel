@@ -262,11 +262,7 @@ impl BRepFeatMakeDPrism {
     }
 
     /// The drafted prism of `PerformFromEnd` on a support.
-    fn end_support(
-        &mut self,
-        vrai: &Shape,
-        c2: &Handle<dyn GeomCurve>,
-    ) -> Result<(), Failure> {
+    fn end_support(&mut self, vrai: &Shape, c2: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
         let asi1 = intersect(&self.form.s_until, c2)?;
         let (mut or_u, mut f_until) = (Orientation::Forward, Face::default());
         if hit(&asi1)? {

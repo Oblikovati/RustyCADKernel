@@ -6,15 +6,15 @@
 //! towards a shape.
 use super::BRepFeatMakePrism;
 use super::statics::{height_max, maj_map, sens_of_prism, test_curve};
-use crate::brep_feat::common::to_fuse;
+use crate::brep_feat::common::detect_top_face;
 use crate::brep_feat::form::global_perform;
-use crate::brep_feat::{PerfSelection, is_inside, tool};
+use crate::brep_feat::{PerfSelection, tool};
 use crate::errors::construction_error;
 use crate::loc_ope::{CSIntersector, Prism};
 use rustycad_tkbo::brep_algo_api::BRepAlgoAPICut;
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{self, Compound, Face, Shape};
+use rustycad_tkbrep::topods::{Compound, Shape};
 use rustycad_tkernel::ncollection::Sequence;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::GeomCurve;
@@ -69,7 +69,12 @@ impl BRepFeatMakePrism {
         // construction of prism of height Length
         let the_prism = Prism::with_vector(&self.pbase, self.along(length))?;
         let vrai_prism = self.take_prism(&the_prism)?;
-        self.detect_top_face(&vrai_prism)?;
+        detect_top_face(
+            &self.form,
+            !self.slface.is_empty(),
+            &self.pbase,
+            &vrai_prism,
+        )?;
         // management of faces of gluing given by the user
         self.form.glued_faces_valid();
         if !self.form.glued_f.is_empty() {
@@ -81,33 +86,6 @@ impl BRepFeatMakePrism {
         if !self.form.just_gluer {
             let g_shape = self.form.g_shape.clone();
             self.form.finish_by_boolean(&g_shape)?;
-        }
-        Ok(())
-    }
-
-    /// try to detect the faces of gluing in case if the top of the prism is tangent to
-    /// the initial shape (natively without effect: the faces found are not kept).
-    fn detect_top_face(&self, vrai_prism: &Shape) -> Result<(), Failure> {
-        let f = &self.form;
-        if f.skface.is_null() && self.slface.is_empty() {
-            return Ok(());
-        }
-        let mut fface = Face::default();
-        if f.l_shape.shape_type()? == ShapeEnum::Wire {
-            'faces: for ex1 in Explorer::new(vrai_prism, ShapeEnum::Face, ShapeEnum::Shape)? {
-                for ex2 in Explorer::new(&ex1, ShapeEnum::Wire, ShapeEnum::Shape)? {
-                    if ex2.is_same(&f.l_shape) {
-                        fface = topods::face(&ex1)?;
-                        break 'faces;
-                    }
-                }
-            }
-        }
-        for exp in Explorer::new(&f.sbase, ShapeEnum::Face, ShapeEnum::Shape)? {
-            let ff = topods::face(&exp)?;
-            if to_fuse(&ff, &fface)? && !fface.is_same(&self.pbase) && is_inside(&ff, &fface)? {
-                break;
-            }
         }
         Ok(())
     }
