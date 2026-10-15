@@ -613449,6 +613449,726 @@
       "rust_item": "rustycad_tkfillet::chfikpart::ChFiKPartComputeData::compute",
       "status": "implemented",
       "notes": "ChFiKPart mapping (docs/tkfillet-progress.md): the overloads are named after the surfaces and the spine (pln_pln, pln_cyl_line, pln_cyl_circle, pln_con), the surface data is a shared ChFiDS handle and the related arguments are grouped in tuples; compared with OCCT by the fl_kpart_make and fl_kpart_corner probes of tools/verify_tkfillet_numeric.py; unit tests in crates/tkfillet/tests/chfikpart_make.rs"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ClosedAndTangent(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::closed_and_tangent",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformSurf(NCollection_Sequence<occ::handle<ChFiDS_SurfData>> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, TopAbs_Orientation, double, double, double, double &, double &, bool, bool, bool, bool, bool, bool, const math_VectorBase<> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::perform_surf_rst1",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Generated(const TopoDS_Shape &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::generated",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myVDataMap",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_vdata_map",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ExtentOneCorner(const TopoDS_Vertex &, const occ::handle<ChFiDS_Stripe> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::extent_one_corner",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::tol2d",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::tol2d",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myEVIMap",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_evi_map",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ComputeData(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor2d_Curve2d> &, const occ::handle<Adaptor3d_TopolTool> &, bool &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor2d_Curve2d> &, const occ::handle<Adaptor3d_TopolTool> &, bool &, Blend_RstRstFunction &, Blend_SurfCurvFuncInv &, Blend_CurvPointFuncInv &, Blend_SurfCurvFuncInv &, Blend_CurvPointFuncInv &, double, double, double, double, double &, double &, const math_VectorBase<> &, bool, bool, bool, bool, bool, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::walk_rst_rst",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformSurf(NCollection_Sequence<occ::handle<ChFiDS_SurfData>> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, TopAbs_Orientation, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, double, double, double, double &, double &, bool, bool, bool, bool, bool, bool, const math_VectorBase<> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::perform_surf_rst2",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Contains(const TopoDS_Edge &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::contains_with_index",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SetContinuity(GeomAbs_Shape, double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::set_continuity",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::tolesp",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::tolesp",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulSurf(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, TopAbs_Orientation, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, double, double, double &, double &, bool, bool, bool, bool, bool, bool, const math_VectorBase<> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::simul_surf_rst2",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Builder() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::builder",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SearchFace(const occ::handle<ChFiDS_Spine> &, const ChFiDS_CommonPoint &, const TopoDS_Face &, TopoDS_Face &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::search_face",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Trunc(const occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_Spine> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, int, bool, int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::trunc",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ExtentThreeCorner(const TopoDS_Vertex &, const NCollection_List<occ::handle<ChFiDS_Stripe>> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::extent_three_corner",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myESoMap",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_eso_map",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SetParams(double, double, double, double, double, double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::set_params",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::NbFaultyVertices() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::nb_faulty_vertices",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::StoreData(occ::handle<ChFiDS_SurfData> &, const AppBlend_Approx &, const occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, bool, bool, bool, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::store_data",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Compute()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::compute",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::RelativeAbscissa(int, const TopoDS_Vertex &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::relative_abscissa",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Shape() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::shape",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myEdgeFirstFace",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_edge_first_face",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ComputedSurface(int, int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::computed_surface",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::hasresult",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::hasresult",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulData(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_ElSpine> &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, Blend_Function &, Blend_FuncInv &, double, double, double, double, double &, double &, bool, bool, bool, const math_VectorBase<> &, int, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::simul_data",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Abscissa(int, const TopoDS_Vertex &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::abscissa",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::FirstVertex(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::first_vertex",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformSetOfKGen(occ::handle<ChFiDS_Stripe> &, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::perform_set_of_kgen",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SplitKPart(const occ::handle<ChFiDS_SurfData> &, NCollection_Sequence<occ::handle<ChFiDS_SurfData>> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, bool &, bool &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::split_kpart",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myVFMap",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_vf_map",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformSurf(NCollection_Sequence<occ::handle<ChFiDS_SurfData>> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, TopAbs_Orientation, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, TopAbs_Orientation, double, double, double, double &, double &, bool, bool, bool, bool, bool, bool, bool, const math_VectorBase<> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::perform_surf_rst_rst",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformTwoCorner(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::perform_two_corner",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::tolappangle",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::tolappangle",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformFirstSection(const occ::handle<ChFiDS_Spine> &, const occ::handle<ChFiDS_ElSpine> &, int, occ::handle<BRepAdaptor_Surface> &, occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<Adaptor3d_TopolTool> &, double, math_VectorBase<> &, TopAbs_State &, TopAbs_State &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::perform_first_section",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::StripeStatus(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::stripe_status",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myEShMap",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_esh_map",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformElement(const occ::handle<ChFiDS_Spine> &, double, const TopoDS_Face &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::perform_element",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SetRegul()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::set_regul",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::NbFaultyContours() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::nb_faulty_contours",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::CompleteData(occ::handle<ChFiDS_SurfData> &, Blend_RstRstFunction &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::complete_data",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::NbElements() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::nb_elements",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Closed(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::closed",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulSurf(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, double, double &, double &, bool, bool, bool, bool, bool, const math_VectorBase<> &, int &, int &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::simul_surf",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myRegul",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_regul",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformSurf(NCollection_Sequence<occ::handle<ChFiDS_SurfData>> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, double, double, double, double &, double &, bool, bool, bool, bool, bool, const math_VectorBase<> &, int &, int &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::perform_surf",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::FaultyContour(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::faulty_contour",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ExtentTwoCorner(const TopoDS_Vertex &, const NCollection_List<occ::handle<ChFiDS_Stripe>> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::extent_two_corner",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::fleche",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::fleche",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myVEMap",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_ve_map",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::badvertices",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::badvertices",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformExtremity(const occ::handle<ChFiDS_Spine> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::perform_extremity",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Length(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::length",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::IsDone() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::is_done",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::CallPerformSurf(occ::handle<ChFiDS_Stripe> &, bool, NCollection_Sequence<occ::handle<ChFiDS_SurfData>> &, occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Surface> &, const gp_Pnt2d &, const gp_Pnt2d &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Surface> &, const gp_Pnt2d &, const gp_Pnt2d &, const occ::handle<Adaptor3d_TopolTool> &, double, double, double, double &, double &, bool, bool, bool, bool, bool, math_VectorBase<> &, int &, int &, occ::handle<BRepAdaptor_Surface> &, occ::handle<BRepAdaptor_Surface> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::call_perform_surf",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myCoup",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_coup",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulData(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor2d_Curve2d> &, const occ::handle<Adaptor3d_TopolTool> &, bool &, Blend_SurfRstFunction &, Blend_FuncInv &, Blend_SurfPointFuncInv &, Blend_SurfCurvFuncInv &, double, double, double, double, double &, double &, const math_VectorBase<> &, int, bool, bool, bool, bool, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::walk_surf_rst",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformThreeCorner(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::perform_three_corner",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Remove(const TopoDS_Edge &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::remove",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulData(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor2d_Curve2d> &, const occ::handle<Adaptor3d_TopolTool> &, bool &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor2d_Curve2d> &, const occ::handle<Adaptor3d_TopolTool> &, bool &, Blend_RstRstFunction &, Blend_SurfCurvFuncInv &, Blend_CurvPointFuncInv &, Blend_SurfCurvFuncInv &, Blend_CurvPointFuncInv &, double, double, double, double, double &, double &, const math_VectorBase<> &, int, bool, bool, bool, bool, bool, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::walk_rst_rst",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformSetOfSurf(occ::handle<ChFiDS_Stripe> &, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::perform_set_of_surf",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::BadShape() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::bad_shape",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Contains(const TopoDS_Edge &, int &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::contains_with_index",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::tolapp3d",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::tolapp3d",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::tolapp2d",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::tolapp2d",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::done",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::done",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::FaultyVertex(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::faulty_vertex",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulSurf(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, TopAbs_Orientation, double, double, double &, double &, bool, bool, bool, bool, bool, bool, const math_VectorBase<> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::simul_surf_rst1",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::NbComputedSurfaces(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::nb_computed_surfaces",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myConti",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_conti",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::CompleteData(occ::handle<ChFiDS_SurfData> &, Blend_Function &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, bool, bool, bool, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::complete_data",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::StripeOrientations(const occ::handle<ChFiDS_Spine> &, TopAbs_Orientation &, TopAbs_Orientation &, int &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::stripe_orientations",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::PerformSetOfKPart(occ::handle<ChFiDS_Stripe> &, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::perform_set_of_kpart",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulKPart(const occ::handle<ChFiDS_SurfData> &) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::simul_kpart",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myEFMap",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_ef_map",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::badstripes",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::badstripes",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ChFi3d_Builder(const TopoDS_Shape &, double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::new",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myListStripe",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_list_stripe",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::LastVertex(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::last_vertex",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::CompleteData(occ::handle<ChFiDS_SurfData> &, Blend_SurfRstFunction &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_Surface> &, TopAbs_Orientation, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::complete_data",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Reset()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::reset",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::Value(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::value",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::SimulSurf(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, int, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, TopAbs_Orientation, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<BRepAdaptor_Curve2d> &, const occ::handle<BRepAdaptor_Surface> &, const occ::handle<BRepAdaptor_Curve2d> &, bool &, TopAbs_Orientation, double, double, double &, double &, bool, bool, bool, bool, bool, bool, bool, const math_VectorBase<> &)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilderOps::simul_surf_rst_rst",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a method of the trait ChFi3dBuilderOps implemented by the fillet and chamfer builders (not ported yet); the defaults of the restriction variants fail as the native ones"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ComputeData(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, const occ::handle<ChFiDS_Spine> &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, Blend_Function &, Blend_FuncInv &, double, double, double, double, double &, double &, bool, bool, bool, const math_VectorBase<> &, int &, int &, bool &, bool &, bool &, bool &, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::compute_data",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::myDS",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::my_ds",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; a field of ChFi3dBuilder"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::CompleteData(occ::handle<ChFiDS_SurfData> &, const occ::handle<Geom_Surface> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Geom2d_Curve> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Geom2d_Curve> &, TopAbs_Orientation, bool, bool, bool, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::complete_data_coin",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::ComputeData(occ::handle<ChFiDS_SurfData> &, const occ::handle<ChFiDS_ElSpine> &, occ::handle<BRepBlend_Line> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor3d_TopolTool> &, const occ::handle<Adaptor3d_Surface> &, const occ::handle<Adaptor2d_Curve2d> &, const occ::handle<Adaptor3d_TopolTool> &, bool &, Blend_SurfRstFunction &, Blend_FuncInv &, Blend_SurfPointFuncInv &, Blend_SurfCurvFuncInv &, double, double, double, double, double &, double &, const math_VectorBase<> &, bool, bool, bool, bool, bool, bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::walk_surf_rst",
+      "status": "partial",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; ported; no caller until ChFi3d_FilBuilder and ChFi3d_ChBuilder are ported, so it is not exercised by the TKFillet GTests yet"
+    },
+    {
+      "upstream_id": "ChFi3d_Builder::HasResult() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dBuilder::has_result",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder mapping (docs/tkfillet-progress.md): the class is ChFi3dBuilder, its virtual methods the trait ChFi3dBuilderOps, the data structure is owned by the builder while it computes and native exceptions become Failure values; tested on a builder without contours in crates/tkfillet/tests/chfi3d_builder.rs; with contours through the fillet and chamfer builders once they are ported"
     }
   ],
   "tests": [

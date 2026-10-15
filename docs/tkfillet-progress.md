@@ -123,15 +123,45 @@ is wider than the sphere the centre is NaN and the sphere is still written (the
 comparisons are negated as the native ones). `ChFi3d_FilDS` is checked through the
 fillet builders.
 
+## ChFi3d_Builder
+
+`ChFi3d_Builder` is `ChFi3dBuilder` (`crates/tkfillet/src/chfi3d/builder/`). The
+builder owns its `TopOpeBRepDS_DataStructure` while it computes and moves it into the
+`TopOpeBRepDS_HDataStructure` handle only before `TopOpeBRepBuild_HBuilder::Perform`,
+so no lock is held across the computation. The virtual methods of the C++ class are the
+trait `ChFi3dBuilderOps` (the fillet and chamfer builders implement it); the methods of
+the base class that call them are on `dyn ChFi3dBuilderOps`, the others on
+`ChFi3dBuilder`. The long native argument lists are grouped in `WalkSettings`,
+`SurfCall`, `RstCall`, `BlendSide` and `SurfOut`.
+
+Ported: the accessors of `ChFi3d_Builder.cxx`, `Compute`, `ExtentAnalyse`,
+`PerformFilletOnVertex`, `PerformSingularCorner`, `CompleteDS`, `UpdateTolesp`, the
+contour building of `ChFi3d_Builder_1.cxx` (`PerformElement`, `PerformExtremity`,
+`StartSol`, the obstacle starts), the walking of `ChFi3d_Builder_2.cxx`
+(`PerformSetOfSurf`, `PerformSetOfSurfOnElSpine`, `PerformSetOfKPart`,
+`PerformSetOfKGen`, `ComputeData`, `CompleteData`, `StoreData`, the surface/restriction
+walkings, `SimulData`, `Trunc`), `SplitKPart` of `ChFi3d_Builder_SpKP.cxx`, and of
+`ChFi3d_Builder_C1.cxx` `PerformOneCorner`, `PerformIntersectionAtEnd`, `FindFace`,
+`MoreSurfdata` and the corner helpers. `Geom2dHatch_Hatching` gained `change_domain`
+(the `const_cast` of `Domain(I)` that `SplitKPart` uses).
+
+Kept native quirks: `SearchFace` returns false in the spine branch even when it found
+the face; the prolongation of `PerformOneCorner` on a same face reuses the cork curves
+when the cork is already split; `IsEqual(a, b)` is `|a - b| < DBL_MIN`; `Tri` edits the
+hatching domains in place.
+
 ## Remaining
 
-The ChFi3d builders (`ChFi3d_Builder`, `ChFi3d_FilBuilder`, `ChFi3d_ChBuilder` and the
-`ChFi3d_Builder_*` member files), `BRepFilletAPI_MakeFillet`,
-`BRepFilletAPI_MakeChamfer`, `FilletSurf_Builder` and `FilletSurf_InternalBuilder`
-rebuild the solid with `TopOpeBRepBuild_HBuilder` and are not ported yet. Their GTests
-(`BRepFilletAPI_MakeFillet_Test.cxx`, `BRepFilletAPI_MakeChamfer_Test.cxx`) and the
-`BFuseSimpleTest.BlendBoxWithCylinder*` GTests of TKBO are `pending_dependency` rows in
-`porting/parity.json`.
+`PerformMoreSurfdata`, `IntersectMoreCorner` (`ChFi3d_Builder_C1.cxx`) and
+`PerformMoreThreeCorner` (`ChFi3d_Builder_CnCrn.cxx`) are not ported: they fail with
+`Standard_NotImplemented` (`pending_corners.rs`) so a corner needing them makes the
+contour faulty instead of a wrong shape. `PerformTwoCornerbyInter` (`ChFi3d_Builder_C2.cxx`),
+`ChFi3d_FilBuilder`, `ChFi3d_ChBuilder`, `BRepFilletAPI_MakeFillet`,
+`BRepFilletAPI_MakeChamfer`, `FilletSurf_Builder` and `FilletSurf_InternalBuilder` are
+not ported yet; without them the walking functions of `ChFi3dBuilder` have no caller.
+Their GTests (`BRepFilletAPI_MakeFillet_Test.cxx`, `BRepFilletAPI_MakeChamfer_Test.cxx`)
+and the `BFuseSimpleTest.BlendBoxWithCylinder*` GTests of TKBO are
+`pending_dependency` rows in `porting/parity.json`.
 
 Everything of these packages that does not touch the data structure is ported:
 `BRepFilletAPI_LocalOperation` (the `BRepFilletAPILocalOperation` trait),

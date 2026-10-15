@@ -7,6 +7,8 @@ pub mod builder0_ds;
 pub mod builder0_solve;
 #[path = "../builder0_topology.rs"]
 pub mod builder0_topology;
+#[path = "../chfi3d_builder.rs"]
+pub mod chfi3d_builder;
 #[path = "../chfi3d_hatching.rs"]
 pub mod chfi3d_hatching;
 #[path = "../chfikpart.rs"]
