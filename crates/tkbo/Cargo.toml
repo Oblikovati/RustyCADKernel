@@ -28,6 +28,8 @@ rustycad-tkshhealing = { path = "../tkshhealing", version = "0.2.8" }
 name = "rustycad-tkbo-numeric-probe"
 path = "examples/numeric_probe.rs"
 [dev-dependencies]
+# The blend fixtures of the fuse GTests (BOPTest_Utilities::CreateBlend).
+rustycad-tkfillet = { path = "../tkfillet", version = "0.2.8" }
 rustycad-tkmesh = { path = "../tkmesh", version = "0.2.8" }
 static_assertions = "1.1.0"
 

@@ -7,7 +7,9 @@ use super::ChFi3dBuilderOps;
 use super::compute::spine_of;
 use crate::brep_blend::WalkingDomain;
 use crate::chfi_ds::SurfData;
-use crate::chfi_ds::{ChamfMode, ElSpine, SpineHandle, StripeHandle, SurfDataHandle, lock, shared};
+use crate::chfi_ds::{
+    ChamfMode, ElSpine, SpineHandle, SpineObject, StripeHandle, SurfDataHandle, lock, shared,
+};
 use crate::chfi3d::{in_period, kparticular, next_side, perform_el_spine};
 use crate::chfikpart::ChFiKPartComputeData;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorSurface;
@@ -57,18 +59,20 @@ impl Current {
         w: f64,
         (p, t): (Point3, Vector3),
         next: &SurfDataHandle,
-    ) {
+    ) -> Result<(), Failure> {
         let mut sp = lock(spine);
         self.he.set_last_parameter(w);
         self.he.set_last_point_and_tgt(p, t);
-        sp.change_el_spines().push(self.he.clone());
+        // The virtual AppendElSpine: a fillet spine computes the law of the new spine.
+        SpineObject::append_el_spine(&mut *sp, &self.he)?;
         self.he.change_next(Some(next.clone()));
         self.he = Handle::new(ElSpine::new());
         self.offset_he.set_last_parameter(w);
         self.offset_he.set_last_point_and_tgt(p, t);
-        sp.change_offset_el_spines().push(self.offset_he.clone());
+        sp.append_offset_el_spine(&self.offset_he);
         self.offset_he.change_next(Some(next.clone()));
         self.offset_he = Handle::new(ElSpine::new());
+        Ok(())
     }
 
     /// The current spines started at `w` after the particular case `prev`.
@@ -156,13 +160,13 @@ impl dyn ChFi3dBuilderOps + '_ {
                 sp.set_last_parameter(st.wend_periodic);
             } else if !st.intf || iedge > 1 {
                 lock(spine).set_first_tgt(0f64.min(wfirst))?;
-                st.cur.close(spine, wfirst, first, sd);
+                st.cur.close(spine, wfirst, first, sd)?;
             }
             st.cur.open(st.wlast, last, sd);
             st.ya_kpart = true;
         } else {
             if wfirst - st.cur.he.first_parameter()? > tolesp {
-                st.cur.close(spine, wfirst, first, sd);
+                st.cur.close(spine, wfirst, first, sd)?;
             }
             st.cur.open(st.wlast, last, sd);
         }
@@ -248,9 +252,9 @@ impl dyn ChFi3dBuilderOps + '_ {
                         he.set_periodic(true);
                     }
                     if list_offset {
-                        sp.change_offset_el_spines().push(he.clone());
+                        sp.append_offset_el_spine(he);
                     } else {
-                        sp.change_el_spines().push(he.clone());
+                        SpineObject::append_el_spine(&mut *sp, he)?;
                     }
                 }
             }
@@ -265,10 +269,10 @@ impl dyn ChFi3dBuilderOps + '_ {
         if lp - st.wlast > tolesp {
             st.cur.he.set_last_parameter(lp);
             st.cur.he.set_last_point_and_tgt(plast, tlast);
-            sp.change_el_spines().push(st.cur.he.clone());
+            SpineObject::append_el_spine(&mut *sp, &st.cur.he)?;
             st.cur.offset_he.set_last_parameter(lp);
             st.cur.offset_he.set_last_point_and_tgt(plast, tlast);
-            sp.change_offset_el_spines().push(st.cur.offset_he.clone());
+            sp.append_offset_el_spine(&st.cur.offset_he);
         }
         Ok(())
     }

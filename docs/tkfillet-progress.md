@@ -102,10 +102,16 @@ FilletSurf.
 | ChFi3d | `fl_hatching_domains` (`ChFi3d_ComputeHatchingDomains`), `fl_concave_side` (`ChFi3d::ConcaveSide` on every edge of box, prism, cylinder, cone, sphere, torus and revolved solids), `fl_search_sing` (`ChFi3d_SearchSing` and its `math_FunctionRoot`) |
 | ChFi3d_Builder_0 | `fl_b0_scalars`, `fl_bound_srf`, `fl_bound_fac`, `fl_enlarge_box`, `fl_b0_faces`, `fl_b0_spines`, `fl_inter_plane_edge`, `fl_b0_pcurves`, `fl_reparam_pcurv`, `fl_project_pcurv`, `fl_b0_bounds`, `fl_compute_arete`, `fl_fil_common_point`, `fl_b0_stripes`, `fl_b0_tols`, `fl_int_cs`, `fl_computes_int_pc`, `fl_b0_inter2d`, `fl_b0_topology`, `fl_b0_smooth`, `fl_compute_curves`, `fl_int_traces`, `fl_el_spine` |
 | ChFiKPart | `fl_kpart_fcts`, `fl_corner_spine`, `fl_kpart_make` (every `ChFiKPart_MakeFillet`, `ChFiKPart_MakeChamfer` and `ChFiKPart_MakeChAsym` overload with every orientation), `fl_kpart_corner` (the three `ChFiKPart_ComputeData::ComputeCorner`) |
-| BRepFilletAPI | `fl_chfi2d_builder` (`BRepFilletAPI_MakeFillet2d` on the edited face) |
+| BRepFilletAPI | `fl_chfi2d_builder` (`BRepFilletAPI_MakeFillet2d` on the edited face), `fl_make_fillet` (`BRepFilletAPI_MakeFillet` and `BRepFilletAPI_MakeChamfer` on one edge or every edge of a box, a pyramid, a cylinder, a box with a rounded edge and boxes with a boss, a pocket, a notch or a step: constant and evolving fillets, the three section shapes, chamfers of one or two distances and of a distance and an angle; faces, edges, volume and area bits and validity) |
+| FilletSurf | `fl_fillet_surf` (`FilletSurf_Builder` computed and simulated on the same solids, with the refused contours) |
 
 The GTests of `ChFi3d_Hatching_Test.cxx` are translated in
-`crates/tkfillet/tests/chfi3d_hatching.rs`.
+`crates/tkfillet/tests/chfi3d_hatching.rs`, those of `BRepFilletAPI_MakeFillet_Test.cxx`
+and `BRepFilletAPI_MakeChamfer_Test.cxx` in `brep_fillet_api_make_fillet.rs` and
+`brep_fillet_api_make_chamfer.rs`, and the `BFuseSimpleTest.BlendBoxWithCylinder*` GTests
+of TKBO in `crates/tkbo/tests/brep_algo_api_fuse_legacy`. `tests/fil_builder.rs` checks
+closed forms (the quarter cylinder of a box edge, the rounded cube, the chamfer prism)
+and pins native volumes and areas of the corners of four and more edges.
 
 ## Data structure
 
@@ -142,32 +148,49 @@ contour building of `ChFi3d_Builder_1.cxx` (`PerformElement`, `PerformExtremity`
 `PerformSetOfKGen`, `ComputeData`, `CompleteData`, `StoreData`, the surface/restriction
 walkings, `SimulData`, `Trunc`), `SplitKPart` of `ChFi3d_Builder_SpKP.cxx`, and of
 `ChFi3d_Builder_C1.cxx` `PerformOneCorner`, `PerformIntersectionAtEnd`, `FindFace`,
-`MoreSurfdata` and the corner helpers. `Geom2dHatch_Hatching` gained `change_domain`
-(the `const_cast` of `Domain(I)` that `SplitKPart` uses).
+`MoreSurfdata`, `PerformMoreSurfdata`, `IntersectMoreCorner` and the corner helpers,
+`PerformTwoCornerbyInter` of `ChFi3d_Builder_C2.cxx`, and `PerformMoreThreeCorner` of
+`ChFi3d_Builder_CnCrn.cxx` (`builder/cn_crn/`: the corner of n edges filled by a
+`GeomPlate` surface). `Geom2dHatch_Hatching` gained `change_domain` (the `const_cast` of
+`Domain(I)` that `SplitKPart` uses).
+
+`ChFi3d_FilBuilder` is `ChFi3dFilBuilder` and `ChFi3d_ChBuilder` is `ChFi3dChBuilder`
+(`chfi3d/fil_builder/`, `chfi3d/ch_builder/`): each owns a `ChFi3dBuilder` (`base`) and
+implements `ChFi3dBuilderOps`, the corners of two and three contours (`_C2`, `_C3`) in
+their own files. `BRepFilletAPI_MakeFillet` and `BRepFilletAPI_MakeChamfer` implement
+`BRepBuilderAPIMakeShape` and `BRepFilletAPILocalOperation` over them. In FilletSurf,
+`FilletSurfInternalBuilder` wraps a `ChFi3dFilBuilder` and implements `ChFi3dBuilderOps`
+with its own two-surface `PerformSurf`; `FilletSurfBuilder` wraps it.
 
 Kept native quirks: `SearchFace` returns false in the spine branch even when it found
 the face; the prolongation of `PerformOneCorner` on a same face reuses the cork curves
 when the cork is already split; `IsEqual(a, b)` is `|a - b| < DBL_MIN`; `Tri` edits the
-hatching domains in place.
+hatching domains in place; `ChFi3d_ComputeCurves` computes the whole curves by default
+(`wholeCurv`); `cherche_face`, `ChFi3d_cherche_edge`, `ChFi3d_cherche_element` and the
+`cherche_edge1` of `ChFi3d_Builder_CnCrn.cxx` keep their output when they find nothing
+and fail only when it is still null (the chain of faces at an apex of four edges stops
+on that); the static `SearchFD` of `ChFi3d_FilBuilder_C3.cxx` keeps the outputs of the
+last `ChFi3d_IsInFront` when it fails (the face of the pivot may come from a failed
+pair); `ExtentTwoCorner` of the fillet builder reuses the stripe of its first loop and
+that of the chamfer builder never matches its second stripe; `SplitSurf` compares the
+dot product of the sections, not their gap; the second `ComputePCurv` of
+`ChFi3d_FilBuilder_C2.cxx` uses the start points; in `ChFi3d_FilBuilder_C3.cxx` the
+first vertex is copied into the last when the corner is pointed.
+`PerformMoreThreeCorner` keeps: the `Ecom`, `parcom`, `Fproj` and `Eproj` sequences
+read from their start for every connection crossing several faces; the second end of
+such a connection gets the tolerance of the first one plus the error; the error of the
+Hermite curves starts at 1e-30 and only decreases; `Order` is written at the index of
+the contour for the boundaries on the fillets and read at the index of the boundary for
+the regularities of the connections; the free borders are walked up to `nedge` included; `RemoveSurfData` keeps the adjacent
+edges of a contour for the next one.
 
 ## Remaining
 
-`PerformMoreSurfdata`, `IntersectMoreCorner` (`ChFi3d_Builder_C1.cxx`) and
-`PerformMoreThreeCorner` (`ChFi3d_Builder_CnCrn.cxx`) are not ported: they fail with
-`Standard_NotImplemented` (`pending_corners.rs`) so a corner needing them makes the
-contour faulty instead of a wrong shape. `PerformTwoCornerbyInter` (`ChFi3d_Builder_C2.cxx`),
-`ChFi3d_FilBuilder`, `ChFi3d_ChBuilder`, `BRepFilletAPI_MakeFillet`,
-`BRepFilletAPI_MakeChamfer`, `FilletSurf_Builder` and `FilletSurf_InternalBuilder` are
-not ported yet; without them the walking functions of `ChFi3dBuilder` have no caller.
-Their GTests (`BRepFilletAPI_MakeFillet_Test.cxx`, `BRepFilletAPI_MakeChamfer_Test.cxx`)
-and the `BFuseSimpleTest.BlendBoxWithCylinder*` GTests of TKBO are
-`pending_dependency` rows in `porting/parity.json`.
-
-Everything of these packages that does not touch the data structure is ported:
-`BRepFilletAPI_LocalOperation` (the `BRepFilletAPILocalOperation` trait),
-`BRepFilletAPI_MakeFillet2d`, `ChFi3d::ConcaveSide`, `ChFi3d_SearchSing`,
-`ChFi3d_FilletShape`, the geometric and topological helpers of `ChFi3d_Builder_0`
-(including `ChFi3d_ComputeCurves`, `ChFi3d_IntTraces` and `ChFi3d_PerformElSpine`),
-`ChFi3d_ComputeHatchingDomains`, the ChFiKPart helpers (`ChFiKPart_InPeriod`,
-`ChFiKPart_PCurve`, `ChFiKPart_ProjPC`, `ChFiKPart_CornerSpine`) and the FilletSurf
-statuses. `ChFi3d_EnlargeFace` is declared but never defined natively.
+The whole toolkit is ported. `PerformMoreSurfdata` and `IntersectMoreCorner` are ported
+from the source but no solid of the native probe reaches them (the instrumented native
+probe was run over every edge of the probe solids with radii up to 4 without entering
+them); they need a native case before being checked bit for bit. The class records of
+`ChFi3d_FilBuilder`, `ChFi3d_ChBuilder`, `BRepFilletAPI_MakeChamfer`,
+`FilletSurf_Builder` and `FilletSurf_InternalBuilder` in `porting/parity.json` are
+generator-owned (`tools/generate_api_macro_rows.py`) and come with the next refresh of
+the Rust API inventory. `ChFi3d_EnlargeFace` is declared but never defined natively.

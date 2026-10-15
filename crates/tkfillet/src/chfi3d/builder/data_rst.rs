@@ -421,15 +421,3 @@ impl ChFi3dBuilder {
         Ok(true)
     }
 }
-
-/// The restriction of a side as a general 2d curve.
-pub(crate) fn rst_curve(
-    pc: &Handle<rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve2d>,
-) -> Handle<dyn Adaptor2dCurve2d> {
-    pc.clone().cast()
-}
-
-/// The guide of a walking as a 3d curve.
-pub(crate) fn guide_curve(hguide: &Handle<ElSpine>) -> &dyn Adaptor3dCurve {
-    &**hguide
-}

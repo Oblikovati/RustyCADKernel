@@ -60,7 +60,8 @@ impl ChFi3dBuilder {
             (&hgs, &hbs),
             (pardeb, parfin),
             (self.tolapp3d, self.tol2d),
-            false,
+            // The native default wholeCurv = true.
+            true,
             &mut out,
         )? {
             return Err(Failure::new("OneCorner : echec calcul intersection"));

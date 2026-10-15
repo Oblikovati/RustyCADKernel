@@ -29,3 +29,5 @@ def append_tkfillet_requests(requests: list[str]) -> None:
     __import__('tkfillet_corpus_builder0').append_builder0_requests(requests)
     # ChFiKPart (tkfillet_corpus_chfikpart.py)
     __import__('tkfillet_corpus_chfikpart').append_chfikpart_requests(requests)
+    # BRepFilletAPI (tkfillet_corpus_api.py)
+    __import__('tkfillet_corpus_api').append_api_requests(requests)

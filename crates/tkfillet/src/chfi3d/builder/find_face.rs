@@ -24,21 +24,27 @@ fn sub_shapes(s: &Shape, kind: ShapeEnum) -> Result<IndexedMapOfShape, Failure> 
     Ok(m)
 }
 
-/// `cherche_face(map, E, F1, F2, F3, F)`: the face of the list other than the three
-/// containing the edge (Standard_ConstructionError when none).
+/// `cherche_face(map, E, F1, F2, F3, F)`: `f` set to the face of the list other than
+/// the three containing the edge. As natively, `f` keeps its value when there is none,
+/// the failure (Standard_ConstructionError) coming only when it is still null.
 pub(super) fn cherche_face(
     map: &List<Shape>,
     e: &Edge,
     (f1, f2, f3): (&Face, &Face, &Face),
-) -> Result<Face, Failure> {
+    f: &mut Face,
+) -> Result<(), Failure> {
     for s in map.iter() {
         let fcur = topods::face(s)?;
         if fcur.is_same(f1) || fcur.is_same(f2) || fcur.is_same(f3) {
             continue;
         }
         if contain_e(&fcur, e)? {
-            return Ok(fcur);
+            *f = fcur;
+            return Ok(());
         }
+    }
+    if !f.is_null() {
+        return Ok(());
     }
     Err(Failure::with_message(
         "Standard_ConstructionError",
@@ -139,7 +145,7 @@ impl ChFi3dBuilder {
     }
 
     /// The first and second edges at the vertex lying on the face.
-    fn edges_on_face(&self, vtx: &Vertex, fv: &Face) -> Result<(Edge, Edge), Failure> {
+    pub(super) fn edges_on_face(&self, vtx: &Vertex, fv: &Face) -> Result<(Edge, Edge), Failure> {
         let list = self.my_ve_map.find_from_key(vtx.as_ref())?;
         let mut arc1 = Edge::default();
         for s in list.iter() {
