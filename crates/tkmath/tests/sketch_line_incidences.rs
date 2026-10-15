@@ -12,6 +12,7 @@ mod curve_selection;
 mod curve_sources;
 mod failures;
 mod generated;
+mod generated_curves;
 mod isolation;
 mod lines;
 mod ordering;
