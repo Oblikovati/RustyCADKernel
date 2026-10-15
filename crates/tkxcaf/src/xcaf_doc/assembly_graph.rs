@@ -141,6 +141,12 @@ impl XCAFDocAssemblyGraph {
     pub fn nb_nodes(&self) -> i32 {
         self.data.read().nodes.extent() as i32
     }
+    /// `GetLinks`: the children of each parent node (a copy).
+    pub fn get_links(&self) -> XCAFDocAssemblyGraphAdjacencyMap {
+        let mut links = XCAFDocAssemblyGraphAdjacencyMap::default();
+        links.assign(&self.data.read().adjacency);
+        links
+    }
     /// `NbLinks`: the number of parent-child links.
     pub fn nb_links(&self) -> i32 {
         self.data

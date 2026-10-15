@@ -3,11 +3,11 @@
 
 //! `XCAFPrs_Texture`: a 2D texture whose image comes from the `Image_Texture` of a
 //! visualization material, bound to a texture unit.
-use rustycad_tkernel::standard::{Handle, StandardTransient};
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkservice::graphic3d::{
-    Graphic3dTexture2DBase, Graphic3dTexture2DSource, Graphic3dTextureMap, Graphic3dTextureRoot,
-    Graphic3dTextureRootBase, Graphic3dTextureUnit, Graphic3dTypeOfTexture,
+    Graphic3dTexture2D, Graphic3dTexture2DBase, Graphic3dTexture2DSource, Graphic3dTextureMap,
+    Graphic3dTextureRoot, Graphic3dTextureRootBase, Graphic3dTextureUnit,
     graphic3d_convert_to_compatible,
 };
 use rustycad_tkservice::image::{
@@ -25,16 +25,15 @@ use rustycad_tkservice::image::{
 /// assert!(texture.texture_root_base().fields.read().is_color_map);
 /// ```
 pub struct XCAFPrsTexture {
-    transient: StandardTransient,
-    base: Graphic3dTexture2DBase,
+    texture: Graphic3dTexture2D,
     image_source: Handle<dyn ImageTextureSource>,
 }
-rustycad_tkernel::impl_transient!(XCAFPrsTexture, "XCAFPrs_Texture", dyn Graphic3dTexture2DSource,
-    transient, interfaces: [dyn Graphic3dTextureRoot, dyn Graphic3dTextureMap, dyn Graphic3dTexture2DSource]);
+rustycad_tkernel::impl_transient!(XCAFPrsTexture, "XCAFPrs_Texture", Graphic3dTexture2D,
+    texture, interfaces: [dyn Graphic3dTextureRoot, dyn Graphic3dTextureMap, dyn Graphic3dTexture2DSource]);
 
 impl Graphic3dTextureRoot for XCAFPrsTexture {
     fn texture_root_base(&self) -> &Graphic3dTextureRootBase {
-        &self.base.root
+        self.texture.texture_root_base()
     }
     /// `GetCompressedImage`: the compressed image of the source, null without one.
     fn get_compressed_image(
@@ -60,7 +59,7 @@ impl Graphic3dTextureRoot for XCAFPrsTexture {
 impl Graphic3dTextureMap for XCAFPrsTexture {}
 impl Graphic3dTexture2DSource for XCAFPrsTexture {
     fn texture_2d_base(&self) -> &Graphic3dTexture2DBase {
-        &self.base
+        self.texture.texture_2d_base()
     }
 }
 
@@ -69,11 +68,8 @@ impl XCAFPrsTexture {
     /// defaults) identified as its source, on the unit, a color map for base color and
     /// emission.
     pub fn new(source: Handle<dyn ImageTextureSource>, unit: Graphic3dTextureUnit) -> Self {
-        let base = Graphic3dTexture2DBase::from_file(
-            &AsciiString::default(),
-            Graphic3dTypeOfTexture::TOT_2D,
-        )
-        .with_public_defaults();
+        let texture = Graphic3dTexture2D::from_file(&AsciiString::default());
+        let base = texture.texture_2d_base();
         if let Some(id) = source
             .get()
             .map(|s| s.texture_id())
@@ -81,12 +77,11 @@ impl XCAFPrsTexture {
         {
             base.root.fields.write().tex_id = id;
         }
-        live_params(&base).set_texture_unit(unit);
+        live_params(base).set_texture_unit(unit);
         base.root.fields.write().is_color_map =
             unit == Graphic3dTextureUnit::BASE_COLOR || unit == Graphic3dTextureUnit::EMISSIVE;
         Self {
-            transient: StandardTransient::default(),
-            base,
+            texture,
             image_source: source,
         }
     }

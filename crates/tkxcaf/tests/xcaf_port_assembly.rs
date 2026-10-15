@@ -91,6 +91,7 @@ fn assembly_iterator_and_graph() {
     assert_eq!(graph.nb_occurrences(3), 1);
     assert!(graph.is_direct_link(1, 2) && graph.is_direct_link(2, 3));
     assert!(!graph.is_direct_link(1, 3));
+    assert_eq!(graph.get_links().extent(), 3);
 }
 
 #[test]

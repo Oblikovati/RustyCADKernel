@@ -381,3 +381,47 @@ fn area_backs_up_as_itself() {
     assert!(XCAFDocArea::get_of_label(&label, &mut area).unwrap());
     assert_eq!(area, 1.0);
 }
+
+// FillAspect: the material, alpha mode and culling of the aspect, and one XCAFPrs_Texture
+// per texture of the material (the base color one on unit 0, a color map).
+#[test]
+fn vis_material_fills_aspects() {
+    use rustycad_tkservice::graphic3d::{
+        Graphic3dAlphaMode, Graphic3dAspects, Graphic3dAspectsMembers,
+        Graphic3dAspectsRenderMembers, Graphic3dTextureRoot, Graphic3dTypeOfBackfacingModel,
+    };
+    use rustycad_tkservice::image::ImageTexture;
+    use rustycad_tkxcaf::xcaf_prs::XCAFPrsTexture;
+    let material = XCAFDocVisMaterial::new();
+    let texture: Handle<dyn rustycad_tkservice::image::ImageTextureSource> =
+        Handle::new(ImageTexture::new(&AsciiString::from("wood.png"))).cast();
+    let pbr = XCAFDocVisMaterialPbr {
+        base_color_texture: texture.clone(),
+        ..Default::default()
+    };
+    material.set_pbr_material(&pbr).unwrap();
+    material
+        .set_alpha_mode(Graphic3dAlphaMode::Mask, 0.25)
+        .unwrap();
+    material.set_double_sided(true).unwrap();
+    let aspects = Handle::new(Graphic3dAspects::default());
+    material.fill_aspect(&aspects.clone().cast()).unwrap();
+    let aspects = aspects.get().unwrap();
+    assert_eq!(aspects.alpha_mode(), Graphic3dAlphaMode::Mask);
+    assert_eq!(
+        aspects.face_culling(),
+        Graphic3dTypeOfBackfacingModel::DoubleSided
+    );
+    assert!(aspects.to_map_texture());
+    let set = aspects.texture_set();
+    let set = set.get().unwrap();
+    assert_eq!(set.size(), 1);
+    let first = set.first().unwrap();
+    let first = first.cast::<XCAFPrsTexture>();
+    let first = first.get().unwrap();
+    assert!(first.texture_root_base().fields.read().is_color_map);
+    assert_eq!(
+        first.get_image_source().object_address(),
+        texture.object_address()
+    );
+}

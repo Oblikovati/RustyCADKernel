@@ -338,3 +338,9 @@ TKVCAF (`crates/tkvcaf`, `rustycad-tkvcaf`) joins OCAF to the AIS of TKV3d.
   formats `%g` with the `Standard_CString` `sprintf` and converts through the current
   units; `ComputeRound` returns null when `PrsDim_RadiusDimension` fails (the native
   `OCC_CATCH_SIGNALS` block); the other exceptions propagate as `Failure` errors.
+
+TKXCAF, the XDE document on top of these toolkits, has its own note:
+[xcaf-design.md](xcaf-design.md). The one rule it adds here: a `Backup` that the native
+reaches through a virtual call of a derived attribute goes through the attribute's own
+handle (`backup_as_dynamic` in `tdata_std::support`, used by `TDataStd_Real::Set`), so the
+delta records the most derived type.

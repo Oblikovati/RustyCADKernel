@@ -29,6 +29,17 @@ where an implicit partner exists, or refused by name (`OffsetPair`,
 `OffsetSingular`, `PeriodicKnotShift`, `PeriodicShape`). Spline-source
 extension stays refused until the application defines a rule.
 
+## New toolkit: TKXCAF (extended data exchange document)
+
+`rustycad-tkxcaf` ports XCAFDoc (the XDE attributes and the document, shape, color, layer,
+material, GD&T, notes, view, clipping-plane and visualization-material tools, the assembly
+iterator and graph, the editor), XCAFDimTolObjects, XCAFNoteObjects, XCAFView, XCAFPrs
+(styles, the AIS object, the driver and the document explorer) and XCAFApp. The native
+BinXCAF and XmlXCAF storage is not ported. In `rustycad-tklcaf`, `TDataStd_Real::Set`
+backs up through the attribute's own handle (`backup_as_dynamic`), so derived attributes
+record deltas of their own type; `TPrsStd_AISViewer::New` adds the viewer first in the
+root's attribute list, as the native default.
+
 ## New toolkit: TKVCAF (OCAF presentation attributes)
 
 `rustycad-tkvcaf` ports `TPrsStd`: the `TPrsStd_AISViewer` and
