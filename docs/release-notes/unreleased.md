@@ -28,3 +28,21 @@ where an implicit partner exists, or refused by name (`OffsetPair`,
 `OffsetBasis`, `OffsetRadius`, `OffsetEllipseAxis`, `OffsetContinuity`,
 `OffsetSingular`, `PeriodicKnotShift`, `PeriodicShape`). Spline-source
 extension stays refused until the application defines a rule.
+
+## Visualization: TKV3d API completed
+
+- `AisInteractiveContext::{set_object_deviation_coefficient,
+  set_object_deviation_angle, set_object_iso_on_triangulation}` port the
+  per-object `SetDeviationCoefficient`, `SetDeviationAngle` and
+  `IsoOnTriangulation` overloads.
+- The protected `AIS_Shape` drawer helpers are public as
+  `rustycad_tkv3d::ais::set_shape_drawer_{color,material,transparency,width}`,
+  and the protected `PrsDim_EllipseRadiusDimension` constructor body as
+  `rustycad_tkv3d::prs_dim::init_ellipse_radius`.
+- `AisViewController` re-exports the listener `press_mouse_button`,
+  `release_mouse_button`, `pressed_mouse_buttons`, `last_mouse_flags`,
+  `last_mouse_position` and `has_touch_points` as inherent methods.
+- The parity ledger claims the AIS_Manipulator, PrsDim, AIS_ViewController,
+  AIS_InteractiveContext, AIS_Shape and remaining AIS declarations: TKV3d API
+  done 3235 -> 5118 of 5172; 37 rows stay partial with their reasons and 17
+  class records wait for the row generator.
