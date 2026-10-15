@@ -109,3 +109,11 @@ pub use native_parameter_construction::{
 };
 #[cfg(test)]
 mod native_parameter_construction_tests;
+#[cfg(test)]
+mod rational_circle_tests;
+
+mod carrier;
+mod carrier_spans;
+mod public_carrier;
+pub use carrier::BezierPairCarrierKind;
+pub use public_carrier::{BezierPairCarrierParameter, BezierPairCommonCarrier};

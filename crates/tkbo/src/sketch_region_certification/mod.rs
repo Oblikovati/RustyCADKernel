@@ -14,7 +14,7 @@ mod paired_execution;
 mod paired_types;
 pub(crate) use coverage::inspect_contact_coverage;
 pub(crate) use outcome::*;
-pub(crate) use paired_admission::enumerate_source_bound_census;
+pub(crate) use paired_admission::{enumerate_carrier_census, enumerate_source_bound_census};
 #[cfg(test)]
 mod tests;
 

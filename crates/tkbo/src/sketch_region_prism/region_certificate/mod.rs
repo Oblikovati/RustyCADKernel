@@ -13,6 +13,7 @@ pub(crate) mod hypothesis;
 #[cfg(test)]
 mod hypothesis_tests;
 mod inspect;
+pub(in crate::sketch_region_prism) mod loop_region;
 mod rebind;
 mod source;
 pub(in crate::sketch_region_prism) mod two_loop;
