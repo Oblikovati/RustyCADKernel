@@ -3,7 +3,7 @@
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
        TKPrim, TKHelix, TKShHealing, TKBO, TKBool, TKFillet, TKCDF, TKLCAF, TKCAF, TKDE, TKXSBase,
-       TKService, TKExpress, TKV3d)
+       TKService, TKExpress, TKV3d, TKMeshVS)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -29,7 +29,8 @@ from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS
                           OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
                           VISUALIZATION_CLOSURE_TARGETS, VISUALIZATION_LINKED_TOOLKITS,
                           VISUALIZATION_TOOLKITS, V3D_CLOSURE_TARGETS, V3D_LINKED_TOOLKITS,
-                          V3D_TOOLKITS, closure_flags, locked_cmake)
+                          V3D_TOOLKITS, MESHVS_CLOSURE_TARGETS, MESHVS_LINKED_TOOLKITS,
+                          MESHVS_TOOLKITS, closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
@@ -61,6 +62,7 @@ NUMERIC_VERIFIERS = {
     'TKExpress': ('tools/verify_tkexpress_numeric.py', 'target/oracle-tkexpress/numeric'),
     'TKBool': ('tools/verify_tkbool_numeric.py', 'target/oracle-tkbool/numeric'),
     'TKV3d': ('tools/verify_tkv3d_numeric.py', 'target/oracle-tkv3d/numeric'),
+    'TKMeshVS': ('tools/verify_tkmeshvs_numeric.py', 'target/oracle-tkmeshvs/numeric'),
 }
 
 
@@ -89,6 +91,8 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     'TKExpress': (EXPRESS_TOOLKITS, EXPRESS_CLOSURE_TARGETS, 'target/occt-express-full'),
     # TKV3d adds the modeling toolkits of its EXTERNLIB to the visualization base.
     'TKV3d': (V3D_TOOLKITS, V3D_CLOSURE_TARGETS, 'target/occt-v3d-full'),
+    # TKMeshVS adds its toolkit to the TKV3d closure; its GTest list is empty at 3d097a0.
+    'TKMeshVS': (MESHVS_TOOLKITS, MESHVS_CLOSURE_TARGETS, 'target/occt-meshvs-full'),
 }
 
 
@@ -97,6 +101,7 @@ OWN_CLOSURE_PROFILES: dict[str, tuple[str, ...]] = {
     'TKService': VISUALIZATION_LINKED_TOOLKITS,
     'TKExpress': EXPRESS_LINKED_TOOLKITS,
     'TKV3d': V3D_LINKED_TOOLKITS,
+    'TKMeshVS': MESHVS_LINKED_TOOLKITS,
 }
 
 

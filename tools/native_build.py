@@ -114,6 +114,13 @@ V3D_LINKED_TOOLKITS: tuple[str, ...] = ('TKV3d', 'TKService', 'TKHLR', 'TKMesh',
                                         'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
                                         'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
 V3D_CLOSURE_TARGETS: list[str] = [*V3D_TOOLKITS, 'gtest_main']
+# The TKMeshVS oracle closure (numeric oracle; the toolkit has no GTest suite at the pinned
+# revision) adds TKMeshVS to the TKV3d tree. The shared all-modules build can be reused instead.
+MESHVS_TOOLKITS: tuple[str, ...] = ('TKMeshVS',)
+# The TKMeshVS closure's shared libraries in link order, dependants first (its EXTERNLIB on
+# top of the TKV3d closure).
+MESHVS_LINKED_TOOLKITS: tuple[str, ...] = ('TKMeshVS', *V3D_LINKED_TOOLKITS)
+MESHVS_CLOSURE_TARGETS: list[str] = [*MESHVS_TOOLKITS, 'gtest_main']
 
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:
