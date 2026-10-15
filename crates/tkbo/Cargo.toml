@@ -10,25 +10,25 @@ publish.workspace = true
 [lints]
 workspace = true
 [dependencies]
-rustycad-tkernel = { path = "../tkernel", version = "0.2.7" }
-rustycad-tkmath = { path = "../tkmath", version = "0.2.7" }
-rustycad-tkg3d = { path = "../tkg3d", version = "0.2.7" }
-rustycad-tkbrep = { path = "../tkbrep", version = "0.2.7" }
-rustycad-tkg2d = { path = "../tkg2d", version = "0.2.7" }
-rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.2.7" }
-rustycad-tkgeombase = { path = "../tkgeombase", version = "0.2.7" }
-rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.7" }
+rustycad-tkernel = { path = "../tkernel", version = "0.2.8" }
+rustycad-tkmath = { path = "../tkmath", version = "0.2.8" }
+rustycad-tkg3d = { path = "../tkg3d", version = "0.2.8" }
+rustycad-tkbrep = { path = "../tkbrep", version = "0.2.8" }
+rustycad-tkg2d = { path = "../tkg2d", version = "0.2.8" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.2.8" }
+rustycad-tkgeombase = { path = "../tkgeombase", version = "0.2.8" }
+rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.8" }
 # Native TKBO links TKPrim: BOPAlgo_MakerVolume bounds the faces with a BRepPrimAPI_MakeBox.
-rustycad-tkprim = { path = "../tkprim", version = "0.2.7" }
+rustycad-tkprim = { path = "../tkprim", version = "0.2.8" }
 # Native TKBO links TKShHealing: ShapeUpgrade_UnifySameDomain merges the edges and faces of
 # one material (BOPAlgo_CellsBuilder), simplifies Boolean results and defeatured shapes.
-rustycad-tkshhealing = { path = "../tkshhealing", version = "0.2.7" }
+rustycad-tkshhealing = { path = "../tkshhealing", version = "0.2.8" }
 
 [[example]]
 name = "rustycad-tkbo-numeric-probe"
 path = "examples/numeric_probe.rs"
 [dev-dependencies]
-rustycad-tkmesh = { path = "../tkmesh", version = "0.2.7" }
+rustycad-tkmesh = { path = "../tkmesh", version = "0.2.8" }
 static_assertions = "1.1.0"
 
 [[example]]

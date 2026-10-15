@@ -10,20 +10,20 @@ publish.workspace = true
 [lints]
 workspace = true
 [dependencies]
-rustycad-tkg2d = { path = "../tkg2d", version = "0.2.7" }
-rustycad-tkgeombase = { path = "../tkgeombase", version = "0.2.7" }
-rustycad-tkernel = { path = "../tkernel", version = "0.2.7" }
-rustycad-tkmath = { path = "../tkmath", version = "0.2.7" }
-rustycad-tkg3d = { path = "../tkg3d", version = "0.2.7" }
-rustycad-tkservice = { path = "../tkservice", version = "0.2.7" }
-rustycad-tkmesh = { path = "../tkmesh", version = "0.2.7" }
-rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.2.7" }
+rustycad-tkg2d = { path = "../tkg2d", version = "0.2.8" }
+rustycad-tkgeombase = { path = "../tkgeombase", version = "0.2.8" }
+rustycad-tkernel = { path = "../tkernel", version = "0.2.8" }
+rustycad-tkmath = { path = "../tkmath", version = "0.2.8" }
+rustycad-tkg3d = { path = "../tkg3d", version = "0.2.8" }
+rustycad-tkservice = { path = "../tkservice", version = "0.2.8" }
+rustycad-tkmesh = { path = "../tkmesh", version = "0.2.8" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.2.8" }
 
 
-rustycad-tkbrep = { path = "../tkbrep", version = "0.2.7" }
-rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.7" }
+rustycad-tkbrep = { path = "../tkbrep", version = "0.2.8" }
+rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.8" }
 # StdPrs_HLRToolShape and StdPrs_HLRPolyShape run the hidden line removal (native TKV3d links TKHLR).
-rustycad-tkhlr = { path = "../tkhlr", version = "0.2.7" }
+rustycad-tkhlr = { path = "../tkhlr", version = "0.2.8" }
 
 [[example]]
 name = "rustycad-tkv3d-numeric-probe"
@@ -41,4 +41,4 @@ path = "tests/ais_context_fatal.rs"
 
 [dev-dependencies]
 # Real closed volume fixtures reuse the existing Martensite primitive topology implementation.
-rustycad-tkprim = { path = "../tkprim", version = "0.2.7" }
+rustycad-tkprim = { path = "../tkprim", version = "0.2.8" }

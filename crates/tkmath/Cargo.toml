@@ -12,19 +12,19 @@ workspace = true
 num-bigint = { version = "=0.4.6", default-features = false }
 num-complex = "=0.4.6"
 rustc_apfloat = "=0.2.3"
-rustycad-cmath = { path = "../cmath", version = "0.2.7" }
-rustycad-tkernel = { path = "../tkernel", version = "0.2.7" }
+rustycad-cmath = { path = "../cmath", version = "0.2.8" }
+rustycad-tkernel = { path = "../tkernel", version = "0.2.8" }
 
 [features]
 # Matches checks compiled into OCCT's out-of-line gp_Mat methods under OCCT_DEBUG.
 occt-debug-checks = []
 
 [dev-dependencies]
-rustycad-tkg3d = { path = "../tkg3d", version = "0.2.7" }
-rustycad-tkbrep = { path = "../tkbrep", version = "0.2.7" }
-rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.7" }
-rustycad-tkprim = { path = "../tkprim", version = "0.2.7" }
-rustycad-tkmesh = { path = "../tkmesh", version = "0.2.7" }
+rustycad-tkg3d = { path = "../tkg3d", version = "0.2.8" }
+rustycad-tkbrep = { path = "../tkbrep", version = "0.2.8" }
+rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.8" }
+rustycad-tkprim = { path = "../tkprim", version = "0.2.8" }
+rustycad-tkmesh = { path = "../tkmesh", version = "0.2.8" }
 
 [[example]]
 name = "rustycad-tkmath-numeric-probe"
