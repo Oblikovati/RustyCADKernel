@@ -13,6 +13,8 @@
 #include <PrsDim_MaxRadiusDimension.hxx>
 #include <PrsDim_MinRadiusDimension.hxx>
 #include <Geom_Ellipse.hxx>
+#include <PrsDim_OffsetDimension.hxx>
+#include <PrsDim_TangentRelation.hxx>
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -120,8 +122,47 @@ template <class T> static occ::handle<PrsDim_Relation> v3pr_radius(int variant, 
     default: return new T(v3pr_ellipse_shape(0), 7.0 - value, v3pr_text(1));
   }
 }
+static TopoDS_Face v3pr_cylinder_at(double x, double radius) {
+  return BRepBuilderAPI_MakeFace(gp_Cylinder(gp_Ax3(gp_Pnt(x, 0, 0), gp::DZ()), radius), 0.0, 2 * M_PI, 0.0, 4.0).Face();
+}
+static occ::handle<PrsDim_Relation> v3pr_offset(int variant) {
+  switch (variant) {
+    case 0: return new PrsDim_OffsetDimension(v3pr_square(0, 4), v3pr_square(5, 4), 5.0, v3pr_text(1));
+    case 1: return new PrsDim_OffsetDimension(v3pr_square(0, 4), v3pr_square(5, 4), 0.0, v3pr_text(2));
+    case 2: return new PrsDim_OffsetDimension(v3pr_cylinder_at(0, 2), v3pr_cylinder_at(3, 1), 3.0, v3pr_text(1));
+    case 3: return new PrsDim_OffsetDimension(v3pr_cylinder_at(0, 2), v3pr_square(5, 4), 3.0, v3pr_text(1));
+    default: return new PrsDim_OffsetDimension(v3pr_square(0, 4), v3pr_square(0, 2), 400.0, v3pr_text(1));
+  }
+}
+static TopoDS_Edge v3pr_circle_edge(double x, double y, double radius) {
+  return BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(x, y, 0), gp::DZ()), radius)).Edge();
+}
+static TopoDS_Edge v3pr_ellipse_at(double y) {
+  return BRepBuilderAPI_MakeEdge(gp_Elips(gp_Ax2(gp_Pnt(0, y, 0), gp::DZ(), gp::DX()), 5.0, 3.0)).Edge();
+}
+static occ::handle<PrsDim_Relation> v3pr_tangent(int variant) {
+  switch (variant) {
+    case 0: return new PrsDim_TangentRelation(v3pr_circle_edge(0, 0, 3), v3pr_edge(-5, 3, 0, 5, 3, 0), v3pr_plane(), 0);
+    case 1: return new PrsDim_TangentRelation(v3pr_edge(-5, 3, 0, 5, 3, 0), v3pr_circle_edge(0, 0, 3), v3pr_plane(), 1);
+    case 2: return new PrsDim_TangentRelation(v3pr_circle_edge(0, 0, 3), v3pr_circle_edge(5, 0, 2), v3pr_plane(), 0);
+    case 3: return new PrsDim_TangentRelation(v3pr_circle_edge(0, 0, 3), v3pr_circle_edge(0, 0, 5), v3pr_plane(), 0);
+    case 4: return new PrsDim_TangentRelation(v3pr_edge(-6, 1, 0, 6, 1, 0), v3pr_ellipse_at(4), v3pr_plane(), 0);
+    case 5: return new PrsDim_TangentRelation(v3pr_ellipse_at(4), v3pr_edge(-6, 1, 0, 6, 1, 0), v3pr_plane(), 0);
+    case 6: return new PrsDim_TangentRelation(v3pr_circle_edge(0, 8, 1), v3pr_ellipse_at(4), v3pr_plane(), 0);
+    case 7: return new PrsDim_TangentRelation(v3pr_ellipse_at(4), v3pr_circle_edge(0, 8, 1), v3pr_plane(), 0);
+    case 8: return new PrsDim_TangentRelation(v3pr_ellipse_at(4), v3pr_ellipse_at(-2), v3pr_plane(), 0);
+    default: {
+      TopoDS_Vertex v0 = v3pr_vertex(0, 0, 0), v1 = v3pr_vertex(5, 0, 0), v2 = v3pr_vertex(8, 3, 0);
+      TopoDS_Edge line = BRepBuilderAPI_MakeEdge(v0, v1).Edge();
+      TopoDS_Edge arc = BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(5, 3, 0), gp::DZ()), 3.0), v1, v2).Edge();
+      return new PrsDim_TangentRelation(line, arc, v3pr_plane(), 0);
+    }
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 8: return v3pr_offset(variant);
+    case 9: return v3pr_tangent(variant);
     case 6: return v3pr_radius<PrsDim_MaxRadiusDimension>(variant, 5.0);
     case 7: return v3pr_radius<PrsDim_MinRadiusDimension>(variant, 3.0);
     case 4: return v3pr_perpendicular(variant);

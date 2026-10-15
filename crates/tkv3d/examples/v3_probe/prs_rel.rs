@@ -344,8 +344,103 @@ macro_rules! radius_case {
     }};
 }
 
+fn cylinder_at(x: f64, radius: f64) -> Shape {
+    let cylinder = Cylinder3::new(
+        Axis3::from_normal(Point3::new(x, 0.0, 0.0), gp::dz()).unwrap(),
+        radius,
+    )
+    .unwrap();
+    BRepBuilderAPIMakeFace::from_cylinder_bounds(cylinder, (0.0, 2.0 * PI, 0.0, 4.0))
+        .unwrap()
+        .face()
+        .unwrap()
+        .into()
+}
+fn offset(variant: i32) -> Relation {
+    let r = match variant {
+        0 => PrsDimOffsetDimension::new(&square(0.0, 4.0), &square(5.0, 4.0), 5.0, &text(1)),
+        1 => PrsDimOffsetDimension::new(&square(0.0, 4.0), &square(5.0, 4.0), 0.0, &text(2)),
+        2 => PrsDimOffsetDimension::new(
+            &cylinder_at(0.0, 2.0),
+            &cylinder_at(3.0, 1.0),
+            3.0,
+            &text(1),
+        ),
+        3 => PrsDimOffsetDimension::new(&cylinder_at(0.0, 2.0), &square(5.0, 4.0), 3.0, &text(1)),
+        _ => PrsDimOffsetDimension::new(&square(0.0, 4.0), &square(0.0, 2.0), 400.0, &text(1)),
+    };
+    r.into_cast()
+}
+fn circle_edge(x: f64, y: f64, radius: f64) -> Shape {
+    let circle = Circle3::new(
+        Axis2::new(Point3::new(x, y, 0.0), gp::dz()).unwrap(),
+        radius,
+    )
+    .unwrap();
+    BRepBuilderAPIMakeEdge::from_circ(circle)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into()
+}
+fn ellipse_at(y: f64) -> Shape {
+    let ellipse = Ellipse3::new(
+        Axis2::with_x_direction(Point3::new(0.0, y, 0.0), gp::dz(), gp::dx()).unwrap(),
+        5.0,
+        3.0,
+    )
+    .unwrap();
+    BRepBuilderAPIMakeEdge::from_elips(ellipse)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into()
+}
+fn tangent(variant: i32) -> Relation {
+    let line = || edge([-5., 3., 0.], [5., 3., 0.]);
+    let low = || edge([-6., 1., 0.], [6., 1., 0.]);
+    let (a, b, reference) = match variant {
+        0 => (circle_edge(0., 0., 3.), line(), 0),
+        1 => (line(), circle_edge(0., 0., 3.), 1),
+        2 => (circle_edge(0., 0., 3.), circle_edge(5., 0., 2.), 0),
+        3 => (circle_edge(0., 0., 3.), circle_edge(0., 0., 5.), 0),
+        4 => (low(), ellipse_at(4.), 0),
+        5 => (ellipse_at(4.), low(), 0),
+        6 => (circle_edge(0., 8., 1.), ellipse_at(4.), 0),
+        7 => (ellipse_at(4.), circle_edge(0., 8., 1.), 0),
+        8 => (ellipse_at(4.), ellipse_at(-2.), 0),
+        _ => {
+            let as_vertex = |s: Shape| rustycad_tkbrep::topods::vertex(&s).unwrap();
+            let (v0, v1, v2) = (
+                as_vertex(vertex(0., 0., 0.)),
+                as_vertex(vertex(5., 0., 0.)),
+                as_vertex(vertex(8., 3., 0.)),
+            );
+            let line: Shape = BRepBuilderAPIMakeEdge::from_vertices(&v0, &v1)
+                .unwrap()
+                .edge()
+                .unwrap()
+                .into();
+            let circle = Circle3::new(
+                Axis2::new(Point3::new(5.0, 3.0, 0.0), gp::dz()).unwrap(),
+                3.0,
+            )
+            .unwrap();
+            let arc: Shape = BRepBuilderAPIMakeEdge::from_circ_vertices(circle, &v1, &v2)
+                .unwrap()
+                .edge()
+                .unwrap()
+                .into();
+            (line, arc, 0)
+        }
+    };
+    PrsDimTangentRelation::new(&a, &b, &xoy(), reference).into_cast()
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        8 => offset(variant),
+        9 => tangent(variant),
         6 => radius_case!(PrsDimMaxRadiusDimension, variant, 5.0),
         7 => radius_case!(PrsDimMinRadiusDimension, variant, 3.0),
         4 => perpendicular(variant),
