@@ -122,7 +122,8 @@ mod rational_integrals;
 pub use rational_integrals::{
     CertifiedRationalMeasure, RATIONAL_TAYLOR_ORDER, RationalIntegralError,
     RationalIntegralEvidence, RationalIntegralFailure, RationalIntegralOptions,
-    certify_rational_boundary_integral, certify_rational_sweep_integral,
+    certify_rational_boundary_integral, certify_rational_face_area,
+    certify_rational_sweep_integral,
 };
 
 mod polynomial_side;

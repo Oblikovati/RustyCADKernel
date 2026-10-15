@@ -50,6 +50,11 @@ pub enum RationalIntegralFailure {
         /// Downward-rounded parameter length of `[0,1]` already certified within its share.
         certified_length: f64,
     },
+    /// ADR 0068: a face loop's certified integral does not exclude zero.
+    IndeterminateOrientation {
+        /// Flattened index of the loop's first curve (outer first, then holes).
+        first_curve: usize,
+    },
     /// Original metric input or cancellation cause; no string-only erasure.
     Metric(Box<ResidualError>),
     /// Exact enclosure endpoint cannot be represented by finite binary64 values.
@@ -100,6 +105,7 @@ impl RationalIntegralFailure {
             Self::Degree { .. } => "stored degree within requested maximum",
             Self::DenominatorSign { .. } => "strictly positive Bernstein denominator",
             Self::WorkLimit { .. } => "error share met within the subinterval maximum",
+            Self::IndeterminateOrientation { .. } => "loop integral enclosure excluding zero",
             Self::Metric(_) => "valid finite metric inputs and uncancelled completion",
             Self::Unrepresentable { .. } => "finite binary64 enclosure endpoints",
             Self::ErrorLimit { .. } => "certified error bound within requested cap",

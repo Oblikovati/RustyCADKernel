@@ -142,3 +142,81 @@ fn looser_cap_needs_no_more_work_and_still_contains_closed_form() {
         previous = report.integration_subintervals();
     }
 }
+/// Assert `[rep - err, rep + err]` contains `constant + factor * pi`.
+fn assert_contains_affine_pi(report: &CertifiedRationalMeasure, constant: f64, factor: f64) {
+    let [low, high] = pi_bounds().map(|bound| {
+        bound
+            .multiply(&ExactRatio::from_finite(factor))
+            .add(&ExactRatio::from_finite(constant))
+    });
+    let (low, high) = if low <= high {
+        (low, high)
+    } else {
+        (high, low)
+    };
+    let representative = ExactRatio::from_finite(report.representative());
+    let error = ExactRatio::from_finite(report.absolute_error_bound());
+    assert!(
+        representative.subtract(&error) <= low && representative.add(&error) >= high,
+        "{report:?}"
+    );
+    assert!(report.absolute_error_bound() <= report.requested_options().absolute_error_limit);
+}
+fn line(origin: [f64; 2], direction: [f64; 2]) -> OrientedMetricCurve<'static> {
+    OrientedMetricCurve {
+        curve: MetricCurve::Line { origin, direction },
+        reversed: false,
+    }
+}
+#[test]
+fn annulus_face_area_is_independent_of_loop_orientations() {
+    let outer = circle_poles([0., 0.], 2.);
+    let inner = circle_poles([0.25, 0.], 0.5);
+    for (outer_reversed, inner_reversed) in
+        [(false, false), (false, true), (true, false), (true, true)]
+    {
+        let outer = arcs(&outer, &QUARTER_WEIGHTS, outer_reversed);
+        let hole = arcs(&inner, &QUARTER_WEIGHTS, inner_reversed);
+        let report =
+            certify_rational_face_area(&outer, &[&hole], Default::default(), || false).unwrap();
+        assert_contains_affine_pi(&report, 0., 3.75);
+        assert_eq!(report.operation(), PolynomialIntegralOperation::FaceArea);
+    }
+}
+#[test]
+fn square_with_two_circular_holes_is_sixteen_minus_holes() {
+    let square = [
+        line([-2., -2.], [4., 0.]),
+        line([2., -2.], [0., 4.]),
+        line([2., 2.], [-4., 0.]),
+        line([-2., 2.], [0., -4.]),
+    ];
+    let left = circle_poles([-1., 0.], 0.5);
+    let right = circle_poles([1., 0.5], 0.25);
+    let left = arcs(&left, &QUARTER_WEIGHTS, true);
+    let right = arcs(&right, &QUARTER_WEIGHTS, false);
+    let report =
+        certify_rational_face_area(&square, &[&left, &right], Default::default(), || false)
+            .unwrap();
+    assert_contains_affine_pi(&report, 16., -0.3125);
+}
+#[test]
+fn zero_area_loop_has_indeterminate_orientation() {
+    let point = [[1., 1.]; 3];
+    let degenerate = [OrientedMetricCurve {
+        curve: MetricCurve::Bezier(MetricBezier {
+            poles: &point,
+            weights: Some(&QUARTER_WEIGHTS),
+        }),
+        reversed: false,
+    }];
+    let outer = circle_poles([0., 0.], 2.);
+    let outer = arcs(&outer, &QUARTER_WEIGHTS, false);
+    let error = certify_rational_face_area(&outer, &[&degenerate], Default::default(), || false)
+        .unwrap_err();
+    assert!(matches!(
+        error.cause,
+        RationalIntegralFailure::IndeterminateOrientation { first_curve: 4 }
+    ));
+    assert_eq!(error.curve_index, Some(4));
+}

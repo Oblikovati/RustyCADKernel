@@ -4,6 +4,7 @@
 //! Taylor models with certified Bernstein remainders. No quadrature estimate is used.
 mod curve;
 mod error;
+mod face;
 mod integer_polynomial;
 mod publish;
 mod subinterval;
@@ -12,6 +13,7 @@ use super::super::{certificate_arithmetic::ExactRatio, error::poll};
 use super::affine_prism_jacobian;
 use super::{MetricEmbedding, OrientedMetricCurve, PolynomialIntegralOperation};
 pub use error::{RationalIntegralError, RationalIntegralFailure};
+pub use face::certify_rational_face_area;
 use publish::reversed_bounds;
 pub use types::*;
 
