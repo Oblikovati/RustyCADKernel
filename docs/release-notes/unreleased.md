@@ -28,3 +28,16 @@ where an implicit partner exists, or refused by name (`OffsetPair`,
 `OffsetBasis`, `OffsetRadius`, `OffsetEllipseAxis`, `OffsetContinuity`,
 `OffsetSingular`, `PeriodicKnotShift`, `PeriodicShape`). Spline-source
 extension stays refused until the application defines a rule.
+
+## New toolkit: TKTObj
+
+`rustycad-tktobj` ports the TObj package (OCCT 3d097a0): `TObj_Model` and
+`TObj_Object` as traits over embedded bases, partitions, the object iterators,
+`TObj_Application`, `TObj_Assistant`, `TObj_Persistence`, `TObj_CheckModel` and
+the attributes `TObj_TObject`, `TObj_TModel`, `TObj_TNameContainer`,
+`TObj_TReference`, `TObj_TXYZ`, `TObj_TIntSparseArray`
+([tobj-design.md](../tobj-design.md)). 42 of the 44 TObj_Model_Test GTests pass
+in Rust with `tools/verify_toolkit.py TKTObj`; the two stream cases use the
+out-of-scope BinTObj native format and stay native-only. Without an
+application-defined storage driver, `TObj_Model::SaveAs` reports the TObj
+driver-failure message.
