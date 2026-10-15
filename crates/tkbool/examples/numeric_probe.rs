@@ -152,6 +152,19 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("tb_wire_to_face", top_ope_brep_build::wire_to_face_case),
     ("tb_face_builder", top_ope_brep_build::face_builder_case),
     ("tb_wec", top_ope_brep_build::wec_case),
+    // TopOpeBRepBuild_Tools (bl_probe/top_ope_brep_build_tools.rs)
+    (
+        "tb_tools_geom",
+        bl_probe::top_ope_brep_build_tools::geom_case,
+    ),
+    (
+        "tb_tools_states",
+        bl_probe::top_ope_brep_build_tools::states_case,
+    ),
+    (
+        "tb_tools_tolerances",
+        bl_probe::top_ope_brep_build_tools::tolerances_case,
+    ),
 ];
 
 fn main() {

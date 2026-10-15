@@ -224,8 +224,8 @@ impl Default for TopOpeBRepDSShapeWithState {
 }
 
 impl TopOpeBRepDSShapeWithState {
-    /// The part of a state (none for UNKNOWN).
-    fn part_mut(&mut self, a_state: State) -> Option<&mut List<Shape>> {
+    /// The part of a state (none for UNKNOWN), changed in place by Builder1.
+    pub(crate) fn part_mut(&mut self, a_state: State) -> Option<&mut List<Shape>> {
         match a_state {
             State::In => Some(&mut self.my_part_in),
             State::Out => Some(&mut self.my_part_out),

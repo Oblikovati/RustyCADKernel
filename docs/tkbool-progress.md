@@ -121,3 +121,60 @@ Check/Dumper and every FUN_ds_* completion printing the resulting interferences 
 shape (the section edges sorted: `TOOL::EShareG` adds them in the order of a shape map).
 Unit tests with closed-form expectations are in
 `crates/tkbool/tests/top_ope_brep_ds_ops.rs`.
+
+## TopOpeBRepBuild (Builder, Builder1, HBuilder, BuilderON, Tools, FuseFace, ShellToSolid and the area, edge, solid and face builders)
+
+Every public class of the package is ported; the debug-only `Griddump`, `trace` and
+`Gtrace*` members are release no-ops, as natively without `OCCT_DEBUG`.
+
+- `TopOpeBRepBuild_Builder` is `TopOpeBRepBuildBuilder`; its members spread over the
+  files of the native parts (`builder/`). Its virtual members (`Perform`, `Clear`,
+  `MergeKPart`, `GWESMakeFaces`, `GFillSolidSFS`, `GFillShellSFS`) dispatch to the
+  Builder1 versions when the builder carries Builder1 data (`b1`); the base versions are
+  `*_base`.
+- `TopOpeBRepBuild_Builder1` is `TopOpeBRepBuildBuilder1`, a builder with that data
+  (dereferencing to it); the Builder1 members are methods of the builder, raising
+  Standard_NullObject on a plain builder. The file statics (`mySDEdgeMap`,
+  `processedEdges`, `theUsedVertexMap`, `theUnkStateVer`) and the `GLOBAL_*` variables
+  are thread-local; the destructor clearing the Builder1_1 statics is the drop of the data.
+- `TopOpeBRepBuild_HBuilder` keeps its fields (the Builder1 included) in a locked
+  `SharedState`: members returning references return copies, `ChangeBuilder` returns
+  the lock guard, `ChangeBuildTool` and `ChangeNewEdges` take a closure.
+- `TopOpeBRepBuild_Tools` is the namespace struct `TopOpeBRepBuildTools`; outputs are
+  returned (`GetAdjacentFace` returns an `Option`, `GetTangentToEdge*` a flag and the
+  tangent).
+
+### Native quirks kept
+
+- `InitSection` also clears the ON splits; `myNewVertices` and `myNewFaces` are indexed
+  from 0 as their native arrays.
+- `GLOBAL_USE_NEW_BUILDER` is never set natively, so the Builder1 state computation
+  (`PerformShapeWithStates`, the same domain fills) only runs when a caller sets it; the
+  Builder1 `MergeKPart` (2d correction of the soso result) and `GWESMakeFaces`
+  (NormalizeFace for soso, CorrectFace2d) always run.
+- `OrientateEdgeOnFace` changes the edge in place, so the edges bound in the face state
+  map and added to the wire edge set are the reoriented ones, as natively through the
+  non-const `TopoDS::Edge`; `PerformPieceOn2D` reorients the ON parts of the tool edges
+  in the map of shapes with states of the structure.
+- `GetTangentToEdgeEdge` projects onto the copy of the 3d curve of the original edge
+  moved by the edge location only; `CorrectEdgeTolerance` validates with the surface of
+  the face moved by `L` (the curve representation surface is read and dropped).
+- The edges kept by `GFABUMakeFaces` with two copies of one edge, `nfa` kept across the
+  solids of `GSOBUMakeSolids`, the never-cleared `FUNBUILD` maps, `yap2`'s always-false
+  flag and the early return of `GFillFaceSFS` before `myEdgeAvoid.Clear` follow the
+  native code.
+
+### Verification
+
+`python3 tools/verify_tkbool_numeric.py` runs `tb_wire_to_face`, `tb_face_builder`,
+`tb_wec` (`tools/oracle/tkbool_probe_topopebrepbuild.cxx`) and `tb_tools_geom`,
+`tb_tools_states`, `tb_tools_tolerances` (`tools/oracle/tkbool_probe_topopebrepbuild_tools.cxx`,
+corpus `tools/tkbool_corpus_topopebrepbuild_tools.py`): the normals, tangents, face
+closure and normalization on plane and cylinder faces (the seam included), the states
+found through the vertices of shells, faces and wires against solids and propagated from
+a face, and the tolerance corrections. The `tt_corriso` requests of the sphere were
+removed: `CORRISO::Init` makes the p-curve of a degenerated edge from its null 3d curve,
+a segmentation fault natively (Standard_NullObject here). Unit tests are in
+`crates/tkbool/tests/top_ope_brep_build_parts.rs` and
+`crates/tkbool/tests/top_ope_brep_build_builder.rs`; the builder runs end to end once
+the TopOpeBRep fillers fill its structures.

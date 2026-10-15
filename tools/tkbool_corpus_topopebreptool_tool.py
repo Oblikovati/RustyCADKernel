@@ -116,7 +116,9 @@ def regularize_requests() -> list[str]:
 def corriso_requests() -> list[str]:
     out = []
     two_pi = 2 * math.pi
-    for solid, n in ((CYLINDER, 4), (SPHERE, 4), (TORUS, 4), ((2, 1.0, 0.5, 2.0, 0.0, 0.0, 0.0, 0.0), 4)):
+    # The sphere is left out: CORRISO::Init makes the p-curve of its degenerated edges from a
+    # null 3d curve, a null dereference (segmentation fault) natively, Standard_NullObject here.
+    for solid, n in ((CYLINDER, 4), (TORUS, 4), ((2, 1.0, 0.5, 2.0, 0.0, 0.0, 0.0, 0.0), 4)):
         for ie in range(1, n + 1):
             for t in ((two_pi, 0.0), (-two_pi, 0.0), (0.0, 0.0), (0.0, 1.0)):
                 out.append(f'tt_corriso {fmt(solid)} {fmt((ie,) + t)}')

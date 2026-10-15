@@ -63,6 +63,8 @@ pub mod legacy_top_ope_brep_ds_build_tool;
 pub mod point_explorer;
 #[path = "../top_ope_brep_build.rs"]
 pub mod top_ope_brep_build;
+#[path = "../top_ope_brep_build_builder.rs"]
+pub mod top_ope_brep_build_builder;
 #[path = "../top_ope_brep_build_parts.rs"]
 pub mod top_ope_brep_build_parts;
 #[path = "../top_ope_brep_ds_build_tool.rs"]
@@ -75,7 +77,7 @@ pub mod top_ope_brep_ds_ops;
 pub mod top_ope_brep_tool_classifier;
 #[path = "../top_ope_brep_tool_curve_tool.rs"]
 pub mod top_ope_brep_tool_curve_tool;
-#[path = "../top_ope_brep_tool_tool.rs"]
-pub mod top_ope_brep_tool_tool;
 #[path = "../top_ope_brep_tool_shapes.rs"]
 pub mod top_ope_brep_tool_shapes;
+#[path = "../top_ope_brep_tool_tool.rs"]
+pub mod top_ope_brep_tool_tool;

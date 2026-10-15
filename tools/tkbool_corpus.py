@@ -63,3 +63,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_topopebreptool_tool').append_topopebreptool_tool_requests(requests)
     # TopOpeBRepDS interference processing (tkbool_corpus_topopebrepds_ops.py)
     __import__('tkbool_corpus_topopebrepds_ops').append_topopebrepds_ops_requests(requests)
+    # TopOpeBRepBuild_Tools (tkbool_corpus_topopebrepbuild_tools.py)
+    __import__('tkbool_corpus_topopebrepbuild_tools').append_topopebrepbuild_tools_requests(requests)

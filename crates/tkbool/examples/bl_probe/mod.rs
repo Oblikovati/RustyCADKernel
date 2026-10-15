@@ -19,6 +19,7 @@ pub mod curve_explorer;
 pub mod interference_tool;
 pub mod point_explorer;
 pub mod top_ope_brep_build;
+pub mod top_ope_brep_build_tools;
 pub mod top_ope_brep_ds;
 pub mod top_ope_brep_ds_build;
 pub mod top_ope_brep_ds_ops;

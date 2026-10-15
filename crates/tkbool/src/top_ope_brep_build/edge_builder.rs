@@ -252,6 +252,9 @@ impl TopOpeBRepBuildArea1dBuilder {
         Self::default()
     }
 
+    /// `DumpList(LOL)`: nothing in a release build, as natively; `ab.dump_list(&lol)`.
+    pub fn dump_list(&self, _lol: &super::LoopList) {}
+
     /// `TopOpeBRepBuild_Area1dBuilder(LS, LC, ForceClass)`;
     /// `TopOpeBRepBuildArea1dBuilder::with_loops(&mut ps, &mut pc, false)?`.
     pub fn with_loops(
