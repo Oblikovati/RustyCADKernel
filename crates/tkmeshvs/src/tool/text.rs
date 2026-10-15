@@ -80,7 +80,7 @@ fn make_text(values: TextValues) -> Result<Graphic3dAspectText3d, Failure> {
     text.set_text_font_aspect(font_aspect);
     Ok(text)
 }
-fn terminated_font(font: &AsciiString) -> AsciiString {
+pub(crate) fn terminated_font(font: &AsciiString) -> AsciiString {
     let bytes = font.as_bytes();
     let end = bytes
         .iter()
@@ -100,21 +100,21 @@ fn text_parameters(color: Color, expansion: f64, space: f64, font: AsciiString) 
         font_aspect: 1,
     }
 }
-fn text_style(value: i32) -> Result<AspectTypeOfStyleText, Failure> {
+pub(crate) fn text_style(value: i32) -> Result<AspectTypeOfStyleText, Failure> {
     native_enum(
         value,
         AspectTypeOfStyleText::from_native_value(value),
         "Aspect_TypeOfStyleText",
     )
 }
-fn text_display(value: i32) -> Result<AspectTypeOfDisplayText, Failure> {
+pub(crate) fn text_display(value: i32) -> Result<AspectTypeOfDisplayText, Failure> {
     native_enum(
         value,
         AspectTypeOfDisplayText::from_native_value(value),
         "Aspect_TypeOfDisplayText",
     )
 }
-fn font_aspect(value: i32) -> Result<FontFontAspect, Failure> {
+pub(crate) fn font_aspect(value: i32) -> Result<FontFontAspect, Failure> {
     native_enum(
         value,
         FontFontAspect::from_native_value(value),

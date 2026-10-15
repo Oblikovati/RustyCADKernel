@@ -15,4 +15,4 @@ mod values;
 pub struct MeshVSTool;
 
 mod fill;
-mod text;
+pub(crate) mod text;

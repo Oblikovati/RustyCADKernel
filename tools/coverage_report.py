@@ -100,6 +100,11 @@ PROBE_CORPORA: tuple[ProbeCorpus, ...] = (
     ),
     ProbeCorpus("rustycad-tkbool", "numeric_probe", "target/oracle-tkbool/numeric"),
     ProbeCorpus("rustycad-tkv3d", "numeric_probe", "target/oracle-tkv3d/numeric"),
+    ProbeCorpus(
+        "martensite-tkmeshvs",
+        "martensite-tkmeshvs-numeric-probe",
+        "target/oracle-tkmeshvs/numeric",
+    ),
 )
 
 

@@ -13,6 +13,12 @@ workspace = true
 rustycad-tkernel = { path = "../tkernel", version = "0.2.8" }
 rustycad-tkservice = { path = "../tkservice", version = "0.2.8" }
 rustycad-tkmath = { path = "../tkmath", version = "0.2.8" }
+# MeshVS_Mesh is an AIS interactive object with SelectMgr owners and Select3D entities.
+rustycad-tkv3d = { path = "../tkv3d", version = "0.2.8" }
+[[example]]
+name = "martensite-tkmeshvs-numeric-probe"
+path = "examples/numeric_probe.rs"
+
 [[test]]
 name = "toolkit"
 path = "tests/toolkit.rs"
