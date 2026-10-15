@@ -596,8 +596,81 @@ fn equal_distance(variant: i32) -> Relation {
     PrsDimEqualDistanceRelation::new(&a, &b, &c, &d, &xoy()).into_cast()
 }
 
+fn identic(variant: i32) -> Result<Relation, Failure> {
+    let circle = Circle3::new(Axis2::new(gp::origin(), gp::dz())?, 3.0)?;
+    let ellipse = Ellipse3::new(
+        Axis2::with_x_direction(gp::origin(), gp::dz(), gp::dx())?,
+        5.0,
+        3.0,
+    )?;
+    let full: Shape = BRepBuilderAPIMakeEdge::from_circ(circle)?.edge()?.into();
+    let efull: Shape = BRepBuilderAPIMakeEdge::from_elips(ellipse)?.edge()?.into();
+    let infinite: Shape = BRepBuilderAPIMakeEdge::from_lin(Line3::new(gp::origin(), gp::dx()))?
+        .edge()?
+        .into();
+    let arc_c = |a: f64, b: f64| -> Result<Shape, Failure> {
+        Ok(BRepBuilderAPIMakeEdge::from_circ_params(circle, a, b)?
+            .edge()?
+            .into())
+    };
+    let arc_e = |a: f64, b: f64| -> Result<Shape, Failure> {
+        Ok(BRepBuilderAPIMakeEdge::from_elips_params(ellipse, a, b)?
+            .edge()?
+            .into())
+    };
+    let new = |a: &Shape, b: &Shape| PrsDimIdenticRelation::new(a, b, &xoy());
+    let r = match variant {
+        0 => new(&vertex(1., 2., 0.), &vertex(1., 2., 0.)),
+        1 => {
+            let as_vertex = |s: Shape| rustycad_tkbrep::topods::vertex(&s).unwrap();
+            let (v0, v, v2) = (
+                as_vertex(vertex(0., 0., 0.)),
+                as_vertex(vertex(4., 0., 0.)),
+                as_vertex(vertex(4., 3., 0.)),
+            );
+            let e1 = BRepBuilderAPIMakeEdge::from_vertices(&v0, &v)?.edge()?;
+            let e2 = BRepBuilderAPIMakeEdge::from_vertices(&v, &v2)?.edge()?;
+            let wire = BRepBuilderAPIMakeWire::from_two_edges(&e1, &e2)?.wire()?;
+            let shape: Shape = v.into();
+            let r = new(&shape, &shape);
+            let user = AisShape::new(&wire.into());
+            r.add_user(&user.cast());
+            r
+        }
+        2 => new(&vertex(2., 0., 0.), &edge([0., 0., 0.], [5., 0., 0.])),
+        3 => new(&edge([0., 0., 0.], [5., 0., 0.]), &vertex(2., 0., 3.)),
+        4 => new(
+            &edge([0., 0., 0.], [6., 0., 0.]),
+            &edge([3., 0., 0.], [9., 0., 0.]),
+        ),
+        5 => new(
+            &edge([0., 0., 0.], [6., 0., 0.]),
+            &edge([0., 0., 0.], [6., 0., 0.]),
+        ),
+        6 => new(
+            &edge([0., 0., 0.], [4., 0., 0.]),
+            &edge([4., 0., 0.], [9., 0., 0.]),
+        ),
+        7 => new(
+            &edge([0., 0., 0.], [9., 0., 0.]),
+            &edge([2., 0., 0.], [5., 0., 0.]),
+        ),
+        8 => new(&infinite, &infinite),
+        9 => new(&full, &full),
+        10 => new(&full, &arc_c(1.0, 2.5)?),
+        11 => new(&arc_c(0.0, 2.0)?, &arc_c(2.0, 4.0)?),
+        12 => new(&arc_c(0.0, 3.0)?, &arc_c(2.0, 5.0)?),
+        13 => new(&arc_c(0.0, 2.0)?, &arc_c(0.0, 3.0)?),
+        14 => new(&efull, &efull),
+        15 => new(&arc_e(0.0, 2.0)?, &arc_e(2.0, 4.0)?),
+        _ => new(&vertex(3., 0., 0.), &full),
+    };
+    Ok(r.into_cast())
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        14 => identic(variant)?,
         13 => equal_distance(variant),
         12 => midpoint(variant)?,
         11 => symmetric(variant)?,

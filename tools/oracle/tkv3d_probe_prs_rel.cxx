@@ -19,6 +19,8 @@
 #include <PrsDim_SymmetricRelation.hxx>
 #include <PrsDim_MidPointRelation.hxx>
 #include <PrsDim_EqualDistanceRelation.hxx>
+#include <PrsDim_IdenticRelation.hxx>
+#include <AIS_Shape.hxx>
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -221,8 +223,41 @@ static occ::handle<PrsDim_Relation> v3pr_equal_distance(int variant) {
     default: return new PrsDim_EqualDistanceRelation(v3pr_vertex(1, 1, 0), v3pr_vertex(1, 1, 0), BRepBuilderAPI_MakeEdge(gp_Lin(gp_Pnt(0, 4, 0), gp::DX())).Edge(), l9, v3pr_plane());
   }
 }
+static occ::handle<PrsDim_Relation> v3pr_identic(int variant) {
+  const gp_Circ c(gp_Ax2(gp_Pnt(0, 0, 0), gp::DZ()), 3.0);
+  const gp_Elips e(gp_Ax2(gp_Pnt(0, 0, 0), gp::DZ(), gp::DX()), 5.0, 3.0);
+  const TopoDS_Edge full = BRepBuilderAPI_MakeEdge(c).Edge();
+  const TopoDS_Edge efull = BRepBuilderAPI_MakeEdge(e).Edge();
+  const TopoDS_Edge inf = BRepBuilderAPI_MakeEdge(gp_Lin(gp_Pnt(0, 0, 0), gp::DX())).Edge();
+  switch (variant) {
+    case 0: return new PrsDim_IdenticRelation(v3pr_vertex(1, 2, 0), v3pr_vertex(1, 2, 0), v3pr_plane());
+    case 1: {
+      TopoDS_Vertex v0 = v3pr_vertex(0, 0, 0), v = v3pr_vertex(4, 0, 0), v2 = v3pr_vertex(4, 3, 0);
+      TopoDS_Wire w = BRepBuilderAPI_MakeWire(BRepBuilderAPI_MakeEdge(v0, v).Edge(), BRepBuilderAPI_MakeEdge(v, v2).Edge()).Wire();
+      occ::handle<PrsDim_IdenticRelation> r = new PrsDim_IdenticRelation(v, v, v3pr_plane());
+      r->AddUser(new AIS_Shape(w));
+      return r;
+    }
+    case 2: return new PrsDim_IdenticRelation(v3pr_vertex(2, 0, 0), v3pr_edge(0, 0, 0, 5, 0, 0), v3pr_plane());
+    case 3: return new PrsDim_IdenticRelation(v3pr_edge(0, 0, 0, 5, 0, 0), v3pr_vertex(2, 0, 3), v3pr_plane());
+    case 4: return new PrsDim_IdenticRelation(v3pr_edge(0, 0, 0, 6, 0, 0), v3pr_edge(3, 0, 0, 9, 0, 0), v3pr_plane());
+    case 5: return new PrsDim_IdenticRelation(v3pr_edge(0, 0, 0, 6, 0, 0), v3pr_edge(0, 0, 0, 6, 0, 0), v3pr_plane());
+    case 6: return new PrsDim_IdenticRelation(v3pr_edge(0, 0, 0, 4, 0, 0), v3pr_edge(4, 0, 0, 9, 0, 0), v3pr_plane());
+    case 7: return new PrsDim_IdenticRelation(v3pr_edge(0, 0, 0, 9, 0, 0), v3pr_edge(2, 0, 0, 5, 0, 0), v3pr_plane());
+    case 8: return new PrsDim_IdenticRelation(inf, inf, v3pr_plane());
+    case 9: return new PrsDim_IdenticRelation(full, full, v3pr_plane());
+    case 10: return new PrsDim_IdenticRelation(full, BRepBuilderAPI_MakeEdge(c, 1.0, 2.5).Edge(), v3pr_plane());
+    case 11: return new PrsDim_IdenticRelation(BRepBuilderAPI_MakeEdge(c, 0.0, 2.0).Edge(), BRepBuilderAPI_MakeEdge(c, 2.0, 4.0).Edge(), v3pr_plane());
+    case 12: return new PrsDim_IdenticRelation(BRepBuilderAPI_MakeEdge(c, 0.0, 3.0).Edge(), BRepBuilderAPI_MakeEdge(c, 2.0, 5.0).Edge(), v3pr_plane());
+    case 13: return new PrsDim_IdenticRelation(BRepBuilderAPI_MakeEdge(c, 0.0, 2.0).Edge(), BRepBuilderAPI_MakeEdge(c, 0.0, 3.0).Edge(), v3pr_plane());
+    case 14: return new PrsDim_IdenticRelation(efull, efull, v3pr_plane());
+    case 15: return new PrsDim_IdenticRelation(BRepBuilderAPI_MakeEdge(e, 0.0, 2.0).Edge(), BRepBuilderAPI_MakeEdge(e, 2.0, 4.0).Edge(), v3pr_plane());
+    default: return new PrsDim_IdenticRelation(v3pr_vertex(3, 0, 0), full, v3pr_plane());
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 14: return v3pr_identic(variant);
     case 13: return v3pr_equal_distance(variant);
     case 12: return v3pr_midpoint(variant);
     case 11: return v3pr_symmetric(variant);
