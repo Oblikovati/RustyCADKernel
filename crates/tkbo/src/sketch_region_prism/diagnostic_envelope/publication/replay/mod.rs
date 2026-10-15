@@ -9,6 +9,9 @@ use crate::sketch_region_prism::{
 };
 pub(super) use join::join_bytes;
 pub(in crate::sketch_region_prism::diagnostic_envelope::publication) use tags::freeze as freeze_tag;
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) use tags::{
+    class as publication_class_tag, history as history_phase_tag, pending as pending_tag,
+};
 impl OwnedPrismPublicationDiagnostic {
     /// Replay supported evidence and exact coverage; `diagnostic.replay_bytes()` excludes retained local owners.
     pub(crate) fn replay_bytes(&self) -> Vec<u8> {
@@ -106,7 +109,7 @@ fn callback_v2(
         stage(value, bytes);
     }
 }
-fn callback(value: &OwnedPublicationCallback, bytes: &mut Vec<u8>) {
+pub(super) fn callback(value: &OwnedPublicationCallback, bytes: &mut Vec<u8>) {
     bytes.push(shared::publication_phase_tag(value.checkpoint.phase));
     bytes.extend((value.checkpoint.ordinal as u64).to_le_bytes());
     shared::append_callback_cause(&value.cause, bytes);

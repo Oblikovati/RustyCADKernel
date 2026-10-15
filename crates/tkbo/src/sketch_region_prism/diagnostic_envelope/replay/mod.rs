@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Complete supported V1 envelope bytes include explicit gaps, never unsupported local-owner contents.
 mod admission;
+mod annular;
 mod native;
 mod phases;
 mod tags;

@@ -2,6 +2,8 @@
 //! Owned annular preparation: two explicit boundary roles through the existing general pipeline.
 mod access;
 mod admission;
+pub(in crate::sketch_region_prism) mod names;
+pub(in crate::sketch_region_prism) mod operation;
 mod pipeline;
 mod request;
 mod retained;
@@ -16,6 +18,7 @@ pub(in crate::sketch_region_prism) use retained::{
 
 use super::admission::OwnedPrismAdmissionCause;
 use super::construction::{ConstructedPolynomialSource, construct_owned_polynomial_as};
+use super::diagnostic_access::RetainedPreparationStage;
 use super::diagnostics::{OwnedPreparationCause, OwnedPreparationClass};
 use super::names::CallerOperationId;
 use super::progress::*;
@@ -25,6 +28,8 @@ use crate::sketch_region_certification::{BoundaryCensus, CensusPolicy};
 use crate::sketch_region_contact_transport::{ContactTransportPolicy, PairedContactTransaction};
 use crate::sketch_region_partition_bindings::PartitionBoundOutputs;
 use crate::sketch_region_prism::PrismReceipt;
+use crate::sketch_region_prism::publication::annular::AnnularPublicationOptions;
+use crate::sketch_region_prism::region_certificate::embedding::AnnularEmbeddingOptions;
 use crate::sketch_region_prism::region_certificate::two_loop::{
     TwoLoopCandidateBinding, TwoLoopRegionIdentities, TwoLoopRegionOptions, TwoLoopRegionRequest,
     TwoLoopWireBinding,
@@ -34,4 +39,4 @@ use retained::*;
 use rustycad_tkmath::{gp::Plane3, predicates::roots::RootIsolationOptions};
 
 #[cfg(test)]
-mod tests;
+pub(in crate::sketch_region_prism) mod tests;

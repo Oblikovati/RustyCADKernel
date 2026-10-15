@@ -27,7 +27,7 @@ fn capture(original: &OwnedPrismPreparationFailure) -> OwnedPrismDiagnostic {
         gaps: Vec::new(),
     }
 }
-fn operation_class(class: OwnedPreparationClass) -> PrismDiagnosticClass {
+pub(super) fn operation_class(class: OwnedPreparationClass) -> PrismDiagnosticClass {
     match class {
         OwnedPreparationClass::Declined => PrismDiagnosticClass::Declined,
         OwnedPreparationClass::Incomplete => PrismDiagnosticClass::Incomplete,
@@ -35,7 +35,7 @@ fn operation_class(class: OwnedPreparationClass) -> PrismDiagnosticClass {
         OwnedPreparationClass::Cancelled => PrismDiagnosticClass::Cancelled,
     }
 }
-fn owned_cause(cause: &OwnedPreparationCause) -> OwnedPreparationDiagnosticCause {
+pub(super) fn owned_cause(cause: &OwnedPreparationCause) -> OwnedPreparationDiagnosticCause {
     use OwnedPreparationCause as C;
     use OwnedPreparationDiagnosticCause as O;
     use UnprojectedPreparationPayload as U;
@@ -50,7 +50,7 @@ fn owned_cause(cause: &OwnedPreparationCause) -> OwnedPreparationDiagnosticCause
         C::PrismUnavailable(_) => O::Unprojected(U::RegionPrism),
     }
 }
-fn owned_callback(stop: &OwnedPrismCallbackStop) -> OwnedPreparationCallback {
+pub(super) fn owned_callback(stop: &OwnedPrismCallbackStop) -> OwnedPreparationCallback {
     let cause = match &stop.cause {
         OwnedPrismCallbackCause::Cancelled => OwnedDiagnosticCallbackCause::Cancelled,
         OwnedPrismCallbackCause::Failed(value) => {
@@ -75,7 +75,9 @@ fn collect_gaps(original: &OwnedPrismPreparationFailure, gaps: &mut Vec<PrismDia
         gaps.push(PrismDiagnosticGap::MissingCallbackEvidence);
     }
 }
-fn unprojected_cause(cause: &OwnedPreparationCause) -> Option<UnprojectedPreparationPayload> {
+pub(super) fn unprojected_cause(
+    cause: &OwnedPreparationCause,
+) -> Option<UnprojectedPreparationPayload> {
     use OwnedPreparationCause as C;
     use UnprojectedPreparationPayload as U;
     match cause {

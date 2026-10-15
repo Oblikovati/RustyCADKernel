@@ -4,7 +4,9 @@ use super::*;
 use crate::sketch_region_prism::{
     frozen::FreezePhase, region_certificate::embedding::PrismEmbeddingPhase,
 };
-pub(super) fn class(value: PrismPublicationClass) -> u8 {
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) fn class(
+    value: PrismPublicationClass,
+) -> u8 {
     let class = match value {
         PrismPublicationClass::Failed => PrismDiagnosticClass::Failed,
         PrismPublicationClass::Incomplete => PrismDiagnosticClass::Incomplete,
@@ -12,7 +14,9 @@ pub(super) fn class(value: PrismPublicationClass) -> u8 {
     };
     shared::diagnostic_class_tag(class)
 }
-pub(super) fn pending(value: PublicationPendingPayload) -> u8 {
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) fn pending(
+    value: PublicationPendingPayload,
+) -> u8 {
     match value {
         PublicationPendingPayload::JoinClosureQuery => 0,
         PublicationPendingPayload::JoinClosureRegion => 1,
@@ -26,7 +30,9 @@ pub(super) fn pending(value: PublicationPendingPayload) -> u8 {
         PublicationPendingPayload::Measures => 9,
     }
 }
-pub(super) fn history(value: PrismHistoryPhase) -> u8 {
+pub(in crate::sketch_region_prism::diagnostic_envelope::publication) fn history(
+    value: PrismHistoryPhase,
+) -> u8 {
     match value {
         PrismHistoryPhase::Admission => 0,
         PrismHistoryPhase::Capture => 1,

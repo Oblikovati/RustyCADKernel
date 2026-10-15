@@ -39,4 +39,25 @@ impl AnnularPreparationFailure {
     pub(in crate::sketch_region_prism) fn receipt(&self) -> Option<&PrismReceipt> {
         self.retained.prism.as_ref()
     }
+    /// Borrow the original owned request; `failure.request().regions.annulus`.
+    pub(in crate::sketch_region_prism) fn request(&self) -> &OwnedAnnularPrismRequest {
+        &self.retained.request
+    }
+    /// List retained partial-transaction owners in pipeline order; `failure.retained_stages()`.
+    /// An empty list does not prove a nested cause was projected.
+    pub(in crate::sketch_region_prism) fn retained_stages(&self) -> Vec<RetainedPreparationStage> {
+        use RetainedPreparationStage::*;
+        let retained = &self.retained;
+        [
+            (ConstructedSource, !retained.sources.is_empty()),
+            (Census, retained.census.is_some()),
+            (Partition, retained.partition.is_some()),
+            (ContactTransport, retained.bridge.is_some()),
+            (RegionIdentities, retained.identities.is_some()),
+            (Prism, retained.prism.is_some()),
+        ]
+        .into_iter()
+        .filter_map(|(stage, present)| present.then_some(stage))
+        .collect()
+    }
 }

@@ -9,7 +9,7 @@ pub(crate) enum OrderedPrismStage {
     Tolerance,
 }
 impl OrderedPrismStage {
-    pub(super) const ALL: [Self; 4] = [
+    pub(in crate::sketch_region_prism) const ALL: [Self; 4] = [
         Self::Topology,
         Self::Geometry,
         Self::SelfIntersection,

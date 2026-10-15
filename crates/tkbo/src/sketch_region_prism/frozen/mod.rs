@@ -94,5 +94,7 @@ pub(in crate::sketch_region_prism) mod annular_join;
 pub(in crate::sketch_region_prism) mod annular_orientation;
 
 pub(in crate::sketch_region_prism) mod annular_measures;
+pub(in crate::sketch_region_prism) mod annular_volume;
+pub(in crate::sketch_region_prism) use identities::same_definition as same_occurrence_definition;
 
 pub(in crate::sketch_region_prism) mod annular_history;

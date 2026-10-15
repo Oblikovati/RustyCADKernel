@@ -21,7 +21,7 @@ pub(super) fn encode(report: &AnnularPrismMeasures) -> Vec<u8> {
     bytes.extend(report.side_subdivisions.to_le_bytes());
     bytes
 }
-fn options(value: AnnularMeasureOptions, bytes: &mut Vec<u8>) {
+pub(in crate::sketch_region_prism) fn options(value: AnnularMeasureOptions, bytes: &mut Vec<u8>) {
     bytes.extend(value.version.to_le_bytes());
     encode_joined_integral_options(value.cap_area, bytes);
     encode_joined_integral_options(value.signed_sweep, bytes);
@@ -36,7 +36,7 @@ fn direction(value: AnnularBoundaryDirection, bytes: &mut Vec<u8>) {
     bytes.extend(value.native_winding.to_le_bytes());
     bytes.extend(value.material_side.to_le_bytes());
 }
-fn measured_face(face: &AnnularMeasuredFace, bytes: &mut Vec<u8>) {
+pub(super) fn measured_face(face: &AnnularMeasuredFace, bytes: &mut Vec<u8>) {
     encode_frozen_use_key(bytes, &face.named.chart.occurrence);
     match &face.measure {
         AnnularFaceMeasure::Cap(report) => {
@@ -55,7 +55,7 @@ fn measured_face(face: &AnnularMeasuredFace, bytes: &mut Vec<u8>) {
         }
     }
 }
-fn sweep(report: &CertifiedPolynomialMeasure, bytes: &mut Vec<u8>) {
+pub(super) fn sweep(report: &CertifiedPolynomialMeasure, bytes: &mut Vec<u8>) {
     // The V2 quantity is normalized material boundary × signed exact placed Jacobian.
     bytes.push(2);
     encode_joined_scalar(report.enclosure(), report.absolute_error_bound(), bytes);

@@ -5,6 +5,7 @@ mod replay;
 mod transport;
 mod types;
 use super::{AuthoredPrismId, joined_measures::*, joined_orientation::*, proof_join::*};
+pub(in crate::sketch_region_prism) use transport::transport_scalar as transport_volume_scalar;
 pub(crate) use types::*;
 #[cfg(test)]
 mod tests;

@@ -16,7 +16,7 @@ pub(in crate::sketch_region_prism) struct AnnularRegionNames {
 }
 impl AnnularRegionNames {
     /// Every authored name, in role order; `names.all()` is checked for zero and duplicates.
-    pub(super) fn all(&self) -> [u64; 7] {
+    pub(in crate::sketch_region_prism) fn all(&self) -> [u64; 7] {
         [
             self.annulus,
             self.inner_domain,
@@ -38,6 +38,12 @@ pub(in crate::sketch_region_prism) struct OwnedAnnularPolicy {
     pub spatial_limit: f64,
     pub parameter_limit: f64,
     pub region: TwoLoopRegionOptions,
+    /// Embedding regularity policy for the one-call operation (ADR0065).
+    pub embedding: AnnularEmbeddingOptions,
+    /// Every publication child policy for the one-call operation (ADR0065).
+    pub publication: AnnularPublicationOptions,
+    /// Requested physical-volume behavior version (ADR0063).
+    pub volume_version: u32,
 }
 /// Bounded V1 annular request; the outer and inner roles are explicit, never request order.
 #[derive(Clone)]
