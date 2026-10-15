@@ -2,6 +2,7 @@
 //! ADR 0066 part C owned profile preparation: any number of polynomial or rational edges in
 //! authored loops, through the shared general stages, then the general loop region proof.
 mod admission;
+mod certify;
 mod construction;
 mod pipeline;
 mod regions;
@@ -9,6 +10,7 @@ mod request;
 pub(in crate::sketch_region_prism) use admission::{
     ProfileAdmissionCause, ProfileEdgeCause, ProfileLoopCause,
 };
+pub(crate) use certify::{ProfileProofInput, ProfileProofRefusal, ProofEdge, certify_profile};
 pub(in crate::sketch_region_prism) use construction::ConstructedProfileEdge;
 pub(in crate::sketch_region_prism) use pipeline::{
     PreparedProfile, ProfilePreparationCause, ProfilePreparationFailure, prepare_owned_profile,
