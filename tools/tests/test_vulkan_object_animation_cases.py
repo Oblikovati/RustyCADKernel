@@ -29,8 +29,8 @@ class ObjectAnimationCaseTests(unittest.TestCase):
     def test_numeric_corpus_covers_nulls_and_immediate_layer_policy(self) -> None:
         rows: list[str] = []
         append_object_requests(rows)
-        self.assertEqual(len(rows), 2068)
-        self.assertEqual(len(set(rows)), 2068)
+        self.assertEqual(len(rows), 2488)
+        self.assertEqual(len(set(rows)), 2488)
         self.assertIn("v3_animation_object 2 3 2.0 0.0 1.0", rows)
         self.assertIn("v3_base_animation_object 216 1", rows)
         self.assertEqual(corpus(), "\n".join(rows) + "\n")
