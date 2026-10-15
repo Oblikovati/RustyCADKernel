@@ -11,9 +11,7 @@ use rustycad_tkfeat::loc_ope::{
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve;
 use rustycad_tkmath::gp::Point3;
-use rustycad_tktopalgo::brep_builder_api::{
-    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
-};
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeWire};
 use support::{assert_close, count, edge_near, face_near, is_valid, make_box, sub_shapes, volume};
 
 fn segment(a: Point3, b: Point3) -> Edge {
