@@ -101,8 +101,8 @@ fn rectangle_extrudes_to_a_box() {
     assert_history(&result, &region_of(&profile, 0));
     assert!(cap_heights(&result, HistoryRole::StartCap).iter().all(|z| *z == 0.0));
     assert!(cap_heights(&result, HistoryRole::EndCap).iter().all(|z| (*z - 4.0).abs() < 1e-15));
-    let validation = result.validation();
-    assert_eq!(validation.self_intersection_evidence, SelfIntersectionEvidence::AffineSweepOfCertifiedRegion);
+    assert!(result.validation().is_valid(), "{:?}", result.validation());
+    assert_eq!(result.self_intersection_certificate(), SelfIntersectionEvidence::AffineSweepOfCertifiedRegion);
     assert!(result.achieved_tolerance().max() <= 1e-6);
 }
 
@@ -216,4 +216,35 @@ fn results_are_equal_across_threads() {
         assert_eq!(remote.volume(), local.volume());
         assert_eq!(remote.achieved_tolerance(), local.achieved_tolerance());
     }
+}
+
+/// ADR 0082: the result's validation is the public `validate_body` report of its solid:
+/// the same four stages, modes, census and budget, every stage passed.
+#[test]
+fn operation_validation_is_the_public_body_report() {
+    use rustycad_tkbo::body_check::{CheckMode, StageVerdict, ValidationStage, validate_body};
+    for (profile, genus) in [(rectangle(), 0), (circle(), 0), (annulus(), 1)] {
+        let result = extruded(&profile, 0, [0., 0., 1.]);
+        let report: &ValidationReport = result.validation();
+        assert_eq!(report, &validate_body(result.solid(), &resolution()).unwrap());
+        assert!(report.is_valid(), "{report:?}");
+        let modes = report.stages.iter().map(|stage| stage.mode).collect::<Vec<_>>();
+        assert_eq!(modes[0], CheckMode::Exact);
+        assert_eq!(modes[2], CheckMode::NativeSearch);
+        assert_eq!(report.stage(ValidationStage::Tolerance).verdict, StageVerdict::Passed);
+        assert_eq!(report.census[0].genus, Some(genus));
+        assert_eq!(report.tolerance_budget, Some(1e-6));
+    }
+}
+
+/// A report cap is a finding, not a validation defect: the body check runs without a budget.
+#[test]
+fn report_cap_keeps_a_valid_report_without_budget() {
+    let region = region_of(&rectangle(), 0);
+    let mut lenient = options();
+    lenient.resolution.cap = ToleranceCap::Report(1e-9);
+    let result = extrude(&region, [0., 0., 1.], &lenient).unwrap();
+    assert!(result.validation().is_valid());
+    assert_eq!(result.validation().tolerance_budget, None);
+    assert_eq!(result.findings().len(), 1);
 }

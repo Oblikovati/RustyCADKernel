@@ -10,9 +10,10 @@ use super::profile::{ProfileCurveId, ProfileVertexId, SketchProfile};
 use super::proof::{CertifiedLoops, certify_loops};
 use super::region_area::{RegionAreaInput, region_area};
 use super::regions::*;
-use super::resolution::{Measure, Resolution};
+use super::resolution::Resolution;
 use super::topology::{ProfileTopology, build_topology, loop_wire, region_face};
 use super::validation::{CheckedShape, SelfIntersectionEvidence, check_publication};
+use crate::measured::Measured;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::standard::Failure;
 use std::collections::BTreeSet;
@@ -108,7 +109,7 @@ impl RegionContext<'_> {
         &self,
         face: Face,
         members: &[usize],
-        area: Measure,
+        area: Measured,
         checked: CheckedShape,
     ) -> PlanarRegion {
         let hole_loops = members[1..].iter().map(|index| self.loops[*index].clone());
@@ -140,7 +141,7 @@ impl RegionContext<'_> {
         region_face(&self.profile.frame, &wires[0], &wires[1..])
     }
 
-    fn area(&self, members: &[usize]) -> Result<Measure, super::decline::DeclineCause> {
+    fn area(&self, members: &[usize]) -> Result<Measured, super::decline::DeclineCause> {
         region_area(&RegionAreaInput {
             certified: self.certified.areas[members[0]],
             loop_areas: members

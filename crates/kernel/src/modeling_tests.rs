@@ -99,3 +99,20 @@ fn history_face_records_resolve_through_body_topology() {
         assert!(face.is_same(&result.faces()[index]), "{record:?}");
     }
 }
+
+/// ADR 0081: the extrusion volume and `body_properties` report one `Measured` type; both
+/// enclose the closed form `(8 + pi - pi / 4) * 1.5` and their intervals overlap.
+#[test]
+fn operation_volume_is_a_body_properties_measure() {
+    use crate::properties::{Evidence, IntegrationMethod, Measured, body_properties};
+    let result = extruded(&slot_with_hole());
+    let volume: Measured = result.volume();
+    let expected = (8.0 + std::f64::consts::PI * 0.75) * 1.5;
+    assert!(volume.encloses(expected), "{volume:?}");
+    assert_eq!(volume.method, IntegrationMethod::RepresentationEnclosure);
+    assert_eq!(volume.evidence(), Evidence::Estimated);
+    let measured = body_properties(result.solid()).unwrap().volume;
+    assert!(measured.encloses(expected), "{measured:?}");
+    let gap = (measured.value - volume.value).abs();
+    assert!(gap <= measured.error_bound + volume.error_bound, "{gap}");
+}

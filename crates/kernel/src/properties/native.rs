@@ -42,6 +42,7 @@ fn unbounded(value: f64) -> Measured {
     Measured {
         value,
         error_bound: f64::INFINITY,
+        method: IntegrationMethod::NativeUnbounded,
     }
 }
 
@@ -49,5 +50,6 @@ fn centre(props: &GProps) -> MeasuredPoint {
     MeasuredPoint {
         point: *props.centre_of_mass().coordinates(),
         error_bound: f64::INFINITY,
+        method: IntegrationMethod::NativeUnbounded,
     }
 }

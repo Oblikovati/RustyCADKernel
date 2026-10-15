@@ -5,8 +5,9 @@ use super::admitted::WorldFrame;
 use super::decline::OperationDecline;
 use super::loops::ProfileLoop;
 use super::profile::{ProfileCurveId, ProfileVertexId};
-use super::resolution::{AchievedTolerance, Measure, Resolution};
-use super::validation::ValidationReport;
+use super::resolution::{AchievedTolerance, Resolution};
+use super::validation::RegionValidation;
+use crate::measured::Measured;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 
 /// Index of a region within its `PlanarRegionSet`: the caller order of the first curve of
@@ -32,11 +33,11 @@ pub struct PlanarRegion {
     pub(crate) face: Face,
     pub(crate) outer: ProfileLoop,
     pub(crate) holes: Vec<ProfileLoop>,
-    pub(crate) area: Measure,
+    pub(crate) area: Measured,
     pub(crate) edges: Vec<(ProfileCurveId, Edge)>,
     pub(crate) vertices: Vec<(ProfileVertexId, Vertex)>,
     pub(crate) frame: WorldFrame,
-    pub(crate) validation: ValidationReport,
+    pub(crate) validation: RegionValidation,
     pub(crate) achieved: AchievedTolerance,
 }
 
@@ -58,7 +59,7 @@ impl PlanarRegion {
         &self.holes
     }
     /// Face area: outer area minus hole areas.
-    pub fn area(&self) -> Measure {
+    pub fn area(&self) -> Measured {
         self.area
     }
     /// Every boundary edge with its caller curve, outer loop first, in loop order.
@@ -74,7 +75,7 @@ impl PlanarRegion {
         self.frame.normal
     }
     /// Ordered validation of the face.
-    pub fn validation(&self) -> ValidationReport {
+    pub fn validation(&self) -> RegionValidation {
         self.validation
     }
     /// Largest stored tolerances of the face.

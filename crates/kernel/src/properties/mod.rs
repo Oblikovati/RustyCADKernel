@@ -31,6 +31,6 @@ mod face_tests;
 pub use body::body_properties;
 pub use face::face_properties;
 pub use measured::{
-    BodyProperties, FaceProperties, IntegrationMethod, LoopRole, LoopSummary, Measured,
+    BodyProperties, Evidence, FaceProperties, IntegrationMethod, LoopRole, LoopSummary, Measured,
     MeasuredPoint,
 };

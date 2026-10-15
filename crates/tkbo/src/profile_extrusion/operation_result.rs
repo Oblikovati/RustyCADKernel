@@ -3,8 +3,10 @@
 //! solid, complete source to result history, validation, findings and achieved tolerance.
 use super::profile::{ProfileCurveId, ProfileVertexId};
 use super::regions::RegionId;
-use super::resolution::{AchievedTolerance, Measure, Resolution};
-use super::validation::{Finding, ValidationReport};
+use super::resolution::{AchievedTolerance, Resolution};
+use super::validation::{Finding, SelfIntersectionEvidence};
+use crate::body_check::ValidationReport;
+use crate::measured::Measured;
 use rustycad_tkbrep::topods::{Edge, Face, Shape, Solid, Vertex};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPICopy, BRepBuilderAPIMakeShape};
@@ -117,9 +119,10 @@ pub struct OperationResult {
     pub(crate) vertices: Vec<Vertex>,
     pub(crate) history: OperationHistory,
     pub(crate) validation: ValidationReport,
+    pub(crate) self_intersection: SelfIntersectionEvidence,
     pub(crate) findings: Vec<Finding>,
     pub(crate) achieved: AchievedTolerance,
-    pub(crate) volume: Measure,
+    pub(crate) volume: Measured,
     pub(crate) resolution: Resolution,
 }
 
@@ -149,9 +152,17 @@ impl OperationResult {
     pub fn history(&self) -> &OperationHistory {
         &self.history
     }
-    /// Ordered validation of the solid.
-    pub fn validation(&self) -> ValidationReport {
-        self.validation
+    /// Ordered validation of the solid by the public `validate_body` (ADR 0072, ADR 0082):
+    /// the same stages, modes and findings as `rustycad_kernel::validation`. Every stage
+    /// passed; findings name topology by the `faces/edges/vertices` indices of this result.
+    pub fn validation(&self) -> &ValidationReport {
+        &self.validation
+    }
+    /// The certificate that the solid has no self-intersection. The validation report's
+    /// self-intersection stage is a native search (`CheckMode::NativeSearch`); this names
+    /// the proof that makes the pass exact for an extrusion.
+    pub fn self_intersection_certificate(&self) -> SelfIntersectionEvidence {
+        self.self_intersection
     }
     /// Non-fatal findings, such as a tolerance above a report limit.
     pub fn findings(&self) -> &[Finding] {
@@ -162,7 +173,7 @@ impl OperationResult {
         self.achieved
     }
     /// Volume of the solid with its error and evidence kind.
-    pub fn volume(&self) -> Measure {
+    pub fn volume(&self) -> Measured {
         self.volume
     }
     /// The resolution the operation ran with.

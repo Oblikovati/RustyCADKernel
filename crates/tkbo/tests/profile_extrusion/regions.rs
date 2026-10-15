@@ -22,7 +22,7 @@ fn built(profile: &SketchProfile) -> PlanarRegionSet {
 fn assert_area(region: &PlanarRegion, expected: f64) {
     let area = region.area();
     assert!(area.encloses(expected), "{area:?} vs {expected}");
-    assert!(area.error < 1e-12, "{area:?}");
+    assert!(area.error_bound < 1e-12, "{area:?}");
     let integrated = integrated_area(region);
     assert!((integrated - expected).abs() < 1e-8, "{integrated} vs {expected}");
 }
@@ -149,11 +149,11 @@ fn circular_segment_with_a_general_arc_has_the_closed_form_area() {
     let theta = 2.0 * PI / 3.0;
     let region = &set.regions()[0];
     assert_area(region, 2.0 * (theta - theta.sin()));
-    assert_eq!(region.area().kind, MeasureKind::ClosedForm);
+    assert_eq!(region.area().method, IntegrationMethod::RepresentationEnclosure);
 }
 
 #[test]
 fn line_only_regions_carry_a_certified_area_bound() {
     let set = built(&rectangle());
-    assert_eq!(set.regions()[0].area().kind, MeasureKind::CertifiedBound);
+    assert_eq!(set.regions()[0].area().method, IntegrationMethod::CertifiedEnclosure);
 }

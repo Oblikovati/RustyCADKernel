@@ -27,11 +27,14 @@ mod region_area;
 mod regions;
 mod resolution;
 mod seeds;
+mod solid_validation;
 mod sweep_history;
 mod sweep_images;
 mod topology;
 mod validation;
 
+pub use crate::body_check::ValidationReport;
+pub use crate::measured::{Evidence, IntegrationMethod, Measured, MeasuredPoint};
 pub use build_regions::build_planar_regions;
 pub use decline::{
     DeclineCause, DeclineClass, OperationDecline, OperationKind, OperationStage,
@@ -43,4 +46,4 @@ pub use operation_result::*;
 pub use profile::*;
 pub use regions::*;
 pub use resolution::*;
-pub use validation::{Finding, SelfIntersectionEvidence, StageStatus, ValidationReport};
+pub use validation::{Finding, RegionValidation, SelfIntersectionEvidence, StageStatus};
