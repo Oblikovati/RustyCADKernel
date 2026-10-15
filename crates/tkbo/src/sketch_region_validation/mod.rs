@@ -33,11 +33,14 @@ mod tolerance_types;
 mod traversal_tests;
 
 pub(crate) use outcome::{
-    BodyKind, OrderedCoverage, SourceRelation, StageCoverage, ValidationStage,
+    AnalyticGap, BodyKind, OrderedCoverage, SourceRelation, StageCoverage, ValidationCause,
+    ValidationFinding, ValidationStage,
 };
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
+pub(crate) use self_check::inspect_self_intersection;
 pub(crate) use source_relations::source_relations;
+pub(crate) use tolerance::inspect_planar_edge_residual;
 
 /// Inspect an already-owned candidate without exposing diagnostic geometry as success.
 /// Example: `validate_owned_candidate(&owned_face, BodyKind::PlanarRegion, &relations)`.
@@ -60,7 +63,9 @@ pub(crate) fn validate_owned_candidate(
     report
 }
 
-fn inspect_stage(
+/// Run one mapped BRepCheck stage into `report` (ADR 0072 reuses it for any body).
+/// Example: `inspect_stage(&solid, BodyKind::Any, &[], ValidationStage::Topology, &mut report)`.
+pub(crate) fn inspect_stage(
     shape: &Shape,
     kind: BodyKind,
     sources: &[SourceRelation],

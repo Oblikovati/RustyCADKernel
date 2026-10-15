@@ -15,8 +15,10 @@ pub use rustycad_tkernel as foundation;
 
 pub mod pick;
 pub mod presentation;
+pub mod properties;
 pub mod query_error;
 pub mod topology;
+pub mod validation;
 
 /// Planar regions from solved sketches and extrusion into solids with complete history.
 ///
@@ -43,4 +45,10 @@ pub mod modeling {
 }
 
 #[cfg(test)]
+mod invalid_shapes;
+#[cfg(test)]
 mod modeling_tests;
+#[cfg(test)]
+mod test_shapes;
+#[cfg(test)]
+mod validation_tests;

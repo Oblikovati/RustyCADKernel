@@ -11,6 +11,8 @@ use rustycad_tktopalgo::brep_check::BRepCheckStatus;
 pub(crate) enum BodyKind {
     PlanarRegion,
     Solid,
+    // ADR 0072: any owned body (solid, shell, compound); the caller selects invariants.
+    Any,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum ValidationStage {
@@ -100,7 +102,7 @@ pub(crate) struct OrderedCoverage {
 }
 
 impl OrderedCoverage {
-    pub(super) fn pending() -> Self {
+    pub(crate) fn pending() -> Self {
         Self {
             topology: StageCoverage::Blocked,
             geometry: StageCoverage::Blocked,

@@ -14,7 +14,9 @@ pub(super) fn body_cause(
     stage: ValidationStage,
 ) -> Result<Option<ValidationCause>, Failure> {
     let actual = shape.shape_type()?;
-    let expected = expected_shape_kind(kind);
+    let Some(expected) = expected_shape_kind(kind) else {
+        return Ok(None);
+    };
     if actual != expected {
         return Ok(Some(ValidationCause::BodyKindMismatch {
             expected: kind,
@@ -35,9 +37,10 @@ fn plane_cause(shape: &Shape) -> Result<Option<ValidationCause>, Failure> {
     Ok(Some(ValidationCause::NonPlanarRegion))
 }
 
-fn expected_shape_kind(kind: BodyKind) -> ShapeEnum {
+fn expected_shape_kind(kind: BodyKind) -> Option<ShapeEnum> {
     match kind {
-        BodyKind::PlanarRegion => ShapeEnum::Face,
-        BodyKind::Solid => ShapeEnum::Solid,
+        BodyKind::PlanarRegion => Some(ShapeEnum::Face),
+        BodyKind::Solid => Some(ShapeEnum::Solid),
+        BodyKind::Any => None,
     }
 }

@@ -31,7 +31,7 @@ use crate::bop_algo::{BOPAlgoCheckerSI, FaceTermination, SelfCheckCompletion};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::{ncollection::List, standard::Failure};
 
-pub(super) fn inspect_self_intersection(
+pub(crate) fn inspect_self_intersection(
     shape: &Shape,
     sources: &[SourceRelation],
 ) -> Vec<ValidationFinding> {

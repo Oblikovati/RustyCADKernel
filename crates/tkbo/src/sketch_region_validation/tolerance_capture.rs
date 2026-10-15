@@ -14,7 +14,7 @@ use rustycad_tkmath::predicates::roots::{
     RootIsolationOptions,
     metric_bounds::{MetricEmbedding, PlanarResidualQuery},
 };
-pub(super) struct CapturedPlanarPair {
+pub(crate) struct CapturedPlanarPair {
     curve: CapturedMetricCurve<3>,
     pcurve: CapturedMetricCurve<2>,
     interval: [f64; 2],
