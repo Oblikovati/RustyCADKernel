@@ -1,26 +1,16 @@
 //! BRep offset geometry helpers.
 mod classification;
 mod collapse_singularities;
-mod correct_singular_face;
 pub use classification::{BRepOffsetError, BRepOffsetMode};
 mod interval;
 pub use interval::BRepOffsetInterval;
+mod make_loops;
+pub use make_loops::BRepOffsetMakeLoops;
+mod inter2d;
+pub use inter2d::{BRepOffsetInter2d, CoincidentVertices, EdgeIntersections};
 mod inter3d;
-pub use inter3d::BRepOffsetInter3d;
-mod make_offset;
-mod make_offset_build;
-mod make_offset_build_adjacent;
-mod make_offset_build_spheres;
-mod make_offset_check;
-mod make_offset_history;
-mod make_offset_thick_solid;
-mod offset_face;
-mod offset_rails;
-mod offset_rails_adaptors;
-mod offset_rails_closed;
-mod offset_rails_geometry;
-mod offset_rails_iso;
-mod offset_tube;
+pub use inter3d::{BRepOffsetInter3d, OffsetFaces, ShapeShapeMap};
+mod offset;
 mod simple_offset;
 mod simple_offset_angle;
 mod simple_offset_edge;
@@ -29,13 +19,17 @@ mod simple_offset_maker;
 mod simple_offset_vertex;
 mod simple_offset_vertex_map;
 mod simple_offset_wall;
-mod sphere_join;
 mod surface;
 mod surface_analytic;
+pub use offset::{BRepOffsetOffset, CreatedShapes, PipeOptions};
+mod tool;
+pub use tool::{BRepOffsetTool, EdgeNeighbours, EnlargeFaceOptions, ShapeImages, VertexEdges};
 
 pub use crate::brep_offset_api::BRepOffsetAPIMakeOffsetShape;
 pub use collapse_singularities::collapse_singularities;
-pub use make_offset::{BRepOffsetMakeOffset, BRepOffsetMakeOffsetConfiguration};
+mod build_offset_faces;
+mod maker;
+pub use maker::{BRepOffsetMakeOffset, MakeOffsetOptions};
 pub use simple_offset::BRepOffsetSimpleOffset;
 pub use simple_offset_angle::{
     compute_simple_offset_max_angle, compute_simple_offset_safe_distance,
@@ -49,9 +43,6 @@ pub use simple_offset_vertex::{
 pub use simple_offset_vertex_map::{OffsetVertexData, build_simple_offset_vertices};
 pub use surface::{BRepOffsetStatus, surface};
 
-pub use offset_face::BRepOffsetOffsetFace;
-pub use offset_rails::BRepOffsetOffset;
 pub use simple_offset_wall::build_simple_offset_wall;
-pub use sphere_join::build_vertex_arc_join;
 mod analyse;
 pub use analyse::BRepOffsetAnalyse;

@@ -10,7 +10,8 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkg3d::{geom::GeomOffsetSurface, top_abs::ShapeEnum};
 use rustycad_tkgeombase::gprop::GProps;
-use rustycad_tkoffset::brep_offset::{BRepOffsetOffsetFace, BRepOffsetStatus};
+use rustycad_tkmath::geom_abs::JoinType;
+use rustycad_tkoffset::brep_offset::{BRepOffsetOffset, BRepOffsetStatus};
 use rustycad_tktopalgo::{
     brep_builder_api::BRepBuilderAPIMakeShape, brep_check::BRepCheckAnalyzer, brep_gprop::BRepGProp,
 };
@@ -18,7 +19,7 @@ use rustycad_tktopalgo::{
 #[test]
 fn occ28131_non_singular_offset_face_matches_native_constructor() {
     let source = occ28131_face();
-    let offset = BRepOffsetOffsetFace::from_face(&source, 10.0).unwrap();
+    let offset = BRepOffsetOffset::from_face(&source, 10.0, true, JoinType::Arc).unwrap();
     assert_eq!(offset.status(), BRepOffsetStatus::Good);
     assert_offset_face_shape(offset.face());
     assert_edge_history(&source, &offset);
@@ -64,7 +65,7 @@ fn assert_bounds(face: &Face) {
     assert_near(BRepTool::face_tolerance(face).unwrap(), 1.0e-7, 1.0e-15);
 }
 
-fn assert_edge_history(source: &Face, offset: &BRepOffsetOffsetFace) {
+fn assert_edge_history(source: &Face, offset: &BRepOffsetOffset) {
     let mut edges = Explorer::new(
         &source.clone().into_shape(),
         ShapeEnum::Edge,

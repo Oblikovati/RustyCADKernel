@@ -10,7 +10,7 @@ use rustycad_tkg3d::{
     top_abs::ShapeEnum,
 };
 use rustycad_tkmath::geom_abs::JoinType;
-use rustycad_tkoffset::brep_offset::{BRepOffsetMakeOffset, BRepOffsetMode};
+use rustycad_tkoffset::brep_offset::{BRepOffsetMakeOffset, BRepOffsetMode, MakeOffsetOptions};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
@@ -23,14 +23,18 @@ fn box_vertex_sphere_edges_keep_native_exact_iso_images() {
         &source,
         0.5,
         1.0e-7,
-        BRepOffsetMode::Skin,
-        false,
-        false,
-        JoinType::Arc,
-        false,
-        false,
+        MakeOffsetOptions {
+            mode: BRepOffsetMode::Skin,
+            intersection: false,
+            self_inter: false,
+            join: JoinType::Arc,
+            thickening: false,
+            remove_int_edges: false,
+        },
     );
-    maker.make_offset_shape().unwrap();
+    maker
+        .make_offset_shape(&rustycad_tkernel::message::ProgressRange::default())
+        .unwrap();
 
     let spheres = generated_sphere_faces(&source, &mut maker);
     assert_eq!(spheres.len(), 8);
@@ -92,7 +96,13 @@ fn generated_sphere_faces(
 ) -> Vec<Face> {
     let mut result = Vec::new();
     for vertex in Explorer::new(source, ShapeEnum::Vertex, ShapeEnum::Shape).unwrap() {
-        for generated in maker.generated(&vertex).unwrap() {
+        for generated in maker
+            .generated(&vertex)
+            .unwrap()
+            .iter()
+            .cloned()
+            .collect::<Vec<_>>()
+        {
             let face = Face::unchecked(generated);
             if BRepTool::surface(&face)
                 .unwrap()

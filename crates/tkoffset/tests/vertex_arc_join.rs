@@ -4,10 +4,11 @@ use rustycad_tkbrep::{
     topexp::Explorer,
     topods::{Edge, Shape, Vertex},
 };
+use rustycad_tkernel::ncollection::List;
 use rustycad_tkg3d::{geom::GeomSphericalSurface, top_abs::ShapeEnum};
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::gp::Point3;
-use rustycad_tkoffset::brep_offset::{BRepOffsetOffset, BRepOffsetStatus, build_vertex_arc_join};
+use rustycad_tkoffset::brep_offset::{BRepOffsetOffset, BRepOffsetStatus, PipeOptions};
 use rustycad_tktopalgo::{
     brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeShape},
     brep_check::BRepCheckAnalyzer,
@@ -44,7 +45,9 @@ fn offset_object_vertex_mode_retains_native_state_and_face() {
         edge(Point3::new(0.0, 3.0, 0.0)),
         edge(Point3::new(0.0, 0.0, 3.0)),
     ];
-    let offset = BRepOffsetOffset::from_vertex(&vertex, &edges, 2.0).unwrap();
+    let offset =
+        BRepOffsetOffset::from_vertex(&vertex, &edge_list(&edges), 2.0, PipeOptions::default())
+            .unwrap();
     assert_eq!(offset.status(), BRepOffsetStatus::Good);
     assert!(offset.initial_shape().is_same(&vertex.clone().into_shape()));
     assert!(offset.generated(&vertex.clone().into_shape()).is_null());
@@ -62,7 +65,18 @@ fn joined_face(offset: f64) -> rustycad_tkbrep::topods::Face {
         edge(Point3::new(0.0, 3.0, 0.0)),
         edge(Point3::new(0.0, 0.0, 3.0)),
     ];
-    build_vertex_arc_join(&vertex, &edges, offset).unwrap()
+    BRepOffsetOffset::from_vertex(&vertex, &edge_list(&edges), offset, PipeOptions::default())
+        .unwrap()
+        .face()
+        .clone()
+}
+
+fn edge_list(edges: &[Edge]) -> List<Shape> {
+    let mut list = List::default();
+    for e in edges {
+        list.append(e.clone().into_shape());
+    }
+    list
 }
 
 fn assert_native_positive_frame(face: &rustycad_tkbrep::topods::Face) {
