@@ -181,7 +181,7 @@ fn map_end(
 pub(crate) fn maj_map_swept(
     the_b: &Shape,
     ends: (&Shape, &Shape),
-    shapes: impl Fn(&Shape) -> Result<rustycad_tkernel::ncollection::List<Shape>, Failure>,
+    mut shapes: impl FnMut(&Shape) -> Result<rustycad_tkernel::ncollection::List<Shape>, Failure>,
     the_map: &mut super::DescendantMap,
     the_f_shape: &mut Shape,
     the_l_shape: &mut Shape,
