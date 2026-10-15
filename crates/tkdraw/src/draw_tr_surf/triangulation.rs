@@ -4,8 +4,7 @@
 //! `DrawTrSurf_Triangulation`: a drawable triangulation (free edges in red, internal
 //! edges in blue, optional node and triangle numbers).
 //!
-//! Known gap: as for the polygons, `Save` cannot give the TKMath Poly writer the
-//! scientific 15-digit stream format of the native code.
+//! As for the polygons, `Dump` and `Save` hand the Poly writer the stream's number text.
 use super::geometry::geometry;
 use crate::draw::{
     DrawColor, DrawColorKind, DrawDisplay, DrawIStream, DrawInterpretor, DrawOStream, DrawSession,
@@ -205,14 +204,20 @@ impl Drawable3D for DrawTrSurfTriangulation {
     /// `Dump`: `Poly::Dump`.
     fn dump(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         let mesh = geometry(&self.triangulation)?;
-        stream.write_bytes_through(|out| poly::dump_triangulation(mesh, out))
+        let real_text = stream.real_text();
+        stream.write_bytes_through(|out| {
+            poly::write_triangulation_with(mesh, out, false, &*real_text)
+        })
     }
 
-    /// `Save`: `Poly::Write` (see the module note on the number format).
+    /// `Save`: `Poly::Write` in scientific notation with 15 digits; the flags are left
+    /// set afterwards, as the native `setf(aFlags)` (which only adds flags) leaves them.
     fn save(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         let mesh = geometry(&self.triangulation)?;
         stream.set_scientific(true).set_precision(15);
-        stream.write_bytes_through(|out| poly::write_triangulation(mesh, out, true))
+        let real_text = stream.real_text();
+        stream
+            .write_bytes_through(|out| poly::write_triangulation_with(mesh, out, true, &*real_text))
     }
 
     fn whatis(&self, di: &DrawInterpretor) -> Result<(), Failure> {

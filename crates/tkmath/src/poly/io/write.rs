@@ -5,14 +5,21 @@
 use crate::{
     gp::Point3,
     poly::{Polygon2D, Polygon3D, Triangulation},
-    stream_format::{general, padded},
+    stream_format::general,
 };
 use rustycad_tkernel::standard::Failure;
 use std::io::Write;
+
+/// Formats one real as `operator<<(double)` does on the caller's `std::ostream`, whose
+/// precision and float field the native writers inherit; [`general`] is the default.
+/// `write_polygon3d_with(&polygon, &mut out, true, &|value| format!("{value:.3e}"))?`.
+pub type RealText<'a> = &'a dyn Fn(f64) -> String;
+
 /// Streams the values of one line, with a `setw` column only in dump mode.
 struct Columns<'a, W: Write> {
     output: &'a mut W,
     compact: bool,
+    real_text: RealText<'a>,
 }
 impl<W: Write> Columns<'_, W> {
     fn text(&mut self, text: &str) -> Result<(), Failure> {
@@ -27,10 +34,12 @@ impl<W: Write> Columns<'_, W> {
         self.text(&format!("{index:>10} : "))
     }
     fn real(&mut self, value: f64, separator: &str) -> Result<(), Failure> {
+        let number = (self.real_text)(value);
         let text = if self.compact {
-            general(value)
+            number
         } else {
-            padded(value, 17)
+            // `std::setw(17) << value`: right-aligned in at least 17 columns.
+            format!("{number:>17}")
         };
         self.text(&text)?;
         self.text(separator)
@@ -62,7 +71,8 @@ impl<W: Write> Columns<'_, W> {
     }
     fn deflection(&mut self, deflection: f64) -> Result<(), Failure> {
         self.dump_only("Deflection : ")?;
-        self.text(&format!("{}\n", general(deflection)))
+        let number = (self.real_text)(deflection);
+        self.text(&format!("{number}\n"))
     }
 }
 /// `Poly::Write(Poly_Triangulation)`: compact save text or, when not `compact`, the dump;
@@ -72,7 +82,21 @@ pub fn write_triangulation(
     output: &mut impl Write,
     compact: bool,
 ) -> Result<(), Failure> {
-    let mut columns = Columns { output, compact };
+    write_triangulation_with(triangulation, output, compact, &general)
+}
+/// [`write_triangulation`] on a stream whose numbers `real_text` formats;
+/// `write_triangulation_with(&mesh, &mut out, false, &|v| format!("{v}"))?`.
+pub fn write_triangulation_with(
+    triangulation: &Triangulation,
+    output: &mut impl Write,
+    compact: bool,
+    real_text: RealText<'_>,
+) -> Result<(), Failure> {
+    let mut columns = Columns {
+        output,
+        compact,
+        real_text,
+    };
     let (nodes, triangles) = (triangulation.nb_nodes(), triangulation.nb_triangles());
     let with = if triangulation.has_uv_nodes() {
         "with"
@@ -122,7 +146,21 @@ pub fn write_polygon3d(
     output: &mut impl Write,
     compact: bool,
 ) -> Result<(), Failure> {
-    let mut columns = Columns { output, compact };
+    write_polygon3d_with(polygon, output, compact, &general)
+}
+/// [`write_polygon3d`] on a stream whose numbers `real_text` formats;
+/// `write_polygon3d_with(&polygon, &mut out, true, &|v| format!("{v:e}"))?`.
+pub fn write_polygon3d_with(
+    polygon: &Polygon3D,
+    output: &mut impl Write,
+    compact: bool,
+    real_text: RealText<'_>,
+) -> Result<(), Failure> {
+    let mut columns = Columns {
+        output,
+        compact,
+        real_text,
+    };
     let count = polygon.nb_nodes();
     let with = if polygon.has_parameters() {
         "with"
@@ -148,7 +186,8 @@ pub fn write_polygon3d(
         let value = parameters
             .value(index)
             .map_err(|e| e.into_failure("Poly::Write"))?;
-        columns.text(&format!("{} ", general(*value)))?;
+        let number = (columns.real_text)(*value);
+        columns.text(&format!("{number} "))?;
     }
     columns.text("\n")
 }
@@ -158,7 +197,21 @@ pub fn write_polygon2d(
     output: &mut impl Write,
     compact: bool,
 ) -> Result<(), Failure> {
-    let mut columns = Columns { output, compact };
+    write_polygon2d_with(polygon, output, compact, &general)
+}
+/// [`write_polygon2d`] on a stream whose numbers `real_text` formats;
+/// `write_polygon2d_with(&polygon, &mut out, false, &|v| format!("{v}"))?`.
+pub fn write_polygon2d_with(
+    polygon: &Polygon2D,
+    output: &mut impl Write,
+    compact: bool,
+    real_text: RealText<'_>,
+) -> Result<(), Failure> {
+    let mut columns = Columns {
+        output,
+        compact,
+        real_text,
+    };
     let count = polygon.nb_nodes();
     columns.text("Poly_Polygon2D\n")?;
     if compact {
@@ -190,3 +243,7 @@ pub fn dump_polygon3d(polygon: &Polygon3D, output: &mut impl Write) -> Result<()
 pub fn dump_polygon2d(polygon: &Polygon2D, output: &mut impl Write) -> Result<(), Failure> {
     write_polygon2d(polygon, output, false)
 }
+
+#[cfg(test)]
+#[path = "write_tests.rs"]
+mod tests;

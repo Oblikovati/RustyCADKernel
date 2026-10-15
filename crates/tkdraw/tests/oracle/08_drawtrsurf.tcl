@@ -88,3 +88,15 @@ puts "2dpscale: [2dpscale s2 0 0 3]"
 puts [dump s2]
 puts "short: [catch {translate c 1 2} message] <$message> [catch {2drotate c 1} message] <$message>"
 puts "rotate null axis: [catch {rotate c 0 0 0 0 0 0 10} message] <[string range $message 0 30]>"
+
+# Polygons and triangulations: Dump inherits the dump stream precision and Save sets the
+# stream to scientific notation with 15 digits before Poly::Write.
+puts "polygon3d: [restore_record q3 {DrawTrSurf_Polygon3D Poly_Polygon3D {3 1} 0.125 {0 0.5 1} {2.25 3 -4} {0.1 0.2 0.3} {0 0.5 1.75}}] <[dtyp q3]>"
+puts [dump q3]
+puts [show_saved q3]
+puts "polygon2d: [restore_record q2 {DrawTrSurf_Polygon2D Poly_Polygon2D {2 0.5} {0 1.5} {2.75 -3}}] <[dtyp q2]>"
+puts [dump q2]
+puts [show_saved q2]
+puts "triangulation: [restore_record tr {DrawTrSurf_Triangulation Poly_Triangulation {3 1 0} 0.25 {0 0 0} {1 0 0} {0 0.1 0} {1 2 3}}] <[dtyp tr]>"
+puts [dump tr]
+puts [show_saved tr]

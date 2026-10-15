@@ -342,3 +342,53 @@ Knots :
 
 short: 1 <> 1 <>
 rotate null axis: 1 <An exception was caught Standar>
+polygon3d: q3 <polygon3D>
+
+
+*********** Dump of q3 *************
+Poly_Polygon3D
+       3 Nodes
+with parameters
+Deflection : 0.125
+
+Nodes :
+         1 :                 0               0.5                 1
+         2 :              2.25                 3                -4
+         3 :               0.1               0.2               0.3
+
+Parameters :
+0 0.5 1.75 
+
+DrawTrSurf_Polygon3D|Poly_Polygon3D|3 1|1.250000000000000e-01|0.000000000000000e+00 5.000000000000000e-01 1.000000000000000e+00|2.250000000000000e+00 3.000000000000000e+00 -4.000000000000000e+00|1.000000000000000e-01 2.000000000000000e-01 3.000000000000000e-01|0.000000000000000e+00 5.000000000000000e-01 1.750000000000000e+00 ||0||
+polygon2d: q2 <polygon2D>
+
+
+*********** Dump of q2 *************
+Poly_Polygon2D
+       2 Nodes
+Deflection : 0.5
+
+Nodes :
+         1 :                 0               1.5
+         2 :              2.75                -3
+
+DrawTrSurf_Polygon2D|Poly_Polygon2D|2 5.000000000000000e-01|0.000000000000000e+00 1.500000000000000e+00|2.750000000000000e+00 -3.000000000000000e+00||0||
+triangulation: tr <triangulation>
+
+
+*********** Dump of tr *************
+Poly_Triangulation
+       3 Nodes
+       1 Triangles
+without UV nodes
+Deflection : 0.25
+
+3D Nodes :
+         1 :                 0                 0                 0
+         2 :                 1                 0                 0
+         3 :                 0               0.1                 0
+
+Triangles :
+         1 :          1          2          3
+
+DrawTrSurf_Triangulation|Poly_Triangulation|3 1 0|2.500000000000000e-01|0.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00|1.000000000000000e+00 0.000000000000000e+00 0.000000000000000e+00|0.000000000000000e+00 1.000000000000000e-01 0.000000000000000e+00|1 2 3||0||

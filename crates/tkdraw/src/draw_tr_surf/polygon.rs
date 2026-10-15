@@ -3,9 +3,9 @@
 
 //! `DrawTrSurf_Polygon3D` and `DrawTrSurf_Polygon2D`: drawable polylines.
 //!
-//! Known gap: `Save` sets the stream to scientific notation with 15 digits before
-//! `Poly::Write`, but the TKMath Poly writer formats its numbers itself (`%g`), so the
-//! saved text differs from native files (the values are the `%g` roundings).
+//! `Dump` and `Save` hand the TKMath Poly writers the number text of the DRAW stream
+//! (precision 15 for `dump`, scientific 15 digits for `Save`), as the native writers
+//! inherit the `std::ostream` state.
 use super::curve_common::PlotPoint;
 use super::geometry::geometry;
 use crate::draw::{
@@ -114,14 +114,19 @@ impl Drawable3D for DrawTrSurfPolygon3D {
     /// `Dump`: `Poly::Dump`.
     fn dump(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         let polygon = geometry(&self.polygon)?;
-        stream.write_bytes_through(|out| poly::dump_polygon3d(polygon, out))
+        let real_text = stream.real_text();
+        stream
+            .write_bytes_through(|out| poly::write_polygon3d_with(polygon, out, false, &*real_text))
     }
 
-    /// `Save`: `Poly::Write` (see the module note on the number format).
+    /// `Save`: `Poly::Write` in scientific notation with 15 digits; the flags are left
+    /// set afterwards, as the native `setf(aFlags)` (which only adds flags) leaves them.
     fn save(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         let polygon = geometry(&self.polygon)?;
         stream.set_scientific(true).set_precision(15);
-        stream.write_bytes_through(|out| poly::write_polygon3d(polygon, out, true))
+        let real_text = stream.real_text();
+        stream
+            .write_bytes_through(|out| poly::write_polygon3d_with(polygon, out, true, &*real_text))
     }
 
     fn whatis(&self, di: &DrawInterpretor) -> Result<(), Failure> {
@@ -206,14 +211,19 @@ impl Drawable3D for DrawTrSurfPolygon2D {
     /// `Dump`: `Poly::Dump`.
     fn dump(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         let polygon = geometry(&self.polygon)?;
-        stream.write_bytes_through(|out| poly::dump_polygon2d(polygon, out))
+        let real_text = stream.real_text();
+        stream
+            .write_bytes_through(|out| poly::write_polygon2d_with(polygon, out, false, &*real_text))
     }
 
-    /// `Save`: `Poly::Write` (see the module note on the number format).
+    /// `Save`: `Poly::Write` in scientific notation with 15 digits; the flags are left
+    /// set afterwards, as the native `setf(aFlags)` (which only adds flags) leaves them.
     fn save(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         let polygon = geometry(&self.polygon)?;
         stream.set_scientific(true).set_precision(15);
-        stream.write_bytes_through(|out| poly::write_polygon2d(polygon, out, true))
+        let real_text = stream.real_text();
+        stream
+            .write_bytes_through(|out| poly::write_polygon2d_with(polygon, out, true, &*real_text))
     }
 
     fn whatis(&self, di: &DrawInterpretor) -> Result<(), Failure> {

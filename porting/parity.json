@@ -483666,8 +483666,8 @@
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::<rustycad_tkdraw::draw::Drawable3D>::dump",
-      "status": "partial",
-      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw). Dump and Save hand the TKMath Poly writers (write_*_with) the number text of the DRAW stream (Draw::OStream::real_text), so Dump inherits the precision of the dump command and Save writes scientific notation with 15 digits, as the native stream does; the batch oracle (tests/oracle/08_drawtrsurf.tcl, polygon3d/polygon2d/triangulation dump and save cases) matches native DRAWEXE byte for byte."
     },
     {
       "upstream_id": "DrawTrSurf_Polygon2D::Polygon2D() const",
@@ -483698,8 +483698,8 @@
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::<rustycad_tkdraw::draw::Drawable3D>::save",
-      "status": "partial",
-      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw). Dump and Save hand the TKMath Poly writers (write_*_with) the number text of the DRAW stream (Draw::OStream::real_text), so Dump inherits the precision of the dump command and Save writes scientific notation with 15 digits, as the native stream does; the batch oracle (tests/oracle/08_drawtrsurf.tcl, polygon3d/polygon2d/triangulation dump and save cases) matches native DRAWEXE byte for byte."
     },
     {
       "upstream_id": "DrawTrSurf_Polygon2D::ShowNodes() const",
@@ -483764,8 +483764,8 @@
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::<rustycad_tkdraw::draw::Drawable3D>::dump",
-      "status": "partial",
-      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw). Dump and Save hand the TKMath Poly writers (write_*_with) the number text of the DRAW stream (Draw::OStream::real_text), so Dump inherits the precision of the dump command and Save writes scientific notation with 15 digits, as the native stream does; the batch oracle (tests/oracle/08_drawtrsurf.tcl, polygon3d/polygon2d/triangulation dump and save cases) matches native DRAWEXE byte for byte."
     },
     {
       "upstream_id": "DrawTrSurf_Polygon3D::Polygon3D() const",
@@ -483796,8 +483796,8 @@
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::<rustycad_tkdraw::draw::Drawable3D>::save",
-      "status": "partial",
-      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw). Dump and Save hand the TKMath Poly writers (write_*_with) the number text of the DRAW stream (Draw::OStream::real_text), so Dump inherits the precision of the dump command and Save writes scientific notation with 15 digits, as the native stream does; the batch oracle (tests/oracle/08_drawtrsurf.tcl, polygon3d/polygon2d/triangulation dump and save cases) matches native DRAWEXE byte for byte."
     },
     {
       "upstream_id": "DrawTrSurf_Polygon3D::ShowNodes() const",
@@ -484056,8 +484056,8 @@
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::dump",
-      "status": "partial",
-      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw). Dump and Save hand the TKMath Poly writers (write_*_with) the number text of the DRAW stream (Draw::OStream::real_text), so Dump inherits the precision of the dump command and Save writes scientific notation with 15 digits, as the native stream does; the batch oracle (tests/oracle/08_drawtrsurf.tcl, polygon3d/polygon2d/triangulation dump and save cases) matches native DRAWEXE byte for byte."
     },
     {
       "upstream_id": "DrawTrSurf_Triangulation::RegisterFactory()",
@@ -484080,8 +484080,8 @@
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::save",
-      "status": "partial",
-      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw). Dump and Save hand the TKMath Poly writers (write_*_with) the number text of the DRAW stream (Draw::OStream::real_text), so Dump inherits the precision of the dump command and Save writes scientific notation with 15 digits, as the native stream does; the batch oracle (tests/oracle/08_drawtrsurf.tcl, polygon3d/polygon2d/triangulation dump and save cases) matches native DRAWEXE byte for byte."
     },
     {
       "upstream_id": "DrawTrSurf_Triangulation::ShowNodes() const",
