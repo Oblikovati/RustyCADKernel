@@ -10,10 +10,12 @@ use super::super::DyadicBound;
 use super::super::certificate_arithmetic::ExactRatio;
 use super::algebraic::IsolatedRoot;
 use super::budget::Work;
+use super::canonical::{canonical, kind_name};
 use super::conic_source::ConicSource;
 use super::failure::SketchIncidenceCause as Cause;
 use super::implicit::LineImplicit;
 use super::input::{SketchIncidenceCurve, SketchIncidenceSpline};
+use super::offset_geometry::circle_radius;
 use super::place::{KeyValue, SourcePlace};
 use super::rational_polynomial::{RationalPolynomial, ratio};
 use super::report::SketchLinePosition;
@@ -40,14 +42,18 @@ pub(super) enum SourceFrame {
 impl SourceFrame {
     /// Exact frame of an admitted source curve; angle bounds are placed with work.
     pub fn new(curve: &SketchIncidenceCurve, work: &mut Work<'_>) -> Result<Self, Cause> {
-        Ok(match curve {
+        let curve = canonical(curve)?;
+        Ok(match curve.as_ref() {
             SketchIncidenceCurve::Line { points, .. } => Self::Line(Box::new(LineSource {
                 implicit: LineImplicit::through(*points),
                 piece: line_span(*points, false),
             })),
             SketchIncidenceCurve::Spline(spline) => Self::Spline(SplineSource::new(spline)),
-            SketchIncidenceCurve::PeriodicSpline(periodic) => {
-                Self::Spline(SplineSource::new(&super::periodic::unwrap(periodic)?))
+            SketchIncidenceCurve::Offset(offset) if circle_radius(offset).is_none() => {
+                return Err(Cause::OffsetPair {
+                    source: kind_name(curve.as_ref()),
+                    target: "any",
+                });
             }
             conic => Self::Conic(Box::new(ConicSource::new(conic, work)?)),
         })
@@ -72,6 +78,14 @@ impl SourceFrame {
             }
             (Self::Conic(conic), place) => conic.position(place, work),
             _ => Err(Cause::Invariant("place kind differs from its source")),
+        }
+    }
+    /// Representation name used by named refusals.
+    pub fn kind_name(&self) -> &'static str {
+        match self {
+            Self::Line(_) => "line",
+            Self::Spline(_) => "spline",
+            Self::Conic(_) => "conic",
         }
     }
     /// True for a full conic or a spline whose ends are the same exact point.

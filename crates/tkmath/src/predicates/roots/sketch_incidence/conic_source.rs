@@ -9,7 +9,10 @@ use super::angle::{AngleFrame, FrameAngle};
 use super::budget::Work;
 use super::failure::SketchIncidenceCause as Cause;
 use super::implicit::ConicImplicit;
-use super::input::{SketchConicAngles, SketchConicBounds, SketchIncidenceCurve};
+use super::input::{
+    SketchConicAngles, SketchConicBounds, SketchIncidenceCurve, SketchIncidenceOffset,
+};
+use super::offset_geometry::circle_radius;
 use super::place::{AngleKey, KeyValue, SketchSweepChart, SourcePlace, compare_places};
 use super::rational_polynomial::ratio;
 use super::report::SketchLinePosition;
@@ -25,14 +28,14 @@ pub(super) struct ConicSource {
     pub end: Option<SourcePlace>,
     angled: bool,
 }
-struct ConicShape<'a> {
-    implicit: ConicImplicit,
-    center: [f64; 2],
-    axis: [f64; 2],
-    radii: [f64; 2],
-    bounds: Option<&'a SketchConicBounds>,
+pub(super) struct ConicShape<'a> {
+    pub implicit: ConicImplicit,
+    pub center: [f64; 2],
+    pub axis: [f64; 2],
+    pub radii: [f64; 2],
+    pub bounds: Option<&'a SketchConicBounds>,
 }
-fn shape(curve: &SketchIncidenceCurve) -> ConicShape<'_> {
+pub(super) fn shape(curve: &SketchIncidenceCurve) -> ConicShape<'_> {
     match curve {
         SketchIncidenceCurve::Circle {
             center,
@@ -57,7 +60,27 @@ fn shape(curve: &SketchIncidenceCurve) -> ConicShape<'_> {
             radii: *radii,
             bounds: sector.as_ref(),
         },
+        SketchIncidenceCurve::Offset(offset) => offset_circle(offset),
         other => unreachable!("curve {other:?}; expected a circle or ellipse"),
+    }
+}
+// A circle offset is the concentric circle with the basis sector and frame.
+fn offset_circle(offset: &SketchIncidenceOffset) -> ConicShape<'_> {
+    let SketchIncidenceCurve::Circle {
+        center,
+        radius,
+        sector,
+    } = offset.basis.as_ref()
+    else {
+        unreachable!("offset {offset:?}; expected a circle basis");
+    };
+    let exact = circle_radius(offset).expect("a circle basis");
+    ConicShape {
+        implicit: ConicImplicit::circle_exact(*center, exact),
+        center: *center,
+        axis: [1., 0.],
+        radii: [*radius; 2],
+        bounds: sector.as_ref(),
     }
 }
 impl ConicSource {

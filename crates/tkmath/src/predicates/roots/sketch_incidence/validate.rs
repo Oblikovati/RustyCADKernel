@@ -18,7 +18,7 @@ pub(super) fn options(options: SketchIncidenceOptions) -> Result<(), SketchIncid
     checked.map_err(input_failure)
 }
 pub(super) fn source(source: &SketchIncidenceSource) -> Result<(), SketchIncidenceFailure> {
-    let checked = match &source.curve {
+    let checked = match source_basis(&source.curve) {
         SketchIncidenceCurve::Line { points, bounded } => {
             distinct_points("source.points", *points).and_then(|()| bounded_source(*bounded))
         }
@@ -26,13 +26,22 @@ pub(super) fn source(source: &SketchIncidenceSource) -> Result<(), SketchInciden
             if source.domain == SketchLineDomain::Support =>
         {
             Err(Cause::SourceDomain {
-                source: "spline",
+                source: super::canonical::kind_name(&source.curve),
                 domain: source.domain,
             })
         }
-        other => curve(other),
+        _ => Ok(()),
     };
-    checked.map_err(input_failure)
+    checked
+        .and_then(|()| curve(&source.curve))
+        .map_err(input_failure)
+}
+// An offset source has the ends and domains of its basis.
+fn source_basis(curve: &SketchIncidenceCurve) -> &SketchIncidenceCurve {
+    match curve {
+        SketchIncidenceCurve::Offset(offset) => &offset.basis,
+        other => other,
+    }
 }
 // The two points of a line source are its ends; extension uses the domain, not the flag.
 fn bounded_source(bounded: bool) -> Admission {
@@ -73,7 +82,12 @@ fn curve(curve: &SketchIncidenceCurve) -> Admission {
         SketchIncidenceCurve::PeriodicSpline(periodic) => {
             super::spline_admission::spline(&super::periodic::unwrap(periodic)?)
         }
+        SketchIncidenceCurve::Offset(offset) => offset_curve(offset),
     }
+}
+fn offset_curve(offset: &SketchIncidenceOffset) -> Admission {
+    curve(&offset.basis)?;
+    super::offset_admission::offset(offset)
 }
 pub(super) fn finite(field: &'static str, values: &[f64]) -> Admission {
     match values.iter().position(|value| !value.is_finite()) {

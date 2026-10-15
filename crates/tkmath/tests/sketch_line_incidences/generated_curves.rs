@@ -160,21 +160,21 @@ fn domain(code: &str) -> SketchLineDomain {
     }
 }
 fn magnitude(curves: &[&SketchIncidenceCurve]) -> f64 {
-    let scale = |curve: &&SketchIncidenceCurve| match curve {
+    curves.iter().map(|curve| scale(curve)).fold(1f64, f64::max)
+}
+fn scale(curve: &SketchIncidenceCurve) -> f64 {
+    match curve {
         SketchIncidenceCurve::Circle { center, radius, .. } => {
             center[0].abs().max(center[1].abs()).max(*radius)
         }
         SketchIncidenceCurve::Ellipse { center, radii, .. } => {
             center[0].abs().max(center[1].abs()).max(radii[0])
         }
-        SketchIncidenceCurve::Line { points, .. } => points
-            .iter()
-            .flatten()
-            .fold(0f64, |size, value| size.max(value.abs())),
+        SketchIncidenceCurve::Line { points, .. } => largest(points),
         SketchIncidenceCurve::Spline(spline) => largest(&spline.poles),
         SketchIncidenceCurve::PeriodicSpline(spline) => largest(&spline.poles),
-    };
-    curves.iter().map(scale).fold(1f64, f64::max)
+        SketchIncidenceCurve::Offset(offset) => scale(&offset.basis) + offset.distance.abs(),
+    }
 }
 fn largest(poles: &[[f64; 2]]) -> f64 {
     poles

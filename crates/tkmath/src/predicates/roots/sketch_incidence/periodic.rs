@@ -7,25 +7,12 @@
 //! `flat[i + n] - flat[i]` equals the period in rational arithmetic for every
 //! `i` (`n` poles per period). Poles wrap as in `BSplCLib::Unperiodize`.
 use super::failure::SketchIncidenceCause as Cause;
-use super::input::{SketchIncidenceCurve, SketchIncidenceSpline, SketchPeriodicSpline};
+use super::input::{SketchIncidenceSpline, SketchPeriodicSpline};
 use super::rational_polynomial::ratio;
 use super::validate::{finite, positive};
 use crate::bsplclib;
 use rustycad_tkernel::ncollection::Array1;
-use std::borrow::Cow;
 
-/// The curve with a periodic spline replaced by its exact unwrapped spline.
-/// Example: `let curve = unwrapped(&target.curve)?;`.
-pub(super) fn unwrapped(
-    curve: &SketchIncidenceCurve,
-) -> Result<Cow<'_, SketchIncidenceCurve>, Cause> {
-    match curve {
-        SketchIncidenceCurve::PeriodicSpline(periodic) => {
-            Ok(Cow::Owned(SketchIncidenceCurve::Spline(unwrap(periodic)?)))
-        }
-        other => Ok(Cow::Borrowed(other)),
-    }
-}
 /// Exact non-periodic form of an admitted periodic spline.
 pub(super) fn unwrap(periodic: &SketchPeriodicSpline) -> Result<SketchIncidenceSpline, Cause> {
     shape(periodic)?;

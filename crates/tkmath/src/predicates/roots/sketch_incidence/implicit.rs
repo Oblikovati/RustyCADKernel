@@ -61,7 +61,10 @@ impl QuadraticForm {
 impl ConicImplicit {
     /// Circle of the given center and positive radius.
     pub fn circle(center: [f64; 2], radius: f64) -> Self {
-        let radius = ratio(radius);
+        Self::circle_exact(center, ratio(radius))
+    }
+    /// Circle with an exact rational radius, e.g. a circle offset `r + d`.
+    pub fn circle_exact(center: [f64; 2], radius: ExactRatio) -> Self {
         Self {
             center: center.map(ratio),
             form: QuadraticForm {

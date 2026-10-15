@@ -119,6 +119,22 @@ pub enum SketchIncidenceCurve {
     Spline(SketchIncidenceSpline),
     /// Periodic B-spline with native knots and multiplicities (ADR 0080).
     PeriodicSpline(SketchPeriodicSpline),
+    /// Offset of a basis curve at a signed distance (ADR 0080).
+    Offset(SketchIncidenceOffset),
+}
+/// Offset curve `C(u) + distance * (C'(u) rotated clockwise) / |C'(u)|`, as
+/// `Geom2d_OffsetCurve`: a positive distance lies right of the travel direction.
+///
+/// Bases: a line, a circle or ellipse (a full conic travels counterclockwise, an
+/// arc in its sector sense), or a spline (periodic or not) that is C1 and regular
+/// on its bounds. A circle offset is the concentric circle; a zero distance is the
+/// basis itself. The offset keeps the basis parameterization, sector and bounds.
+#[derive(Clone, Debug, PartialEq)]
+pub struct SketchIncidenceOffset {
+    /// Basis curve; it must not itself be an offset.
+    pub basis: Box<SketchIncidenceCurve>,
+    /// Finite signed offset distance.
+    pub distance: f64,
 }
 /// Periodic B-spline in the native OCCT form: distinct knots with multiplicities.
 ///

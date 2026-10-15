@@ -17,6 +17,8 @@ mod generated;
 mod generated_curves;
 mod isolation;
 mod lines;
+mod offset_circles;
+mod offset_failures;
 mod ordering;
 mod periodic_splines;
 mod selection;

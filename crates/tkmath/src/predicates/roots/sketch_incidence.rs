@@ -14,6 +14,7 @@ mod angle;
 mod angle_admission;
 mod bivariate;
 mod budget;
+mod canonical;
 mod conic_chart;
 mod conic_concentric;
 mod conic_pair;
@@ -26,6 +27,8 @@ mod failure;
 mod implicit;
 mod implicit_target;
 mod input;
+mod offset_admission;
+mod offset_geometry;
 mod order;
 mod overlap;
 mod parametric_target;
@@ -40,6 +43,7 @@ mod report;
 mod resultant;
 mod root_map;
 mod root_sign;
+mod route;
 mod sector;
 mod select;
 mod source_frame;
@@ -57,8 +61,8 @@ pub use failure::{
 };
 pub use input::{
     SketchConicAngles, SketchConicBounds, SketchConicSector, SketchIncidenceCurve,
-    SketchIncidenceOptions, SketchIncidenceSource, SketchIncidenceSpline, SketchIncidenceTarget,
-    SketchLineDomain, SketchPeriodicSpline,
+    SketchIncidenceOffset, SketchIncidenceOptions, SketchIncidenceSource, SketchIncidenceSpline,
+    SketchIncidenceTarget, SketchLineDomain, SketchPeriodicSpline,
 };
 pub use place::SketchSweepChart;
 pub use report::{
@@ -73,9 +77,6 @@ pub use select::{
 use budget::Work;
 use contact::TargetKey;
 use failure::SketchIncidenceCause as Cause;
-use implicit::{ConicImplicit, LineImplicit};
-use implicit_target::ImplicitTarget;
-use report::SketchLineOverlap as Overlap;
 use source_frame::SourceFrame;
 
 /// Certify every incidence of a source curve with every target, in exact source order.
@@ -154,157 +155,13 @@ fn target_incidences(
 ) -> Result<SketchTargetIncidences, Cause> {
     work.enter(SketchIncidenceStage::Equation);
     work.check()?;
-    let curve = periodic::unwrapped(&target.curve)?;
-    let (contacts, overlaps) = curve_incidences(&curve, owner, frame, work)?;
+    let curve = canonical::canonical(&target.curve)?;
+    let (contacts, overlaps) = route::curve_incidences(&curve, owner, frame, work)?;
     Ok(SketchTargetIncidences {
         target: target.clone(),
         contacts,
         overlaps,
     })
-}
-// The report keeps the request target; a periodic spline is certified unwrapped.
-fn curve_incidences(
-    curve: &SketchIncidenceCurve,
-    owner: TargetKey,
-    frame: &SourceFrame,
-    work: &mut Work<'_>,
-) -> Result<(Vec<SketchLineContact>, Vec<Overlap>), Cause> {
-    Ok(match frame {
-        SourceFrame::Spline(spline) => (
-            parametric_source(&spline.pieces, curve, owner, frame, work)?,
-            Vec::new(),
-        ),
-        SourceFrame::Line(line) if is_conic(curve) => {
-            let pieces = std::slice::from_ref(&line.piece);
-            (
-                parametric_source(pieces, curve, owner, frame, work)?,
-                Vec::new(),
-            )
-        }
-        _ => implicit_source(curve, owner, frame, work)?,
-    })
-}
-fn is_conic(curve: &SketchIncidenceCurve) -> bool {
-    matches!(
-        curve,
-        SketchIncidenceCurve::Circle { .. } | SketchIncidenceCurve::Ellipse { .. }
-    )
-}
-// Line and spline sources substitute their pieces into the target's implicit equation.
-fn parametric_source(
-    pieces: &[spans::ParametricSpan],
-    curve: &SketchIncidenceCurve,
-    owner: TargetKey,
-    frame: &SourceFrame,
-    work: &mut Work<'_>,
-) -> Result<Vec<SketchLineContact>, Cause> {
-    let implicit = match curve {
-        SketchIncidenceCurve::Line { points, bounded } => ImplicitTarget::Line {
-            implicit: LineImplicit::through(*points),
-            bounded: *bounded,
-        },
-        SketchIncidenceCurve::Circle { .. } | SketchIncidenceCurve::Ellipse { .. } => {
-            conic_target(curve)
-        }
-        SketchIncidenceCurve::Spline(spline) => return spline_target(spline, owner, frame, work),
-        _ => {
-            return Err(Cause::Invariant(
-                "a curve kind without an implicit target form",
-            ));
-        }
-    };
-    implicit_target::incidences(pieces, &implicit, owner, frame, work)
-}
-// Spline sources meet spline targets through span-pair elimination.
-fn spline_target(
-    spline: &SketchIncidenceSpline,
-    owner: TargetKey,
-    frame: &SourceFrame,
-    work: &mut Work<'_>,
-) -> Result<Vec<SketchLineContact>, Cause> {
-    let SourceFrame::Spline(source) = frame else {
-        return Err(Cause::Invariant("spline pair without a spline source"));
-    };
-    let spans = spans::spline_spans(spline);
-    let pair = spline_pair::SplinePair {
-        source,
-        spans: &spans,
-        bounds: spline.bounds,
-        owner,
-    };
-    spline_pair::incidences(&pair, frame, work)
-}
-fn conic_target(curve: &SketchIncidenceCurve) -> ImplicitTarget<'_> {
-    let (implicit, radii, sector) = match curve {
-        SketchIncidenceCurve::Circle {
-            center,
-            radius,
-            sector,
-        } => (
-            ConicImplicit::circle(*center, *radius),
-            [*radius; 2],
-            sector,
-        ),
-        SketchIncidenceCurve::Ellipse {
-            center,
-            major_axis,
-            radii,
-            sector,
-        } => (
-            ConicImplicit::ellipse(*center, *major_axis, *radii),
-            *radii,
-            sector,
-        ),
-        other => unreachable!("curve {other:?}; expected a circle or ellipse"),
-    };
-    ImplicitTarget::Conic {
-        implicit,
-        sector: sector
-            .as_ref()
-            .map(|bounds| sector::ArcBounds { bounds, radii }),
-    }
-}
-// Line and conic sources substitute line and spline targets into their own equation.
-fn implicit_source(
-    curve: &SketchIncidenceCurve,
-    owner: TargetKey,
-    frame: &SourceFrame,
-    work: &mut Work<'_>,
-) -> Result<(Vec<SketchLineContact>, Vec<Overlap>), Cause> {
-    let (spans, bounds) = match curve {
-        SketchIncidenceCurve::Line { points, bounded } => (
-            vec![spans::line_span(*points, *bounded)],
-            bounded.then_some([0., 1.]),
-        ),
-        SketchIncidenceCurve::Spline(spline) => (spans::spline_spans(spline), Some(spline.bounds)),
-        conic => return conic_source(conic, owner, frame, work),
-    };
-    let request = parametric_target::ParametricRequest {
-        spans,
-        bounds,
-        owner,
-    };
-    parametric_target::incidences(request, frame, work)
-}
-// Conic sources meet conic targets through their chart elimination.
-fn conic_source(
-    curve: &SketchIncidenceCurve,
-    owner: TargetKey,
-    frame: &SourceFrame,
-    work: &mut Work<'_>,
-) -> Result<(Vec<SketchLineContact>, Vec<Overlap>), Cause> {
-    let (SourceFrame::Conic(source), ImplicitTarget::Conic { implicit, sector }) =
-        (frame, conic_target(curve))
-    else {
-        return Err(Cause::Invariant("conic pair without a conic source"));
-    };
-    let pair = conic_pair::ConicPair {
-        source,
-        target: &implicit,
-        sector,
-        owner,
-    };
-    conic_pair::incidences(&pair, frame, work)
 }
 fn max_error(results: &[SketchTargetIncidences]) -> f64 {
     results
