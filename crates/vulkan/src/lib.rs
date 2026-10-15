@@ -12,6 +12,7 @@ pub use gui_surface_outcome::{
     RenderGuiSurfacePhase, RenderGuiSurfacePolicy,
 };
 mod render_driver_identity;
+pub use backend::{VERIFIED_VALIDATION_LAYER, ValidationLayerVersion, active_validation_layer};
 pub use render_driver_identity::RenderDriverIdentity;
 mod scene;
 pub use backend::{VulkanOptions, VulkanRenderer};

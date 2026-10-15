@@ -2,3 +2,8 @@
 lint = "clippy --workspace --all-targets --all-features --locked -- -D warnings"
 test-all = "test --workspace --all-features --locked"
 coverage = "llvm-cov --workspace --all-features --locked --lcov --output-path target/lcov.info"
+
+# Renderer tests must not depend on the host's validation layer: Ubuntu 24.04's 1.3.275 reports a
+# false dynamic-rendering depth-resolve hazard and crashes under parallel instances (docs/vulkan-renderer.md).
+[target.x86_64-unknown-linux-gnu]
+runner = ["tools/with_vulkan_validation.py", "--"]
