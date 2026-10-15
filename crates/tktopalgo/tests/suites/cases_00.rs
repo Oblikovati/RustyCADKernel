@@ -77,6 +77,8 @@ pub mod brep_lib_package;
 pub mod brep_lib_point_cloud;
 #[path = "../brep_mat2d_behavior.rs"]
 pub mod brep_mat2d_behavior;
+#[path = "../brep_offset_api_thru_sections.rs"]
+pub mod brep_offset_api_thru_sections;
 #[path = "../brep_top_adaptor_domain.rs"]
 pub mod brep_top_adaptor_domain;
 #[path = "../brep_top_adaptor_fclass2d.rs"]
