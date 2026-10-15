@@ -129,3 +129,13 @@ Named refusals: `PeriodicShape`, `PeriodicKnotShift`, `OffsetBasis`,
 `OffsetRadius`, `OffsetEllipseAxis`, `OffsetContinuity`, `OffsetSingular`,
 `OffsetPair`; ellipse offset sources refuse trim picks (`PickKind`). Spline-source
 extension stays refused. No owner release or application intake is claimed.
+
+Local checks for ADR 0080 on 2026-10-15 (Rust 1.99.0, locked dependencies):
+`cargo test --locked -p rustycad-tkmath --all-features` passed 294 unit, 3,094
+integration and 56 documentation tests; the TKGeomAlgo incidence tests passed 9
+of 9 (including 108 native and 108 mapped offset cases); clippy for both crates
+with warnings denied passed; `tools/verify_toolkit.py TKMath` and `TKGeomAlgo`
+passed (2,023 and 213 native and Rust runtime cases). Two separate processes
+printed identical offset report text (64,588 bytes, SHA-256
+`24b0dfceace8bd28ca4d21081d00d61eb953fb79470de20bc5487ee9999ed29a` of the
+report line).
