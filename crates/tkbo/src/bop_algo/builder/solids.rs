@@ -1,6 +1,6 @@
 //! `BOPAlgo_Builder::FillImagesSolids`, `FillIn3DParts` and `BuildDraftSolid`
 //! (BOPAlgo_Builder_3.cxx).
-use super::{BOPAlgoBuilder, SameDomainShapes, required_context};
+use super::{BOPAlgoBuilder, BuilderHooks, SameDomainShapes, required_context};
 use crate::bop_algo::tools::{InParts, ShapeBoxMap, SolidInternalFaces, classify_faces};
 use crate::bop_ds::DataStructure;
 use crate::bop_tools::is_split_to_reverse_with_warning;
@@ -15,30 +15,41 @@ use rustycad_tkmath::bnd::BoundingBox3;
 /// The draft solids of the source solids (`aDraftSolid`).
 type DraftSolids = IndexedDataMap<Shape, Shape, ShapeMapHasher>;
 
+/// `FillImagesSolids` of the algorithm `hooks`: its (virtual) `FillIn3DParts`
+/// classifies the faces into draft solids, then the solid builder and the internal
+/// shapes; `fill_images_solids_with(&mut algo, &mut ds)?`.
+pub fn fill_images_solids_with<H: BuilderHooks>(
+    hooks: &mut H,
+    structure: &mut DataStructure,
+) -> Result<(), Failure> {
+    let mut has_solid = false;
+    for index in 0..structure.nb_source_shapes() {
+        if structure.shape_info(index)?.shape_type() == ShapeEnum::Solid {
+            has_solid = true;
+            break;
+        }
+    }
+    if !has_solid {
+        return Ok(());
+    }
+    let mut draft_solids: SameDomainShapes = DataMap::with_hasher(ShapeMapHasher, 1);
+    hooks.fill_in_3d_parts(structure, &mut draft_solids)?;
+    let builder = hooks.general_fuse();
+    if builder.options().has_errors() {
+        return Ok(());
+    }
+    builder.build_split_solids(structure, &draft_solids)?;
+    if builder.options().has_errors() {
+        return Ok(());
+    }
+    builder.fill_internal_shapes(structure)
+}
+
 impl BOPAlgoBuilder {
     /// Splits the solids: faces classified into draft solids, then the solid builder and
     /// the internal shapes (`FillImagesSolids`); `builder.fill_images_solids(&mut ds)?`.
     pub fn fill_images_solids(&mut self, structure: &mut DataStructure) -> Result<(), Failure> {
-        let mut has_solid = false;
-        for index in 0..structure.nb_source_shapes() {
-            if structure.shape_info(index)?.shape_type() == ShapeEnum::Solid {
-                has_solid = true;
-                break;
-            }
-        }
-        if !has_solid {
-            return Ok(());
-        }
-        let mut draft_solids: SameDomainShapes = DataMap::with_hasher(ShapeMapHasher, 1);
-        self.fill_in_3d_parts(structure, &mut draft_solids)?;
-        if self.options().has_errors() {
-            return Ok(());
-        }
-        self.build_split_solids(structure, &draft_solids)?;
-        if self.options().has_errors() {
-            return Ok(());
-        }
-        self.fill_internal_shapes(structure)
+        fill_images_solids_with(self, structure)
     }
 
     /// Classifies all faces against the draft solids; binds the draft of each solid that has

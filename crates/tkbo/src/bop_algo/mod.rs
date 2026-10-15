@@ -33,7 +33,7 @@ pub use make_periodic::{BOPAlgoMakePeriodic, PeriodicityParams};
 pub use maker_volume::BOPAlgoMakerVolume;
 pub use remove_features::BOPAlgoRemoveFeatures;
 mod builder;
-pub use bop::BOPAlgoBOP;
+pub use bop::{BOPAlgoBOP, BopHooks, build_bop_shape, perform_bop_internal1};
 mod general_fuse;
 mod section;
 pub use general_fuse::GeneralFuseAlgorithm;
@@ -43,7 +43,10 @@ pub use splitter::BOPAlgoSplitter;
 mod pave_filler;
 pub mod tools;
 mod tools_provider;
-pub use builder::{BOPAlgoBuilder, BuilderHooks, SameDomainShapes, ShapeImages};
+pub use builder::{
+    BOPAlgoBuilder, BuilderHooks, SameDomainShapes, ShapeImages, fill_images_solids_with,
+    perform_on,
+};
 pub use pave_filler::{BOPAlgoPaveFiller, EdgeRangeDistance};
 pub use tools_provider::BOPAlgoToolsProvider;
 mod builder_area;

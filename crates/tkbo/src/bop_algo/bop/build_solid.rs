@@ -193,7 +193,7 @@ impl BOPAlgoBOP {
 
     /// Whether an argument solid is open and the solid builder warned about it or its splits
     /// acquired new INTERNAL faces (`CheckArgsForOpenSolid`).
-    pub(super) fn check_args_for_open_solid(
+    pub(super) fn check_open_solid_arguments(
         &self,
         structure: &DataStructure,
     ) -> Result<bool, Failure> {

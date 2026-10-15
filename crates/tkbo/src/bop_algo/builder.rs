@@ -33,7 +33,8 @@ mod solids;
 #[path = "builder/split_solids.rs"]
 mod split_solids;
 pub(crate) use bop::operation_states;
-pub use perform::BuilderHooks;
+pub use perform::{BuilderHooks, perform_on};
+pub use solids::fill_images_solids_with;
 
 /// Shapes and their image, origin or IN-part lists (`myImages`, `myOrigins`, `myInParts`).
 pub type ShapeImages = DataMap<Shape, List<Shape>, ShapeMapHasher>;
@@ -196,6 +197,40 @@ impl BOPAlgoBuilder {
     /// The solids and the faces inside them (`myInParts`); `builder.in_parts()`.
     pub fn in_parts(&self) -> &ShapeImages {
         &self.in_parts
+    }
+
+    /// `myImages`, to write, for the derived algorithms that rebuild the splits
+    /// (BRepFeat_Builder); `builder.images_mut()`.
+    pub fn images_mut(&mut self) -> &mut ShapeImages {
+        &mut self.images
+    }
+
+    /// `myOrigins`, to write; `builder.origins_mut()`.
+    pub fn origins_mut(&mut self) -> &mut ShapeImages {
+        &mut self.origins
+    }
+
+    /// `myShapesSD`, to write; `builder.shapes_sd_mut()`.
+    pub fn shapes_sd_mut(&mut self) -> &mut SameDomainShapes {
+        &mut self.shapes_sd
+    }
+
+    /// `myInParts`, to write; `builder.in_parts_mut()`.
+    pub fn in_parts_mut(&mut self) -> &mut ShapeImages {
+        &mut self.in_parts
+    }
+
+    /// Takes the filler kept by `perform` (to work on its data structure while the
+    /// images change); give it back with [`Self::restore_pave_filler`];
+    /// `builder.take_pave_filler()`.
+    pub fn take_pave_filler(&mut self) -> Option<BOPAlgoPaveFiller> {
+        self.filler.take()
+    }
+
+    /// Gives back a filler taken by [`Self::take_pave_filler`];
+    /// `builder.restore_pave_filler(filler)`.
+    pub fn restore_pave_filler(&mut self, filler: Option<BOPAlgoPaveFiller>) {
+        self.filler = filler;
     }
 }
 

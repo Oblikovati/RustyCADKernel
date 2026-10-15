@@ -1,6 +1,6 @@
 //! `BOPAlgo_Builder::Perform`, `PerformWithFiller`, `PerformInternal(1)`, `CheckData`,
 //! `CheckFiller`, `Prepare`, `BuildResult` and `PostTreat` (BOPAlgo_Builder.cxx).
-use super::BOPAlgoBuilder;
+use super::{BOPAlgoBuilder, SameDomainShapes};
 use crate::bop_algo::alerts::alert;
 use crate::bop_algo::{AlertBuilderFailed, AlertTooFewArguments, BOPAlgoPaveFiller};
 use crate::bop_ds::DataStructure;
@@ -27,6 +27,24 @@ pub trait BuilderHooks {
     /// The base adds the images of `arguments()`; derived algorithms may read the DS.
     fn build_result(&mut self, kind: ShapeEnum, _structure: &DataStructure) -> Result<(), Failure> {
         self.general_fuse().build_result_default(kind)
+    }
+
+    /// Prepares the result after the check (`Prepare`): an empty compound; derived
+    /// algorithms (BRepFeat_Builder) add their own preparation.
+    fn prepare(&mut self) -> Result<(), Failure> {
+        self.general_fuse().prepare();
+        Ok(())
+    }
+
+    /// Classifies the face splits against the draft solids (`FillIn3DParts`); derived
+    /// algorithms (BRepFeat_Builder) filter the IN parts afterwards.
+    fn fill_in_3d_parts(
+        &mut self,
+        structure: &mut DataStructure,
+        draft_solids: &mut SameDomainShapes,
+    ) -> Result<(), Failure> {
+        self.general_fuse()
+            .fill_in_3d_parts(structure, draft_solids)
     }
 
     /// The pipeline run on the results of `filler` (`PerformInternal1`).
@@ -90,8 +108,8 @@ impl BOPAlgoBuilder {
         self.options().report().merge(filler.options().report());
     }
 
-    /// The result starts as an empty compound (`Prepare`).
-    pub(crate) fn prepare(&mut self) {
+    /// The result starts as an empty compound (`Prepare`); `builder.prepare()`.
+    pub fn prepare(&mut self) {
         make_container(ShapeEnum::Compound, &mut self.shape);
     }
 
@@ -150,8 +168,9 @@ impl BOPAlgoBuilder {
 }
 
 /// Intersects `shapes` with a pave filler made with the builder options, runs the pipeline
-/// and keeps the filler (`Perform` of the builders, entry point 1).
-pub(crate) fn perform_on<H: BuilderHooks>(hooks: &mut H, shapes: List<Shape>) {
+/// and keeps the filler (`Perform` of the builders, entry point 1); a derived algorithm
+/// runs its own hooks through it; `perform_on(&mut algo, shapes)`.
+pub fn perform_on<H: BuilderHooks>(hooks: &mut H, shapes: List<Shape>) {
     hooks.general_fuse().options().clear();
     let mut filler = hooks.general_fuse().new_filler(shapes);
     filler.perform();
@@ -197,7 +216,10 @@ pub(crate) fn perform_internal1<H: BuilderHooks>(
     if hooks.general_fuse().options().has_errors() {
         return Ok(());
     }
-    hooks.general_fuse().prepare();
+    hooks.prepare()?;
+    if hooks.general_fuse().options().has_errors() {
+        return Ok(());
+    }
     let Some(structure) = filler.data_structure_mut() else {
         return Err(no_structure());
     };
@@ -218,18 +240,27 @@ pub(crate) fn fill_images_with_results<H: BuilderHooks>(
     hooks: &mut H,
     structure: &mut DataStructure,
 ) -> Result<bool, Failure> {
-    let stages: [(Stage<BOPAlgoBuilder>, ShapeEnum); 8] = [
-        (BOPAlgoBuilder::stage_vertices, ShapeEnum::Vertex),
-        (BOPAlgoBuilder::stage_edges, ShapeEnum::Edge),
-        (BOPAlgoBuilder::stage_wires, ShapeEnum::Wire),
-        (BOPAlgoBuilder::stage_faces, ShapeEnum::Face),
-        (BOPAlgoBuilder::stage_shells, ShapeEnum::Shell),
-        (BOPAlgoBuilder::stage_solids, ShapeEnum::Solid),
-        (BOPAlgoBuilder::stage_compsolids, ShapeEnum::CompSolid),
-        (BOPAlgoBuilder::stage_compounds, ShapeEnum::Compound),
+    let stages: [(Stage<H>, ShapeEnum); 8] = [
+        (|h, s| h.general_fuse().stage_vertices(s), ShapeEnum::Vertex),
+        (|h, s| h.general_fuse().stage_edges(s), ShapeEnum::Edge),
+        (|h, s| h.general_fuse().stage_wires(s), ShapeEnum::Wire),
+        (|h, s| h.general_fuse().stage_faces(s), ShapeEnum::Face),
+        (|h, s| h.general_fuse().stage_shells(s), ShapeEnum::Shell),
+        (
+            |h, s| super::solids::fill_images_solids_with(h, s),
+            ShapeEnum::Solid,
+        ),
+        (
+            |h, s| h.general_fuse().stage_compsolids(s),
+            ShapeEnum::CompSolid,
+        ),
+        (
+            |h, s| h.general_fuse().stage_compounds(s),
+            ShapeEnum::Compound,
+        ),
     ];
     for (stage, kind) in stages {
-        stage(hooks.general_fuse(), structure)?;
+        stage(hooks, structure)?;
         if hooks.general_fuse().options().has_errors() {
             return Ok(false);
         }
@@ -277,10 +308,6 @@ impl BOPAlgoBuilder {
 
     fn stage_shells(&mut self, structure: &mut DataStructure) -> Result<(), Failure> {
         self.fill_images_containers(ShapeEnum::Shell, structure)
-    }
-
-    fn stage_solids(&mut self, structure: &mut DataStructure) -> Result<(), Failure> {
-        self.fill_images_solids(structure)
     }
 
     fn stage_compsolids(&mut self, structure: &mut DataStructure) -> Result<(), Failure> {

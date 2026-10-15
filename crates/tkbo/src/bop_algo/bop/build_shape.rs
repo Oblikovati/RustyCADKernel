@@ -18,11 +18,16 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use std::sync::Arc;
 
 impl BOPAlgoBOP {
-    /// Builds the result (`BuildShape`): open solids first try `BuildBOP`; then the splits
-    /// of the result, solids for FUSE of solids, else the containers of the arguments rebuilt
-    /// from their kept splits and the other kept splits.
-    pub(super) fn build_shape(&mut self, structure: &DataStructure) -> Result<(), Failure> {
-        if self.dims == [3, 3] && self.check_args_for_open_solid(structure)? {
+    /// Builds the result (`BuildShape`): open solids (`open_solids`, the answer of
+    /// `CheckArgsForOpenSolid` for solid arguments) first try `BuildBOP`; then the splits of
+    /// the result, solids for FUSE of solids, else the containers of the arguments rebuilt
+    /// from their kept splits and the other kept splits; `bop.build_shape(&ds, false)?`.
+    pub fn build_shape(
+        &mut self,
+        structure: &DataStructure,
+        open_solids: bool,
+    ) -> Result<(), Failure> {
+        if open_solids {
             // Open solids cannot be split well by the solid builder: build the result from
             // the face splits (this loses the history of the solids).
             let report = Arc::new(Report::new());
