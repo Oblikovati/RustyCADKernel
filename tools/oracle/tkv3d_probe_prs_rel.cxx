@@ -15,6 +15,7 @@
 #include <Geom_Ellipse.hxx>
 #include <PrsDim_OffsetDimension.hxx>
 #include <PrsDim_TangentRelation.hxx>
+#include <PrsDim_FixRelation.hxx>
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 
 static TopoDS_Edge v3pr_edge(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -159,8 +160,24 @@ static occ::handle<PrsDim_Relation> v3pr_tangent(int variant) {
     }
   }
 }
+static occ::handle<PrsDim_Relation> v3pr_fix(int variant) {
+  const TopoDS_Edge line = v3pr_edge(0, 0, 0, 10, 0, 0);
+  const TopoDS_Edge arc = v3pr_arc(1, 0, 3, 1, 4);
+  switch (variant) {
+    case 0: return new PrsDim_FixRelation(v3pr_vertex(1, 2, 0), v3pr_plane());
+    case 1: return new PrsDim_FixRelation(v3pr_vertex(1, 2, 0), v3pr_plane(), gp_Pnt(3, 4, 0), 3.0);
+    case 2: return new PrsDim_FixRelation(line, v3pr_plane());
+    case 3: return new PrsDim_FixRelation(line, v3pr_plane(), gp_Pnt(5, 5, 0), 2.0);
+    case 4: return new PrsDim_FixRelation(line, v3pr_plane(), gp_Pnt(15, 3, 0), 2.0);
+    case 5: return new PrsDim_FixRelation(arc, v3pr_plane());
+    case 6: return new PrsDim_FixRelation(arc, v3pr_plane(), gp_Pnt(1, -6, 0), 4.0);
+    case 7: return new PrsDim_FixRelation(v3pr_arc(1, 0, 3, 0, 2 * M_PI), v3pr_plane());
+    default: return new PrsDim_FixRelation(v3pr_square(0, 4), v3pr_plane());
+  }
+}
 static occ::handle<PrsDim_Relation> v3pr_make(int kind, int variant) {
   switch (kind) {
+    case 10: return v3pr_fix(variant);
     case 8: return v3pr_offset(variant);
     case 9: return v3pr_tangent(variant);
     case 6: return v3pr_radius<PrsDim_MaxRadiusDimension>(variant, 5.0);

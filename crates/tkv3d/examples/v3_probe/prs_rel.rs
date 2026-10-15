@@ -437,8 +437,33 @@ fn tangent(variant: i32) -> Relation {
     PrsDimTangentRelation::new(&a, &b, &xoy(), reference).into_cast()
 }
 
+fn fix(variant: i32) -> Relation {
+    let line = edge([0., 0., 0.], [10., 0., 0.]);
+    let arc: Shape = arc(1., 0., 3., 1., 4.).into();
+    let p = Point3::new;
+    let r = match variant {
+        0 => PrsDimFixRelation::new(&vertex(1., 2., 0.), &xoy(), None),
+        1 => {
+            PrsDimFixRelation::with_position(&vertex(1., 2., 0.), &xoy(), None, &p(3., 4., 0.), 3.0)
+        }
+        2 => PrsDimFixRelation::new(&line, &xoy(), None),
+        3 => PrsDimFixRelation::with_position(&line, &xoy(), None, &p(5., 5., 0.), 2.0),
+        4 => PrsDimFixRelation::with_position(&line, &xoy(), None, &p(15., 3., 0.), 2.0),
+        5 => PrsDimFixRelation::new(&arc, &xoy(), None),
+        6 => PrsDimFixRelation::with_position(&arc, &xoy(), None, &p(1., -6., 0.), 4.0),
+        7 => PrsDimFixRelation::new(
+            &super::prs_rel::arc(1., 0., 3., 0., 2.0 * PI).into(),
+            &xoy(),
+            None,
+        ),
+        _ => PrsDimFixRelation::new(&square(0.0, 4.0), &xoy(), None),
+    };
+    r.into_cast()
+}
+
 fn make(kind: i32, variant: i32) -> Result<Relation, Failure> {
     Ok(match kind {
+        10 => fix(variant),
         8 => offset(variant),
         9 => tangent(variant),
         6 => radius_case!(PrsDimMaxRadiusDimension, variant, 5.0),
