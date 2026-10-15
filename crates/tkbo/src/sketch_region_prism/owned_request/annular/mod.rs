@@ -2,6 +2,7 @@
 //! Owned annular preparation: two explicit boundary roles through the existing general pipeline.
 mod access;
 mod admission;
+pub(in crate::sketch_region_prism) mod names;
 mod pipeline;
 mod request;
 mod retained;
