@@ -119,8 +119,18 @@ const _: fn() = || {
     require_send_sync::<FaceIndex>();
 };
 
-/// The refusal of a null body for `operation`.
-pub(crate) fn null_body(operation: BodyQuery) -> BodyQueryError {
+/// Enumerates `body` on behalf of `operation`, so its failures name that query.
+pub(crate) fn enumerate_for(
+    body: &Shape,
+    operation: BodyQuery,
+) -> Result<BodyTopology, BodyQueryError> {
+    BodyTopology::enumerate(body).map_err(|mut error| {
+        error.operation = operation;
+        error
+    })
+}
+
+fn null_body(operation: BodyQuery) -> BodyQueryError {
     BodyQueryError::new(
         operation,
         QueryEntity::Body,
