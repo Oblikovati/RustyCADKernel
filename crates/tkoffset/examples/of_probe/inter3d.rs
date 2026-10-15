@@ -4,6 +4,7 @@ use super::common::{Reader, flag, int};
 use super::shape::shape;
 use super::tool::{finish, primitive};
 use rustycad_tkbool::brep_algo::{BRepAlgoAsDes, BRepAlgoImage};
+use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::{self, Explorer};
 use rustycad_tkbrep::topods::{self, Shape};
 use rustycad_tkbrep::toptools::IndexedMapOfShape;
@@ -13,7 +14,8 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::{ShapeEnum, State};
 use rustycad_tkmath::geom_abs::JoinType;
 use rustycad_tkoffset::brep_offset::{
-    BRepOffsetAnalyse, BRepOffsetInter3d, BRepOffsetOffset, OffsetFaces, ShapeShapeMap,
+    BRepOffsetAnalyse, BRepOffsetInter2d, BRepOffsetInter3d, BRepOffsetOffset, CoincidentVertices,
+    EdgeIntersections, OffsetFaces, ShapeShapeMap,
 };
 
 /// The descendants of a shape in the AsDes.
@@ -72,6 +74,90 @@ pub fn inter_case(values: &[f64]) {
                 &range,
                 planar,
             )?;
+        }
+        let as_des2d = Handle::new(BRepAlgoAsDes::new());
+        let ad2 = as_des2d.get().expect("AsDes2d");
+        let mut image_vv = BRepAlgoImage::new();
+        let mut edge_int = EdgeIntersections::default();
+        if op >= 3 {
+            // BRepOffset_MakeOffset::IntersectEdges, then for op 4 Compute on each
+            // enlarged face.
+            let ad = as_des.get().expect("AsDes");
+            let mut dmvv = CoincidentVertices::default();
+            let mut mfv = IndexedMapOfShape::default();
+            for fs in Explorer::new(&p, ShapeEnum::Face, ShapeEnum::Shape)? {
+                let f = topods::face(&fs)?;
+                let tol = BRepTool::face_tolerance(&f)?;
+                let o = map_sf.change_seek(&fs).expect("offset");
+                flag(BRepOffsetInter2d::connex_int_by_int(
+                    &f,
+                    o,
+                    &mut mes,
+                    &build,
+                    ad,
+                    ad2,
+                    off,
+                    tol,
+                    &a,
+                    &mut mfv,
+                    &mut image_vv,
+                    &mut edge_int,
+                    &mut dmvv,
+                    &range,
+                )?);
+            }
+            int(mfv.extent() as i32);
+            for i in 1..=mfv.extent() {
+                let f = topods::face(mfv.find_key(i)?)?;
+                let tol = BRepTool::face_tolerance(&f)?;
+                let o = map_sf.change_seek(f.as_ref()).expect("offset");
+                BRepOffsetInter2d::connex_int_by_int_in_vert(
+                    &f, o, &mut mes, &build, ad, ad2, tol, &a, &mut dmvv, &range,
+                )?;
+            }
+            flag(BRepOffsetInter2d::fuse_vertices(&dmvv, ad2, &mut image_vv)?);
+            if op == 4 {
+                let mut dmvv2 = CoincidentVertices::default();
+                for fs in Explorer::new(&p, ShapeEnum::Face, ShapeEnum::Shape)? {
+                    let of = map_sf.seek(&fs).expect("offset").face().as_ref().clone();
+                    if let Some(nf) = mes.seek(&of).cloned() {
+                        let nf = topods::face(&nf)?;
+                        let tol = BRepTool::face_tolerance(&nf)?;
+                        let new_edges = inter.new_edges().clone();
+                        BRepOffsetInter2d::compute(
+                            ad, &nf, &new_edges, tol, &edge_int, &mut dmvv2, &range,
+                        )?;
+                    }
+                }
+                flag(BRepOffsetInter2d::fuse_vertices(&dmvv2, ad, &mut image_vv)?);
+            }
+            for fs in Explorer::new(&p, ShapeEnum::Face, ShapeEnum::Shape)? {
+                let o = map_sf.seek(&fs).expect("offset");
+                for e in Explorer::new(&fs, ShapeEnum::Edge, ShapeEnum::Shape)? {
+                    let ne = mes.seek(&o.generated(&e)).cloned();
+                    flag(ne.is_some());
+                    if let Some(ne) = ne {
+                        shape(&ne)?;
+                        descendants(ad2, &ne)?;
+                    }
+                }
+                if let Some(nf) = mes.seek(o.face().as_ref()) {
+                    for e in ad.descendant(nf) {
+                        descendants(ad2, &e)?;
+                        descendants(ad, &e)?;
+                    }
+                }
+            }
+            for v in Explorer::new(&p, ShapeEnum::Vertex, ShapeEnum::Shape)? {
+                flag(image_vv.has_image(&v));
+                if image_vv.has_image(&v) {
+                    let l = image_vv.image(&v);
+                    int(l.len() as i32);
+                    for x in &l {
+                        shape(x)?;
+                    }
+                }
+            }
         }
         if op == 2 {
             let mut ctx = IndexedMapOfShape::default();

@@ -15,6 +15,6 @@ def append_inter3d_requests(requests: list[str]) -> None:
     """Append the BRepOffset_Inter3d requests in a fixed order."""
     for prim in PRIMITIVES:
         for off in (0.5, -0.25):
-            for op in range(3):
+            for op in range(5):
                 for planar in (0, 1):
                     requests.append(f'oi_inter {prim} {off} 0.01 {op} {planar}')

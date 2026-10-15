@@ -626789,6 +626789,46 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::is_done",
       "status": "implemented",
       "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter: every operation, on analysed and offset boxes, cylinders, cones, spheres and tori both ways; enlarged faces, AsDes descendants, Build compounds, failures and counts)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter2d::Compute(const occ::handle<BRepAlgo_AsDes>&,const TopoDS_Face&,const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,double,const NCollection_DataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter2d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter2d::compute",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter2d.cxx (crates/tkoffset/src/brep_offset/inter2d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter ops 3 and 4: Compute on the enlarged faces, after Inter3d::ConnexIntByInt on analysed and offset boxes, cylinders, cones, spheres and tori both ways; extended edges, 2d AsDes vertices, vertex images)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter2d::ConnexIntByInt(const TopoDS_Face&,BRepOffset_Offset&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const occ::handle<BRepAlgo_AsDes>&,const occ::handle<BRepAlgo_AsDes>&,double,double,const BRepOffset_Analyse&,NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,BRepAlgo_Image&,NCollection_DataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter2d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter2d::connex_int_by_int",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter2d.cxx (crates/tkoffset/src/brep_offset/inter2d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter ops 3 and 4: the IntersectEdges sequence of BRepOffset_MakeOffset, after Inter3d::ConnexIntByInt on analysed and offset boxes, cylinders, cones, spheres and tori both ways; extended edges, 2d AsDes vertices, vertex images). The Store of the vertices reads the live descendant list of an edge already bound (and the static empty list otherwise), as natively."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter2d::ConnexIntByIntInVert(const TopoDS_Face&,BRepOffset_Offset&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const occ::handle<BRepAlgo_AsDes>&,const occ::handle<BRepAlgo_AsDes>&,double,const BRepOffset_Analyse&,NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter2d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter2d::connex_int_by_int_in_vert",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter2d.cxx (crates/tkoffset/src/brep_offset/inter2d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter ops 3 and 4: the faces with vertex-generated edges of IntersectEdges, after Inter3d::ConnexIntByInt on analysed and offset boxes, cylinders, cones, spheres and tori both ways; extended edges, 2d AsDes vertices, vertex images)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter2d::ExtentEdge(const TopoDS_Edge&,TopoDS_Edge&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter2d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter2d::extent_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter2d.cxx (crates/tkoffset/src/brep_offset/inter2d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter ops 3 and 4: the edge extensions of ConnexIntByInt, after Inter3d::ConnexIntByInt on analysed and offset boxes, cylinders, cones, spheres and tori both ways; extended edges, 2d AsDes vertices, vertex images)."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter2d::FuseVertices(const NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,const occ::handle<BRepAlgo_AsDes>&,BRepAlgo_Image&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter2d.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter2d::fuse_vertices",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter2d.cxx (crates/tkoffset/src/brep_offset/inter2d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter ops 3 and 4: both vertex fusions, after Inter3d::ConnexIntByInt on analysed and offset boxes, cylinders, cones, spheres and tori both ways; extended edges, 2d AsDes vertices, vertex images)."
     }
   ],
   "tests": [
