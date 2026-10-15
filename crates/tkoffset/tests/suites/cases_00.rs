@@ -13,6 +13,8 @@ pub mod conical_apex_grouping;
 pub mod interval;
 #[path = "../legacy_brep_builder_api_sewing.rs"]
 pub mod legacy_brep_builder_api_sewing;
+#[path = "../legacy_brep_offset_api_make_pipe_shell.rs"]
+pub mod legacy_brep_offset_api_make_pipe_shell;
 #[path = "../legacy_brep_offset_make_offset.rs"]
 pub mod legacy_brep_offset_make_offset;
 #[path = "../make_offset_thick_solid.rs"]

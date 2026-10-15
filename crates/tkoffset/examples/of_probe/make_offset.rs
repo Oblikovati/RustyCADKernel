@@ -15,9 +15,17 @@ use rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffset;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
 /// Prints the exception of a failed step and ends the line.
-fn failed(error: Failure) {
+pub fn failed(error: Failure) {
     print!("{} ", error.exception_type());
     end();
+}
+
+/// The shape of the program at a table index.
+pub fn at(t: &TpShapes, index: i32) -> Result<Shape, Failure> {
+    t.shapes
+        .get(index as usize)
+        .cloned()
+        .ok_or_else(|| Failure::out_of_range("of_probe: shape index"))
 }
 
 /// The join of its enumeration value (0 arc, 1 tangent, 2 intersection).
@@ -97,12 +105,7 @@ pub fn make_offset_case(values: &[f64]) {
     let (mode, join) = (r.integer(), join_of(r.integer()));
     let (open, approx) = (r.flag(), r.flag());
     let (offset1, alt1, offset2, alt2) = (r.real(), r.real(), r.real(), r.real());
-    let face = t
-        .shapes
-        .get(index as usize)
-        .cloned()
-        .ok_or_else(|| Failure::out_of_range("of_probe: shape index"))
-        .and_then(|f| topods::face(&f));
+    let face = at(&t, index).and_then(|f| topods::face(&f));
     let mut maker = match face.and_then(|face| maker_of(&face, mode, join, open)) {
         Ok(maker) => maker,
         Err(error) => return failed(error),

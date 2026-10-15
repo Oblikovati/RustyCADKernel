@@ -35,6 +35,7 @@ from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
                                        require_blockers_in_source, runnable_rows, source_with_fixtures)
 from legacy_not_applicable import not_applicable_rows
+from toolkit_native_skips import approved_native_skips, native_skip_observations
 
 # The whole numeric verifier of one toolkit (both probes over its full corpus) may run this
 # long. It is a hang guard, not a budget: a corpus must never be trimmed to fit it. The
@@ -196,8 +197,9 @@ def run_native_suites(command: list, log: Path, environment: dict, has_approved_
         if not has_approved_failures: raise
 
 
-def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict, approved: dict[str, str], disabled: dict[str, SourceDisabledCase] | None = None, linked: tuple[str, ...] = LINKED_TOOLKITS) -> list[Path]:
-    """Run complete native suites; only the approved native failures may fail; native_tests(...)."""
+def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict, approved: dict[str, str], disabled: dict[str, SourceDisabledCase] | None = None, linked: tuple[str, ...] = LINKED_TOOLKITS, skips: dict[str, str] | None = None) -> list[Path]:
+    """Run complete native suites; only the approved native failures may fail and only the
+    approved native skips may skip (tools/toolkit_native_skips.py); native_tests(...)."""
     compiler = re.search(r'^CMAKE_CXX_COMPILER:FILEPATH=(.*)$',(build/'CMakeCache.txt').read_text(),re.M)[1]
     common = [compiler,'-std=c++17','-O2','-pthread','-I'+str(build/'include/opencascade'),
               '-I'+str(build/'_deps/googletest-src/googletest/include')]
@@ -211,7 +213,9 @@ def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs
     run_native_suites([executable,f'--gtest_output=xml:{output/"native.xml"}'],output/'native-run.log',environment,bool(approved))
     cases = ET.parse(output/'native.xml').findall('.//testcase')
     if {case.attrib['classname']+'.'+case.attrib['name'] for case in cases} != expected: raise ValueError('Incomplete native results')
-    check_native_cases(active_native_cases(cases, disabled or {}), approved)
+    active, skipped = native_skip_observations(active_native_cases(cases, disabled or {}), skips or {})
+    check_native_cases(active, approved)
+    (output/'native-skips.json').write_text(json.dumps(skipped, indent=2)+'\n')
     verify_forced_disabled(executable, output, environment, disabled or {})
     return libraries
 
@@ -298,7 +302,8 @@ def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], job
     native |= set(not_applicable_rows(rows))
     approved = approved_native_failures(runnable)
     disabled = source_disabled_rows(runnable)
-    libraries = native_tests(source,output,build,paths,jobs,native,environment,approved,disabled,linked)
+    skips = approved_native_skips(runnable)
+    libraries = native_tests(source,output,build,paths,jobs,native,environment,approved,disabled,linked,skips)
     rust_tests(output,runnable,rust,environment)
     return native,rust,approved,libraries
 
@@ -324,19 +329,22 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     pending = pending_dependency_rows(rows, set())
     inapplicable = not_applicable_rows(rows)
     observations = json.loads((output/'source-disabled.json').read_text()) if disabled else []
+    skips = approved_native_skips(runnable_rows(rows))
+    skipped = json.loads((output/'native-skips.json').read_text()) if skips else []
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
               'numeric_report':numeric,'declarations_mapped':len(rows)-len(pending)-len(inapplicable),
               'rust_pending_dependency':{name:list(case.blocked_by) for name,case in sorted(pending.items())},
-              'rust_not_applicable':{name:case.reason for name,case in sorted(inapplicable.items())},'legacy_runtime_cases_passed':len(native)-len(approved)-len(disabled),
+              'rust_not_applicable':{name:case.reason for name,case in sorted(inapplicable.items())},'legacy_runtime_cases_passed':len(native)-len(approved)-len(disabled)-len(skips),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,
               'native_expected_failures':approved, 'source_disabled_cases':observations,
+              'native_skipped_cases':skipped,
               'scope':'Mapped GoogleTest suites only; full toolkit API and test inventories pending',
               'source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
               'oracle_libraries_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in libraries}}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     failures = f' ({len(approved)} approved native failures)' if approved else ''
-    print(f'PASS: {toolkit}: {len(rows)-len(pending)} mapped declarations, {len(native)-len(approved)-len(disabled)} native and {len(rust)} Rust runtime cases{failures}; '
-          f'{len(disabled)} source-disabled expected failures; {len(pending)} pending dependency (native passed, Rust pending)')
+    print(f'PASS: {toolkit}: {len(rows)-len(pending)} mapped declarations, {len(native)-len(approved)-len(disabled)-len(skips)} native and {len(rust)} Rust runtime cases{failures}; '
+          f'{len(disabled)} source-disabled expected failures; {len(skips)} approved native skips; {len(pending)} pending dependency (native passed, Rust pending)')
 
 
 if __name__ == '__main__':

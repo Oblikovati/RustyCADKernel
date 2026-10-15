@@ -38,9 +38,12 @@
 #include "tktopalgo_probe_face.cxx"
 #include "tktopalgo_probe_shapes.cxx"
 #include "tkoffset_probe_brepoffsetapi_make_offset.cxx"
+#include "tkoffset_probe_brepoffsetapi_make_pipe_shell.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
- // BRepOffsetAPI (tkoffset_probe_brepoffsetapi_make_offset.cxx)
+ // BRepOffsetAPI (tkoffset_probe_brepoffsetapi_make_offset.cxx,
+ // tkoffset_probe_brepoffsetapi_make_pipe_shell.cxx)
  {"oa_make_offset", of_oa_make_offset_case},
+ {"oa_pipe_shell", of_oa_pipe_shell_case},
 };
 int main() {
  std::string line;

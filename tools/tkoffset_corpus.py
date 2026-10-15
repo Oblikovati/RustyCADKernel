@@ -13,3 +13,5 @@ def append_tkoffset_requests(requests: list[str]) -> None:
     """Append every TKOffset request family in a fixed order."""
     # BRepOffsetAPI_MakeOffset (tkoffset_corpus_brepoffsetapi_make_offset.py)
     __import__('tkoffset_corpus_brepoffsetapi_make_offset').append_make_offset_requests(requests)
+    # BRepOffsetAPI_MakePipeShell (tkoffset_corpus_brepoffsetapi_make_pipe_shell.py)
+    __import__('tkoffset_corpus_brepoffsetapi_make_pipe_shell').append_pipe_shell_requests(requests)
