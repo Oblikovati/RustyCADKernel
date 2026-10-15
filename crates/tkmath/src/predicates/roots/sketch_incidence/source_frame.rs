@@ -46,6 +46,9 @@ impl SourceFrame {
                 piece: line_span(*points, false),
             })),
             SketchIncidenceCurve::Spline(spline) => Self::Spline(SplineSource::new(spline)),
+            SketchIncidenceCurve::PeriodicSpline(periodic) => {
+                Self::Spline(SplineSource::new(&super::periodic::unwrap(periodic)?))
+            }
             conic => Self::Conic(Box::new(ConicSource::new(conic, work)?)),
         })
     }

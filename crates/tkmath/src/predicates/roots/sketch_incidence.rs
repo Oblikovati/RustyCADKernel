@@ -29,6 +29,9 @@ mod input;
 mod order;
 mod overlap;
 mod parametric_target;
+mod periodic;
+#[cfg(test)]
+mod periodic_tests;
 mod pieces;
 mod place;
 mod rational_parameter;
@@ -55,7 +58,7 @@ pub use failure::{
 pub use input::{
     SketchConicAngles, SketchConicBounds, SketchConicSector, SketchIncidenceCurve,
     SketchIncidenceOptions, SketchIncidenceSource, SketchIncidenceSpline, SketchIncidenceTarget,
-    SketchLineDomain,
+    SketchLineDomain, SketchPeriodicSpline,
 };
 pub use place::SketchSweepChart;
 pub use report::{
@@ -151,24 +154,34 @@ fn target_incidences(
 ) -> Result<SketchTargetIncidences, Cause> {
     work.enter(SketchIncidenceStage::Equation);
     work.check()?;
-    let (contacts, overlaps) = match frame {
-        SourceFrame::Spline(spline) => (
-            parametric_source(&spline.pieces, target, owner, frame, work)?,
-            Vec::new(),
-        ),
-        SourceFrame::Line(line) if is_conic(&target.curve) => {
-            let pieces = std::slice::from_ref(&line.piece);
-            (
-                parametric_source(pieces, target, owner, frame, work)?,
-                Vec::new(),
-            )
-        }
-        _ => implicit_source(target, owner, frame, work)?,
-    };
+    let curve = periodic::unwrapped(&target.curve)?;
+    let (contacts, overlaps) = curve_incidences(&curve, owner, frame, work)?;
     Ok(SketchTargetIncidences {
         target: target.clone(),
         contacts,
         overlaps,
+    })
+}
+// The report keeps the request target; a periodic spline is certified unwrapped.
+fn curve_incidences(
+    curve: &SketchIncidenceCurve,
+    owner: TargetKey,
+    frame: &SourceFrame,
+    work: &mut Work<'_>,
+) -> Result<(Vec<SketchLineContact>, Vec<Overlap>), Cause> {
+    Ok(match frame {
+        SourceFrame::Spline(spline) => (
+            parametric_source(&spline.pieces, curve, owner, frame, work)?,
+            Vec::new(),
+        ),
+        SourceFrame::Line(line) if is_conic(curve) => {
+            let pieces = std::slice::from_ref(&line.piece);
+            (
+                parametric_source(pieces, curve, owner, frame, work)?,
+                Vec::new(),
+            )
+        }
+        _ => implicit_source(curve, owner, frame, work)?,
     })
 }
 fn is_conic(curve: &SketchIncidenceCurve) -> bool {
@@ -180,20 +193,25 @@ fn is_conic(curve: &SketchIncidenceCurve) -> bool {
 // Line and spline sources substitute their pieces into the target's implicit equation.
 fn parametric_source(
     pieces: &[spans::ParametricSpan],
-    target: &SketchIncidenceTarget,
+    curve: &SketchIncidenceCurve,
     owner: TargetKey,
     frame: &SourceFrame,
     work: &mut Work<'_>,
 ) -> Result<Vec<SketchLineContact>, Cause> {
-    let implicit = match &target.curve {
+    let implicit = match curve {
         SketchIncidenceCurve::Line { points, bounded } => ImplicitTarget::Line {
             implicit: LineImplicit::through(*points),
             bounded: *bounded,
         },
         SketchIncidenceCurve::Circle { .. } | SketchIncidenceCurve::Ellipse { .. } => {
-            conic_target(&target.curve)
+            conic_target(curve)
         }
         SketchIncidenceCurve::Spline(spline) => return spline_target(spline, owner, frame, work),
+        _ => {
+            return Err(Cause::Invariant(
+                "a curve kind without an implicit target form",
+            ));
+        }
     };
     implicit_target::incidences(pieces, &implicit, owner, frame, work)
 }
@@ -248,12 +266,12 @@ fn conic_target(curve: &SketchIncidenceCurve) -> ImplicitTarget<'_> {
 }
 // Line and conic sources substitute line and spline targets into their own equation.
 fn implicit_source(
-    target: &SketchIncidenceTarget,
+    curve: &SketchIncidenceCurve,
     owner: TargetKey,
     frame: &SourceFrame,
     work: &mut Work<'_>,
 ) -> Result<(Vec<SketchLineContact>, Vec<Overlap>), Cause> {
-    let (spans, bounds) = match &target.curve {
+    let (spans, bounds) = match curve {
         SketchIncidenceCurve::Line { points, bounded } => (
             vec![spans::line_span(*points, *bounded)],
             bounded.then_some([0., 1.]),

@@ -171,13 +171,16 @@ fn magnitude(curves: &[&SketchIncidenceCurve]) -> f64 {
             .iter()
             .flatten()
             .fold(0f64, |size, value| size.max(value.abs())),
-        SketchIncidenceCurve::Spline(spline) => spline
-            .poles
-            .iter()
-            .flatten()
-            .fold(0f64, |size, value| size.max(value.abs())),
+        SketchIncidenceCurve::Spline(spline) => largest(&spline.poles),
+        SketchIncidenceCurve::PeriodicSpline(spline) => largest(&spline.poles),
     };
     curves.iter().map(scale).fold(1f64, f64::max)
+}
+fn largest(poles: &[[f64; 2]]) -> f64 {
+    poles
+        .iter()
+        .flatten()
+        .fold(0f64, |size, value| size.max(value.abs()))
 }
 fn check_row(row: &str) {
     let fields: Vec<&str> = row.split(';').collect();

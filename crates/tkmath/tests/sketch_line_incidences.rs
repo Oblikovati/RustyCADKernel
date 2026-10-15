@@ -18,6 +18,7 @@ mod generated_curves;
 mod isolation;
 mod lines;
 mod ordering;
+mod periodic_splines;
 mod selection;
 mod spline_pairs;
 mod splines;

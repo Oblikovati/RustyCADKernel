@@ -22,7 +22,9 @@ pub(super) fn source(source: &SketchIncidenceSource) -> Result<(), SketchInciden
         SketchIncidenceCurve::Line { points, bounded } => {
             distinct_points("source.points", *points).and_then(|()| bounded_source(*bounded))
         }
-        SketchIncidenceCurve::Spline(_) if source.domain == SketchLineDomain::Support => {
+        SketchIncidenceCurve::Spline(_) | SketchIncidenceCurve::PeriodicSpline(_)
+            if source.domain == SketchLineDomain::Support =>
+        {
             Err(Cause::SourceDomain {
                 source: "spline",
                 domain: source.domain,
@@ -68,6 +70,9 @@ fn curve(curve: &SketchIncidenceCurve) -> Admission {
             Some(*major_axis),
         ),
         SketchIncidenceCurve::Spline(spline) => super::spline_admission::spline(spline),
+        SketchIncidenceCurve::PeriodicSpline(periodic) => {
+            super::spline_admission::spline(&super::periodic::unwrap(periodic)?)
+        }
     }
 }
 pub(super) fn finite(field: &'static str, values: &[f64]) -> Admission {

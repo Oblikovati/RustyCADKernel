@@ -94,6 +94,28 @@ pub enum SketchIncidenceCause {
         /// Admitted domain `[knots[degree], knots[poles]]`.
         domain: [f64; 2],
     },
+    /// Periodic spline counts or multiplicities do not describe one periodic
+    /// B-spline (`BSplCLib::NbPoles` gives the expected pole count).
+    PeriodicShape {
+        /// Supplied degree.
+        degree: usize,
+        /// Supplied pole count.
+        poles: usize,
+        /// Native pole count of the multiplicities; None when they are invalid.
+        expected_poles: Option<usize>,
+        /// Supplied multiplicities.
+        multiplicities: Vec<usize>,
+        /// Supplied weight count, if any.
+        weights: Option<usize>,
+    },
+    /// A periodic knot shifted by the period is not exact in binary64, so the
+    /// flat knots would not describe the periodic curve.
+    PeriodicKnotShift {
+        /// Zero-based index of the inexact flat knot.
+        index: usize,
+        /// Its binary64 value.
+        value: f64,
+    },
     /// Original root isolation, degree or work failure.
     Root(RootIsolationError),
     /// Caller cancellation.

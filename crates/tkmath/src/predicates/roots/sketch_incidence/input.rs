@@ -117,6 +117,27 @@ pub enum SketchIncidenceCurve {
     },
     /// Non-periodic B-spline with flat knots, as built by the owned sketch constructor.
     Spline(SketchIncidenceSpline),
+    /// Periodic B-spline with native knots and multiplicities (ADR 0080).
+    PeriodicSpline(SketchPeriodicSpline),
+}
+/// Periodic B-spline in the native OCCT form: distinct knots with multiplicities.
+///
+/// It is unwrapped exactly into flat knots by `BSplCLib::KnotSequence`; every
+/// knot shifted by the period must be exact in binary64 (`PeriodicKnotShift`).
+#[derive(Clone, Debug, PartialEq)]
+pub struct SketchPeriodicSpline {
+    /// Degree, at least one.
+    pub degree: usize,
+    /// Control points of one period: the sum of the multiplicities but the last.
+    pub poles: Vec<[f64; 2]>,
+    /// Optional strictly positive weights, one per pole; None is non-rational.
+    pub weights: Option<Vec<f64>>,
+    /// Strictly increasing distinct knots; the period is `last - first`.
+    pub knots: Vec<f64>,
+    /// Multiplicities: interior ones in `1..=degree`, first equal to last.
+    pub multiplicities: Vec<usize>,
+    /// Trimmed parameter range inside `[knots[0], knots[last]]`, lower < upper.
+    pub bounds: [f64; 2],
 }
 /// Exact B-spline recipe; closed sketch splines use their wrapped (unwrapped-knot) form.
 #[derive(Clone, Debug, PartialEq)]
