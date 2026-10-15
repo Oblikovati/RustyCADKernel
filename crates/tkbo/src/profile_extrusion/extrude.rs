@@ -23,6 +23,7 @@ const DECLINE: Decliner = Decliner {
 /// Options of one extrusion; the resolution has no implicit default.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ExtrudeOptions {
+    /// Tolerances and cap of the operation.
     pub resolution: Resolution,
 }
 

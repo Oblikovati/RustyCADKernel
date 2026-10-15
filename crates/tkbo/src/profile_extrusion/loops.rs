@@ -9,6 +9,7 @@ use std::collections::BTreeMap;
 /// One directed use of a caller curve inside a loop.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct LoopUse {
+    /// The caller curve.
     pub curve: ProfileCurveId,
     /// Traversed from the authored end to the authored start.
     pub reversed: bool,
@@ -18,6 +19,7 @@ pub struct LoopUse {
 /// curve of the loop in caller order, so the value is deterministic for a given input.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct ProfileLoop {
+    /// Directed uses in traversal order.
     pub uses: Vec<LoopUse>,
 }
 

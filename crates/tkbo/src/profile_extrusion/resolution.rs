@@ -41,10 +41,15 @@ pub struct DisplayTolerance {
 /// ```
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Resolution {
+    /// Spatial weld tolerance (model units).
     pub weld: f64,
+    /// Spatial sew tolerance (model units).
     pub sew: f64,
+    /// Angular tolerance (radians).
     pub angular: f64,
+    /// Display tessellation limits.
     pub display: DisplayTolerance,
+    /// Limit on the achieved B-rep tolerance.
     pub cap: ToleranceCap,
 }
 
@@ -107,8 +112,11 @@ pub enum MeasureKind {
 /// A measured quantity with its error and evidence kind.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Measure {
+    /// Representative value.
     pub value: f64,
+    /// Error of `value`; meaning given by `kind`.
     pub error: f64,
+    /// Evidence kind.
     pub kind: MeasureKind,
 }
 
@@ -122,8 +130,11 @@ impl Measure {
 /// Largest stored B-rep tolerance per entity kind of a published result.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct AchievedTolerance {
+    /// Largest vertex tolerance.
     pub vertex: f64,
+    /// Largest edge tolerance.
     pub edge: f64,
+    /// Largest face tolerance.
     pub face: f64,
 }
 

@@ -23,8 +23,11 @@ pub enum HistorySource {
 /// A result entity: an index into `OperationResult::faces/edges/vertices`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum ResultEntity {
+    /// Index into `OperationResult::faces`.
     Face(usize),
+    /// Index into `OperationResult::edges`.
     Edge(usize),
+    /// Index into `OperationResult::vertices`.
     Vertex(usize),
 }
 
@@ -61,9 +64,13 @@ pub enum HistoryRelation {
 /// One source to result relation.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct HistoryRecord {
+    /// The input entity.
     pub source: HistorySource,
+    /// The role of the result relative to the source.
     pub role: HistoryRole,
+    /// The relation class.
     pub relation: HistoryRelation,
+    /// The result entity.
     pub result: ResultEntity,
 }
 
@@ -72,7 +79,9 @@ pub struct HistoryRecord {
 /// byte-identical histories.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct OperationHistory {
+    /// One record per result entity, sorted.
     pub records: Vec<HistoryRecord>,
+    /// Sources without an image; empty for an extrusion.
     pub deleted: Vec<HistorySource>,
 }
 

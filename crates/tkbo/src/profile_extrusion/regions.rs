@@ -17,7 +17,9 @@ pub struct RegionId(pub u32);
 /// The single native edge generated from one caller curve and the regions bounded by it.
 #[derive(Clone, Debug)]
 pub struct CurveEdge {
+    /// The caller curve.
     pub curve: ProfileCurveId,
+    /// Its native edge, shared by every region it bounds.
     pub edge: Edge,
     /// Regions whose boundary uses this edge, ascending.
     pub regions: Vec<RegionId>,

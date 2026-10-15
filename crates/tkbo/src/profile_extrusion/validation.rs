@@ -14,9 +14,13 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 /// Outcome of one ordered stage.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum StageStatus {
+    /// The stage ran completely and found nothing.
     Passed,
+    /// The stage found a defect.
     Failed,
+    /// The stage did not complete; never treated as passed.
     Incomplete,
+    /// The stage did not run because an earlier stage did not pass.
     Blocked,
 }
 
@@ -37,10 +41,15 @@ pub enum SelfIntersectionEvidence {
 /// Ordered validation coverage of a published shape; every stage passed on success.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct ValidationReport {
+    /// Native topology checks.
     pub topology: StageStatus,
+    /// Native geometry checks.
     pub geometry: StageStatus,
+    /// Self-intersection stage.
     pub self_intersection: StageStatus,
+    /// The certificate behind the self-intersection pass.
     pub self_intersection_evidence: SelfIntersectionEvidence,
+    /// Achieved tolerance against the cap.
     pub tolerance: StageStatus,
 }
 
@@ -48,7 +57,12 @@ pub struct ValidationReport {
 #[derive(Clone, Debug, PartialEq)]
 pub enum Finding {
     /// The achieved tolerance exceeds a `ToleranceCap::Report` limit.
-    ToleranceAboveReportLimit { achieved: f64, limit: f64 },
+    ToleranceAboveReportLimit {
+        /// Largest stored tolerance.
+        achieved: f64,
+        /// The report limit.
+        limit: f64,
+    },
 }
 
 /// Largest stored tolerances of `shape`; `achieved_tolerance(&shape)?`.
