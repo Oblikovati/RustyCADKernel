@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 use super::super::super::{
-    certificate_arithmetic::rounding::outward_binary64, polynomial::IntegerPolynomial,
+    RootIsolationError, certificate_arithmetic::rounding::outward_binary64,
+    polynomial::IntegerPolynomial,
 };
 use super::super::{
     MetricCurve,
@@ -64,7 +65,7 @@ fn stored_degree(curve: MetricCurve<'_, 2>) -> Result<usize, PolynomialIntegralF
         MetricCurve::Line { .. } => 1,
     })
 }
-fn native_plane() -> MetricEmbedding<2> {
+pub(in super::super) fn native_plane() -> MetricEmbedding<2> {
     MetricEmbedding {
         linear: [[1., 0.], [0., 1.], [0., 0.]],
         origin: [0.; 3],
@@ -81,13 +82,13 @@ pub(super) fn curve_integral(
     let curve = coefficients::embedded(source, native_plane(), "integral curve", cancelled)?;
     let numerator = green_numerator(&curve, cancelled)?;
     let denominator = BigInt::from(2) * &curve[3][0] * &curve[3][0];
-    integrate_unit(&numerator, denominator, cancelled)
+    Ok(integrate_unit(&numerator, denominator, cancelled)?)
 }
 
-fn green_numerator(
+pub(in super::super) fn green_numerator(
     curve: &coefficients::HomogeneousCurve,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<Vec<BigInt>, PolynomialIntegralFailure> {
+) -> Result<Vec<BigInt>, RootIsolationError> {
     // IntegerPolynomial's raw constructor/derivative preserve magnitude; sign normalization would not.
     let dx = IntegerPolynomial(curve[0].clone()).derivative();
     let dy = IntegerPolynomial(curve[1].clone()).derivative();
@@ -95,11 +96,11 @@ fn green_numerator(
     let y_dx = product(&curve[1], &dx.0, cancelled)?;
     Ok(difference(x_dy, y_dx))
 }
-fn integrate_unit(
+pub(in super::super) fn integrate_unit(
     coefficients: &[BigInt],
     denominator: BigInt,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<ExactRatio, PolynomialIntegralFailure> {
+) -> Result<ExactRatio, RootIsolationError> {
     let mut sum = ExactRatio::from_finite(0.);
     for (power, coefficient) in coefficients.iter().enumerate() {
         poll(cancelled)?;

@@ -43,6 +43,8 @@ pub enum PolynomialIntegralOperation {
     SignedBoundaryIntegral,
     /// Signed boundary integral times the supplied affine sweep's exact determinant.
     SignedSweepIntegral,
+    /// ADR 0066 part C: outer loop area minus hole areas, under caller-certified Jordan nesting.
+    FaceArea,
 }
 
 /// Certification describes arithmetic evidence, not boundary or body validation.

@@ -2,6 +2,7 @@
 //! Private owned request preparation; no operation completion authority.
 pub(in crate::sketch_region_prism) mod annular;
 pub(super) mod names;
+pub(in crate::sketch_region_prism) mod profile;
 
 mod admission;
 mod classification;
