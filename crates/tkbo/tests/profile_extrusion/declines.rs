@@ -25,11 +25,12 @@ fn open_profile_names_the_dangling_vertex() {
 }
 
 #[test]
-fn branching_profile_is_declined() {
+fn dangling_branch_is_an_open_profile() {
+    // Branches are admitted (ADR 0084); the dangling end of the branch is not.
     let mut fixture = SketchFixture::new();
     fixture.rectangle(0, [0., 0.], [1., 1.]).vertex(9, [2., 0.]).line(30, 1, 9);
     let decline = declined(&fixture.build(), resolution());
-    assert!(matches!(decline.cause, DeclineCause::BranchingProfile { uses: 3, .. }), "{decline}");
+    assert_eq!(decline.cause, DeclineCause::OpenProfile { vertex: ProfileVertexId(9), uses: 1 });
 }
 
 #[test]

@@ -51,6 +51,8 @@ pub(crate) enum LoopRegionStage {
     Joins,
     Nesting,
     Regions,
+    /// ADR 0084: rotation system, orbits and their orientation.
+    Faces,
 }
 /// Typed refusal; no partial certificate accompanies it.
 #[derive(Clone, Debug, PartialEq)]
@@ -111,6 +113,36 @@ pub(crate) enum LoopRegionCause {
         cause: String,
     },
     Cancelled,
+    /// ADR 0084: two darts leave a vertex of degree three or more in one direction.
+    TangentBranches {
+        vertex: u64,
+    },
+    /// ADR 0084: darts at one vertex start at different chart points.
+    VertexChart {
+        vertex: u64,
+    },
+    /// ADR 0084: a source with all controls equal.
+    DegenerateSource {
+        vertex: u64,
+    },
+    /// ADR 0084: an orbit's certified Green integral contains zero.
+    OrbitOrientation {
+        orbit: usize,
+        enclosure: [f64; 2],
+    },
+    /// ADR 0084: a component without exactly one negative (outer) orbit.
+    OrbitCount {
+        component: usize,
+        outer: usize,
+    },
+    /// ADR 0084: a bounded face whose boundary walk revisits `vertex`.
+    PinchedFace {
+        vertex: u64,
+    },
+    /// ADR 0084: a nested component whose outer walk revisits `vertex`.
+    PinchedHole {
+        vertex: u64,
+    },
 }
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct LoopRegionFailure {

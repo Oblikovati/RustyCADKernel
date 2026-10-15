@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
-//! Directed use geometry in plane coordinates, closed-form signed loop area and the
-//! interior seed hypothesis of each loop. The certified loop proof re-decides every
-//! topological fact derived here; these values only shape the request it checks.
+//! Directed use geometry in plane coordinates and the closed-form signed loop area, a
+//! cross-check of the certified area. The plane graph proof decides every topological fact.
 use super::admitted::{AdmittedCurve, AdmittedProfile, CircleCarrier};
 use super::loops::{LoopUse, ProfileLoop};
 use super::plane_math::*;
@@ -120,27 +119,4 @@ pub(crate) fn signed_area(profile: &AdmittedProfile, closed: &ProfileLoop) -> (f
         .collect();
     let scale: f64 = terms.iter().map(|term| term.abs()).sum();
     (terms.iter().sum(), 64.0 * f64::EPSILON * scale)
-}
-
-/// Midpoint and unit tangent of a directed use, in traversal direction.
-pub(crate) fn midpoint_frame(geometry: UseGeometry) -> ([f64; 2], [f64; 2]) {
-    match geometry {
-        UseGeometry::Segment { start, end } => {
-            let delta = sub2(end, start);
-            let length = length2(delta);
-            let mid = [0.5 * (start[0] + end[0]), 0.5 * (start[1] + end[1])];
-            (mid, [delta[0] / length, delta[1] / length])
-        }
-        UseGeometry::Arc {
-            carrier,
-            start_angle,
-            sweep,
-            ..
-        } => {
-            let angle = start_angle + 0.5 * sweep;
-            let sign = sweep.signum();
-            let tangent = [-sign * angle.sin(), sign * angle.cos()];
-            (on_circle(carrier.center, carrier.radius, angle), tangent)
-        }
-    }
 }

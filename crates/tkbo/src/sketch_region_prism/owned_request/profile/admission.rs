@@ -69,8 +69,15 @@ pub(in crate::sketch_region_prism) enum ProfileLoopCause {
         start: CallerVertexId,
     },
 }
-/// Admit one version-1 profile request; `admit(&request)?`.
+/// Request version of a plane graph profile (ADR 0084): edges only, no authored loops or
+/// regions; the plane graph proof derives every face.
+pub(in crate::sketch_region_prism) const GRAPH_PROFILE_VERSION: u32 = 2;
+
+/// Admit one version-1 profile request or a version-2 plane graph; `admit(&request)?`.
 pub(super) fn admit(request: &OwnedProfileRequest) -> Result<(), ProfileAdmissionCause> {
+    if request.version == GRAPH_PROFILE_VERSION {
+        return admit_graph(request);
+    }
     if request.version != 1 {
         let (actual, expected) = (request.version, 1);
         return Err(ProfileAdmissionCause::UnsupportedVersion { actual, expected });
@@ -96,6 +103,24 @@ pub(super) fn admit(request: &OwnedProfileRequest) -> Result<(), ProfileAdmissio
     }
     admit_vertices(request)?;
     admit_loops(request)
+}
+/// A plane graph: finite edges with consistent shared vertices, no authored loops.
+fn admit_graph(request: &OwnedProfileRequest) -> Result<(), ProfileAdmissionCause> {
+    if request.edges.is_empty() {
+        return Err(ProfileAdmissionCause::EmptyProfile);
+    }
+    if !(request.loops.is_empty() && request.regions.is_empty()) {
+        let quantity = "plane graph without authored loops or regions";
+        return Err(ProfileAdmissionCause::Names { quantity });
+    }
+    finite_plane(request.declared_plane).map_err(ProfileAdmissionCause::Plane)?;
+    let edges: Vec<u64> = request.edges.iter().map(|edge| edge.source.0).collect();
+    distinct("nonzero distinct edge sources", &edges)?;
+    distinct("nonzero operation identity", &[request.operation.0])?;
+    for edge in &request.edges {
+        admit_edge(edge).map_err(|cause| edge_failure(edge.source, cause))?;
+    }
+    admit_vertices(request)
 }
 fn edge_failure(source: CallerBoundaryId, cause: ProfileEdgeCause) -> ProfileAdmissionCause {
     ProfileAdmissionCause::Edge { source, cause }

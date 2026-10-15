@@ -10,7 +10,10 @@ mod request;
 pub(in crate::sketch_region_prism) use admission::{
     ProfileAdmissionCause, ProfileEdgeCause, ProfileLoopCause,
 };
-pub(crate) use certify::{ProfileProofInput, ProfileProofRefusal, ProofEdge, certify_profile};
+pub(crate) use certify::{
+    ProfileGraphInput, ProfileProofInput, ProfileProofRefusal, ProofEdge, certify_profile,
+    certify_profile_graph,
+};
 pub(in crate::sketch_region_prism) use construction::ConstructedProfileEdge;
 pub(in crate::sketch_region_prism) use pipeline::{
     PreparedProfile, ProfilePreparationCause, ProfilePreparationFailure, prepare_owned_profile,

@@ -17,9 +17,9 @@ pub enum OperationKind {
 pub enum OperationStage {
     /// Caller values were checked before any construction.
     Admission,
-    /// Closed loops were assembled from the vertex graph.
+    /// Every vertex was checked to close the curve graph (no dangling end).
     Loops,
-    /// Contacts, nesting and seeds were certified.
+    /// Contacts, branch order, faces, nesting and areas were certified.
     Certification,
     /// Native topology was constructed.
     Construction,
@@ -147,14 +147,30 @@ pub enum DeclineCause {
         /// Curve ends at it.
         uses: usize,
     },
-    /// A vertex ends more than two curves.
+    /// A vertex ends more than two curves. No longer produced: branches are admitted by
+    /// the plane graph proof (ADR 0084); kept so existing matches compile.
     BranchingProfile {
         /// The branching vertex.
         vertex: ProfileVertexId,
         /// Curve ends at it.
         uses: usize,
     },
-    /// Two curves meet away from an authored join.
+    /// Two or more curves leave a vertex of three or more curve ends in the same direction,
+    /// so the order of the faces around it is undecided (ADR 0084).
+    TangentBranches {
+        /// The vertex.
+        vertex: ProfileVertexId,
+    },
+    /// A face boundary (`hole == false`) or the boundary of a nested group of loops
+    /// (`hole == true`) passes through `vertex` twice, so it is not a simple loop; for
+    /// example a loop touching its enclosing loop from inside (ADR 0084).
+    PinchedRegion {
+        /// The vertex visited twice.
+        vertex: ProfileVertexId,
+        /// Whether the pinched boundary is a hole.
+        hole: bool,
+    },
+    /// Two curves meet away from a shared vertex.
     SelfIntersecting {
         /// The two curves, in caller order.
         curves: [ProfileCurveId; 2],
@@ -206,7 +222,9 @@ impl DeclineCause {
     pub fn class(&self) -> DeclineClass {
         use DeclineCause::*;
         match self {
-            UnsupportedCurve { .. } => DeclineClass::Unsupported,
+            UnsupportedCurve { .. } | TangentBranches { .. } | PinchedRegion { .. } => {
+                DeclineClass::Unsupported
+            }
             SelfIntersecting { .. } | OpenProfile { .. } | BranchingProfile { .. } => {
                 DeclineClass::InvalidGeometry
             }

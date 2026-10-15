@@ -111,20 +111,13 @@ pub(crate) fn native_plane(frame: &WorldFrame) -> Result<Plane3, Failure> {
     Ok(Plane3::from_position(axis))
 }
 
-/// A closed wire of `closed`, counterclockwise about the plane normal when `outer`,
-/// clockwise otherwise. `area` is the loop's signed area in traversal order.
-pub(crate) fn loop_wire(
-    topology: &ProfileTopology,
-    closed: &ProfileLoop,
-    area: f64,
-    outer: bool,
-) -> Result<Wire, Failure> {
-    let flip = (area > 0.0) != outer;
+/// A closed wire of `closed` in its certified traversal order: counterclockwise about the
+/// plane normal for an outer loop, clockwise for a hole (ADR 0084 orbits).
+pub(crate) fn loop_wire(topology: &ProfileTopology, closed: &ProfileLoop) -> Result<Wire, Failure> {
     let mut wire = Wire::default();
     Builder.make_wire(&mut wire);
     for used in &closed.uses {
-        let orientation =
-            [Orientation::Forward, Orientation::Reversed][usize::from(used.reversed != flip)];
+        let orientation = [Orientation::Forward, Orientation::Reversed][usize::from(used.reversed)];
         Builder.add(
             &mut wire,
             &topology.edges[&used.curve].oriented(orientation),

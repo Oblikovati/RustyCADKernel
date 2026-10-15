@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Bind every authored source to exactly one unsplit full-range census segment.
 use super::types::*;
-use crate::sketch_region::RegionSourceId;
+use crate::sketch_region::{ArrangementSource, RegionSourceId};
 use crate::sketch_region_candidates::CandidateSegment;
+use crate::sketch_region_contact_transport::PairedContactTransaction;
 use std::collections::BTreeSet;
 
 /// Census segment index of every request source, in request source order.
@@ -33,39 +34,46 @@ impl<'a> SegmentBinding<'a> {
 const STAGE: LoopRegionStage = LoopRegionStage::Admission;
 
 pub(super) fn bind<'a>(request: &LoopRegionRequest<'a, '_>) -> LoopRegionCheck<SegmentBinding<'a>> {
-    if request.options.version != 1 {
-        let actual = request.options.version;
-        return refuse(
-            STAGE,
-            LoopRegionCause::Version {
-                actual,
-                expected: 1,
-            },
-        );
+    let binding = bind_segments(request.bridge, request.sources, request.options.version)?;
+    authored_uses(request, &binding)?;
+    Ok(binding)
+}
+/// Version check and the one unsplit full-range census segment of every source; the
+/// shared first stage of the loop proof and of the plane graph proof (ADR 0084).
+pub(super) fn bind_segments<'a>(
+    bridge: &'a PairedContactTransaction,
+    sources: &[ArrangementSource<'_>],
+    version: u32,
+) -> LoopRegionCheck<SegmentBinding<'a>> {
+    if version != 1 {
+        let cause = LoopRegionCause::Version {
+            actual: version,
+            expected: 1,
+        };
+        return refuse(STAGE, cause);
     }
-    let census = &request.bridge.census;
+    let census = &bridge.census;
     count(
         "census segments",
         census.inputs.segments.len(),
-        request.sources.len(),
+        sources.len(),
     )?;
     count(
         "census originals",
         census.inputs.originals.len(),
-        request.sources.len(),
+        sources.len(),
     )?;
     let mut binding = SegmentBinding {
         sources: Vec::new(),
         segments: Vec::new(),
         positions: Vec::new(),
     };
-    for source in request.sources {
-        let (position, row) = segment(request, source.identity)?;
+    for source in sources {
+        let (position, row) = segment(bridge, source.identity)?;
         binding.segments.push(row);
         binding.positions.push(position);
         binding.sources.push(source.identity);
     }
-    authored_uses(request, &binding)?;
     Ok(binding)
 }
 fn count(quantity: &'static str, actual: usize, expected: usize) -> LoopRegionCheck<()> {
@@ -81,11 +89,11 @@ fn count(quantity: &'static str, actual: usize, expected: usize) -> LoopRegionCh
         },
     )
 }
-fn segment<'a>(
-    request: &LoopRegionRequest<'a, '_>,
+fn segment(
+    bridge: &PairedContactTransaction,
     source: RegionSourceId,
-) -> LoopRegionCheck<(usize, &'a CandidateSegment)> {
-    let inputs = &request.bridge.census.inputs;
+) -> LoopRegionCheck<(usize, &CandidateSegment)> {
+    let inputs = &bridge.census.inputs;
     let originals: Vec<_> = inputs
         .originals
         .iter()

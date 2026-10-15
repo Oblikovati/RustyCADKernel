@@ -26,7 +26,6 @@ mod proof_pieces;
 mod region_area;
 mod regions;
 mod resolution;
-mod seeds;
 mod solid_validation;
 mod sweep_history;
 mod sweep_images;

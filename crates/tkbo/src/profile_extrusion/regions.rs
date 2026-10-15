@@ -92,8 +92,10 @@ pub struct RegionCertificate {
     /// Of those, the pairs certified by the common-carrier route (pieces of one circle or
     /// one line).
     pub carrier_pairs: usize,
-    /// Closed loops whose nesting was certified.
+    /// Bounded faces certified (one outer loop each).
     pub loops: usize,
+    /// Connected components of the curve graph whose nesting was certified.
+    pub components: usize,
 }
 
 /// All bounded faces of a solved profile and the complete curve to edge mapping.

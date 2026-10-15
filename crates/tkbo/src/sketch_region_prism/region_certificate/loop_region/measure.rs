@@ -4,7 +4,7 @@ use super::binding::SegmentBinding;
 use super::types::*;
 use rustycad_tkmath::predicates::roots::metric_bounds::{
     CertifiedRationalMeasure, MetricBezier, MetricCurve, OrientedMetricCurve,
-    RationalIntegralError, certify_rational_face_area,
+    RationalIntegralError, RationalIntegralOptions, certify_rational_face_area,
 };
 
 /// Attach the certified chart area to each region proof.
@@ -26,23 +26,48 @@ fn face_area(
     region: &RegionProof,
     cancelled: &mut impl FnMut() -> bool,
 ) -> LoopRegionCheck<CertifiedRationalMeasure> {
-    let outer = curves(request, binding, region.outer);
-    let holes: Vec<Vec<OrientedMetricCurve<'_>>> = region
+    let uses = |name: u64| {
+        let authored = request.loops.iter().find(|l| l.name == name);
+        authored.expect("certified loop").uses.as_slice()
+    };
+    let holes: Vec<&[AuthoredLoopUse]> = region.holes.iter().map(|hole| uses(*hole)).collect();
+    let face = FaceUses {
+        name: region.name,
+        outer: uses(region.outer),
+        holes: &holes,
+    };
+    certified_face_area(request.options.area, binding, face, cancelled)
+}
+/// The directed uses of one face: outer loop and holes, named for refusals.
+pub(super) struct FaceUses<'u> {
+    pub name: u64,
+    pub outer: &'u [AuthoredLoopUse],
+    pub holes: &'u [&'u [AuthoredLoopUse]],
+}
+/// Certified `area(outer) - sum area(hole)` of directed source uses (shared with ADR 0084).
+pub(super) fn certified_face_area(
+    options: RationalIntegralOptions,
+    binding: &SegmentBinding<'_>,
+    face: FaceUses<'_>,
+    cancelled: &mut impl FnMut() -> bool,
+) -> LoopRegionCheck<CertifiedRationalMeasure> {
+    let outer = curves(binding, face.outer);
+    let holes: Vec<Vec<OrientedMetricCurve<'_>>> = face
         .holes
         .iter()
-        .map(|hole| curves(request, binding, *hole))
+        .map(|hole| curves(binding, hole))
         .collect();
     let holes: Vec<&[OrientedMetricCurve<'_>]> = holes.iter().map(Vec::as_slice).collect();
     // The observed caller stop is authoritative over nested numerical cancellation causes.
     let mut stopped = false;
-    let measured = certify_rational_face_area(&outer, &holes, request.options.area, || {
+    let measured = certify_rational_face_area(&outer, &holes, options, || {
         stopped = stopped || cancelled();
         stopped
     });
     match measured {
         Ok(area) => Ok(area),
         Err(_) if stopped => refuse(LoopRegionStage::Regions, LoopRegionCause::Cancelled),
-        Err(error) => refuse(LoopRegionStage::Regions, area_cause(region.name, error)),
+        Err(error) => refuse(LoopRegionStage::Regions, area_cause(face.name, error)),
     }
 }
 fn area_cause(region: u64, error: RationalIntegralError) -> LoopRegionCause {
@@ -53,16 +78,11 @@ fn area_cause(region: u64, error: RationalIntegralError) -> LoopRegionCause {
         cause: error.to_string(),
     }
 }
-fn curves<'a>(
-    request: &LoopRegionRequest<'_, '_>,
+/// The metric curves of directed source uses, in order.
+pub(super) fn curves<'a>(
     binding: &SegmentBinding<'a>,
-    name: u64,
+    uses: &[AuthoredLoopUse],
 ) -> Vec<OrientedMetricCurve<'a>> {
-    let authored = request
-        .loops
-        .iter()
-        .find(|l| l.name == name)
-        .expect("certified loop");
     let occurrence = |directed: &AuthoredLoopUse| {
         let segment = binding.segment(directed.source);
         OrientedMetricCurve {
@@ -73,5 +93,5 @@ fn curves<'a>(
             reversed: directed.reversed,
         }
     };
-    authored.uses.iter().map(occurrence).collect()
+    uses.iter().map(occurrence).collect()
 }
