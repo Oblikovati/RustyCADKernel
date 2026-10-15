@@ -262,6 +262,7 @@ mod manipulator_transform;
 mod view_controller_dispatch_state;
 pub use view_controller_dispatch_state::AisViewControllerHooks;
 mod view_controller_events;
+mod view_controller_fields;
 mod view_controller_xr;
 
 mod view_controller_clicks;

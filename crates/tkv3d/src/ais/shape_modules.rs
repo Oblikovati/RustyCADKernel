@@ -29,7 +29,9 @@ pub use textured_shape_factory::{
 mod shape_appearance;
 mod shape_unset_appearance;
 mod shape_unset_shading;
-pub use shape_appearance::{ais_shape_set_color, ais_shape_set_material};
+pub use shape_appearance::{
+    ais_shape_replace_with_new_own_aspects, ais_shape_set_color, ais_shape_set_material,
+};
 pub use shape_unset_appearance::ais_shape_unset_color;
 pub use shape_unset_shading::ais_shape_unset_material;
 

@@ -207,6 +207,32 @@ fn installed_hooks_replace_the_virtual_callbacks() {
 }
 
 #[test]
+fn protected_state_starts_with_the_native_constructor_values() {
+    let c = AisViewController::new().unwrap();
+    assert_eq!(c.scroll_zoom_ratio(), 15.0);
+    assert_eq!(c.mouse_click_threshold(), 3.0);
+    assert_eq!(
+        (
+            c.touch_rotation_threshold_px(),
+            c.touch_pan_threshold_px(),
+            c.touch_zoom_threshold_px(),
+            c.touch_dragging_threshold_px()
+        ),
+        (6.0, 4.0, 6.0, 6.0)
+    );
+    assert_eq!(c.touch_zoom_ratio(), 0.13);
+    assert_eq!(c.touch_click_threshold_px(), 3.0);
+    assert_eq!(c.touch_z_rotation_threshold(), (2.0 * std::f64::consts::PI / 180.0) as f32);
+    assert_eq!((c.mouse_single_button(), c.mouse_click_counter()), (-1, 0));
+    assert!(c.update_start_point_pan() && c.update_start_point_rot() && c.update_start_point_z_rot());
+    assert!(!c.has_thrust() && !c.has_hlr_on_before_rotation());
+    assert_eq!(c.nb_touches_last(), 0);
+    assert_eq!(c.anchor_point_prs1().z_layer(), rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOP);
+    assert_eq!(c.anchor_point_prs2().z_layer(), rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOPMOST);
+    assert_eq!(c.rubber_band().z_layer(), rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOP_OSD);
+}
+
+#[test]
 fn inactive_xr_handlers_keep_the_default_state() {
     let s = scene();
     let mut c = AisViewController::new().unwrap();
