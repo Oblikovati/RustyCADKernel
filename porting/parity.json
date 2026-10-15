@@ -581103,11 +581103,11 @@
       "upstream_id": "StdSelect_BRepSelectionTool",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepSelectionTool.hxx",
-      "source_sha256": "0ec00794ecf0d537199fd02c1bcc90a80f3cf8ee041453a5495be0ec67569ab5",
-      "cpp_declaration_id": "f998ccb0cb06f3c0294a14725b0d5f44f2d191c56fd53be0b0c2619028b5814b",
       "rust_item": "rustycad_tkv3d::std_select::StdSelectBrepSelectionTool",
-      "status": "partial",
-      "notes": "Only PreBuildBVH is ported. Load, GetEdgeSensitive, GetStandardPriority, GetSensitiveForCylinder, GetSensitiveForFace and ComputeSensitive remain unimplemented."
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkv3d::std_select::StdSelectBrepSelectionTool (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "f998ccb0cb06f3c0294a14725b0d5f44f2d191c56fd53be0b0c2619028b5814b",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "AIS_Selection::Init()",
@@ -592220,8 +592220,8 @@
       "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
       "cpp_declaration_id": "a831fb69fbf4c357b3cf4bd5adf80fe649bf817d9e8492321f8baf604d14c5f3",
       "rust_item": "rustycad_tkv3d::ais::AisViewController::new",
-      "status": "partial",
-      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+      "status": "implemented",
+      "notes": "Martensite AIS_ViewController construction at OCCT 3d097a0: every native member default (UI/GL input buffers, policy parameters, mouse gesture maps and selection schemes, anchor and rubber-band presentations with their Z layers, click and touch thresholds). The members it initializes for rendering dispatch, animations, keyboard/mouse/touch dispatch and XR are ported (7f6174598). The v3_ais_view_controller native probe compares the default snapshots and crates/tkv3d/tests/ais_view_controller_dispatch.rs (protected_state_starts_with_the_native_constructor_values) the protected defaults. See docs/ais-view-controller.md."
     },
     {
       "upstream_id": "AIS_ViewController::MinZoomDistance() const",
@@ -592241,7 +592241,7 @@
       "cpp_declaration_id": "a9c7b1d7b5955c8b2dac1003fdc53e21c8373aa1b8c4c88e495442b9691c00fc",
       "rust_item": "rustycad_tkv3d::ais::AisViewController",
       "status": "partial",
-      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+      "notes": "Martensite AIS_ViewController at OCCT 3d097a0: construction, event queues, dispatch, animations, keyboard/mouse/touch and XR handlers are ported and compared with native OCCT (v3_ais_view_controller and the committed controller fixtures). The class stays partial while handleCameraActions snapshots the zoom sequence instead of traversing the live NCollection_Sequence (see that row). See docs/ais-view-controller.md."
     },
     {
       "upstream_id": "AIS_ViewController::SetLockOrbitZUp(bool)",
@@ -596587,11 +596587,11 @@
       "upstream_id": "AIS_ViewCubeSensitive",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
-      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
-      "cpp_declaration_id": "968a5c423c41e5e8e1ddf358b5282e516640fc2eb9d846cf2a261bfda49b535a",
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeSensitive",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkv3d::ais::AisViewCubeSensitive (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "968a5c423c41e5e8e1ddf358b5282e516640fc2eb9d846cf2a261bfda49b535a",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "AIS_ViewCubeSensitive::AIS_ViewCubeSensitive",
