@@ -109,6 +109,9 @@ pub enum SketchIncidenceCause {
         /// Parameter range of the coincident piece; None for an unbounded line.
         range: Option<[f64; 2]>,
     },
+    /// Two conics meet tangentially on both half turns of one line through the
+    /// source center; version 1 certifies only transversal points there.
+    ExceptionalTangency,
     /// A line source must be bounded: its two points are its ends.
     UnboundedSource,
     /// The requested domain is not defined for this source representation.

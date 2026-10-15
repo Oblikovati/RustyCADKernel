@@ -11,6 +11,10 @@
 //! certified error bound. Any unresolved step is a named failure.
 mod algebraic;
 mod budget;
+mod conic_chart;
+mod conic_concentric;
+mod conic_pair;
+mod conic_point;
 mod construction;
 mod contact;
 mod equation;
@@ -221,7 +225,7 @@ fn implicit_source(
             bounded.then_some([0., 1.]),
         ),
         SketchIncidenceCurve::Spline(spline) => (spans::spline_spans(spline), Some(spline.bounds)),
-        _ => return Err(Cause::Invariant("conic pairs are not yet routed")),
+        conic => return conic_source(conic, owner, frame, work),
     };
     let request = parametric_target::ParametricRequest {
         spans,
@@ -229,6 +233,26 @@ fn implicit_source(
         owner,
     };
     parametric_target::incidences(request, frame, work)
+}
+// Conic sources meet conic targets through their chart elimination.
+fn conic_source(
+    curve: &SketchIncidenceCurve,
+    owner: TargetKey,
+    frame: &SourceFrame,
+    work: &mut Work<'_>,
+) -> Result<(Vec<SketchLineContact>, Vec<Overlap>), Cause> {
+    let (SourceFrame::Conic(source), ImplicitTarget::Conic { implicit, sector }) =
+        (frame, conic_target(curve))
+    else {
+        return Err(Cause::Invariant("conic pair without a conic source"));
+    };
+    let pair = conic_pair::ConicPair {
+        source,
+        target: &implicit,
+        sector,
+        owner,
+    };
+    conic_pair::incidences(&pair, frame, work)
 }
 fn max_error(results: &[SketchTargetIncidences]) -> f64 {
     results

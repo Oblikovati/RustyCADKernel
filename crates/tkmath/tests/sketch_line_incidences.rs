@@ -6,6 +6,7 @@ use rustycad_tkmath::predicates::roots::sketch_incidence::*;
 mod fixture;
 use fixture::*;
 
+mod conic_pairs;
 mod conics;
 mod curve_selection;
 mod curve_sources;

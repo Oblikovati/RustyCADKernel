@@ -42,6 +42,21 @@ impl QuadraticForm {
             .add(&cross)
             .add(&y.multiply(y).scale(&self.yy))
     }
+    /// Exact value at a rational vector.
+    pub fn value(&self, vector: &[ExactRatio; 2]) -> ExactRatio {
+        let applied = self.apply(vector);
+        applied[0]
+            .multiply(&vector[0])
+            .add(&applied[1].multiply(&vector[1]))
+    }
+    /// Matrix-vector product `M q`, half the gradient of the form.
+    pub fn apply(&self, vector: &[ExactRatio; 2]) -> [ExactRatio; 2] {
+        let [x, y] = vector;
+        [
+            self.xx.multiply(x).add(&self.xy.multiply(y)),
+            self.xy.multiply(x).add(&self.yy.multiply(y)),
+        ]
+    }
 }
 impl ConicImplicit {
     /// Circle of the given center and positive radius.

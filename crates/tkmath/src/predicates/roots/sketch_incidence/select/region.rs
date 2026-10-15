@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Whether a coincident target part meets the source part an edit would change.
+//!
+//! Line and spline overlaps are parameter intervals. A conic overlap is the cyclic
+//! arc of the target's sweep from its first to its last place in the source sense;
+//! the parts an edit changes are cyclic arcs too, so both are compared cyclically.
 use super::super::budget::Work;
 use super::super::failure::SketchIncidenceCause as Cause;
 use super::super::place::{SourcePlace, compare_places};
@@ -21,32 +25,74 @@ pub(super) struct ExtensionCheck<'a> {
     pub end: SketchLineEnd,
     pub candidate: Option<SourcePlace>,
 }
+fn less(first: &SourcePlace, second: &SourcePlace, work: &mut Work<'_>) -> Result<bool, Cause> {
+    let order = compare_places(&mut first.clone(), &mut second.clone(), work)?;
+    Ok(order == Ordering::Less)
+}
+fn same(first: &SourcePlace, second: &SourcePlace, work: &mut Work<'_>) -> Result<bool, Cause> {
+    let order = compare_places(&mut first.clone(), &mut second.clone(), work)?;
+    Ok(order == Ordering::Equal)
+}
+fn at_most(first: &SourcePlace, second: &SourcePlace, work: &mut Work<'_>) -> Result<bool, Cause> {
+    Ok(!less(second, first, work)?)
+}
 /// Overlap range in increasing source order; None for an unbounded overlap.
 fn sorted_range(
     overlap: &SketchLineOverlap,
     work: &mut Work<'_>,
 ) -> Result<Option<[SourcePlace; 2]>, Cause> {
-    let Some([mut first, mut second]) = overlap.source_range.clone() else {
+    let Some([first, second]) = overlap.source_range.clone() else {
         return Ok(None);
     };
-    Ok(Some(match compare_places(&mut first, &mut second, work)? {
-        Ordering::Greater => [second, first],
-        _ => [first, second],
+    Ok(Some(match less(&second, &first, work)? {
+        true => [second, first],
+        false => [first, second],
     }))
 }
-fn less(first: &SourcePlace, second: &SourcePlace, work: &mut Work<'_>) -> Result<bool, Cause> {
-    let order = compare_places(&mut first.clone(), &mut second.clone(), work)?;
-    Ok(order == Ordering::Less)
+/// `x` on the closed cyclic arc from `from` forward to `to`.
+fn on_closed_arc(
+    x: &SourcePlace,
+    [from, to]: [&SourcePlace; 2],
+    work: &mut Work<'_>,
+) -> Result<bool, Cause> {
+    let after_from = at_most(from, x, work)?;
+    let before_to = at_most(x, to, work)?;
+    if at_most(from, to, work)? {
+        return Ok(after_from && before_to);
+    }
+    Ok(after_from || before_to)
+}
+/// `x` strictly inside the open cyclic arc from `from` forward to `to`.
+fn on_open_arc(
+    x: &SourcePlace,
+    [from, to]: [&SourcePlace; 2],
+    work: &mut Work<'_>,
+) -> Result<bool, Cause> {
+    let after_from = less(from, x, work)?;
+    let before_to = less(x, to, work)?;
+    if less(from, to, work)? {
+        return Ok(after_from && before_to);
+    }
+    Ok(after_from || before_to)
 }
 impl TrimRegion<'_> {
     /// True when the overlap meets the open removed part.
     pub fn meets(&self, overlap: &SketchLineOverlap, work: &mut Work<'_>) -> Result<bool, Cause> {
-        let Some([lower, upper]) = sorted_range(overlap, work)? else {
-            return Ok(true);
-        };
         let [start, end] = self.frame.ends();
         let from = self.before.clone().unwrap_or(start);
         let to = self.after.clone().unwrap_or(end);
+        if let SourceFrame::Conic(_) = self.frame {
+            let Some([first, last]) = &overlap.source_range else {
+                return Ok(true);
+            };
+            // A closed arc meets an open one at a point inside it, or by starting in it.
+            let inside = on_open_arc(first, [&from, &to], work)?;
+            let entered = on_closed_arc(&from, [first, last], work)? && !same(&from, last, work)?;
+            return Ok(inside || entered);
+        }
+        let Some([lower, upper]) = sorted_range(overlap, work)? else {
+            return Ok(true);
+        };
         let below_to = less(&lower, &to, work)?;
         let above_from = less(&from, &upper, work)?;
         // A cyclic region runs from `from` past the source end and on to `to`.
@@ -59,21 +105,12 @@ impl TrimRegion<'_> {
 impl ExtensionCheck<'_> {
     /// True when the overlap lies in the added part, at or before the candidate.
     pub fn blocked(&self, overlap: &SketchLineOverlap, work: &mut Work<'_>) -> Result<bool, Cause> {
+        if let SourceFrame::Conic(_) = self.frame {
+            return self.blocked_on_conic(overlap, work);
+        }
         let Some([lower, upper]) = sorted_range(overlap, work)? else {
             return Ok(true);
         };
-        match self.frame {
-            SourceFrame::Conic(_) => self.blocked_on_conic(lower, upper, work),
-            _ => self.blocked_on_line(lower, upper, work),
-        }
-    }
-    // The support line continues away from the extended end.
-    fn blocked_on_line(
-        &self,
-        lower: SourcePlace,
-        upper: SourcePlace,
-        work: &mut Work<'_>,
-    ) -> Result<bool, Cause> {
         let (near, far) = match self.end {
             SketchLineEnd::End => (lower, upper),
             SketchLineEnd::Start => (upper, lower),
@@ -101,52 +138,22 @@ impl ExtensionCheck<'_> {
         }
     }
     // An arc's support runs from its end ray through the gap back to its start ray.
-    // An overlap that crosses the start ray in sweep order is reported as two
-    // places with `lower` at the reference; it touches the start.
+    // The added part is the closed arc from the extended end to the candidate.
     fn blocked_on_conic(
         &self,
-        lower: SourcePlace,
-        upper: SourcePlace,
+        overlap: &SketchLineOverlap,
         work: &mut Work<'_>,
     ) -> Result<bool, Cause> {
-        let [start, end] = self.ends;
-        let touches_start = lower == *start;
-        let reaches_gap = !less(&upper, end, work)?;
-        match self.end {
-            SketchLineEnd::End => {
-                if !reaches_gap {
-                    return Ok(false);
-                }
-                if !less(end, &lower, work)? {
-                    return Ok(true);
-                }
-                self.candidate_not_before(&lower, true, work)
-            }
-            SketchLineEnd::Start => {
-                if touches_start {
-                    return Ok(true);
-                }
-                if !reaches_gap {
-                    return Ok(false);
-                }
-                self.candidate_not_before(&upper, false, work)
-            }
-        }
-    }
-    // The candidate must lie strictly between the extended end and the overlap.
-    fn candidate_not_before(
-        &self,
-        bound: &SourcePlace,
-        forward: bool,
-        work: &mut Work<'_>,
-    ) -> Result<bool, Cause> {
-        let Some(candidate) = &self.candidate else {
+        let Some([first, last]) = &overlap.source_range else {
             return Ok(true);
         };
-        let nearer = match forward {
-            true => less(candidate, bound, work)?,
-            false => less(bound, candidate, work)?,
+        let [start, end] = self.ends;
+        let added = match (self.end, &self.candidate) {
+            (SketchLineEnd::End, Some(candidate)) => [end, candidate],
+            (SketchLineEnd::Start, Some(candidate)) => [candidate, start],
+            (_, None) => [end, start],
         };
-        Ok(!nearer)
+        let inside = on_closed_arc(first, added, work)?;
+        Ok(inside || on_closed_arc(added[0], [first, last], work)?)
     }
 }

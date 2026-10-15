@@ -46,7 +46,7 @@ fn full_circle_source_orders_contacts_by_sweep_from_its_axis() {
 fn quarter_arc_source_keeps_outside_contacts_beyond_its_end() {
     // x = 3 meets x^2 + y^2 = 25 at (3, 4) inside the quarter and (3, -4) outside.
     let line = target(4, segment([3., -10.], [3., 10.]));
-    let report = certify(curve_source(quarter_arc(5.), SUPPORT), &[line.clone()]);
+    let report = certify(curve_source(quarter_arc(5.), SUPPORT), std::slice::from_ref(&line));
     let contacts = ordered(&report);
     assert_eq!(contacts.len(), 2);
     assert_point(contacts[0], [3., 4.]);
