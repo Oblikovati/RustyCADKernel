@@ -59,22 +59,20 @@ fn make_edge(
     curve: &AdmittedCurve,
     vertices: &BTreeMap<ProfileVertexId, Vertex>,
 ) -> Result<Edge, Failure> {
+    let ends = |ends: [ProfileVertexId; 2]| [&vertices[&ends[0]], &vertices[&ends[1]]];
     let maker = match *curve {
-        AdmittedCurve::Line { ends, .. } => {
-            BRepBuilderAPIMakeEdge::from_vertices(&vertices[&ends[0]], &vertices[&ends[1]])?
+        AdmittedCurve::Line { ends: ids, .. } => {
+            let [start, end] = ends(ids);
+            BRepBuilderAPIMakeEdge::from_vertices(start, end)?
         }
         AdmittedCurve::Arc {
-            ends,
+            ends: ids,
             carrier,
             sense,
             ..
         } => {
-            let circle = circle(frame, carrier, sense)?;
-            BRepBuilderAPIMakeEdge::from_circ_vertices(
-                circle,
-                &vertices[&ends[0]],
-                &vertices[&ends[1]],
-            )?
+            let [start, end] = ends(ids);
+            BRepBuilderAPIMakeEdge::from_circ_vertices(circle(frame, carrier, sense)?, start, end)?
         }
         AdmittedCurve::Circle { carrier, .. } => {
             BRepBuilderAPIMakeEdge::from_circ(circle(frame, carrier, ArcSense::CounterClockwise)?)?
@@ -125,12 +123,8 @@ pub(crate) fn loop_wire(
     let mut wire = Wire::default();
     Builder.make_wire(&mut wire);
     for used in &closed.uses {
-        let reversed = used.reversed != flip;
-        let orientation = if reversed {
-            Orientation::Reversed
-        } else {
-            Orientation::Forward
-        };
+        let orientation =
+            [Orientation::Forward, Orientation::Reversed][usize::from(used.reversed != flip)];
         Builder.add(
             &mut wire,
             &topology.edges[&used.curve].oriented(orientation),

@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Ordered validation through the shared ADR 0014 stages (topology, geometry,
 //! self-intersection), then the tolerance stage against the caller cap.
-use super::decline::{DeclineCause, ValidationStageKind};
+use super::decline::{
+    DeclineCause, Decliner, OperationDecline, OperationStage as Stage, ValidationStageKind,
+};
 use super::resolution::{AchievedTolerance, ToleranceCap};
 use crate::sketch_region_validation::{
     BodyKind, OrderedCoverage, StageCoverage, validate_owned_candidate,
@@ -31,7 +33,8 @@ pub enum StageStatus {
 /// certificates instead.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SelfIntersectionEvidence {
-    /// Certified pairwise curve contacts only at authored joins, and certified loop nesting.
+    /// The general loop region proof (ADR 0066): contacts only at authored joins, Jordan
+    /// loops and certified nesting.
     RegionContactCertificate,
     /// The affine sweep `(p, t) -> p + t d` of a certified region, with `d` outside the
     /// plane by more than the angular tolerance, is injective.
@@ -65,8 +68,36 @@ pub enum Finding {
     },
 }
 
+/// A shape that passed every ordered stage, with its measured tolerance and findings.
+pub(crate) struct CheckedShape {
+    pub validation: ValidationReport,
+    pub achieved: AchievedTolerance,
+    pub findings: Vec<Finding>,
+}
+
+/// Validate, measure the achieved tolerance and apply the cap, in order;
+/// `check_publication(&shape, evidence, cap, decliner)?`.
+pub(crate) fn check_publication(
+    shape: &Shape,
+    evidence: SelfIntersectionEvidence,
+    cap: ToleranceCap,
+    decline: Decliner,
+) -> Result<CheckedShape, OperationDecline> {
+    let validation =
+        ordered_validation(shape, evidence).map_err(|c| decline.at(Stage::Validation, c))?;
+    let achieved = achieved_tolerance(shape)
+        .map_err(|f| decline.native(Stage::Tolerance, "achieved tolerance", f))?;
+    let mut checked = CheckedShape {
+        validation,
+        achieved,
+        findings: Vec::new(),
+    };
+    tolerance_stage(&mut checked, cap).map_err(|c| decline.at(Stage::Tolerance, c))?;
+    Ok(checked)
+}
+
 /// Largest stored tolerances of `shape`; `achieved_tolerance(&shape)?`.
-pub(crate) fn achieved_tolerance(shape: &Shape) -> Result<AchievedTolerance, Failure> {
+fn achieved_tolerance(shape: &Shape) -> Result<AchievedTolerance, Failure> {
     Ok(AchievedTolerance {
         vertex: BRepTool::max_tolerance(shape, ShapeEnum::Vertex)?,
         edge: BRepTool::max_tolerance(shape, ShapeEnum::Edge)?,
@@ -76,7 +107,7 @@ pub(crate) fn achieved_tolerance(shape: &Shape) -> Result<AchievedTolerance, Fai
 
 /// Run the shared ordered stages. Topology and geometry must pass; a native
 /// self-intersection interference declines, and `evidence` certifies the stage otherwise.
-pub(crate) fn ordered_validation(
+fn ordered_validation(
     shape: &Shape,
     evidence: SelfIntersectionEvidence,
 ) -> Result<ValidationReport, DeclineCause> {
@@ -85,18 +116,7 @@ pub(crate) fn ordered_validation(
         SelfIntersectionEvidence::AffineSweepOfCertifiedRegion => BodyKind::Solid,
     };
     let coverage = validate_owned_candidate(shape, kind, &[]);
-    let stages = [
-        (ValidationStageKind::Topology, coverage.topology),
-        (ValidationStageKind::Geometry, coverage.geometry),
-    ];
-    let failed = stages
-        .iter()
-        .find(|(_, status)| *status != StageCoverage::Passed);
-    let interference = (coverage.self_intersection == StageCoverage::Failed).then_some((
-        ValidationStageKind::SelfIntersection,
-        coverage.self_intersection,
-    ));
-    if let Some((stage, _)) = failed.copied().or(interference) {
+    if let Some(stage) = first_unpassed(&coverage) {
         return Err(DeclineCause::ValidationFailed {
             stage,
             findings: findings(&coverage),
@@ -111,41 +131,55 @@ pub(crate) fn ordered_validation(
     })
 }
 
+/// The first of topology or geometry short of Passed, else a failed self-check.
+fn first_unpassed(coverage: &OrderedCoverage) -> Option<ValidationStageKind> {
+    let stages = [
+        (
+            ValidationStageKind::Topology,
+            coverage.topology != StageCoverage::Passed,
+        ),
+        (
+            ValidationStageKind::Geometry,
+            coverage.geometry != StageCoverage::Passed,
+        ),
+        (
+            ValidationStageKind::SelfIntersection,
+            coverage.self_intersection == StageCoverage::Failed,
+        ),
+    ];
+    stages
+        .into_iter()
+        .find(|(_, unpassed)| *unpassed)
+        .map(|(stage, _)| stage)
+}
+
 fn findings(coverage: &OrderedCoverage) -> Vec<String> {
-    coverage
-        .findings
-        .iter()
-        .map(|finding| {
-            format!(
-                "{:?} {:?}: {:?}",
-                finding.stage, finding.coverage, finding.cause
-            )
-        })
-        .collect()
+    let render = |finding: &crate::sketch_region_validation::outcome::ValidationFinding| {
+        format!(
+            "{:?} {:?}: {:?}",
+            finding.stage, finding.coverage, finding.cause
+        )
+    };
+    coverage.findings.iter().map(render).collect()
 }
 
 /// The tolerance stage: refuse over a `Refuse` cap, record a finding over a `Report` cap.
-pub(crate) fn tolerance_stage(
-    achieved: AchievedTolerance,
-    cap: ToleranceCap,
-    report: &mut ValidationReport,
-    notes: &mut Vec<Finding>,
-) -> Result<(), DeclineCause> {
+fn tolerance_stage(checked: &mut CheckedShape, cap: ToleranceCap) -> Result<(), DeclineCause> {
+    let achieved = checked.achieved.max();
     match cap {
-        ToleranceCap::Refuse(limit) if !achieved.within(cap) => {
+        ToleranceCap::Refuse(limit) if !checked.achieved.within(cap) => {
             return Err(DeclineCause::ToleranceOverBudget {
-                achieved: achieved.max(),
+                achieved,
                 cap: limit,
             });
         }
-        ToleranceCap::Report(limit) if !achieved.within(cap) => {
-            notes.push(Finding::ToleranceAboveReportLimit {
-                achieved: achieved.max(),
-                limit,
-            });
+        ToleranceCap::Report(limit) if !checked.achieved.within(cap) => {
+            checked
+                .findings
+                .push(Finding::ToleranceAboveReportLimit { achieved, limit });
         }
         _ => {}
     }
-    report.tolerance = StageStatus::Passed;
+    checked.validation.tolerance = StageStatus::Passed;
     Ok(())
 }

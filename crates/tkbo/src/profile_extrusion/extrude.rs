@@ -11,7 +11,7 @@ use super::resolution::{Measure, Resolution};
 use super::sweep_history::{IndexedSweep, sweep_history};
 use super::validation::*;
 use rustycad_tkbrep::topods::{self, Shape, Solid};
-use rustycad_tkbrep::toptools::IndexedMapOfShape;
+
 use rustycad_tkmath::gp::Vector3;
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
@@ -52,41 +52,38 @@ pub fn extrude(
     options: &ExtrudeOptions,
 ) -> Result<OperationResult, OperationDecline> {
     let resolution = options.resolution;
-    admit_resolution(&resolution).map_err(|c| DECLINE.at(Stage::Admission, c))?;
-    let height = admit_direction(region, direction, &resolution)
-        .map_err(|c| DECLINE.at(Stage::Admission, c))?;
+    let admitted = admit_resolution(&resolution)
+        .and_then(|()| admit_direction(region, direction, &resolution));
+    let height = admitted.map_err(|c| DECLINE.at(Stage::Admission, c))?;
     let (mut maker, solid) = sweep(region, direction)?;
     let indexed =
         sweep_history(&mut maker, &solid, region).map_err(|c| DECLINE.at(Stage::History, c))?;
     let evidence = SelfIntersectionEvidence::AffineSweepOfCertifiedRegion;
-    let mut validation =
-        ordered_validation(&solid, evidence).map_err(|c| DECLINE.at(Stage::Validation, c))?;
-    let achieved = achieved_tolerance(&solid)
-        .map_err(|f| DECLINE.native(Stage::Tolerance, "solid tolerance", f))?;
-    let mut findings = Vec::new();
-    tolerance_stage(achieved, resolution.cap, &mut validation, &mut findings)
-        .map_err(|c| DECLINE.at(Stage::Tolerance, c))?;
-    let IndexedSweep {
-        faces,
-        edges,
-        vertices,
-        history,
-    } = indexed;
-    Ok(OperationResult {
-        faces: typed(&faces, topods::face)
-            .map_err(|f| DECLINE.native(Stage::History, "face index", f))?,
-        edges: typed(&edges, topods::edge)
-            .map_err(|f| DECLINE.native(Stage::History, "edge index", f))?,
-        vertices: typed(&vertices, topods::vertex)
-            .map_err(|f| DECLINE.native(Stage::History, "vertex index", f))?,
+    let checked = check_publication(&solid, evidence, resolution.cap, DECLINE)?;
+    let volume = prism_volume(region.area(), height);
+    Ok(published(solid, indexed, checked, volume, resolution))
+}
+
+/// The owned result: the solid, its indexed topology and history, and its checks.
+fn published(
+    solid: Solid,
+    indexed: IndexedSweep,
+    checked: CheckedShape,
+    volume: Measure,
+    resolution: Resolution,
+) -> OperationResult {
+    OperationResult {
         solid,
-        history,
-        validation,
-        findings,
-        achieved,
-        volume: prism_volume(region.area(), height),
+        faces: indexed.faces,
+        edges: indexed.edges,
+        vertices: indexed.vertices,
+        history: indexed.history,
+        validation: checked.validation,
+        findings: checked.findings,
+        achieved: checked.achieved,
+        volume,
         resolution,
-    })
+    }
 }
 
 /// Signed height of `direction` over the region plane; declines a vector shorter than the
@@ -125,15 +122,6 @@ fn sweep(
     let shape: Shape = maker.shape().map_err(native)?.clone();
     let solid = topods::solid(&shape).map_err(native)?;
     Ok((maker, solid))
-}
-
-fn typed<T>(
-    map: &IndexedMapOfShape,
-    cast: fn(&Shape) -> Result<T, rustycad_tkernel::standard::Failure>,
-) -> Result<Vec<T>, rustycad_tkernel::standard::Failure> {
-    (1..=map.extent())
-        .map(|index| cast(map.find_key(index)?))
-        .collect()
 }
 
 /// Volume of a prism: base area times height, exact for an affine sweep; the error

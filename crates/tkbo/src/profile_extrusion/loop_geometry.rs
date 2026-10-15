@@ -5,7 +5,7 @@
 use super::admitted::{AdmittedCurve, AdmittedProfile, CircleCarrier};
 use super::loops::{LoopUse, ProfileLoop};
 use super::plane_math::*;
-use std::f64::consts::TAU;
+use super::profile::ArcSense;
 
 /// One directed use resolved to its traversal geometry.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -45,28 +45,28 @@ fn forward_geometry(profile: &AdmittedProfile, curve: &AdmittedCurve) -> UseGeom
             carrier,
             sense,
             ..
-        } => {
-            let [start, end] = ends.map(|vertex| profile.point(vertex));
-            let start_angle = polar_angle(carrier.center, start);
-            let sweep = signed_sweep(start_angle, polar_angle(carrier.center, end), sense);
-            UseGeometry::Arc {
-                carrier,
-                start_angle,
-                sweep,
-                start,
-                end,
-            }
-        }
+        } => arc_geometry(carrier, ends.map(|vertex| profile.point(vertex)), sense),
         AdmittedCurve::Circle { carrier, .. } => {
+            // Coincident ends sweep one full counterclockwise turn from parameter 0.
             let start = on_circle(carrier.center, carrier.radius, 0.0);
-            UseGeometry::Arc {
-                carrier,
-                start_angle: 0.0,
-                sweep: TAU,
-                start,
-                end: start,
-            }
+            arc_geometry(carrier, [start, start], ArcSense::CounterClockwise)
         }
+    }
+}
+
+fn arc_geometry(
+    carrier: CircleCarrier,
+    [start, end]: [[f64; 2]; 2],
+    sense: ArcSense,
+) -> UseGeometry {
+    let start_angle = polar_angle(carrier.center, start);
+    let sweep = signed_sweep(start_angle, polar_angle(carrier.center, end), sense);
+    UseGeometry::Arc {
+        carrier,
+        start_angle,
+        sweep,
+        start,
+        end,
     }
 }
 

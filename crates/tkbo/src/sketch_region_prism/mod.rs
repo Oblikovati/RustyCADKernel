@@ -50,6 +50,10 @@ mod graph_import_tests;
 mod copy_retention_tests;
 
 mod owned_request;
+pub(crate) use owned_request::profile::{
+    ProfileProofInput, ProfileProofRefusal, ProofEdge, certify_profile,
+};
+pub(crate) use region_certificate::loop_region::{LoopRegionCertificate, RegionProof};
 mod publication;
 #[cfg(test)]
 mod sweep_query_tests;
