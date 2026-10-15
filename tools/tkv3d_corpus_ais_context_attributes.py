@@ -1,7 +1,8 @@
 """AIS_InteractiveContext attribute members: appearance edits through the context, display
 modes, display priority and Z layer, selection mode activation with every concurrency, filters,
 pixel tolerance, trihedron and plane sizes, hidden lines, sub-intensity, local attributes,
-selection, erase/display and the default attributes, on a cylinder shape, an edge shape and a
+selection, erase/display, the per-object deviation and isoline members and the default
+attributes, on a cylinder shape, an edge shape and a
 point (see tools/oracle/tkv3d_probe_ais_context_attributes.cxx).
 
 A request is `v3_ais_ctx_attr Count Op Object Arg...`.
@@ -21,6 +22,10 @@ SEQUENCES = (
     ((35, 0, 0), (37, 0, 0), (37, 2, 0), (38, 0, 4), (39, 0, 2), (39, 0, 1)),
     ((40, 1, 0), (0, 1, 0), (9, 1, 1), (12, 1, 6), (41, 1, 0), (42, 0, 0), (44, 2, 0)),
     ((33, 1, 0), (2, 1, 0), (31, 1, 0), (9, 1, 1), (10, 1, 0), (32, 1, 0), (46, 0, 0)),
+    # Per-object deviation and triangulation isolines: shapes take them, the point (a datum)
+    # does not; the edge (kind Shape) also takes the angle.
+    ((48, 0, 4), (48, 1, 7), (48, 2, 2), (49, 0, 30), (49, 1, 25), (49, 2, 20), (37, 0, 0)),
+    ((50, 0, 1), (50, 2, 1), (48, 0, 10), (50, 0, 0), (9, 0, 1), (48, 0, 3), (49, 0, 11)),
 )
 
 
