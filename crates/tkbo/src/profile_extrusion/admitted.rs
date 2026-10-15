@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Admitted profile: checked curves in caller order and the orthonormal world frame.
+use super::ellipse::EllipseCarrier;
 use super::profile::{ArcSense, ProfileCurveId, ProfileVertexId};
 use super::resolution::Resolution;
+use super::spline::AdmittedSpline;
 use std::collections::BTreeMap;
 
 /// Orthonormal right-handed sketch frame in world coordinates.
@@ -19,6 +21,11 @@ impl WorldFrame {
     pub(crate) fn world(&self, [u, v]: [f64; 2]) -> [f64; 3] {
         std::array::from_fn(|axis| self.origin[axis] + u * self.x[axis] + v * self.y[axis])
     }
+
+    /// World direction of the plane vector `[u, v]`.
+    pub(crate) fn direction(&self, [u, v]: [f64; 2]) -> [f64; 3] {
+        std::array::from_fn(|axis| u * self.x[axis] + v * self.y[axis])
+    }
 }
 
 /// A checked circle carrier: center and radius in plane coordinates.
@@ -29,7 +36,7 @@ pub(crate) struct CircleCarrier {
 }
 
 /// A checked admitted curve.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub(crate) enum AdmittedCurve {
     Line {
         id: ProfileCurveId,
@@ -45,19 +52,42 @@ pub(crate) enum AdmittedCurve {
         id: ProfileCurveId,
         carrier: CircleCarrier,
     },
+    EllipticArc {
+        id: ProfileCurveId,
+        ends: [ProfileVertexId; 2],
+        carrier: EllipseCarrier,
+        sense: ArcSense,
+    },
+    Ellipse {
+        id: ProfileCurveId,
+        carrier: EllipseCarrier,
+    },
+    Spline {
+        id: ProfileCurveId,
+        ends: [ProfileVertexId; 2],
+        spline: AdmittedSpline,
+    },
 }
 
 impl AdmittedCurve {
     pub(crate) fn id(&self) -> ProfileCurveId {
         match self {
-            Self::Line { id, .. } | Self::Arc { id, .. } | Self::Circle { id, .. } => *id,
+            Self::Line { id, .. }
+            | Self::Arc { id, .. }
+            | Self::Circle { id, .. }
+            | Self::EllipticArc { id, .. }
+            | Self::Ellipse { id, .. }
+            | Self::Spline { id, .. } => *id,
         }
     }
 
     pub(crate) fn ends(&self) -> Option<[ProfileVertexId; 2]> {
         match self {
-            Self::Line { ends, .. } | Self::Arc { ends, .. } => Some(*ends),
-            Self::Circle { .. } => None,
+            Self::Line { ends, .. }
+            | Self::Arc { ends, .. }
+            | Self::EllipticArc { ends, .. }
+            | Self::Spline { ends, .. } => Some(*ends),
+            Self::Circle { .. } | Self::Ellipse { .. } => None,
         }
     }
 }

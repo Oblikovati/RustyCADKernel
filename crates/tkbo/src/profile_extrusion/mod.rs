@@ -10,11 +10,14 @@
 //! Every operation is non-destructive and either succeeds completely or returns a typed
 //! [`OperationDecline`]; no partial result exists.
 mod admission;
+mod admit_curves;
 mod admitted;
 mod bezier;
 mod build_regions;
+mod carriers;
 
 mod decline;
+mod ellipse;
 mod extrude;
 mod loop_geometry;
 mod loops;
@@ -27,6 +30,7 @@ mod region_area;
 mod regions;
 mod resolution;
 mod solid_validation;
+mod spline;
 mod sweep_history;
 mod sweep_images;
 mod topology;

@@ -122,6 +122,26 @@ pub enum DeclineCause {
         /// The weld tolerance.
         weld: f64,
     },
+    /// A curve parameter violates the documented contract (for example a spline's knot
+    /// count, a nonpositive weight, or an ellipse whose minor radius exceeds its major).
+    InvalidCurve {
+        /// The curve.
+        curve: ProfileCurveId,
+        /// What is wrong.
+        reason: &'static str,
+    },
+    /// A curve's end (an elliptic arc's end on its ellipse, a spline's end pole) is farther
+    /// than the sew tolerance from its authored vertex.
+    EndOffCurve {
+        /// The curve.
+        curve: ProfileCurveId,
+        /// The vertex.
+        vertex: ProfileVertexId,
+        /// Distance between the vertex and the curve end.
+        distance: f64,
+        /// The sew tolerance.
+        sew: f64,
+    },
     /// An arc's ends are at different distances from its center.
     ArcRadiusMismatch {
         /// The arc.

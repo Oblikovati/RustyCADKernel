@@ -5,7 +5,7 @@
 use super::admission::admit_profile;
 use super::admitted::{AdmittedCurve, AdmittedProfile};
 use super::decline::{Decliner, OperationDecline, OperationKind, OperationStage as Stage};
-use super::loop_geometry::signed_area;
+use super::loop_geometry::{loop_scale, signed_area};
 use super::loops::{ProfileLoop, require_closed};
 use super::profile::{ProfileCurveId, ProfileVertexId, SketchProfile};
 use super::proof::{CertifiedFace, CertifiedRegions, certify_regions};
@@ -142,9 +142,10 @@ impl RegionContext<'_> {
             certified: face.area,
             loop_areas: loops
                 .iter()
-                .map(|closed| signed_area(self.profile, closed).0)
+                .map(|closed| signed_area(self.profile, closed))
                 .collect(),
             line_only: loops.iter().all(|closed| self.line_only(closed)),
+            scale: loops.iter().map(|l| loop_scale(self.profile, l)).sum(),
         })
     }
 

@@ -87,15 +87,21 @@ fn report_cap_keeps_the_region() {
 
 #[test]
 fn unsupported_and_invalid_inputs_are_named() {
-    let mut ellipse = SketchFixture::new();
-    ellipse.profile.curves.push(ProfileCurve::Ellipse {
+    let mut unclamped = SketchFixture::new();
+    unclamped.vertex(0, [0., 0.]).vertex(1, [3., 0.]).line(5, 1, 0);
+    unclamped.profile.curves.push(ProfileCurve::Spline {
         id: ProfileCurveId(4),
-        center: [0., 0.],
-        major_axis: [2., 0.],
-        minor_radius: 1.,
+        start: ProfileVertexId(0),
+        end: ProfileVertexId(1),
+        degree: 2,
+        poles: vec![[0., 0.], [1., 1.], [2., 1.], [3., 0.]],
+        weights: None,
+        knots: vec![0., 1., 2., 3., 4., 5., 6.],
     });
-    let decline = declined(&ellipse.build(), resolution());
+    let decline = declined(&unclamped.build(), resolution());
     assert_eq!(decline.class(), DeclineClass::Unsupported);
+    let kind = "unclamped spline";
+    assert_eq!(decline.cause, DeclineCause::UnsupportedCurve { curve: ProfileCurveId(4), kind });
     let empty = SketchFixture::new().build();
     assert_eq!(declined(&empty, resolution()).cause, DeclineCause::EmptyProfile);
     let mut bad = resolution();

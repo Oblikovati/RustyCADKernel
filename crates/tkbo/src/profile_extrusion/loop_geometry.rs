@@ -2,12 +2,55 @@
 //! Directed use geometry in plane coordinates and the closed-form signed loop area, a
 //! cross-check of the certified area. The plane graph proof decides every topological fact.
 use super::admitted::{AdmittedCurve, AdmittedProfile, CircleCarrier};
+use super::bezier::BezierPiece;
+use super::ellipse::EllipseCarrier;
 use super::loops::{LoopUse, ProfileLoop};
 use super::plane_math::*;
 use super::profile::ArcSense;
 
-/// One directed use resolved to its traversal geometry.
+/// The carrier of a circular or elliptic arc: the image of the unit circle.
 #[derive(Clone, Copy, Debug, PartialEq)]
+pub(crate) enum Conic {
+    Circle(CircleCarrier),
+    Ellipse(EllipseCarrier),
+}
+
+impl Conic {
+    /// Point at (affine) parameter `t`.
+    pub(crate) fn point(&self, t: f64) -> [f64; 2] {
+        match self {
+            Self::Circle(c) => on_circle(c.center, c.radius, t),
+            Self::Ellipse(e) => e.point(t),
+        }
+    }
+    /// Image of the unit-circle point `[x, y]`.
+    pub(crate) fn image(&self, [x, y]: [f64; 2]) -> [f64; 2] {
+        match self {
+            Self::Circle(c) => [c.center[0] + c.radius * x, c.center[1] + c.radius * y],
+            Self::Ellipse(e) => e.image([x, y]),
+        }
+    }
+    /// Parameter of a point on the carrier.
+    fn parameter(&self, p: [f64; 2]) -> f64 {
+        match self {
+            Self::Circle(c) => polar_angle(c.center, p),
+            Self::Ellipse(e) => e.parameter(p),
+        }
+    }
+    /// Green's term of the arc from `start` to `end` sweeping `sweep`.
+    fn green_term(&self, start: [f64; 2], end: [f64; 2], sweep: f64) -> f64 {
+        match self {
+            Self::Circle(c) => {
+                let chord = cross(c.center, sub2(end, start));
+                0.5 * (chord + c.radius * c.radius * sweep)
+            }
+            Self::Ellipse(e) => e.green_term(start, end, sweep),
+        }
+    }
+}
+
+/// One directed use resolved to its traversal geometry.
+#[derive(Clone, Debug, PartialEq)]
 pub(crate) enum UseGeometry {
     Segment {
         start: [f64; 2],
@@ -15,11 +58,15 @@ pub(crate) enum UseGeometry {
     },
     /// `sweep` is signed in traversal direction (positive counterclockwise).
     Arc {
-        carrier: CircleCarrier,
+        carrier: Conic,
         start_angle: f64,
         sweep: f64,
         start: [f64; 2],
         end: [f64; 2],
+    },
+    /// Bézier pieces in traversal order; no closed-form area.
+    Spline {
+        pieces: Vec<BezierPiece>,
     },
 }
 
@@ -34,32 +81,41 @@ pub(crate) fn use_geometry(profile: &AdmittedProfile, used: LoopUse) -> UseGeome
 }
 
 fn forward_geometry(profile: &AdmittedProfile, curve: &AdmittedCurve) -> UseGeometry {
-    match *curve {
-        AdmittedCurve::Line { ends, .. } => UseGeometry::Segment {
-            start: profile.point(ends[0]),
-            end: profile.point(ends[1]),
-        },
+    let points = |ends: [_; 2]| ends.map(|vertex| profile.point(vertex));
+    match curve {
+        AdmittedCurve::Line { ends, .. } => {
+            let [start, end] = points(*ends);
+            UseGeometry::Segment { start, end }
+        }
         AdmittedCurve::Arc {
             ends,
             carrier,
             sense,
             ..
-        } => arc_geometry(carrier, ends.map(|vertex| profile.point(vertex)), sense),
-        AdmittedCurve::Circle { carrier, .. } => {
-            // Coincident ends sweep one full counterclockwise turn from parameter 0.
-            let start = on_circle(carrier.center, carrier.radius, 0.0);
-            arc_geometry(carrier, [start, start], ArcSense::CounterClockwise)
-        }
+        } => arc_geometry(Conic::Circle(*carrier), points(*ends), *sense),
+        AdmittedCurve::EllipticArc {
+            ends,
+            carrier,
+            sense,
+            ..
+        } => arc_geometry(Conic::Ellipse(*carrier), points(*ends), *sense),
+        AdmittedCurve::Circle { carrier, .. } => closed_geometry(Conic::Circle(*carrier)),
+        AdmittedCurve::Ellipse { carrier, .. } => closed_geometry(Conic::Ellipse(*carrier)),
+        AdmittedCurve::Spline { spline, .. } => UseGeometry::Spline {
+            pieces: spline.bezier_pieces(),
+        },
     }
 }
 
-fn arc_geometry(
-    carrier: CircleCarrier,
-    [start, end]: [[f64; 2]; 2],
-    sense: ArcSense,
-) -> UseGeometry {
-    let start_angle = polar_angle(carrier.center, start);
-    let sweep = signed_sweep(start_angle, polar_angle(carrier.center, end), sense);
+/// A full turn: coincident ends at parameter 0, counterclockwise.
+fn closed_geometry(carrier: Conic) -> UseGeometry {
+    let start = carrier.point(0.0);
+    arc_geometry(carrier, [start, start], ArcSense::CounterClockwise)
+}
+
+fn arc_geometry(carrier: Conic, [start, end]: [[f64; 2]; 2], sense: ArcSense) -> UseGeometry {
+    let start_angle = carrier.parameter(start);
+    let sweep = signed_sweep(start_angle, carrier.parameter(end), sense);
     UseGeometry::Arc {
         carrier,
         start_angle,
@@ -88,35 +144,54 @@ fn reverse(geometry: UseGeometry) -> UseGeometry {
             start: end,
             end: start,
         },
+        UseGeometry::Spline { pieces } => UseGeometry::Spline {
+            pieces: pieces
+                .into_iter()
+                .rev()
+                .map(BezierPiece::reversed)
+                .collect(),
+        },
     }
 }
 
-/// Green's-theorem contribution `1/2 * integral (x dy - y dx)` of one directed use.
-fn green_term(geometry: UseGeometry) -> f64 {
-    let cross = |a: [f64; 2], b: [f64; 2]| a[0] * b[1] - a[1] * b[0];
+fn cross(a: [f64; 2], b: [f64; 2]) -> f64 {
+    a[0] * b[1] - a[1] * b[0]
+}
+
+/// Green's-theorem contribution `1/2 * integral (x dy - y dx)` of one directed use, `None`
+/// for a spline.
+fn green_term(geometry: &UseGeometry) -> Option<f64> {
     match geometry {
-        UseGeometry::Segment { start, end } => 0.5 * cross(start, end),
+        UseGeometry::Segment { start, end } => Some(0.5 * cross(*start, *end)),
         UseGeometry::Arc {
             carrier,
             sweep,
             start,
             end,
             ..
-        } => {
-            let chord = cross(carrier.center, sub2(end, start));
-            0.5 * (chord + carrier.radius * carrier.radius * sweep)
-        }
+        } => Some(carrier.green_term(*start, *end, *sweep)),
+        UseGeometry::Spline { .. } => None,
     }
 }
 
-/// Closed-form signed area of a loop (positive when counterclockwise) and its rounding
-/// estimate: a small multiple of the unit roundoff times the summed term magnitudes.
-pub(crate) fn signed_area(profile: &AdmittedProfile, closed: &ProfileLoop) -> (f64, f64) {
-    let terms: Vec<f64> = closed
-        .uses
-        .iter()
-        .map(|used| green_term(use_geometry(profile, *used)))
-        .collect();
-    let scale: f64 = terms.iter().map(|term| term.abs()).sum();
-    (terms.iter().sum(), 64.0 * f64::EPSILON * scale)
+/// Scale of one use for rounding estimates: its Green term's magnitude, or for a spline
+/// the sum over pieces of the largest control distance times the control polygon length.
+fn use_scale(geometry: &UseGeometry) -> f64 {
+    match geometry {
+        UseGeometry::Spline { pieces } => pieces.iter().map(BezierPiece::green_scale).sum(),
+        other => green_term(other).map_or(0.0, f64::abs),
+    }
+}
+
+/// Closed-form signed area of a loop (positive when counterclockwise), `None` when a spline
+/// bounds it.
+pub(crate) fn signed_area(profile: &AdmittedProfile, closed: &ProfileLoop) -> Option<f64> {
+    let geometry = closed.uses.iter().map(|used| use_geometry(profile, *used));
+    geometry.map(|g| green_term(&g)).sum()
+}
+
+/// Summed rounding scale of a loop's uses (see `use_scale`).
+pub(crate) fn loop_scale(profile: &AdmittedProfile, closed: &ProfileLoop) -> f64 {
+    let geometry = closed.uses.iter().map(|used| use_geometry(profile, *used));
+    geometry.map(|g| use_scale(&g)).sum()
 }
