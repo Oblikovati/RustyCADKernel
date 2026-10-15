@@ -630763,6 +630763,596 @@
       "status": "implemented",
       "notes": "TPrsStd mapping (docs/ocaf-design.md section 13): TPrsStd_AISViewer and TPrsStd_AISPresentation are TdfAttribute structs (the interactive object and context in shared state); TPrsStd_Driver is the trait TPrsStdDriver over stateless driver structs and TPrsStd_DriverTable::Get is a process-wide OnceLock handle; overloads are named variants; exceptions and native null dereferences are Failure errors.",
       "cpp_declaration_id": "1442f75d2b9a7fd5439f14f3025ab4afa409f6e32f0286185e54c04f69539b22"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "1d68e05d718f1b4e29b4e99e9e0f69d8541d8a0e9a01a9062b0a1b6e4253cd7f",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(TPrsStdAISPresentation, \"TPrsStd_AISPresentation\", dyn TdfAttribute) at crates/tkvcaf/src/tprs_std/ais_presentation.rs:55 registers descriptor \"TPrsStd_AISPresentation\"; C++ base_type is TDF_Attribute. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "1bd00e3fc3433c3886ea47b91fffd591d947b2b3df84382bb05720cd36c6d82f",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TDF_Attribute base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation names parent descriptor \"TDF_Attribute\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "25cff982214581ce0917e8e32cc98f879495a8c7bbf574261fc163e3337191ac",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(TPrsStdAISPresentation, \"TPrsStd_AISPresentation\", dyn TdfAttribute) at crates/tkvcaf/src/tprs_std/ais_presentation.rs:55 registers descriptor \"TPrsStd_AISPresentation\"; C++ base_type is TDF_Attribute. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "961f2116d1cec003ddeb45c0f29ffb9e4d89ccf7211835bec06663843e76f6db",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISPresentation::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISPresentation.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISPresentation::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(TPrsStdAISPresentation, \"TPrsStd_AISPresentation\", dyn TdfAttribute) at crates/tkvcaf/src/tprs_std/ais_presentation.rs:55 registers descriptor \"TPrsStd_AISPresentation\"; C++ base_type is TDF_Attribute. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "0f22fe6335badfd283c20e34ccec504cd182e2db43a9cd8be806712f1bb7738b",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdAISViewer (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "bfa5872318f89830119af5e20f082935113c4ab317cdca3e484d11e88ceb0d00",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(TPrsStdAISViewer, \"TPrsStd_AISViewer\", dyn TdfAttribute) at crates/tkvcaf/src/tprs_std/ais_viewer.rs:40 registers descriptor \"TPrsStd_AISViewer\"; C++ base_type is TDF_Attribute. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "5e2c8cbf4922d03678cc63b67fbfe52f99a485b0705b1b043aad53d417a29ef4",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TDF_Attribute base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdAISViewer names parent descriptor \"TDF_Attribute\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "78386afc3273355bba578b2185a0c401b3e97bc60eb6aed73d8a4101231ef563",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(TPrsStdAISViewer, \"TPrsStd_AISViewer\", dyn TdfAttribute) at crates/tkvcaf/src/tprs_std/ais_viewer.rs:40 registers descriptor \"TPrsStd_AISViewer\"; C++ base_type is TDF_Attribute. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "56d434c3a5f0bd4e8c66237588dacefd1d5dfecfc5271e9ede4710806a917686",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AISViewer::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAISViewer::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(TPrsStdAISViewer, \"TPrsStd_AISViewer\", dyn TdfAttribute) at crates/tkvcaf/src/tprs_std/ais_viewer.rs:40 registers descriptor \"TPrsStd_AISViewer\"; C++ base_type is TDF_Attribute. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "e9c8689390da637936914c31c5df99231d708daf0e5d78271c25d2e94fc72f58",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "V3d_Viewer",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AISViewer.hxx",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkv3d::v3d::V3dViewer (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "90b9bccb357558a662211926720380b9e219a006aa70bea36be3679a34a0330e",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AxisDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AxisDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "af7ef1a8e1f32257b63b68ec692d20a5f46cd99318aa4e63d45c307d917f8ec9",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AxisDriver::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AxisDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): presentation_driver!(TPrsStdAxisDriver, \"TPrsStd_AxisDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:39 registers descriptor \"TPrsStd_AxisDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "05f4b50a4625879b7d1834181e963b2f6c8f2607e7a3a6d608c8510f55296dc6",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AxisDriver::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AxisDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TPrsStd_Driver base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver names parent descriptor \"TPrsStd_Driver\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "b7da2cf22c301429276a0504c0c07908e72dc0883b30c8578ce69d71725ea69e",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AxisDriver::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AxisDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): presentation_driver!(TPrsStdAxisDriver, \"TPrsStd_AxisDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:39 registers descriptor \"TPrsStd_AxisDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "bed0583e703894e9332c9526fe207d307c986ee1682e3726995bf608b2f4ac30",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_AxisDriver::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_AxisDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdAxisDriver::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): presentation_driver!(TPrsStdAxisDriver, \"TPrsStd_AxisDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:39 registers descriptor \"TPrsStd_AxisDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "f8417e965cfba0f9116a235c2255a3818435d727ce47a367a5d204f5c69f6418",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "42523386f0f5862f8ef4662213a29867807b1fe478ab561ff645a29974df8f73",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintDriver::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): presentation_driver!(TPrsStdConstraintDriver, \"TPrsStd_ConstraintDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/constraint_driver.rs:18 registers descriptor \"TPrsStd_ConstraintDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "2f402745a87d17ba277597d9ccb4d993869c334387c074ed45e1588ca5688432",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintDriver::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TPrsStd_Driver base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver names parent descriptor \"TPrsStd_Driver\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "20a7cacb9a7edcc5f1b8c3b4d539e6b236dd7f5d479039c0366f36de0377ce8f",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintDriver::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): presentation_driver!(TPrsStdConstraintDriver, \"TPrsStd_ConstraintDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/constraint_driver.rs:18 registers descriptor \"TPrsStd_ConstraintDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "e12c02f85be0a73a5b2f2051174c69d70c05441c8ef612b665671d36f17f8657",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintDriver::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintDriver::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): presentation_driver!(TPrsStdConstraintDriver, \"TPrsStd_ConstraintDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/constraint_driver.rs:18 registers descriptor \"TPrsStd_ConstraintDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "372f32f509c7b46fb90672295362f261cf0f52dfbf1c0ef14f5bd4e1495a106a",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Geom_Geometry",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomGeometry",
+      "status": "implemented",
+      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkg3d::geom::GeomGeometry (evidence: impl_transient_interface!); each member is mapped by its own row.",
+      "cpp_declaration_id": "3404fd0a55a97c3510d893e9312bdce051e666ec31d852e1afcc57032a8c5cca",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "f505450d2f249ca13cb5623ffee26c6413a86ae0aa67b9d0f2d2948a4ee85251",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::operator delete(void*) noexcept",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which returns one object's memory through Standard::Free. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "1ab684fffba289d645ff7a9fe11e5e528f2d0192c3d7623b0d750aea744a8066",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::operator delete(void*,void*) noexcept",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which is the placement form that constructs into caller-provided storage. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "2997a5e13ee9bdba5164382b5a300e2d873277a51a376e9099400af529b54a02",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::operator delete[](void*) noexcept",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which returns an array's memory through Standard::Free. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "29cdfe55432b7f8c9a67281385597142c431886fa1c5f5df685bf9a06810bcf1",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::operator new(size_t)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates one object through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "781de4ef1d3a9307210d28dfeb81997095d6782b3628d37a264727413cf1eeae",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::operator new(size_t,void*) noexcept",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which is the placement form that constructs into caller-provided storage. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "f23c09aca2b1d9d54edc0a342587ae6c81a6bc763550ebe10d04119b763a4303",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::operator new[](size_t)",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkvcaf::tprs_std::TPrsStdConstraintTools needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "04d3c2bd25e77e16c4821e6e1c940ce97743e6288974293e173d09be3b88ade7",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_Driver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_Driver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriver",
+      "status": "implemented",
+      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkvcaf::tprs_std::TPrsStdDriver (evidence: impl_transient_interface!); each member is mapped by its own row.",
+      "cpp_declaration_id": "69dc6866074bfcad435da5b9362b18bd496fcbc04156129a48b2251365a9d86c",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_Driver::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_Driver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriver",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient_interface!(dyn TPrsStdDriver, \"TPrsStd_Driver\", StandardTransient) at crates/tkvcaf/src/tprs_std/driver.rs:34 registers descriptor \"TPrsStd_Driver\"; C++ base_type is Standard_Transient. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types; the descriptor is `<dyn Trait as RuntimeTyped>`. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "c1838d8ea76521896fae38ba6754e44a6e8d6a9c78d826a676ff1f77965f8018",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_Driver::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_Driver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriver",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdDriver names parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "7ec2f5c9e010a1e3f781feef7c39d76afbcefa6d6f38d030f44b3949bd691b1e",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_Driver::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_Driver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriver",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient_interface!(dyn TPrsStdDriver, \"TPrsStd_Driver\", StandardTransient) at crates/tkvcaf/src/tprs_std/driver.rs:34 registers descriptor \"TPrsStd_Driver\"; C++ base_type is Standard_Transient. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types; the descriptor is `<dyn Trait as RuntimeTyped>`. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "8fec1329b14c28dd1749a966ef29b83648902421da4e627766357aa133879e52",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_Driver::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_Driver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriver",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient_interface!(dyn TPrsStdDriver, \"TPrsStd_Driver\", StandardTransient) at crates/tkvcaf/src/tprs_std/driver.rs:34 registers descriptor \"TPrsStd_Driver\"; C++ base_type is Standard_Transient. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types; the descriptor is `<dyn Trait as RuntimeTyped>`. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "1abe588ee07144ee26ee4cd9df8eaf56ce279a2f8094d744c104c66fceee9748",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdDriverTable (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "878781834104753012a9546539e67b010f386868c463703f456c61010c3a260b",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(TPrsStdDriverTable, \"TPrsStd_DriverTable\", StandardTransient) at crates/tkvcaf/src/tprs_std/driver.rs:53 registers descriptor \"TPrsStd_DriverTable\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "19fc344be51266119f231892cd0bab33366348c6187f9949aa7d1cf4ce69e78e",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdDriverTable names parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "acf9ec02560c1a52a22a234aad03e0419c19dfdf18ea6d0a4c93532e259b6159",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(TPrsStdDriverTable, \"TPrsStd_DriverTable\", StandardTransient) at crates/tkvcaf/src/tprs_std/driver.rs:53 registers descriptor \"TPrsStd_DriverTable\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "9584c1cbdbdbe7888e9baadaee7b2efea7e4c56e1ddd9a9dcf0b8e6ad4ea9cad",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_DriverTable::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_DriverTable.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdDriverTable::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(TPrsStdDriverTable, \"TPrsStd_DriverTable\", StandardTransient) at crates/tkvcaf/src/tprs_std/driver.rs:53 registers descriptor \"TPrsStd_DriverTable\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "9e907e85e32aaae7811f8daccfa0b8375aeaa8226d35954a04cbd66d5f12f454",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_GeometryDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_GeometryDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "6f4e586446c07e9c3c98c9488a88ec51db73537fad821260fdb8f2eba3af0161",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_GeometryDriver::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_GeometryDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): presentation_driver!(TPrsStdGeometryDriver, \"TPrsStd_GeometryDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/geometry_drivers.rs:23 registers descriptor \"TPrsStd_GeometryDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "3ad530c204faf078fe797cf8d421afcdf997f66ecf299644aab4c632ae46d6cf",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_GeometryDriver::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_GeometryDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TPrsStd_Driver base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver names parent descriptor \"TPrsStd_Driver\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "b10c91f4124f6cc9ebead573a3fe196bbb5ab869179467a87a7e61425952c30d",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_GeometryDriver::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_GeometryDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): presentation_driver!(TPrsStdGeometryDriver, \"TPrsStd_GeometryDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/geometry_drivers.rs:23 registers descriptor \"TPrsStd_GeometryDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "4f56f57d83e2f6d791adaa916aa88a5adc0348f3e45629bb07d863da2e79901e",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_GeometryDriver::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_GeometryDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdGeometryDriver::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): presentation_driver!(TPrsStdGeometryDriver, \"TPrsStd_GeometryDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/geometry_drivers.rs:23 registers descriptor \"TPrsStd_GeometryDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "4199f3de305f2a2e6eb282765593d6ef2920abd2286dd968ab8b2069e10e28da",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_NamedShapeDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_NamedShapeDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "d30268bc6ae952094e2c5a608c840d5533dbe909d4607589cf2c6e8d0aa423db",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_NamedShapeDriver::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_NamedShapeDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): presentation_driver!(TPrsStdNamedShapeDriver, \"TPrsStd_NamedShapeDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/geometry_drivers.rs:28 registers descriptor \"TPrsStd_NamedShapeDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "790c98fe228892e4e7670301d7575bd97f4c2059911622a33f06d3cc892b281e",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_NamedShapeDriver::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_NamedShapeDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TPrsStd_Driver base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver names parent descriptor \"TPrsStd_Driver\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "4cefb51dafe65fc83fdd32398e6a5db5293ed9afa082b20e32968f7c3ef1bef9",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_NamedShapeDriver::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_NamedShapeDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): presentation_driver!(TPrsStdNamedShapeDriver, \"TPrsStd_NamedShapeDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/geometry_drivers.rs:28 registers descriptor \"TPrsStd_NamedShapeDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "d8406eeaecb0c71f44154ccfb3866d07036d0fabcc901a4cffcccbddf2b34e8f",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_NamedShapeDriver::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_NamedShapeDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdNamedShapeDriver::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): presentation_driver!(TPrsStdNamedShapeDriver, \"TPrsStd_NamedShapeDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/geometry_drivers.rs:28 registers descriptor \"TPrsStd_NamedShapeDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "5009bda84625949c99131d5dca354f076b6024c0da2d8cc4d264a933db231310",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PlaneDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PlaneDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "2b0127b05369e8251e9782f488e0d9d26c0a3991c304a80cb636352d4fbe2cee",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PlaneDriver::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PlaneDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): presentation_driver!(TPrsStdPlaneDriver, \"TPrsStd_PlaneDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:44 registers descriptor \"TPrsStd_PlaneDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "09f1324df1c1029b46265138f37a8adf79f2112e2823f38179c7e7b9496661fd",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PlaneDriver::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PlaneDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TPrsStd_Driver base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver names parent descriptor \"TPrsStd_Driver\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "bb347fde3e00d691007cc206b4b8f1dc542399aa7dfbbf65cec8b601494f8879",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PlaneDriver::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PlaneDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): presentation_driver!(TPrsStdPlaneDriver, \"TPrsStd_PlaneDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:44 registers descriptor \"TPrsStd_PlaneDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "0998db3c7d5e0e648ae874086a3464ed784251305555d03aa8ae93dd29b5117e",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PlaneDriver::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PlaneDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPlaneDriver::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): presentation_driver!(TPrsStdPlaneDriver, \"TPrsStd_PlaneDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:44 registers descriptor \"TPrsStd_PlaneDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "a35cf8ffb4f21227a0e782cc51c7b2fcb548f575e5e87db885f8bc91e9b96e84",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PointDriver",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PointDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPointDriver",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkvcaf::tprs_std::TPrsStdPointDriver (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "454840f8761c221e1db154150560ddfaabff1a92fb3c7d3292f8b33fd6965c6b",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PointDriver::DynamicType() const",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PointDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPointDriver::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): presentation_driver!(TPrsStdPointDriver, \"TPrsStd_PointDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:49 registers descriptor \"TPrsStd_PointDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "916d5e358f765af5588e1b471cbc962cb17cf3b2a45904b29dc7410ff35a7825",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PointDriver::base_type",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PointDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPointDriver",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef TPrsStd_Driver base_type` for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkvcaf::tprs_std::TPrsStdPointDriver names parent descriptor \"TPrsStd_Driver\", which RuntimeType::parent() returns.",
+      "cpp_declaration_id": "5f4aae0df8128e1c9cc62fe6cbd6c5e18fff527fdcb6ff155caa6ed3a0c5706b",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PointDriver::get_type_descriptor()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PointDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPointDriver::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): presentation_driver!(TPrsStdPointDriver, \"TPrsStd_PointDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:49 registers descriptor \"TPrsStd_PointDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "cd6f38febdf1e549f2aba9ff2a80cbc6c620d46db0a36670bc6663f65181c1b6",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TPrsStd_PointDriver::get_type_name()",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_PointDriver.hxx",
+      "rust_item": "rustycad_tkvcaf::tprs_std::TPrsStdPointDriver::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): presentation_driver!(TPrsStdPointDriver, \"TPrsStd_PointDriver\", dyn $crate::tprs_std::TPrsStdDriver) at crates/tkvcaf/src/tprs_std/construction_drivers.rs:49 registers descriptor \"TPrsStd_PointDriver\"; C++ base_type is TPrsStd_Driver. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "cpp_declaration_id": "524031b7d458dcc48ea108e6abca217eab4b24166bc46ed86e90692fdc9c847f",
+      "generated_by": "tools/generate_api_macro_rows.py"
     }
   ],
   "tests": [
