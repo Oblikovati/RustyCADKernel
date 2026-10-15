@@ -10,7 +10,8 @@ For workspace version `X.Y.Z`, publish one stable GitHub release named `vX.Y.Z`
 at the tested commit. Keep the tag and release assets immutable. Include:
 
 - `NAME-X.Y.Z.crate` for every workspace package, including all transitive
-  `rustycad-*` and `martensite-*` packages. The current workspace has 31 packages.
+  `rustycad-*` and `martensite-*` packages. The current workspace has 32 packages; the tag guard derives the expected asset
+  count from the workspace members of the tagged commit.
 - `rust-toolchain.toml`, the toolchain used outside the source checkout.
 - `LICENSE`, the kernel license text.
 - `Cargo.lock`, the owner lockfile used by the package verification workspace.

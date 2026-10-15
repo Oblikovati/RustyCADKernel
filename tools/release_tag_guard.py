@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tomllib
 from types import ModuleType
 from typing import Callable, Protocol, cast
 
@@ -194,8 +195,18 @@ def verify_gates(receipt: dict[str, object], plan_bytes: bytes, base: Path) -> N
         raise ValueError(f"gate names={actual!r}: expected exactly {expected!r}")
 
 
+# Cargo.lock, LICENSE, rust-toolchain.toml, test support, manifest and SHA256SUMS.
+FIXED_ASSET_COUNT = 6
+
+
+def expected_asset_count(git: GuardGit, revision: str) -> int:
+    """One crate per workspace member plus fixed assets; example: expected_asset_count(git, sha)."""
+    manifest = tomllib.loads(git.read("show", revision + ":Cargo.toml").decode())
+    return len(manifest["workspace"]["members"]) + FIXED_ASSET_COUNT
+
+
 def verify_packages(
-    receipt: dict[str, object], tag: str, revision: str, base: Path
+    receipt: dict[str, object], tag: str, revision: str, base: Path, expected: int
 ) -> None:
     """Independently validate sealed assets; example: verify_packages(r, tag, sha, base)."""
     packages = object_field(receipt, "packages")
@@ -209,7 +220,9 @@ def verify_packages(
         "manifest sha256",
     )
     validate_assets(manifest.parent, tag, revision, REPOSITORY)
-    require_equal(len(artifact_hashes(manifest.parent)), 37, "sealed asset count")
+    require_equal(
+        len(artifact_hashes(manifest.parent)), expected, "sealed asset count"
+    )
 
 
 def verify_annotation(git: GuardGit, oid: str, tag: str) -> None:
@@ -258,7 +271,8 @@ def verify_tag(tag: str, oid: str, receipt_path: Path, git: GuardGit) -> None:
     verify_gates(receipt, plan_bytes, receipt_path.parent)
     root = Path(git.read("rev-parse", "--show-toplevel").decode().strip())
     verify_command_rosters(receipt, plan_bytes, root)
-    verify_packages(receipt, tag, revision, receipt_path.parent)
+    expected = expected_asset_count(git, revision)
+    verify_packages(receipt, tag, revision, receipt_path.parent, expected)
 
 
 def existing_release_reference(reference: str, git: GuardGit) -> str | None:

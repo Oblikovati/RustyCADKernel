@@ -15,6 +15,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from release_archives import write_receipt
 from release_tag_guard import (
+    expected_asset_count,
     guard_transaction,
     planned_gate_names,
     plan_command_roster,
@@ -42,6 +43,15 @@ def verification_gates(root, source):
 """
 
 
+# 31 workspace members plus six fixed assets match the 37 sealed fixture files.
+def workspace(members: int) -> bytes:
+    names = ", ".join(f'"crates/member{index}"' for index in range(members))
+    return f"[workspace]\nmembers = [{names}]\n".encode()
+
+
+WORKSPACE = workspace(31)
+
+
 class FakeGuardGit:
     def __init__(self) -> None:
         self.status = b""
@@ -62,6 +72,7 @@ class FakeGuardGit:
             ("rev-parse", "--show-toplevel"): str(self.root).encode(),
             ("status", "--porcelain", "--untracked-files=all"): self.status,
             ("show", REVISION + ":tools/release_verification_plan.py"): PLAN,
+            ("show", REVISION + ":Cargo.toml"): WORKSPACE,
         }
         return responses[arguments]
 
@@ -137,6 +148,19 @@ class ReleaseGuardTests(unittest.TestCase):
             ("prepared", "refs/tags/v0.2.8", "0" * 40),
         ]:
             guard_transaction(state, f"{REVISION} {new} {ref}", None, self.git)
+
+    def test_asset_count_follows_tagged_workspace_members(self) -> None:
+        self.assertEqual(expected_asset_count(self.git, REVISION), 37)
+        responses = self.git.read
+
+        def grown(*arguments: str) -> bytes:
+            if arguments == ("show", REVISION + ":Cargo.toml"):
+                return workspace(32)
+            return responses(*arguments)
+
+        self.git.read = grown  # type: ignore[method-assign]
+        with self.assertRaisesRegex(ValueError, "sealed asset count"):
+            self.verify()
 
     def test_missing_receipt_and_malformed_plan(self) -> None:
         with self.assertRaisesRegex(ValueError, "MARTENSITE_RELEASE_RECEIPT"):
@@ -269,6 +293,7 @@ class RealHookIntegration(unittest.TestCase):
             root.mkdir()
             (root / "tools").mkdir()
             (root / "tools/release_verification_plan.py").write_bytes(PLAN)
+            (root / "Cargo.toml").write_bytes(WORKSPACE)
             self.git(root, "init", "-q")
             self.git(root, "config", "user.email", "fixture@example.invalid")
             self.git(root, "config", "user.name", "Named release fixture")
