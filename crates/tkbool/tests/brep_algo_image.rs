@@ -156,6 +156,22 @@ fn filter_removes_images_missing_from_the_selected_shape() {
     assert!(!links.has_image(&source_b));
 }
 
+#[test]
+fn last_image_of_an_unbound_shape_is_the_shape_not_the_fallback_list() {
+    let shape = vertex(2.0);
+    let other = vertex(3.0);
+    let mut graph = BRepAlgoImage::new();
+    graph.bind(&other, &shape).unwrap();
+    let last = graph.last_image(&shape);
+    assert_eq!(last.len(), 1);
+    assert!(last[0].is_same(&shape));
+    // A bound shape whose image is itself gives the shape (its own orientation).
+    graph.bind(&shape, &shape.reversed()).unwrap();
+    let last = graph.last_image(&shape);
+    assert_eq!(last.len(), 1);
+    assert_eq!(last[0].orientation(), shape.orientation());
+}
+
 fn vertex(x: f64) -> Shape {
     let mut vertex = Vertex::default();
     BRepBuilder::default()

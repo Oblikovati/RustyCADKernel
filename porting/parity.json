@@ -329333,7 +329333,7 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
       "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::new",
       "status": "implemented",
-      "notes": "Default state and no-algorithm history verified by native wrapper fixture. Standard/join offset remains unported."
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
     },
     {
       "upstream_id": "BRepOffsetAPI_MakeOffsetShape::PerformBySimple",
@@ -342048,142 +342048,79 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/) and compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: offset shapes and thick solids of primitives, single faces and face shells, arc and intersection joins, thickening). Partial: the complete intersection of planar shapes (BRepOffset_MakeOffset_1.cxx, BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces) is not ported and raises Standard_NotImplemented."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::BRepOffset_MakeOffset()",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::new",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::Initialize(const TopoDS_Shape &, const double, const double, const BRepOffset_Mode, const bool, const bool, const GeomAbs_JoinType, const bool, const bool)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::initialize",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx; the native fields left uninitialized take the Initialize defaults."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Clear()",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::clear",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::AllowLinearization(const bool)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::allow_linearization",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::AddFace(const TopoDS_Face &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::add_face",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::SetOffsetOnFace(const TopoDS_Face &, const double)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::set_offset_on_face",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::MakeOffsetShape(const Message_ProgressRange &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_offset_shape",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::CheckInputData(const Message_ProgressRange &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::check_input_data",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::IsDone() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_done",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Shape() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::shape",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::InitShape() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::init_shape",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Error() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::error",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetJoinType() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::join_type",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::get_join_type",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::ClosingFaces() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::closing_faces",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetBadShape() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::bad_shape",
-      "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::get_bad_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BOPTools_AlgoTools2D::AdjustPCurveOnSurf(const BRepAdaptor_Surface &, const double, const double, const occ::handle<Geom2d_Curve> &, occ::handle<Geom2d_Curve> &)",
@@ -342357,15 +342294,6 @@
       "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
     },
     {
-      "upstream_id": "BRepOffset_MakeOffset::OffsetEdgesFromShapes()",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_edges_from_shapes",
-      "status": "partial",
-      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. OCC28131 standard-offset legacy declaration now passes and is mapped; these history observations remain bounded to their recorded fixtures, and the general offset pipeline is incomplete."
-    },
-    {
       "upstream_id": "BRepAlgo_Image::RemoveRoot(const TopoDS_Shape &)",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
@@ -342474,15 +342402,6 @@
       "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
     },
     {
-      "upstream_id": "BRepOffset_MakeOffset::Generated(const TopoDS_Shape &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::generated",
-      "status": "partial",
-      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. OCC28131 standard-offset legacy declaration now passes and is mapped; these history observations remain bounded to their recorded fixtures, and the general offset pipeline is incomplete."
-    },
-    {
       "upstream_id": "BRepAlgo_Image::HasImage(const TopoDS_Shape &)",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
@@ -342528,15 +342447,6 @@
       "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
     },
     {
-      "upstream_id": "BRepOffset_MakeOffset::IsDeleted(const TopoDS_Shape &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_deleted",
-      "status": "partial",
-      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. OCC28131 standard-offset legacy declaration now passes and is mapped; these history observations remain bounded to their recorded fixtures, and the general offset pipeline is incomplete."
-    },
-    {
       "upstream_id": "BRepAlgo_Image::Bind(const TopoDS_Shape &, const TopoDS_Shape &)",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
@@ -342544,24 +342454,6 @@
       "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::bind",
       "status": "partial",
       "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::Modified(const TopoDS_Shape &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::modified",
-      "status": "partial",
-      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. OCC28131 standard-offset legacy declaration now passes and is mapped; these history observations remain bounded to their recorded fixtures, and the general offset pipeline is incomplete."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::OffsetFacesFromShapes()",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_faces_from_shapes",
-      "status": "partial",
-      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. OCC28131 standard-offset legacy declaration now passes and is mapped; these history observations remain bounded to their recorded fixtures, and the general offset pipeline is incomplete."
     },
     {
       "upstream_id": "BOPTools_AlgoTools::IsSplitToReverse(const TopoDS_Edge &, const TopoDS_Edge &, const occ::handle<IntTools_Context> &, int *)",
@@ -344874,19 +344766,9 @@
       "upstream_id": "BRepOffset_MakeOffset::GetAnalyse() const",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": null,
-      "status": "upstream_unimplemented",
-      "notes": "Pinned OCCT declares this exported method but has no source definition or native library symbol; its minimal call probe fails to link. Evidence and hashes: tools/oracle/tkoffset_get_analyse_gap.json and tools/oracle/tkoffset_get_analyse_unimplemented.md. No Rust implementation or successful port is claimed; this remains an explicit inventory obligation."
-    },
-    {
-      "upstream_id": "BRepOffset_MakeOffset::MakeThickSolid(const Message_ProgressRange &)",
-      "toolkit": "TKOffset",
-      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
-      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
-      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_thick_solid",
-      "status": "partial",
-      "notes": "No-closing-face branch delegates to MakeOffsetShape and reverses completed positive offsets. Pinned native positive, negative and zero-offset fixtures compare completion, errors, nullness, result and face orientations; tools/oracle/tkoffset_make_thick_solid_no_caps.md. Closing-face quilting is explicitly unsupported. Supplemental fixtures do not map legacy declarations or establish complete API parity."
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::get_analyse",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::operator delete(void*) noexcept",
@@ -345898,8 +345780,8 @@
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d",
-      "status": "partial",
-      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_Inter3d.cxx (crates/tkoffset/src/brep_offset/inter3d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter) and through BRepOffset_MakeOffset (om_offset)."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::AsDes() const",
@@ -626829,6 +626711,246 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter2d::fuse_vertices",
       "status": "implemented",
       "notes": "Translated from BRepOffset_Inter2d.cxx (crates/tkoffset/src/brep_offset/inter2d/); compared with OCCT by tools/verify_tkoffset_numeric.py (oi_inter ops 3 and 4: both vertex fusions, after Inter3d::ConnexIntByInt on analysed and offset boxes, cylinders, cones, spheres and tori both ways; extended edges, 2d AsDes vertices, vertex images)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::AddFace(const TopoDS_Face&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::add_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::AllowLinearization(bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::allow_linearization",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::BRepOffset_MakeOffset(const TopoDS_Shape&,double,double,BRepOffset_Mode,bool,bool,GeomAbs_JoinType,bool,bool,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::with_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The defaulted arguments are MakeOffsetOptions (Default gives the native defaults). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::CheckInputData(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::check_input_data",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The NullOffset, NotConnectedShell, C0 and bad-normal checks are also covered by tests/standard_offset_check_input.rs."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The vertex and edge cases fall through to the face case as natively."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Initialize(const TopoDS_Shape&,double,double,BRepOffset_Mode,bool,bool,GeomAbs_JoinType,bool,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::initialize",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The defaulted arguments are MakeOffsetOptions (Default gives the native defaults)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::IsDeleted(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_deleted",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::MakeOffsetShape(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_offset_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::MakeThickSolid(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_thick_solid",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Modified(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::modified",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::OffsetEdgesFromShapes() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_edges_from_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::OffsetFacesFromShapes() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_faces_from_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::SetOffsetOnFace(const TopoDS_Face&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::set_offset_on_face",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeOffset.cxx (crates/tkoffset/src/brep_offset/maker/); compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset: the offset shapes and thick solids of boxes, cylinders, cones, spheres and tori, of single faces and of shells of 2 and 3 box faces, both ways, arc and intersection joins, thickened faces; order-independent digests of the results and the history counts and types of every face, edge and vertex of the source)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeLoops::BRepOffset_MakeLoops()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeLoops.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeLoops::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeLoops.cxx (crates/tkoffset/src/brep_offset/make_loops.rs); compared with OCCT through BRepOffset_MakeOffset (om_offset). The old vertex points are moved to the substituted vertex (NCollection_List::Append of a list empties it, as natively)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeLoops::Build(const NCollection_List<TopoDS_Shape>&,const occ::handle<BRepAlgo_AsDes>&,BRepAlgo_Image&,BRepAlgo_Image&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeLoops.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeLoops::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeLoops.cxx (crates/tkoffset/src/brep_offset/make_loops.rs); compared with OCCT through BRepOffset_MakeOffset (om_offset). The old vertex points are moved to the substituted vertex (NCollection_List::Append of a list empties it, as natively)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeLoops::BuildFaces(const NCollection_List<TopoDS_Shape>&,const occ::handle<BRepAlgo_AsDes>&,BRepAlgo_Image&,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeLoops.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeLoops::build_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeLoops.cxx (crates/tkoffset/src/brep_offset/make_loops.rs); compared with OCCT through BRepOffset_MakeOffset (om_offset). The old vertex points are moved to the substituted vertex (NCollection_List::Append of a list empties it, as natively)."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeLoops::BuildOnContext(const NCollection_List<TopoDS_Shape>&,const BRepOffset_Analyse&,const occ::handle<BRepAlgo_AsDes>&,BRepAlgo_Image&,bool,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeLoops.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeLoops::build_on_context",
+      "status": "implemented",
+      "notes": "Translated from BRepOffset_MakeLoops.cxx (crates/tkoffset/src/brep_offset/make_loops.rs); compared with OCCT through BRepOffset_MakeOffset (om_offset). The old vertex points are moved to the substituted vertex (NCollection_List::Append of a list empties it, as natively)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::GetJoinType() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::get_join_type",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::IsDeleted(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::is_deleted",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::MakeOffset() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::make_offset",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::Modified(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::modified",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::PerformByJoin(const TopoDS_Shape&,double,double,BRepOffset_Mode,bool,bool,GeomAbs_JoinType,bool,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::perform_by_join",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple). The defaulted arguments are MakeOffsetOptions (Default gives the native defaults). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeOffsetShape::PerformBySimple(const TopoDS_Shape&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeOffsetShape.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape::perform_by_simple",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeOffsetShape.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs) over BRepOffset_MakeOffset and BRepOffset_MakeSimpleOffset, both compared with OCCT by tools/verify_tkoffset_numeric.py (om_offset, om_simple)."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolid::BRepOffsetAPI_MakeThickSolid()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeThickSolid.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeThickSolid::new",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeThickSolid.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs; the native subclass of BRepOffsetAPI_MakeOffsetShape is a wrapper around it); compared with OCCT through om_offset and om_simple; the GTests of BRepOffsetAPI_MakeThickSolid_Test.cxx pass, with the closed-form wall volume 1844 of the hollowed box of side 20. The constructor sets the build-solid flag of the simple algorithm, as natively."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolid::Build(const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeThickSolid.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeThickSolid::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeThickSolid.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs; the native subclass of BRepOffsetAPI_MakeOffsetShape is a wrapper around it); compared with OCCT through om_offset and om_simple; the GTests of BRepOffsetAPI_MakeThickSolid_Test.cxx pass, with the closed-form wall volume 1844 of the hollowed box of side 20."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolid::MakeThickSolidByJoin(const TopoDS_Shape&,const NCollection_List<TopoDS_Shape>&,double,double,BRepOffset_Mode,bool,bool,GeomAbs_JoinType,bool,const Message_ProgressRange&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeThickSolid.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeThickSolid::make_thick_solid_by_join",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeThickSolid.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs; the native subclass of BRepOffsetAPI_MakeOffsetShape is a wrapper around it); compared with OCCT through om_offset and om_simple; the GTests of BRepOffsetAPI_MakeThickSolid_Test.cxx pass, with the closed-form wall volume 1844 of the hollowed box of side 20. The defaulted arguments are MakeOffsetOptions (Default gives the native defaults). The complete intersection of planar shapes (Intersection with an intersection join on planar faces) needs BRepOffset_MakeOffset_1.cxx (BuildSplitsOfExtendedFaces/BuildSplitsOfTrimmedFaces), not ported yet: that mode raises Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolid::MakeThickSolidBySimple(const TopoDS_Shape&,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeThickSolid.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeThickSolid::make_thick_solid_by_simple",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeThickSolid.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs; the native subclass of BRepOffsetAPI_MakeOffsetShape is a wrapper around it); compared with OCCT through om_offset and om_simple; the GTests of BRepOffsetAPI_MakeThickSolid_Test.cxx pass, with the closed-form wall volume 1844 of the hollowed box of side 20."
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_MakeThickSolid::Modified(const TopoDS_Shape&)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffsetAPI/BRepOffsetAPI_MakeThickSolid.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeThickSolid::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::modified",
+      "status": "implemented",
+      "notes": "Translated from BRepOffsetAPI_MakeThickSolid.cxx (crates/tkoffset/src/brep_offset_api/make_offset_shape.rs; the native subclass of BRepOffsetAPI_MakeOffsetShape is a wrapper around it); compared with OCCT through om_offset and om_simple; the GTests of BRepOffsetAPI_MakeThickSolid_Test.cxx pass, with the closed-form wall volume 1844 of the hollowed box of side 20."
     }
   ],
   "tests": [
@@ -741426,10 +741548,11 @@
       "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.HollowBox",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid"
-      ],
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_api_make_thick_solid",
+      "rust_test": "hollow_box",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_api_make_thick_solid.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ],
@@ -741439,10 +741562,11 @@
       "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.HollowBoxVolume",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid"
-      ],
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_api_make_thick_solid",
+      "rust_test": "hollow_box_volume",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_api_make_thick_solid.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ],
@@ -741452,10 +741576,11 @@
       "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.MakeThickSolidBySimple",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid"
-      ],
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_api_make_thick_solid",
+      "rust_test": "make_thick_solid_by_simple",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_api_make_thick_solid.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ],
@@ -741465,10 +741590,11 @@
       "upstream_id": "BRepOffsetAPI_MakeThickSolidTest.ThickSolidLargerVolume",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/GTests/BRepOffsetAPI_MakeThickSolid_Test.cxx",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BRepOffsetAPI_MakeThickSolid"
-      ],
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "legacy_brep_offset_api_make_thick_solid",
+      "rust_test": "thick_solid_larger_volume",
+      "rust_source": "crates/tkoffset/tests/legacy_brep_offset_api_make_thick_solid.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ],

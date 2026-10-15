@@ -17,7 +17,7 @@ pub use make_draft::BRepOffsetAPIMakeDraft;
 pub use make_evolved::{BRepOffsetAPIMakeEvolved, EvolvedOptions};
 pub use make_filling::{BRepOffsetAPIMakeFilling, FillingParameters};
 pub use make_offset::BRepOffsetAPIMakeOffset;
-pub use make_offset_shape::BRepOffsetAPIMakeOffsetShape;
+pub use make_offset_shape::{BRepOffsetAPIMakeOffsetShape, BRepOffsetAPIMakeThickSolid};
 pub use make_pipe::BRepOffsetAPIMakePipe;
 pub use make_pipe_shell::BRepOffsetAPIMakePipeShell;
 pub use normal_projection::BRepOffsetAPINormalProjection;

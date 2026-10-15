@@ -14,7 +14,7 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::geom_abs::JoinType;
-use rustycad_tkoffset::brep_offset::{BRepOffsetMakeOffset, BRepOffsetMode};
+use rustycad_tkoffset::brep_offset::{MakeOffsetOptions, BRepOffsetMakeOffset, BRepOffsetMode};
 use rustycad_tkshhealing::shape_fix::ShapeFixShape;
 use rustycad_tktopalgo::{
     brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape},
@@ -28,7 +28,7 @@ fn geom_fill_bspline_curves_occ28131_standard_offset_of_filled_face() {
     assert!(!source.is_null());
     let mut maker = BRepOffsetMakeOffset::new();
     initialize_standard_maker(&mut maker, &source);
-    maker.make_offset_shape().unwrap();
+    maker.make_offset_shape(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
     assert!(maker.is_done());
     assert!(!maker.shape().is_null());
     assert_native_raw_result(maker.shape());
@@ -37,17 +37,7 @@ fn geom_fill_bspline_curves_occ28131_standard_offset_of_filled_face() {
 }
 
 fn initialize_standard_maker(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
-    maker.initialize(
-        source,
-        10.0,
-        1.0e-7,
-        BRepOffsetMode::Skin,
-        false,
-        false,
-        JoinType::Arc,
-        false,
-        false,
-    );
+    maker.initialize(source, 10.0, 1.0e-7, MakeOffsetOptions { mode: BRepOffsetMode::Skin, intersection: false, self_inter: false, join: JoinType::Arc, thickening: false, remove_int_edges: false });
 }
 
 fn assert_native_raw_result(shape: &Shape) {

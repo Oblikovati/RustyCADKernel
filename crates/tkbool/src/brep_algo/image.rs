@@ -241,10 +241,16 @@ fn append_unbound_image(source: &Shape) -> Vec<Shape> {
     images.clone()
 }
 
+/// `LastImage(S, L)`: an unbound shape itself (not the static list of `Image`), else
+/// the shape for each image that is the same, the last images of the others.
 fn append_last_images(graph: &BRepAlgoImage, source: &Shape, result: &mut Vec<Shape>) {
-    for image in graph.image(source) {
-        if image.is_same(source) || !graph.has_image(&image) {
-            result.push(image);
+    let Ok(images) = graph.down.find(source) else {
+        result.push(source.clone());
+        return;
+    };
+    for image in images.clone() {
+        if image.is_same(source) {
+            result.push(source.clone());
         } else {
             append_last_images(graph, &image, result);
         }

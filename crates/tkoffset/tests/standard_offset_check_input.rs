@@ -10,7 +10,7 @@ use rustycad_tkmath::{
     geom_abs::JoinType,
     gp::{Axis3, Cylinder3, Direction3, Plane3, Point3},
 };
-use rustycad_tkoffset::brep_offset::{BRepOffsetError, BRepOffsetMakeOffset, BRepOffsetMode};
+use rustycad_tkoffset::brep_offset::{MakeOffsetOptions, BRepOffsetError, BRepOffsetMakeOffset, BRepOffsetMode};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tktopalgo::{
     brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape},
@@ -23,10 +23,10 @@ fn null_global_offset_fails_and_clears_bad_shape() {
     let face = plane_face(0.0);
     let mut maker = initialized(&face.clone().into_shape(), 0.0);
 
-    assert!(!maker.check_input_data().unwrap());
-    assert_eq!(maker.error(), Some(BRepOffsetError::NullOffset));
+    assert!(!maker.check_input_data(&rustycad_tkernel::message::ProgressRange::default()).unwrap());
+    assert_eq!(maker.error(), BRepOffsetError::NullOffset);
     assert!(maker.shape().is_null());
-    assert!(maker.bad_shape().is_null());
+    assert!(maker.get_bad_shape().is_null());
 }
 
 #[test]
@@ -35,8 +35,8 @@ fn nonzero_face_override_allows_zero_global_offset() {
     let mut maker = initialized(&face.clone().into_shape(), 0.0);
     maker.set_offset_on_face(&face, 1.0);
 
-    assert!(maker.check_input_data().unwrap());
-    assert_eq!(maker.error(), Some(BRepOffsetError::NoError));
+    assert!(maker.check_input_data(&rustycad_tkernel::message::ProgressRange::default()).unwrap());
+    assert_eq!(maker.error(), BRepOffsetError::NoError);
 }
 
 #[test]
@@ -46,10 +46,10 @@ fn disconnected_faces_fail_during_standard_offset_precheck() {
     let shape = disconnected(&first.clone().into_shape(), &second.clone().into_shape());
     let mut maker = initialized(&shape, 1.0);
 
-    maker.make_offset_shape().unwrap();
+    maker.make_offset_shape(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
     assert!(!maker.is_done());
-    assert_eq!(maker.error(), Some(BRepOffsetError::NotConnectedShell));
-    assert!(maker.bad_shape().is_null());
+    assert_eq!(maker.error(), BRepOffsetError::NotConnectedShell);
+    assert!(maker.get_bad_shape().is_null());
 }
 
 #[test]
@@ -75,23 +75,23 @@ fn clear_removes_offset_history_after_a_successful_build() {
     let face = plane_face(0.0);
     let source = face.clone().into_shape();
     let mut maker = initialized(&source, 2.0);
-    maker.make_offset_shape().unwrap();
+    maker.make_offset_shape(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
 
     maker.clear();
 
     assert!(!maker.offset_faces_from_shapes().has_image(&source));
     assert!(!maker.offset_edges_from_shapes().has_image(&source));
-    assert!(maker.generated(&source).unwrap().is_empty());
+    assert!(maker.generated(&source).unwrap().iter().cloned().collect::<Vec<_>>().is_empty());
     assert!(maker.is_deleted(&source).unwrap());
 }
 
 fn assert_cylinder_offset(face: &rustycad_tkbrep::topods::Face) {
     let mut maker = initialized(&face.clone().into_shape(), 2.0);
 
-    maker.make_offset_shape().unwrap();
+    maker.make_offset_shape(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
 
     assert!(maker.is_done());
-    assert_eq!(maker.error(), Some(BRepOffsetError::NoError));
+    assert_eq!(maker.error(), BRepOffsetError::NoError);
     assert_shell_topology(maker.shape());
     let mut properties = GProps::new();
     BRepGProp::surface_properties(maker.shape(), &mut properties, false, false).unwrap();
@@ -113,40 +113,18 @@ fn reversed_face_and_negative_offset_use_oriented_plane_normal() {
 }
 
 #[test]
-fn unsupported_join_mode_returns_a_named_partial_port_error() {
-    let face = plane_face(0.0);
-    let mut maker = BRepOffsetMakeOffset::new();
-    maker.initialize(
-        &face.clone().into_shape(),
-        2.0,
-        1.0e-7,
-        BRepOffsetMode::Skin,
-        false,
-        false,
-        JoinType::Intersection,
-        false,
-        false,
-    );
-
-    let error = maker.make_offset_shape().unwrap_err();
-    assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(!maker.is_done());
-    assert!(maker.shape().is_null());
-}
-
-#[test]
 fn multi_face_solid_offset_builds_native_corner_spheres_and_history() {
     let mut source = BRepPrimAPIMakeBox::from_sizes(1.0, 2.0, 3.0).unwrap();
     let shape = source.shape().unwrap().clone();
     let mut maker = initialized(&shape, 0.5);
 
-    maker.make_offset_shape().unwrap();
+    maker.make_offset_shape(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
     assert_box_solid_result(&mut maker, &shape);
 }
 
 fn assert_box_solid_result(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
     assert!(maker.is_done());
-    assert_eq!(maker.error(), Some(BRepOffsetError::NoError));
+    assert_eq!(maker.error(), BRepOffsetError::NoError);
     assert_eq!(maker.shape().shape_type().unwrap(), ShapeEnum::Solid);
     assert_eq!(
         Explorer::new(maker.shape(), ShapeEnum::Face, ShapeEnum::Shape)
@@ -190,7 +168,7 @@ fn assert_box_generated_history(maker: &mut BRepOffsetMakeOffset, source: &Shape
 }
 
 fn assert_generated_face(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
-    let generated = maker.generated(source).unwrap();
+    let generated = maker.generated(source).unwrap().iter().cloned().collect::<Vec<_>>();
     assert_eq!(generated.len(), 1);
     assert_eq!(generated[0].shape_type().unwrap(), ShapeEnum::Face);
 }
@@ -198,9 +176,9 @@ fn assert_generated_face(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
 fn assert_single_plane_offset(face: rustycad_tkbrep::topods::Face, offset: f64, z: f64) {
     let source = face.clone().into_shape();
     let mut maker = initialized(&source, offset);
-    maker.make_offset_shape().unwrap();
+    maker.make_offset_shape(&rustycad_tkernel::message::ProgressRange::default()).unwrap();
     assert!(maker.is_done());
-    assert_eq!(maker.error(), Some(BRepOffsetError::NoError));
+    assert_eq!(maker.error(), BRepOffsetError::NoError);
     assert_shell_topology(maker.shape());
     let offset_face = first_face(maker.shape());
     assert_offset_sample(&offset_face, z);
@@ -217,12 +195,12 @@ fn assert_offset_history(
     assert!(
         maker
             .generated(source)
-            .unwrap()
+            .unwrap().iter().cloned().collect::<Vec<_>>()
             .first()
             .unwrap()
             .is_same(&first_face(maker.shape()).into_shape())
     );
-    assert!(maker.modified(source).is_empty());
+    assert!(maker.modified(source).unwrap().is_empty());
     assert!(!maker.is_deleted(source).unwrap());
     assert_mapped_subshapes(maker, face, ShapeEnum::Edge);
     assert_mapped_subshapes(maker, face, ShapeEnum::Vertex);
@@ -238,7 +216,7 @@ fn assert_mapped_subshapes(
             maker.offset_edges_from_shapes().has_image(&source),
             kind == ShapeEnum::Edge
         );
-        let generated = maker.generated(&source).unwrap();
+        let generated = maker.generated(&source).unwrap().iter().cloned().collect::<Vec<_>>();
         assert_eq!(generated.len(), 1);
         assert_edge_history_image(maker, kind, &source, &generated[0]);
         assert!(!maker.is_deleted(&source).unwrap());
@@ -305,17 +283,7 @@ fn assert_shell_geometry(shape: &Shape, face: &rustycad_tkbrep::topods::Face) {
 
 fn initialized(shape: &Shape, offset: f64) -> BRepOffsetMakeOffset {
     let mut maker = BRepOffsetMakeOffset::new();
-    maker.initialize(
-        shape,
-        offset,
-        1.0e-7,
-        BRepOffsetMode::Skin,
-        false,
-        false,
-        JoinType::Arc,
-        false,
-        false,
-    );
+    maker.initialize(shape, offset, 1.0e-7, MakeOffsetOptions { mode: BRepOffsetMode::Skin, intersection: false, self_inter: false, join: JoinType::Arc, thickening: false, remove_int_edges: false });
     maker
 }
 
