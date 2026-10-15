@@ -19,3 +19,5 @@ pub mod tool_contracts;
 pub mod tool_derived;
 #[path = "../two_colors.rs"]
 pub mod two_colors;
+#[path = "../volume_topology.rs"]
+pub mod volume_topology;

@@ -151,6 +151,8 @@ pub mod brep_tools_gtrsf_modification;
 pub mod brep_tools_reshape;
 #[path = "../brep_tools_trsf_modification.rs"]
 pub mod brep_tools_trsf_modification;
+#[path = "../graph_pcurve_placement.rs"]
+pub mod graph_pcurve_placement;
 #[path = "../topexp.rs"]
 pub mod topexp;
 #[path = "../topexp_behavior.rs"]
@@ -167,5 +169,3 @@ pub mod topods_iterator;
 pub mod topods_tshape;
 #[path = "../toptools_behavior.rs"]
 pub mod toptools_behavior;
-#[path = "../graph_pcurve_placement.rs"]
-pub mod graph_pcurve_placement;

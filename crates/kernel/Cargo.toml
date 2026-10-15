@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-kernel"
 version.workspace = true
 edition.workspace = true
@@ -23,3 +24,13 @@ rustycad-tkmesh = { path = "../tkmesh", version = "0.2.8" }
 [dev-dependencies]
 rustycad-tkprim = { path = "../tkprim", version = "0.2.8" }
 static_assertions = "1.1.0"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"
+
+# Isolated: re-runs its own executable with an exact test name in a child process.
+[[test]]
+name = "presentation_determinism"
+path = "tests/presentation_determinism.rs"
