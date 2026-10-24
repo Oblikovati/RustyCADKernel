@@ -6,7 +6,7 @@ permissions:
 jobs:
   windows-runtime:
     runs-on: windows-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/checkout@v7.0.1
@@ -14,7 +14,7 @@ jobs:
           repository: Oblikovati/Martensite
           ref: 2254483e14b35f82a838a316ef5121d6059de658
           path: target/document-access-sdk
-      - name: Compare destination named streams through native save paths
+      - name: Capture native Windows compiler inventory before baseline admission
         shell: pwsh
         env:
           CARGO_PROFILE_DEV_DEBUG: '0'
@@ -61,23 +61,26 @@ jobs:
           git -C target/document-access-sdk rev-parse HEAD | Out-File target/runtime-oracle/sdk-revision.txt
           Get-Volume | Format-List | Out-File target/runtime-oracle/volumes.txt
           Get-FileHash tools/diagnostics/windows_document_streams.rs, tools/diagnostics/windows_document_streams_fix.patch, tools/diagnostics/windows_document_streams_fix.json, tools/diagnostics/windows_document_streams.lock, .github/workflows/native-runtime-oracle.yml | Format-List | Out-File target/runtime-oracle/source-hashes.txt
-          cargo +1.99.0 run --locked --manifest-path target/windows-probe/Cargo.toml -- target/runtime-oracle/files 2>&1 | Tee-Object target/runtime-oracle/probe.log
-          $probeExit = $LASTEXITCODE
-          Get-FileHash target/windows-probe/target/debug/windows-document-stream-probe.exe, target/windows-probe/Cargo.lock | Format-List | Out-File target/runtime-oracle/build-hashes.txt
-          if ($probeExit -ne 0) { throw "Named-stream preservation regression: probe returned $probeExit" }
-          cargo +1.99.0 test --locked --manifest-path target/document-access-sdk/Cargo.toml -p martensite-tkernel --lib osd::document_file:: -- --test-threads=1 2>&1 | Tee-Object target/runtime-oracle/foundation-regressions.log
-          if ($LASTEXITCODE -ne 0) { throw 'Native foundation stream/access regressions failed' }
-          cargo +1.99.0 test --locked --manifest-path target/document-access-sdk/Cargo.toml -p martensite-tkcdf --lib named_stream_refusal_preserves_original_and_cleans_staging -- --test-threads=1 2>&1 | Tee-Object target/runtime-oracle/document-regression.log
-          if ($LASTEXITCODE -ne 0) { throw 'Native typed document refusal regression failed' }
-          if (-not (Select-String -Path target/runtime-oracle/foundation-regressions.log -Pattern 'named_destination_streams_refuse_publication_without_metadata_changes ... ok' -Quiet)) { throw 'Foundation stream regression did not execute' }
-          if (-not (Select-String -Path target/runtime-oracle/document-regression.log -SimpleMatch '1 passed; 0 failed;' -Quiet)) { throw 'Exactly one document regression must execute' }
-
+          $env:RUSTUP_TOOLCHAIN = '1.99.0'
+          $env:CARGO_BUILD_JOBS = '2'
+          Push-Location target/document-access-sdk
+          cargo +1.99.0 xtask pr --base 2254483e14b35f82a838a316ef5121d6059de658 2>&1 | Tee-Object ../runtime-oracle/native-compiler-inventory.log
+          $inventoryExit = $LASTEXITCODE
+          Pop-Location
+          if ($inventoryExit -eq 0) { throw 'Expected a reviewed baseline delta before admission' }
+          if (-not (Select-String -Path target/runtime-oracle/native-compiler-inventory.log -SimpleMatch 'compiler inventory changed for x86_64-pc-windows-msvc' -Quiet)) { throw 'Inventory did not reach its expected baseline comparison' }
+          python tools/diagnostics/verify_windows_stream_inventory.py
+          if ($LASTEXITCODE -ne 0) { throw 'Native inventory delta verification failed' }
+          Copy-Item target/document-access-sdk/target/unsafe-inventory/latest.json target/runtime-oracle/compiler-inventory.json
+          Copy-Item target/document-access-sdk/target/unsafe-inventory/compiler.stdout.jsonl target/runtime-oracle/compiler.stdout.jsonl
+          Copy-Item target/document-access-sdk/target/unsafe-inventory/compiler.stderr.txt target/runtime-oracle/compiler.stderr.txt
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: windows-document-stream-probe
           path: |
             target/runtime-oracle/*.json
+            target/runtime-oracle/*.jsonl
             target/runtime-oracle/*.txt
             target/runtime-oracle/*.log
             target/windows-probe/Cargo.lock

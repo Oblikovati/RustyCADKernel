@@ -1,18 +1,21 @@
 diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 55372def..41185984 100644
+index 55372def..af35db5f 100644
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -6,6 +6,10 @@ follows [Semantic Versioning](https://semver.org/).
+@@ -6,10 +6,12 @@ follows [Semantic Versioning](https://semver.org/).
  
  ## [Unreleased]
  
-+### Fixed
-+
-+- Refused Windows document replacements with destination named streams before changing metadata or publishing bytes, preserving the original file and its stream contents (#248).
-+
- ## [0.3.6] - 2026-10-23
+-## [0.3.6] - 2026-10-23
++## [0.3.6] - 2026-10-24
  
  ### Fixed
+ 
++- Refused Windows document replacements with destination named streams before changing metadata or publishing bytes, preserving the original file and its stream contents (#248).
++
+ - Staged document writes so preparation failures and incomplete driver output leave existing files intact; verified access policies before publication and retained requested paths and symbolic links (#245).
+ - Refused custom restrictive writer policies before replacing existing documents, while retaining ordinary staging defaults and destination access policies (#245).
+ 
 diff --git a/crates/martensite-tkcdf/src/cdf/staged_store/tests.rs b/crates/martensite-tkcdf/src/cdf/staged_store/tests.rs
 index 58d97501..46ff740d 100644
 --- a/crates/martensite-tkcdf/src/cdf/staged_store/tests.rs
@@ -290,3 +293,15 @@ index ab2e53b0..2ca5c09e 100644
 +permission error leaves the original bytes and streams intact. Saves to ordinary
 +files remain supported. Stream-enumeration errors also refuse publication rather
 +than assuming metadata is absent (#248).
+diff --git a/docs/features/safe-toolkits/unsafe-source-baseline.json b/docs/features/safe-toolkits/unsafe-source-baseline.json
+index 1969f3d0..038319f2 100644
+--- a/docs/features/safe-toolkits/unsafe-source-baseline.json
++++ b/docs/features/safe-toolkits/unsafe-source-baseline.json
+@@ -146,6 +146,7 @@
+   "crates/martensite-tkernel/src/ncollection/vector/storage.rs": {"unsafe_keywords":2,"unsafe_code_mentions":2,"kinds":{"block":2}},
+   "crates/martensite-tkernel/src/osd/document_file/macos/acl.rs": {"unsafe_keywords":8,"unsafe_code_mentions":1,"kinds":{"block":7,"extern":1}},
+   "crates/martensite-tkernel/src/osd/document_file/windows.rs": {"unsafe_keywords":13,"unsafe_code_mentions":1,"kinds":{"block":13}},
++  "crates/martensite-tkernel/src/osd/document_file/windows_streams.rs": {"unsafe_keywords":3,"unsafe_code_mentions":1,"kinds":{"block":3}},
+   "crates/martensite-tkernel/src/osd/file/native_unix.rs": {"unsafe_keywords":12,"unsafe_code_mentions":1,"kinds":{"block":12}},
+   "crates/martensite-tkernel/src/osd/file/native_unix/lock_record.rs": {"unsafe_keywords":1,"unsafe_code_mentions":0,"kinds":{"block":1}},
+   "crates/martensite-tkernel/src/osd/file/native_unix/directory_cursor.rs": {"unsafe_keywords":5,"unsafe_code_mentions":0,"kinds":{"block":4,"implementation":1}},
