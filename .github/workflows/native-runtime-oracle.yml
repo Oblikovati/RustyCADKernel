@@ -25,6 +25,9 @@ jobs:
           git checkout-index --force --all
           git -C target/document-access-sdk config core.autocrlf false
           git -C target/document-access-sdk checkout-index --force --all
+          git config core.eol lf
+          git -C target/document-access-sdk config core.eol lf
+          python tools/diagnostics/prepare_windows_streams.py
           New-Item -ItemType Directory -Force target/runtime-oracle, target/windows-probe/src | Out-Null
           Copy-Item tools/diagnostics/windows_document_streams.rs target/windows-probe/src/main.rs
           $sdkPath = (Resolve-Path target/document-access-sdk/crates/martensite-tkernel).Path.Replace('\', '/')
