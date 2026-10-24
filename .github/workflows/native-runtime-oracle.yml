@@ -54,7 +54,7 @@ jobs:
             if ($actual -ne $file.Value) { throw "Fixed source hash mismatch: $($file.Name)" }
           }
           Copy-Item tools/diagnostics/windows_document_streams_fix.json target/runtime-oracle/fix-manifest.json
-          rustup toolchain install 1.99.0 --profile minimal
+          rustup toolchain install 1.99.0 --profile minimal --component rustfmt
           if ($LASTEXITCODE -ne 0) { throw "Rust installation failed: $LASTEXITCODE" }
           rustc +1.99.0 -Vv | Out-File target/runtime-oracle/rust-version.txt
           git rev-parse HEAD | Out-File target/runtime-oracle/source-revision.txt
