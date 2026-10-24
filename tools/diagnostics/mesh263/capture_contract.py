@@ -57,6 +57,73 @@ def validate_sources(product: Path, manifest: dict[str, object], fixed: bool) ->
             )
 
 
+def checkout_state(product: Path) -> dict[str, str]:
+    """Preserve the actual offending paths before restoration; `checkout_state(product)`."""
+    return {
+        "porcelain": git(product, "status", "--porcelain", "--untracked-files=all"),
+        "raw": git(product, "diff", "--raw"),
+        "numstat": git(product, "diff", "--numstat"),
+    }
+
+
+def restore_tracked_blob(
+    product: Path, revision: str, relative: str
+) -> dict[str, object]:
+    """Restore reviewed bytes without accepting generated content; `restore_tracked_blob(product, sha, path)`."""
+    contents = regular_blob_contents(product, revision, relative)
+    path = product / relative
+    before = sha256(path) if path.exists() else None
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(contents)
+    expected = hashlib.sha256(contents).hexdigest()
+    if sha256(path) != expected:
+        raise ValueError(
+            f"restored {relative!r} hash {sha256(path)}: expected {expected}"
+        )
+    return {
+        "path": relative,
+        "before_sha256": before,
+        "frozen_sha256": expected,
+        "after_sha256": sha256(path),
+    }
+
+
+def regular_blob_contents(product: Path, revision: str, relative: str) -> bytes:
+    """Reject symlinks/submodules before restoring source; `regular_blob_contents(product, sha, path)`."""
+    entry = git(product, "ls-tree", revision, "--", relative).split()
+    if not entry or entry[0] not in ("100644", "100755"):
+        raise ValueError(
+            f"tracked entry {entry!r}: expected a regular file at {relative!r}"
+        )
+    return subprocess.check_output(
+        ["git", "-C", str(product), "show", f"{revision}:{relative}"]
+    )
+
+
+def normalize_checkout(
+    product: Path, output: Path, manifest: dict[str, object]
+) -> None:
+    """Restore only tracked drift, then retain a strict clean-tree gate; `normalize_checkout(product,out,manifest)`."""
+    revision = str(manifest["product_revision"])
+    if git(product, "rev-parse", "HEAD") != revision:
+        raise ValueError(
+            f"checkout {git(product, 'rev-parse', 'HEAD')}: expected {revision}"
+        )
+    before = checkout_state(product)
+    (output / "checkout-before.json").write_text(json.dumps(before, indent=2) + "\n")
+    git(product, "config", "core.autocrlf", "false")
+    git(product, "config", "core.eol", "lf")
+    modified = subprocess.check_output(
+        ["git", "-C", str(product), "ls-files", "--modified", "-z"]
+    )
+    names = [name.decode("utf-8") for name in modified.split(b"\0") if name]
+    restored = [restore_tracked_blob(product, revision, name) for name in names]
+    result = {"before": before, "restored": restored, "after": checkout_state(product)}
+    (output / "checkout-normalization.json").write_text(
+        json.dumps(result, indent=2) + "\n"
+    )
+
+
 def validate_manifest(product: Path, manifest: dict[str, object]) -> None:
     """Admit only the reviewed baseline and assets; `validate_manifest(product, manifest)`."""
     actual = git(product, "rev-parse", "HEAD")
@@ -65,10 +132,9 @@ def validate_manifest(product: Path, manifest: dict[str, object]) -> None:
             f"product revision {actual}: expected {manifest['product_revision']}"
         )
     validate_assets(manifest)
-    if git(product, "status", "--porcelain"):
-        raise ValueError(
-            "product checkout has changes: expected a clean exact baseline"
-        )
+    dirty = git(product, "status", "--porcelain")
+    if dirty:
+        raise ValueError(f"product checkout {dirty!r}: expected a clean exact baseline")
     validate_sources(product, manifest, False)
 
 
@@ -283,6 +349,7 @@ def main() -> None:
     output.mkdir(parents=True)
     manifest = json.loads((HERE / "manifest.json").read_text())
     validate_platform()
+    normalize_checkout(product, output, manifest)
     validate_manifest(product, manifest)
     result = run_contract(product, output, manifest)
     receipt = {

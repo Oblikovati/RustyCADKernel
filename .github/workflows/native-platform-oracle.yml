@@ -11,6 +11,10 @@ on:
         description: JSON runner list for the controlled capture
         type: string
         default: '["ubuntu-latest", "macos-latest", "windows-latest"]'
+      portable_windows_only:
+        description: Retry only the native Windows portable-cylinder diagnostic
+        type: boolean
+        default: false
       fp_contract:
         description: Native compiler floating-point contraction
         type: choice
@@ -70,7 +74,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-15, windows-2025]
+        os: ${{ fromJSON(inputs.portable_windows_only && '["windows-2025"]' || '["macos-15","windows-2025"]') }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     env:
