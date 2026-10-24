@@ -1,0 +1,292 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 55372def..41185984 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -6,6 +6,10 @@ follows [Semantic Versioning](https://semver.org/).
+ 
+ ## [Unreleased]
+ 
++### Fixed
++
++- Refused Windows document replacements with destination named streams before changing metadata or publishing bytes, preserving the original file and its stream contents (#248).
++
+ ## [0.3.6] - 2026-10-23
+ 
+ ### Fixed
+diff --git a/crates/martensite-tkcdf/src/cdf/staged_store/tests.rs b/crates/martensite-tkcdf/src/cdf/staged_store/tests.rs
+index 58d97501..46ff740d 100644
+--- a/crates/martensite-tkcdf/src/cdf/staged_store/tests.rs
++++ b/crates/martensite-tkcdf/src/cdf/staged_store/tests.rs
+@@ -79,3 +79,24 @@ fn cyclic_final_symlink_is_refused_with_its_destination() {
+             .contains(&destination.file.to_string_lossy().to_string())
+     );
+ }
++
++#[cfg(windows)]
++#[test]
++fn named_stream_refusal_preserves_original_and_cleans_staging() {
++    let destination = TemporaryDestination::new();
++    fs::write(&destination.file, b"owned original").unwrap();
++    let mut stream = destination.file.as_os_str().to_os_string();
++    stream.push(":Zone.Identifier");
++    let stream = PathBuf::from(stream);
++    fs::write(&stream, b"[ZoneTransfer]\r\nZoneId=3\r\n").unwrap();
++    let stage = StagedStore::new(&destination.file).unwrap();
++    fs::write(&stage.file, b"completed replacement").unwrap();
++    let directory = stage.directory.clone();
++    let failure = storage_failure(&destination.name(), stage.commit().unwrap_err(), "publish");
++    assert_eq!(failure.exception_type(), "DocumentStore_PermissionDenied");
++    assert!(failure.message().contains("Zone.Identifier"));
++    drop(stage);
++    assert!(!directory.exists());
++    assert_eq!(fs::read(&destination.file).unwrap(), b"owned original");
++    assert_eq!(fs::read(stream).unwrap(), b"[ZoneTransfer]\r\nZoneId=3\r\n");
++}
+diff --git a/crates/martensite-tkernel/src/osd/document_file.rs b/crates/martensite-tkernel/src/osd/document_file.rs
+index f5837118..8832ce69 100644
+--- a/crates/martensite-tkernel/src/osd/document_file.rs
++++ b/crates/martensite-tkernel/src/osd/document_file.rs
+@@ -32,6 +32,8 @@ pub fn create_private_document_directory(directory: &Path) -> io::Result<()> {
+ /// Every staged policy must match a default-policy probe in its private directory
+ /// before existing-target restoration or new-target parent defaults are applied.
+ /// Custom writer policies are refused before publication rather than widened.
++/// Windows destinations with named streams are refused before publication, since
++/// replacing the file cannot preserve those streams through this boundary.
+ /// The staged output must be a regular file; symbolic links are refused.
+ /// An existing destination must also be a regular file. Resolve destination
+ /// symbolic links before calling this boundary, as the document writer does.
+diff --git a/crates/martensite-tkernel/src/osd/document_file/windows.rs b/crates/martensite-tkernel/src/osd/document_file/windows.rs
+index 5538d978..22825af8 100644
+--- a/crates/martensite-tkernel/src/osd/document_file/windows.rs
++++ b/crates/martensite-tkernel/src/osd/document_file/windows.rs
+@@ -30,6 +30,9 @@ use windows_sys::Win32::System::Threading::{
+     GetCurrentProcess, GetCurrentThread, OpenProcessToken, OpenThreadToken,
+ };
+ 
++#[path = "windows_streams.rs"]
++mod streams;
++
+ const ACCESS_SECTIONS: [u32; 8] = [
+     OWNER_SECURITY_INFORMATION,
+     GROUP_SECURITY_INFORMATION,
+@@ -357,6 +360,7 @@ fn preserve_readonly(source: &Path, staged: &Path) -> io::Result<()> {
+ }
+ 
+ fn prepare_access(source: &Path, staged: &Path) -> io::Result<()> {
++    streams::reject_named_streams(source)?;
+     reject_encryption(source)?;
+     reject_encryption(staged)?;
+     require_default_writer_policy(staged)?;
+diff --git a/crates/martensite-tkernel/src/osd/document_file/windows_streams.rs b/crates/martensite-tkernel/src/osd/document_file/windows_streams.rs
+new file mode 100644
+index 00000000..5721b015
+--- /dev/null
++++ b/crates/martensite-tkernel/src/osd/document_file/windows_streams.rs
+@@ -0,0 +1,126 @@
++//! Refuse named-stream loss before staged-document access metadata is changed (#248).
++#![allow(unsafe_code)]
++use super::wide_path;
++use std::{io, path::Path};
++use windows_sys::Win32::Foundation::{ERROR_HANDLE_EOF, HANDLE, INVALID_HANDLE_VALUE};
++use windows_sys::Win32::Storage::FileSystem::{
++    FindClose, FindFirstStreamW, FindNextStreamW, FindStreamInfoStandard, WIN32_FIND_STREAM_DATA,
++};
++
++struct StreamSearch {
++    handle: HANDLE,
++    entry: WIN32_FIND_STREAM_DATA,
++}
++
++impl Drop for StreamSearch {
++    fn drop(&mut self) {
++        // SAFETY: A successful FindFirstStreamW transfers this unique search handle;
++        // it remains valid until this single close and is never used afterwards.
++        unsafe { FindClose(self.handle) };
++    }
++}
++
++impl StreamSearch {
++    fn open(path: &Path) -> io::Result<Option<Self>> {
++        let wide = wide_path(path)?;
++        let mut entry = WIN32_FIND_STREAM_DATA::default();
++        let handle = first_stream(&wide, &mut entry);
++        if handle == INVALID_HANDLE_VALUE {
++            return enumeration_end(io::Error::last_os_error()).map(|_| None);
++        }
++        Ok(Some(Self { handle, entry }))
++    }
++
++    fn advance(&mut self) -> io::Result<bool> {
++        // SAFETY: This live search handle came from FindFirstStreamW and the
++        // writable entry has the exact required WIN32_FIND_STREAM_DATA layout.
++        if unsafe { FindNextStreamW(self.handle, std::ptr::from_mut(&mut self.entry).cast()) } != 0
++        {
++            return Ok(true);
++        }
++        enumeration_end(io::Error::last_os_error())
++    }
++}
++
++fn first_stream(wide: &[u16], entry: &mut WIN32_FIND_STREAM_DATA) -> HANDLE {
++    // SAFETY: The caller supplies a terminated path and a suitably sized, aligned
++    // output that remain live. A valid result owns an initialized first entry.
++    unsafe {
++        FindFirstStreamW(
++            wide.as_ptr(),
++            FindStreamInfoStandard,
++            std::ptr::from_mut(entry).cast(),
++            0,
++        )
++    }
++}
++
++fn enumeration_end(error: io::Error) -> io::Result<bool> {
++    if error.raw_os_error() == Some(ERROR_HANDLE_EOF as i32) {
++        return Ok(false);
++    }
++    // Unsupported filesystems and access failures cannot prove stream absence.
++    Err(error)
++}
++
++fn stream_name<'a>(path: &Path, entry: &'a WIN32_FIND_STREAM_DATA) -> io::Result<&'a [u16]> {
++    let length = entry.cStreamName.iter().position(|&unit| unit == 0).ok_or_else(|| {
++        io::Error::new(io::ErrorKind::InvalidData, format!(
++            "stream name for {} has no terminator; expected a NUL-terminated Windows stream name", path.display(),
++        ))
++    })?;
++    Ok(&entry.cStreamName[..length])
++}
++
++fn require_unnamed(path: &Path, entry: &WIN32_FIND_STREAM_DATA) -> io::Result<()> {
++    let stream = stream_name(path, entry)?;
++    if stream == [58, 58, 36, 68, 65, 84, 65] {
++        // The unnamed byte stream is ::$DATA.
++        return Ok(());
++    }
++    Err(io::Error::new(
++        io::ErrorKind::PermissionDenied,
++        format!(
++            "document destination {} has named stream {}; expected only the unnamed byte stream before replacement; publication refused",
++            path.display(),
++            String::from_utf16_lossy(stream),
++        ),
++    ))
++}
++
++/// Refuse destination metadata loss before publication; `reject_named_streams(path)?`.
++pub(super) fn reject_named_streams(path: &Path) -> io::Result<()> {
++    let Some(mut search) = StreamSearch::open(path)? else {
++        return Ok(());
++    };
++    loop {
++        require_unnamed(path, &search.entry)?;
++        if !search.advance()? {
++            return Ok(());
++        }
++    }
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    use windows_sys::Win32::Foundation::{ERROR_ACCESS_DENIED, ERROR_INVALID_PARAMETER};
++
++    #[test]
++    fn only_enumeration_eof_establishes_completion() {
++        assert!(!enumeration_end(io::Error::from_raw_os_error(ERROR_HANDLE_EOF as i32)).unwrap());
++        for code in [ERROR_ACCESS_DENIED, ERROR_INVALID_PARAMETER] {
++            let error = enumeration_end(io::Error::from_raw_os_error(code as i32)).unwrap_err();
++            assert_eq!(error.raw_os_error(), Some(code as i32));
++        }
++    }
++
++    #[test]
++    fn malformed_stream_names_refuse_publication() {
++        let mut entry = WIN32_FIND_STREAM_DATA::default();
++        entry.cStreamName.fill(65);
++        let error = require_unnamed(Path::new("malformed.bin"), &entry).unwrap_err();
++        assert_eq!(error.kind(), io::ErrorKind::InvalidData);
++        assert!(error.to_string().contains("malformed.bin"));
++    }
++}
+diff --git a/crates/martensite-tkernel/src/osd/document_file/windows_tests.rs b/crates/martensite-tkernel/src/osd/document_file/windows_tests.rs
+index 26f6bacb..8925d5a8 100644
+--- a/crates/martensite-tkernel/src/osd/document_file/windows_tests.rs
++++ b/crates/martensite-tkernel/src/osd/document_file/windows_tests.rs
+@@ -1,4 +1,5 @@
+ //! Native Windows tests: cross-compilation does not establish their runtime results.
++use super::super::preserve_document_access;
+ use super::*;
+ use std::os::windows::ffi::OsStringExt;
+ use std::os::windows::fs::OpenOptionsExt;
+@@ -190,3 +191,37 @@ fn readonly_writer_output_is_refused_without_changing_original() {
+     assert_eq!(fs::read(&destination).unwrap(), b"old document");
+     fs::set_permissions(stage, original_permissions).unwrap();
+ }
++
++fn named_stream(path: &Path, name: &str) -> PathBuf {
++    let mut stream = path.as_os_str().to_os_string();
++    stream.push(format!(":{name}"));
++    PathBuf::from(stream)
++}
++
++#[test]
++fn named_destination_streams_refuse_publication_without_metadata_changes() {
++    for name in ["Zone.Identifier", "user.metadata"] {
++        let root = TestDirectory::new();
++        let destination = root.0.join("original");
++        fs::write(&destination, b"old document").unwrap();
++        let stream = named_stream(&destination, name);
++        fs::write(&stream, b"owned named-stream bytes").unwrap();
++        let stage = root.stage();
++        let before = (snapshot(&destination), snapshot(&stage));
++        let error = preserve_document_access(&destination, &stage).unwrap_err();
++        assert_eq!(error.kind(), io::ErrorKind::PermissionDenied);
++        assert!(error.to_string().contains(name));
++        assert_eq!(fs::read(&destination).unwrap(), b"old document");
++        assert_eq!(fs::read(stream).unwrap(), b"owned named-stream bytes");
++        assert_eq!(fs::read(&stage).unwrap(), b"new document");
++        assert_eq!((snapshot(&destination), snapshot(&stage)), before);
++    }
++}
++
++#[test]
++fn stream_inspection_retains_native_missing_destination_error() {
++    let root = TestDirectory::new();
++    let error = streams::reject_named_streams(&root.0.join("missing")).unwrap_err();
++    assert_eq!(error.kind(), io::ErrorKind::NotFound);
++    assert!(error.raw_os_error().is_some());
++}
+diff --git a/docs/features/document-save-publication/README.md b/docs/features/document-save-publication/README.md
+index 649f6295..b538d0eb 100644
+--- a/docs/features/document-save-publication/README.md
++++ b/docs/features/document-save-publication/README.md
+@@ -34,6 +34,12 @@ ordered ACL and quarantine attributes. Unsupported access policy is refused.
+ Content-bound capabilities and signatures are not transplanted to replacement
+ bytes. The platform implementations verify their results before publication.
+ 
++Windows destinations with named streams, including `Zone.Identifier`, are refused
++before access metadata changes or publication (#248). Refusal retains the
++original bytes and stream contents, and leaves the staged policy untouched.
++Stream-enumeration errors also refuse publication and retain their native error
++codes. Ordinary files containing only the unnamed byte stream remain supported.
++
+ The CDF writer converts operating-system failures into named `Failure` classes
+ for missing output, missing destination, permission refusal, invalid destination
+ or other publication failure. Diagnostics retain the save phase, requested path,
+diff --git a/docs/features/martensite-tkernel/README.md b/docs/features/martensite-tkernel/README.md
+index ab2e53b0..2ca5c09e 100644
+--- a/docs/features/martensite-tkernel/README.md
++++ b/docs/features/martensite-tkernel/README.md
+@@ -105,3 +105,11 @@ x64. ARM64 release support is limited to macOS (#198). Run the manual `release`
+ dispatch on the exact candidate commit and require all four native targets to
+ pass before tagging. Target configuration is not evidence of a successful run;
+ retain the commands, diagnostics and results from that candidate.
++
++### Windows staged document writes
++
++The access-policy boundary refuses replacement of an existing destination with
++named streams, including `Zone.Identifier`, before changing file metadata. The
++permission error leaves the original bytes and streams intact. Saves to ordinary
++files remain supported. Stream-enumeration errors also refuse publication rather
++than assuming metadata is absent (#248).

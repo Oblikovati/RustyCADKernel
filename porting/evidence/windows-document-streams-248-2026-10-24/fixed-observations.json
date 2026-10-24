@@ -1,0 +1,46 @@
+[
+  {
+    "operation": "File::create",
+    "new_bytes": true,
+    "stream_preserved": true
+  },
+  {
+    "operation": "fs::rename",
+    "new_bytes": true,
+    "stream_preserved": false
+  },
+  {
+    "operation": "candidate_facade_then_rename",
+    "published": false,
+    "old_bytes": true,
+    "new_bytes": false,
+    "stream_preserved": true,
+    "error_kind": "PermissionDenied",
+    "error_os_code": null,
+    "error": "document destination target/runtime-oracle/files\\first\\candidate.bin has named stream :Zone.Identifier:$DATA; expected only the unnamed byte stream before replacement; publication refused"
+  },
+  {
+    "operation": "File::create",
+    "new_bytes": true,
+    "stream_preserved": true
+  },
+  {
+    "operation": "fs::rename",
+    "new_bytes": true,
+    "stream_preserved": false
+  },
+  {
+    "operation": "candidate_facade_then_rename",
+    "published": false,
+    "old_bytes": true,
+    "new_bytes": false,
+    "stream_preserved": true,
+    "error_kind": "PermissionDenied",
+    "error_os_code": null,
+    "error": "document destination target/runtime-oracle/files\\second\\candidate.bin has named stream :Zone.Identifier:$DATA; expected only the unnamed byte stream before replacement; publication refused"
+  },
+  {
+    "candidate_preserves_stream_or_refuses_without_modification": true,
+    "repetitions": 2
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "operation": "File::create",
+    "new_bytes": true,
+    "stream_preserved": true
+  },
+  {
+    "operation": "fs::rename",
+    "new_bytes": true,
+    "stream_preserved": false
+  },
+  {
+    "operation": "candidate_facade_then_rename",
+    "published": true,
+    "old_bytes": false,
+    "new_bytes": true,
+    "stream_preserved": false
+  },
+  {
+    "operation": "File::create",
+    "new_bytes": true,
+    "stream_preserved": true
+  },
+  {
+    "operation": "fs::rename",
+    "new_bytes": true,
+    "stream_preserved": false
+  },
+  {
+    "operation": "candidate_facade_then_rename",
+    "published": true,
+    "old_bytes": false,
+    "new_bytes": true,
+    "stream_preserved": false
+  },
+  {
+    "candidate_preserves_stream_or_refuses_without_modification": false,
+    "repetitions": 2
+  }
+]

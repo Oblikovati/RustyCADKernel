@@ -1,0 +1,60 @@
+windows-runtime	Compare destination named streams through native save paths	﻿2026-10-24T07:55:02.2083874Z ##[group]Run $ErrorActionPreference = 'Stop'
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2084257Z ^[[36;1m$ErrorActionPreference = 'Stop'^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2084449Z ^[[36;1mgit config core.autocrlf false^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2084623Z ^[[36;1mgit checkout-index --force --all^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2084845Z ^[[36;1mgit -C target/document-access-sdk config core.autocrlf false^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2085113Z ^[[36;1mgit -C target/document-access-sdk checkout-index --force --all^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2085453Z ^[[36;1mNew-Item -ItemType Directory -Force target/runtime-oracle, target/windows-probe/src | Out-Null^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2085843Z ^[[36;1mCopy-Item tools/diagnostics/windows_document_streams.rs target/windows-probe/src/main.rs^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2086247Z ^[[36;1m$sdkPath = (Resolve-Path target/document-access-sdk/crates/martensite-tkernel).Path.Replace('\', '/')^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2086536Z ^[[36;1m@"^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2086644Z ^[[36;1m[package]^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2086788Z ^[[36;1mname = "windows-document-stream-probe"^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2086995Z ^[[36;1mversion = "0.0.0"^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2087127Z ^[[36;1medition = "2024"^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2087247Z ^[[36;1m[workspace]^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2087429Z ^[[36;1m[dependencies]^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2087598Z ^[[36;1mmartensite-tkernel = { path = "$sdkPath" }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2087800Z ^[[36;1m"@ | Set-Content target/windows-probe/Cargo.toml^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2088093Z ^[[36;1mCopy-Item tools/diagnostics/windows_document_streams.lock target/windows-probe/Cargo.lock^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2088475Z ^[[36;1m$fix = Get-Content tools/diagnostics/windows_document_streams_fix.json -Raw | ConvertFrom-Json^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2088830Z ^[[36;1m$patch = (Resolve-Path tools/diagnostics/windows_document_streams_fix.patch).Path^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2089120Z ^[[36;1m$patchHash = (Get-FileHash $patch).Hash.ToLowerInvariant()^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2089383Z ^[[36;1mif ($patchHash -ne $fix.patch_sha256) { throw 'Fix patch hash mismatch' }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2089650Z ^[[36;1mgit -C target/document-access-sdk apply --check $patch^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2089915Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Fix patch does not match exact candidate' }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2090174Z ^[[36;1mgit -C target/document-access-sdk apply $patch^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2090405Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Fix patch application failed' }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2090664Z ^[[36;1mforeach ($file in $fix.files.PSObject.Properties) {^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2090981Z ^[[36;1m  $actual = (Get-FileHash (Join-Path target/document-access-sdk $file.Name)).Hash.ToLowerInvariant()^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2091340Z ^[[36;1m  if ($actual -ne $file.Value) { throw "Fixed source hash mismatch: $($file.Name)" }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2091567Z ^[[36;1m}^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2091813Z ^[[36;1mCopy-Item tools/diagnostics/windows_document_streams_fix.json target/runtime-oracle/fix-manifest.json^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2092135Z ^[[36;1mrustup toolchain install 1.99.0 --profile minimal^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2092391Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw "Rust installation failed: $LASTEXITCODE" }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2092671Z ^[[36;1mrustc +1.99.0 -Vv | Out-File target/runtime-oracle/rust-version.txt^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2092945Z ^[[36;1mgit rev-parse HEAD | Out-File target/runtime-oracle/source-revision.txt^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2093283Z ^[[36;1mgit -C target/document-access-sdk rev-parse HEAD | Out-File target/runtime-oracle/sdk-revision.txt^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2093623Z ^[[36;1mGet-Volume | Format-List | Out-File target/runtime-oracle/volumes.txt^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2094408Z ^[[36;1mGet-FileHash tools/diagnostics/windows_document_streams.rs, tools/diagnostics/windows_document_streams_fix.patch, tools/diagnostics/windows_document_streams_fix.json, tools/diagnostics/windows_document_streams.lock, .github/workflows/native-runtime-oracle.yml | Format-List | Out-File target/runtime-oracle/source-hashes.txt^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2095527Z ^[[36;1mcargo +1.99.0 run --locked --manifest-path target/windows-probe/Cargo.toml -- target/runtime-oracle/files 2>&1 | Tee-Object target/runtime-oracle/probe.log^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2096938Z ^[[36;1m$probeExit = $LASTEXITCODE^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2097370Z ^[[36;1mGet-FileHash target/windows-probe/target/debug/windows-document-stream-probe.exe, target/windows-probe/Cargo.lock | Format-List | Out-File target/runtime-oracle/build-hashes.txt^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2097922Z ^[[36;1mif ($probeExit -ne 0) { throw "Named-stream preservation regression: probe returned $probeExit" }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2098522Z ^[[36;1mcargo +1.99.0 test --locked --manifest-path target/document-access-sdk/Cargo.toml -p martensite-tkernel --lib osd::document_file:: -- --test-threads=1 2>&1 | Tee-Object target/runtime-oracle/foundation-regressions.log^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2099387Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Native foundation stream/access regressions failed' }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2100028Z ^[[36;1mcargo +1.99.0 test --locked --manifest-path target/document-access-sdk/Cargo.toml -p martensite-tkcdf --lib named_stream_refusal_preserves_original_and_cleans_staging -- --test-threads=1 2>&1 | Tee-Object target/runtime-oracle/document-regression.log^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2100680Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Native typed document refusal regression failed' }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2101299Z ^[[36;1mif (-not (Select-String -Path target/runtime-oracle/foundation-regressions.log -Pattern 'named_destination_streams_refuse_publication_without_metadata_changes ... ok' -Quiet)) { throw 'Foundation stream regression did not execute' }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2102098Z ^[[36;1mif (-not (Select-String -Path target/runtime-oracle/document-regression.log -SimpleMatch '1 passed; 0 failed;' -Quiet)) { throw 'Exactly one document regression must execute' }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2759407Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2759652Z env:
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2759802Z   CARGO_PROFILE_DEV_DEBUG: 0
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2759964Z   CARGO_INCREMENTAL: 0
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:02.2760087Z ##[endgroup]
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:03.6331850Z ^[[31;1mException: ^[[0mD:\a\_temp\be5066f9-ec5d-4cc0-b340-ef81bea574bb.ps1:23^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:03.6332372Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:03.6332930Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  23 | ^[[0m … $patchHash -ne $fix.patch_sha256) { ^[[36;1mthrow 'Fix patch hash mismatch'^[[0m }^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:03.6333535Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:03.6334058Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mFix patch hash mismatch^[[0m
+windows-runtime	Compare destination named streams through native save paths	2026-10-24T07:55:03.6814482Z ##[error]Process completed with exit code 1.

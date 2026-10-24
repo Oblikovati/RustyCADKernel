@@ -1,0 +1,37 @@
+{
+  "issue": "https://github.com/Oblikovati/Martensite/issues/248",
+  "sdk_base_revision": "2254483e14b35f82a838a316ef5121d6059de658",
+  "product_fix_revision": "f58319b3547a2d421e2d54607f9eb4556b0bc3da",
+  "baseline_run": 40075229497,
+  "baseline_source_revision": "93c77dcab8099f25e29c6685186e168087c3db7f",
+  "fixed_run": 40076129216,
+  "fixed_source_revision": "925bd8a20ec6e92cbc1bdca74bbbd69197bf4c70",
+  "platform": "Windows x64 MSVC on NTFS, native Rust 1.99.0",
+  "baseline_reproductions": 2,
+  "fixed_repetitions": 2,
+  "foundation_native_tests_passed": 12,
+  "document_native_tests_passed": 1,
+  "cross_check": "passed, tkernel/tkcdf libraries and tests, Windows MSVC target",
+  "cross_clippy": "passed, -D warnings, same scope",
+  "native_fix_source_admission": "SDK225 plus applied patch; all8changedfiles SHA256 matched frozen fix before compile",
+  "probe_lockfile": "Baseline resolved standalone probe lockfile reused with --locked; native product tests used SDK lockfile with --locked",
+  "scope": "Focused named-stream preservation/refusal and existing access-policy regressions only. Final required CI and supported-platform release matrix remain required.",
+  "superseded_runs": {
+    "40075213652": "cancelled after sparse checkout omitted probe payload; corrected in93c77d",
+    "40075904596": "cancelled before corrected native test after checkout-byte gate review",
+    "40075944891": "failed strict patch SHA gate before compilation because Windows checkout conversion altered bytes; retained raw log"
+  },
+  "new_unsafe_system_boundary_blocks": 3,
+  "evidence_sha256": {
+    "baseline-observations.json": "61c07c1edcb6e22cc763bf19d0fb67615fe40b7f832cf991f2ed714fde481fb9",
+    "cross-check.log": "d0d6d1dd4c5cfec561b06177b4287da802df2eb2450ab2509909cb4476f486a0",
+    "cross-clippy.log": "96db1761619367440100a7a241092136d7f8d7c0ea5cda1eee9b208b19dba5c9",
+    "fixed-observations.json": "5e7a30ad7a66566c9ae26c4b92b6e0f0fc999f72b3580be155a69baa2c2d76af",
+    "fixed-source-manifest.json": "11d9f4ad1cde8abfab7e355617d5f965816135aa43f4ad62583b26dde324126b",
+    "fixed-source.patch": "c6b524660b0f2154b9fc402c7805dba15e37fe8d1673e0190d634a04d8bdb404",
+    "native-green-40076129216.tar.gz": "bd5587417273612c96764ee01934a79fe1cd8e8db6fbdcdf9c827c00d473fecd",
+    "native-red-40075229497.tar.gz": "c7d86d43e4705bba1508c25b6aa8e708d91ef968e7ec40ebc970f3b20e1d3e74",
+    "probe.rs": "6c054f839bd937b6bb7dd89fb19538d8085adfc065c030f453e64ea3b5fc10f1",
+    "transport-failure-40075944891.log": "a6fa993b7b2100f85707b3fab1906bd4c0eb0c994aa5f1213e6ffb092d791fc7"
+  }
+}
