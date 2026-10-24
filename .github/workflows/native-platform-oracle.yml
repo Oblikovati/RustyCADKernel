@@ -5,7 +5,7 @@ on:
       capture:
         description: Geometry scope for the diagnostic capture
         type: choice
-        options: ['geometry', 'cylinder']
+        options: ['geometry', 'cylinder', 'portable-cylinder']
         default: 'geometry'
       platforms:
         description: JSON runner list for the controlled capture
@@ -24,6 +24,7 @@ env:
   CARGO_INCREMENTAL: '0'
 jobs:
   geometry:
+    if: inputs.capture != 'portable-cylinder'
     strategy:
       fail-fast: false
       matrix:
@@ -63,3 +64,49 @@ jobs:
             target/platform-geometry/*.log
             target/platform-geometry/receipt.json
             target/native-platform/CMakeCache.txt
+
+  portable-cylinder:
+    if: inputs.capture == 'portable-cylinder'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, windows-2025]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      RUSTUP_TOOLCHAIN: '1.99.0'
+      CARGO_BUILD_JOBS: '2'
+      CARGO_TERM_COLOR: never
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows
+            tools/diagnostics/mesh263
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: Oblikovati/Martensite
+          ref: ab4bad4fce774001b192fd20ac4d7a9010e68fea
+          path: target/mesh263-product
+          persist-credentials: false
+      - name: Preserve exact source bytes and install the pinned compiler
+        shell: bash
+        run: |
+          git config core.autocrlf false
+          git checkout-index --force --all
+          git -C target/mesh263-product config core.autocrlf false
+          git -C target/mesh263-product checkout-index --force --all
+          rustup toolchain install 1.99.0 --profile minimal
+      - name: Capture exact original failures and checked selector correction
+        shell: bash
+        run: python tools/diagnostics/mesh263/capture_contract.py target/mesh263-product target/mesh263-results
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: portable-cylinder-${{ matrix.os }}
+          path: |
+            target/mesh263-results/*.json
+            target/mesh263-results/*.log
+            target/mesh263-results/probe/Cargo.lock
+          if-no-files-found: error
