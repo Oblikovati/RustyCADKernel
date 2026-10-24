@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 import tempfile
+import subprocess
+from contextlib import ExitStack
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -94,7 +96,7 @@ def hash_rows(records: bytes) -> list[bytes]:
 
 
 class FrozenCheckoutFixture:
-    """Name a frozen Git object and authored working-tree drift without running Git."""
+    """Name frozen objects and authored drift without invoking external Git."""
 
     def __init__(self, root: Path) -> None:
         self.root = root
@@ -103,34 +105,55 @@ class FrozenCheckoutFixture:
         self.working.write_bytes(b"reviewed source\r\n")
         self.revision = "frozen"
         self.mode = "100644"
+        self.index_tree = "frozen-index-tree"
+        self.index_was_refreshed = False
+        self.change_index_after_refresh = False
 
     def git(self, product: Path, *arguments: str) -> str:
         if arguments == ("rev-parse", "HEAD"):
             return self.revision
+        if arguments == ("rev-parse", "frozen^{tree}"):
+            return "frozen-index-tree"
+        if arguments == ("write-tree",):
+            return self.index_tree
         if arguments[0] == "config":
             return ""
         if arguments[0] == "ls-tree":
             return f"{self.mode} blob frozen-object\ttracked.rs"
-        if arguments[0] == "status":
-            dirty = (
-                " M tracked.rs\n" if self.working.read_bytes() != self.frozen else ""
-            )
-            extra = (
-                "?? untracked.txt\n" if (self.root / "untracked.txt").exists() else ""
-            )
-            return dirty + extra
-        return (
-            "authored tracked-file diff"
-            if self.working.read_bytes() != self.frozen
-            else ""
-        )
+        return self.status() if arguments[0] == "status" else "authored diff"
+
+    def status(self) -> str:
+        dirty = " M tracked.rs\n" if self.working.read_bytes() != self.frozen else ""
+        extra = "?? untracked.txt\n" if (self.root / "untracked.txt").exists() else ""
+        return dirty + extra
 
     def read(self, command: list[str]) -> bytes:
         if command[3] == "show":
             return self.frozen
+        if command[3] == "ls-tree":
+            return b"100644 blob frozen-object\ttracked.rs\0"
         if command[3] == "ls-files":
             return b"tracked.rs\0" if self.working.read_bytes() != self.frozen else b""
         raise AssertionError(f"unexpected command {command!r}")
+
+    def apply_index(
+        self, command: list[str], input: bytes, capture_output: bool, check: bool
+    ) -> subprocess.CompletedProcess[bytes]:
+        self.index_was_refreshed = True
+        if self.change_index_after_refresh:
+            self.index_tree = "unexpected-index-tree"
+        return subprocess.CompletedProcess(command, 0, b"", b"")
+
+    def patches(self) -> ExitStack:
+        contexts = ExitStack()
+        contexts.enter_context(patch.object(capture, "git", self.git))
+        contexts.enter_context(
+            patch.object(capture.subprocess, "check_output", self.read)
+        )
+        contexts.enter_context(
+            patch.object(capture.subprocess, "run", self.apply_index)
+        )
+        return contexts
 
 
 class CheckoutNormalizationTests(unittest.TestCase):
@@ -138,9 +161,7 @@ class CheckoutNormalizationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             fixture = FrozenCheckoutFixture(root)
-            with patch.object(capture, "git", fixture.git), patch.object(
-                capture.subprocess, "check_output", fixture.read
-            ):
+            with fixture.patches():
                 capture.normalize_checkout(root, root, {"product_revision": "frozen"})
             self.assertEqual(fixture.working.read_bytes(), fixture.frozen)
             self.assertIn('" M tracked.rs', (root / "checkout-before.json").read_text())
@@ -153,9 +174,7 @@ class CheckoutNormalizationTests(unittest.TestCase):
             root = Path(directory)
             fixture = FrozenCheckoutFixture(root)
             (root / "untracked.txt").write_bytes(b"keep this evidence")
-            with patch.object(capture, "git", fixture.git), patch.object(
-                capture.subprocess, "check_output", fixture.read
-            ):
+            with fixture.patches():
                 capture.normalize_checkout(root, root, {"product_revision": "frozen"})
                 after = capture.checkout_state(root)
             self.assertIn("?? untracked.txt", after["porcelain"])
@@ -175,6 +194,30 @@ class CheckoutNormalizationTests(unittest.TestCase):
                         root, root, {"product_revision": "frozen"}
                     )
             self.assertEqual(fixture.working.read_bytes(), before)
+
+    def test_index_tree_must_match_before_metadata_refresh(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            fixture = FrozenCheckoutFixture(root)
+            fixture.index_tree = "unexpected-index-tree"
+            with fixture.patches():
+                with self.assertRaises(ValueError):
+                    capture.normalize_checkout(
+                        root, root, {"product_revision": "frozen"}
+                    )
+            self.assertFalse(fixture.index_was_refreshed)
+
+    def test_metadata_refresh_cannot_change_the_frozen_tree(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            fixture = FrozenCheckoutFixture(root)
+            fixture.change_index_after_refresh = True
+            with fixture.patches():
+                with self.assertRaises(ValueError):
+                    capture.normalize_checkout(
+                        root, root, {"product_revision": "frozen"}
+                    )
+            self.assertTrue(fixture.index_was_refreshed)
 
     def test_nonregular_tracked_entries_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

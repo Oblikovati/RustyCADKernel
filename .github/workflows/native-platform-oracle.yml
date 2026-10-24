@@ -102,6 +102,20 @@ jobs:
           git -C target/mesh263-product config core.autocrlf false
           git -C target/mesh263-product checkout-index --force --all
           rustup toolchain install 1.99.0 --profile minimal
+          python - <<'PY'
+          import os
+          import subprocess
+          from pathlib import Path
+          revision = os.environ["GITHUB_SHA"]
+          actual = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+          if actual != revision:
+              raise ValueError(f"transport revision {actual}: expected {revision}")
+          paths = subprocess.check_output(["git", "ls-tree", "-rz", "--name-only", revision, "--", "tools/diagnostics/mesh263"])
+          for entry in paths.split(b"\0"):
+              if entry:
+                  name = entry.decode("utf-8")
+                  Path(name).write_bytes(subprocess.check_output(["git", "show", f"{revision}:{name}"]))
+          PY
       - name: Capture exact original failures and checked selector correction
         shell: bash
         run: python tools/diagnostics/mesh263/capture_contract.py target/mesh263-product target/mesh263-results

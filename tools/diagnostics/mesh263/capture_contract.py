@@ -100,6 +100,62 @@ def regular_blob_contents(product: Path, revision: str, relative: str) -> bytes:
     )
 
 
+def frozen_index_entries(product: Path, revision: str, names: list[str]) -> bytes:
+    """Refresh only reviewed regular entries; `frozen_index_entries(product, sha, paths)`."""
+    wanted = {name.encode("utf-8") for name in names}
+    tree = subprocess.check_output(
+        ["git", "-C", str(product), "ls-tree", "-rz", revision]
+    )
+    entries: list[bytes] = []
+    for row in tree.split(b"\0"):
+        if not row:
+            continue
+        metadata, name = row.split(b"\t", 1)
+        if name in wanted:
+            mode, kind, object_id = metadata.split()
+            if mode not in (b"100644", b"100755") or kind != b"blob":
+                raise ValueError(f"entry {metadata!r}: expected a regular frozen blob")
+            entries.append(mode + b" " + object_id + b"\t" + name + b"\0")
+    if len(entries) != len(wanted):
+        raise ValueError(
+            f"entries {len(entries)}: expected {len(wanted)} frozen regular paths"
+        )
+    return b"".join(entries)
+
+
+def refresh_frozen_index(
+    product: Path, revision: str, names: list[str]
+) -> dict[str, object]:
+    """Clear stale EOL stat metadata without changing the index tree; `refresh_frozen_index(product, sha, paths)`."""
+    expected = git(product, "rev-parse", revision + "^{tree}")
+    before = git(product, "write-tree")
+    if before != expected:
+        raise ValueError(f"index tree {before}: expected frozen tree {expected}")
+    entries = frozen_index_entries(product, revision, names)
+    apply_frozen_entries(product, entries)
+    after = git(product, "write-tree")
+    if after != expected:
+        raise ValueError(
+            f"refreshed tree {after}: expected unchanged frozen tree {expected}"
+        )
+    return {
+        "frozen_tree": expected,
+        "before_tree": before,
+        "after_tree": after,
+        "refreshed_paths": len(names),
+    }
+
+
+def apply_frozen_entries(product: Path, entries: bytes) -> None:
+    """Rewrite only existing frozen entry identities; `apply_frozen_entries(product, entries)`."""
+    subprocess.run(
+        ["git", "-C", str(product), "update-index", "-z", "--index-info"],
+        input=entries,
+        capture_output=True,
+        check=True,
+    )
+
+
 def normalize_checkout(
     product: Path, output: Path, manifest: dict[str, object]
 ) -> None:
@@ -118,7 +174,24 @@ def normalize_checkout(
     )
     names = [name.decode("utf-8") for name in modified.split(b"\0") if name]
     restored = [restore_tracked_blob(product, revision, name) for name in names]
-    result = {"before": before, "restored": restored, "after": checkout_state(product)}
+    index = refresh_frozen_index(product, revision, names)
+    write_checkout_receipt(output, before, restored, index, checkout_state(product))
+
+
+def write_checkout_receipt(
+    output: Path,
+    before: dict[str, str],
+    restored: list[dict[str, object]],
+    index: dict[str, object],
+    after: dict[str, str],
+) -> None:
+    """Retain tree and byte identities at each stage; `write_checkout_receipt(out,before,files,index,after)`."""
+    result = {
+        "before": before,
+        "restored": restored,
+        "index_refresh": index,
+        "after": after,
+    }
     (output / "checkout-normalization.json").write_text(
         json.dumps(result, indent=2) + "\n"
     )
