@@ -33,22 +33,44 @@ jobs:
           [dependencies]
           martensite-tkernel = { path = "$sdkPath" }
           "@ | Set-Content target/windows-probe/Cargo.toml
+          Copy-Item tools/diagnostics/windows_document_streams.lock target/windows-probe/Cargo.lock
+          $fix = Get-Content tools/diagnostics/windows_document_streams_fix.json -Raw | ConvertFrom-Json
+          $patch = (Resolve-Path tools/diagnostics/windows_document_streams_fix.patch).Path
+          $patchHash = (Get-FileHash $patch).Hash.ToLowerInvariant()
+          if ($patchHash -ne $fix.patch_sha256) { throw 'Fix patch hash mismatch' }
+          git -C target/document-access-sdk apply --check $patch
+          if ($LASTEXITCODE -ne 0) { throw 'Fix patch does not match exact candidate' }
+          git -C target/document-access-sdk apply $patch
+          if ($LASTEXITCODE -ne 0) { throw 'Fix patch application failed' }
+          foreach ($file in $fix.files.PSObject.Properties) {
+            $actual = (Get-FileHash (Join-Path target/document-access-sdk $file.Name)).Hash.ToLowerInvariant()
+            if ($actual -ne $file.Value) { throw "Fixed source hash mismatch: $($file.Name)" }
+          }
+          Copy-Item tools/diagnostics/windows_document_streams_fix.json target/runtime-oracle/fix-manifest.json
           rustup toolchain install 1.99.0 --profile minimal
           if ($LASTEXITCODE -ne 0) { throw "Rust installation failed: $LASTEXITCODE" }
           rustc +1.99.0 -Vv | Out-File target/runtime-oracle/rust-version.txt
           git rev-parse HEAD | Out-File target/runtime-oracle/source-revision.txt
           git -C target/document-access-sdk rev-parse HEAD | Out-File target/runtime-oracle/sdk-revision.txt
           Get-Volume | Format-List | Out-File target/runtime-oracle/volumes.txt
-          Get-FileHash tools/diagnostics/windows_document_streams.rs, .github/workflows/native-runtime-oracle.yml | Format-List | Out-File target/runtime-oracle/source-hashes.txt
-          cargo +1.99.0 run --manifest-path target/windows-probe/Cargo.toml -- target/runtime-oracle/files 2>&1 | Tee-Object target/runtime-oracle/probe.log
+          Get-FileHash tools/diagnostics/windows_document_streams.rs, tools/diagnostics/windows_document_streams_fix.patch, tools/diagnostics/windows_document_streams_fix.json, tools/diagnostics/windows_document_streams.lock, .github/workflows/native-runtime-oracle.yml | Format-List | Out-File target/runtime-oracle/source-hashes.txt
+          cargo +1.99.0 run --locked --manifest-path target/windows-probe/Cargo.toml -- target/runtime-oracle/files 2>&1 | Tee-Object target/runtime-oracle/probe.log
           $probeExit = $LASTEXITCODE
           Get-FileHash target/windows-probe/target/debug/windows-document-stream-probe.exe, target/windows-probe/Cargo.lock | Format-List | Out-File target/runtime-oracle/build-hashes.txt
           if ($probeExit -ne 0) { throw "Named-stream preservation regression: probe returned $probeExit" }
+          cargo +1.99.0 test --locked --manifest-path target/document-access-sdk/Cargo.toml -p martensite-tkernel --lib osd::document_file:: -- --test-threads=1 2>&1 | Tee-Object target/runtime-oracle/foundation-regressions.log
+          if ($LASTEXITCODE -ne 0) { throw 'Native foundation stream/access regressions failed' }
+          cargo +1.99.0 test --locked --manifest-path target/document-access-sdk/Cargo.toml -p martensite-tkcdf --lib named_stream_refusal_preserves_original_and_cleans_staging -- --test-threads=1 2>&1 | Tee-Object target/runtime-oracle/document-regression.log
+          if ($LASTEXITCODE -ne 0) { throw 'Native typed document refusal regression failed' }
+          if (-not (Select-String -Path target/runtime-oracle/foundation-regressions.log -Pattern 'named_destination_streams_refuse_publication_without_metadata_changes ... ok' -Quiet)) { throw 'Foundation stream regression did not execute' }
+          if (-not (Select-String -Path target/runtime-oracle/document-regression.log -SimpleMatch '1 passed; 0 failed;' -Quiet)) { throw 'Exactly one document regression must execute' }
+
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: windows-document-stream-probe
           path: |
+            target/runtime-oracle/*.json
             target/runtime-oracle/*.txt
             target/runtime-oracle/*.log
             target/windows-probe/Cargo.lock
