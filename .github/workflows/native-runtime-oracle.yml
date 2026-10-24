@@ -6,25 +6,50 @@ permissions:
 jobs:
   windows-runtime:
     runs-on: windows-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7.0.1
-      - name: Capture C-locale hexadecimal formatting with the MSVC CRT
+      - uses: actions/checkout@v7.0.1
+        with:
+          repository: Oblikovati/Martensite
+          ref: 2254483e14b35f82a838a316ef5121d6059de658
+          path: target/document-access-sdk
+      - name: Compare destination named streams through native save paths
         shell: pwsh
+        env:
+          CARGO_PROFILE_DEV_DEBUG: '0'
+          CARGO_INCREMENTAL: '0'
         run: |
           $ErrorActionPreference = 'Stop'
-          New-Item -ItemType Directory -Force target/runtime-oracle | Out-Null
-          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-          $installation = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-          $developer = Join-Path $installation 'Common7\Tools\VsDevCmd.bat'
-          $command = "call `"$developer`" -arch=x64 -host_arch=x64 && cl /nologo /EHsc /DMARTENSITE_CRT_ONLY tools\oracle\tkernel_hex_float.cxx /Fe:target\runtime-oracle\hex-float.exe && target\runtime-oracle\hex-float.exe > target\runtime-oracle\tkernel_hex_float.windows.expected"
-          & cmd.exe /d /c $command
-          if ($LASTEXITCODE -ne 0) { throw "CRT capture returned $LASTEXITCODE; expected zero" }
-          Get-FileHash tools/oracle/tkernel_hex_float.cxx, target/runtime-oracle/tkernel_hex_float.windows.expected | Format-List | Out-File target/runtime-oracle/hashes.txt
+          New-Item -ItemType Directory -Force target/runtime-oracle, target/windows-probe/src | Out-Null
+          Copy-Item tools/diagnostics/windows_document_streams.rs target/windows-probe/src/main.rs
+          $sdkPath = (Resolve-Path target/document-access-sdk/crates/martensite-tkernel).Path.Replace('\', '/')
+          @"
+          [package]
+          name = "windows-document-stream-probe"
+          version = "0.0.0"
+          edition = "2024"
+          [workspace]
+          [dependencies]
+          martensite-tkernel = { path = "$sdkPath" }
+          "@ | Set-Content target/windows-probe/Cargo.toml
+          rustup toolchain install 1.99.0 --profile minimal
+          if ($LASTEXITCODE -ne 0) { throw "Rust installation failed: $LASTEXITCODE" }
+          rustc +1.99.0 -Vv | Out-File target/runtime-oracle/rust-version.txt
+          git rev-parse HEAD | Out-File target/runtime-oracle/source-revision.txt
+          git -C target/document-access-sdk rev-parse HEAD | Out-File target/runtime-oracle/sdk-revision.txt
+          Get-Volume | Format-List | Out-File target/runtime-oracle/volumes.txt
+          Get-FileHash tools/diagnostics/windows_document_streams.rs, .github/workflows/native-runtime-oracle.yml | Format-List | Out-File target/runtime-oracle/source-hashes.txt
+          cargo +1.99.0 run --manifest-path target/windows-probe/Cargo.toml -- target/runtime-oracle/files 2>&1 | Tee-Object target/runtime-oracle/probe.log
+          $probeExit = $LASTEXITCODE
+          Get-FileHash target/windows-probe/target/debug/windows-document-stream-probe.exe, target/windows-probe/Cargo.lock | Format-List | Out-File target/runtime-oracle/build-hashes.txt
+          if ($probeExit -ne 0) { throw "Named-stream preservation regression: probe returned $probeExit" }
       - uses: actions/upload-artifact@v7.0.2
+        if: always()
         with:
-          name: windows-runtime-oracle
+          name: windows-document-stream-probe
           path: |
-            target/runtime-oracle/*.expected
-            target/runtime-oracle/hashes.txt
+            target/runtime-oracle/*.txt
+            target/runtime-oracle/*.log
+            target/windows-probe/Cargo.lock
           if-no-files-found: error
