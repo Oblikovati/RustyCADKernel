@@ -17,10 +17,10 @@
 
 _Static_assert(ATOMIC_INT_LOCK_FREE == 2 && ATOMIC_LLONG_LOCK_FREE == 2, "signal telemetry atomics must be lock free");
 
-struct expiry_observation { int kind; pid_t helper; int result; int flags_preserved; long long elapsed; };
+struct expiry_observation { int kind; pid_t helper; int result; int flags_preserved; int relay_stage; long long elapsed; };
 static int request_pipe[2], acknowledgement[2], monitor_fd, output_flags, expiry_mode;
 static _Atomic long long request_deadline;
-static _Atomic int completed, helper_result, relay_ready;
+static _Atomic int completed, helper_result, relay_ready, relay_stage;
 static sigset_t relay_original_mask;
 static _Atomic pid_t helper_pid;
 static volatile sig_atomic_t callback_fd = -1;
@@ -37,8 +37,8 @@ static void blocking_user_atfork(void) {
   for (;;) pause();
 }
 
-static void report_helper(pid_t helper) {
-  struct expiry_observation observation = {1, helper, errno, 0, 0};
+static void report_helper(pid_t helper, int failure) {
+  struct expiry_observation observation = {1, helper, failure, 0, atomic_load(&relay_stage), 0};
   demand(write(monitor_fd, &observation, sizeof(observation)) == sizeof(observation), "helper observation");
 }
 
@@ -72,7 +72,23 @@ static void receive_child_completion(pid_t helper, int failure) {
   if (helper >= 0) do { count = read(acknowledgement[0], &failure, sizeof(failure)); }
     while (count < 0 && errno == EINTR);
   atomic_store(&helper_result, helper < 0 ? failure : count == sizeof(failure) ? failure : ETIMEDOUT);
+  atomic_store(&relay_stage, 4);
   atomic_store(&completed, 1);
+}
+
+static void spawn_expired_output(void) {
+  int gate[2];
+  if (expiry_mode == 7) demand(pipe(gate) == 0, "controlled pre-guard stall until parent death");
+  atomic_store(&relay_stage, 2);
+  pid_t helper = cpu_probe_spawn_bounded(STDOUT_FILENO, acknowledgement[1],
+      atomic_load(&request_deadline), expiry_mode == 4 ? 0 : 4096, expiry_mode == 7 ? gate : NULL);
+  int spawn_failure = errno;
+  atomic_store(&relay_stage, 3);
+  assert_application_policy_unchanged();
+  atomic_store(&helper_pid, helper);
+  report_helper(helper, spawn_failure);
+  close(acknowledgement[1]);
+  receive_child_completion(helper, spawn_failure);
 }
 
 static void *expire_regular_relay(void *unused) {
@@ -80,17 +96,9 @@ static void *expire_regular_relay(void *unused) {
   prepare_relay_thread();
   char requested;
   demand(read(request_pipe[0], &requested, 1) == 1, "regular relay request");
+  atomic_store(&relay_stage, 1);
   if (expiry_mode == 3) for (;;) pause();
-  int gate[2];
-  if (expiry_mode == 7) demand(pipe(gate) == 0, "controlled pre-guard stall until parent death");
-  pid_t helper = cpu_probe_spawn_bounded(STDOUT_FILENO, acknowledgement[1],
-      atomic_load(&request_deadline), expiry_mode == 4 ? 0 : 4096, expiry_mode == 7 ? gate : NULL);
-  int spawn_failure = errno;
-  assert_application_policy_unchanged();
-  atomic_store(&helper_pid, helper);
-  report_helper(helper);
-  close(acknowledgement[1]);
-  receive_child_completion(helper, spawn_failure);
+  spawn_expired_output();
   return NULL;
 }
 
@@ -110,7 +118,7 @@ static void expiry_without_pid_actions(int signal_number) {
   await_original_grace(started);
   struct expiry_observation observation = {2, atomic_load(&helper_pid), atomic_load(&helper_result),
       fcntl(STDOUT_FILENO, F_GETFL) == output_flags && fcntl(STDOUT_FILENO, F_GETNOSIGPIPE) == 0,
-      cpu_probe_clock() - started};
+      atomic_load(&relay_stage), cpu_probe_clock() - started};
   (void)write(monitor_fd, &observation, sizeof(observation));
   _exit(2);
 }
@@ -194,16 +202,38 @@ static void refuse_actual_spawn(int mode) {
   demand(setrlimit(RLIMIT_NPROC, &process_limit) == 0, "actual spawn refusal fault fixture");
 }
 
+static int initialize_current_output(int output, int mode) {
+  if (mode != 8) {
+    demand(dup2(output, STDOUT_FILENO) == STDOUT_FILENO, "bind actual current stdout");
+    close(output);
+    return -1;
+  }
+  int original[2];
+  demand(pipe(original) == 0, "stdout before relay initialization");
+  demand(dup2(original[1], STDOUT_FILENO) == STDOUT_FILENO, "bind initial stdout fixture");
+  close(original[1]);
+  return original[0];
+}
+
+static void redirect_after_initialization(int output, int original_reader) {
+  if (original_reader < 0) return;
+  demand(dup2(output, STDOUT_FILENO) == STDOUT_FILENO, "redirect stdout after relay readiness");
+  close(output);
+  char byte;
+  demand(read(original_reader, &byte, 1) == 0, "initial stdout has no retained helper writer");
+  close(original_reader);
+}
+
 static void run_cpu_parent(int output, int reader, int monitor, int policy, int mode) {
   close(reader);
-  demand(dup2(output, STDOUT_FILENO) == STDOUT_FILENO, "bind actual current stdout");
-  close(output);
+  int original_reader = initialize_current_output(output, mode);
   monitor_fd = monitor;
   expiry_mode = mode;
   helper_pid = -1;
-  output_flags = fcntl(STDOUT_FILENO, F_GETFL);
   install_application_policy(policy);
   start_request_relay();
+  redirect_after_initialization(output, original_reader);
+  output_flags = fcntl(STDOUT_FILENO, F_GETFL);
   start_concurrent_application(policy);
   refuse_actual_spawn(mode);
   install_original_cpu_budget();
@@ -231,6 +261,9 @@ static struct expiry_observation read_observation(int descriptor) {
   demand(poll(&ready, 1, 12000) > 0, "original twelve-second safety guard");
   struct expiry_observation observation;
   demand(read(descriptor, &observation, sizeof(observation)) == sizeof(observation), "whole observation");
+  fprintf(stderr, "{\"probe\":\"raw_observation\",\"kind\":%d,\"helper\":%d,\"result\":%d,"
+      "\"flags_preserved\":%d,\"relay_stage\":%d,\"elapsed_ns\":%lld}\n", observation.kind,
+      observation.helper, observation.result, observation.flags_preserved, observation.relay_stage, observation.elapsed);
   return observation;
 }
 
@@ -276,7 +309,7 @@ static struct expiry_observation observe_parent_expiry(int descriptor, pid_t par
 
 static void check_and_close_output(int descriptor, int mode) {
   if (descriptor < 0) return;
-  if (mode == 0) {
+  if (mode == 0 || mode == 8) {
     char message[sizeof(CPU_PROBE_MESSAGE)] = {0};
     demand(read(descriptor, message, sizeof(message)) == sizeof(CPU_PROBE_MESSAGE) - 1
         && memcmp(message, CPU_PROBE_MESSAGE, sizeof(CPU_PROBE_MESSAGE) - 1) == 0, "original diagnostic exact bytes");
@@ -374,6 +407,7 @@ static void probe_all_reaping_policies(void) {
     probe_cpu_expiry(policy, 5, "forced_parent_death");
     probe_cpu_expiry(policy, 6, "actual_spawn_refused");
     probe_cpu_expiry(policy, 7, "forced_parent_death_before_guard");
+    probe_cpu_expiry(policy, 8, "stdout_redirected_after_initialization");
   }
 }
 
