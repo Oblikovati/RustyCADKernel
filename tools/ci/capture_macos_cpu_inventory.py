@@ -12,8 +12,8 @@ import tomllib
 from pathlib import Path
 from typing import Mapping
 
-PRODUCT_SHA = "8c478604e3e6cd65700b9526c21fdc038602b8dc"
-BASE_SHA = "879d907781d3264130f30130922c7eee4dc0fe96"
+PRODUCT_SHA = "35dcacdaf9d0df729cfa90566933945fae047f21"
+BASE_SHA = "681283b9bc5de2088ea9aa340506ea3b127b6744"
 TOOLCHAIN = "1.99.0"
 INVENTORY_NAMES = ("latest.json", "compiler.stdout.jsonl", "compiler.stderr.txt")
 NATIVE_TARGETS = {"arm64": "aarch64-apple-darwin", "x86_64": "x86_64-apple-darwin"}
