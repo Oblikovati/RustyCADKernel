@@ -104,6 +104,17 @@ static void await_original_grace(long long started) {
   }
 }
 
+static struct expiry_observation published_expiry_snapshot(long long started) {
+  int done = atomic_load(&completed);
+  int stage = done ? 4 : atomic_load(&relay_stage);
+  if (!done && stage == 4) stage = 3;
+  struct expiry_observation observation = {2, atomic_load(&helper_pid), done ? atomic_load(&helper_result) : EINPROGRESS,
+      fcntl(STDOUT_FILENO, F_GETFL) == output_flags && fcntl(STDOUT_FILENO, F_GETNOSIGPIPE) == 0,
+      caller_policies_preserved(), stage, cpu_probe_bounded_spawn_phase(), done ? atomic_load(&acknowledged) : 0,
+      cpu_probe_clock() - started};
+  return observation;
+}
+
 static void expiry_without_pid_actions(int signal_number) {
   (void)signal_number;
   long long started = cpu_probe_clock();
@@ -111,9 +122,7 @@ static void expiry_without_pid_actions(int signal_number) {
   atomic_store(&request_deadline, started + 100000000LL);
   (void)write(request_pipe[1], "x", 1);
   await_original_grace(started);
-  struct expiry_observation observation = {2, atomic_load(&helper_pid), atomic_load(&helper_result),
-      fcntl(STDOUT_FILENO, F_GETFL) == output_flags && fcntl(STDOUT_FILENO, F_GETNOSIGPIPE) == 0,
-      caller_policies_preserved(), atomic_load(&relay_stage), cpu_probe_bounded_spawn_phase(), atomic_load(&acknowledged), cpu_probe_clock() - started};
+  struct expiry_observation observation = published_expiry_snapshot(started);
   (void)write(monitor_fd, &observation, sizeof(observation));
   _exit(2);
 }
