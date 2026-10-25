@@ -66,7 +66,7 @@ static int helper_parent_guard(pid_t expected_parent) {
   return 0;
 }
 
-static int helper_close_inherited(int retained, struct proc_fdinfo *entries, size_t capacity, int *maximum) {
+static int helper_close_inherited(int retained, int output, struct proc_fdinfo *entries, size_t capacity, int *maximum) {
   int bytes = proc_pidinfo(getpid(), PROC_PIDLISTFDS, 0, NULL, 0);
   if (checked_fd_info_count(bytes) < 0) return errno;
   if ((size_t)bytes > capacity * sizeof(*entries)) return EOVERFLOW;
@@ -75,7 +75,7 @@ static int helper_close_inherited(int retained, struct proc_fdinfo *entries, siz
   if ((size_t)used > capacity * sizeof(*entries) || (size_t)used % sizeof(*entries)) return EIO;
   size_t count = (size_t)used / sizeof(*entries);
   for (size_t i = 0; i < count; ++i) {
-    if (entries[i].proc_fd != retained) {
+    if (entries[i].proc_fd != retained && entries[i].proc_fd != output) {
       if (entries[i].proc_fd > *maximum) *maximum = entries[i].proc_fd;
       close(entries[i].proc_fd);
     }
@@ -118,7 +118,7 @@ static int helper_receive_output(int control, char *bytes, size_t *length) {
 
 static void helper_child(int control, pid_t expected_parent, struct proc_fdinfo *entries, size_t capacity) {
   int readiness[2] = {helper_parent_guard(expected_parent), -1};
-  if (!readiness[0]) readiness[0] = helper_close_inherited(control, entries, capacity, &readiness[1]);
+  if (!readiness[0]) readiness[0] = helper_close_inherited(control, -1, entries, capacity, &readiness[1]);
   (void)helper_write_all(control, (const char *)readiness, sizeof(readiness));
   int failure = readiness[0];
   if (failure) _exit(1);
@@ -214,4 +214,73 @@ int cpu_probe_receive(struct cpu_helper_probe *helper, int milliseconds) {
   int status = 0;
   ssize_t count = read(helper->control, &status, sizeof(status));
   return count == (ssize_t)sizeof(status) ? status : EPIPE;
+}
+
+static long long bounded_deadline;
+static pid_t bounded_parent;
+
+static void bounded_output_alarm(int signal_number) {
+  (void)signal_number;
+  long long now = cpu_probe_clock();
+  if (getppid() != bounded_parent || now < 0 || now >= bounded_deadline) _exit(0);
+}
+
+static int arm_bounded_timer(long long remaining) {
+  struct itimerval timer = {{0, 1000}, {remaining / 1000000000LL, (remaining % 1000000000LL + 999) / 1000}};
+  if (timer.it_value.tv_usec == 1000000) { ++timer.it_value.tv_sec; timer.it_value.tv_usec = 0; }
+  return setitimer(ITIMER_REAL, &timer, NULL) == 0 ? 0 : errno;
+}
+
+static int bounded_child_timer(pid_t parent, long long deadline) {
+  bounded_parent = parent;
+  bounded_deadline = deadline;
+  struct sigaction action;
+  memset(&action, 0, sizeof(action));
+  action.sa_handler = bounded_output_alarm;
+  sigemptyset(&action.sa_mask);
+  if (sigaction(SIGALRM, &action, NULL) != 0) return errno;
+  sigset_t blocked;
+  sigfillset(&blocked);
+  sigdelset(&blocked, SIGALRM);
+  if (sigprocmask(SIG_SETMASK, &blocked, NULL) != 0) return errno;
+  long long now = cpu_probe_clock();
+  long long remaining = deadline - now;
+  if (getppid() != parent || now < 0 || remaining <= 0) return ETIMEDOUT;
+  return arm_bounded_timer(remaining);
+}
+
+static void bounded_output_child(int output, int acknowledgement, pid_t parent,
+    long long deadline, struct proc_fdinfo *entries, size_t capacity) {
+  int maximum = -1;
+  int failure = bounded_child_timer(parent, deadline);
+  if (!failure) failure = helper_close_inherited(acknowledgement, output, entries, capacity, &maximum);
+  if (!failure) failure = helper_write_all(output, CPU_PROBE_MESSAGE, sizeof(CPU_PROBE_MESSAGE) - 1);
+  (void)helper_write_all(acknowledgement, (const char *)&failure, sizeof(failure));
+  _exit(0);
+}
+
+static void wait_before_guard_fault(int *gate) {
+  if (!gate) return;
+  close(gate[1]);
+  char release;
+  while (read(gate[0], &release, 1) < 0 && errno == EINTR) {}
+  close(gate[0]);
+}
+
+pid_t cpu_probe_spawn_bounded(int output, int acknowledgement, long long deadline, size_t capacity, int *gate) {
+  struct proc_fdinfo entries[4096];
+  if (capacity > 4096) { errno = EOVERFLOW; return -1; }
+  helper_preflight();
+  pid_t parent = getpid();
+  /* Public Darwin vfork is fork without user atfork handlers since macOS12.
+     This deprecated diagnostic experiment is never a generic POSIX vfork use. */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  pid_t child = vfork();
+#pragma clang diagnostic pop
+  if (child == 0) {
+    wait_before_guard_fault(gate);
+    bounded_output_child(output, acknowledgement, parent, deadline, entries, capacity);
+  }
+  return child;
 }

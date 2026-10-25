@@ -1,0 +1,24 @@
+{
+  "platform_scope": "Experimental native macOS15 x64/ARM64 only; no product deployment-minimum change or production approval",
+  "documented_semantics_minimum": "macOS12.0",
+  "deprecated": true,
+  "trusted_platform_assumption": "LibSystem fork housekeeping is trusted platform work; no mathematical pre-guard liveness bound is claimed. Our post-fork child performs native syscalls and checked stack-buffer operations only.",
+  "failure_policy": "Actual spawn failure records error without any helper PID action; original CPU caller exit2/grace100ms stays independent.",
+  "primary_sources": [
+    {
+      "local_name": "vfork.2",
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/man/man2/vfork.2",
+      "sha256": "10b67fd99599ebe92ef282c7e0c68f18255564b551a03ddd5e1690560cf1a9b7"
+    },
+    {
+      "local_name": "fork.c",
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/Libc/71bbe350ab79eef58113991d817ccc6165061a64/sys/fork.c",
+      "sha256": "d2b445ce7830a78840cdea0f0ebc0540cbd5cc49464a1d51c34de2d070b11f80"
+    },
+    {
+      "local_name": "libsystem_init.c",
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/Libsystem/c23b51183e46e613375dc7639fb4bf11fbf59ba8/init.c",
+      "sha256": "329d8f27565ebcc332336b15fecd86bcde7728237d5da14cdbed81d7c804f88a"
+    }
+  ]
+}
