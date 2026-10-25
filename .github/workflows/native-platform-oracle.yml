@@ -1,6 +1,12 @@
 name: Native platform geometry oracle
 on:
   workflow_dispatch:
+    inputs:
+      capture:
+        description: Native diagnostic evidence to retain
+        type: choice
+        options: [rust-controls, compiler-inventory]
+        default: rust-controls
 permissions:
   contents: read
 env:
@@ -21,8 +27,15 @@ jobs:
           persist-credentials: false
       - name: Install exact product compiler
         run: rustup toolchain install 1.99.0 --profile minimal
+      - name: Install compiler inventory gate tools
+        if: inputs.capture == 'compiler-inventory'
+        run: rustup component add --toolchain 1.99.0 rustfmt clippy
       - name: Focused native Rust CPU controls
+        if: inputs.capture == 'rust-controls'
         run: python3 tools/ci/capture_macos_cpu_rust.py
+      - name: Retain unaccepted native compiler inventory
+        if: inputs.capture == 'compiler-inventory'
+        run: python3 tools/ci/capture_macos_cpu_inventory.py
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
@@ -30,3 +43,4 @@ jobs:
           path: |
             target/macos-cpu-pipe/*.log
             target/macos-cpu-pipe/*.json
+            target/macos-cpu-pipe/compiler-inventory/
