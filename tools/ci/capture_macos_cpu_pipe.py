@@ -54,11 +54,13 @@ helper_sources = {name: hashlib.sha256((ROOT / 'tools/ci' / name).read_bytes()).
 assert helper_status == 0
 assert command(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror', '-pthread',
                 str(ROOT / 'tools/ci/probe_macos_cpu_expiry.c'),
+                str(ROOT / 'tools/ci/probe_macos_cpu_expiry_parent.c'),
                 str(ROOT / 'tools/ci/probe_macos_cpu_helper_child.c'), '-lproc', '-o', str(OUT / 'native-expiry')], 'expiry-compile') == 0
 expiry_status = command([str(OUT / 'native-expiry')], 'native-expiry')
 (OUT / 'expiry-receipt.json').write_text(json.dumps(dict(status=expiry_status,
     sources_sha256={name: hashlib.sha256((ROOT / 'tools/ci' / name).read_bytes()).hexdigest()
-                   for name in ['probe_macos_cpu_expiry.c', 'probe_macos_cpu_helper_child.c',
+                   for name in ['probe_macos_cpu_expiry.c', 'probe_macos_cpu_expiry_parent.c',
+                                'probe_macos_cpu_expiry.h', 'probe_macos_cpu_helper_child.c',
                                 'probe_macos_cpu_helper.h', 'macos_cpu_expiry_source_audit.json']},
     scope='Experimental Mac15 mechanism only. Public deprecated vfork semantics require Mac12+; product minimum unresolved. Parent expiry has no helper-PID action; platform housekeeping is trusted, not mathematically bounded.'), indent=2) + '\n')
 assert expiry_status == 0
