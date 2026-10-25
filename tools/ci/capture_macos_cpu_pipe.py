@@ -35,6 +35,15 @@ assert command([str(OUT / 'native-probe')], 'native-probe') == 0
 assert command(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror', '-pthread',
                 str(ROOT / 'tools/ci/probe_macos_cpu_helper.c'),
                 str(ROOT / 'tools/ci/probe_macos_cpu_helper_child.c'), '-lproc', '-o', str(OUT / 'native-helper')], 'helper-compile') == 0
+assert command(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror', '-pthread',
+                str(ROOT / 'tools/ci/probe_macos_cpu_reaper.c'),
+                str(ROOT / 'tools/ci/probe_macos_cpu_helper_child.c'), '-lproc', '-o', str(OUT / 'native-reaper')], 'reaper-compile') == 0
+reaper_status = command([str(OUT / 'native-reaper')], 'native-reaper')
+(OUT / 'reaper-receipt.json').write_text(json.dumps(dict(status=reaper_status,
+    sources_sha256={name: hashlib.sha256((ROOT / 'tools/ci' / name).read_bytes()).hexdigest()
+                   for name in ['probe_macos_cpu_reaper.c', 'probe_macos_cpu_helper_child.c', 'probe_macos_cpu_helper.h']},
+    scope='Non-destructive ownership refutation only; no post-reap signal or claim of actual PID reuse.'), indent=2) + '\n')
+assert reaper_status == 0
 helper_status = command([str(OUT / 'native-helper')], 'native-helper')
 helper_sources = {name: hashlib.sha256((ROOT / 'tools/ci' / name).read_bytes()).hexdigest()
                   for name in ['probe_macos_cpu_helper.c', 'probe_macos_cpu_helper_child.c',
