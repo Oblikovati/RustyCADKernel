@@ -53,6 +53,15 @@ class FrozenInventoryProcesses(InventoryCommandCapture):
 class UnexpectedPassingProcesses(FrozenInventoryProcesses):
     command_status = 0
 
+    def run(self, arguments: list[str]) -> subprocess.CompletedProcess[bytes]:
+        """Model an actual matching summary so the unexpected-zero control is causal."""
+        result = super().run(arguments)
+        path = self.product / "target/unsafe-inventory/latest.json"
+        report = json.loads(path.read_text())
+        report["diagnostics"]["workspace_summary"] = []
+        path.write_text(json.dumps(report))
+        return result
+
 
 class MutatingInventoryProcesses(FrozenInventoryProcesses):
     mutate_source = True
@@ -144,7 +153,7 @@ class MacInventoryCaptureTests(unittest.TestCase):
         self.assertEqual(receipt["command_returncode"], 0)
         self.assertEqual(status, 1)
         self.assertFalse(receipt["expectations_accepted"])
-        self.assertEqual(receipt["observations"]["observed_baseline"]["verdict"], "mismatch")
+        self.assertEqual(receipt["observations"]["observed_baseline"]["verdict"], "match")
         self.assertIn("--checks-only", receipt["command"])
 
     def test_changed_source_and_wrong_host_remain_explicit_failures(self) -> None:
