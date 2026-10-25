@@ -4,6 +4,7 @@
 #include <libproc.h>
 #include <poll.h>
 #include <signal.h>
+#include <stdatomic.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -132,13 +133,25 @@ static void helper_child(int control, pid_t expected_parent, struct proc_fdinfo 
   for (;;) pause();
 }
 
+static _Atomic int bounded_spawn_phase;
+_Static_assert(ATOMIC_INT_LOCK_FREE == 2, "native diagnostic phases must be lock free");
+
+int cpu_probe_bounded_spawn_phase(void) {
+  return atomic_load(&bounded_spawn_phase);
+}
+
 static void helper_preflight(void) {
+  atomic_store(&bounded_spawn_phase, 10);
   (void)cpu_probe_fd_capacity(); /* Bind libproc/__proc_info before fork. */
+  atomic_store(&bounded_spawn_phase, 11);
   struct itimerval unused = {{0, 0}, {0, 0}};
   (void)setitimer(-1, &unused, NULL); /* Bind without changing any caller timer. */
+  atomic_store(&bounded_spawn_phase, 12);
   struct sigaction action;
   (void)sigaction(SIGALRM, NULL, &action);
+  atomic_store(&bounded_spawn_phase, 13);
   (void)getppid();
+  atomic_store(&bounded_spawn_phase, 14);
 }
 
 void cpu_probe_stop(struct cpu_helper_probe *helper) {
@@ -276,8 +289,10 @@ pid_t cpu_probe_spawn_bounded(int output, int acknowledgement, long long deadlin
      This deprecated diagnostic experiment is never a generic POSIX vfork use. */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  atomic_store(&bounded_spawn_phase, 20);
   pid_t child = vfork();
 #pragma clang diagnostic pop
+  if (child != 0) atomic_store(&bounded_spawn_phase, 21);
   if (child == 0) {
     wait_before_guard_fault(gate);
     bounded_output_child(output, acknowledgement, parent, deadline, entries, capacity);

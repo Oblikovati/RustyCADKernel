@@ -17,7 +17,7 @@
 
 _Static_assert(ATOMIC_INT_LOCK_FREE == 2 && ATOMIC_LLONG_LOCK_FREE == 2, "signal telemetry atomics must be lock free");
 
-struct expiry_observation { int kind; pid_t helper; int result; int flags_preserved; int relay_stage; long long elapsed; };
+struct expiry_observation { int kind; pid_t helper; int result; int flags_preserved; int relay_stage; int factory_phase; long long elapsed; };
 static int request_pipe[2], acknowledgement[2], monitor_fd, output_flags, expiry_mode;
 static _Atomic long long request_deadline;
 static _Atomic int completed, helper_result, relay_ready, relay_stage;
@@ -38,7 +38,7 @@ static void blocking_user_atfork(void) {
 }
 
 static void report_helper(pid_t helper, int failure) {
-  struct expiry_observation observation = {1, helper, failure, 0, atomic_load(&relay_stage), 0};
+  struct expiry_observation observation = {1, helper, failure, 0, atomic_load(&relay_stage), cpu_probe_bounded_spawn_phase(), 0};
   demand(write(monitor_fd, &observation, sizeof(observation)) == sizeof(observation), "helper observation");
 }
 
@@ -118,7 +118,7 @@ static void expiry_without_pid_actions(int signal_number) {
   await_original_grace(started);
   struct expiry_observation observation = {2, atomic_load(&helper_pid), atomic_load(&helper_result),
       fcntl(STDOUT_FILENO, F_GETFL) == output_flags && fcntl(STDOUT_FILENO, F_GETNOSIGPIPE) == 0,
-      atomic_load(&relay_stage), cpu_probe_clock() - started};
+      atomic_load(&relay_stage), cpu_probe_bounded_spawn_phase(), cpu_probe_clock() - started};
   (void)write(monitor_fd, &observation, sizeof(observation));
   _exit(2);
 }
@@ -230,6 +230,7 @@ static void run_cpu_parent(int output, int reader, int monitor, int policy, int 
   monitor_fd = monitor;
   expiry_mode = mode;
   helper_pid = -1;
+  helper_result = EINPROGRESS;
   install_application_policy(policy);
   start_request_relay();
   redirect_after_initialization(output, original_reader);
@@ -262,8 +263,8 @@ static struct expiry_observation read_observation(int descriptor) {
   struct expiry_observation observation;
   demand(read(descriptor, &observation, sizeof(observation)) == sizeof(observation), "whole observation");
   fprintf(stderr, "{\"probe\":\"raw_observation\",\"kind\":%d,\"helper\":%d,\"result\":%d,"
-      "\"flags_preserved\":%d,\"relay_stage\":%d,\"elapsed_ns\":%lld}\n", observation.kind,
-      observation.helper, observation.result, observation.flags_preserved, observation.relay_stage, observation.elapsed);
+      "\"flags_preserved\":%d,\"relay_stage\":%d,\"factory_phase\":%d,\"elapsed_ns\":%lld}\n", observation.kind,
+      observation.helper, observation.result, observation.flags_preserved, observation.relay_stage, observation.factory_phase, observation.elapsed);
   return observation;
 }
 

@@ -21,5 +21,7 @@ void cpu_probe_stop(struct cpu_helper_probe *);
 long long cpu_probe_clock(void);
 /* Native Mac12+ expiry-only experiment; cpu_probe_spawn_bounded(1,ack,deadline,4096,NULL). */
 pid_t cpu_probe_spawn_bounded(int output, int acknowledgement, long long deadline, size_t capacity, int *pre_guard_fault_gate);
+/* Observe actual factory phase without interpreting a pending call; cpu_probe_bounded_spawn_phase(). */
+int cpu_probe_bounded_spawn_phase(void);
 #define CPU_PROBE_MESSAGE "Process killed by CPU limit  (1 sec)\n"
 #endif
