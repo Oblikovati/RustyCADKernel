@@ -18,6 +18,8 @@
 #include "probe_macos_cpu_expiry.h"
 
 static volatile sig_atomic_t callback_fd = -1;
+static enum expiry_probe_claim current_claim = EXPIRY_DETERMINISTIC_RECIPIENT;
+static long long held_full_closure_ns = -1;
 
 void cpu_probe_expiry_require(int condition, const char *label) {
   if (condition) return;
@@ -51,8 +53,8 @@ static struct expiry_observation read_observation(int descriptor) {
   struct expiry_observation observation;
   cpu_probe_expiry_require(read(descriptor, &observation, sizeof(observation)) == sizeof(observation), "whole observation");
   fprintf(stderr, "{\"probe\":\"raw_observation\",\"kind\":%d,\"helper\":%d,\"result\":%d,"
-      "\"flags_preserved\":%d,\"relay_stage\":%d,\"factory_phase\":%d,\"elapsed_ns\":%lld}\n", observation.kind,
-      observation.helper, observation.result, observation.flags_preserved, observation.relay_stage, observation.factory_phase, observation.elapsed);
+      "\"flags_preserved\":%d,\"policies_preserved\":%d,\"relay_stage\":%d,\"factory_phase\":%d,\"acknowledged\":%d,\"elapsed_ns\":%lld}\n", observation.kind,
+      observation.helper, observation.result, observation.flags_preserved, observation.policies_preserved, observation.relay_stage, observation.factory_phase, observation.acknowledged, observation.elapsed);
   return observation;
 }
 
@@ -79,26 +81,59 @@ static void await_output_eof(int descriptor) {
   }
 }
 
+static struct expiry_observation observe_unmasked_exit(int descriptor, struct expiry_observation observation, int mode) {
+  if (observation.kind == 1) observation = read_observation(descriptor);
+  cpu_probe_expiry_require(observation.kind == 2 && observation.flags_preserved && observation.policies_preserved, "unmasked stress CPU exit and exact stdout flags");
+  if (observation.relay_stage < 4)
+    cpu_probe_expiry_require(observation.result == EINPROGRESS && !observation.acknowledged
+        && observation.elapsed >= 100000000LL, "pending diagnostic remains explicitly incomplete through original grace");
+  if (mode == 6 && observation.factory_phase == 21 && observation.relay_stage == 4)
+    cpu_probe_expiry_require(observation.helper == -1 && observation.result == EAGAIN && !observation.acknowledged,
+        "completed unmasked refusal is an actual native error");
+  return observation;
+}
+
 static struct expiry_observation observe_parent_expiry(int descriptor, pid_t parent, int mode) {
   struct expiry_observation observation = read_observation(descriptor);
+  if (current_claim == EXPIRY_UNMASKED_EXIT_ONLY) return observe_unmasked_exit(descriptor, observation, mode);
   if (mode == 5 || mode == 7) {
     cpu_probe_expiry_require(observation.kind == 1 && observation.helper > 0, "actual expiry-only helper before forced death");
     cpu_probe_expiry_require(kill(parent, SIGKILL) == 0, "forced controlled parent death");
     return observation;
   }
   if (observation.kind == 1) observation = read_observation(descriptor);
-  cpu_probe_expiry_require(observation.kind == 2 && observation.flags_preserved, "actual CPU expiry and exact stdout flags");
+  cpu_probe_expiry_require(observation.kind == 2 && observation.flags_preserved && observation.policies_preserved, "actual CPU expiry and exact stdout flags");
   if (mode == 2 || mode == 3) cpu_probe_expiry_require(observation.elapsed >= 100000000LL, "unchanged full diagnostic grace");
   if (mode != 3 && mode != 6) cpu_probe_expiry_require(observation.helper > 0, "expiry helper bypassed all blocking user atfork callbacks");
-  if (mode == 1) cpu_probe_expiry_require(observation.result == EPIPE, "actual closed stdout EPIPE");
-  if (mode == 4) cpu_probe_expiry_require(observation.result == EOVERFLOW, "actual child initialization refusal");
-  if (mode == 6) cpu_probe_expiry_require(observation.helper == -1 && observation.result == EAGAIN, "actual vfork syscall failure");
+  if (mode == 1) cpu_probe_expiry_require(observation.acknowledged && observation.result == EPIPE, "actual closed stdout EPIPE");
+  if (mode == 4) cpu_probe_expiry_require(observation.acknowledged && observation.result == EOVERFLOW, "actual child initialization refusal");
+  if (mode == 6) cpu_probe_expiry_require(observation.helper == -1 && observation.factory_phase == 21 && !observation.acknowledged
+      && observation.result == EAGAIN, "actual vfork syscall failure");
   return observation;
 }
 
-static void check_and_close_output(int descriptor, int mode) {
+static long long await_full_writer_closed_without_drain(int descriptor) {
+  long long started = cpu_probe_clock();
+  cpu_probe_expiry_require(started >= 0, "valid held-full closure start");
+  for (;;) {
+    long long now = cpu_probe_clock();
+    cpu_probe_expiry_require(now >= 0 && now - started < 12000000000LL, "original twelve-second helper closure guard");
+    /* Darwin registers a read filter only when requested. Snapshot HUP without
+       draining full data; ordinary readiness must not unblock the writer (#289). */
+    struct pollfd closed = {descriptor, POLLHUP, 0};
+    int pending = poll(&closed, 1, 0);
+    if (pending > 0 && (closed.revents & POLLHUP)) return cpu_probe_clock() - started;
+    cpu_probe_expiry_require(pending == 0 || (pending < 0 && errno == EINTR), "full pipe closes without observer reads");
+    usleep(1000);
+  }
+}
+
+static void check_and_close_output(int descriptor, int mode, struct expiry_observation observation) {
   if (descriptor < 0) return;
-  if (mode == 0 || mode == 8) {
+  if (mode == 2 || mode == 5 || mode == 7)
+    held_full_closure_ns = await_full_writer_closed_without_drain(descriptor);
+  if ((mode == 0 || mode == 8) && (current_claim == EXPIRY_DETERMINISTIC_RECIPIENT
+      || (observation.acknowledged && observation.result == 0))) {
     char message[sizeof(CPU_PROBE_MESSAGE)] = {0};
     cpu_probe_expiry_require(read(descriptor, message, sizeof(message)) == sizeof(CPU_PROBE_MESSAGE) - 1
         && memcmp(message, CPU_PROBE_MESSAGE, sizeof(CPU_PROBE_MESSAGE) - 1) == 0, "original diagnostic exact bytes");
@@ -107,26 +142,36 @@ static void check_and_close_output(int descriptor, int mode) {
   close(descriptor);
 }
 
+static const char *diagnostic_coverage(struct expiry_observation observation) {
+  if (observation.relay_stage < 4) return "pending_unknown";
+  if (observation.helper < 0 && observation.factory_phase == 21) return "native_spawn_failed";
+  if (!observation.acknowledged) return "channel_ended_without_report_unknown";
+  return observation.result == 0 ? "peer_reported_write_complete" : "peer_reported_write_failed";
+}
+
 static void report_expiry(int policy, int mode, const char *kind, struct expiry_observation observation) {
   printf("{\"probe\":\"expiry_only_helper\",\"policy\":%d,\"kind\":\"%s\",\"exit_code\":%d,"
-      "\"diagnostic_ns\":%lld,\"no_parent_pid_actions\":true,\"output_closed\":true}\n",
-      policy, kind, (mode == 5 || mode == 7) ? -1 : 2, observation.elapsed);
+      "\"diagnostic_ns\":%lld,\"claim\":\"%s\",\"diagnostic_coverage\":\"%s\",\"held_full_closure_ns\":%lld,\"no_parent_pid_actions\":true,\"output_closed\":true}\n",
+      policy, kind, (mode == 5 || mode == 7) ? -1 : 2, observation.elapsed,
+      current_claim == EXPIRY_DETERMINISTIC_RECIPIENT ? "deterministic_recipient_mechanism" : "unmasked_stress_bounded_exit_only",
+      diagnostic_coverage(observation), held_full_closure_ns);
   fflush(stdout);
 }
 
 static void probe_cpu_expiry(int policy, int mode, const char *kind) {
   int output[2], monitor[2];
+  held_full_closure_ns = -1;
   prepare_output(output, mode == 2 || mode == 5 || mode == 7);
   cpu_probe_expiry_require(pipe(monitor) == 0, "observer telemetry pipe");
   pid_t parent = fork();
   cpu_probe_expiry_require(parent >= 0, "controlled parent fork");
-  if (parent == 0) { close(monitor[0]); cpu_probe_run_expiry_parent(output[1], output[0], monitor[1], policy, mode, blocking_user_atfork); }
+  if (parent == 0) { close(monitor[0]); cpu_probe_run_expiry_parent(output[1], output[0], monitor[1], policy, mode, current_claim, blocking_user_atfork); }
   close(output[1]);
   close(monitor[1]);
   if (mode == 1) { close(output[0]); output[0] = -1; }
   struct expiry_observation observation = observe_parent_expiry(monitor[0], parent, mode);
   await_controlled_parent(parent, (mode == 5 || mode == 7) ? SIGKILL : 0);
-  check_and_close_output(output[0], mode);
+  check_and_close_output(output[0], mode, observation);
   close(monitor[0]);
   report_expiry(policy, mode, kind, observation);
 }
@@ -186,17 +231,28 @@ static void prove_child_callback_really_blocks(void) {
       "child callback positive-control complete");
 }
 
-static void probe_all_reaping_policies(void) {
+static void probe_deterministic_recipients(void) {
+  current_claim = EXPIRY_DETERMINISTIC_RECIPIENT;
   for (int policy = 0; policy < 3; ++policy) {
-    probe_cpu_expiry(policy, 0, "writable");
-    probe_cpu_expiry(policy, 1, "closed");
-    probe_cpu_expiry(policy, 2, "full");
-    probe_cpu_expiry(policy, 3, "stalled_relay");
-    probe_cpu_expiry(policy, 4, "child_initialization_refused");
-    probe_cpu_expiry(policy, 5, "forced_parent_death");
-    probe_cpu_expiry(policy, 6, "actual_spawn_refused");
-    probe_cpu_expiry(policy, 7, "forced_parent_death_before_guard");
-    probe_cpu_expiry(policy, 8, "stdout_redirected_after_initialization");
+    probe_cpu_expiry(policy, 0, "deterministic_writable");
+    probe_cpu_expiry(policy, 1, "deterministic_closed");
+    probe_cpu_expiry(policy, 2, "deterministic_full");
+    probe_cpu_expiry(policy, 3, "deterministic_stalled_relay");
+    probe_cpu_expiry(policy, 4, "deterministic_child_initialization_refused");
+    probe_cpu_expiry(policy, 5, "deterministic_forced_parent_death");
+    probe_cpu_expiry(policy, 6, "deterministic_actual_spawn_refused");
+    probe_cpu_expiry(policy, 7, "deterministic_forced_parent_death_before_guard");
+    probe_cpu_expiry(policy, 8, "deterministic_stdout_redirected_after_initialization");
+  }
+}
+
+static void probe_unmasked_stress_exit(void) {
+  current_claim = EXPIRY_UNMASKED_EXIT_ONLY;
+  for (int policy = 0; policy < 3; ++policy) {
+    probe_cpu_expiry(policy, 0, "unmasked_writable_exit_only");
+    probe_cpu_expiry(policy, 1, "unmasked_closed_exit_only");
+    probe_cpu_expiry(policy, 2, "unmasked_full_exit_only");
+    probe_cpu_expiry(policy, 6, "unmasked_refusal_limit_exit_only");
   }
 }
 
@@ -206,7 +262,8 @@ int main(void) {
   cpu_probe_expiry_require(descriptors >= 0, "initial observer descriptor count");
   prove_fork_callback_really_blocks();
   prove_child_callback_really_blocks();
-  probe_all_reaping_policies();
+  probe_deterministic_recipients();
+  probe_unmasked_stress_exit();
   cpu_probe_expiry_require(cpu_probe_fd_count() == descriptors, "observer descriptors preserved");
   printf("{\"probe\":\"expiry_prototype_complete\",\"descriptor_count_preserved\":true}\n");
   return 0;

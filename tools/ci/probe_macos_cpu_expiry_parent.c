@@ -21,13 +21,14 @@ _Static_assert(ATOMIC_INT_LOCK_FREE == 2 && ATOMIC_LLONG_LOCK_FREE == 2, "signal
 
 static int request_pipe[2], acknowledgement[2], monitor_fd, output_flags, expiry_mode;
 static _Atomic long long request_deadline;
-static _Atomic int completed, helper_result, relay_ready, relay_stage;
+static _Atomic int completed, helper_result, relay_ready, relay_stage, acknowledged, fixture_workers_ready;
+static enum expiry_probe_claim fixture_claim;
 static sigset_t relay_original_mask;
 static _Atomic pid_t helper_pid;
 static struct sigaction original_pipe_policy, original_child_policy;
 
 static void report_helper(pid_t helper, int failure) {
-  struct expiry_observation observation = {1, helper, failure, 0, atomic_load(&relay_stage), cpu_probe_bounded_spawn_phase(), 0};
+  struct expiry_observation observation = {1, helper, failure, 0, 0, atomic_load(&relay_stage), cpu_probe_bounded_spawn_phase(), atomic_load(&acknowledged), 0};
   cpu_probe_expiry_require(write(monitor_fd, &observation, sizeof(observation)) == sizeof(observation), "helper observation");
 }
 
@@ -42,25 +43,29 @@ static void prepare_relay_thread(void) {
   atomic_store(&relay_ready, 1);
 }
 
+static int caller_policies_preserved(void) {
+  struct sigaction pipe_policy, child_policy;
+  memset(&pipe_policy, 0, sizeof(pipe_policy));
+  memset(&child_policy, 0, sizeof(child_policy));
+  if (sigaction(SIGPIPE, NULL, &pipe_policy) != 0 || sigaction(SIGCHLD, NULL, &child_policy) != 0) return 0;
+  return pipe_policy.sa_handler == original_pipe_policy.sa_handler && pipe_policy.sa_flags == original_pipe_policy.sa_flags
+      && memcmp(&pipe_policy.sa_mask, &original_pipe_policy.sa_mask, sizeof(sigset_t)) == 0
+      && child_policy.sa_handler == original_child_policy.sa_handler && child_policy.sa_flags == original_child_policy.sa_flags
+      && memcmp(&child_policy.sa_mask, &original_child_policy.sa_mask, sizeof(sigset_t)) == 0;
+}
+
 static void assert_application_policy_unchanged(void) {
   sigset_t relay_current_mask;
   cpu_probe_expiry_require(pthread_sigmask(SIG_SETMASK, NULL, &relay_current_mask) == 0
       && memcmp(&relay_current_mask, &relay_original_mask, sizeof(sigset_t)) == 0, "relay mask preserved");
-  struct sigaction pipe_policy, child_policy;
-  memset(&pipe_policy, 0, sizeof(pipe_policy));
-  memset(&child_policy, 0, sizeof(child_policy));
-  cpu_probe_expiry_require(sigaction(SIGPIPE, NULL, &pipe_policy) == 0 && sigaction(SIGCHLD, NULL, &child_policy) == 0,
-      "actual parent signal policies");
-  cpu_probe_expiry_require(pipe_policy.sa_handler == original_pipe_policy.sa_handler && pipe_policy.sa_flags == original_pipe_policy.sa_flags
-      && memcmp(&pipe_policy.sa_mask, &original_pipe_policy.sa_mask, sizeof(sigset_t)) == 0, "parent SIGPIPE policy preserved");
-  cpu_probe_expiry_require(child_policy.sa_handler == original_child_policy.sa_handler && child_policy.sa_flags == original_child_policy.sa_flags
-      && memcmp(&child_policy.sa_mask, &original_child_policy.sa_mask, sizeof(sigset_t)) == 0, "application reaper policy preserved");
+  cpu_probe_expiry_require(caller_policies_preserved(), "actual caller SIGPIPE and reaper policies preserved");
 }
 
 static void receive_child_completion(pid_t helper, int failure) {
   ssize_t count = -1;
   if (helper >= 0) do { count = read(acknowledgement[0], &failure, sizeof(failure)); }
     while (count < 0 && errno == EINTR);
+  atomic_store(&acknowledged, helper >= 0 && count == sizeof(failure));
   atomic_store(&helper_result, helper < 0 ? failure : count == sizeof(failure) ? failure : ETIMEDOUT);
   atomic_store(&relay_stage, 4);
   atomic_store(&completed, 1);
@@ -108,13 +113,29 @@ static void expiry_without_pid_actions(int signal_number) {
   await_original_grace(started);
   struct expiry_observation observation = {2, atomic_load(&helper_pid), atomic_load(&helper_result),
       fcntl(STDOUT_FILENO, F_GETFL) == output_flags && fcntl(STDOUT_FILENO, F_GETNOSIGPIPE) == 0,
-      atomic_load(&relay_stage), cpu_probe_bounded_spawn_phase(), cpu_probe_clock() - started};
+      caller_policies_preserved(), atomic_load(&relay_stage), cpu_probe_bounded_spawn_phase(), atomic_load(&acknowledged), cpu_probe_clock() - started};
   (void)write(monitor_fd, &observation, sizeof(observation));
   _exit(2);
 }
 
+static void configure_fixture_recipient(void) {
+  sigset_t blocked;
+  sigemptyset(&blocked);
+  /* Test-only recipient control; production must not change application masks. */
+  if (fixture_claim == EXPIRY_DETERMINISTIC_RECIPIENT) {
+    sigaddset(&blocked, SIGXCPU);
+    cpu_probe_expiry_require(pthread_sigmask(SIG_BLOCK, &blocked, NULL) == 0, "fixture CPU recipient mask");
+  }
+  cpu_probe_expiry_require(pthread_sigmask(SIG_SETMASK, NULL, &blocked) == 0
+      && sigismember(&blocked, SIGPIPE) == 0
+      && sigismember(&blocked, SIGXCPU) == (fixture_claim == EXPIRY_DETERMINISTIC_RECIPIENT),
+      "declared fixture CPU recipient and unmasked application SIGPIPE");
+  atomic_fetch_add(&fixture_workers_ready, 1);
+}
+
 static void *allocation_stress(void *unused) {
   (void)unused;
+  configure_fixture_recipient();
   for (;;) {
     char *allocation = malloc(65536);
     if (allocation) { memset(allocation, 1, 65536); free(allocation); }
@@ -124,6 +145,7 @@ static void *allocation_stress(void *unused) {
 
 static void *loader_stress(void *unused) {
   (void)unused;
+  configure_fixture_recipient();
   for (;;) {
     void *library = dlopen("/usr/lib/libSystem.B.dylib", RTLD_LAZY);
     if (library) dlclose(library);
@@ -133,6 +155,7 @@ static void *loader_stress(void *unused) {
 
 static void *application_reaper(void *unused) {
   (void)unused;
+  configure_fixture_recipient();
   for (;;) { int status; (void)waitpid(-1, &status, WNOHANG); usleep(100); }
   return NULL;
 }
@@ -145,6 +168,7 @@ static void start_concurrent_application(int policy) {
     cpu_probe_expiry_require(pthread_create(&thread, NULL, loader_stress, NULL) == 0, "loader stress thread");
   if (policy == 2)
     cpu_probe_expiry_require(pthread_create(&thread, NULL, application_reaper, NULL) == 0, "application reaper thread");
+  while (atomic_load(&fixture_workers_ready) < 6 + (policy == 2)) usleep(100);
 }
 
 static void install_application_policy(int policy, void (*blocking_callback)(void)) {
@@ -214,11 +238,12 @@ static void redirect_after_initialization(int output, int original_reader) {
   close(original_reader);
 }
 
-_Noreturn void cpu_probe_run_expiry_parent(int output, int reader, int monitor, int policy, int mode, void (*blocking_callback)(void)) {
+_Noreturn void cpu_probe_run_expiry_parent(int output, int reader, int monitor, int policy, int mode, enum expiry_probe_claim claim, void (*blocking_callback)(void)) {
   close(reader);
   int original_reader = initialize_current_output(output, mode);
   monitor_fd = monitor;
   expiry_mode = mode;
+  fixture_claim = claim;
   helper_pid = -1;
   helper_result = EINPROGRESS;
   install_application_policy(policy, blocking_callback);

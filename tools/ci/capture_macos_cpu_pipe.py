@@ -57,13 +57,17 @@ assert command(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror', '-pthread',
                 str(ROOT / 'tools/ci/probe_macos_cpu_expiry_parent.c'),
                 str(ROOT / 'tools/ci/probe_macos_cpu_helper_child.c'), '-lproc', '-o', str(OUT / 'native-expiry')], 'expiry-compile') == 0
 expiry_status = command([str(OUT / 'native-expiry')], 'native-expiry')
-(OUT / 'expiry-receipt.json').write_text(json.dumps(dict(status=expiry_status,
+expiry_rows = [json.loads(line) for line in (OUT / 'native-expiry.stdout.log').read_text().splitlines()]
+claim_counts = {claim: sum(row.get('claim') == claim for row in expiry_rows)
+                for claim in ['deterministic_recipient_mechanism', 'unmasked_stress_bounded_exit_only']}
+(OUT / 'expiry-receipt.json').write_text(json.dumps(dict(status=expiry_status, observed_claim_counts=claim_counts,
     sources_sha256={name: hashlib.sha256((ROOT / 'tools/ci' / name).read_bytes()).hexdigest()
                    for name in ['probe_macos_cpu_expiry.c', 'probe_macos_cpu_expiry_parent.c',
                                 'probe_macos_cpu_expiry.h', 'probe_macos_cpu_helper_child.c',
                                 'probe_macos_cpu_helper.h', 'macos_cpu_expiry_source_audit.json']},
     scope='Experimental Mac15 mechanism only. Public deprecated vfork semantics require Mac12+; product minimum unresolved. Parent expiry has no helper-PID action; platform housekeeping is trusted, not mathematically bounded.'), indent=2) + '\n')
 assert expiry_status == 0
+assert claim_counts == dict(deterministic_recipient_mechanism=27, unmasked_stress_bounded_exit_only=12)
 PRODUCT.mkdir()
 assert command(['git', 'init', str(PRODUCT)], 'init') == 0
 assert command(['git', 'remote', 'add', 'origin', 'https://github.com/Oblikovati/Martensite.git'], 'remote', PRODUCT) == 0

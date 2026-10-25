@@ -30,5 +30,11 @@
     "14": "parent query returned, ordinary preflight complete",
     "20": "cached public vfork invoked",
     "21": "vfork returned in parent (errno meaningful only when pid<0)"
+  },
+  "diagnostic_contracts": {
+    "deterministic_recipient_mechanism": "27 cases; only fixture application workers block SIGXCPU before CPU cap, SIGPIPE stays unmasked. Exact message, actual EAGAIN, original forced-death and callback assertions retained. No production mask change.",
+    "unmasked_stress_bounded_exit_only": "12 additional cases retain unmasked allocator/loader/application reaper workers. Require real exit2, original grace for pending work, exact flags/policies and honest incomplete diagnostics; no writer-progress/refusal claim from pending calls.",
+    "acknowledgement_received": "Distinct actual full ACK read from EOF/local timeout; relay stage4 alone is not an ACK.",
+    "held_full_writer_cleanup": "Observe explicitly requested POLLHUP using zero-timeout snapshots and1ms observer pauses on retained full reader before any drain, original12s observer guard. XNU registers EVFILT_READ only for requested input/HUP and reports EV_EOF even with pending buffered data. No observer-assisted write unblock."
   }
 }
