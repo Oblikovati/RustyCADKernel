@@ -1,0 +1,38 @@
+{
+  "upstream": "Apple XNU",
+  "revision": "f6217f891ac0bb64f3d375211650a4c1ff8ca1ea",
+  "files": {
+    "libsyscall/wrappers/libproc/libproc.c": {
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/libsyscall/wrappers/libproc/libproc.c",
+      "sha256": "5c8a771427e04c5e1d55c4cdf5a077f3b52c5be4a091683b970084bfdda76df2"
+    },
+    "libsyscall/wrappers/libproc/libproc.h": {
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/libsyscall/wrappers/libproc/libproc.h",
+      "sha256": "37c7629819a18c5ef10d19a9bea00eb7e0bd31e0b127ecd2ae108c74f47c39e2"
+    },
+    "bsd/kern/proc_info.c": {
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/kern/proc_info.c",
+      "sha256": "557092f14fbad3341100f59e0391d2e812c54b79a7404c89b2af97471ad67082"
+    },
+    "bsd/kern/sys_generic.c": {
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/kern/sys_generic.c",
+      "sha256": "6bf3e35160701519d433f5a2269f8220646459e2b131816de7408fb7d5505c2c"
+    },
+    "bsd/kern/kern_descrip.c": {
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/kern/kern_descrip.c",
+      "sha256": "480cfed4e987be874bd71fb6933c254adf9fb1f36de8496dee8f351b18da13b1"
+    },
+    "bsd/sys/fcntl.h": {
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/sys/fcntl.h",
+      "sha256": "0f93c8918a70ffafe20bfe9c72e671fde67438cbee9f9de8c2f87b5c704c9a9e"
+    }
+  },
+  "audited_facts": [
+    "proc_pidinfo wrapper directly calls __proc_info without user-space allocation or locks; parent executes it before fork to bind the wrapper.",
+    "Child closure measures its own complete descriptor table after fork, refuses insufficient capacity, then closes actual inherited descriptors except its private socket; no resource-limit upper bound or parent snapshot is used.",
+    "F_SETNOSIGPIPE lives in shared fileglob flags; both native Macs confirmed dup and /dev/fd reopening mutate the original descriptor state.",
+    "EPIPE generates process-wide SIGPIPE on Darwin; helper process confines that signal while caller disposition remains unchanged.",
+    "Successful writes record FWASWRITTEN0x10000 independently of output configuration."
+  ],
+  "prototype_scope": "Experimental native controls only; not product code, release acceptance, or source integration changes."
+}
