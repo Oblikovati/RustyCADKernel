@@ -37,7 +37,7 @@ assert command(['git', 'fetch', '--depth=1', 'origin', PRODUCT_SHA], 'rust-fetch
 assert command(['git', 'checkout', '--detach', PRODUCT_SHA], 'rust-checkout', PRODUCT) == 0
 compiler_status = command(['rustc', '+1.99.0', '-vV'], 'rust-compiler', PRODUCT)
 unit_status = command(['cargo', '+1.99.0', 'test', '--locked', '-p', 'martensite-tkernel',
-                       '--lib', 'osd::timing::signal_native::cpu_budget', '--',
+                       '--lib', 'osd::timing::signal_native::cpu_budget::darwin', '--',
                        '--test-threads=1', '--show-output'], 'rust-budget-unit', PRODUCT)
 host_status = command(['cargo', '+1.99.0', 'test', '--locked', '-p', 'martensite-tkernel',
                        '--test', 'osd_cpu_limit_signal', '--', '--test-threads=1',
