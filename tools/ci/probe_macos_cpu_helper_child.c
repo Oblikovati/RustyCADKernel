@@ -27,15 +27,23 @@ long long cpu_probe_clock(void) {
   return (long long)value.tv_sec * 1000000000LL + value.tv_nsec;
 }
 
+static int checked_fd_info_count(int bytes) {
+  if (bytes <= 0 || bytes % (int)sizeof(struct proc_fdinfo) != 0) {
+    errno = EIO;
+    return -1;
+  }
+  return bytes / (int)sizeof(struct proc_fdinfo);
+}
+
 int cpu_probe_fd_capacity(void) {
   int bytes = proc_pidinfo(getpid(), PROC_PIDLISTFDS, 0, NULL, 0);
-  return bytes / (int)sizeof(struct proc_fdinfo);
+  return checked_fd_info_count(bytes);
 }
 
 int cpu_probe_fd_count(void) {
   struct proc_fdinfo entries[4096];
   int bytes = proc_pidinfo(getpid(), PROC_PIDLISTFDS, 0, entries, sizeof(entries));
-  return bytes / (int)sizeof(struct proc_fdinfo);
+  return checked_fd_info_count(bytes);
 }
 
 static void helper_parent_gone(int signal_number) {
@@ -60,7 +68,7 @@ static int helper_parent_guard(pid_t expected_parent) {
 
 static int helper_close_inherited(int retained, struct proc_fdinfo *entries, size_t capacity, int *maximum) {
   int bytes = proc_pidinfo(getpid(), PROC_PIDLISTFDS, 0, NULL, 0);
-  if (bytes <= 0) return errno ? errno : EIO;
+  if (checked_fd_info_count(bytes) < 0) return errno;
   if ((size_t)bytes > capacity * sizeof(*entries)) return EOVERFLOW;
   int used = proc_pidinfo(getpid(), PROC_PIDLISTFDS, 0, entries, (int)(capacity * sizeof(*entries)));
   if (used <= 0) return errno ? errno : EIO;

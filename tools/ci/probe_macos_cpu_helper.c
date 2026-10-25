@@ -237,6 +237,7 @@ static void probe_high_descriptor(void) {
 
 static void probe_initialization_failure(void) {
   int before = cpu_probe_fd_count();
+  demand(before >= 0, "valid initial descriptor observation");
   demand(cpu_probe_prepare(&active_helper, 0) == EOVERFLOW, "actual undersized child buffer refuses initialization");
   demand(active_helper.pid == -1 && cpu_probe_fd_count() == before, "initialization failure reaped and closed descriptors");
   printf("{\"probe\":\"initialization_refusal\",\"errno\":%d,\"reaped\":true,\"fds_before\":%d,\"fds_after\":%d}\n", EOVERFLOW, before, cpu_probe_fd_count());
@@ -316,12 +317,14 @@ static void probe_forced_parent_death(void) {
 
 int main(void) {
   signal(SIGPIPE, SIG_DFL);
+  demand(signal(SIGCHLD, SIG_DFL) != SIG_ERR, "controlled prototype reaping policy");
   struct sigaction pipe_before, pipe_after;
   struct itimerval timer_before, timer_after;
   demand(sigaction(SIGPIPE, NULL, &pipe_before) == 0, "caller signal snapshot");
   demand(getitimer(ITIMER_REAL, &timer_before) == 0, "caller timer snapshot");
   demand(timer_before.it_value.tv_sec == 0 && timer_before.it_value.tv_usec == 0, "inactive caller timer fixture");
   int descriptors = cpu_probe_fd_count();
+  demand(descriptors >= 0, "valid caller descriptor observation");
   probe_initialization_failure();
   probe_late_descriptor();
   probe_high_descriptor();
@@ -340,6 +343,6 @@ int main(void) {
   demand(getitimer(ITIMER_REAL, &timer_after) == 0 && timer_after.it_value.tv_sec == 0
       && timer_after.it_value.tv_usec == 0 && timer_after.it_interval.tv_sec == timer_before.it_interval.tv_sec
       && timer_after.it_interval.tv_usec == timer_before.it_interval.tv_usec, "caller timer retained");
-  printf("{\"probe\":\"complete\",\"descriptor_count_preserved\":true}\n");
+  printf("{\"probe\":\"complete\",\"descriptor_count_preserved\":true,\"sigchld_policy\":\"explicit_default\"}\n");
   return 0;
 }

@@ -41,7 +41,7 @@ helper_sources = {name: hashlib.sha256((ROOT / 'tools/ci' / name).read_bytes()).
                                'probe_macos_cpu_helper.h', 'macos_cpu_helper_source_audit.json']}
 (OUT / 'helper-receipt.json').write_text(json.dumps(dict(status=helper_status,
     sources_sha256=helper_sources, platform=platform.platform(), machine=platform.machine(),
-    scope='Native mechanism prototype only; not corrected product acceptance.'), indent=2) + '\n')
+    scope='Isolated native prototype with explicit SIGCHLD=SIG_DFL. Numeric-PID cleanup is not production-approved for SIG_IGN, SA_NOCLDWAIT or application reapers.'), indent=2) + '\n')
 assert helper_status == 0
 PRODUCT.mkdir()
 assert command(['git', 'init', str(PRODUCT)], 'init') == 0
