@@ -82,7 +82,7 @@ static void spawn_expired_output(void) {
   atomic_store(&relay_stage, 2);
   pid_t helper = cpu_probe_spawn_bounded(STDOUT_FILENO, acknowledgement[1],
       atomic_load(&request_deadline), expiry_mode == 4 ? 0 : 4096, expiry_mode == 7 ? gate : NULL);
-  int spawn_failure = errno;
+  int spawn_failure = helper < 0 ? errno : 0;
   atomic_store(&relay_stage, 3);
   assert_application_policy_unchanged();
   atomic_store(&helper_pid, helper);
