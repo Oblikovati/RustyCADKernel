@@ -20,5 +20,15 @@
       "url": "https://raw.githubusercontent.com/apple-oss-distributions/Libsystem/c23b51183e46e613375dc7639fb4bf11fbf59ba8/init.c",
       "sha256": "329d8f27565ebcc332336b15fecd86bcde7728237d5da14cdbed81d7c804f88a"
     }
-  ]
+  ],
+  "runtime_prebinding": "Regular relay initialization binds proc_pidinfo/getpid/setitimer/sigaction/getppid and resolves documented public deprecated vfork through dlsym before reporting readiness or enabling CPU expiry; cached pointer avoids late caller-stub lazy binding. LibSystem internal fork housekeeping remains trusted platform work.",
+  "native_factory_phases": {
+    "10": "proc_pidinfo preflight entered",
+    "11": "proc_pidinfo returned",
+    "12": "invalid-timer binding probe returned",
+    "13": "signal query returned",
+    "14": "parent query returned, ordinary preflight complete",
+    "20": "cached public vfork invoked",
+    "21": "vfork returned in parent (errno meaningful only when pid<0)"
+  }
 }

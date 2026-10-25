@@ -1,6 +1,7 @@
 #define _DARWIN_C_SOURCE 1
 #include "probe_macos_cpu_helper.h"
 #include <errno.h>
+#include <dlfcn.h>
 #include <libproc.h>
 #include <poll.h>
 #include <signal.h>
@@ -229,6 +230,17 @@ int cpu_probe_receive(struct cpu_helper_probe *helper, int milliseconds) {
   return count == (ssize_t)sizeof(status) ? status : EPIPE;
 }
 
+static pid_t (*bounded_public_vfork)(void);
+
+int cpu_probe_prepare_bounded_runtime(void) {
+  if (cpu_probe_fd_capacity() < 0) return errno;
+  helper_preflight();
+  /* Resolve the documented deprecated public symbol before CPU expiry can
+     interrupt an application thread holding the loader lock. */
+  bounded_public_vfork = (pid_t (*)(void))dlsym(RTLD_DEFAULT, "vfork");
+  return bounded_public_vfork ? 0 : ENOSYS;
+}
+
 static long long bounded_deadline;
 static pid_t bounded_parent;
 
@@ -283,15 +295,12 @@ static void wait_before_guard_fault(int *gate) {
 pid_t cpu_probe_spawn_bounded(int output, int acknowledgement, long long deadline, size_t capacity, int *gate) {
   struct proc_fdinfo entries[4096];
   if (capacity > 4096) { errno = EOVERFLOW; return -1; }
-  helper_preflight();
+  if (!bounded_public_vfork) { errno = ENOSYS; return -1; }
   pid_t parent = getpid();
   /* Public Darwin vfork is fork without user atfork handlers since macOS12.
      This deprecated diagnostic experiment is never a generic POSIX vfork use. */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   atomic_store(&bounded_spawn_phase, 20);
-  pid_t child = vfork();
-#pragma clang diagnostic pop
+  pid_t child = bounded_public_vfork();
   if (child != 0) atomic_store(&bounded_spawn_phase, 21);
   if (child == 0) {
     wait_before_guard_fault(gate);

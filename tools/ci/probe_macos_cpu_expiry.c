@@ -49,6 +49,7 @@ static void prepare_relay_thread(void) {
   sigaddset(&blocked, SIGPIPE);
   demand(pthread_sigmask(SIG_BLOCK, &blocked, NULL) == 0, "private relay signal mask");
   demand(pthread_sigmask(SIG_SETMASK, NULL, &relay_original_mask) == 0, "relay mask snapshot");
+  demand(cpu_probe_prepare_bounded_runtime() == 0, "ordinary runtime and public primitive bound before readiness");
   atomic_store(&relay_ready, 1);
 }
 
