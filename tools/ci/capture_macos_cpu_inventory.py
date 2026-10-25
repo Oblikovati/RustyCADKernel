@@ -17,15 +17,16 @@ BASE_SHA = "879d907781d3264130f30130922c7eee4dc0fe96"
 TOOLCHAIN = "1.99.0"
 INVENTORY_NAMES = ("latest.json", "compiler.stdout.jsonl", "compiler.stderr.txt")
 NATIVE_TARGETS = {"arm64": "aarch64-apple-darwin", "x86_64": "x86_64-apple-darwin"}
+INVENTORY_OS_ENVIRONMENT_KEYS = ("PATH", "HOME", "USER", "LOGNAME", "TMPDIR", "LANG", "LC_ALL", "LC_CTYPE")
 
 
 def inventory_capture_environment(source: Mapping[str, str], target: Path) -> dict[str, str]:
-    """Isolate Cargo credentials and select a nonpublishing plan; use this before spawning."""
-    result = {key: value for key, value in source.items() if "TOKEN" not in key}
-    for key in ("MARTENSITE_RELEASE_HISTORY_SHA256", "RUSTFLAGS", "CARGO_ENCODED_RUSTFLAGS"):
-        result.pop(key, None)
-    result.update(CARGO_TARGET_DIR=str(target), MARTENSITE_CI_MODE="pr")
-    result.update(GITHUB_EVENT_NAME="workflow_dispatch")
+    """Forward native OS necessities, not arbitrary credentials/config; call before spawning."""
+    result = {key: source[key] for key in INVENTORY_OS_ENVIRONMENT_KEYS if key in source}
+    result.update(CARGO_TARGET_DIR=str(target), CARGO_HOME=str(target.with_name(target.name + "-cargo-home")))
+    result.update(CARGO_INCREMENTAL="0", CARGO_PROFILE_DEV_DEBUG="0", CARGO_PROFILE_TEST_DEBUG="0")
+    result.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull, GIT_TERMINAL_PROMPT="0")
+    result.update(MARTENSITE_CI_MODE="pr", GITHUB_EVENT_NAME="workflow_dispatch")
     return result
 
 
@@ -34,7 +35,8 @@ class InventoryCommandCapture:
     def __init__(self, product: Path, output: Path, environment: Mapping[str, str]) -> None:
         self.product = product
         self.output = output
-        self.environment = dict(environment)
+        target = product.parent / "martensite-native-compiler-build"
+        self.environment = inventory_capture_environment(environment, target)
         self.records: list[dict[str, object]] = []
 
     def run(self, arguments: list[str]) -> subprocess.CompletedProcess[bytes]:
@@ -206,6 +208,7 @@ def capture_inventory_evidence(
     commands = process_type(product, output, environment)
     receipt: dict[str, object] = dict(product=PRODUCT_SHA, base=BASE_SHA, machine=machine,
                                     platform=platform.platform(), expectations_accepted=False, human_review_status="pending")
+    receipt["environment_keys"] = sorted(commands.environment)
     receipt["transport"] = {key: environment.get(key) for key in ("GITHUB_SHA", "GITHUB_RUN_ID", "GITHUB_RUN_ATTEMPT", "GITHUB_JOB", "GITHUB_REPOSITORY", "RUNNER_OS", "RUNNER_ARCH")}
     status = 1
     try:
@@ -221,7 +224,7 @@ def main() -> int:
         raise RuntimeError(f"host {platform.system()}; expected native Darwin")
     temporary = Path(os.environ["RUNNER_TEMP"])
     product = temporary / "martensite-native-compiler-product"
-    environment = inventory_capture_environment(os.environ, temporary / "martensite-native-compiler-build")
+    environment = dict(os.environ)
     output = Path.cwd() / "target" / "macos-cpu-pipe" / "compiler-inventory"
     return capture_inventory_evidence(product, output, environment, platform.machine())
 

@@ -129,11 +129,39 @@ class RecordedInventoryProgram:
         return [sys.executable, "-c", program]
 
 
+class NativeToolchainEnvironmentFixture:
+    """Named harmless OS inputs and inert credential/config/loader injection canaries."""
+    required = dict(PATH="/usr/bin:/Users/runner/.cargo/bin", HOME="/Users/runner",
+                    USER="runner", LOGNAME="runner", TMPDIR="/tmp/runner",
+                    LANG="en_US.UTF-8", LC_ALL="C", LC_CTYPE="C")
+    blocked_keys = (
+        "GH_TOKEN", "GITHUB_TOKEN", "AWS_SECRET_ACCESS_KEY", "CI_JOB_JWT",
+        "SSH_AUTH_SOCK", "GIT_CONFIG_COUNT", "GIT_CONFIG_KEY_0", "GIT_CONFIG_VALUE_0",
+        "GIT_DIR", "GIT_WORK_TREE", "GIT_CONFIG", "GIT_CONFIG_GLOBAL", "GIT_CONFIG_NOSYSTEM",
+        "GIT_TERMINAL_PROMPT", "GIT_SSH_COMMAND", "GIT_ASKPASS",
+        "CARGO_REGISTRIES_CRATES_IO_INDEX", "CARGO_REGISTRIES_CRATES_IO_TOKEN",
+        "CARGO_BUILD_RUSTC", "CARGO_BUILD_RUSTC_WRAPPER", "CARGO_HOME", "RUSTUP_HOME",
+        "CARGO_TARGET_DIR", "CARGO_INCREMENTAL", "CARGO_PROFILE_DEV_DEBUG", "CARGO_PROFILE_TEST_DEBUG",
+        "RUSTC", "RUSTDOC", "RUSTC_WRAPPER", "RUSTC_WORKSPACE_WRAPPER", "RUSTUP_TOOLCHAIN",
+        "RUSTFLAGS", "CARGO_ENCODED_RUSTFLAGS", "MARTENSITE_RELEASE_HISTORY_SHA256",
+        "LD_PRELOAD", "LD_LIBRARY_PATH", "DYLD_INSERT_LIBRARIES", "DYLD_LIBRARY_PATH",
+        "PYTHONPATH", "PYTHONHOME", "SDKROOT", "DEVELOPER_DIR", "MACOSX_DEPLOYMENT_TARGET",
+        "CC", "CXX", "AR", "CPATH", "LIBRARY_PATH", "HTTPS_PROXY", "UNLISTED_OPTION",
+    )
+
+    @classmethod
+    def inherited(cls) -> dict[str, str]:
+        """Build an inert hostile environment; call inherited() without exporting any keys."""
+        canaries = {key: "inert-canary-" + key for key in cls.blocked_keys}
+        return dict(cls.required, **canaries)
+
+
 class MacInventoryCaptureTests(unittest.TestCase):
-    def capture_fixture(self, process_type: type[InventoryCommandCapture]) -> tuple[int, dict[str, object]]:
+    def capture_fixture(self, process_type: type[InventoryCommandCapture],
+                        environment: dict[str, str] | None = None) -> tuple[int, dict[str, object]]:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            status = capture_inventory_evidence(root / "product", root / "evidence", {}, "arm64", process_type)
+            status = capture_inventory_evidence(root / "product", root / "evidence", environment or {}, "arm64", process_type)
             receipt = json.loads((root / "evidence/receipt.json").read_text())
             return status, receipt
 
@@ -163,15 +191,30 @@ class MacInventoryCaptureTests(unittest.TestCase):
             self.assertIn("capture_error", receipt)
             self.assertFalse(receipt["expectations_accepted"])
 
-    def test_credentials_are_removed_from_each_cargo_environment(self) -> None:
-        source = dict(GH_TOKEN="secret", GITHUB_TOKEN="secret", OTHER_TOKEN="secret",
-                      MARTENSITE_RELEASE_HISTORY_SHA256="pin", RUSTFLAGS="old", PATH="bin")
+    def test_explicit_allowlist_rejects_named_credentials_config_and_loader_canaries(self) -> None:
+        source = NativeToolchainEnvironmentFixture.inherited()
         actual = inventory_capture_environment(source, Path("private-build"))
-        self.assertFalse(any("TOKEN" in key for key in actual))
-        self.assertNotIn("RUSTFLAGS", actual)
-        self.assertNotIn("MARTENSITE_RELEASE_HISTORY_SHA256", actual)
+        blocked_values = set(source.values()) - set(NativeToolchainEnvironmentFixture.required.values())
+        self.assertFalse(blocked_values & set(actual.values()))
+        for key, value in NativeToolchainEnvironmentFixture.required.items():
+            self.assertEqual(actual[key], value)
+        self.assertEqual(actual["CARGO_HOME"], "private-build-cargo-home")
+        self.assertEqual(actual["GIT_CONFIG_GLOBAL"], os.devnull)
+        self.assertEqual(actual["GIT_CONFIG_NOSYSTEM"], "1")
+        self.assertEqual(actual["GIT_TERMINAL_PROMPT"], "0")
         self.assertEqual(actual["MARTENSITE_CI_MODE"], "pr")
         self.assertEqual(actual["GITHUB_EVENT_NAME"], "workflow_dispatch")
+
+    def test_constructor_and_receipt_never_reintroduce_inherited_canary_values(self) -> None:
+        source = NativeToolchainEnvironmentFixture.inherited()
+        status, receipt = self.capture_fixture(PreparedInventoryProcesses, source)
+        self.assertEqual(status, 1)
+        self.assertIn("PATH", receipt["environment_keys"])
+        self.assertIn("HOME", receipt["environment_keys"])
+        self.assertNotIn("AWS_SECRET_ACCESS_KEY", receipt["environment_keys"])
+        self.assertNotIn("CI_JOB_JWT", receipt["environment_keys"])
+        self.assertNotIn("GIT_CONFIG_VALUE_0", receipt["environment_keys"])
+        self.assertNotIn("inert-canary-", json.dumps(receipt))
 
     def test_command_uses_existing_supported_checks_only_driver(self) -> None:
         self.assertEqual(inventory_checks_command("aarch64-apple-darwin"), [
