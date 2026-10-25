@@ -42,12 +42,17 @@ unit_status = command(['cargo', '+1.99.0', 'test', '--locked', '-p', 'martensite
 host_status = command(['cargo', '+1.99.0', 'test', '--locked', '-p', 'martensite-tkernel',
                        '--test', 'osd_cpu_limit_signal', '--', '--test-threads=1',
                        '--show-output'], 'rust-original-host', PRODUCT)
+unit_output = (OUT / 'rust-budget-unit.stdout.log').read_text()
+host_output = (OUT / 'rust-original-host.stdout.log').read_text()
+unit_coverage = 'test result: ok. 5 passed; 0 failed;' in unit_output
+host_coverage = 'test result: ok. 4 passed; 0 failed;' in host_output
 sources = PRODUCT / 'crates' / 'martensite-tkernel' / 'src' / 'osd' / 'timing'
 source_hashes = {str(path.relative_to(PRODUCT)): hashlib.sha256(path.read_bytes()).hexdigest()
                  for path in sorted(sources.rglob('*.rs'))}
 receipt = dict(product_sha=PRODUCT_SHA, platform=platform.platform(), machine=platform.machine(),
                compiler_status=compiler_status, unit_status=unit_status, original_host_status=host_status,
+               unit_exact_five_passed=unit_coverage, original_exact_four_passed=host_coverage,
                records=records, source_sha256=source_hashes,
                scope='Native Rust focused controls only. Oldest macOS support policy and the exact final release matrix remain separate gates.')
 (OUT / 'rust-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
-sys.exit(0 if compiler_status == unit_status == host_status == 0 else 1)
+sys.exit(0 if compiler_status == unit_status == host_status == 0 and unit_coverage and host_coverage else 1)
