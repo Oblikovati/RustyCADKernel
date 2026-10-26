@@ -22,7 +22,7 @@ rustycad-tktopalgo = { path = "../tktopalgo", version = "0.2.8" }
 rustycad-tkhlr = { path = "../tkhlr", version = "0.2.8" }
 rustycad-tkmesh = { path = "../tkmesh", version = "0.2.8" }
 # The stream capture of the command log redirects descriptors with dup/dup2 (C library).
-libc = "=0.2.190"
+libc = "=0.2.191"
 
 [target.'cfg(windows)'.dev-dependencies]
 windows-sys = { version = "=0.61.2", features = ["Win32_Foundation", "Win32_System_Diagnostics_Debug", "Win32_System_LibraryLoader"] }
